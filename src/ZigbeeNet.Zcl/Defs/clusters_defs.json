@@ -1,0 +1,209 @@
+{
+  "Clusters": {
+    "0": {
+      "Id": "0",
+      "Name": "Basic",
+      "Attributes": [
+        {
+          "Identifier": 0,
+          "Name": "ZCLVersion",
+          "DataType": 32,
+          "RangeFrom": 0,
+          "RangeTo": 255,
+          "Access": 1,
+          "Default": 2,
+          "Mandatory": true
+        },
+        {
+          "Identifier": 1,
+          "Name": "ApplicationVersion",
+          "DataType": 32,
+          "RangeFrom": 0,
+          "RangeTo": 255,
+          "Access": 1,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 2,
+          "Name": "StackVersion",
+          "DataType": 32,
+          "RangeFrom": 0,
+          "RangeTo": 255,
+          "Access": 1,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 3,
+          "Name": "HWVersion",
+          "DataType": 32,
+          "RangeFrom": 0,
+          "RangeTo": 255,
+          "Access": 1,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 4,
+          "Name": "ManufacturerName",
+          "DataType": 66,
+          "RangeFrom": 0,
+          "RangeTo": 32,
+          "Access": 1,
+          "Default": "",
+          "Mandatory": false
+        },
+        {
+          "Identifier": 5,
+          "Name": "ModelIdentifier",
+          "DataType": 66,
+          "RangeFrom": 0,
+          "RangeTo": 32,
+          "Access": 1,
+          "Default": "",
+          "Mandatory": false
+        },
+        {
+          "Identifier": 6,
+          "Name": "DateCode",
+          "DataType": 66,
+          "RangeFrom": 0,
+          "RangeTo": 16,
+          "Access": 1,
+          "Default": "",
+          "Mandatory": false
+        },
+        {
+          "Identifier": 7,
+          "Name": "PowerSource",
+          "DataType": "48",
+          "RangeFrom": "0",
+          "RangeTo": "255",
+          "Access": "1",
+          "Default": "0",
+          "Mandatory": true
+        },
+        {
+          "Identifier": 16,
+          "Name": "LocationDescription",
+          "DataType": 66,
+          "RangeFrom": 0,
+          "RangeTo": 16,
+          "Access": 2,
+          "Default": "",
+          "Mandatory": true
+        },
+        {
+          "Identifier": 17,
+          "Name": "PhysicalEnvironment",
+          "DataType": 30,
+          "RangeFrom": 0,
+          "RangeTo": 255,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 18,
+          "Name": "DeviceEnabled",
+          "DataType": 16,
+          "RangeFrom": 0,
+          "RangeTo": 1,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 19,
+          "Name": "AlarmMask",
+          "DataType": 24,
+          "RangeFrom": 0,
+          "RangeTo": 0,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 20,
+          "Name": "DisableLocalConfig",
+          "DataType": 24,
+          "RangeFrom": 0,
+          "RangeTo": 0,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 16384,
+          "Name": "SWBuildID",
+          "DataType": 66,
+          "RangeFrom": 0,
+          "RangeTo": 16,
+          "Access": 1,
+          "Default": "",
+          "Mandatory": false
+        }
+      ],
+      "Commands": {
+        "ResetFactoryDefault": 0
+      },
+      "CommandResponses": null
+    },
+    "6": {
+      "Id": 6,
+      "Name": "OnOff",
+      "Attributes": [
+        {
+          "Identifier": 0,
+          "Name": "OnOff",
+          "DataType": 16,
+          "RangeFrom": 0,
+          "RangeTo": 1,
+          "Access": 1,
+          "Default": 0,
+          "Mandatory": true
+        },
+        {
+          "Identifier": 1024,
+          "Name": "GlobalSceneControl",
+          "DataType": 16,
+          "RangeFrom": 0,
+          "RangeTo": 1,
+          "Access": 1,
+          "Default": 1,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 1025,
+          "Name": "OnTime",
+          "DataType": 33,
+          "RangeFrom": 0,
+          "RangeTo": 65535,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        },
+        {
+          "Identifier": 1026,
+          "Name": "OffWaitTime",
+          "DataType": 33,
+          "RangeFrom": 0,
+          "RangeTo": 65535,
+          "Access": 2,
+          "Default": 0,
+          "Mandatory": false
+        }
+      ],
+      "Commands": {
+        "Off": 0,
+        "On": 1,
+        "Toggle": 2,
+        "OffWithEffect": 64,
+        "OnWithRecallGlobalScene": 65,
+        "OnWithTimedOff": 66
+      },
+      "CommandResponses": null
+    }
+  }
+}
