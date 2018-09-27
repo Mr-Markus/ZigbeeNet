@@ -76,7 +76,7 @@ namespace ZigbeeNet
 
         public Frame Send()
         {
-            return new Frame();
+            throw new NotImplementedException();
         }
 
         private void Send(byte[] data)

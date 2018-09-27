@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinarySerialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,11 @@ namespace ZigbeeNet
 {
     public class FrameHeader
     {
+        public FrameHeader(FrameControl frameControl, byte commandIdentifier)
+        {
+            FrameControl = frameControl;
+            CommandIdentifierField = commandIdentifier;
+        }
         public FrameHeader(FrameType frameType, Direction direction, byte commandIdentifier, DisableDefaultResponse disableDefaultResponse = DisableDefaultResponse.Always, bool manufacturerSpecific = false)
         {
             FrameControl = new FrameControl()
@@ -21,12 +27,15 @@ namespace ZigbeeNet
         /// The frame control field is 8 bits in length and contains information defining the command type and other control flags. 
         /// Bits 5-7 are reserved for future use and SHALL be set to 0. 
         /// </summary>
+        [FieldOrder(0)]
+        [FieldBitLength(8)]
         public FrameControl FrameControl { get; set; }
 
         /// <summary>
         /// The manufacturer code field is 16 bits in length and specifies the ZigBee assigned manufacturer code for proprietary extensions. 
         /// This field SHALL only be included in the ZCL frame if the manufacturer specific sub-field of the frame control field is set to True. 
         /// </summary>
+        [FieldOrder(1)]
         public ushort ManufacturerCode { get; set; }
 
         /// <summary>
@@ -41,6 +50,7 @@ namespace ZigbeeNet
         /// The Transaction Sequence Number field can be used by a controlling device, which MAY have issued multiple commands, 
         /// so that it can match the incoming responses to the relevant command. 
         /// </summary>
+        [FieldOrder(2)]
         public byte TransactionSequenceNumber { get; set; }
 
         /// <summary>
@@ -51,6 +61,7 @@ namespace ZigbeeNet
         /// 
         /// The cluster specific command identifiers can be found in each individual document describing the clusters (see also 2.2.1.1). 
         /// </summary>
+        [FieldOrder(3)]
         public byte CommandIdentifierField { get; set; }
     }
 }
