@@ -50,6 +50,7 @@ namespace ZigbeeNet.TI.UNPI
         /// 
         /// Source: http://processors.wiki.ti.com/index.php/NPI_Type_SubSystem
         /// </summary>
+        [FieldOrder(2)]
         public byte Cmd0
         {
             get
