@@ -24,11 +24,25 @@ namespace ZigbeeNet.TI
         {
             Unpi = new Unpi(port, baudrate, 1);
             Unpi.DataReceived += Unpi_DataReceived;
+            Unpi.Opened += Unpi_Opened;
+            Unpi.Closed += Unpi_Closed;
+
+            Unpi.Open();
+        }
+
+        private void Unpi_Closed(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Unpi_Opened(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Unpi_DataReceived(object sender, Packet e)
         {
-            throw new NotImplementedException();
+            ParseIncomingData(e);
         }
 
         public void Start()
@@ -79,18 +93,22 @@ namespace ZigbeeNet.TI
 
             byte cmd = 54; //mgmtPermitJoinReq
 
-            Dictionary<string, object> args = new Dictionary<string, object>();
+            ArgumentCollection valObj = new ArgumentCollection();
+            valObj.Add("addrmode", DataType.UInt8, addrmode);
+            valObj.Add("dstaddr", DataType.UInt16, dstaddr);
+            valObj.Add("duration", DataType.UInt16, 0);
+            valObj.Add("tcsignificance", DataType.UInt16, 0);
 
-            args.Add("addrmode", addrmode);
-            args.Add("dstaddr", dstaddr);
-            args.Add("duration", time);
-            args.Add("tcsignificance", 0);
-
-            this.Request(SubSystem.ZDO, cmd, args);
+            this.Request(SubSystem.ZDO, cmd, valObj);
         }
 
-        public void Request(SubSystem subSystem, byte commandId, Dictionary<string, object> valObject, Action callback = null)
+        public void Request(SubSystem subSystem, byte commandId, ArgumentCollection valObject, Action callback = null)
         {
+            if(Unpi == null)
+            {
+                throw new NullReferenceException("CCZnp has not been initialized yet");
+            }
+
             ZpiObject zpiObject = new ZpiObject(subSystem, commandId, valObject);
 
             if(zpiObject.Type == CommandType.SREQ)
@@ -105,17 +123,11 @@ namespace ZigbeeNet.TI
 
         private void SendSREQ(ZpiObject zpiObject, Action callback)
         {
-            //TODO: Send to unipi
-            //Unpi.Send((int)zpiObject.Type, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.ValObj.Values);
+            Unpi.Send((int)zpiObject.Type, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
         }
 
         private ZpiObject ParseIncomingData(Packet data)
         {
-            //if(data.FrameCheckSequence != data.csum)
-            //{
-
-            //}
-
             ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
 
             zpiObject.Parse((CommandType)data.Type, data.Length, data.Payload, (string error, string result) =>

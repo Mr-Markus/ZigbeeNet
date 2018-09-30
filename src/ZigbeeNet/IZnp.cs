@@ -10,6 +10,6 @@ namespace ZigbeeNet
     public interface IZnp
     {
         void Init(string port, int baudrate = 115200, Action callback = null);
-        void Request(SubSystem subSystem, byte commandId, Dictionary<string, object> valObject, Action callback = null);
+        void Request(SubSystem subSystem, byte commandId, ArgumentCollection valObject, Action callback = null);
     }
 }

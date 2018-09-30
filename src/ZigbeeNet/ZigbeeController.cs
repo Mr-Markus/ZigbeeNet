@@ -2,20 +2,29 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.TI;
 
 namespace ZigbeeNet
 {
     public class ZigbeeController
     {
+        private Options _options;
+
         public ZigbeeService Service { get; }
-        public IZnp Znp { get; set; }
+        public CCZnp Znp { get; set; }
+
+        public event EventHandler Started;
+        public event EventHandler Stoped;
 
         private ConcurrentDictionary<ulong, Device> _deviceInfoList = new ConcurrentDictionary<ulong, Device>();
 
-        public ZigbeeController(ZigbeeService service, IZnp znp)
+        public ZigbeeController(ZigbeeService service, Options options)
         {
+            _options = options;
+
             Service = service;
-            Znp = znp;
+
+            Znp = new CCZnp();
         }
 
         public void Init()
@@ -23,9 +32,10 @@ namespace ZigbeeNet
             Service.Ready += Service_Ready;
         }
 
-        public void Start(Action callback)
+        public void Start()
         {
-
+            //TODO. Init ZNP --> Execute Start Command
+            Znp.Init(_options.Port, _options.Baudrate);
         }
 
         private void Service_Ready(object sender, EventArgs e)
@@ -33,19 +43,23 @@ namespace ZigbeeNet
             throw new NotImplementedException();
         }
 
-        public void PermitJoin(int time, bool onCoordOnly)
+        public void PermitJoin(int time, bool onCoordOnly, Action callback = null)
         {
             if (time > 255 || time < 0)
             {
                 throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
-            }
+            }            
 
-            object[] valObj = new object[] { 0x02, 0x00, time, 0 };
+            ArgumentCollection valObj = new ArgumentCollection();
+            valObj.Add("addrmode", DataType.UInt8, 0x02);
+            valObj.Add("dstaddr", DataType.UInt16, 0);
+            valObj.Add("duration", DataType.UInt16, 0);
+            valObj.Add("tcsignificance", DataType.UInt16, 0);
 
-            //this.Request(SubSystem.ZDO, 54, valObj);
+            this.Request(SubSystem.ZDO, 54, valObj, callback);
         }
 
-        public void Request(SubSystem subSystem, byte commandId, Dictionary<string, object> valObj, Action callback = null)
+        public void Request(SubSystem subSystem, byte commandId, ArgumentCollection valObj, Action callback = null)
         {
             if(subSystem == SubSystem.ZDO)
             {

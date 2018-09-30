@@ -5,11 +5,7 @@ VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet", "ZigbeeNet\ZigbeeNet.csproj", "{33F9BDE4-2E9F-4304-BE71-32954A80DED4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.TI", "ZigbeeNet.TI\ZigbeeNet.TI.csproj", "{A3B783DA-B14E-431B-A960-311EC29EFC1B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.Zcl", "ZigbeeNet.Zcl\ZigbeeNet.Zcl.csproj", "{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnpiNet", "..\unpi-net\src\UnpiNet\UnpiNet.csproj", "{31E78014-8792-4D95-A400-9AA582844E66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnpiNet", "..\unpi-net\src\UnpiNet\UnpiNet.csproj", "{61563195-1D5B-4688-9939-908830CC8DF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +17,10 @@ Global
 		{33F9BDE4-2E9F-4304-BE71-32954A80DED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F9BDE4-2E9F-4304-BE71-32954A80DED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F9BDE4-2E9F-4304-BE71-32954A80DED4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3B783DA-B14E-431B-A960-311EC29EFC1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3B783DA-B14E-431B-A960-311EC29EFC1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3B783DA-B14E-431B-A960-311EC29EFC1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3B783DA-B14E-431B-A960-311EC29EFC1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31E78014-8792-4D95-A400-9AA582844E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31E78014-8792-4D95-A400-9AA582844E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31E78014-8792-4D95-A400-9AA582844E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31E78014-8792-4D95-A400-9AA582844E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61563195-1D5B-4688-9939-908830CC8DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61563195-1D5B-4688-9939-908830CC8DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61563195-1D5B-4688-9939-908830CC8DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61563195-1D5B-4688-9939-908830CC8DF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

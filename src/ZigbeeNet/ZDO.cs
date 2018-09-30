@@ -13,7 +13,7 @@ namespace ZigbeeNet
 
         public ZigbeeController Controller { get; }
 
-        public void Request(byte commandId, Dictionary<string, object> valObj, Action callback = null)
+        public void Request(byte commandId, ArgumentCollection valObj, Action callback = null)
         {
             //TODO: Get RequestType
             RequestType requestType = RequestType.Special;
@@ -38,17 +38,17 @@ namespace ZigbeeNet
             }
         }
 
-        private void SendZdoRequestViaZnp(byte commandId, Dictionary<string, object> valObject, Action callback = null)
+        private void SendZdoRequestViaZnp(byte commandId, ArgumentCollection valObj, Action callback = null)
         {
-            Controller.Znp.Request(SubSystem.ZDO, commandId, valObject, callback);
+            Controller.Znp.Request(SubSystem.ZDO, commandId, valObj, callback);
         }
 
-        private void ResponselessRequest(byte commandId, Dictionary<string, object> valObject, Action callback = null)
+        private void ResponselessRequest(byte commandId, ArgumentCollection valObj, Action callback = null)
         {
-            SendZdoRequestViaZnp(commandId, valObject, callback);
+            SendZdoRequestViaZnp(commandId, valObj, callback);
         }
 
-        private void SpecialRequest(byte commandId, Dictionary<string, object> valObj, Action callback = null)
+        private void SpecialRequest(byte commandId, ArgumentCollection valObj, Action callback = null)
         {
             if(commandId == 54)
             {
@@ -56,7 +56,7 @@ namespace ZigbeeNet
             }
         }
 
-        private void GenericRequest(byte commandId, Dictionary<string, object> valObject, Action callback = null)
+        private void GenericRequest(byte commandId, ArgumentCollection valObj, Action callback = null)
         {
 
         }
