@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.TI", "ZigbeeNet.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.Zcl", "ZigbeeNet.Zcl\ZigbeeNet.Zcl.csproj", "{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnpiNet", "..\unpi-net\src\UnpiNet\UnpiNet.csproj", "{31E78014-8792-4D95-A400-9AA582844E66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C6FC75-F683-454D-BAE0-1CECDAD65C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E78014-8792-4D95-A400-9AA582844E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E78014-8792-4D95-A400-9AA582844E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E78014-8792-4D95-A400-9AA582844E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E78014-8792-4D95-A400-9AA582844E66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
