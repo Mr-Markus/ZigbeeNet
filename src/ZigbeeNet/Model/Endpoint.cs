@@ -6,6 +6,8 @@ namespace ZigbeeNet
 {
     public class Endpoint
     {
+        public byte Id { get; set; }
+
         public Device Device { get; set; }
 
         public Endpoint(Device device)

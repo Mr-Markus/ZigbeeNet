@@ -9,14 +9,15 @@ namespace ZigbeeNet
     {
         private bool _disposed;
         private bool _isRunning;
-        private Stream _stream;
 
-        public event EventHandler<FrameEventArgs> NewFrame;
+        public ZigbeeController Controller { get; set; }
+
+        public event EventHandler<byte[]> NewPacket;
         public event EventHandler Ready;
 
-        public ZigbeeService(Stream stream)
+        public ZigbeeService(IZnp znp)
         {
-            _stream = stream;
+            Controller = new ZigbeeController(this, znp);
         }
 
         public void Dispose()
@@ -40,7 +41,6 @@ namespace ZigbeeNet
                 if (disposing)
                 {
                     // Dispose managed resources.
-                    _stream.Dispose();
                 }
 
                 // Note disposing has been done.
@@ -48,14 +48,22 @@ namespace ZigbeeNet
             }
         }
 
+        private void Setup(Action callback)
+        {
+            //Controller.st
+        }
+
         /// <summary>
         /// Starts the zigbee service
         /// </summary>
         public void Start()
         {
-            _isRunning = true;
+            Setup(() =>
+            {
+                _isRunning = true;
 
-            Ready(this, EventArgs.Empty);
+                Ready(this, EventArgs.Empty);
+            });
         }
 
         /// <summary>
@@ -84,15 +92,20 @@ namespace ZigbeeNet
             throw new NotImplementedException();
         }
 
+        public void OnNewPacket(byte[] data)
+        {
+            NewPacket(this, data);
+        }
+
         /// <summary>
         /// Permits devices to join the zigbee network
         /// </summary>
         /// <param name="time">Time in seconds</param>
         public void PermitJoining(int time)
         {
-            if(time < 0)
+            if(time > 255 || time < 0)
             {
-                throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0");
+                throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
             }
         }
 

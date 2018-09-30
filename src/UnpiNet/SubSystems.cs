@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.TI.UNPI
+namespace UnpiNet
 {
     /// <summary>
     /// Source: http://processors.wiki.ti.com/index.php/NPI_Type_SubSystem
     /// </summary>
-    public enum SubSystems : byte
+    public enum SubSystem
     {
         RPC_SYS_RES = 0x00,
         RPC_SYS_SYS = 0x01,

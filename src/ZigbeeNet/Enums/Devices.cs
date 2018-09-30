@@ -43,16 +43,4 @@ namespace ZigbeeNet
         IASZone = 0x0402,
         IASWarningDevice = 0x0403 
     }
-
-    public enum eDeviceStatus : byte
-    {
-        Offline = 0x00,
-        Online = 0x01
-    }
-
-    public enum eDeviceEnabled : byte
-    {
-        Disabled = 0x00,
-        Enabled = 0x01
-    }
 }

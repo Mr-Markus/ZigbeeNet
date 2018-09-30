@@ -52,7 +52,7 @@ namespace ZigbeeNet.TI.Components
             return "rspless";
         }
 
-        public string GenerateEventOfRequest(string reqName, object valObj)
+        public string GenerateEventOfRequest(string reqName, Dictionary<string, object> valObj)
         {
             var meta = _zdoReqRspMap[reqName];
             string evtName = "";

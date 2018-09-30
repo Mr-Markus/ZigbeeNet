@@ -1,7 +1,7 @@
 ﻿using BinarySerialization;
 using System;
 
-namespace ZigbeeNet.TI.UNPI
+namespace UnpiNet
 {
     /// <summary>
     /// TI Unified NPI Packet Format
@@ -17,13 +17,19 @@ namespace ZigbeeNet.TI.UNPI
 
         }
 
-        public Packet(MessageTypes type, SubSystems subSystem, byte commandId, byte[] payload)
+        public Packet(MessageType type, SubSystem subSystem, byte commandId, byte[] payload)
         {
             Type = type;
             SubSystem = subSystem;
             Cmd1 = commandId;
             Payload = payload;
         }
+
+        [Ignore()]
+        public int LenBytes { get; set; }
+
+        [Ignore()]
+        public int Length { get; set; }
 
         /// <summary>
         /// Start of Frame(SOF) is set to be 0xFE (254)
@@ -35,13 +41,21 @@ namespace ZigbeeNet.TI.UNPI
         /// Length field is 2 bytes long in little-endian format (so LSB first).
         /// </summary>
         [FieldOrder(1)]
-        public ushort Length { get; set; }
+        [SerializeWhen(nameof(LenBytes), 2)]
+        public ushort LengthUShort { get; set; }
+
+        /// <summary>
+        /// Length field is 2 bytes long in little-endian format (so LSB first).
+        /// </summary>
+        [FieldOrder(2)]
+        [SerializeWhen(nameof(LenBytes), 1)]
+        public byte LengthByte { get; set; }
 
         [Ignore()]
-        public MessageTypes Type { get; set; }
+        public MessageType Type { get; set; }
 
         [Ignore()]
-        public SubSystems SubSystem { get; set; }
+        public SubSystem SubSystem { get; set; }
 
         /// <summary>
         /// CMD0 is a 1 byte field that contains both message type and subsystem information 
@@ -50,7 +64,7 @@ namespace ZigbeeNet.TI.UNPI
         /// 
         /// Source: http://processors.wiki.ti.com/index.php/NPI_Type_SubSystem
         /// </summary>
-        [FieldOrder(2)]
+        [FieldOrder(3)]
         public byte Cmd0
         {
             get
@@ -62,14 +76,14 @@ namespace ZigbeeNet.TI.UNPI
         /// <summary>
         /// CMD1 is a 1 byte field that contains the opcode of the command being sent
         /// </summary>
-        [FieldOrder(3)]
+        [FieldOrder(4)]
         public byte Cmd1 { get; set; }
 
         /// <summary>
         /// Payload is a variable length field that contains the parameters defined by the 
         /// command that is selected by the CMD1 field. The length of the payload is defined by the length field.
         /// </summary>
-        [FieldOrder(4)]
+        [FieldOrder(5)]
         [FieldLength(nameof(Length))]
         [FieldChecksum(nameof(FrameCheckSequence), Mode = ChecksumMode.Xor)]
         public byte[] Payload { get; set; }
@@ -79,46 +93,7 @@ namespace ZigbeeNet.TI.UNPI
         /// send/receive on the bus (the SOF byte is always excluded from the FCS calculation): 
         ///     FCS = LEN_LSB XOR LEN_MSB XOR D1 XOR D2...XOR Dlen
         /// </summary>
-        [FieldOrder(5)]
-        public byte FrameCheckSequence
-        {
-            get
-            {
-                byte[] preBuffer = new byte[5];
-
-                //TODO: Check if length is two bytes long
-                byte[] lengthBytes = BitConverter.GetBytes(Payload.Length);
-                preBuffer[0] = lengthBytes[0]; //(byte)(packet.Length >> 8);
-                preBuffer[1] = lengthBytes[1]; //(byte)(packet.Length  & 0xff);
-
-                preBuffer[2] = (byte)Type;
-                preBuffer[3] = (byte)SubSystem;
-
-                //Do not include sof in fcs calculation
-                return checksum(preBuffer, Payload);
-            }
-        }
-
-        private byte checksum(byte[] buf1, byte[] buf2)
-        {
-            var fcs = (byte)0x00;
-            var buf1_len = buf1.Length;
-            var buf2_len = buf2.Length;
-
-            for (int i = 0; i < buf1_len; i += 1)
-            {
-                fcs ^= buf1[i];
-            }
-
-            if (buf2 != null)
-            {
-                for (int i = 0; i < buf2_len; i += 1)
-                {
-                    fcs ^= buf2[i];
-                }
-            }
-
-            return fcs;
-        }
+        [FieldOrder(6)]
+        public byte FrameCheckSequence { get; set; }
     }
 }

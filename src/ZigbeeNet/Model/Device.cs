@@ -12,7 +12,7 @@ namespace ZigbeeNet
     /// </summary>
     public class Device
     {
-        //TODO: Id Property
+        public ushort Id { get; set; }
 
         public Devices Type { get; set; }
 
@@ -28,17 +28,20 @@ namespace ZigbeeNet
 
         public string ModelId { get; set; }
 
-        public eDeviceStatus Status { get; set; }
+        public DeviceStatus Status { get; set; }
 
-        public eDeviceEnabled DeviceEnabled { get; set; }
+        public DeviceEnabled DeviceEnabled { get; set; }
 
         public DateTime JoinTime { get; set; }
 
         public List<Endpoint> Endpoints { get; set; }
 
-        public Device()
+        public Device(ushort id)
         {
+            Id = id;
             Endpoints = new List<Endpoint>();
+
+            Status = DeviceStatus.Offline;
         }
     }
 }
