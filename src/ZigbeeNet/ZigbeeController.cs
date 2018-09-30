@@ -42,7 +42,7 @@ namespace ZigbeeNet
 
             object[] valObj = new object[] { 0x02, 0x00, time, 0 };
 
-            this.Request(SubSystem.ZDO, 54, valObj);
+            //this.Request(SubSystem.ZDO, 54, valObj);
         }
 
         public void Request(SubSystem subSystem, byte commandId, Dictionary<string, object> valObj, Action callback = null)

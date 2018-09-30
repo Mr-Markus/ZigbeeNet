@@ -106,15 +106,15 @@ namespace ZigbeeNet.TI
         private void SendSREQ(ZpiObject zpiObject, Action callback)
         {
             //TODO: Send to unipi
-            Unpi.Send((int)zpiObject.Type, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.ValObj.Values);
+            //Unpi.Send((int)zpiObject.Type, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.ValObj.Values);
         }
 
         private ZpiObject ParseIncomingData(Packet data)
         {
-            if(data.FrameCheckSequence != data.csum)
-            {
+            //if(data.FrameCheckSequence != data.csum)
+            //{
 
-            }
+            //}
 
             ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
 
