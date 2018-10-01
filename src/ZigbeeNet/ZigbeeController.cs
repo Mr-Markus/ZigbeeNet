@@ -25,11 +25,18 @@ namespace ZigbeeNet
             Service = service;
 
             Znp = new CCZnp();
+            Znp.Ready += Znp_Ready;
+        }
+
+        private void Znp_Ready(object sender, EventArgs e)
+        {
+            //TODO: SetupCoord
+
         }
 
         public void Init()
         {
-            Service.Ready += Service_Ready;
+            
         }
 
         public void Start()
@@ -38,9 +45,14 @@ namespace ZigbeeNet
             Znp.Init(_options.Port, _options.Baudrate);
         }
 
-        private void Service_Ready(object sender, EventArgs e)
+        private void StartupCoord()
         {
-            throw new NotImplementedException();
+            ArgumentCollection args = new ArgumentCollection();
+            args.Add("startdelay", DataType.UInt16, 100);
+
+            //TODO: Add stateChangedInd event
+
+            Request(SubSystem.ZDO, 0x40, args);
         }
 
         public void PermitJoin(int time, bool onCoordOnly, Action callback = null)

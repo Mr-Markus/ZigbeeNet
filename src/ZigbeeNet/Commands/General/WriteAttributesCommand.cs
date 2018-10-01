@@ -22,7 +22,6 @@ namespace ZigbeeNet.Commands.General
         /// </summary>
         public DataType AttributeDataType { get; set; }
 
-        //TODO: Define AttributeValue class ???
         /// <summary>
         /// The attribute data field is variable in length and SHALL contain the actual value of the attribute that is to be written. 
         /// </summary>
