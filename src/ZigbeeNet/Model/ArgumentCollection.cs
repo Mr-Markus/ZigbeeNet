@@ -8,14 +8,14 @@ namespace ZigbeeNet
     {
         public ArgumentCollection()
         {
-            Arguments = new List<RequestArgument>();
+            Arguments = new List<ZpiArgument>();
         }
 
-        public List<RequestArgument> Arguments { get; set; }
+        public List<ZpiArgument> Arguments { get; set; }
 
         public void Add(string name, DataType dataType, object value)
         {
-            RequestArgument requestArgument = new RequestArgument()
+            ZpiArgument requestArgument = new ZpiArgument()
             {
                 Name = name,
                 DataType = dataType,

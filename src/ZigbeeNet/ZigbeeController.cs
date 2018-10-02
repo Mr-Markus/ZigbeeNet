@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.TI;
 
 namespace ZigbeeNet
 {
@@ -15,8 +14,6 @@ namespace ZigbeeNet
 
         public event EventHandler Started;
         public event EventHandler Stoped;
-
-        private ConcurrentDictionary<ulong, Device> _deviceInfoList = new ConcurrentDictionary<ulong, Device>();
 
         public ZigbeeController(ZigbeeService service, Options options)
         {

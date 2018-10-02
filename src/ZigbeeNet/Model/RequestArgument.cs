@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public class RequestArgument
+    public class ZpiArgument
     {
         public string Name { get; set; }
 
@@ -12,12 +12,12 @@ namespace ZigbeeNet
 
         public object Value { get; set; }
 
-        public RequestArgument()
+        public ZpiArgument()
         {
 
         }
 
-        public RequestArgument(string name, DataType dataType, object value)
+        public ZpiArgument(string name, DataType dataType, object value)
         {
             Name = name;
             DataType = dataType;

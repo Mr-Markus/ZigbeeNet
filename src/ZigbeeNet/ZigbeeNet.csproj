@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\unpi-net\src\UnpiNet\UnpiNet.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\General\" />
+  </ItemGroup>
+
 </Project>

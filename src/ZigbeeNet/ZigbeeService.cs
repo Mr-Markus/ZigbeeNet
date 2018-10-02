@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,6 +10,8 @@ namespace ZigbeeNet
     {
         private bool _disposed;
         private bool _isRunning;
+
+        private ConcurrentDictionary<ulong, Device> _deviceInfoList = new ConcurrentDictionary<ulong, Device>();
 
         public ZigbeeController Controller { get; set; }
 

@@ -4,12 +4,11 @@ using System.Text;
 
 namespace ZigbeeNet.Commands
 {
-    public class GeneralCommand : BaseCommand
+    public class BaseCommand : ZpiObject
     {
-        public GeneralCommand(FrameType frameType, Direction direction, byte commandIdentifier)
-            : base(frameType, direction, commandIdentifier)
+        public BaseCommand(SubSystem subSystem, byte commandId, ArgumentCollection valObj = null) 
+            : base(subSystem, commandId, valObj)
         {
-
         }
     }
 }

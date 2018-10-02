@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using ZigbeeNet;
-using ZigbeeNet.TI.Components;
 using UnpiNet;
 using System.Diagnostics;
+using ZigbeeNet.Commands;
 
-namespace ZigbeeNet.TI
+namespace ZigbeeNet
 {
     public class CCZnp
     {
@@ -17,7 +17,7 @@ namespace ZigbeeNet.TI
         public Unpi Unpi { get; set; }
 
         public event EventHandler Ready;
-        public event EventHandler Close;
+        public event EventHandler Closed;
         public event EventHandler<string> AsyncResponse;
         public event EventHandler<string> SyncResponse;
 
@@ -61,23 +61,21 @@ namespace ZigbeeNet.TI
             Unpi.Closed += Unpi_Closed;
 
             Unpi.Open();
-
-            Ready(this, EventArgs.Empty);
         }
 
         private void Unpi_Closed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Stop();
         }
 
         private void Unpi_Opened(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Ready?.Invoke(this, EventArgs.Empty);
         }
 
         private void Unpi_DataReceived(object sender, Packet e)
         {
-            if(e.Type == MessageType.SRSP)
+            if((byte)e.Type == (byte)MessageType.SRSP)
             {
                 _spinLock = false;
 
@@ -88,7 +86,7 @@ namespace ZigbeeNet.TI
 
                 _resetting = false;
             }
-            else if (e.Type == MessageType.AREQ)
+            else if ((byte)e.Type == (byte)MessageType.AREQ)
             {
                 
             }
@@ -99,26 +97,19 @@ namespace ZigbeeNet.TI
         public void Start()
         {
             Enabled = true;
-
-            //TODO: Fire ready event
+            Unpi.Open();
         }
 
         public void Stop()
         {
             Enabled = false;
+            _txQueue.Clear();
+            Unpi = null;
+
+            Closed?.Invoke(this, EventArgs.Empty);
         }
 
         public void Reset()
-        {
-
-        }
-
-        public void RegisterDevice(Device device)
-        {
-
-        }
-
-        public void UnregisterDevice(Device device)
         {
 
         }
@@ -153,6 +144,21 @@ namespace ZigbeeNet.TI
             this.Request(SubSystem.ZDO, cmd, valObj);
         }
 
+        public byte[] SendCommand(BaseCommand command, Action callback = null)
+        {
+            return Request(command, callback);
+        }
+
+        public byte[] SendCommand(MessageType type, SubSystem subSystem, byte commandId, byte[] payload)
+        {
+            return Unpi.Send((int)type, (int)subSystem, commandId, payload);
+        }
+
+        public byte[] Request(ZpiObject zpiObject, Action callback = null)
+        {
+            return Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Arguments, callback);
+        }
+
         public byte[] Request(SubSystem subSystem, byte commandId, ArgumentCollection valObject, Action callback = null)
         {
             if(Unpi == null)
@@ -174,11 +180,11 @@ namespace ZigbeeNet.TI
 
             ZpiObject zpiObject = new ZpiObject(subSystem, commandId, valObject);
 
-            if(zpiObject.Type == CommandType.SREQ)
+            if(zpiObject.Type == MessageType.SREQ)
             {
                 return SendSREQ(zpiObject, callback);
             }
-            else if (zpiObject.Type == CommandType.AREQ)
+            else if (zpiObject.Type == MessageType.AREQ)
             {
                 return SendAREQ(zpiObject, callback);
             }
@@ -195,7 +201,8 @@ namespace ZigbeeNet.TI
 
         private byte[] SendAREQ(ZpiObject zpiObject, Action callback = null)
         {
-            if((zpiObject.SubSystem == SubSystem.SYS && zpiObject.CommandId == 0) || (zpiObject.SubSystem == SubSystem.SAPI && zpiObject.CommandId == 9)) //resetReq or systemReset
+            if((zpiObject.SubSystem == SubSystem.SYS && zpiObject.CommandId == 0) 
+                || (zpiObject.SubSystem == SubSystem.SAPI && zpiObject.CommandId == 9)) //resetReq or systemReset
             {
                 _resetting = true;
                 // clear all pending requests, since the system is reset
@@ -229,7 +236,7 @@ namespace ZigbeeNet.TI
         {
             ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
 
-            zpiObject.Parse((CommandType)data.Type, data.Length, data.Payload, (string error, string result) =>
+            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, (string error, string result) =>
             {
 
             });

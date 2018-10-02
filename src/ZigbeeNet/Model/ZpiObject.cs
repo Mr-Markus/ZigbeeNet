@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.TI
+namespace ZigbeeNet
 {
     public class ZpiObject
     {
-        public SubSystem SubSystem { get; set; }
-        public byte CommandId { get; set; }
-        public CommandType Type { get; set; }
+        public virtual SubSystem SubSystem { get; set; }
+        public virtual byte CommandId { get; set; }
+        public virtual MessageType Type { get; set; }
         public ArgumentCollection Arguments { get; set; }
 
         public byte[] Frame
@@ -38,15 +38,27 @@ namespace ZigbeeNet.TI
 
         public ZpiObject(SubSystem subSystem, byte commandId, ArgumentCollection valObj = null)
         {
-            //TODO: Get CommandType by mapping
             SubSystem = subSystem;
             CommandId = commandId;
             Arguments = valObj;
         }
 
-        public void Parse(CommandType type, int length, byte[] payload, Action<string, string> result = null)
+        public void Parse(MessageType type, int length, byte[] buffer, Action<string, string> result = null)
         {
-            throw new NotImplementedException();
+            ArgumentCollection arguments = new ArgumentCollection();
+
+            if(type == MessageType.SRSP)
+            {
+                //TODO: GetRspParams(subsys, cmd)
+            } else if (type == MessageType.AREQ)
+            {
+                //TODO: GetReqParams(subsys, cmd)
+            }
+
+            foreach (ZpiArgument argument in arguments.Arguments)
+            {
+
+            }
         }
     }
 }
