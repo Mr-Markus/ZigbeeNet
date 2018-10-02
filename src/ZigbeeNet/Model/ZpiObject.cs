@@ -43,7 +43,7 @@ namespace ZigbeeNet
             Arguments = valObj;
         }
 
-        public void Parse(MessageType type, int length, byte[] buffer, Action<string, string> result = null)
+        public void Parse(MessageType type, int length, byte[] buffer, Action<string, ArgumentCollection> result = null)
         {
             ArgumentCollection arguments = new ArgumentCollection();
 

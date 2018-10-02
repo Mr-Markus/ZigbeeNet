@@ -18,8 +18,8 @@ namespace ZigbeeNet
 
         public event EventHandler Ready;
         public event EventHandler Closed;
-        public event EventHandler<string> AsyncResponse;
-        public event EventHandler<string> SyncResponse;
+        public event EventHandler<ZpiObject> AsyncResponse;
+        public event EventHandler<ZpiObject> SyncResponse;
 
         private List<byte[]> _txQueue;
         private bool _spinLock;
@@ -232,16 +232,28 @@ namespace ZigbeeNet
             }
         }
 
-        private ZpiObject ParseIncomingData(Packet data)
+        private void ParseIncomingData(Packet data)
         {
             ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
 
-            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, (string error, string result) =>
+            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, (string error, ArgumentCollection result) =>
             {
+                zpiObject.Arguments = result;
 
-            });
+                MtIcomingDataHandler(error, zpiObject);
+            });        
+        }
 
-            return zpiObject;            
+        private void MtIcomingDataHandler(string error, ZpiObject data)
+        {
+            if(data.Type == MessageType.SRSP)
+            {
+                SyncResponse?.Invoke(this, data);
+            }
+            else if(data.Type == MessageType.AREQ)
+            {
+                AsyncResponse?.Invoke(this, data);
+            }
         }
     }
 }
