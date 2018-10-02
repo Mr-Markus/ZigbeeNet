@@ -5,6 +5,7 @@ using ZigbeeNet;
 using UnpiNet;
 using System.Diagnostics;
 using ZigbeeNet.Commands;
+using System.Threading;
 
 namespace ZigbeeNet
 {
@@ -18,10 +19,12 @@ namespace ZigbeeNet
 
         public event EventHandler Ready;
         public event EventHandler Closed;
+        public event EventHandler ResetDone;
+
         public event EventHandler<ZpiObject> AsyncResponse;
         public event EventHandler<ZpiObject> SyncResponse;
 
-        private List<byte[]> _txQueue;
+        private List<ZpiObject> _txQueue;
         private bool _spinLock;
 
         private bool _reset;
@@ -32,25 +35,34 @@ namespace ZigbeeNet
             }
             set
             {
-                if(_resetTimer == null)
-                {
-                    _resetTimer = new Stopwatch();
-                }
+                int dueTime = Timeout.Infinite;
+                int period = Timeout.Infinite;
+
                 if (value == true)
                 {
-                    _resetTimer.Restart();
-                } else
-                {
-                    _resetTimer.Stop();
+                    dueTime = 0;
+                    period = 30000;
                 }
+
+                _resetTimeout = new Timer((object state) =>
+                    {
+                        if(_resetting)
+                        {
+                            _spinLock = false;
+                        }
+                    }, null, dueTime, period);
+                
+                
                 _reset = value;
             }
         }
-        private Stopwatch _resetTimer;
+        private Timer _resetTimeout;
+        private Timer _timeout;
+        private bool _sreqRunning;
 
         public CCZnp()
         {
-            _txQueue = new List<byte[]>();
+            _txQueue = new List<ZpiObject>();
         }
 
         public void Init(string port, int baudrate = 115200, Action callback = null)
@@ -79,7 +91,8 @@ namespace ZigbeeNet
             {
                 _spinLock = false;
 
-                //TODO: clear timeout controller if it is there
+                _sreqRunning = false;
+                _timeout.Change(Timeout.Infinite, Timeout.Infinite);
 
                 // schedule next transmission if something in txQueue
                 ScheduleNextSend();
@@ -88,7 +101,17 @@ namespace ZigbeeNet
             }
             else if ((byte)e.Type == (byte)MessageType.AREQ)
             {
-                
+                if(e.Cmd1 == 0x00) //ResetReq
+                {
+                    // if AREQ:SYS:RESET does not return in 30 sec
+                    // release the lock to avoid the requests from enqueuing
+                    _spinLock = false;
+                    _resetting = false;
+
+                    ResetDone?.Invoke(this, EventArgs.Empty);
+
+                    return;
+                }
             }
 
             ParseIncomingData(e);
@@ -107,11 +130,6 @@ namespace ZigbeeNet
             Unpi = null;
 
             Closed?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void Reset()
-        {
-
         }
 
         public void PermitJoin(int time, bool onCoord)
@@ -166,19 +184,17 @@ namespace ZigbeeNet
                 throw new NullReferenceException("CCZnp has not been initialized yet");
             }
 
-            if(_spinLock)
+            ZpiObject zpiObject = new ZpiObject(subSystem, commandId, valObject);
+
+            if (_spinLock)
             {
-                byte[] result = Request(subSystem, commandId, valObject, callback);
+                _txQueue.Add(zpiObject);
 
-                _txQueue.Add(result);
-
-                return result;
+                return null;
             }
 
             //prepare for transmission
             _spinLock = true;
-
-            ZpiObject zpiObject = new ZpiObject(subSystem, commandId, valObject);
 
             if(zpiObject.Type == MessageType.SREQ)
             {
@@ -194,8 +210,26 @@ namespace ZigbeeNet
 
         private byte[] SendSREQ(ZpiObject zpiObject, Action callback = null)
         {
-            //TODO: Check for timeout
+            _timeout = new Timer((object state) =>
+            {
+                if(_sreqRunning)
+                {
+                    _sreqRunning = false;
+                    _timeout.Change(Timeout.Infinite, Timeout.Infinite);
 
+                    if (state.GetType() == typeof(ZpiObject))
+                    {
+                        ZpiObject zpi = state as ZpiObject;
+                        throw new TimeoutException($"Request timeout: {zpi.Type.ToString()}:{zpi.SubSystem.ToString()}:{zpi.CommandId}");
+                    }
+                    else
+                    {
+                        throw new TimeoutException("Request timeout");
+                    }
+                }
+            }, zpiObject, 0, 30000); //TODO: Get timeout by config
+
+            _sreqRunning = true;
             return Unpi.Send((int)MessageType.SREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
         }
 
@@ -205,15 +239,9 @@ namespace ZigbeeNet
                 || (zpiObject.SubSystem == SubSystem.SAPI && zpiObject.CommandId == 9)) //resetReq or systemReset
             {
                 _resetting = true;
-                // clear all pending requests, since the system is reset
-                _txQueue.Clear();
 
-                // if AREQ:SYS:RESET does not return in 30 sec
-                // release the lock to avoid the requests from enqueuing
-                if (_resetting && _resetTimer.ElapsedMilliseconds > 30000)
-                {
-                    _spinLock = false;
-                }                
+                // clear all pending requests, since the system is reset
+                _txQueue.Clear();                
             } else
             {
                 _spinLock = false;
@@ -228,7 +256,11 @@ namespace ZigbeeNet
         {
             if(_txQueue.Count > 0)
             {
+                ZpiObject next = _txQueue[0];
+
                 _txQueue.RemoveAt(0);
+
+                Request(next);
             }
         }
 
