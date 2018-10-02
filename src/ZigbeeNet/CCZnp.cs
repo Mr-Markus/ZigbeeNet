@@ -51,7 +51,6 @@ namespace ZigbeeNet
                             // if AREQ:SYS:RESET does not return in 30 sec
                             // release the lock to avoid the requests from enqueuing
                             _spinLock = false;
-                            _spinLock = false;
                         }
                     }, null, dueTime, period);
                 
@@ -109,6 +108,7 @@ namespace ZigbeeNet
                 {
                     //Reset done
                     _resetting = false;
+                    _spinLock = false;
 
                     ResetDone?.Invoke(this, EventArgs.Empty);
 
