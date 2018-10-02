@@ -48,6 +48,9 @@ namespace ZigbeeNet
                     {
                         if(_resetting)
                         {
+                            // if AREQ:SYS:RESET does not return in 30 sec
+                            // release the lock to avoid the requests from enqueuing
+                            _spinLock = false;
                             _spinLock = false;
                         }
                     }, null, dueTime, period);
@@ -101,11 +104,10 @@ namespace ZigbeeNet
             }
             else if ((byte)e.Type == (byte)MessageType.AREQ)
             {
-                if(e.Cmd1 == 0x00) //ResetReq
+                if ((e.SubSystem == UnpiNet.SubSystem.RPC_SYS_SYS && e.Cmd1 == 0)
+                || (e.SubSystem == UnpiNet.SubSystem.RPC_SYS_SAPI && e.Cmd1 == 9))
                 {
-                    // if AREQ:SYS:RESET does not return in 30 sec
-                    // release the lock to avoid the requests from enqueuing
-                    _spinLock = false;
+                    //Reset done
                     _resetting = false;
 
                     ResetDone?.Invoke(this, EventArgs.Empty);
