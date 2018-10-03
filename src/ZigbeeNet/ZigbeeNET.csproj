@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\unpi-net\src\UnpiNet\UnpiNet.csproj" />
+    <ProjectReference Include="..\ZigbeeNet.ZCL\ZigbeeNet.ZCL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

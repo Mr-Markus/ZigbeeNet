@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
 {
@@ -23,6 +24,18 @@ namespace ZigbeeNet
 
             Znp = new CCZnp();
             Znp.Ready += Znp_Ready;
+            Znp.AsyncResponse += Znp_AsyncResponse;
+            Znp.SyncResponse += Znp_SyncResponse;
+        }
+
+        private void Znp_SyncResponse(object sender, ZpiObject e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Znp_AsyncResponse(object sender, ZpiObject e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Znp_Ready(object sender, EventArgs e)

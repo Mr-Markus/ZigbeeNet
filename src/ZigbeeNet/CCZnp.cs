@@ -6,6 +6,7 @@ using UnpiNet;
 using System.Diagnostics;
 using ZigbeeNet.Commands;
 using System.Threading;
+using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
 {

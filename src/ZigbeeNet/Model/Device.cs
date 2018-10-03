@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet;
+using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
 {
