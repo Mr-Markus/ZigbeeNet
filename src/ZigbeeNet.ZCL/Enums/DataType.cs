@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigbeeNet.ZCL
 {
     /// <summary>
     /// Cluster specifications MAY use the unique data type short name to reduce the text size of the specification.

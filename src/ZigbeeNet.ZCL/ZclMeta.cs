@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace ZigbeeNet.ZCL
 {
@@ -18,7 +19,10 @@ namespace ZigbeeNet.ZCL
             {
                 if(string.IsNullOrEmpty(_zclMetaDef))
                 {
-                    _zclMetaDef = GetDefinitionAsJson("zcl_meta.json");
+                    Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.zcl_meta.json");
+
+                    StreamReader reader = new StreamReader(stream);
+                    _zclMetaDef = reader.ReadToEnd();
                 }
                 return _zclMetaDef;
             }
@@ -87,6 +91,7 @@ namespace ZigbeeNet.ZCL
                         ZclFunctionalCommand zclCommand = new ZclFunctionalCommand();
 
                         zclCommand.Name = cmd.Key;
+                        zclCommand.Cluster = cluster.Name;
                         zclCommand.Direction = (Direction)cmd.Value["dir"].ToObject<int>();
 
                         var paramCollection = cmd.Value["params"];
@@ -111,13 +116,14 @@ namespace ZigbeeNet.ZCL
             }
         }
 
-        private string GetDefinitionAsJson(string embeddedFileName)
+        public ZclFoundationCommand GetFoundationCommand(string cmd)
         {
-            Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream(Assembly.GetCallingAssembly().GetName().Name + ".Defs." + embeddedFileName);
+            return Foundation.SingleOrDefault(fc => fc.Name.Equals(cmd));
+        }
 
-            StreamReader reader = new StreamReader(stream);
-            string text = reader.ReadToEnd();
-            return text;
+        public ZclFunctionalCommand GetFunctionalCommand(string cluster, string cmd)
+        {
+            return Functional.SingleOrDefault(fc => fc.Cluster.Equals(cluster) && fc.Name.Equals(cmd));
         }
     }
 }

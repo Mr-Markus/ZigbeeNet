@@ -6,6 +6,8 @@ namespace ZigbeeNet.ZCL
 {
     public class ZclFunctionalCommand : ZclCommand
     {
+        public string Cluster { get; set; }
+
         public Direction Direction { get; set; }
     }
 }
