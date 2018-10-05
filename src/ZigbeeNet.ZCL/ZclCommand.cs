@@ -6,8 +6,9 @@ namespace ZigbeeNet.ZCL
 {
     public class ZclCommand
     {
+        public byte Id { get; set; }
         public string Name { get; set; }
-
+        
         public List<ZclCommandParam> Params { get; }
 
         public ZclCommand()

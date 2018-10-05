@@ -1,0 +1,1783 @@
+{
+  "foundation": {
+    "read": {
+      "params": [
+        { "attrId": 33 }
+      ],
+      "knownBufLen": 2
+    },
+    "readRsp": {
+      "params": [
+        { "attrId": 33 },
+        { "status": 32 },
+        { "extra": "readRsp" }
+      ],
+      "knownBufLen": 3
+    },
+    "write": {
+      "params": [
+        { "attrId": 33 },
+        { "dataType": 32 },
+        { "attrData": "variable" }
+      ],
+      "knownBufLen": 3
+    },
+    "writeUndiv": {
+      "params": [
+        { "attrId": 33 },
+        { "dataType": 32 },
+        { "attrData": "variable" }
+      ],
+      "knownBufLen": 3
+    },
+    "writeRsp": {
+      "params": [
+        { "extra": "writeRsp" }
+      ],
+      "knownBufLen": 0
+    },
+    "writeNoRsp": {
+      "params": [
+        { "attrId": 33 },
+        { "dataType": 32 },
+        { "attrData": "variable" }
+      ],
+      "knownBufLen": 3
+    },
+    "configReport": {
+      "params": [
+        { "direction": 32 },
+        { "attrId": 33 },
+        { "extra": "configReport" }
+      ],
+      "knownBufLen": 3
+    },
+    "configReportRsp": {
+      "params": [
+        { "extra": "configReportRsp" }
+      ],
+      "knownBufLen": 0
+    },
+    "readReportConfig": {
+      "params": [
+        { "direction": 32 },
+        { "attrId": 33 }
+      ],
+      "knownBufLen": 3
+    },
+    "readReportConfigRsp": {
+      "params": [
+        { "status": 32 },
+        { "direction": 32 },
+        { "attrId": 33 },
+        { "extra": "readReportConfigRsp" }
+      ],
+      "knownBufLen": 4
+    },
+    "report": {
+      "params": [
+        { "attrId": 33 },
+        { "dataType": 32 },
+        { "attrData": "variable" }
+      ],
+      "knownBufLen": 3
+    },
+    "defaultRsp": {
+      "params": [
+        { "cmdId": 32 },
+        { "statusCode": 32 }
+      ],
+      "knownBufLen": 2
+    },
+    "discover": {
+      "params": [
+        { "startAttrId": 33 },
+        { "maxAttrIds": 32 }
+      ],
+      "knownBufLen": 3
+    },
+    "discoverRsp": {
+      "params": [
+        { "attrId": 33 },
+        { "dataType": 32 }
+      ],
+      "knownBufLen": 3
+    },
+    "readStruct": {
+      "params": [
+        { "attrId": 33 },
+        { "selector": "selector" }
+      ],
+      "knownBufLen": 2
+    },
+    "writeStrcut": {
+      "params": [
+        { "attrId": 33 },
+        { "selector": "selector" },
+        { "dataType": 32 },
+        { "attrData": "multi" }
+      ],
+      "knownBufLen": 3
+    },
+    "writeStrcutRsp": {
+      "params": [
+        { "status": 32 },
+        { "attrId": 33 },
+        { "selector": "selector" }
+      ],
+      "knownBufLen": 3
+    }
+  },
+  "functional": {
+    "genBasic": {
+      "resetFactDefault": {
+        "params": [],
+        "dir": 0
+      }
+    },
+    "genIdentify": {
+      "identify": {
+        "params": [
+          { "identifytime": 33 }
+        ],
+        "dir": 0
+      },
+      "identifyQuery": {
+        "params": [],
+        "dir": 0
+      },
+      "ezmodeInvoke": {
+        "params": [
+          { "action": 32 }
+        ],
+        "dir": 0
+      },
+      "updateCommissionState": {
+        "params": [
+          { "action": 32 },
+          { "commstatemask": 32 }
+        ],
+        "dir": 0
+      },
+      "triggerEffect": {
+        "params": [
+          { "effectid": 32 },
+          { "effectvariant": 32 }
+        ],
+        "dir": 0
+      },
+      "identifyQueryRsp": {
+        "params": [
+          { "timeout": 33 }
+        ],
+        "dir": 1
+      }
+    },
+    "genGroups": {
+      "add": {
+        "params": [
+          { "groupid": 33 },
+          { "groupname": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "view": {
+        "params": [
+          { "groupid": 33 }
+        ],
+        "dir": 0
+      },
+      "getMembership": {
+        "params": [
+          { "groupcount": "preLenUint8" },
+          { "grouplist": "dynUint16" }
+        ],
+        "dir": 0
+      },
+      "remove": {
+        "params": [
+          { "groupid": 33 }
+        ],
+        "dir": 0
+      },
+      "removeAll": {
+        "params": [],
+        "dir": 0
+      },
+      "addIfIdentifying": {
+        "params": [
+          { "groupid": 33 },
+          { "groupname": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "addRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 }
+        ],
+        "dir": 1
+      },
+      "viewRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 },
+          { "groupname": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "getMembershipRsp": {
+        "params": [
+          { "capacity": 32 },
+          { "groupcount": "preLenUint8" },
+          { "grouplist": "dynUint16" }
+        ],
+        "dir": 1
+      },
+      "removeRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 }
+        ],
+        "dir": 1
+      }
+    },
+    "genScenes": {
+      "add": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 },
+          { "transtime": 33 },
+          { "scenename": "stringPreLen" },
+          { "extensionfieldsets": "extfieldsets" }
+        ],
+        "dir": 0,
+        "knownBufLen": 6
+      },
+      "view": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 0
+      },
+      "remove": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 0
+      },
+      "removeAll": {
+        "params": [
+          { "groupid": 33 }
+        ],
+        "dir": 0
+      },
+      "store": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 0
+      },
+      "recall": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 0
+      },
+      "getSceneMembership": {
+        "params": [
+          { "groupid": 33 }
+        ],
+        "dir": 0
+      },
+      "enhancedAdd": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 },
+          { "transtime": 33 },
+          { "scenename": "stringPreLen" },
+          { "extensionfieldsets": "extfieldsets" }
+        ],
+        "dir": 0,
+        "knownBufLen": 6
+      },
+      "enhancedView": {
+        "params": [
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 0
+      },
+      "copy": {
+        "params": [
+          { "mode": 32 },
+          { "groupidfrom": 33 },
+          { "sceneidfrom": 32 },
+          { "groupidto": 33 },
+          { "sceneidto": 32 }
+        ],
+        "dir": 0
+      },
+      "addRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupId": 33 },
+          { "sceneId": 32 }
+        ],
+        "dir": 1
+      },
+      "viewRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 },
+          { "sceneid": 32 },
+          { "transtime": 33 },
+          { "scenename": "stringPreLen" },
+          { "extensionfieldsets": "extfieldsets" }
+        ],
+        "dir": 1,
+        "knownBufLen": 7
+      },
+      "removeRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 1
+      },
+      "removeAllRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 }
+        ],
+        "dir": 1
+      },
+      "storeRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 },
+          { "sceneid": 32 }
+        ],
+        "dir": 1
+      },
+      "getSceneMembershipRsp": {
+        "params": [
+          { "status": 32 },
+          { "capacity": 32 },
+          { "groupid": 33 },
+          { "scenecount": "preLenUint8" },
+          { "scenelist": "dynUint8" }
+        ],
+        "dir": 1
+      },
+      "enhancedAddRsp": {
+        "params": [],
+        "dir": 1
+      },
+      "enhancedViewRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupid": 33 },
+          { "sceneid": 32 },
+          { "transtime": 33 },
+          { "scenename": "stringPreLen" },
+          { "extensionfieldsets": "extfieldsets" }
+        ],
+        "dir": 1,
+        "knownBufLen": 7
+      },
+      "copyRsp": {
+        "params": [
+          { "status": 32 },
+          { "groupidfrom": 33 },
+          { "sceneidfrom": 32 }
+        ],
+        "dir": 1
+      }
+    },
+    "genOnOff": {
+      "off": {
+        "params": [],
+        "dir": 0
+      },
+      "on": {
+        "params": [],
+        "dir": 0
+      },
+      "toggle": {
+        "params": [],
+        "dir": 0
+      },
+      "offWithEffect": {
+        "params": [
+          { "effectid": 32 },
+          { "effectvariant": 32 }
+        ],
+        "dir": 0
+      },
+      "onWithRecallGlobalScene": {
+        "params": [],
+        "dir": 0
+      },
+      "onWithTimedOff": {
+        "params": [
+          { "ctrlbits": 32 },
+          { "ctrlbyte": 32 },
+          { "ontime": 33 },
+          { "offwaittime": 33 }
+        ],
+        "dir": 0
+      }
+    },
+    "genLevelCtrl": {
+      "moveToLevel": {
+        "params": [
+          { "level": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "move": {
+        "params": [
+          { "movemode": 32 },
+          { "rate": 32 }
+        ],
+        "dir": 0
+      },
+      "step": {
+        "params": [
+          { "stepmode": 32 },
+          { "stepsize": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "stop": {
+        "params": [],
+        "dir": 0
+      },
+      "moveToLevelWithOnOff": {
+        "params": [
+          { "level": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveWithOnOff": {
+        "params": [
+          { "movemode": 32 },
+          { "rate": 32 }
+        ],
+        "dir": 0
+      },
+      "stepWithOnOff": {
+        "params": [
+          { "stepmode": 32 },
+          { "stepsize": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "stopWithOnOff": {
+        "params": [],
+        "dir": 0
+      }
+    },
+    "genAlarms": {
+      "reset": {
+        "params": [
+          { "alarmcode": 32 },
+          { "clusterid": 33 }
+        ],
+        "dir": 0
+      },
+      "resetAll": {
+        "params": [],
+        "dir": 0
+      },
+      "getAlarm": {
+        "params": [],
+        "dir": 0
+      },
+      "resetLog": {
+        "params": [],
+        "dir": 0
+      },
+      "publishEventLog": {
+        "params": [],
+        "dir": 0
+      },
+      "alarm": {
+        "params": [
+          { "alarmcode": 32 },
+          { "clusterid": 33 }
+        ],
+        "dir": 1
+      },
+      "getRsp": {
+        "params": [
+          { "status": 32 },
+          { "alarmcode": 32 },
+          { "clusterid": 33 },
+          { "timestamp": 35 }
+        ],
+        "dir": 1
+      },
+      "getEventLog": {
+        "params": [],
+        "dir": 1
+      }
+    },
+    "genRssiLocation": {
+      "setAbsolute": {
+        "params": [
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 },
+          { "power": 41 },
+          { "pathlossexponent": 33 }
+        ],
+        "dir": 0
+      },
+      "setDevCfg": {
+        "params": [
+          { "power": 41 },
+          { "pathlossexponent": 33 },
+          { "calperiod": 33 },
+          { "numrssimeasurements": 32 },
+          { "reportingperiod": 33 }
+        ],
+        "dir": 0
+      },
+      "getDevCfg": {
+        "params": [
+          { "targetaddr": "longaddr" }
+        ],
+        "dir": 0
+      },
+      "getData": {
+        "params": [
+          { "getdatainfo": 32 },
+          { "numrsp": 32 },
+          { "targetaddr": "longaddr" }
+        ],
+        "dir": 0
+      },
+      "rssiRsp": {
+        "params": [
+          { "replyingdev": "longaddr" },
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 },
+          { "rssi": 40 },
+          { "numrssimeasurements": 32 }
+        ],
+        "dir": 0
+      },
+      "sendPings": {
+        "params": [
+          { "targetaddr": "longaddr" },
+          { "numrssimeasurements": 32 },
+          { "calperiod": 33 }
+        ],
+        "dir": 0
+      },
+      "anchorNodeAnnounce": {
+        "params": [
+          { "anchornodeaddr": "longaddr" },
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 }
+        ],
+        "dir": 0
+      },
+      "devCfgRsp": {
+        "params": [
+          { "status": 32 },
+          { "power": 41 },
+          { "pathlossexp": 33 },
+          { "calperiod": 33 },
+          { "numrssimeasurements": 32 },
+          { "reportingperiod": 33 }
+        ],
+        "dir": 1
+      },
+      "dataRsp": {
+        "params": [
+          { "status": 32 },
+          { "locationtype": 32 },
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 },
+          { "power": 41 },
+          { "pathlossexp": 33 },
+          { "locationmethod": 32 },
+          { "qualitymeasure": 32 },
+          { "locationage": 33 }
+        ],
+        "dir": 1
+      },
+      "dataNotif": {
+        "params": [
+          { "locationtype": 32 },
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 },
+          { "power": 41 },
+          { "pathlossexp": 33 },
+          { "locationmethod": 32 },
+          { "qualitymeasure": 32 },
+          { "locationage": 33 }
+        ],
+        "dir": 1
+      },
+      "compactDataNotif": {
+        "params": [
+          { "locationtype": 32 },
+          { "coord1": 41 },
+          { "coord2": 41 },
+          { "coord3": 41 },
+          { "qualitymeasure": 32 },
+          { "locationage": 33 }
+        ],
+        "dir": 1
+      },
+      "rssiPing": {
+        "params": [
+          { "locationtype": 32 }
+        ],
+        "dir": 1
+      },
+      "rssiReq": {
+        "params": [],
+        "dir": 1
+      },
+      "reportRssiMeas": {
+        "params": [
+          { "reportingaddr": "longaddr" },
+          { "numofneighbors": "preLenUint8" },
+          { "neighborsinfo": "locationbuffer" }
+        ],
+        "dir": 1
+      },
+      "reqOwnLocation": {
+        "params": [
+          { "reqaddr": "longaddr" }
+        ],
+        "dir": 1
+      }
+    },
+    "genCommissioning": {
+      "restartDevice": {
+        "params": [
+          { "options": 32 },
+          { "delay": 32 },
+          { "jitter": 32 }
+        ],
+        "dir": 0
+      },
+      "saveStartupParams": {
+        "params": [
+          { "options": 32 },
+          { "index": 32 }
+        ],
+        "dir": 0
+      },
+      "restoreStartupParams": {
+        "params": [
+          { "options": 32 },
+          { "index": 32 }
+        ],
+        "dir": 0
+      },
+      "resetStartupParams": {
+        "params": [
+          { "options": 32 },
+          { "index": 32 }
+        ],
+        "dir": 0
+      },
+      "restartDeviceRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "saveStartupParamsRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "restoreStartupParamsRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "resetStartupParamsRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      }
+    },
+    "genPollCtrl": {
+      "checkinRsp": {
+        "params": [
+          { "startfastpolling": 32 },
+          { "fastpolltimeout": 33 }
+        ],
+        "dir": 0
+      },
+      "fastPollStop": {
+        "params": [],
+        "dir": 0
+      },
+      "setLongPollInterval": {
+        "params": [
+          { "newlongpollinterval": 35 }
+        ],
+        "dir": 0
+      },
+      "setShortPollInterval": {
+        "params": [
+          { "newshortpollinterval": 33 }
+        ],
+        "dir": 0
+      },
+      "checkin": {
+        "params": [],
+        "dir": 1
+      }
+    },
+    "closuresDoorLock": {
+      "lockDoor": {
+        "params": [
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "unlockDoor": {
+        "params": [
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "toggleDoor": {
+        "params": [
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "unlockWithTimeout": {
+        "params": [
+          { "timeout": 33 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "getLogRecord": {
+        "params": [
+          { "logindex": 33 }
+        ],
+        "dir": 0
+      },
+      "setPinCode": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 },
+          { "usertype": 32 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "getPinCode": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearPinCode": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearAllPinCodes": {
+        "params": [],
+        "dir": 0
+      },
+      "setUserStatus": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 }
+        ],
+        "dir": 0
+      },
+      "getUserStatus": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "setWeekDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 },
+          { "daysmask": 32 },
+          { "starthour": 32 },
+          { "startminute": 32 },
+          { "endhour": 32 },
+          { "endminute": 32 }
+        ],
+        "dir": 0
+      },
+      "getWeekDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearWeekDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "setYearDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 },
+          { "zigbeelocalstarttime": 35 },
+          { "zigbeelocalendtime": 35 }
+        ],
+        "dir": 0
+      },
+      "getYearDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearYearDaySchedule": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "setHolidaySchedule": {
+        "params": [
+          { "holidayscheduleid": 32 },
+          { "zigbeelocalstarttime": 35 },
+          { "zigbeelocalendtime": 35 },
+          { "opermodelduringholiday": 32 }
+        ],
+        "dir": 0
+      },
+      "getHolidaySchedule": {
+        "params": [
+          { "holidayscheduleid": 32 }
+        ],
+        "dir": 0
+      },
+      "clearHolidaySchedule": {
+        "params": [
+          { "holidayscheduleid": 32 }
+        ],
+        "dir": 0
+      },
+      "setUserType": {
+        "params": [
+          { "userid": 33 },
+          { "usertype": 32 }
+        ],
+        "dir": 0
+      },
+      "getUserType": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "setRfidCode": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 },
+          { "usertype": 32 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "getRfidCode": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearRfidCode": {
+        "params": [
+          { "userid": 33 }
+        ],
+        "dir": 0
+      },
+      "clearAllRfidCodes": {
+        "params": [],
+        "dir": 0
+      },
+      "lockDoorRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "unlockDoorRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "toggleDoorRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "unlockWithTimeoutRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getLogRecordRsp": {
+        "params": [
+          { "logentryid": 33 },
+          { "timestamp": 35 },
+          { "eventtype": 32 },
+          { "source": 32 },
+          { "eventidalarmcode": 32 },
+          { "userid": 33 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "setPinCodeRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getPinCodeRsp": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 },
+          { "usertype": 32 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "clearPinCodeRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "clearAllPinCodesRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "setUserStatusRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getUserStatusRsp": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 }
+        ],
+        "dir": 1
+      },
+      "setWeekDayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getWeekDayScheduleRsp": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 },
+          { "status": 32 },
+          { "daysmask": 32 },
+          { "starthour": 32 },
+          { "startminute": 32 },
+          { "endhour": 32 },
+          { "endminute": 32 }
+        ],
+        "dir": 1
+      },
+      "clearWeekDayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "setYearDayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getYearDayScheduleRsp": {
+        "params": [
+          { "scheduleid": 32 },
+          { "userid": 33 },
+          { "status": 32 },
+          { "zigbeelocalstarttime": 35 },
+          { "zigbeelocalendtime": 35 }
+        ],
+        "dir": 1
+      },
+      "clearYearDayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "setHolidayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getHolidayScheduleRsp": {
+        "params": [
+          { "holidayscheduleid": 32 },
+          { "status": 32 },
+          { "zigbeelocalstarttime": 35 },
+          { "zigbeelocalendtime": 35 },
+          { "opermodelduringholiday": 32 }
+        ],
+        "dir": 1
+      },
+      "clearHolidayScheduleRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "setUserTypeRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getUserTypeRsp": {
+        "params": [
+          { "userid": 33 },
+          { "usertype": 32 }
+        ],
+        "dir": 1
+      },
+      "setRfidCodeRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "getRfidCodeRsp": {
+        "params": [
+          { "userid": 33 },
+          { "userstatus": 32 },
+          { "usertype": 32 },
+          { "pincodevalue": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "clearRfidCodeRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "clearAllRfidCodesRsp": {
+        "params": [
+          { "status": 32 }
+        ],
+        "dir": 1
+      },
+      "operationEventNotification": {
+        "params": [
+          { "opereventsrc": 32 },
+          { "opereventcode": 32 },
+          { "userid": 33 },
+          { "pin": 32 },
+          { "zigbeelocaltime": 35 },
+          { "data": 32 }
+        ],
+        "dir": 1
+      },
+      "programmingEventNotification": {
+        "params": [
+          { "programeventsrc": 32 },
+          { "programeventcode": 32 },
+          { "userid": 33 },
+          { "pin": 32 },
+          { "usertype": 32 },
+          { "userstatus": 32 },
+          { "zigbeelocaltime": 35 },
+          { "data": 32 }
+        ],
+        "dir": 1
+      }
+    },
+    "closuresWindowCovering": {
+      "upOpen": {
+        "params": [],
+        "dir": 0
+      },
+      "downClose": {
+        "params": [],
+        "dir": 0
+      },
+      "stop": {
+        "params": [],
+        "dir": 0
+      },
+      "goToLiftValue": {
+        "params": [
+          { "liftvalue": 33 }
+        ],
+        "dir": 0
+      },
+      "goToLiftPercentage": {
+        "params": [
+          { "percentageliftvalue": 32 }
+        ],
+        "dir": 0
+      },
+      "goToTiltValue": {
+        "params": [
+          { "tiltvalue": 33 }
+        ],
+        "dir": 0
+      },
+      "goToTiltPercentage": {
+        "params": [
+          { "percentagetiltvalue": 32 }
+        ],
+        "dir": 0
+      }
+    },
+    "hvacThermostat": {
+      "setpointRaiseLower": {
+        "params": [
+          { "mode": 32 },
+          { "amount": 40 }
+        ],
+        "dir": 0
+      },
+      "setWeeklySchedule": {
+        "params": [
+          { "numoftrans": 32 },
+          { "dayofweek": 32 },
+          { "mode": "preLenUint8" },
+          { "thermoseqmode": "dynUint16" }
+        ],
+        "dir": 0
+      },
+      "getWeeklySchedule": {
+        "params": [
+          { "daystoreturn": 32 },
+          { "modetoreturn": 32 }
+        ],
+        "dir": 0
+      },
+      "clearWeeklySchedule": {
+        "params": [],
+        "dir": 0
+      },
+      "getRelayStatusLog": {
+        "params": [],
+        "dir": 0
+      },
+      "getWeeklyScheduleRsp": {
+        "params": [
+          { "numoftrans": 32 },
+          { "dayofweek": 32 },
+          { "mode": "preLenUint8" },
+          { "thermoseqmode": "dynUint16" }
+        ],
+        "dir": 1
+      },
+      "getRelayStatusLogRsp": {
+        "params": [
+          { "timeofday": 33 },
+          { "relaystatus": 33 },
+          { "localtemp": 33 },
+          { "humidity": 32 },
+          { "setpoint": 33 },
+          { "unreadentries": 33 }
+        ],
+        "dir": 1
+      }
+    },
+    "lightingColorCtrl": {
+      "moveToHue": {
+        "params": [
+          { "hue": 32 },
+          { "direction": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveHue": {
+        "params": [
+          { "movemode": 32 },
+          { "rate": 32 }
+        ],
+        "dir": 0
+      },
+      "stepHue": {
+        "params": [
+          { "stepmode": 32 },
+          { "stepsize": 32 },
+          { "transtime": 32 }
+        ],
+        "dir": 0
+      },
+      "moveToSaturation": {
+        "params": [
+          { "saturation": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveSaturation": {
+        "params": [
+          { "movemode": 32 },
+          { "rate": 32 }
+        ],
+        "dir": 0
+      },
+      "stepSaturation": {
+        "params": [
+          { "stepmode": 32 },
+          { "stepsize": 32 },
+          { "transtime": 32 }
+        ],
+        "dir": 0
+      },
+      "moveToHueAndSaturation": {
+        "params": [
+          { "hue": 32 },
+          { "saturation": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveToColor": {
+        "params": [
+          { "colorx": 33 },
+          { "colory": 33 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveColor": {
+        "params": [
+          { "ratex": 41 },
+          { "ratey": 41 }
+        ],
+        "dir": 0
+      },
+      "stepColor": {
+        "params": [
+          { "stepx": 41 },
+          { "stepy": 41 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "moveToColorTemp": {
+        "params": [
+          { "colortemp": 33 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "enhancedMoveToHue": {
+        "params": [
+          { "enhancehue": 33 },
+          { "direction": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "enhancedMoveHue": {
+        "params": [
+          { "movemode": 32 },
+          { "rate": 33 }
+        ],
+        "dir": 0
+      },
+      "enhancedStepHue": {
+        "params": [
+          { "stepmode": 32 },
+          { "stepsize": 33 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "enhancedMoveToHueAndSaturation": {
+        "params": [
+          { "enhancehue": 33 },
+          { "saturation": 32 },
+          { "transtime": 33 }
+        ],
+        "dir": 0
+      },
+      "colorLoopSet": {
+        "params": [
+          { "bits": 32 },
+          { "bytee": 32 },
+          { "action": 32 },
+          { "direction": 32 },
+          { "time": 33 },
+          { "starthue": 33 }
+        ],
+        "dir": 0
+      },
+      "stopMoveStep": {
+        "params": [
+          { "bits": 32 },
+          { "bytee": 32 },
+          { "action": 32 },
+          { "direction": 32 },
+          { "time": 33 },
+          { "starthue": 33 }
+        ],
+        "dir": 0
+      }
+    },
+    "ssIasZone": {
+      "enrollRsp": {
+        "params": [
+          { "enrollrspcode": 32 },
+          { "zoneid": 32 }
+        ],
+        "dir": 0
+      },
+      "initNormalOpMode": {
+        "params": [],
+        "dir": 0
+      },
+      "initTestMode": {
+        "params": [],
+        "dir": 0
+      },
+      "statusChangeNotification": {
+        "params": [
+          { "zonestatus": 33 },
+          { "extendedstatus": 32 }
+        ],
+        "dir": 1
+      },
+      "enrollReq": {
+        "params": [
+          { "zonetype": 33 },
+          { "manucode": 33 }
+        ],
+        "dir": 1
+      }
+    },
+    "ssIasAce": {
+      "arm": {
+        "params": [
+          { "armmode": 32 }
+        ],
+        "dir": 0
+      },
+      "bypass": {
+        "params": [
+          { "numofzones": "preLenUint8" },
+          { "zoneidlist": "dynUint8" }
+        ],
+        "dir": 0
+      },
+      "emergency": {
+        "params": [],
+        "dir": 0
+      },
+      "fire": {
+        "params": [],
+        "dir": 0
+      },
+      "panic": {
+        "params": [],
+        "dir": 0
+      },
+      "getZoneIDMap": {
+        "params": [],
+        "dir": 0
+      },
+      "getZoneInfo": {
+        "params": [
+          { "zoneid": 32 }
+        ],
+        "dir": 0
+      },
+      "getPanelStatus": {
+        "params": [],
+        "dir": 0
+      },
+      "getBypassedZoneList": {
+        "params": [],
+        "dir": 0
+      },
+      "getZoneStatus": {
+        "params": [
+          { "startzoneid": 32 },
+          { "maxnumzoneid": 32 },
+          { "zonestatusmaskflag": 32 },
+          { "zonestatusmask": 33 }
+        ],
+        "dir": 0
+      },
+      "armRsp": {
+        "params": [
+          { "armnotification": 32 }
+        ],
+        "dir": 1
+      },
+      "getZoneIDMapRsp": {
+        "params": [
+          { "zoneidmapsection0": 33 },
+          { "zoneidmapsection1": 33 },
+          { "zoneidmapsection2": 33 },
+          { "zoneidmapsection3": 33 },
+          { "zoneidmapsection4": 33 },
+          { "zoneidmapsection5": 33 },
+          { "zoneidmapsection6": 33 },
+          { "zoneidmapsection7": 33 },
+          { "zoneidmapsection8": 33 },
+          { "zoneidmapsection9": 33 },
+          { "zoneidmapsection10": 33 },
+          { "zoneidmapsection11": 33 },
+          { "zoneidmapsection12": 33 },
+          { "zoneidmapsection13": 33 },
+          { "zoneidmapsection14": 33 },
+          { "zoneidmapsection15": 33 }
+        ],
+        "dir": 1
+      },
+      "getZoneInfoRsp": {
+        "params": [
+          { "zoneid": 32 },
+          { "zonetype": 33 },
+          { "ieeeaddr": "longaddr" }
+        ],
+        "dir": 1
+      },
+      "zoneStatusChanged": {
+        "params": [
+          { "zoneid": 32 },
+          { "zonestatus": 33 },
+          { "audiblenotif": 32 },
+          { "strlen": 32 },
+          { "string": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "panelStatusChanged": {
+        "params": [
+          { "panelstatus": 32 },
+          { "secondsremain": 32 },
+          { "audiblenotif": 32 },
+          { "alarmstatus": 32 }
+        ],
+        "dir": 1
+      },
+      "getPanelStatusRsp": {
+        "params": [
+          { "panelstatus": 32 },
+          { "secondsremain": 32 },
+          { "audiblenotif": 32 },
+          { "alarmstatus": 32 }
+        ],
+        "dir": 1
+      },
+      "setBypassedZoneList": {
+        "params": [
+          { "numofzones": "preLenUint8" },
+          { "zoneid": "dynUint8" }
+        ],
+        "dir": 1
+      },
+      "bypassRsp": {
+        "params": [
+          { "numofzones": "preLenUint8" },
+          { "bypassresult": "dynUint8" }
+        ],
+        "dir": 1
+      },
+      "getZoneStatusRsp": {
+        "params": [
+          { "zonestatuscomplete": 32 },
+          { "numofzones": "preLenUint8" },
+          { "zoneinfo": "zonebuffer" }
+        ],
+        "dir": 1
+      }
+    },
+    "ssIasWd": {
+      "startWarning": {
+        "params": [
+          { "startwarninginfo": 32 },
+          { "warningduration": 33 }
+        ],
+        "dir": 0
+      },
+      "squawk": {
+        "params": [
+          { "squawkinfo": 32 }
+        ],
+        "dir": 0
+      }
+    },
+    "piGenericTunnel": {
+      "matchProtocolAddr": {
+        "params": [
+          { "protocoladdr": "stringPreLen" }
+        ],
+        "dir": 0
+      },
+      "matchProtocolAddrRsp": {
+        "params": [
+          { "devieeeaddr": "longaddr" },
+          { "protocoladdr": "stringPreLen" }
+        ],
+        "dir": 1
+      },
+      "advertiseProtocolAddr": {
+        "params": [
+          { "protocoladdr": "stringPreLen" }
+        ],
+        "dir": 1
+      }
+    },
+    "piBacnetProtocolTunnel": {
+      "transferNpdu": {
+        "params": [
+          { "npdu": 32 }
+        ],
+        "dir": 0
+      }
+    },
+    "piAnalogInputExt": {
+      "transferApdu": {
+        "params": [],
+        "dir": 0
+      },
+      "connectReq": {
+        "params": [],
+        "dir": 0
+      },
+      "disconnectReq": {
+        "params": [],
+        "dir": 0
+      },
+      "connectStatusNoti": {
+        "params": [],
+        "dir": 0
+      }
+    },
+    "pi11073ProtocolTunnel": {
+      "transferApdu": {
+        "params": [],
+        "dir": 0
+      },
+      "connectReq": {
+        "params": [],
+        "dir": 0
+      },
+      "disconnectReq": {
+        "params": [],
+        "dir": 0
+      },
+      "connectStatusNoti": {
+        "params": [],
+        "dir": 0
+      }
+    },
+    "seMetering": {
+      "getProfile": {
+        "params": [],
+        "dir": 0
+      },
+      "reqMirror": {
+        "params": [],
+        "dir": 0
+      },
+      "mirrorRem": {
+        "params": [],
+        "dir": 0
+      },
+      "reqFastPollMode": {
+        "params": [],
+        "dir": 0
+      },
+      "getSnapshot": {
+        "params": [],
+        "dir": 0
+      },
+      "takeSnapshot": {
+        "params": [],
+        "dir": 0
+      },
+      "mirrorReportAttrRsp": {
+        "params": [],
+        "dir": 0
+      },
+      "getProfileRsp": {
+        "params": [],
+        "dir": 1
+      },
+      "reqMirrorRsp": {
+        "params": [],
+        "dir": 1
+      },
+      "mirrorRemRsp": {
+        "params": [],
+        "dir": 1
+      },
+      "reqFastPollModeRsp": {
+        "params": [],
+        "dir": 1
+      },
+      "getSnapshotRsp": {
+        "params": [],
+        "dir": 1
+      }
+    },
+    "haApplianceEventsAlerts": {
+      "getAlerts": {
+        "params": [],
+        "dir": 0
+      },
+      "getAlertsRsp": {
+        "params": [
+          { "alertscount": "preLenUint8" },
+          { "aalert": "dynUint24" }
+        ],
+        "dir": 1
+      },
+      "alertsNotification": {
+        "params": [
+          { "alertscount": "preLenUint8" },
+          { "aalert": "dynUint24" }
+        ],
+        "dir": 1
+      },
+      "eventNotification": {
+        "params": [
+          { "eventheader": 32 },
+          { "eventid": 32 }
+        ],
+        "dir": 1
+      }
+    },
+    "haApplianceStatistics": {
+      "log": {
+        "params": [
+          { "logid": 35 }
+        ],
+        "dir": 0
+      },
+      "logQueue": {
+        "params": [],
+        "dir": 0
+      },
+      "logNotification": {
+        "params": [
+          { "timestamp": 35 },
+          { "logid": 35 },
+          { "loglength": "preLenUint32" },
+          { "logpayload": "dynUint8" }
+        ],
+        "dir": 1
+      },
+      "logRsp": {
+        "params": [
+          { "timestamp": 35 },
+          { "logid": 35 },
+          { "loglength": "preLenUint32" },
+          { "logpayload": "dynUint8" }
+        ],
+        "dir": 1
+      },
+      "logQueueRsp": {
+        "params": [
+          { "logqueuesize": "preLenUint8" },
+          { "logid": "dynUint32" }
+        ],
+        "dir": 1
+      },
+      "statisticsAvailable": {
+        "params": [
+          { "logqueuesize": "preLenUint8" },
+          { "logid": "dynUint32" }
+        ],
+        "dir": 1
+      }
+    },
+    "haElectricalMeasurement": {
+      "getProfileInfo": {
+        "params": [],
+        "dir": 0
+      },
+      "getMeasurementProfile": {
+        "params": [
+          { "attrId": 33 },
+          { "starttime": 35 },
+          { "numofuntervals": 32 }
+        ],
+        "dir": 0
+      },
+      "getProfileInfoRsp": {
+        "params": [
+          { "profilecount": 32 },
+          { "profileintervalperiod": 32 },
+          { "maxnumofintervals": 32 },
+          { "numofattrs": "preLenUint8" },
+          { "listofattr": "dynUint16" }
+        ],
+        "dir": 1
+      },
+      "getMeasurementProfileRsp": {
+        "params": [
+          { "starttime": 35 },
+          { "status": 32 },
+          { "profileintervalperiod": 32 },
+          { "numofintervalsdeliv": "preLenUint8" },
+          { "attrId": 33 },
+          { "intervals": "dynUint8" }
+        ],
+        "dir": 1
+      }
+    }
+  }
+}

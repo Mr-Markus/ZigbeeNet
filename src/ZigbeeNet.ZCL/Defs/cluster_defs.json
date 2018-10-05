@@ -1,0 +1,4847 @@
+{
+  "genBasic": {
+    "id": 0,
+    "attrId": {
+      "zclVersion": {
+        "id": 0,
+        "type": 32
+      },
+      "appVersion": {
+        "id": 1,
+        "type": 32
+      },
+      "stackVersion": {
+        "id": 2,
+        "type": 32
+      },
+      "hwVersion": {
+        "id": 3,
+        "type": 32
+      },
+      "manufacturerName": {
+        "id": 4,
+        "type": 66
+      },
+      "modelId": {
+        "id": 5,
+        "type": 66
+      },
+      "dateCode": {
+        "id": 6,
+        "type": 66
+      },
+      "powerSource": {
+        "id": 7,
+        "type": 48
+      },
+      "appProfileVersion": {
+        "id": 8,
+        "type": 48
+      },
+      "swBuildId": {
+        "id": 16384,
+        "type": 66
+      },
+      "locationDesc": {
+        "id": 16,
+        "type": 66
+      },
+      "physicalEnv": {
+        "id": 17,
+        "type": 48
+      },
+      "deviceEnabled": {
+        "id": 18,
+        "type": 16
+      },
+      "alarmMask": {
+        "id": 19,
+        "type": 24
+      },
+      "disableLocalConfig": {
+        "id": 20,
+        "type": 24
+      }
+    },
+    "cmd": { "resetFactDefault": 0 },
+    "cmdRsp": null
+  },
+  "genPowerCfg": {
+    "id": 1,
+    "attrId": {
+      "mainsVoltage": {
+        "id": 0,
+        "type": 33
+      },
+      "mainsFrequency": {
+        "id": 1,
+        "type": 32
+      },
+      "mainsAlarmMask": {
+        "id": 16,
+        "type": 24
+      },
+      "mainsVoltMinThres": {
+        "id": 17,
+        "type": 33
+      },
+      "mainsVoltMaxThres": {
+        "id": 18,
+        "type": 33
+      },
+      "mainsVoltageDwellTripPoint": {
+        "id": 19,
+        "type": 33
+      },
+      "batteryVoltage": {
+        "id": 32,
+        "type": 32
+      },
+      "batteryPercentageRemaining": {
+        "id": 33,
+        "type": 32
+      },
+      "batteryManufacturer": {
+        "id": 48,
+        "type": 66
+      },
+      "batterySize": {
+        "id": 49,
+        "type": 48
+      },
+      "batteryAHrRating": {
+        "id": 50,
+        "type": 33
+      },
+      "batteryQuantity": {
+        "id": 51,
+        "type": 32
+      },
+      "batteryRatedVoltage": {
+        "id": 52,
+        "type": 32
+      },
+      "batteryAlarmMask": {
+        "id": 53,
+        "type": 24
+      },
+      "batteryVoltMinThres": {
+        "id": 54,
+        "type": 32
+      },
+      "batteryVoltThres1": {
+        "id": 55,
+        "type": 32
+      },
+      "batteryVoltThres2": {
+        "id": 56,
+        "type": 32
+      },
+      "batteryVoltThres3": {
+        "id": 57,
+        "type": 32
+      },
+      "batteryPercentMinThres": {
+        "id": 58,
+        "type": 32
+      },
+      "batteryPercentThres1": {
+        "id": 59,
+        "type": 32
+      },
+      "batteryPercentThres2": {
+        "id": 60,
+        "type": 32
+      },
+      "batteryPercentThres3": {
+        "id": 61,
+        "type": 32
+      },
+      "batteryAlarmState": {
+        "id": 62,
+        "type": 27
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genDeviceTempCfg": {
+    "id": 2,
+    "attrId": {
+      "currentTemperature": {
+        "id": 0,
+        "type": 41
+      },
+      "minTempExperienced": {
+        "id": 1,
+        "type": 41
+      },
+      "maxTempExperienced": {
+        "id": 2,
+        "type": 41
+      },
+      "overTempTotalDwell": {
+        "id": 3,
+        "type": 33
+      },
+      "devTempAlarmMask": {
+        "id": 16,
+        "type": 24
+      },
+      "lowTempThres": {
+        "id": 17,
+        "type": 41
+      },
+      "highTempThres": {
+        "id": 18,
+        "type": 41
+      },
+      "lowTempDwellTripPoint": {
+        "id": 19,
+        "type": 34
+      },
+      "highTempDwellTripPoint": {
+        "id": 20,
+        "type": 34
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genIdentify": {
+    "id": 3,
+    "attrId": {
+      "identifyTime": {
+        "id": 0,
+        "type": 33
+      },
+      "identifyCommissionState": {
+        "id": 1,
+        "type": 255
+      }
+    },
+    "cmd": {
+      "identify": 0,
+      "identifyQuery": 1,
+      "ezmodeInvoke": 2,
+      "updateCommissionState": 3,
+      "triggerEffect": 64
+    },
+    "cmdRsp": { "identifyQueryRsp": 0 }
+  },
+  "genGroups": {
+    "id": 4,
+    "attrId": {
+      "nameSupport": {
+        "id": 0,
+        "type": 24
+      }
+    },
+    "cmd": {
+      "add": 0,
+      "view": 1,
+      "getMembership": 2,
+      "remove": 3,
+      "removeAll": 4,
+      "addIfIdentifying": 5
+    },
+    "cmdRsp": {
+      "addRsp": 0,
+      "viewRsp": 1,
+      "getMembershipRsp": 2,
+      "removeRsp": 3
+    }
+  },
+  "genScenes": {
+    "id": 5,
+    "attrId": {
+      "count": {
+        "id": 0,
+        "type": 32
+      },
+      "currentScene": {
+        "id": 1,
+        "type": 32
+      },
+      "currentGroup": {
+        "id": 2,
+        "type": 33
+      },
+      "sceneValid": {
+        "id": 3,
+        "type": 16
+      },
+      "nameSupport": {
+        "id": 4,
+        "type": 24
+      },
+      "lastCfgBy": {
+        "id": 5,
+        "type": 240
+      }
+    },
+    "cmd": {
+      "add": 0,
+      "view": 1,
+      "remove": 2,
+      "removeAll": 3,
+      "store": 4,
+      "recall": 5,
+      "getSceneMembership": 6,
+      "enhancedAdd": 64,
+      "enhancedView": 65,
+      "copy": 66
+    },
+    "cmdRsp": {
+      "addRsp": 0,
+      "viewRsp": 1,
+      "removeRsp": 2,
+      "removeAllRsp": 3,
+      "storeRsp": 4,
+      "getSceneMembershipRsp": 6,
+      "enhancedAddRsp": 64,
+      "enhancedViewRsp": 65,
+      "copyRsp": 66
+    }
+  },
+  "genOnOff": {
+    "id": 6,
+    "attrId": {
+      "onOff": {
+        "id": 0,
+        "type": 16
+      },
+      "globalSceneCtrl": {
+        "id": 16384,
+        "type": 16
+      },
+      "onTime": {
+        "id": 16385,
+        "type": 33
+      },
+      "offWaitTime": {
+        "id": 16386,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "off": 0,
+      "on": 1,
+      "toggle": 2,
+      "offWithEffect": 64,
+      "onWithRecallGlobalScene": 65,
+      "onWithTimedOff": 66
+    },
+    "cmdRsp": null
+  },
+  "genOnOffSwitchCfg": {
+    "id": 7,
+    "attrId": {
+      "switchType": {
+        "id": 0,
+        "type": 48
+      },
+      "switchMultiFunction": {
+        "id": 2,
+        "type": 255
+      },
+      "switchActions": {
+        "id": 16,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genLevelCtrl": {
+    "id": 8,
+    "attrId": {
+      "currentLevel": {
+        "id": 0,
+        "type": 32
+      },
+      "remainingTime": {
+        "id": 1,
+        "type": 33
+      },
+      "onOffTransitionTime": {
+        "id": 16,
+        "type": 33
+      },
+      "onLevel": {
+        "id": 17,
+        "type": 32
+      },
+      "onTransitionTime": {
+        "id": 18,
+        "type": 33
+      },
+      "offTransitionTime": {
+        "id": 19,
+        "type": 33
+      },
+      "defaultMoveRate": {
+        "id": 20,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "moveToLevel": 0,
+      "move": 1,
+      "step": 2,
+      "stop": 3,
+      "moveToLevelWithOnOff": 4,
+      "moveWithOnOff": 5,
+      "stepWithOnOff": 6,
+      "stopWithOnOff": 7
+    },
+    "cmdRsp": null
+  },
+  "genAlarms": {
+    "id": 9,
+    "attrId": {
+      "alarmCount": {
+        "id": 0,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "reset": 0,
+      "resetAll": 1,
+      "getAlarm": 2,
+      "resetLog": 3,
+      "publishEventLog": 4
+    },
+    "cmdRsp": {
+      "alarm": 0,
+      "getRsp": 1,
+      "getEventLog": 2
+    }
+  },
+  "genTime": {
+    "id": 10,
+    "attrId": {
+      "time": {
+        "id": 0,
+        "type": 226
+      },
+      "timeStatus": {
+        "id": 1,
+        "type": 24
+      },
+      "timeZone": {
+        "id": 2,
+        "type": 43
+      },
+      "dstStart": {
+        "id": 3,
+        "type": 35
+      },
+      "dstEnd": {
+        "id": 4,
+        "type": 35
+      },
+      "dstShift": {
+        "id": 5,
+        "type": 43
+      },
+      "standardTime": {
+        "id": 6,
+        "type": 35
+      },
+      "localTime": {
+        "id": 7,
+        "type": 35
+      },
+      "lastSetTime": {
+        "id": 8,
+        "type": 226
+      },
+      "validUntilTime": {
+        "id": 9,
+        "type": 226
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genRssiLocation": {
+    "id": 11,
+    "attrId": {
+      "type": {
+        "id": 0,
+        "type": 8
+      },
+      "method": {
+        "id": 1,
+        "type": 48
+      },
+      "age": {
+        "id": 2,
+        "type": 33
+      },
+      "qualityMeasure": {
+        "id": 3,
+        "type": 32
+      },
+      "numOfDevices": {
+        "id": 4,
+        "type": 32
+      },
+      "coordinate1": {
+        "id": 16,
+        "type": 41
+      },
+      "coordinate2": {
+        "id": 17,
+        "type": 41
+      },
+      "coordinate3": {
+        "id": 18,
+        "type": 41
+      },
+      "power": {
+        "id": 19,
+        "type": 41
+      },
+      "pathLossExponent": {
+        "id": 20,
+        "type": 33
+      },
+      "reportingPeriod": {
+        "id": 21,
+        "type": 33
+      },
+      "calcPeriod": {
+        "id": 22,
+        "type": 33
+      },
+      "numRSSIMeasurements": {
+        "id": 23,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "setAbsolute": 0,
+      "setDevCfg": 1,
+      "getDevCfg": 2,
+      "getData": 3
+    },
+    "cmdRsp": {
+      "devCfgRsp": 0,
+      "dataRsp": 1,
+      "dataNotif": 2,
+      "compactDataNotif": 3,
+      "rssiPing": 4
+    }
+  },
+  "genAnalogInput": {
+    "id": 12,
+    "attrId": {
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "maxPresentValue": {
+        "id": 65,
+        "type": 57
+      },
+      "minPresentValue": {
+        "id": 69,
+        "type": 57
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 57
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "resolution": {
+        "id": 106,
+        "type": 57
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "engineeringUnits": {
+        "id": 117,
+        "type": 49
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genAnalogOutput": {
+    "id": 13,
+    "attrId": {
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "maxPresentValue": {
+        "id": 65,
+        "type": 57
+      },
+      "minPresentValue": {
+        "id": 69,
+        "type": 57
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 57
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 57
+      },
+      "resolution": {
+        "id": 106,
+        "type": 57
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "engineeringUnits": {
+        "id": 117,
+        "type": 49
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genAnalogValue": {
+    "id": 14,
+    "attrId": {
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 57
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 57
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "engineeringUnits": {
+        "id": 117,
+        "type": 49
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genBinaryInput": {
+    "id": 15,
+    "attrId": {
+      "activeText": {
+        "id": 4,
+        "type": 66
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "inactiveText": {
+        "id": 46,
+        "type": 66
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "polarity": {
+        "id": 84,
+        "type": 48
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 16
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genBinaryOutput": {
+    "id": 16,
+    "attrId": {
+      "activeText": {
+        "id": 4,
+        "type": 66
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "inactiveText": {
+        "id": 46,
+        "type": 66
+      },
+      "minimumOffTime": {
+        "id": 66,
+        "type": 35
+      },
+      "minimumOnTime": {
+        "id": 67,
+        "type": 35
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "polarity": {
+        "id": 84,
+        "type": 48
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 16
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 16
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genBinaryValue": {
+    "id": 17,
+    "attrId": {
+      "activeText": {
+        "id": 4,
+        "type": 66
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "inactiveText": {
+        "id": 46,
+        "type": 66
+      },
+      "minimumOffTime": {
+        "id": 66,
+        "type": 35
+      },
+      "minimumOnTime": {
+        "id": 67,
+        "type": 35
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 16
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 16
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genMultistateInput": {
+    "id": 18,
+    "attrId": {
+      "stateText": {
+        "id": 14,
+        "type": 72
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "numberOfStates": {
+        "id": 74,
+        "type": 33
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 33
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genMultistateOutput": {
+    "id": 19,
+    "attrId": {
+      "stateText": {
+        "id": 14,
+        "type": 72
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "numberOfStates": {
+        "id": 74,
+        "type": 33
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 33
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 33
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genMultistateValue": {
+    "id": 20,
+    "attrId": {
+      "stateText": {
+        "id": 14,
+        "type": 72
+      },
+      "description": {
+        "id": 28,
+        "type": 66
+      },
+      "numberOfStates": {
+        "id": 74,
+        "type": 33
+      },
+      "outOfService": {
+        "id": 81,
+        "type": 16
+      },
+      "presentValue": {
+        "id": 85,
+        "type": 33
+      },
+      "priorityArray": {
+        "id": 87,
+        "type": 72
+      },
+      "reliability": {
+        "id": 103,
+        "type": 48
+      },
+      "relinquishDefault": {
+        "id": 104,
+        "type": 33
+      },
+      "statusFlags": {
+        "id": 111,
+        "type": 24
+      },
+      "applicationType": {
+        "id": 256,
+        "type": 35
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "genCommissioning": {
+    "id": 21,
+    "attrId": {
+      "shortress": {
+        "id": 0,
+        "type": 33
+      },
+      "extendedPANId": {
+        "id": 1,
+        "type": 240
+      },
+      "panId": {
+        "id": 2,
+        "type": 33
+      },
+      "channelmask": {
+        "id": 3,
+        "type": 27
+      },
+      "protocolVersion": {
+        "id": 4,
+        "type": 32
+      },
+      "stackProfile": {
+        "id": 5,
+        "type": 32
+      },
+      "startupControl": {
+        "id": 6,
+        "type": 48
+      },
+      "trustCenterress": {
+        "id": 16,
+        "type": 240
+      },
+      "trustCenterMasterKey": {
+        "id": 17,
+        "type": 241
+      },
+      "networkKey": {
+        "id": 18,
+        "type": 241
+      },
+      "useInsecureJoin": {
+        "id": 19,
+        "type": 16
+      },
+      "preconfiguredLinkKey": {
+        "id": 20,
+        "type": 241
+      },
+      "networkKeySeqNum": {
+        "id": 21,
+        "type": 32
+      },
+      "networkKeyType": {
+        "id": 22,
+        "type": 48
+      },
+      "networkManagerress": {
+        "id": 23,
+        "type": 33
+      },
+      "scanAttempts": {
+        "id": 32,
+        "type": 32
+      },
+      "timeBetweenScans": {
+        "id": 33,
+        "type": 33
+      },
+      "rejoinInterval": {
+        "id": 34,
+        "type": 33
+      },
+      "maxRejoinInterval": {
+        "id": 35,
+        "type": 33
+      },
+      "indirectPollRate": {
+        "id": 48,
+        "type": 33
+      },
+      "parentRetryThreshold": {
+        "id": 49,
+        "type": 32
+      },
+      "concentratorFlag": {
+        "id": 64,
+        "type": 16
+      },
+      "concentratorRus": {
+        "id": 65,
+        "type": 32
+      },
+      "concentratorDiscoveryTime": {
+        "id": 66,
+        "type": 32
+      }
+    },
+    "cmd": {
+      "restartDevice": 0,
+      "saveStartupParams": 1,
+      "restoreStartupParams": 2,
+      "resetStartupParams": 3
+    },
+    "cmdRsp": {
+      "restartDeviceRsp": 0,
+      "saveStartupParamsRsp": 1,
+      "restoreStartupParamsRsp": 2,
+      "resetStartupParamsRsp": 3
+    }
+  },
+  "genOta": {
+    "id": 25,
+    "attrId": {
+      "upgradeServerId": {
+        "id": 0,
+        "type": 240
+      },
+      "fileOffset": {
+        "id": 1,
+        "type": 35
+      },
+      "currentFileVersion": {
+        "id": 2,
+        "type": 35
+      },
+      "currentZigbeeStackVersion": {
+        "id": 3,
+        "type": 33
+      },
+      "downloadedFileVersion": {
+        "id": 4,
+        "type": 35
+      },
+      "downloadedZigbeeStackVersion": {
+        "id": 5,
+        "type": 33
+      },
+      "imageUpgradeStatus": {
+        "id": 6,
+        "type": 48
+      },
+      "manufacturerId": {
+        "id": 7,
+        "type": 33
+      },
+      "imageTypeId": {
+        "id": 8,
+        "type": 33
+      },
+      "minimumBlockReqDelay": {
+        "id": 9,
+        "type": 33
+      },
+      "imageStamp": {
+        "id": 10,
+        "type": 35
+      }
+    },
+    "cmd": {
+      "imageNotify": 0,
+      "queryNextImageReq": 1,
+      "queryNextImageRsp": 2,
+      "imageBlockReq": 3,
+      "imagePageReq": 4,
+      "imageBlockRsp": 5,
+      "upgradeEndReq": 6,
+      "upgradeEndRsp": 7,
+      "querySpecificFileReq": 8,
+      "querySpecificFileRsp": 9
+    },
+    "cmdRsp": {
+      "imageNotify": 0,
+      "queryNextImageReq": 1,
+      "queryNextImageRsp": 2,
+      "imageBlockReq": 3,
+      "imagePageReq": 4,
+      "imageBlockRsp": 5,
+      "upgradeEndReq": 6,
+      "upgradeEndRsp": 7,
+      "querySpecificFileReq": 8,
+      "querySpecificFileRsp": 9
+    }
+  },
+  "genPollCtrl": {
+    "id": 32,
+    "attrId": {
+      "checkinInterval": {
+        "id": 0,
+        "type": 35
+      },
+      "longPollInterval": {
+        "id": 1,
+        "type": 35
+      },
+      "shortPollInterval": {
+        "id": 2,
+        "type": 33
+      },
+      "fastPollTimeout": {
+        "id": 3,
+        "type": 33
+      },
+      "checkinIntervalMin": {
+        "id": 4,
+        "type": 35
+      },
+      "longPollIntervalMin": {
+        "id": 5,
+        "type": 35
+      },
+      "fastPollTimeoutMax": {
+        "id": 6,
+        "type": 33
+      },
+      "physicalClosedLimit": {
+        "id": 0,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "checkinRsp": 0,
+      "fastPollStop": 1,
+      "setLongPollInterval": 2,
+      "setShortPollInterval": 3
+    },
+    "cmdRsp": { "checkin": 0 }
+  },
+  "mobileDeviceCfg": {
+    "id": 34,
+    "attrId": {
+      "keepAliveTime": {
+        "id": 0,
+        "type": 33
+      },
+      "rejoinTimeout": {
+        "id": 1,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": { "keepAliveNotification": 0 }
+  },
+  "neighborCleaning": {
+    "id": 35,
+    "attrId": {
+      "neighborCleaningTimeout": {
+        "id": 0,
+        "type": 33
+      }
+    },
+    "cmd": { "purgeEntries": 0 },
+    "cmdRsp": null
+  },
+  "nearestGateway": {
+    "id": 36,
+    "attrId": {
+      "nearestGateway": {
+        "id": 0,
+        "type": 33
+      },
+      "newMobileNode": {
+        "id": 1,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "closuresShadeCfg": {
+    "id": 256,
+    "attrId": {
+      "physicalClosedLimit": {
+        "id": 0,
+        "type": 33
+      },
+      "motorStepSize": {
+        "id": 1,
+        "type": 32
+      },
+      "status": {
+        "id": 2,
+        "type": 24
+      },
+      "losedLimit": {
+        "id": 16,
+        "type": 33
+      },
+      "mode": {
+        "id": 18,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "closuresDoorLock": {
+    "id": 257,
+    "attrId": {
+      "lockState": {
+        "id": 0,
+        "type": 48
+      },
+      "lockType": {
+        "id": 38,
+        "type": 25
+      },
+      "actuatorEnabled": {
+        "id": 2,
+        "type": 16
+      },
+      "doorState": {
+        "id": 3,
+        "type": 48
+      },
+      "doorOpenEvents": {
+        "id": 4,
+        "type": 35
+      },
+      "doorClosedEvents": {
+        "id": 5,
+        "type": 35
+      },
+      "openPeriod": {
+        "id": 6,
+        "type": 33
+      },
+      "numOfLockRecordsSupported": {
+        "id": 16,
+        "type": 33
+      },
+      "numOfTotalUsersSupported": {
+        "id": 17,
+        "type": 33
+      },
+      "numOfPinUsersSupported": {
+        "id": 18,
+        "type": 33
+      },
+      "numOfRfidUsersSupported": {
+        "id": 19,
+        "type": 33
+      },
+      "numOfWeekDaySchedulesSupportedPerUser": {
+        "id": 20,
+        "type": 32
+      },
+      "numOfYearDaySchedulesSupportedPerUser": {
+        "id": 21,
+        "type": 32
+      },
+      "numOfHolidayScheduledsSupported": {
+        "id": 22,
+        "type": 32
+      },
+      "maxPinLen": {
+        "id": 23,
+        "type": 32
+      },
+      "minPinLen": {
+        "id": 24,
+        "type": 32
+      },
+      "maxRfidLen": {
+        "id": 25,
+        "type": 32
+      },
+      "minRfidLen": {
+        "id": 26,
+        "type": 32
+      },
+      "enable_Logging": {
+        "id": 32,
+        "type": 16
+      },
+      "language": {
+        "id": 33,
+        "type": 66
+      },
+      "ledSettings": {
+        "id": 34,
+        "type": 32
+      },
+      "autoRelockTime": {
+        "id": 35,
+        "type": 35
+      },
+      "soundVolume": {
+        "id": 36,
+        "type": 32
+      },
+      "operatingMode": {
+        "id": 37,
+        "type": 35
+      },
+      "defaultConfigurationRegister": {
+        "id": 39,
+        "type": 25
+      },
+      "enableLocalProgramming": {
+        "id": 40,
+        "type": 16
+      },
+      "enableOneTouchLocking": {
+        "id": 41,
+        "type": 16
+      },
+      "enableInsideStatusLed": {
+        "id": 42,
+        "type": 16
+      },
+      "enablePrivacyModeButton": {
+        "id": 43,
+        "type": 16
+      },
+      "wrongCodeEntryLimit": {
+        "id": 48,
+        "type": 32
+      },
+      "userCodeTemporaryDisableTime": {
+        "id": 49,
+        "type": 32
+      },
+      "sendPinOta": {
+        "id": 50,
+        "type": 16
+      },
+      "requirePinForRfOperation": {
+        "id": 51,
+        "type": 16
+      },
+      "zigbeeSecurityLevel": {
+        "id": 52,
+        "type": 32
+      },
+      "alarmMask": {
+        "id": 64,
+        "type": 25
+      },
+      "keypadOperationEventMask": {
+        "id": 65,
+        "type": 25
+      },
+      "rfOperationEventMask": {
+        "id": 66,
+        "type": 25
+      },
+      "manualOperationEventMask": {
+        "id": 67,
+        "type": 25
+      },
+      "rfidOperationEventMask": {
+        "id": 68,
+        "type": 25
+      },
+      "keypadProgrammingEventMask": {
+        "id": 69,
+        "type": 25
+      },
+      "rfProgrammingEventMask": {
+        "id": 70,
+        "type": 25
+      },
+      "rfidProgrammingEventMask": {
+        "id": 71,
+        "type": 25
+      }
+    },
+    "cmd": {
+      "lockDoor": 0,
+      "unlockDoor": 1,
+      "toggleDoor": 2,
+      "unlockWithTimeout": 3,
+      "getLogRecord": 4,
+      "setPinCode": 5,
+      "getPinCode": 6,
+      "clearPinCode": 7,
+      "clearAllPinCodes": 8,
+      "setUserStatus": 9,
+      "getUserStatus": 10,
+      "setWeekDaySchedule": 11,
+      "getWeekDaySchedule": 12,
+      "clearWeekDaySchedule": 13,
+      "setYearDaySchedule": 14,
+      "getYearDaySchedule": 15,
+      "clearYearDaySchedule": 16,
+      "setHolidaySchedule": 17,
+      "getHolidaySchedule": 18,
+      "clearHolidaySchedule": 19,
+      "setUserType": 20,
+      "getUserType": 21,
+      "setRfidCode": 22,
+      "getRfidCode": 23,
+      "clearRfidCode": 24,
+      "clearAllRfidCodes": 25
+    },
+    "cmdRsp": {
+      "lockDoorRsp": 0,
+      "unlockDoorRsp": 1,
+      "toggleDoorRsp": 2,
+      "unlockWithTimeoutRsp": 3,
+      "getLogRecordRsp": 4,
+      "setPinCodeRsp": 5,
+      "getPinCodeRsp": 6,
+      "clearPinCodeRsp": 7,
+      "clearAllPinCodesRsp": 8,
+      "setUserStatusRsp": 9,
+      "getUserStatusRsp": 10,
+      "setWeekDayScheduleRsp": 11,
+      "getWeekDayScheduleRsp": 12,
+      "clearWeekDayScheduleRsp": 13,
+      "setYearDayScheduleRsp": 14,
+      "getYearDayScheduleRsp": 15,
+      "clearYearDayScheduleRsp": 16,
+      "setHolidayScheduleRsp": 17,
+      "getHolidayScheduleRsp": 18,
+      "clearHolidayScheduleRsp": 19,
+      "setUserTypeRsp": 20,
+      "getUserTypeRsp": 21,
+      "setRfidCodeRsp": 22,
+      "getRfidCodeRsp": 23,
+      "clearRfidCodeRsp": 24,
+      "clearAllRfidCodesRsp": 25,
+      "operationEventNotification": 32,
+      "programmingEventNotification": 33
+    }
+  },
+  "closuresWindowCovering": {
+    "id": 258,
+    "attrId": {
+      "windowCoveringType": {
+        "id": 0,
+        "type": 48
+      },
+      "physicalCloseLimitLiftCm": {
+        "id": 1,
+        "type": 33
+      },
+      "physicalCloseLimitTiltDdegree": {
+        "id": 2,
+        "type": 33
+      },
+      "currentPositionLiftCm": {
+        "id": 3,
+        "type": 33
+      },
+      "currentPositionTiltDdegree": {
+        "id": 4,
+        "type": 33
+      },
+      "numOfActuationLift": {
+        "id": 5,
+        "type": 33
+      },
+      "numOfActuationTilt": {
+        "id": 22,
+        "type": 33
+      },
+      "configStatus": {
+        "id": 7,
+        "type": 24
+      },
+      "currentPositionLiftPercentage": {
+        "id": 8,
+        "type": 32
+      },
+      "currentPositionTiltPercentage": {
+        "id": 9,
+        "type": 32
+      },
+      "installedOpenLimitLiftCm": {
+        "id": 16,
+        "type": 33
+      },
+      "installedClosedLimitLiftCm": {
+        "id": 17,
+        "type": 33
+      },
+      "installedOpenLimitTiltDdegree": {
+        "id": 18,
+        "type": 33
+      },
+      "installedClosedLimitTiltDdegree": {
+        "id": 16,
+        "type": 33
+      },
+      "velocityLift": {
+        "id": 18,
+        "type": 33
+      },
+      "accelerationTimeLift": {
+        "id": 21,
+        "type": 33
+      },
+      "windowCoveringMode": {
+        "id": 23,
+        "type": 24
+      },
+      "intermediateSetpointsLift": {
+        "id": 24,
+        "type": 65
+      },
+      "intermediateSetpointsTilt": {
+        "id": 25,
+        "type": 65
+      }
+    },
+    "cmd": {
+      "upOpen": 0,
+      "downClose": 1,
+      "stop": 2,
+      "goToLiftValue": 4,
+      "goToLiftPercentage": 5,
+      "goToTiltValue": 7,
+      "goToTiltPercentage": 8
+    },
+    "cmdRsp": null
+  },
+  "hvacPumpCfgCtrl": {
+    "id": 512,
+    "attrId": {
+      "maxPressure": {
+        "id": 0,
+        "type": 41
+      },
+      "maxSpeed": {
+        "id": 1,
+        "type": 33
+      },
+      "maxFlow": {
+        "id": 2,
+        "type": 33
+      },
+      "minConstPressure": {
+        "id": 3,
+        "type": 41
+      },
+      "maxConstPressure": {
+        "id": 4,
+        "type": 41
+      },
+      "minCompPressure": {
+        "id": 5,
+        "type": 41
+      },
+      "maxCompPressure": {
+        "id": 6,
+        "type": 41
+      },
+      "minConstSpeed": {
+        "id": 7,
+        "type": 33
+      },
+      "maxConstSpeed": {
+        "id": 8,
+        "type": 33
+      },
+      "minConstFlow": {
+        "id": 9,
+        "type": 33
+      },
+      "maxConstFlow": {
+        "id": 10,
+        "type": 33
+      },
+      "minConstTemp": {
+        "id": 11,
+        "type": 41
+      },
+      "maxConstTemp": {
+        "id": 12,
+        "type": 41
+      },
+      "pumpStatus": {
+        "id": 16,
+        "type": 25
+      },
+      "effectiveOperationMode": {
+        "id": 17,
+        "type": 48
+      },
+      "effectiveControlMode": {
+        "id": 18,
+        "type": 48
+      },
+      "capacity": {
+        "id": 19,
+        "type": 41
+      },
+      "speed": {
+        "id": 20,
+        "type": 33
+      },
+      "lifetimeRunningHours": {
+        "id": 21,
+        "type": 34
+      },
+      "power": {
+        "id": 22,
+        "type": 34
+      },
+      "lifetimeEnergyConsumed": {
+        "id": 23,
+        "type": 35
+      },
+      "operationMode": {
+        "id": 32,
+        "type": 48
+      },
+      "controlMode": {
+        "id": 33,
+        "type": 48
+      },
+      "alarmMask": {
+        "id": 34,
+        "type": 25
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "hvacThermostat": {
+    "id": 513,
+    "attrId": {
+      "localTemp": {
+        "id": 0,
+        "type": 41
+      },
+      "outdoorTemp": {
+        "id": 1,
+        "type": 41
+      },
+      "ocupancy": {
+        "id": 2,
+        "type": 24
+      },
+      "absMinHeatSetpointLimit": {
+        "id": 3,
+        "type": 41
+      },
+      "absMaxHeatSetpointLimit": {
+        "id": 4,
+        "type": 41
+      },
+      "absMinCoolSetpointLimit": {
+        "id": 5,
+        "type": 41
+      },
+      "absMaxCoolSetpointLimit": {
+        "id": 6,
+        "type": 41
+      },
+      "pICoolingDemand": {
+        "id": 7,
+        "type": 32
+      },
+      "pIHeatingDemand": {
+        "id": 8,
+        "type": 32
+      },
+      "systemTypeConfig": {
+        "id": 9,
+        "type": 24
+      },
+      "localTemperatureCalibration": {
+        "id": 16,
+        "type": 40
+      },
+      "occupiedCoolingSetpoint": {
+        "id": 17,
+        "type": 41
+      },
+      "occupiedHeatingSetpoint": {
+        "id": 18,
+        "type": 41
+      },
+      "unoccupiedCoolingSetpoint": {
+        "id": 19,
+        "type": 41
+      },
+      "unoccupiedHeatingSetpoint": {
+        "id": 20,
+        "type": 41
+      },
+      "minHeatSetpointLimit": {
+        "id": 21,
+        "type": 41
+      },
+      "maxHeatSetpointLimit": {
+        "id": 22,
+        "type": 41
+      },
+      "minCoolSetpointLimit": {
+        "id": 23,
+        "type": 41
+      },
+      "maxCoolSetpointLimit": {
+        "id": 24,
+        "type": 41
+      },
+      "minSetpointDeadBand": {
+        "id": 25,
+        "type": 40
+      },
+      "remoteSensing": {
+        "id": 26,
+        "type": 24
+      },
+      "ctrlSeqeOfOper": {
+        "id": 27,
+        "type": 48
+      },
+      "systemMode": {
+        "id": 28,
+        "type": 48
+      },
+      "alarmMask": {
+        "id": 29,
+        "type": 24
+      },
+      "runningMode": {
+        "id": 30,
+        "type": 48
+      },
+      "startOfWeek": {
+        "id": 32,
+        "type": 48
+      },
+      "numberOfWeeklyTrans": {
+        "id": 33,
+        "type": 32
+      },
+      "numberOfDailyTrans": {
+        "id": 34,
+        "type": 32
+      },
+      "tempSetpointHold": {
+        "id": 35,
+        "type": 48
+      },
+      "tempSetpointHoldDuration": {
+        "id": 36,
+        "type": 33
+      },
+      "programingOperMode": {
+        "id": 37,
+        "type": 24
+      },
+      "runningState": {
+        "id": 41,
+        "type": 25
+      },
+      "setpointChangeSource": {
+        "id": 48,
+        "type": 48
+      },
+      "setpointChangeAmount": {
+        "id": 49,
+        "type": 41
+      },
+      "setpointChangeSourceTimeStamp": {
+        "id": 50,
+        "type": 226
+      },
+      "acType": {
+        "id": 64,
+        "type": 48
+      },
+      "acCapacity": {
+        "id": 65,
+        "type": 33
+      },
+      "acRefrigerantType": {
+        "id": 66,
+        "type": 48
+      },
+      "acConpressorType": {
+        "id": 67,
+        "type": 48
+      },
+      "acErrorCode": {
+        "id": 68,
+        "type": 27
+      },
+      "acLouverPosition": {
+        "id": 69,
+        "type": 48
+      },
+      "acCollTemp": {
+        "id": 70,
+        "type": 41
+      },
+      "acCapacityFormat": {
+        "id": 71,
+        "type": 48
+      }
+    },
+    "cmd": {
+      "setpointRaiseLower": 0,
+      "setWeeklySchedule": 1,
+      "getWeeklySchedule": 2,
+      "clearWeeklySchedule": 3,
+      "getRelayStatusLog": 4
+    },
+    "cmdRsp": {
+      "getWeeklyScheduleRsp": 0,
+      "getRelayStatusLogRsp": 1
+    }
+  },
+  "hvacFanCtrl": {
+    "id": 514,
+    "attrId": {
+      "fanMode": {
+        "id": 0,
+        "type": 48
+      },
+      "fanModeSequence": {
+        "id": 1,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "hvacDehumidificationCtrl": {
+    "id": 515,
+    "attrId": {
+      "relativeHumidity": {
+        "id": 0,
+        "type": 32
+      },
+      "dehumidCooling": {
+        "id": 1,
+        "type": 32
+      },
+      "rhDehumidSetpoint": {
+        "id": 16,
+        "type": 32
+      },
+      "relativeHumidityMode": {
+        "id": 17,
+        "type": 48
+      },
+      "dehumidLockout": {
+        "id": 18,
+        "type": 48
+      },
+      "dehumidHysteresis": {
+        "id": 19,
+        "type": 32
+      },
+      "dehumidMaxCool": {
+        "id": 20,
+        "type": 32
+      },
+      "relativeHumidDisplay": {
+        "id": 21,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "hvacUserInterfaceCfg": {
+    "id": 516,
+    "attrId": {
+      "tempDisplayMode": {
+        "id": 0,
+        "type": 48
+      },
+      "keypadLockout": {
+        "id": 1,
+        "type": 48
+      },
+      "programmingVisibility": {
+        "id": 2,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "lightingColorCtrl": {
+    "id": 768,
+    "attrId": {
+      "currentHue": {
+        "id": 0,
+        "type": 32
+      },
+      "currentSaturation": {
+        "id": 1,
+        "type": 32
+      },
+      "remainingTime": {
+        "id": 2,
+        "type": 33
+      },
+      "currentX": {
+        "id": 3,
+        "type": 33
+      },
+      "currentY": {
+        "id": 4,
+        "type": 33
+      },
+      "driftCompensation": {
+        "id": 5,
+        "type": 48
+      },
+      "compensationText": {
+        "id": 6,
+        "type": 66
+      },
+      "colorTemperature": {
+        "id": 7,
+        "type": 33
+      },
+      "colorMode": {
+        "id": 8,
+        "type": 48
+      },
+      "numPrimaries": {
+        "id": 16,
+        "type": 32
+      },
+      "primary1X": {
+        "id": 17,
+        "type": 33
+      },
+      "primary1Y": {
+        "id": 18,
+        "type": 33
+      },
+      "primary1Intensity": {
+        "id": 19,
+        "type": 32
+      },
+      "primary2X": {
+        "id": 21,
+        "type": 33
+      },
+      "primary2Y": {
+        "id": 22,
+        "type": 33
+      },
+      "primary2Intensity": {
+        "id": 23,
+        "type": 32
+      },
+      "primary3X": {
+        "id": 25,
+        "type": 33
+      },
+      "primary3Y": {
+        "id": 26,
+        "type": 33
+      },
+      "primary3Intensity": {
+        "id": 27,
+        "type": 32
+      },
+      "primary4X": {
+        "id": 32,
+        "type": 33
+      },
+      "primary4Y": {
+        "id": 33,
+        "type": 33
+      },
+      "primary4Intensity": {
+        "id": 34,
+        "type": 32
+      },
+      "primary5X": {
+        "id": 36,
+        "type": 33
+      },
+      "primary5Y": {
+        "id": 37,
+        "type": 33
+      },
+      "primary5Intensity": {
+        "id": 38,
+        "type": 32
+      },
+      "primary6X": {
+        "id": 40,
+        "type": 33
+      },
+      "primary6Y": {
+        "id": 41,
+        "type": 33
+      },
+      "primary6Intensity": {
+        "id": 42,
+        "type": 32
+      },
+      "whitePointX": {
+        "id": 48,
+        "type": 33
+      },
+      "whitePointY": {
+        "id": 49,
+        "type": 33
+      },
+      "colorPointRX": {
+        "id": 50,
+        "type": 33
+      },
+      "colorPointRY": {
+        "id": 51,
+        "type": 33
+      },
+      "colorPointRIntensity": {
+        "id": 52,
+        "type": 32
+      },
+      "colorPointGX": {
+        "id": 54,
+        "type": 33
+      },
+      "colorPointGY": {
+        "id": 55,
+        "type": 33
+      },
+      "colorPointGIntensity": {
+        "id": 56,
+        "type": 32
+      },
+      "colorPointBX": {
+        "id": 58,
+        "type": 33
+      },
+      "colorPointBY": {
+        "id": 59,
+        "type": 33
+      },
+      "colorPointBIntensity": {
+        "id": 60,
+        "type": 32
+      },
+      "enhancedCurrentHue": {
+        "id": 16384,
+        "type": 33
+      },
+      "enhancedColorMode": {
+        "id": 16385,
+        "type": 48
+      },
+      "colorLoopActive": {
+        "id": 16386,
+        "type": 32
+      },
+      "colorLoopDirection": {
+        "id": 16387,
+        "type": 32
+      },
+      "colorLoopTime": {
+        "id": 16388,
+        "type": 33
+      },
+      "colorLoopStartEnhancedHue": {
+        "id": 16389,
+        "type": 33
+      },
+      "colorLoopStoredEnhancedHue": {
+        "id": 16390,
+        "type": 33
+      },
+      "colorCapabilities": {
+        "id": 16394,
+        "type": 33
+      },
+      "colorTempPhysicalMin": {
+        "id": 16395,
+        "type": 33
+      },
+      "colorTempPhysicalMax": {
+        "id": 16396,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "moveToHue": 0,
+      "moveHue": 1,
+      "stepHue": 2,
+      "moveToSaturation": 3,
+      "moveSaturation": 4,
+      "stepSaturation": 5,
+      "moveToHueAndSaturation": 6,
+      "moveToColor": 7,
+      "moveColor": 8,
+      "stepColor": 9,
+      "moveToColorTemp": 10,
+      "enhancedMoveToHue": 64,
+      "enhancedMoveHue": 65,
+      "enhancedStepHue": 66,
+      "enhancedMoveToHueAndSaturation": 67,
+      "colorLoopSet": 68,
+      "stopMoveStep": 71
+    },
+    "cmdRsp": null
+  },
+  "lightingBallastCfg": {
+    "id": 769,
+    "attrId": {
+      "physicalMinLevel": {
+        "id": 0,
+        "type": 32
+      },
+      "physicalMaxLevel": {
+        "id": 1,
+        "type": 32
+      },
+      "ballastStatus": {
+        "id": 2,
+        "type": 24
+      },
+      "minLevel": {
+        "id": 16,
+        "type": 32
+      },
+      "maxLevel": {
+        "id": 17,
+        "type": 32
+      },
+      "powerOnLevel": {
+        "id": 18,
+        "type": 32
+      },
+      "powerOnFadeTime": {
+        "id": 19,
+        "type": 33
+      },
+      "intrinsicBallastFactor": {
+        "id": 20,
+        "type": 32
+      },
+      "ballastFactorAdjustment": {
+        "id": 21,
+        "type": 32
+      },
+      "lampQuantity": {
+        "id": 32,
+        "type": 32
+      },
+      "lampType": {
+        "id": 48,
+        "type": 66
+      },
+      "lampManufacturer": {
+        "id": 49,
+        "type": 66
+      },
+      "lampRatedHours": {
+        "id": 50,
+        "type": 34
+      },
+      "lampBurnHours": {
+        "id": 51,
+        "type": 34
+      },
+      "lampAlarmMode": {
+        "id": 52,
+        "type": 24
+      },
+      "lampBurnHoursTripPoint": {
+        "id": 53,
+        "type": 34
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msIlluminanceMeasurement": {
+    "id": 1024,
+    "attrId": {
+      "measuredValue": {
+        "id": 0,
+        "type": 33
+      },
+      "minMeasuredValue": {
+        "id": 1,
+        "type": 33
+      },
+      "maxMeasuredValue": {
+        "id": 2,
+        "type": 33
+      },
+      "tolerance": {
+        "id": 3,
+        "type": 33
+      },
+      "lightSensorType": {
+        "id": 4,
+        "type": 48
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msIlluminanceLevelSensing": {
+    "id": 1025,
+    "attrId": {
+      "levelStatus": {
+        "id": 0,
+        "type": 48
+      },
+      "lightSensorType": {
+        "id": 1,
+        "type": 48
+      },
+      "illuminanceTargetLevel": {
+        "id": 16,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msTemperatureMeasurement": {
+    "id": 1026,
+    "attrId": {
+      "measuredValue": {
+        "id": 0,
+        "type": 41
+      },
+      "minMeasuredValue": {
+        "id": 1,
+        "type": 41
+      },
+      "maxMeasuredValue": {
+        "id": 2,
+        "type": 41
+      },
+      "tolerance": {
+        "id": 3,
+        "type": 33
+      },
+      "minPercentChange": {
+        "id": 16,
+        "type": 255
+      },
+      "minAbsoluteChange": {
+        "id": 17,
+        "type": 255
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msPressureMeasurement": {
+    "id": 1027,
+    "attrId": {
+      "measuredValue": {
+        "id": 0,
+        "type": 41
+      },
+      "minMeasuredValue": {
+        "id": 1,
+        "type": 41
+      },
+      "maxMeasuredValue": {
+        "id": 2,
+        "type": 41
+      },
+      "tolerance": {
+        "id": 3,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msFlowMeasurement": {
+    "id": 1028,
+    "attrId": {
+      "measuredValue": {
+        "id": 0,
+        "type": 33
+      },
+      "minMeasuredValue": {
+        "id": 1,
+        "type": 33
+      },
+      "maxMeasuredValue": {
+        "id": 2,
+        "type": 33
+      },
+      "tolerance": {
+        "id": 3,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msRelativeHumidity": {
+    "id": 1029,
+    "attrId": {
+      "measuredValue": {
+        "id": 0,
+        "type": 33
+      },
+      "minMeasuredValue": {
+        "id": 1,
+        "type": 33
+      },
+      "maxMeasuredValue": {
+        "id": 2,
+        "type": 33
+      },
+      "tolerance": {
+        "id": 3,
+        "type": 33
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "msOccupancySensing": {
+    "id": 1030,
+    "attrId": {
+      "occupancy": {
+        "id": 0,
+        "type": 24
+      },
+      "occupancySensorType": {
+        "id": 1,
+        "type": 48
+      },
+      "pirOToUDelay": {
+        "id": 16,
+        "type": 33
+      },
+      "pirUToODelay": {
+        "id": 17,
+        "type": 33
+      },
+      "pirUToOThreshold": {
+        "id": 18,
+        "type": 32
+      },
+      "ultrasonicOToUDelay": {
+        "id": 32,
+        "type": 33
+      },
+      "ultrasonicUToODelay": {
+        "id": 33,
+        "type": 33
+      },
+      "ultrasonicUToOThreshold": {
+        "id": 34,
+        "type": 32
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "ssIasZone": {
+    "id": 1280,
+    "attrId": {
+      "zoneState": {
+        "id": 0,
+        "type": 48
+      },
+      "zoneType": {
+        "id": 1,
+        "type": 49
+      },
+      "zoneStatus": {
+        "id": 2,
+        "type": 25
+      },
+      "iasCieAddr": {
+        "id": 16,
+        "type": 240
+      },
+      "zoneId": {
+        "id": 17,
+        "type": 32
+      },
+      "numZoneSensitivityLevelsSupported": {
+        "id": 18,
+        "type": 32
+      },
+      "currentZoneSensitivityLevel": {
+        "id": 19,
+        "type": 32
+      }
+    },
+    "cmd": {
+      "enrollRsp": 0,
+      "initNormalOpMode": 1,
+      "initTestMode": 2
+    },
+    "cmdRsp": {
+      "statusChangeNotification": 0,
+      "enrollReq": 1
+    }
+  },
+  "ssIasAce": {
+    "id": 1281,
+    "attrId": null,
+    "cmd": {
+      "arm": 0,
+      "bypass": 1,
+      "emergency": 2,
+      "fire": 3,
+      "panic": 4,
+      "getZoneIDMap": 5,
+      "getZoneInfo": 6,
+      "getPanelStatus": 7,
+      "getBypassedZoneList": 8,
+      "getZoneStatus": 9
+    },
+    "cmdRsp": {
+      "armRsp": 0,
+      "getZoneIDMapRsp": 1,
+      "getZoneInfoRsp": 2,
+      "zoneStatusChanged": 3,
+      "panelStatusChanged": 4,
+      "getPanelStatusRsp": 5,
+      "setBypassedZoneList": 6,
+      "bypassRsp": 7,
+      "getZoneStatusRsp": 8
+    }
+  },
+  "ssIasWd": {
+    "id": 1282,
+    "attrId": {
+      "maxDuration": {
+        "id": 0,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "startWarning": 0,
+      "squawk": 1
+    },
+    "cmdRsp": null
+  },
+  "piGenericTunnel": {
+    "id": 1536,
+    "attrId": {
+      "maxIncomeTransSize": {
+        "id": 1,
+        "type": 33
+      },
+      "maxOutgoTransSize": {
+        "id": 2,
+        "type": 33
+      },
+      "protocolAddr": {
+        "id": 3,
+        "type": 65
+      }
+    },
+    "cmd": { "matchProtocolAddr": 0 },
+    "cmdRsp": {
+      "matchProtocolAddrRsp": 0,
+      "advertiseProtocolAddr": 1
+    }
+  },
+  "piBacnetProtocolTunnel": {
+    "id": 1537,
+    "attrId": null,
+    "cmd": { "transferNpdu": 0 },
+    "cmdRsp": null
+  },
+  "piAnalogInputReg": {
+    "id": 1538,
+    "attrId": {
+      "covIncrement": {
+        "id": 22,
+        "type": 57
+      },
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "updateInterval": {
+        "id": 118,
+        "type": 32
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piAnalogInputExt": {
+    "id": 1539,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "deadband": {
+        "id": 25,
+        "type": 57
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "highLimit": {
+        "id": 45,
+        "type": 57
+      },
+      "limitEnable": {
+        "id": 52,
+        "type": 24
+      },
+      "lowLimit": {
+        "id": 59,
+        "type": 57
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": {
+      "transferApdu": 0,
+      "connectReq": 1,
+      "disconnectReq": 2,
+      "connectStatusNoti": 3
+    },
+    "cmdRsp": null
+  },
+  "piAnalogOutputReg": {
+    "id": 1540,
+    "attrId": {
+      "covIncrement": {
+        "id": 22,
+        "type": 57
+      },
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "updateInterval": {
+        "id": 118,
+        "type": 32
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piAnalogOutputExt": {
+    "id": 1541,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "deadband": {
+        "id": 25,
+        "type": 57
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "highLimit": {
+        "id": 45,
+        "type": 57
+      },
+      "limitEnable": {
+        "id": 52,
+        "type": 24
+      },
+      "lowLimit": {
+        "id": 59,
+        "type": 57
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piAnalogValueReg": {
+    "id": 1542,
+    "attrId": {
+      "covIncrement": {
+        "id": 22,
+        "type": 57
+      },
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piAnalogValueExt": {
+    "id": 1543,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "deadband": {
+        "id": 25,
+        "type": 57
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "highLimit": {
+        "id": 45,
+        "type": 57
+      },
+      "limitEnable": {
+        "id": 52,
+        "type": 24
+      },
+      "lowLimit": {
+        "id": 59,
+        "type": 57
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryInputReg": {
+    "id": 1544,
+    "attrId": {
+      "changeOfStateCount": {
+        "id": 15,
+        "type": 35
+      },
+      "changeOfStateTime": {
+        "id": 16,
+        "type": 76
+      },
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "elapsedActiveTime": {
+        "id": 33,
+        "type": 35
+      },
+      "objectIdentifier": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "timeOfATReset": {
+        "id": 114,
+        "type": 76
+      },
+      "timeOfSCReset": {
+        "id": 115,
+        "type": 76
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryInputExt": {
+    "id": 1545,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "alarmValue": {
+        "id": 6,
+        "type": 16
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryOutputReg": {
+    "id": 1546,
+    "attrId": {
+      "changeOfStateCount": {
+        "id": 15,
+        "type": 35
+      },
+      "changeOfStateTime": {
+        "id": 16,
+        "type": 76
+      },
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "elapsedActiveTime": {
+        "id": 33,
+        "type": 35
+      },
+      "feedBackValue": {
+        "id": 40,
+        "type": 48
+      },
+      "objectIdentifier": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "timeOfATReset": {
+        "id": 114,
+        "type": 76
+      },
+      "timeOfSCReset": {
+        "id": 115,
+        "type": 76
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryOutputExt": {
+    "id": 1547,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryValueReg": {
+    "id": 1548,
+    "attrId": {
+      "changeOfStateCount": {
+        "id": 15,
+        "type": 35
+      },
+      "changeOfStateTime": {
+        "id": 16,
+        "type": 76
+      },
+      "elapsedActiveTime": {
+        "id": 33,
+        "type": 35
+      },
+      "objectIdentifier": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "timeOfATReset": {
+        "id": 114,
+        "type": 76
+      },
+      "timeOfSCReset": {
+        "id": 115,
+        "type": 76
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piBinaryValueExt": {
+    "id": 1549,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "alarmValue": {
+        "id": 6,
+        "type": 16
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateInputReg": {
+    "id": 1550,
+    "attrId": {
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateInputExt": {
+    "id": 1551,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "alarmValue": {
+        "id": 6,
+        "type": 33
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "faultValues": {
+        "id": 37,
+        "type": 33
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateOutputReg": {
+    "id": 1552,
+    "attrId": {
+      "deviceType": {
+        "id": 31,
+        "type": 66
+      },
+      "feedBackValue": {
+        "id": 40,
+        "type": 48
+      },
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateOutputExt": {
+    "id": 1553,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateValueReg": {
+    "id": 1554,
+    "attrId": {
+      "objectId": {
+        "id": 75,
+        "type": 234
+      },
+      "objectName": {
+        "id": 77,
+        "type": 66
+      },
+      "objectType": {
+        "id": 79,
+        "type": 49
+      },
+      "profileName": {
+        "id": 168,
+        "type": 66
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "piMultistateValueExt": {
+    "id": 1555,
+    "attrId": {
+      "ackedTransitions": {
+        "id": 0,
+        "type": 24
+      },
+      "alarmValue": {
+        "id": 6,
+        "type": 33
+      },
+      "notificationClass": {
+        "id": 17,
+        "type": 33
+      },
+      "eventEnable": {
+        "id": 35,
+        "type": 24
+      },
+      "eventState": {
+        "id": 36,
+        "type": 48
+      },
+      "faultValues": {
+        "id": 37,
+        "type": 33
+      },
+      "notifyType": {
+        "id": 72,
+        "type": 48
+      },
+      "timeDelay": {
+        "id": 113,
+        "type": 32
+      },
+      "eventTimeStamps": {
+        "id": 130,
+        "type": 72
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "pi11073ProtocolTunnel": {
+    "id": 1556,
+    "attrId": {
+      "deviceidList": {
+        "id": 0,
+        "type": 72
+      },
+      "managerTarget": {
+        "id": 1,
+        "type": 240
+      },
+      "managerEndpoint": {
+        "id": 2,
+        "type": 32
+      },
+      "connected": {
+        "id": 3,
+        "type": 16
+      },
+      "preemptible": {
+        "id": 4,
+        "type": 16
+      },
+      "idleTimeout": {
+        "id": 5,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "transferApdu": 0,
+      "connectReq": 1,
+      "disconnectReq": 2,
+      "connectStatusNoti": 3
+    },
+    "cmdRsp": null
+  },
+  "piIso7818ProtocolTunnel": {
+    "id": 1557,
+    "attrId": {
+      "status": {
+        "id": 0,
+        "type": 32
+      }
+    },
+    "cmd": {
+      "transferApdu": 0,
+      "insertSmartCard": 1,
+      "extractSmartCard": 2
+    },
+    "cmdRsp": { "transferApdu": 0 }
+  },
+  "piRetailTunnel": {
+    "id": 1559,
+    "attrId": {
+      "manufacturerCode": {
+        "id": 0,
+        "type": 33
+      },
+      "msProfile": {
+        "id": 1,
+        "type": 33
+      }
+    },
+    "cmd": { "transferApdu": 0 },
+    "cmdRsp": null
+  },
+  "seMetering": {
+    "id": 1794,
+    "attrId": {
+      "currentSummDelivered": {
+        "id": 0,
+        "type": 37
+      },
+      "currentSummReceived": {
+        "id": 1,
+        "type": 37
+      },
+      "currentMaxDemandDelivered": {
+        "id": 2,
+        "type": 37
+      },
+      "currentMaxDemandReceived": {
+        "id": 3,
+        "type": 37
+      },
+      "dftSumm": {
+        "id": 4,
+        "type": 37
+      },
+      "dailyFreezeTime": {
+        "id": 5,
+        "type": 33
+      },
+      "powerFactor": {
+        "id": 6,
+        "type": 40
+      },
+      "readingSnapshotTime": {
+        "id": 7,
+        "type": 226
+      },
+      "currentMaxDemandDeliverdTime": {
+        "id": 8,
+        "type": 226
+      },
+      "currentMaxDemandReceivedTime": {
+        "id": 9,
+        "type": 226
+      },
+      "defaultUpdatePeriod": {
+        "id": 10,
+        "type": 32
+      },
+      "fastPollUpdatePeriod": {
+        "id": 11,
+        "type": 32
+      },
+      "currentBlockPeriodConsumpDelivered": {
+        "id": 12,
+        "type": 37
+      },
+      "dailyConsumpTarget": {
+        "id": 13,
+        "type": 34
+      },
+      "currentBlock": {
+        "id": 14,
+        "type": 48
+      },
+      "profileIntervalPeriod": {
+        "id": 15,
+        "type": 48
+      },
+      "intervalReadReportingPeriod": {
+        "id": 16,
+        "type": 33
+      },
+      "presetReadingTime": {
+        "id": 17,
+        "type": 33
+      },
+      "volumePerReport": {
+        "id": 18,
+        "type": 33
+      },
+      "flowRestriction": {
+        "id": 19,
+        "type": 32
+      },
+      "supplyStatus": {
+        "id": 20,
+        "type": 48
+      },
+      "currentInEnergyCarrierSumm": {
+        "id": 21,
+        "type": 37
+      },
+      "currentOutEnergyCarrierSumm": {
+        "id": 22,
+        "type": 37
+      },
+      "inletTempreature": {
+        "id": 23,
+        "type": 42
+      },
+      "outletTempreature": {
+        "id": 24,
+        "type": 42
+      },
+      "controlTempreature": {
+        "id": 25,
+        "type": 42
+      },
+      "currentInEnergyCarrierDemand": {
+        "id": 26,
+        "type": 42
+      },
+      "currentOutEnergyCarrierDemand": {
+        "id": 27,
+        "type": 42
+      },
+      "currentBlockPeriodConsumpReceived": {
+        "id": 29,
+        "type": 37
+      },
+      "currentBlockReceived": {
+        "id": 30,
+        "type": 37
+      },
+      "currentTier1SummDelivered": {
+        "id": 256,
+        "type": 37
+      },
+      "currentTier1SummReceived": {
+        "id": 257,
+        "type": 37
+      },
+      "currentTier2SummDelivered": {
+        "id": 258,
+        "type": 37
+      },
+      "currentTier2SummReceived": {
+        "id": 259,
+        "type": 37
+      },
+      "currentTier3SummDelivered": {
+        "id": 260,
+        "type": 37
+      },
+      "currentTier3SummReceived": {
+        "id": 261,
+        "type": 37
+      },
+      "currentTier4SummDelivered": {
+        "id": 262,
+        "type": 37
+      },
+      "currentTier4SummReceived": {
+        "id": 263,
+        "type": 37
+      },
+      "currentTier5SummDelivered": {
+        "id": 264,
+        "type": 37
+      },
+      "currentTier5SummReceived": {
+        "id": 265,
+        "type": 37
+      },
+      "currentTier6SummDelivered": {
+        "id": 266,
+        "type": 37
+      },
+      "currentTier6SummReceived": {
+        "id": 267,
+        "type": 37
+      },
+      "currentTier7SummDelivered": {
+        "id": 268,
+        "type": 37
+      },
+      "currentTier7SummReceived": {
+        "id": 269,
+        "type": 37
+      },
+      "currentTier8SummDelivered": {
+        "id": 270,
+        "type": 37
+      },
+      "currentTier8SummReceived": {
+        "id": 271,
+        "type": 37
+      },
+      "currentTier9SummDelivered": {
+        "id": 272,
+        "type": 37
+      },
+      "currentTier9SummReceived": {
+        "id": 273,
+        "type": 37
+      },
+      "currentTier10SummDelivered": {
+        "id": 274,
+        "type": 37
+      },
+      "currentTier10SummReceived": {
+        "id": 275,
+        "type": 37
+      },
+      "currentTier11SummDelivered": {
+        "id": 276,
+        "type": 37
+      },
+      "currentTier11SummReceived": {
+        "id": 277,
+        "type": 37
+      },
+      "currentTier12SummDelivered": {
+        "id": 278,
+        "type": 37
+      },
+      "currentTier12SummReceived": {
+        "id": 279,
+        "type": 37
+      },
+      "currentTier13SummDelivered": {
+        "id": 280,
+        "type": 37
+      },
+      "currentTier13SummReceived": {
+        "id": 281,
+        "type": 37
+      },
+      "currentTier14SummDelivered": {
+        "id": 282,
+        "type": 37
+      },
+      "currentTier14SummReceived": {
+        "id": 283,
+        "type": 37
+      },
+      "currentTier15SummDelivered": {
+        "id": 284,
+        "type": 37
+      },
+      "currentTier15SummReceived": {
+        "id": 285,
+        "type": 37
+      },
+      "status": {
+        "id": 512,
+        "type": 24
+      },
+      "remainingBattLife": {
+        "id": 513,
+        "type": 32
+      },
+      "hoursInOperation": {
+        "id": 514,
+        "type": 34
+      },
+      "hoursInFault": {
+        "id": 515,
+        "type": 34
+      },
+      "extendedStatus": {
+        "id": 516,
+        "type": 31
+      },
+      "unitOfMeasure": {
+        "id": 768,
+        "type": 48
+      },
+      "multiplier": {
+        "id": 769,
+        "type": 34
+      },
+      "divisor": {
+        "id": 770,
+        "type": 34
+      },
+      "summaFormatting": {
+        "id": 771,
+        "type": 24
+      },
+      "demandFormatting": {
+        "id": 772,
+        "type": 24
+      },
+      "historicalConsumpFormatting": {
+        "id": 773,
+        "type": 24
+      },
+      "meteringDeviceType": {
+        "id": 774,
+        "type": 24
+      },
+      "siteId": {
+        "id": 775,
+        "type": 65
+      },
+      "meterSerialNumber": {
+        "id": 776,
+        "type": 65
+      },
+      "energyCarrierUnitOfMeas": {
+        "id": 777,
+        "type": 48
+      },
+      "energyCarrierSummFormatting": {
+        "id": 778,
+        "type": 24
+      },
+      "energyCarrierDemandFormatting": {
+        "id": 779,
+        "type": 24
+      },
+      "temperatureUnitOfMeas": {
+        "id": 780,
+        "type": 48
+      },
+      "temperatureFormatting": {
+        "id": 781,
+        "type": 24
+      },
+      "moduleSerialNumber": {
+        "id": 782,
+        "type": 65
+      },
+      "operatingTariffLevel": {
+        "id": 783,
+        "type": 65
+      },
+      "instantaneousDemand": {
+        "id": 1024,
+        "type": 42
+      },
+      "currentdayConsumpDelivered": {
+        "id": 1025,
+        "type": 34
+      },
+      "currentdayConsumpReceived": {
+        "id": 1026,
+        "type": 34
+      },
+      "previousdayConsumpDelivered": {
+        "id": 1027,
+        "type": 34
+      },
+      "previousdayConsumpReceived": {
+        "id": 1028,
+        "type": 34
+      },
+      "curPartProfileIntStartTimeDelivered": {
+        "id": 1029,
+        "type": 226
+      },
+      "curPartProfileIntStartTime_Received": {
+        "id": 1030,
+        "type": 226
+      },
+      "curPartProfileIntValueDelivered": {
+        "id": 1031,
+        "type": 34
+      },
+      "curPartProfileIntValueReceived": {
+        "id": 1032,
+        "type": 34
+      },
+      "currentDayMaxPressure": {
+        "id": 1033,
+        "type": 37
+      },
+      "currentDayMinPressure": {
+        "id": 1034,
+        "type": 37
+      },
+      "previousDayMaxPressure": {
+        "id": 1035,
+        "type": 37
+      },
+      "previousDayMinPressure": {
+        "id": 1036,
+        "type": 37
+      },
+      "currentDayMaxDemand": {
+        "id": 1037,
+        "type": 42
+      },
+      "previousDayMaxDemand": {
+        "id": 1038,
+        "type": 42
+      },
+      "currentMonthMaxDemand": {
+        "id": 1039,
+        "type": 42
+      },
+      "currentYearMaxDemand": {
+        "id": 1040,
+        "type": 42
+      },
+      "currentdayMaxEnergyCarrDemand": {
+        "id": 1041,
+        "type": 42
+      },
+      "previousdayMaxEnergyCarrDemand": {
+        "id": 1042,
+        "type": 42
+      },
+      "curMonthMaxEnergyCarrDemand": {
+        "id": 1043,
+        "type": 42
+      },
+      "curMonthMinEnergyCarrDemand": {
+        "id": 1044,
+        "type": 42
+      },
+      "curYearMaxEnergyCarrDemand": {
+        "id": 1045,
+        "type": 42
+      },
+      "curYearMinEnergyCarrDemand": {
+        "id": 1046,
+        "type": 42
+      },
+      "maxNumberOfPeriodsDelivered": {
+        "id": 1280,
+        "type": 32
+      },
+      "current_Demand_Delivered": {
+        "id": 1536,
+        "type": 34
+      },
+      "demandLimit": {
+        "id": 1537,
+        "type": 34
+      },
+      "demandIntegrationPeriod": {
+        "id": 1538,
+        "type": 32
+      },
+      "numberOfDemandSubintervals": {
+        "id": 1539,
+        "type": 32
+      },
+      "demandLimitArmDuration": {
+        "id": 1540,
+        "type": 33
+      },
+      "genericAlarmMask": {
+        "id": 2048,
+        "type": 25
+      },
+      "electricityAlarmMask": {
+        "id": 2049,
+        "type": 27
+      },
+      "genFlowPressureAlarmMask": {
+        "id": 2050,
+        "type": 25
+      },
+      "waterSpecificAlarmMask": {
+        "id": 2051,
+        "type": 25
+      },
+      "heatCoolSpecificAlarmMASK": {
+        "id": 2052,
+        "type": 25
+      },
+      "gasSpecificAlarmMask": {
+        "id": 2053,
+        "type": 25
+      },
+      "extendedGenericAlarmMask": {
+        "id": 2054,
+        "type": 29
+      },
+      "manufactureAlarmMask": {
+        "id": 2055,
+        "type": 25
+      },
+      "billToDate": {
+        "id": 2560,
+        "type": 35
+      },
+      "billToDateTimeStamp": {
+        "id": 2561,
+        "type": 226
+      },
+      "projectedBill": {
+        "id": 2562,
+        "type": 35
+      },
+      "projectedBillTimeStamp": {
+        "id": 2563,
+        "type": 226
+      },
+      "notification_Control_Flags": {
+        "id": 0,
+        "type": 27
+      },
+      "notification_Flags": {
+        "id": 1,
+        "type": 27
+      },
+      "price_Notification_Flags": {
+        "id": 2,
+        "type": 27
+      },
+      "calendar_Notification_Flags": {
+        "id": 3,
+        "type": 27
+      },
+      "pre_Pay_Notification_Flags": {
+        "id": 4,
+        "type": 27
+      },
+      "device_Management_Flags": {
+        "id": 5,
+        "type": 27
+      },
+      "changeReportingProfile": {
+        "id": 256,
+        "type": 255
+      }
+    },
+    "cmd": {
+      "getProfile": 0,
+      "reqMirror": 1,
+      "mirrorRem": 2,
+      "reqFastPollMode": 3,
+      "getSnapshot": 4,
+      "takeSnapshot": 5,
+      "mirrorReportAttrRsp": 6
+    },
+    "cmdRsp": {
+      "getProfileRsp": 0,
+      "reqMirrorRsp": 1,
+      "mirrorRemRsp": 2,
+      "reqFastPollModeRsp": 3,
+      "getSnapshotRsp": 4
+    }
+  },
+  "telecommunicationsInformation": {
+    "id": 2304,
+    "attrId": {
+      "nodeDescription": {
+        "id": 0,
+        "type": 66
+      },
+      "deliveryEnable": {
+        "id": 1,
+        "type": 16
+      },
+      "pushInformationTimer": {
+        "id": 2,
+        "type": 35
+      },
+      "enableSecureConfiguration": {
+        "id": 3,
+        "type": 16
+      },
+      "numberOfContents": {
+        "id": 16,
+        "type": 33
+      },
+      "contentRootID": {
+        "id": 17,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "reqInformation": 0,
+      "pushInformationRsp": 1,
+      "sendPreference": 2,
+      "reqPreferenceRsp": 3,
+      "update": 4,
+      "delete": 5,
+      "cfgNodeDescription": 6,
+      "cfgDeliveryEnable": 7,
+      "cfgPushInformationTimer": 8,
+      "cfgSetRootID": 9
+    },
+    "cmdRsp": {
+      "reqInformationRsp": 0,
+      "pushInformation": 1,
+      "sendPreferenceRsp": 2,
+      "serverReqPreference": 3,
+      "reqPreferenceConfirmation": 4,
+      "updateRsp": 5,
+      "deleteRsp": 6
+    }
+  },
+  "telecommunicationsVoiceOverZigbee": {
+    "id": 2308,
+    "attrId": {
+      "codecType": {
+        "id": 0,
+        "type": 48
+      },
+      "samplingFrequency": {
+        "id": 1,
+        "type": 48
+      },
+      "codecrate": {
+        "id": 2,
+        "type": 48
+      },
+      "establishmentTimeout": {
+        "id": 3,
+        "type": 32
+      },
+      "codecTypeSub1": {
+        "id": 4,
+        "type": 48
+      },
+      "codecTypeSub2": {
+        "id": 5,
+        "type": 48
+      },
+      "codecTypeSub3": {
+        "id": 6,
+        "type": 48
+      },
+      "compressionType": {
+        "id": 7,
+        "type": 48
+      },
+      "compressionRate": {
+        "id": 8,
+        "type": 48
+      },
+      "optionFlags": {
+        "id": 9,
+        "type": 24
+      },
+      "threshold": {
+        "id": 10,
+        "type": 32
+      }
+    },
+    "cmd": {
+      "establishmentReq": 0,
+      "voiceTransmission": 1,
+      "voiceTransmissionCompletion": 2,
+      "controlResponse": 3
+    },
+    "cmdRsp": {
+      "establishmentResponse": 0,
+      "voiceTransmissionResponse": 1,
+      "control": 2
+    }
+  },
+  "telecommunicationsChatting": {
+    "id": 2309,
+    "attrId": {
+      "uID": {
+        "id": 0,
+        "type": 33
+      },
+      "nickname": {
+        "id": 1,
+        "type": 66
+      },
+      "cID": {
+        "id": 16,
+        "type": 33
+      },
+      "name": {
+        "id": 17,
+        "type": 66
+      },
+      "enableAddChat": {
+        "id": 18,
+        "type": 16
+      }
+    },
+    "cmd": {
+      "joinChatReq": 0,
+      "leaveChatReq": 1,
+      "searchChatReq": 2,
+      "switchChairmanRsp": 3,
+      "startChatReq": 4,
+      "chatMessage": 5,
+      "getNodeInformationReq": 6
+    },
+    "cmdRsp": {
+      "startChatRsp": 0,
+      "joinChatRsp": 1,
+      "userLeft": 2,
+      "userJoined": 3,
+      "searchChatRsp": 4,
+      "switchChairmanReq": 5,
+      "switchChairmanConfirm": 6,
+      "switchChairmanNotification": 7,
+      "getNodeInformationRsp": 8
+    }
+  },
+  "haApplianceIdentification": {
+    "id": 2817,
+    "attrId": {
+      "basicIdentification": {
+        "id": 0,
+        "type": 38
+      },
+      "companyName": {
+        "id": 16,
+        "type": 66
+      },
+      "companyId": {
+        "id": 17,
+        "type": 33
+      },
+      "brandName": {
+        "id": 18,
+        "type": 66
+      },
+      "brandId": {
+        "id": 19,
+        "type": 33
+      },
+      "model": {
+        "id": 20,
+        "type": 65
+      },
+      "partNumber": {
+        "id": 21,
+        "type": 65
+      },
+      "productRevision": {
+        "id": 22,
+        "type": 65
+      },
+      "softwareRevision": {
+        "id": 23,
+        "type": 65
+      },
+      "productTypeName": {
+        "id": 24,
+        "type": 65
+      },
+      "productTypeId": {
+        "id": 25,
+        "type": 33
+      },
+      "cecedSpecificationVersion": {
+        "id": 26,
+        "type": 32
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "haMeterIdentification": {
+    "id": 2817,
+    "attrId": {
+      "companyName": {
+        "id": 0,
+        "type": 66
+      },
+      "meterTypeId": {
+        "id": 1,
+        "type": 33
+      },
+      "dataQualityId": {
+        "id": 4,
+        "type": 33
+      },
+      "customerName": {
+        "id": 5,
+        "type": 66
+      },
+      "model": {
+        "id": 6,
+        "type": 66
+      },
+      "partNumber": {
+        "id": 7,
+        "type": 66
+      },
+      "productRevision": {
+        "id": 8,
+        "type": 66
+      },
+      "softwareRevision": {
+        "id": 10,
+        "type": 66
+      },
+      "utilityName": {
+        "id": 11,
+        "type": 66
+      },
+      "pod": {
+        "id": 12,
+        "type": 66
+      },
+      "availablePower": {
+        "id": 13,
+        "type": 42
+      },
+      "powerThreshold": {
+        "id": 14,
+        "type": 42
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "haApplianceEventsAlerts": {
+    "id": 2818,
+    "attrId": null,
+    "cmd": { "getAlerts": 0 },
+    "cmdRsp": {
+      "getAlertsRsp": 0,
+      "alertsNotification": 1,
+      "eventNotification": 2
+    }
+  },
+  "haApplianceStatistics": {
+    "id": 2819,
+    "attrId": {
+      "logMaxSize": {
+        "id": 0,
+        "type": 35
+      },
+      "logQueueMaxSize": {
+        "id": 1,
+        "type": 32
+      }
+    },
+    "cmd": {
+      "log": 0,
+      "logQueue": 1
+    },
+    "cmdRsp": {
+      "logNotification": 0,
+      "logRsp": 1,
+      "logQueueRsp": 2,
+      "statisticsAvailable": 3
+    }
+  },
+  "haElectricalMeasurement": {
+    "id": 2820,
+    "attrId": {
+      "measurementType": {
+        "id": 0,
+        "type": 27
+      },
+      "dcVoltage": {
+        "id": 256,
+        "type": 41
+      },
+      "dcVoltageMin": {
+        "id": 257,
+        "type": 41
+      },
+      "dcvoltagemax": {
+        "id": 258,
+        "type": 41
+      },
+      "dcCurrent": {
+        "id": 259,
+        "type": 41
+      },
+      "dcCurrentMin": {
+        "id": 260,
+        "type": 41
+      },
+      "dcCurrentMax": {
+        "id": 261,
+        "type": 41
+      },
+      "dcPower": {
+        "id": 262,
+        "type": 41
+      },
+      "dcPowerMin": {
+        "id": 263,
+        "type": 41
+      },
+      "dcPowerMax": {
+        "id": 264,
+        "type": 41
+      },
+      "dcVoltageMultiplier": {
+        "id": 512,
+        "type": 33
+      },
+      "dcVoltageDivisor": {
+        "id": 513,
+        "type": 33
+      },
+      "dcCurrentMultiplier": {
+        "id": 514,
+        "type": 33
+      },
+      "dcCurrentDivisor": {
+        "id": 515,
+        "type": 33
+      },
+      "dcPowerMultiplier": {
+        "id": 516,
+        "type": 33
+      },
+      "dcPowerDivisor": {
+        "id": 517,
+        "type": 33
+      },
+      "acFrequency": {
+        "id": 768,
+        "type": 33
+      },
+      "acFrequencyMin": {
+        "id": 769,
+        "type": 33
+      },
+      "acFrequencyMax": {
+        "id": 770,
+        "type": 33
+      },
+      "neutralCurrent": {
+        "id": 771,
+        "type": 33
+      },
+      "totalActivePower": {
+        "id": 772,
+        "type": 43
+      },
+      "totalReactivePower": {
+        "id": 773,
+        "type": 43
+      },
+      "totalApparentPower": {
+        "id": 774,
+        "type": 35
+      },
+      "meas1stHarmonicCurrent": {
+        "id": 775,
+        "type": 41
+      },
+      "meas3rdHarmonicCurrent": {
+        "id": 776,
+        "type": 41
+      },
+      "meas5thHarmonicCurrent": {
+        "id": 777,
+        "type": 41
+      },
+      "meas7thHarmonicCurrent": {
+        "id": 778,
+        "type": 41
+      },
+      "meas9thHarmonicCurrent": {
+        "id": 779,
+        "type": 41
+      },
+      "meas11thHarmonicCurrent": {
+        "id": 780,
+        "type": 41
+      },
+      "measPhase1stHarmonicCurrent": {
+        "id": 781,
+        "type": 41
+      },
+      "measPhase3rdHarmonicCurrent": {
+        "id": 782,
+        "type": 41
+      },
+      "measPhase5thHarmonicCurrent": {
+        "id": 783,
+        "type": 41
+      },
+      "measPhase7thHarmonicCurrent": {
+        "id": 784,
+        "type": 41
+      },
+      "measPhase9thHarmonicCurrent": {
+        "id": 785,
+        "type": 41
+      },
+      "measPhase11thHarmonicCurrent": {
+        "id": 786,
+        "type": 41
+      },
+      "acFrequencyMultiplier": {
+        "id": 1024,
+        "type": 33
+      },
+      "acFrequencyDivisor": {
+        "id": 1025,
+        "type": 33
+      },
+      "powerMultiplier": {
+        "id": 1026,
+        "type": 35
+      },
+      "powerDivisor": {
+        "id": 1027,
+        "type": 35
+      },
+      "harmonicCurrentMultiplier": {
+        "id": 1028,
+        "type": 40
+      },
+      "phaseHarmonicCurrentMultiplier": {
+        "id": 1029,
+        "type": 40
+      },
+      "instantaneousVoltage": {
+        "id": 1280,
+        "type": 41
+      },
+      "instantaneousLineCurrent": {
+        "id": 1281,
+        "type": 33
+      },
+      "instantaneousActiveCurrent": {
+        "id": 1282,
+        "type": 41
+      },
+      "instantaneousReactiveCurrent": {
+        "id": 1283,
+        "type": 41
+      },
+      "instantaneousPower": {
+        "id": 1284,
+        "type": 41
+      },
+      "rmsVoltage": {
+        "id": 1285,
+        "type": 33
+      },
+      "rmsVoltageMin": {
+        "id": 1286,
+        "type": 33
+      },
+      "rmsVoltageMax": {
+        "id": 1287,
+        "type": 33
+      },
+      "rmsCurrent": {
+        "id": 1288,
+        "type": 33
+      },
+      "rmsCurrentMin": {
+        "id": 1289,
+        "type": 33
+      },
+      "rmsCurrentMax": {
+        "id": 1290,
+        "type": 33
+      },
+      "activePower": {
+        "id": 1291,
+        "type": 41
+      },
+      "activePowerMin": {
+        "id": 1292,
+        "type": 41
+      },
+      "activePowerMax": {
+        "id": 1293,
+        "type": 41
+      },
+      "reactivePower": {
+        "id": 1294,
+        "type": 41
+      },
+      "apparentPower": {
+        "id": 1295,
+        "type": 33
+      },
+      "powerFactor": {
+        "id": 1296,
+        "type": 40
+      },
+      "averageRmsVoltageMeasPeriod": {
+        "id": 1297,
+        "type": 33
+      },
+      "averageRmsOverVoltageCounter": {
+        "id": 1298,
+        "type": 33
+      },
+      "averageRmsUnderVoltageCounter": {
+        "id": 1299,
+        "type": 33
+      },
+      "rmsExtremeOverVoltagePeriod": {
+        "id": 1300,
+        "type": 33
+      },
+      "rmsExtremeUnderVoltagePeriod": {
+        "id": 1301,
+        "type": 33
+      },
+      "rmsVoltageSagPeriod": {
+        "id": 1302,
+        "type": 33
+      },
+      "rmsVoltageSwellPeriod": {
+        "id": 1303,
+        "type": 33
+      },
+      "acVoltageMultiplier": {
+        "id": 1536,
+        "type": 33
+      },
+      "acVoltageDivisor": {
+        "id": 1537,
+        "type": 33
+      },
+      "acCurrentMultiplier": {
+        "id": 1538,
+        "type": 33
+      },
+      "acCurrentDivisor": {
+        "id": 1539,
+        "type": 33
+      },
+      "acPowerMultiplier": {
+        "id": 1540,
+        "type": 33
+      },
+      "acPowerDivisor": {
+        "id": 1541,
+        "type": 33
+      },
+      "dcOverloadAlarmsMask": {
+        "id": 1792,
+        "type": 24
+      },
+      "dcVoltageOverload": {
+        "id": 1793,
+        "type": 41
+      },
+      "dcCurrentOverload": {
+        "id": 1794,
+        "type": 41
+      },
+      "acAlarmsMask": {
+        "id": 2048,
+        "type": 25
+      },
+      "acVoltageOverload": {
+        "id": 2049,
+        "type": 41
+      },
+      "acCurrentOverload": {
+        "id": 2050,
+        "type": 41
+      },
+      "acActivePowerOverload": {
+        "id": 2051,
+        "type": 41
+      },
+      "acReactivePowerOverload": {
+        "id": 2052,
+        "type": 41
+      },
+      "averageRmsOverVoltage": {
+        "id": 2053,
+        "type": 41
+      },
+      "averageRmsUnderVoltage": {
+        "id": 2054,
+        "type": 41
+      },
+      "rmsExtremeOverVoltage": {
+        "id": 2055,
+        "type": 41
+      },
+      "rmsExtremeUnderVoltage": {
+        "id": 2056,
+        "type": 41
+      },
+      "rmsVoltageSag": {
+        "id": 2057,
+        "type": 41
+      },
+      "rmsVoltageSwell": {
+        "id": 2058,
+        "type": 41
+      },
+      "lineCurrentPhB": {
+        "id": 2305,
+        "type": 33
+      },
+      "activeCurrentPhB": {
+        "id": 2306,
+        "type": 41
+      },
+      "reactiveCurrentPhB": {
+        "id": 2307,
+        "type": 41
+      },
+      "rmsVoltagePhB": {
+        "id": 2309,
+        "type": 33
+      },
+      "rmsVoltageMinPhB": {
+        "id": 2310,
+        "type": 33
+      },
+      "rmsVoltageMaxPhB": {
+        "id": 2311,
+        "type": 33
+      },
+      "rmsCurrentPhB": {
+        "id": 2312,
+        "type": 33
+      },
+      "rmsCurrentMinPhB": {
+        "id": 2313,
+        "type": 33
+      },
+      "rmsCurrentMaxPhB": {
+        "id": 2314,
+        "type": 33
+      },
+      "activePowerPhB": {
+        "id": 2315,
+        "type": 41
+      },
+      "activePowerMinPhB": {
+        "id": 2316,
+        "type": 41
+      },
+      "activePowerMaxPhB": {
+        "id": 2317,
+        "type": 41
+      },
+      "reactivePowerPhB": {
+        "id": 2318,
+        "type": 41
+      },
+      "apparentPowerPhB": {
+        "id": 2319,
+        "type": 33
+      },
+      "powerFactorPhB": {
+        "id": 2320,
+        "type": 40
+      },
+      "averageRmsVoltageMeasurePeriodPhB": {
+        "id": 2321,
+        "type": 33
+      },
+      "averageRmsOverVoltageCounterPhB": {
+        "id": 2322,
+        "type": 33
+      },
+      "averageUnderVoltageCounterPhB": {
+        "id": 2323,
+        "type": 33
+      },
+      "rmsExtremeOverVoltagePeriodPhB": {
+        "id": 2324,
+        "type": 33
+      },
+      "rmsExtremeUnderVoltagePeriodPhB": {
+        "id": 2325,
+        "type": 33
+      },
+      "rmsVoltageSagPeriodPhB": {
+        "id": 2326,
+        "type": 33
+      },
+      "rmsVoltageSwellPeriodPhB": {
+        "id": 2327,
+        "type": 33
+      },
+      "lineCurrentPhC": {
+        "id": 2561,
+        "type": 33
+      },
+      "activeCurrentPhC": {
+        "id": 2562,
+        "type": 41
+      },
+      "reactiveCurrentPhC": {
+        "id": 2563,
+        "type": 41
+      },
+      "rmsVoltagePhC": {
+        "id": 2565,
+        "type": 33
+      },
+      "rmsVoltageMinPhC": {
+        "id": 2566,
+        "type": 33
+      },
+      "rmsVoltageMaxPhC": {
+        "id": 2567,
+        "type": 33
+      },
+      "rmsCurrentPhC": {
+        "id": 2568,
+        "type": 33
+      },
+      "rmsCurrentMinPhC": {
+        "id": 2569,
+        "type": 33
+      },
+      "rmsCurrentMaxPhC": {
+        "id": 2570,
+        "type": 33
+      },
+      "activePowerPhC": {
+        "id": 2571,
+        "type": 41
+      },
+      "activePowerMinPhC": {
+        "id": 2572,
+        "type": 41
+      },
+      "activePowerMaxPhC": {
+        "id": 2573,
+        "type": 41
+      },
+      "reactivePowerPhC": {
+        "id": 2574,
+        "type": 41
+      },
+      "apparentPowerPhC": {
+        "id": 2575,
+        "type": 33
+      },
+      "powerFactorPhC": {
+        "id": 2576,
+        "type": 40
+      },
+      "averageRmsVoltageMeasPeriodPhC": {
+        "id": 2577,
+        "type": 33
+      },
+      "averageRmsOverVoltageCounterPhC": {
+        "id": 2578,
+        "type": 33
+      },
+      "averageUnderVoltageCounterPhC": {
+        "id": 2579,
+        "type": 33
+      },
+      "rmsExtremeOverVoltagePeriodPhC": {
+        "id": 2580,
+        "type": 33
+      },
+      "rmsExtremeUnderVoltagePeriodPhC": {
+        "id": 2581,
+        "type": 33
+      },
+      "rmsVoltageSagPeriodPhC": {
+        "id": 2582,
+        "type": 33
+      },
+      "rmsVoltageSwellPeriodPh_C": {
+        "id": 2583,
+        "type": 33
+      }
+    },
+    "cmd": {
+      "getProfileInfo": 0,
+      "getMeasurementProfile": 1
+    },
+    "cmdRsp": {
+      "getProfileInfoRsp": 0,
+      "getMeasurementProfileRsp": 1
+    }
+  },
+  "haDiagnostic": {
+    "id": 2821,
+    "attrId": {
+      "numberOfResets": {
+        "id": 0,
+        "type": 33
+      },
+      "persistentMemoryWrites": {
+        "id": 1,
+        "type": 33
+      },
+      "macRxBcast": {
+        "id": 256,
+        "type": 35
+      },
+      "macTxBcast": {
+        "id": 257,
+        "type": 35
+      },
+      "macRxUcast": {
+        "id": 258,
+        "type": 35
+      },
+      "macTxUcast": {
+        "id": 259,
+        "type": 35
+      },
+      "macTxUcastRetry": {
+        "id": 260,
+        "type": 33
+      },
+      "macTxUcastFail": {
+        "id": 261,
+        "type": 33
+      },
+      "aPSRxBcast": {
+        "id": 262,
+        "type": 33
+      },
+      "aPSTxBcast": {
+        "id": 263,
+        "type": 33
+      },
+      "aPSRxUcast": {
+        "id": 264,
+        "type": 33
+      },
+      "aPSTxUcastSuccess": {
+        "id": 265,
+        "type": 33
+      },
+      "aPSTxUcastRetry": {
+        "id": 266,
+        "type": 33
+      },
+      "aPSTxUcastFail": {
+        "id": 267,
+        "type": 33
+      },
+      "routeDiscInitiated": {
+        "id": 268,
+        "type": 33
+      },
+      "neighborAdded": {
+        "id": 269,
+        "type": 33
+      },
+      "neighborRemoved": {
+        "id": 270,
+        "type": 33
+      },
+      "neighborStale": {
+        "id": 271,
+        "type": 33
+      },
+      "joinIndication": {
+        "id": 272,
+        "type": 33
+      },
+      "childMoved": {
+        "id": 273,
+        "type": 33
+      },
+      "nwkFcFailure": {
+        "id": 274,
+        "type": 33
+      },
+      "apsFcFailure": {
+        "id": 275,
+        "type": 33
+      },
+      "apsUnauthorizedKey": {
+        "id": 276,
+        "type": 33
+      },
+      "nwkDecryptFailures": {
+        "id": 277,
+        "type": 33
+      },
+      "apsDecryptFailures": {
+        "id": 278,
+        "type": 33
+      },
+      "packetBufferAllocateFailures": {
+        "id": 279,
+        "type": 33
+      },
+      "relayedUcast": {
+        "id": 280,
+        "type": 33
+      },
+      "phyToMacQueueLimitReached": {
+        "id": 281,
+        "type": 33
+      },
+      "packetValidateDropCount": {
+        "id": 282,
+        "type": 33
+      },
+      "averageMacRetryPerApsMessageSent": {
+        "id": 283,
+        "type": 33
+      },
+      "lastMessageLqi": {
+        "id": 284,
+        "type": 32
+      },
+      "lastMessageRssi": {
+        "id": 285,
+        "type": 40
+      }
+    },
+    "cmd": null,
+    "cmdRsp": null
+  },
+  "lightLink": {
+    "id": 4096,
+    "attrId": null,
+    "cmd": {
+      "scanReq": 0,
+      "deviceInformationReq": 2,
+      "identifyReq": 6,
+      "resetToFactoryNewReq": 7,
+      "networkStartReq": 16,
+      "networkJoinRouterReq": 18,
+      "networkJoinEndDeviceReq": 20,
+      "networkUpdateReq": 22,
+      "getGroupIdentifiersReq": 65,
+      "getEndpointListReq": 66
+    },
+    "cmdRsp": {
+      "scanRsp": 1,
+      "deviceInformationRsp": 3,
+      "networkStartRsp": 17,
+      "networkJoinRouterRsp": 19,
+      "networkJoinEndDeviceRsp": 21,
+      "endpointInformation": 64,
+      "getGroupIdentifiersRsp": 65,
+      "getEndpointListRsp": 66
+    }
+  }
+}
