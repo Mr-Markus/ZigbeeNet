@@ -131,9 +131,19 @@ namespace ZigbeeNet.ZCL
                     {
                         ZclCommandParam param = new ZclCommandParam()
                         {
-                            Name = p.Key,
-                            DataType = (DataType)p.Value.ToObject<int>()
+                            Name = p.Key
                         };
+                        if (p.Value.Type == JTokenType.Integer)
+                        {
+                            param.DataType = (DataType)p.Value.ToObject<int>();
+                        } else if (p.Value.Type == JTokenType.String)
+                        {
+                            param.SpecialType = p.Value.ToObject<string>();
+                        } else
+                        {
+                            throw new NotImplementedException($"Param type {p.Value.Type.ToString()} not implemented");
+                        }
+
                         zclCommand.Params.Add(param);
                     }
                 }
@@ -168,9 +178,20 @@ namespace ZigbeeNet.ZCL
                             {
                                 ZclCommandParam param = new ZclCommandParam()
                                 {
-                                    Name = p.Key,
-                                    DataType = (DataType)p.Value.ToObject<int>() //TODO: convert type to int and then to enum
+                                    Name = p.Key
                                 };
+                                if (p.Value.Type == JTokenType.Integer)
+                                {
+                                    param.DataType = (DataType)p.Value.ToObject<int>();
+                                }
+                                else if (p.Value.Type == JTokenType.String)
+                                {
+                                    param.SpecialType = p.Value.ToObject<string>();
+                                }
+                                else
+                                {
+                                    throw new NotImplementedException($"Param type {p.Value.Type.ToString()} not implemented");
+                                }
 
                                 zclCommand.Params.Add(param);
                             }
