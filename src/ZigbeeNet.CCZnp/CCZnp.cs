@@ -135,41 +135,6 @@ namespace ZigbeeNet.CC
             Closed?.Invoke(this, EventArgs.Empty);
         }
 
-        public void PermitJoin(int time, bool onCoord)
-        {
-            if(Enabled == false)
-            {
-                throw new Exception("ZNP is not enabled");
-            }
-            
-            byte addrmode = 0x02;       //Coordinator
-            ushort dstaddr = 0x0000;    //Coordinator adress;
-
-            if (onCoord == false)
-            {
-                addrmode = 0x0F;
-                dstaddr = 0xFFFC;   // all coord and routers
-            }
-
-            if (time > 255 || time < 0)
-                throw new Exception("Jointime can only range from  0 to 255.");
-
-            byte cmd = 54; //mgmtPermitJoinReq
-
-            ArgumentCollection valObj = new ArgumentCollection();
-            valObj.AddOrUpdate("addrmode", ParamType.uint8, addrmode);
-            valObj.AddOrUpdate("dstaddr", ParamType.uint16, dstaddr);
-            valObj.AddOrUpdate("duration", ParamType.uint16, 0);
-            valObj.AddOrUpdate("tcsignificance", ParamType.uint16, 0);
-
-            this.Request(SubSystem.ZDO, cmd, valObj);
-        }
-
-        public byte[] SendCommand(BaseCommand command, Action callback = null)
-        {
-            return Request(command, callback);
-        }
-
         public byte[] SendCommand(MessageType type, SubSystem subSystem, byte commandId, byte[] payload)
         {
             return Unpi.Send((int)type, (int)subSystem, commandId, payload);
@@ -177,17 +142,10 @@ namespace ZigbeeNet.CC
 
         public byte[] Request(ZpiObject zpiObject, Action callback = null)
         {
-            return Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.RequestArguments, callback);
-        }
-
-        public byte[] Request(SubSystem subSystem, byte commandId, ArgumentCollection valObject, Action callback = null)
-        {
             if(Unpi == null)
             {
                 throw new NullReferenceException("CCZnp has not been initialized yet");
             }
-
-            ZpiObject zpiObject = new ZpiObject(subSystem, commandId, valObject);
 
             if (_spinLock)
             {

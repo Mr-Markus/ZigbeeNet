@@ -25,11 +25,17 @@ namespace ZigbeeNet.CC
             ResponseArguments = new ArgumentCollection();
         }
 
-        public ZpiObject(SubSystem subSystem, byte commandId, ArgumentCollection requestArgs = null)
+        public ZpiObject(SubSystem subSystem, byte cmdId)
         {
             SubSystem = subSystem;
-            CommandId = commandId;
-            RequestArguments = requestArgs;
+            CommandId = cmdId;
+
+            ZpiObject zpi = ZpiMeta.GetCommand(subSystem, cmdId);
+
+            this.Type = zpi.Type;
+            this.Name = zpi.Name;
+            this.RequestArguments = zpi.RequestArguments;
+            this.ResponseArguments = zpi.ResponseArguments;
         }
 
         public byte[] Frame

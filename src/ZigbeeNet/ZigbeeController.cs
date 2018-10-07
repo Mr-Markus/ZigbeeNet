@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.CC;
+using ZigbeeNet.CC.Commands;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
@@ -66,20 +67,21 @@ namespace ZigbeeNet
             Request(SubSystem.ZDO, 0x40, args);
         }
 
-        public void PermitJoin(int time, bool onCoordOnly, Action callback = null)
+        public void PermitJoin(int time, Action callback = null)
         {
             if (time > 255 || time < 0)
             {
                 throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
             }
 
-            ArgumentCollection valObj = new ArgumentCollection();
-            valObj.AddOrUpdate("addrmode", ParamType.uint8, 0x02);
-            valObj.AddOrUpdate("dstaddr", ParamType.uint16, 0);
-            valObj.AddOrUpdate("duration", ParamType.uint16, 0);
-            valObj.AddOrUpdate("tcsignificance", ParamType.uint16, 0);
+            PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
 
-            this.Request(SubSystem.ZDO, 54, valObj, callback);
+            this.Request(permitJoinRequest, callback);
+        }
+
+        public void Request(ZpiObject zpiObject, Action callback = null)
+        {
+            Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.RequestArguments, callback);
         }
 
         public void Request(SubSystem subSystem, byte commandId, ArgumentCollection valObj, Action callback = null)
@@ -92,7 +94,7 @@ namespace ZigbeeNet
             }
             else
             {
-                Znp.Request(subSystem, commandId, valObj);
+                //Znp.Request(subSystem, commandId, valObj);
             }
         }
     }

@@ -41,7 +41,6 @@ namespace ZigbeeNet.CC
                         break;                   
                     default:
                         throw new NotImplementedException($"ParamType {ParamType.ToString()} not implemented in ZpiArgument");
-                        break;
                 }
             }
         }

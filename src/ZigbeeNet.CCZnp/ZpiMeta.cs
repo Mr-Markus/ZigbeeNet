@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace ZigbeeNet.CC
 {
@@ -94,6 +95,26 @@ namespace ZigbeeNet.CC
                     _zpiObjects[subSystem].Add(zpiObject);
                 }
             }
+        }
+
+        public static ZpiObject GetCommand(SubSystem subSystem, byte cmdId)
+        {
+            return ZpiObjects[subSystem].Single(cmd => cmd.CommandId == cmdId);
+        }
+
+        public static MessageType GetMessageType(SubSystem subSystem, byte cmdId)
+        {
+            return GetCommand(subSystem, cmdId).Type;
+        }
+
+        public static ArgumentCollection GetReqArguments(SubSystem subSystem, byte cmdId)
+        {
+            return GetCommand(subSystem, cmdId).RequestArguments;
+        }
+
+        public static ArgumentCollection GetRspArguments(SubSystem subSystem, byte cmdId)
+        {
+            return GetCommand(subSystem, cmdId).ResponseArguments;
         }
     }
 }

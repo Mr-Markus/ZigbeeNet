@@ -27,7 +27,7 @@ namespace ZigbeeNet
 
         private void Controller_Started(object sender, EventArgs e)
         {
-            Controller.PermitJoin(0, true, () => { }
+            Controller.PermitJoin(0, () => { }
                 //TODO: Register Coord via Service
 
                 );
@@ -76,7 +76,7 @@ namespace ZigbeeNet
         {
             if (_isRunning)
             {
-                PermitJoining(0, false, () =>
+                PermitJoining(0, () =>
                 {
                     _isRunning = false;
                 });
@@ -100,7 +100,7 @@ namespace ZigbeeNet
         /// Permits devices to join the zigbee network
         /// </summary>
         /// <param name="time">Time in seconds</param>
-        public void PermitJoining(int time, bool onCoordOnly, Action callback = null)
+        public void PermitJoining(int time, Action callback = null)
         {
             if(time > 255 || time < 0)
             {
@@ -113,7 +113,7 @@ namespace ZigbeeNet
             }
             else
             {
-                this.Controller.PermitJoin(time, onCoordOnly, callback);
+                this.Controller.PermitJoin(time, callback);
             }
         }
 
