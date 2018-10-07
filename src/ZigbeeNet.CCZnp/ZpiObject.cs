@@ -3,31 +3,51 @@ using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet
+namespace ZigbeeNet.CC
 {
     public class ZpiObject
     {
-        public virtual SubSystem SubSystem { get; set; }
-        public virtual byte CommandId { get; set; }
         public virtual MessageType Type { get; set; }
-        public ArgumentCollection Arguments { get; set; }
+
+        public virtual SubSystem SubSystem { get; set; }
+
+        public virtual byte CommandId { get; set; }
+
+        public string Name { get; set; }
+
+        public ArgumentCollection RequestArguments { get; set; }
+
+        public ArgumentCollection ResponseArguments { get; set; }
+
+        public ZpiObject()
+        {
+            RequestArguments = new ArgumentCollection();
+            ResponseArguments = new ArgumentCollection();
+        }
+
+        public ZpiObject(SubSystem subSystem, byte commandId, ArgumentCollection requestArgs = null)
+        {
+            SubSystem = subSystem;
+            CommandId = commandId;
+            RequestArguments = requestArgs;
+        }
 
         public byte[] Frame
         {
             get
             {
-                if(this.Arguments == null)
+                if (this.RequestArguments == null)
                 {
                     throw new ArgumentException("ZpiObject has no ValObj", "ValObj");
                 }
 
                 List<byte> result = new List<byte>();
 
-                foreach (var item in Arguments.Arguments)
+                foreach (var item in RequestArguments.Arguments)
                 {
-                    switch(item.DataType)
+                    switch (item.ParamType)
                     {
-                        case DataType.UInt8:
+                        case ParamType.uint8:
                             result.Add(Convert.ToByte(item.Value));
                             break;
                     }
@@ -37,12 +57,6 @@ namespace ZigbeeNet
             }
         }
 
-        public ZpiObject(SubSystem subSystem, byte commandId, ArgumentCollection valObj = null)
-        {
-            SubSystem = subSystem;
-            CommandId = commandId;
-            Arguments = valObj;
-        }
 
         public void Parse(MessageType type, int length, byte[] buffer, Action<string, ArgumentCollection> result = null)
         {

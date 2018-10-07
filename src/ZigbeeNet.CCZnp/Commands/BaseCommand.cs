@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Commands
+namespace ZigbeeNet.CC.Commands
 {
     public class BaseCommand : ZpiObject
     {

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\unpi-net\src\UnpiNet\UnpiNet.csproj" />
+    <ProjectReference Include="..\ZigbeeNet.ZCL\ZigbeeNet.ZCL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\General\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Defs/zdo_meta.json" />
+    <EmbeddedResource Include="Defs/zpi_meta.json" />
+  </ItemGroup>
+</Project>

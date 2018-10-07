@@ -4,16 +4,16 @@ using System.IO;
 using ZigbeeNet;
 using UnpiNet;
 using System.Diagnostics;
-using ZigbeeNet.Commands;
+using ZigbeeNet.CC.Commands;
 using System.Threading;
 using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet
+namespace ZigbeeNet.CC
 {
     public class CCZnp
     {
         //TODO: get and set to data destination e.g. database or textfile
-        public Dictionary<ulong, Device> Devices { get; set; }
+        //public Dictionary<ulong, Device> Devices { get; set; }
 
         public bool Enabled { get; set; }
         public Unpi Unpi { get; set; }
@@ -157,10 +157,10 @@ namespace ZigbeeNet
             byte cmd = 54; //mgmtPermitJoinReq
 
             ArgumentCollection valObj = new ArgumentCollection();
-            valObj.Add("addrmode", DataType.UInt8, addrmode);
-            valObj.Add("dstaddr", DataType.UInt16, dstaddr);
-            valObj.Add("duration", DataType.UInt16, 0);
-            valObj.Add("tcsignificance", DataType.UInt16, 0);
+            valObj.AddOrUpdate("addrmode", ParamType.uint8, addrmode);
+            valObj.AddOrUpdate("dstaddr", ParamType.uint16, dstaddr);
+            valObj.AddOrUpdate("duration", ParamType.uint16, 0);
+            valObj.AddOrUpdate("tcsignificance", ParamType.uint16, 0);
 
             this.Request(SubSystem.ZDO, cmd, valObj);
         }
@@ -177,7 +177,7 @@ namespace ZigbeeNet
 
         public byte[] Request(ZpiObject zpiObject, Action callback = null)
         {
-            return Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Arguments, callback);
+            return Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.RequestArguments, callback);
         }
 
         public byte[] Request(SubSystem subSystem, byte commandId, ArgumentCollection valObject, Action callback = null)
@@ -273,7 +273,7 @@ namespace ZigbeeNet
 
             zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, (string error, ArgumentCollection result) =>
             {
-                zpiObject.Arguments = result;
+                zpiObject.RequestArguments = result;
 
                 MtIcomingDataHandler(error, zpiObject);
             });        

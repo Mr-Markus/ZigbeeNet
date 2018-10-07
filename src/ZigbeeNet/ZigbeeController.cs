@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.CC;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
@@ -58,7 +59,7 @@ namespace ZigbeeNet
         private void StartupCoord()
         {
             ArgumentCollection args = new ArgumentCollection();
-            args.Add("startdelay", DataType.UInt16, 100);
+            args.AddOrUpdate("startdelay", ParamType.uint16, 100);
 
             //TODO: Add stateChangedInd event
 
@@ -70,13 +71,13 @@ namespace ZigbeeNet
             if (time > 255 || time < 0)
             {
                 throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
-            }            
+            }
 
             ArgumentCollection valObj = new ArgumentCollection();
-            valObj.Add("addrmode", DataType.UInt8, 0x02);
-            valObj.Add("dstaddr", DataType.UInt16, 0);
-            valObj.Add("duration", DataType.UInt16, 0);
-            valObj.Add("tcsignificance", DataType.UInt16, 0);
+            valObj.AddOrUpdate("addrmode", ParamType.uint8, 0x02);
+            valObj.AddOrUpdate("dstaddr", ParamType.uint16, 0);
+            valObj.AddOrUpdate("duration", ParamType.uint16, 0);
+            valObj.AddOrUpdate("tcsignificance", ParamType.uint16, 0);
 
             this.Request(SubSystem.ZDO, 54, valObj, callback);
         }
