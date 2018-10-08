@@ -6,7 +6,7 @@ namespace ZigbeeNet.CC.Commands
 {
     public class PermitJoinRequest : ZpiObject
     {
-        public PermitJoinRequest(byte duration = 0xff, AddressMode mode = AddressMode.All) 
+        public PermitJoinRequest(byte duration = 0xff, AddressMode mode = AddressMode.Coord) 
             : base(SubSystem.ZDO, (byte)ZDO.mgmtPermitJoinReq)
         {
             Duration = duration;
