@@ -45,6 +45,7 @@ namespace ZigbeeNet.CC
             }
         }
 
+        [Ignore()]
         public object this[string key]
         {
             get

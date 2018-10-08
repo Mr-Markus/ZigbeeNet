@@ -10,11 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\General\" />
+    <EmbeddedResource Include="Defs/zdo_meta.json" />
+    <EmbeddedResource Include="Defs/zpi_meta.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Defs/zdo_meta.json" />
-    <EmbeddedResource Include="Defs/zpi_meta.json" />
+    <PackageReference Include="BinarySerializer" Version="8.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 </Project>

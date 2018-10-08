@@ -848,7 +848,7 @@
               "coordrealignment": 0
             },
             {
-              "realignkeysource": 13
+              "realignkeysource": 14
             },
             {
               "realignsecuritylevel": 0
@@ -860,7 +860,7 @@
               "realignkeyindex": 0
             },
             {
-              "beaconkeysource": 13
+              "beaconkeysource": 14
             },
             {
               "beaconsecuritylevel": 0
@@ -931,7 +931,7 @@
               "power": 0
             },
             {
-              "keysource": 13
+              "keysource": 14
             },
             {
               "securitylevel": 0
@@ -980,7 +980,7 @@
               "capabilityinformation": 0
             },
             {
-              "keysource": 13
+              "keysource": 14
             },
             {
               "securitylevel": 0
@@ -1020,7 +1020,7 @@
               "txindirect": 0
             },
             {
-              "keysource": 13
+              "keysource": 14
             },
             {
               "securitylevel": 0
@@ -1067,7 +1067,7 @@
               "attribute": 0
             },
             {
-              "attributevalue": 13
+              "attributevalue": 15
             }
           ],
           "rsp": [
@@ -1098,7 +1098,7 @@
               "maxresults": 0
             },
             {
-              "keysource": 13
+              "keysource": 14
             },
             {
               "securitylevel": 0
@@ -1132,7 +1132,7 @@
               "coordpanid": 1
             },
             {
-              "keysource": 13
+              "keysource": 14
             },
             {
               "securitylevel": 0
@@ -1714,13 +1714,13 @@
               "appnuminclusters": 0
             },
             {
-              "appinclusterlist": 12
+              "appinclusterlist": 17
             },
             {
               "appnumoutclusters": 0
             },
             {
-              "appoutclusterlist": 12
+              "appoutclusterlist": 17
             }
           ],
           "rsp": [
@@ -1843,13 +1843,13 @@
               "radius": 0
             },
             {
-              "relaycount": 0
+              "relaycount": 7
             },
             {
               "relaylist": 12
             },
             {
-              "len": 0
+              "len": 7
             },
             {
               "data": 11
@@ -2268,13 +2268,13 @@
               "profileid": 1
             },
             {
-              "numinclusters": 0
+              "numinclusters": 7
             },
             {
               "inclusterlist": 12
             },
             {
-              "numoutclusters": 0
+              "numoutclusters": 7
             },
             {
               "outclusterlist": 12
@@ -2409,13 +2409,13 @@
               "profileid": 1
             },
             {
-              "numinclusters": 0
+              "numinclusters": 7
             },
             {
               "inclusterlist": 12
             },
             {
-              "numoutclusters": 0
+              "numoutclusters": 7
             },
             {
               "outclusterlist": 12
@@ -2508,7 +2508,7 @@
               "ieeeaddr": 3
             },
             {
-              "linkkey": 13
+              "linkkey": 15
             }
           ],
           "rsp": [
@@ -2884,7 +2884,7 @@
               "startindex": 0
             },
             {
-              "numassocdev": 0
+              "numassocdev": 7
             },
             {
               "assocdevlist": 5
@@ -2910,7 +2910,7 @@
               "startindex": 0
             },
             {
-              "numassocdev": 0
+              "numassocdev": 7
             },
             {
               "assocdevlist": 5
@@ -3215,7 +3215,7 @@
               "startindex": 0
             },
             {
-              "networklistcount": 0
+              "networklistcount": 7
             },
             {
               "networklist": 6
@@ -3241,7 +3241,7 @@
               "startindex": 0
             },
             {
-              "neighborlqilistcount": 0
+              "neighborlqilistcount": 7
             },
             {
               "neighborlqilist": 6
@@ -3267,7 +3267,7 @@
               "startindex": 0
             },
             {
-              "routingtablelistcount": 0
+              "routingtablelistcount": 7
             },
             {
               "routingtablelist": 6
@@ -3293,7 +3293,7 @@
               "startindex": 0
             },
             {
-              "bindingtablelistcount": 0
+              "bindingtablelistcount": 7
             },
             {
               "bindingtablelist": 6
@@ -3603,7 +3603,7 @@
               "extaddr": 3
             },
             {
-              "linkkey": 13
+              "linkkey": 15
             }
           ],
           "rsp": [
@@ -4361,7 +4361,7 @@
         "params": {
           "req": [
             {
-              "preconfigkey": 13
+              "preconfigkey": 15
             }
           ],
           "rsp": [
@@ -4944,7 +4944,7 @@
               "dstendpoint": 0
             },
             {
-              "numclusterids": 0
+              "numclusterids": 7
             },
             {
               "clusterids": 12

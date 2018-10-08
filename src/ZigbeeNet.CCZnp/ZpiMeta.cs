@@ -99,7 +99,7 @@ namespace ZigbeeNet.CC
 
         public static ZpiObject GetCommand(SubSystem subSystem, byte cmdId)
         {
-            return ZpiObjects[subSystem].Single(cmd => cmd.CommandId == cmdId);
+            return ZpiObjects[subSystem].SingleOrDefault(cmd => cmd.CommandId == cmdId);
         }
 
         public static MessageType GetMessageType(SubSystem subSystem, byte cmdId)

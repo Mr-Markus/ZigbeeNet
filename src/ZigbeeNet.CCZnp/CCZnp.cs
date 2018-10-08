@@ -41,7 +41,7 @@ namespace ZigbeeNet.CC
 
                 if (value == true)
                 {
-                    dueTime = 0;
+                    dueTime = 30000;
                     period = 30000;
                 }
 
@@ -140,13 +140,21 @@ namespace ZigbeeNet.CC
             return Unpi.Send((int)type, (int)subSystem, commandId, payload);
         }
 
-        public byte[] Request(ZpiObject zpiObject, Action callback = null)
+        public byte[] Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs, Action callback = null)
         {
-            if(Unpi == null)
+            if (Unpi == null)
             {
                 throw new NullReferenceException("CCZnp has not been initialized yet");
             }
 
+            ZpiObject zpiObject = new ZpiObject(subSystem, cmdId);
+            zpiObject.RequestArguments = reqestArgs;
+
+            return Request(zpiObject, callback);
+        }
+
+        public byte[] Request(ZpiObject zpiObject, Action callback = null)
+        {
             if (_spinLock)
             {
                 _txQueue.Add(zpiObject);
@@ -157,7 +165,7 @@ namespace ZigbeeNet.CC
             //prepare for transmission
             _spinLock = true;
 
-            if(zpiObject.Type == MessageType.SREQ)
+            if (zpiObject.Type == MessageType.SREQ)
             {
                 return SendSREQ(zpiObject, callback);
             }
@@ -178,17 +186,17 @@ namespace ZigbeeNet.CC
                     _sreqRunning = false;
                     _timeout.Change(Timeout.Infinite, Timeout.Infinite);
 
-                    if (state.GetType() == typeof(ZpiObject))
+                    if (state is ZpiObject)
                     {
                         ZpiObject zpi = state as ZpiObject;
-                        throw new TimeoutException($"Request timeout: {zpi.Type.ToString()}:{zpi.SubSystem.ToString()}:{zpi.CommandId}");
+                        throw new TimeoutException($"Request timeout: {zpi.Type.ToString()}:{zpi.SubSystem.ToString()}:{zpi.Name}");
                     }
                     else
                     {
                         throw new TimeoutException("Request timeout");
                     }
                 }
-            }, zpiObject, 0, 30000); //TODO: Get timeout by config
+            }, zpiObject, 30000, 30000); //TODO: Get timeout by config
 
             _sreqRunning = true;
             return Unpi.Send((int)MessageType.SREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
@@ -229,21 +237,19 @@ namespace ZigbeeNet.CC
         {
             ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
 
-            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, (string error, ArgumentCollection result) =>
+            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, () =>
             {
-                zpiObject.RequestArguments = result;
-
-                MtIcomingDataHandler(error, zpiObject);
+                MtIcomingDataHandler(zpiObject, (MessageType)data.Type);
             });        
         }
 
-        private void MtIcomingDataHandler(string error, ZpiObject data)
+        private void MtIcomingDataHandler(ZpiObject data, MessageType messageType)
         {
-            if(data.Type == MessageType.SRSP)
+            if(messageType == MessageType.SRSP)
             {
                 SyncResponse?.Invoke(this, data);
             }
-            else if(data.Type == MessageType.AREQ)
+            else if(messageType == MessageType.AREQ)
             {
                 AsyncResponse?.Invoke(this, data);
             }

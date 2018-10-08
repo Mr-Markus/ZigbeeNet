@@ -17,6 +17,7 @@ namespace ZigbeeNet.CC
         [Ignore()]
         private object _value;
 
+        [FieldOrder(0)]
         public object Value
         {
             get
@@ -28,16 +29,16 @@ namespace ZigbeeNet.CC
                 switch (ParamType)
                 {
                     case ParamType.uint8:
-                        _value = new ZpiArgumentValue<byte>(Convert.ToByte(value));
+                        _value = Convert.ToByte(value);
                         break;
                     case ParamType.uint16:
-                        _value = new ZpiArgumentValue<ushort>(Convert.ToUInt16(value));
+                        _value = Convert.ToUInt16(value);
                         break;
                     case ParamType.uint32:
-                        _value = new ZpiArgumentValue<uint>(Convert.ToUInt32(value));
+                        _value = Convert.ToUInt32(value);
                         break;
                     case ParamType.longaddr:
-                        _value = new ZpiArgumentValue<long>(Convert.ToInt64(value));
+                        _value = Convert.ToInt64(value);
                         break;                   
                     default:
                         throw new NotImplementedException($"ParamType {ParamType.ToString()} not implemented in ZpiArgument");
@@ -54,7 +55,12 @@ namespace ZigbeeNet.CC
         {
             Name = name;
             ParamType = paramType;
-            Value = new ZpiArgumentValue<object>(value, paramType);
+            Value = value;
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Name}: {this.Value}";
         }
     }
 }
