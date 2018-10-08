@@ -17,6 +17,7 @@ namespace ZigbeeNet
 
         public event EventHandler Started;
         public event EventHandler Stoped;
+        public event EventHandler<ZpiObject> NewPacket;
 
         public ZigbeeController(ZigbeeService service, Options options)
         {
@@ -32,18 +33,20 @@ namespace ZigbeeNet
 
         private void Znp_SyncResponse(object sender, ZpiObject e)
         {
-            throw new NotImplementedException();
+            NewPacket?.Invoke(this, e);
         }
 
         private void Znp_AsyncResponse(object sender, ZpiObject e)
         {
-            throw new NotImplementedException();
+            NewPacket?.Invoke(this, e);
         }
 
         private void Znp_Ready(object sender, EventArgs e)
         {
-            //TODO: SetupCoord
+            StartupFromAppRequest startupFromAppRequest = new StartupFromAppRequest();
 
+            //TODO: Add stateChangedInd event
+            this.Request(startupFromAppRequest);
         }
 
         public void Init()
@@ -55,16 +58,6 @@ namespace ZigbeeNet
         {
             //TODO. Init ZNP --> Execute Start Command
             Znp.Init(_options.Port, _options.Baudrate);
-        }
-
-        private void StartupCoord()
-        {
-            ArgumentCollection args = new ArgumentCollection();
-            args.AddOrUpdate("startdelay", ParamType.uint16, 100);
-
-            //TODO: Add stateChangedInd event
-
-            Request(SubSystem.ZDO, 0x40, args);
         }
 
         public void PermitJoin(int time, Action callback = null)
@@ -81,21 +74,17 @@ namespace ZigbeeNet
 
         public void Request(ZpiObject zpiObject, Action callback = null)
         {
-            Request(zpiObject.SubSystem, zpiObject.CommandId, zpiObject.RequestArguments, callback);
+            Znp.Request(zpiObject, callback);
         }
 
-        public void Request(SubSystem subSystem, byte commandId, ArgumentCollection valObj, Action callback = null)
+        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj, Action callback = null)
         {
-            if(subSystem == SubSystem.ZDO)
+            ZpiObject zpiObject = new ZpiObject(subSystem, cmdId)
             {
-                ZDO zdo = new ZDO(this);
+                RequestArguments = valObj
+            };
 
-                zdo.Request(commandId, valObj, callback);
-            }
-            else
-            {
-                //Znp.Request(subSystem, commandId, valObj);
-            }
+            Request(zpiObject, callback);
         }
     }
 }

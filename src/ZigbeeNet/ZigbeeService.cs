@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ZigbeeNet.CC;
 
 namespace ZigbeeNet
 {
@@ -15,7 +16,7 @@ namespace ZigbeeNet
 
         public ZigbeeController Controller { get; set; }
 
-        public event EventHandler<byte[]> NewPacket;
+        public event EventHandler<ZpiObject> NewPacket;
         public event EventHandler Ready;
 
         public ZigbeeService(Options options)
@@ -23,6 +24,12 @@ namespace ZigbeeNet
             Controller = new ZigbeeController(this, options);
 
             Controller.Started += Controller_Started;
+            Controller.NewPacket += Controller_NewPacket;
+        }
+
+        private void Controller_NewPacket(object sender, ZpiObject e)
+        {
+            NewPacket?.Invoke(sender, e);
         }
 
         private void Controller_Started(object sender, EventArgs e)
@@ -31,6 +38,8 @@ namespace ZigbeeNet
                 //TODO: Register Coord via Service
 
                 );
+
+            Ready?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()
@@ -89,11 +98,6 @@ namespace ZigbeeNet
         public void Reset()
         {
             throw new NotImplementedException();
-        }
-
-        public void OnNewPacket(byte[] data)
-        {
-            NewPacket(this, data);
         }
 
         /// <summary>
