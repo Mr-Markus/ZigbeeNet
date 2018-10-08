@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public class ZclFunctionalCommand : ZclCommand
+    public class ZclClusterCommand : ZclCommand
     {
         internal string ClusterName { get; set; }
 

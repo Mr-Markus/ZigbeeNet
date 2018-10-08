@@ -1,16 +1,22 @@
 ﻿using BinarySerialization;
 using System;
+using System.IO;
 
 namespace ZigbeeNet.ZCL
 {
-    public class Frame
+    public class ZclPacket
     {
-        public Frame(FrameHeader header)
+        public ZclPacket()
+        {
+
+        }
+
+        public ZclPacket(FrameHeader header)
         {
             Header = header;
         }
 
-        public Frame(FrameHeader header, byte[] payload)
+        public ZclPacket(FrameHeader header, byte[] payload)
         {
             Header = header;
             Payload = payload;
@@ -23,17 +29,15 @@ namespace ZigbeeNet.ZCL
         [FieldOrder(1)]
         public byte[] Payload { get; set; }
 
-        public ZclCommand ZclObject { get; set; }
-
-        public void Parse(byte[] data)
+        public void Parse(byte[] data, Action callback = null)
         {
-            if(Header.FrameControl.Type == FrameType.Global)
-            {
+            var stream = new MemoryStream(data);
+            var serializer = new BinarySerializer();
 
-            } else
-            {
+            ZclPacket zclPacket = serializer.Deserialize<ZclPacket>(stream);
 
-            }
+            Header = zclPacket.Header;
+            Payload = zclPacket.Payload;
         }
     }
 }

@@ -1,12 +1,14 @@
 {
   "foundation": {
     "read": {
+      "id": 0,
       "params": [
         { "attrId": 33 }
       ],
       "knownBufLen": 2
     },
     "readRsp": {
+      "id": 1,
       "params": [
         { "attrId": 33 },
         { "status": 32 },
@@ -15,6 +17,7 @@
       "knownBufLen": 3
     },
     "write": {
+      "id": 2,
       "params": [
         { "attrId": 33 },
         { "dataType": 32 },
@@ -23,6 +26,7 @@
       "knownBufLen": 3
     },
     "writeUndiv": {
+      "id": 3,
       "params": [
         { "attrId": 33 },
         { "dataType": 32 },
@@ -31,12 +35,14 @@
       "knownBufLen": 3
     },
     "writeRsp": {
+      "id": 4,
       "params": [
         { "extra": "writeRsp" }
       ],
       "knownBufLen": 0
     },
     "writeNoRsp": {
+      "id": 5,
       "params": [
         { "attrId": 33 },
         { "dataType": 32 },
@@ -45,6 +51,7 @@
       "knownBufLen": 3
     },
     "configReport": {
+      "id": 6,
       "params": [
         { "direction": 32 },
         { "attrId": 33 },
@@ -53,12 +60,14 @@
       "knownBufLen": 3
     },
     "configReportRsp": {
+      "id": 7,
       "params": [
         { "extra": "configReportRsp" }
       ],
       "knownBufLen": 0
     },
     "readReportConfig": {
+      "id": 8,
       "params": [
         { "direction": 32 },
         { "attrId": 33 }
@@ -66,6 +75,7 @@
       "knownBufLen": 3
     },
     "readReportConfigRsp": {
+      "id": 9,
       "params": [
         { "status": 32 },
         { "direction": 32 },
@@ -75,6 +85,7 @@
       "knownBufLen": 4
     },
     "report": {
+      "id": 10,
       "params": [
         { "attrId": 33 },
         { "dataType": 32 },
@@ -83,6 +94,7 @@
       "knownBufLen": 3
     },
     "defaultRsp": {
+      "id": 11,
       "params": [
         { "cmdId": 32 },
         { "statusCode": 32 }
@@ -90,6 +102,7 @@
       "knownBufLen": 2
     },
     "discover": {
+      "id": 12,
       "params": [
         { "startAttrId": 33 },
         { "maxAttrIds": 32 }
@@ -97,6 +110,7 @@
       "knownBufLen": 3
     },
     "discoverRsp": {
+      "id": 13,
       "params": [
         { "attrId": 33 },
         { "dataType": 32 }
@@ -104,6 +118,7 @@
       "knownBufLen": 3
     },
     "readStruct": {
+      "id": 14,
       "params": [
         { "attrId": 33 },
         { "selector": "selector" }
@@ -111,6 +126,7 @@
       "knownBufLen": 2
     },
     "writeStrcut": {
+      "id": 15,
       "params": [
         { "attrId": 33 },
         { "selector": "selector" },
@@ -120,6 +136,7 @@
       "knownBufLen": 3
     },
     "writeStrcutRsp": {
+      "id": 16,
       "params": [
         { "status": 32 },
         { "attrId": 33 },

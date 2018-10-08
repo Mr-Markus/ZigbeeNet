@@ -9,35 +9,81 @@ using System.Linq;
 
 namespace ZigbeeNet.ZCL
 {
-    public class ZclMeta
+    public static class ZclMeta
     {
-        public List<ZclFoundationCommand> GlobalCommands { get; set; }
+        private static string zclMetaFile = LoadCmdFile();
 
-        public List<ZclFunctionalCommand> ClusterCommands { get; set; }
-
-        public List<ZclCluster> Clusters { get; set; }
-
-        public ZclMeta()
+        public static List<ZclGlobalCommand> _globalCommands;
+        public static List<ZclGlobalCommand> GlobalCommands
         {
-            GlobalCommands = new List<ZclFoundationCommand>();
-            ClusterCommands = new List<ZclFunctionalCommand>();
-            Clusters = new List<ZclCluster>();
+            get
+            {
+                if (_globalCommands == null)
+                {
+                    _globalCommands = new List<ZclGlobalCommand>();
 
-            string zclMetaFile = LoadCmdFile();
+                    string zclMetaFile = LoadCmdFile();
 
-            JObject jObject = JsonConvert.DeserializeObject<JObject>(zclMetaFile);
+                    JObject jObject = JsonConvert.DeserializeObject<JObject>(zclMetaFile);
 
-            LoadGlobalCommands(jObject);
-            LoadClusterCommands(jObject);
+                    LoadGlobalCommands(jObject);
+                }
 
-            string clusterFile = LoadClusterFile();
-
-            JObject jClusters = JsonConvert.DeserializeObject<JObject>(clusterFile);
-
-            LoadClusters(jClusters);
+                return _globalCommands;
+            }
         }
 
-        private string LoadCmdFile()
+        public static List<ZclClusterCommand> _clusterCommands;
+        public static List<ZclClusterCommand> ClusterCommands
+        {
+            get
+            {
+                if(_clusterCommands == null)
+                {
+                    _clusterCommands = new List<ZclClusterCommand>();
+
+                    string zclMetaFile = LoadCmdFile();
+
+                    JObject jObject = JsonConvert.DeserializeObject<JObject>(zclMetaFile);
+
+                    LoadClusterCommands(jObject);
+                }
+
+                return _clusterCommands;
+            }
+        }
+
+        private static List<ZclCluster> _clusters;
+        public static List<ZclCluster> Clusters
+        {
+            get
+            {
+                if(_clusters == null)
+                {
+                    _clusters = new List<ZclCluster>();
+
+                    string clusterFile = LoadClusterFile();
+
+                    JObject jClusters = JsonConvert.DeserializeObject<JObject>(clusterFile);
+
+                    LoadClusters(jClusters);
+                }
+
+                return _clusters;
+            }
+        }
+
+        public static List<ZclCommandParam> GetGlobalCommandParams(byte cmdId)
+        {
+            return GlobalCommands.Single(c => c.Id == cmdId).Params;
+        }
+
+        public static List<ZclCommandParam> GetClusterCommandParams(ushort clusterId, byte cmdId)
+        {
+            return ClusterCommands.Single(c => c.Id == cmdId && c.Cluster.Id == clusterId).Params;
+        }
+
+        private static string LoadCmdFile()
         {
             using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.cmd_defs.json"))
             {
@@ -46,7 +92,7 @@ namespace ZigbeeNet.ZCL
             }
         }
 
-        private string LoadClusterFile()
+        private static string LoadClusterFile()
         {
             using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.cluster_defs.json"))
             {
@@ -56,7 +102,7 @@ namespace ZigbeeNet.ZCL
             }
         }
 
-        private void LoadClusters(JObject root)
+        private static void LoadClusters(JObject root)
         {
             foreach (JObject cluster in root.Values())
             {
@@ -74,7 +120,7 @@ namespace ZigbeeNet.ZCL
                     foreach (JObject info in attr)
                     {
                         zclAttribute.Id = info.GetValue("id").Value<ushort>();
-                        zclAttribute.DataType = (DataType)info.GetValue("type").Value<int>(); //TODO: convert strings to int and then to enum
+                        zclAttribute.DataType = (DataType)info.GetValue("type").Value<int>();
                     }
 
                     cl.Attributes.Add(zclAttribute);
@@ -84,7 +130,7 @@ namespace ZigbeeNet.ZCL
 
                 foreach (JProperty cmd in reqCmds)
                 {
-                    ZclFunctionalCommand fc = ClusterCommands.SingleOrDefault(f => f.ClusterName == cl.Name && f.Name == cmd.Name && f.Direction == Direction.ClientToServer);
+                    ZclClusterCommand fc = ClusterCommands.SingleOrDefault(f => f.ClusterName == cl.Name && f.Name == cmd.Name && f.Direction == Direction.ClientToServer);
                     if (fc != null)
                     {
                         fc.Id = cmd.Value.Value<byte>();
@@ -98,7 +144,7 @@ namespace ZigbeeNet.ZCL
 
                 foreach (JProperty cmd in rspCmds)
                 {
-                    ZclFunctionalCommand fc = ClusterCommands.SingleOrDefault(f => f.ClusterName == cl.Name && f.Name == cmd.Name && f.Direction == Direction.ServerToClient);
+                    ZclClusterCommand fc = ClusterCommands.SingleOrDefault(f => f.ClusterName == cl.Name && f.Name == cmd.Name && f.Direction == Direction.ServerToClient);
                     if (fc != null)
                     {
                         fc.Id = cmd.Value.Value<byte>();
@@ -108,18 +154,19 @@ namespace ZigbeeNet.ZCL
                     }
                 }
 
-                Clusters.Add(cl);
+                _clusters.Add(cl);
             }
         }
 
-        private void LoadGlobalCommands(JObject root)
+        private static void LoadGlobalCommands(JObject root)
         {
             JToken jFoundation = root.GetValue("foundation");
 
             foreach (JProperty command in jFoundation)
             {
-                ZclFoundationCommand zclCommand = new ZclFoundationCommand();
+                ZclGlobalCommand zclCommand = new ZclGlobalCommand();
 
+                zclCommand.Id = command.Value["id"].Value<byte>();
                 zclCommand.Name = command.Name;
                 zclCommand.KnownBufLen = command.Value["knownBufLen"].Value<int>();
 
@@ -152,7 +199,7 @@ namespace ZigbeeNet.ZCL
             }
         }
 
-        private void LoadClusterCommands(JObject root)
+        private static void LoadClusterCommands(JObject root)
         {
             JToken jFunctional = root.GetValue("functional");
 
@@ -164,7 +211,7 @@ namespace ZigbeeNet.ZCL
                 {
                     foreach (var cmd in jToken)
                     {
-                        ZclFunctionalCommand zclCommand = new ZclFunctionalCommand();
+                        ZclClusterCommand zclCommand = new ZclClusterCommand();
 
                         zclCommand.Name = cmd.Key;
                         zclCommand.ClusterName = cluster.Name;
@@ -197,20 +244,25 @@ namespace ZigbeeNet.ZCL
                             }
                         }
 
-                        ClusterCommands.Add(zclCommand);
+                        _clusterCommands.Add(zclCommand);
                     }
                 }
             }
         }
 
-        public ZclFoundationCommand GetGlobalCommand(string cmd)
+        public static ZclGlobalCommand GetGlobalCommand(string cmd)
         {
-            return GlobalCommands.SingleOrDefault(fc => fc.Name.Equals(cmd));
+            return GlobalCommands.Single(fc => fc.Name.Equals(cmd));
         }
 
-        public ZclFunctionalCommand GetClusterCommand(string cluster, string cmd)
+        public static ZclGlobalCommand GetGlobalCommand(byte cmdId)
         {
-            return ClusterCommands.SingleOrDefault(fc => fc.Cluster.Equals(cluster) && fc.Name.Equals(cmd));
+            return GlobalCommands.Single(fc => fc.Id.Equals(cmdId));
+        }
+
+        public static ZclClusterCommand GetClusterCommand(string cluster, string cmd)
+        {
+            return ClusterCommands.Single(fc => fc.Cluster.Equals(cluster) && fc.Name.Equals(cmd));
         }
     }
 }

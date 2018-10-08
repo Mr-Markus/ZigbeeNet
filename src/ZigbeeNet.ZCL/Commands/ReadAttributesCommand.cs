@@ -14,7 +14,6 @@ namespace ZigbeeNet.ZCL.Commands
                 {
                     ZclCommandParam param = new ZclCommandParam()
                     {
-                        DataType = DataType.UInt16,
                         Value = attr
                     };
                     this.Params.Add(param);

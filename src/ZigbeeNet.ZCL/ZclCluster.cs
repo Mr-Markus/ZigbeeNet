@@ -10,14 +10,14 @@ namespace ZigbeeNet.ZCL
         public string Name { get; set; }
 
         public List<ZclAttribute> Attributes { get; }
-        public List<ZclFunctionalCommand> Requests { get; }
-        public List<ZclFunctionalCommand> Responses { get; }
+        public List<ZclClusterCommand> Requests { get; }
+        public List<ZclClusterCommand> Responses { get; }
 
         public ZclCluster()
         {
             Attributes = new List<ZclAttribute>();
-            Requests = new List<ZclFunctionalCommand>();
-            Responses = new List<ZclFunctionalCommand>();
+            Requests = new List<ZclClusterCommand>();
+            Responses = new List<ZclClusterCommand>();
         }
     }
 }
