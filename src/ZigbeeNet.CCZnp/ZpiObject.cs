@@ -159,6 +159,8 @@ namespace ZigbeeNet.CC
                         break;
                     case ParamType._preLenUint8:
                         preLen = Convert.ToInt32(buffer[index]);
+
+                        argument.Value = preLen;
                         index += 1;
                         break;
                     case ParamType._preLenUint16:
@@ -166,6 +168,7 @@ namespace ZigbeeNet.CC
                         Array.Copy(buffer, index, lenValue, 0, 2);
 
                         preLen = BitConverter.ToInt32(lenValue, 0);
+                        argument.Value = preLen;
                         index += 2;
                         break;
                     case ParamType.dynbuffer:

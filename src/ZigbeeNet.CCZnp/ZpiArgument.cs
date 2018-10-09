@@ -26,23 +26,7 @@ namespace ZigbeeNet.CC
             }
             set
             {
-                switch (ParamType)
-                {
-                    case ParamType.uint8:
-                        _value = Convert.ToByte(value);
-                        break;
-                    case ParamType.uint16:
-                        _value = Convert.ToUInt16(value);
-                        break;
-                    case ParamType.uint32:
-                        _value = Convert.ToUInt32(value);
-                        break;
-                    case ParamType.longaddr:
-                        _value = Convert.ToInt64(value);
-                        break;                   
-                    default:
-                        throw new NotImplementedException($"ParamType {ParamType.ToString()} not implemented in ZpiArgument");
-                }
+                _value = value;
             }
         }
 
