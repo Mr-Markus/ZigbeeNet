@@ -18,6 +18,7 @@ namespace ZigbeeNet
         public event EventHandler Started;
         public event EventHandler Stoped;
         public event EventHandler<ZpiObject> NewPacket;
+        public event EventHandler<ZpiObject> PermitJoining;
 
         public ZigbeeController(ZigbeeService service, Options options)
         {
@@ -34,11 +35,25 @@ namespace ZigbeeNet
         private void Znp_SyncResponse(object sender, ZpiObject e)
         {
             NewPacket?.Invoke(this, e);
+
+            if (e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)CC.ZDO.endDeviceAnnceInd)
+            {
+                endDeviceAnnceHdlr(e);
+            }
         }
 
         private void Znp_AsyncResponse(object sender, ZpiObject e)
         {
             NewPacket?.Invoke(this, e);
+
+            if (e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)CC.ZDO.endDeviceAnnceInd)
+            {
+                endDeviceAnnceHdlr(e);
+            }
+            if(e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)CC.ZDO.mgmtPermitJoinRsp)
+            {
+                PermitJoining?.Invoke(this, e);
+            }
         }
 
         private void Znp_Ready(object sender, EventArgs e)
@@ -58,6 +73,20 @@ namespace ZigbeeNet
         {
             //TODO. Init ZNP --> Execute Start Command
             Znp.Init(_options.Port, _options.Baudrate);
+        }
+
+        private void endDeviceAnnceHdlr(ZpiObject zpiObject)
+        {
+            EndDeviceAnnouncedInd ind = new EndDeviceAnnouncedInd(zpiObject);
+
+            //TODO: Fill devInfo
+
+            ZpiObject epReq = new ZpiObject(SubSystem.ZDO, (byte)CC.ZDO.activeEpReq);
+
+            epReq.RequestArguments["dstaddr"] = ind.NetworkAddress;
+            epReq.RequestArguments["nwkaddrofinterest"] = ind.NetworkAddress;
+
+            Request(epReq);
         }
 
         public void PermitJoin(int time, Action callback = null)

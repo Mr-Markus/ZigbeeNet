@@ -12,24 +12,28 @@ namespace ZigbeeNet
         private bool _disposed;
         private bool _isRunning;
 
+        private EventBridge _eventBridge;
+
         private ConcurrentDictionary<ulong, Device> _deviceInfoList = new ConcurrentDictionary<ulong, Device>();
 
         public ZigbeeController Controller { get; set; }
 
-        public event EventHandler<ZpiObject> NewPacket;
         public event EventHandler Ready;
+        public event EventHandler PermitJoining;
 
         public ZigbeeService(Options options)
         {
             Controller = new ZigbeeController(this, options);
 
+            _eventBridge = new EventBridge(Controller);
+
             Controller.Started += Controller_Started;
-            Controller.NewPacket += Controller_NewPacket;
+            Controller.PermitJoining += Controller_PermitJoining;
         }
 
-        private void Controller_NewPacket(object sender, ZpiObject e)
+        private void Controller_PermitJoining(object sender, ZpiObject e)
         {
-            NewPacket?.Invoke(sender, e);
+            PermitJoining?.Invoke(this, EventArgs.Empty);
         }
 
         private void Controller_Started(object sender, EventArgs e)
@@ -85,7 +89,7 @@ namespace ZigbeeNet
         {
             if (_isRunning)
             {
-                PermitJoining(0, () =>
+                PermitJoin(0, () =>
                 {
                     _isRunning = false;
                 });
@@ -104,7 +108,7 @@ namespace ZigbeeNet
         /// Permits devices to join the zigbee network
         /// </summary>
         /// <param name="time">Time in seconds</param>
-        public void PermitJoining(int time, Action callback = null)
+        public void PermitJoin(int time, Action callback = null)
         {
             if(time > 255 || time < 0)
             {
