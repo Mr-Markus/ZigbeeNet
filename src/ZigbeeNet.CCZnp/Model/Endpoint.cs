@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigbeeNet.CC
 {
     public class Endpoint
     {

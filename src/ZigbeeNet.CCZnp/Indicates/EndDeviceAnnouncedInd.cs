@@ -12,7 +12,7 @@ namespace ZigbeeNet.CC
             RequestArguments = zpi.RequestArguments;
             ResponseArguments = zpi.ResponseArguments;
         }
-        public EndDeviceAnnouncedInd(ushort srcAddr, ushort nwkAddr, ulong ieeeAddr, byte capabilities)
+        public EndDeviceAnnouncedInd(ushort srcAddr, ushort nwkAddr, long ieeeAddr, byte capabilities)
             :base(SubSystem.ZDO, (byte)ZDO.endDeviceAnnceInd)
         {
             SourceAddress = srcAddr;
@@ -45,11 +45,11 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public ulong IeeeAddress
+        public long IeeeAddress
         {
             get
             {
-                return (ulong)RequestArguments["ieeeaddr"];
+                return (long)RequestArguments["ieeeaddr"];
             }
             set
             {

@@ -38,10 +38,7 @@ namespace ZigbeeNet
 
         private void Controller_Started(object sender, EventArgs e)
         {
-            Controller.PermitJoin(0, () => { }
-                //TODO: Register Coord via Service
-
-                );
+            Controller.PermitJoin(0);
 
             Ready?.Invoke(this, EventArgs.Empty);
         }
@@ -89,10 +86,7 @@ namespace ZigbeeNet
         {
             if (_isRunning)
             {
-                PermitJoin(0, () =>
-                {
-                    _isRunning = false;
-                });
+                PermitJoin(0);
             }
         }
 
@@ -108,7 +102,7 @@ namespace ZigbeeNet
         /// Permits devices to join the zigbee network
         /// </summary>
         /// <param name="time">Time in seconds</param>
-        public void PermitJoin(int time, Action callback = null)
+        public void PermitJoin(int time, Action<ZpiObject> callback = null)
         {
             if(time > 255 || time < 0)
             {

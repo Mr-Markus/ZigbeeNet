@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.CC
 {
-    public enum ZDO {
+    public enum ZDO : byte  {
         nwkAddrReq = 0,
         ieeeAddrReq = 1,
         nodeDescReq = 2,

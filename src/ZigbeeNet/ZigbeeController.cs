@@ -29,7 +29,6 @@ namespace ZigbeeNet
             Znp = new CCZnp();
             Znp.Ready += Znp_Ready;
             Znp.AsyncResponse += Znp_AsyncResponse;
-            Znp.SyncResponse += Znp_SyncResponse;
         }
 
         private void Znp_SyncResponse(object sender, ZpiObject e)
@@ -89,7 +88,7 @@ namespace ZigbeeNet
             Request(epReq);
         }
 
-        public void PermitJoin(int time, Action callback = null)
+        public void PermitJoin(int time, Action<ZpiObject> callback = null)
         {
             if (time > 255 || time < 0)
             {
@@ -101,12 +100,12 @@ namespace ZigbeeNet
             this.Request(permitJoinRequest, callback);
         }
 
-        public void Request(ZpiObject zpiObject, Action callback = null)
+        public void Request(ZpiObject zpiObject, Action<ZpiObject> callback = null)
         {
             Znp.Request(zpiObject, callback);
         }
 
-        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj, Action callback = null)
+        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj, Action<ZpiObject> callback = null)
         {
             ZpiObject zpiObject = new ZpiObject(subSystem, cmdId)
             {

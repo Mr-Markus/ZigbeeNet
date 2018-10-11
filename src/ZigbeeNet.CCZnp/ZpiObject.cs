@@ -22,10 +22,66 @@ namespace ZigbeeNet.CC
 
         public ArgumentCollection ResponseArguments { get; set; }
 
+        public Action<ZpiObject> Callback { get; set; }
+
         public ZpiObject()
         {
             RequestArguments = new ArgumentCollection();
             ResponseArguments = new ArgumentCollection();
+        }
+
+        public ZpiObject(SYS sysCmd)
+            : this(SubSystem.SYS, (byte)sysCmd)
+        {
+
+        }
+
+        public ZpiObject(ZDO zdoCmd)
+            :this(SubSystem.ZDO, (byte)zdoCmd)
+        {
+            
+        }
+
+        public ZpiObject(AF afCmd)
+            : this(SubSystem.AF, (byte)afCmd)
+        {
+
+        }
+
+        public ZpiObject(APP appCmd)
+            : this(SubSystem.APP, (byte)appCmd)
+        {
+
+        }
+
+        public ZpiObject(MAC macCmd)
+            : this(SubSystem.MAC, (byte)macCmd)
+        {
+
+        }
+
+        public ZpiObject(SAPI sapiCmd)
+            : this(SubSystem.SAPI, (byte)sapiCmd)
+        {
+
+        }
+
+        public ZpiObject(UTIL utilCmd)
+            : this(SubSystem.UTIL, (byte)utilCmd)
+        {
+
+        }
+
+        public ZpiObject(DBG dbgCmd)
+            : this(SubSystem.DBG, (byte)dbgCmd)
+        {
+
+        }
+
+        public ZpiObject(DEBUG debugCmd)
+            : this(SubSystem.DEBUG, (byte)debugCmd)
+        {
+
         }
 
         public ZpiObject(SubSystem subSystem, byte cmdId)

@@ -4,7 +4,7 @@ using System.Text;
 using ZigbeeNet;
 using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet
+namespace ZigbeeNet.CC
 {
     /// <summary>
     /// Fill with values from basic cluster
@@ -37,9 +37,8 @@ namespace ZigbeeNet
 
         public List<Endpoint> Endpoints { get; set; }
 
-        public Device(ushort id)
+        public Device()
         {
-            Id = id;
             Endpoints = new List<Endpoint>();
 
             Status = DeviceStatus.Offline;
