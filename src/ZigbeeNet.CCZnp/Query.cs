@@ -7,7 +7,7 @@ namespace ZigbeeNet.CC
 {
     public static class Query
     {
-        public static Dictionary<ushort, Device> Devices = new Dictionary<ushort, Device>;
+        //public static Dictionary<ushort, Device> Devices = new Dictionary<ushort, Device>;
 
         public static Device GetDeviceInfo(CCZnp controller, long ieeeAddr, ushort nwkAddr, Action<Device> callback)
         {
@@ -16,10 +16,10 @@ namespace ZigbeeNet.CC
                 NwkAdress = nwkAddr
             };
 
-            if(Devices.ContainsKey(nwkAddr) == false)
-            {
-                Devices.Add(nwkAddr, device);
-            }
+            //if(Devices.ContainsKey(nwkAddr) == false)
+            //{
+            //    Devices.Add(nwkAddr, device);
+            //}
 
             ZpiObject zpiObject = new ZpiObject(ZDO.nodeDescReq);
 
