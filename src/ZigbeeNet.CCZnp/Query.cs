@@ -28,7 +28,6 @@ namespace ZigbeeNet.CC
 
             controller.Request(zpiObject, (result) =>
             {
-                return;
 
                 device.Type = (Devices)((byte)result.RequestArguments["logicaltype_cmplxdescavai_userdescavai"] & 0x07);
                 device.ManufacturerId = (ushort)result.RequestArguments["manufacturercode"];
@@ -43,21 +42,21 @@ namespace ZigbeeNet.CC
 
 
 
-                if (result.SubSystem == SubSystem.ZDO && result.CommandId == (byte)ZDO.activeEpRsp)
-                {
-                    ZpiObject activeEpRsp = result;
+                //if (result.SubSystem == SubSystem.ZDO && result.CommandId == (byte)ZDO.activeEpRsp)
+                //{
+                //    ZpiObject activeEpRsp = result;
 
-                    foreach (byte ep in (byte[])result.RequestArguments["activeeplist"])
-                    {
-                        Endpoint endpoint = new Endpoint(device)
-                        {
-                            Id = ep
-                        };
-                        device.Endpoints.Add(endpoint);
-                    }
+                //    foreach (byte ep in (byte[])result.RequestArguments["activeeplist"])
+                //    {
+                //        Endpoint endpoint = new Endpoint(device)
+                //        {
+                //            Id = ep
+                //        };
+                //        device.Endpoints.Add(endpoint);
+                //    }
 
-                    callback(device);
-                }
+                //    callback(device);
+                //}
             });
 
             return device;

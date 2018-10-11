@@ -1,0 +1,35 @@
+{
+    "nwkAddrRsp": [ "ieeeaddr", "startindex" ],
+    "ieeeAddrRsp": [ "nwkaddr" ], // 'startindex' mismatch
+    "nodeDescRsp": [ "nwkaddr" ],
+    "powerDescRsp": [ "nwkaddr" ],
+    "simpleDescRsp": [ "nwkaddr", "endpoint" ],
+    "activeEpRsp": [ "nwkaddr" ],
+    "matchDescRsp": [ "nwkaddr" ],
+    "complexDescRsp": [ "nwkaddr" ],
+    "userDescRsp": [ "nwkaddr" ],
+    "userDescConf": [ "nwkaddr" ],
+    "serverDiscRsp": null, // special, listen at controller.on('ZDO:serverDiscRsp')
+    "endDeviceBindRsp": [ "srcaddr" ],
+    "bindRsp": [ "srcaddr" ],
+    "unbindRsp": [ "srcaddr" ],
+    "nwkDiscoveryCnf": null,
+    "joinCnf": null,
+    "mgmtNwkDiscRsp": [ "srcaddr", "startindex" ],
+    "mgmtLqiRsp": [ "srcaddr", "startindex" ],
+    "mgmtRtgRsp": [ "srcaddr", "startindex" ],
+    "mgmtBindRsp": [ "srcaddr", "startindex" ],
+    "mgmtLeaveRsp": [ "srcaddr" ],
+    "mgmtDirectJoinRsp": [ "srcaddr" ],
+    "mgmtPermitJoinRsp": [ "srcaddr" ],
+    "stateChangeInd": null, // very special, tackled in event_bridge._zdoIndicationEventBridge()
+    "endDeviceAnnceInd": null,
+    "matchDescRspSent": null,
+    "statusErrorRsp": null,
+    "srcRtgInd": null,
+    "beacon_notify_ind": null,
+    "leaveInd": null,
+    "msgCbIncoming": null,
+    "tcDeviceInd": null,
+    "permitJoinInd": null
+}

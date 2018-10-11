@@ -18,6 +18,31 @@ namespace ZigbeeNet.CC
 
         public string Name { get; set; }
 
+        private ZpiObject _indObject;
+        public ZpiObject IndObject
+        {
+            get
+            {
+                if(_indObject == null)
+                {
+                    if (SubSystem == SubSystem.ZDO)
+                    {
+                        if (ZdoMeta.ZdoObjects.ContainsKey((ZDO)CommandId))
+                        {
+                            ZdoMetaItem zdo = ZdoMeta.ZdoObjects[(ZDO)CommandId];
+
+                            _indObject = ZpiMeta.GetCommand(SubSystem.ZDO, (byte)zdo.ResponseInd);
+                        }
+                    }
+                }
+                return _indObject;
+            }
+            set
+            {
+                _indObject = value;
+            }
+        }
+
         public ArgumentCollection RequestArguments { get; set; }
 
         public ArgumentCollection ResponseArguments { get; set; }

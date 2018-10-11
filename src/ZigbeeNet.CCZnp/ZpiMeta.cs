@@ -97,6 +97,15 @@ namespace ZigbeeNet.CC
             }
         }
 
+        public static void Init()
+        {
+            _zpiObjects = new Dictionary<SubSystem, List<ZpiObject>>();
+
+            JObject jSubSys = JsonConvert.DeserializeObject<JObject>(zclMetaFile);
+
+            LoadSubSys(jSubSys);
+        }
+
         public static ZpiObject GetCommand(SubSystem subSystem, byte cmdId)
         {
             return ZpiObjects[subSystem].SingleOrDefault(cmd => cmd.CommandId == cmdId);

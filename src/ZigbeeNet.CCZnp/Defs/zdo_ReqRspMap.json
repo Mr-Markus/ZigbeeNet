@@ -1,119 +1,163 @@
 {
- "zdoReqRspMap":
-  {
     "nwkAddrReq": {
+      "id": 0,
+      "indid": 128,
       "ind": "nwkAddrRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "ieeeaddr", "startindex" ]
     },
     "ieeeAddrReq": {
+      "id": 1,
+      "indid": 129,
       "ind": "ieeeAddrRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "shortaddr" ]
     }, // 'startindex' mismatch
     "nodeDescReq": {
+      "id": 2,
+      "indid": 130,
       "ind": "nodeDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "powerDescReq": {
+      "id": 3,
+      "indid": 131,
       "ind": "powerDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "simpleDescReq": {
+      "id": 4,
+      "indid": 132,
       "ind": "simpleDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest", "endpoint" ]
     },
     "activeEpReq": {
+      "id": 5,
+      "indid": 133,
       "ind": "activeEpRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "matchDescReq": {
+      "id": 6,
+      "indid": 134,
       "ind": "matchDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "complexDescReq": {
+      "id": 7,
+      "indid": 135,
       "ind": "complexDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "userDescReq": {
+      "id": 8,
+      "indid": 136,
       "ind": "userDescRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "userDescSet": {
+      "id": 11,
+      "indid": 137,
       "ind": "userDescConf",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "nwkaddrofinterest" ]
     },
     "serverDiscReq": {
+      "id": 12,
+      "indid": 138,
       "ind": "serverDiscRsp",
-      "apiType": "special",
+      "apiType": 2,
       "suffix": []
     },
     "endDeviceBindReq": {
+      "id": 32,
+      "indid": 160,
       "ind": "endDeviceBindRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "dstaddr" ]
     }, // address 16bit mode unsupported
     "bindReq": {
+      "id": 33,
+      "indid": 161,
       "ind": "bindRsp",
-      "apiType": "special",
+      "apiType": 2,
       "suffix": [ "dstaddr" ]
     },
     "unbindReq": {
+      "id": 34,
+      "indid": 162,
       "ind": "unbindRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "dstaddr" ]
     },
     "nwkDiscoveryReq": {
+      "id": 38,
+      "indid": 199,
       "ind": "nwkDiscoveryCnf",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": []
     },
     "joinReq": {
+      "id": 39,
+      "indid": 198,
       "ind": "joinCnf",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": []
     },
     "mgmtNwkDiscReq": {
+      "id": 48,
+      "indid": 176,
       "ind": "mgmtNwkDiscRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "dstaddr", "startindex" ]
     },
     "mgmtLqiReq": {
+      "id": 49,
+      "indid": 177,
       "ind": "mgmtLqiRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "dstaddr", "startindex" ]
     },
     "mgmtRtgReq": {
+      "id": 50,
+      "indid": 178,
       "ind": "mgmtRtgRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "dstaddr", "startindex" ]
     },
     "mgmtBindReq": {
+      "id": 51,
+      "indid": 179,
       "ind": "mgmtBindRsp",
-      "apiType": "concat",
+      "apiType": 1,
       "suffix": [ "dstaddr", "startindex" ]
     },
     "mgmtLeaveReq": {
+      "id": 52,
+      "indid": 180,
       "ind": "mgmtLeaveRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "dstaddr" ]
     },
     "mgmtDirectJoinReq": {
+      "id": 53,
+      "indid": 181,
       "ind": "mgmtDirectJoinRsp",
-      "apiType": "generic",
+      "apiType": 0,
       "suffix": [ "dstaddr" ]
     },
     "mgmtPermitJoinReq": {
+      "id": 54,
+      "indid": 182,
       "ind": "mgmtPermitJoinRsp",
-      "apiType": "special",
+      "apiType": 2,
       "suffix": [ "dstaddr" ]
     },
     "mgmtNwkUpdateReq": null,
@@ -144,42 +188,4 @@
     "endDeviceTimeoutReq": null,
     "sendData": null,
     "nwkAddrOfInterestReq": null
-  },
-
-  "zdoIndSuffix":
-  {
-    "nwkAddrRsp": [ "ieeeaddr", "startindex" ],
-    "ieeeAddrRsp": [ "nwkaddr" ], // 'startindex' mismatch
-    "nodeDescRsp": [ "nwkaddr" ],
-    "powerDescRsp": [ "nwkaddr" ],
-    "simpleDescRsp": [ "nwkaddr", "endpoint" ],
-    "activeEpRsp": [ "nwkaddr" ],
-    "matchDescRsp": [ "nwkaddr" ],
-    "complexDescRsp": [ "nwkaddr" ],
-    "userDescRsp": [ "nwkaddr" ],
-    "userDescConf": [ "nwkaddr" ],
-    "serverDiscRsp": null, // special, listen at controller.on('ZDO:serverDiscRsp')
-    "endDeviceBindRsp": [ "srcaddr" ],
-    "bindRsp": [ "srcaddr" ],
-    "unbindRsp": [ "srcaddr" ],
-    "nwkDiscoveryCnf": null,
-    "joinCnf": null,
-    "mgmtNwkDiscRsp": [ "srcaddr", "startindex" ],
-    "mgmtLqiRsp": [ "srcaddr", "startindex" ],
-    "mgmtRtgRsp": [ "srcaddr", "startindex" ],
-    "mgmtBindRsp": [ "srcaddr", "startindex" ],
-    "mgmtLeaveRsp": [ "srcaddr" ],
-    "mgmtDirectJoinRsp": [ "srcaddr" ],
-    "mgmtPermitJoinRsp": [ "srcaddr" ],
-    "stateChangeInd": null, // very special, tackled in event_bridge._zdoIndicationEventBridge()
-    "endDeviceAnnceInd": null,
-    "matchDescRspSent": null,
-    "statusErrorRsp": null,
-    "srcRtgInd": null,
-    "beacon_notify_ind": null,
-    "leaveInd": null,
-    "msgCbIncoming": null,
-    "tcDeviceInd": null,
-    "permitJoinInd": null
   }
-}

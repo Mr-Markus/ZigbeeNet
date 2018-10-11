@@ -5,12 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Defs\zdo_IndSuffix.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\unpi-net\src\UnpiNet\UnpiNet.csproj" />
     <ProjectReference Include="..\ZigbeeNet.ZCL\ZigbeeNet.ZCL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Defs/zdo_meta.json" />
+    <EmbeddedResource Include="Defs/zdo_IndSuffix.json" />
+    <EmbeddedResource Include="Defs/zdo_ReqRspMap.json" />
     <EmbeddedResource Include="Defs/zpi_meta.json" />
   </ItemGroup>
 
