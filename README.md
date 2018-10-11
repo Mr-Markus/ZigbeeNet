@@ -9,6 +9,6 @@ With ZigbeeNet you can develop your own .NET application which communicates with
 ## License
 ZigbeeNET is provided under [The MIT License](https://github.com/Mr-Markus/ZigbeeNet/blob/master/LICENSE).
 
-## Contributer
+## Contributor
 
  [@Mr-Markus](https://github.com/Mr-Markus)
