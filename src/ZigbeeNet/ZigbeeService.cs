@@ -18,7 +18,7 @@ namespace ZigbeeNet
 
         public ZigbeeController Controller { get; set; }
 
-        public event EventHandler Ready;
+        public event EventHandler OnReady;
         public event EventHandler PermitJoining;
 
         public ZigbeeService(Options options)
@@ -40,7 +40,7 @@ namespace ZigbeeNet
         {
             Controller.PermitJoin(0);
 
-            Ready?.Invoke(this, EventArgs.Empty);
+            OnReady?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()
@@ -69,6 +69,11 @@ namespace ZigbeeNet
                 // Note disposing has been done.
                 _disposed = true;
             }
+        }
+
+        public void Ready()
+        {
+            OnReady?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -115,7 +120,7 @@ namespace ZigbeeNet
             }
             else
             {
-                this.Controller.PermitJoin(time, callback);
+                this.Controller.PermitJoin(time);
             }
         }
 

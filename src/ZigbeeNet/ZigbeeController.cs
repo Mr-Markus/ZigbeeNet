@@ -61,6 +61,8 @@ namespace ZigbeeNet
 
             //TODO: Add stateChangedInd event
             this.Request(startupFromAppRequest);
+
+            Service.Ready();
         }
 
         public void Init()
@@ -88,7 +90,7 @@ namespace ZigbeeNet
             Request(epReq);
         }
 
-        public void PermitJoin(int time, Action<ZpiObject> callback = null)
+        public void PermitJoin(int time)
         {
             if (time > 255 || time < 0)
             {
@@ -97,22 +99,22 @@ namespace ZigbeeNet
 
             PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
 
-            this.Request(permitJoinRequest, callback);
+            this.Request(permitJoinRequest);
         }
 
-        public void Request(ZpiObject zpiObject, Action<ZpiObject> callback = null)
+        public void Request(ZpiObject zpiObject)
         {
-            Znp.Request(zpiObject, callback);
+            Znp.Request(zpiObject);
         }
 
-        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj, Action<ZpiObject> callback = null)
+        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj)
         {
             ZpiObject zpiObject = new ZpiObject(subSystem, cmdId)
             {
                 RequestArguments = valObj
             };
 
-            Request(zpiObject, callback);
+            Request(zpiObject);
         }
     }
 }

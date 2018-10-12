@@ -68,7 +68,7 @@ namespace ZigbeeNet.CC
             _txQueue = new List<ZpiObject>();
         }
 
-        public void Init(string port, int baudrate = 115200, Action callback = null)
+        public void Init(string port, int baudrate = 115200)
         {
             ZpiMeta.Init();
             ZdoMeta.Init();
@@ -115,15 +115,23 @@ namespace ZigbeeNet.CC
 
                     _resetting = false;
 
-                    ParseIncomingData(e, (result) =>
+                    ZpiObject zpiObject = new ZpiObject((SubSystem)e.SubSystem, (MessageType)e.Type, e.Cmd1);
+                    zpiObject.Parsed += (object s, ZpiObject result) =>
                     {
+                        AsyncResponse?.Invoke(this, result);
+
                         // schedule next transmission if something in txQueue
-                        ScheduleNextSend(result);
-                    });
+                        ScheduleNextSend(zpiObject);
+                    };
                 }
                 else
                 {
-                    ParseIncomingData(e);
+                    ZpiObject zpiObject = new ZpiObject((SubSystem)e.SubSystem, (MessageType)e.Type, e.Cmd1);
+                    zpiObject.Parsed += (object s, ZpiObject result) =>
+                    {
+                        AsyncResponse?.Invoke(this, result);
+                    };
+                    zpiObject.Parse((MessageType)e.Type, e.Length, e.Payload);
                 }
             }
             else if((byte)e.Type == (byte)MessageType.SRSP)
@@ -135,16 +143,18 @@ namespace ZigbeeNet.CC
 
                     _resetting = false;
 
-                    ParseIncomingData(e, (result) =>
+                    ZpiObject zpiObject = new ZpiObject((SubSystem)e.SubSystem, (MessageType)e.Type, e.Cmd1);
+                    zpiObject.Parsed += (object s, ZpiObject result) =>
                     {
                         if (_sreqRunning != null)
                         {
-                            _sreqRunning.Callback?.Invoke(result);
+                            _sreqRunning.Response(result);
                         }
 
                         // schedule next transmission if something in txQueue
                         ScheduleNextSend(result);
-                    });
+                    };
+                    zpiObject.Parse((MessageType)e.Type, e.Length, e.Payload);
                 }
             }
         }
@@ -169,7 +179,7 @@ namespace ZigbeeNet.CC
             return Unpi.Send((int)type, (int)subSystem, commandId, payload);
         }
 
-        public byte[] Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs, Action<ZpiObject> callback = null)
+        public byte[] Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs)
         {
             if (Unpi == null)
             {
@@ -179,10 +189,10 @@ namespace ZigbeeNet.CC
             ZpiObject zpiObject = new ZpiObject(subSystem, cmdId);
             zpiObject.RequestArguments = reqestArgs;
 
-            return Request(zpiObject, callback);
+            return Request(zpiObject);
         }
 
-        public byte[] Request(ZpiObject zpiObject, Action<ZpiObject> callback = null)
+        public byte[] Request(ZpiObject zpiObject)
         {
             if(_txQueue.Count == 0 && _spinLock == true)
             {
@@ -190,7 +200,6 @@ namespace ZigbeeNet.CC
             }
             if (_spinLock)
             {
-                zpiObject.Callback = callback;
                 _txQueue.Add(zpiObject);
 
                 return null;
@@ -201,17 +210,17 @@ namespace ZigbeeNet.CC
 
             if (zpiObject.Type == MessageType.SREQ)
             {
-                SendSREQ(zpiObject, callback);
+                SendSREQ(zpiObject);
             }
             else if (zpiObject.Type == MessageType.AREQ)
             {
-                return SendAREQ(zpiObject, callback);
+                return SendAREQ(zpiObject);
             }
 
             return null;
         }
 
-        private void SendSREQ(ZpiObject zpiObject, Action<ZpiObject> callback = null)
+        private void SendSREQ(ZpiObject zpiObject)
         {
             _timeout = new Timer((object state) =>
             {
@@ -232,28 +241,19 @@ namespace ZigbeeNet.CC
                 }
             }, zpiObject, 300000, 300000); //TODO: Get timeout by config
 
-            zpiObject.Callback = callback;
-
             _sreqRunning = zpiObject;
 
             byte[] data = Unpi.Send((int)MessageType.SREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
+                       
+            _timeout.Change(Timeout.Infinite, Timeout.Infinite);
 
-            if (data.Length > 0 && data[1] > 0x00)
-            {
-                ParseIncomingData(zpiObject, data);
-            } else
-            {
+            // schedule next transmission if something in txQueue
+            ScheduleNextSend();
 
-                _timeout.Change(Timeout.Infinite, Timeout.Infinite);
-
-                // schedule next transmission if something in txQueue
-                ScheduleNextSend();
-
-                _resetting = false;
-            }
+            _resetting = false;
         }
 
-        private byte[] SendAREQ(ZpiObject zpiObject, Action<ZpiObject> callback = null)
+        private byte[] SendAREQ(ZpiObject zpiObject)
         {
             if((zpiObject.SubSystem == SubSystem.SYS && zpiObject.CommandId == 0) 
                 || (zpiObject.SubSystem == SubSystem.SAPI && zpiObject.CommandId == 9)) //resetReq or systemReset
@@ -269,13 +269,11 @@ namespace ZigbeeNet.CC
                     {
                         _spinLock = false;
                         _resetting = false;
-                        callback?.Invoke(e);
                     }
                 };
             } else
             {
                 ScheduleNextSend();
-                callback?.Invoke(zpiObject);
             }
 
             return Unpi.Send((int)MessageType.AREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
@@ -285,7 +283,7 @@ namespace ZigbeeNet.CC
         {
             if (current != null && _sreqRunning != null)
             {
-                _sreqRunning.Callback?.Invoke(current);
+                _sreqRunning.Response(current);
             }
 
             _spinLock = false;
@@ -296,13 +294,13 @@ namespace ZigbeeNet.CC
 
                 _txQueue.RemoveAt(0);
                 
-                Request(next, next.Callback);
+                Request(next);
             }
 
             _sreqRunning = null;
         }
 
-        private void ParseIncomingData(ZpiObject zpiObject, byte[] buffer, Action<ZpiObject> callback = null)
+        private void ParseIncomingData(ZpiObject request, byte[] buffer)
         {
             if (buffer == null || buffer.Length == 0)
             {
@@ -329,32 +327,10 @@ namespace ZigbeeNet.CC
                     throw new Exception("Received FCS is not equal with new packet");
                 }
 
-                zpiObject.Parse((MessageType)packet.Type, packet.Length, packet.Payload, () =>
-                {
-                    callback?.Invoke(zpiObject);
-                });
-            }
-        }
+                ZpiObject result = new ZpiObject((SubSystem)packet.SubSystem, (MessageType)packet.Type, packet.Cmd1);
+                result.Parse((MessageType)packet.Type, packet.Length, packet.Payload);
 
-        private void ParseIncomingData(Packet data, Action<ZpiObject> callback = null)
-        {
-            ZpiObject zpiObject = new ZpiObject((SubSystem)data.SubSystem, data.Cmd1);
-
-            zpiObject.Parse((MessageType)data.Type, data.Length, data.Payload, () =>
-            {
-                MtIcomingDataHandler(zpiObject, (MessageType)data.Type, callback);
-            });        
-        }
-
-        private void MtIcomingDataHandler(ZpiObject data, MessageType messageType, Action<ZpiObject> callback = null)
-        {
-            if(messageType == MessageType.SRSP)
-            {
-                callback?.Invoke(data);
-            }
-            else if(messageType == MessageType.AREQ)
-            {
-                AsyncResponse?.Invoke(this, data);
+                request.Response(result);
             }
         }
     }

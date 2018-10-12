@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using ZigbeeNet.ZCL;
 using System.Linq;
 
 namespace ZigbeeNet.CC
@@ -47,12 +45,25 @@ namespace ZigbeeNet.CC
 
         public ArgumentCollection ResponseArguments { get; set; }
 
-        public Action<ZpiObject> Callback { get; set; }
+        //public Action<ZpiObject> Callback { get; set; }
+
+        public event EventHandler<ZpiObject> Parsed;
+        public event EventHandler<ZpiObject> OnResponse;
+        public void Response(ZpiObject zpiObject)
+        {
+            OnResponse?.Invoke(this, zpiObject);
+        }
 
         public ZpiObject()
         {
             RequestArguments = new ArgumentCollection();
             ResponseArguments = new ArgumentCollection();
+        }
+
+        public ZpiObject(SubSystem subSystem, MessageType type, byte commandId)
+            : this(subSystem, (byte)commandId)
+        {
+            Type = type;
         }
 
         public ZpiObject(SYS sysCmd)
@@ -144,7 +155,12 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public void Parse(MessageType type, int length, byte[] buffer, Action result = null)
+        public void Request(CCZnp znp)
+        {
+            znp.Request(this);
+        }
+
+        public void Parse(MessageType type, int length, byte[] buffer)
         {
             ArgumentCollection arguments = new ArgumentCollection();
             if (type == MessageType.SRSP)
@@ -165,7 +181,8 @@ namespace ZigbeeNet.CC
                 switch (argument.ParamType)
                 {
                     case ParamType.uint8:
-                        argument.Value = buffer[index];
+                    case ParamType.uint8ZdoInd:
+                        argument.Value = index < buffer.Length ? buffer[index] : 0;
                         index += 1;
                         break;
                     case ParamType.uint16:
@@ -308,7 +325,7 @@ namespace ZigbeeNet.CC
                         throw new Exception("Type not implemented");
                 }
             }
-            result();
+            Parsed?.Invoke(this, this);
         }
 
         public override string ToString()
