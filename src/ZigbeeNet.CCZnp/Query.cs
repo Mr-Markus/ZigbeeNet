@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigbeeNet.ZCL;
 
@@ -14,14 +15,7 @@ namespace ZigbeeNet.CC
             _znp = znp;
         }
 
-        public void DeviceWithEndpoints(ushort nwkAddr, long ieeeAddr)
-        {
-            List<Endpoint> endpoints = new List<Endpoint>();
-
-            DeviceInfo(nwkAddr, ieeeAddr);
-        }
-
-        public void DeviceInfo(ushort nwkAddr, long ieeeAddr)
+        public void GetDevice(ushort nwkAddr, ulong ieeeAddr, Action<Device> callback)
         {
             Device device = new Device()
             {
@@ -52,12 +46,17 @@ namespace ZigbeeNet.CC
 
                     foreach (byte epByte in eprsp.Endpoints)
                     {
-                        Endpoint endpoint = new Endpoint(device)
+                        int count = 0;
+                        GetEndpoint(device, epByte, nwkAddr, (endpoint) =>
                         {
-                            Id = epByte
-                        };
+                            device.Endpoints.Add(endpoint);
+                            count++;
 
-                        device.Endpoints.Add(endpoint);
+                            if(count == eprsp.Endpoints.Count())
+                            {
+                                callback?.Invoke(device);
+                            }
+                        });
                     }
                 };
                 activeEp.Request(_znp);
@@ -66,7 +65,50 @@ namespace ZigbeeNet.CC
             nodeDesc.Request(_znp);
         }
 
-        public static Device GetDeviceInfo(CCZnp controller, long ieeeAddr, ushort nwkAddr, Action<Device> callback)
+        public void GetEndpoint(Device device, byte endpointId, ushort nwkAddr, Action<Endpoint> callback)
+        {
+            Endpoint endpoint = new Endpoint(device)
+            {
+                Id = endpointId
+            };
+
+            device.Endpoints.Add(endpoint);
+
+            SimpleDescRequest simpleDesc = new SimpleDescRequest()
+            {
+                DestinationAddress = nwkAddr,
+                NetworkAddressOfInteresst = nwkAddr,
+                Endpoint = endpointId
+            };
+
+            simpleDesc.IndObject.OnParsed += (object sDesc, ZpiObject epDef) =>
+            {
+                SimpleDescResponse descResponse = epDef.ToSpecificObject<SimpleDescResponse>();
+
+                int chunkSize = 2;
+
+                int iIn = 0;
+                byte[][] cIn = descResponse.ClusterIn.GroupBy(c => iIn++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
+
+                foreach (var c in cIn)
+                {
+                    endpoint.InClusters.Add((Clusters)BitConverter.ToUInt16(c, 0));
+                }
+
+                int iOut = 0;
+                byte[][] cOut = descResponse.ClusterOut.GroupBy(c => iOut++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
+
+                foreach (var c in cOut)
+                {
+                    endpoint.OutClusters.Add((Clusters)BitConverter.ToUInt16(c, 0));
+                }
+
+                callback?.Invoke(endpoint);
+            };
+            simpleDesc.Request(_znp);
+        }
+
+        public static Device GetDeviceInfo(CCZnp controller, ulong ieeeAddr, ushort nwkAddr, Action<Device> callback)
         {
             Device device = new Device()
             {
@@ -109,5 +151,7 @@ namespace ZigbeeNet.CC
 
             return device;
         }
+
+
     }
 }

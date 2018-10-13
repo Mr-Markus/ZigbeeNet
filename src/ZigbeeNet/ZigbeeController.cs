@@ -118,7 +118,10 @@ namespace ZigbeeNet
 
             Query query = new Query(Znp);
 
-            query.DeviceWithEndpoints(deviceInd.NetworkAddress, deviceInd.IeeeAddress);
+            query.GetDevice(deviceInd.NetworkAddress, deviceInd.IeeeAddress, (dev) =>
+            {
+                device = dev;
+            });
         }
 
         public void PermitJoin(int time)

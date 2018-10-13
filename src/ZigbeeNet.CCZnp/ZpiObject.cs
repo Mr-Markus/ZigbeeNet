@@ -185,7 +185,7 @@ namespace ZigbeeNet.CC
                         index += 4;
                         break;
                     case ParamType.longaddr:
-                        argument.Value = BitConverter.ToInt64(buffer, index);
+                        argument.Value = BitConverter.ToUInt64(buffer, index);
                         index += 8;
                         break;
                     case ParamType.buffer:
@@ -269,11 +269,19 @@ namespace ZigbeeNet.CC
                             index += preLen;
                         }
                         break;
+                    case ParamType.listbuffer:
+                        if (preLen >= 0)
+                        {
+                            byte[] dynbuf = new byte[preLen * 2];
+                            Array.Copy(buffer, index, dynbuf, 0, preLen * 2);
+                            argument.Value = dynbuf;
+                            index += preLen * 2;
+                        }
+                        break;
                     case ParamType.preLenList:
                         preLen = Convert.ToInt32(buffer[index]);
                         index += 1;
                         break;
-                    case ParamType.listbuffer:
                     case ParamType.devlistbuffer:
                         if (preLen >= 0)
                         {
