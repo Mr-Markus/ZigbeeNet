@@ -16,6 +16,8 @@ namespace ZigbeeNet.CC
 
         public string Name { get; set; }
 
+        public bool IsParsed { get; protected set; }
+
         private ZpiObject _indObject;
         public ZpiObject IndObject
         {
@@ -43,11 +45,12 @@ namespace ZigbeeNet.CC
 
         public ArgumentCollection RequestArguments { get; set; }
 
-        public ArgumentCollection ResponseArguments { get; set; }
+        public event EventHandler<ZpiObject> OnParsed;
+        public void Parsed(ZpiObject zpiObject)
+        {
+            OnParsed?.Invoke(this, zpiObject);
+        }
 
-        //public Action<ZpiObject> Callback { get; set; }
-
-        public event EventHandler<ZpiObject> Parsed;
         public event EventHandler<ZpiObject> OnResponse;
         public void Response(ZpiObject zpiObject)
         {
@@ -57,7 +60,6 @@ namespace ZigbeeNet.CC
         public ZpiObject()
         {
             RequestArguments = new ArgumentCollection();
-            ResponseArguments = new ArgumentCollection();
         }
 
         public ZpiObject(SubSystem subSystem, MessageType type, byte commandId)
@@ -132,7 +134,6 @@ namespace ZigbeeNet.CC
                 this.Type = zpi.Type;
                 this.Name = zpi.Name;
                 this.RequestArguments = zpi.RequestArguments;
-                this.ResponseArguments = zpi.ResponseArguments;
             }
         }
 
@@ -160,28 +161,18 @@ namespace ZigbeeNet.CC
             znp.Request(this);
         }
 
-        public void Parse(MessageType type, int length, byte[] buffer)
+        protected void ParseArguments(ArgumentCollection arguments, int length, byte[] buffer)
         {
-            ArgumentCollection arguments = new ArgumentCollection();
-            if (type == MessageType.SRSP)
-            {
-                if(ResponseArguments != null)
-                    arguments = ResponseArguments;
-            }
-            else if (type == MessageType.AREQ)
-            {
-                if(RequestArguments != null)
-                    arguments = RequestArguments;
-            }
-
             int index = 0;
             int preLen = -1;
             foreach (ZpiArgument argument in arguments.Arguments)
             {
                 switch (argument.ParamType)
                 {
-                    case ParamType.uint8:
                     case ParamType.uint8ZdoInd:
+                        argument.Value = index < buffer.Length ? (DeviceState)buffer[index] : 0;
+                        break;
+                    case ParamType.uint8:
                         argument.Value = index < buffer.Length ? buffer[index] : 0;
                         index += 1;
                         break;
@@ -198,7 +189,7 @@ namespace ZigbeeNet.CC
                         index += 8;
                         break;
                     case ParamType.buffer:
-                        ZpiArgument argLen = ResponseArguments.Arguments.SingleOrDefault(arg => arg.Name == "len");
+                        ZpiArgument argLen = RequestArguments.Arguments.SingleOrDefault(arg => arg.Name == "len");
                         if (argLen != null)
                         {
                             int len = (int)argLen.Value;
@@ -325,7 +316,18 @@ namespace ZigbeeNet.CC
                         throw new Exception("Type not implemented");
                 }
             }
-            Parsed?.Invoke(this, this);
+        }
+
+        public virtual void Parse(MessageType type, int length, byte[] buffer)
+        {
+            if(type != MessageType.SRSP)
+            {
+                ParseArguments(RequestArguments, length, buffer);
+
+                IsParsed = true;
+
+                Parsed(this);
+            }
         }
 
         public override string ToString()

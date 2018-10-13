@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.CC;
 
 namespace ZigbeeNet
 {
@@ -14,7 +15,7 @@ namespace ZigbeeNet
             _controller.NewPacket += _controller_NewPacket;
         }
 
-        private void _controller_NewPacket(object sender, CC.ZpiObject e)
+        private void _controller_NewPacket(object sender, ZpiObject e)
         {
             switch(e.SubSystem)
             {
@@ -27,65 +28,41 @@ namespace ZigbeeNet
                     }
                     break;
                 case CC.SubSystem.ZDO:
-                    switch ((CC.ZDO)e.CommandId)
+                    switch ((ZDO)e.CommandId)
                     {
-                        case CC.ZDO.tcDeviceInd:
+                        case ZDO.tcDeviceInd:
 
                             break;
-                        case CC.ZDO.stateChangeInd:
+                        case ZDO.stateChangeInd:                            
+                            if ((DeviceState)e.RequestArguments["state"] == DeviceState.Started_as_ZigBee_Coordinator)
+                            {
+                                _controller.Service.Ready();
+                            }
+                            break;
+                        case ZDO.matchDescRspSent:
 
                             break;
-                        case CC.ZDO.matchDescRspSent:
+                        case ZDO.statusErrorRsp:
 
                             break;
-                        case CC.ZDO.statusErrorRsp:
+                        case ZDO.srcRtgInd:
 
                             break;
-                        case CC.ZDO.srcRtgInd:
+                        case ZDO.beacon_notify_ind:
 
                             break;
-                        case CC.ZDO.beacon_notify_ind:
+                        case ZDO.leaveInd:
 
                             break;
-                        case CC.ZDO.leaveInd:
+                        case ZDO.msgCbIncoming:
 
                             break;
-                        case CC.ZDO.msgCbIncoming:
-
-                            break;
-                        case CC.ZDO.serverDiscRsp:
+                        case ZDO.serverDiscRsp:
 
                             break;
                     }
                     break;
             }
         }
-
-        //public void AttachEventHandlers()
-        //{
-        //    controller.on('SYS:resetInd', hdls.resetInd);
-
-        //    controller.on('ZDO:devIncoming', hdls.devIncoming);
-
-        //    controller.on('ZDO:tcDeviceInd', hdls.tcDeviceInd);
-
-        //    controller.on('ZDO:stateChangeInd', hdls.stateChangeInd);
-
-        //    controller.on('ZDO:matchDescRspSent', hdls.matchDescRspSent);
-
-        //    controller.on('ZDO:statusErrorRsp', hdls.statusErrorRsp);
-
-        //    controller.on('ZDO:srcRtgInd', hdls.srcRtgInd);
-
-        //    controller.on('ZDO:beacon_notify_ind', hdls.beacon_notify_ind);
-
-        //    controller.on('ZDO:leaveInd', hdls.leaveInd);
-
-        //    controller.on('ZDO:msgCbIncoming', hdls.msgCbIncoming);
-
-        //    controller.on('ZDO:serverDiscRsp', hdls.serverDiscRsp);
-
-        //    // controller.on('ZDO:permitJoinInd',     hdls.permitJoinInd);
-        //}
     }
 }

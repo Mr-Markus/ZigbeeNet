@@ -10,7 +10,6 @@ namespace ZigbeeNet.CC
             : base(SubSystem.ZDO, (byte)ZDO.endDeviceAnnceInd)
         {
             RequestArguments = zpi.RequestArguments;
-            ResponseArguments = zpi.ResponseArguments;
         }
         public EndDeviceAnnouncedInd(ushort srcAddr, ushort nwkAddr, long ieeeAddr, byte capabilities)
             :base(SubSystem.ZDO, (byte)ZDO.endDeviceAnnceInd)

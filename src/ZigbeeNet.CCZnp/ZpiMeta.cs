@@ -55,29 +55,16 @@ namespace ZigbeeNet.CC
 
                 foreach (var attr in subSys["cmds"].Values())
                 {
-                    ZpiObject zpiObject = new ZpiObject();
-                    zpiObject.Name = attr.Path.Substring(attr.Path.LastIndexOf(".") + 1);
-                    zpiObject.CommandId = (byte)attr["cmdId"].Value<byte>();
-                    zpiObject.Type = (MessageType)attr["type"].Value<int>();
-                    zpiObject.SubSystem = subSystem;
-
-                    foreach (JObject item in attr["params"]["req"])
+                    if(attr["params"].Value<JArray>("rsp") != null)
                     {
-                        foreach (var itm in item)
-                        {
-                            ZpiArgument zpiArgument = new ZpiArgument()
-                            {
-                                Name = itm.Key,
-                                ParamType = (ParamType)itm.Value.Value<int>()
-                            };
+                        //Sync
+                        ZpiSREQ zpiSREQ = new ZpiSREQ();
+                        zpiSREQ.Name = attr.Path.Substring(attr.Path.LastIndexOf(".") + 1);
+                        zpiSREQ.CommandId = (byte)attr["cmdId"].Value<byte>();
+                        zpiSREQ.Type = (MessageType)attr["type"].Value<int>();
+                        zpiSREQ.SubSystem = subSystem;
 
-                            zpiObject.RequestArguments.AddOrUpdate(zpiArgument);
-                        }
-                    }
-
-                    if (attr["params"].Value<JArray>("rsp") != null)
-                    {
-                        foreach (JObject item in attr["params"]["rsp"])
+                        foreach (JObject item in attr["params"]["req"])
                         {
                             foreach (var itm in item)
                             {
@@ -87,12 +74,54 @@ namespace ZigbeeNet.CC
                                     ParamType = (ParamType)itm.Value.Value<int>()
                                 };
 
-                                zpiObject.ResponseArguments.AddOrUpdate(zpiArgument);
+                                zpiSREQ.RequestArguments.AddOrUpdate(zpiArgument);
                             }
                         }
-                    }
 
-                    _zpiObjects[subSystem].Add(zpiObject);
+                        if (attr["params"].Value<JArray>("rsp") != null)
+                        {
+                            foreach (JObject item in attr["params"]["rsp"])
+                            {
+                                foreach (var itm in item)
+                                {
+                                    ZpiArgument zpiArgument = new ZpiArgument()
+                                    {
+                                        Name = itm.Key,
+                                        ParamType = (ParamType)itm.Value.Value<int>()
+                                    };
+
+                                    zpiSREQ.ResponseArguments.AddOrUpdate(zpiArgument);
+                                }
+                            }
+                        }
+
+                        _zpiObjects[subSystem].Add(zpiSREQ);
+                    } else
+                    {
+                        //Async
+                        ZpiObject zpiObject  = new ZpiSREQ();
+                        zpiObject.Name = attr.Path.Substring(attr.Path.LastIndexOf(".") + 1);
+                        zpiObject.CommandId = (byte)attr["cmdId"].Value<byte>();
+                        zpiObject.Type = (MessageType)attr["type"].Value<int>();
+                        zpiObject.SubSystem = subSystem;
+
+                        foreach (JObject item in attr["params"]["req"])
+                        {
+                            foreach (var itm in item)
+                            {
+                                ZpiArgument zpiArgument = new ZpiArgument()
+                                {
+                                    Name = itm.Key,
+                                    ParamType = (ParamType)itm.Value.Value<int>()
+                                };
+
+                                zpiObject.RequestArguments.AddOrUpdate(zpiArgument);
+                            }
+                        }
+
+                        _zpiObjects[subSystem].Add(zpiObject);
+
+                    }                    
                 }
             }
         }
@@ -114,16 +143,6 @@ namespace ZigbeeNet.CC
         public static MessageType GetMessageType(SubSystem subSystem, byte cmdId)
         {
             return GetCommand(subSystem, cmdId).Type;
-        }
-
-        public static ArgumentCollection GetReqArguments(SubSystem subSystem, byte cmdId)
-        {
-            return GetCommand(subSystem, cmdId).RequestArguments;
-        }
-
-        public static ArgumentCollection GetRspArguments(SubSystem subSystem, byte cmdId)
-        {
-            return GetCommand(subSystem, cmdId).ResponseArguments;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public enum Status
+    public enum ZclStatus
     {
         /// <summary>
         /// Operation was successful
