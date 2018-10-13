@@ -82,6 +82,11 @@ namespace ZigbeeNet.CC
 
         }
 
+        public override void Request(CCZnp znp)
+        {
+            znp.SendSREQ(this, false);
+        }
+
         public override void Parse(MessageType type, int length, byte[] buffer)
         {
             if (type == MessageType.SRSP)

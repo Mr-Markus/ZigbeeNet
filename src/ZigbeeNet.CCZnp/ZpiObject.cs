@@ -156,7 +156,7 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public void Request(CCZnp znp)
+        public virtual void Request(CCZnp znp)
         {
             znp.Request(this);
         }
@@ -170,10 +170,10 @@ namespace ZigbeeNet.CC
                 switch (argument.ParamType)
                 {
                     case ParamType.uint8ZdoInd:
-                        argument.Value = index < buffer.Length ? (DeviceState)buffer[index] : 0;
+                        argument.Value = (byte)(index < buffer.Length ? (DeviceState)buffer[index] : 0);
                         break;
                     case ParamType.uint8:
-                        argument.Value = index < buffer.Length ? buffer[index] : 0;
+                        argument.Value = (byte)(index < buffer.Length ? buffer[index] : 0);
                         index += 1;
                         break;
                     case ParamType.uint16:

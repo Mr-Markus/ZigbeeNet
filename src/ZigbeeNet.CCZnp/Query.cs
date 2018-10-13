@@ -40,6 +40,27 @@ namespace ZigbeeNet.CC
                 NodeDescResponse rsp = e.ToSpecificObject<NodeDescResponse>();
                 device.Type = (Devices)(rsp.LogicaltypeCmplxdescavaiUserdescavai & 0x07);
                 device.ManufacturerId = rsp.ManufacturerCode;
+
+                ActiveEndpointsRequest activeEp = new ActiveEndpointsRequest()
+                {
+                    DestinationAddress = nwkAddr,
+                    NetworkAddressOfInteresst = nwkAddr
+                };
+                activeEp.IndObject.OnParsed += (object s, ZpiObject ep) =>
+                {
+                    ActiveEndpointResponse eprsp = ep.ToSpecificObject<ActiveEndpointResponse>();
+
+                    foreach (byte epByte in eprsp.Endpoints)
+                    {
+                        Endpoint endpoint = new Endpoint(device)
+                        {
+                            Id = epByte
+                        };
+
+                        device.Endpoints.Add(endpoint);
+                    }
+                };
+                activeEp.Request(_znp);
             };
 
             nodeDesc.Request(_znp);
