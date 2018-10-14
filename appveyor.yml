@@ -5,7 +5,9 @@ image:
 install:
   - git submodule update --init --recursive
 before_build:
+  - nuget restore unpi-net/src/UnpiNet.sln
   - nuget restore src/ZigbeeNet.sln
 build:
   verbosity: minimal
+  project: unpi-net/src/UnpiNet.sln
   project: src/ZigbeeNet.sln
