@@ -4,6 +4,8 @@ image:
   - Ubuntu1804
 install:
   - git submodule update --init --recursive
+before_build:
+  - nuget restore
 build:
   verbosity: minimal
   project: src/ZigbeeNet.sln
