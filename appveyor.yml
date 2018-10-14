@@ -9,5 +9,5 @@ before_build:
   - nuget restore src/ZigbeeNet.sln
 build:
   verbosity: minimal
-  project: unpi-net/src/UnpiNet.sln
+#  project: unpi-net/src/UnpiNet.sln
   project: src/ZigbeeNet.sln
