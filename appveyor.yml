@@ -5,7 +5,7 @@ image:
 install:
   - git submodule update --init --recursive
 before_build:
-  - nuget restore
+  - nuget restore src/ZigbeeNet.sln
 build:
   verbosity: minimal
   project: src/ZigbeeNet.sln
