@@ -20,6 +20,7 @@ namespace ZigbeeNet
         public event EventHandler Stoped;
         public event EventHandler<ZpiObject> NewPacket;
         public event EventHandler<ZpiObject> PermitJoining;
+        public event EventHandler<Device> NewDevice;
 
         private ConcurrentQueue<EndDeviceAnnouncedInd> _joinQueue;
         private bool _spinLock;
@@ -72,10 +73,13 @@ namespace ZigbeeNet
         private void Znp_Ready(object sender, EventArgs e)
         {
             StartRequest startRequest = new StartRequest();
+            startRequest.OnResponse += StartRequest_OnResponse;
+            startRequest.Request(Znp);
+        }
 
-            this.Request(startRequest);
-
-            
+        private void StartRequest_OnResponse(object sender, ZpiObject e)
+        {
+            Started?.Invoke(this, EventArgs.Empty);
         }
 
         public void Init()
@@ -85,7 +89,6 @@ namespace ZigbeeNet
 
         public void Start()
         {
-            //TODO. Init ZNP --> Execute Start Command
             Znp.Init(_options.Port, _options.Baudrate);
         }
 
@@ -121,6 +124,7 @@ namespace ZigbeeNet
             query.GetDevice(deviceInd.NetworkAddress, deviceInd.IeeeAddress, (dev) =>
             {
                 device = dev;
+                //TODO: Throw new event "DeviceIncoming" for EventBridge
             });
         }
 

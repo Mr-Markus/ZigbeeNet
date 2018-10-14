@@ -102,10 +102,12 @@ namespace ZigbeeNet.CC
 
                 _sreqRunning.IndObject.OnParsed += (object s, ZpiObject result) =>
                 {
+                    ZpiObject current = _sreqRunning;
+                    
                     // schedule next transmission if something in txQueue
-                    _sreqRunning.Response(result);
                     ScheduleNextSend();
 
+                    current.Response(result);
                 };
                 _sreqRunning.IndObject.Parse((MessageType)e.Type, e.Length, e.Payload);
 
@@ -146,8 +148,12 @@ namespace ZigbeeNet.CC
                         {
                             if (_sreqRunning.IndObject == null)
                             {
+                                ZpiObject current = _sreqRunning;
+
                                 // schedule next transmission if something in txQueue
                                 ScheduleNextSend();
+
+                                current.Response(result);
                             }
                         };
                         _sreqRunning.Parse((MessageType)e.Type, e.Length, e.Payload);

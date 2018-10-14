@@ -40,7 +40,7 @@ namespace ZigbeeNet.CC
                     DestinationAddress = nwkAddr,
                     NetworkAddressOfInteresst = nwkAddr
                 };
-                activeEp.IndObject.OnParsed += (object s, ZpiObject ep) =>
+                activeEp.OnResponse += (object s, ZpiObject ep) =>
                 {
                     ActiveEndpointResponse eprsp = ep.ToSpecificObject<ActiveEndpointResponse>();
 
