@@ -6,3 +6,4 @@ install:
   - git submodule update --init --recursive
 build:
   verbosity: minimal
+  project: src/ZigbeeNet.sln
