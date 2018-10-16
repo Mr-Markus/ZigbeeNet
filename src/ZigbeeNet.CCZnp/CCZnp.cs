@@ -4,7 +4,6 @@ using System.IO;
 using ZigbeeNet;
 using UnpiNet;
 using System.Diagnostics;
-using ZigbeeNet.CC.Commands;
 using System.Threading;
 using ZigbeeNet.ZCL;
 using BinarySerialization;
@@ -157,7 +156,8 @@ namespace ZigbeeNet.CC
 
                         _sreqRunning.OnParsed += (object s, ZpiObject result) =>
                         {
-                            Log.Information("{@MessageType} - {@SubSystem} - {@Name}", e.Type, result.SubSystem, result.Name);
+                            ZpiSREQ sREQ = (ZpiSREQ)result;
+                            Log.Information("{@MessageType} - {@SubSystem} - {@Name} - Status: {@Status}", e.Type, sREQ.SubSystem, sREQ.Name, sREQ.Status);
 
                             if (_sreqRunning.IndObject == null)
                             {
@@ -289,7 +289,7 @@ namespace ZigbeeNet.CC
 
                 this.AsyncResponse += (object sender, ZpiObject e) =>
                 {
-                    if (e.Type == MessageType.AREQ && e.SubSystem == SubSystem.SYS && e.CommandId == (byte)SYS.resetInd)
+                    if (e.Type == MessageType.AREQ && e.SubSystem == SubSystem.SYS && e.CommandId == (byte)SYS.SysCommand.resetInd)
                     {
                         _resetting = false;
                     }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Linq;
+using ZigbeeNet.CC.ZDO;
 
 namespace ZigbeeNet.CC
 {
@@ -22,24 +23,24 @@ namespace ZigbeeNet.CC
             }
         }
 
-        private static Dictionary<ZDO, ZdoMetaItem> _zdoObjects;
+        private static Dictionary<ZdoCommand, ZdoMetaItem> _zdoObjects;
 
         public static void Init()
         {
-            _zdoObjects = new Dictionary<ZDO, ZdoMetaItem>();
+            _zdoObjects = new Dictionary<ZdoCommand, ZdoMetaItem>();
 
             JObject jZdo = JsonConvert.DeserializeObject<JObject>(zdoMetaFile);
 
             LoadZdo(jZdo);
         }
 
-        public static Dictionary<ZDO, ZdoMetaItem> ZdoObjects
+        public static Dictionary<ZdoCommand, ZdoMetaItem> ZdoObjects
         {
             get
             {
                 if (_zdoObjects == null)
                 {
-                    _zdoObjects = new Dictionary<ZDO, ZdoMetaItem>();
+                    _zdoObjects = new Dictionary<ZdoCommand, ZdoMetaItem>();
 
                     JObject jZdo = JsonConvert.DeserializeObject<JObject>(zdoMetaFile);
 
@@ -58,8 +59,8 @@ namespace ZigbeeNet.CC
                 {
                     ZdoMetaItem itm = new ZdoMetaItem()
                     {
-                        Request = (ZDO)zdo.Value<int>("id"),
-                        ResponseInd = (ZDO)zdo.Value<int>("indid"),
+                        Request = (ZdoCommand)zdo.Value<int>("id"),
+                        ResponseInd = (ZdoCommand)zdo.Value<int>("indid"),
                         ApiType = (ApiType)zdo.Value<int>("apiType")
                     };
 

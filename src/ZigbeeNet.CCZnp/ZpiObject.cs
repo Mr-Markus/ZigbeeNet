@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ZigbeeNet.CC.ZDO;
 
 namespace ZigbeeNet.CC
 {
@@ -27,9 +28,9 @@ namespace ZigbeeNet.CC
                 {
                     if (SubSystem == SubSystem.ZDO)
                     {
-                        if (ZdoMeta.ZdoObjects.ContainsKey((ZDO)CommandId))
+                        if (ZdoMeta.ZdoObjects.ContainsKey((ZdoCommand)CommandId))
                         {
-                            ZdoMetaItem zdo = ZdoMeta.ZdoObjects[(ZDO)CommandId];
+                            ZdoMetaItem zdo = ZdoMeta.ZdoObjects[(ZdoCommand)CommandId];
 
                             _indObject = ZpiMeta.GetCommand(SubSystem.ZDO, (byte)zdo.ResponseInd);
                         }
@@ -68,55 +69,55 @@ namespace ZigbeeNet.CC
             Type = type;
         }
 
-        public ZpiObject(SYS sysCmd)
+        public ZpiObject(SYS.SysCommand sysCmd)
             : this(SubSystem.SYS, (byte)sysCmd)
         {
 
         }
 
-        public ZpiObject(ZDO zdoCmd)
+        public ZpiObject(ZDO.ZdoCommand zdoCmd)
             :this(SubSystem.ZDO, (byte)zdoCmd)
         {
             
         }
 
-        public ZpiObject(AF afCmd)
+        public ZpiObject(AF.AfCommand afCmd)
             : this(SubSystem.AF, (byte)afCmd)
         {
 
         }
 
-        public ZpiObject(APP appCmd)
+        public ZpiObject(APP.AppCommand appCmd)
             : this(SubSystem.APP, (byte)appCmd)
         {
 
         }
 
-        public ZpiObject(MAC macCmd)
+        public ZpiObject(MAC.MacCommand macCmd)
             : this(SubSystem.MAC, (byte)macCmd)
         {
 
         }
 
-        public ZpiObject(SAPI sapiCmd)
+        public ZpiObject(SAPI.SapiCommand sapiCmd)
             : this(SubSystem.SAPI, (byte)sapiCmd)
         {
 
         }
 
-        public ZpiObject(UTIL utilCmd)
+        public ZpiObject(UTIL.UtilCommand utilCmd)
             : this(SubSystem.UTIL, (byte)utilCmd)
         {
 
         }
 
-        public ZpiObject(DBG dbgCmd)
+        public ZpiObject(DBG.DbgCommand dbgCmd)
             : this(SubSystem.DBG, (byte)dbgCmd)
         {
 
         }
 
-        public ZpiObject(DEBUG debugCmd)
+        public ZpiObject(DEBUG.DebugCommand debugCmd)
             : this(SubSystem.DEBUG, (byte)debugCmd)
         {
 

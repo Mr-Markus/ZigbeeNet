@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC
 
         public string ManufacturerName { get; set; }
 
-        public PowerSources PowerSource { get; set; }
+        public PowerSource PowerSource { get; set; }
 
         public string ModelId { get; set; }
 

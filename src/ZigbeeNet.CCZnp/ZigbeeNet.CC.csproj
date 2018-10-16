@@ -25,4 +25,20 @@
     <PackageReference Include="Serilog" Version="2.7.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Layers\APP\Response\" />
+    <Folder Include="Layers\APP\Request\" />
+    <Folder Include="Layers\DBG\Response\" />
+    <Folder Include="Layers\DBG\Request\" />
+    <Folder Include="Layers\DEBUG\Response\" />
+    <Folder Include="Layers\DEBUG\Request\" />
+    <Folder Include="Layers\MAC\Response\" />
+    <Folder Include="Layers\MAC\Request\" />
+    <Folder Include="Layers\SAPI\Response\" />
+    <Folder Include="Layers\SYS\Response\" />
+    <Folder Include="Layers\SYS\Request\" />
+    <Folder Include="Layers\UTIL\Response\" />
+    <Folder Include="Layers\UTIL\Request\" />
+  </ItemGroup>
 </Project>

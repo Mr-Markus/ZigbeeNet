@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.CC
@@ -107,5 +108,7 @@ namespace ZigbeeNet.CC
             };
             simpleDesc.Request(_znp);
         }
+
+        //public void Network()
     }
 }

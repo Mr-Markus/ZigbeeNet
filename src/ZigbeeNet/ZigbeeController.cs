@@ -4,8 +4,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.CC;
-using ZigbeeNet.CC.Commands;
 using ZigbeeNet.ZCL;
+using ZigbeeNet.CC.ZDO;
+using ZigbeeNet.CC.SAPI;
 
 namespace ZigbeeNet
 {
@@ -24,6 +25,7 @@ namespace ZigbeeNet
 
         private ConcurrentQueue<EndDeviceAnnouncedInd> _joinQueue;
         private bool _spinLock;
+        private byte _transId;
 
         public ZigbeeController(ZigbeeService service, Options options)
         {
@@ -46,7 +48,7 @@ namespace ZigbeeNet
         {
             NewPacket?.Invoke(this, e);
 
-            if (e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)ZDO.endDeviceAnnceInd)
+            if (e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)ZdoCommand.endDeviceAnnceInd)
             {
                 EndDeviceAnnouncedInd ind = e.ToSpecificObject<EndDeviceAnnouncedInd>();
                 if (_spinLock)
@@ -64,7 +66,7 @@ namespace ZigbeeNet
                     endDeviceAnnceHdlr(ind);
                 }
             }
-            if(e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)CC.ZDO.mgmtPermitJoinRsp)
+            if(e.SubSystem == SubSystem.ZDO && e.CommandId == (byte)ZdoCommand.mgmtPermitJoinRsp)
             {
                 PermitJoining?.Invoke(this, e);
             }
@@ -72,6 +74,9 @@ namespace ZigbeeNet
 
         private void Znp_Ready(object sender, EventArgs e)
         {
+            
+
+
             StartRequest startRequest = new StartRequest();
             startRequest.OnResponse += StartRequest_OnResponse;
             startRequest.Request(Znp);
@@ -80,6 +85,26 @@ namespace ZigbeeNet
         private void StartRequest_OnResponse(object sender, ZpiObject e)
         {
             Started?.Invoke(this, EventArgs.Empty);
+        }
+
+        //init.setupCoord = function(controller, callback)
+        //{
+
+        //    return controller.checkNvParams().then(function() {
+
+        //        return init._bootCoordFromApp(controller);
+
+        //    }).then(function(netInfo) {
+
+        //        return init._registerDelegators(controller, netInfo);
+
+        //    }).nodeify(callback);
+
+        //};
+
+        private void BootCoordFromApp()
+        {
+
         }
 
         public void Init()
@@ -123,8 +148,7 @@ namespace ZigbeeNet
 
             query.GetDevice(deviceInd.NetworkAddress, deviceInd.IeeeAddress, (dev) =>
             {
-                device = dev;
-                //TODO: Throw new event "DeviceIncoming" for EventBridge
+                NewDevice?.Invoke(this, dev);
             });
         }
 
@@ -155,9 +179,13 @@ namespace ZigbeeNet
             Request(zpiObject);
         }
 
-        private void SimpleDescReq(ushort nwkAddr, long ieeeAddr)
-        {
+        internal byte NextTransId()
+        {  // zigbee transection id
 
+            if (++_transId > 255)
+                _transId = 1;
+
+            return _transId;
         }
     }
 }

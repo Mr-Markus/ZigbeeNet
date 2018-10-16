@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using ZigbeeNet.CC.ZDO;
 
 namespace ZigbeeNet.CC
 {
     public class ZdoMetaItem
     {
-        public ZDO Request { get; set; }
+        public ZdoCommand Request { get; set; }
 
-        public ZDO ResponseInd { get; set; }
+        public ZdoCommand ResponseInd { get; set; }
 
         public ApiType ApiType { get; set; }
 
