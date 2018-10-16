@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public enum PowerSources
+    public enum PowerSource
     {
         Unkown = 0,
         MainsSinglePhase = 1,

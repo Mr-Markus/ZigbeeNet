@@ -6,9 +6,9 @@ namespace ZigbeeNet.ZCL
 {
     public class ZclPacket
     {
-        public ZclPacket()
+        public ZclPacket(byte cmdId)
         {
-
+            Header = new FrameHeader(FrameType.Global, Direction.ClientToServer, cmdId);
         }
 
         public ZclPacket(FrameHeader header)
@@ -23,7 +23,6 @@ namespace ZigbeeNet.ZCL
         }
 
         [FieldOrder(0)]
-        [FieldLength(5)]
         public FrameHeader Header { get; set; }
 
         [FieldOrder(1)]

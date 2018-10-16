@@ -38,7 +38,7 @@ namespace ZigbeeNet
 
         private void Controller_Started(object sender, EventArgs e)
         {
-            Controller.PermitJoin(0);
+            Controller.PermitJoin(255);
 
             OnReady?.Invoke(this, EventArgs.Empty);
         }
