@@ -1,0 +1,12 @@
+version: 1.0.{build}
+image:
+  - Visual Studio 2017
+  - Ubuntu1804
+install:
+  - git submodule update --init --recursive
+before_build:
+  - nuget restore unpi-net/src/UnpiNet.sln
+  - nuget restore src/ZigbeeNet.sln
+build:
+  verbosity: minimal
+  project: src/ZigbeeNet.sln
