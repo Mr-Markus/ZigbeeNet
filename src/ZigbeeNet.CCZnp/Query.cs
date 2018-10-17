@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.CC
@@ -40,7 +41,7 @@ namespace ZigbeeNet.CC
                     DestinationAddress = nwkAddr,
                     NetworkAddressOfInteresst = nwkAddr
                 };
-                activeEp.IndObject.OnParsed += (object s, ZpiObject ep) =>
+                activeEp.OnResponse += (object s, ZpiObject ep) =>
                 {
                     ActiveEndpointResponse eprsp = ep.ToSpecificObject<ActiveEndpointResponse>();
 
@@ -72,8 +73,6 @@ namespace ZigbeeNet.CC
                 Id = endpointId
             };
 
-            device.Endpoints.Add(endpoint);
-
             SimpleDescRequest simpleDesc = new SimpleDescRequest()
             {
                 DestinationAddress = nwkAddr,
@@ -85,6 +84,8 @@ namespace ZigbeeNet.CC
             {
                 SimpleDescResponse descResponse = epDef.ToSpecificObject<SimpleDescResponse>();
 
+                endpoint.ProfileId = descResponse.ProfileId;
+
                 int chunkSize = 2;
 
                 int iIn = 0;
@@ -92,7 +93,7 @@ namespace ZigbeeNet.CC
 
                 foreach (var c in cIn)
                 {
-                    endpoint.InClusters.Add((Clusters)BitConverter.ToUInt16(c, 0));
+                    endpoint.InClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
                 }
 
                 int iOut = 0;
@@ -100,7 +101,7 @@ namespace ZigbeeNet.CC
 
                 foreach (var c in cOut)
                 {
-                    endpoint.OutClusters.Add((Clusters)BitConverter.ToUInt16(c, 0));
+                    endpoint.OutClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
                 }
 
                 callback?.Invoke(endpoint);
@@ -108,50 +109,6 @@ namespace ZigbeeNet.CC
             simpleDesc.Request(_znp);
         }
 
-        public static Device GetDeviceInfo(CCZnp controller, ulong ieeeAddr, ushort nwkAddr, Action<Device> callback)
-        {
-            Device device = new Device()
-            {
-                NwkAdress = nwkAddr,
-                IeeeAddress = ieeeAddr
-            };
-
-            ZpiObject zpiObject = new ZpiObject(ZDO.nodeDescReq);
-
-            zpiObject.RequestArguments["dstaddr"] = nwkAddr;
-            zpiObject.RequestArguments["nwkaddrofinterest"] = nwkAddr;
-
-            zpiObject.OnResponse += (object sender, ZpiObject result) =>
-            {
-
-                device.Type = (Devices)((byte)result.RequestArguments["logicaltype_cmplxdescavai_userdescavai"] & 0x07);
-                device.ManufacturerId = (ushort)result.RequestArguments["manufacturercode"];
-
-                ZpiObject activeEpReq = new ZpiObject(ZDO.activeEpReq);
-
-                activeEpReq.RequestArguments["dstaddr"] = nwkAddr;
-                activeEpReq.RequestArguments["nwkaddrofinterest"] = nwkAddr;
-
-                activeEpReq.OnResponse += (object s, ZpiObject e) =>
-                {
-                    foreach (byte ep in (byte[])result.RequestArguments["activeeplist"])
-                    {
-                        Endpoint endpoint = new Endpoint(device)
-                        {
-                            Id = ep
-                        };
-                        device.Endpoints.Add(endpoint);
-                    }
-                };
-
-                activeEpReq.Request(controller);
-            };
-
-            zpiObject.Request(controller);
-
-            return device;
-        }
-
-
+        //public void Network()
     }
 }

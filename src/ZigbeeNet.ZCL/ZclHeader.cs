@@ -23,6 +23,18 @@ namespace ZigbeeNet.ZCL
             };
             CommandIdentifierField = commandIdentifier;
         }
+
+        /// <summary>
+        /// Just for serialization
+        /// </summary>
+        [Ignore()]
+        public bool ManufacturerSpecific
+        {
+            get
+            {
+                return FrameControl.ManufacturerSpecific;
+            }
+        }
         /// <summary>
         /// The frame control field is 8 bits in length and contains information defining the command type and other control flags. 
         /// Bits 5-7 are reserved for future use and SHALL be set to 0. 
@@ -36,6 +48,7 @@ namespace ZigbeeNet.ZCL
         /// This field SHALL only be included in the ZCL frame if the manufacturer specific sub-field of the frame control field is set to True. 
         /// </summary>
         [FieldOrder(1)]
+        [SerializeWhen(nameof(ManufacturerSpecific), true)]
         public ushort ManufacturerCode { get; set; }
 
         /// <summary>
