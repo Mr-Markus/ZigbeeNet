@@ -1,4 +1,4 @@
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/Mr-Markus/ZigbeeNet)](https://ci.appveyor.com/api/projects/status/github/Mr-Markus/ZigbeeNet)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/Mr-Markus/ZigbeeNet?svg=true)](https://ci.appveyor.com/api/projects/status/github/Mr-Markus/ZigbeeNet)
 
 # What is ZigbeeNet?
 
