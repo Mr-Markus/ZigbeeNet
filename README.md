@@ -1,3 +1,5 @@
+[master-win-badge]: https://ci.appveyor.com/api/projects/status/github/Mr-Markus/ZigbeeNet
+
 # What is ZigbeeNet?
 
 ZigbeeNET is a .NET Standard implementation of the Zigbee 3.0 Cluster Library and also includes a support for Texas Instruments CC2531 USB Stick with ZNP firmware to work as a gateway
