@@ -8,7 +8,7 @@ using System.Threading;
 using ZigbeeNet.ZCL;
 using BinarySerialization;
 using System.Collections.Concurrent;
-using ZigbeeNet.CC.Logging;
+using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC
 {

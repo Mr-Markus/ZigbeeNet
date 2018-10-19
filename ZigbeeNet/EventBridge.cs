@@ -5,7 +5,6 @@ using System.Text;
 using ZigbeeNet.CC;
 using ZigbeeNet.CC.SYS;
 using ZigbeeNet.CC.ZDO;
-using ZigbeeNet.Logging;
 using ZigbeeNet.ZCL;
 using ZigbeeNet.ZCL.Commands;
 using ZigbeeNet.Logging;
@@ -14,8 +13,6 @@ namespace ZigbeeNet
 {
     public class EventBridge
     {
-        private readonly ILog _logger = LogProvider.For<CCZnp>();
-
         private ZigbeeController _controller;
         private ZclBridge _zclBridge;
         private readonly ILog _logger = LogProvider.For<EventBridge>();
