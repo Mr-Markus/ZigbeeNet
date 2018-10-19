@@ -23,6 +23,7 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> transmitQueue;
         private BlockingCollection<SerialPacket> responseQueue;
 
+
         public bool Enabled { get; set; }
         public Unpi Unpi { get; set; }
 
@@ -192,7 +193,7 @@ namespace ZigbeeNet.CC
 
                 _sreqRunning.IndObject.OnParsed += (object s, ZpiObject result) =>
                 {
-                    _logger.Info("{@MessageType} - {@SubSystem} - {@Name}", e.Type, result.SubSystem, result.Name);
+                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
 
                     ZpiObject current = _sreqRunning;
                     
@@ -221,7 +222,7 @@ namespace ZigbeeNet.CC
                 ZpiObject zpiObject = new ZpiObject((SubSystem)e.SubSystem, (MessageType)e.Type, e.Cmd1);
                 zpiObject.OnParsed += (object s, ZpiObject result) =>
                 {
-                    _logger.Info("{@MessageType} - {@SubSystem} - {@Name}", e.Type, result.SubSystem, result.Name);
+                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
 
                     AsyncResponse?.Invoke(this, result);
                 };
@@ -241,7 +242,8 @@ namespace ZigbeeNet.CC
                         _sreqRunning.OnParsed += (object s, ZpiObject result) =>
                         {
                             ZpiSREQ sREQ = (ZpiSREQ)result;
-                            _logger.Info("{@MessageType} - {@SubSystem} - {@Name} - Status: {@Status}", e.Type, sREQ.SubSystem, sREQ.Name, sREQ.Status);
+
+                            _logger.Info("{Type} - {SubSystem} - {Name} - {Status}", e.Type, sREQ.SubSystem, sREQ.Name, sREQ.Status);
 
                             if (_sreqRunning.IndObject == null)
                             {
@@ -294,7 +296,7 @@ namespace ZigbeeNet.CC
 
         public void Request(ZpiObject zpiObject)
         {
-            _logger.Info("{@MessageType} - {@SubSystem} - {@Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
+            _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
 
             if (_sreqRunning != null)
             {
@@ -321,7 +323,7 @@ namespace ZigbeeNet.CC
             //prepare for transmission
             if(queueDone == false)
             {
-                _logger.Info("{@MessageType} - {@SubSystem} - {@Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
+                _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
 
                 if (_sreqRunning != null)
                 {
