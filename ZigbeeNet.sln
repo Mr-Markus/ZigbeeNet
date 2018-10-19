@@ -5,19 +5,26 @@ VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigbeeNet", "ZigbeeNet\ZigbeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigbeeNet.netstandard2.0", "ZigbeeNet.netstandard2.0\ZigbeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.netstandard2.0", "ZigbeeNet.netstandard2.0\ZigbeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7FF7F314-871A-4B42-ABCB-9D2FB5D14188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigbeeNet.core2.0", "ZigbeeNet.core2.0\ZigbeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.core2.0", "ZigbeeNet.core2.0\ZigbeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.0", "core2.0", "{F436D83A-F434-4A0C-9E49-D2C3B998104E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSample", "Samples\core2.0\BasicSample\BasicSample.csproj", "{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicSample", "Samples\core2.0\BasicSample\BasicSample.csproj", "{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-68A9-44EE-B8BA-73969C9B3895}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
