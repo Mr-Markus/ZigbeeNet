@@ -20,3 +20,4 @@ ZigbeeNET is provided under [The MIT License](https://github.com/Mr-Markus/Zigbe
 ## Contributor
 
  [@Mr-Markus](https://github.com/Mr-Markus)
+ [@nicolaiw](https://github.com/nicolaiw)
