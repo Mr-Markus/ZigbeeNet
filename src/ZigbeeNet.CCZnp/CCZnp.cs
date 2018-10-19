@@ -8,12 +8,15 @@ using System.Threading;
 using ZigbeeNet.ZCL;
 using BinarySerialization;
 using System.Collections.Concurrent;
-using Serilog;
+using ZigbeeNet.CC.Logging;
 
 namespace ZigbeeNet.CC
 {
     public class CCZnp
     {
+        private readonly ILog _logger = LogProvider.For<CCZnp>();
+
+
         public bool Enabled { get; set; }
         public Unpi Unpi { get; set; }
 
@@ -72,11 +75,6 @@ namespace ZigbeeNet.CC
             ZpiMeta.Init();
             ZdoMeta.Init();
 
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .CreateLogger();
-
             Unpi = new Unpi(port, baudrate, 1);
             Unpi.DataReceived += Unpi_DataReceived;
             Unpi.Opened += Unpi_Opened;
@@ -108,7 +106,7 @@ namespace ZigbeeNet.CC
 
                 _sreqRunning.IndObject.OnParsed += (object s, ZpiObject result) =>
                 {
-                    Log.Information("{@MessageType} - {@SubSystem} - {@Name}", e.Type, result.SubSystem, result.Name);
+                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
 
                     ZpiObject current = _sreqRunning;
                     
@@ -137,7 +135,7 @@ namespace ZigbeeNet.CC
                 ZpiObject zpiObject = new ZpiObject((SubSystem)e.SubSystem, (MessageType)e.Type, e.Cmd1);
                 zpiObject.OnParsed += (object s, ZpiObject result) =>
                 {
-                    Log.Information("{@MessageType} - {@SubSystem} - {@Name}", e.Type, result.SubSystem, result.Name);
+                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
 
                     AsyncResponse?.Invoke(this, result);
                 };
@@ -157,7 +155,8 @@ namespace ZigbeeNet.CC
                         _sreqRunning.OnParsed += (object s, ZpiObject result) =>
                         {
                             ZpiSREQ sREQ = (ZpiSREQ)result;
-                            Log.Information("{@MessageType} - {@SubSystem} - {@Name} - Status: {@Status}", e.Type, sREQ.SubSystem, sREQ.Name, sREQ.Status);
+
+                            _logger.Info("{Type} - {SubSystem} - {Name} - {Status}", e.Type, sREQ.SubSystem, sREQ.Name, sREQ.Status);
 
                             if (_sreqRunning.IndObject == null)
                             {
@@ -210,7 +209,7 @@ namespace ZigbeeNet.CC
 
         public void Request(ZpiObject zpiObject)
         {
-            Log.Information("{@MessageType} - {@SubSystem} - {@Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
+            _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
 
             if (_sreqRunning != null)
             {
@@ -237,7 +236,7 @@ namespace ZigbeeNet.CC
             //prepare for transmission
             if(queueDone == false)
             {
-                Log.Information("{@MessageType} - {@SubSystem} - {@Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
+                _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
 
                 if (_sreqRunning != null)
                 {

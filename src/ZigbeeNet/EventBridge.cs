@@ -1,11 +1,11 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZigbeeNet.CC;
 using ZigbeeNet.CC.SYS;
 using ZigbeeNet.CC.ZDO;
+using ZigbeeNet.Logging;
 using ZigbeeNet.ZCL;
 using ZigbeeNet.ZCL.Commands;
 
@@ -13,6 +13,8 @@ namespace ZigbeeNet
 {
     public class EventBridge
     {
+        private readonly ILog _logger = LogProvider.For<CCZnp>();
+
         private ZigbeeController _controller;
         private ZclBridge _zclBridge;
 
@@ -45,7 +47,7 @@ namespace ZigbeeNet
                 }
             } catch (Exception ex)
             {
-                Log.Error(ex, "Error 0x0002");
+                _logger.Error(ex, "Error 0x0002");
             }
         }
 
