@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>ZigbeeNet.netstandard2._0</RootNamespace>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>ZigbeeNet.core2._0</RootNamespace>
     <AssemblyName>ZigbeeNet</AssemblyName>
   </PropertyGroup>
 
