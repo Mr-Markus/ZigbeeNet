@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6bca5435-c030-4c96-a3e2-406815abe131</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ZigbeeNet</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ArgumentCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ApiType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceEnabled.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\MessageTypes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\Options.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ParamType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\Status.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\SubSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Enums\AfCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Enums\InterpanCtl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Enums\NetworkLatencyReq.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Enums\Options.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Request\DataRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\AF\Response\DataConfirmResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\APP\Enums\AppCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\DBG\Enums\DbgCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\DEBUG\Enums\DebugCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\MAC\Enums\MacCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\BindAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\NvItemIdsUint8.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\SapiCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\SearchType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\TxOptAck.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Enums\ZbDeviceInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Request\StartRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\SYS\Enums\SysCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\UTIL\Enums\UtilCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\AddrReqType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\AppDevVer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\DescCapability.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\DeviceLogicalType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\InitDev.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\LeaveAndRemoveChild.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\LeaveIndRejoin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\LeaveIndRemove.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\LeaveIndRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\ServerCapability.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\StackProfileId.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\Status.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Enums\ZdoCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Request\ActiveEndpointsRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Request\NodeDescRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Request\PermitJoinRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Request\SimpleDescRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Request\StartupFromAppRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Response\ActiveEndpointResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Response\EndDeviceAnnouncedInd.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Response\NodeDescResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Layers\ZDO\Response\SimpleDescResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Coordinator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Endpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Network.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Query.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZdoMeta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZdoMetaItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiArgument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiMeta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiObjectExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiSREQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventBridge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZclBridge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Commands\ReadAttributesCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Enums\Cluster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Enums\DataType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Enums\Devices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Enums\PowerSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Enums\ZclStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\FrameControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclCluster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclClusterCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclCommandParam.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclGlobalCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclMeta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\APP\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\APP\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\DBG\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\DBG\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\DEBUG\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\DEBUG\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\MAC\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\MAC\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\SAPI\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\SYS\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\SYS\Response\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\UTIL\Request\" />
+    <Folder Include="$(MSBuildThisFileDirectory)CC\Layers\UTIL\Response\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CC\Defs\zdo_IndSuffix.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CC\Defs\zdo_ReqRspMap.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CC\Defs\zpi_meta.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ZCL\Defs\cluster_defs.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ZCL\Defs\cmd_defs.json" />
+  </ItemGroup>
+</Project>

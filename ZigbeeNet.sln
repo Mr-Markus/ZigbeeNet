@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigbeeNet", "ZigbeeNet\ZigbeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.netstandard2.0", "ZigbeeNet.netstandard2.0\ZigbeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7FF7F314-871A-4B42-ABCB-9D2FB5D14188}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.core2.0", "ZigbeeNet.core2.0\ZigbeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.0", "core2.0", "{F436D83A-F434-4A0C-9E49-D2C3B998104E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicSample", "Samples\core2.0\BasicSample\BasicSample.csproj", "{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-68A9-44EE-B8BA-73969C9B3895}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ZigbeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E465DBE-8E60-4731-BB21-A052026BCE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E465DBE-8E60-4731-BB21-A052026BCE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E465DBE-8E60-4731-BB21-A052026BCE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E465DBE-8E60-4731-BB21-A052026BCE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D9BD78-D8D1-4786-992A-90A2B19B7E4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6BCA5435-C030-4C96-A3E2-406815ABE131} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
+		{0E465DBE-8E60-4731-BB21-A052026BCE00} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
+		{F436D83A-F434-4A0C-9E49-D2C3B998104E} = {B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}
+		{70D9BD78-D8D1-4786-992A-90A2B19B7E4B} = {F436D83A-F434-4A0C-9E49-D2C3B998104E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
+	EndGlobalSection
+EndGlobal
