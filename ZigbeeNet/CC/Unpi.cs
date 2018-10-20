@@ -6,6 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO
+// Files regaring UNPI is just cramped in here. Should not be tied too strict to
+// the project as UNPI is intended to be used on other systems as well.
+//
+// SerialPacket could be abstracted to a general serialpacket and overloaded here to add the stuff we need
+// to handle our MT CMD and queue stuff.... 
+
 namespace ZigbeeNet.CC
 {
     public enum UnpiMessageType : byte
