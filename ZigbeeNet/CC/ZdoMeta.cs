@@ -16,7 +16,7 @@ namespace ZigbeeNet.CC
 
         private static string LoadZdoReqRspMapFile()
         {
-            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.zdo_ReqRspMap.json"))
+            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.CC.Defs.zdo_ReqRspMap.json"))
             {
                 StreamReader reader = new StreamReader(stream);
                 return reader.ReadToEnd();

@@ -15,7 +15,7 @@ namespace ZigbeeNet.CC
 
         private static string LoadZpiMetaFile()
         {
-            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.zpi_meta.json"))
+            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.CC.Defs.zpi_meta.json"))
             {
                 StreamReader reader = new StreamReader(stream);
                 return reader.ReadToEnd();
