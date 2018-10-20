@@ -85,7 +85,7 @@ namespace ZigbeeNet.ZCL
 
         private static string LoadCmdFile()
         {
-            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.cmd_defs.json"))
+            using (Stream stream =  Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.ZCL.Defs.cmd_defs.json"))
             {
                 StreamReader reader = new StreamReader(stream);
                 return reader.ReadToEnd();
@@ -94,7 +94,7 @@ namespace ZigbeeNet.ZCL
 
         private static string LoadClusterFile()
         {
-            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.Defs.cluster_defs.json"))
+            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream($"{Assembly.GetCallingAssembly().GetName().Name}.ZCL.Defs.cluster_defs.json"))
             {
 
                 StreamReader reader = new StreamReader(stream);
