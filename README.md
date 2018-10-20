@@ -6,8 +6,6 @@ With ZigbeeNet you can develop your own .NET application which communicates with
 
 ## What is Zigbee?
 
-<img src="https://www.zigbee.org/wp-content/uploads/2017/12/zb_logo-a_color_rgb.png" width="200">
-
 Zigbee is a worldwide standard for low power, self-healing, mesh networks offering a complete and interoperable IoT solution for home and building automation:
 - The industry-proven worldwide standard for robust mesh networking
 - Capable of supporting hundreds of nodes
