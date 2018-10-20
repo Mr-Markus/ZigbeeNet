@@ -34,7 +34,7 @@ namespace ZigbeeNet.CC
             
             // TODO
             // Create tasks
-            readTask = new Task((() => ReadSerialPort(Unpi)));
+            readTask = new Task((() => ReadSerialPort(unpi)));
             transmitTask = new Task(() => ProcessQueue(transmitQueue, OnSend));
 
             // TODO
@@ -48,7 +48,7 @@ namespace ZigbeeNet.CC
         {
             if (serialPacket == null) throw new ArgumentNullException(nameof(serialPacket));
 
-            serialPacket.WriteAsync(Unpi.OutputStream).ConfigureAwait(false);
+            serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
             _logger.Debug($"Transmitted: {serialPacket}");
         }
 
@@ -64,7 +64,7 @@ namespace ZigbeeNet.CC
             _logger.Debug($"Closed interface...");
         }
 
-        private async void ReadSerialPort(Unpi port)
+        private async void ReadSerialPort(UnifiedNetworkProcessorInterface port)
         {
             if (port == null) throw new ArgumentNullException(nameof(port));
 
@@ -109,7 +109,7 @@ namespace ZigbeeNet.CC
         private readonly ILog _logger = LogProvider.For<CCZnp>();
 
         public bool Enabled { get; set; }
-        public Unpi Unpi { get; set; }
+        private UnifiedNetworkProcessorInterface unpi { get; set; }
 
         public event EventHandler Ready;
         public event EventHandler Closed;
@@ -167,12 +167,12 @@ namespace ZigbeeNet.CC
             ZpiMeta.Init();
             ZdoMeta.Init();
 
-            Unpi = new Unpi(port, baudrate, 1);
-            //Unpi.DataReceived += Unpi_DataReceived;
-            //Unpi.Opened += Unpi_Opened;
-            //Unpi.Closed += Unpi_Closed;
+            unpi = new UnifiedNetworkProcessorInterface(port, baudrate, 1);
+            //unpi.DataReceived += Unpi_DataReceived;
+            //unpi.Opened += Unpi_Opened;
+            //unpi.Closed += Unpi_Closed;
 
-            Unpi.Open();
+            unpi.Open();
         }
 
         private void Unpi_Closed(object sender, EventArgs e)
@@ -214,8 +214,8 @@ namespace ZigbeeNet.CC
             
             if ((byte)e.Type == (byte)MessageType.AREQ)
             {
-                if ((e.SubSystem == UnpiSubSystem.RPC_SYS_SYS && e.Cmd1 == 0)
-                || (e.SubSystem == UnpiSubSystem.RPC_SYS_SAPI && e.Cmd1 == 9))
+                if ((e.SubSystem == SubSystem.SYS && e.Cmd1 == 0)
+                || (e.SubSystem == SubSystem.SAPI && e.Cmd1 == 9))
                 {
                     //Reset done
                     _resetting = false;
@@ -269,26 +269,26 @@ namespace ZigbeeNet.CC
         public void Start()
         {
             Enabled = true;
-            Unpi.Open();
+            unpi.Open();
         }
 
         public void Stop()
         {
             Enabled = false;
             _requestQueue = new ConcurrentQueue<ZpiObject>();
-            Unpi = null;
+            unpi = null;
 
             Closed?.Invoke(this, EventArgs.Empty);
         }
 
         public byte[] SendCommand(MessageType type, SubSystem subSystem, byte commandId, byte[] payload)
         {
-            return Unpi.Send((int)type, (int)subSystem, commandId, payload);
+            return unpi.Send((int)type, (int)subSystem, commandId, payload);
         }
 
         public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs)
         {
-            if (Unpi == null)
+            if (unpi == null)
             {
                 throw new NullReferenceException("CCZnp has not been initialized yet");
             }
@@ -358,7 +358,7 @@ namespace ZigbeeNet.CC
                 }
             }, zpiObject, 300000, 300000); //TODO: Get timeout by config            
 
-            Unpi.Send((int)MessageType.SREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
+            unpi.Send((int)MessageType.SREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
         }
 
         public void SendAREQ(ZpiObject zpiObject)
@@ -387,7 +387,7 @@ namespace ZigbeeNet.CC
                 };
             }
 
-            Unpi.Send((int)MessageType.AREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
+            unpi.Send((int)MessageType.AREQ, (int)zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
         }
 
         private void ScheduleNextSend()

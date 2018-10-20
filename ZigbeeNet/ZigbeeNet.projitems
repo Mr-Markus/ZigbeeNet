@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CC\ArgumentCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CC\Class1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ApiType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceEnabled.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceState.cs" />

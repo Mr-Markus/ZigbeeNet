@@ -15,30 +15,7 @@ using System.Threading.Tasks;
 
 namespace ZigbeeNet.CC
 {
-    public enum UnpiMessageType : byte
-    {
-        POLL = 0x00,
-        /// <summary>
-        /// Synchronous Messages A Synchronous Request (SREQ) is a frame, defined by data content instead of 
-        /// the ordering of events of the physical interface, which is sent from the Host to NP where the 
-        /// next frame sent from NP to Host must be the Synchronous Response (SRESP) to that SREQ. 
-        /// 
-        /// Note that once a SREQ is sent, the NPI interface blocks until a corresponding response(SRESP) is received.
-        /// </summary>
-        SREQ = 0x01,
-        /// <summary>
-        /// Asynchronous Messages Asynchronous Request – transfer initiated by Host Asynchronous Indication – transfer initiated by NP. 
-        /// </summary>
-        AREQ = 0x02,
-        /// <summary>
-        /// Synchronous Response
-        /// </summary>
-        SRSP = 0x03,
-        RES0 = 0x04,
-        RES1 = 0x05,
-        RES2 = 0x06,
-        RES3 = 0x07
-    }
+    
 
     public class SerialPacket
     {
@@ -52,7 +29,7 @@ namespace ZigbeeNet.CC
 
         public byte Length => (byte)Payload.Length;
 
-        public SerialPacket(UnpiMessageType type, UnpiSubSystem subSystem, byte commandId, byte[] payload = null)
+        public SerialPacket(MessageType type, SubSystem subSystem, byte commandId, byte[] payload = null)
         {
             Type = type;
             SubSystem = subSystem;
@@ -89,8 +66,8 @@ namespace ZigbeeNet.CC
                 await stream.ReadAsyncExact(buffer, 2, length + 2);
 
 
-                var type = (UnpiMessageType)(buffer[2] & 0xe0);
-                var subsystem = (UnpiSubSystem)(buffer[2] & 0x1f);
+                var type = (MessageType)(buffer[2] & 0xe0);
+                var subsystem = (SubSystem)(buffer[2] & 0x1f);
                 var cmd1 = buffer[3];
                 var payload = buffer.Skip(4).Take(length - 2).ToArray();
 
@@ -103,9 +80,9 @@ namespace ZigbeeNet.CC
             throw new InvalidDataException("unable to decode packet");
         }
 
-        public UnpiMessageType Type { get; set; }
+        public MessageType Type { get; set; }
 
-        public UnpiSubSystem SubSystem { get; set; }
+        public SubSystem SubSystem { get; set; }
 
         /// <summary>
         /// CMD0 is a 1 byte field that contains both message type and subsystem information 
@@ -122,8 +99,8 @@ namespace ZigbeeNet.CC
             }
             private set
             {
-                Type = (UnpiMessageType)(value & 0xE0);
-                SubSystem = (UnpiSubSystem)(value & 0x1F);
+                Type = (MessageType)(value & 0xE0);
+                SubSystem = (SubSystem)(value & 0x1F);
             }
         }
 
@@ -153,42 +130,7 @@ namespace ZigbeeNet.CC
         /// <value>The checksum.</value>
         public byte Checksum { get; set; }
     }
-
-    public enum UnpiSubSystem : byte
-    {
-        RPC_SYS_RES = 0x00,
-        RPC_SYS_SYS = 0x01,
-        RPC_SYS_MAC = 0x02,
-        RPC_SYS_NWK = 0x03,
-        RPC_SYS_AF = 0x04,
-        RPC_SYS_ZDO = 0x05,
-        RPC_SYS_SAPI = 0x06,
-        RPC_SYS_UTIL = 0x07,
-        RPC_SYS_DBG = 0x08,
-        RPC_SYS_APP = 0x09,
-        RPC_SYS_RCAF = 0x0a,
-        RPC_SYS_RCN = 0x0b,
-        RPC_SYS_RCN_CLIENT = 0x0c,
-        RPC_SYS_BOOT = 0x0d,
-        RPC_SYS_ZIPTEST = 0x0e,
-        RPC_SYS_DEBUG = 0x0f,
-        RPC_SYS_PERIPHERALS = 0x10,
-        RPC_SYS_NFC = 0x11,
-        RPC_SYS_PB_NWK_MGR = 0x12,
-        RPC_SYS_PB_GW = 0x13,
-        RPC_SYS_PB_OTA_MGR = 0x14,
-        RPC_SYS_BLE_SPNP = 0x15,
-        RPC_SYS_BLE_HCI = 0x16,
-        RPC_SYS_RESV01 = 0x17,
-        RPC_SYS_RESV02 = 0x18,
-        RPC_SYS_RESV03 = 0x19,
-        RPC_SYS_RESV04 = 0x1a,
-        RPC_SYS_RESV05 = 0x1b,
-        RPC_SYS_RESV06 = 0x1c,
-        RPC_SYS_RESV07 = 0x1d,
-        RPC_SYS_RESV08 = 0x1e,
-        RPC_SYS_SRV_CTR = 0x1f
-    }
+    
 
     static partial class StreamExtensions
     {
@@ -207,7 +149,7 @@ namespace ZigbeeNet.CC
 
 
 
-    public class Unpi 
+    public class UnifiedNetworkProcessorInterface 
     {
         public SerialPort Port { get; set; }
         public int LenBytes;
@@ -223,11 +165,11 @@ namespace ZigbeeNet.CC
         }
 
         /// <summary>
-        /// Create a new instance of the Unpi class.
+        /// Create a new instance of the unpi class.
         /// </summary>
         /// <param name="lenBytes">1 or 2 to indicate the width of length field. Default is 2.</param>
         /// <param name="stream">The transceiver instance, i.e. serial port, spi. It should be a duplex stream.</param>
-        public Unpi(string port, int baudrate = 115200, int lenBytes = 2)
+        public UnifiedNetworkProcessorInterface(string port, int baudrate = 115200, int lenBytes = 2)
         {
             Port = new SerialPort(port, baudrate);
 
