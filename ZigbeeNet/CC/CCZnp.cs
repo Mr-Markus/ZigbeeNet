@@ -2,20 +2,111 @@
 using System.Collections.Generic;
 using System.IO;
 using ZigbeeNet;
-using UnpiNet;
 using System.Diagnostics;
 using System.Threading;
 using ZigbeeNet.ZCL;
 using BinarySerialization;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC
 {
     public class CCZnp
     {
-        private readonly ILog _logger = LogProvider.For<CCZnp>();
+        #region New Approach
 
+        private readonly SemaphoreSlim semaphore;
+        private Task readTask;
+        private Task transmitTask;
+
+        private BlockingCollection<SerialPacket> eventQueue;
+        private BlockingCollection<SerialPacket> transmitQueue;
+        private BlockingCollection<SerialPacket> responseQueue;
+
+        public void Open()
+        {
+            _logger.Debug($"Opening interface...");
+            // TODO: port must be open!!
+
+            // create or reset queues
+            transmitQueue = new BlockingCollection<SerialPacket>();
+            
+            // TODO
+            // Create tasks
+            readTask = new Task((() => ReadSerialPort(Unpi)));
+            transmitTask = new Task(() => ProcessQueue(transmitQueue, OnSend));
+
+            // TODO
+            // Start tasks
+            readTask.Start();
+
+            _logger.Debug($"Interface opened...");
+        }
+
+        private void OnSend(SerialPacket serialPacket)
+        {
+            if (serialPacket == null) throw new ArgumentNullException(nameof(serialPacket));
+
+            serialPacket.WriteAsync(Unpi.OutputStream).ConfigureAwait(false);
+            _logger.Debug($"Transmitted: {serialPacket}");
+        }
+
+        public void Close()
+        {
+            _logger.Debug($"Closing interface...");
+            
+            transmitQueue.CompleteAdding();
+
+            readTask.Wait();
+            transmitTask.Wait();
+
+            _logger.Debug($"Closed interface...");
+        }
+
+        private async void ReadSerialPort(Unpi port)
+        {
+            if (port == null) throw new ArgumentNullException(nameof(port));
+
+            while (true)
+            {
+                // Message is read from stream.
+                // think like this:
+                var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
+                
+                // unpack SerialPacket to MT_CMD 
+
+                // thinking AREQ goes into a eventQueue
+                // while SRES would go to a reponseQueue
+            }
+        }
+
+        private void ProcessQueue<T>(BlockingCollection<T> queue, Action<T> action) where T : SerialPacket
+        {
+            if (queue == null) throw new ArgumentNullException(nameof(queue));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
+            while (!queue.IsCompleted)
+            {
+                var packet = default(SerialPacket);
+                try
+                {
+                    packet = queue.Take();
+                }
+                catch (InvalidOperationException)
+                {
+                }
+
+                if (packet != null)
+                {
+                    action((T) packet);
+                }
+            }
+        }
+
+        #endregion
+
+        private readonly ILog _logger = LogProvider.For<CCZnp>();
 
         public bool Enabled { get; set; }
         public Unpi Unpi { get; set; }
@@ -25,11 +116,12 @@ namespace ZigbeeNet.CC
         public event EventHandler ResetDone;
 
         public event EventHandler<ZpiObject> AsyncResponse;
-        
+
         private ConcurrentQueue<ZpiObject> _requestQueue;
 
         private bool _reset;
-        private bool _resetting {
+        private bool _resetting
+        {
             get
             {
                 return _reset;
@@ -46,18 +138,18 @@ namespace ZigbeeNet.CC
                 }
 
                 _resetTimeout = new Timer((object state) =>
+                {
+                    if (_resetting)
                     {
-                        if(_resetting)
-                        {
-                            // if AREQ:SYS:RESET does not return in 30 sec
-                            // release the lock to avoid the requests from enqueuing
-                            _sreqRunning = null;
-                            ZpiObject ignore = new ZpiObject();
-                            _requestQueue.TryDequeue(out ignore);
-                        }
-                    }, null, dueTime, period);
-                
-                
+                        // if AREQ:SYS:RESET does not return in 30 sec
+                        // release the lock to avoid the requests from enqueuing
+                        _sreqRunning = null;
+                        ZpiObject ignore = new ZpiObject();
+                        _requestQueue.TryDequeue(out ignore);
+                    }
+                }, null, dueTime, period);
+
+
                 _reset = value;
             }
         }
@@ -76,9 +168,9 @@ namespace ZigbeeNet.CC
             ZdoMeta.Init();
 
             Unpi = new Unpi(port, baudrate, 1);
-            Unpi.DataReceived += Unpi_DataReceived;
-            Unpi.Opened += Unpi_Opened;
-            Unpi.Closed += Unpi_Closed;
+            //Unpi.DataReceived += Unpi_DataReceived;
+            //Unpi.Opened += Unpi_Opened;
+            //Unpi.Closed += Unpi_Closed;
 
             Unpi.Open();
         }
@@ -93,9 +185,9 @@ namespace ZigbeeNet.CC
             Ready?.Invoke(this, EventArgs.Empty);
         }
 
-        private void Unpi_DataReceived(object sender, Packet e)
+        private void Unpi_DataReceived(object sender, SerialPacket e)
         {
-            //Log.Information("{@Packet}", e);
+            //Log.Information("{@SerialPacket}", e);
             if (_sreqRunning != null && _sreqRunning.IndObject != null
                     && (byte)_sreqRunning.IndObject.SubSystem == (byte)e.SubSystem
                     && _sreqRunning.IndObject.CommandId == e.Cmd1)
@@ -122,8 +214,8 @@ namespace ZigbeeNet.CC
             
             if ((byte)e.Type == (byte)MessageType.AREQ)
             {
-                if ((e.SubSystem == UnpiNet.SubSystem.RPC_SYS_SYS && e.Cmd1 == 0)
-                || (e.SubSystem == UnpiNet.SubSystem.RPC_SYS_SAPI && e.Cmd1 == 9))
+                if ((e.SubSystem == UnpiSubSystem.RPC_SYS_SYS && e.Cmd1 == 0)
+                || (e.SubSystem == UnpiSubSystem.RPC_SYS_SAPI && e.Cmd1 == 9))
                 {
                     //Reset done
                     _resetting = false;
@@ -322,13 +414,13 @@ namespace ZigbeeNet.CC
 
             var serializer = new BinarySerializer();
 
-            List<Packet> packets = new List<Packet>();
+            List<SerialPacket> packets = new List<SerialPacket>();
 
             using (MemoryStream stream = new MemoryStream(buffer))
             {
-                packets.AddRange(serializer.Deserialize<List<Packet>>(stream));
+                packets.AddRange(serializer.Deserialize<List<SerialPacket>>(stream));
             }
-            foreach (Packet packet in packets)
+            foreach (SerialPacket packet in packets)
             {
                 if (packet.FrameCheckSequence.Equals(packet.Checksum) == false)
                 {
