@@ -14,7 +14,8 @@ namespace ZigbeeNet.CC
 {
     public class CCZnp
     {
-        private readonly ILog _logger = LogProvider.For<CCZnp>();
+        #region New Approach
+
         private readonly SemaphoreSlim semaphore;
         private Task readTask;
         private Task transmitTask;
@@ -22,73 +23,6 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> eventQueue;
         private BlockingCollection<SerialPacket> transmitQueue;
         private BlockingCollection<SerialPacket> responseQueue;
-
-
-        public bool Enabled { get; set; }
-        public Unpi Unpi { get; set; }
-
-        public event EventHandler Ready;
-        public event EventHandler Closed;
-        public event EventHandler ResetDone;
-
-        public event EventHandler<ZpiObject> AsyncResponse;
-        
-        private ConcurrentQueue<ZpiObject> _requestQueue;
-
-        private bool _reset;
-        private bool _resetting {
-            get
-            {
-                return _reset;
-            }
-            set
-            {
-                int dueTime = Timeout.Infinite;
-                int period = Timeout.Infinite;
-
-                if (value == true)
-                {
-                    dueTime = 30000;
-                    period = 30000;
-                }
-
-                _resetTimeout = new Timer((object state) =>
-                    {
-                        if(_resetting)
-                        {
-                            // if AREQ:SYS:RESET does not return in 30 sec
-                            // release the lock to avoid the requests from enqueuing
-                            _sreqRunning = null;
-                            ZpiObject ignore = new ZpiObject();
-                            _requestQueue.TryDequeue(out ignore);
-                        }
-                    }, null, dueTime, period);
-                
-                
-                _reset = value;
-            }
-        }
-        private Timer _resetTimeout;
-        private Timer _timeout;
-        private ZpiSREQ _sreqRunning;
-
-        public CCZnp()
-        {
-            _requestQueue = new ConcurrentQueue<ZpiObject>();
-        }
-
-        public void Init(string port, int baudrate = 115200)
-        {
-            ZpiMeta.Init();
-            ZdoMeta.Init();
-
-            Unpi = new Unpi(port, baudrate, 1);
-            Unpi.DataReceived += Unpi_DataReceived;
-            Unpi.Opened += Unpi_Opened;
-            Unpi.Closed += Unpi_Closed;
-
-            Unpi.Open();
-        }
 
         public void Open()
         {
@@ -168,6 +102,77 @@ namespace ZigbeeNet.CC
                     action((T) packet);
                 }
             }
+        }
+
+        #endregion
+
+        private readonly ILog _logger = LogProvider.For<CCZnp>();
+
+        public bool Enabled { get; set; }
+        public Unpi Unpi { get; set; }
+
+        public event EventHandler Ready;
+        public event EventHandler Closed;
+        public event EventHandler ResetDone;
+
+        public event EventHandler<ZpiObject> AsyncResponse;
+
+        private ConcurrentQueue<ZpiObject> _requestQueue;
+
+        private bool _reset;
+        private bool _resetting
+        {
+            get
+            {
+                return _reset;
+            }
+            set
+            {
+                int dueTime = Timeout.Infinite;
+                int period = Timeout.Infinite;
+
+                if (value == true)
+                {
+                    dueTime = 30000;
+                    period = 30000;
+                }
+
+                _resetTimeout = new Timer((object state) =>
+                {
+                    if (_resetting)
+                    {
+                        // if AREQ:SYS:RESET does not return in 30 sec
+                        // release the lock to avoid the requests from enqueuing
+                        _sreqRunning = null;
+                        ZpiObject ignore = new ZpiObject();
+                        _requestQueue.TryDequeue(out ignore);
+                    }
+                }, null, dueTime, period);
+
+
+                _reset = value;
+            }
+        }
+        private Timer _resetTimeout;
+        private Timer _timeout;
+        private ZpiSREQ _sreqRunning;
+
+        public CCZnp()
+        {
+            _requestQueue = new ConcurrentQueue<ZpiObject>();
+        }
+
+        public void Init(string port, int baudrate = 115200)
+        {
+            ZpiMeta.Init();
+            ZdoMeta.Init();
+
+            Unpi = new Unpi(port, baudrate, 1);
+            //Unpi.DataReceived += Unpi_DataReceived;
+            //Unpi.Opened += Unpi_Opened;
+            //Unpi.Closed += Unpi_Closed;
+
+            Unpi.Open();
         }
 
         private void Unpi_Closed(object sender, EventArgs e)

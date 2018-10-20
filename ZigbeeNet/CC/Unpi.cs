@@ -43,6 +43,8 @@ namespace ZigbeeNet.CC
 
         }
 
+        public byte Length => (byte)Payload.Length;
+
         public SerialPacket(UnpiMessageType type, UnpiSubSystem subSystem, byte commandId, byte[] payload = null)
         {
             Type = type;
@@ -136,6 +138,13 @@ namespace ZigbeeNet.CC
         ///     FCS = LEN_LSB XOR LEN_MSB XOR D1 XOR D2...XOR Dlen
         /// </summary>
         public byte FrameCheckSequence { get; set; }
+
+
+        /// <summary>
+        /// Do not use! Should be handled internally
+        /// </summary>
+        /// <value>The checksum.</value>
+        public byte Checksum { get; set; }
     }
 
     public enum UnpiSubSystem : byte
@@ -229,6 +238,16 @@ namespace ZigbeeNet.CC
         public void Close()
         {
             Port.Close();
+        }
+
+
+        /// <summary>
+        /// Sending isn't really implmented, but the correct method is to put it on the transmit queue on CCZnp
+        /// </summary>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public byte[] Send(int areq, int zpiObjectSubSystem, byte zpiObjectCommandId, byte[] zpiObjectFrame)
+        {
+            throw new NotImplementedException();
         }
     }
 }
