@@ -19,6 +19,7 @@ namespace ZigbeeNet.CC
         private readonly SemaphoreSlim semaphore;
         private Task readTask;
         private Task transmitTask;
+        public int MaxRetryCount => 3;
 
         private BlockingCollection<SerialPacket> eventQueue;
         private BlockingCollection<SerialPacket> transmitQueue;
@@ -103,6 +104,43 @@ namespace ZigbeeNet.CC
                 }
             }
         }
+
+        private async Task<byte[]> RetryAsync(Func<Task<byte[]>> func, string message,
+            CancellationToken cancellationToken)
+        {
+            if (func == null) throw new ArgumentNullException(nameof(func));
+
+            await semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+            try
+            {
+                var attempt = 0;
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    try
+                    {
+                        return await func().ConfigureAwait(false);
+                    }
+                    // TODO
+                    // Catch more specific exceptions
+                    catch (Exception e)
+                    {
+                        if (attempt++ >= MaxRetryCount)
+                            throw;
+
+                        _logger.Error($"Some error occured on: {message}. Retrying {attempt} of {MaxRetryCount}.");
+                        await Task.Delay(TimeSpan.FromMilliseconds(500), cancellationToken).ConfigureAwait(false);
+                    }
+                }
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+
+            throw new TaskCanceledException();
+        }
+
+        
 
         #endregion
 

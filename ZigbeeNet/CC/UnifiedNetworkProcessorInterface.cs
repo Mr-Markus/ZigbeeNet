@@ -74,7 +74,20 @@ namespace ZigbeeNet.CC
                 if (buffer.Skip(1).Take(buffer.Length - 2).Aggregate((byte)0xFF, (total, next) => (byte)(total ^ next)) != buffer[buffer.Length - 1])
                     throw new InvalidDataException("checksum error");
 
-                return new SerialPacket(type, subsystem, cmd1, payload);
+                if (type == MessageType.SRSP)
+                {
+                    return new SynchronousResponse(subsystem, cmd1, payload);
+                }
+                else if (type == MessageType.SREQ)
+                {
+                    return new SynchronousRequest(subsystem, cmd1, payload);
+                }
+                else if (type == MessageType.AREQ)
+                {
+                    return new AsynchronousRequest(subsystem, cmd1, payload);
+                }
+
+                throw new InvalidDataException($"unknown message type: {type}");
             }
 
             throw new InvalidDataException("unable to decode packet");
