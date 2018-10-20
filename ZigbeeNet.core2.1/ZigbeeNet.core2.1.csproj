@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>ZigbeeNet</RootNamespace>
+    <AssemblyName>ZigbeeNet</AssemblyName>
+  </PropertyGroup>
+
+  <Import Project="..\ZigbeeNet\ZigbeeNet.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="BinarySerializer" Version="8.1.3" />
+    <PackageReference Include="LibLog" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.IO.Ports" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
