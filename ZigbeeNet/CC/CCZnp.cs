@@ -24,6 +24,7 @@ namespace ZigbeeNet.CC
         public CCZnp()
         {
             _requestQueue = new ConcurrentQueue<ZpiObject>();
+            semaphore = new SemaphoreSlim(1, 1);
         }
 
         public bool Enabled { get; set; }
@@ -65,7 +66,7 @@ namespace ZigbeeNet.CC
         public event EventHandler ResetDone;
 
         public event EventHandler<ZpiObject> AsyncResponse;
-
+        
         public void Init(string port, int baudrate = 115200)
         {
             ZpiMeta.Init();
