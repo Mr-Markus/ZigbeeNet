@@ -193,7 +193,7 @@ namespace ZigbeeNet.CC
 
         public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs)
         {
-            if (unpi == null) throw new NullReferenceException("CCZnp has not been initialized yet");
+            if (unpi == null) throw new ArgumentNullException(nameof(unpi));
 
             var zpiObject = new ZpiObject(subSystem, cmdId);
             zpiObject.RequestArguments = reqestArgs;
@@ -300,7 +300,7 @@ namespace ZigbeeNet.CC
 
         private void ParseIncomingData(ZpiObject request, byte[] buffer)
         {
-            if (buffer == null || buffer.Length == 0) throw new NullReferenceException("Buffer is empty");
+            if (buffer == null || buffer.Length == 0) throw new ArgumentNullException(nameof(buffer));
 
             if (buffer[0] != 0xfe) //Fix SOF
                 throw new FormatException("Buffer is not a vailid frame");
