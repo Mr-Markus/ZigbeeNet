@@ -40,6 +40,7 @@ namespace ZigbeeNet.CC
         public Task WriteAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (stream.Length == 0) throw new ArgumentException("Stream length should not be 0");
 
             var buffer = new List<byte>();
             buffer.Add(SOF);
@@ -55,6 +56,7 @@ namespace ZigbeeNet.CC
         public static async Task<SerialPacket> ReadAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (stream.Length == 0) throw new ArgumentException("Stream length should not be 0");
 
             var buffer = new byte[1024];
             await stream.ReadAsyncExact(buffer, 0, 1);
@@ -149,8 +151,9 @@ namespace ZigbeeNet.CC
     {
         public static async Task ReadAsyncExact(this Stream stream, byte[] buffer, int offset, int count)
         {
-            if (buffer == null)
-                throw new ArgumentNullException(nameof(buffer));
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (buffer.Length == 0) throw new ArgumentException("Buffer length should not be 0");
 
             var read = 0;
             while (read < count)
