@@ -10,7 +10,7 @@ using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC
 {
-    public class CCZnp
+    public class CCZnp : IHardwareChannel
     {
         private readonly ILog _logger = LogProvider.For<CCZnp>();
 
@@ -331,6 +331,7 @@ namespace ZigbeeNet.CC
         private Task readTask;
         private Task transmitTask;
         public int MaxRetryCount => 3;
+        private TimeSpan ResponseTimeout { get; } = TimeSpan.FromSeconds(5);
 
         private BlockingCollection<SerialPacket> eventQueue;
         private BlockingCollection<SerialPacket> transmitQueue;
@@ -450,7 +451,7 @@ namespace ZigbeeNet.CC
                     }
                     // TODO
                     // Catch more specific exceptions
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         if (attempt++ >= MaxRetryCount)
                             throw;
@@ -488,9 +489,7 @@ namespace ZigbeeNet.CC
 
             throw new TaskCanceledException();
         }
-
-        private TimeSpan ResponseTimeout { get; } = TimeSpan.FromSeconds(5);
-
+        
         private Task<byte[]> Send(SubSystem subSystem, byte[] payload, Func<SynchronousResponse, bool> predicate,
             CancellationToken cancellationToken)
         {
