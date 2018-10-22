@@ -56,7 +56,6 @@ namespace ZigbeeNet.CC
         public static async Task<SerialPacket> ReadAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
-            if (stream.Length == 0) throw new ArgumentException("Stream length should not be 0");
 
             var buffer = new byte[1024];
             await stream.ReadAsyncExact(buffer, 0, 1);
@@ -65,15 +64,15 @@ namespace ZigbeeNet.CC
             {
                 await stream.ReadAsyncExact(buffer, 1, 1);
                 var length = buffer[1];
-                await stream.ReadAsyncExact(buffer, 2, length + 2);
+                await stream.ReadAsyncExact(buffer, 2, length + 3);
 
 
-                var type = (MessageType)(buffer[2] & 0xe0);
+                var type = (MessageType)(buffer[2] >> 5 & 0x07);
                 var subsystem = (SubSystem)(buffer[2] & 0x1f);
                 var cmd1 = buffer[3];
                 var payload = buffer.Skip(4).Take(length - 2).ToArray();
 
-                if (buffer.Skip(1).Take(buffer.Length - 2).Aggregate((byte)0xFF, (total, next) => (byte)(total ^ next)) != buffer[buffer.Length - 1])
+                if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
 
                 if (type == MessageType.SRSP)
