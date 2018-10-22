@@ -40,7 +40,6 @@ namespace ZigbeeNet.CC
         public Task WriteAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
-            if (stream.Length == 0) throw new ArgumentException("Stream length should not be 0");
 
             var buffer = new List<byte>();
             buffer.Add(SOF);
