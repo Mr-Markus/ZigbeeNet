@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using BinarySerialization;
-using ZigbeeNet.CC.SYS;
 using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.Logging;
 
@@ -29,12 +26,18 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SerialPacket> _responseQueue;
 
+        private ConcurrentQueue<EndDeviceAnnouncedInd> _joinQueue;
+        private bool _spinLock;
+
         public int MaxRetryCount => 3;
-        public bool Enabled { get; set; }
+
+        public event EventHandler Started;
+        public event EventHandler<Device> NewDevice;
 
         public CCZnp()
         {
             semaphore = new SemaphoreSlim(1, 1);
+            _joinQueue = new ConcurrentQueue<EndDeviceAnnouncedInd>();
 
             ZpiMeta.Init();
             ZdoMeta.Init();
@@ -47,10 +50,8 @@ namespace ZigbeeNet.CC
             _tokenSource = new CancellationTokenSource();
 
             _logger.Debug("Opening interface...");
-            // TODO: port must be open!!
+            // Port must be open!!
             unpi.Port.Open();
-
-            Enabled = true;
 
             // create or reset queues
             _transmitQueue = new BlockingCollection<SerialPacket>();
@@ -64,27 +65,17 @@ namespace ZigbeeNet.CC
             _areqTask = ProcessQueueAsync(_areqQueue, OnReceive);
 
             _logger.Debug("Interface opened...");
-        }
 
-        private void OnSend(SerialPacket serialPacket)
-        {
-            if (serialPacket == null)
-                throw new ArgumentNullException(nameof(serialPacket));
-
-            serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
-            _logger.Debug($"Transmitted: {serialPacket}");
-        }
-
-        private void OnReceive(AsynchronousRequest asynchronousRequest)
-        {
-            //TODO: HandleIncommingMessage
+            //TODO: Maybe it is not correct at this point
+            //==> Starts the hardware CC2531
+            SAPI.StartRequest startRequest = new SAPI.StartRequest();
+            startRequest.OnResponse += (_, e) => Started?.Invoke(this, EventArgs.Empty);
+            startRequest.RequestAsync(this);
         }
 
         public void Close()
         {
             _logger.Debug("Closing interface...");
-
-            Enabled = false;
 
             _transmitQueue.CompleteAdding();
             _areqQueue.CompleteAdding();
@@ -108,11 +99,18 @@ namespace ZigbeeNet.CC
         {
             if (port == null) throw new ArgumentNullException(nameof(port));
 
-            while (Enabled)
+            while (true)
             {
                 try
                 {
+                    if(_tokenSource.IsCancellationRequested)
+                    {
+                        break;
+                    }
+
                     var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
+
+                    _logger.Info($"Paket read: {@serialPacket}", serialPacket);
 
                     // SerialPacket.ReadAsync() return the correct package class, so 
                     // we can start processing them into the correct queue here
@@ -135,9 +133,48 @@ namespace ZigbeeNet.CC
             }
         }
 
+        public async Task<byte[]> SendAsync(byte[] payload)
+        {
+            if (unpi.Port.IsOpen == false)
+                throw new Exception("Port is not opened");
+
+            using (MemoryStream stream = new MemoryStream(payload))
+            {
+                var packet = await SerialPacket.ReadAsync(stream).ConfigureAwait(false);
+
+                return await SendAsync(packet.SubSystem, packet.Payload,
+                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
+            }
+        }
+
         protected virtual void OnError(Exception e)
         {
             _logger.Error($"Exception: {e}");
+        }
+
+        private void OnSend(SerialPacket serialPacket)
+        {
+            if (serialPacket == null)
+                throw new ArgumentNullException(nameof(serialPacket));
+
+            serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
+            _logger.Debug($"Transmitted: {serialPacket}");
+        }
+
+        private void OnReceive(AsynchronousRequest asynchronousRequest)
+        {
+            //TODO: HandleIncommingMessage
+            if (asynchronousRequest.SubSystem == SubSystem.ZDO && asynchronousRequest.Cmd1 == (byte)ZdoCommand.endDeviceAnnceInd)
+            {
+                ZpiObject zpiObject = new ZpiObject(asynchronousRequest.SubSystem, asynchronousRequest.Cmd1);
+                zpiObject.Parse(asynchronousRequest.Type, asynchronousRequest.Length, asynchronousRequest.Payload);
+
+                EndDeviceAnnouncedInd ind = zpiObject.ToSpecificObject<EndDeviceAnnouncedInd>();
+
+                endDeviceAnnceHdlr(ind);
+            }
+
+            //TODO: EventHandler or Bridge class should handle special requests
         }
 
         private Task ProcessQueueAsync<T>(BlockingCollection<T> queue, Action<T> action) where T : SerialPacket
@@ -247,18 +284,42 @@ namespace ZigbeeNet.CC
             }, $"{subSystem} {(payload != null ? BitConverter.ToString(payload) : string.Empty)}");
         }
 
-        public async Task<byte[]> SendAsync(byte[] payload)
+        private void endDeviceAnnceHdlr(EndDeviceAnnouncedInd deviceInd)
         {
-            if (unpi.Port.IsOpen == false)
-                throw new Exception("Port is not opened");
-
-            using(MemoryStream stream = new MemoryStream(payload))
+            //TODO: Try to get device from device db and check status if it is online. If true continue with next ind
+            Device device = null;
+            if (device != null && device.Status == DeviceStatus.Online)
             {
-                var packet = await SerialPacket.ReadAsync(stream).ConfigureAwait(false);
+                Console.WriteLine("Device already in Network");
 
-                return await SendAsync(packet.SubSystem, packet.Payload,
-                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
+                EndDeviceAnnouncedInd removed = null;
+                if (_joinQueue.TryDequeue(out removed))
+                {
+                    EndDeviceAnnouncedInd next = null;
+
+                    if (_joinQueue.TryDequeue(out next))
+                    {
+                        endDeviceAnnceHdlr(next);
+                    }
+                    else
+                    {
+                        _spinLock = false;
+                    }
+                }
+
+                return;
             }
+
+            //TODO: Timeout
+
+            Query query = new Query(this);
+
+            query.GetDevice(deviceInd.NetworkAddress, deviceInd.IeeeAddress, (dev) =>
+            {
+                NewDevice?.Invoke(this, dev);
+            });
+
+            NewDevice?.Invoke(this, device);
         }
     }
 }

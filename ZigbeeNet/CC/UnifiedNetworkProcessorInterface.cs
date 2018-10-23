@@ -41,13 +41,10 @@ namespace ZigbeeNet.CC
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                await WriteAsync(stream).ContinueWith( (task) =>
-                {
-                    return stream.ToArray();
-                }).ConfigureAwait(false);
-            }
+                await WriteAsync(stream).ConfigureAwait(false);
 
-            return null;
+                return stream.ToArray();
+            }
         }
 
         public async Task WriteAsync(Stream stream)
@@ -60,7 +57,7 @@ namespace ZigbeeNet.CC
             buffer.Add(Cmd0);
             buffer.Add(Cmd1);
             buffer.AddRange(Payload);
-            buffer.Add(buffer.Skip(1).Aggregate((byte)0xFF, (total, next) => total ^= next));
+            buffer.Add(buffer.Skip(1).Aggregate((byte)0x00, (total, next) => total ^= next));
 
             await stream.WriteAsync(buffer.ToArray(), 0, buffer.Count);
         }
@@ -82,7 +79,7 @@ namespace ZigbeeNet.CC
                 var type = (MessageType)(buffer[2] >> 5 & 0x07);
                 var subsystem = (SubSystem)(buffer[2] & 0x1f);
                 var cmd1 = buffer[3];
-                var payload = buffer.Skip(4).Take(length - 2).ToArray();
+                var payload = buffer.Skip(4).Take(length).ToArray();
 
                 if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
@@ -155,6 +152,11 @@ namespace ZigbeeNet.CC
         /// </summary>
         /// <value>The checksum.</value>
         public byte Checksum { get; set; }
+
+        public override string ToString()
+        {
+            return $"{{ SubSys: {SubSystem}, Type: {Type}, Cmd1: {Cmd1}, Length: {Length} }}";
+        }
     }
     
 

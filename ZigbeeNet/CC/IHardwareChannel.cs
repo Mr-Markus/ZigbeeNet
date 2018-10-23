@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ZigbeeNet.CC
@@ -12,6 +13,10 @@ namespace ZigbeeNet.CC
     /// </summary>
     public interface IHardwareChannel
     {
+        //TODO: Started event???
+        event EventHandler Started;
+        event EventHandler<Device> NewDevice;
+
         void Open();
         void Close();
         Task<byte[]> SendAsync(byte[] payload);
