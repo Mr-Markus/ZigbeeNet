@@ -37,6 +37,19 @@ namespace ZigbeeNet.CC
             Payload = payload != null ? payload : new byte[0];
         }
 
+        public Task<byte[]> ToFrame()
+        {
+            using(MemoryStream stream = new MemoryStream())
+            {
+                WriteAsync(stream).ContinueWith( (task) =>
+                {
+                    return stream.ToArray();
+                });
+            }
+
+            return null;
+        }
+
         public Task WriteAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));

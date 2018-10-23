@@ -14,6 +14,8 @@ namespace ZigbeeNet.CC
     {
         void Open();
         void Close();
-        Task<byte[]> Send(SubSystem subSystem, CancellationToken cancellationToken, params byte[] payload);
+        Task<byte[]> Send(CancellationToken cancellationToken, params byte[] payload);
+
+        Task<byte[]> PermitJoin(int time, CancellationToken cancellationToken);
     }
 }

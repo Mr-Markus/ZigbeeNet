@@ -102,9 +102,9 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public override void Request(CCZnp znp)
+        public async override void Request(IHardwareChannel znp)
         {
-            znp.SendSREQ(this, false);
+            await znp.Send(System.Threading.CancellationToken.None, await this.ToSerialPacket().ToFrame());
         }
 
         public override void Parse(MessageType type, int length, byte[] buffer)
@@ -123,15 +123,11 @@ namespace ZigbeeNet.CC
                     Status = (ZpiStatus)ResponseArguments["status"];
                 }
 
-                IsParsed = true;
-
                 Parsed(this);
             }
             else
             {
                 base.ParseArguments(RequestArguments, length, buffer);
-
-                IsParsed = true;
 
                 Parsed(this);
             }

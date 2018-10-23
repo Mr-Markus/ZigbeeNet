@@ -16,9 +16,7 @@ namespace ZigbeeNet.CC
         public virtual byte CommandId { get; set; }
 
         public string Name { get; set; }
-
-        public bool IsParsed { get; protected set; }
-
+        
         private ZpiObject _indObject;
         public ZpiObject IndObject
         {
@@ -157,9 +155,9 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public virtual void Request(CCZnp znp)
+        public async virtual void Request(IHardwareChannel znp)
         {
-            znp.Request(this);
+            await znp.Send(System.Threading.CancellationToken.None, await this.ToSerialPacket().ToFrame());
         }
 
         protected void ParseArguments(ArgumentCollection arguments, int length, byte[] buffer)
@@ -332,11 +330,14 @@ namespace ZigbeeNet.CC
             if(type != MessageType.SRSP)
             {
                 ParseArguments(RequestArguments, length, buffer);
-
-                IsParsed = true;
-
+                
                 Parsed(this);
             }
+        }
+
+        public SerialPacket ToSerialPacket()
+        {
+            return new SerialPacket(this.Type, this.SubSystem, this.CommandId, this.Frame);
         }
 
         public override string ToString()

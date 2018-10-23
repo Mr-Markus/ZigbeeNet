@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BinarySerialization;
 using ZigbeeNet.CC.SYS;
+using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC
@@ -14,316 +15,22 @@ namespace ZigbeeNet.CC
     {
         private readonly ILog _logger = LogProvider.For<CCZnp>();
 
-        private ConcurrentQueue<ZpiObject> _requestQueue;
-
-        private bool _reset;
-        private Timer _resetTimeout;
-        private ZpiSREQ _sreqRunning;
-        private Timer _timeout;
-
-        public CCZnp()
-        {
-            _requestQueue = new ConcurrentQueue<ZpiObject>();
-            semaphore = new SemaphoreSlim(1, 1);
-        }
-
         public bool Enabled { get; set; }
         private UnifiedNetworkProcessorInterface unpi { get; set; }
 
-        private bool _resetting
+        public CCZnp()
         {
-            get => _reset;
-            set
-            {
-                var dueTime = Timeout.Infinite;
-                var period = Timeout.Infinite;
+            semaphore = new SemaphoreSlim(1, 1);
 
-                if (value)
-                {
-                    dueTime = 30000;
-                    period = 30000;
-                }
-
-                _resetTimeout = new Timer(state =>
-                {
-                    if (_resetting)
-                    {
-                        // if AREQ:SYS:RESET does not return in 30 sec
-                        // release the lock to avoid the requests from enqueuing
-                        _sreqRunning = null;
-                        var ignore = new ZpiObject();
-                        _requestQueue.TryDequeue(out ignore);
-                    }
-                }, null, dueTime, period);
-
-
-                _reset = value;
-            }
+            Init("COM3", 115200);
         }
-
-        public event EventHandler Ready;
-        public event EventHandler Closed;
-        public event EventHandler ResetDone;
-
-        public event EventHandler<ZpiObject> AsyncResponse;
-        
+ 
         public void Init(string port, int baudrate = 115200)
         {
             ZpiMeta.Init();
             ZdoMeta.Init();
 
             unpi = new UnifiedNetworkProcessorInterface(port, baudrate, 1);
-            //unpi.DataReceived += Unpi_DataReceived;
-            //unpi.Opened += Unpi_Opened;
-            //unpi.Closed += Unpi_Closed;
-
-            unpi.Open();
-        }
-
-        private void Unpi_Closed(object sender, EventArgs e)
-        {
-            Stop();
-        }
-
-        private void Unpi_Opened(object sender, EventArgs e)
-        {
-            Ready?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void Unpi_DataReceived(object sender, SerialPacket e)
-        {
-            //Log.Information("{@SerialPacket}", e);
-            if (_sreqRunning != null && _sreqRunning.IndObject != null
-                                     && (byte) _sreqRunning.IndObject.SubSystem == (byte) e.SubSystem
-                                     && _sreqRunning.IndObject.CommandId == e.Cmd1)
-            {
-                _timeout.Change(Timeout.Infinite, Timeout.Infinite);
-
-                _resetting = false;
-
-                _sreqRunning.IndObject.OnParsed += (s, result) =>
-                {
-                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
-
-                    ZpiObject current = _sreqRunning;
-
-                    // schedule next transmission if something in txQueue
-                    ScheduleNextSend();
-
-                    current.Response(result);
-                };
-                _sreqRunning.IndObject.Parse(e.Type, e.Length, e.Payload);
-
-                return;
-            }
-
-            if ((byte) e.Type == (byte) MessageType.AREQ)
-            {
-                if (e.SubSystem == SubSystem.SYS && e.Cmd1 == 0
-                    || e.SubSystem == SubSystem.SAPI && e.Cmd1 == 9)
-                {
-                    //Reset done
-                    _resetting = false;
-
-                    ResetDone?.Invoke(this, EventArgs.Empty);
-
-                    return;
-                }
-
-                var zpiObject = new ZpiObject(e.SubSystem, e.Type, e.Cmd1);
-                zpiObject.OnParsed += (s, result) =>
-                {
-                    _logger.Info("{Type} - {SubSystem} - {Name}", e.Type, result.SubSystem, result.Name);
-
-                    AsyncResponse?.Invoke(this, result);
-                };
-                zpiObject.Parse(e.Type, e.Length, e.Payload);
-            }
-            else if ((byte) e.Type == (byte) MessageType.SRSP)
-            {
-                if (_sreqRunning != null)
-                    if ((byte) _sreqRunning.SubSystem == (byte) e.SubSystem && _sreqRunning.CommandId == e.Cmd1)
-                    {
-                        // Status Response
-                        _timeout.Change(Timeout.Infinite, Timeout.Infinite);
-
-                        _resetting = false;
-
-                        _sreqRunning.OnParsed += (s, result) =>
-                        {
-                            var sREQ = (ZpiSREQ) result;
-
-                            _logger.Info("{Type} - {SubSystem} - {Name} - {Status}", e.Type, sREQ.SubSystem, sREQ.Name,
-                                sREQ.Status);
-
-                            if (_sreqRunning.IndObject == null)
-                            {
-                                ZpiObject current = _sreqRunning;
-
-                                // schedule next transmission if something in txQueue
-                                ScheduleNextSend();
-
-                                current.Response(result);
-                            }
-                        };
-                        _sreqRunning.Parse(e.Type, e.Length, e.Payload);
-                    }
-            }
-        }
-
-        public void Start()
-        {
-            Enabled = true;
-            unpi.Open();
-        }
-
-        public void Stop()
-        {
-            Enabled = false;
-            _requestQueue = new ConcurrentQueue<ZpiObject>();
-            unpi = null;
-
-            Closed?.Invoke(this, EventArgs.Empty);
-        }
-
-        public byte[] SendCommand(MessageType type, SubSystem subSystem, byte commandId, byte[] payload)
-        {
-            return unpi.Send((int) type, (int) subSystem, commandId, payload);
-        }
-
-        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection reqestArgs)
-        {
-            if (unpi == null) throw new ArgumentNullException(nameof(unpi));
-
-            var zpiObject = new ZpiObject(subSystem, cmdId);
-            zpiObject.RequestArguments = reqestArgs;
-
-            Request(zpiObject);
-        }
-
-        public void Request(ZpiObject zpiObject)
-        {
-            _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
-
-            if (_sreqRunning != null)
-            {
-                _requestQueue.Enqueue(zpiObject);
-
-                return;
-            }
-
-            //prepare for transmission
-
-            if (zpiObject.Type == MessageType.SREQ)
-            {
-                var zpiSREQ = new ZpiSREQ(zpiObject);
-                SendSREQ(zpiSREQ, true);
-            }
-            else if (zpiObject.Type == MessageType.AREQ)
-            {
-                SendAREQ(zpiObject);
-            }
-        }
-
-        public void SendSREQ(ZpiSREQ zpiObject, bool queueDone = true)
-        {
-            //prepare for transmission
-            if (queueDone == false)
-            {
-                _logger.Info("{Type} - {SubSystem} - {Name}", zpiObject.Type, zpiObject.SubSystem, zpiObject.Name);
-
-                if (_sreqRunning != null)
-                {
-                    _requestQueue.Enqueue(zpiObject);
-
-                    return;
-                }
-            }
-
-            _sreqRunning = zpiObject;
-
-            _timeout = new Timer(state =>
-            {
-                if (_sreqRunning != null)
-                {
-                    _sreqRunning = null;
-                    _timeout.Change(Timeout.Infinite, Timeout.Infinite);
-
-                    if (state is ZpiSREQ)
-                    {
-                        var zpi = state as ZpiSREQ;
-                        throw new TimeoutException(
-                            $"Request timeout: {zpi.Type.ToString()}:{zpi.SubSystem.ToString()}:{zpi.Name}");
-                    }
-
-                    throw new TimeoutException("Request timeout");
-                }
-            }, zpiObject, 300000, 300000); //TODO: Get timeout by config            
-
-            unpi.Send((int) MessageType.SREQ, (int) zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
-        }
-
-        public void SendAREQ(ZpiObject zpiObject)
-        {
-            if (_sreqRunning != null)
-            {
-                _requestQueue.Enqueue(zpiObject);
-
-                return;
-            }
-
-            if (zpiObject.SubSystem == SubSystem.SYS && zpiObject.CommandId == 0
-                || zpiObject.SubSystem == SubSystem.SAPI && zpiObject.CommandId == 9) //resetReq or systemReset
-            {
-                _resetting = true;
-
-                // clear all pending requests, since the system is reset
-                _requestQueue = new ConcurrentQueue<ZpiObject>();
-
-                AsyncResponse += (sender, e) =>
-                {
-                    if (e.Type == MessageType.AREQ && e.SubSystem == SubSystem.SYS &&
-                        e.CommandId == (byte) SysCommand.resetInd) _resetting = false;
-                };
-            }
-
-            unpi.Send((int) MessageType.AREQ, (int) zpiObject.SubSystem, zpiObject.CommandId, zpiObject.Frame);
-        }
-
-        private void ScheduleNextSend()
-        {
-            _sreqRunning = null;
-
-            var next = new ZpiObject();
-            if (_requestQueue.TryDequeue(out next)) Request(next);
-        }
-
-        private void ParseIncomingData(ZpiObject request, byte[] buffer)
-        {
-            if (buffer == null || buffer.Length == 0) throw new ArgumentNullException(nameof(buffer));
-
-            if (buffer[0] != 0xfe) //Fix SOF
-                throw new FormatException("Buffer is not a vailid frame");
-
-            var serializer = new BinarySerializer();
-
-            var packets = new List<SerialPacket>();
-
-            using (var stream = new MemoryStream(buffer))
-            {
-                packets.AddRange(serializer.Deserialize<List<SerialPacket>>(stream));
-            }
-
-            foreach (var packet in packets)
-            {
-                if (packet.FrameCheckSequence.Equals(packet.Checksum) == false)
-                    throw new Exception("Received FCS is not equal with new packet");
-
-                var result = new ZpiObject(packet.SubSystem, packet.Type, packet.Cmd1);
-                result.Parse(packet.Type, packet.Length, packet.Payload);
-
-                request.Response(result);
-            }
         }
 
         #region New Approach
@@ -334,7 +41,7 @@ namespace ZigbeeNet.CC
         public int MaxRetryCount => 3;
         private TimeSpan ResponseTimeout { get; } = TimeSpan.FromSeconds(5);
 
-        private BlockingCollection<SerialPacket> eventQueue;
+        private BlockingCollection<SerialPacket> areqQueue;
         private BlockingCollection<SerialPacket> transmitQueue;
         private BlockingCollection<SerialPacket> responseQueue;
 
@@ -342,15 +49,18 @@ namespace ZigbeeNet.CC
         {
             _logger.Debug("Opening interface...");
             // TODO: port must be open!!
+            unpi.Port.Open();
+
+            Enabled = true;
 
             // create or reset queues
             transmitQueue = new BlockingCollection<SerialPacket>();
-            eventQueue = new BlockingCollection<SerialPacket>();
+            areqQueue = new BlockingCollection<SerialPacket>();
             responseQueue = new BlockingCollection<SerialPacket>();
 
             // TODO
             // Create tasks
-            readTask = new Task(() => ReadSerialPort(unpi));
+            readTask = new Task(() => ReadSerialPortAsync(unpi));
             transmitTask = new Task(() => ProcessQueue(transmitQueue, OnSend));
 
             // TODO
@@ -363,7 +73,8 @@ namespace ZigbeeNet.CC
 
         private void OnSend(SerialPacket serialPacket)
         {
-            if (serialPacket == null) throw new ArgumentNullException(nameof(serialPacket));
+            if (serialPacket == null)
+                throw new ArgumentNullException(nameof(serialPacket));
 
             serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
             _logger.Debug($"Transmitted: {serialPacket}");
@@ -373,8 +84,10 @@ namespace ZigbeeNet.CC
         {
             _logger.Debug("Closing interface...");
 
+            Enabled = false;
+
             transmitQueue.CompleteAdding();
-            eventQueue.CompleteAdding();
+            areqQueue.CompleteAdding();
             responseQueue.CompleteAdding();
 
             readTask.Wait();
@@ -383,11 +96,18 @@ namespace ZigbeeNet.CC
             _logger.Debug("Closed interface...");
         }
 
-        private async void ReadSerialPort(UnifiedNetworkProcessorInterface port)
+        public async Task<byte[]> PermitJoin(int time, CancellationToken token)
+        {
+            PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
+
+            return await Send(token, await permitJoinRequest.ToSerialPacket().ToFrame());
+        }
+
+        private async void ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
         {
             if (port == null) throw new ArgumentNullException(nameof(port));
 
-            while (true)
+            while (Enabled)
                 try
                 {
                     var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
@@ -400,9 +120,12 @@ namespace ZigbeeNet.CC
                         continue;
                     }
 
-                    if (serialPacket is AsynchronousRequest) eventQueue.Add(serialPacket);
+                    if (serialPacket is AsynchronousRequest)
+                    {
+                        //TODO: Check if it is a callback for an SREQ
 
-                    // Ok, not sure but if we reach here something is afoot?
+                        areqQueue.Add(serialPacket);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -469,7 +192,7 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
 
-        private async Task<SerialPacket> WaitForResponse(Func<SerialPacket, bool> predicate,
+        private async Task<SerialPacket> WaitForResponseAsync(Func<SerialPacket, bool> predicate,
             CancellationToken cancellationToken)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -499,18 +222,30 @@ namespace ZigbeeNet.CC
                 var request = new SynchronousRequest(subSystem, 0, payload);
                 transmitQueue.Add(request);
 
-                var response = await WaitForResponse(msg => predicate((SynchronousResponse) msg), cancellationToken)
+                var response = await WaitForResponseAsync(msg => predicate((SynchronousResponse) msg), cancellationToken)
                     .ConfigureAwait(false);
+
+                var zpiObject = new ZpiObject(response.SubSystem, response.Type, response.Cmd1);
+                zpiObject.OnParsed += (s, result) =>
+                {
+                    _logger.Info("Parsed: {Type} - {SubSystem} - {Name}", response.Type, result.SubSystem, result.Name);
+                };
+                zpiObject.Parse(response.Type, response.Length, response.Payload);
 
                 return ((SynchronousResponse) response).Payload;
             }, $"{subSystem} {(payload != null ? BitConverter.ToString(payload) : string.Empty)}", cancellationToken);
         }
 
-        public Task<byte[]> Send(SubSystem subSystem, CancellationToken cancellationToken, params byte[] payload)
+        public async Task<byte[]> Send(CancellationToken cancellationToken, params byte[] payload)
         {
-            return Send(subSystem, payload,
-                msg => { return msg is SynchronousResponse && msg.SubSystem == subSystem; },
-                cancellationToken);
+            using(MemoryStream stream = new MemoryStream(payload))
+            {
+                var packet = await SerialPacket.ReadAsync(stream);
+
+                return await Send(packet.SubSystem, packet.Payload,
+                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; },
+                    cancellationToken);
+            }
         }
 
         #endregion

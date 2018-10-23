@@ -7,6 +7,7 @@ using ZigbeeNet.CC;
 using ZigbeeNet.ZCL;
 using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.CC.SAPI;
+using System.Threading;
 
 namespace ZigbeeNet
 {
@@ -15,7 +16,7 @@ namespace ZigbeeNet
         private Options _options;
 
         public ZigbeeService Service { get; }
-        public CCZnp Znp { get; set; }
+        public IHardwareChannel Znp { get; set; }
 
         public event EventHandler Started;
         public event EventHandler Stoped;
@@ -35,8 +36,6 @@ namespace ZigbeeNet
             Service = service;
 
             Znp = new CCZnp();
-            Znp.Ready += Znp_Ready;
-            Znp.AsyncResponse += Znp_AsyncResponse;
         }
 
         private void Znp_SyncResponse(object sender, ZpiObject e)
@@ -86,22 +85,7 @@ namespace ZigbeeNet
         {
             Started?.Invoke(this, EventArgs.Empty);
         }
-
-        //init.setupCoord = function(controller, callback)
-        //{
-
-        //    return controller.checkNvParams().then(function() {
-
-        //        return init._bootCoordFromApp(controller);
-
-        //    }).then(function(netInfo) {
-
-        //        return init._registerDelegators(controller, netInfo);
-
-        //    }).nodeify(callback);
-
-        //};
-
+        
         private void BootCoordFromApp()
         {
 
@@ -114,7 +98,7 @@ namespace ZigbeeNet
 
         public void Start()
         {
-            Znp.Init(_options.Port, _options.Baudrate);
+            Znp.Open();
         }
 
         private void endDeviceAnnceHdlr(EndDeviceAnnouncedInd deviceInd)
@@ -159,24 +143,9 @@ namespace ZigbeeNet
                 throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
             }
 
-            PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
+            var cancelToken = new CancellationTokenSource();
 
-            this.Request(permitJoinRequest);
-        }
-
-        public void Request(ZpiObject zpiObject)
-        {
-            Znp.Request(zpiObject);
-        }
-
-        public void Request(SubSystem subSystem, byte cmdId, ArgumentCollection valObj)
-        {
-            ZpiObject zpiObject = new ZpiObject(subSystem, cmdId)
-            {
-                RequestArguments = valObj
-            };
-
-            Request(zpiObject);
+            Znp.PermitJoin(time, cancelToken.Token);
         }
 
         internal byte NextTransId()

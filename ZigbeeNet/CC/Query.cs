@@ -9,9 +9,9 @@ namespace ZigbeeNet.CC
 {
     public class Query
     {
-        private CCZnp _znp;
+        private IHardwareChannel _znp;
 
-        public Query(CCZnp znp)
+        public Query(IHardwareChannel znp)
         {
             _znp = znp;
         }
