@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using ZigbeeNet.CC.ZDO;
 
 namespace ZigbeeNet.CC
@@ -155,9 +156,11 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public async virtual void Request(IHardwareChannel znp)
+        public async virtual void RequestAsync(IHardwareChannel znp)
         {
-            await znp.Send(System.Threading.CancellationToken.None, await this.ToSerialPacket().ToFrame());
+            byte[] data = await this.ToSerialPacket().ToFrame().ConfigureAwait(false);
+
+            await znp.SendAsync(data).ConfigureAwait(false);
         }
 
         protected void ParseArguments(ArgumentCollection arguments, int length, byte[] buffer)

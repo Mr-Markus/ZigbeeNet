@@ -102,9 +102,10 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public async override void Request(IHardwareChannel znp)
+        public async override void RequestAsync(IHardwareChannel znp)
         {
-            await znp.Send(System.Threading.CancellationToken.None, await this.ToSerialPacket().ToFrame());
+            byte[] data = await this.ToSerialPacket().ToFrame().ConfigureAwait(false);
+            await znp.SendAsync(data).ConfigureAwait(false);
         }
 
         public override void Parse(MessageType type, int length, byte[] buffer)

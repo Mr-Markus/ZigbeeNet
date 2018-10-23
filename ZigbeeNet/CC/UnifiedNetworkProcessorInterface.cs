@@ -37,20 +37,20 @@ namespace ZigbeeNet.CC
             Payload = payload != null ? payload : new byte[0];
         }
 
-        public Task<byte[]> ToFrame()
+        public async Task<byte[]> ToFrame()
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                WriteAsync(stream).ContinueWith( (task) =>
+                await WriteAsync(stream).ContinueWith( (task) =>
                 {
                     return stream.ToArray();
-                });
+                }).ConfigureAwait(false);
             }
 
             return null;
         }
 
-        public Task WriteAsync(Stream stream)
+        public async Task WriteAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 
@@ -62,7 +62,7 @@ namespace ZigbeeNet.CC
             buffer.AddRange(Payload);
             buffer.Add(buffer.Skip(1).Aggregate((byte)0xFF, (total, next) => total ^= next));
 
-            return stream.WriteAsync(buffer.ToArray(), 0, buffer.Count);
+            await stream.WriteAsync(buffer.ToArray(), 0, buffer.Count);
         }
 
         public static async Task<SerialPacket> ReadAsync(Stream stream)

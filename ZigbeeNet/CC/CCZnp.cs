@@ -14,39 +14,38 @@ namespace ZigbeeNet.CC
     public class CCZnp : IHardwareChannel
     {
         private readonly ILog _logger = LogProvider.For<CCZnp>();
+        private readonly SemaphoreSlim semaphore;
 
-        public bool Enabled { get; set; }
         private UnifiedNetworkProcessorInterface unpi { get; set; }
+        private CancellationTokenSource _tokenSource;
+        
+        private Task _readTask;
+        private Task _transmitTask;
+        private Task _areqTask;
+
+        private TimeSpan ResponseTimeout { get; } = TimeSpan.FromSeconds(5);
+
+        private BlockingCollection<AsynchronousRequest> _areqQueue;
+        private BlockingCollection<SerialPacket> _transmitQueue;
+        private BlockingCollection<SerialPacket> _responseQueue;
+
+        public int MaxRetryCount => 3;
+        public bool Enabled { get; set; }
 
         public CCZnp()
         {
             semaphore = new SemaphoreSlim(1, 1);
 
-            Init("COM3", 115200);
-        }
- 
-        public void Init(string port, int baudrate = 115200)
-        {
             ZpiMeta.Init();
             ZdoMeta.Init();
 
-            unpi = new UnifiedNetworkProcessorInterface(port, baudrate, 1);
+            unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
         }
-
-        #region New Approach
-
-        private readonly SemaphoreSlim semaphore;
-        private Task readTask;
-        private Task transmitTask;
-        public int MaxRetryCount => 3;
-        private TimeSpan ResponseTimeout { get; } = TimeSpan.FromSeconds(5);
-
-        private BlockingCollection<SerialPacket> areqQueue;
-        private BlockingCollection<SerialPacket> transmitQueue;
-        private BlockingCollection<SerialPacket> responseQueue;
 
         public void Open()
         {
+            _tokenSource = new CancellationTokenSource();
+
             _logger.Debug("Opening interface...");
             // TODO: port must be open!!
             unpi.Port.Open();
@@ -54,19 +53,15 @@ namespace ZigbeeNet.CC
             Enabled = true;
 
             // create or reset queues
-            transmitQueue = new BlockingCollection<SerialPacket>();
-            areqQueue = new BlockingCollection<SerialPacket>();
-            responseQueue = new BlockingCollection<SerialPacket>();
+            _transmitQueue = new BlockingCollection<SerialPacket>();
+            _areqQueue = new BlockingCollection<AsynchronousRequest>();
+            _responseQueue = new BlockingCollection<SerialPacket>();
 
             // TODO
             // Create tasks
-            readTask = new Task(() => ReadSerialPortAsync(unpi));
-            transmitTask = new Task(() => ProcessQueue(transmitQueue, OnSend));
-
-            // TODO
-            // Start tasks
-            readTask.Start();
-            transmitTask.Start();
+            _readTask = ReadSerialPortAsync(unpi);
+            _transmitTask = ProcessQueueAsync(_transmitQueue, OnSend);
+            _areqTask = ProcessQueueAsync(_areqQueue, OnReceive);
 
             _logger.Debug("Interface opened...");
         }
@@ -80,51 +75,56 @@ namespace ZigbeeNet.CC
             _logger.Debug($"Transmitted: {serialPacket}");
         }
 
+        private void OnReceive(AsynchronousRequest asynchronousRequest)
+        {
+            //TODO: HandleIncommingMessage
+        }
+
         public void Close()
         {
             _logger.Debug("Closing interface...");
 
             Enabled = false;
 
-            transmitQueue.CompleteAdding();
-            areqQueue.CompleteAdding();
-            responseQueue.CompleteAdding();
+            _transmitQueue.CompleteAdding();
+            _areqQueue.CompleteAdding();
+            _responseQueue.CompleteAdding();
 
-            readTask.Wait();
-            transmitTask.Wait();
+            _tokenSource.Cancel();
 
             _logger.Debug("Closed interface...");
         }
 
-        public async Task<byte[]> PermitJoin(int time, CancellationToken token)
+        public async Task<byte[]> PermitJoinAsync(int time)
         {
             PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
 
-            return await Send(token, await permitJoinRequest.ToSerialPacket().ToFrame());
+            byte[] data = await permitJoinRequest.ToSerialPacket().ToFrame().ConfigureAwait(false);
+
+            return await SendAsync(data);
         }
 
-        private async void ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
+        private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
         {
             if (port == null) throw new ArgumentNullException(nameof(port));
 
             while (Enabled)
+            {
                 try
                 {
                     var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
 
                     // SerialPacket.ReadAsync() return the correct package class, so 
                     // we can start processing them into the correct queue here
-                    if (serialPacket is SynchronousResponse)
+                    if (serialPacket is SynchronousResponse srsp)
                     {
-                        responseQueue.Add(serialPacket);
+                        _responseQueue.Add(srsp);
                         continue;
                     }
 
-                    if (serialPacket is AsynchronousRequest)
+                    if (serialPacket is AsynchronousRequest areq)
                     {
-                        //TODO: Check if it is a callback for an SREQ
-
-                        areqQueue.Add(serialPacket);
+                        _areqQueue.Add(areq);
                     }
                 }
                 catch (Exception e)
@@ -132,6 +132,7 @@ namespace ZigbeeNet.CC
                     // TODO improve this by adding a good error handling
                     OnError(e);
                 }
+            }
         }
 
         protected virtual void OnError(Exception e)
@@ -139,36 +140,42 @@ namespace ZigbeeNet.CC
             _logger.Error($"Exception: {e}");
         }
 
-        private void ProcessQueue<T>(BlockingCollection<T> queue, Action<T> action) where T : SerialPacket
+        private Task ProcessQueueAsync<T>(BlockingCollection<T> queue, Action<T> action) where T : SerialPacket
         {
             if (queue == null) throw new ArgumentNullException(nameof(queue));
             if (action == null) throw new ArgumentNullException(nameof(action));
 
-            while (!queue.IsCompleted)
+            return Task.Run(() =>
             {
-                var packet = default(SerialPacket);
-                try
+                while (!queue.IsCompleted)
                 {
-                    packet = queue.Take();
-                }
-                catch (InvalidOperationException)
-                {
-                }
+                    var packet = default(SerialPacket);
+                    try
+                    {
+                        packet = queue.Take();
+                    }
+                    catch (InvalidOperationException ie)
+                    {
+                        OnError(ie);
+                    }
 
-                if (packet != null) action((T) packet);
-            }
+                    if (packet != null)
+                        action((T)packet);
+                }
+            });
         }
 
-        private async Task<byte[]> RetryAsync(Func<Task<byte[]>> func, string message,
-            CancellationToken cancellationToken)
+        private async Task<byte[]> RetryAsync(Func<Task<byte[]>> func, string message)
         {
-            if (func == null) throw new ArgumentNullException(nameof(func));
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
 
-            await semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+            await semaphore.WaitAsync(_tokenSource.Token).ConfigureAwait(false);
             try
             {
                 var attempt = 0;
-                while (!cancellationToken.IsCancellationRequested)
+                while (!_tokenSource.Token.IsCancellationRequested)
+                {
                     try
                     {
                         return await func().ConfigureAwait(false);
@@ -181,8 +188,9 @@ namespace ZigbeeNet.CC
                             throw;
 
                         _logger.Error($"Some error occured on: {message}. Retrying {attempt} of {MaxRetryCount}.");
-                        await Task.Delay(TimeSpan.FromMilliseconds(500), cancellationToken).ConfigureAwait(false);
+                        await Task.Delay(TimeSpan.FromMilliseconds(500), _tokenSource.Token).ConfigureAwait(false);
                     }
+                }
             }
             finally
             {
@@ -192,37 +200,40 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
 
-        private async Task<SerialPacket> WaitForResponseAsync(Func<SerialPacket, bool> predicate,
-            CancellationToken cancellationToken)
+        private async Task<SerialPacket> WaitForResponseAsync(SynchronousRequest request, Func<SerialPacket, bool> predicate)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
 
-            while (!cancellationToken.IsCancellationRequested)
+            while (!_tokenSource.Token.IsCancellationRequested)
             {
-                var result = await Task.Run(() =>
+                var result = await Task<SerialPacket>.Run(() =>
                 {
                     var msg = default(SerialPacket);
-                    responseQueue.TryTake(out msg, (int) ResponseTimeout.TotalMilliseconds, cancellationToken);
-                    return msg;
+                    _responseQueue.TryTake(out msg, (int) ResponseTimeout.TotalMilliseconds, _tokenSource.Token);
+
+                    if (msg.SubSystem == request.SubSystem && msg.Cmd1 == request.Cmd1)
+                        return msg;
+                    else
+                        throw new Exception("Response does not belong to SREQ");
                 }).ConfigureAwait(false);
 
                 // TODO Sanity checks
 
-                if (predicate(result)) return result;
+                if (predicate(result))
+                    return result;
             }
 
             throw new TaskCanceledException();
         }
         
-        private Task<byte[]> Send(SubSystem subSystem, byte[] payload, Func<SynchronousResponse, bool> predicate,
-            CancellationToken cancellationToken)
+        private async Task<byte[]> SendAsync(SubSystem subSystem, byte[] payload, Func<SynchronousResponse, bool> predicate)
         {
-            return RetryAsync(async () =>
+            return await RetryAsync(async () =>
             {
                 var request = new SynchronousRequest(subSystem, 0, payload);
-                transmitQueue.Add(request);
+                _transmitQueue.Add(request);
 
-                var response = await WaitForResponseAsync(msg => predicate((SynchronousResponse) msg), cancellationToken)
+                var response = await WaitForResponseAsync(request, msg => predicate((SynchronousResponse) msg))
                     .ConfigureAwait(false);
 
                 var zpiObject = new ZpiObject(response.SubSystem, response.Type, response.Cmd1);
@@ -233,21 +244,21 @@ namespace ZigbeeNet.CC
                 zpiObject.Parse(response.Type, response.Length, response.Payload);
 
                 return ((SynchronousResponse) response).Payload;
-            }, $"{subSystem} {(payload != null ? BitConverter.ToString(payload) : string.Empty)}", cancellationToken);
+            }, $"{subSystem} {(payload != null ? BitConverter.ToString(payload) : string.Empty)}");
         }
 
-        public async Task<byte[]> Send(CancellationToken cancellationToken, params byte[] payload)
+        public async Task<byte[]> SendAsync(byte[] payload)
         {
+            if (unpi.Port.IsOpen == false)
+                throw new Exception("Port is not opened");
+
             using(MemoryStream stream = new MemoryStream(payload))
             {
-                var packet = await SerialPacket.ReadAsync(stream);
+                var packet = await SerialPacket.ReadAsync(stream).ConfigureAwait(false);
 
-                return await Send(packet.SubSystem, packet.Payload,
-                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; },
-                    cancellationToken);
+                return await SendAsync(packet.SubSystem, packet.Payload,
+                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
             }
         }
-
-        #endregion
     }
 }

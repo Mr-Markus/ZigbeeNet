@@ -52,7 +52,7 @@ namespace ZigbeeNet
                 zclCommand.Response(null);
             };
 
-            dataRequest.Request(Controller.Znp);
+            dataRequest.RequestAsync(Controller.Znp);
         }
 
         public void ZclGlobal(Endpoint srcEndpoint, Endpoint dstEndpoint, Cluster cluster, ZclCommand zclCommand)

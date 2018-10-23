@@ -92,6 +92,10 @@ namespace ZigbeeNet
             if (_isRunning)
             {
                 PermitJoin(0);
+
+                Controller.Stop();
+
+                _isRunning = false;
             }
         }
 

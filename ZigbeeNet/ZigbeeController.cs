@@ -73,12 +73,9 @@ namespace ZigbeeNet
 
         private void Znp_Ready(object sender, EventArgs e)
         {
-            
-
-
             StartRequest startRequest = new StartRequest();
             startRequest.OnResponse += StartRequest_OnResponse;
-            startRequest.Request(Znp);
+            startRequest.RequestAsync(Znp);
         }
 
         private void StartRequest_OnResponse(object sender, ZpiObject e)
@@ -99,6 +96,11 @@ namespace ZigbeeNet
         public void Start()
         {
             Znp.Open();
+        }
+
+        public void Stop()
+        {
+            Znp.Close();
         }
 
         private void endDeviceAnnceHdlr(EndDeviceAnnouncedInd deviceInd)
@@ -143,9 +145,7 @@ namespace ZigbeeNet
                 throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
             }
 
-            var cancelToken = new CancellationTokenSource();
-
-            Znp.PermitJoin(time, cancelToken.Token);
+            Znp.PermitJoinAsync(time);
         }
 
         internal byte NextTransId()

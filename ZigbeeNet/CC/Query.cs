@@ -60,10 +60,10 @@ namespace ZigbeeNet.CC
                         });
                     }
                 };
-                activeEp.Request(_znp);
+                activeEp.RequestAsync(_znp);
             };
 
-            nodeDesc.Request(_znp);
+            nodeDesc.RequestAsync(_znp);
         }
 
         public void GetEndpoint(Device device, byte endpointId, ushort nwkAddr, Action<Endpoint> callback)
@@ -106,7 +106,7 @@ namespace ZigbeeNet.CC
 
                 callback?.Invoke(endpoint);
             };
-            simpleDesc.Request(_znp);
+            simpleDesc.RequestAsync(_znp);
         }
 
         //public void Network()
