@@ -110,7 +110,7 @@ namespace ZigbeeNet.CC
 
                     var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
 
-                    _logger.Info($"Paket read: {@serialPacket}", serialPacket);
+                    _logger.Debug("Paket read: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd1: {cmdId}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd1);
 
                     // SerialPacket.ReadAsync() return the correct package class, so 
                     // we can start processing them into the correct queue here
@@ -142,14 +142,14 @@ namespace ZigbeeNet.CC
             {
                 var packet = await SerialPacket.ReadAsync(stream).ConfigureAwait(false);
 
-                return await SendAsync(packet.SubSystem, packet.Payload,
+                return await SendAsync(packet.SubSystem, packet.Cmd1, packet.Payload,
                     msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
             }
         }
 
         protected virtual void OnError(Exception e)
         {
-            _logger.Error($"Exception: {e}");
+            _logger.ErrorException("Exception: {e}", e);
         }
 
         private void OnSend(SerialPacket serialPacket)
@@ -158,12 +158,26 @@ namespace ZigbeeNet.CC
                 throw new ArgumentNullException(nameof(serialPacket));
 
             serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
-            _logger.Debug($"Transmitted: {serialPacket}");
+            _logger.Debug("Transmitted: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd1: {cmdId}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd1);
         }
 
         private void OnReceive(AsynchronousRequest asynchronousRequest)
         {
             //TODO: HandleIncommingMessage
+            if (asynchronousRequest.SubSystem == SubSystem.ZDO && asynchronousRequest.Cmd1 == (byte)ZdoCommand.stateChangeInd)
+            {
+                ZpiObject zpiObject = new ZpiObject(asynchronousRequest.SubSystem, asynchronousRequest.Cmd1);
+                zpiObject.Parse(asynchronousRequest.Type, asynchronousRequest.Length, asynchronousRequest.Payload);
+
+                DeviceState state = (DeviceState)(byte)zpiObject.RequestArguments["state"];
+
+                _logger.Info("State changed: {state}", state);
+
+                if(state == DeviceState.Started_as_ZigBee_Coordinator)
+                {
+                    PermitJoinAsync(255);
+                }
+            }
             if (asynchronousRequest.SubSystem == SubSystem.ZDO && asynchronousRequest.Cmd1 == (byte)ZdoCommand.endDeviceAnnceInd)
             {
                 ZpiObject zpiObject = new ZpiObject(asynchronousRequest.SubSystem, asynchronousRequest.Cmd1);
@@ -172,8 +186,8 @@ namespace ZigbeeNet.CC
                 EndDeviceAnnouncedInd ind = zpiObject.ToSpecificObject<EndDeviceAnnouncedInd>();
 
                 endDeviceAnnceHdlr(ind);
+                _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", ind.NetworkAddress, ind.IeeeAddress);
             }
-
             //TODO: EventHandler or Bridge class should handle special requests
         }
 
@@ -224,7 +238,7 @@ namespace ZigbeeNet.CC
                         if (attempt++ >= MaxRetryCount)
                             throw;
 
-                        _logger.Error($"Some error occured on: {message}. Retrying {attempt} of {MaxRetryCount}.");
+                        _logger.Error("Some error occured on: {message}. Retrying {attempt} of {MaxRetryCount}.", message, attempt, MaxRetryCount);
                         await Task.Delay(TimeSpan.FromMilliseconds(500), _tokenSource.Token).ConfigureAwait(false);
                     }
                 }
@@ -263,11 +277,11 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
         
-        private async Task<byte[]> SendAsync(SubSystem subSystem, byte[] payload, Func<SynchronousResponse, bool> predicate)
+        private async Task<byte[]> SendAsync(SubSystem subSystem, byte cmdId, byte[] payload, Func<SynchronousResponse, bool> predicate)
         {
             return await RetryAsync(async () =>
             {
-                var request = new SynchronousRequest(subSystem, 0, payload);
+                var request = new SynchronousRequest(subSystem, cmdId, payload);
                 _transmitQueue.Add(request);
 
                 var response = await WaitForResponseAsync(request, msg => predicate((SynchronousResponse) msg))
