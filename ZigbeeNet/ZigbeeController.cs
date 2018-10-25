@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.CC;
 using ZigbeeNet.ZCL;
-using ZigbeeNet.CC.ZDO;
-using ZigbeeNet.CC.SAPI;
 using System.Threading;
 
 namespace ZigbeeNet
@@ -20,8 +18,6 @@ namespace ZigbeeNet
 
         public event EventHandler Started;
         public event EventHandler Stoped;
-        public event EventHandler<ZpiObject> NewPacket;
-        public event EventHandler<ZpiObject> PermitJoining;
         public event EventHandler<Device> NewDevice;
 
         private byte _transId;

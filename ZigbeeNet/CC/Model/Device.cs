@@ -17,9 +17,9 @@ namespace ZigbeeNet.CC
 
         public Devices Type { get; set; }
 
-        public ulong IeeeAddress { get; set; }
+        public ZAddress64 IeeeAddress { get; set; }
 
-        public ushort NwkAdress { get; set; }
+        public ZAddress16 NwkAdress { get; set; }
 
         public ushort ManufacturerId { get; set; }
 

@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigbeeNet.CC.ZDO;
+using ZigbeeNet.CC.Packet;
+using ZigbeeNet.CC.Packet.SimpleAPI;
+using ZigbeeNet.CC.Packet.ZDO;
 using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC
@@ -26,7 +28,7 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SerialPacket> _responseQueue;
 
-        private ConcurrentQueue<EndDeviceAnnouncedInd> _joinQueue;
+        private ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND> _joinQueue;
         private bool _spinLock;
 
         public int MaxRetryCount => 3;
@@ -37,10 +39,7 @@ namespace ZigbeeNet.CC
         public CCZnp()
         {
             semaphore = new SemaphoreSlim(1, 1);
-            _joinQueue = new ConcurrentQueue<EndDeviceAnnouncedInd>();
-
-            ZpiMeta.Init();
-            ZdoMeta.Init();
+            _joinQueue = new ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND>();
 
             unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
         }
@@ -68,9 +67,11 @@ namespace ZigbeeNet.CC
 
             //TODO: Maybe it is not correct at this point
             //==> Starts the hardware CC2531
-            SAPI.StartRequest startRequest = new SAPI.StartRequest();
-            startRequest.OnResponse += (_, e) => Started?.Invoke(this, EventArgs.Empty);
-            startRequest.RequestAsync(this);
+            ZB_START_REQUEST start = new ZB_START_REQUEST();
+            SendAsync(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
+            {
+                Started?.Invoke(this, EventArgs.Empty);
+            });
         }
 
         public void Close()
@@ -88,11 +89,8 @@ namespace ZigbeeNet.CC
 
         public async Task<byte[]> PermitJoinAsync(int time)
         {
-            PermitJoinRequest permitJoinRequest = new PermitJoinRequest(Convert.ToByte(time));
-
-            byte[] data = await permitJoinRequest.ToSerialPacket().ToFrame().ConfigureAwait(false);
-
-            return await SendAsync(data);
+            ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZAddress16(0,0), 255, false);
+            return await SendAsync(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
         }
 
         private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
@@ -108,7 +106,7 @@ namespace ZigbeeNet.CC
                         break;
                     }
 
-                    var serialPacket = await SerialPacket.ReadAsync(port.InputStream).ConfigureAwait(false);
+                    var serialPacket = await PacketStream.ReadAsync(port.InputStream).ConfigureAwait(false);
 
                     _logger.Debug("Paket read: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd1: {cmdId}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd1);
 
@@ -140,9 +138,9 @@ namespace ZigbeeNet.CC
 
             using (MemoryStream stream = new MemoryStream(payload))
             {
-                var packet = await SerialPacket.ReadAsync(stream).ConfigureAwait(false);
+                var packet = await PacketStream.ReadAsync(stream).ConfigureAwait(false);
 
-                return await SendAsync(packet.SubSystem, packet.Cmd1, packet.Payload,
+                return await SendAsync(packet,
                     msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
             }
         }
@@ -164,29 +162,20 @@ namespace ZigbeeNet.CC
         private void OnReceive(AsynchronousRequest asynchronousRequest)
         {
             //TODO: HandleIncommingMessage
-            if (asynchronousRequest.SubSystem == SubSystem.ZDO && asynchronousRequest.Cmd1 == (byte)ZdoCommand.stateChangeInd)
+            if (asynchronousRequest is ZDO_STATE_CHANGE_IND stateInd)
             {
-                ZpiObject zpiObject = new ZpiObject(asynchronousRequest.SubSystem, asynchronousRequest.Cmd1);
-                zpiObject.Parse(asynchronousRequest.Type, asynchronousRequest.Length, asynchronousRequest.Payload);
+                _logger.Info("State changed: {state}", stateInd.Status);
 
-                DeviceState state = (DeviceState)(byte)zpiObject.RequestArguments["state"];
-
-                _logger.Info("State changed: {state}", state);
-
-                if(state == DeviceState.Started_as_ZigBee_Coordinator)
+                if(stateInd.Status == DeviceState.Started_as_ZigBee_Coordinator)
                 {
                     PermitJoinAsync(255);
                 }
             }
-            if (asynchronousRequest.SubSystem == SubSystem.ZDO && asynchronousRequest.Cmd1 == (byte)ZdoCommand.endDeviceAnnceInd)
+            if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
             {
-                ZpiObject zpiObject = new ZpiObject(asynchronousRequest.SubSystem, asynchronousRequest.Cmd1);
-                zpiObject.Parse(asynchronousRequest.Type, asynchronousRequest.Length, asynchronousRequest.Payload);
 
-                EndDeviceAnnouncedInd ind = zpiObject.ToSpecificObject<EndDeviceAnnouncedInd>();
-
-                endDeviceAnnceHdlr(ind);
-                _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", ind.NetworkAddress, ind.IeeeAddress);
+                endDeviceAnnceHdlr(endDevInd);
+                _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", endDevInd.NwkAddr, endDevInd.IEEEAddr);
             }
             //TODO: EventHandler or Bridge class should handle special requests
         }
@@ -262,6 +251,8 @@ namespace ZigbeeNet.CC
                     var msg = default(SerialPacket);
                     _responseQueue.TryTake(out msg, (int) ResponseTimeout.TotalMilliseconds, _tokenSource.Token);
 
+                    //TODO: What to do if msg is null because no response came in?
+
                     if (msg.SubSystem == request.SubSystem && msg.Cmd1 == request.Cmd1)
                         return msg;
                     else
@@ -277,28 +268,21 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
         
-        private async Task<byte[]> SendAsync(SubSystem subSystem, byte cmdId, byte[] payload, Func<SynchronousResponse, bool> predicate)
+        private async Task<byte[]> SendAsync(SerialPacket packet, Func<SynchronousResponse, bool> predicate)
         {
             return await RetryAsync(async () =>
             {
-                var request = new SynchronousRequest(subSystem, cmdId, payload);
+                var request = new SynchronousRequest(packet.SubSystem, packet.Cmd1, packet.Payload);
                 _transmitQueue.Add(request);
 
                 var response = await WaitForResponseAsync(request, msg => predicate((SynchronousResponse) msg))
                     .ConfigureAwait(false);
 
-                var zpiObject = new ZpiObject(response.SubSystem, response.Type, response.Cmd1);
-                zpiObject.OnParsed += (s, result) =>
-                {
-                    _logger.Info("Parsed: {Type} - {SubSystem} - {Name}", response.Type, result.SubSystem, result.Name);
-                };
-                zpiObject.Parse(response.Type, response.Length, response.Payload);
-
                 return ((SynchronousResponse) response).Payload;
-            }, $"{subSystem} {(payload != null ? BitConverter.ToString(payload) : string.Empty)}");
+            }, $"{packet.SubSystem} {(packet.Payload != null ? BitConverter.ToString(packet.Payload) : string.Empty)}");
         }
 
-        private void endDeviceAnnceHdlr(EndDeviceAnnouncedInd deviceInd)
+        private void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
         {
             //TODO: Try to get device from device db and check status if it is online. If true continue with next ind
             Device device = null;
@@ -306,10 +290,10 @@ namespace ZigbeeNet.CC
             {
                 Console.WriteLine("Device already in Network");
 
-                EndDeviceAnnouncedInd removed = null;
+                ZDO_END_DEVICE_ANNCE_IND removed = null;
                 if (_joinQueue.TryDequeue(out removed))
                 {
-                    EndDeviceAnnouncedInd next = null;
+                    ZDO_END_DEVICE_ANNCE_IND next = null;
 
                     if (_joinQueue.TryDequeue(out next))
                     {
@@ -328,7 +312,7 @@ namespace ZigbeeNet.CC
 
             Query query = new Query(this);
 
-            query.GetDevice(deviceInd.NetworkAddress, deviceInd.IeeeAddress, (dev) =>
+            query.GetDevice(deviceInd.NwkAddr, deviceInd.IEEEAddr, (dev) =>
             {
                 NewDevice?.Invoke(this, dev);
             });

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using ZigbeeNet.CC;
-using ZigbeeNet.CC.AF;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
@@ -28,31 +27,31 @@ namespace ZigbeeNet
 
         public void Send(ZclCommand zclCommand, Endpoint srcEndpoint, Endpoint dstEndpoint, Cluster cluster, byte[] payload)
         {
-            DataRequest dataRequest = new DataRequest()
-            {
-                DestinationAddress = dstEndpoint.Device.NwkAdress,
-                SourceEndpoint = 0, //TODO: senderEp = srcEp.isLocal() ? srcEp : controller.getCoord().getDelegator(profId);
-                DestinationEndpoint = dstEndpoint.Id,
-                Cluster = (ushort)cluster,
-                TransactionSeqNumber = Controller.NextTransId(),
-                Options = (byte)(AFOptions.ACK_REQUEST | AFOptions.DISCV_ROUTE),
-                Radius = 0x1e,
-                Length = (byte)payload.Length,
-                Data = payload
-            };
+            //DataRequest dataRequest = new DataRequest()
+            //{
+            //    DestinationAddress = dstEndpoint.Device.NwkAdress,
+            //    SourceEndpoint = 0, //TODO: senderEp = srcEp.isLocal() ? srcEp : controller.getCoord().getDelegator(profId);
+            //    DestinationEndpoint = dstEndpoint.Id,
+            //    Cluster = (ushort)cluster,
+            //    TransactionSeqNumber = Controller.NextTransId(),
+            //    Options = (byte)(AFOptions.ACK_REQUEST | AFOptions.DISCV_ROUTE),
+            //    Radius = 0x1e,
+            //    Length = (byte)payload.Length,
+            //    Data = payload
+            //};
 
-            dataRequest.OnResponse += (object sender, ZpiObject zpiObject) =>
-            {
-                //TODO: parse zpiObject payload to ZclPacket and it's payload to ZclCommand
-                // AF:IncommingMsg --> AREQ Id: 129
-                // 1. AF_DataConfirm 2. AF_IncommingMsg ???
-                // Call ZclCommand Response() with parsed object as value
+            //dataRequest.OnResponse += (object sender, ZpiObject zpiObject) =>
+            //{
+            //    //TODO: parse zpiObject payload to ZclPacket and it's payload to ZclCommand
+            //    // AF:IncommingMsg --> AREQ Id: 129
+            //    // 1. AF_DataConfirm 2. AF_IncommingMsg ???
+            //    // Call ZclCommand Response() with parsed object as value
 
-                throw new NotImplementedException();
-                zclCommand.Response(null);
-            };
+            //    throw new NotImplementedException();
+            //    zclCommand.Response(null);
+            //};
 
-            dataRequest.RequestAsync(Controller.Znp);
+            //dataRequest.RequestAsync(Controller.Znp);
         }
 
         public void ZclGlobal(Endpoint srcEndpoint, Endpoint dstEndpoint, Cluster cluster, ZclCommand zclCommand)

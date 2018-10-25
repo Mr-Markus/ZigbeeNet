@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigbeeNet.CC.ZDO;
 using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.CC
@@ -16,7 +15,7 @@ namespace ZigbeeNet.CC
             _znp = znp;
         }
 
-        public void GetDevice(ushort nwkAddr, ulong ieeeAddr, Action<Device> callback)
+        public void GetDevice(ZAddress16 nwkAddr, ZAddress64 ieeeAddr, Action<Device> callback)
         {
             Device device = new Device()
             {
@@ -24,89 +23,89 @@ namespace ZigbeeNet.CC
                 IeeeAddress = ieeeAddr
             };
 
-            NodeDescRequest nodeDesc = new NodeDescRequest()
-            {
-                DestinationAddress = nwkAddr,
-                NetworkAddressOfInteresst = nwkAddr
-            };
+            //NodeDescRequest nodeDesc = new NodeDescRequest()
+            //{
+            //    DestinationAddress = nwkAddr,
+            //    NetworkAddressOfInteresst = nwkAddr
+            //};
 
-            nodeDesc.OnResponse += (object sender, ZpiObject e) =>
-            {
-                NodeDescResponse rsp = e.ToSpecificObject<NodeDescResponse>();
-                device.Type = (Devices)(rsp.LogicaltypeCmplxdescavaiUserdescavai & 0x07);
-                device.ManufacturerId = rsp.ManufacturerCode;
+            //nodeDesc.OnResponse += (object sender, ZpiObject e) =>
+            //{
+            //    NodeDescResponse rsp = e.ToSpecificObject<NodeDescResponse>();
+            //    device.Type = (Devices)(rsp.LogicaltypeCmplxdescavaiUserdescavai & 0x07);
+            //    device.ManufacturerId = rsp.ManufacturerCode;
 
-                ActiveEndpointsRequest activeEp = new ActiveEndpointsRequest()
-                {
-                    DestinationAddress = nwkAddr,
-                    NetworkAddressOfInteresst = nwkAddr
-                };
-                activeEp.OnResponse += (object s, ZpiObject ep) =>
-                {
-                    ActiveEndpointResponse eprsp = ep.ToSpecificObject<ActiveEndpointResponse>();
+            //    ActiveEndpointsRequest activeEp = new ActiveEndpointsRequest()
+            //    {
+            //        DestinationAddress = nwkAddr,
+            //        NetworkAddressOfInteresst = nwkAddr
+            //    };
+            //    activeEp.OnResponse += (object s, ZpiObject ep) =>
+            //    {
+            //        ActiveEndpointResponse eprsp = ep.ToSpecificObject<ActiveEndpointResponse>();
 
-                    foreach (byte epByte in eprsp.Endpoints)
-                    {
-                        int count = 0;
-                        GetEndpoint(device, epByte, nwkAddr, (endpoint) =>
-                        {
-                            device.Endpoints.Add(endpoint);
-                            count++;
+            //        foreach (byte epByte in eprsp.Endpoints)
+            //        {
+            //            int count = 0;
+            //            GetEndpoint(device, epByte, nwkAddr, (endpoint) =>
+            //            {
+            //                device.Endpoints.Add(endpoint);
+            //                count++;
 
-                            if(count == eprsp.Endpoints.Count())
-                            {
-                                callback?.Invoke(device);
-                            }
-                        });
-                    }
-                };
-                activeEp.RequestAsync(_znp);
-            };
+            //                if(count == eprsp.Endpoints.Count())
+            //                {
+            //                    callback?.Invoke(device);
+            //                }
+            //            });
+            //        }
+            //    };
+            //    activeEp.RequestAsync(_znp);
+            //};
 
-            nodeDesc.RequestAsync(_znp);
+            //nodeDesc.RequestAsync(_znp);
         }
 
         public void GetEndpoint(Device device, byte endpointId, ushort nwkAddr, Action<Endpoint> callback)
         {
-            Endpoint endpoint = new Endpoint(device)
-            {
-                Id = endpointId
-            };
+            //Endpoint endpoint = new Endpoint(device)
+            //{
+            //    Id = endpointId
+            //};
 
-            SimpleDescRequest simpleDesc = new SimpleDescRequest()
-            {
-                DestinationAddress = nwkAddr,
-                NetworkAddressOfInteresst = nwkAddr,
-                Endpoint = endpointId
-            };
+            //SimpleDescRequest simpleDesc = new SimpleDescRequest()
+            //{
+            //    DestinationAddress = nwkAddr,
+            //    NetworkAddressOfInteresst = nwkAddr,
+            //    Endpoint = endpointId
+            //};
 
-            simpleDesc.IndObject.OnParsed += (object sDesc, ZpiObject epDef) =>
-            {
-                SimpleDescResponse descResponse = epDef.ToSpecificObject<SimpleDescResponse>();
+            //simpleDesc.IndObject.OnParsed += (object sDesc, ZpiObject epDef) =>
+            //{
+            //    SimpleDescResponse descResponse = epDef.ToSpecificObject<SimpleDescResponse>();
 
-                endpoint.ProfileId = descResponse.ProfileId;
+            //    endpoint.ProfileId = descResponse.ProfileId;
 
-                int chunkSize = 2;
+            //    int chunkSize = 2;
 
-                int iIn = 0;
-                byte[][] cIn = descResponse.ClusterIn.GroupBy(c => iIn++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
+            //    int iIn = 0;
+            //    byte[][] cIn = descResponse.ClusterIn.GroupBy(c => iIn++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
 
-                foreach (var c in cIn)
-                {
-                    endpoint.InClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
-                }
+            //    foreach (var c in cIn)
+            //    {
+            //        endpoint.InClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
+            //    }
 
-                int iOut = 0;
-                byte[][] cOut = descResponse.ClusterOut.GroupBy(c => iOut++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
+            //    int iOut = 0;
+            //    byte[][] cOut = descResponse.ClusterOut.GroupBy(c => iOut++ / chunkSize).Select(g => g.ToArray<byte>()).ToArray();
 
-                foreach (var c in cOut)
-                {
-                    endpoint.OutClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
-                }
+            //    foreach (var c in cOut)
+            //    {
+            //        endpoint.OutClusters.Add((Cluster)BitConverter.ToUInt16(c, 0));
+            //    }
 
-                callback?.Invoke(endpoint);
-            };
-            simpleDesc.RequestAsync(_znp);
+            //    callback?.Invoke(endpoint);
+            //};
+            //simpleDesc.RequestAsync(_znp);
         }
 
         //public void Network()

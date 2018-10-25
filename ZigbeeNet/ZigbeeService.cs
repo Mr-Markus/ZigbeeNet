@@ -28,12 +28,6 @@ namespace ZigbeeNet
             _eventBridge = new EventBridge(Controller);
 
             Controller.Started += Controller_Started;
-            Controller.PermitJoining += Controller_PermitJoining;
-        }
-
-        private void Controller_PermitJoining(object sender, ZpiObject e)
-        {
-            PermitJoining?.Invoke(this, EventArgs.Empty);
         }
 
         private void Controller_Started(object sender, EventArgs e)
@@ -91,8 +85,6 @@ namespace ZigbeeNet
         {
             if (_isRunning)
             {
-                PermitJoin(0);
-
                 Controller.Stop();
 
                 _isRunning = false;
@@ -105,27 +97,6 @@ namespace ZigbeeNet
         public void Reset()
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Permits devices to join the zigbee network
-        /// </summary>
-        /// <param name="time">Time in seconds</param>
-        public void PermitJoin(int time, Action<ZpiObject> callback = null)
-        {
-            if(time > 255 || time < 0)
-            {
-                throw new ArgumentOutOfRangeException("time", "Given value for 'time' have to be greater than 0 and less than 255");
-            }
-
-            if(_isRunning == false)
-            {
-                throw new Exception("Service is not running.");
-            }
-            else
-            {
-                this.Controller.PermitJoin(time);
-            }
         }
 
         private void Read(byte[] data)
