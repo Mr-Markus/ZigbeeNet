@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ZigbeeNet.CC.ZDO
 {
-    public class SimpleDescRequest : ZpiSREQ
+    public class SimpleDescRequest : ZpiObject
     {
         public SimpleDescRequest()
-            : base(ZdoCommand.simpleDescReq)
+            : base(CommandType.ZDO_SIMPLE_DESC_REQ)
         {
 
         }

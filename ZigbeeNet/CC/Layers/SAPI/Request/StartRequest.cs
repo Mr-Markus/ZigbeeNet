@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ZigbeeNet.CC.SAPI
 {
-    public class StartRequest : ZpiSREQ
+    public class StartRequest : ZpiObject
     {
         public StartRequest()
-            : base(SapiCommand.startRequest)
+            : base(CommandType.ZB_START_REQUEST)
         {
         }
     }

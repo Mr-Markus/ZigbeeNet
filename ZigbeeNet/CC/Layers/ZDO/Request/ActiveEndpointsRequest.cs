@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ZigbeeNet.CC.ZDO
 {
-    public class ActiveEndpointsRequest : ZpiSREQ
+    public class ActiveEndpointsRequest : ZpiObject
     {
         public ActiveEndpointsRequest()
-            : base(ZdoCommand.activeEpReq)
+            : base(CommandType.ZDO_ACTIVE_EP_REQ)
         {
 
         }

@@ -58,7 +58,7 @@ namespace ZigbeeNet.CC
                     if(attr["params"].Value<JArray>("rsp") != null)
                     {
                         //Sync
-                        ZpiSREQ zpiSREQ = new ZpiSREQ();
+                        ZpiObject zpiSREQ = new ZpiObject();
                         zpiSREQ.Name = attr.Path.Substring(attr.Path.LastIndexOf(".") + 1);
                         zpiSREQ.CommandId = (byte)attr["cmdId"].Value<byte>();
                         zpiSREQ.Type = (MessageType)attr["type"].Value<int>();

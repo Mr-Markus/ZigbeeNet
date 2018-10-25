@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ZigbeeNet.CC.AF
 {
-    public class DataRequest : ZpiSREQ
+    public class DataRequest : ZpiObject
     {
         public DataRequest()
-            : base(AfCommand.dataRequest)
+            : base(CommandType.AF_DATA_REQUEST)
         {
 
         }

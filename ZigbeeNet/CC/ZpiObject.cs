@@ -62,72 +62,20 @@ namespace ZigbeeNet.CC
             RequestArguments = new ArgumentCollection();
         }
 
-        public ZpiObject(SubSystem subSystem, MessageType type, byte commandId)
-            : this(subSystem, (byte)commandId)
+        public ZpiObject(CommandType commandType, MessageType type)
+            : this(commandType)
         {
             Type = type;
         }
 
-        public ZpiObject(SYS.SysCommand sysCmd)
-            : this(SubSystem.SYS, (byte)sysCmd)
+        public ZpiObject(CommandType commandType)
         {
+            DoubleByte doubleByte = new DoubleByte((ushort)commandType);
 
-        }
+            SubSystem = (SubSystem)doubleByte.GetMsb();
+            CommandId = doubleByte.GetLsb();
 
-        public ZpiObject(ZDO.ZdoCommand zdoCmd)
-            :this(SubSystem.ZDO, (byte)zdoCmd)
-        {
-            
-        }
-
-        public ZpiObject(AF.AfCommand afCmd)
-            : this(SubSystem.AF, (byte)afCmd)
-        {
-
-        }
-
-        public ZpiObject(APP.AppCommand appCmd)
-            : this(SubSystem.APP, (byte)appCmd)
-        {
-
-        }
-
-        public ZpiObject(MAC.MacCommand macCmd)
-            : this(SubSystem.MAC, (byte)macCmd)
-        {
-
-        }
-
-        public ZpiObject(SAPI.SapiCommand sapiCmd)
-            : this(SubSystem.SAPI, (byte)sapiCmd)
-        {
-
-        }
-
-        public ZpiObject(UTIL.UtilCommand utilCmd)
-            : this(SubSystem.UTIL, (byte)utilCmd)
-        {
-
-        }
-
-        public ZpiObject(DBG.DbgCommand dbgCmd)
-            : this(SubSystem.DBG, (byte)dbgCmd)
-        {
-
-        }
-
-        public ZpiObject(DEBUG.DebugCommand debugCmd)
-            : this(SubSystem.DEBUG, (byte)debugCmd)
-        {
-
-        }
-
-        public ZpiObject(SubSystem subSystem, byte cmdId)
-        {
-            SubSystem = subSystem;
-            CommandId = cmdId;
-
-            ZpiObject zpi = ZpiMeta.GetCommand(subSystem, cmdId);
+            ZpiObject zpi = ZpiMeta.GetCommand(SubSystem, CommandId);
 
             if (zpi != null)
             {

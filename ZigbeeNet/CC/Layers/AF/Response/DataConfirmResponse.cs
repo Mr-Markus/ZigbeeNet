@@ -7,13 +7,13 @@ namespace ZigbeeNet.CC.AF
     public class DataConfirmResponse : ZpiObject
     {
         public DataConfirmResponse(ZpiObject zpi)
-            : base(AfCommand.dataConfirm)
+            : base(CommandType.AF_DATA_CONFIRM)
         {
             RequestArguments = zpi.RequestArguments;
         }
 
         public DataConfirmResponse()
-            : base (AfCommand.dataConfirm)
+            : base (CommandType.AF_DATA_CONFIRM)
         {
 
         }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CC\ArgumentCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\IHardwareChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ProtocolPackets.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
@@ -69,13 +70,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Endpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Model\Network.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Query.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Util\DoubleByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZdoMeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZdoMetaItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiArgument.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiMeta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiObjectExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CC\ZpiSREQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventBridge.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Options.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZclBridge.cs" />
