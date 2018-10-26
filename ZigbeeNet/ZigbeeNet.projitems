@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\PacketStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_PERMIT_JOINING_REQUEST_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_PERMIT_JOINING_REQUEST.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_SEND_DATA_REQUEST.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_START_REQUEST.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_START_REQUEST_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousRequest.cs" />

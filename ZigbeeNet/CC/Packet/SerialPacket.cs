@@ -130,15 +130,16 @@ namespace ZigbeeNet.CC.Packet
         {
             return $"{{ SubSys: {SubSystem}, Type: {Type}, Cmd1: {Cmd1}, Length: {Length} }}";
         }
-
-        
         
         public static byte CalcChecksum(byte length, byte cmd0, byte cmd1, byte[] payload)
         {
-            var buffer = new List<byte>();
-            buffer.Add(length);
-            buffer.Add(cmd0);
-            buffer.Add(cmd1);
+            var buffer = new List<byte>
+            {
+                length,
+                cmd0,
+                cmd1
+            };
+
             buffer.AddRange(payload);
 
             return buffer.Aggregate((byte)0x00, (total, next) => total ^= next);
