@@ -6,12 +6,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_IEEE_ADDR_REQ_SRSP : SynchronousResponse
     {
-        public PacketStatus Status { get; set; }
-
-        public ZDO_IEEE_ADDR_REQ_SRSP()
-        {
-
-        }
+        public PacketStatus Status { get; private set; }
 
         public ZDO_IEEE_ADDR_REQ_SRSP(byte[] data)
         {

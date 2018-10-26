@@ -6,11 +6,11 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_IEEE_ADDR_REQ : SynchronousRequest
     {
-        public ZAddress16 ShortAddress { get; set; }
+        public ZAddress16 ShortAddress { get; private set; }
 
-        public RequestType ReqType { get; set; }
+        public RequestType ReqType { get; private set; }
 
-        public byte StartIndex { get; set; }
+        public byte StartIndex { get; private set; }
 
         public ZDO_IEEE_ADDR_REQ(ZAddress16 shortAddress, RequestType reqType, byte startIndex)
         {

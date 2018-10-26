@@ -7,12 +7,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
 {
     public class ZB_PERMIT_JOINING_REQUEST_RSP : SynchronousRequest
     {
-        public byte Status { get; set; }
-
-        public ZB_PERMIT_JOINING_REQUEST_RSP()
-        {
-
-        }
+        public byte Status { get; private set; }
 
         public ZB_PERMIT_JOINING_REQUEST_RSP(byte[] data)
         {

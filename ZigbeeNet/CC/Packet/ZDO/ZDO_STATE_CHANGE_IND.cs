@@ -12,12 +12,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the changed ZDO state
         /// </summary>
-        public DeviceState Status { get; set; }
-
-        public ZDO_STATE_CHANGE_IND()
-        {
-
-        }
+        public DeviceState Status { get; private set; }
 
         public ZDO_STATE_CHANGE_IND(byte[] data)
         {

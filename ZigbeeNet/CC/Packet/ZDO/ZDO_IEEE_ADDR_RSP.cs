@@ -12,34 +12,34 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// This field indicates either SUCCESS or FAILURE
         /// </summary>
-        public PacketStatus Status { get; set; }
+        public PacketStatus Status { get; private set; }
 
         /// <summary>
         /// 64 bit IEEE address of source device
         /// </summary>
-        public ZAddress64 IeeeAddr { get; set; }
+        public ZAddress64 IeeeAddr { get; private set; }
 
         /// <summary>
         /// Specifies the short network address of responding device
         /// </summary>
-        public ZAddress16 NwkAddr { get; set; }
+        public ZAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Specifies the starting index into the list of associated devices for this report
         /// </summary>
-        public byte StartIndex { get; set; }
+        public byte StartIndex { get; private set; }
 
         /// <summary>
         /// Specifies the number of associated devices
         /// </summary>
-        public byte NumAssocDev { get; set; }
+        public byte NumAssocDev { get; private set; }
 
         /// <summary>
         /// Contains the list of network address for associated devices.  
         /// This list can be a partial list if the entire list doesn’t fit into a packet.  
         /// If it is a partial list, the starting index is StartIndex
         /// </summary>
-        public List<ZAddress16> AssocDevList { get; set; }
+        public List<ZAddress16> AssocDevList { get; private set; }
 
         public ZDO_IEEE_ADDR_RSP()
         {

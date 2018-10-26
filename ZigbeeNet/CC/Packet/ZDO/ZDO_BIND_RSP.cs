@@ -6,14 +6,10 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_BIND_RSP : AsynchronousRequest
     {
-        public ZAddress16 srcAddr { get; set; }
+        public ZAddress16 srcAddr { get; private  set; }
 
-        public PacketStatus Status { get; set; }
+        public PacketStatus Status { get; private set; }
 
-        public ZDO_BIND_RSP()
-        {
-
-        }
 
         public ZDO_BIND_RSP(byte[] data)
         {

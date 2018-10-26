@@ -17,7 +17,8 @@ namespace ZigbeeNet.CC.Packet
 
         public static async Task<SerialPacket> ReadAsync(Stream stream)
         {
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
 
             var buffer = new byte[1024];
             await stream.ReadAsyncExact(buffer, 0, 1);
@@ -179,6 +180,8 @@ namespace ZigbeeNet.CC.Packet
 
                 case CommandType.ZDO_STATE_CHANGE_IND:
                     return new ZDO_STATE_CHANGE_IND(payload);
+                case CommandType.ZDO_STATUS_ERROR_RSP:
+                    return new ZDO_STATUS_ERROR_RSP(payload);
                 //case CommandType.ZDO_MSG_CB_REGISTER_SRSP:
                 //    return new ZDO_MSG_CB_REGISTER_SRSP(payload);
                 //case CommandType.ZDO_STARTUP_FROM_APP_SRSP:
