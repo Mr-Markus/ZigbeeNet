@@ -9,32 +9,79 @@ namespace ZigbeeNet.CC.Packet.ZDO
     /// </summary>
     public class ZDO_NODE_DESC_RSP : AsynchronousRequest
     {
+        /// <summary>
+        /// The message’s source network address
+        /// </summary>
         public ZAddress16 SrcAddr { get; private set; }
 
+        /// <summary>
+        /// This field indicates either SUCCESS or FAILURE
+        /// </summary>
         public PacketStatus Status { get; private set; }
 
+        /// <summary>
+        /// Device’s short address of this Node descriptor 
+        /// </summary>
         public ZAddress16 NwkAddr { get; private set; }
 
+        /// <summary>
+        /// Logical Type
+        /// </summary>
         public NodeType LogicalType { get; private set; }
 
+        /// <summary>
+        /// Indicates if complex descriptor is available for the node 
+        /// </summary>
         public bool ComplexDescriptorAvailable { get; private set; }
 
+        /// <summary>
+        ///  Indicates if user descriptor is available for the node 
+        /// </summary>
         public bool UserDescriptorAvailable { get; private set; }
 
+        /// <summary>
+        /// Node Flags assigned for APS. For V1.0 all bits are reserved
+        /// </summary>
         public byte APSFlags { get; private set; }
 
+        /// <summary>
+        ///  Identifies node frequency band capabilities 
+        /// </summary>
         public byte FrequencyBand { get; private set; }
 
+        /// <summary>
+        /// Capability flags stored for the MAC
+        /// </summary>
         public CapabilitiesFlags MacCapabilitiesFlags { get; private set; }
 
+        /// <summary>
+        /// Specifies a manufacturer code that is allocated by the ZigBee Alliance, relating to the manufacturer to the device
+        /// </summary>
         public DoubleByte ManufacturerCode { get; set; }
 
+        /// <summary>
+        /// Indicates size of maximum NPDU. This field is used as a high level indication for management
+        /// </summary>
         public byte MaxBufferSize { get; private set; }
 
+        /// <summary>
+        /// Indicates maximum size of Transfer up to 0x7fff (This field is reserved in version 1.0 and shall be set to zero). 
+        /// </summary>
         public DoubleByte MaxInTransferSize { get; private set; }
 
+        /// <summary>
+        /// Bit 0 - Primary Trust Center       
+        ///     1 - Backup Trust Center       
+        ///     2 - Primary Binding Table Cache       
+        ///     3 - Backup Binding Table Cache       
+        ///     4 - Primary Discovery Cache       
+        ///     5 - Backup Discovery Cache 
+        /// </summary>
         public DoubleByte ServerMask { get; private set; }
 
+        /// <summary>
+        /// Specifies the Descriptor capabilities 
+        /// </summary>
         public byte DescriptorCapabilities { get; private set; }
 
         public ZDO_NODE_DESC_RSP(byte[] framedata)
