@@ -6,12 +6,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_MGMT_PERMIT_JOIN_REQ_SRSP : SynchronousResponse
     {
-        public ZpiStatus Status { get; set; }
-
-        public ZDO_MGMT_PERMIT_JOIN_REQ_SRSP()
-        {
-
-        }
+        public ZpiStatus Status { get; private set; }
 
         public ZDO_MGMT_PERMIT_JOIN_REQ_SRSP(byte[] data)
         {

@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATE_CHANGE_IND.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATUS_ERROR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ApiType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceEnabled.cs" />
