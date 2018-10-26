@@ -21,7 +21,7 @@ namespace ZigbeeNet.CC
 
         public ZAddress16 NwkAdress { get; set; }
 
-        public ushort ManufacturerId { get; set; }
+        public DoubleByte ManufacturerId { get; set; }
 
         public string ManufacturerName { get; set; }
 

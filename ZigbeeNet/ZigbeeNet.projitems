@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CommandType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\NodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\IHardwareChannel.cs" />
@@ -37,6 +38,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_RSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_REQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_REQ_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATE_CHANGE_IND.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATUS_ERROR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
