@@ -6,6 +6,9 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_MGMT_PERMIT_JOIN_RSP : AsynchronousRequest
     {
+        /// <summary>
+        /// Source address of the message
+        /// </summary>
         public ZAddress16 SrcAddr { get; set; }
 
         public ZpiStatus Status { get; set; }

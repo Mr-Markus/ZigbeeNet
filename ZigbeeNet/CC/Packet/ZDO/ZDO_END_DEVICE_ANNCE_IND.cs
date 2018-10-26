@@ -12,17 +12,17 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Source address of the message
         /// </summary>
-        public ZAddress16 SrcAddr { get; set; }
+        public ZAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// Specifies the device’s short address
         /// </summary>
-        public ZAddress16 NwkAddr { get; set; }
+        public ZAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Specifies the 64 bit IEEE address of source device
         /// </summary>
-        public ZAddress64 IEEEAddr { get; set; }
+        public ZAddress64 IEEEAddr { get; private set; }
 
         /// <summary>
         /// Specifies the MAC capabilities of the device. 
@@ -35,12 +35,8 @@ namespace ZigbeeNet.CC.Packet.ZDO
         ///         6 – Security capability        
         ///         7 – Reserved 
         /// </summary>
-        public byte Capabilities { get; set; }
+        public byte Capabilities { get; private set; }
 
-        public ZDO_END_DEVICE_ANNCE_IND()
-        {
-
-        }
         public ZDO_END_DEVICE_ANNCE_IND(byte[] data)
         {
             SrcAddr = new ZAddress16(data[0], data[1]);
