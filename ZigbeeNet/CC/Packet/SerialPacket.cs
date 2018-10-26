@@ -35,7 +35,7 @@ namespace ZigbeeNet.CC.Packet
             }
             private set
             {
-                Type = (MessageType)(value & 0xE0);
+                Type = (MessageType)(value >> 5);
                 SubSystem = (SubSystem)(value & 0x1F);
             }
         }

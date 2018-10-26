@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using ZigbeeNet.CC.Extensions;
 using ZigbeeNet.CC.Packet.SimpleAPI;
 using ZigbeeNet.CC.Packet.ZDO;
+using ZigbeeNet.Logging;
 
 namespace ZigbeeNet.CC.Packet
 {
     public class PacketStream
     {
+        private static readonly ILog _logger = LogProvider.For<PacketStream>();
+
         public static async Task<SerialPacket> ReadAsync(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -36,21 +39,6 @@ namespace ZigbeeNet.CC.Packet
                 DoubleByte cmd = new DoubleByte(buffer[2], buffer[3]);
 
                 return ParsePayload((CommandType)cmd.Get16BitValue(), buffer.Skip(4).Take(length).ToArray());
-
-                if (type == MessageType.SRSP)
-                {
-                    return new SynchronousResponse(subsystem, cmd1, payload);
-                }
-                else if (type == MessageType.SREQ)
-                {
-                    return new SynchronousRequest(subsystem, cmd1, payload);
-                }
-                else if (type == MessageType.AREQ)
-                {
-                    return new AsynchronousRequest(subsystem, cmd1, payload);
-                }
-
-                throw new InvalidDataException($"unknown message type: {type}");
             }
 
             throw new InvalidDataException("unable to decode packet");
@@ -202,7 +190,7 @@ namespace ZigbeeNet.CC.Packet
                 //case CommandType.UTIL_GET_DEVICE_INFO_RESPONSE:
                 //    return new UTIL_GET_DEVICE_INFO_RESPONSE(payload);
                 default:
-                     //_logger.warn("Unknown command ID: 0x" + Integer.toHexString(cmdId.get16BitValue()));
+                    _logger.Warn("Unknown command ID: {Command}", cmd);
                     throw new NotImplementedException();
                     return new SerialPacket(cmd, payload);
             }

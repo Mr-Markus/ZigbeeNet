@@ -41,7 +41,7 @@ namespace ZigbeeNet.CC
             semaphore = new SemaphoreSlim(1, 1);
             _joinQueue = new ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND>();
 
-            unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
+            unpi = new UnifiedNetworkProcessorInterface("COM4", 115200, 1); //TODO: Get by config
         }
 
         public void Open()
@@ -108,7 +108,7 @@ namespace ZigbeeNet.CC
 
                     var serialPacket = await PacketStream.ReadAsync(port.InputStream).ConfigureAwait(false);
 
-                    _logger.Debug("Paket read: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd1: {cmdId}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd1);
+                    _logger.Debug("Paket read: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd: {cmd}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd);
 
                     // SerialPacket.ReadAsync() return the correct package class, so 
                     // we can start processing them into the correct queue here
@@ -156,7 +156,7 @@ namespace ZigbeeNet.CC
                 throw new ArgumentNullException(nameof(serialPacket));
 
             serialPacket.WriteAsync(unpi.OutputStream).ConfigureAwait(false);
-            _logger.Debug("Transmitted: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd1: {cmdId}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd1);
+            _logger.Debug("Transmitted: SubSystem: {subSystem}, Type: {type}, Length: {length}, Cmd: {cmd}", serialPacket.SubSystem, serialPacket.Type, serialPacket.Length, serialPacket.Cmd);
         }
 
         private void OnReceive(AsynchronousRequest asynchronousRequest)
@@ -173,7 +173,6 @@ namespace ZigbeeNet.CC
             }
             if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
             {
-
                 endDeviceAnnceHdlr(endDevInd);
                 _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", endDevInd.NwkAddr, endDevInd.IEEEAddr);
             }
