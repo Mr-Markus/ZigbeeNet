@@ -12,27 +12,23 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Destination address type: 0x02 – Address 16 bit, 0xFF – Broadcast
         /// </summary>
-        public byte AddrMode { get; set; }
+        public byte AddrMode { get; private set; }
 
         /// <summary>
         /// Specifies the network address of the destination device whose Permit Join information is to be modified. 
         /// </summary>
-        public ZAddress16 DstAddr { get; set; }
+        public ZAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Specifies the duration to permit joining.  0 = join disabled.  0xff = join enabled. 0x01-0xfe = number of seconds to permit joining
         /// </summary>
-        public byte Duration { get; set; }
+        public byte Duration { get; private set; }
 
         /// <summary>
         /// Trust Center Significance
         /// </summary>
-        public byte TCSignificance { get; set; }
+        public byte TCSignificance { get; private set; }
 
-        public ZDO_MGMT_PERMIT_JOIN_REQ()
-        {
-
-        }
 
         public ZDO_MGMT_PERMIT_JOIN_REQ(byte addrMode, ZAddress16 dstAddr, byte duration, bool tcsSignificant)
         {

@@ -10,6 +10,7 @@ namespace ZigbeeNet.CC.Packet
         {
 
         }
+
         public SynchronousResponse(SubSystem subSystem, byte commandId, byte[] payload) : base(MessageType.SRSP, subSystem, commandId, payload)
         {
 

@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\PacketStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_PERMIT_JOINING_REQUEST_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_PERMIT_JOINING_REQUEST.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_SEND_DATA_REQUEST.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_START_REQUEST.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_START_REQUEST_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousRequest.cs" />
@@ -31,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATE_CHANGE_IND.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATUS_ERROR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ApiType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceEnabled.cs" />
