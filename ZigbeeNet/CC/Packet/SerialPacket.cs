@@ -95,7 +95,8 @@ namespace ZigbeeNet.CC.Packet
 
         public async Task WriteAsync(Stream stream)
         {
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
 
             var buffer = new List<byte>();
             buffer.Add(SOF);
@@ -117,8 +118,8 @@ namespace ZigbeeNet.CC.Packet
             DoubleByte apiId = new DoubleByte((ushort)commandType);
 
             Cmd = commandType;
-            Cmd0 = apiId.GetHighByte();
-            Cmd1 = apiId.GetLowByte();
+            Cmd0 = apiId.High;
+            Cmd1 = apiId.Low;
 
             Payload = data.ToArray();
 

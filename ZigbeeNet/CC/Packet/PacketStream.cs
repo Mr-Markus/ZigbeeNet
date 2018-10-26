@@ -17,7 +17,8 @@ namespace ZigbeeNet.CC.Packet
 
         public static async Task<SerialPacket> ReadAsync(Stream stream)
         {
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
 
             var buffer = new byte[1024];
             await stream.ReadAsyncExact(buffer, 0, 1);

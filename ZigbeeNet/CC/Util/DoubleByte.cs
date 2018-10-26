@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ZigbeeNet.CC
 {
     public class DoubleByte
     {
+        /// <summary>
+        /// Gets or sets high byte
+        /// </summary>
+        public byte High { get; set; }
 
-        private byte _high;
-        private byte _low;
+        /// <summary>
+        /// Gets or sets low byte
+        /// </summary>
+        public byte Low { get; set; }
+
 
         public DoubleByte()
         {
@@ -22,13 +30,11 @@ namespace ZigbeeNet.CC
         public DoubleByte(ushort val)
         {
             if (val > 0xFFFF || val < 0)
-            {
-                throw new ArgumentOutOfRangeException("value is out of range");
-            }
+                throw new InvalidDataException(nameof(val));
 
             // split address into high and low bytes
-            _high = (byte)(val >> 8);
-            _low = (byte)(val & 0xFF);
+            High = (byte)(val >> 8);
+            Low = (byte)(val & 0xFF);
         }
 
         /// <summary>
@@ -39,46 +45,18 @@ namespace ZigbeeNet.CC
         public DoubleByte(byte low, byte high)
         {
 
-            if (high > 0xFF || low > 0xFF)
-            {
-                throw new ArgumentOutOfRangeException("msb or lsb are out of range");
-            }
+            if (high > 0xFF)
+                throw new InvalidDataException(nameof(high));
+            if(low > 0xFF)
+                throw new InvalidDataException(nameof(low));
 
-            this._high = high;
-            this._low = low;
-        }
-
-        /// <summary>
-        /// Get high byte
-        /// </summary>
-        /// <returns></returns>
-        public byte GetHighByte()
-        {
-            return _high;
-        }
-
-        /// <summary>
-        /// Get low byte
-        /// </summary>
-        /// <returns></returns>
-        public byte GetLowByte()
-        {
-            return _low;
+            this.High = high;
+            this.Low = low;
         }
 
         public ushort Get16BitValue()
         {
-            return BitConverter.ToUInt16(new byte[2] { _high, _low }, 0);
-        }
-
-        public void SetHigh(byte high)
-        {
-            this._high = high;
-        }
-
-        public void SetLow(byte low)
-        {
-            this._low = low;
+            return BitConverter.ToUInt16(new byte[2] { High, Low }, 0);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ZigbeeNet.CC
@@ -33,7 +34,7 @@ namespace ZigbeeNet.CC
         public ZAddress16(byte[] data)
         {
             if (data.Length != 2)
-                throw new ArgumentOutOfRangeException(nameof(data));
+                throw new InvalidDataException(nameof(data));
 
             doubleByte = new DoubleByte(data[0], data[1]);
         }

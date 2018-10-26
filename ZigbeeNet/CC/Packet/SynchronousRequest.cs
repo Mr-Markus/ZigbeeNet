@@ -13,6 +13,7 @@ namespace ZigbeeNet.CC.Packet
 
         public SynchronousRequest(SubSystem subSystem, byte commandId, byte[] payload) : base(MessageType.SREQ, subSystem, commandId, payload)
         {
+
         }
     }
 }
