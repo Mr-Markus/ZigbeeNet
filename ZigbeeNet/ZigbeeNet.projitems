@@ -26,7 +26,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SerialPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_REQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_REQ_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_END_DEVICE_ANNCE_IND.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_IEEE_ADDR_REQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_IEEE_ADDR_REQ_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_IEEE_ADDR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MGMT_PERMIT_JOIN_RSP.cs" />

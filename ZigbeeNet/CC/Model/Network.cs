@@ -35,7 +35,7 @@ namespace ZigbeeNet.CC
         /// The Status of the Network. It can be offline or online
         /// </summary>
         [Ignore()]
-        public ZpiStatus Status { get; set; }
+        public PacketStatus Status { get; set; }
         
         [FieldOrder(1)]
         public byte Channel { get; set; }

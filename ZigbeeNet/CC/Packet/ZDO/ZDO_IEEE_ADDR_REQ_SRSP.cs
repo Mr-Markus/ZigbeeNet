@@ -4,19 +4,20 @@ using System.Text;
 
 namespace ZigbeeNet.CC.Packet.ZDO
 {
-    public class ZDO_MGMT_PERMIT_JOIN_REQ_SRSP : SynchronousResponse
+    public class ZDO_IEEE_ADDR_REQ_SRSP : SynchronousResponse
     {
         public PacketStatus Status { get; set; }
 
-        public ZDO_MGMT_PERMIT_JOIN_REQ_SRSP()
+        public ZDO_IEEE_ADDR_REQ_SRSP()
         {
 
         }
 
-        public ZDO_MGMT_PERMIT_JOIN_REQ_SRSP(byte[] data)
+        public ZDO_IEEE_ADDR_REQ_SRSP(byte[] data)
         {
             Status = (PacketStatus)data[0];
-            BuildPacket(CommandType.ZDO_MGMT_PERMIT_JOIN_REQ_SRSP, data);
+
+            BuildPacket(CommandType.ZDO_IEEE_ADDR_REQ_SRSP, data);
         }
     }
 }

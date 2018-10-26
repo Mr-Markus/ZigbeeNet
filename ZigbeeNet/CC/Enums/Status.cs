@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.CC
 {
-    public enum ZpiStatus : byte
+    public enum PacketStatus : byte
     {
         SUCESS = 0x00,
         FAILURE = 0x01

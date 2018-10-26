@@ -41,7 +41,7 @@ namespace ZigbeeNet.CC
             semaphore = new SemaphoreSlim(1, 1);
             _joinQueue = new ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND>();
 
-            unpi = new UnifiedNetworkProcessorInterface("COM4", 115200, 1); //TODO: Get by config
+            unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
         }
 
         public void Open()

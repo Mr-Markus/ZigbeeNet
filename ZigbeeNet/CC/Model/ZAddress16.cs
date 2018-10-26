@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC
             doubleByte = new DoubleByte();
         }
 
-        public ZAddress16(byte high, byte low)
+        public ZAddress16(byte low, byte high)
         {
             doubleByte = new DoubleByte(high, low);
         }
@@ -41,6 +41,11 @@ namespace ZigbeeNet.CC
         public override byte[] ToByteArray()
         {
             return BitConverter.GetBytes(Value);
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
     }
 }

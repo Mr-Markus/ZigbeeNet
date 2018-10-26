@@ -80,5 +80,10 @@ namespace ZigbeeNet.CC
         {
             this._low = low;
         }
+
+        public override string ToString()
+        {
+            return Get16BitValue().ToString();
+        }
     }
 }
