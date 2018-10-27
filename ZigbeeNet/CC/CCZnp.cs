@@ -26,7 +26,7 @@ namespace ZigbeeNet.CC
 
         private BlockingCollection<AsynchronousRequest> _areqQueue;
         private BlockingCollection<SerialPacket> _transmitQueue;
-        private BlockingCollection<SerialPacket> _responseQueue;
+        private BlockingCollection<SynchronousResponse> _responseQueue;
 
         private ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND> _joinQueue;
         private bool _spinLock;
@@ -55,7 +55,7 @@ namespace ZigbeeNet.CC
             // create or reset queues
             _transmitQueue = new BlockingCollection<SerialPacket>();
             _areqQueue = new BlockingCollection<AsynchronousRequest>();
-            _responseQueue = new BlockingCollection<SerialPacket>();
+            _responseQueue = new BlockingCollection<SynchronousResponse>();
 
             // TODO
             // Create tasks
@@ -68,7 +68,7 @@ namespace ZigbeeNet.CC
             //TODO: Maybe it is not correct at this point
             //==> Starts the hardware CC2531
             ZB_START_REQUEST start = new ZB_START_REQUEST();
-            SendAsync(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
+            SendAsync<ZB_START_REQUEST_RSP>(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
             {
                 Started?.Invoke(this, EventArgs.Empty);
             });
@@ -90,7 +90,9 @@ namespace ZigbeeNet.CC
         public async Task<byte[]> PermitJoinAsync(int time)
         {
             ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZAddress16(0,0), 255, false);
-            return await SendAsync(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
+            var responsePacket = await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
+
+            return await responsePacket.ToFrame();
         }
 
         private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
@@ -138,10 +140,12 @@ namespace ZigbeeNet.CC
 
             using (MemoryStream stream = new MemoryStream(payload))
             {
-                var packet = await PacketStream.ReadAsync(stream).ConfigureAwait(false);
+                var transmitPacket = await PacketStream.ReadAsync(stream).ConfigureAwait(false);
 
-                return await SendAsync(packet,
-                    msg => { return msg is SynchronousResponse && msg.SubSystem == packet.SubSystem; }).ConfigureAwait(false);
+                var responsePacket = await SendAsync<SynchronousResponse>(transmitPacket,
+                    msg => { return msg is SynchronousResponse && msg.SubSystem == transmitPacket.SubSystem; }).ConfigureAwait(false);
+
+                return await responsePacket.ToFrame();
             }
         }
 
@@ -204,7 +208,7 @@ namespace ZigbeeNet.CC
             });
         }
 
-        private async Task<byte[]> RetryAsync(Func<Task<byte[]>> func, string message)
+        private async Task<TResponse> RetryAsync<TResponse>(Func<Task<TResponse>> func, string message) where TResponse : SynchronousResponse
         {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));
@@ -239,15 +243,16 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
 
-        private async Task<SerialPacket> WaitForResponseAsync(SynchronousRequest request, Func<SerialPacket, bool> predicate)
+        private async Task<TResponse> WaitForResponseAsync<TResponse>(SynchronousRequest request, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
         {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate == null)
+                throw new ArgumentNullException(nameof(predicate));
 
             while (!_tokenSource.Token.IsCancellationRequested)
             {
-                var result = await Task<SerialPacket>.Run(() =>
+                var result = await Task<TResponse>.Run(() =>
                 {
-                    var msg = default(SerialPacket);
+                    var msg = default(SynchronousResponse);
                     _responseQueue.TryTake(out msg, (int) ResponseTimeout.TotalMilliseconds, _tokenSource.Token);
 
                     //TODO: What to do if msg is null because no response came in?
@@ -260,28 +265,28 @@ namespace ZigbeeNet.CC
 
                 // TODO Sanity checks
 
-                if (predicate(result))
-                    return result;
+                if (predicate(result as TResponse))
+                    return result as TResponse;
             }
 
             throw new TaskCanceledException();
         }
         
-        private async Task<byte[]> SendAsync(SerialPacket packet, Func<SynchronousResponse, bool> predicate)
+        private async Task<TResponse> SendAsync<TResponse>(SerialPacket packet, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
         {
             return await RetryAsync(async () =>
             {
                 var request = new SynchronousRequest(packet.SubSystem, packet.Cmd1, packet.Payload);
                 _transmitQueue.Add(request);
 
-                var response = await WaitForResponseAsync(request, msg => predicate((SynchronousResponse) msg))
+                var response = await WaitForResponseAsync<TResponse>(request, msg => predicate((TResponse) msg))
                     .ConfigureAwait(false);
 
-                return ((SynchronousResponse) response).Payload;
+                return ((TResponse) response);
             }, $"{packet.SubSystem} {(packet.Payload != null ? BitConverter.ToString(packet.Payload) : string.Empty)}");
         }
 
-        private void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
+        private async void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
         {
             //TODO: Try to get device from device db and check status if it is online. If true continue with next ind
             Device device = null;

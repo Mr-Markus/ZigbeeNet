@@ -70,37 +70,37 @@ namespace ZigbeeNet.CC.Packet
                 //case CommandType.AF_REGISTER_SRSP:
                 //    return new AF_REGISTER_SRSP(payload);
                 //case CommandType.ZB_ALLOW_BIND_CONFIRM:
-                //    return new ZB_ALLOW_BIND_CONFIRM();
+                //    return new ZB_ALLOW_BIND_CONFIRM(payload);
                 //case CommandType.ZB_ALLOW_BIND_RSP:
                 //    return new ZB_ALLOW_BIND_RSP(payload);
                 //case CommandType.ZB_APP_REGISTER_RSP:
                 //    return new ZB_APP_REGISTER_RSP(payload);
                 //case CommandType.ZB_BIND_CONFIRM:
                 //    return new ZB_BIND_CONFIRM(payload);
-                //case CommandType.ZB_BIND_DEVICE_RSP:
-                //    return new ZB_BIND_DEVICE_RSP(payload);
-                //case CommandType.ZB_FIND_DEVICE_CONFIRM:
-                //    return new ZB_FIND_DEVICE_CONFIRM(payload);
-                //case CommandType.ZB_FIND_DEVICE_REQUEST_RSP:
-                //    return new ZB_FIND_DEVICE_REQUEST_RSP();
-                //case CommandType.ZB_GET_DEVICE_INFO_RSP:
-                //    return new ZB_GET_DEVICE_INFO_RSP(payload);
+                case CommandType.ZB_BIND_DEVICE_RSP:
+                    return new ZB_BIND_DEVICE_RSP(payload);
+                case CommandType.ZB_FIND_DEVICE_CONFIRM:
+                    return new ZB_FIND_DEVICE_CONFIRM(payload);
+                case CommandType.ZB_FIND_DEVICE_REQUEST_RSP:
+                    return new ZB_FIND_DEVICE_REQUEST_RSP();
+                case CommandType.ZB_GET_DEVICE_INFO_RSP:
+                    return new ZB_GET_DEVICE_INFO_RSP(payload);
                 case CommandType.ZB_PERMIT_JOINING_REQUEST_RSP:
                     return new ZB_PERMIT_JOINING_REQUEST_RSP(payload);
-                //case CommandType.ZB_READ_CONFIGURATION_RSP:
-                //    return new ZB_READ_CONFIGURATION_RSP(payload);
-                //case CommandType.ZB_RECEIVE_DATA_INDICATION:
-                //    return new ZB_RECEIVE_DATA_INDICATION(payload);
-                //case CommandType.ZB_SEND_DATA_CONFIRM:
-                //    return new ZB_SEND_DATA_CONFIRM(payload);
-                //case CommandType.ZB_SEND_DATA_REQUEST_RSP:
-                //    return new ZB_SEND_DATA_REQUEST_RSP(payload);
-                //case CommandType.ZB_START_CONFIRM:
-                //    return new ZB_START_CONFIRM(payload);
+                case CommandType.ZB_READ_CONFIGURATION_RSP:
+                    return new ZB_READ_CONFIGURATION_RSP(payload);
+                case CommandType.ZB_RECEIVE_DATA_INDICATION:
+                    return new ZB_RECEIVE_DATA_INDICATION(payload);
+                case CommandType.ZB_SEND_DATA_CONFIRM:
+                    return new ZB_SEND_DATA_CONFIRM(payload);
+                case CommandType.ZB_SEND_DATA_REQUEST_RSP:
+                    return new ZB_SEND_DATA_REQUEST_RSP(payload);
+                case CommandType.ZB_START_CONFIRM:
+                    return new ZB_START_CONFIRM(payload);
                 case CommandType.ZB_START_REQUEST_RSP:
                     return new ZB_START_REQUEST_RSP(payload);
-                //case CommandType.ZB_WRITE_CONFIGURATION_RSP:
-                //    return new ZB_WRITE_CONFIGURATION_RSP(payload);
+                case CommandType.ZB_WRITE_CONFIGURATION_RSP:
+                    return new ZB_WRITE_CONFIGURATION_RSP(payload);
 
                 #region not implemented but posible
                 // case CommandType.ZDO_ACTIVE_EP_REQ_SRSP:
