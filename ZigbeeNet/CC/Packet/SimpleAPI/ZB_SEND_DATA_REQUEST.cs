@@ -67,10 +67,10 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             PayloadValue = buffer;
 
             byte[] framedata = new byte[PayloadValue.Length + 8];
-            framedata[0] = Destination.DoubleByte.Low;
-            framedata[1] = Destination.DoubleByte.High;
-            framedata[2] = CommandId.Low;
-            framedata[3] = CommandId.High;
+            framedata[0] = Destination.DoubleByte.Lsb;
+            framedata[1] = Destination.DoubleByte.Msb;
+            framedata[2] = CommandId.Lsb;
+            framedata[3] = CommandId.Msb;
             framedata[4] = (byte)Handle;
             framedata[5] = (byte)Ack;
             framedata[6] = (byte)Radius;

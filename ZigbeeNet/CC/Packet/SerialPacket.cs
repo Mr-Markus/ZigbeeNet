@@ -118,8 +118,8 @@ namespace ZigbeeNet.CC.Packet
             DoubleByte apiId = new DoubleByte((ushort)commandType);
 
             Cmd = commandType;
-            Cmd0 = apiId.High;
-            Cmd1 = apiId.Low;
+            Cmd0 = apiId.Msb;
+            Cmd1 = apiId.Lsb;
 
             Payload = data.ToArray();
 

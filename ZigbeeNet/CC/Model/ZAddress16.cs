@@ -26,9 +26,9 @@ namespace ZigbeeNet.CC
             DoubleByte = new DoubleByte();
         }
 
-        public ZAddress16(byte low, byte high)
+        public ZAddress16(byte msb, byte lsb)
         {
-            DoubleByte = new DoubleByte(high, low);
+            DoubleByte = new DoubleByte(msb, lsb);
         }
 
         public ZAddress16(byte[] data)
@@ -36,7 +36,7 @@ namespace ZigbeeNet.CC
             if (data.Length != 2)
                 throw new InvalidDataException(nameof(data));
 
-            DoubleByte = new DoubleByte(data[0], data[1]);
+            DoubleByte = new DoubleByte(data[1], data[0]);
         }
 
         public override byte[] ToByteArray()

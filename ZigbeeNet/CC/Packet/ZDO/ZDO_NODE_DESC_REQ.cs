@@ -25,10 +25,10 @@ namespace ZigbeeNet.CC.Packet.ZDO
             NwkAddrOfInterest = nwkAddrOfinterest;
 
             byte[] framedata = new byte[4];
-            framedata[0] = DstAddr.DoubleByte.Low;
-            framedata[1] = DstAddr.DoubleByte.High;
-            framedata[2] = NwkAddrOfInterest.DoubleByte.Low;
-            framedata[3] = NwkAddrOfInterest.DoubleByte.High;
+            framedata[0] = DstAddr.DoubleByte.Lsb;
+            framedata[1] = DstAddr.DoubleByte.Msb;
+            framedata[2] = NwkAddrOfInterest.DoubleByte.Lsb;
+            framedata[3] = NwkAddrOfInterest.DoubleByte.Msb;
 
             BuildPacket(CommandType.ZDO_NODE_DESC_REQ, framedata);
         }

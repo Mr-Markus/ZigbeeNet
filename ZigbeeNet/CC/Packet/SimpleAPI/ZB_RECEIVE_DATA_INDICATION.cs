@@ -31,9 +31,9 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
 
         public ZB_RECEIVE_DATA_INDICATION(byte[] framedata)
         {
-            Source = new ZAddress16(framedata[0], framedata[1]);
-            Command = new DoubleByte(framedata[2], framedata[3]);
-            Len = new DoubleByte(framedata[4], framedata[5]);
+            Source = new ZAddress16(framedata[1], framedata[0]);
+            Command = new DoubleByte(framedata[3], framedata[2]);
+            Len = new DoubleByte(framedata[5], framedata[4]);
             Data = new byte[framedata.Length - 6];
 
             for (int i = 0; i < Data.Length; i++)

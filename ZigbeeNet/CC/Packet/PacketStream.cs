@@ -37,7 +37,7 @@ namespace ZigbeeNet.CC.Packet
                 if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
 
-                DoubleByte cmd = new DoubleByte(buffer[2], buffer[3]);
+                DoubleByte cmd = new DoubleByte(buffer[3], buffer[2]);
 
                 return ParsePayload((CommandType)cmd.Get16BitValue(), buffer.Skip(4).Take(length).ToArray());
             }
@@ -146,10 +146,10 @@ namespace ZigbeeNet.CC.Packet
                 // case CommandType.ZDO_MSG_CB_INCOMING:
                 // ZDO_MSG_CB_INCOMING incoming = new ZDO_MSG_CB_INCOMING(payload);
                 // return incoming.translate();
-                // case CommandType.ZDO_NODE_DESC_REQ_SRSP:
-                // return new ZDO_NODE_DESC_REQ_SRSP(payload);
-                // case CommandType.ZDO_NODE_DESC_RSP:
-                // return new ZDO_NODE_DESC_RSP(payload);
+                case CommandType.ZDO_NODE_DESC_REQ_SRSP:
+                    return new ZDO_NODE_DESC_REQ_SRSP(payload);
+                case CommandType.ZDO_NODE_DESC_RSP:
+                    return new ZDO_NODE_DESC_RSP(payload);
                 // case CommandType.ZDO_POWER_DESC_REQ_SRSP:
                 // return new ZDO_POWER_DESC_REQ_SRSP(payload);
                 // case CommandType.ZDO_POWER_DESC_RSP:

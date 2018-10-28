@@ -39,8 +39,8 @@ namespace ZigbeeNet.CC.Packet.ZDO
 
         public ZDO_END_DEVICE_ANNCE_IND(byte[] data)
         {
-            SrcAddr = new ZAddress16(data[0], data[1]);
-            NwkAddr = new ZAddress16(data[2], data[3]);
+            SrcAddr = new ZAddress16(data[1], data[0]);
+            NwkAddr = new ZAddress16(data[3], data[2]);
             IEEEAddr = new ZAddress64(BitConverter.ToUInt64(data, 4));
             Capabilities = data[12];
 

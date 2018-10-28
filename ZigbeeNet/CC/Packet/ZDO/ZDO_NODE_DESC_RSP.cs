@@ -87,9 +87,9 @@ namespace ZigbeeNet.CC.Packet.ZDO
         public ZDO_NODE_DESC_RSP(byte[] framedata)
         {
 
-            SrcAddr = new ZAddress16(framedata[0], framedata[1]);
+            SrcAddr = new ZAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
-            NwkAddr = new ZAddress16(framedata[3], framedata[4]);
+            NwkAddr = new ZAddress16(framedata[4], framedata[3]);
             LogicalType = (NodeType)(framedata[5] & (byte)0x07);
             ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
             UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;

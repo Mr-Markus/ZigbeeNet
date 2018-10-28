@@ -20,8 +20,6 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             byte[] framedata = new byte[] { (byte)param };
 
             BuildPacket(CommandType.ZB_GET_DEVICE_INFO, framedata);
-        }
-
-        
+        }        
     }
 }

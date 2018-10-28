@@ -13,7 +13,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
 
         public ZDO_BIND_RSP(byte[] data)
         {
-            srcAddr = new ZAddress16(data[0], data[1]);
+            srcAddr = new ZAddress16(data[1], data[0]);
             Status = (PacketStatus)data[2];
 
             BuildPacket(CommandType.ZDO_BIND_RSP, data);

@@ -33,8 +33,8 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
 
             byte[] framedata = new byte[11];
             framedata[0] = create ? (byte)0x01 : (byte)0x00;
-            framedata[1] = commandId.Low;
-            framedata[2] = commandId.High;
+            framedata[1] = commandId.Lsb;
+            framedata[2] = commandId.Msb;
 
             byte[] dst = destination.ToByteArray();
             for (int i = 3; i < 8; i++)

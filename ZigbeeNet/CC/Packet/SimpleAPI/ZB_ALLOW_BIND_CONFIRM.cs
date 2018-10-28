@@ -19,8 +19,8 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             Source = source;
 
             byte[] framedata = new byte[2];
-            framedata[0] = Source.DoubleByte.Low;
-            framedata[1] = Source.DoubleByte.High;
+            framedata[0] = Source.DoubleByte.Lsb;
+            framedata[1] = Source.DoubleByte.Msb;
 
             BuildPacket(CommandType.ZB_ALLOW_BIND_CONFIRM, framedata);
         }

@@ -10,12 +10,12 @@ namespace ZigbeeNet.CC
         /// <summary>
         /// Gets or sets high byte
         /// </summary>
-        public byte High { get; set; }
+        public byte Msb { get; set; }
 
         /// <summary>
         /// Gets or sets low byte
         /// </summary>
-        public byte Low { get; set; }
+        public byte Lsb { get; set; }
 
 
         public DoubleByte()
@@ -33,30 +33,30 @@ namespace ZigbeeNet.CC
                 throw new InvalidDataException(nameof(val));
 
             // split address into high and low bytes
-            High = (byte)(val >> 8);
-            Low = (byte)(val & 0xFF);
+            Msb = (byte)(val >> 8);
+            Lsb = (byte)(val & 0xFF);
         }
 
         /// <summary>
         /// Constructs a 16bit value from two bytes (high and low)
         /// </summary>
-        /// <param name="high"></param>
-        /// <param name="low"></param>
-        public DoubleByte(byte low, byte high)
+        /// <param name="msb"></param>
+        /// <param name="lsb"></param>
+        public DoubleByte(byte msb, byte lsb)
         {
 
-            if (high > 0xFF)
-                throw new InvalidDataException(nameof(high));
-            if(low > 0xFF)
-                throw new InvalidDataException(nameof(low));
+            if (msb > 0xFF)
+                throw new InvalidDataException(nameof(msb));
+            if(lsb > 0xFF)
+                throw new InvalidDataException(nameof(lsb));
 
-            this.High = high;
-            this.Low = low;
+            this.Msb = msb;
+            this.Lsb = lsb;
         }
 
         public ushort Get16BitValue()
         {
-            return BitConverter.ToUInt16(new byte[2] { High, Low }, 0);
+            return BitConverter.ToUInt16(new byte[2] { Msb, Lsb }, 0);
         }
 
         public override string ToString()

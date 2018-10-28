@@ -60,8 +60,8 @@ namespace ZigbeeNet.CC.Packet.ZDO
             framedata.AddRange(nwkDst.ToByteArray());
             framedata.AddRange(ieeeSrc.ToByteArray());
             framedata.Add(srcEp);
-            framedata.Add(cluster.Low);
-            framedata.Add(cluster.High);
+            framedata.Add(cluster.Lsb);
+            framedata.Add(cluster.Msb);
             framedata.Add((byte)addressMode);
             framedata.AddRange(ieeeDst.ToByteArray());
 

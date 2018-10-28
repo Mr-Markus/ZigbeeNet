@@ -50,14 +50,14 @@ namespace ZigbeeNet.CC.Packet.ZDO
         {
             Status = (PacketStatus)data[0];
             IeeeAddr = new ZAddress64(BitConverter.ToUInt64(data, 1));
-            NwkAddr = new ZAddress16(data[9], data[10]);
+            NwkAddr = new ZAddress16(data[10], data[9]);
             StartIndex = data[11];
             NumAssocDev = data[12];
 
             AssocDevList = new List<ZAddress16>();
             for (int i = 0; i < Length; i++)
             {
-                this.AssocDevList[i] = new ZAddress16(data[13 + (i * 2)], data[14 + (i * 2)]);
+                this.AssocDevList[i] = new ZAddress16(data[14 + (i * 2)], data[13 + (i * 2)]);
             }
 
             BuildPacket(CommandType.ZDO_IEEE_ADDR_RSP, data);
