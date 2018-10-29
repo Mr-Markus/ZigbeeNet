@@ -66,6 +66,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_REQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_NODE_DESC_RSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_SIMPLE_DESC_REQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_SIMPLE_DESC_REQ_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_SIMPLE_DESC_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATE_CHANGE_IND.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATUS_ERROR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />

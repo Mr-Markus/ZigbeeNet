@@ -172,16 +172,13 @@ namespace ZigbeeNet.CC
         {
             if(asynchronousRequest is SYS_RESET_RESPONSE res)
             {
-                if (res.Reason == SYS_RESET_RESPONSE.ResetType.PowerUp)
+                //TODO: Maybe it is not correct at this point
+                //==> Starts the hardware CC2531
+                ZB_START_REQUEST start = new ZB_START_REQUEST();
+                await SendAsync<ZB_START_REQUEST_RSP>(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
                 {
-                    //TODO: Maybe it is not correct at this point
-                    //==> Starts the hardware CC2531
-                    ZB_START_REQUEST start = new ZB_START_REQUEST();
-                    await SendAsync<ZB_START_REQUEST_RSP>(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
-                    {
-                        Started?.Invoke(this, EventArgs.Empty);
-                    });
-                }
+                    Started?.Invoke(this, EventArgs.Empty);
+                });
             }
             //TODO: HandleIncommingMessage
             if (asynchronousRequest is ZDO_STATE_CHANGE_IND stateInd)
@@ -205,13 +202,40 @@ namespace ZigbeeNet.CC
             {
                 Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == nodeDesc.NwkAddr.Value);
 
-                device.ManufacturerId = nodeDesc.ManufacturerCode;
+                if (device != null)
+                {
+                    device.ManufacturerId = nodeDesc.ManufacturerCode;
+
+                    ZDO_ACTIVE_EP_REQ epReq = new ZDO_ACTIVE_EP_REQ(device.NwkAdress, device.NwkAdress);
+                    ZDO_ACTIVE_EP_REQ_SRSP epRsp = await SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq, msg => { return msg is SynchronousResponse && msg.SubSystem == epReq.SubSystem; }).ConfigureAwait(false);
+                }
             }
             if(asynchronousRequest is ZDO_ACTIVE_EP_RSP spRsp)
             {
                 foreach (var ep in spRsp.ActiveEpList)
                 {
+                    ZDO_SIMPLE_DESC_REQ simpleReq = new ZDO_SIMPLE_DESC_REQ(spRsp.NwkAddr, ep);
+                    ZDO_SIMPLE_DESC_REQ_SRSP simpleRsp = await SendAsync<ZDO_SIMPLE_DESC_REQ_SRSP>(simpleReq, msg => { return msg is SynchronousResponse && msg.SubSystem == simpleReq.SubSystem; }).ConfigureAwait(false);
+                }
+            }
+            if(asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
+            {
+                Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
+                
+                if(device != null)
+                {
+                    Endpoint ep = new Endpoint(device)
+                    {
+                        Id = simpRsp.Endpoint,
+                        ProfileId = simpRsp.ProfileId
+                    };
 
+                    ep.InClusters.AddRange(simpRsp.InClusterList);
+                    ep.OutClusters.AddRange(simpRsp.OutClusterList);
+
+                    device.Endpoints.Add(ep);
+
+                    //TODO: Bind Endpoint via ZDO_BIND_REQ
                 }
             }
             //TODO: EventHandler or Bridge class should handle special requests
@@ -368,9 +392,6 @@ namespace ZigbeeNet.CC
 
             ZDO_NODE_DESC_REQ nodeReq = new ZDO_NODE_DESC_REQ(deviceInd.NwkAddr, deviceInd.NwkAddr);
             var nodeRsp = await SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq, msg => msg.SubSystem == nodeReq.SubSystem && msg.Cmd1 == nodeReq.Cmd1).ConfigureAwait(false);
-
-            ZDO_ACTIVE_EP_REQ epReq = new ZDO_ACTIVE_EP_REQ(deviceInd.NwkAddr, deviceInd.NwkAddr);
-            var epRsp = await SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq, msg => msg.SubSystem == epReq.SubSystem && msg.Cmd1 == epReq.Cmd1).ConfigureAwait(false);
         }
 
         private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)

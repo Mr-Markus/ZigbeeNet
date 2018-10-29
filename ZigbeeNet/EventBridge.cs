@@ -31,17 +31,17 @@ namespace ZigbeeNet
 
             try
             {
-                Endpoint basicEp = e.Endpoints.SingleOrDefault(ep => ep.ClusterList.Contains(Cluster.genBasic));
+                //Endpoint basicEp = e.Endpoints.SingleOrDefault(ep => ep.ClusterList.Contains(Cluster.genBasic));
 
-                if(basicEp != null)
-                {
-                    ReadAttributesCommand readAttributes = new ReadAttributesCommand(4, 5, 7);
+                //if(basicEp != null)
+                //{
+                //    ReadAttributesCommand readAttributes = new ReadAttributesCommand(4, 5, 7);
                     
-                    readAttributes.OnResponse += ReadAttributes_OnResponse;
+                //    readAttributes.OnResponse += ReadAttributes_OnResponse;
 
-                    //ZCL.ZclMeta.Clusters
-                    _zclBridge.ZclGlobal(basicEp, basicEp, Cluster.genBasic, readAttributes);
-                }
+                //    //ZCL.ZclMeta.Clusters
+                //    _zclBridge.ZclGlobal(basicEp, basicEp, Cluster.genBasic, readAttributes);
+                //}
             } catch (Exception ex)
             {
                 _logger.Error(ex, "Error 0x0002");
