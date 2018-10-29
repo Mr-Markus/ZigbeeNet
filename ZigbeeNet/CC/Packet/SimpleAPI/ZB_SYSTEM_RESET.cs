@@ -10,7 +10,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
     /// for instance, so that the USB host does not have to contend with the USB H/W resetting 
     /// (and thus causing the USB host to re-enumerate the device which can cause an open virtual serial port to hang.) 
     /// </summary>
-    public class ZB_SYSTEM_RESET : SynchronousRequest
+    public class ZB_SYSTEM_RESET : AsynchronousRequest
     {
         public ZB_SYSTEM_RESET()
         {

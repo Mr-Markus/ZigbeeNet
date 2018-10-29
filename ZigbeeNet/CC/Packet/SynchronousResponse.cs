@@ -11,7 +11,7 @@ namespace ZigbeeNet.CC.Packet
 
         }
 
-        public SynchronousResponse(SubSystem subSystem, byte commandId, byte[] payload) : base(MessageType.SRSP, subSystem, commandId, payload)
+        public SynchronousResponse(CommandType commandId, byte[] payload) : base(commandId, payload)
         {
 
         }

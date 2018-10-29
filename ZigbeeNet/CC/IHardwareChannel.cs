@@ -19,7 +19,7 @@ namespace ZigbeeNet.CC
 
         void Open();
         void Close();
-        Task<byte[]> SendAsync(byte[] payload);
+        Task SendAsync(byte[] payload);
 
         Task<byte[]> PermitJoinAsync(int time);
     }

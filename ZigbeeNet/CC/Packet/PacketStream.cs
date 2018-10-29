@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigbeeNet.CC.Extensions;
 using ZigbeeNet.CC.Packet.SimpleAPI;
+using ZigbeeNet.CC.Packet.SYS;
 using ZigbeeNet.CC.Packet.ZDO;
 using ZigbeeNet.Logging;
 
@@ -49,8 +50,8 @@ namespace ZigbeeNet.CC.Packet
         {
             switch (cmd)
             {
-                //case CommandType.SYS_RESET_RESPONSE:
-                //    return new SYS_RESET_RESPONSE(payload);
+                case CommandType.SYS_RESET_RESPONSE:
+                    return new SYS_RESET_RESPONSE(payload);
                 //case CommandType.SYS_VERSION_RESPONSE:
                 //    return new SYS_VERSION_RESPONSE(payload);
                 //case CommandType.SYS_PING_RESPONSE:
@@ -103,10 +104,10 @@ namespace ZigbeeNet.CC.Packet
                     return new ZB_WRITE_CONFIGURATION_RSP(payload);
 
                 #region not implemented but posible
-                // case CommandType.ZDO_ACTIVE_EP_REQ_SRSP:
-                // return new ZDO_ACTIVE_EP_REQ_SRSP(payload);
-                // case CommandType.ZDO_ACTIVE_EP_RSP:
-                // return new ZDO_ACTIVE_EP_RSP(payload);
+                case CommandType.ZDO_ACTIVE_EP_REQ_SRSP:
+                    return new ZDO_ACTIVE_EP_REQ_SRSP(payload);
+                case CommandType.ZDO_ACTIVE_EP_RSP:
+                    return new ZDO_ACTIVE_EP_RSP(payload);
                 // case CommandType.ZDO_BIND_REQ_SRSP:
                 // return new ZDO_BIND_REQ_SRSP(payload);
                 // case CommandType.ZDO_BIND_RSP:

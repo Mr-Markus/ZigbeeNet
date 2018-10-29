@@ -70,16 +70,14 @@ namespace ZigbeeNet.CC.Packet
 
         }
 
-        public SerialPacket(CommandType commandType, byte[] data)
+        public SerialPacket(CommandType commandId, byte[] payload = null)
         {
+            DoubleByte dByte = new DoubleByte((ushort)commandId);
 
-        }
-
-        public SerialPacket(MessageType type, SubSystem subSystem, byte commandId, byte[] payload = null)
-        {
-            Type = type;
-            SubSystem = subSystem;
-            Cmd1 = commandId;
+            Type = (MessageType)((byte)dByte.Msb >> 5);
+            SubSystem = (SubSystem)(byte)(dByte.Msb & 0x1F);
+            Cmd1 = dByte.Lsb;
+            Cmd = commandId;
             Payload = payload != null ? payload : new byte[0];
         }
 

@@ -37,14 +37,14 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// </summary>
         public byte Capabilities { get; private set; }
 
-        public ZDO_END_DEVICE_ANNCE_IND(byte[] data)
+        public ZDO_END_DEVICE_ANNCE_IND(byte[] framedata)
         {
-            SrcAddr = new ZAddress16(data[1], data[0]);
-            NwkAddr = new ZAddress16(data[3], data[2]);
-            IEEEAddr = new ZAddress64(BitConverter.ToUInt64(data, 4));
-            Capabilities = data[12];
+            SrcAddr = new ZAddress16(framedata[1], framedata[0]);
+            NwkAddr = new ZAddress16(framedata[3], framedata[2]);
+            IEEEAddr = new ZAddress64(BitConverter.ToUInt64(framedata, 4));
+            Capabilities = framedata[12];
 
-            BuildPacket(CommandType.ZDO_END_DEVICE_ANNCE_IND, data);
+            BuildPacket(CommandType.ZDO_END_DEVICE_ANNCE_IND, framedata);
         }
     }
 }

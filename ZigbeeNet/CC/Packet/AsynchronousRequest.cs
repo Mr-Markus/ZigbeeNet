@@ -11,7 +11,7 @@ namespace ZigbeeNet.CC.Packet
 
         }
 
-        public AsynchronousRequest(SubSystem subSystem, byte commandId, byte[] payload) : base(MessageType.AREQ, subSystem, commandId, payload)
+        public AsynchronousRequest(CommandType commandId, byte[] payload) : base(commandId, payload)
         {
 
         }

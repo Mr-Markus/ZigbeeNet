@@ -49,6 +49,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SynchronousResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SerialPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SYS\SYS_RESET_RESPONSE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_ACTIVE_EP_REQ.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_ACTIVE_EP_REQ_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_ACTIVE_EP_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_REQ.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_REQ_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_BIND_RSP.cs" />
