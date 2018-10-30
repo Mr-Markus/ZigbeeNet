@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -19,7 +20,9 @@ namespace ZigbeeNet.CC
 
         private UnifiedNetworkProcessorInterface unpi { get; set; }
         private CancellationTokenSource _tokenSource;
-        
+
+        private List<IPacketHandler> _handlers;
+
         private Task _readTask;
         private Task _transmitTask;
         private Task _areqTask;
@@ -29,11 +32,7 @@ namespace ZigbeeNet.CC
         private BlockingCollection<AsynchronousRequest> _areqQueue;
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SynchronousResponse> _responseQueue;
-
-        private ConcurrentBag<Device> _devices;
-        private ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND> _joinQueue;
-        private bool _spinLock;
-
+        
         public int MaxRetryCount => 3;
 
         public event EventHandler Started;
@@ -42,8 +41,8 @@ namespace ZigbeeNet.CC
         public CCZnp()
         {
             semaphore = new SemaphoreSlim(1, 1);
-            _joinQueue = new ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND>();
-            _devices = new ConcurrentBag<Device>();
+
+            _handlers = new List<IPacketHandler>();
 
             unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
         }
@@ -55,6 +54,10 @@ namespace ZigbeeNet.CC
             _logger.Debug("Opening interface...");
             // Port must be open!!
             unpi.Port.Open();
+
+            _handlers.Clear();
+            _handlers.Add(new PacketHandler(this));
+            _handlers.Add(new DeviceHandler(this));
 
             // create or reset queues
             _transmitQueue = new BlockingCollection<SerialPacket>();
@@ -86,12 +89,10 @@ namespace ZigbeeNet.CC
             _logger.Debug("Closed interface...");
         }
 
-        public async Task<byte[]> PermitJoinAsync(int time)
+        public async Task PermitJoinAsync(int time)
         {
-            ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZAddress16(0,0), 255, false);
-            var responsePacket = await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
-
-            return await responsePacket.ToFrame();
+            ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZAddress16(0,0), (byte)time, false);
+            await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
         }
 
         private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
@@ -130,7 +131,7 @@ namespace ZigbeeNet.CC
                     OnError(e);
                 }
             }
-        }
+        }        
 
         public async Task SendAsync(byte[] payload)
         {
@@ -159,6 +160,16 @@ namespace ZigbeeNet.CC
             _logger.ErrorException("Exception: {e}", e);
         }
 
+        internal void OnStarted()
+        {
+            Started?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void OnNewDevice(Device device)
+        {
+            NewDevice?.Invoke(this, device);
+        }
+
         private void OnSend(SerialPacket serialPacket)
         {
             if (serialPacket == null)
@@ -170,75 +181,10 @@ namespace ZigbeeNet.CC
 
         private async void OnReceive(AsynchronousRequest asynchronousRequest)
         {
-            if(asynchronousRequest is SYS_RESET_RESPONSE res)
+            foreach (var handler in _handlers)
             {
-                //TODO: Maybe it is not correct at this point
-                //==> Starts the hardware CC2531
-                ZB_START_REQUEST start = new ZB_START_REQUEST();
-                await SendAsync<ZB_START_REQUEST_RSP>(start, msg => { return msg is SynchronousResponse && msg.SubSystem == start.SubSystem; }).ContinueWith((t) =>
-                {
-                    Started?.Invoke(this, EventArgs.Empty);
-                });
+                await handler.Handle(asynchronousRequest);
             }
-            //TODO: HandleIncommingMessage
-            if (asynchronousRequest is ZDO_STATE_CHANGE_IND stateInd)
-            {
-                _logger.Info("State changed: {state}", stateInd.Status);
-
-                if(stateInd.Status == DeviceState.Started_as_ZigBee_Coordinator)
-                {
-                    ZAddress64 ieeeAddr = await GetIeeeAddress();
-                    //ZAddress16 panId = await GetCurrentPanId();
-
-                    await PermitJoinAsync(255);
-                }
-            }
-            if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
-            {
-                endDeviceAnnceHdlr(endDevInd);
-                _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", endDevInd.NwkAddr, endDevInd.IEEEAddr);
-            }
-            if(asynchronousRequest is ZDO_NODE_DESC_RSP nodeDesc)
-            {
-                Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == nodeDesc.NwkAddr.Value);
-
-                if (device != null)
-                {
-                    device.ManufacturerId = nodeDesc.ManufacturerCode;
-
-                    ZDO_ACTIVE_EP_REQ epReq = new ZDO_ACTIVE_EP_REQ(device.NwkAdress, device.NwkAdress);
-                    ZDO_ACTIVE_EP_REQ_SRSP epRsp = await SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq, msg => { return msg is SynchronousResponse && msg.SubSystem == epReq.SubSystem; }).ConfigureAwait(false);
-                }
-            }
-            if(asynchronousRequest is ZDO_ACTIVE_EP_RSP spRsp)
-            {
-                foreach (var ep in spRsp.ActiveEpList)
-                {
-                    ZDO_SIMPLE_DESC_REQ simpleReq = new ZDO_SIMPLE_DESC_REQ(spRsp.NwkAddr, ep);
-                    ZDO_SIMPLE_DESC_REQ_SRSP simpleRsp = await SendAsync<ZDO_SIMPLE_DESC_REQ_SRSP>(simpleReq, msg => { return msg is SynchronousResponse && msg.SubSystem == simpleReq.SubSystem; }).ConfigureAwait(false);
-                }
-            }
-            if(asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
-            {
-                Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
-                
-                if(device != null)
-                {
-                    Endpoint ep = new Endpoint(device)
-                    {
-                        Id = simpRsp.Endpoint,
-                        ProfileId = simpRsp.ProfileId
-                    };
-
-                    ep.InClusters.AddRange(simpRsp.InClusterList);
-                    ep.OutClusters.AddRange(simpRsp.OutClusterList);
-
-                    device.Endpoints.Add(ep);
-
-                    //TODO: Bind Endpoint via ZDO_BIND_REQ
-                }
-            }
-            //TODO: EventHandler or Bridge class should handle special requests
         }
 
         private Task ProcessQueueAsync<T>(BlockingCollection<T> queue, Action<T> action) where T : SerialPacket
@@ -332,7 +278,7 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
         
-        private async Task<TResponse> SendAsync<TResponse>(SerialPacket packet, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
+        internal async Task<TResponse> SendAsync<TResponse>(SerialPacket packet, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
         {
             return await RetryWithResponseAsync(async () =>
             {
@@ -352,72 +298,6 @@ namespace ZigbeeNet.CC
             {
                 _transmitQueue.Add(packet);
             });
-        }
-
-        private async void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
-        {
-            //TODO: Try to get device from device db and check status if it is online. If true continue with next ind
-            Device device = _devices.SingleOrDefault(d=> d.IeeeAddress.Value == deviceInd.IEEEAddr.Value);
-            if (device != null && device.Status == DeviceStatus.Online)
-            {
-                Console.WriteLine("Device already in Network");
-
-                ZDO_END_DEVICE_ANNCE_IND removed = null;
-                if (_joinQueue.TryDequeue(out removed))
-                {
-                    ZDO_END_DEVICE_ANNCE_IND next = null;
-
-                    if (_joinQueue.TryDequeue(out next))
-                    {
-                        endDeviceAnnceHdlr(next);
-                    }
-                    else
-                    {
-                        _spinLock = false;
-                    }
-                }
-
-                return;
-            }
-
-            //TODO: Timeout
-
-            device = new Device();
-            device.NwkAdress = deviceInd.NwkAddr;
-            device.IeeeAddress = deviceInd.IEEEAddr;
-
-            _devices.Add(device);
-
-            NewDevice?.Invoke(this, device);
-
-            ZDO_NODE_DESC_REQ nodeReq = new ZDO_NODE_DESC_REQ(deviceInd.NwkAddr, deviceInd.NwkAddr);
-            var nodeRsp = await SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq, msg => msg.SubSystem == nodeReq.SubSystem && msg.Cmd1 == nodeReq.Cmd1).ConfigureAwait(false);
-        }
-
-        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
-        {
-            ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
-            ZB_GET_DEVICE_INFO_RSP infoRsp = await SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq, msg => msg.SubSystem == infoReq.SubSystem && msg.Cmd1 == infoReq.Cmd1).ConfigureAwait(false);
-
-            return infoRsp.Value;
-        }
-
-        private async Task<ZAddress64> GetIeeeAddress()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
-
-            ZAddress64 ieeeAddr = new ZAddress64(result);
-
-            return ieeeAddr;
-        }
-
-        private async Task<ZAddress16> GetCurrentPanId()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
-
-            ZAddress16 panId = new ZAddress16(result);
-
-            return panId;
-        }
+        }       
     }
 }
