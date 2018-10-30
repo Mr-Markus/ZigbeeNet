@@ -17,10 +17,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\IHardwareChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\IPacketHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Model\ZAddress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Model\ZAddress16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Model\ZAddress64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AsynchronousRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\DeviceHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\PacketHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\PacketStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_ALLOW_BIND.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_ALLOW_BIND_CONFIRM.cs" />
