@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public enum DeviceStatus : byte
+    public enum ZigbeeNodeStatus : byte
     {
         Offline = 0x00,
         Online = 0x01

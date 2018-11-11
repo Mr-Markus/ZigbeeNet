@@ -4,23 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZigbeeNet.CC.Packet;
 using ZigbeeNet.CC.Packet.ZDO;
 using ZigbeeNet.Logging;
+using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigbeeNet.CC.Handler
 {
     public class DeviceHandler : IPacketHandler
     {
         private readonly ILog _logger = LogProvider.For<DeviceHandler>();
         private CCZnp _znp;
-        private ConcurrentBag<Device> _devices;
+        private ConcurrentBag<ZigbeeNode> _devices;
         private ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND> _joinQueue;
         private bool _spinLock;
 
         public DeviceHandler(CCZnp znp)
         {
             _znp = znp;
-            _devices = new ConcurrentBag<Device>();
+            _devices = new ConcurrentBag<ZigbeeNode>();
             _joinQueue = new ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND>();
         }
 
@@ -33,11 +35,13 @@ namespace ZigbeeNet.CC.Packet
             }
             if (asynchronousRequest is ZDO_NODE_DESC_RSP nodeDesc)
             {
-                Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == nodeDesc.NwkAddr.Value);
+                ZigbeeNode device = _devices.SingleOrDefault(d => d.NwkAdress.Value == nodeDesc.NwkAddr.Value);
 
                 if (device != null)
                 {
                     device.ManufacturerId = nodeDesc.ManufacturerCode;
+
+                    _znp.OnDeviceInfoChanged(device);
 
                     ZDO_ACTIVE_EP_REQ epReq = new ZDO_ACTIVE_EP_REQ(device.NwkAdress, device.NwkAdress);
                     ZDO_ACTIVE_EP_REQ_SRSP epRsp = await _znp.SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq, msg => { return msg is SynchronousResponse && msg.SubSystem == epReq.SubSystem; }).ConfigureAwait(false);
@@ -53,22 +57,27 @@ namespace ZigbeeNet.CC.Packet
             }
             if (asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
             {
-                Device device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
+                ZigbeeNode device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
 
                 if (device != null)
                 {
-                    Endpoint ep = new Endpoint(device)
+                    ZigbeeEndpoint ep = new ZigbeeEndpoint(device)
                     {
                         Id = simpRsp.Endpoint,
                         ProfileId = simpRsp.ProfileId
                     };
 
-                    ep.InClusters.AddRange(simpRsp.InClusterList);
-                    ep.OutClusters.AddRange(simpRsp.OutClusterList);
+                    ep.InClusters.AddRange(simpRsp.InClusterList.Select(c => (ZclCluster)c.Value));
+                    ep.OutClusters.AddRange(simpRsp.OutClusterList.Select(c => (ZclCluster)c.Value));
 
                     device.Endpoints.Add(ep);
 
+                    _znp.OnDeviceInfoChanged(device);
+
                     //TODO: Bind Endpoint via ZDO_BIND_REQ
+                    ZclCluster cl = ep.InClusters.Single();
+
+                    ZDO_BIND_REQ bindReq = new ZDO_BIND_REQ(device.NwkAdress, device.IeeeAddress, ep.Id, new DoubleByte((ushort)cl) , ZDO_BIND_REQ.Address_Mode.ADDRESS_64_BIT, await _znp.GetIeeeAddress(), 0);
                 }
             }
         }
@@ -76,8 +85,8 @@ namespace ZigbeeNet.CC.Packet
         private async void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
         {
             //TODO: Try to get device from device db and check status if it is online. If true continue with next ind
-            Device device = _devices.SingleOrDefault(d => d.IeeeAddress.Value == deviceInd.IEEEAddr.Value);
-            if (device != null && device.Status == DeviceStatus.Online)
+            ZigbeeNode device = _devices.SingleOrDefault(d => d.IeeeAddress.Value == deviceInd.IEEEAddr.Value);
+            if (device != null && device.Status == ZigbeeNodeStatus.Online)
             {
                 Console.WriteLine("Device already in Network");
 
@@ -101,7 +110,7 @@ namespace ZigbeeNet.CC.Packet
 
             //TODO: Timeout
 
-            device = new Device();
+            device = new ZigbeeNode();
             device.NwkAdress = deviceInd.NwkAddr;
             device.IeeeAddress = deviceInd.IEEEAddr;
 

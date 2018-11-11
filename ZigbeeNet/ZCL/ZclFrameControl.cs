@@ -30,7 +30,7 @@ namespace ZigbeeNet.ZCL
     /// Bits: |     0-1     |           2           |     3     |           4               |   5-7    | 
     ///       | Frame type  | Manufacturer specific | Direction | Disable Default Response  | Reserved |
     /// </summary>
-    public class FrameControl
+    public class ZclFrameControl
     {
         /// <summary>
         ///  If the frame type sub-field of the frame control field is set to 0b00, the command identifier 

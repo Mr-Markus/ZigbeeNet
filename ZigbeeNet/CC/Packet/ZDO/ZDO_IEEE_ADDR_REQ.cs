@@ -13,7 +13,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the short address of the device
         /// </summary>
-        public ZAddress16 ShortAddress { get; private set; }
+        public ZigbeeAddress16 ShortAddress { get; private set; }
 
         /// <summary>
         /// Value that the search was executed on
@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// </summary>
         public byte StartIndex { get; private set; }
 
-        public ZDO_IEEE_ADDR_REQ(ZAddress16 shortAddress, RequestType reqType, byte startIndex)
+        public ZDO_IEEE_ADDR_REQ(ZigbeeAddress16 shortAddress, RequestType reqType, byte startIndex)
         {
             ShortAddress = shortAddress;
             ReqType = reqType;

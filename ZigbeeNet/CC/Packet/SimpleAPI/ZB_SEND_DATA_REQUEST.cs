@@ -23,7 +23,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
         /// - ZB_BROADCAST_ADDR sends the data to all devices in the network.
         /// - ZB_BINDING_ADDR sends the data to a previously bound device. 
         /// </summary>
-        public ZAddress16 Destination { get; private set; }
+        public ZigbeeAddress16 Destination { get; private set; }
 
         /// <summary>
         /// A handle used to Identify the send data request. 
@@ -55,7 +55,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             PayloadValue = new byte[0xff];
         }
 
-        public ZB_SEND_DATA_REQUEST(ZAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] buffer)
+        public ZB_SEND_DATA_REQUEST(ZigbeeAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] buffer)
         {
             // TODO: check buffer length
             Destination = destination;

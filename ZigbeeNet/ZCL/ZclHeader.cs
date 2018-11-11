@@ -7,14 +7,14 @@ namespace ZigbeeNet.ZCL
 {
     public class FrameHeader
     {
-        public FrameHeader(FrameControl frameControl, byte commandIdentifier)
+        public FrameHeader(ZclFrameControl frameControl, byte commandIdentifier)
         {
             FrameControl = frameControl;
             CommandIdentifierField = commandIdentifier;
         }
         public FrameHeader(FrameType frameType, Direction direction, byte commandIdentifier, DisableDefaultResponse disableDefaultResponse = DisableDefaultResponse.Always, bool manufacturerSpecific = false)
         {
-            FrameControl = new FrameControl()
+            FrameControl = new ZclFrameControl()
             {
                 Type = frameType,
                 Direction = direction,
@@ -41,7 +41,7 @@ namespace ZigbeeNet.ZCL
         /// </summary>
         [FieldOrder(0)]
         [FieldBitLength(8)]
-        public FrameControl FrameControl { get; set; }
+        public ZclFrameControl FrameControl { get; set; }
 
         /// <summary>
         /// The manufacturer code field is 16 bits in length and specifies the ZigBee assigned manufacturer code for proprietary extensions. 

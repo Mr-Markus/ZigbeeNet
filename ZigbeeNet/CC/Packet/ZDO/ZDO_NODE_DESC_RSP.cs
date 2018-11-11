@@ -12,7 +12,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// The message’s source network address
         /// </summary>
-        public ZAddress16 SrcAddr { get; private set; }
+        public ZigbeeAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// This field indicates either SUCCESS or FAILURE
@@ -22,12 +22,12 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Device’s short address of this Node descriptor 
         /// </summary>
-        public ZAddress16 NwkAddr { get; private set; }
+        public ZigbeeAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Logical Type
         /// </summary>
-        public NodeType LogicalType { get; private set; }
+        public ZigbeeNodeType LogicalType { get; private set; }
 
         /// <summary>
         /// Indicates if complex descriptor is available for the node 
@@ -87,10 +87,10 @@ namespace ZigbeeNet.CC.Packet.ZDO
         public ZDO_NODE_DESC_RSP(byte[] framedata)
         {
 
-            SrcAddr = new ZAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
-            NwkAddr = new ZAddress16(framedata[4], framedata[3]);
-            LogicalType = (NodeType)(framedata[5] & (byte)0x07);
+            NwkAddr = new ZigbeeAddress16(framedata[4], framedata[3]);
+            LogicalType = (ZigbeeNodeType)(framedata[5] & (byte)0x07);
             ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
             UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;
             APSFlags = (byte)(framedata[6] & (byte)0x0F);

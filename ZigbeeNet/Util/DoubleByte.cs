@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
     public class DoubleByte
     {
@@ -54,14 +54,11 @@ namespace ZigbeeNet.CC
             this.Lsb = lsb;
         }
 
-        public ushort Get16BitValue()
-        {
-            return BitConverter.ToUInt16(new byte[2] { Msb, Lsb }, 0);
-        }
+        public ushort Value => BitConverter.ToUInt16(new byte[2] { Msb, Lsb }, 0);
 
         public override string ToString()
         {
-            return Get16BitValue().ToString();
+            return Value.ToString();
         }
     }
 }

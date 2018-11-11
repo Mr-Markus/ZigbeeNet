@@ -40,7 +40,7 @@ namespace ZigbeeNet.CC.Packet
 
                 DoubleByte cmd = new DoubleByte(buffer[3], buffer[2]);
 
-                return ParsePayload((CommandType)cmd.Get16BitValue(), buffer.Skip(4).Take(length).ToArray());
+                return ParsePayload((CommandType)cmd.Value, buffer.Skip(4).Take(length).ToArray());
             }
 
             throw new InvalidDataException("unable to decode packet");

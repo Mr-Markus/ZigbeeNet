@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public class ZAddress16 : ZAddress
+    public class ZigbeeAddress16 : ZigbeeAddress
     {
         public DoubleByte DoubleByte { get; private set; }
 
@@ -13,7 +13,7 @@ namespace ZigbeeNet.CC
         {
             get
             {
-                return DoubleByte.Get16BitValue();
+                return DoubleByte.Value;
             }
             set
             {
@@ -21,17 +21,22 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public ZAddress16()
+        public ZigbeeAddress16()
         {
             DoubleByte = new DoubleByte();
         }
 
-        public ZAddress16(byte msb, byte lsb)
+        public ZigbeeAddress16(ushort value)
+        {
+            Value = value;
+        }
+
+        public ZigbeeAddress16(byte msb, byte lsb)
         {
             DoubleByte = new DoubleByte(msb, lsb);
         }
 
-        public ZAddress16(byte[] data)
+        public ZigbeeAddress16(byte[] data)
         {
             if (data.Length != 2)
                 throw new InvalidDataException(nameof(data));

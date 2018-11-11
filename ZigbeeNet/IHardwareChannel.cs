@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
     /// <summary>
     /// Interface for a hardware specific channel. This should reside in the ZCL part of the library
@@ -13,12 +13,12 @@ namespace ZigbeeNet.CC
     /// </summary>
     public interface IHardwareChannel
     {
-        //TODO: Started event???
         event EventHandler Started;
-        event EventHandler<Device> NewDevice;
+        event EventHandler<ZigbeeNode> NewDevice;
+        event EventHandler<ZigbeeNode> DeviceInfoChanged;
 
-        void Open();
-        void Close();
+        void Start();
+        void Stop();
         Task SendAsync(byte[] payload);
 
         Task PermitJoinAsync(int time);

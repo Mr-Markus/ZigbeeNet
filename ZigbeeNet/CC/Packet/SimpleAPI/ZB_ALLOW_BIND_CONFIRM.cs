@@ -12,9 +12,9 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Contains the address of the device attempted to bind to this device
         /// </summary>
-        public ZAddress16 Source { get; private set; }
+        public ZigbeeAddress16 Source { get; private set; }
 
-        public ZB_ALLOW_BIND_CONFIRM(ZAddress16 source)
+        public ZB_ALLOW_BIND_CONFIRM(ZigbeeAddress16 source)
         {
             Source = source;
 

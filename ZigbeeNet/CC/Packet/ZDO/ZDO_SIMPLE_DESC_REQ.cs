@@ -6,7 +6,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
 {
     public class ZDO_SIMPLE_DESC_REQ : SynchronousRequest
     {
-        public ZDO_SIMPLE_DESC_REQ(ZAddress16 nwkAddr, byte endPoint)
+        public ZDO_SIMPLE_DESC_REQ(ZigbeeAddress16 nwkAddr, byte endPoint)
         {
             byte[] framedata = new byte[5];
 

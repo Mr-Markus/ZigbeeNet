@@ -17,7 +17,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the network address of the destination device whose Permit Join information is to be modified. 
         /// </summary>
-        public ZAddress16 DstAddr { get; private set; }
+        public ZigbeeAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Specifies the duration to permit joining.  0 = join disabled.  0xff = join enabled. 0x01-0xfe = number of seconds to permit joining
@@ -30,7 +30,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         public byte TCSignificance { get; private set; }
 
 
-        public ZDO_MGMT_PERMIT_JOIN_REQ(byte addrMode, ZAddress16 dstAddr, byte duration, bool tcsSignificant)
+        public ZDO_MGMT_PERMIT_JOIN_REQ(byte addrMode, ZigbeeAddress16 dstAddr, byte duration, bool tcsSignificant)
         {
             AddrMode = addrMode;
             DstAddr = dstAddr;

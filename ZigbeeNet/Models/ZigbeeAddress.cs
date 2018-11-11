@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public abstract class ZAddress
+    public abstract class ZigbeeAddress
     {
         public abstract byte[] ToByteArray();
     }

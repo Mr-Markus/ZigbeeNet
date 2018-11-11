@@ -18,14 +18,14 @@ namespace ZigbeeNet
 
         private byte _seqNumber = 0;
 
-        public ZigbeeController Controller { get; private set; }
+        public IHardwareChannel Controller { get; private set; }
 
-        public ZclBridge(ZigbeeController controller)
+        public ZclBridge(IHardwareChannel controller)
         {
             Controller = controller;
         }
 
-        public void Send(ZclCommand zclCommand, Endpoint srcEndpoint, Endpoint dstEndpoint, Cluster cluster, byte[] payload)
+        public void Send(ZclCommand zclCommand, ZigbeeEndpoint srcEndpoint, ZigbeeEndpoint dstEndpoint, ZclCluster cluster, byte[] payload)
         {
             //DataRequest dataRequest = new DataRequest()
             //{
@@ -54,7 +54,7 @@ namespace ZigbeeNet
             //dataRequest.RequestAsync(Controller.Znp);
         }
 
-        public void ZclGlobal(Endpoint srcEndpoint, Endpoint dstEndpoint, Cluster cluster, ZclCommand zclCommand)
+        public void ZclGlobal(ZigbeeEndpoint srcEndpoint, ZigbeeEndpoint dstEndpoint, ZclCluster cluster, ZclCommand zclCommand)
         {
             ZclPacket packet = new ZclPacket(zclCommand.Id);
             packet.Header.TransactionSequenceNumber = nextZclSeqNum();

@@ -12,17 +12,17 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Source address of the message
         /// </summary>
-        public ZAddress16 SrcAddr { get; private set; }
+        public ZigbeeAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// Specifies the device’s short address
         /// </summary>
-        public ZAddress16 NwkAddr { get; private set; }
+        public ZigbeeAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Specifies the 64 bit IEEE address of source device
         /// </summary>
-        public ZAddress64 IEEEAddr { get; private set; }
+        public ZigbeeAddress64 IEEEAddr { get; private set; }
 
         /// <summary>
         /// Specifies the MAC capabilities of the device. 
@@ -39,9 +39,9 @@ namespace ZigbeeNet.CC.Packet.ZDO
 
         public ZDO_END_DEVICE_ANNCE_IND(byte[] framedata)
         {
-            SrcAddr = new ZAddress16(framedata[1], framedata[0]);
-            NwkAddr = new ZAddress16(framedata[3], framedata[2]);
-            IEEEAddr = new ZAddress64(BitConverter.ToUInt64(framedata, 4));
+            SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
+            NwkAddr = new ZigbeeAddress16(framedata[3], framedata[2]);
+            IEEEAddr = new ZigbeeAddress64(BitConverter.ToUInt64(framedata, 4));
             Capabilities = framedata[12];
 
             BuildPacket(CommandType.ZDO_END_DEVICE_ANNCE_IND, framedata);

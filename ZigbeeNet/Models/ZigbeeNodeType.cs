@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public enum NodeType : byte
+    public enum ZigbeeNodeType : byte
     {
         ZigBeeCoordinator = 0x00,
         ZigBeeRouter = 0x01,

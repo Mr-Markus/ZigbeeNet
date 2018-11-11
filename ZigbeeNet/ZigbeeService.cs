@@ -11,28 +11,23 @@ namespace ZigbeeNet
     {
         private bool _disposed;
         private bool _isRunning;
+        
+        private ConcurrentDictionary<ulong, ZigbeeNode> _deviceInfoList = new ConcurrentDictionary<ulong, ZigbeeNode>();
 
-        private EventBridge _eventBridge;
-
-        private ConcurrentDictionary<ulong, Device> _deviceInfoList = new ConcurrentDictionary<ulong, Device>();
-
-        public ZigbeeController Controller { get; set; }
+        public IHardwareChannel Controller { get; set; }
 
         public event EventHandler OnReady;
-        public event EventHandler PermitJoining;
 
         public ZigbeeService(Options options)
         {
-            Controller = new ZigbeeController(this, options);
-
-            _eventBridge = new EventBridge(Controller);
+            Controller = new CCZnp(options);
 
             Controller.Started += Controller_Started;
         }
 
         private void Controller_Started(object sender, EventArgs e)
         {
-            Controller.PermitJoin(255);
+            Controller.PermitJoinAsync(255);
 
             OnReady?.Invoke(this, EventArgs.Empty);
         }
@@ -89,19 +84,6 @@ namespace ZigbeeNet
 
                 _isRunning = false;
             }
-        }
-
-        /// <summary>
-        /// Resets the zigbee service
-        /// </summary>
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Read(byte[] data)
-        {
-            throw new NotImplementedException();
-        }        
+        }       
     }
 }

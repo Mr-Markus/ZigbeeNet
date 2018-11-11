@@ -15,7 +15,6 @@ namespace ZigbeeNet.ZCL
         public ZclGlobalCommand(byte cmdId)
         {
             this.Id = cmdId;
-            this.Params = ZclMeta.GetGlobalCommandParams(cmdId);
         }
 
         public int KnownBufLen { get; set; }

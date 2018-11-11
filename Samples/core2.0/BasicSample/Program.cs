@@ -15,7 +15,7 @@ namespace BasicSample
                 .CreateLogger();
             try
             {
-                var zigbeeService = new ZigbeeService(new Options { Baudrate = 115200, Port = "COM3" });
+                var zigbeeService = new ZigbeeService(new Options { Baudrate = 115200, Port = "COM4" });
                 zigbeeService.Start();
             }
             catch (Exception ex)

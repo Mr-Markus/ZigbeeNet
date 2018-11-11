@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public class Endpoint
+    public class ZigbeeEndpoint
     {
         public byte Id { get; set; }
 
         public DoubleByte ProfileId { get; set; }
 
-        public Device Device { get; set; }
+        public ZigbeeNode Device { get; set; }
 
-        public List<DoubleByte> InClusters { get; set; }
+        public List<ZclCluster> InClusters { get; set; }
 
-        public List<DoubleByte> OutClusters { get; set; }
+        public List<ZclCluster> OutClusters { get; set; }
 
-        public List<DoubleByte> ClusterList
+        public List<ZclCluster> ClusterList
         {
             get
             {
-                List<DoubleByte> clusterList = new List<DoubleByte>();
+                List<ZclCluster> clusterList = new List<ZclCluster>();
 
                 clusterList.AddRange(InClusters);
                 clusterList.AddRange(OutClusters);
@@ -35,7 +36,7 @@ namespace ZigbeeNet.CC
         {
             get
             {
-                if (ProfileId .Get16BitValue()< 0x8000 && Device.Id < 0xc000)
+                if (ProfileId.Value < 0x8000 && Device.Id < 0xc000)
                 {
                     return true;
                 } 
@@ -44,11 +45,11 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public Endpoint(Device device)
+        public ZigbeeEndpoint(ZigbeeNode device)
         {
             Device = device;
-            InClusters = new List<DoubleByte>();
-            OutClusters = new List<DoubleByte>();
+            InClusters = new List<ZclCluster>();
+            OutClusters = new List<ZclCluster>();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ZigbeeNet.CC.Handler;
 using ZigbeeNet.CC.Packet;
 using ZigbeeNet.CC.Packet.SimpleAPI;
 using ZigbeeNet.CC.Packet.SYS;
@@ -32,22 +33,23 @@ namespace ZigbeeNet.CC
         private BlockingCollection<AsynchronousRequest> _areqQueue;
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SynchronousResponse> _responseQueue;
-        
+
         public int MaxRetryCount => 3;
 
         public event EventHandler Started;
-        public event EventHandler<Device> NewDevice;
+        public event EventHandler<ZigbeeNode> NewDevice;
+        public event EventHandler<ZigbeeNode> DeviceInfoChanged;
 
-        public CCZnp()
+        public CCZnp(Options options)
         {
             semaphore = new SemaphoreSlim(1, 1);
 
             _handlers = new List<IPacketHandler>();
 
-            unpi = new UnifiedNetworkProcessorInterface("COM3", 115200, 1); //TODO: Get by config
+            unpi = new UnifiedNetworkProcessorInterface(options.Port, options.Baudrate, 1);
         }
 
-        public void Open()
+        public void Start()
         {
             _tokenSource = new CancellationTokenSource();
 
@@ -64,7 +66,6 @@ namespace ZigbeeNet.CC
             _areqQueue = new BlockingCollection<AsynchronousRequest>();
             _responseQueue = new BlockingCollection<SynchronousResponse>();
 
-            // TODO
             // Create tasks
             _readTask = ReadSerialPortAsync(unpi);
             _transmitTask = ProcessQueueAsync(_transmitQueue, OnSend);
@@ -72,11 +73,10 @@ namespace ZigbeeNet.CC
 
             _logger.Debug("Interface opened...");
 
-            ZB_SYSTEM_RESET reset = new ZB_SYSTEM_RESET();
-            SendAsync(reset).ConfigureAwait(false);
+            SysReset();
         }
 
-        public void Close()
+        public void Stop()
         {
             _logger.Debug("Closing interface...");
 
@@ -89,9 +89,15 @@ namespace ZigbeeNet.CC
             _logger.Debug("Closed interface...");
         }
 
+        private async Task SysReset()
+        {
+            ZB_SYSTEM_RESET reset = new ZB_SYSTEM_RESET();
+            await SendAsync(reset).ConfigureAwait(false);
+        }
+
         public async Task PermitJoinAsync(int time)
         {
-            ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZAddress16(0,0), (byte)time, false);
+            ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZigbeeAddress16(0, 0), (byte)time, false);
             await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
         }
 
@@ -103,7 +109,7 @@ namespace ZigbeeNet.CC
             {
                 try
                 {
-                    if(_tokenSource.IsCancellationRequested)
+                    if (_tokenSource.IsCancellationRequested)
                     {
                         break;
                     }
@@ -131,7 +137,7 @@ namespace ZigbeeNet.CC
                     OnError(e);
                 }
             }
-        }        
+        }
 
         public async Task SendAsync(byte[] payload)
         {
@@ -148,7 +154,8 @@ namespace ZigbeeNet.CC
                         msg => { return msg is SynchronousResponse && msg.SubSystem == transmitPacket.SubSystem; }).ConfigureAwait(false);
 
                     await responsePacket.ToFrame();
-                } else if(transmitPacket is AsynchronousRequest areq)
+                }
+                else if (transmitPacket is AsynchronousRequest areq)
                 {
                     await SendAsync(areq);
                 }
@@ -165,9 +172,14 @@ namespace ZigbeeNet.CC
             Started?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void OnNewDevice(Device device)
+        internal void OnNewDevice(ZigbeeNode device)
         {
             NewDevice?.Invoke(this, device);
+        }
+
+        internal void OnDeviceInfoChanged(ZigbeeNode device)
+        {
+            DeviceInfoChanged?.Invoke(this, device);
         }
 
         private void OnSend(SerialPacket serialPacket)
@@ -247,7 +259,7 @@ namespace ZigbeeNet.CC
             }
 
             throw new TaskCanceledException();
-        }        
+        }
 
         private async Task<TResponse> WaitForResponseAsync<TResponse>(SynchronousRequest request, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
         {
@@ -259,7 +271,7 @@ namespace ZigbeeNet.CC
                 var result = await Task<TResponse>.Run(() =>
                 {
                     var msg = default(SynchronousResponse);
-                    _responseQueue.TryTake(out msg, (int) ResponseTimeout.TotalMilliseconds, _tokenSource.Token);
+                    _responseQueue.TryTake(out msg, (int)ResponseTimeout.TotalMilliseconds, _tokenSource.Token);
 
                     //TODO: What to do if msg is null because no response came in?
 
@@ -277,7 +289,7 @@ namespace ZigbeeNet.CC
 
             throw new TaskCanceledException();
         }
-        
+
         internal async Task<TResponse> SendAsync<TResponse>(SerialPacket packet, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
         {
             return await RetryWithResponseAsync(async () =>
@@ -285,10 +297,10 @@ namespace ZigbeeNet.CC
                 var request = new SynchronousRequest(packet.Cmd, packet.Payload);
                 _transmitQueue.Add(request);
 
-                var response = await WaitForResponseAsync<TResponse>(request, msg => predicate((TResponse) msg))
+                var response = await WaitForResponseAsync<TResponse>(request, msg => predicate((TResponse)msg))
                     .ConfigureAwait(false);
 
-                return ((TResponse) response);
+                return ((TResponse)response);
             }, $"{packet.SubSystem} {(packet.Payload != null ? BitConverter.ToString(packet.Payload) : string.Empty)}");
         }
 
@@ -298,6 +310,34 @@ namespace ZigbeeNet.CC
             {
                 _transmitQueue.Add(packet);
             });
-        }       
+        }
+
+        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
+        {
+            ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
+            ZB_GET_DEVICE_INFO_RSP infoRsp = await SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq, msg => msg.SubSystem == infoReq.SubSystem && msg.Cmd1 == infoReq.Cmd1).ConfigureAwait(false);
+
+            return infoRsp.Value;
+        }
+
+        internal async Task<ZigbeeAddress64> GetIeeeAddress()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
+
+            ZigbeeAddress64 ieeeAddr = new ZigbeeAddress64(result);
+
+            return ieeeAddr;
+        }
+
+        internal async Task<ZigbeeAddress16> GetCurrentPanId()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
+
+            ushort relevantValue = ByteHelper.ShortFromBytes(result, 1, 0);
+
+            ZigbeeAddress16 panId = new ZigbeeAddress16(relevantValue);
+
+            return panId;
+        }
     }
 }

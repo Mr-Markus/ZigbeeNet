@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigbeeNet.CC.Packet;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigbeeNet.CC.Handler
 {
     public interface IPacketHandler
     {

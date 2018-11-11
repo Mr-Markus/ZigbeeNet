@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public class ZAddress64 : ZAddress
+    public class ZigbeeAddress64 : ZigbeeAddress
     {
         private byte[] _address;
 
@@ -20,12 +20,12 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public ZAddress64(ulong ieee)
+        public ZigbeeAddress64(ulong ieee)
         {
             _address = BitConverter.GetBytes(ieee);
         }
 
-        public ZAddress64(byte[] address)
+        public ZigbeeAddress64(byte[] address)
         {
             _address = address;
         }

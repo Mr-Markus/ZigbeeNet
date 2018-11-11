@@ -4,22 +4,22 @@ using System.Text;
 using ZigbeeNet;
 using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
     /// <summary>
     /// Fill with values from basic cluster
     /// 
     /// Maybe it could be implemented in Zigbee library as common object???
     /// </summary>
-    public class Device
+    public class ZigbeeNode
     {
         public ushort Id { get; set; }
 
-        public Devices Type { get; set; }
+        public ZclDevice Type { get; set; }
 
-        public ZAddress64 IeeeAddress { get; set; }
+        public ZigbeeAddress64 IeeeAddress { get; set; }
 
-        public ZAddress16 NwkAdress { get; set; }
+        public ZigbeeAddress16 NwkAdress { get; set; }
 
         public DoubleByte ManufacturerId { get; set; }
 
@@ -29,19 +29,19 @@ namespace ZigbeeNet.CC
 
         public string ModelId { get; set; }
 
-        public DeviceStatus Status { get; set; }
+        public ZigbeeNodeStatus Status { get; set; }
 
-        public DeviceEnabled DeviceEnabled { get; set; }
+        public ZigbeeNodeState DeviceEnabled { get; set; }
 
         public DateTime JoinTime { get; set; }
 
-        public List<Endpoint> Endpoints { get; set; }
+        public List<ZigbeeEndpoint> Endpoints { get; set; }
 
-        public Device()
+        public ZigbeeNode()
         {
-            Endpoints = new List<Endpoint>();
+            Endpoints = new List<ZigbeeEndpoint>();
 
-            Status = DeviceStatus.Offline;
+            Status = ZigbeeNodeStatus.Offline;
         }
     }
 }

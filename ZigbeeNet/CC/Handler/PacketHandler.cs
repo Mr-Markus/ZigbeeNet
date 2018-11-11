@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ZigbeeNet.CC.Packet;
 using ZigbeeNet.CC.Packet.SimpleAPI;
 using ZigbeeNet.CC.Packet.SYS;
 using ZigbeeNet.CC.Packet.ZDO;
 using ZigbeeNet.Logging;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigbeeNet.CC.Handler
 {
     public class PacketHandler : IPacketHandler
     {
@@ -37,37 +38,9 @@ namespace ZigbeeNet.CC.Packet
 
                 if (stateInd.Status == DeviceState.Started_as_ZigBee_Coordinator)
                 {
-                    ZAddress64 ieeeAddr = await GetIeeeAddress();
-                    //ZAddress16 panId = await GetCurrentPanId();
-
                     await _znp.PermitJoinAsync(255);
                 }
-            }            
-        }
-        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
-        {
-            ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
-            ZB_GET_DEVICE_INFO_RSP infoRsp = await _znp.SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq, msg => msg.SubSystem == infoReq.SubSystem && msg.Cmd1 == infoReq.Cmd1).ConfigureAwait(false);
-
-            return infoRsp.Value;
-        }
-
-        private async Task<ZAddress64> GetIeeeAddress()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
-
-            ZAddress64 ieeeAddr = new ZAddress64(result);
-
-            return ieeeAddr;
-        }
-
-        private async Task<ZAddress16> GetCurrentPanId()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
-
-            ZAddress16 panId = new ZAddress16(result);
-
-            return panId;
+            }
         }
     }
 }

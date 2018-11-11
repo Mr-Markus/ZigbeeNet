@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.ZCL;
 
-namespace ZigbeeNet.CC
+namespace ZigbeeNet
 {
-    public class Network
+    public class ZigbeeNetwork
     {
         /// <summary>
         ///  Part of 802.15.4, the PAN ID is a 16-bit identifier selected at random by the Coordinator when 
@@ -35,7 +35,7 @@ namespace ZigbeeNet.CC
         /// The Status of the Network. It can be offline or online
         /// </summary>
         [Ignore()]
-        public PacketStatus Status { get; set; }
+        //public PacketStatus Status { get; set; }
         
         [FieldOrder(1)]
         public byte Channel { get; set; }
