@@ -13,6 +13,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CONFIG_ID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DEV_INFO_TYPE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\AfMessageHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Models\NetworkInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_CONFIRM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_REQUEST.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_REQUEST_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_INCOMING_MSG.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
@@ -108,7 +116,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZigbeeService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)CC\Handler\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Util\" />
     <Folder Include="$(MSBuildThisFileDirectory)ZCL\Models\" />

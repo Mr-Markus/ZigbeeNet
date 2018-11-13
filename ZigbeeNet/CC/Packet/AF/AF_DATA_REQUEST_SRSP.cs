@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ZigbeeNet.CC.Packet.AF
+{
+    public class AF_DATA_REQUEST_SRSP : SynchronousResponse
+    {
+        public PacketStatus Status { get; private set; }
+
+        public AF_DATA_REQUEST_SRSP(byte[] framedata)
+        {
+            Status = (PacketStatus)framedata[0];
+
+            BuildPacket(CommandType.AF_DATA_SRSP, framedata);
+        }
+    }
+}
