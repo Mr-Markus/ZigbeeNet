@@ -17,7 +17,6 @@ namespace ZigbeeNet.CC.Handler
         private CCZnp _znp;
         private ConcurrentBag<ZigbeeNode> _devices;
         private ConcurrentQueue<ZDO_END_DEVICE_ANNCE_IND> _joinQueue;
-        private bool _spinLock;
 
         public DeviceHandler(CCZnp znp)
         {
@@ -44,7 +43,7 @@ namespace ZigbeeNet.CC.Handler
                     _znp.OnDeviceInfoChanged(device);
 
                     ZDO_ACTIVE_EP_REQ epReq = new ZDO_ACTIVE_EP_REQ(device.NwkAdress, device.NwkAdress);
-                    ZDO_ACTIVE_EP_REQ_SRSP epRsp = await _znp.SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq, msg => { return msg is SynchronousResponse && msg.SubSystem == epReq.SubSystem; }).ConfigureAwait(false);
+                    ZDO_ACTIVE_EP_REQ_SRSP epRsp = await _znp.SendAsync<ZDO_ACTIVE_EP_REQ_SRSP>(epReq).ConfigureAwait(false);
                 }
             }
             if (asynchronousRequest is ZDO_ACTIVE_EP_RSP spRsp)
@@ -52,7 +51,7 @@ namespace ZigbeeNet.CC.Handler
                 foreach (var ep in spRsp.ActiveEpList)
                 {
                     ZDO_SIMPLE_DESC_REQ simpleReq = new ZDO_SIMPLE_DESC_REQ(spRsp.NwkAddr, ep);
-                    ZDO_SIMPLE_DESC_REQ_SRSP simpleRsp = await _znp.SendAsync<ZDO_SIMPLE_DESC_REQ_SRSP>(simpleReq, msg => { return msg is SynchronousResponse && msg.SubSystem == simpleReq.SubSystem; }).ConfigureAwait(false);
+                    ZDO_SIMPLE_DESC_REQ_SRSP simpleRsp = await _znp.SendAsync<ZDO_SIMPLE_DESC_REQ_SRSP>(simpleReq).ConfigureAwait(false);
                 }
             }
             if (asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
@@ -72,13 +71,7 @@ namespace ZigbeeNet.CC.Handler
 
                     device.Endpoints.Add(ep);
 
-                    _znp.OnDeviceInfoChanged(device);
-
-                    //TODO: Bind Endpoint via ZDO_BIND_REQ
-                    ZclCluster cl = ep.InClusters.Single();
-
-                    ZDO_BIND_REQ bindReq = new ZDO_BIND_REQ(device.NwkAdress, device.IeeeAddress, ep.Id, new DoubleByte((ushort)cl) , ZDO_BIND_REQ.Address_Mode.ADDRESS_64_BIT, await _znp.GetIeeeAddress(), 0);
-                }
+                    _znp.OnDeviceInfoChanged(device);                }
             }
         }
 
@@ -88,7 +81,7 @@ namespace ZigbeeNet.CC.Handler
             ZigbeeNode device = _devices.SingleOrDefault(d => d.IeeeAddress.Value == deviceInd.IEEEAddr.Value);
             if (device != null && device.Status == ZigbeeNodeStatus.Online)
             {
-                Console.WriteLine("Device already in Network");
+                _logger.Info("Device {Device} already in Network", device.IeeeAddress);
 
                 ZDO_END_DEVICE_ANNCE_IND removed = null;
                 if (_joinQueue.TryDequeue(out removed))
@@ -98,10 +91,6 @@ namespace ZigbeeNet.CC.Handler
                     if (_joinQueue.TryDequeue(out next))
                     {
                         endDeviceAnnceHdlr(next);
-                    }
-                    else
-                    {
-                        _spinLock = false;
                     }
                 }
 
@@ -119,7 +108,7 @@ namespace ZigbeeNet.CC.Handler
             _znp.OnNewDevice(device);
 
             ZDO_NODE_DESC_REQ nodeReq = new ZDO_NODE_DESC_REQ(deviceInd.NwkAddr, deviceInd.NwkAddr);
-            await _znp.SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq, msg => msg.SubSystem == nodeReq.SubSystem && msg.Cmd1 == nodeReq.Cmd1).ConfigureAwait(false);
+            await _znp.SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq).ConfigureAwait(false);
         }
     }
 }

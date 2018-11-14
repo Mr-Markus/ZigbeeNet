@@ -27,8 +27,6 @@ namespace ZigbeeNet
 
         private void Controller_Started(object sender, EventArgs e)
         {
-            Controller.PermitJoinAsync(255);
-
             OnReady?.Invoke(this, EventArgs.Empty);
         }
 

@@ -34,6 +34,7 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SynchronousResponse> _responseQueue;
 
+        public ZigbeeNetwork Network { get; set; }
         public int MaxRetryCount => 3;
 
         public event EventHandler Started;
@@ -98,7 +99,7 @@ namespace ZigbeeNet.CC
         public async Task PermitJoinAsync(int time)
         {
             ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZigbeeAddress16(0, 0), (byte)time, false);
-            await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join, msg => { return msg is SynchronousResponse && msg.SubSystem == join.SubSystem; }).ConfigureAwait(false);
+            await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join).ConfigureAwait(false);
         }
 
         private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
@@ -150,8 +151,7 @@ namespace ZigbeeNet.CC
 
                 if (transmitPacket is SynchronousRequest sreq)
                 {
-                    var responsePacket = await SendAsync<SynchronousResponse>(transmitPacket,
-                        msg => { return msg is SynchronousResponse && msg.SubSystem == transmitPacket.SubSystem; }).ConfigureAwait(false);
+                    var responsePacket = await SendAsync<SynchronousResponse>(transmitPacket).ConfigureAwait(false);
 
                     await responsePacket.ToFrame();
                 }
@@ -261,11 +261,8 @@ namespace ZigbeeNet.CC
             throw new TaskCanceledException();
         }
 
-        private async Task<TResponse> WaitForResponseAsync<TResponse>(SynchronousRequest request, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
+        private async Task<TResponse> WaitForResponseAsync<TResponse>(SynchronousRequest request) where TResponse : SynchronousResponse
         {
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
-
             while (!_tokenSource.Token.IsCancellationRequested)
             {
                 var result = await Task<TResponse>.Run(() =>
@@ -281,23 +278,20 @@ namespace ZigbeeNet.CC
                         throw new Exception("Response does not belong to SREQ");
                 }).ConfigureAwait(false);
 
-                // TODO Sanity checks
-
-                if (predicate(result as TResponse))
-                    return result as TResponse;
+                return result as TResponse;
             }
 
             throw new TaskCanceledException();
         }
 
-        internal async Task<TResponse> SendAsync<TResponse>(SerialPacket packet, Func<TResponse, bool> predicate) where TResponse : SynchronousResponse
+        internal async Task<TResponse> SendAsync<TResponse>(SerialPacket packet) where TResponse : SynchronousResponse
         {
             return await RetryWithResponseAsync(async () =>
             {
                 var request = new SynchronousRequest(packet.Cmd, packet.Payload);
                 _transmitQueue.Add(request);
 
-                var response = await WaitForResponseAsync<TResponse>(request, msg => predicate((TResponse)msg))
+                var response = await WaitForResponseAsync<TResponse>(request)
                     .ConfigureAwait(false);
 
                 return ((TResponse)response);
@@ -310,34 +304,6 @@ namespace ZigbeeNet.CC
             {
                 _transmitQueue.Add(packet);
             });
-        }
-
-        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
-        {
-            ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
-            ZB_GET_DEVICE_INFO_RSP infoRsp = await SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq, msg => msg.SubSystem == infoReq.SubSystem && msg.Cmd1 == infoReq.Cmd1).ConfigureAwait(false);
-
-            return infoRsp.Value;
-        }
-
-        internal async Task<ZigbeeAddress64> GetIeeeAddress()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
-
-            ZigbeeAddress64 ieeeAddr = new ZigbeeAddress64(result);
-
-            return ieeeAddr;
-        }
-
-        internal async Task<ZigbeeAddress16> GetCurrentPanId()
-        {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
-
-            ushort relevantValue = ByteHelper.ShortFromBytes(result, 1, 0);
-
-            ZigbeeAddress16 panId = new ZigbeeAddress16(relevantValue);
-
-            return panId;
-        }
+        }       
     }
 }
