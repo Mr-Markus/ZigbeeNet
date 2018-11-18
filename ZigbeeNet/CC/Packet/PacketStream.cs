@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigbeeNet.CC.Extensions;
+using ZigbeeNet.CC.Packet.AF;
 using ZigbeeNet.CC.Packet.SimpleAPI;
 using ZigbeeNet.CC.Packet.SYS;
 using ZigbeeNet.CC.Packet.ZDO;
@@ -60,16 +61,16 @@ namespace ZigbeeNet.CC.Packet
                 //    return new SYS_RPC_ERROR(payload);
                 //case CommandType.SYS_TEST_LOOPBACK_SRSP:
                 //    return new SYS_TEST_LOOPBACK_SRSP(payload);
-                //case CommandType.AF_DATA_CONFIRM:
-                //    return new AF_DATA_CONFIRM(payload);
-                //case CommandType.AF_DATA_SRSP:
-                //    return new AF_DATA_SRSP(payload);
+                case CommandType.AF_DATA_CONFIRM:
+                    return new AF_DATA_CONFIRM(payload);
+                case CommandType.AF_DATA_SRSP:
+                    return new AF_DATA_REQUEST_SRSP(payload);
                 //case CommandType.AF_DATA_SRSP_EXT:
                 //    return new AF_DATA_SRSP_EXT(payload);
-                //case CommandType.AF_INCOMING_MSG:
-                //    return new AF_INCOMING_MSG(payload);
-                //case CommandType.AF_REGISTER_SRSP:
-                //    return new AF_REGISTER_SRSP(payload);
+                case CommandType.AF_INCOMING_MSG:
+                    return new AF_INCOMING_MSG(payload);
+                case CommandType.AF_REGISTER_SRSP:
+                    return new AF_REGISTER_SRSP(payload);
                 //case CommandType.ZB_ALLOW_BIND_CONFIRM:
                 //    return new ZB_ALLOW_BIND_CONFIRM(payload);
                 //case CommandType.ZB_ALLOW_BIND_RSP:

@@ -57,17 +57,17 @@ namespace ZigbeeNet.CC.Packet.AF
         /// </summary>
         public DoubleByte[] AppOutClusterList { get; private set; }
 
-        public AF_REGISTER(byte endpoint, DoubleByte appProfId, DoubleByte appDeviceId, byte addDevVer, byte appNumInCLusters,
-                                DoubleByte[] appInClusterList, byte appNumOutClusters, DoubleByte[] appOutClusterList)
+        public AF_REGISTER(byte endpoint, DoubleByte appProfId, DoubleByte appDeviceId, byte addDevVer,
+                                DoubleByte[] appInClusterList, DoubleByte[] appOutClusterList)
         {
             EndPoint = endpoint;
             AppProfId = appProfId;
             AppDeviceId = appDeviceId;
             AddDevVer = addDevVer;
-            AppNumInClusters = appNumInCLusters;
-            AppInClusterList = new DoubleByte[AppInClusterList.Length];
-            AppNumOutClusters = appNumOutClusters;
-            AppOutClusterList = new DoubleByte[AppOutClusterList.Length];
+            AppNumInClusters = (byte)appInClusterList.Length;
+            AppInClusterList = new DoubleByte[appInClusterList.Length];
+            AppNumOutClusters = (byte)appOutClusterList.Length;
+            AppOutClusterList = new DoubleByte[appOutClusterList.Length];
 
             byte[] framedata = new byte[9 + appInClusterList.Length * 2 + AppOutClusterList.Length * 2];
             framedata[0] = EndPoint;
