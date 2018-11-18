@@ -104,6 +104,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclDataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclPowerSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclFrameControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclAttribute.cs" />
@@ -118,6 +119,5 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Util\" />
-    <Folder Include="$(MSBuildThisFileDirectory)ZCL\Models\" />
   </ItemGroup>
 </Project>

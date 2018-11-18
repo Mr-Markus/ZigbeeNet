@@ -9,9 +9,9 @@ namespace ZigbeeNet
     {
         public byte Id { get; set; }
 
-        public DoubleByte ProfileId { get; set; }
+        public ZclProfile ProfileId { get; set; }
 
-        public ZigbeeNode Device { get; set; }
+        public ZigbeeNode Node { get; set; }
 
         public List<ZclCluster> InClusters { get; set; }
 
@@ -32,22 +32,9 @@ namespace ZigbeeNet
             }
         }
 
-        public bool IsZclSupported
+        public ZigbeeEndpoint(ZigbeeNode node)
         {
-            get
-            {
-                if (ProfileId.Value < 0x8000 && Device.Id < 0xc000)
-                {
-                    return true;
-                } 
-
-                return false;
-            }
-        }
-
-        public ZigbeeEndpoint(ZigbeeNode device)
-        {
-            Device = device;
+            Node = node;
             InClusters = new List<ZclCluster>();
             OutClusters = new List<ZclCluster>();
         }

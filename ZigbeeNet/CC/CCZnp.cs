@@ -7,10 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using ZigbeeNet.CC.Handler;
 using ZigbeeNet.CC.Packet;
+using ZigbeeNet.CC.Packet.AF;
 using ZigbeeNet.CC.Packet.SimpleAPI;
 using ZigbeeNet.CC.Packet.SYS;
 using ZigbeeNet.CC.Packet.ZDO;
 using ZigbeeNet.Logging;
+using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.CC
 {
@@ -35,8 +37,10 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SynchronousResponse> _responseQueue;
 
         public ZigbeeNetwork Network { get; set; }
-        public int MaxRetryCount => 3;
+        public ZigbeeNode Coordinator { get; private set; }
 
+        public int MaxRetryCount => 3;
+        
         public event EventHandler Started;
         public event EventHandler<ZigbeeNode> NewDevice;
         public event EventHandler<ZigbeeNode> DeviceInfoChanged;
@@ -100,6 +104,25 @@ namespace ZigbeeNet.CC
         {
             ZDO_MGMT_PERMIT_JOIN_REQ join = new ZDO_MGMT_PERMIT_JOIN_REQ(0x02, new ZigbeeAddress16(0, 0), (byte)time, false);
             await SendAsync<ZDO_MGMT_PERMIT_JOIN_REQ_SRSP>(join).ConfigureAwait(false);
+
+            Network.PermitJoining = time > 0 ? true : false;
+            _logger.Info("PermitJoining enabled: {Time} seconds", time);
+
+            if (time > 0 && time < 255)
+            {
+                Task joinCountdown = new Task(() =>
+                    {
+                        Timer t = new Timer((network) =>
+                        {
+                            lock (Network)
+                            {
+                                Network.PermitJoining = false;
+                                _logger.Info("PermitJoining disabled");
+                            }
+                        }, Network, time * 1000, Timeout.Infinite);
+                    });
+                joinCountdown.Start();
+            }
         }
 
         private async Task ReadSerialPortAsync(UnifiedNetworkProcessorInterface port)
@@ -167,8 +190,32 @@ namespace ZigbeeNet.CC
             _logger.ErrorException("Exception: {e}", e);
         }
 
-        internal void OnStarted()
+        internal async void OnStarted()
         {
+            Network = new ZigbeeNetwork()
+            {
+                IeeeAddress = await GetIeeeAddress(),
+                PanId = await GetCurrentPanId(),
+                Channel = await GetCurrentChannel(),
+                NetworkAddress = await GetShortAddress()
+            };
+
+            _logger.Info("Network started: {@Network}", Network);
+
+            Coordinator = new ZigbeeNode()
+            {
+                IeeeAddress = Network.IeeeAddress,
+                NwkAdress = Network.NetworkAddress,
+                Status = ZigbeeNodeStatus.Online,
+                DeviceEnabled = ZigbeeNodeState.Enabled,
+                JoinTime = DateTime.Now,
+                PowerSource = PowerSource.DCSource
+            };
+
+            byte newEpId = 1;
+
+            await CreateEndpoint(Coordinator, newEpId, ZclProfile.ZIGBEE_HOME_AUTOMATION);
+
             Started?.Invoke(this, EventArgs.Empty);
         }
 
@@ -304,6 +351,71 @@ namespace ZigbeeNet.CC
             {
                 _transmitQueue.Add(packet);
             });
-        }       
+        }    
+
+        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigbeeNode node, byte endpointId, ZclProfile profileId)
+        {
+            AF_REGISTER register = new AF_REGISTER(endpointId, new DoubleByte((ushort)profileId), new DoubleByte(0), 0, new DoubleByte[0], new DoubleByte[0]);
+            AF_REGISTER_SRSP result = await SendAsync<AF_REGISTER_SRSP>(register);
+
+            if(result.Status != PacketStatus.SUCESS)
+            {
+                throw new Exception($"Unable create a new Endpoint. AF_REGISTER command failed with {result.Status}");
+            }
+
+            ZigbeeEndpoint endpoint = new ZigbeeEndpoint(node);
+            endpoint.Id = endpointId;
+            endpoint.ProfileId = profileId;
+
+            node.Endpoints.Add(endpoint);
+
+            _logger.Info("Endpoint {Endpoint} created for node {Node}", endpoint.Id, node.NwkAdress);
+
+            return endpoint;
+        }
+
+        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
+        {
+            ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
+            ZB_GET_DEVICE_INFO_RSP infoRsp = await SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq).ConfigureAwait(false);
+
+            return infoRsp.Value;
+        }
+
+        internal async Task<ZigbeeAddress64> GetIeeeAddress()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
+
+            ZigbeeAddress64 ieeeAddr = new ZigbeeAddress64(result);
+
+            return ieeeAddr;
+        }
+
+        internal async Task<ZigbeeAddress16> GetShortAddress()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.SHORT_ADDR);
+
+            ZigbeeAddress16 addr = new ZigbeeAddress16(ByteHelper.ShortFromBytes(result, 1, 0));
+
+            return addr;
+        }
+
+        internal async Task<ZigbeeAddress16> GetCurrentPanId()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
+
+            ushort relevantValue = ByteHelper.ShortFromBytes(result, 1, 0);
+
+            ZigbeeAddress16 panId = new ZigbeeAddress16(relevantValue);
+
+            return panId;
+        }
+
+        internal async Task<byte> GetCurrentChannel()
+        {
+            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.CHANNEL);
+
+            return result[0];
+        }
     }
 }

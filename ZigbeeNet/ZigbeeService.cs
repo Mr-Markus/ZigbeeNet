@@ -83,5 +83,10 @@ namespace ZigbeeNet
                 _isRunning = false;
             }
         }       
+
+        public void PermitJoining(int time)
+        {
+            Controller.PermitJoinAsync(time);
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace ZigbeeNet.CC.Handler
             if (asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
             {
                 ZigbeeNode device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
-
+                
                 if (device != null)
                 {
                     ZigbeeEndpoint ep = new ZigbeeEndpoint(device)
@@ -71,7 +71,8 @@ namespace ZigbeeNet.CC.Handler
 
                     device.Endpoints.Add(ep);
 
-                    _znp.OnDeviceInfoChanged(device);                }
+                    _znp.OnDeviceInfoChanged(device);
+                }
             }
         }
 
