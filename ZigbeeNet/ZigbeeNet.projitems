@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_INCOMING_MSG.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER_SRSP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_TC_DEVICE_IND.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
