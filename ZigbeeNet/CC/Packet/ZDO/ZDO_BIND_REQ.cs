@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.CC.Packet.ZDO
 {
@@ -53,34 +54,49 @@ namespace ZigbeeNet.CC.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZigbeeAddress16 dstAddr, ZigbeeAddress64 srcAddress, byte srcEndpoint, DoubleByte cluster, Address_Mode dstAddrMode, ZigbeeAddress dstAddress, byte dstEndpoint = 0x00)
+        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigbeeAddress64 ieeeSrc, byte epSrc, ZclCluster cluster,
+            Address_Mode addressingMode, ZigbeeAddress64 ieeeDst, byte epDst)
         {
-            List<byte> framedata = new List<byte>();
 
-            framedata.AddRange(dstAddr.ToByteArray());
-            framedata.AddRange(srcAddress.ToByteArray());
-            framedata.Add(srcEndpoint);
-            framedata.Add(cluster.Lsb);
-            framedata.Add(cluster.Msb);
-            framedata.Add((byte)dstAddrMode);
+            byte[] framedata;
+            if (addressingMode == Address_Mode.ADDRESS_64_BIT)
+            {
+                framedata = new byte[23];
+            }
+            else
+            {
+                framedata = new byte[16];
+            }
+            framedata[0] = nwkDst.DoubleByte.Lsb;
+            framedata[1] = nwkDst.DoubleByte.Msb;
+            byte[] bytes = ieeeSrc.ToByteArray();
+            for (int i = 0; i < 8; i++)
+            {
+                framedata[i + 2] = (byte)(bytes[7 - i] & 0xFF);
+            }
+            framedata[10] = epSrc;
 
-            if(dstAddrMode == Address_Mode.ADDRESS_64_BIT)
+            DoubleByte clusterByte = new DoubleByte((ushort)cluster);
+
+            framedata[11] = clusterByte.Lsb;
+            framedata[12] = clusterByte.Msb;
+            framedata[13] = (byte)addressingMode;
+            bytes = ieeeDst.ToByteArray();
+            if (addressingMode == Address_Mode.ADDRESS_64_BIT)
             {
-                if(dstAddress is ZigbeeAddress64 z64)
+                for (int i = 0; i < 8; i++)
                 {
-                    framedata.AddRange(dstAddress.ToByteArray());
-                    framedata.Add(dstEndpoint);
+                    framedata[i + 14] = (byte)(bytes[7 - i] & 0xFF);
                 }
-                else
-                {
-                    throw new ArgumentException($"Mode is {dstAddrMode}, but {nameof(dstAddress)} is not a ZigbeeAddress64");
-                }
-            } else
+                framedata[22] = epDst;
+            }
+            else
             {
-                framedata.AddRange(dstAddress.ToByteArray());
+                framedata[14] = bytes[7];
+                framedata[15] = bytes[6];
             }
 
-            BuildPacket(CommandType.ZDO_BIND_REQ, framedata.ToArray());
-        }
+            BuildPacket(CommandType.ZDO_BIND_REQ, framedata);
+        }        
     }
 }

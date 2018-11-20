@@ -21,14 +21,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_INCOMING_MSG.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER_SRSP.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNodeType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IHardwareChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\IPacketHandler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeAddress.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeAddress16.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeAddress64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeAddress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeAddress16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeAddress64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AsynchronousRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\DeviceHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\PacketHandler.cs" />
@@ -83,22 +83,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATE_CHANGE_IND.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_STATUS_ERROR_RSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNodeState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNodeState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNodeStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNodeStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\MessageTypes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\Options.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ParamType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\SubSystem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeEndpoint.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ZigbeeNetwork.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNetwork.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Query.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\ByteHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\DoubleByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Options.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZclBridge.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Commands\ReadAttributesCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Models\ZclDataType.cs" />
@@ -114,10 +113,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclGlobalCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZDO\Models\ZdoStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigbeeService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Util\" />
   </ItemGroup>
 </Project>

@@ -109,10 +109,10 @@ namespace ZigbeeNet.CC.Packet
                     return new ZDO_ACTIVE_EP_REQ_SRSP(payload);
                 case CommandType.ZDO_ACTIVE_EP_RSP:
                     return new ZDO_ACTIVE_EP_RSP(payload);
-                // case CommandType.ZDO_BIND_REQ_SRSP:
-                // return new ZDO_BIND_REQ_SRSP(payload);
-                // case CommandType.ZDO_BIND_RSP:
-                // return new ZDO_BIND_RSP(payload);
+                case CommandType.ZDO_BIND_REQ_SRSP:
+                    return new ZDO_BIND_REQ_SRSP(payload);
+                case CommandType.ZDO_BIND_RSP:
+                    return new ZDO_BIND_RSP(payload);
                 case CommandType.ZDO_END_DEVICE_ANNCE_IND:
                     return new ZDO_END_DEVICE_ANNCE_IND(payload);
                 // case CommandType.ZDO_END_DEVICE_ANNCE_SRSP:

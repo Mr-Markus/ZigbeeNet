@@ -55,7 +55,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             PayloadValue = new byte[0xff];
         }
 
-        public ZB_SEND_DATA_REQUEST(ZigbeeAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] buffer)
+        public ZB_SEND_DATA_REQUEST(ZigbeeAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] payload)
         {
             // TODO: check buffer length
             Destination = destination;
@@ -64,7 +64,7 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
             Ack = ack;
             Radius = radius;
             PayloadLength = payloadLength;
-            PayloadValue = buffer;
+            PayloadValue = payload;
 
             byte[] framedata = new byte[PayloadValue.Length + 8];
             framedata[0] = Destination.DoubleByte.Lsb;

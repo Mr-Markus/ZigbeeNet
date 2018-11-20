@@ -30,7 +30,7 @@ namespace BasicSample
 
         private static void ZigbeeService_OnReady(object sender, EventArgs e)
         {
-            _service.PermitJoining(10);
+            _service.PermitJoining(30);
         }
     }
 }

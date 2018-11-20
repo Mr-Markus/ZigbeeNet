@@ -57,7 +57,7 @@ namespace ZigbeeNet.CC.Handler
             if (asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
             {
                 ZigbeeNode device = _devices.SingleOrDefault(d => d.NwkAdress.Value == simpRsp.NwkAddr.Value);
-                
+
                 if (device != null)
                 {
                     ZigbeeEndpoint ep = new ZigbeeEndpoint(device)
@@ -71,8 +71,18 @@ namespace ZigbeeNet.CC.Handler
 
                     device.Endpoints.Add(ep);
 
+                    //foreach (var c in ep.ClusterList)
+                    //{
+                    //    ZDO_BIND_REQ bind = new ZDO_BIND_REQ(device.NwkAdress, _znp.Coordinator.IeeeAddress, 1, c, ZDO_BIND_REQ.Address_Mode.ADDRESS_64_BIT, device.IeeeAddress, ep.Id);
+                    //    ZDO_BIND_REQ_SRSP bindSrsp = await _znp.SendAsync<ZDO_BIND_REQ_SRSP>(bind);
+                    //}
+
                     _znp.OnDeviceInfoChanged(device);
                 }
+            }
+            if (asynchronousRequest is ZDO_BIND_RSP bindRsp)
+            {
+                ZigbeeAddress16 srcAddr = bindRsp.srcAddr;
             }
         }
 
