@@ -164,8 +164,8 @@ namespace ZigbeeNet.CC.Packet
                     return new ZDO_SIMPLE_DESC_REQ_SRSP(payload);
                 case CommandType.ZDO_SIMPLE_DESC_RSP:
                     return new ZDO_SIMPLE_DESC_RSP(payload);
-                // case CommandType.ZDO_TC_DEVICE_IND:
-                // return new ZDO_TC_DEVICE_IND(payload);
+                case CommandType.ZDO_TC_DEVICE_IND:
+                    return new ZDO_TC_DEVICE_IND(payload);
                 // case CommandType.ZDO_UNBIND_REQ_SRSP:
                 // return new ZDO_UNBIND_REQ_SRSP(payload);
                 // case CommandType.ZDO_UNBIND_RSP:

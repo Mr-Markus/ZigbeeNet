@@ -214,7 +214,7 @@ namespace ZigbeeNet.CC
 
             byte newEpId = 1;
 
-            await CreateEndpoint(Coordinator, newEpId, ZclProfile.ZIGBEE_HOME_AUTOMATION);
+            //await CreateEndpoint(Coordinator, newEpId, ZclProfile.ZIGBEE_HOME_AUTOMATION);
 
             Started?.Invoke(this, EventArgs.Empty);
         }
