@@ -53,5 +53,14 @@ namespace ZigbeeNet
         {
             return Value.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is ZigbeeAddress16 z16)
+            {
+                return Value == z16.Value;
+            }
+            return false;
+        }
     }
 }

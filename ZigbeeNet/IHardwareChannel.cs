@@ -15,6 +15,7 @@ namespace ZigbeeNet
     {
         event EventHandler Started;
         event EventHandler<ZigbeeNode> NewDevice;
+        event EventHandler<ZigbeeEndpoint> NewEndpoint;
         event EventHandler<ZigbeeNode> DeviceInfoChanged;
 
         void Start();

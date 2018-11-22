@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Serilog;
 using ZigbeeNet;
 
@@ -7,9 +9,12 @@ namespace BasicSample
     class Program
     {
         private static ZigbeeService _service;
+        private static List<ZigbeeNode> _nodes;
 
         static void Main(string[] args)
         {
+            _nodes = new List<ZigbeeNode>();
+
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -19,6 +24,8 @@ namespace BasicSample
             {
                 _service = new ZigbeeService(new Options { Baudrate = 115200, Port = "COM4" });
                 _service.OnReady += ZigbeeService_OnReady;
+                _service.Controller.NewEndpoint += Controller_NewEndpoint; ;
+                _service.Controller.NewDevice += Controller_NewDevice;
                 _service.Start();
             }
             catch (Exception ex)
@@ -26,6 +33,24 @@ namespace BasicSample
                 Console.WriteLine(ex.ToString());
             }
             Console.ReadLine();
+        }
+
+        private static void Controller_NewEndpoint(object sender, ZigbeeEndpoint e)
+        {
+            if (sender is ZigbeeAddress16 nwkDst)
+            {
+                ZigbeeNode node = _nodes.Single(n => n.NwkAdress.Equals(nwkDst));
+
+                node.Endpoints.Add(e);
+            }
+        }
+
+        private static void Controller_NewDevice(object sender, ZigbeeNode e)
+        {
+            if(_nodes.Exists(n => n.IeeeAddress == e.IeeeAddress) == false)
+            {
+                _nodes.Add(e);
+            }
         }
 
         private static void ZigbeeService_OnReady(object sender, EventArgs e)

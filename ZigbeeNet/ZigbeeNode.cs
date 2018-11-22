@@ -43,5 +43,17 @@ namespace ZigbeeNet
 
             Status = ZigbeeNodeStatus.Offline;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is ZigbeeNode node)
+            {
+                if(NwkAdress != null && node.NwkAdress != null)
+                {
+                    return NwkAdress.Value == node.NwkAdress.Value;
+                }
+            }
+            return false;
+        }
     }
 }

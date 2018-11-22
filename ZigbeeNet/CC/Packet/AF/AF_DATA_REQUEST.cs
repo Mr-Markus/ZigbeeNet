@@ -21,17 +21,22 @@ namespace ZigbeeNet.CC.Packet.AF
         public byte[] Data { get; private set; }
 
         /// <summary>
-        /// Endpoint of the destination device 
+        /// This parameter shall be present if, and only if,
+        /// the DstAddrMode parameter has a value of 0x02 or 0x03 and, if present, 
+        /// shall be either the number of the individual endpoint of the entity
+        /// to which the ADSDU is beeing transferred ot the broadcast endpoint (0xff)
         /// </summary>
         public byte DstEndpoint { get; private set; }
 
         /// <summary>
-        /// Endpoint of the source device 
+        /// The individual endpoint of the entity from which
+        /// the ASDU is beeing trasferred
         /// </summary>
         public byte SrcEndpoint { get; private set; }
 
         /// <summary>
-        /// Short address of the destination device 
+        /// The individual device address or group
+        /// address of the entity to which the ASDU is being transferred
         /// </summary>
         public ZigbeeAddress16 DstAddr { get; private set; }
 
@@ -43,6 +48,7 @@ namespace ZigbeeNet.CC.Packet.AF
         /// <summary>
         /// Transmit options bit mask according to the following defines from AF.h: 
         /// bit 1: sets ‘Wildcard Profile ID’; 
+        /// bit 2: Use NWK key
         /// bit 4: turns on/off ‘APS ACK’; 
         /// bit 5 sets ‘discover route’; 
         /// bit 6 sets ‘APS security’; bit 7 sets ‘skip routing’. 
@@ -50,7 +56,8 @@ namespace ZigbeeNet.CC.Packet.AF
         public byte Options { get; private set; }
 
         /// <summary>
-        /// Specifies the number of hops allowed delivering the message (see AF_DEFAULT_RADIUS.)
+        /// The distance, in hops, that a transmitted frame will be
+        /// allowed to travel through the network
         /// </summary>
         public byte Radius { get; private set; }
 

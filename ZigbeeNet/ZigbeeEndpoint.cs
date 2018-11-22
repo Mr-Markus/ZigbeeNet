@@ -32,7 +32,7 @@ namespace ZigbeeNet
             }
         }
 
-        public ZigbeeEndpoint(ZigbeeNode node)
+        public ZigbeeEndpoint(ZigbeeNode node = null)
         {
             Node = node;
             InClusters = new List<ZclCluster>();

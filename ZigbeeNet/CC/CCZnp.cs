@@ -43,6 +43,7 @@ namespace ZigbeeNet.CC
         
         public event EventHandler Started;
         public event EventHandler<ZigbeeNode> NewDevice;
+        public event EventHandler<ZigbeeEndpoint> NewEndpoint;
         public event EventHandler<ZigbeeNode> DeviceInfoChanged;
 
         public CCZnp(Options options)
@@ -212,21 +213,31 @@ namespace ZigbeeNet.CC
                 PowerSource = PowerSource.DCSource
             };
 
-            byte newEpId = 1;
+            byte newEpId = 0;
 
             //await CreateEndpoint(Coordinator, newEpId, ZclProfile.ZIGBEE_HOME_AUTOMATION);
+
+            OnNewDevice(Coordinator);
 
             Started?.Invoke(this, EventArgs.Empty);
         }
 
         internal void OnNewDevice(ZigbeeNode device)
         {
+            _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", device.NwkAdress, device.IeeeAddress);
+
             NewDevice?.Invoke(this, device);
         }
 
-        internal void OnDeviceInfoChanged(ZigbeeNode device)
+        internal void OnDeviceInfoChanged(ZDO_NODE_DESC_RSP nodeDesc)
         {
-            DeviceInfoChanged?.Invoke(this, device);
+            //TODO: What to do here???
+            DeviceInfoChanged?.Invoke(nodeDesc.NwkAddr, null);
+        }
+
+        internal void OnNewEndpoint(ZigbeeAddress16 nwkAddress, ZigbeeEndpoint endpoint)
+        {
+            NewEndpoint?.Invoke(nwkAddress, endpoint);
         }
 
         private void OnSend(SerialPacket serialPacket)
