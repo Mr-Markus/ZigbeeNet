@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigbeeNet
 {
-    public enum ZclProfile
+    public enum ZigbeeProfileType
     {
         /// <summary>
         /// ZigBee Home Automation

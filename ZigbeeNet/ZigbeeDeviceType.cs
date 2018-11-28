@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigbeeNet
 {
-    public enum ZclDevice : ushort
+    public enum ZigbeeDeviceType : ushort
     {
         //Generic
         OnOffSwitch = 0x0000,

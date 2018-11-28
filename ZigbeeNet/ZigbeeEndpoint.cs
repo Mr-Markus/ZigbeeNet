@@ -9,19 +9,19 @@ namespace ZigbeeNet
     {
         public byte Id { get; set; }
 
-        public ZclProfile ProfileId { get; set; }
+        public ZigbeeProfileType ProfileId { get; set; }
 
         public ZigbeeNode Node { get; set; }
 
-        public List<ZclCluster> InClusters { get; set; }
+        public List<ZclClusterId> InClusters { get; set; }
 
-        public List<ZclCluster> OutClusters { get; set; }
+        public List<ZclClusterId> OutClusters { get; set; }
 
-        public List<ZclCluster> ClusterList
+        public List<ZclClusterId> ClusterList
         {
             get
             {
-                List<ZclCluster> clusterList = new List<ZclCluster>();
+                List<ZclClusterId> clusterList = new List<ZclClusterId>();
 
                 clusterList.AddRange(InClusters);
                 clusterList.AddRange(OutClusters);
@@ -35,8 +35,8 @@ namespace ZigbeeNet
         public ZigbeeEndpoint(ZigbeeNode node = null)
         {
             Node = node;
-            InClusters = new List<ZclCluster>();
-            OutClusters = new List<ZclCluster>();
+            InClusters = new List<ZclClusterId>();
+            OutClusters = new List<ZclClusterId>();
         }
     }
 }

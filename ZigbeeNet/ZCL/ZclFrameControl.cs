@@ -11,12 +11,6 @@ namespace ZigbeeNet.ZCL
         ClusterSpecific = 0x01
     }
 
-    public enum Direction : byte
-    {
-        ClientToServer = 0x00,
-        ServerToClient = 0x01
-    }
-
     public enum DisableDefaultResponse
     {
         Always = 0x00,
@@ -57,7 +51,7 @@ namespace ZigbeeNet.ZCL
         /// </summary>
         [FieldOrder(2)]
         [FieldBitLength(1)]
-        public Direction Direction { get; set; }
+        public ZclCommandDirection Direction { get; set; }
         /// <summary>
         /// The disable Default Response sub-field is 1 bit in length. If it is set to 0, the Default Response command will be 
         /// returned, under the conditions specified in 2.5.12.2. If it is set to 1, the Default Response command will only be 

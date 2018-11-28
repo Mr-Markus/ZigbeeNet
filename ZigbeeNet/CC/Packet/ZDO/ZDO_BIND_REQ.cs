@@ -54,7 +54,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigbeeAddress64 ieeeSrc, byte epSrc, ZclCluster cluster,
+        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigbeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
             Address_Mode addressingMode, ZigbeeAddress64 ieeeDst, byte epDst)
         {
 

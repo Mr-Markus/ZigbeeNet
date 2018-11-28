@@ -25,7 +25,14 @@ namespace ZigbeeNet.CC.Handler
         {
             if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
             {
-                endDeviceAnnceHdlr(endDevInd);
+                ZigbeeNode device = new ZigbeeNode();
+                device.NwkAdress = endDevInd.NwkAddr;
+                device.IeeeAddress = endDevInd.IEEEAddr;
+
+                _znp.OnNewDevice(device);
+
+                ZDO_NODE_DESC_REQ nodeReq = new ZDO_NODE_DESC_REQ(endDevInd.NwkAddr, endDevInd.NwkAddr);
+                await _znp.SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq).ConfigureAwait(false);
             }
             if (asynchronousRequest is ZDO_NODE_DESC_RSP nodeDesc)
             {
@@ -50,8 +57,8 @@ namespace ZigbeeNet.CC.Handler
                     ProfileId = simpRsp.ProfileId
                 };
 
-                ep.InClusters.AddRange(simpRsp.InClusterList.Select(c => (ZclCluster)c.Value));
-                ep.OutClusters.AddRange(simpRsp.OutClusterList.Select(c => (ZclCluster)c.Value));
+                ep.InClusters.AddRange(simpRsp.InClusterList.Select((Func<DoubleByte, ZclClusterId>)(c => (ZclClusterId)c.Value)));
+                ep.OutClusters.AddRange(simpRsp.OutClusterList.Select((Func<DoubleByte, ZclClusterId>)(c => (ZclClusterId)c.Value)));
 
                 _znp.OnNewEndpoint(simpRsp.NwkAddr, ep);
             }
@@ -59,20 +66,6 @@ namespace ZigbeeNet.CC.Handler
             {
                 ZigbeeAddress16 srcAddr = bindRsp.srcAddr;
             }
-        }
-
-        private async void endDeviceAnnceHdlr(ZDO_END_DEVICE_ANNCE_IND deviceInd)
-        {
-            //TODO: Timeout
-
-            ZigbeeNode device = new ZigbeeNode();
-            device.NwkAdress = deviceInd.NwkAddr;
-            device.IeeeAddress = deviceInd.IEEEAddr;
-
-            _znp.OnNewDevice(device);
-
-            ZDO_NODE_DESC_REQ nodeReq = new ZDO_NODE_DESC_REQ(deviceInd.NwkAddr, deviceInd.NwkAddr);
-            await _znp.SendAsync<ZDO_NODE_DESC_REQ_SRSP>(nodeReq).ConfigureAwait(false);
         }
     }
 }

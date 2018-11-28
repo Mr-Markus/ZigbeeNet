@@ -5,50 +5,48 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public class FrameHeader
+    public class ZclHeader
     {
-        public FrameHeader(ZclFrameControl frameControl, byte commandIdentifier)
-        {
-            FrameControl = frameControl;
-            CommandIdentifierField = commandIdentifier;
-        }
-        public FrameHeader(FrameType frameType, Direction direction, byte commandIdentifier, DisableDefaultResponse disableDefaultResponse = DisableDefaultResponse.Always, bool manufacturerSpecific = false)
-        {
-            FrameControl = new ZclFrameControl()
-            {
-                Type = frameType,
-                Direction = direction,
-                DisableDefaultResponse = disableDefaultResponse,
-                ManufacturerSpecific = manufacturerSpecific
-            };
-            CommandIdentifierField = commandIdentifier;
-        }
+        private static byte MASK_FRAME_TYPE = 0b00000011;
+        private static byte MASK_MANUFACTURER_SPECIFIC = 0b00000100;
+        private static byte MASK_DIRECTION = 0b00001000;
+        private static byte MASK_DEFAULT_RESPONSE = 0b00010000;
+                       
+        private static byte FRAME_TYPE_ENTIRE_PROFILE = 0x00;
+        private static byte FRAME_TYPE_CLUSTER_SPECIFIC = 0x01;
 
         /// <summary>
-        /// Just for serialization
+        /// The frame type sub-field
+        /// Specifies if this is a <i>generic</i> command used across the entire profile ENTIRE_PROFILE_COMMAND
+        /// or a command that is specific to a single cluster CLUSTER_SPECIFIC_COMMAND.
         /// </summary>
-        [Ignore()]
-        public bool ManufacturerSpecific
-        {
-            get
-            {
-                return FrameControl.ManufacturerSpecific;
-            }
-        }
+        public ZclFrameType FrameType { get; set; }
+
         /// <summary>
-        /// The frame control field is 8 bits in length and contains information defining the command type and other control flags. 
-        /// Bits 5-7 are reserved for future use and SHALL be set to 0. 
+        /// The manufacturer specific sub-field is 1 bit in length and specifies whether this command refers to a
+        /// manufacturer specific extension to a profile. If this value is set to 1, the manufacturer code field shall be
+        /// present in the ZCL frame. If this value is set to 0, the manufacturer code field shall not be included in the ZCL
+        /// frame.
         /// </summary>
-        [FieldOrder(0)]
-        [FieldBitLength(8)]
-        public ZclFrameControl FrameControl { get; set; }
+        public bool ManufacturerSpecific { get; set; }
+
+        /// <summary>
+        /// The direction sub-field specifies the client/server direction for this command. If this value is set to 1, the
+        /// command is being sent from the server side of a cluster to the client side of a cluster. If this value is set to
+        /// 0, the command is being sent from the client side of a cluster to the server side of a cluster.
+        /// </summary>
+        public ZclCommandDirection Direction { get; set; }
+
+        /// <summary>
+        /// The disable default response sub-field is 1 bit in length. If it is set to 0, the Default response command will
+        /// be returned. If it is set to 1, the Default response command will only be returned if there is an error.
+        /// </summary>
+        public bool DisableDefaultResponse { get; set; }
 
         /// <summary>
         /// The manufacturer code field is 16 bits in length and specifies the ZigBee assigned manufacturer code for proprietary extensions. 
         /// This field SHALL only be included in the ZCL frame if the manufacturer specific sub-field of the frame control field is set to True. 
         /// </summary>
-        [FieldOrder(1)]
-        [SerializeWhen(nameof(ManufacturerSpecific), true)]
         public ushort ManufacturerCode { get; set; }
 
         /// <summary>
@@ -63,8 +61,7 @@ namespace ZigbeeNet.ZCL
         /// The Transaction Sequence Number field can be used by a controlling device, which MAY have issued multiple commands, 
         /// so that it can match the incoming responses to the relevant command. 
         /// </summary>
-        [FieldOrder(2)]
-        public byte TransactionSequenceNumber { get; set; }
+        public byte SequenceNumber { get; set; }
 
         /// <summary>
         /// The Command Identifier field is 8 bits in length and specifies the cluster command being used. 
@@ -74,7 +71,50 @@ namespace ZigbeeNet.ZCL
         /// 
         /// The cluster specific command identifiers can be found in each individual document describing the clusters (see also 2.2.1.1). 
         /// </summary>
-        [FieldOrder(3)]
-        public byte CommandIdentifierField { get; set; }
+        public byte CommandId { get; set; }
+
+        public ZclHeader()
+        {
+            ManufacturerSpecific = false;
+            ManufacturerCode = 0;
+            DisableDefaultResponse = false;
+        }
+
+        public ZclHeader(ZclFieldDeserializer fieldSerializer)
+        {
+            
+        }
+
+        public byte[] Serialize(ZclFieldSerializer fieldSerializer, byte[] payload)
+        {
+            byte frameControl = 0;
+
+            switch (FrameType)
+            {
+                case ZclFrameType.CLUSTER_SPECIFIC_COMMAND:
+                    frameControl |= FRAME_TYPE_CLUSTER_SPECIFIC;
+                    break;
+                case ZclFrameType.ENTIRE_PROFILE_COMMAND:
+                    frameControl |= FRAME_TYPE_ENTIRE_PROFILE;
+                    break;
+                default:
+                    break;
+            }
+
+            frameControl |= Direction == ZclCommandDirection.ServerToClient ? MASK_DIRECTION : (byte)0b00000000;
+            frameControl |= DisableDefaultResponse ? MASK_DEFAULT_RESPONSE : (byte)0b00000000;
+
+            byte[] zclFrame = new byte[payload.Length + 3];
+            zclFrame[0] = frameControl;
+            zclFrame[1] = SequenceNumber;
+            zclFrame[2] = CommandId;
+
+            for (int i = 0; i < payload.Length; i++)
+            {
+                zclFrame[i + 3] = payload[i];
+            }
+
+            return zclFrame;
+        }
     }
 }

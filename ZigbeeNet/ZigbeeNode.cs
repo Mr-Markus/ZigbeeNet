@@ -15,7 +15,7 @@ namespace ZigbeeNet
     {
         public ushort Id { get; set; }
 
-        public ZclDevice Type { get; set; }
+        public ZigbeeDeviceType Type { get; set; }
 
         public ZigbeeAddress64 IeeeAddress { get; set; }
 
@@ -42,6 +42,11 @@ namespace ZigbeeNet
             Endpoints = new List<ZigbeeEndpoint>();
 
             Status = ZigbeeNodeStatus.Offline;
+        }
+
+        public void Shutdown()
+        {
+            throw new NotImplementedException();
         }
 
         public override bool Equals(object obj)

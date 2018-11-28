@@ -40,7 +40,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// The profile Id for this endpoint
         /// </summary>
-        public ZclProfile ProfileId { get; private set; }
+        public ZigbeeProfileType ProfileId { get; private set; }
 
         /// <summary>
         /// The Device Description Id for this endpoint
@@ -82,7 +82,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
             if (Len >= MIN_DESC_LEN)
             {
                 Endpoint = framedata[6];
-                ProfileId = (ZclProfile)(new DoubleByte(framedata[8], framedata[7]).Value);
+                ProfileId = (ZigbeeProfileType)(new DoubleByte(framedata[8], framedata[7]).Value);
                 DeviceId = new DoubleByte(framedata[10], framedata[9]);
                 DeviceVersion = framedata[11];
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public enum ZclCluster
+    public enum ZclClusterId
     {
         genBasic =  0,
         genPowerCfg =  1,

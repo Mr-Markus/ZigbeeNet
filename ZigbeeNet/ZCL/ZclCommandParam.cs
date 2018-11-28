@@ -9,7 +9,7 @@ namespace ZigbeeNet.ZCL
         public string Name { get; set; }
 
         [Ignore()]
-        public DataType DataType { get; set; }
+        public ZclDataType DataType { get; set; }
 
         [Ignore()]
         public string SpecialType { get; set; }
@@ -30,52 +30,52 @@ namespace ZigbeeNet.ZCL
                 {
                     switch (DataType)
                     {
-                        case DataType.Boolean:
+                        case ZclDataType.Boolean:
                             _value = Convert.ToBoolean(value);
                             break;
-                        case DataType.UInt8:
-                        case DataType.Int8:
-                        case DataType.Data8:
-                        case DataType.Enum8:
+                        case ZclDataType.UInt8:
+                        case ZclDataType.Int8:
+                        case ZclDataType.Data8:
+                        case ZclDataType.Enum8:
                             _value = Convert.ToByte(value);
                             break;
-                        case DataType.Int16:
-                        case DataType.Data16:
-                        case DataType.Enum16:
-                        case DataType.Map16:
-                        case DataType.String16:
+                        case ZclDataType.Int16:
+                        case ZclDataType.Data16:
+                        case ZclDataType.Enum16:
+                        case ZclDataType.Map16:
+                        case ZclDataType.String16:
                             _value = Convert.ToInt16(value);
                             break;
-                        case DataType.Int32:
-                        case DataType.Data32:
-                        case DataType.Map32:
+                        case ZclDataType.Int32:
+                        case ZclDataType.Data32:
+                        case ZclDataType.Map32:
                             _value = Convert.ToInt32(value);
                             break;
-                        case DataType.Int64:
-                        case DataType.IeeeAddress:
+                        case ZclDataType.Int64:
+                        case ZclDataType.IeeeAddress:
                             _value = Convert.ToInt64(value);
                             break;
-                        case DataType.UInt16:
+                        case ZclDataType.UInt16:
                             _value = Convert.ToUInt16(value);
                             break;
-                        case DataType.UInt32:
-                        case DataType.UTC:
+                        case ZclDataType.UInt32:
+                        case ZclDataType.UTC:
                             _value = Convert.ToUInt32(value);
                             break;
-                        case DataType.Double:
+                        case ZclDataType.Double:
                             _value = Convert.ToDouble(value);
                             break;
-                        case DataType.UInt64:
+                        case ZclDataType.UInt64:
                             _value = Convert.ToUInt64(value);
                             break;
-                        case DataType.String:
+                        case ZclDataType.String:
                             _value = Convert.ToString(value);
                             break;
-                        case DataType.Date:
+                        case ZclDataType.Date:
                             DateTime date = Convert.ToDateTime(value);
                             value = new byte[4] { (byte)date.Year, (byte)date.Month, (byte)date.Day, (byte)date.DayOfWeek };
                             break;
-                        case DataType.TimeOfDay:
+                        case ZclDataType.TimeOfDay:
                             DateTime time = Convert.ToDateTime(value);
                             value = new byte[4] { (byte)time.Hour, (byte)time.Minute, (byte)time.Second, (byte)(time.Millisecond / 10) };
                             break;

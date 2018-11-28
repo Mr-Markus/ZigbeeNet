@@ -9,7 +9,7 @@ namespace ZigbeeNet.ZCL
     /// 
     /// Table 2-10
     /// </summary>
-    public enum DataType
+    public enum ZclDataType
     {
         NoData = 0,
         Data8 = 8,

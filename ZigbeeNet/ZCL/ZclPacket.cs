@@ -8,22 +8,22 @@ namespace ZigbeeNet.ZCL
     {
         public ZclPacket(byte cmdId)
         {
-            Header = new FrameHeader(FrameType.Global, Direction.ClientToServer, cmdId);
+            Header = new ZclHeader();
         }
 
-        public ZclPacket(FrameHeader header)
+        public ZclPacket(ZclHeader header)
         {
             Header = header;
         }
 
-        public ZclPacket(FrameHeader header, byte[] payload)
+        public ZclPacket(ZclHeader header, byte[] payload)
         {
             Header = header;
             Payload = payload;
         }
 
         [FieldOrder(0)]
-        public FrameHeader Header { get; set; }
+        public ZclHeader Header { get; set; }
 
         [FieldOrder(1)]
         public byte[] Payload { get; set; }

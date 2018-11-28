@@ -10,7 +10,15 @@ namespace ZigbeeNet.ZCL
 
         public ushort Id { get; set; }
 
-        public DataType DataType { get; set; }
+        public ZclDataType DataType { get; set; }
+
+        public bool Mandatory { get; set; }
+
+        public bool Implemented { get; set; }
+
+        public bool Readable { get; set; }
+
+        public bool Writable { get; set; }
 
         public ZclAttribute()
         {

@@ -364,7 +364,7 @@ namespace ZigbeeNet.CC
             });
         }    
 
-        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigbeeNode node, byte endpointId, ZclProfile profileId)
+        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigbeeNode node, byte endpointId, ZigbeeProfileType profileId)
         {
             AF_REGISTER register = new AF_REGISTER(endpointId, new DoubleByte((ushort)profileId), new DoubleByte(0), 0, new DoubleByte[0], new DoubleByte[0]);
             AF_REGISTER_SRSP result = await SendAsync<AF_REGISTER_SRSP>(register);
