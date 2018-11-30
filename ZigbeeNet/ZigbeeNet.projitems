@@ -17,6 +17,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DEV_INFO_TYPE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\AfMessageHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Models\NetworkInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\AFMessageListenerFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\DriverStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\IApplicationFrameworkMessageListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\IAsynchronousCommandListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\ICommandInterface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\ISynchronousCommandListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkStateListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_CONFIRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_REQUEST.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_DATA_REQUEST_SRSP.cs" />
@@ -24,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\AF\AF_REGISTER_SRSP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_TC_DEVICE_IND.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\ZigBeeDongleTiCc2531.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\ZigBeeCommandNotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeAnnounceListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigbeeCommandListener.cs" />
@@ -36,6 +46,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\DefaultSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transport\FlowControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigbeePort.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigBeeTransportReceive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigBeeTransportTransmit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\ZigBeeTransportState.cs" />
