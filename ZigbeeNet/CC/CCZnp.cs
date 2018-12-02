@@ -385,7 +385,7 @@ namespace ZigbeeNet.CC
             return endpoint;
         }
 
-        private async Task<byte[]> GetDeviceInfo(DEV_INFO_TYPE info)
+        private async Task<byte[]> GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE info)
         {
             ZB_GET_DEVICE_INFO infoReq = new ZB_GET_DEVICE_INFO(info);
             ZB_GET_DEVICE_INFO_RSP infoRsp = await SendAsync<ZB_GET_DEVICE_INFO_RSP>(infoReq).ConfigureAwait(false);
@@ -395,7 +395,7 @@ namespace ZigbeeNet.CC
 
         internal async Task<ZigbeeAddress64> GetIeeeAddress()
         {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
+            byte[] result = await GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.IEEE_ADDR);
 
             ZigbeeAddress64 ieeeAddr = new ZigbeeAddress64(result);
 
@@ -404,7 +404,7 @@ namespace ZigbeeNet.CC
 
         internal async Task<ZigbeeAddress16> GetShortAddress()
         {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.SHORT_ADDR);
+            byte[] result = await GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.SHORT_ADDR);
 
             ZigbeeAddress16 addr = new ZigbeeAddress16(ByteHelper.ShortFromBytes(result, 1, 0));
 
@@ -413,7 +413,7 @@ namespace ZigbeeNet.CC
 
         internal async Task<ZigbeeAddress16> GetCurrentPanId()
         {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.PAN_ID);
+            byte[] result = await GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.PAN_ID);
 
             ushort relevantValue = ByteHelper.ShortFromBytes(result, 1, 0);
 
@@ -424,7 +424,7 @@ namespace ZigbeeNet.CC
 
         internal async Task<byte> GetCurrentChannel()
         {
-            byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.CHANNEL);
+            byte[] result = await GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.CHANNEL);
 
             return result[0];
         }

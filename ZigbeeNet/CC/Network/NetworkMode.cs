@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ZigbeeNet.CC.Network
 {
-    public enum NetworkMode
+    public enum NetworkMode : byte
     {
-        Coordinator,
-        Router,
-        EndDevice
+        Coordinator = 0x00,
+        Router = 0x01,
+        EndDevice = 0x02
     }
 }
