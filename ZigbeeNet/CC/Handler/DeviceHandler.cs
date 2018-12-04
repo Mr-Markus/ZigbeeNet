@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC.Handler
         {
             if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
             {
-                ZigbeeNode device = new ZigbeeNode();
+                ZigBeeNode device = new ZigBeeNode();
                 device.NwkAdress = endDevInd.NwkAddr;
                 device.IeeeAddress = endDevInd.IEEEAddr;
 
@@ -51,7 +51,7 @@ namespace ZigbeeNet.CC.Handler
             }
             if (asynchronousRequest is ZDO_SIMPLE_DESC_RSP simpRsp)
             {
-                ZigbeeEndpoint ep = new ZigbeeEndpoint()
+                ZigBeeEndpoint ep = new ZigBeeEndpoint()
                 {
                     Id = simpRsp.Endpoint,
                     ProfileId = simpRsp.ProfileId

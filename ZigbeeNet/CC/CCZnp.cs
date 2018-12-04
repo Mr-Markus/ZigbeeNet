@@ -36,15 +36,15 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SerialPacket> _transmitQueue;
         private BlockingCollection<SynchronousResponse> _responseQueue;
 
-        public ZigbeeNetwork Network { get; set; }
-        public ZigbeeNode Coordinator { get; private set; }
+        public ZigBeeNetwork Network { get; set; }
+        public ZigBeeNode Coordinator { get; private set; }
 
         public int MaxRetryCount => 3;
         
         public event EventHandler Started;
-        public event EventHandler<ZigbeeNode> NewDevice;
-        public event EventHandler<ZigbeeEndpoint> NewEndpoint;
-        public event EventHandler<ZigbeeNode> DeviceInfoChanged;
+        public event EventHandler<ZigBeeNode> NewDevice;
+        public event EventHandler<ZigBeeEndpoint> NewEndpoint;
+        public event EventHandler<ZigBeeNode> DeviceInfoChanged;
 
         public CCZnp(Options options)
         {
@@ -193,7 +193,7 @@ namespace ZigbeeNet.CC
 
         internal async void OnStarted()
         {
-            Network = new ZigbeeNetwork()
+            Network = new ZigBeeNetwork()
             {
                 IeeeAddress = await GetIeeeAddress(),
                 PanId = await GetCurrentPanId(),
@@ -203,11 +203,11 @@ namespace ZigbeeNet.CC
 
             _logger.Info("Network started: {@Network}", Network);
 
-            Coordinator = new ZigbeeNode()
+            Coordinator = new ZigBeeNode()
             {
                 IeeeAddress = Network.IeeeAddress,
                 NwkAdress = Network.NetworkAddress,
-                Status = ZigbeeNodeStatus.Online,
+                Status = ZigBeeNodeStatus.Online,
                 DeviceEnabled = ZigbeeNodeState.Enabled,
                 JoinTime = DateTime.Now,
                 PowerSource = PowerSource.DCSource
@@ -222,7 +222,7 @@ namespace ZigbeeNet.CC
             Started?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void OnNewDevice(ZigbeeNode device)
+        internal void OnNewDevice(ZigBeeNode device)
         {
             _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", device.NwkAdress, device.IeeeAddress);
 
@@ -235,7 +235,7 @@ namespace ZigbeeNet.CC
             DeviceInfoChanged?.Invoke(nodeDesc.NwkAddr, null);
         }
 
-        internal void OnNewEndpoint(ZigbeeAddress16 nwkAddress, ZigbeeEndpoint endpoint)
+        internal void OnNewEndpoint(ZigbeeAddress16 nwkAddress, ZigBeeEndpoint endpoint)
         {
             NewEndpoint?.Invoke(nwkAddress, endpoint);
         }
@@ -364,9 +364,9 @@ namespace ZigbeeNet.CC
             });
         }    
 
-        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigbeeNode node, byte endpointId, ZigbeeProfileType profileId)
+        public async Task<ZigBeeEndpoint> CreateEndpoint(ZigBeeNode node, byte endpointId, ZigBeeProfileType profileId)
         {
-            AF_REGISTER register = new AF_REGISTER(endpointId, new DoubleByte((ushort)profileId), new DoubleByte(0), 0, new DoubleByte[0], new DoubleByte[0]);
+            AF_REGISTER register = new AF_REGISTER(endpointId, new DoubleByte((ushort)profileId.Key), new DoubleByte(0), 0, new DoubleByte[0], new DoubleByte[0]);
             AF_REGISTER_SRSP result = await SendAsync<AF_REGISTER_SRSP>(register);
 
             if(result.Status != PacketStatus.SUCESS)
@@ -374,7 +374,7 @@ namespace ZigbeeNet.CC
                 throw new Exception($"Unable create a new Endpoint. AF_REGISTER command failed with {result.Status}");
             }
 
-            ZigbeeEndpoint endpoint = new ZigbeeEndpoint(node);
+            ZigBeeEndpoint endpoint = new ZigBeeEndpoint(node);
             endpoint.Id = endpointId;
             endpoint.ProfileId = profileId;
 
@@ -393,11 +393,11 @@ namespace ZigbeeNet.CC
             return infoRsp.Value;
         }
 
-        internal async Task<ZigbeeAddress64> GetIeeeAddress()
+        internal async Task<ZigBeeAddress64> GetIeeeAddress()
         {
             byte[] result = await GetDeviceInfo(DEV_INFO_TYPE.IEEE_ADDR);
 
-            ZigbeeAddress64 ieeeAddr = new ZigbeeAddress64(result);
+            ZigBeeAddress64 ieeeAddr = new ZigBeeAddress64(result);
 
             return ieeeAddr;
         }

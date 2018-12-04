@@ -10,12 +10,12 @@ namespace ZigbeeNet
         /// Serializes the network state from the ZigBeeNetworkManager.
         /// </summary>
         /// <param name="networkManager"></param>
-        void Serialize(ZigbeeNetworkManager networkManager);
+        void Serialize(ZigBeeNetworkManager networkManager);
 
         /// <summary>
         /// Deserializes the network state into the ZigBeeNetworkManager.
         /// </summary>
         /// <param name="networkManager"></param>
-        void Deserialize(ZigbeeNetworkManager networkManager);
+        void Deserialize(ZigBeeNetworkManager networkManager);
     }
 }

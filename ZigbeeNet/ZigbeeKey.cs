@@ -7,16 +7,16 @@ namespace ZigbeeNet
     /// <summary>
     /// Represents a 128 bit ZigBee key
     /// </summary>
-    public class ZigbeeKey
+    public class ZigBeeKey
     {
         public byte[] Value { get; private set; }
 
-        public ZigbeeKey()
+        public ZigBeeKey()
         {
             Value = new byte[16];
         }
 
-        public ZigbeeKey(byte[] key)
+        public ZigBeeKey(byte[] key)
         {
             if (key.Length != 16)
             {
@@ -26,7 +26,7 @@ namespace ZigbeeNet
             Array.Copy(key, Value, 16);
         }
 
-        public ZigbeeKey(string keyString)
+        public ZigBeeKey(string keyString)
         {
             if (keyString == null)
             {
@@ -79,7 +79,7 @@ namespace ZigbeeNet
             return result;
         }
 
-        public static ZigbeeKey createRandom()
+        public static ZigBeeKey createRandom()
         {
             byte[] key = new byte[16];
             for (int cnt = 0; cnt < 16; cnt++)
@@ -87,7 +87,7 @@ namespace ZigbeeNet
                 key[cnt] = (byte)Math.Floor((new Random().NextDouble() * 255));
             }
 
-            return new ZigbeeKey(key);
+            return new ZigBeeKey(key);
         }
     }
 }

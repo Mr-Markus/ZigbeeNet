@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public enum ZigbeeStatus
+    public enum ZigBeeStatus
     {
         /// <summary>
         /// The operation completed successfully

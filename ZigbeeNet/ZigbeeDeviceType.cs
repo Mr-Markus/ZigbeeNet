@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public enum ZigbeeDeviceType : ushort
+    public enum ZigBeeDeviceType : ushort
     {
         //Generic
         OnOffSwitch = 0x0000,

@@ -4,8 +4,16 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public abstract class ZigbeeAddress
+    public interface IZigBeeAddress : IComparable<IZigBeeAddress>
     {
-        public abstract byte[] ToByteArray();
+        /**
+         * The network address for this address.
+         */
+        int Address { get; set; }
+
+        /**
+         * Check whether this address is ZigBee group.
+         */
+        bool IsGroup();
     }
 }

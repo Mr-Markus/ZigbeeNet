@@ -7,18 +7,18 @@ using ZigbeeNet.CC;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeService : IDisposable
+    public class ZigBeeService : IDisposable
     {
         private bool _disposed;
         private bool _isRunning;
         
-        private ConcurrentDictionary<ulong, ZigbeeNode> _deviceInfoList = new ConcurrentDictionary<ulong, ZigbeeNode>();
+        private ConcurrentDictionary<ulong, ZigBeeNode> _deviceInfoList = new ConcurrentDictionary<ulong, ZigBeeNode>();
 
         public IHardwareChannel Controller { get; set; }
 
         public event EventHandler OnReady;
 
-        public ZigbeeService(Options options)
+        public ZigBeeService(Options options)
         {
             Controller = new CCZnp(options);
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeAddress16 : ZigbeeAddress
+    public class ZigBeeAddress16 : IZigBeeAddress
     {
         public DoubleByte DoubleByte { get; private set; }
 
@@ -21,22 +21,22 @@ namespace ZigbeeNet
             }
         }
 
-        public ZigbeeAddress16()
+        public ZigBeeAddress16()
         {
             DoubleByte = new DoubleByte();
         }
 
-        public ZigbeeAddress16(ushort value)
+        public ZigBeeAddress16(ushort value)
         {
             Value = value;
         }
 
-        public ZigbeeAddress16(byte msb, byte lsb)
+        public ZigBeeAddress16(byte msb, byte lsb)
         {
             DoubleByte = new DoubleByte(msb, lsb);
         }
 
-        public ZigbeeAddress16(byte[] data)
+        public ZigBeeAddress16(byte[] data)
         {
             if (data.Length != 2)
                 throw new InvalidDataException(nameof(data));
@@ -44,7 +44,7 @@ namespace ZigbeeNet
             DoubleByte = new DoubleByte(data[1], data[0]);
         }
 
-        public override byte[] ToByteArray()
+        public byte[] ToByteArray()
         {
             return BitConverter.GetBytes(Value);
         }
@@ -56,7 +56,7 @@ namespace ZigbeeNet
 
         public override bool Equals(object obj)
         {
-            if(obj is ZigbeeAddress16 z16)
+            if(obj is ZigBeeAddress16 z16)
             {
                 return Value == z16.Value;
             }

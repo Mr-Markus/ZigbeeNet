@@ -17,7 +17,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// 64 bit IEEE address of source device
         /// </summary>
-        public ZigbeeAddress64 IeeeAddr { get; private set; }
+        public ZigBeeAddress64 IeeeAddr { get; private set; }
 
         /// <summary>
         /// Specifies the short network address of responding device
@@ -49,7 +49,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         public ZDO_IEEE_ADDR_RSP(byte[] data)
         {
             Status = (PacketStatus)data[0];
-            IeeeAddr = new ZigbeeAddress64(BitConverter.ToUInt64(data, 1));
+            IeeeAddr = new ZigBeeAddress64(BitConverter.ToUInt64(data, 1));
             NwkAddr = new ZigbeeAddress16(data[10], data[9]);
             StartIndex = data[11];
             NumAssocDev = data[12];

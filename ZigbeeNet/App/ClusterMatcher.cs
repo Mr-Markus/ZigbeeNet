@@ -10,11 +10,11 @@ namespace ZigbeeNet.App
     {
         private readonly ILog _logger = LogProvider.For<ClusterMatcher>();
 
-        private ZigbeeNetworkManager _networkManager;
+        private ZigBeeNetworkManager _networkManager;
 
         private List<ushort> _clusters = new List<ushort>();
 
-        public ClusterMatcher(ZigbeeNetworkManager networkManager)
+        public ClusterMatcher(ZigBeeNetworkManager networkManager)
         {
             _logger.Debug("ClusterMatcher starting");
             _networkManager = networkManager;
@@ -28,7 +28,7 @@ namespace ZigbeeNet.App
             _clusters.Add(cluster);
         }
 
-        public void CommandReceived(ZigbeeCommand command)
+        public void CommandReceived(ZigBeeCommand command)
         {
             throw new NotImplementedException();
         }

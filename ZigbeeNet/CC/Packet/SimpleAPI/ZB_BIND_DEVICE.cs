@@ -23,9 +23,9 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Specifies the 64-bit IEEE address of the device to bind to
         /// </summary>
-        public ZigbeeAddress64 Destination { get; private set; }
+        public ZigBeeAddress64 Destination { get; private set; }
 
-        public ZB_BIND_DEVICE(bool create, DoubleByte commandId, ZigbeeAddress64 destination)
+        public ZB_BIND_DEVICE(bool create, DoubleByte commandId, ZigBeeAddress64 destination)
         {
             Create = create;
             CommandId = commandId;

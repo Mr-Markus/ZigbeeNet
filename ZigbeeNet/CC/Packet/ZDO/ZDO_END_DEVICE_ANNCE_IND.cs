@@ -22,7 +22,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the 64 bit IEEE address of source device
         /// </summary>
-        public ZigbeeAddress64 IEEEAddr { get; private set; }
+        public ZigBeeAddress64 IEEEAddr { get; private set; }
 
         /// <summary>
         /// Specifies the MAC capabilities of the device. 
@@ -41,7 +41,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         {
             SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
             NwkAddr = new ZigbeeAddress16(framedata[3], framedata[2]);
-            IEEEAddr = new ZigbeeAddress64(BitConverter.ToUInt64(framedata, 4));
+            IEEEAddr = new ZigBeeAddress64(BitConverter.ToUInt64(framedata, 4));
             Capabilities = framedata[12];
 
             BuildPacket(CommandType.ZDO_END_DEVICE_ANNCE_IND, framedata);

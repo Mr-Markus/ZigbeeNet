@@ -27,7 +27,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Logical Type
         /// </summary>
-        public ZigbeeNodeType LogicalType { get; private set; }
+        public ZigBeeNodeType LogicalType { get; private set; }
 
         /// <summary>
         /// Indicates if complex descriptor is available for the node 
@@ -90,7 +90,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
             SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
             NwkAddr = new ZigbeeAddress16(framedata[4], framedata[3]);
-            LogicalType = (ZigbeeNodeType)(framedata[5] & (byte)0x07);
+            LogicalType = (ZigBeeNodeType)(framedata[5] & (byte)0x07);
             ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
             UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;
             APSFlags = (byte)(framedata[6] & (byte)0x0F);

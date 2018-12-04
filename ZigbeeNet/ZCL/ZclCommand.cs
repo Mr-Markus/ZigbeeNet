@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ZigbeeNet.ZCL.Protocol;
 
 namespace ZigbeeNet.ZCL
 {
-    public abstract class ZclCommand : ZigbeeCommand
+    public abstract class ZclCommand : ZigBeeCommand
     {
-        public bool GenericCommand { get; set; }
+        public bool IsGenericCommand { get; set; }
 
         public byte CommandId { get; set; }
 

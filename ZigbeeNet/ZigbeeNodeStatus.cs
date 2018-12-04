@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public enum ZigbeeNodeStatus : byte
+    public enum ZigBeeNodeStatus : byte
     {
         Offline = 0x00,
         Online = 0x01

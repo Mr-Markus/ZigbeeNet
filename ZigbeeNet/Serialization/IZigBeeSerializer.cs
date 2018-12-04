@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.ZCL;
+using ZigbeeNet.ZCL.Protocol;
 
 namespace ZigbeeNet.Serialization
 {
@@ -15,12 +16,12 @@ namespace ZigbeeNet.Serialization
         /// </summary>
         /// <param name="data">Object containing the value to append</param>
         /// <param name="type">ZclDataType to select of data has to be appended</param>
-        void AppendZigBeeType(Object data, ZclDataType type);
+        void AppendZigBeeType(object data, ZclDataType type);
 
         /// <summary>
         /// Returnss a copy of the payload
         /// </summary>
         /// <returns></returns>
-        byte[] Payload { get; }
+        int[] Payload { get; }
     }
 }

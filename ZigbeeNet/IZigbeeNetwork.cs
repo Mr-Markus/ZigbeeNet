@@ -15,7 +15,7 @@ namespace ZigbeeNet
         /// Sends ZigBee command without waiting for response.
         /// </summary>
         /// <param name="command"></param>
-        void SendTransaction(ZigbeeCommand command);
+        void SendTransaction(ZigBeeCommand command);
 
         /// <summary>
         /// Adds ZigBee library command listener.
