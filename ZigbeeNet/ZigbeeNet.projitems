@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App\Discovery\ZigBeeNodeServiceDiscoverer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\IZigBeeApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\IZigBeeNetworkExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App\ZigBeeNetworkDiscoverer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\AfMessageHandler.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internal\ZigBeeCommandNotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeAnnounceListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeCommandListener.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IZigbeeNetwork.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetwork.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetworkEndpointListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetworkNodeListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetworkStateListener.cs" />
@@ -175,7 +176,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\UnifiedNetworkProcessorInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNodeState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\DeviceState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZigbeeNodeStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNodeStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\MessageTypes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\Options.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\ParamType.cs" />

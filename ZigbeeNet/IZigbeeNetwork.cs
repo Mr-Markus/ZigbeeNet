@@ -9,7 +9,7 @@ namespace ZigbeeNet
     /// ZigBee network interface. It provides an interface for higher layers to receive information about the network and
     /// also provides services for the ZigBeeTransportTransmit to provide network updates and incoming commands.
     /// </summary>
-    public interface IZigbeeNetwork
+    public interface IZigBeeNetwork
     {
         /// <summary>
         /// Sends ZigBee command without waiting for response.
@@ -21,12 +21,12 @@ namespace ZigbeeNet
         /// Adds ZigBee library command listener.
         /// </summary>
         /// <param name="commandListener"></param>
-        void AddCommandListener(IZigbeeCommandListener commandListener);
+        void AddCommandListener(IZigBeeCommandListener commandListener);
 
         /// <summary>
         /// Removes ZigBee library command listener.
         /// </summary>
         /// <param name="commandListener"></param>
-        void RemoveCommandListener(IZigbeeCommandListener commandListener);
+        void RemoveCommandListener(IZigBeeCommandListener commandListener);
     }
 }

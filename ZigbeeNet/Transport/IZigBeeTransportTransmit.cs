@@ -11,7 +11,7 @@ namespace ZigbeeNet.Transport
         /// configure the transport layer.
         /// 
         /// During the initialize() method, the provider must initialize the ports and perform any configuration required to
-        /// get the stack ready for use. If the dongle has already joined a network, then this method will return ZigbeeStatus.SUCESS
+        /// get the stack ready for use. If the dongle has already joined a network, then this method will return ZigBeeStatus.SUCESS
         /// 
         /// At the completion of the initialize method, the IeeeAddress must return the valid address
         /// for the coordinator.
@@ -46,7 +46,7 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// Gets the current ZigBee RF channel
         /// </summary>
-        ZigBeeChannel ZigbeeChannel { get; set; }
+        ZigBeeChannel ZigBeeChannel { get; set; }
 
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport

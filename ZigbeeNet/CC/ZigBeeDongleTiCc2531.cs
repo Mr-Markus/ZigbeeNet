@@ -24,11 +24,11 @@ namespace ZigbeeNet.CC
 
         public string VersionString { get; set; }
         public ZigbeeAddress64 IeeeAddress { get; set; }
-        public ZigbeeChannel ZigbeeChannel { get; set; }
+        public ZigBeeChannel ZigBeeChannel { get; set; }
         public ZigbeeAddress16 PanID { get; set; }
         public ZigbeeAddress64 ExtendedPanId { get; set; }
-        public ZigbeeKey ZigbeeNetworkKey { get; set; }
-        public ZigbeeKey TcLinkKey { get; set; }
+        public ZigBeeKey ZigbeeNetworkKey { get; set; }
+        public ZigBeeKey TcLinkKey { get; set; }
 
         public ZigBeeDongleTiCc2531(IZigbeePort serialPort)
         {
@@ -40,7 +40,7 @@ namespace ZigbeeNet.CC
             throw new NotImplementedException();
         }
 
-        public ZigbeeStatus Initialize()
+        public ZigBeeStatus Initialize()
         {
             _logger.Debug("CC2531 transport initialize");
 
@@ -49,7 +49,7 @@ namespace ZigbeeNet.CC
 
         public bool Notify(AF_INCOMING_MSG msg)
         {
-            ZigbeeApsFrame apsFrame = new ZigbeeApsFrame();
+            ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
             apsFrame.Cluster = msg.ClusterId.Value;
             apsFrame.DestinationEndpoint = msg.DstEndpoint;
             apsFrame.SourceEndpoint = msg.SrcEndpoint;
@@ -75,7 +75,7 @@ namespace ZigbeeNet.CC
                     break;
             }
 
-            ZigbeeApsFrame apsFrame = null;
+            ZigBeeApsFrame apsFrame = null;
             switch(packet.Cmd)
             {
                 case CommandType.ZDO_MSG_CB_INCOMING:
@@ -128,7 +128,7 @@ namespace ZigbeeNet.CC
             }
         }
 
-        public void SendCommand(ZigbeeApsFrame apsFrame)
+        public void SendCommand(ZigBeeApsFrame apsFrame)
         {
             throw new NotImplementedException();
         }
@@ -138,7 +138,7 @@ namespace ZigbeeNet.CC
             throw new NotImplementedException();
         }
 
-        public ZigbeeStatus Startup(bool reinitialize)
+        public ZigBeeStatus Startup(bool reinitialize)
         {
             throw new NotImplementedException();
         }
