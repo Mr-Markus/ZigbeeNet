@@ -10,18 +10,18 @@ namespace ZigbeeNet
         /// Node was added
         /// </summary>
         /// <param name="node"></param>
-        void NodeAdded(ZigbeeNode node);
+        void NodeAdded(ZigBeeNode node);
 
         /// <summary>
         /// Node was updated
         /// </summary>
         /// <param name="node"></param>
-        void NodeUpdated(ZigbeeNode node);
+        void NodeUpdated(ZigBeeNode node);
 
         /// <summary>
         /// Node was removed
         /// </summary>
         /// <param name="node"></param>
-        void NodeRemoved(ZigbeeNode node);
+        void NodeRemoved(ZigBeeNode node);
     }
 }

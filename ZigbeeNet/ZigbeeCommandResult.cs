@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeCommandResult
+    public class ZigBeeCommandResult
     {
-        public ZigbeeCommand Response { get; set; }
+        public ZigBeeCommand Response { get; set; }
 
-        public ZigbeeCommandResult(ZigbeeCommand response)
+        public ZigBeeCommandResult(ZigBeeCommand response)
         {
             Response = response;
         }

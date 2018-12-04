@@ -25,7 +25,7 @@ namespace ZigbeeNet.Internal
             }
         }
 
-        public void NotifyCommandListeners(ZigbeeCommand command)
+        public void NotifyCommandListeners(ZigBeeCommand command)
         {
             foreach (IZigbeeCommandListener commandListener in CommandListeners)
             {

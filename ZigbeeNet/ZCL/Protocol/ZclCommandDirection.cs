@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigbeeNet.ZCL.Protocol
 {
     public enum ZclCommandDirection : byte
     {

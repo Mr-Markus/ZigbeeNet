@@ -28,7 +28,7 @@ namespace ZigbeeNet.App
         /// </summary>
         /// <param name="networkManager">The ZigBeeNetworkManager of the network</param>
         /// <returns> true if the extension started successfully</returns>
-        bool ExtensionStartup(ZigbeeNetworkManager networkManager);
+        bool ExtensionStartup(ZigBeeNetworkManager networkManager);
 
         /// <summary>
         /// Shuts down an extension. The extension should perform any shutdown and cleanup as required.

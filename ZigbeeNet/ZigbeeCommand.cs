@@ -5,11 +5,11 @@ using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeCommand
+    public class ZigBeeCommand
     {
-        public ZigbeeAddress SourceAddress { get; set; }
+        public IZigBeeAddress SourceAddress { get; set; }
 
-        public ZigbeeAddress DestinationAddress { get; set; }
+        public IZigBeeAddress DestinationAddress { get; set; }
 
         public ushort ClusterId { get; set; }
 
@@ -19,12 +19,12 @@ namespace ZigbeeNet
 
         public virtual void Serialize(ZclFieldSerializer serializer)
         {
-            throw new NotImplementedException();
+            // Default implementation does nothing - overridden by each class
         }
 
         public virtual void Deserialize(ZclFieldDeserializer serializer)
         {
-            throw new NotImplementedException();
+            // Default implementation does nothing - overridden by each class
         }
 
         public override string ToString()

@@ -7,12 +7,12 @@ namespace ZigbeeNet
     /// <summary>
     /// CCommand listeners provides a callback when commands are received
     /// </summary>
-    public interface IZigbeeCommandListener
+    public interface IZigBeeCommandListener
     {
         /// <summary>
         /// Called then a command has been received
         /// </summary>
         /// <param name="command"></param>
-        void CommandReceived(ZigbeeCommand command);
+        void CommandReceived(ZigBeeCommand command);
     }
 }

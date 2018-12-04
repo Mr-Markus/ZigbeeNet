@@ -18,7 +18,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// 64 bit Binding source IEEE addres
         /// </summary>
-        public ZigbeeAddress64 SrcAddress { get; private set; }
+        public ZigBeeAddress64 SrcAddress { get; private set; }
 
         /// <summary>
         /// Specifies the binding source endpoint
@@ -38,7 +38,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
         /// <summary>
         /// Binding destination IEEE address. Not to be confused with DstAddr
         /// </summary>
-        public ZigbeeAddress64 DstAddress { get; private set; }
+        public ZigBeeAddress64 DstAddress { get; private set; }
 
         /// <summary>
         /// Specifies the binding destination endpoint. It is used only when DstAddrMode is 64 bits extended address
@@ -54,8 +54,8 @@ namespace ZigbeeNet.CC.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigbeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
-            Address_Mode addressingMode, ZigbeeAddress64 ieeeDst, byte epDst)
+        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigBeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
+            Address_Mode addressingMode, ZigBeeAddress64 ieeeDst, byte epDst)
         {
 
             byte[] framedata;

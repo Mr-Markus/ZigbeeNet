@@ -43,7 +43,7 @@ namespace ZigbeeNet
     /// <li>channel-26 2480 MHz
     /// </ol>
     /// </summary>
-    public enum ZigbeeChannel
+    public enum ZigBeeChannel
     {
         UNKNOWN = 0,
         CHANNEL_00 = 0x00000001,
