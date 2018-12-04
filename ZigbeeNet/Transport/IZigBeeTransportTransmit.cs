@@ -17,7 +17,7 @@ namespace ZigbeeNet.Transport
         /// for the coordinator.
         /// </summary>
         /// <returns></returns>
-        ZigbeeStatus Initialize();
+        ZigBeeStatus Initialize();
 
         /// <summary>
         /// Starts the transport interface.
@@ -26,7 +26,7 @@ namespace ZigbeeNet.Transport
         /// </summary>
         /// <param name="reinitialize"></param>
         /// <returns>true if startup was success</returns>
-        ZigbeeStatus Startup(bool reinitialize);
+        ZigBeeStatus Startup(bool reinitialize);
 
         /// <summary>
         /// Shuts down a transport interface.
@@ -41,12 +41,12 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// Returns the IeeeAddress of the local device
         /// </summary>
-        ZigbeeAddress64 IeeeAddress { get; set; }
+        ZigBeeAddress64 IeeeAddress { get; set; }
 
         /// <summary>
         /// Gets the current ZigBee RF channel
         /// </summary>
-        ZigbeeChannel ZigbeeChannel { get; set; }
+        ZigBeeChannel ZigbeeChannel { get; set; }
 
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
@@ -56,17 +56,17 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// Gets the ZigBee Extended PAN ID currently in use by the transport
         /// </summary>
-        ZigbeeAddress64 ExtendedPanId { get; set; }
+        ZigBeeAddress64 ExtendedPanId { get; set; }
 
         /// <summary>
         /// The ZigBee network security key
         /// </summary>
-        ZigbeeKey ZigbeeNetworkKey { get; set; }
+        ZigBeeKey ZigbeeNetworkKey { get; set; }
 
         /// <summary>
         /// The Trust Center link security key
         /// </summary>
-        ZigbeeKey TcLinkKey { get; set; }
+        ZigBeeKey TcLinkKey { get; set; }
 
         ///  <summary>
         /// Sends ZigBee Cluster Library command without waiting for response. Responses are provided to the framework
@@ -80,7 +80,7 @@ namespace ZigbeeNet.Transport
         /// is serialised by the framework using the {@link ZigBeeSerializer} interface, thus allowing the format to be set
         /// for different hardware implementations.
         /// </summary>
-        void SendCommand(ZigbeeApsFrame apsFrame);
+        void SendCommand(ZigBeeApsFrame apsFrame);
 
         /// <summary>
         /// * Sets the transport configuration.

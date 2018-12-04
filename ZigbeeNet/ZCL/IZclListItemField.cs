@@ -20,6 +20,6 @@ namespace ZigbeeNet.ZCL
         /// Deserializes the field.
         /// </summary>
         /// <param name="serializer"></param>
-        void Deserialize(IZigBeeSerializer serializer);
+        void Deserialize(IZigBeeDeserializer deserializer);
     }
 }

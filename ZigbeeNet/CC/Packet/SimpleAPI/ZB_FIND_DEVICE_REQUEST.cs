@@ -15,9 +15,9 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Specifies the value to search on
         /// </summary>
-        public ZigbeeAddress64 SearchKey { get; private set; }
+        public ZigBeeAddress64 SearchKey { get; private set; }
 
-        public ZB_FIND_DEVICE_REQUEST(ZigbeeAddress64 searchKey)
+        public ZB_FIND_DEVICE_REQUEST(ZigBeeAddress64 searchKey)
         {
             SearchKey = searchKey;
 

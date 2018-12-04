@@ -6,6 +6,6 @@ namespace ZigbeeNet
 {
     public interface IZigBeeTransactionMatcher
     {
-        bool IsTransactionMatch(ZigbeeCommand request, ZigbeeCommand response);
+        bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response);
     }
 }

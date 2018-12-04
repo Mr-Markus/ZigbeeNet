@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet.ZCL;
+using ZigbeeNet.ZCL.Protocol;
 
 namespace ZigbeeNet.Serialization
 {

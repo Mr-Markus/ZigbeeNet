@@ -10,18 +10,18 @@ namespace ZigbeeNet
         /// Device was added to network.
         /// </summary>
         /// <param name="endpoint"></param>
-        void DeviceAdded(ZigbeeEndpoint endpoint);
+        void DeviceAdded(ZigBeeEndpoint endpoint);
 
         /// <summary>
         /// Device was updated.
         /// </summary>
         /// <param name="endpoint"></param>
-        void DeviceUpdated(ZigbeeEndpoint endpoint);
+        void DeviceUpdated(ZigBeeEndpoint endpoint);
 
         /// <summary>
         /// Device was removed from network.
         /// </summary>
         /// <param name="endpoint"></param>
-        void DeviceRemoved(ZigbeeEndpoint endpoint);
+        void DeviceRemoved(ZigBeeEndpoint endpoint);
     }
 }

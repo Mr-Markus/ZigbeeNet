@@ -11,7 +11,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
     /// </summary>
     public class ZDO_TC_DEVICE_IND : AsynchronousRequest
     {
-        public ZigbeeAddress64 IeeeAddr { get; private set; }
+        public ZigBeeAddress64 IeeeAddr { get; private set; }
 
         public ZigbeeAddress16 NwkAddr { get; private set; }
 
@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC.Packet.ZDO
             {
                 bytes[i] = framedata[9 - i];
             }
-            IeeeAddr = new ZigbeeAddress64(bytes);
+            IeeeAddr = new ZigBeeAddress64(bytes);
             NwkAddr = new ZigbeeAddress16(framedata[11], framedata[10]);
 
             BuildPacket(CommandType.ZDO_TC_DEVICE_IND, framedata);

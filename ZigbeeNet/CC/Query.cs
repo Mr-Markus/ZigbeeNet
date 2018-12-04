@@ -15,9 +15,9 @@ namespace ZigbeeNet.CC
             _znp = znp;
         }
 
-        public void GetDevice(ZigbeeAddress16 nwkAddr, ZigbeeAddress64 ieeeAddr, Action<ZigbeeNode> callback)
+        public void GetDevice(ZigbeeAddress16 nwkAddr, ZigBeeAddress64 ieeeAddr, Action<ZigBeeNode> callback)
         {
-            ZigbeeNode device = new ZigbeeNode()
+            ZigBeeNode device = new ZigBeeNode()
             {
                 NwkAdress = nwkAddr,
                 IeeeAddress = ieeeAddr
@@ -65,7 +65,7 @@ namespace ZigbeeNet.CC
             //nodeDesc.RequestAsync(_znp);
         }
 
-        public void GetEndpoint(ZigbeeNode device, byte endpointId, ushort nwkAddr, Action<ZigbeeEndpoint> callback)
+        public void GetEndpoint(ZigBeeNode device, byte endpointId, ushort nwkAddr, Action<ZigBeeEndpoint> callback)
         {
             //Endpoint endpoint = new Endpoint(device)
             //{

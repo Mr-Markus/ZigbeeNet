@@ -11,14 +11,14 @@ using ZigbeeNet.ZDO;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeNetworkManager : IZigbeeNetwork, IZigBeeTransportReceive
+    public class ZigBeeNetworkManager : IZigbeeNetwork, IZigBeeTransportReceive
     {
-        private readonly ILog _logger = LogProvider.For<ZigbeeNetworkManager>();
+        private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
         
         /// <summary>
         /// The nodes in the ZigBee network
         /// </summary>
-        private Dictionary<ZigbeeAddress64, ZigbeeNode> _networkNodes = new Dictionary<ZigbeeAddress64, ZigbeeNode>();
+        private Dictionary<ZigBeeAddress64, ZigBeeNode> _networkNodes = new Dictionary<ZigBeeAddress64, ZigBeeNode>();
 
         /// <summary>
         /// The groups in the ZigBee network.
@@ -118,7 +118,7 @@ namespace ZigbeeNet
         /// Sets the ZigBee RF channel. The allowable channel range is 11 to 26 for 2.4GHz, however the transport
         /// implementation may allow any value it supports.
         /// </summary>
-        public ZigbeeChannel Channel
+        public ZigBeeChannel Channel
         {
             get
             {
@@ -133,7 +133,7 @@ namespace ZigbeeNet
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
         /// </summary>
-        public ZigbeeAddress16 PanId
+        public ZigBeeAddress16 PanId
         {
             get
             {
@@ -148,7 +148,7 @@ namespace ZigbeeNet
         /// <summary>
         /// Get or set the ZigBee Extended PAN ID to the specified value
         /// </summary>
-        public ZigbeeAddress64 ExtendedPanId
+        public ZigBeeAddress64 ExtendedPanId
         {
             get
             {
@@ -163,7 +163,7 @@ namespace ZigbeeNet
         /// <summary>
         /// Get or set the current network key in use by the system.
         /// </summary>
-        public ZigbeeKey ZigbeeNetworkKey
+        public ZigBeeKey ZigbeeNetworkKey
         {
             get
             {
@@ -178,7 +178,7 @@ namespace ZigbeeNet
         /// <summary>
         /// Get or set the current link key in use by the system.
         /// </summary>
-        public ZigbeeKey ZigbeeLinkKey
+        public ZigBeeKey ZigbeeLinkKey
         {
             get
             {
@@ -196,23 +196,23 @@ namespace ZigbeeNet
         /// <param name="reinitialize">true if the provider is to reinitialise the network with the parameters configured since the
         /// initialize} method was called.</param>
         /// <returns>ZigBeeStatus with the status of function</returns>
-        public ZigbeeStatus Startup(bool reinitialize)
+        public ZigBeeStatus Startup(bool reinitialize)
         {
-            ZigbeeStatus status = _transport.Startup(reinitialize);
+            ZigBeeStatus status = _transport.Startup(reinitialize);
 
-            if(status != ZigbeeStatus.SUCCESS)
+            if(status != ZigBeeStatus.SUCCESS)
             {
                 SetNetworkState(ZigBeeTransportState.OFFLINE);
                 return status;
             }
             
             SetNetworkState(ZigBeeTransportState.ONLINE);
-            return ZigbeeStatus.SUCCESS;
+            return ZigBeeStatus.SUCCESS;
         }
 
         public void Shutdown()
         {
-            foreach (ZigbeeNode node in _networkNodes.Values)
+            foreach (ZigBeeNode node in _networkNodes.Values)
             {
                 node.Shutdown();
             }
@@ -228,9 +228,9 @@ namespace ZigbeeNet
             _transport.Shutdown();
         }
 
-        public byte SendCommand(ZigbeeCommand command)
+        public byte SendCommand(ZigBeeCommand command)
         {
-            ZigbeeApsFrame apsFrame = new ZigbeeApsFrame();
+            ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
 
             if(command.TransactionId == null)
             {
@@ -252,10 +252,11 @@ namespace ZigbeeNet
             if(command.DestinationAddress is ZigBeeEndpointAddress epAddr)
             {
                 apsFrame.AddressMode = ZigBeeNwkAddressMode.Device;
-                apsFrame.DestinationAddress = epAddr.Address;
-                apsFrame.DestinationEndpoint = epAddr.Endpoint;
+                apsFrame.DestinationAddress = (ushort)epAddr.Address;
+                apsFrame.DestinationEndpoint = (byte)epAddr.Endpoint;
 
-                ZigbeeNode node = GetNode(epAddr.Address);
+                ZigBeeNode node = GetNode((ushort)epAddr.Address);
+
                 if(node != null)
                 {
                     apsFrame.DestinationIeeeAddress = node.IeeeAddress;
@@ -284,7 +285,7 @@ namespace ZigbeeNet
                 apsFrame.Profile = 0x104;
 
                 ZclHeader zclHeader = new ZclHeader();
-                zclHeader.FrameType = zclCommand.GenericCommand ? ZclFrameType.ENTIRE_PROFILE_COMMAND : ZclFrameType.CLUSTER_SPECIFIC_COMMAND;
+                zclHeader.FrameType = zclCommand.IsGenericCommand ? ZclFrameType.ENTIRE_PROFILE_COMMAND : ZclFrameType.CLUSTER_SPECIFIC_COMMAND;
                 zclHeader.Direction = zclCommand.Direction;
                 zclHeader.CommandId = zclCommand.CommandId;
                 zclHeader.SequenceNumber = command.TransactionId;
@@ -313,14 +314,14 @@ namespace ZigbeeNet
             _commandNotifier.RemoveCommandListener(commandListener);
         }
 
-        public void SendTransaction(ZigbeeCommand command)
+        public void SendTransaction(ZigBeeCommand command)
         {
             throw new NotImplementedException();
         }
 
-        private ZigbeeNode GetNode(ushort networkAddress)
+        private ZigBeeNode GetNode(ushort networkAddress)
         {
-            foreach (ZigbeeNode node in _networkNodes.Values)
+            foreach (ZigBeeNode node in _networkNodes.Values)
             {
                 if (node.NwkAdress.Value == networkAddress)
                     return node;
@@ -329,13 +330,13 @@ namespace ZigbeeNet
             return null;
         }
 
-        public void ReceiveCommand(ZigbeeApsFrame apsFrame)
+        public void ReceiveCommand(ZigBeeApsFrame apsFrame)
         {
             _logger.Debug($"RX APS: {apsFrame}");
 
             ZclFieldDeserializer fieldDeserializer = new ZclFieldDeserializer(Deserializer);
 
-            ZigbeeCommand command = null;
+            ZigBeeCommand command = null;
             switch (apsFrame.Profile)
             {
                 case 0x0000:
@@ -365,7 +366,7 @@ namespace ZigbeeNet
             _commandNotifier.NotifyCommandListeners(command);
         }
 
-        private ZigbeeCommand ReceiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigbeeApsFrame apsFrame)
+        private ZigBeeCommand ReceiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
             //TODO: Add CommandType
             //ZdoCommandType commandType = null;
@@ -375,14 +376,14 @@ namespace ZigbeeNet
             //    return null;
             //}
 
-            ZigbeeCommand command = null;
+            ZigBeeCommand command = null;
 
             command.Deserialize(fieldDeserializer);
 
             return command;
         }
 
-        private ZigbeeCommand ReceiveZclCommand(ZclFieldDeserializer fieldDeserializer, ZigbeeApsFrame apsFrame)
+        private ZigBeeCommand ReceiveZclCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
             ZclHeader zclHeader = new ZclHeader(fieldDeserializer);
 
@@ -424,7 +425,7 @@ namespace ZigbeeNet
             throw new NotImplementedException();
         }
 
-        public void NodeStatusUpdate(ZigbeeNodeStatus deviceStatus, ushort networkAddress, ulong ieeeAddress)
+        public void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, ulong ieeeAddress)
         {
             throw new NotImplementedException();
         }

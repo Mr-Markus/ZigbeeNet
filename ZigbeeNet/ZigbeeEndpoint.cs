@@ -1,42 +1,449 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.App;
+using ZigbeeNet.DAO;
 using ZigbeeNet.ZCL;
+using ZigbeeNet.ZCL.Clusters.General;
+using ZigbeeNet.ZCL.Protocol;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeEndpoint
+    public class ZigBeeEndpoint
     {
-        public byte Id { get; set; }
+        //private final Logger logger = LoggerFactory.getLogger(ZigBeeEndpoint.class);
 
-        public ZigbeeProfileType ProfileId { get; set; }
+        /**
+         * The {@link ZigBeeNetworkManager} that manages this endpoint
+         */
+        private readonly ZigBeeNetworkManager _networkManager;
 
-        public ZigbeeNode Node { get; set; }
+        /**
+         * Link to the parent {@link ZigBeeNode} to which this endpoint belongs
+         */
+        public ZigBeeNode Node { get; private set; }
 
-        public List<ZclClusterId> InClusters { get; set; }
+        /**
+         * The endpoint number for this endpoint. Applications shall only use endpoints 1-254. Endpoints 241-254 shall be
+         * used only with the approval of the ZigBee Alliance.
+         */
+        public int EndpointId { get; private set; }
 
-        public List<ZclClusterId> OutClusters { get; set; }
+        /**
+         * The profile ID.
+         */
+        public int ProfileId { get; set; }
 
-        public List<ZclClusterId> ClusterList
+        /**
+         * The device ID. Specifies the device description supported on this endpoint. Device description identifiers shall
+         * be obtained from the ZigBee Alliance.
+         */
+        public int DeviceId { get; private set; }
+
+        /**
+         * The device version.
+         */
+        public int DeviceVersion { get; private set; }
+
+        /**
+         * List of input clusters supported by the endpoint
+         */
+        private readonly ConcurrentDictionary<int, ZclCluster> _inputClusters = new ConcurrentDictionary<int, ZclCluster>();
+
+        /**
+         * List of output clusters supported by the endpoint
+         */
+        private readonly ConcurrentDictionary<int, ZclCluster> _outputClusters = new ConcurrentDictionary<int, ZclCluster>();
+
+        /**
+         * Map of {@link ZigBeeApplication}s that are available to this endpoint. Applications are added
+         * with the {@link #addApplication(ZigBeeApplication application)} method and can be retrieved with the
+         * {@link #getApplication(int clusterId)} method.
+         */
+        private readonly ConcurrentDictionary<int, IZigBeeApplication> _applications = new ConcurrentDictionary<int, IZigBeeApplication>();
+
+        /**
+         * Constructor
+         *
+         * @param networkManager the {@link ZigBeeNetworkManager} to which the endpoint belongs
+         * @param node the parent {@link ZigBeeNode}
+         * @param endpoint the endpoint number within the {@link ZigBeeNode}
+         */
+        public ZigBeeEndpoint(ZigBeeNetworkManager networkManager, ZigBeeNode node, int endpoint)
         {
-            get
+            this._networkManager = networkManager;
+            this.Node = node;
+            this.EndpointId = endpoint;
+        }
+
+
+        /**
+         * Gets input cluster IDs. This lists the IDs of all clusters the device
+         * supports as a server.
+         *
+         * @return the {@link Collection} of input cluster IDs
+         */
+        public IEnumerable<int> GetInputClusterIds()
+        {
+            return _inputClusters.Keys;
+        }
+
+        /**
+         * Gets an input cluster
+         *
+         * @deprecated Use {@link #getInputCluster}
+         * @param clusterId
+         *            the cluster number
+         * @return the cluster or null if cluster is not found
+         */
+
+        /**
+         * Gets an input cluster
+         *
+         * @param clusterId the cluster number
+         * @return the {@link ZclCluster} or null if cluster is not found
+         */
+        public ZclCluster GetInputCluster(int clusterId)
+        {
+            _inputClusters.TryGetValue(clusterId, out ZclCluster cluster);
+            return cluster;
+        }
+
+        /**
+         * Gets an output cluster
+         *
+         * @param clusterId the cluster number
+         * @return the {@link ZclCluster} or null if cluster is not found
+         */
+        public ZclCluster GetOutputCluster(int clusterId)
+        {
+            _outputClusters.TryGetValue(clusterId, out ZclCluster cluster);
+            return cluster;
+        }
+
+        /**
+         * Sets input cluster IDs.
+         *
+         * @param inputClusterIds
+         *            the input cluster IDs
+         */
+        public void SetInputClusterIds(List<int> inputClusterIds)
+        {
+            this._inputClusters.Clear();
+
+            //logger.debug("{}: Setting input clusters {}", getEndpointAddress(), inputClusterIds);
+
+            UpdateClusters(_inputClusters, inputClusterIds, true);
+        }
+
+        /**
+         * Gets the {@link IeeeAddress} for this endpoint from it's parent {@link ZigBeeNode}
+         *
+         * @return the node {@link IeeeAddress}
+         */
+        public ZigBeeAddress64 GetIeeeAddress()
+        {
+            return Node.IeeeAddress;
+        }
+
+        /**
+         * Gets the endpoint address
+         *
+         * @return the {@link ZigBeeEndpointAddress}
+         */
+        public ZigBeeEndpointAddress GetEndpointAddress()
+        {
+            return new ZigBeeEndpointAddress(Node.NwkAdress.Value, EndpointId);
+        }
+
+        /**
+         * Gets output cluster IDs. This provides the IDs of all clusters the endpoint
+         * supports as a client.
+         *
+         * @return the {@link Collection} of output cluster IDs
+         */
+        public IEnumerable<int> GetOutputClusterIds()
+        {
+            return _outputClusters.Keys;
+        }
+
+        /**
+         * Sets output cluster IDs.
+         *
+         * @param outputClusterIds
+         *            the output cluster IDs
+         */
+        public void SetOutputClusterIds(List<int> outputClusterIds)
+        {
+            this._outputClusters.Clear();
+
+            //logger.debug("{}: Setting output clusters {}", getEndpointAddress(), outputClusterIds);
+
+            UpdateClusters(_outputClusters, outputClusterIds, false);
+        }
+
+        /**
+         * Gets a cluster from the input or output cluster list depending on the command {@link ZclCommandDirection} for a
+         * received command.
+         * <p>
+         * If commandDirection is {@link ZclCommandDirection#CLIENT_TO_SERVER} then the cluster comes from the output
+         * cluster list.
+         * If commandDirection is {@link ZclCommandDirection#SERVER_TO_CLIENT} then the cluster comes from the input
+         * cluster list.
+         *
+         * @param clusterId the cluster ID to get
+         * @param direction the {@link ZclCommandDirection}
+         * @return the {@link ZclCluster} or null if the cluster is not known
+         */
+        private ZclCluster GetReceiveCluster(int clusterId, ZclCommandDirection direction)
+        {
+            if (direction == ZclCommandDirection.ClientToServer)
             {
-                List<ZclClusterId> clusterList = new List<ZclClusterId>();
-
-                clusterList.AddRange(InClusters);
-                clusterList.AddRange(OutClusters);
-
-                clusterList.Sort();
-
-                return clusterList;
+                return GetOutputCluster(clusterId);
+            }
+            else
+            {
+                return GetInputCluster(clusterId);
             }
         }
 
-        public ZigbeeEndpoint(ZigbeeNode node = null)
+        private ZclCluster GetClusterClass(int clusterId)
         {
-            Node = node;
-            InClusters = new List<ZclClusterId>();
-            OutClusters = new List<ZclClusterId>();
+            ZclClusterType clusterType = ZclClusterType.GetValueById(clusterId);
+            if (clusterType == null)
+            {
+                // Unsupported cluster
+                //logger.debug("{}: Unsupported cluster {}", getEndpointAddress(), clusterId);
+                return null;
+            }
+
+            // Create a cluster class
+            ZclCluster cluster = null;
+
+            //    Constructor <? extends ZclCluster > constructor;
+            //    // try {
+            //    try
+            //    {
+            //        constructor = clusterType.getClusterClass().getConstructor(ZigBeeNetworkManager.class,
+            //            ZigBeeEndpoint.class);
+            //    cluster = constructor.newInstance(networkManager, this);
+            //} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+            //        | IllegalArgumentException | InvocationTargetException e) {
+            //    logger.debug("{}: Error instantiating cluster {}", getEndpointAddress(), clusterType);
+            //    return null;
+            //}
+
+            return cluster;
+        }
+
+        private void UpdateClusters(ConcurrentDictionary<int, ZclCluster> clusters, List<int> newList, bool isInput)
+        {
+            // Get a list any clusters that are no longer in the list
+            List<int> removeIds = new List<int>();
+
+            foreach (ZclCluster cluster in clusters.Values)
+            {
+                if (newList.Contains(cluster.GetClusterId()))
+                {
+                    // The existing cluster is in the new list, so no need to remove it
+                    continue;
+                }
+
+                removeIds.Add(cluster.GetClusterId());
+            }
+
+            // Remove clusters no longer in use
+            foreach (int id in removeIds)
+            {
+                //logger.debug("{}: Removing cluster {}", getEndpointAddress(), id);
+                clusters.TryRemove(id, out ZclCluster not_used);
+            }
+
+            // Add any missing clusters into the list
+            foreach (int id in newList)
+            {
+                if (!clusters.ContainsKey(id))
+                {
+                    // Get the cluster type
+                    ZclCluster clusterClass = GetClusterClass(id);
+                    if (clusterClass == null)
+                    {
+                        continue;
+                    }
+
+                    if (isInput)
+                    {
+                        //logger.debug("{}: Setting cluster {} as server", getEndpointAddress(),
+                        ZclClusterType.GetValueById(id);
+                        clusterClass.SetServer();
+                    }
+                    else
+                    {
+                        //logger.debug("{}: Setting cluster {} as client", getEndpointAddress(),
+                        ZclClusterType.GetValueById(id);
+                        clusterClass.SetClient();
+                    }
+
+                    // Add to our list of clusters
+                    clusters.TryAdd(id, clusterClass);
+                }
+            }
+        }
+
+
+        /**
+         * Adds an application and makes it available to this endpoint.
+         * The cluster used by the server must be in the output clusters list and this will be passed to the
+         * {@link ZclApplication#serverStartup()) method to start the application.
+         *
+         * @param application the new {@link ZigBeeApplication}
+         */
+        public void AddApplication(IZigBeeApplication application)
+        {
+            _applications.TryAdd(application.GetClusterId(), application);
+            _outputClusters.TryGetValue(application.GetClusterId(), out ZclCluster cluster);
+
+            if (cluster == null)
+            {
+                _inputClusters.TryGetValue(application.GetClusterId(), out cluster);
+            }
+
+            application.AppStartup(cluster);
+        }
+
+        /**
+         * Gets the application associated with the clusterId. Returns null if there is no server linked to the requested
+         * cluster
+         *
+         * @param clusterId
+         * @return the {@link ZigBeeApplication}
+         */
+        public IZigBeeApplication GetApplication(int clusterId)
+        {
+            _applications.TryGetValue(clusterId, out IZigBeeApplication app);
+
+            return app;
+        }
+
+        /**
+         * Incoming command handler. The endpoint will process any commands addressed to this endpoint ID and pass o
+         * clusters and applications
+         *
+         * @param command the {@link ZclCommand} received
+         */
+        public void CommandReceived(ZclCommand command)
+        {
+            if (!command.SourceAddress.Equals(GetEndpointAddress()))
+            {
+                return;
+            }
+
+            // Pass all commands received from this endpoint to any registered applications
+            lock (_applications)
+            {
+                foreach (IZigBeeApplication application in _applications.Values)
+                {
+                    application.CommandReceived(command);
+                }
+            }
+
+            // Get the cluster
+            ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.Direction);
+            if (cluster == null)
+            {
+                //logger.debug("{}: Cluster {} not found for attribute response", GetEndpointAddress(), command.getClusterId());
+                return;
+            }
+
+            if (command is ReportAttributesCommand reportAttributesCommand)
+            {
+                // Pass the reports to the cluster
+                cluster.HandleAttributeReport(reportAttributesCommand.Reports);
+                return;
+            }
+
+            if (command is ReadAttributesResponse readAttributesResponse)
+            {
+                // Pass the reports to the cluster
+                cluster.HandleAttributeStatus(readAttributesResponse.Records);
+                return;
+            }
+
+            // If this is a specific cluster command, pass the command to the cluster command handler
+            if (!command.IsGenericCommand)
+            {
+                cluster.HandleCommand(command);
+            }
+        }
+
+        /**
+         * Gets a {@link ZigBeeEndpointDao} used for serialisation of the {@link ZigBeeEndpoint}
+         *
+         * @return the {@link ZigBeeEndpointDao}
+         */
+        public ZigBeeEndpointDao GetDao()
+        {
+            ZigBeeEndpointDao dao = new ZigBeeEndpointDao();
+
+            dao.EndpointId = EndpointId;
+            dao.ProfileId = ProfileId;
+
+            List<ZclClusterDao> clusters;
+
+            clusters = new List<ZclClusterDao>();
+            foreach (ZclCluster cluster in _inputClusters.Values)
+            {
+                clusters.Add(cluster.getDao());
+            }
+
+            dao.SetInputClusters(clusters);
+
+            clusters = new List<ZclClusterDao>();
+            foreach (ZclCluster cluster in _outputClusters.Values)
+            {
+                clusters.Add(cluster.getDao());
+            }
+            dao.SetOutputClusters(clusters);
+
+            return dao;
+        }
+
+        public void SetDao(ZigBeeEndpointDao dao)
+        {
+            EndpointId = dao.EndpointId;
+            //if (dao.ProfileId != null)
+            //{
+            ProfileId = dao.ProfileId;
+            //}
+
+            if (dao.InputClusterIds != null)
+            {
+                foreach (ZclClusterDao clusterDao in dao.InputClusters)
+                {
+                    ZclCluster cluster = GetClusterClass(clusterDao.ClusterId);
+                    cluster.SetDao(clusterDao);
+                    _inputClusters.TryAdd(clusterDao.ClusterId, cluster);
+                }
+            }
+
+            if (dao.OutputClusterIds != null)
+            {
+                foreach (ZclClusterDao clusterDao in dao.OutputClusters)
+                {
+                    ZclCluster cluster = GetClusterClass(clusterDao.ClusterId);
+                    cluster.SetDao(clusterDao);
+                    _outputClusters.TryAdd(clusterDao.ClusterId, cluster);
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            return "ZigBeeEndpoint [networkAddress=" + GetEndpointAddress().ToString() + ", profileId="
+                    + string.Format("{0}4X", ProfileId) + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion
+                    + ", inputClusterIds=" + string.Join(",", GetInputClusterIds()) + ", outputClusterIds="
+                    + string.Join(",", GetOutputClusterIds())+ "]";
         }
     }
 }

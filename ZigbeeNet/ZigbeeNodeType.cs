@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public enum ZigbeeNodeType : byte
+    public enum ZigBeeNodeType : byte
     {
         ZigBeeCoordinator = 0x00,
         ZigBeeRouter = 0x01,

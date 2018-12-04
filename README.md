@@ -4,7 +4,7 @@ ZigbeeNET is a implementation of the Zigbee 3.0 Cluster Library for .NET Standar
 
 With ZigbeeNet you can develop your own .NET application which communicates with zigbee devices.
 
-This project is inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and some ideas were adopted.
+This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and many ideas were adopted (almost a java -> c# port).
 
 ## What is Zigbee?
 
