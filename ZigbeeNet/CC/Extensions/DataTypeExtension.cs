@@ -14,6 +14,14 @@ namespace ZigbeeNet.CC.Extensions
             return BitConverter.GetBytes(value)[index];
         }
 
+        public static byte GetByte(this int value, int index)
+        {
+            if (index < 0 || index > 1)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return BitConverter.GetBytes(value)[index];
+        }
+
         public static byte[] GetBytes(this ushort value)
         {
             return BitConverter.GetBytes(value);

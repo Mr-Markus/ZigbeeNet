@@ -53,8 +53,8 @@ namespace ZigbeeNet.CC.Packet
             {
                 case CommandType.SYS_RESET_RESPONSE:
                     return new SYS_RESET_RESPONSE(payload);
-                //case CommandType.SYS_VERSION_RESPONSE:
-                //    return new SYS_VERSION_RESPONSE(payload);
+                case CommandType.SYS_VERSION_RESPONSE:
+                    return new SYS_VERSION_RESPONSE(payload);
                 //case CommandType.SYS_PING_RESPONSE:
                 //    return new SYS_PING_RESPONSE(payload);
                 //case CommandType.SYS_RPC_ERROR:
@@ -184,8 +184,8 @@ namespace ZigbeeNet.CC.Packet
                     return new ZDO_STATE_CHANGE_IND(payload);
                 case CommandType.ZDO_STATUS_ERROR_RSP:
                     return new ZDO_STATUS_ERROR_RSP(payload);
-                //case CommandType.ZDO_MSG_CB_REGISTER_SRSP:
-                //    return new ZDO_MSG_CB_REGISTER_SRSP(payload);
+                case CommandType.ZDO_MSG_CB_REGISTER_SRSP:
+                    return new ZDO_MSG_CB_REGISTER_SRSP(payload);
                 //case CommandType.ZDO_STARTUP_FROM_APP_SRSP:
                 //    return new ZDO_STARTUP_FROM_APP_SRSP(payload);
                 //case CommandType.UTIL_SET_PANID_RESPONSE:

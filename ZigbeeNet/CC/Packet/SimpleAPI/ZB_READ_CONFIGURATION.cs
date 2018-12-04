@@ -12,9 +12,9 @@ namespace ZigbeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Specifies the Identifier for the configuration property
         /// </summary>
-        public CONFIG_ID ConfigId { get; private set; }
+        public ZB_WRITE_CONFIGURATION.CONFIG_ID ConfigId { get; private set; }
 
-        public ZB_READ_CONFIGURATION(CONFIG_ID configId)
+        public ZB_READ_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID configId)
         {
             ConfigId = configId;
 
