@@ -11,13 +11,13 @@ namespace ZigbeeNet.Transport
         /// configure the transport layer.
         /// 
         /// During the initialize() method, the provider must initialize the ports and perform any configuration required to
-        /// get the stack ready for use. If the dongle has already joined a network, then this method will return ZigbeeStatus.SUCESS
+        /// get the stack ready for use. If the dongle has already joined a network, then this method will return ZigBeeStatus.SUCESS
         /// 
         /// At the completion of the initialize method, the IeeeAddress must return the valid address
         /// for the coordinator.
         /// </summary>
         /// <returns></returns>
-        ZigbeeStatus Initialize();
+        ZigBeeStatus Initialize();
 
         /// <summary>
         /// Starts the transport interface.
@@ -26,7 +26,7 @@ namespace ZigbeeNet.Transport
         /// </summary>
         /// <param name="reinitialize"></param>
         /// <returns>true if startup was success</returns>
-        ZigbeeStatus Startup(bool reinitialize);
+        ZigBeeStatus Startup(bool reinitialize);
 
         /// <summary>
         /// Shuts down a transport interface.
@@ -46,7 +46,7 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// Gets the current ZigBee RF channel
         /// </summary>
-        ZigbeeChannel ZigbeeChannel { get; set; }
+        ZigBeeChannel ZigBeeChannel { get; set; }
 
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
@@ -61,12 +61,12 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// The ZigBee network security key
         /// </summary>
-        ZigbeeKey ZigbeeNetworkKey { get; set; }
+        ZigBeeKey ZigbeeNetworkKey { get; set; }
 
         /// <summary>
         /// The Trust Center link security key
         /// </summary>
-        ZigbeeKey TcLinkKey { get; set; }
+        ZigBeeKey TcLinkKey { get; set; }
 
         ///  <summary>
         /// Sends ZigBee Cluster Library command without waiting for response. Responses are provided to the framework
@@ -80,7 +80,7 @@ namespace ZigbeeNet.Transport
         /// is serialised by the framework using the {@link ZigBeeSerializer} interface, thus allowing the format to be set
         /// for different hardware implementations.
         /// </summary>
-        void SendCommand(ZigbeeApsFrame apsFrame);
+        void SendCommand(ZigBeeApsFrame apsFrame);
 
         /// <summary>
         /// * Sets the transport configuration.

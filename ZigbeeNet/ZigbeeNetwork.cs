@@ -29,7 +29,7 @@ namespace ZigbeeNet
         /// <summary>
         /// The Status of the Network. It can be offline or online
         /// </summary>
-        public ZigbeeNodeStatus Status { get; set; }
+        public ZigBeeNodeStatus Status { get; set; }
         
         public byte Channel { get; set; }
 

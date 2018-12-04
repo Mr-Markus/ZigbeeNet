@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ZigbeeNet.ZCL
 {
-    public abstract class ZclCommand : ZigbeeCommand
+    public abstract class ZclCommand : ZigBeeCommand
     {
         public bool GenericCommand { get; set; }
 

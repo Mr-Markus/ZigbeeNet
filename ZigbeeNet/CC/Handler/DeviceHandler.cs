@@ -25,7 +25,7 @@ namespace ZigbeeNet.CC.Handler
         {
             if (asynchronousRequest is ZDO_END_DEVICE_ANNCE_IND endDevInd)
             {
-                ZigbeeNode device = new ZigbeeNode();
+                ZigBeeNode device = new ZigBeeNode();
                 device.NwkAdress = endDevInd.NwkAddr;
                 device.IeeeAddress = endDevInd.IEEEAddr;
 

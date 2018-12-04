@@ -14,9 +14,9 @@ namespace ZigbeeNet
     public interface IHardwareChannel
     {
         event EventHandler Started;
-        event EventHandler<ZigbeeNode> NewDevice;
+        event EventHandler<ZigBeeNode> NewDevice;
         event EventHandler<ZigbeeEndpoint> NewEndpoint;
-        event EventHandler<ZigbeeNode> DeviceInfoChanged;
+        event EventHandler<ZigBeeNode> DeviceInfoChanged;
 
         void Start();
         void Stop();

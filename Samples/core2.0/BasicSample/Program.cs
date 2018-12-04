@@ -9,11 +9,11 @@ namespace BasicSample
     class Program
     {
         private static ZigbeeService _service;
-        private static List<ZigbeeNode> _nodes;
+        private static List<ZigBeeNode> _nodes;
 
         static void Main(string[] args)
         {
-            _nodes = new List<ZigbeeNode>();
+            _nodes = new List<ZigBeeNode>();
 
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
@@ -39,13 +39,13 @@ namespace BasicSample
         {
             if (sender is ZigbeeAddress16 nwkDst)
             {
-                ZigbeeNode node = _nodes.Single(n => n.NwkAdress.Equals(nwkDst));
+                ZigBeeNode node = _nodes.Single(n => n.NwkAdress.Equals(nwkDst));
 
                 node.Endpoints.Add(e);
             }
         }
 
-        private static void Controller_NewDevice(object sender, ZigbeeNode e)
+        private static void Controller_NewDevice(object sender, ZigBeeNode e)
         {
             if(_nodes.Exists(n => n.IeeeAddress == e.IeeeAddress) == false)
             {

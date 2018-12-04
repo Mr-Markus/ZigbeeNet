@@ -11,7 +11,7 @@ namespace ZigbeeNet
 
         public ZigbeeProfileType ProfileId { get; set; }
 
-        public ZigbeeNode Node { get; set; }
+        public ZigBeeNode Node { get; set; }
 
         public List<ZclClusterId> InClusters { get; set; }
 
@@ -32,7 +32,7 @@ namespace ZigbeeNet
             }
         }
 
-        public ZigbeeEndpoint(ZigbeeNode node = null)
+        public ZigbeeEndpoint(ZigBeeNode node = null)
         {
             Node = node;
             InClusters = new List<ZclClusterId>();

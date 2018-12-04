@@ -11,7 +11,7 @@ namespace ZigbeeNet
     /// 
     /// Maybe it could be implemented in Zigbee library as common object???
     /// </summary>
-    public class ZigbeeNode
+    public class ZigBeeNode
     {
         public ushort Id { get; set; }
 
@@ -29,7 +29,7 @@ namespace ZigbeeNet
 
         public string ModelId { get; set; }
 
-        public ZigbeeNodeStatus Status { get; set; }
+        public ZigBeeNodeStatus Status { get; set; }
 
         public ZigbeeNodeState DeviceEnabled { get; set; }
 
@@ -37,11 +37,11 @@ namespace ZigbeeNet
 
         public List<ZigbeeEndpoint> Endpoints { get; set; }
 
-        public ZigbeeNode()
+        public ZigBeeNode()
         {
             Endpoints = new List<ZigbeeEndpoint>();
 
-            Status = ZigbeeNodeStatus.Offline;
+            Status = ZigBeeNodeStatus.Offline;
         }
 
         public void Shutdown()
@@ -51,7 +51,7 @@ namespace ZigbeeNet
 
         public override bool Equals(object obj)
         {
-            if(obj is ZigbeeNode node)
+            if(obj is ZigBeeNode node)
             {
                 if(NwkAdress != null && node.NwkAdress != null)
                 {

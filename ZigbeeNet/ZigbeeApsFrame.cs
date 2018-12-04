@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeApsFrame
+    public class ZigBeeApsFrame
     {
         /// <summary>
         /// The type of destination address supplied by the DstAddr parameter

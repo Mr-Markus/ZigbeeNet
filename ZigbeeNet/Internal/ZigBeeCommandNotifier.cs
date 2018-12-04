@@ -7,9 +7,9 @@ namespace ZigbeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
-        public List<IZigbeeCommandListener> CommandListeners { get; set; }
+        public List<IZigBeeCommandListener> CommandListeners { get; set; }
 
-        public void AddCommandListener(IZigbeeCommandListener commandListener)
+        public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
             lock (CommandListeners)
             {
@@ -17,7 +17,7 @@ namespace ZigbeeNet.Internal
             }
         }
 
-        public void RemoveCommandListener(IZigbeeCommandListener commandListener)
+        public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
             lock (CommandListeners)
             {
@@ -25,9 +25,9 @@ namespace ZigbeeNet.Internal
             }
         }
 
-        public void NotifyCommandListeners(ZigbeeCommand command)
+        public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            foreach (IZigbeeCommandListener commandListener in CommandListeners)
+            foreach (IZigBeeCommandListener commandListener in CommandListeners)
             {
                 Task.Run(() => commandListener.CommandReceived(command));
             }

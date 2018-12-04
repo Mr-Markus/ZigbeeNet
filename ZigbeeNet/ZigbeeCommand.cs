@@ -5,7 +5,7 @@ using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet
 {
-    public class ZigbeeCommand
+    public class ZigBeeCommand
     {
         public ZigbeeAddress SourceAddress { get; set; }
 

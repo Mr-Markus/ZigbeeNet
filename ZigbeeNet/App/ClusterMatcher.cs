@@ -6,7 +6,7 @@ using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.App
 {
-    public class ClusterMatcher : IZigbeeCommandListener
+    public class ClusterMatcher : IZigBeeCommandListener
     {
         private readonly ILog _logger = LogProvider.For<ClusterMatcher>();
 
@@ -28,7 +28,7 @@ namespace ZigbeeNet.App
             _clusters.Add(cluster);
         }
 
-        public void CommandReceived(ZigbeeCommand command)
+        public void CommandReceived(ZigBeeCommand command)
         {
             throw new NotImplementedException();
         }

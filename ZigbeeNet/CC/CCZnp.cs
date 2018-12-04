@@ -37,14 +37,14 @@ namespace ZigbeeNet.CC
         private BlockingCollection<SynchronousResponse> _responseQueue;
 
         public ZigbeeNetwork Network { get; set; }
-        public ZigbeeNode Coordinator { get; private set; }
+        public ZigBeeNode Coordinator { get; private set; }
 
         public int MaxRetryCount => 3;
         
         public event EventHandler Started;
-        public event EventHandler<ZigbeeNode> NewDevice;
+        public event EventHandler<ZigBeeNode> NewDevice;
         public event EventHandler<ZigbeeEndpoint> NewEndpoint;
-        public event EventHandler<ZigbeeNode> DeviceInfoChanged;
+        public event EventHandler<ZigBeeNode> DeviceInfoChanged;
 
         public CCZnp(Options options)
         {
@@ -203,11 +203,11 @@ namespace ZigbeeNet.CC
 
             _logger.Info("Network started: {@Network}", Network);
 
-            Coordinator = new ZigbeeNode()
+            Coordinator = new ZigBeeNode()
             {
                 IeeeAddress = Network.IeeeAddress,
                 NwkAdress = Network.NetworkAddress,
-                Status = ZigbeeNodeStatus.Online,
+                Status = ZigBeeNodeStatus.Online,
                 DeviceEnabled = ZigbeeNodeState.Enabled,
                 JoinTime = DateTime.Now,
                 PowerSource = PowerSource.DCSource
@@ -222,7 +222,7 @@ namespace ZigbeeNet.CC
             Started?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void OnNewDevice(ZigbeeNode device)
+        internal void OnNewDevice(ZigBeeNode device)
         {
             _logger.Info("New Device! NwkAddr: {NwkAddr}, IeeeAddr: {ieeeAddr}", device.NwkAdress, device.IeeeAddress);
 
@@ -364,7 +364,7 @@ namespace ZigbeeNet.CC
             });
         }    
 
-        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigbeeNode node, byte endpointId, ZigbeeProfileType profileId)
+        public async Task<ZigbeeEndpoint> CreateEndpoint(ZigBeeNode node, byte endpointId, ZigbeeProfileType profileId)
         {
             AF_REGISTER register = new AF_REGISTER(endpointId, new DoubleByte((ushort)profileId), new DoubleByte(0), 0, new DoubleByte[0], new DoubleByte[0]);
             AF_REGISTER_SRSP result = await SendAsync<AF_REGISTER_SRSP>(register);

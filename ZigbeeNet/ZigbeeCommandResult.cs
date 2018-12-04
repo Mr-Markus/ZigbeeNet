@@ -6,9 +6,9 @@ namespace ZigbeeNet
 {
     public class ZigbeeCommandResult
     {
-        public ZigbeeCommand Response { get; set; }
+        public ZigBeeCommand Response { get; set; }
 
-        public ZigbeeCommandResult(ZigbeeCommand response)
+        public ZigbeeCommandResult(ZigBeeCommand response)
         {
             Response = response;
         }

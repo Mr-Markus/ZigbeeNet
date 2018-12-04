@@ -5,7 +5,7 @@ using ZigbeeNet.ZCL;
 
 namespace ZigbeeNet.ZDO
 {
-    public class ZdoCommand : ZigbeeCommand
+    public class ZdoCommand : ZigBeeCommand
     {
         public override void Serialize(ZclFieldSerializer serializer)
         {
