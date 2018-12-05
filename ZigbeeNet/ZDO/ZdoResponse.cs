@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZDO
+namespace ZigBeeNet.ZDO
 {
     public abstract class ZdoResponse : ZdoCommand
     {
@@ -15,7 +15,7 @@ namespace ZigbeeNet.ZDO
         /**
          * The response status.
          */
-        protected ZdoStatus Status { get; set; }
+        public ZdoStatus Status { get; set; }
 
         /**
          * Gets source address.
@@ -40,20 +40,20 @@ namespace ZigbeeNet.ZDO
          *
          * @return the response status
          */
-        public ZdoStatus GetStatus()
-        {
-            return Status;
-        }
+        //public ZdoStatus GetStatus()
+        //{
+        //    return Status;
+        //}
 
-        /**
-         * Sets the response status
-         *
-         * @param status the response status as {@link int}
-         */
-        public void SetStatus(ZdoStatus status)
-        {
-            this.Status = status;
-        }
+        ///**
+        // * Sets the response status
+        // *
+        // * @param status the response status as {@link int}
+        // */
+        //public void SetStatus(ZdoStatus status)
+        //{
+        //    this.Status = status;
+        //}
 
         // @Override
         // public String toString() {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
 
     public enum ProfileType

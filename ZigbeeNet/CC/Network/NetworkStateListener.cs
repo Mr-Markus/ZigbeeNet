@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.CC.Packet.ZDO;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet.ZDO;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     internal class NetworkStateListener : IAsynchronousCommandListener
     {

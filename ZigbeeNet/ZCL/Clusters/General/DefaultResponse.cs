@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZCL.Clusters.General
+namespace ZigBeeNet.ZCL.Clusters.General
 {
     public class DefaultResponse : ZclCommand
     {

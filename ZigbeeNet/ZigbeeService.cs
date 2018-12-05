@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ZigbeeNet.CC;
+using ZigBeeNet.CC;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class ZigBeeService : IDisposable
     {

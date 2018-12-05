@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.SimpleAPI
+namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
     /// <summary>
     /// This callback is called asynchronously by the ZigBee stack to notify the application when data is received from a peer device

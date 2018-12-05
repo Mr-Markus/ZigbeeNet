@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public enum ZigBeeNodeStatus : byte
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     public class ZDO_STARTUP_FROM_APP_SRSP : SynchronousResponse
     {

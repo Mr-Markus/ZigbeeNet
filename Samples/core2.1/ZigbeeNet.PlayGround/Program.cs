@@ -1,7 +1,7 @@
 ﻿using System;
 using Serilog;
 
-namespace ZigbeeNet.PlayGround
+namespace ZigBeeNet.PlayGround
 {
     class Program
     {

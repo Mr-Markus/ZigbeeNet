@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     /// <summary>
     /// This callback message is in response to the ZDO Node Descriptor Request

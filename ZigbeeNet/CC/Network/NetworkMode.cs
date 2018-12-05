@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     public enum NetworkMode : byte
     {

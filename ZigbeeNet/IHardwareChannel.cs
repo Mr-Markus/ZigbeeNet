@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /// <summary>
     /// Interface for a hardware specific channel. This should reside in the ZCL part of the library

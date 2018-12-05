@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZigbeeNet.CC.Extensions;
-using ZigbeeNet.CC.Packet.AF;
-using ZigbeeNet.CC.Packet.SimpleAPI;
-using ZigbeeNet.CC.Packet.SYS;
-using ZigbeeNet.CC.Packet.ZDO;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Extensions;
+using ZigBeeNet.CC.Packet.AF;
+using ZigBeeNet.CC.Packet.SimpleAPI;
+using ZigBeeNet.CC.Packet.SYS;
+using ZigBeeNet.CC.Packet.ZDO;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigBeeNet.CC.Packet
 {
     public class PacketStream
     {

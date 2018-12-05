@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Network;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.CC.Packet.AF;
-using ZigbeeNet.Logging;
-using ZigbeeNet.Transport;
+using ZigBeeNet.CC.Network;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet.AF;
+using ZigBeeNet.Logging;
+using ZigBeeNet.Transport;
 
-namespace ZigbeeNet.CC
+namespace ZigBeeNet.CC
 {
     public class ZigBeeDongleTiCc2531 : IZigBeeTransportTransmit, IApplicationFrameworkMessageListener, IAsynchronousCommandListener
     {
         private readonly ILog _logger = LogProvider.For<ZigBeeDongleTiCc2531>();
 
         private NetworkManager _networkManager;
-        private IZigBeeTransportReceive _zigbeeNetworkReceive;
+        private IZigBeeTransportReceive _ZigBeeNetworkReceive;
 
         private readonly Dictionary<ushort, byte> _sender2Endpoint = new Dictionary<ushort, byte>();
         private readonly Dictionary<byte, ushort> _Endpoint2Profile = new Dictionary<byte, ushort>();
@@ -58,7 +58,7 @@ namespace ZigbeeNet.CC
             apsFrame.ApsCounter = msg.TransSeqNumber;
             apsFrame.Payload = msg.Data;
 
-            _zigbeeNetworkReceive.ReceiveCommand(apsFrame);
+            _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
 
             return true;
         }
@@ -115,7 +115,7 @@ namespace ZigbeeNet.CC
 
             if(apsFrame != null)
             {
-                _zigbeeNetworkReceive.ReceiveCommand(apsFrame);
+                _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
                 return;
             }
         }

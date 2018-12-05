@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Extensions;
+using ZigBeeNet.CC.Extensions;
 
-namespace ZigbeeNet.CC.Packet.AF
+namespace ZigBeeNet.CC.Packet.AF
 {
     public class AF_DATA_REQUEST_EXT : SynchronousRequest
     {

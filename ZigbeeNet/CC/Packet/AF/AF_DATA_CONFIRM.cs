@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.AF
+namespace ZigBeeNet.CC.Packet.AF
 {
     /// <summary>
     /// This command is sent by the device to the user after it receives a data request.

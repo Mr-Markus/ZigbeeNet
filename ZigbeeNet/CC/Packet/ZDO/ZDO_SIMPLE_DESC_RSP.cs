@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     /// <summary>
     /// This callback message is in response to the ZDO Simple Descriptor Request 

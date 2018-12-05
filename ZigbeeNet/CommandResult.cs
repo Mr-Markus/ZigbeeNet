@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Clusters.General;
-using ZigbeeNet.ZDO;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class CommandResult
     {
@@ -13,7 +13,7 @@ namespace ZigbeeNet
         /**
          * The response command.
          */
-        private readonly ZigBeeCommand response;
+        public ZigBeeCommand Response { get; private set; }
 
         /**
          * Constructor which sets the received response command or null if timeout occurs.
@@ -22,7 +22,7 @@ namespace ZigbeeNet
          */
         public CommandResult(ZigBeeCommand response)
         {
-            this.response = response;
+            this.Response = response;
         }
 
         /**
@@ -30,7 +30,7 @@ namespace ZigbeeNet
          */
         public CommandResult()
         {
-            this.response = null;
+            this.Response = null;
         }
 
         /**
@@ -38,7 +38,7 @@ namespace ZigbeeNet
          *
          * @return TRUE if command execution was successful.
          */
-        public bool isSuccess()
+        public bool IsSuccess()
         {
             return !(IsTimeout() || IsError());
         }
@@ -50,7 +50,7 @@ namespace ZigbeeNet
          */
         public bool IsTimeout()
         {
-            return response == null;
+            return Response == null;
         }
 
         /**
@@ -66,7 +66,7 @@ namespace ZigbeeNet
             }
             else
             {
-                return response == null;
+                return Response == null;
             }
         }
 
@@ -77,9 +77,9 @@ namespace ZigbeeNet
          */
         private bool HasStatusCode()
         {
-            if (response != null)
+            if (Response != null)
             {
-                return response is DefaultResponse || response is ZdoResponse;
+                return Response is DefaultResponse || Response is ZdoResponse;
             }
             else
             {
@@ -96,13 +96,13 @@ namespace ZigbeeNet
         {
             if (HasStatusCode())
             {
-                if (response is DefaultResponse resp)
+                if (Response is DefaultResponse resp)
                 {
                     return (int)resp.StatusCode;
                 }
                 else
                 {
-                    return (int)((ZdoResponse)response).GetStatus();
+                    return (int)((ZdoResponse)Response).GetStatus();
                 }
             }
             else
@@ -118,18 +118,20 @@ namespace ZigbeeNet
          */
         public ZigBeeCommand GetResponse()
         {
-            return response;
+            return Response;
         }
 
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
+
             builder.Append("CommandResult [");
-            if (isSuccess())
+
+            if (IsSuccess())
             {
                 builder.Append("SUCCESS, ")
-                       .Append(response.ToString());
+                       .Append(Response.ToString());
             }
             else if (IsTimeout())
             {
@@ -138,11 +140,13 @@ namespace ZigbeeNet
             else
             {
                 ZclStatus status = (ZclStatus)GetStatusCode();
+
                 builder.Append("ERROR (")
                        .Append(status.ToString())
                        .Append(String.Format(",0x{0}2X), ", (int)status))
-                       .Append(response);
+                       .Append(Response);
             }
+
             builder.Append(']');
             return builder.ToString();
         }

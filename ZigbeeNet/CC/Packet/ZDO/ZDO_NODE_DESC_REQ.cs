@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     /// <summary>
     /// This command is generated to inquire about the Node Descriptor information of the destination device

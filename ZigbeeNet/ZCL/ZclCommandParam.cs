@@ -1,7 +1,7 @@
 ﻿using System;
 using BinarySerialization;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     public class ZclCommandParam
     {

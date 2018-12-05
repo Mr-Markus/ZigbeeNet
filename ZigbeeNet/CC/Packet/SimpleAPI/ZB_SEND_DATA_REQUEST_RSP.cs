@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.SimpleAPI
+namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
     public class ZB_SEND_DATA_REQUEST_RSP : SynchronousResponse
     {

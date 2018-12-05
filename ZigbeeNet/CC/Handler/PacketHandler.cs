@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.CC.Packet.SimpleAPI;
-using ZigbeeNet.CC.Packet.SYS;
-using ZigbeeNet.CC.Packet.ZDO;
-using ZigbeeNet.Logging;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet.SimpleAPI;
+using ZigBeeNet.CC.Packet.SYS;
+using ZigBeeNet.CC.Packet.ZDO;
+using ZigBeeNet.Logging;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.CC.Handler
+namespace ZigBeeNet.CC.Handler
 {
     public class PacketHandler : IPacketHandler
     {

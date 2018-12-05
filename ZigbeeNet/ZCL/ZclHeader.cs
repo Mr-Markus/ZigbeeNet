@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     public class ZclHeader
     {

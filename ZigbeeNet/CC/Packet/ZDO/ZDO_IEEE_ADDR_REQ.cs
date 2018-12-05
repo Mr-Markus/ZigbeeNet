@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     /// <summary>
     /// This command will request a device’s IEEE 64-bit address.  You must subscribe to “ZDO IEEE Address Response” to receive 

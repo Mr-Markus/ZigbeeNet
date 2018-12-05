@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     /// <summary>
     /// The command interface for sending and receiving ZNP serial interface commands

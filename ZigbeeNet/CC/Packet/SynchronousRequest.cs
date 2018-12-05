@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigBeeNet.CC.Packet
 {
     public class SynchronousRequest : SerialPacket
     {

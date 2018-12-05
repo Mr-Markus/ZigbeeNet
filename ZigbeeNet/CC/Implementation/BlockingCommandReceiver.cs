@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using ZigbeeNet.CC.Network;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Network;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Implementation
+namespace ZigBeeNet.CC.Implementation
 {
     /**
  * Blocking receiver for asynchronous commands.

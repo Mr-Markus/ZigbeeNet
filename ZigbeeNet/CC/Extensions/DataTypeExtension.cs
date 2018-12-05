@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Extensions
+namespace ZigBeeNet.CC.Extensions
 {
     public static class DataTypeExtension
     {

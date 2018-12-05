@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.SimpleAPI
+namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
     /// <summary>
     /// This command will reset the device by using a soft reset (i.e. a jump to the reset vector) 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.ZDO
+namespace ZigBeeNet.ZDO
 {
     public class ZdoCommand : ZigBeeCommand
     {

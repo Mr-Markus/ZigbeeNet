@@ -5,16 +5,16 @@
 //using System.Linq;
 //using System.Threading;
 //using System.Threading.Tasks;
-//using ZigbeeNet.CC.Handler;
-//using ZigbeeNet.CC.Packet;
-//using ZigbeeNet.CC.Packet.AF;
-//using ZigbeeNet.CC.Packet.SimpleAPI;
-//using ZigbeeNet.CC.Packet.SYS;
-//using ZigbeeNet.CC.Packet.ZDO;
-//using ZigbeeNet.Logging;
-//using ZigbeeNet.ZCL;
+//using ZigBeeNet.CC.Handler;
+//using ZigBeeNet.CC.Packet;
+//using ZigBeeNet.CC.Packet.AF;
+//using ZigBeeNet.CC.Packet.SimpleAPI;
+//using ZigBeeNet.CC.Packet.SYS;
+//using ZigBeeNet.CC.Packet.ZDO;
+//using ZigBeeNet.Logging;
+//using ZigBeeNet.ZCL;
 
-//namespace ZigbeeNet.CC
+//namespace ZigBeeNet.CC
 //{
 //    public class CCZnp : IHardwareChannel
 //    {

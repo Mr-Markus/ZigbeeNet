@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigbeeNet;
-using ZigbeeNet.App;
-using ZigbeeNet.Internal;
-using ZigbeeNet.Logging;
-using ZigbeeNet.Security;
-using ZigbeeNet.Serialization;
-using ZigbeeNet.Transport;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZDO;
+using ZigBeeNet;
+using ZigBeeNet.App;
+using ZigBeeNet.Internal;
+using ZigBeeNet.Logging;
+using ZigBeeNet.Security;
+using ZigBeeNet.Serialization;
+using ZigBeeNet.Transport;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /**
  * ZigBeeNetworkManager implements functions for managing the ZigBee interfaces. The network manager is the central
@@ -472,7 +472,7 @@ namespace ZigbeeNet
             lock(typeof(ZigBeeNetworkManager)) {
                 foreach (ZigBeeNode node in networkNodes.Values)
                 {
-                    node.shutdown();
+                    node.Shutdown();
                 }
 
                 if (NetworkStateSerializer != null)
@@ -496,12 +496,13 @@ namespace ZigbeeNet
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
-        public ScheduledFuture<?> scheduleTask(Runnable runnableTask, long delay)
+        public Task ScheduleTask(Task runnableTask, long delay)
         {
             if (NetworkState != ZigBeeTransportState.ONLINE)
             {
                 return null;
             }
+
             return executorService.schedule(runnableTask, delay, TimeUnit.MILLISECONDS);
         }
 
@@ -514,9 +515,8 @@ namespace ZigbeeNet
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
-        public ScheduledFuture<?> rescheduleTask(ScheduledFuture<?> futureTask, Runnable runnableTask, long delay)
+        public Task RescheduleTask(Task runnableTask, long delay)
         {
-            futureTask.cancel(false);
             if (NetworkState != ZigBeeTransportState.ONLINE)
             {
                 return null;
@@ -1057,7 +1057,7 @@ namespace ZigbeeNet
 
             // If this is a broadcast, then we send it to our own address as well
             // This seems to be required for some stacks (eg ZNP)
-            if (ZigBeeBroadcastDestination.getBroadcastDestination(destination.Address) != null)
+            if (ZigBeeBroadcastDestination.GetBroadcastDestination(destination.Address) != null)
             {
                 command = new ManagementPermitJoiningRequest();
                 command.setPermitDuration(duration);

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Extensions;
+using ZigBeeNet.CC.Extensions;
 
-namespace ZigbeeNet.CC.Packet.SimpleAPI
+namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
     public class ZB_PERMIT_JOINING_REQUEST_RSP : SynchronousRequest
     {

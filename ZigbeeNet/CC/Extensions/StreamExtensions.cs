@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZigbeeNet.CC.Extensions
+namespace ZigBeeNet.CC.Extensions
 {
     internal static partial class StreamExtensions
     {

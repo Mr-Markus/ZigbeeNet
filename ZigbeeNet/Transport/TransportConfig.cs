@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     public class TransportConfig
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Power Descriptor Request value object class.
@@ -12,15 +12,15 @@ namespace ZigbeeNet.ZDO.Command
      * inquire as to the power descriptor of a remote device. This command shall be
      * unicast either to the remote device itself or to an alternative device that contains
      * the discovery information of the remote device.
-     * <p>
+     * 
      * Code is auto-generated. Modifications may be overwritten!
      */
     public class PowerDescriptorRequest : ZdoCommand, IZigBeeTransactionMatcher
     {
         /**
-     * NWKAddrOfInterest command message field.
-     */
-        private ushort NwkAddrOfInterest { get; set; }
+         * NWKAddrOfInterest command message field.
+        */
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
          * Default constructor.
@@ -37,7 +37,6 @@ namespace ZigbeeNet.ZDO.Command
             serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
-
         public override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
@@ -45,23 +44,25 @@ namespace ZigbeeNet.ZDO.Command
             NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
-
-        public bool isTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
+        public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
         {
-            if (response is PowerDescriptorResponse)) {
+            if (response is PowerDescriptorResponse) {
                 return (((PowerDescriptorRequest)request).NwkAddrOfInterest.Equals(((PowerDescriptorResponse)response).NwkAddrOfInterest));
             }
+
             return false;
         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder(62);
-            builder.Append("PowerDescriptorRequest [");
-            builder.Append(base.ToString());
-            builder.Append(", nwkAddrOfInterest=");
-            builder.Append(NwkAddrOfInterest);
-            builder.Append(']');
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append("PowerDescriptorRequest [")
+                   .Append(base.ToString())
+                   .Append(", nwkAddrOfInterest=")
+                   .Append(NwkAddrOfInterest)
+                   .Append(']');
+
             return builder.ToString();
         }
     }

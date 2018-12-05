@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Fileld;
-using ZigbeeNet.ZCL.Protocol;
-using ZigbeeNet.ZDO;
-using ZigbeeNet.ZDO.field;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.field;
 
-namespace ZigbeeNet.Serialization
+namespace ZigBeeNet.Serialization
 {
     public class DefaultDeserializer : IZigBeeDeserializer
     {

@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL.Clusters
+namespace ZigBeeNet.ZCL.Clusters
 {
     public class ZclOnOffCluster : ZclCluster
     {
