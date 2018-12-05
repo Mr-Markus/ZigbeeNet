@@ -24,7 +24,7 @@ namespace ZigbeeNet.App
 
         public void AddCluster(ushort cluster)
         {
-            _logger.Debug($"ClusterMatcher adding cluster {(ZclClusterId)cluster}");
+            _logger.Debug($"ClusterMatcher adding cluster {cluster}");
             _clusters.Add(cluster);
         }
 
