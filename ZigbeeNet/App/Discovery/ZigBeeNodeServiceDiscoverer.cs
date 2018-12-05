@@ -4,31 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigbeeNet;
-using ZigbeeNet.Logging;
-using ZigbeeNet.ZDO;
-using ZigbeeNet.ZDO.Command;
-using ZigbeeNet.ZDO.Field;
+using ZigBeeNet.Logging;
+using ZigBeeNet;
+using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.Command;
+using ZigBeeNet.ZDO.Field;
 
-namespace ZigbeeNet.App.Discovery
+namespace ZigBeeNet.App.Discovery
 {
     /**
      * This class contains methods for discovering the services and features of a {@link ZigBeeNode}. All discovery methods
      * are private and the class is utilised by calling {@link #startDiscovery(Set)} with a set of
      * {@link #NodeDiscoveryState} for the stages wishing to be discovered or updated.
-     * <p>
+     * 
      * A single worker thread is ensured - if the thread is already active when {@link #startDiscovery(Set)} is called, the
      * new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
      * running, it will be started.
-     * <p>
+     * 
      * This class provides a centralised helper, used for discovering and updating information about the {@link ZigBeeNode}
-     * <p>
+     * 
      * A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
      * supported, then this will not be issued again on subsequent requests.
-     * <p>
+     * 
      * Once the discovery update is complete the {@link ZigBeeNetworkManager#updateNode(ZigBeeNode)} is called to alert
      * users.
-     *
      */
     public class ZigBeeNodeServiceDiscoverer
     {
@@ -94,12 +93,12 @@ namespace ZigbeeNet.App.Discovery
         /**
          * Record of the last time we started a service discovery or update
          */
-        private DateTime _lastDiscoveryStarted;
+        public DateTime LastDiscoveryStarted { get; private set; }
 
         /**
          * Record of the last time we completed a service discovery or update
          */
-        private DateTime _lastDiscoveryCompleted;
+        public DateTime LastDiscoveryCompleted { get; private set; }
 
         /**
          *
@@ -119,7 +118,7 @@ namespace ZigbeeNet.App.Discovery
         /**
          * The list of tasks we need to complete
          */
-        private Queue<NodeDiscoveryTask> _discoveryTasks = new Queue<NodeDiscoveryTask>();
+        public Queue<NodeDiscoveryTask> DiscoveryTasks { get; private set; } = new Queue<NodeDiscoveryTask>();
 
         /**
          * Creates the discovery class
@@ -149,7 +148,7 @@ namespace ZigbeeNet.App.Discovery
         {
             // Tasks are managed in a queue. The worker thread will only remove the task from the queue once the task is
             // complete. When no tasks are left in the queue, the worker thread will exit.
-            lock (_discoveryTasks)
+            lock (DiscoveryTasks)
             {
                 // Remove any tasks that we know are not supported by this device
                 if (!_supportsManagementLqi && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
@@ -168,14 +167,14 @@ namespace ZigbeeNet.App.Discovery
                     return;
                 }
 
-                bool startWorker = _discoveryTasks.Count == 0;
+                bool startWorker = DiscoveryTasks.Count == 0;
 
                 // Add new tasks, avoiding any duplication
                 foreach (NodeDiscoveryTask newTask in newTasks)
                 {
-                    if (!_discoveryTasks.Contains(newTask))
+                    if (!DiscoveryTasks.Contains(newTask))
                     {
-                        _discoveryTasks.Enqueue(newTask);
+                        DiscoveryTasks.Enqueue(newTask);
                     }
                 }
 
@@ -185,11 +184,11 @@ namespace ZigbeeNet.App.Discovery
                 }
                 else
                 {
-                    _lastDiscoveryStarted = DateTime.UtcNow;
+                    LastDiscoveryStarted = DateTime.UtcNow;
                 }
             }
 
-            _logger.Debug("{}: Node SVC Discovery: scheduled {}", Node.IeeeAddress, _discoveryTasks);
+            _logger.Debug("{}: Node SVC Discovery: scheduled {}", Node.IeeeAddress, DiscoveryTasks);
 
             var nodeDiscoveryTask = GetNodeServiceDiscoveryTask();
 
@@ -206,17 +205,17 @@ namespace ZigbeeNet.App.Discovery
                 _logger.Debug("{}: Node SVC Discovery: running", Node.IeeeAddress);
                 NodeDiscoveryTask? discoveryTask = null;
 
-                lock (_discoveryTasks)
+                lock (DiscoveryTasks)
                 {
-                    if (_discoveryTasks.Count != 0)
+                    if (DiscoveryTasks.Count != 0)
                     {
-                        discoveryTask = _discoveryTasks.Peek();
+                        discoveryTask = DiscoveryTasks.Peek();
                     }
                 }
 
                 if (discoveryTask == null)
                 {
-                    _lastDiscoveryCompleted = DateTime.UtcNow;
+                    LastDiscoveryCompleted = DateTime.UtcNow;
                     _logger.Debug("{}: Node SVC Discovery: complete", Node.IeeeAddress);
                     NetworkManager.UpdateNode(Node);
                     return;
@@ -259,12 +258,12 @@ namespace ZigbeeNet.App.Discovery
                 int retryDelay = 0;
                 if (success)
                 {
-                    lock (_discoveryTasks)
+                    lock (DiscoveryTasks)
                     {
-                        _discoveryTasks = new Queue<NodeDiscoveryTask>(_discoveryTasks.Where(t => t != discoveryTask));
+                        DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
-                    _logger.Debug("{}: Node SVC Discovery: request {} successful. Advanced to {}.", Node.IeeeAddress, discoveryTask, _discoveryTasks.Peek());
+                    _logger.Debug("{}: Node SVC Discovery: request {} successful. Advanced to {}.", Node.IeeeAddress, discoveryTask, DiscoveryTasks.Peek());
 
                     retryCnt = 0;
                 }
@@ -272,9 +271,9 @@ namespace ZigbeeNet.App.Discovery
                 {
                     _logger.Debug("{}: Node SVC Discovery: request {} failed after {} attempts.", Node.IeeeAddress, discoveryTask, retryCnt);
 
-                    lock (_discoveryTasks)
+                    lock (DiscoveryTasks)
                     {
-                        _discoveryTasks = new Queue<NodeDiscoveryTask>(_discoveryTasks.Where(t => t != discoveryTask));
+                        DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
                     retryCnt = 0;
@@ -486,7 +485,7 @@ namespace ZigbeeNet.App.Discovery
             List<ZigBeeEndpoint> endpoints = new List<ZigBeeEndpoint>();
             foreach (int endpointId in activeEndpointsResponse.ActiveEpList)
             {
-                ZigBeeEndpoint endpoint = GetSimpleDescriptor(endpointId);
+                ZigBeeEndpoint endpoint = await GetSimpleDescriptor(endpointId);
                 if (endpoint == null)
                 {
                     return false;
@@ -633,32 +632,33 @@ namespace ZigbeeNet.App.Discovery
          * @throws ExecutionException
          * @throws InterruptedException
          */
-        private ZigBeeEndpoint GetSimpleDescriptor(int endpointId)
+        private async Task<ZigBeeEndpoint> GetSimpleDescriptor(int endpointId)
         {
             SimpleDescriptorRequest simpleDescriptorRequest = new SimpleDescriptorRequest();
-            simpleDescriptorRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-            simpleDescriptorRequest.setNwkAddrOfInterest(node.getNetworkAddress());
-            simpleDescriptorRequest.setEndpoint(endpointId);
+            simpleDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+            simpleDescriptorRequest.NwkAddrOfInterest = Node.NetworkAddress;
+            simpleDescriptorRequest.Endpoint = endpointId;
 
-            CommandResult response = networkManager.sendTransaction(simpleDescriptorRequest, simpleDescriptorRequest).get();
+            CommandResult response = await NetworkManager.SendTransaction(simpleDescriptorRequest, simpleDescriptorRequest);
+            SimpleDescriptorResponse simpleDescriptorResponse = (SimpleDescriptorResponse)response.Response;
 
-            SimpleDescriptorResponse simpleDescriptorResponse = (SimpleDescriptorResponse)response.getResponse();
-            _logger.debug("{}: Node SVC Discovery: SimpleDescriptorResponse returned {}", node.getIeeeAddress(),
-                            simpleDescriptorResponse);
+            _logger.Debug("{}: Node SVC Discovery: SimpleDescriptorResponse returned {}", Node.IeeeAddress, simpleDescriptorResponse);
+
             if (simpleDescriptorResponse == null)
             {
                 return null;
             }
 
-            if (simpleDescriptorResponse.getStatus() == ZdoStatus.SUCCESS)
+            if (simpleDescriptorResponse.Status == ZdoStatus.SUCCESS)
             {
-                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(node, endpointId);
-                SimpleDescriptor simpleDescriptor = simpleDescriptorResponse.getSimpleDescriptor();
-                endpoint.setProfileId(simpleDescriptor.getProfileId());
-                endpoint.setDeviceId(simpleDescriptor.getDeviceId());
-                endpoint.setDeviceVersion(simpleDescriptor.getDeviceVersion());
-                endpoint.setInputClusterIds(simpleDescriptor.getInputClusterList());
-                endpoint.setOutputClusterIds(simpleDescriptor.getOutputClusterList());
+                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(NetworkManager, Node, endpointId);
+                SimpleDescriptor simpleDescriptor = simpleDescriptorResponse.SimpleDescriptor;
+
+                endpoint.ProfileId = simpleDescriptor.ProfileId;
+                endpoint.DeviceId = simpleDescriptor.DeviceId;
+                endpoint.DeviceVersion = simpleDescriptor.DeviceVersion;
+                endpoint.SetInputClusterIds(simpleDescriptor.InputClusterList.Select(id => (int)id).ToList());
+                endpoint.SetOutputClusterIds(simpleDescriptor.OutputClusterList.Select(id => (int)id).ToList());
 
                 return endpoint;
             }
@@ -686,31 +686,31 @@ namespace ZigbeeNet.App.Discovery
          */
         public void StartDiscovery()
         {
-            _logger.Debug("{}: Node SVC Discovery: start discovery", Node.I);
+            _logger.Debug("{}: Node SVC Discovery: start discovery", Node.IeeeAddress);
 
-            Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
+            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
             // Always request the network address - in case it's changed
-            tasks.add(NodeDiscoveryTask.NWK_ADDRESS);
+            tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
 
-            if (node.getNodeDescriptor().getLogicalType() == LogicalType.UNKNOWN)
+            if (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN)
             {
-                tasks.add(NodeDiscoveryTask.NODE_DESCRIPTOR);
+                tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
             }
 
-            if (node.getPowerDescriptor().getCurrentPowerMode() == CurrentPowerModeType.UNKNOWN)
+            if (Node.PowerDescriptor.CurrentPowerMode == PowerDescriptor.CurrentPowerModeType.UNKNOWN)
             {
-                tasks.add(NodeDiscoveryTask.POWER_DESCRIPTOR);
+                tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
             }
 
-            if (node.getEndpoints().size() == 0 && node.getNetworkAddress() != 0)
+            if (Node.Endpoints.Count == 0 && Node.NetworkAddress != 0)
             {
-                tasks.add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
+                tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
             }
 
-            tasks.add(NodeDiscoveryTask.NEIGHBORS);
+            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
 
-            startDiscovery(tasks);
+            StartDiscovery(tasks);
         }
 
         /**
@@ -718,59 +718,21 @@ namespace ZigbeeNet.App.Discovery
          * {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
          * {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
          */
-        public void updateMesh()
+        public void UpdateMesh()
         {
-            _logger.debug("{}: Node SVC Discovery: Update mesh", node.getIeeeAddress());
-            Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
+            _logger.Debug("{}: Node SVC Discovery: Update mesh", Node.IeeeAddress);
 
-            tasks.add(NodeDiscoveryTask.NEIGHBORS);
+            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-            if (node.getNodeDescriptor().getLogicalType() != LogicalType.END_DEVICE)
+            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
+
+            if (Node.NodeDescriptor.LogicalNodeType != NodeDescriptor.LogicalType.END_DEVICE)
             {
-                tasks.add(NodeDiscoveryTask.ROUTES);
+                tasks.Add(NodeDiscoveryTask.ROUTES);
             }
 
-            startDiscovery(tasks);
+            StartDiscovery(tasks);
         }
 
-        /**
-         * Gets the collection of {@link NodeDiscoveryTask}s that are currently outstanding for this discoverer
-         *
-         * @return collection of {@link NodeDiscoveryTask}s
-         */
-        public Collection<NodeDiscoveryTask> getTasks()
-        {
-            return discoveryTasks;
-        }
-
-        /**
-         * Gets the {@link ZigBeeNode} to which this service discoverer is associated
-         *
-         * @return the {@link ZigBeeNode}
-         */
-        public ZigBeeNode getNode()
-        {
-            return node;
-        }
-
-        /**
-         * Gets the time the last discovery was started.
-         *
-         * @return the {@link Instant} that the last discovery was started
-         */
-        public Instant getLastDiscoveryStarted()
-        {
-            return lastDiscoveryStarted;
-        }
-
-        /**
-         * Gets the time the last discovery was completed.
-         *
-         * @return the {@link Instant} that the last discovery was completed
-         */
-        public Instant getLastDiscoveryCompleted()
-        {
-            return lastDiscoveryCompleted;
-        }
     }
 }

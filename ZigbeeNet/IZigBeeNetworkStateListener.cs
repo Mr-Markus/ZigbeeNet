@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Transport;
+using ZigBeeNet.Transport;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public interface IZigBeeNetworkStateListener
     {

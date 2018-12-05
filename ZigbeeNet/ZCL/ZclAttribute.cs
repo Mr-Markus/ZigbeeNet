@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     public class ZclAttribute
     {

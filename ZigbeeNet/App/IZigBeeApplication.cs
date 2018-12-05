@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.App
+namespace ZigBeeNet.App
 {
     /**
      * Defines the interface for a ZigBee Application

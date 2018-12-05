@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.ZDO
+namespace ZigBeeNet.CC.Packet.ZDO
 {
     /// <summary>
     /// This command will be received by the ZNP coordinator as an indication that a new device has joined the network. 

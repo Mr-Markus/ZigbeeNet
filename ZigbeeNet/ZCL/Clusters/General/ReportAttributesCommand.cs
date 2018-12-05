@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL.Fileld;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZCL.Clusters.General
+namespace ZigBeeNet.ZCL.Clusters.General
 {
     public class ReportAttributesCommand : ZclCommand
     {

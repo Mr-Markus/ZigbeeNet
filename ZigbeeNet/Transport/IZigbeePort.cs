@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     /// <summary>
     /// Interface for a generic port used for the ZigBee API. The stack will call the

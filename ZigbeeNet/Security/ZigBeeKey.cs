@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Security
+namespace ZigBeeNet.Security
 {
     /**
  * Represents a 128 bit ZigBee key

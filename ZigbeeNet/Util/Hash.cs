@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Util
+namespace ZigBeeNet.Util
 {
     public static class Hash
     {

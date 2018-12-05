@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using ZigbeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet;
 
-namespace ZigbeeNet.CC.Handler
+namespace ZigBeeNet.CC.Handler
 {
     public interface IPacketHandler
     {

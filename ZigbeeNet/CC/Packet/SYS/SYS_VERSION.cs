@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.SYS
+namespace ZigBeeNet.CC.Packet.SYS
 {
     public class SYS_VERSION : SynchronousRequest
     {

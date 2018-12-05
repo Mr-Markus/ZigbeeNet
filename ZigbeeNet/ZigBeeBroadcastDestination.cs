@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /**
      * Defines the broadcast destination addresses defined in the ZigBee protocol.

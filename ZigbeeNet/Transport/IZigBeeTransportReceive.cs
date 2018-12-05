@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     /// <summary>
     /// Defines the interface for data passed from the transport layer(ie dongle) to the ZigBee stack framework.

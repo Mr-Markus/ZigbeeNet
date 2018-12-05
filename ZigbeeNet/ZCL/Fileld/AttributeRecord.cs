@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Serialization;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.Serialization;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZCL.Fileld
+namespace ZigBeeNet.ZCL.Fileld
 {
     public class AttributeRecord : IZclListItemField
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.AF
+namespace ZigBeeNet.CC.Packet.AF
 {
     /// <summary>
     /// This command enables the tester to register an application’s endpoint description

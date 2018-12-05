@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     public class SynchronousCommandListener : ISynchronousCommandListener
     {

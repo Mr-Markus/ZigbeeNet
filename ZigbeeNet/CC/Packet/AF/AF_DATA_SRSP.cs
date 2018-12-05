@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.AF
+namespace ZigBeeNet.CC.Packet.AF
 {
     public class AF_DATA_SRSP : SynchronousResponse
     {

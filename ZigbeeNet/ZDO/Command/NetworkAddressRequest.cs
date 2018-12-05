@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
  * Network Address Request value object class.

@@ -2,12 +2,12 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet;
-using ZigbeeNet.App.Discovery;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZDO.Field;
+using ZigBeeNet;
+using ZigBeeNet.App.Discovery;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZDO.Field;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /// <summary>
     /**
@@ -74,7 +74,7 @@ namespace ZigbeeNet
         /**
          * List of endpoints this node exposes
          */
-        private ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
+        public ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; private set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
 
         /**
          * The node service discoverer that is responsible for the discovery of services, and periodic update or routes and

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Protocol;
-using ZigbeeNet.ZDO.Field;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Management LQI Response value object class.

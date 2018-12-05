@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     public class ZclPacket
     {

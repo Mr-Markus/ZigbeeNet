@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Models
+namespace ZigBeeNet.CC.Models
 {
     class NetworkInfo
     {

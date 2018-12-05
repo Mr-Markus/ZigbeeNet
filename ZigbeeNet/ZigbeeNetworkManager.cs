@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigbeeNet;
-using ZigbeeNet.App;
-using ZigbeeNet.Internal;
-using ZigbeeNet.Logging;
-using ZigbeeNet.Security;
-using ZigbeeNet.Serialization;
-using ZigbeeNet.Transport;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZDO;
+using ZigBeeNet;
+using ZigBeeNet.App;
+using ZigBeeNet.Internal;
+using ZigBeeNet.Logging;
+using ZigBeeNet.Security;
+using ZigBeeNet.Serialization;
+using ZigBeeNet.Transport;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /**
  * ZigBeeNetworkManager implements functions for managing the ZigBee interfaces. The network manager is the central

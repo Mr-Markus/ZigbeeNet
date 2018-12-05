@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Serialization;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.Serialization;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZDO.Field
+namespace ZigBeeNet.ZDO.Field
 {
     /**
     * The node power descriptor gives a dynamic indication of the power status of the

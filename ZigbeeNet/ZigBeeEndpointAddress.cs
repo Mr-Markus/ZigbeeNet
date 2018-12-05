@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Util;
+using ZigBeeNet.Util;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class ZigBeeEndpointAddress : IZigBeeAddress
     {

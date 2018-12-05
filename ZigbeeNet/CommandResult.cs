@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Clusters.General;
-using ZigbeeNet.ZDO;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class CommandResult
     {

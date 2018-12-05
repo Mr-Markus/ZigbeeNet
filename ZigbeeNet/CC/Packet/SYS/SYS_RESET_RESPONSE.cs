@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC.Packet.SYS
+namespace ZigBeeNet.CC.Packet.SYS
 {
     /// <summary>
     /// This callback is sent by the device to indicate that a reset has occurred. 

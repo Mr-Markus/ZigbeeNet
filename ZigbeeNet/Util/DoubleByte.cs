@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class DoubleByte
     {

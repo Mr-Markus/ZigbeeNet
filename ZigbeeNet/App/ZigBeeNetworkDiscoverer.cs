@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Logging;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.Logging;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.App
+namespace ZigBeeNet.App
 {
         /**
      * {@link ZigBeeNetworkDiscoverer} is used to discover devices in the network.
@@ -41,7 +41,7 @@ namespace ZigbeeNet.App
     /**
      * The ZigBee network manager.
      */
-    private ZigbeeNetworkManager _networkManager;
+    private ZigBeeNetworkManager _networkManager;
 
     /**
      * Period between retries
@@ -73,7 +73,7 @@ namespace ZigbeeNet.App
      *
      * @param _networkManager the {@link ZigBeeNetworkManager}
      */
-    protected ZigBeeNetworkDiscoverer(ZigbeeNetworkManager networkManager)
+    protected ZigBeeNetworkDiscoverer(ZigBeeNetworkManager networkManager)
     {
         _networkManager = networkManager;
     }

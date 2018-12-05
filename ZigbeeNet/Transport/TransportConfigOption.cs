@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     /**
  * Enumeration defining all possible configuration options for the {@link ZigBeeTransportTransmit}. Configuration is

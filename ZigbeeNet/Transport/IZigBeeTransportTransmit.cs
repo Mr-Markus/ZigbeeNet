@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Security;
+using ZigBeeNet.Security;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     public interface IZigBeeTransportTransmit
     {

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
-using ZigbeeNet.CC.Implementation;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.CC.Packet.AF;
-using ZigbeeNet.CC.Packet.SimpleAPI;
-using ZigbeeNet.CC.Packet.SYS;
-using ZigbeeNet.CC.Packet.ZDO;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Implementation;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet.AF;
+using ZigBeeNet.CC.Packet.SimpleAPI;
+using ZigBeeNet.CC.Packet.SYS;
+using ZigBeeNet.CC.Packet.ZDO;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     public class NetworkManager
     {

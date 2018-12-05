@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
-using ZigbeeNet.Util;
+using ZigBeeNet.Util;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class IeeeAddress : IComparable<IeeeAddress>
     {

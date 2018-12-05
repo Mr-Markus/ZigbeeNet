@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZigbeeNet.Internal
+namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZigbeeNet.CC.Extensions;
+using ZigBeeNet.CC.Extensions;
 
-namespace ZigbeeNet.CC.Packet
+namespace ZigBeeNet.CC.Packet
 {
     public class SerialPacket
     {

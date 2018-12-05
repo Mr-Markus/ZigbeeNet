@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.App
+namespace ZigBeeNet.App
 {
     /// <summary>
     /// Defines the interface for a ZigBee Extension.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigbeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Fileld;
 
-namespace ZigbeeNet.ZCL.Protocol
+namespace ZigBeeNet.ZCL.Protocol
 {
 
     public enum DataType

@@ -1,8 +1,8 @@
-# ZigbeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet)
+# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib?svg=true)](https://ci.appveyor.com/project/Mr-Markus/ZigBeeNet)
 
-ZigbeeNET is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard, .NET Core and more .NET platforms. 
+ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard, .NET Core and more .NET platforms. 
 
-With ZigbeeNet you can develop your own .NET application which communicates with zigbee devices.
+With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.
 
 This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and many ideas were adopted (almost a java -> c# port).
 
@@ -23,10 +23,10 @@ Further information here: [https://www.zigbee.org/zigbee-for-developers/zigbee-3
 With Zigbee 3.0 you can also build your own Smart Home solution and control Zigbee devices from different manufactures like Philips with Philips Hue and IKEA with Tradfri at the same time in the same network. So you are very flexible and the components are very cheap.
 
 ## Zigbee Stacks
-Because Zigbee is just a specification you need a stack of a manufacturer that implements it. ZigbeeNet is developed with a strict seperation of the Zigbee Cluster Library (ZCL) and the various manufacturer stacks. Because of that it is possible to use different hardware for your Zigbee solution 
+Because Zigbee is just a specification you need a stack of a manufacturer that implements it. ZigBeeNet is developed with a strict seperation of the Zigbee Cluster Library (ZCL) and the various manufacturer stacks. Because of that it is possible to use different hardware for your Zigbee solution 
 
 ### Texas Instruments ( Z-Stack )
-The first stack that is implemented in ZigbeeNet is Z-Stack 3.0 from Texas Instruments
+The first stack that is implemented in ZigBeeNet is Z-Stack 3.0 from Texas Instruments
 
 Z-Stack 3.0.x is TI's Zigbee 3.0 compliant protocol suite for the CC2530, CC2531, and CC2538 Wireless MCU.
 Z-Stack comunicates through TI's Unified Network Processor Interface (NPI) which is used for establishing a serial data link between a TI SoC and external MCUs or PCs. UNPI is also implemented in this project and is also implemented for different plattforms.
@@ -44,7 +44,7 @@ This library is still under development. Breaking changes are possible at all ti
 ```
 using System;
 
-namespace ZigbeeNet.PlayGround
+namespace ZigBeeNet.PlayGround
 {
     class Program
     {
@@ -71,7 +71,7 @@ namespace ZigbeeNet.PlayGround
 Feel free to open an issue if you have any idea or enhancement. If you want to implement on code create a fork and open a pull request
 
 ## License
-ZigbeeNET is provided under [The MIT License](https://github.com/Mr-Markus/ZigbeeNet/blob/master/LICENSE).
+ZigBeeNet is provided under [The MIT License](https://github.com/Mr-Markus/ZigBeeNet/blob/master/LICENSE).
 
 ## Contributor
 

@@ -11,7 +11,7 @@ namespace ZigBeeNet.ZDO.Field
 
         public byte Endpoint { get; set; }
 
-        private ushort ProfileId { get; set; }
+        public ushort ProfileId { get; set; }
 
         /**
          * The application device identifier field of the simple descriptor is sixteen bits in length and specifies the
@@ -31,7 +31,7 @@ namespace ZigBeeNet.ZDO.Field
          *
          * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
          */
-        public void deserialize(IZigBeeDeserializer deserializer)
+        public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
             Endpoint = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));

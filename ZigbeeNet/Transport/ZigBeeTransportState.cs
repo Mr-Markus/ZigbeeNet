@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.Transport
+namespace ZigBeeNet.Transport
 {
     public enum ZigBeeTransportState
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Serilog;
-using ZigbeeNet;
+using ZigBeeNet;
 
 namespace BasicSample
 {

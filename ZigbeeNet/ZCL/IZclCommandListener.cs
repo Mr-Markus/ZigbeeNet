@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     /**
     * Command listener. Listeners are called when an ZclCommand for the Cluster is received.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /// <summary>
     /// Provides a list of channel mask values used for channel scans.

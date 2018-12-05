@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.CC
+namespace ZigBeeNet.CC
 {
     public class Query
     {

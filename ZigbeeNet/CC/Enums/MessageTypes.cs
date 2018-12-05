@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.CC
+namespace ZigBeeNet.CC
 {
     /// <summary>
     /// A one byte value which specifies the message type

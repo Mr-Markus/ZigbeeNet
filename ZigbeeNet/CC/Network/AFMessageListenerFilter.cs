@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Packet;
-using ZigbeeNet.CC.Packet.AF;
-using ZigbeeNet.Logging;
+using ZigBeeNet.CC.Packet;
+using ZigBeeNet.CC.Packet.AF;
+using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     internal class AFMessageListenerFilter : IAsynchronousCommandListener
     {

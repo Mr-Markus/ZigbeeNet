@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     /// <summary>
     /// ZigBee network interface. It provides an interface for higher layers to receive information about the network and

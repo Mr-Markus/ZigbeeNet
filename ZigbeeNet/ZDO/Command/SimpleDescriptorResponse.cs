@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZDO.Command
 {
@@ -19,126 +22,67 @@ namespace ZigBeeNet.ZDO.Command
         public int MwkAddrOfInterest { get; set; }
 
         /**
-         * Length command message field.
+         * Length command message fie
          */
         public int Length { get; set; }
 
         /**
          * SimpleDescriptor command message field.
          */
-        public SimpleDescriptor simpleDescriptor;
+        public SimpleDescriptor SimpleDescriptor { get; set; }
 
         /**
          * Default constructor.
          */
         public SimpleDescriptorResponse()
         {
-            clusterId = 0x8004;
+            ClusterId = 0x8004;
         }
 
-        /**
-         * Gets NWKAddrOfInterest.
-         *
-         * @return the NWKAddrOfInterest
-         */
-        public Integer getNwkAddrOfInterest()
+        public override void Serialize(ZclFieldSerializer serializer)
         {
-            return MwkAddrOfInterest;
+            base.Serialize(serializer);
+
+            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
+            serializer.Serialize(MwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
+            serializer.Serialize(Length, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(SimpleDescriptor, ZclDataType.Get(DataType.SIMPLE_DESCRIPTOR));
         }
 
-        /**
-         * Sets NWKAddrOfInterest.
-         *
-         * @param nwkAddrOfInterest the NWKAddrOfInterest
-         */
-        public void setNwkAddrOfInterest(final Integer nwkAddrOfInterest)
+        public override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            this.MwkAddrOfInterest = MwkAddrOfInterest;
-        }
+            base.Deserialize(deserializer);
 
-        /**
-         * Gets Length.
-         *
-         * @return the Length
-         */
-        public Integer getLength()
-        {
-            return Length;
-        }
+            Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
 
-        /**
-         * Sets Length.
-         *
-         * @param length the Length
-         */
-        public void setLength(final Integer length)
-        {
-            this.Length = Length;
-        }
-
-        /**
-         * Gets SimpleDescriptor.
-         *
-         * @return the SimpleDescriptor
-         */
-        public SimpleDescriptor getSimpleDescriptor()
-        {
-            return simpleDescriptor;
-        }
-
-        /**
-         * Sets SimpleDescriptor.
-         *
-         * @param simpleDescriptor the SimpleDescriptor
-         */
-        public void setSimpleDescriptor(final SimpleDescriptor simpleDescriptor)
-        {
-            this.simpleDescriptor = simpleDescriptor;
-        }
-
-        @Override
-        public void serialize(final ZclFieldSerializer serializer)
-        {
-            super.serialize(serializer);
-
-            serializer.serialize(status, ZclDataType.ZDO_STATUS);
-            serializer.serialize(MwkAddrOfInterest, ZclDataType.NWK_ADDRESS);
-            serializer.serialize(Length, ZclDataType.UNSIGNED_8_BIT_INTEGER);
-            serializer.serialize(simpleDescriptor, ZclDataType.SIMPLE_DESCRIPTOR);
-        }
-
-        @Override
-        public void deserialize(final ZclFieldDeserializer deserializer)
-        {
-            super.deserialize(deserializer);
-
-            status = (ZdoStatus)deserializer.deserialize(ZclDataType.ZDO_STATUS);
-            if (status != ZdoStatus.SUCCESS)
+            if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            MwkAddrOfInterest = (Integer)deserializer.deserialize(ZclDataType.NWK_ADDRESS);
-            Length = (Integer)deserializer.deserialize(ZclDataType.UNSIGNED_8_BIT_INTEGER);
-            simpleDescriptor = (SimpleDescriptor)deserializer.deserialize(ZclDataType.SIMPLE_DESCRIPTOR);
+
+            MwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            Length = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            SimpleDescriptor = (SimpleDescriptor)deserializer.Deserialize(ZclDataType.Get(DataType.SIMPLE_DESCRIPTOR));
         }
 
-        @Override
-        public String toString()
+        public override string ToString()
         {
-            final StringBuilder builder = new StringBuilder(152);
-            builder.append("SimpleDescriptorResponse [");
-            builder.append(super.toString());
-            builder.append(", status=");
-            builder.append(status);
-            builder.append(", nwkAddrOfInterest=");
-            builder.append(MwkAddrOfInterest);
-            builder.append(", length=");
-            builder.append(Length);
-            builder.append(", simpleDescriptor=");
-            builder.append(simpleDescriptor);
-            builder.append(']');
-            return builder.toString();
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append("SimpleDescriptorResponse [")
+                   .Append(base.ToString())
+                   .Append(", status=")
+                   .Append(Status)
+                   .Append(", nwkAddrOfInterest=")
+                   .Append(MwkAddrOfInterest)
+                   .Append(", length=")
+                   .Append(Length)
+                   .Append(", simpleDescriptor=")
+                   .Append(SimpleDescriptor)
+                   .Append(']');
+
+            return builder.ToString();
         }
 
     }

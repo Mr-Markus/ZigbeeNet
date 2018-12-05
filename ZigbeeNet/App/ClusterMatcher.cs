@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Logging;
-using ZigbeeNet.ZCL;
+using ZigBeeNet.Logging;
+using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.App
+namespace ZigBeeNet.App
 {
     public class ClusterMatcher : IZigBeeCommandListener
     {

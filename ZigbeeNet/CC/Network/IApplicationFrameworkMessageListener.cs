@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.CC.Packet.AF;
+using ZigBeeNet.CC.Packet.AF;
 
-namespace ZigbeeNet.CC.Network
+namespace ZigBeeNet.CC.Network
 {
     /// <summary>
     /// This class represent the callback invoked by the ZigBeeNetworkManager whenever a message

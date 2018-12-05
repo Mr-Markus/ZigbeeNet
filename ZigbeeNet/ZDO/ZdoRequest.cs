@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZDO
+namespace ZigBeeNet.ZDO
 {
     /**
      * Abstract class for ZDO response commands.

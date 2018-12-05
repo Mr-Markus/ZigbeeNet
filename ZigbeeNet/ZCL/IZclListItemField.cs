@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Serialization;
+using ZigBeeNet.Serialization;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     /// <summary>
     /// ZclSerializableField class for non primitive field types.

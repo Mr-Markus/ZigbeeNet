@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZDO
+namespace ZigBeeNet.ZDO
 {
     public abstract class ZdoResponse : ZdoCommand
     {

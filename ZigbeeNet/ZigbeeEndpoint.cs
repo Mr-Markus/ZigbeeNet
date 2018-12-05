@@ -2,13 +2,13 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.App;
-using ZigbeeNet.DAO;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZCL.Clusters.General;
-using ZigbeeNet.ZCL.Protocol;
+using ZigBeeNet.App;
+using ZigBeeNet.DAO;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet
+namespace ZigBeeNet
 {
     public class ZigBeeEndpoint
     {
@@ -39,12 +39,12 @@ namespace ZigbeeNet
          * The device ID. Specifies the device description supported on this endpoint. Device description identifiers shall
          * be obtained from the ZigBee Alliance.
          */
-        public int DeviceId { get; private set; }
+        public int DeviceId { get; set; }
 
         /**
          * The device version.
          */
-        public int DeviceVersion { get; private set; }
+        public int DeviceVersion { get; set; }
 
         /**
          * List of input clusters supported by the endpoint

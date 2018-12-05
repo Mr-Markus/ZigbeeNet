@@ -1,5 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
-namespace ZigbeeNet.CC
+namespace ZigBeeNet.CC
 {
     // Source: https://github.com/zsmartsystems/com.zsmartsystems.zigbee/blob/master/com.zsmartsystems.zigbee.dongle.cc2531/src/main/java/com/zsmartsystems/zigbee/dongle/cc2531/network/packet/ZToolCMD.java
     public enum CommandType : ushort
