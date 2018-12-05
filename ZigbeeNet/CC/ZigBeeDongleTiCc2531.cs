@@ -27,7 +27,7 @@ namespace ZigbeeNet.CC
         public ZigBeeChannel ZigBeeChannel { get; set; }
         public ZigbeeAddress16 PanID { get; set; }
         public ZigbeeAddress64 ExtendedPanId { get; set; }
-        public ZigBeeKey ZigbeeNetworkKey { get; set; }
+        public ZigBeeKey ZigBeeNetworkKey { get; set; }
         public ZigBeeKey TcLinkKey { get; set; }
 
         public ZigBeeDongleTiCc2531(IZigbeePort serialPort)

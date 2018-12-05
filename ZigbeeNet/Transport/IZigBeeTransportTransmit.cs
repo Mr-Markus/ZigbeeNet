@@ -61,7 +61,7 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// The ZigBee network security key
         /// </summary>
-        ZigBeeKey ZigbeeNetworkKey { get; set; }
+        ZigBeeKey ZigBeeNetworkKey { get; set; }
 
         /// <summary>
         /// The Trust Center link security key

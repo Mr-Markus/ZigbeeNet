@@ -35,6 +35,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.core2.1", "ZigbeeNet.core2.1\ZigbeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ZigbeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

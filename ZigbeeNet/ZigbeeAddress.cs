@@ -9,7 +9,7 @@ namespace ZigbeeNet
         /**
          * The network address for this address.
          */
-        int Address { get; set; }
+        ushort Address { get; set; }
 
         /**
          * Check whether this address is ZigBee group.

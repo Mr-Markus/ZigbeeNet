@@ -7,9 +7,9 @@ namespace ZigbeeNet
 {
     public class ZigBeeEndpointAddress : IZigBeeAddress
     {
-        public int Endpoint { get; private set; }
+        public byte Endpoint { get; private set; }
 
-        public int Address { get; set; }
+        public ushort Address { get; set; }
 
         /**
          * Constructor for ZDO ZigBee devices where only the address is defined
@@ -18,7 +18,7 @@ namespace ZigbeeNet
          *            the network address
          *
          */
-        public ZigBeeEndpointAddress(int address)
+        public ZigBeeEndpointAddress(ushort address)
         {
             this.Address = address;
             this.Endpoint = 0;
@@ -32,7 +32,7 @@ namespace ZigbeeNet
          * @param endpoint
          *            the endpoint number
          */
-        public ZigBeeEndpointAddress(int address, int endpoint)
+        public ZigBeeEndpointAddress(ushort address, byte endpoint)
         {
             this.Address = address;
             this.Endpoint = endpoint;
@@ -47,12 +47,12 @@ namespace ZigbeeNet
                 {
                     throw new ArgumentException(nameof(address));
                 }
-                this.Address = int.Parse(splits[0]);
-                this.Endpoint = int.Parse(splits[1]);
+                this.Address = ushort.Parse(splits[0]);
+                this.Endpoint = byte.Parse(splits[1]);
             }
             else
             {
-                this.Address = int.Parse(address);
+                this.Address = ushort.Parse(address);
                 this.Endpoint = 0;
             }
         }
@@ -64,7 +64,7 @@ namespace ZigbeeNet
 
         public override int GetHashCode()
         {
-            return Hash.CalcHashCode(new[] { Address, Endpoint });
+            return Hash.CalcHashCode(new[] { (int)Address, (int)Endpoint });
         }
 
         public override bool Equals(object obj)
