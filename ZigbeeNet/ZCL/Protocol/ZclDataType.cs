@@ -99,7 +99,7 @@ namespace ZigbeeNet.ZCL.Protocol
             _codeTypeMapping[0x08] = new ZclDataType("8-bit data", typeof(int), 0x08, false, DataType.DATA_8_BIT);
             _codeTypeMapping[0x31] = new ZclDataType("16-bit enumeration", typeof(int), 0x31, false, DataType.ENUMERATION_16_BIT);
             _codeTypeMapping[0x30] = new ZclDataType("8-bit Enumeration", typeof(int), 0x30, false, DataType.ENUMERATION_8_BIT);
-            _codeTypeMapping[0xF0] = new ZclDataType("IEEE Address", typeof(ZigBeeAddress64), 0xF0, false, DataType.IEEE_ADDRESS);
+            _codeTypeMapping[0xF0] = new ZclDataType("IEEE Address", typeof(IeeeAddress), 0xF0, false, DataType.IEEE_ADDRESS);
             _codeTypeMapping[0x00] = new ZclDataType("N X Attribute identifier", typeof(int), 0x00, false, DataType.N_X_ATTRIBUTE_IDENTIFIER);
             _codeTypeMapping[0x00] = new ZclDataType("N X Attribute information", typeof(AttributeInformation), 0x00, false, DataType.N_X_ATTRIBUTE_INFORMATION);
             _codeTypeMapping[0x00] = new ZclDataType("N X Attribute record", typeof(AttributeRecord), 0x00, false, DataType.N_X_ATTRIBUTE_RECORD);

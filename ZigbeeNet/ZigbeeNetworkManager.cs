@@ -471,7 +471,7 @@ namespace ZigbeeNet
             lock(typeof(ZigBeeNetworkManager)) {
                 foreach (ZigBeeNode node in networkNodes.Values)
                 {
-                    node.shutdown();
+                    node.Shutdown();
                 }
 
                 if (NetworkStateSerializer != null)
@@ -495,12 +495,13 @@ namespace ZigbeeNet
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
-        public ScheduledFuture<?> scheduleTask(Runnable runnableTask, long delay)
+        public Task ScheduleTask(Task runnableTask, long delay)
         {
             if (NetworkState != ZigBeeTransportState.ONLINE)
             {
                 return null;
             }
+
             return executorService.schedule(runnableTask, delay, TimeUnit.MILLISECONDS);
         }
 
@@ -513,9 +514,8 @@ namespace ZigbeeNet
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
-        public ScheduledFuture<?> rescheduleTask(ScheduledFuture<?> futureTask, Runnable runnableTask, long delay)
+        public Task RescheduleTask(Task runnableTask, long delay)
         {
-            futureTask.cancel(false);
             if (NetworkState != ZigBeeTransportState.ONLINE)
             {
                 return null;
@@ -1063,7 +1063,7 @@ namespace ZigbeeNet
 
             // If this is a broadcast, then we send it to our own address as well
             // This seems to be required for some stacks (eg ZNP)
-            if (ZigBeeBroadcastDestination.getBroadcastDestination(destination.Address) != null)
+            if (ZigBeeBroadcastDestination.GetBroadcastDestination(destination.Address) != null)
             {
                 command = new ManagementPermitJoiningRequest();
                 command.setPermitDuration(duration);

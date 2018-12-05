@@ -3,8 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using ZigbeeNet;
+using ZigbeeNet.App.Discovery;
 using ZigbeeNet.ZCL;
-using ZigbeeNet.ZDO.field;
+using ZigbeeNet.ZDO.Field;
 
 namespace ZigbeeNet
 {
@@ -26,12 +27,12 @@ namespace ZigbeeNet
         /**
          * The extended {@link IeeeAddress} for the node
          */
-        private IeeeAddress ieeeAddress;
+        public IeeeAddress IeeeAddress { get; private set; }
 
         /**
          * The 16 bit network address for the node
          */
-        private int networkAddress;
+        public int NetworkAddress { get; set; }
 
         /**
          * The {@link NodeDescriptor} for the node
@@ -52,7 +53,7 @@ namespace ZigbeeNet
         /**
          * List of associated devices for the node, specified in a {@link List} {@link Integer}
          */
-        private List<int> associatedDevices = new List<int>();
+        public List<int> AssociatedDevices = new List<int>();
 
         /**
          * List of neighbors for the node, specified in a {@link NeighborTable}
@@ -106,21 +107,12 @@ namespace ZigbeeNet
         public ZigBeeNode(ZigBeeNetworkManager networkManager, IeeeAddress ieeeAddress)
         {
             this.networkManager = networkManager;
-            this.ieeeAddress = ieeeAddress ?? throw new ArgumentException("IeeeAddress can't be null when creating ZigBeeNode");
+            this.IeeeAddress = ieeeAddress ?? throw new ArgumentException("IeeeAddress can't be null when creating ZigBeeNode");
             this.serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
 
             networkManager.addCommandListener(this);
         }
 
-        /**
-         * Gets the {@link IeeeAddress} of the node
-         *
-         * @return the {@link IeeeAddress} of the node
-         */
-        public IeeeAddress getIeeeAddress()
-        {
-            return ieeeAddress;
-        }
 
         /**
          * Sets the 16 bit network address of the node.
@@ -129,7 +121,7 @@ namespace ZigbeeNet
          */
         public void setNetworkAddress(Integer networkAddress)
         {
-            this.networkAddress = networkAddress;
+            this.NetworkAddress = networkAddress;
         }
 
         /**
@@ -139,7 +131,7 @@ namespace ZigbeeNet
          */
         public Integer getNetworkAddress()
         {
-            return networkAddress;
+            return NetworkAddress;
         }
 
         /**
@@ -308,7 +300,7 @@ namespace ZigbeeNet
             synchronized(this.bindingTable) {
                 this.bindingTable.clear();
                 this.bindingTable.addAll(bindingTable);
-                logger.debug("{}: Binding table updated: {}", ieeeAddress, bindingTable);
+                logger.debug("{}: Binding table updated: {}", IeeeAddress, bindingTable);
             }
         }
 
@@ -344,7 +336,7 @@ namespace ZigbeeNet
                 do
                 {
                     ManagementBindRequest bindingRequest = new ManagementBindRequest();
-                    bindingRequest.setDestinationAddress(new ZigBeeEndpointAddress(networkAddress));
+                    bindingRequest.setDestinationAddress(new ZigBeeEndpointAddress(NetworkAddress));
                     bindingRequest.setStartIndex(index);
 
                     CommandResult result = networkManager.unicast(bindingRequest, new ManagementBindRequest()).get();

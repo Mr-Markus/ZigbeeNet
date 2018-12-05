@@ -5,7 +5,7 @@ using ZigbeeNet.Serialization;
 using ZigbeeNet.ZCL;
 using ZigbeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZDO.field
+namespace ZigbeeNet.ZDO.Field
 {
     public class NodeDescriptor
     {

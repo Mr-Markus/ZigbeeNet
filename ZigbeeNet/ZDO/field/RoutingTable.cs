@@ -4,7 +4,7 @@ using System.Text;
 using ZigbeeNet.Serialization;
 using ZigbeeNet.ZCL.Protocol;
 
-namespace ZigbeeNet.ZDO.field
+namespace ZigbeeNet.ZDO.Field
 {
     public class RoutingTable
     {

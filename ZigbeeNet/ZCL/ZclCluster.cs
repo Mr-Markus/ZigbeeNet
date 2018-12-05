@@ -212,7 +212,7 @@ namespace ZigbeeNet.ZCL
                 return null;
             }
 
-            if (!result.isSuccess())
+            if (!result.IsSuccess())
             {
                 return null;
             }

@@ -4,14 +4,12 @@ using System.Text;
 using ZigbeeNet.Serialization;
 using ZigbeeNet.ZCL;
 using ZigbeeNet.ZCL.Protocol;
-using static ZigbeeNet.ZDO.field.NodeDescriptor;
+using static ZigbeeNet.ZDO.Field.NodeDescriptor;
 
-namespace ZigbeeNet.ZDO.field
+namespace ZigbeeNet.ZDO.Field
 {
     /**
      * Class representing the ZigBee neighbor table
-     *
-     *
      */
     public class NeighborTable
     {
