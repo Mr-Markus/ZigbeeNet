@@ -13,21 +13,13 @@ namespace ZigbeeNet.ZCL.Fileld
         private byte[] _value;
 
         /**
-         * Constructor taking a byte[] array
-         */
-        public ByteArray(byte[] array)
-        {
-            _value = array;
-        }
-
-        /**
          * Constructor taking part of an existing integer array
          *
          * @param payload the existing integer array
          * @param from the start offset of the array (inclusive)
          * @param to the end offset of the array (exclusive)
          */
-        public ByteArray(int[] payload, int start, int finish)
+        public ByteArray(byte[] payload, int start, int finish)
         {
             _value = new byte[finish - start];
             int outCnt = 0;
@@ -44,7 +36,7 @@ namespace ZigbeeNet.ZCL.Fileld
          * @param from the start offset of the array (inclusive)
          * @param to the end offset of the array (exclusive)
          */
-        public ByteArray(int[] payload)
+        public ByteArray(byte[] payload)
             : this(payload, 0, payload.Length)
         {
         }
