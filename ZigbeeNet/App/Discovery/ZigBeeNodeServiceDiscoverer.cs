@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ZigbeeNet.App.Discovery
 {
@@ -57,39 +58,39 @@ namespace ZigbeeNet.App.Discovery
         /**
          * The maximum number of retries to perform before failing the request
          */
-        private readonly int maxBackoff = DEFAULT_MAX_BACKOFF;
+        private readonly int _maxBackoff = DEFAULT_MAX_BACKOFF;
 
         /**
          * The minimum number of milliseconds to wait before retrying the request
          */
-        private readonly int retryPeriod = DEFAULT_RETRY_PERIOD;
+        private readonly int _retryPeriod = DEFAULT_RETRY_PERIOD;
 
         /**
          * Flag to indicate if the device supports the {@link ManagementLqiRequest}
          * This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
          */
-        private bool supportsManagementLqi = true;
+        private bool _supportsManagementLqi = true;
 
         /**
          * Flag to indicate if the device supports the {@link ManagementRoutingRequest}.
          * This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
          */
-        private bool supportsManagementRouting = true;
+        private bool _supportsManagementRouting = true;
 
         /**
          * The task being run
          */
-        private ScheduledFuture<?> futureTask;
+        private Task _futureTask;
 
         /**
          * Record of the last time we started a service discovery or update
          */
-        private DateTime lastDiscoveryStarted;
+        private DateTime _lastDiscoveryStarted;
 
         /**
          * Record of the last time we completed a service discovery or update
          */
-        private DateTime lastDiscoveryCompleted;
+        private DateTime _lastDiscoveryCompleted;
 
         /**
          *
@@ -109,7 +110,7 @@ namespace ZigbeeNet.App.Discovery
         /**
          * The list of tasks we need to complete
          */
-        private Queue<NodeDiscoveryTask> discoveryTasks = new Queue<NodeDiscoveryTask>();
+        private Queue<NodeDiscoveryTask> _discoveryTasks = new Queue<NodeDiscoveryTask>();
 
         /**
          * Creates the discovery class
@@ -122,7 +123,7 @@ namespace ZigbeeNet.App.Discovery
             this.NetworkManager = networkManager;
             this.Node = node;
 
-            retryPeriod = DEFAULT_RETRY_PERIOD + new Random().Next(RETRY_RANDOM_TIME);
+            _retryPeriod = DEFAULT_RETRY_PERIOD + new Random().Next(RETRY_RANDOM_TIME);
         }
 
         /**
@@ -135,18 +136,18 @@ namespace ZigbeeNet.App.Discovery
          *
          * @param newTasks a set of {@link NodeDiscoveryTask}s to be performed
          */
-        private void startDiscovery(List<NodeDiscoveryTask> newTasks)
+        private void StartDiscovery(List<NodeDiscoveryTask> newTasks)
         {
             // Tasks are managed in a queue. The worker thread will only remove the task from the queue once the task is
             // complete. When no tasks are left in the queue, the worker thread will exit.
-            lock(discoveryTasks)
+            lock(_discoveryTasks)
             {
                 // Remove any tasks that we know are not supported by this device
-                if (!supportsManagementLqi && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
+                if (!_supportsManagementLqi && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
                 {
                     newTasks.Remove(NodeDiscoveryTask.NEIGHBORS);
                 }
-                if (!supportsManagementRouting && newTasks.Contains(NodeDiscoveryTask.ROUTES))
+                if (!_supportsManagementRouting && newTasks.Contains(NodeDiscoveryTask.ROUTES))
                 {
                     newTasks.Remove(NodeDiscoveryTask.ROUTES);
                 }
@@ -158,14 +159,14 @@ namespace ZigbeeNet.App.Discovery
                     return;
                 }
 
-                bool startWorker = discoveryTasks.Count == 0;
+                bool startWorker = _discoveryTasks.Count == 0;
 
                 // Add new tasks, avoiding any duplication
                 foreach (NodeDiscoveryTask newTask in newTasks)
                 {
-                    if (!discoveryTasks.Contains(newTask))
+                    if (!_discoveryTasks.Contains(newTask))
                     {
-                        discoveryTasks.Enqueue(newTask);
+                        _discoveryTasks.Enqueue(newTask);
                     }
                 }
 
@@ -175,14 +176,14 @@ namespace ZigbeeNet.App.Discovery
                 }
                 else
                 {
-                    lastDiscoveryStarted = DateTime.UtcNow;
+                    _lastDiscoveryStarted = DateTime.UtcNow;
                 }
             }
 
             //logger.debug("{}: Node SVC Discovery: scheduled {}", Node.getIeeeAddress(), discoveryTasks);
             Runnable runnable = new NodeServiceDiscoveryTask();
 
-            futureTask = NetworkManager.ScheduleTask(runnable, new Random().Next(retryPeriod));
+            _futureTask = NetworkManager.ScheduleTask(runnable, new Random().Next(_retryPeriod));
         }
 
         /**
@@ -190,9 +191,9 @@ namespace ZigbeeNet.App.Discovery
          */
         public void stopDiscovery()
         {
-            if (futureTask != null)
+            if (_futureTask != null)
             {
-                futureTask.cancel(true);
+                _futureTask.cancel(true);
             }
             //logger.debug("{}: Node SVC Discovery: stopped", Node.getIeeeAddress());
         }
@@ -202,7 +203,7 @@ namespace ZigbeeNet.App.Discovery
          */
         public int getMaxBackoff()
         {
-            return maxBackoff;
+            return _maxBackoff;
         }
 
         /**
