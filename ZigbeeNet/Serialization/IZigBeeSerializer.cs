@@ -22,6 +22,6 @@ namespace ZigbeeNet.Serialization
         /// Returnss a copy of the payload
         /// </summary>
         /// <returns></returns>
-        int[] Payload { get; }
+        byte[] Payload { get; }
     }
 }

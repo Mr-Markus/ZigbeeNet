@@ -10,7 +10,7 @@ namespace ZigbeeNet.ZCL
     {
         public IZigBeeSerializer Serializer { get; private set; }
 
-        public int[] Payload
+        public byte[] Payload
         {
             get => Serializer.Payload;
         }
