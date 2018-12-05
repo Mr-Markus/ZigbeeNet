@@ -41,32 +41,78 @@ namespace ZigbeeNet.Transport
         /// <summary>
         /// Returns the IeeeAddress of the local device
         /// </summary>
-        ZigBeeAddress64 IeeeAddress { get; set; }
+        IeeeAddress IeeeAddress { get; set; }
+
+        /// <summary>
+        /// Returns the network address of the local device
+        /// May return null if the address is not known.
+        /// </summary>
+        ushort NwkAddress { get; set; }
 
         /// <summary>
         /// Gets the current ZigBee RF channel
         /// </summary>
-        ZigBeeChannel ZigBeeChannel { get; set; }
+        ZigBeeChannel ZigBeeChannel { get; }
 
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
         /// </summary>
-        ZigbeeAddress16 PanID { get; set; }
+        ZigBeeAddress16 PanID { get; }
 
         /// <summary>
         /// Gets the ZigBee Extended PAN ID currently in use by the transport
         /// </summary>
-        ZigBeeAddress64 ExtendedPanId { get; set; }
+        ExtendedPanId  ExtendedPanId { get; }
 
         /// <summary>
         /// The ZigBee network security key
         /// </summary>
-        ZigBeeKey ZigBeeNetworkKey { get; set; }
+        ZigBeeKey ZigBeeNetworkKey { get; }
 
         /// <summary>
         /// The Trust Center link security key
         /// </summary>
-        ZigBeeKey TcLinkKey { get; set; }
+        ZigBeeKey TcLinkKey { get; }
+
+        ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel);
+
+        /// <summary>
+        /// Sets the ZigBee PAN ID to the specified value. The range of the PAN ID is 0 to 0x3FFF.
+        /// Additionally a value of 0xFFFF is allowed to indicate the user doesn't care and a random value
+        /// can be set by the transport.
+        /// 
+        /// Note that this method may only be called following the initialize call, and before the startup
+        /// </summary>
+        /// <param name="panId">the new PAN ID</param>
+        /// <returns>ZigBeeStatus with the status of function</returns>
+        ZigBeeStatus SetZigBeePanId(ushort panId);
+
+        /// <summary>
+        /// Sets the ZigBee Extended PAN ID to the specified value
+        /// 
+        /// Note that this method may only be called following the initialize call, and before the startup call
+        /// </summary>
+        /// <param name="panId">the new ExtendedPanId</param>
+        /// <returns>ZigBeeStatus} with the status of function</returns>
+        ZigBeeStatus SetZigBeeExtendedPanId(ExtendedPanId panId);
+
+        /// <summary>
+        /// Set the current network key in use by the system.
+        /// 
+        /// Note that this method may only be called following the initialize call, and before the startup call
+        /// </summary>
+        /// <param name="key">the new network key as ZigBeeKey</param>
+        /// <returns>with the status of function</returns>
+        ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key);
+
+        /// <summary>
+        /// Set the current link key in use by the system.
+        /// 
+        ///  Note that this method may only be called following the initialize call, and before the startup call
+        /// </summary>
+        /// <param name="key">the new link key as ZigBeeKey</param>
+        /// <returns>ZigBeeStatus with the status of function</returns>
+        ZigBeeStatus SetTcLinkKey(ZigBeeKey key);
 
         ///  <summary>
         /// Sends ZigBee Cluster Library command without waiting for response. Responses are provided to the framework
@@ -101,6 +147,6 @@ namespace ZigbeeNet.Transport
         /// TransportConfigResult#ERROR_INVALID_VALUE is returned in the value status
         /// </summary>
         /// <param name="configuration"></param>
-        //void UpdateTransportConfig(TransportConfig configuration);
+        void UpdateTransportConfig(TransportConfig configuration);
     }
 }

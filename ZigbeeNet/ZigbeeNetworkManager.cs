@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ZigbeeNet;
 using ZigbeeNet.App;
@@ -99,12 +101,12 @@ namespace ZigbeeNet
         /**
          * {@link AtomicInteger} used to generate transaction sequence numbers
          */
-        private static AtomicInteger sequenceNumber = new AtomicInteger();
+        private static volatile int _sequenceNumber;
 
         /**
          * {@link AtomicInteger} used to generate APS header counters
          */
-        private static AtomicInteger apsCounter = new AtomicInteger();
+        private static volatile int _apsCounter;
 
         /**
          * The network state serializer
@@ -133,7 +135,7 @@ namespace ZigbeeNet
         /**
          * The listeners of the ZigBee network state.
          */
-        private List<IZigBeeNetworkStateListener> stateListeners = new List<IZigBeeNetworkStateListener>();
+        private ReadOnlyCollection<IZigBeeNetworkStateListener> _stateListeners;
 
         /**
          * A Set used to remember if node discovery has been completed. This is used to manage the lifecycle notifications.
@@ -208,16 +210,14 @@ namespace ZigbeeNet
             Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> transitions = new Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>>();
 
             //transitions.put(null, new HashSet<>(Arrays.asList(ZigBeeTransportState.UNINITIALISED)));
-            transitions.put(ZigBeeTransportState.UNINITIALISED,
-                    new HashSet<>(Arrays.asList(ZigBeeTransportState.INITIALISING, ZigBeeTransportState.OFFLINE)));
-            transitions.put(ZigBeeTransportState.INITIALISING,
-                    new HashSet<>(Arrays.asList(ZigBeeTransportState.ONLINE, ZigBeeTransportState.OFFLINE)));
-            transitions.put(ZigBeeTransportState.ONLINE, new HashSet<>(Arrays.asList(ZigBeeTransportState.OFFLINE)));
-            transitions.put(ZigBeeTransportState.OFFLINE, new HashSet<>(Arrays.asList(ZigBeeTransportState.ONLINE)));
+            transitions[ZigBeeTransportState.UNINITIALISED] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.INITIALISING, ZigBeeTransportState.OFFLINE });
+            transitions[ZigBeeTransportState.INITIALISING] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.ONLINE, ZigBeeTransportState.OFFLINE });
+            transitions[ZigBeeTransportState.ONLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.OFFLINE });
+            transitions[ZigBeeTransportState.OFFLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.ONLINE });
 
-            validStateTransitions = Collections.unmodifiableMap(new HashMap<>(transitions));
+            validStateTransitions = transitions;
 
-            this.Transport = transport;
+            Transport = transport;
 
             transport.setZigBeeTransportReceive(this);
         }
@@ -262,12 +262,12 @@ namespace ZigbeeNet
             }
             SetNetworkState(ZigBeeTransportState.INITIALISING);
 
-            addLocalNode();
+            AddLocalNode();
 
             return ZigBeeStatus.SUCCESS;
         }
 
-        private void addLocalNode()
+        private void AddLocalNode()
         {
             ushort nwkAddress = Transport.NwkAddress;
             IeeeAddress ieeeAddress = Transport.IeeeAddress;
@@ -305,7 +305,7 @@ namespace ZigbeeNet
          */
         public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel)
         {
-            return Transport.setZigBeeChannel(channel);
+            return Transport.SetZigBeeChannel(channel);
         }
 
         /**
@@ -332,13 +332,13 @@ namespace ZigbeeNet
          * @param panId the new PAN ID
          * @return {@link ZigBeeStatus} with the status of function
          */
-        public ZigBeeStatus SetZigBeePanId(int panId)
+        public ZigBeeStatus SetZigBeePanId(ushort panId)
         {
             if (panId < 0 || panId > 0xfffe)
             {
                 return ZigBeeStatus.INVALID_ARGUMENTS;
             }
-            return Transport.setZigBeePanId(panId);
+            return Transport.SetZigBeePanId(panId);
         }
 
         /**
@@ -379,7 +379,7 @@ namespace ZigbeeNet
          */
         public ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key)
         {
-            return Transport.ZigBeeNetworkKey(key);
+            return Transport.SetZigBeeNetworkKey(key);
         }
 
         /**
@@ -406,7 +406,7 @@ namespace ZigbeeNet
          */
         public ZigBeeStatus SetZigBeeLinkKey(ZigBeeKey key)
         {
-            return Transport.setTcLinkKey(key);
+            return Transport.SetTcLinkKey(key);
         }
 
         /**
@@ -418,7 +418,7 @@ namespace ZigbeeNet
         {
             get
             {
-                return Transport.getTcLinkKey();
+                return Transport.TcLinkKey;
             }
         }
 
@@ -492,20 +492,6 @@ namespace ZigbeeNet
          * Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
          *
          * @param runnableTask the {@link Runnable} to execute
-         */
-        public void executeTask(Runnable runnableTask)
-        {
-            if (NetworkState != ZigBeeTransportState.ONLINE)
-            {
-                return;
-            }
-            executorService.execute(runnableTask);
-        }
-
-        /**
-         * Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
-         *
-         * @param runnableTask the {@link Runnable} to execute
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
@@ -572,7 +558,7 @@ namespace ZigbeeNet
 
             if (command.TransactionId == null)
             {
-                command.TransactionId = sequenceNumber.getAndIncrement() & 0xff;
+                command.TransactionId = (byte)(((byte)Interlocked.Increment(ref _sequenceNumber)) & 0xff);
             }
 
             // Set the source address - should probably be improved!
@@ -583,7 +569,7 @@ namespace ZigbeeNet
             _logger.Debug("TX CMD: {}", command);
 
             apsFrame.Cluster = command.ClusterId;
-            apsFrame.ApsCounter = apsCounter.getAndIncrement() & 0xff;
+            apsFrame.ApsCounter = (byte)(((byte)Interlocked.Increment(ref _apsCounter)) & 0xff);
             apsFrame.SecurityEnabled = command.ApsSecurity;
 
             // TODO: Set the source address correctly?
@@ -663,7 +649,7 @@ namespace ZigbeeNet
 
             Transport.SendCommand(apsFrame);
 
-            return command.TransactionId();
+            return command.TransactionId;
         }
 
 
@@ -732,7 +718,7 @@ namespace ZigbeeNet
 
         private ZigBeeCommand receiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
-            ZdoCommandType commandType = ZdoCommandType.getValueById(apsFrame.getCluster());
+            ZdoCommandType commandType = ZdoCommandType.getValueById(apsFrame.Cluster);
             if (commandType == null)
             {
                 return null;
@@ -826,8 +812,7 @@ namespace ZigbeeNet
         }
 
 
-        public void nodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress,
-                IeeeAddress ieeeAddress)
+        public void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, ulong ieeeAddress)
         {
             _logger.Debug("{}: nodeStatusUpdate - node status is {}, network address is {}.", ieeeAddress, deviceStatus,
                     networkAddress);
@@ -862,17 +847,23 @@ namespace ZigbeeNet
             }
 
             // Notify the listeners
-            synchronized(this) {
+            lock(announceListeners) {
                 foreach (IZigBeeAnnounceListener announceListener in announceListeners)
                 {
-                    NotificationService.execute(new Runnable()
-                    {
-
-
-                    public void run()
+                    Task.Run(() =>
                     {
                         announceListener.DeviceStatusUpdate(deviceStatus, networkAddress, ieeeAddress);
-                    }
+
+                    });
+
+                    //NotificationService.execute(new Runnable()
+                    //{
+
+
+                    //public void run()
+                    //{
+                    //    announceListener.DeviceStatusUpdate(deviceStatus, networkAddress, ieeeAddress);
+                    //}
                 }
             }
         }
@@ -884,9 +875,9 @@ namespace ZigbeeNet
          */
         public void AddNetworkStateListener(IZigBeeNetworkStateListener stateListener)
         {
-            List<IZigBeeNetworkStateListener> modifiedStateListeners = new List<IZigBeeNetworkStateListener>(stateListeners);
+            List<IZigBeeNetworkStateListener> modifiedStateListeners = new List<IZigBeeNetworkStateListener>(_stateListeners);
             modifiedStateListeners.Add(stateListener);
-            stateListeners = Collections.unmodifiableList(modifiedStateListeners);
+            _stateListeners = new List<IZigBeeNetworkStateListener>(modifiedStateListeners).AsReadOnly();
         }
 
         /**
@@ -896,30 +887,35 @@ namespace ZigbeeNet
          */
         public void RemoveNetworkStateListener(IZigBeeNetworkStateListener stateListener)
         {
-            List<IZigBeeNetworkStateListener> modifiedStateListeners = new ArrayList<IZigBeeNetworkStateListener>(stateListeners);
+            List<IZigBeeNetworkStateListener> modifiedStateListeners = new List<IZigBeeNetworkStateListener>(_stateListeners);
             modifiedStateListeners.Remove(stateListener);
-            stateListeners = Collections.unmodifiableList(modifiedStateListeners);
+            _stateListeners = new List<IZigBeeNetworkStateListener>(modifiedStateListeners).AsReadOnly();
         }
 
 
         public void SetNetworkState(ZigBeeTransportState state)
         {
-            NotificationService.execute(new Runnable()
+            Task.Run(() =>
             {
+                SetNetworkStateRunnable(state);
+            });
+
+            //NotificationService.execute(new Runnable()
+            //{
 
 
-                //public void run()
-                //{
-                //    setNetworkStateRunnable(state);
-                //}
-            }
+            //    //public void run()
+            //    //{
+            //    //    setNetworkStateRunnable(state);
+            //    //}
+            //}
         }
 
-        private void setNetworkStateRunnable(ZigBeeTransportState state)
+        private void SetNetworkStateRunnable(ZigBeeTransportState state)
         {
             synchronized(this) {
                 // Only notify users of state changes
-                if (state.equals(NetworkState))
+                if (state == NetworkState)
                 {
                     return;
                 }
@@ -937,11 +933,11 @@ namespace ZigbeeNet
                 // and ensure that the local node is added
                 if (state == ZigBeeTransportState.ONLINE)
                 {
-                    LocalNwkAddress = Transport.getNwkAddress();
-                    LocalIeeeAddress = Transport.getIeeeAddress();
+                    LocalNwkAddress = Transport.NwkAddress;
+                    LocalIeeeAddress = Transport.IeeeAddress;
 
                     // Make sure that we know the local node, and that the network address is correct.
-                    addLocalNode();
+                    AddLocalNode();
 
                     // Globally update the state
                     NetworkState = state;
@@ -969,7 +965,7 @@ namespace ZigbeeNet
                 }
 
                 // Now that everything is added and started, notify the listeners that the state has updated
-                foreach (IZigBeeNetworkStateListener stateListener in stateListeners)
+                foreach (IZigBeeNetworkStateListener stateListener in _stateListeners)
                 {
                     NotificationService.execute(new Runnable()
                     {
@@ -1033,7 +1029,7 @@ namespace ZigbeeNet
          */
         public ZigBeeStatus PermitJoin(int duration)
         {
-            return permitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_ROUTERS_AND_COORD.getKey()),
+            return PermitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_ROUTERS_AND_COORD.getKey()),
                     duration);
         }
 
@@ -1048,7 +1044,7 @@ namespace ZigbeeNet
          *            value of 255 is not permitted and will be ignored.
          * @return {@link ZigBeeStatus} with the status of function
          */
-        public ZigBeeStatus permitJoin(ZigBeeEndpointAddress destination, int duration)
+        public ZigBeeStatus PermitJoin(ZigBeeEndpointAddress destination, int duration)
         {
             if (duration < 0 || duration >= 255)
             {
@@ -1458,7 +1454,7 @@ namespace ZigbeeNet
                 // If the network is online, start the extension
                 if (NetworkState == ZigBeeTransportState.ONLINE)
                 {
-                    extension.ExtensionStartup();
+                    extension.ExtensionStartup(this);
                 }
             }
         }
