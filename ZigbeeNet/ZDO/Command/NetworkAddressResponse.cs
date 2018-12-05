@@ -60,7 +60,7 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             NwkAddrAssocDevList = new List<int>();
 
-            Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS);
+            Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
 
             if (Status != ZdoStatus.SUCCESS)
             {

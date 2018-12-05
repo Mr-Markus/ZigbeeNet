@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL.Clusters
 {
@@ -127,7 +128,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param maxInterval {@link int} maximum reporting period
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOnOffReporting(final int minInterval, final int maxInterval)
+        public Future<CommandResult> setOnOffReporting(int minInterval, int maxInterval)
         {
             return setReporting(attributes.get(ATTR_ONOFF), minInterval, maxInterval);
         }
@@ -187,7 +188,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
          * @return the {@link Boolean} attribute value, or null on error
          */
-        public Boolean getGlobalSceneControl(final long refreshPeriod)
+        public Boolean getGlobalSceneControl(long refreshPeriod)
         {
             if (attributes.get(ATTR_GLOBALSCENECONTROL).isLastValueCurrent(refreshPeriod))
             {
@@ -207,7 +208,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param offTime the {@link Integer} attribute value to be set
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOffTime(final Object value)
+        public Future<CommandResult> setOffTime(Object value)
         {
             return write(attributes.get(ATTR_OFFTIME), value);
         }
@@ -243,7 +244,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
          * @return the {@link Integer} attribute value, or null on error
          */
-        public Integer getOffTime(final long refreshPeriod)
+        public Integer getOffTime(long refreshPeriod)
         {
             if (attributes.get(ATTR_OFFTIME).isLastValueCurrent(refreshPeriod))
             {
@@ -267,7 +268,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param offWaitTime the {@link Integer} attribute value to be set
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOffWaitTime(final Object value)
+        public Future<CommandResult> setOffWaitTime(Object value)
         {
             return write(attributes.get(ATTR_OFFWAITTIME), value);
         }
@@ -311,7 +312,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
          * @return the {@link Integer} attribute value, or null on error
          */
-        public Integer getOffWaitTime(final long refreshPeriod)
+        public Integer getOffWaitTime(long refreshPeriod)
         {
             if (attributes.get(ATTR_OFFWAITTIME).isLastValueCurrent(refreshPeriod))
             {

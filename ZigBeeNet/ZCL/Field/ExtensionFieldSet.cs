@@ -4,14 +4,14 @@ using System.Text;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigBeeNet.ZCL.Fileld
+namespace ZigBeeNet.ZCL.Field
 {
     public class ExtensionFieldSet : IZclListItemField
     {
         /**
          * The cluster id.
          */
-        public int ClusterId { get; private set; }
+        public byte ClusterId { get; private set; }
 
         /**
          * The data length.
@@ -21,7 +21,7 @@ namespace ZigBeeNet.ZCL.Fileld
         /**
          * The extension data.
          */
-        public int[] Data { get; private set; }
+        public byte[] Data { get; private set; }
 
 
         public void Serialize(IZigBeeSerializer serializer)
@@ -32,8 +32,8 @@ namespace ZigBeeNet.ZCL.Fileld
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            ClusterId = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER);
-            Data = (int[])deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER_ARRAY);
+            ClusterId = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Data = (byte[])deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER_ARRAY));
         }
 
         public override string ToString()

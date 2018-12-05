@@ -4,9 +4,9 @@ using System.Text;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigBeeNet.ZCL.Fileld
+namespace ZigBeeNet.ZCL.Field
 {
-    public class Unsigned8BitInteger : IZclListItemField
+    public class Unsigned16BitInteger : IZclListItemField
     {
     /**
      * The attribute identifier.
@@ -16,17 +16,17 @@ namespace ZigBeeNet.ZCL.Fileld
 
     public void Serialize(IZigBeeSerializer serializer)
     {
-        serializer.AppendZigBeeType(Value, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        serializer.AppendZigBeeType(Value, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
     }
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        Value = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        Value = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
     }
 
     public override string ToString()
     {
-        return "Unsigned 8 Bit Integer: value=" + Value;
+        return "Unsigned 16 Bit Integer: value=" + Value;
     }
 }
 }

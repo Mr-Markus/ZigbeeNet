@@ -78,7 +78,7 @@ namespace ZigBeeNet.ZDO.Command
             {
                 for (int cnt = 0; cnt < routingTableListCount; cnt++)
                 {
-                    RoutingTableList.Add((RoutingTable)deserializer.Deserialize(ZclDataType.Get(DataType.ROUTING_TABLE));
+                    RoutingTableList.Add((RoutingTable)deserializer.Deserialize(ZclDataType.Get(DataType.ROUTING_TABLE)));
                 }
             }
         }

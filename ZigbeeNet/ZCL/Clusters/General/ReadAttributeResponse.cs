@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL.Clusters.General

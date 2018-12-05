@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>ZigbeeNet</RootNamespace>
-    <AssemblyName>ZigbeeNet</AssemblyName>
+    <RootNamespace>ZigBeeNet</RootNamespace>
+    <AssemblyName>ZigBeeNet</AssemblyName>
   </PropertyGroup>
 
   <Import Project="..\ZigbeeNet\ZigbeeNet.projitems" Label="Shared" />

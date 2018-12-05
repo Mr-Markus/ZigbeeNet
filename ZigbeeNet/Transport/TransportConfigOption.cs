@@ -71,6 +71,6 @@ namespace ZigBeeNet.Transport
          * <p>
          * Value must be {@link Integer}
          */
-        RADIO_TX_POWER;
+        RADIO_TX_POWER
     }
 }

@@ -6,6 +6,6 @@ namespace ZigBeeNet
 {
     public interface IZigBeeAnnounceListener
     {
-        void DeviceStatusUpdate(ZigBeeNodeStatus deviceStatus, ZigbeeAddress16 networkAddress, ZigBeeAddress64 ieeeAddress);
+        void DeviceStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, IeeeAddress ieeeAddress);
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigBeeNet.ZCL.Fileld
+namespace ZigBeeNet.ZCL.Field
 {
     public class WriteAttributeStatusRecord : IZclListItemField
     {

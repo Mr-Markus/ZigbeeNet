@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App\ClusterMatcher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App\Discovery\ZigBeeDiscoveryExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\Discovery\ZigBeeNodeServiceDiscoverer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\IZigBeeApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\IZigBeeNetworkExtension.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZclClusterDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZigBeeEndpointDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\ZigBeeDongleTiCc2531.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\ZigBeeNodeDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\ZigBeeCommandNotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeAnnounceListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeCommandListener.cs" />
@@ -77,20 +79,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\ReportAttributesCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOnOffCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ExtendedPanId.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\AttributeInformation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\AttributeRecord.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\AttributeReport.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\AttributeReportingConfigurationRecord.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\AttributeStatusRecord.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\BayteArray.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\ExtendedAttributeInformation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\ExtensionFieldSet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\NeighborInformation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\ReadAttributeStatusRecordcs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\Unsigned8BitInteger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\Unsigned16BitInteger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\WriteAttributeRecord.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Fileld\WriteAttributeStatusRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeReport.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeReportingConfigurationRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeStatusRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\BayteArray.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\ExtendedAttributeInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\ExtensionFieldSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\NeighborInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\ReadAttributeStatusRecordcs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\Unsigned8BitInteger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\Unsigned16BitInteger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\WriteAttributeRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\WriteAttributeStatusRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\IZclAttributeListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\IZclCommandListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclAttributeNormalizer.cs" />
@@ -137,7 +139,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IHardwareChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\IPacketHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeAddress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeAddress16.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNetwork.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CC\Query.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\ByteHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\DoubleByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Options.cs" />
@@ -225,7 +225,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclHeader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclPacket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\ZdoStatus.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZigBeeService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeStatus.cs" />
   </ItemGroup>
   <ItemGroup>

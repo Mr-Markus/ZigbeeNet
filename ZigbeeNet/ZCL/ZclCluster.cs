@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.DAO;
-using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL

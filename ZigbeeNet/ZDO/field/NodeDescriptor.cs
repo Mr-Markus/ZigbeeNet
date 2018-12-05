@@ -21,7 +21,7 @@ namespace ZigBeeNet.ZDO.Field
         public bool IsuserDescriptorAvailable { get; private set; }
 
         public List<FrequencyBandType> FrequencyBands { get; } = new List<FrequencyBandType>();
-        private List<MacCapabilitiesType> MacCapabilities { get; } = new List<MacCapabilitiesType>();
+        public List<MacCapabilitiesType> MacCapabilities { get; } = new List<MacCapabilitiesType>();
         public bool IsextendedEndpointListAvailable { get; private set; }
         public bool ExtendedSimpleDescriptorListAvailable { get; private set; }
         public int StackCompliance { get; private set; }
@@ -200,7 +200,7 @@ namespace ZigBeeNet.ZDO.Field
          *
          * @param serializer the {@link ZclFieldSerializer} used to serialize
          */
-        public int[] Serialize(ZclFieldSerializer serializer)
+        public byte[] Serialize(ZclFieldSerializer serializer)
         {
             // Serialize the fields
             serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
@@ -219,7 +219,7 @@ namespace ZigBeeNet.ZDO.Field
          *
          * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
          */
-        public void deserialize(IZigBeeDeserializer deserializer)
+        public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
             // logicalType = (LogicalType) deserializer.deserialize(ZclDataType.SIGNED_8_BIT_INTEGER);

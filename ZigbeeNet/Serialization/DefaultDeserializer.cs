@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL;
-using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZDO;
-using ZigBeeNet.ZDO.field;
+using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.Serialization
 {
@@ -81,7 +81,15 @@ namespace ZigBeeNet.Serialization
                     }
                     try
                     {
-                        value[0] = new String(Arrays.copyOfRange(bytes, 0, length), "UTF-8");
+                        int len = length - 0;
+                        byte[] dest = new byte[len];
+                        // note i is always from 0
+                        for (int i = 0; i < len; i++)
+                        {
+                            dest[i] = bytes[0 + i]; // so 0..n = 0+x..n+x
+                        }
+
+                        value[0] = Encoding.Default.GetString(dest);
                     }
                     catch (Exception e)
                     {
@@ -231,7 +239,7 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.NODE_DESCRIPTOR:
                     NodeDescriptor nodeDescriptor = new NodeDescriptor();
-                    nodeDescriptor.deserialize(this);
+                    nodeDescriptor.Deserialize(this);
                     value[0] = nodeDescriptor;
                     break;
                 case DataType.POWER_DESCRIPTOR:
@@ -246,7 +254,7 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.SIMPLE_DESCRIPTOR:
                     SimpleDescriptor simpleDescriptor = new SimpleDescriptor();
-                    simpleDescriptor.deserialize(this);
+                    simpleDescriptor.Deserialize(this);
                     value[0] = simpleDescriptor;
                     break;
                 case DataType.ZCL_STATUS:

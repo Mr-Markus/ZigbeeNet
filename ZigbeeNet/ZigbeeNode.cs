@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using ZigbeeNet.DAO;
 using ZigBeeNet;
 using ZigBeeNet.App.Discovery;
+using ZigBeeNet.DAO;
+using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO.Field;
+using static ZigBeeNet.App.Discovery.ZigBeeNodeServiceDiscoverer;
+using static ZigBeeNet.ZDO.Field.NodeDescriptor;
+using static ZigBeeNet.ZDO.Field.PowerDescriptor;
 
 namespace ZigBeeNet
 {
@@ -19,12 +27,14 @@ namespace ZigBeeNet
  */
     public class ZigBeeNode : IZigBeeCommandListener
     {
+        private readonly ILog _logger = LogProvider.For<ZigBeeNode>();
+
         /**
          * The {@link Logger}.
          */
         //private Logger logger = LoggerFactory.getLogger(ZigBeeNode.class);
 
-        private DateTime _lastUpdateTime;
+        public DateTime LastUpdateTime { get; set; }
 
         /**
          * The extended {@link IeeeAddress} for the node
@@ -34,7 +44,7 @@ namespace ZigBeeNet
         /**
          * The 16 bit network address for the node
          */
-        public int NetworkAddress { get; set; }
+        public ushort NetworkAddress { get; set; }
 
         /**
          * The {@link NodeDescriptor} for the node
@@ -54,7 +64,7 @@ namespace ZigBeeNet
         /**
          * List of associated devices for the node, specified in a {@link List} {@link Integer}
          */
-        public List<int> AssociatedDevices = new List<int>();
+        public List<int> AssociatedDevices { get; } = new List<int>();
 
         /**
          * List of neighbors for the node, specified in a {@link NeighborTable}
@@ -86,7 +96,7 @@ namespace ZigBeeNet
          * The endpoint listeners of the ZigBee network. Registered listeners will be
          * notified of additions, deletions and changes to {@link ZigBeeEndpoint}s.
          */
-        private List<IZigBeeNetworkEndpointListener> endpointListeners = new System.Collections.ObjectModel.ReadOnlyCollection<IZigBeeNetworkEndpointListener>(new List<IZigBeeNetworkEndpointListener>());
+        private ReadOnlyCollection<IZigBeeNetworkEndpointListener> endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(new List<IZigBeeNetworkEndpointListener>());
 
         /**
          * The {@link ZigBeeNetworkManager} that manages this node
@@ -111,68 +121,12 @@ namespace ZigBeeNet
             this.IeeeAddress = ieeeAddress ?? throw new ArgumentException("IeeeAddress can't be null when creating ZigBeeNode");
             this.serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
 
-            networkManager.addCommandListener(this);
+            networkManager.AddCommandListener(this);
         }
 
-
-        /**
-         * Sets the 16 bit network address of the node.
-         *
-         * @param networkAddress
-         */
-        public void setNetworkAddress(Integer networkAddress)
+        public void Shutdown()
         {
-            this.NetworkAddress = networkAddress;
-        }
 
-        /**
-         * Gets the 16 bit network address of the node.
-         *
-         * @return networkAddress
-         */
-        public Integer getNetworkAddress()
-        {
-            return NetworkAddress;
-        }
-
-        /**
-         * Sets the {@link NodeDescriptor} for this node.
-         *
-         * @param nodeDescriptor the new {@link NodeDescriptor}
-         */
-        public void setNodeDescriptor(NodeDescriptor nodeDescriptor)
-        {
-            this.NodeDescriptor = nodeDescriptor;
-        }
-
-        /**
-         * Gets the {@link NodeDescriptor} for this node.
-         *
-         * @return nodeDescriptor the new {@link NodeDescriptor}
-         */
-        public NodeDescriptor getNodeDescriptor()
-        {
-            return NodeDescriptor;
-        }
-
-        /**
-         * Sets the nodes {@link PowerDescriptor}
-         *
-         * @param powerDescriptor the {@link PowerDescriptor}
-         */
-        public void setPowerDescriptor(PowerDescriptor powerDescriptor)
-        {
-            this.PowerDescriptor = powerDescriptor;
-        }
-
-        /**
-         * Gets the nodes {@link PowerDescriptor}
-         *
-         * @return the {@link PowerDescriptor} or null if not set
-         */
-        public PowerDescriptor getPowerDescriptor()
-        {
-            return PowerDescriptor;
         }
 
         /**
@@ -184,9 +138,9 @@ namespace ZigBeeNet
          * @param duration sets the duration of the join enable. Setting this to 0 disables joining. Setting to a value
          *            greater than 255 seconds will permanently enable joining.
          */
-        public void permitJoin(final int duration)
+        public void PermitJoin(int duration)
         {
-            final ManagementPermitJoiningRequest command = new ManagementPermitJoiningRequest();
+            ManagementPermitJoiningRequest command = new ManagementPermitJoiningRequest();
 
             if (duration > 255)
             {
@@ -201,7 +155,7 @@ namespace ZigBeeNet
             command.setDestinationAddress(new ZigBeeEndpointAddress(0));
             command.setSourceAddress(new ZigBeeEndpointAddress(0));
 
-            networkManager.sendCommand(command);
+            networkManager.SendCommand(command);
         }
 
         /**
@@ -212,15 +166,15 @@ namespace ZigBeeNet
          *
          * @param enable if true joining is enabled, otherwise it is disabled
          */
-        public void permitJoin(final boolean enable)
+        public void PermitJoin(bool enable)
         {
             if (enable)
             {
-                permitJoin(0xFF);
+                PermitJoin(0xFF);
             }
             else
             {
-                permitJoin(0);
+                PermitJoin(0);
             }
         }
 
@@ -233,13 +187,13 @@ namespace ZigBeeNet
          *
          * @return true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.
          */
-        public boolean isFullFuntionDevice()
+        public bool IsFullFuntionDevice()
         {
             if (NodeDescriptor == null)
             {
                 return false;
             }
-            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
+            return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
         }
 
         /**
@@ -252,31 +206,40 @@ namespace ZigBeeNet
          *
          * @return true if the device is a Reduced Function Device
          */
-        public boolean isReducedFuntionDevice()
+        public bool IsReducedFuntionDevice
         {
-            if (NodeDescriptor == null)
+            get
             {
-                return false;
+                if (NodeDescriptor == null)
+                {
+                    return false;
+                }
+                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
             }
-            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
         }
 
-        public boolean isSecurityCapable()
+        public bool IsSecurityCapable
         {
-            if (NodeDescriptor == null)
+            get
             {
-                return false;
+                if (NodeDescriptor == null)
+                {
+                    return false;
+                }
+                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.SECURITY_CAPABLE);
             }
-            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.SECURITY_CAPABLE);
         }
 
-        public boolean isPrimaryTrustCenter()
+        public bool IsPrimaryTrustCenter
         {
-            if (NodeDescriptor == null)
+            get
             {
-                return false;
+                if (NodeDescriptor == null)
+                {
+                    return false;
+                }
+                return NodeDescriptor.ServerCapabilities.Contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
             }
-            return NodeDescriptor.getServerCapabilities().contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
         }
 
         /**
@@ -291,48 +254,38 @@ namespace ZigBeeNet
          *
          * @return the {@link LogicalType} of the node
          */
-        public LogicalType getLogicalType()
+        public LogicalType LogicalType
         {
-            return NodeDescriptor.getLogicalType();
-        }
-
-        private void setBindingTable(List<BindingTable> bindingTable)
-        {
-            synchronized(this.BindingTable) {
-                this.BindingTable.clear();
-                this.BindingTable.addAll(bindingTable);
-                logger.debug("{}: Binding table updated: {}", IeeeAddress, bindingTable);
+            get
+            {
+                return NodeDescriptor.LogicalNodeType;
             }
         }
 
-        /**
-         * Gets the current binding table for the device. Note that this doesn't retrieve the table from the device - to do
-         * this use the {@link #updateBindingTable()} method.
-         *
-         * @return {@link Set} of {@link BindingTable} for the device
-         */
-        public Set<BindingTable> getBindingTable()
+        private void SetBindingTable(List<BindingTable> bindingTable)
         {
-            synchronized(BindingTable) {
-                return new HashSet<BindingTable>(BindingTable);
+            lock (BindingTable)
+            {
+                BindingTable.Clear();
+                BindingTable.AddRange(bindingTable);
+                _logger.Debug("{}: Binding table updated: {}", IeeeAddress, bindingTable);
             }
         }
 
         /**
          * Request an update of the binding table for this node.
          * <p>
-         * This method returns a future to a boolean. Upon success the caller should call {@link #getBindingTable()}
+         * This method returns a future to a bool. Upon success the caller should call {@link #getBindingTable()}
          *
          * @return {@link Future} returning a {@link Boolean}
          */
-        public Future<Boolean> updateBindingTable()
+        public async Task<bool> UpdateBindingTable()
         {
-            RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
+            return await Task.Run(() =>
+            {
                 int index = 0;
                 int tableSize = 0;
-                List<BindingTable> bindingTable = new ArrayList<BindingTable>();
+                List<BindingTable> bindingTable = new List<BindingTable>();
 
                 do
                 {
@@ -341,513 +294,366 @@ namespace ZigBeeNet
                     bindingRequest.setStartIndex(index);
 
                     CommandResult result = networkManager.unicast(bindingRequest, new ManagementBindRequest()).get();
-                    if (result.isError())
+                    if (result.IsError())
                     {
                         return false;
                     }
 
-                    ManagementBindResponse response = (ManagementBindResponse)result.getResponse();
+                    ManagementBindResponse response = (ManagementBindResponse)result.GetResponse();
                     if (response.getStartIndex() == index)
                     {
                         tableSize = response.getBindingTableEntries();
                         index += response.getBindingTableList().size();
-                        bindingTable.addAll(response.getBindingTableList());
+                        bindingTable.AddRange(response.getBindingTableList());
                     }
                 } while (index < tableSize);
 
-                setBindingTable(bindingTable);
+                SetBindingTable(bindingTable);
                 return true;
-            }
-        });
-
-        // start the thread to execute it
-        new Thread(future).start();
-        return future;
-    }
-
-    /**
-     * Gets the a {@link Collection} of {@link ZigBeeEndpoint}s this node provides
-     *
-     * @return {@link Collection} of {@link ZigBeeEndpoint}s supported by the node
-     */
-    public Collection<ZigBeeEndpoint> getEndpoints()
-    {
-        return endpoints.values();
-    }
-
-    /**
-     * Gets an endpoint given the {@link ZigBeeAddress} address.
-     *
-     * @param endpointId the endpoint ID to get
-     * @return the {@link ZigBeeEndpoint}
-     */
-    public ZigBeeEndpoint getEndpoint(final int endpointId)
-    {
-        synchronized(endpoints) {
-            return endpoints.get(endpointId);
-        }
-    }
-
-    /**
-     * Adds an endpoint to the node
-     *
-     * @param endpoint the {@link ZigBeeEndpoint} to add
-     */
-    public void AddEndpoint(ZigBeeEndpoint endpoint)
-    {
-        lock(_endpoints) {
-            _endpoints.Add(endpoint.getEndpointId(), endpoint);
-        }
-
-        lock(this) {
-            for (ZigBeeNetworkEndpointListener listener in endpointListeners)
-            {
-                NotificationService.execute(new Runnable() {
-                    @Override
-                    public void run()
-                {
-                    listener.deviceAdded(endpoint);
-                }
             });
         }
-    }
-}
 
-/**
- * Updates an endpoint information in the node
- *
- * @param endpoint the {@link ZigBeeEndpoint} to update
- */
-public void updateEndpoint(final ZigBeeEndpoint endpoint)
-{
-    synchronized(endpoints) {
-        endpoints.put(endpoint.getEndpointId(), endpoint);
-    }
-    synchronized(this) {
-        for (final ZigBeeNetworkEndpointListener listener : endpointListeners)
+        /**
+         * Gets an endpoint given the {@link ZigBeeAddress} address.
+         *
+         * @param endpointId the endpoint ID to get
+         * @return the {@link ZigBeeEndpoint}
+         */
+        public ZigBeeEndpoint GetEndpoint(byte endpointId)
         {
-            NotificationService.execute(new Runnable() {
-                    @Override
-                    public void run()
+            lock (Endpoints)
             {
-                listener.deviceUpdated(endpoint);
+                return Endpoints[endpointId];
             }
-        });
-    }
-}
-    }
+        }
 
-    /**
-     * Removes endpoint by network address.
-     *
-     * @param endpointId the network address
-     */
-    public void removeEndpoint(final int endpointId)
-{
-    final ZigBeeEndpoint endpoint;
-    synchronized(endpoints) {
-        endpoint = endpoints.remove(endpointId);
-    }
-    synchronized(this) {
-        if (endpoint != null)
+        /**
+         * Adds an endpoint to the node
+         *
+         * @param endpoint the {@link ZigBeeEndpoint} to add
+         */
+        public void AddEndpoint(ZigBeeEndpoint endpoint)
         {
-            for (final ZigBeeNetworkEndpointListener listener : endpointListeners)
+            lock (Endpoints)
             {
-                NotificationService.execute(new Runnable() {
-                        @Override
-                        public void run()
+                Endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, );
+            }
+
+            lock (this)
+            {
+                foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
                 {
-                    listener.deviceRemoved(endpoint);
+                    Task.Run(() =>
+                    {
+                        listener.DeviceAdded(endpoint);
+                    }).ContinueWith((t) =>
+                    {
+                        _logger.Error(t.Exception, "Error");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
                 }
-            });
+            }
         }
-    }
-}
-    }
 
-    public void addNetworkEndpointListener(final ZigBeeNetworkEndpointListener networkDeviceListener)
-{
-    synchronized(this) {
-        final List<ZigBeeNetworkEndpointListener> modifiedListeners = new ArrayList<ZigBeeNetworkEndpointListener>(
-                endpointListeners);
-        modifiedListeners.add(networkDeviceListener);
-        endpointListeners = Collections.unmodifiableList(modifiedListeners);
-    }
-}
-
-public void removeNetworkEndpointListener(final ZigBeeNetworkEndpointListener networkDeviceListener)
-{
-    synchronized(this) {
-        final List<ZigBeeNetworkEndpointListener> modifiedListeners = new ArrayList<ZigBeeNetworkEndpointListener>(
-                endpointListeners);
-        modifiedListeners.remove(networkDeviceListener);
-        endpointListeners = Collections.unmodifiableList(modifiedListeners);
-    }
-}
-
-/**
- * Get the list of neighbors as a {@link NeighborTable}
- *
- * @return current {@link Set} of neighbors as a {@link NeighborTable}
- */
-public Set<NeighborTable> getNeighbors()
-{
-    synchronized(neighbors) {
-        return new HashSet<NeighborTable>(neighbors);
-    }
-}
-
-/**
- * Set the list of neighbors as a {@link NeighborTable}.
- * <p>
- * This method checks to see if there have been "significant" changes to the neighbors list so that we can avoid
- * bothering higher layers if nothing noteworthy has changed.
- *
- * @param neighbors list of neighbors as a {@link NeighborTable}. Setting to null will remove all neighbors.
- * @return true if the neighbor table was updated
- */
-public boolean setNeighbors(Set<NeighborTable> neighbors)
-{
-    if (this.neighbors.equals(neighbors))
-    {
-        logger.debug("{}: Neighbor table unchanged", ieeeAddress);
-        return false;
-    }
-
-    synchronized(this.neighbors) {
-        this.neighbors.clear();
-        if (neighbors != null)
+        /**
+         * Updates an endpoint information in the node
+         *
+         * @param endpoint the {@link ZigBeeEndpoint} to update
+         */
+        public void UpdateEndpoint(ZigBeeEndpoint endpoint)
         {
-            this.neighbors.addAll(neighbors);
+            lock (Endpoints)
+            {
+                Endpoints[endpoint.EndpointId] = endpoint;
+            }
+            lock (endpointListeners)
+            {
+                foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
+                {
+                    Task.Run(() =>
+                    {
+                        listener.DeviceUpdated(endpoint);
+                    }).ContinueWith((t) =>
+                    {
+                        _logger.Error(t.Exception, "Error");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
+            }
         }
-    }
-    logger.debug("{}: Neighbor table updated: {}", ieeeAddress, neighbors);
 
-    return true;
-}
-
-/**
- * Get the list of associated devices as a {@link List} of {@link Integer}
- *
- * @return current list of associated devices as a {@link Set} of {@link Integer}
- */
-public Set<Integer> getAssociatedDevices()
-{
-    synchronized(associatedDevices) {
-        return new HashSet<Integer>(associatedDevices);
-    }
-}
-
-/**
- * Set the list of associated devices.
- * <p>
- * This method checks to see if there have been "significant" changes to the neighbors list so that we can avoid
- * bothering higher layers if nothing noteworthy has changed.
- *
- * @param neighbors list of neighbors as a {@link NeighborTable}. Setting to null will remove all neighbors.
- * @return true if the neighbor table was updated
- */
-public boolean setAssociatedDevices(Set<Integer> associatedDevices)
-{
-    if (this.associatedDevices.equals(associatedDevices))
-    {
-        logger.debug("{}: Associated devices table unchanged", ieeeAddress);
-        return false;
-    }
-
-    synchronized(this.associatedDevices) {
-        this.associatedDevices.clear();
-        this.associatedDevices.addAll(associatedDevices);
-    }
-    logger.debug("{}: Associated devices table updated: {}", ieeeAddress, associatedDevices);
-
-    return true;
-}
-
-/**
- * Get the list of routes as a {@link RoutingTable}
- *
- * @return {@link Set} of routes as a {@link RoutingTable}
- */
-public Collection<RoutingTable> getRoutes()
-{
-    synchronized(routes) {
-        return new HashSet<RoutingTable>(routes);
-    }
-}
-
-/**
- * Set the list of routes as a {@link RoutingTable}
- * <p>
- * This method checks to see if there have been "significant" changes to the route list so that we can avoid
- * bothering higher layers if nothing noteworthy has changed.
- *
- * @param routes list of routes as a {@link RoutingTable}. Setting to null will remove all routes.
- * @return true if the route table was updated
- */
-public boolean setRoutes(Set<RoutingTable> routes)
-{
-    logger.debug("{}: Routing table NEW: {}", ieeeAddress, routes);
-    logger.debug("{}: Routing table OLD: {}", ieeeAddress, this.routes);
-    if (this.routes.equals(routes))
-    {
-        logger.debug("{}: Routing table unchanged", ieeeAddress);
-        return false;
-    }
-
-    synchronized(this.routes) {
-        this.routes.clear();
-        if (routes != null)
+        /**
+         * Removes endpoint by network address.
+         *
+         * @param endpointId the network address
+         */
+        public void RemoveEndpoint(byte endpointId)
         {
-            this.routes.addAll(routes);
+            ZigBeeEndpoint endpoint;
+            lock (Endpoints)
+            {
+                Endpoints.TryRemove(endpointId, out endpoint);
+            }
+            lock (endpointListeners)
+            {
+                if (endpoint != null)
+                {
+                    foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
+                    {
+                        Task.Run(() =>
+                        {
+                            listener.DeviceRemoved(endpoint);
+                        }).ContinueWith((t) =>
+                        {
+                            _logger.Error(t.Exception, "Error");
+                        }, TaskContinuationOptions.OnlyOnFaulted);
+                    }
+                }
+            }
         }
-    }
-    logger.debug("{}: Routing table updated: {}", ieeeAddress, routes);
 
-    return true;
-}
-
-/**
- * Sets the last update time to the current time.
- * This should be set when important node information is updated such as route tables, neighbor information etc
- */
-public void setLastUpdateTime()
-{
-    lastUpdateTime = new Date();
-}
-
-/**
- * Return the last update time. This is the last time that important node information was updated such as route
- * tables, neighbor information etc
- *
- * @return the last time the node data was updated as a {@link Date}
- */
-public Date getLastUpdateTime()
-{
-    return lastUpdateTime;
-}
-
-@Override
-    public void commandReceived(ZigBeeCommand command)
-{
-    // This gets called for all received commands
-    // Check if it's our address
-    if (command.getSourceAddress().getAddress() != networkAddress)
-    {
-        return;
-    }
-
-    if (!(command instanceof ZclCommand)) {
-        return;
-    }
-
-    ZclCommand zclCommand = (ZclCommand)command;
-    ZigBeeEndpointAddress endpointAddress = (ZigBeeEndpointAddress)zclCommand.getSourceAddress();
-
-    if (endpointAddress.getEndpoint() == BROADCAST_ENDPOINT)
-    {
-        for (ZigBeeEndpoint endpoint : endpoints.values())
+        public void AddNetworkEndpointListener(IZigBeeNetworkEndpointListener networkDeviceListener)
         {
-            endpoint.commandReceived(zclCommand);
+            lock (endpointListeners)
+            {
+                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(endpointListeners);
+                modifiedListeners.Add(networkDeviceListener);
+                endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
+            }
         }
-    }
-    else
-    {
-        ZigBeeEndpoint endpoint = endpoints.get(endpointAddress.getEndpoint());
-        if (endpoint != null)
+
+        public void RemoveNetworkEndpointListener(IZigBeeNetworkEndpointListener networkDeviceListener)
         {
-            endpoint.commandReceived(zclCommand);
+            lock (endpointListeners)
+            {
+                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(endpointListeners);
+                modifiedListeners.Remove(networkDeviceListener);
+                endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
+            }
         }
-    }
-}
 
-/**
- * Starts service discovery for the node.
- */
-public void startDiscovery()
-{
-    Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
 
-    // Always request the network address - in case it's changed
-    tasks.add(NodeDiscoveryTask.NWK_ADDRESS);
-
-    if (nodeDescriptor.getLogicalType() == LogicalType.UNKNOWN)
-    {
-        tasks.add(NodeDiscoveryTask.NODE_DESCRIPTOR);
-    }
-
-    if (powerDescriptor.getCurrentPowerMode() == CurrentPowerModeType.UNKNOWN)
-    {
-        tasks.add(NodeDiscoveryTask.POWER_DESCRIPTOR);
-    }
-
-    if (endpoints.size() == 0 && networkAddress != 0)
-    {
-        tasks.add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
-    }
-
-    tasks.add(NodeDiscoveryTask.NEIGHBORS);
-
-    serviceDiscoverer.startDiscovery(tasks);
-}
-
-/**
- * Starts service discovery for the node in order to update the mesh
- */
-public void updateMesh()
-{
-    Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
-
-    tasks.add(NodeDiscoveryTask.NEIGHBORS);
-
-    if (nodeDescriptor.getLogicalType() != LogicalType.END_DEVICE)
-    {
-        tasks.add(NodeDiscoveryTask.ROUTES);
-    }
-
-    serviceDiscoverer.startDiscovery(tasks);
-}
-
-/**
- * Checks if basic device discovery is complete.
- *
- * @return true if basic device information is known
- */
-public boolean isDiscovered()
-{
-    return nodeDescriptor.getLogicalType() != LogicalType.UNKNOWN && endpoints.size() != 0;
-}
-
-/**
- * Updates the node. This will copy data from another node into this node. Updated elements are checked for equality
- * and the method will only return true if the node data has been changed.
- *
- * @param node the {@link ZigBeeNode} that contains the newer node data.
- * @return true if there were changes made as a result of the update
- */
-protected boolean updateNode(ZigBeeNode node)
-{
-    if (!node.getIeeeAddress().equals(ieeeAddress))
-    {
-        return false;
-    }
-
-    boolean updated = false;
-
-    if (!networkAddress.equals(node.getNetworkAddress()))
-    {
-        updated = true;
-        networkAddress = node.getNetworkAddress();
-    }
-
-    if (!nodeDescriptor.equals(node.getNodeDescriptor()))
-    {
-        updated = true;
-        nodeDescriptor = node.getNodeDescriptor();
-    }
-
-    if (!powerDescriptor.equals(node.getPowerDescriptor()))
-    {
-        updated = true;
-        powerDescriptor = node.getPowerDescriptor();
-    }
-
-    synchronized(associatedDevices) {
-        if (!associatedDevices.equals(node.getAssociatedDevices()))
+        public void CommandReceived(ZigBeeCommand command)
         {
-            updated = true;
-            associatedDevices.clear();
-            associatedDevices.addAll(node.getAssociatedDevices());
-        }
-    }
+            // This gets called for all received commands
+            // Check if it's our address
+            if (command.SourceAddress.Address != NetworkAddress)
+            {
+                return;
+            }
 
-    synchronized(bindingTable) {
-        if (!bindingTable.equals(node.getBindingTable()))
+            if (!(command is ZclCommand))
+            {
+                return;
+            }
+
+            ZclCommand zclCommand = (ZclCommand)command;
+            ZigBeeEndpointAddress endpointAddress = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
+
+            if (endpointAddress.Endpoint == BROADCAST_ENDPOINT)
+            {
+                foreach (ZigBeeEndpoint endpoint in Endpoints.Values)
+                {
+                    endpoint.CommandReceived(zclCommand);
+                }
+            }
+            else
+            {
+                ZigBeeEndpoint endpoint = Endpoints[endpointAddress.Endpoint];
+                if (endpoint != null)
+                {
+                    endpoint.CommandReceived(zclCommand);
+                }
+            }
+        }
+
+        /**
+         * Starts service discovery for the node.
+         */
+        public void StartDiscovery()
         {
-            updated = true;
-            bindingTable.clear();
-            bindingTable.addAll(node.getBindingTable());
-        }
-    }
+            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-    synchronized(neighbors) {
-        if (!neighbors.equals(node.getNeighbors()))
+            // Always request the network address - in case it's changed
+            tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
+
+            if (NodeDescriptor.LogicalNodeType == LogicalType.UNKNOWN)
+            {
+                tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
+            }
+
+            if (PowerDescriptor.CurrentPowerMode == CurrentPowerModeType.UNKNOWN)
+            {
+                tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
+            }
+
+            if (Endpoints.Count == 0 && NetworkAddress != 0)
+            {
+                tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
+            }
+
+            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
+
+            serviceDiscoverer.StartDiscovery(tasks);
+        }
+
+        /**
+         * Starts service discovery for the node in order to update the mesh
+         */
+        public void UpdateMesh()
         {
-            updated = true;
-            neighbors.clear();
-            neighbors.addAll(node.getNeighbors());
-        }
-    }
+            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-    synchronized(routes) {
-        if (!routes.equals(node.getRoutes()))
+            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
+
+            if (NodeDescriptor.LogicalNodeType != LogicalType.END_DEVICE)
+            {
+                tasks.Add(NodeDiscoveryTask.ROUTES);
+            }
+
+            serviceDiscoverer.StartDiscovery(tasks);
+        }
+
+        /**
+         * Checks if basic device discovery is complete.
+         *
+         * @return true if basic device information is known
+         */
+        public bool IsDiscovered()
         {
-            updated = true;
-            routes.clear();
-            routes.addAll(node.getRoutes());
+            return NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
+        }
+
+        /**
+         * Updates the node. This will copy data from another node into this node. Updated elements are checked for equality
+         * and the method will only return true if the node data has been changed.
+         *
+         * @param node the {@link ZigBeeNode} that contains the newer node data.
+         * @return true if there were changes made as a result of the update
+         */
+        public bool UpdateNode(ZigBeeNode node)
+        {
+            if (!node.IeeeAddress.Equals(IeeeAddress))
+            {
+                return false;
+            }
+
+            bool updated = false;
+
+            if (!NetworkAddress.Equals(node.NetworkAddress))
+            {
+                updated = true;
+                NetworkAddress = node.NetworkAddress;
+            }
+
+            if (!NodeDescriptor.Equals(node.NodeDescriptor))
+            {
+                updated = true;
+                NodeDescriptor = node.NodeDescriptor;
+            }
+
+            if (!PowerDescriptor.Equals(node.PowerDescriptor))
+            {
+                updated = true;
+                PowerDescriptor = node.PowerDescriptor;
+            }
+
+            lock (AssociatedDevices)
+            {
+                if (!AssociatedDevices.Equals(node.AssociatedDevices))
+                {
+                    updated = true;
+                    AssociatedDevices.Clear();
+                    AssociatedDevices.AddRange(node.AssociatedDevices);
+                }
+            }
+
+            lock (BindingTable)
+            {
+                if (!BindingTable.Equals(node.BindingTable))
+                {
+                    updated = true;
+                    BindingTable.Clear();
+                    BindingTable.AddRange(node.BindingTable);
+                }
+            }
+
+            lock (Neighbors)
+            {
+                if (!Neighbors.Equals(node.Neighbors))
+                {
+                    updated = true;
+                    Neighbors.Clear();
+                    Neighbors.AddRange(node.Neighbors);
+                }
+            }
+
+            lock (Routes)
+            {
+                if (!Routes.Equals(node.Routes))
+                {
+                    updated = true;
+                    Routes.Clear();
+                    Routes.AddRange(node.Routes);
+                }
+            }
+
+            // TODO: How to deal with endpoints
+
+            return updated;
+        }
+
+        /**
+         * Gets a {@link ZigBeeNodeDao} representing the node
+         *
+         * @return the {@link ZigBeeNodeDao}
+         */
+        public ZigBeeNodeDao GetDao()
+        {
+            ZigBeeNodeDao dao = new ZigBeeNodeDao();
+
+            dao.IeeeAddress = IeeeAddress.ToString();
+            dao.NetworkAddress = NetworkAddress;
+            dao.NodeDescriptor = NodeDescriptor;
+            dao.PowerDescriptor = PowerDescriptor;
+            dao.BindingTable = BindingTable;
+
+            List<ZigBeeEndpointDao> endpointDaoList = new List<ZigBeeEndpointDao>();
+            foreach (ZigBeeEndpoint endpoint in Endpoints.Values)
+            {
+                endpointDaoList.Add(endpoint.GetDao());
+            }
+            dao.Endpoints = endpointDaoList;
+
+            return dao;
+        }
+
+        public void SetDao(ZigBeeNodeDao dao)
+        {
+            IeeeAddress = new IeeeAddress(dao.IeeeAddress);
+            NetworkAddress = dao.NetworkAddress;
+            NodeDescriptor = dao.NodeDescriptor;
+            PowerDescriptor = dao.PowerDescriptor;
+            if (dao.BindingTable != null)
+            {
+                BindingTable.AddRange(dao.BindingTable);
+            }
+
+            foreach (ZigBeeEndpointDao endpointDao in dao.Endpoints)
+            {
+                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(networkManager, this, endpointDao.EndpointId);
+                endpoint.SetDao(endpointDao);
+                Endpoints[endpoint.EndpointId] = endpoint;
+            }
+        }
+
+        public override string ToString()
+        {
+            if (NodeDescriptor == null)
+            {
+                return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=" + string.Format("%04X", NetworkAddress) + "]";
+            }
+
+            return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=" + string.Format("%04X", NetworkAddress) + ", Type="
+                    + NodeDescriptor.LogicalNodeType + "]";
         }
     }
-
-    // TODO: How to deal with endpoints
-
-    return updated;
-}
-
-/**
- * Gets a {@link ZigBeeNodeDao} representing the node
- *
- * @return the {@link ZigBeeNodeDao}
- */
-public ZigBeeNodeDao getDao()
-{
-    ZigBeeNodeDao dao = new ZigBeeNodeDao();
-
-    dao.setIeeeAddress(ieeeAddress.toString());
-    dao.setNetworkAddress(networkAddress);
-    dao.setNodeDescriptor(nodeDescriptor);
-    dao.setPowerDescriptor(powerDescriptor);
-    dao.setBindingTable(bindingTable);
-
-    List<ZigBeeEndpointDao> endpointDaoList = new ArrayList<ZigBeeEndpointDao>();
-    for (ZigBeeEndpoint endpoint : endpoints.values())
-    {
-        endpointDaoList.add(endpoint.getDao());
-    }
-    dao.setEndpoints(endpointDaoList);
-
-    return dao;
-}
-
-public void setDao(ZigBeeNodeDao dao)
-{
-    ieeeAddress = new IeeeAddress(dao.getIeeeAddress());
-    networkAddress = dao.getNetworkAddress();
-    nodeDescriptor = dao.getNodeDescriptor();
-    powerDescriptor = dao.getPowerDescriptor();
-    if (dao.getBindingTable() != null)
-    {
-        bindingTable.addAll(dao.getBindingTable());
-    }
-
-    for (ZigBeeEndpointDao endpointDao : dao.getEndpoints())
-    {
-        ZigBeeEndpoint endpoint = new ZigBeeEndpoint(networkManager, this, endpointDao.getEndpointId());
-        endpoint.setDao(endpointDao);
-        endpoints.put(endpoint.getEndpointId(), endpoint);
-    }
-}
-
-@Override
-    public String toString()
-{
-    if (nodeDescriptor == null)
-    {
-        return "ZigBeeNode [IEEE=" + ieeeAddress + ", NWK=" + String.format("%04X", networkAddress) + "]";
-    }
-
-    return "ZigBeeNode [IEEE=" + ieeeAddress + ", NWK=" + String.format("%04X", networkAddress) + ", Type="
-            + nodeDescriptor.getLogicalType() + "]";
-}
-
-}
 }

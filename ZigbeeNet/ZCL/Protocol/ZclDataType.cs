@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Fileld;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
@@ -128,20 +130,20 @@ namespace ZigBeeNet.ZCL.Protocol
             _codeTypeMapping[0x00] = new ZclDataType("X Unsigned 8-bit integer", typeof(int), 0x00, false, DataType.X_UNSIGNED_8_BIT_INTEGER);
             _codeTypeMapping[0x00] = new ZclDataType("Zcl Status", typeof(ZclStatus), 0x00, false, DataType.ZCL_STATUS);
             _codeTypeMapping[0x00] = new ZclDataType("EXTENDED_PANID", typeof(ExtendedPanId), 0x00, false, DataType.EXTENDED_PANID);
-            //_codeTypeMapping[0x00] = new ZclDataType("Binding Table", BindingTable.class, 0x00, false, DataType.BINDING_TABLE);
+            _codeTypeMapping[0x00] = new ZclDataType("Binding Table", typeof(BindingTable), 0x00, false, DataType.BINDING_TABLE);
             _codeTypeMapping[0x00] = new ZclDataType("ClusterId", typeof(int), 0x00, false, DataType.CLUSTERID);
             //_codeTypeMapping[0x00] = new ZclDataType("Complex Descriptor", ComplexDescriptor.class, 0x00, false, DataType.COMPLEX_DESCRIPTOR);
             _codeTypeMapping[0x00] = new ZclDataType("Endpoint", typeof(int), 0x00, false, DataType.ENDPOINT);
-            //_codeTypeMapping[0x00] = new ZclDataType("Neighbor Table", typeof(NeighborTable), 0x00, false, DataType.NEIGHBOR_TABLE);
-            //_codeTypeMapping[0x00] = new ZclDataType("Node Descriptor", NodeDescriptor.class, 0x00, false, DataType.NODE_DESCRIPTOR);
+            _codeTypeMapping[0x00] = new ZclDataType("Neighbor Table", typeof(NeighborTable), 0x00, false, DataType.NEIGHBOR_TABLE);
+            _codeTypeMapping[0x00] = new ZclDataType("Node Descriptor", typeof(NodeDescriptor), 0x00, false, DataType.NODE_DESCRIPTOR);
             _codeTypeMapping[0x00] = new ZclDataType("NWK address", typeof(int), 0x00, false, DataType.NWK_ADDRESS);
-            //_codeTypeMapping[0x00] = new ZclDataType("N x Binding Table", BindingTable.class, 0x00, false, DataType.N_X_BINDING_TABLE);
+            _codeTypeMapping[0x00] = new ZclDataType("N x Binding Table", typeof(BindingTable), 0x00, false, DataType.N_X_BINDING_TABLE);
             _codeTypeMapping[0x00] = new ZclDataType("N X IEEE Address", typeof(long), 0x00, false, DataType.N_X_IEEE_ADDRESS);
-            //_codeTypeMapping[0x00] = new ZclDataType("Power Descriptor", PowerDescriptor.class, 0x00, false, DataType.POWER_DESCRIPTOR);
-            //_codeTypeMapping[0x00] = new ZclDataType("Routing Table", RoutingTable.class, 0x00, false, DataType.ROUTING_TABLE);
-            //_codeTypeMapping[0x00] = new ZclDataType("Simple Descriptor", SimpleDescriptor.class, 0x00, false, DataType.SIMPLE_DESCRIPTOR);
-            //_codeTypeMapping[0x00] = new ZclDataType("User Descriptor", UserDescriptor.class, 0x00, false, DataType.USER_DESCRIPTOR);
-            //_codeTypeMapping[0x00] = new ZclDataType("Zdo Status", ZdoStatus.class, 0x00, false, DataType.ZDO_STATUS);
+            _codeTypeMapping[0x00] = new ZclDataType("Power Descriptor", typeof(PowerDescriptor), 0x00, false, DataType.POWER_DESCRIPTOR);
+            _codeTypeMapping[0x00] = new ZclDataType("Routing Table", typeof(RoutingTable), 0x00, false, DataType.ROUTING_TABLE);
+            _codeTypeMapping[0x00] = new ZclDataType("Simple Descriptor", typeof(SimpleDescriptor), 0x00, false, DataType.SIMPLE_DESCRIPTOR);
+            //_codeTypeMapping[0x00] = new ZclDataType("User Descriptor", typeof(UserDescriptor), 0x00, false, DataType.USER_DESCRIPTOR);
+            _codeTypeMapping[0x00] = new ZclDataType("Zdo Status", typeof(ZdoStatus), 0x00, false, DataType.ZDO_STATUS);
             _codeTypeMapping[0x00] = new ZclDataType("Unsigned 8 bit Integer Array", typeof(int[]), 0x00, false, DataType.UNSIGNED_8_BIT_INTEGER_ARRAY);
             _codeTypeMapping[0x00] = new ZclDataType("ZigBee Data Type", typeof(ZclDataType), 0x00, false, DataType.ZIGBEE_DATA_TYPE);
         }

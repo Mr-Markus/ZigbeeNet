@@ -42,7 +42,7 @@ namespace ZigBeeNet
         {
             if (address.Contains("/"))
             {
-                var splits = address.Split("/");
+                var splits = address.Split('/');
                 if (splits.Length > 2)
                 {
                     throw new ArgumentException(nameof(address));

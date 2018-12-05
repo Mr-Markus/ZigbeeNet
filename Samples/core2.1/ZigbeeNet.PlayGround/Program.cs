@@ -15,13 +15,9 @@ namespace ZigBeeNet.PlayGround
 
             try
             {
-                var zigbeeService = new ZigBeeService(new Options { Baudrate = 115200, Port = "COM3" });
-                zigbeeService.Start();
-
                 Log.Information("Application started");
 
                 Console.ReadLine();
-                zigbeeService.Stop();
                 Log.Information("Application stopped");
 
             }

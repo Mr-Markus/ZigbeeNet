@@ -23,12 +23,22 @@ namespace ZigBeeNet.App
     public interface IZigBeeNetworkExtension
     {
         /// <summary>
+        /// Initializes an extension. The extension should perform any initialisation. This gets called when
+        /// the extension is registered. The extension should not assume that the network is online, and should
+        /// not attempt to communicate on the network until after {@link #extensionStartup()} is called.
+        ///
+        /// @param networkManager The {@link ZigBeeNetworkManager} of the network
+        /// @return {@link ZigBeeStatus#SUCCESS} if the extension initialized successfully
+        /// </summary>
+        ZigBeeStatus ExtensionInitialize(ZigBeeNetworkManager networkManager);
+
+        /// <summary>
         /// Starts an extension. The extension should perform any initialisation. This gets called when
         /// the extension is registered.
         /// </summary>
         /// <param name="networkManager">The ZigBeeNetworkManager of the network</param>
         /// <returns> true if the extension started successfully</returns>
-        bool ExtensionStartup(ZigBeeNetworkManager networkManager);
+        ZigBeeStatus ExtensionStartup(ZigBeeNetworkManager networkManager);
 
         /// <summary>
         /// Shuts down an extension. The extension should perform any shutdown and cleanup as required.

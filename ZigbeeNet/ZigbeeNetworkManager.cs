@@ -90,14 +90,14 @@ namespace ZigBeeNet
          * The node listeners of the ZigBee network. Registered listeners will be
          * notified of additions, deletions and changes to {@link ZigBeeNode}s.
          */
-        private List<IZigBeeNetworkNodeListener> _nodeListeners = new List<IZigBeeNetworkNodeListener>();
+        private ReadOnlyCollection<IZigBeeNetworkNodeListener> _nodeListeners;
 
         /**
          * The announce listeners are notified whenever a new device is discovered.
          * This can be called from the transport layer, or internally by methods watching
          * the network state.
          */
-        private List<IZigBeeAnnounceListener> announceListeners = new List<IZigBeeAnnounceListener>();
+        private ReadOnlyCollection<IZigBeeAnnounceListener> announceListeners;
 
         /**
          * {@link AtomicInteger} used to generate transaction sequence numbers
@@ -146,12 +146,12 @@ namespace ZigBeeNet
         /**
          * The serializer class used to serialize commands to data packets
          */
-        public IZigBeeSerializer SerializerClass { get; set; }
+        public IZigBeeSerializer Serializer { get; set; }
 
         /**
          * The deserializer class used to deserialize commands from data packets
          */
-        public IZigBeeDeserializer DeserializerClass { get; set; }
+        public IZigBeeDeserializer Deserializer { get; set; }
 
         /**
          * List of {@link ZigBeeNetworkExtension}s that are available to this network. Extensions are added
@@ -279,7 +279,7 @@ namespace ZigBeeNet
                 {
                     _logger.Debug("{}: Adding local node to network, NWK={}", ieeeAddress, nwkAddress);
                     node = new ZigBeeNode(this, ieeeAddress);
-                    node.NwkAdress = nwkAddress;
+                    node.NetworkAddress = nwkAddress;
 
                     AddNode(node);
                 }
@@ -586,7 +586,7 @@ namespace ZigBeeNet
                 ZigBeeNode node = GetNode(command.DestinationAddress.Address);
                 if (node != null)
                 {
-                    apsFrame.DestinationIeeeAddress = node.getIeeeAddress();
+                    apsFrame.DestinationIeeeAddress = node.IeeeAddress;
                 }
             } else {
                 apsFrame.AddressMode = ZigBeeNwkAddressMode.Group;
@@ -596,10 +596,7 @@ namespace ZigBeeNet
             ZclFieldSerializer fieldSerializer;
             try
             {
-                Constructor <? extends ZigBeeSerializer > constructor;
-                constructor = SerializerClass.getConstructor();
-                ZigBeeSerializer serializer = constructor.newInstance();
-                fieldSerializer = new ZclFieldSerializer(serializer);
+                fieldSerializer = new ZclFieldSerializer(Serializer);
             }
             catch (Exception e)
             {
@@ -671,8 +668,6 @@ namespace ZigBeeNet
             _logger.Debug("RX APS: {}", apsFrame);
 
             // Create the deserialiser
-            Constructor <? extends ZigBeeDeserializer > constructor;
-            ZigBeeDeserializer deserializer;
             try
             {
                 //    constructor = deserializerClass.getConstructor(int[].class);
@@ -683,17 +678,17 @@ namespace ZigBeeNet
                 _logger.Debug("Error creating deserializer", e);
                 return;
             }
-            ZclFieldDeserializer fieldDeserializer = new ZclFieldDeserializer(deserializer);
+            ZclFieldDeserializer fieldDeserializer = new ZclFieldDeserializer(Deserializer);
 
             ZigBeeCommand command = null;
             switch (apsFrame.Profile)
             { // TODO: Use ZigBeeProfileType
                 case 0x0000:
-                    command = receiveZdoCommand(fieldDeserializer, apsFrame);
+                    command = ReceiveZdoCommand(fieldDeserializer, apsFrame);
                     break;
                 case 0x0104:
                 case 0xC05E:
-                    command = receiveZclCommand(fieldDeserializer, apsFrame);
+                    command = ReceiveZclCommand(fieldDeserializer, apsFrame);
                     break;
                 default:
                     _logger.Debug("Received message with unknown profile {}", string.Format("%04X", apsFrame.Profile));
@@ -717,7 +712,7 @@ namespace ZigBeeNet
             commandNotifier.NotifyCommandListeners(command);
         }
 
-        private ZigBeeCommand receiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
+        private ZigBeeCommand ReceiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
             ZdoCommandType commandType = ZdoCommandType.getValueById(apsFrame.Cluster);
             if (commandType == null)
@@ -744,8 +739,7 @@ namespace ZigBeeNet
             return command;
         }
 
-        private ZigBeeCommand receiveZclCommand(ZclFieldDeserializer fieldDeserializer,
-                ZigBeeApsFrame apsFrame)
+        private ZigBeeCommand ReceiveZclCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
             // Process the ZCL header
             ZclHeader zclHeader = new ZclHeader(fieldDeserializer);
@@ -792,11 +786,11 @@ namespace ZigBeeNet
          *
          * @param statusListener the new {@link IZigBeeAnnounceListener} to add
          */
-        public void addAnnounceListener(IZigBeeAnnounceListener statusListener)
+        public void AddAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
             List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(announceListeners);
             modifiedStateListeners.Add(statusListener);
-            announceListeners = Collections.unmodifiableList(modifiedStateListeners);
+            announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
         }
 
         /**
@@ -804,12 +798,12 @@ namespace ZigBeeNet
          *
          * @param statusListener the new {@link IZigBeeAnnounceListener} to remove
          */
-        public void removeAnnounceListener(IZigBeeAnnounceListener statusListener)
+        public void RemoveAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
             List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(
                     announceListeners);
             modifiedStateListeners.Remove(statusListener);
-            announceListeners = Collections.unmodifiableList(modifiedStateListeners);
+            announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
         }
 
 
@@ -823,7 +817,7 @@ namespace ZigBeeNet
             switch (deviceStatus)
             {
                 // Device has gone - lets remove it
-                case DEVICE_LEFT:
+                case ZigBeeNodeStatus.DEVICE_LEFT:
                     // Find the node
                     ZigBeeNode node = GetNode(networkAddress);
                     if (node == null)
@@ -838,10 +832,10 @@ namespace ZigBeeNet
                     break;
 
                 // Leave the join/rejoin notifications for the discovery handler
-                case UNSECURED_JOIN:
+                case ZigBeeNodeStatus.UNSECURED_JOIN:
                     break;
-                case SECURED_REJOIN:
-                case UNSECURED_REJOIN:
+                case ZigBeeNodeStatus.SECURED_REJOIN:
+                case ZigBeeNodeStatus.UNSECURED_REJOIN:
                     break;
                 default:
                     break;
@@ -856,15 +850,6 @@ namespace ZigBeeNet
                         announceListener.DeviceStatusUpdate(deviceStatus, networkAddress, ieeeAddress);
 
                     });
-
-                    //NotificationService.execute(new Runnable()
-                    //{
-
-
-                    //public void run()
-                    //{
-                    //    announceListener.DeviceStatusUpdate(deviceStatus, networkAddress, ieeeAddress);
-                    //}
                 }
             }
         }
@@ -1173,7 +1158,7 @@ namespace ZigBeeNet
             lock(_nodeListeners) {
                 List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
                 modifiedListeners.Add(networkNodeListener);
-                _nodeListeners = Collections.unmodifiableList(modifiedListeners);
+                _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(modifiedListeners);
             }
         }
 
@@ -1187,7 +1172,7 @@ namespace ZigBeeNet
             lock(_nodeListeners) {
                 List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
                 modifiedListeners.Remove(networkNodeListener);
-                _nodeListeners = Collections.unmodifiableList(modifiedListeners);
+                _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(modifiedListeners);
             }
         }
 
@@ -1197,11 +1182,12 @@ namespace ZigBeeNet
          *
          * @param ieeeAddress the {@link IeeeAddress} of the node to rediscover
          */
-        public void rediscoverNode(IeeeAddress address)
+        public void RediscoverNode(IeeeAddress address)
         {
-            //    ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)getExtension(
-            //            ZigBeeDiscoveryExtension.class);
-            //if (networkDiscoverer == null) {
+
+            asdfsdf
+            //ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)getExtension(ZigBeeDiscoveryExtension.class);
+            //if (NetworkDiscoverer == null) {
             //    return;
             //}
             //networkDiscoverer.rediscoverNode(address);
@@ -1230,7 +1216,7 @@ namespace ZigBeeNet
             lock(networkNodes) {
                 foreach (ZigBeeNode node in networkNodes.Values)
                 {
-                    if (node.getNetworkAddress().equals(networkAddress))
+                    if (node.NetworkAddress.Equals(networkAddress))
                     {
                         return node;
                     }
@@ -1262,19 +1248,19 @@ namespace ZigBeeNet
                 return;
             }
 
-            _logger.Debug("{}: Node {} is removed from the network", node.getIeeeAddress(), node.getNetworkAddress());
+            _logger.Debug("{}: Node {} is removed from the network", node.IeeeAddress, node.NetworkAddress);
 
-            nodeDiscoveryComplete.Remove(node.getIeeeAddress());
+            nodeDiscoveryComplete.Remove(node.IeeeAddress);
 
             lock(networkNodes) {
                 // Don't update if the node is not known
                 // We especially don't want to notify listeners of a device we removed, that didn't exist!
-                if (!networkNodes.ContainsKey(node.getIeeeAddress()))
+                if (!networkNodes.ContainsKey(node.IeeeAddress))
                 {
                     return;
                 }
                 ZigBeeNode removedNode = null;
-                networkNodes.TryRemove(node.getIeeeAddress(), out removedNode);
+                networkNodes.TryRemove(node.IeeeAddress, out removedNode);
             }
 
             lock(_nodeListeners) {
@@ -1310,17 +1296,17 @@ namespace ZigBeeNet
                 return;
             }
 
-            _logger.Debug("{}: Node {} added to the network", node.getIeeeAddress(), node.getNetworkAddress());
+            _logger.Debug("{}: Node {} added to the network", node.IeeeAddress, node.NetworkAddress);
 
             lock(networkNodes) {
                 // Don't add if the node is already known
                 // We especially don't want to notify listeners
-                if (networkNodes.ContainsKey(node.getIeeeAddress()))
+                if (networkNodes.ContainsKey(node.IeeeAddress))
                 {
                     UpdateNode(node);
                     return;
                 }
-                networkNodes[node.getIeeeAddress()] = node;
+                networkNodes[node.IeeeAddress] = node;
             }
 
             lock(_nodeListeners) {
@@ -1358,32 +1344,32 @@ namespace ZigBeeNet
             {
                 return;
             }
-            _logger.Debug("{}: Node {} update", node.getIeeeAddress(), node.getNetworkAddress());
+            _logger.Debug("{}: Node {} update", node.IeeeAddress, node.NetworkAddress);
 
             ZigBeeNode currentNode;
             lock(networkNodes) {
-                currentNode = networkNodes[node.getIeeeAddress()];
+                currentNode = networkNodes[node.IeeeAddress];
 
                 // Return if we don't know this node
                 if (currentNode == null)
                 {
-                    _logger.Debug("{}: Node {} is not known - can't be updated", node.getIeeeAddress(),
-                            node.getNetworkAddress());
+                    _logger.Debug("{}: Node {} is not known - can't be updated", node.IeeeAddress,
+                            node.NetworkAddress);
                     return;
                 }
 
                 // Return if there were no updates
-                if (!currentNode.updateNode(node))
+                if (!currentNode.UpdateNode(node))
                 {
                     // _logger.Debug("{}: Node {} is not updated", node.getIeeeAddress(), node.getNetworkAddress());
                     // return;
                 }
             }
 
-            bool updated = nodeDiscoveryComplete.Contains(node.getIeeeAddress());
-            if (!updated && node.isDiscovered() || node.getIeeeAddress().Equals(LocalIeeeAddress))
+            bool updated = nodeDiscoveryComplete.Contains(node.IeeeAddress);
+            if (!updated && node.IsDiscovered() || node.IeeeAddress.Equals(LocalIeeeAddress))
             {
-                nodeDiscoveryComplete.Add(node.getIeeeAddress());
+                nodeDiscoveryComplete.Add(node.IeeeAddress);
             }
 
             lock(_nodeListeners) {
@@ -1419,7 +1405,7 @@ namespace ZigBeeNet
          *
          * @param cluster the supported cluster ID
          */
-        public void AddSupportedCluster(int cluster)
+        public void AddSupportedCluster(byte cluster)
         {
             _logger.Debug("Adding supported cluster {}", cluster);
             if (clusterMatcher == null)
@@ -1440,7 +1426,7 @@ namespace ZigBeeNet
             lock (extensions)
             {
                 extensions.Add(extension);
-                extension.extensionInitialize(this);
+                extension.ExtensionInitialize(this);
 
                 // If the network is online, start the extension
                 if (NetworkState == ZigBeeTransportState.ONLINE)
@@ -1469,37 +1455,6 @@ namespace ZigBeeNet
 
             return null;
         }
-
-        /**
-         * Gets the current {@link ZigBeeTransportState}
-         *
-         * @return the current {@link ZigBeeTransportState}
-         */
-        public ZigBeeTransportState getNetworkState()
-        {
-            return NetworkState;
-        }
-
-        /**
-         * Get's the {@link IeeeAddress} of the local node.
-         *
-         * @return the {@link IeeeAddress} of the local node.
-         */
-        public IeeeAddress getLocalIeeeAddress()
-        {
-            return LocalIeeeAddress;
-        }
-
-        /**
-         * Gets the network address of the local node.
-         *
-         * @return the network address of the local node.
-         */
-        public ushort GetLocalNwkAddress()
-        {
-            return LocalNwkAddress;
-        }
-
 
         public void SendTransaction(ZigBeeCommand command)
         {

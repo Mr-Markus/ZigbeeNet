@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZigBeeNet.ZCL.Fileld
+namespace ZigBeeNet.ZCL.Field
 {
     public class ByteArray
     {
