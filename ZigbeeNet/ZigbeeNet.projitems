@@ -59,6 +59,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetworkStateListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeNetworkStateSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeTransactionMatcher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Security\ZigBeeKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\DefaultSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeSerializer.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigbeePort.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigBeeTransportReceive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\IZigBeeTransportTransmit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transport\TransportConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transport\TransportConfigOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\ZigBeeTransportState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\Hash.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\DefaultResponse.cs" />
@@ -97,6 +100,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\IZclListItemField.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclFrameType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZigbeeProfileType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZDO\Command\PowerDescriptorRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZDO\Command\PowerDescriptorResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\field\BindingTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\field\NeighborTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\field\NodeDescriptor.cs" />
@@ -110,7 +115,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeCommandResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeEndpointAddress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeGroupAddress.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZigBeeKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNetworkManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />

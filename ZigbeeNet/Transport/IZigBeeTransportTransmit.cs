@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigbeeNet.Security;
 
 namespace ZigbeeNet.Transport
 {
@@ -127,6 +128,13 @@ namespace ZigbeeNet.Transport
         /// for different hardware implementations.
         /// </summary>
         void SendCommand(ZigBeeApsFrame apsFrame);
+
+        /// <summary>
+        /// Sets the ZigBeeTransportReceive. Set by the network so that the ZigBeeTransportTransmit can send
+        /// callback messages to the network when a command is received or network state changes
+        /// </summary>
+        /// <param name="zigBeeTransportReceive"></param>
+        void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive);
 
         /// <summary>
         /// * Sets the transport configuration.
