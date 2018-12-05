@@ -122,6 +122,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\Field\NodeDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\Field\PowerDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\Field\RoutingTable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZDO\Field\SimpleDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\ZdoCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\ZdoRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZDO\ZdoResponse.cs" />

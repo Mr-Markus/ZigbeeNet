@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigbeeNet", "ZigbeeNet\ZigbeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "ZigBeeNet\ZigBeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.netstandard2.0", "ZigbeeNet.netstandard2.0\ZigbeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.netstandard2.0", "ZigBeeNet.netstandard2.0\ZigBeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7FF7F314-871A-4B42-ABCB-9D2FB5D14188}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.core2.0", "ZigbeeNet.core2.0\ZigbeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.0", "ZigBeeNet.core2.0\ZigBeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}"
 EndProject
@@ -30,13 +30,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstanda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.1", "core2.1", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.PlayGround", "Samples\core2.1\ZigbeeNet.PlayGround\ZigbeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.1\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigbeeNet.core2.1", "ZigbeeNet.core2.1\ZigbeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZiBbeeNet.core2.1", "ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		ZigbeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
+		ZigBeeNet\ZigBeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

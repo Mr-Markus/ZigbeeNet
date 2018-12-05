@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Simple Descriptor Response value object class.
