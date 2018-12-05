@@ -10,6 +10,7 @@ using ZigbeeNet;
 using ZigbeeNet.App;
 using ZigbeeNet.Internal;
 using ZigbeeNet.Logging;
+using ZigbeeNet.Security;
 using ZigbeeNet.Serialization;
 using ZigbeeNet.Transport;
 using ZigbeeNet.ZCL;
@@ -89,7 +90,7 @@ namespace ZigbeeNet
          * The node listeners of the ZigBee network. Registered listeners will be
          * notified of additions, deletions and changes to {@link ZigBeeNode}s.
          */
-        private List<IZigBeeNetworkNodeListener> nodeListeners = new List<IZigBeeNetworkNodeListener>();
+        private List<IZigBeeNetworkNodeListener> _nodeListeners = new List<IZigBeeNetworkNodeListener>();
 
         /**
          * The announce listeners are notified whenever a new device is discovered.
@@ -219,7 +220,7 @@ namespace ZigbeeNet
 
             Transport = transport;
 
-            transport.setZigBeeTransportReceive(this);
+            transport.SetZigBeeTransportReceive(this);
         }
 
         /**
@@ -431,14 +432,14 @@ namespace ZigbeeNet
          */
         public ZigBeeStatus SetZigBeeInstallKey(ZigBeeKey key)
         {
-            if (!key.hasAddress())
+            if (!key.HasAddress())
             {
                 return ZigBeeStatus.INVALID_ARGUMENTS;
             }
             TransportConfig config = new TransportConfig(TransportConfigOption.INSTALL_KEY, key);
-            Transport.updateTransportConfig(config);
+            Transport.UpdateTransportConfig(config);
 
-            return config.getResult(TransportConfigOption.INSTALL_KEY);
+            return config.GetResult(TransportConfigOption.INSTALL_KEY);
         }
 
         /**
@@ -895,32 +896,26 @@ namespace ZigbeeNet
 
         public void SetNetworkState(ZigBeeTransportState state)
         {
+
             Task.Run(() =>
             {
                 SetNetworkStateRunnable(state);
-            });
-
-            //NotificationService.execute(new Runnable()
-            //{
-
-
-            //    //public void run()
-            //    //{
-            //    //    setNetworkStateRunnable(state);
-            //    //}
-            //}
+            }).ContinueWith((t) =>
+            {
+                _logger.Error(t.Exception, "Error");
+            }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         private void SetNetworkStateRunnable(ZigBeeTransportState state)
         {
-            synchronized(this) {
+            lock(typeof(ZigBeeNetworkManager)) {
                 // Only notify users of state changes
                 if (state == NetworkState)
                 {
                     return;
                 }
 
-                if (!validStateTransitions.get(NetworkState).contains(state))
+                if (!validStateTransitions[NetworkState].Contains(state))
                 {
                     _logger.Debug("Ignoring invalid network state transition from {} to {}", NetworkState, state);
                     return;
@@ -950,16 +945,15 @@ namespace ZigbeeNet
 
                     foreach (ZigBeeNode node in networkNodes.Values)
                     {
-                        foreach (IZigBeeNetworkNodeListener listener in nodeListeners)
+                        foreach (IZigBeeNetworkNodeListener listener in _nodeListeners)
                         {
-                            NotificationService.execute(new Runnable()
-                            {
-
-
-                                public void run()
+                            Task.Run(() =>
                             {
                                 listener.NodeAdded(node);
-                            }
+                            }).ContinueWith((t) =>
+                            {
+                                _logger.Error(t.Exception, "Error");
+                            }, TaskContinuationOptions.OnlyOnFaulted);
                         }
                     }
                 }
@@ -967,13 +961,13 @@ namespace ZigbeeNet
                 // Now that everything is added and started, notify the listeners that the state has updated
                 foreach (IZigBeeNetworkStateListener stateListener in _stateListeners)
                 {
-                    NotificationService.execute(new Runnable()
+                    Task.Run(() =>
                     {
-
-                    public void run()
+                        stateListener.NetworkStateUpdated(state);                        
+                    }).ContinueWith((t) =>
                     {
-                        stateListener.networkStateUpdated(state);
-                    }
+                        _logger.Error(t.Exception, "Error");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
         }
@@ -1176,10 +1170,10 @@ namespace ZigbeeNet
             {
                 return;
             }
-            lock(nodeListeners) {
-                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(nodeListeners);
+            lock(_nodeListeners) {
+                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
                 modifiedListeners.Add(networkNodeListener);
-                nodeListeners = Collections.unmodifiableList(modifiedListeners);
+                _nodeListeners = Collections.unmodifiableList(modifiedListeners);
             }
         }
 
@@ -1190,10 +1184,10 @@ namespace ZigbeeNet
          */
         public void RemoveNetworkNodeListener(IZigBeeNetworkNodeListener networkNodeListener)
         {
-            lock(nodeListeners) {
-                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(nodeListeners);
+            lock(_nodeListeners) {
+                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
                 modifiedListeners.Remove(networkNodeListener);
-                nodeListeners = Collections.unmodifiableList(modifiedListeners);
+                _nodeListeners = Collections.unmodifiableList(modifiedListeners);
             }
         }
 
@@ -1283,21 +1277,20 @@ namespace ZigbeeNet
                 networkNodes.TryRemove(node.getIeeeAddress(), out removedNode);
             }
 
-            lock(listener) {
-                foreach (IZigBeeNetworkNodeListener listener in nodeListeners)
+            lock(_nodeListeners) {
+                foreach (IZigBeeNetworkNodeListener listener in _nodeListeners)
                 {
-                    NotificationService.execute(new Runnable()
-                    {
-
-
-                    public void run()
+                    Task.Run(() =>
                     {
                         listener.NodeRemoved(node);
-                    }
-                });
+                    }).ContinueWith((t) =>
+                    {
+                        _logger.Error(t.Exception, "Error");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
             }
 
-            node.shutdown();
+            node.Shutdown();
 
             if (NetworkStateSerializer != null)
             {
@@ -1330,22 +1323,21 @@ namespace ZigbeeNet
                 networkNodes[node.getIeeeAddress()] = node;
             }
 
-            lock(listener) {
+            lock(_nodeListeners) {
                 if (NetworkState != ZigBeeTransportState.ONLINE)
                 {
                     return;
                 }
 
-                foreach (IZigBeeNetworkNodeListener listener in nodeListeners)
+                foreach (IZigBeeNetworkNodeListener listener in _nodeListeners)
                 {
-                    NotificationService.execute(new Runnable()
-                    {
-
-
-                    public void run()
+                    Task.Run(() =>
                     {
                         listener.NodeAdded(node);
-                    }
+                    }).ContinueWith((t) =>
+                    {
+                        _logger.Error(t.Exception, "Error");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
 
@@ -1394,14 +1386,10 @@ namespace ZigbeeNet
                 nodeDiscoveryComplete.Add(node.getIeeeAddress());
             }
 
-            lock(listener) {
-                foreach (IZigBeeNetworkNodeListener listener in nodeListeners)
+            lock(_nodeListeners) {
+                foreach (IZigBeeNetworkNodeListener listener in _nodeListeners)
                 {
-                    NotificationService.execute(new Runnable()
-                    {
-
-
-                    public void run()
+                    Task.Run(() =>
                     {
                         if (updated)
                         {
@@ -1411,8 +1399,11 @@ namespace ZigbeeNet
                         {
                             listener.NodeAdded(currentNode);
                         }
-                    }
-                });
+                    }).ContinueWith((t) => 
+                    {
+                        _logger.Error(t.Exception, "Here is the error additional text");
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                }
             }
 
             if (NetworkStateSerializer != null)
