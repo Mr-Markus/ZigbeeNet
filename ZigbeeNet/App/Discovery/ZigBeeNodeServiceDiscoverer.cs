@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ZigbeeNet;
 using ZigbeeNet.Logging;
 using ZigbeeNet.ZDO;
 using ZigbeeNet.ZDO.Command;
+using ZigbeeNet.ZDO.Field;
 
 namespace ZigbeeNet.App.Discovery
 {
@@ -64,8 +66,6 @@ namespace ZigbeeNet.App.Discovery
          * A random jitter will be added to the retry time for each device to avoid any sort of synchronisation
          */
         private const int RETRY_RANDOM_TIME = 250;
-
-
 
         /**
          * The minimum number of milliseconds to wait before retrying the request
@@ -191,7 +191,7 @@ namespace ZigbeeNet.App.Discovery
 
             _logger.Debug("{}: Node SVC Discovery: scheduled {}", Node.IeeeAddress, _discoveryTasks);
 
-            var nodeDiscoveryTask = new GetNodeServiceDiscoveryTask();
+            var nodeDiscoveryTask = GetNodeServiceDiscoveryTask();
 
             NetworkManager.ScheduleTask(nodeDiscoveryTask, new Random().Next(_retryPeriod));
         }
@@ -231,22 +231,22 @@ namespace ZigbeeNet.App.Discovery
                         success = await RequestNetworkAddress();
                         break;
                     case NodeDiscoveryTask.NODE_DESCRIPTOR:
-                        success = RequestNodeDescriptor();
+                        success = await RequestNodeDescriptor();
                         break;
                     case NodeDiscoveryTask.POWER_DESCRIPTOR:
-                        success = RequestPowerDescriptor();
+                        success = await RequestPowerDescriptor();
                         break;
                     case NodeDiscoveryTask.ACTIVE_ENDPOINTS:
-                        success = RequestActiveEndpoints();
+                        success = await RequestActiveEndpoints();
                         break;
                     case NodeDiscoveryTask.ASSOCIATED_NODES:
                         success = await RequestAssociatedNodes();
                         break;
                     case NodeDiscoveryTask.NEIGHBORS:
-                        success = RequestNeighborTable();
+                        success = await RequestNeighborTable();
                         break;
                     case NodeDiscoveryTask.ROUTES:
-                        success = RequestRoutingTable();
+                        success = await RequestRoutingTable();
                         break;
                     default:
                         _logger.Debug("{}: Node SVC Discovery: unknown task: {}", Node.IeeeAddress, discoveryTask);
@@ -331,7 +331,7 @@ namespace ZigbeeNet.App.Discovery
         private async Task<bool> RequestNetworkAddress()
         {
             NetworkAddressRequest networkAddressRequest = new NetworkAddressRequest();
-            networkAddressRequest.IeeeAddr = Node.IeeeAddress);
+            networkAddressRequest.IeeeAddr = Node.IeeeAddress;
             networkAddressRequest.RequestType = 0;
             networkAddressRequest.StartIndex = 0;
             networkAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ALL_DEVICES).Key);
@@ -399,348 +399,378 @@ namespace ZigbeeNet.App.Discovery
          * Get node descriptor
          *
          * @return true if the message was processed ok
+         */
+        private async Task<bool> RequestNodeDescriptor()
+        {
+            NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest();
+            nodeDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+            nodeDescriptorRequest.NwkAddrOfInterest = Node.NetworkAddress;
+
+            CommandResult response = await NetworkManager.SendTransaction(nodeDescriptorRequest, nodeDescriptorRequest);
+            NodeDescriptorResponse nodeDescriptorResponse = (NodeDescriptorResponse)response.Response;
+
+            _logger.Debug("{}: Node SVC Discovery: NodeDescriptorResponse returned {}", Node.IeeeAddress, nodeDescriptorResponse);
+
+            if (nodeDescriptorResponse == null)
+            {
+                return false;
+            }
+
+            if (nodeDescriptorResponse.Status == ZdoStatus.SUCCESS)
+            {
+                Node.NodeDescriptor = nodeDescriptorResponse.NodeDescriptor;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * Get node power descriptor
+         *
+         * @return true if the message was processed ok, or if the end device does not support the power descriptor
+         */
+        private async Task<bool> RequestPowerDescriptor()
+        {
+            PowerDescriptorRequest powerDescriptorRequest = new PowerDescriptorRequest();
+            powerDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+            powerDescriptorRequest.NwkAddrOfInterest = (ushort)Node.NetworkAddress;
+
+            CommandResult response = await NetworkManager.SendTransaction(powerDescriptorRequest, powerDescriptorRequest);
+            PowerDescriptorResponse powerDescriptorResponse = (PowerDescriptorResponse)response.Response;
+
+            _logger.Debug("{}: Node SVC Discovery: PowerDescriptorResponse returned {}", Node.IeeeAddress, powerDescriptorResponse);
+
+            if (powerDescriptorResponse == null)
+            {
+                return false;
+            }
+
+            if (powerDescriptorResponse.Status == ZdoStatus.SUCCESS)
+            {
+                Node.PowerDescriptor = powerDescriptorResponse.PowerDescriptor;
+
+                return true;
+            }
+            else if (powerDescriptorResponse.Status == ZdoStatus.NOT_SUPPORTED)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * Get the active endpoints for a node
+         *
+         * @return true if the message was processed ok
+         */
+        private async Task<bool> RequestActiveEndpoints()
+        {
+            ActiveEndpointsRequest activeEndpointsRequest = new ActiveEndpointsRequest();
+            activeEndpointsRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+            activeEndpointsRequest.NwkAddrOfInterest = Node.NetworkAddress;
+
+            CommandResult response = await NetworkManager.SendTransaction(activeEndpointsRequest, activeEndpointsRequest);
+            ActiveEndpointsResponse activeEndpointsResponse = (ActiveEndpointsResponse)response.Response;
+
+            _logger.Debug("{}: Node SVC Discovery: ActiveEndpointsResponse returned {}", Node.IeeeAddress, response);
+
+            if (activeEndpointsResponse == null)
+            {
+                return false;
+            }
+
+            // Get the simple descriptors for all endpoints
+            List<ZigBeeEndpoint> endpoints = new List<ZigBeeEndpoint>();
+            foreach (int endpointId in activeEndpointsResponse.ActiveEpList)
+            {
+                ZigBeeEndpoint endpoint = GetSimpleDescriptor(endpointId);
+                if (endpoint == null)
+                {
+                    return false;
+                }
+
+                endpoints.Add(endpoint);
+            }
+
+            // All endpoints have been received, so add them to the node
+            foreach (ZigBeeEndpoint endpoint in endpoints)
+            {
+                Node.AddEndpoint(endpoint);
+            }
+
+            return true;
+        }
+
+        /**
+         * Get node neighbor table by making a {@link ManagementLqiRequest} call.
+         *
+         * @return list of {@link NeighborTable} if the request was processed ok, null otherwise
+         */
+        private async Task<bool> RequestNeighborTable()
+        {
+            // Start index for the list is 0
+            int startIndex = 0;
+            int totalNeighbors = 0;
+            List<NeighborTable> neighbors = new List<NeighborTable>();
+            do
+            {
+                ManagementLqiRequest neighborRequest = new ManagementLqiRequest();
+                neighborRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+                neighborRequest.StartIndex = startIndex;
+
+                CommandResult response = await NetworkManager.SendTransaction(neighborRequest, neighborRequest);
+                ManagementLqiResponse neighborResponse = (ManagementLqiResponse)response.Response;
+
+                _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest response {}", Node.IeeeAddress, response);
+
+                if (neighborResponse == null)
+                {
+                    return false;
+                }
+
+                if (neighborResponse.Status == ZdoStatus.NOT_SUPPORTED)
+                {
+                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest not supported", Node.IeeeAddress);
+                    _supportsManagementLqi = false;
+                    return true;
+                }
+                else if (neighborResponse.Status != ZdoStatus.SUCCESS)
+                {
+                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
+                    return false;
+                }
+
+                // Some devices may report the number of entries as the total number they can maintain.
+                // To avoid a loop, we need to check if there's any response.
+                if (neighborResponse.NeighborTableList.Count == 0)
+                {
+                    break;
+                }
+
+                // Save the neighbors
+                neighbors.AddRange(neighborResponse.NeighborTableList);
+
+                // Continue with next request
+                startIndex += neighborResponse.NeighborTableList.Count;
+                totalNeighbors = neighborResponse.NeighborTableEntries;
+
+            } while (startIndex < totalNeighbors);
+
+            _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} neighbors]", Node.IeeeAddress, neighbors.Count);
+
+            Node.Neighbors = neighbors;
+
+            return true;
+        }
+
+        /**
+         * Get node routing table by making a {@link ManagementRoutingRequest} request
+         *
+         * @return list of {@link RoutingTable} if the request was processed ok, null otherwise
+         */
+        private async Task<bool> RequestRoutingTable()
+        {
+            // Start index for the list is 0
+            int startIndex = 0;
+            int totalRoutes = 0;
+            List<RoutingTable> routes = new List<RoutingTable>();
+
+            do
+            {
+                ManagementRoutingRequest routeRequest = new ManagementRoutingRequest();
+                routeRequest.DestinationAddress  = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+                routeRequest.StartIndex = startIndex;
+
+                CommandResult response = await NetworkManager.SendTransaction(routeRequest, routeRequest);
+                ManagementRoutingResponse routingResponse = (ManagementRoutingResponse)response.Response;
+
+                _logger.Debug("{}: Node SVC Discovery: ManagementRoutingRequest returned {}", Node.IeeeAddress, response);
+
+                if (routingResponse == null)
+                {
+                    return false;
+                }
+
+                if (routingResponse.Status == ZdoStatus.NOT_SUPPORTED)
+                {
+                    _logger.Debug("{}: Node SVC Discovery ManagementLqiRequest not supported", Node.IeeeAddress);
+
+                    _supportsManagementRouting = false;
+
+                    return true;
+                }
+                else if (routingResponse.Status != ZdoStatus.SUCCESS)
+                {
+                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
+
+                    return false;
+                }
+
+                // Save the routes
+                routes.AddRange(routingResponse.RoutingTableList);
+
+                // Continue with next request
+                startIndex += routingResponse.RoutingTableList.Count;
+                totalRoutes = routingResponse.RoutingTableEntries;
+
+            } while (startIndex < totalRoutes);
+
+            _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} routes]", Node.IeeeAddress, routes.Count);
+
+            Node.Routes = routes;
+
+            return true;
+        }
+
+        /**
+         * Get the simple descriptor for an endpoint and create the {@link ZigBeeEndpoint}
+         *
+         * @param endpointId the endpoint id to request
+         * @return the newly created {@link ZigBeeEndpoint} for the endpoint, or null on error
          * @throws ExecutionException
          * @throws InterruptedException
          */
-        private boolean requestNodeDescriptor() throws InterruptedException, ExecutionException {
-         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest();
-        nodeDescriptorRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-        nodeDescriptorRequest.setNwkAddrOfInterest(node.getNetworkAddress());
+        private ZigBeeEndpoint GetSimpleDescriptor(int endpointId)
+        {
+            SimpleDescriptorRequest simpleDescriptorRequest = new SimpleDescriptorRequest();
+            simpleDescriptorRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
+            simpleDescriptorRequest.setNwkAddrOfInterest(node.getNetworkAddress());
+            simpleDescriptorRequest.setEndpoint(endpointId);
 
-        CommandResult response = networkManager.sendTransaction(nodeDescriptorRequest, nodeDescriptorRequest).get();
-        NodeDescriptorResponse nodeDescriptorResponse = (NodeDescriptorResponse)response.getResponse();
-        _logger.debug("{}: Node SVC Discovery: NodeDescriptorResponse returned {}", node.getIeeeAddress(),
-                nodeDescriptorResponse);
-        if (nodeDescriptorResponse == null) {
-            return false;
-        }
+            CommandResult response = networkManager.sendTransaction(simpleDescriptorRequest, simpleDescriptorRequest).get();
 
-        if (nodeDescriptorResponse.getStatus() == ZdoStatus.SUCCESS) {
-            node.setNodeDescriptor(nodeDescriptorResponse.getNodeDescriptor());
-
-            return true;
-        }
-
-        return false;
-    }
-
-/**
- * Get node power descriptor
- *
- * @return true if the message was processed ok, or if the end device does not support the power descriptor
- * @throws ExecutionException
- * @throws InterruptedException
- */
-private boolean requestPowerDescriptor() throws InterruptedException, ExecutionException {
-         PowerDescriptorRequest powerDescriptorRequest = new PowerDescriptorRequest();
-powerDescriptorRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-        powerDescriptorRequest.setNwkAddrOfInterest(node.getNetworkAddress());
-
-        CommandResult response = networkManager.sendTransaction(powerDescriptorRequest, powerDescriptorRequest).get();
-PowerDescriptorResponse powerDescriptorResponse = (PowerDescriptorResponse)response.getResponse();
-_logger.debug("{}: Node SVC Discovery: PowerDescriptorResponse returned {}", node.getIeeeAddress(),
-                powerDescriptorResponse);
-        if (powerDescriptorResponse == null) {
-            return false;
-        }
-
-        if (powerDescriptorResponse.getStatus() == ZdoStatus.SUCCESS) {
-            node.setPowerDescriptor(powerDescriptorResponse.getPowerDescriptor());
-
-            return true;
-        } else if (powerDescriptorResponse.getStatus() == ZdoStatus.NOT_SUPPORTED) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Get the active endpoints for a node
-     *
-     * @return true if the message was processed ok
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    private boolean requestActiveEndpoints() throws InterruptedException, ExecutionException {
-         ActiveEndpointsRequest activeEndpointsRequest = new ActiveEndpointsRequest();
-activeEndpointsRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-        activeEndpointsRequest.setNwkAddrOfInterest(node.getNetworkAddress());
-
-        CommandResult response = networkManager.sendTransaction(activeEndpointsRequest, activeEndpointsRequest).get();
-ActiveEndpointsResponse activeEndpointsResponse = (ActiveEndpointsResponse)response.getResponse();
-_logger.debug("{}: Node SVC Discovery: ActiveEndpointsResponse returned {}", node.getIeeeAddress(), response);
-        if (activeEndpointsResponse == null) {
-            return false;
-        }
-
-        // Get the simple descriptors for all endpoints
-        List<ZigBeeEndpoint> endpoints = new ArrayList<ZigBeeEndpoint>();
-        for (int endpointId : activeEndpointsResponse.getActiveEpList()) {
-            ZigBeeEndpoint endpoint = getSimpleDescriptor(endpointId);
-            if (endpoint == null) {
-                return false;
+            SimpleDescriptorResponse simpleDescriptorResponse = (SimpleDescriptorResponse)response.getResponse();
+            _logger.debug("{}: Node SVC Discovery: SimpleDescriptorResponse returned {}", node.getIeeeAddress(),
+                            simpleDescriptorResponse);
+            if (simpleDescriptorResponse == null)
+            {
+                return null;
             }
 
-            endpoints.add(endpoint);
+            if (simpleDescriptorResponse.getStatus() == ZdoStatus.SUCCESS)
+            {
+                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(node, endpointId);
+                SimpleDescriptor simpleDescriptor = simpleDescriptorResponse.getSimpleDescriptor();
+                endpoint.setProfileId(simpleDescriptor.getProfileId());
+                endpoint.setDeviceId(simpleDescriptor.getDeviceId());
+                endpoint.setDeviceVersion(simpleDescriptor.getDeviceVersion());
+                endpoint.setInputClusterIds(simpleDescriptor.getInputClusterList());
+                endpoint.setOutputClusterIds(simpleDescriptor.getOutputClusterList());
+
+                return endpoint;
+            }
+
+            return null;
         }
 
-        // All endpoints have been received, so add them to the node
-        for (ZigBeeEndpoint endpoint : endpoints) {
-            node.addEndpoint(endpoint);
+
+
+
+        //    private class NodeServiceDiscoveryTask implements Runnable
+        //{
+        //        private int retryCnt = 0;
+        //private int retryMin = 0;
+
+        //@Override
+        //        public void run()
+        //{
+
+        //}
+        //    }
+
+        /**
+         * Starts service discovery for the node.
+         */
+        public void StartDiscovery()
+        {
+            _logger.Debug("{}: Node SVC Discovery: start discovery", Node.I);
+
+            Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
+
+            // Always request the network address - in case it's changed
+            tasks.add(NodeDiscoveryTask.NWK_ADDRESS);
+
+            if (node.getNodeDescriptor().getLogicalType() == LogicalType.UNKNOWN)
+            {
+                tasks.add(NodeDiscoveryTask.NODE_DESCRIPTOR);
+            }
+
+            if (node.getPowerDescriptor().getCurrentPowerMode() == CurrentPowerModeType.UNKNOWN)
+            {
+                tasks.add(NodeDiscoveryTask.POWER_DESCRIPTOR);
+            }
+
+            if (node.getEndpoints().size() == 0 && node.getNetworkAddress() != 0)
+            {
+                tasks.add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
+            }
+
+            tasks.add(NodeDiscoveryTask.NEIGHBORS);
+
+            startDiscovery(tasks);
         }
 
-        return true;
-    }
+        /**
+         * Starts service discovery for the node in order to update the mesh. This adds the
+         * {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
+         * {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
+         */
+        public void updateMesh()
+        {
+            _logger.debug("{}: Node SVC Discovery: Update mesh", node.getIeeeAddress());
+            Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
 
-    /**
-     * Get node neighbor table by making a {@link ManagementLqiRequest} call.
-     *
-     * @return list of {@link NeighborTable} if the request was processed ok, null otherwise
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    private boolean requestNeighborTable() throws InterruptedException, ExecutionException {
-        // Start index for the list is 0
-        int startIndex = 0;
-int totalNeighbors = 0;
-Set<NeighborTable> neighbors = new HashSet<NeighborTable>();
-        do {
-             ManagementLqiRequest neighborRequest = new ManagementLqiRequest();
-neighborRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-            neighborRequest.setStartIndex(startIndex);
+            tasks.add(NodeDiscoveryTask.NEIGHBORS);
 
-            CommandResult response = networkManager.sendTransaction(neighborRequest, neighborRequest).get();
-ManagementLqiResponse neighborResponse = response.getResponse();
-_logger.debug("{}: Node SVC Discovery: ManagementLqiRequest response {}", node.getIeeeAddress(), response);
-            if (neighborResponse == null) {
-                return false;
+            if (node.getNodeDescriptor().getLogicalType() != LogicalType.END_DEVICE)
+            {
+                tasks.add(NodeDiscoveryTask.ROUTES);
             }
 
-            if (neighborResponse.getStatus() == ZdoStatus.NOT_SUPPORTED) {
-                _logger.debug("{}: Node SVC Discovery: ManagementLqiRequest not supported", node.getIeeeAddress());
-                supportsManagementLqi = false;
-                return true;
-            } else if (neighborResponse.getStatus() != ZdoStatus.SUCCESS) {
-                _logger.debug("{}: Node SVC Discovery: ManagementLqiRequest failed", node.getIeeeAddress());
-                return false;
-            }
+            startDiscovery(tasks);
+        }
 
-            // Some devices may report the number of entries as the total number they can maintain.
-            // To avoid a loop, we need to check if there's any response.
-            if (neighborResponse.getNeighborTableList().size() == 0) {
-                break;
-            }
+        /**
+         * Gets the collection of {@link NodeDiscoveryTask}s that are currently outstanding for this discoverer
+         *
+         * @return collection of {@link NodeDiscoveryTask}s
+         */
+        public Collection<NodeDiscoveryTask> getTasks()
+        {
+            return discoveryTasks;
+        }
 
-            // Save the neighbors
-            neighbors.addAll(neighborResponse.getNeighborTableList());
+        /**
+         * Gets the {@link ZigBeeNode} to which this service discoverer is associated
+         *
+         * @return the {@link ZigBeeNode}
+         */
+        public ZigBeeNode getNode()
+        {
+            return node;
+        }
 
-            // Continue with next request
-            startIndex += neighborResponse.getNeighborTableList().size();
-totalNeighbors = neighborResponse.getNeighborTableEntries();
-        } while (startIndex<totalNeighbors);
+        /**
+         * Gets the time the last discovery was started.
+         *
+         * @return the {@link Instant} that the last discovery was started
+         */
+        public Instant getLastDiscoveryStarted()
+        {
+            return lastDiscoveryStarted;
+        }
 
-        _logger.debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} neighbors]", node.getIeeeAddress(),
-                neighbors.size());
-        node.setNeighbors(neighbors);
-
-        return true;
+        /**
+         * Gets the time the last discovery was completed.
+         *
+         * @return the {@link Instant} that the last discovery was completed
+         */
+        public Instant getLastDiscoveryCompleted()
+        {
+            return lastDiscoveryCompleted;
+        }
     }
-
-    /**
-     * Get node routing table by making a {@link ManagementRoutingRequest} request
-     *
-     * @return list of {@link RoutingTable} if the request was processed ok, null otherwise
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    private boolean requestRoutingTable() throws InterruptedException, ExecutionException {
-        // Start index for the list is 0
-        int startIndex = 0;
-int totalRoutes = 0;
-Set<RoutingTable> routes = new HashSet<RoutingTable>();
-        do {
-             ManagementRoutingRequest routeRequest = new ManagementRoutingRequest();
-routeRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-            routeRequest.setStartIndex(startIndex);
-
-            CommandResult response = networkManager.sendTransaction(routeRequest, routeRequest).get();
-ManagementRoutingResponse routingResponse = response.getResponse();
-_logger.debug("{}: Node SVC Discovery: ManagementRoutingRequest returned {}", node.getIeeeAddress(),
-                    response);
-            if (routingResponse == null) {
-                return false;
-            }
-
-            if (routingResponse.getStatus() == ZdoStatus.NOT_SUPPORTED) {
-                _logger.debug("{}: Node SVC Discovery ManagementLqiRequest not supported", node.getIeeeAddress());
-                supportsManagementRouting = false;
-                return true;
-            } else if (routingResponse.getStatus() != ZdoStatus.SUCCESS) {
-                _logger.debug("{}: Node SVC Discovery: ManagementLqiRequest failed", node.getIeeeAddress());
-                return false;
-            }
-
-            // Save the routes
-            routes.addAll(routingResponse.getRoutingTableList());
-
-            // Continue with next request
-            startIndex += routingResponse.getRoutingTableList().size();
-totalRoutes = routingResponse.getRoutingTableEntries();
-        } while (startIndex<totalRoutes);
-
-        _logger.debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} routes]", node.getIeeeAddress(),
-                routes.size());
-        node.setRoutes(routes);
-
-        return true;
-    }
-
-    /**
-     * Get the simple descriptor for an endpoint and create the {@link ZigBeeEndpoint}
-     *
-     * @param endpointId the endpoint id to request
-     * @return the newly created {@link ZigBeeEndpoint} for the endpoint, or null on error
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    private ZigBeeEndpoint getSimpleDescriptor(int endpointId)
-{
-    SimpleDescriptorRequest simpleDescriptorRequest = new SimpleDescriptorRequest();
-    simpleDescriptorRequest.setDestinationAddress(new ZigBeeEndpointAddress(node.getNetworkAddress()));
-    simpleDescriptorRequest.setNwkAddrOfInterest(node.getNetworkAddress());
-    simpleDescriptorRequest.setEndpoint(endpointId);
-
-    CommandResult response = networkManager.sendTransaction(simpleDescriptorRequest, simpleDescriptorRequest).get();
-
-    SimpleDescriptorResponse simpleDescriptorResponse = (SimpleDescriptorResponse)response.getResponse();
-    _logger.debug("{}: Node SVC Discovery: SimpleDescriptorResponse returned {}", node.getIeeeAddress(),
-                    simpleDescriptorResponse);
-    if (simpleDescriptorResponse == null)
-    {
-        return null;
-    }
-
-    if (simpleDescriptorResponse.getStatus() == ZdoStatus.SUCCESS)
-    {
-        ZigBeeEndpoint endpoint = new ZigBeeEndpoint(node, endpointId);
-        SimpleDescriptor simpleDescriptor = simpleDescriptorResponse.getSimpleDescriptor();
-        endpoint.setProfileId(simpleDescriptor.getProfileId());
-        endpoint.setDeviceId(simpleDescriptor.getDeviceId());
-        endpoint.setDeviceVersion(simpleDescriptor.getDeviceVersion());
-        endpoint.setInputClusterIds(simpleDescriptor.getInputClusterList());
-        endpoint.setOutputClusterIds(simpleDescriptor.getOutputClusterList());
-
-        return endpoint;
-    }
-
-    return null;
-}
-
-
-
-
-//    private class NodeServiceDiscoveryTask implements Runnable
-//{
-//        private int retryCnt = 0;
-//private int retryMin = 0;
-
-//@Override
-//        public void run()
-//{
-
-//}
-//    }
-
-/**
- * Starts service discovery for the node.
- */
-public void startDiscovery()
-{
-    _logger.debug("{}: Node SVC Discovery: start discovery", node.getIeeeAddress());
-    Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
-
-    // Always request the network address - in case it's changed
-    tasks.add(NodeDiscoveryTask.NWK_ADDRESS);
-
-    if (node.getNodeDescriptor().getLogicalType() == LogicalType.UNKNOWN)
-    {
-        tasks.add(NodeDiscoveryTask.NODE_DESCRIPTOR);
-    }
-
-    if (node.getPowerDescriptor().getCurrentPowerMode() == CurrentPowerModeType.UNKNOWN)
-    {
-        tasks.add(NodeDiscoveryTask.POWER_DESCRIPTOR);
-    }
-
-    if (node.getEndpoints().size() == 0 && node.getNetworkAddress() != 0)
-    {
-        tasks.add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
-    }
-
-    tasks.add(NodeDiscoveryTask.NEIGHBORS);
-
-    startDiscovery(tasks);
-}
-
-/**
- * Starts service discovery for the node in order to update the mesh. This adds the
- * {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
- * {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
- */
-public void updateMesh()
-{
-    _logger.debug("{}: Node SVC Discovery: Update mesh", node.getIeeeAddress());
-    Set<NodeDiscoveryTask> tasks = new HashSet<NodeDiscoveryTask>();
-
-    tasks.add(NodeDiscoveryTask.NEIGHBORS);
-
-    if (node.getNodeDescriptor().getLogicalType() != LogicalType.END_DEVICE)
-    {
-        tasks.add(NodeDiscoveryTask.ROUTES);
-    }
-
-    startDiscovery(tasks);
-}
-
-/**
- * Gets the collection of {@link NodeDiscoveryTask}s that are currently outstanding for this discoverer
- *
- * @return collection of {@link NodeDiscoveryTask}s
- */
-public Collection<NodeDiscoveryTask> getTasks()
-{
-    return discoveryTasks;
-}
-
-/**
- * Gets the {@link ZigBeeNode} to which this service discoverer is associated
- *
- * @return the {@link ZigBeeNode}
- */
-public ZigBeeNode getNode()
-{
-    return node;
-}
-
-/**
- * Gets the time the last discovery was started.
- *
- * @return the {@link Instant} that the last discovery was started
- */
-public Instant getLastDiscoveryStarted()
-{
-    return lastDiscoveryStarted;
-}
-
-/**
- * Gets the time the last discovery was completed.
- *
- * @return the {@link Instant} that the last discovery was completed
- */
-public Instant getLastDiscoveryCompleted()
-{
-    return lastDiscoveryCompleted;
-}
-}
 }

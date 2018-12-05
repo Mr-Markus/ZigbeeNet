@@ -24,6 +24,8 @@ namespace ZigbeeNet
          */
         //private Logger logger = LoggerFactory.getLogger(ZigBeeNode.class);
 
+        private DateTime _lastUpdateTime;
+
         /**
          * The extended {@link IeeeAddress} for the node
          */
@@ -37,18 +39,17 @@ namespace ZigbeeNet
         /**
          * The {@link NodeDescriptor} for the node
          */
-        private NodeDescriptor nodeDescriptor = new NodeDescriptor();
+        public NodeDescriptor NodeDescriptor { get; set; } = new NodeDescriptor();
 
         /**
          * The {@link PowerDescriptor} for the node
          */
-        private PowerDescriptor powerDescriptor = new PowerDescriptor();
+        public PowerDescriptor PowerDescriptor { get; set; } = new PowerDescriptor();
 
         /**
          * The time the node information was last updated. This is set from the mesh update class when it the
          * updates neighbor table, routing table etc.
          */
-        private DateTime lastUpdateTime;
 
         /**
          * List of associated devices for the node, specified in a {@link List} {@link Integer}
@@ -58,22 +59,22 @@ namespace ZigbeeNet
         /**
          * List of neighbors for the node, specified in a {@link NeighborTable}
          */
-        private List<NeighborTable> neighbors = new List<NeighborTable>();
+        public List<NeighborTable> Neighbors { get; set; } = new List<NeighborTable>();
 
         /**
          * List of routes within the node, specified in a {@link RoutingTable}
          */
-        private List<RoutingTable> routes = new List<RoutingTable>();
+        public List<RoutingTable> Routes { get; set; } = new List<RoutingTable>();
 
         /**
          * List of binding records
          */
-        private List<BindingTable> bindingTable = new List<BindingTable>();
+        public List<BindingTable> BindingTable { get; set; } = new List<BindingTable>();
 
         /**
          * List of endpoints this node exposes
          */
-        private ConcurrentDictionary<int, ZigBeeEndpoint> endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
+        private ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
 
         /**
          * The node service discoverer that is responsible for the discovery of services, and periodic update or routes and
@@ -141,7 +142,7 @@ namespace ZigbeeNet
          */
         public void setNodeDescriptor(NodeDescriptor nodeDescriptor)
         {
-            this.nodeDescriptor = nodeDescriptor;
+            this.NodeDescriptor = nodeDescriptor;
         }
 
         /**
@@ -151,7 +152,7 @@ namespace ZigbeeNet
          */
         public NodeDescriptor getNodeDescriptor()
         {
-            return nodeDescriptor;
+            return NodeDescriptor;
         }
 
         /**
@@ -161,7 +162,7 @@ namespace ZigbeeNet
          */
         public void setPowerDescriptor(PowerDescriptor powerDescriptor)
         {
-            this.powerDescriptor = powerDescriptor;
+            this.PowerDescriptor = powerDescriptor;
         }
 
         /**
@@ -171,7 +172,7 @@ namespace ZigbeeNet
          */
         public PowerDescriptor getPowerDescriptor()
         {
-            return powerDescriptor;
+            return PowerDescriptor;
         }
 
         /**
@@ -234,11 +235,11 @@ namespace ZigbeeNet
          */
         public boolean isFullFuntionDevice()
         {
-            if (nodeDescriptor == null)
+            if (NodeDescriptor == null)
             {
                 return false;
             }
-            return nodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
+            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
         }
 
         /**
@@ -253,29 +254,29 @@ namespace ZigbeeNet
          */
         public boolean isReducedFuntionDevice()
         {
-            if (nodeDescriptor == null)
+            if (NodeDescriptor == null)
             {
                 return false;
             }
-            return nodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
+            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
         }
 
         public boolean isSecurityCapable()
         {
-            if (nodeDescriptor == null)
+            if (NodeDescriptor == null)
             {
                 return false;
             }
-            return nodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.SECURITY_CAPABLE);
+            return NodeDescriptor.getMacCapabilities().contains(MacCapabilitiesType.SECURITY_CAPABLE);
         }
 
         public boolean isPrimaryTrustCenter()
         {
-            if (nodeDescriptor == null)
+            if (NodeDescriptor == null)
             {
                 return false;
             }
-            return nodeDescriptor.getServerCapabilities().contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
+            return NodeDescriptor.getServerCapabilities().contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
         }
 
         /**
@@ -292,14 +293,14 @@ namespace ZigbeeNet
          */
         public LogicalType getLogicalType()
         {
-            return nodeDescriptor.getLogicalType();
+            return NodeDescriptor.getLogicalType();
         }
 
         private void setBindingTable(List<BindingTable> bindingTable)
         {
-            synchronized(this.bindingTable) {
-                this.bindingTable.clear();
-                this.bindingTable.addAll(bindingTable);
+            synchronized(this.BindingTable) {
+                this.BindingTable.clear();
+                this.BindingTable.addAll(bindingTable);
                 logger.debug("{}: Binding table updated: {}", IeeeAddress, bindingTable);
             }
         }
@@ -312,8 +313,8 @@ namespace ZigbeeNet
          */
         public Set<BindingTable> getBindingTable()
         {
-            synchronized(bindingTable) {
-                return new HashSet<BindingTable>(bindingTable);
+            synchronized(BindingTable) {
+                return new HashSet<BindingTable>(BindingTable);
             }
         }
 
@@ -392,13 +393,14 @@ namespace ZigbeeNet
      *
      * @param endpoint the {@link ZigBeeEndpoint} to add
      */
-    public void addEndpoint(final ZigBeeEndpoint endpoint)
+    public void AddEndpoint(ZigBeeEndpoint endpoint)
     {
-        synchronized(endpoints) {
-            endpoints.put(endpoint.getEndpointId(), endpoint);
+        lock(_endpoints) {
+            _endpoints.Add(endpoint.getEndpointId(), endpoint);
         }
-        synchronized(this) {
-            for (final ZigBeeNetworkEndpointListener listener : endpointListeners)
+
+        lock(this) {
+            for (ZigBeeNetworkEndpointListener listener in endpointListeners)
             {
                 NotificationService.execute(new Runnable() {
                     @Override

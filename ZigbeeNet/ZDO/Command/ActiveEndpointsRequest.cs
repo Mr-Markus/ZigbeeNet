@@ -7,28 +7,28 @@ using ZigbeeNet.ZCL.Protocol;
 namespace ZigbeeNet.ZDO.Command
 {
     /**
-     * Power Descriptor Request value object class.
-     * The Power_Desc_req command is generated from a local device wishing to
-     * inquire as to the power descriptor of a remote device. This command shall be
-     * unicast either to the remote device itself or to an alternative device that contains
-     * the discovery information of the remote device.
+     * Active Endpoints Request value object class.
      * 
-     * Code is auto-generated. Modifications may be overwritten!
+     * The Active_EP_req command is generated from a local device wishing to acquire
+     * the list of endpoints on a remote device with simple descriptors. This command
+     * shall be unicast either to the remote device itself or to an alternative device that
+     * contains the discovery information of the remote device.
      */
-    public class PowerDescriptorRequest : ZdoCommand, IZigBeeTransactionMatcher
+    public class ActiveEndpointsRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
         /**
          * NWKAddrOfInterest command message field.
-        */
-        public ushort NwkAddrOfInterest { get; set; }
+         */
+        public int NwkAddrOfInterest { get; set; }
 
         /**
          * Default constructor.
          */
-        public PowerDescriptorRequest()
+        public ActiveEndpointsRequest()
         {
-            ClusterId = 0x0003;
+            ClusterId = 0x0005;
         }
+
 
         public override void Serialize(ZclFieldSerializer serializer)
         {
@@ -41,23 +41,25 @@ namespace ZigbeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
         {
-            if (response is PowerDescriptorResponse) {
-                return (((PowerDescriptorRequest)request).NwkAddrOfInterest.Equals(((PowerDescriptorResponse)response).NwkAddrOfInterest));
+            if (!(response is ActiveEndpointsResponse))
+            {
+                return false;
             }
 
-            return false;
+            return ((ActiveEndpointsRequest)request).NwkAddrOfInterest.Equals(((ActiveEndpointsResponse)response).NwkAddrOfInterest);
         }
+
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("PowerDescriptorRequest [")
+            builder.Append("ActiveEndpointsRequest [")
                    .Append(base.ToString())
                    .Append(", nwkAddrOfInterest=")
                    .Append(NwkAddrOfInterest)
@@ -65,5 +67,6 @@ namespace ZigbeeNet.ZDO.Command
 
             return builder.ToString();
         }
+
     }
 }
