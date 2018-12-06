@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using ZigbeeNet.DAO;
+using ZigbeeNet.ZDO.Command;
 using ZigBeeNet;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
@@ -17,14 +18,11 @@ using static ZigBeeNet.ZDO.Field.PowerDescriptor;
 
 namespace ZigBeeNet
 {
-    /// <summary>
     /**
- * Defines a ZigBee Node. A node is a physical entity on the network and will
- * contain one or more {@link ZigBeeEndpoint}s.
- *
- * @author Chris Jackson
- *
- */
+     * Defines a ZigBee Node. A node is a physical entity on the network and will
+     * contain one or more {@link ZigBeeEndpoint}s.
+     *
+     */
     public class ZigBeeNode : IZigBeeCommandListener
     {
         private readonly ILog _logger = LogProvider.For<ZigBeeNode>();
@@ -64,7 +62,7 @@ namespace ZigBeeNet
         /**
          * List of associated devices for the node, specified in a {@link List} {@link Integer}
          */
-        public List<int> AssociatedDevices { get; } = new List<int>();
+        public List<int> AssociatedDevices { get; set; } = new List<int>();
 
         /**
          * List of neighbors for the node, specified in a {@link NeighborTable}
@@ -90,23 +88,23 @@ namespace ZigBeeNet
          * The node service discoverer that is responsible for the discovery of services, and periodic update or routes and
          * Neighbors
          */
-        private ZigBeeNodeServiceDiscoverer serviceDiscoverer;
+        private ZigBeeNodeServiceDiscoverer _serviceDiscoverer;
 
         /**
          * The endpoint listeners of the ZigBee network. Registered listeners will be
          * notified of additions, deletions and changes to {@link ZigBeeEndpoint}s.
          */
-        private ReadOnlyCollection<IZigBeeNetworkEndpointListener> endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(new List<IZigBeeNetworkEndpointListener>());
+        private ReadOnlyCollection<IZigBeeNetworkEndpointListener> _endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(new List<IZigBeeNetworkEndpointListener>());
 
         /**
-         * The {@link ZigBeeNetworkManager} that manages this node
+         * The {@link ZigBeeNetwork} that manages this node
          */
-        private ZigBeeNetworkManager networkManager;
+        private IZigBeeNetwork _network;
 
         /**
          * Broadcast endpoint definition
          */
-        private static int BROADCAST_ENDPOINT = 0xFF;
+        private const int BROADCAST_ENDPOINT = 0xFF;
 
         /**
          * Constructor
@@ -115,13 +113,13 @@ namespace ZigBeeNet
          * @param ieeeAddress the {@link IeeeAddress} of the node
          * @throws {@link IllegalArgumentException} if ieeeAddress is null
          */
-        public ZigBeeNode(ZigBeeNetworkManager networkManager, IeeeAddress ieeeAddress)
+        public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress)
         {
-            this.networkManager = networkManager;
+            this._network = network;
             this.IeeeAddress = ieeeAddress ?? throw new ArgumentException("IeeeAddress can't be null when creating ZigBeeNode");
-            this.serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
+            //this._serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
 
-            networkManager.AddCommandListener(this);
+            network.AddCommandListener(this);
         }
 
         public void Shutdown()
@@ -144,18 +142,18 @@ namespace ZigBeeNet
 
             if (duration > 255)
             {
-                command.setPermitDuration(255);
+                command.PermitDuration = 255;
             }
             else
             {
-                command.setPermitDuration(duration);
+                command.PermitDuration = duration;
             }
 
-            command.setTcSignificance(true);
-            command.setDestinationAddress(new ZigBeeEndpointAddress(0));
-            command.setSourceAddress(new ZigBeeEndpointAddress(0));
+            command.TcSignificance = true;
+            command.DestinationAddress = new ZigBeeEndpointAddress(0);
+            command.SourceAddress = new ZigBeeEndpointAddress(0);
 
-            networkManager.SendCommand(command);
+            _network.SendTransaction(command);
         }
 
         /**
@@ -244,13 +242,13 @@ namespace ZigBeeNet
 
         /**
          * Gets the {@link LogicalType} of the node.
-         * <p>
+         * 
          * Possible types are -:
-         * <ul>
-         * <li>{@link LogicalType#COORDINATOR}
-         * <li>{@link LogicalType#ROUTER}
-         * <li>{@link LogicalType#END_DEVICE}
-         * <ul>
+         * 
+         * {@link LogicalType#COORDINATOR}
+         * {@link LogicalType#ROUTER}
+         * {@link LogicalType#END_DEVICE}
+         * 
          *
          * @return the {@link LogicalType} of the node
          */
@@ -274,43 +272,41 @@ namespace ZigBeeNet
 
         /**
          * Request an update of the binding table for this node.
-         * <p>
+         * 
          * This method returns a future to a bool. Upon success the caller should call {@link #getBindingTable()}
          *
          * @return {@link Future} returning a {@link Boolean}
          */
         public async Task<bool> UpdateBindingTable()
         {
-            return await Task.Run(() =>
+            int index = 0;
+            int tableSize = 0;
+            List<BindingTable> bindingTable = new List<BindingTable>();
+
+            do
             {
-                int index = 0;
-                int tableSize = 0;
-                List<BindingTable> bindingTable = new List<BindingTable>();
+                ManagementBindRequest bindingRequest = new ManagementBindRequest();
+                bindingRequest.DestinationAddress = new ZigBeeEndpointAddress(NetworkAddress);
+                bindingRequest.StartIndex = index;
 
-                do
+                CommandResult result = await _network.SendTransaction(bindingRequest, new ManagementBindRequest());
+
+                if (result.IsError())
                 {
-                    ManagementBindRequest bindingRequest = new ManagementBindRequest();
-                    bindingRequest.setDestinationAddress(new ZigBeeEndpointAddress(NetworkAddress));
-                    bindingRequest.setStartIndex(index);
+                    return false;
+                }
 
-                    CommandResult result = networkManager.unicast(bindingRequest, new ManagementBindRequest()).get();
-                    if (result.IsError())
-                    {
-                        return false;
-                    }
+                ManagementBindResponse response = (ManagementBindResponse)result.GetResponse();
+                if (response.StartIndex == index)
+                {
+                    tableSize = response.BindingTableEntries;
+                    index += response.BindingTableList.Count;
+                    bindingTable.AddRange(response.BindingTableList);
+                }
+            } while (index < tableSize);
 
-                    ManagementBindResponse response = (ManagementBindResponse)result.GetResponse();
-                    if (response.getStartIndex() == index)
-                    {
-                        tableSize = response.getBindingTableEntries();
-                        index += response.getBindingTableList().size();
-                        bindingTable.AddRange(response.getBindingTableList());
-                    }
-                } while (index < tableSize);
-
-                SetBindingTable(bindingTable);
-                return true;
-            });
+            SetBindingTable(bindingTable);
+            return true;
         }
 
         /**
@@ -334,14 +330,14 @@ namespace ZigBeeNet
          */
         public void AddEndpoint(ZigBeeEndpoint endpoint)
         {
-            lock (Endpoints)
-            {
-                Endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, );
-            }
+            //lock (Endpoints)
+            //{
+            Endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, (_, __) => endpoint);
+            //}
 
-            lock (this)
+            lock (_endpointListeners)
             {
-                foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
+                foreach (IZigBeeNetworkEndpointListener listener in _endpointListeners)
                 {
                     Task.Run(() =>
                     {
@@ -365,9 +361,9 @@ namespace ZigBeeNet
             {
                 Endpoints[endpoint.EndpointId] = endpoint;
             }
-            lock (endpointListeners)
+            lock (_endpointListeners)
             {
-                foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
+                foreach (IZigBeeNetworkEndpointListener listener in _endpointListeners)
                 {
                     Task.Run(() =>
                     {
@@ -392,11 +388,11 @@ namespace ZigBeeNet
             {
                 Endpoints.TryRemove(endpointId, out endpoint);
             }
-            lock (endpointListeners)
+            lock (_endpointListeners)
             {
                 if (endpoint != null)
                 {
-                    foreach (IZigBeeNetworkEndpointListener listener in endpointListeners)
+                    foreach (IZigBeeNetworkEndpointListener listener in _endpointListeners)
                     {
                         Task.Run(() =>
                         {
@@ -412,21 +408,21 @@ namespace ZigBeeNet
 
         public void AddNetworkEndpointListener(IZigBeeNetworkEndpointListener networkDeviceListener)
         {
-            lock (endpointListeners)
+            lock (_endpointListeners)
             {
-                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(endpointListeners);
+                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(_endpointListeners);
                 modifiedListeners.Add(networkDeviceListener);
-                endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
+                _endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
             }
         }
 
         public void RemoveNetworkEndpointListener(IZigBeeNetworkEndpointListener networkDeviceListener)
         {
-            lock (endpointListeners)
+            lock (_endpointListeners)
             {
-                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(endpointListeners);
+                List<IZigBeeNetworkEndpointListener> modifiedListeners = new List<IZigBeeNetworkEndpointListener>(_endpointListeners);
                 modifiedListeners.Remove(networkDeviceListener);
-                endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
+                _endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(modifiedListeners);
             }
         }
 
@@ -468,49 +464,49 @@ namespace ZigBeeNet
         /**
          * Starts service discovery for the node.
          */
-        public void StartDiscovery()
-        {
-            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
+        //public void StartDiscovery()
+        //{
+        //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-            // Always request the network address - in case it's changed
-            tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
+        //    // Always request the network address - in case it's changed
+        //    tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
 
-            if (NodeDescriptor.LogicalNodeType == LogicalType.UNKNOWN)
-            {
-                tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
-            }
+        //    if (NodeDescriptor.LogicalNodeType == LogicalType.UNKNOWN)
+        //    {
+        //        tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
+        //    }
 
-            if (PowerDescriptor.CurrentPowerMode == CurrentPowerModeType.UNKNOWN)
-            {
-                tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
-            }
+        //    if (PowerDescriptor.CurrentPowerMode == CurrentPowerModeType.UNKNOWN)
+        //    {
+        //        tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
+        //    }
 
-            if (Endpoints.Count == 0 && NetworkAddress != 0)
-            {
-                tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
-            }
+        //    if (Endpoints.Count == 0 && NetworkAddress != 0)
+        //    {
+        //        tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
+        //    }
 
-            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
+        //    tasks.Add(NodeDiscoveryTask.NEIGHBORS);
 
-            serviceDiscoverer.StartDiscovery(tasks);
-        }
+        //    _serviceDiscoverer.StartDiscovery(tasks);
+        //}
 
         /**
          * Starts service discovery for the node in order to update the mesh
          */
-        public void UpdateMesh()
-        {
-            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
+        //public void UpdateMesh()
+        //{
+        //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
+        //    tasks.Add(NodeDiscoveryTask.NEIGHBORS);
 
-            if (NodeDescriptor.LogicalNodeType != LogicalType.END_DEVICE)
-            {
-                tasks.Add(NodeDiscoveryTask.ROUTES);
-            }
+        //    if (NodeDescriptor.LogicalNodeType != LogicalType.END_DEVICE)
+        //    {
+        //        tasks.Add(NodeDiscoveryTask.ROUTES);
+        //    }
 
-            serviceDiscoverer.StartDiscovery(tasks);
-        }
+        //    _serviceDiscoverer.StartDiscovery(tasks);
+        //}
 
         /**
          * Checks if basic device discovery is complete.
@@ -639,7 +635,7 @@ namespace ZigBeeNet
 
             foreach (ZigBeeEndpointDao endpointDao in dao.Endpoints)
             {
-                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(networkManager, this, endpointDao.EndpointId);
+                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(this, endpointDao.EndpointId);
                 endpoint.SetDao(endpointDao);
                 Endpoints[endpoint.EndpointId] = endpoint;
             }

@@ -2,31 +2,44 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ZigbeeNet.Transaction;
 
 namespace ZigBeeNet
 {
-    /// <summary>
-    /// ZigBee network interface. It provides an interface for higher layers to receive information about the network and
-    /// also provides services for the ZigBeeTransportTransmit to provide network updates and incoming commands.
-    /// </summary>
+    /**
+     * ZigBee network interface. It provides an interface for higher layers to receive information about the network and
+     * also provides services for the {@link ZigBeeTransportTransmit} to provide network updates and incoming commands.
+     */
     public interface IZigBeeNetwork
     {
-        /// <summary>
-        /// Sends ZigBee command without waiting for response.
-        /// </summary>
-        /// <param name="command"></param>
+        /**
+         * Sends ZigBee command without waiting for response.
+         *
+         * @param command the {@link ZigBeeCommand} to send
+         */
         void SendTransaction(ZigBeeCommand command);
 
-        /// <summary>
-        /// Adds ZigBee library command listener.
-        /// </summary>
-        /// <param name="commandListener"></param>
+        /**
+         * Sends {@link ZigBeeCommand} command and uses the {@link ZigBeeTransactionMatcher} to match the response.
+         *
+         * @param command the {@link ZigBeeCommand} to send
+         * @param responseMatcher the {@link ZigBeeTransactionMatcher} used to match the response to the request
+         * @return the {@link CommandResult} future.
+         */
+        Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher);
+
+        /**
+         * Adds ZigBee library command listener.
+         *
+         * @param commandListener the {@link ZigBeeCommandListener}
+         */
         void AddCommandListener(IZigBeeCommandListener commandListener);
 
-        /// <summary>
-        /// Removes ZigBee library command listener.
-        /// </summary>
-        /// <param name="commandListener"></param>
+        /**
+         * Removes ZigBee library command listener.
+         *
+         * @param commandListener the {@link ZigBeeCommandListener}
+         */
         void RemoveCommandListener(IZigBeeCommandListener commandListener);
     }
 }

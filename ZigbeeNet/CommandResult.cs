@@ -102,7 +102,7 @@ namespace ZigBeeNet
                 }
                 else
                 {
-                    return (int)((ZdoResponse)Response).GetStatus();
+                    return (int)((ZdoResponse)Response).Status;
                 }
             }
             else

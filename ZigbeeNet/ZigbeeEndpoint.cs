@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.App;
 using ZigBeeNet.DAO;
+using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Protocol;
@@ -12,12 +13,12 @@ namespace ZigBeeNet
 {
     public class ZigBeeEndpoint
     {
-        //private final Logger logger = LoggerFactory.getLogger(ZigBeeEndpoint.class);
+        private ILog _logger = LogProvider.For<ZigBeeEndpoint>();
 
-        /**
-         * The {@link ZigBeeNetworkManager} that manages this endpoint
-         */
-        private readonly ZigBeeNetworkManager _networkManager;
+        ///**
+        // * The {@link ZigBeeNetworkManager} that manages this endpoint
+        // */
+        //private readonly ZigBeeNetworkManager _networkManager;
 
         /**
          * Link to the parent {@link ZigBeeNode} to which this endpoint belongs
@@ -70,9 +71,8 @@ namespace ZigBeeNet
          * @param node the parent {@link ZigBeeNode}
          * @param endpoint the endpoint number within the {@link ZigBeeNode}
          */
-        public ZigBeeEndpoint(ZigBeeNetworkManager networkManager, ZigBeeNode node, int endpoint)
+        public ZigBeeEndpoint(ZigBeeNode node, int endpoint)
         {
-            this._networkManager = networkManager;
             this.Node = node;
             this.EndpointId = endpoint;
         }
@@ -132,7 +132,7 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            //logger.debug("{}: Setting input clusters {}", getEndpointAddress(), inputClusterIds);
+            _logger.Debug("{}: Setting input clusters {}", GetEndpointAddress(), inputClusterIds);
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }
@@ -142,7 +142,7 @@ namespace ZigBeeNet
          *
          * @return the node {@link IeeeAddress}
          */
-        public ZigBeeAddress64 GetIeeeAddress()
+        public IeeeAddress GetIeeeAddress()
         {
             return Node.IeeeAddress;
         }
@@ -154,7 +154,7 @@ namespace ZigBeeNet
          */
         public ZigBeeEndpointAddress GetEndpointAddress()
         {
-            return new ZigBeeEndpointAddress(Node.NwkAdress.Value, EndpointId);
+            return new ZigBeeEndpointAddress(Node.NetworkAddress, (byte)EndpointId);
         }
 
         /**
@@ -178,7 +178,7 @@ namespace ZigBeeNet
         {
             this._outputClusters.Clear();
 
-            //logger.debug("{}: Setting output clusters {}", getEndpointAddress(), outputClusterIds);
+            _logger.Debug("{}: Setting output clusters {}", GetEndpointAddress(), outputClusterIds);
 
             UpdateClusters(_outputClusters, outputClusterIds, false);
         }
@@ -186,7 +186,7 @@ namespace ZigBeeNet
         /**
          * Gets a cluster from the input or output cluster list depending on the command {@link ZclCommandDirection} for a
          * received command.
-         * <p>
+         * 
          * If commandDirection is {@link ZclCommandDirection#CLIENT_TO_SERVER} then the cluster comes from the output
          * cluster list.
          * If commandDirection is {@link ZclCommandDirection#SERVER_TO_CLIENT} then the cluster comes from the input
@@ -214,13 +214,15 @@ namespace ZigBeeNet
             if (clusterType == null)
             {
                 // Unsupported cluster
-                //logger.debug("{}: Unsupported cluster {}", getEndpointAddress(), clusterId);
+                _logger.Debug("{}: Unsupported cluster {}", GetEndpointAddress(), clusterId);
                 return null;
             }
 
             // Create a cluster class
             ZclCluster cluster = null;
 
+
+            throw new NotImplementedException();
             //    Constructor <? extends ZclCluster > constructor;
             //    // try {
             //    try
@@ -256,7 +258,7 @@ namespace ZigBeeNet
             // Remove clusters no longer in use
             foreach (int id in removeIds)
             {
-                //logger.debug("{}: Removing cluster {}", getEndpointAddress(), id);
+                _logger.Debug("{}: Removing cluster {}", GetEndpointAddress(), id);
                 clusters.TryRemove(id, out ZclCluster not_used);
             }
 
@@ -274,14 +276,12 @@ namespace ZigBeeNet
 
                     if (isInput)
                     {
-                        //logger.debug("{}: Setting cluster {} as server", getEndpointAddress(),
-                        ZclClusterType.GetValueById(id);
+                        _logger.Debug("{}: Setting cluster {} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetServer();
                     }
                     else
                     {
-                        //logger.debug("{}: Setting cluster {} as client", getEndpointAddress(),
-                        ZclClusterType.GetValueById(id);
+                        _logger.Debug("{}: Setting cluster {} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetClient();
                     }
 
@@ -352,7 +352,7 @@ namespace ZigBeeNet
             ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.Direction);
             if (cluster == null)
             {
-                //logger.debug("{}: Cluster {} not found for attribute response", GetEndpointAddress(), command.getClusterId());
+                _logger.Debug("{}: Cluster {} not found for attribute response", GetEndpointAddress(), command.ClusterId);
                 return;
             }
 
@@ -384,10 +384,11 @@ namespace ZigBeeNet
          */
         public ZigBeeEndpointDao GetDao()
         {
-            ZigBeeEndpointDao dao = new ZigBeeEndpointDao();
-
-            dao.EndpointId = EndpointId;
-            dao.ProfileId = ProfileId;
+            ZigBeeEndpointDao dao = new ZigBeeEndpointDao
+            {
+                EndpointId = EndpointId,
+                ProfileId = ProfileId
+            };
 
             List<ZclClusterDao> clusters;
 
@@ -412,6 +413,7 @@ namespace ZigBeeNet
         public void SetDao(ZigBeeEndpointDao dao)
         {
             EndpointId = dao.EndpointId;
+
             //if (dao.ProfileId != null)
             //{
             ProfileId = dao.ProfileId;

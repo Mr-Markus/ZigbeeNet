@@ -5,6 +5,7 @@ using ZigBeeNet.CC.Network;
 using ZigBeeNet.CC.Packet;
 using ZigBeeNet.CC.Packet.AF;
 using ZigBeeNet.Logging;
+using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 
 namespace ZigBeeNet.CC
@@ -23,10 +24,10 @@ namespace ZigBeeNet.CC
         private List<ushort> _supportedOutputClusters = new List<ushort>();
 
         public string VersionString { get; set; }
-        public ZigbeeAddress64 IeeeAddress { get; set; }
+        public IeeeAddress IeeeAddress { get; set; }
         public ZigBeeChannel ZigBeeChannel { get; set; }
         public ZigbeeAddress16 PanID { get; set; }
-        public ZigbeeAddress64 ExtendedPanId { get; set; }
+        public IeeeAddress ExtendedPanId { get; set; }
         public ZigBeeKey ZigBeeNetworkKey { get; set; }
         public ZigBeeKey TcLinkKey { get; set; }
 
