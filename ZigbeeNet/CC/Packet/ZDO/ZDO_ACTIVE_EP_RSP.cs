@@ -6,11 +6,11 @@ namespace ZigBeeNet.CC.Packet.ZDO
 {
     public class ZDO_ACTIVE_EP_RSP : AsynchronousRequest
     {
-        public ZigbeeAddress16 SrcAddr { get; private set; }
+        public ZigBeeAddress16 SrcAddr { get; private set; }
 
         public PacketStatus Status { get; private set; }
 
-        public ZigbeeAddress16 NwkAddr { get; private set; }
+        public ZigBeeAddress16 NwkAddr { get; private set; }
 
         public byte ActiveEPCount { get; private set; }
 
@@ -18,9 +18,9 @@ namespace ZigBeeNet.CC.Packet.ZDO
 
         public ZDO_ACTIVE_EP_RSP(byte[] framedata)
         {
-            SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZigBeeAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
-            NwkAddr = new ZigbeeAddress16(framedata[4], framedata[3]);
+            NwkAddr = new ZigBeeAddress16(framedata[4], framedata[3]);
 
             ActiveEPCount = framedata[5];
             ActiveEpList = new byte[ActiveEPCount];

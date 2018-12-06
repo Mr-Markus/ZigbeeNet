@@ -12,14 +12,14 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies NWK address of the device generating the inquiry
         /// </summary>
-        public ZigbeeAddress16 DstAddr { get; private set; }
+        public ZigBeeAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Specifies NWK address of the destination device being queried
         /// </summary>
-        public ZigbeeAddress16 NwkAddrOfInterest { get; private set; }
+        public ZigBeeAddress16 NwkAddrOfInterest { get; private set; }
 
-        public ZDO_NODE_DESC_REQ(ZigbeeAddress16 dstAddr, ZigbeeAddress16 nwkAddrOfinterest)
+        public ZDO_NODE_DESC_REQ(ZigBeeAddress16 dstAddr, ZigBeeAddress16 nwkAddrOfinterest)
         {
             DstAddr = dstAddr;
             NwkAddrOfInterest = nwkAddrOfinterest;

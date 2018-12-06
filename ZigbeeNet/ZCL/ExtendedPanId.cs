@@ -8,14 +8,21 @@ namespace ZigBeeNet.ZCL
 {
     public class ExtendedPanId
     {
-        public int[] PanId { get; private set; }
+        public byte[] PanId { get; private set; }
+
+        public ulong Value {
+            get
+            {
+                return BitConverter.ToUInt64(PanId, 0);
+            }
+        }
 
         /**
          * Default constructor. Creates a PAN Id of 0
          */
         public ExtendedPanId()
         {
-            this.PanId = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            PanId = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
         /**
@@ -25,18 +32,18 @@ namespace ZigBeeNet.ZCL
          */
         public ExtendedPanId(BigInteger panId)
         {
-            this.PanId = new int[8];
+            PanId = new byte[8];
 
             long longVal = (long)panId;
 
-            this.PanId[0] = (int)(longVal & 0xff);
-            this.PanId[1] = (int)((longVal >> 8) & 0xff);
-            this.PanId[2] = (int)((longVal >> 16) & 0xff);
-            this.PanId[3] = (int)((longVal >> 24) & 0xff);
-            this.PanId[4] = (int)((longVal >> 32) & 0xff);
-            this.PanId[5] = (int)((longVal >> 40) & 0xff);
-            this.PanId[6] = (int)((longVal >> 48) & 0xff);
-            this.PanId[7] = (int)((longVal >> 56) & 0xff);
+            PanId[0] = (byte)(longVal & 0xff);
+            PanId[1] = (byte)((longVal >> 8) & 0xff);
+            PanId[2] = (byte)((longVal >> 16) & 0xff);
+            PanId[3] = (byte)((longVal >> 24) & 0xff);
+            PanId[4] = (byte)((longVal >> 32) & 0xff);
+            PanId[5] = (byte)((longVal >> 40) & 0xff);
+            PanId[6] = (byte)((longVal >> 48) & 0xff);
+            PanId[7] = (byte)((longVal >> 56) & 0xff);
         }
 
         /**
@@ -56,11 +63,11 @@ namespace ZigBeeNet.ZCL
          * @param panId the panId as an int array. Array length must be 8.
          * @throws InvalidParameterException
          */
-        public ExtendedPanId(int[] panId)
+        public ExtendedPanId(byte[] panId)
         {
             if (panId == null)
             {
-                this.PanId = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+                PanId = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
                 return;
             }
 
@@ -69,7 +76,7 @@ namespace ZigBeeNet.ZCL
                 throw new ArgumentException("ExtendedPanId array length must be 8");
             }
 
-            this.PanId = panId;//panId.Take(8).ToArray();
+            PanId = panId;//panId.Take(8).ToArray();
         }
 
 
@@ -112,7 +119,7 @@ namespace ZigBeeNet.ZCL
             return result;
         }
 
-        public bool equals(Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
             {
@@ -122,7 +129,7 @@ namespace ZigBeeNet.ZCL
             {
                 return false;
             }
-            if (this.GetType() != obj.GetType())
+            if (GetType() != obj.GetType())
             {
                 return false;
             }

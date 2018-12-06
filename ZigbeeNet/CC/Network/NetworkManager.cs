@@ -69,7 +69,7 @@ namespace ZigBeeNet.CC.Network
         private NetworkMode _mode;
         private ushort _pan = AUTO_PANID;
         private byte _channel = ZNP_DEFAULT_CHANNEL;
-        private ZigbeeAddress64 _extendedPanId; // do not initialize to use dongle defaults (the IEEE address)
+        private ExtendedPanId _extendedPanId; // do not initialize to use dongle defaults (the IEEE address)
         private byte[] _networkKey; // 16 byte network key
         private bool _distributeNetworkKey = true; // distribute network key in clear (be careful)
         private int _securityMode = 1;
@@ -816,7 +816,7 @@ namespace ZigBeeNet.CC.Network
         private bool DongleSetExtendedPanId()
         {
             ZB_WRITE_CONFIGURATION_RSP response = (ZB_WRITE_CONFIGURATION_RSP)SendSynchronous(
-                    new ZB_WRITE_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_EXTPANID, _extendedPanId.ToByteArray()));
+                    new ZB_WRITE_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_EXTPANID, _extendedPanId.PanId));
 
             return response != null && response.Status == 0;
         }
@@ -957,7 +957,7 @@ namespace ZigBeeNet.CC.Network
             return response[0];
         }
 
-        public AF_REGISTER_SRSP sendAFRegister(AF_REGISTER request)
+        public AF_REGISTER_SRSP SendAFRegister(AF_REGISTER request)
         {
             if (!WaitForNetwork())
             {
@@ -1149,7 +1149,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _ieeeAddress = new ZigbeeAddress64(result).Value;
+                _ieeeAddress = new IeeeAddress(result).Value;
                 return _ieeeAddress;
             }
         }
@@ -1179,7 +1179,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _currentPanId = new ZigbeeAddress16(result).Value;
+                _currentPanId = new ZigBeeAddress16(result).Value;
                 return _currentPanId;
             }
         }

@@ -13,20 +13,20 @@ namespace ZigBeeNet.CC.Packet.ZDO
     {
         public ZigBeeAddress64 IeeeAddr { get; private set; }
 
-        public ZigbeeAddress16 NwkAddr { get; private set; }
+        public ZigBeeAddress16 NwkAddr { get; private set; }
 
-        public ZigbeeAddress16 SrcAddr { get; private set; }
+        public ZigBeeAddress16 SrcAddr { get; private set; }
 
         public ZDO_TC_DEVICE_IND(byte[] framedata)
         {
-            SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZigBeeAddress16(framedata[1], framedata[0]);
             byte[] bytes = new byte[8];
             for (int i = 0; i < 8; i++)
             {
                 bytes[i] = framedata[9 - i];
             }
             IeeeAddr = new ZigBeeAddress64(bytes);
-            NwkAddr = new ZigbeeAddress16(framedata[11], framedata[10]);
+            NwkAddr = new ZigBeeAddress16(framedata[11], framedata[10]);
 
             BuildPacket(CommandType.ZDO_TC_DEVICE_IND, framedata);
         }

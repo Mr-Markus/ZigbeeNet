@@ -15,7 +15,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the message’s source network address
         /// </summary>
-        public ZigbeeAddress16 SrcAddr { get; private set; }
+        public ZigBeeAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// This field indicates either SUCCESS or FAILURE
@@ -25,7 +25,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies Device’s short address that this response describes
         /// </summary>
-        public ZigbeeAddress16 NwkAddr { get; private set; }
+        public ZigBeeAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Specifies the length of the simple descriptor 
@@ -74,9 +74,9 @@ namespace ZigBeeNet.CC.Packet.ZDO
 
         public ZDO_SIMPLE_DESC_RSP(byte[] framedata)
         {
-            SrcAddr = new ZigbeeAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZigBeeAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
-            NwkAddr = new ZigbeeAddress16(framedata[4], framedata[3]);
+            NwkAddr = new ZigBeeAddress16(framedata[4], framedata[3]);
             Len = framedata[5];
 
             if (Len >= MIN_DESC_LEN)

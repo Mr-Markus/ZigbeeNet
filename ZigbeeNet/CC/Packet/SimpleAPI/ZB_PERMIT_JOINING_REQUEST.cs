@@ -15,11 +15,11 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
         /// This is usually the local device address or the special broadcast address that denotes all routers and coordinator (0xFFFC). 
         /// This way the joining permissions of a single device or the whole network can be controlled
         /// </summary>
-        public ZigbeeAddress16 Destination { get; private set; }
+        public ZigBeeAddress16 Destination { get; private set; }
 
         public byte Timeout { get; private set; }
 
-        public ZB_PERMIT_JOINING_REQUEST(ZigbeeAddress16 dstAddr, byte timeout)
+        public ZB_PERMIT_JOINING_REQUEST(ZigBeeAddress16 dstAddr, byte timeout)
         {
             Destination = dstAddr;
             Timeout = timeout;

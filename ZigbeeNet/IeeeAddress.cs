@@ -8,14 +8,22 @@ namespace ZigBeeNet
 {
     public class IeeeAddress : IComparable<IeeeAddress>
     {
-        private int[] _address;
+        private byte[] _address;
+
+        public ulong Value
+        {
+            get
+            {
+                return BitConverter.ToUInt64(_address, 0);
+            }
+        }
 
         /**
          * Default constructor. Creates an address 0
          */
         public IeeeAddress()
         {
-            this._address = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            this._address = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
         /**
@@ -25,20 +33,19 @@ namespace ZigBeeNet
          */
         public IeeeAddress(BigInteger address) : this()
         {
-            SetAddress((long)address);
+            SetAddress((ulong)address);
         }
 
         /**
          * Create an {@link IeeeAddress} from a {@link String}
          *
          * @param address the address as a {@link String}
-         * @throws IllegalArgumentException
          */
         public IeeeAddress(string address) : this()
         {
             try
             {
-                SetAddress((long)BigInteger.Parse(address, System.Globalization.NumberStyles.HexNumber));
+                SetAddress((ulong)BigInteger.Parse(address, System.Globalization.NumberStyles.HexNumber));
             }
             catch (FormatException e)
             {
@@ -52,23 +59,13 @@ namespace ZigBeeNet
          * @param address the address as an int array. Array length must be 8.
          * @throws IllegalArgumentException
          */
-        public IeeeAddress(int[] address)
+        public IeeeAddress(byte[] address)
         {
             if (address.Length != 8)
             {
                 throw new ArgumentNullException("IeeeAddress array length must be 8");
             }
-            this._address = address;//Arrays.copyOf(address, 8);
-        }
-
-        /**
-         * Gets the IeeeAddress as an integer array with length 8
-         *
-         * @return int array of address
-         */
-        public int[] getValue()
-        {
-            return _address;
+            _address = address;//Arrays.copyOf(address, 8);
         }
 
         public override int GetHashCode()
@@ -91,7 +88,7 @@ namespace ZigBeeNet
             IeeeAddress other = (IeeeAddress)obj;
             for (int cnt = 0; cnt < 8; cnt++)
             {
-                if (other.getValue()[cnt] != _address[cnt])
+                if (other._address[cnt] != _address[cnt])
                 {
                     return false;
                 }
@@ -125,26 +122,26 @@ namespace ZigBeeNet
 
             for (int cnt = 0; cnt < 8; cnt++)
             {
-                if (other.getValue()[cnt] == _address[cnt])
+                if (other._address[cnt] == _address[cnt])
                 {
                     continue;
                 }
 
-                return other.getValue()[cnt] < _address[cnt] ? 1 : -1;
+                return other._address[cnt] < _address[cnt] ? 1 : -1;
             }
             return 0;
         }
 
-        private void SetAddress(long longVal)
+        private void SetAddress(ulong longVal)
         {
-            this._address[0] = (int)(longVal & 0xff);
-            this._address[1] = (int)((longVal >> 8) & 0xff);
-            this._address[2] = (int)((longVal >> 16) & 0xff);
-            this._address[3] = (int)((longVal >> 24) & 0xff);
-            this._address[4] = (int)((longVal >> 32) & 0xff);
-            this._address[5] = (int)((longVal >> 40) & 0xff);
-            this._address[6] = (int)((longVal >> 48) & 0xff);
-            this._address[7] = (int)((longVal >> 56) & 0xff);
+            this._address[0] = (byte)(longVal & 0xff);
+            this._address[1] = (byte)((longVal >> 8) & 0xff);
+            this._address[2] = (byte)((longVal >> 16) & 0xff);
+            this._address[3] = (byte)((longVal >> 24) & 0xff);
+            this._address[4] = (byte)((longVal >> 32) & 0xff);
+            this._address[5] = (byte)((longVal >> 40) & 0xff);
+            this._address[6] = (byte)((longVal >> 48) & 0xff);
+            this._address[7] = (byte)((longVal >> 56) & 0xff);
 
         }
 

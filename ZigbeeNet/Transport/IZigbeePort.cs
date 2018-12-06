@@ -8,7 +8,7 @@ namespace ZigBeeNet.Transport
     /// Interface for a generic port used for the ZigBee API. The stack will call the
     /// interface to open and close the port, and to read and write data
     /// </summary>
-    public interface IZigbeePort
+    public interface IZigBeePort
     {
         /// <summary>
         /// Open the port.

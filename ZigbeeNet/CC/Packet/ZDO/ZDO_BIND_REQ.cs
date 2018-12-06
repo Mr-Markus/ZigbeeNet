@@ -13,7 +13,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the destination address of the device generating the bind request
         /// </summary>
-        public ZigbeeAddress16 DstAddr { get; private set; }
+        public ZigBeeAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// 64 bit Binding source IEEE addres
@@ -54,7 +54,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZigbeeAddress16 nwkDst, ZigBeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
+        public ZDO_BIND_REQ(ZigBeeAddress16 nwkDst, ZigBeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
             Address_Mode addressingMode, ZigBeeAddress64 ieeeDst, byte epDst)
         {
 

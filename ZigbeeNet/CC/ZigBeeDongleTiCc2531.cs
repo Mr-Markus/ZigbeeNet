@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using ZigbeeNet.CC.Implementation;
 using ZigBeeNet.CC.Network;
 using ZigBeeNet.CC.Packet;
 using ZigBeeNet.CC.Packet.AF;
@@ -37,7 +38,7 @@ namespace ZigBeeNet.CC
 
         ExtendedPanId IZigBeeTransportTransmit.ExtendedPanId => throw new NotImplementedException();
 
-        public ZigBeeDongleTiCc2531(IZigbeePort serialPort)
+        public ZigBeeDongleTiCc2531(IZigBeePort serialPort)
         {
             _networkManager = new NetworkManager(new CommandInterfaceImpl(serialPort), NetworkMode.Coordinator, 2500);
         }
@@ -147,14 +148,14 @@ namespace ZigBeeNet.CC
         public void SendCommand(ZigBeeApsFrame apsFrame)
         {
             lock(_networkManager) {
-                ushort sender;
+                byte sender;
                 if (apsFrame.Profile == 0)
                 {
                     sender = 0;
                 }
                 else
                 {
-                    sender = (ushort)GetSendingEndpoint(apsFrame.Profile);
+                    sender = (byte)GetSendingEndpoint(apsFrame.Profile);
                 }
 
                 // TODO: How to differentiate group and device addressing?????
@@ -162,13 +163,13 @@ namespace ZigBeeNet.CC
                 if (!groupCommand)
                 {
                     _networkManager.SendCommand(new AF_DATA_REQUEST(apsFrame.DestinationAddress,
-                            (short)apsFrame.DestinationEndpoint, sender, apsFrame.Cluster,
+                            (byte)apsFrame.DestinationEndpoint, sender, apsFrame.Cluster,
                             apsFrame.ApsCounter, (byte)0x30, (byte)apsFrame.Radius, apsFrame.Payload));
                 }
                 else
                 {
-                    networkManager.sendCommand(new AF_DATA_REQUEST_EXT(apsFrame.getDestinationAddress(), sender,
-                            apsFrame.getCluster(), apsFrame.getApsCounter(), (byte)(0), (byte)0, apsFrame.getPayload()));
+                    _networkManager.SendCommand(new AF_DATA_REQUEST_EXT(apsFrame.DestinationAddress, sender,
+                            apsFrame.Cluster, apsFrame.ApsCounter, (byte)(0), (byte)0, apsFrame.Payload));
                 }
             }
         }
@@ -247,9 +248,25 @@ namespace ZigBeeNet.CC
 
         private byte CreateEndpoint(byte endpointId, ushort profileId)
         {
-            _logger.Trace($"Registering a new endpoint {endpointId} for profile {profileId}");
+            _logger.Trace("Registering a new endpoint {} for profile {}", endpointId, profileId);
 
-            throw new NotImplementedException();
+            AF_REGISTER_SRSP result;
+            result = _networkManager.SendAFRegister(new AF_REGISTER(endpointId, profileId, 0, 0,
+                    _supportedInputClusters.ToArray(), _supportedOutputClusters.ToArray()));
+            // FIX We should retry only when Status != 0xb8 ( Z_APS_DUPLICATE_ENTRY )
+            if (result.Status != 0)
+            {
+                // TODO We should provide a workaround for the maximum number of registered EndPoint
+                // For example, with the CC2480 we could reset the dongle
+                throw new Exception("Unable create a new Endpoint. AF_REGISTER command failed with " + result.Status);
+            }
+
+            _sender2Endpoint[profileId] = endpointId;
+            _Endpoint2Profile[endpointId] = profileId;
+
+            _logger.Debug("Registered endpoint {} with profile: {}", endpointId, profileId);
+
+            return endpointId;
         }
 
         public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel)
@@ -285,7 +302,7 @@ namespace ZigBeeNet.CC
 
         public void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive)
         {
-            throw new NotImplementedException();
+            _ZigBeeNetworkReceive = zigBeeTransportReceive;
         }
 
         public void UpdateTransportConfig(TransportConfig configuration)

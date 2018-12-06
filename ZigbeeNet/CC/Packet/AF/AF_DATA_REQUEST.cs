@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ZigBeeNet.CC.Extensions;
 
 namespace ZigBeeNet.CC.Packet.AF
 {
@@ -38,7 +39,7 @@ namespace ZigBeeNet.CC.Packet.AF
         /// The individual device address or group
         /// address of the entity to which the ASDU is being transferred
         /// </summary>
-        public ZigbeeAddress16 DstAddr { get; private set; }
+        public ZigBeeAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Length of the data.
@@ -66,7 +67,7 @@ namespace ZigBeeNet.CC.Packet.AF
         /// </summary>
         public byte TransId { get; private set; }
 
-        public AF_DATA_REQUEST(ZigbeeAddress16 nwkDstAddr, byte dstEndpoint, byte srcEndpoint, DoubleByte clusterId, byte transId, byte options, byte radius, byte[] data)
+        public AF_DATA_REQUEST(ushort nwkDstAddr, byte dstEndpoint, byte srcEndpoint, ushort clusterId, byte transId, byte options, byte radius, byte[] data)
         {
             if (data.Length > 128)
             {
@@ -74,12 +75,12 @@ namespace ZigBeeNet.CC.Packet.AF
             }
 
             byte[] framedata = new byte[data.Length + 10];
-            framedata[0] = nwkDstAddr.DoubleByte.Lsb;
-            framedata[1] = nwkDstAddr.DoubleByte.Msb;
+            framedata[0] = nwkDstAddr.GetByte(0);
+            framedata[1] = nwkDstAddr.GetByte(1);
             framedata[2] = dstEndpoint;
             framedata[3] = srcEndpoint;
-            framedata[4] = clusterId.Lsb;
-            framedata[5] = clusterId.Msb;
+            framedata[4] = clusterId.GetByte(0);
+            framedata[5] = clusterId.GetByte(1);
             framedata[6] = transId;
             framedata[7] = options;
             framedata[8] = radius;

@@ -6,7 +6,7 @@ namespace ZigBeeNet.Util
 {
     public static class Hash
     {
-        public static int CalcHashCode(int[] array)
+        public static int CalcHashCode(byte[] array)
         {
             int hc = array.Length;
             for (int i = 0; i < array.Length; ++i)

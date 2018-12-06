@@ -64,7 +64,7 @@ namespace ZigBeeNet.CC.Handler
             }
             if (asynchronousRequest is ZDO_BIND_RSP bindRsp)
             {
-                ZigbeeAddress16 srcAddr = bindRsp.srcAddr;
+                ZigBeeAddress16 srcAddr = bindRsp.srcAddr;
             }
         }
     }

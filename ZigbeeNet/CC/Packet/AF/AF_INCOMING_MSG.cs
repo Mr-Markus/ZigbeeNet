@@ -22,7 +22,7 @@ namespace ZigBeeNet.CC.Packet.AF
         /// <summary>
         /// Specifies the ZigBee network address of the source device sending the message
         /// </summary>
-        public ZigbeeAddress16 SrcAddr { get; private set; }
+        public ZigBeeAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// Specifies the source endpoint of the message 
@@ -74,7 +74,7 @@ namespace ZigBeeNet.CC.Packet.AF
         {
             GroupId = new DoubleByte(framedata[1], framedata[0]);
             ClusterId = new DoubleByte(framedata[3], framedata[2]);
-            SrcAddr = new ZigbeeAddress16(framedata[5], framedata[4]);
+            SrcAddr = new ZigBeeAddress16(framedata[5], framedata[4]);
             SrcEndpoint = framedata[6];
             DstEndpoint = framedata[7];
             WasBroadcast = framedata[8];
