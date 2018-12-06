@@ -20,6 +20,7 @@ using ZigBeeNet.Serialization;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO;
+using ZigBeeNet.App.Discovery;
 
 namespace ZigBeeNet
 {

@@ -16,10 +16,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)App\IZigBeeNetworkExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\ZigBeeNetworkDiscoverer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BroadcastResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CC\CCZnp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Enums\CommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Handler\AfMessageHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\BlockingCommandReceiver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\CommandInterfaceImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Models\NetworkInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\AFMessageListenerFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\DriverStatus.cs" />
@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\IAsynchronousCommandListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\ICommandInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\ISynchronousCommandListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Network\IZToolPacketHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Network\NetworkStateListener.cs" />
