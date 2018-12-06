@@ -6,7 +6,7 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Field;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Management Bind Response value object class.

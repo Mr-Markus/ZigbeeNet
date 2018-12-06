@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigbeeNet;
-using ZigbeeNet.Transaction;
-using ZigbeeNet.ZCL;
-using ZigbeeNet.ZDO.Command;
+using ZigBeeNet;
+using ZigBeeNet.Transaction;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.Command;
 using ZigBeeNet;
 using ZigBeeNet.App;
 using ZigBeeNet.Internal;
@@ -726,19 +727,23 @@ namespace ZigBeeNet
 
         private ZigBeeCommand ReceiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
-            ZdoCommandType commandType = ZdoCommandType.getValueById(apsFrame.Cluster);
+            ZdoCommandType commandType = ZdoCommandType.GetValueById(apsFrame.Cluster);
+
             if (commandType == null)
             {
                 return null;
             }
 
             ZigBeeCommand command;
+
             try
             {
-                Class <? extends ZdoCommand > commandClass = commandType.getCommandClass();
-                Constructor <? extends ZdoCommand > constructor;
-                constructor = commandClass.getConstructor();
-                command = constructor.newInstance();
+                //Class <? extends ZdoCommand > commandClass = commandType.getCommandClass();
+                //Constructor <? extends ZdoCommand > constructor;
+                //constructor = commandClass.getConstructor();
+                //command = constructor.newInstance();
+
+                command = commandType.GetZdoCommand();
             }
             catch (Exception e)
             {
@@ -1213,11 +1218,11 @@ namespace ZigBeeNet
         public void RediscoverNode(IeeeAddress address)
         {
 
-            //ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)getExtension(ZigBeeDiscoveryExtension.class);
-            //if (networkDiscoverer == null) {
-            //    return;
-            //}
-            //_networkDiscoverer.rediscoverNode(address);
+            ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)getExtension(ZigBeeDiscoveryExtension.class);
+            if (networkDiscoverer == null) {
+                return;
+            }
+            _networkDiscoverer.rediscoverNode(address);
         }
 
         /**
