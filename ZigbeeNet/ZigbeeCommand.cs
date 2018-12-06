@@ -13,7 +13,7 @@ namespace ZigBeeNet
 
         public ushort ClusterId { get; set; }
 
-        public byte TransactionId { get; set; }
+        public byte? TransactionId { get; set; }
 
         public bool ApsSecurity { get; set; }
 

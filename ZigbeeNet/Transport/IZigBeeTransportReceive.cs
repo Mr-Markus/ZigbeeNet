@@ -52,6 +52,6 @@ namespace ZigBeeNet.Transport
         /// <param name="deviceStatus">The ZigBeeNodeStatus of the node</param>
         /// <param name="networkAddress">The network address of the new node</param>
         /// <param name="ieeeAddress">The IeeeAddress address of the new node</param>
-        void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, ulong ieeeAddress);
+        void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, IeeeAddress ieeeAddress);
     }
 }

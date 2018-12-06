@@ -137,9 +137,9 @@ namespace ZigBeeNet.App.Discovery
         /**
          * Performs node service discovery. This discovers node level attributes such as the endpoints and
          * descriptors, as well as updating routing and neighbor tables - as needed.
-         * <p>
+         * 
          * If any of the tasks requested are already in the queue, they will not be added again.
-         * <p>
+         * 
          * If the worker thread is not running, it will be started.
          *
          * @param newTasks a set of {@link NodeDiscoveryTask}s to be performed
@@ -290,7 +290,7 @@ namespace ZigBeeNet.App.Discovery
                 // Reschedule the task
                 var tmp = _cancellationTokenSource;
                 _cancellationTokenSource = new CancellationTokenSource();
-                _ = NetworkManager.RescheduleTask(Discovery(_cancellationTokenSource.Token), retryDelay);
+                _ = NetworkManager.ScheduleTask(Discovery(_cancellationTokenSource.Token), retryDelay);
                 tmp.Cancel();
             }
             catch (TaskCanceledException)
@@ -347,7 +347,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (networkAddressResponse.Status == ZdoStatus.SUCCESS)
             {
-                Node.NetworkAddress = networkAddressResponse.NwkAddrRemoteDev;
+                Node.NetworkAddress = (ushort)networkAddressResponse.NwkAddrRemoteDev;
 
                 return true;
             }
@@ -373,7 +373,7 @@ namespace ZigBeeNet.App.Discovery
                 ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
                 ieeeAddressRequest.RequestType = 1;
                 ieeeAddressRequest.StartIndex = startIndex;
-                ieeeAddressRequest.NwkAddrOfInterest = Node.getNetworkAddress();
+                ieeeAddressRequest.NwkAddrOfInterest = Node.NetworkAddress;
                 CommandResult response = await NetworkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest);
 
                 IeeeAddressResponse ieeeAddressResponse = (IeeeAddressResponse)response.Response;
