@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet;
 
-namespace ZigbeeNet.Transaction
+namespace ZigBeeNet.Transaction
 {
     /**
      * Defines the interface for transaction matcher

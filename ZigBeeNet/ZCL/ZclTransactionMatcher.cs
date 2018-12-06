@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Transaction;
+using ZigBeeNet.Transaction;
 using ZigBeeNet;
 using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.ZCL
+namespace ZigBeeNet.ZCL
 {
     /**
      * The ZCL transaction response matcher.

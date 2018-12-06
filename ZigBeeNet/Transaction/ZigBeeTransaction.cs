@@ -6,7 +6,7 @@ using ZigBeeNet;
 using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 
-namespace ZigbeeNet.Transaction
+namespace ZigBeeNet.Transaction
 {
     /**
      * Transaction class to handle the sending of commands and timeout in the event there is no response.
