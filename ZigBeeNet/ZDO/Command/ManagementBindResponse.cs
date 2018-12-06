@@ -52,7 +52,7 @@ namespace ZigbeeNet.ZDO.Command
             serializer.Serialize(BindingTableList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             for (int cnt = 0; cnt < BindingTableList.Count; cnt++)
             {
-                serializer.Serialize(BindingTableList.[cnt], ZclDataType.Get(DataType.BINDING_TABLE));
+                serializer.Serialize(BindingTableList[cnt], ZclDataType.Get(DataType.BINDING_TABLE));
             }
         }
 
@@ -61,7 +61,7 @@ namespace ZigbeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             // Create lists
-            BindingTableList = new List<BindingTable>;
+            BindingTableList = new List<BindingTable>();
 
             Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
             if (Status != ZdoStatus.SUCCESS)

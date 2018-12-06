@@ -18,11 +18,11 @@ namespace ZigBeeNet.ZCL.Clusters
          */
         public const String CLUSTER_NAME = "On/Off";
 
-    // Attribute constants
-    /**
-     * The OnOff attribute has the following values: 0 = Off, 1 = On
-     */
-    public const int ATTR_ONOFF = 0x0000;
+        // Attribute constants
+        /**
+         * The OnOff attribute has the following values: 0 = Off, 1 = On
+         */
+        public const int ATTR_ONOFF = 0x0000;
         /**
          * In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
          * introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
@@ -418,8 +418,7 @@ namespace ZigBeeNet.ZCL.Clusters
             return send(command);
         }
 
-        @Override
-    public ZclCommand getCommandFromId(int commandId)
+        public ZclCommand getCommandFromId(int commandId)
         {
             switch (commandId)
             {

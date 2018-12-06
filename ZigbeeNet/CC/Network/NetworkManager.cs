@@ -10,6 +10,7 @@ using ZigBeeNet.CC.Packet.SimpleAPI;
 using ZigBeeNet.CC.Packet.SYS;
 using ZigBeeNet.CC.Packet.ZDO;
 using ZigBeeNet.Logging;
+using ZigBeeNet.ZCL;
 
 namespace ZigBeeNet.CC.Network
 {
@@ -504,34 +505,34 @@ namespace ZigBeeNet.CC.Network
             return DongleSetChannel();
         }
 
-        //public bool SetZigBeeExtendedPanId(ExtendedPanId panId)
-        //{
-        //    _extendedPanId = panId;
-        //    return DongleSetExtendedPanId();
-        //}
+        public bool SetZigBeeExtendedPanId(ExtendedPanId panId)
+        {
+            _extendedPanId = panId;
+            return DongleSetExtendedPanId();
+        }
 
-        public bool setNetworkKey(byte[] networkKey)
+        public bool SetNetworkKey(byte[] networkKey)
         {
             _networkKey = networkKey;
 
             return DongleSetNetworkKey();
         }
 
-        public bool setDistributeNetworkKey(bool distributeNetworkKey)
+        public bool SetDistributeNetworkKey(bool distributeNetworkKey)
         {
             _distributeNetworkKey = distributeNetworkKey;
 
             return dongleSetDistributeNetworkKey();
         }
 
-        public bool setSecurityMode(int securityMode)
+        public bool SetSecurityMode(int securityMode)
         {
             _securityMode = securityMode;
 
             return dongleSetSecurityMode();
         }
 
-        public void addAsynchronousCommandListener(IAsynchronousCommandListener asynchronousCommandListener)
+        public void AddAsynchronousCommandListener(IAsynchronousCommandListener asynchronousCommandListener)
         {
             _commandInterface.AddAsynchronousCommandListener(asynchronousCommandListener);
         }

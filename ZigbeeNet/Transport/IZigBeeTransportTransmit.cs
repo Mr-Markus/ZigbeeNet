@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Security;
+using ZigBeeNet.ZCL;
 
 namespace ZigBeeNet.Transport
 {

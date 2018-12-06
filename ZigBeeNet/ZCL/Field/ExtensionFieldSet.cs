@@ -27,7 +27,7 @@ namespace ZigBeeNet.ZCL.Field
         public void Serialize(IZigBeeSerializer serializer)
         {
             serializer.AppendZigBeeType(ClusterId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType(Data, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER_ARRAY);
+            serializer.AppendZigBeeType(Data, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER_ARRAY));
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)

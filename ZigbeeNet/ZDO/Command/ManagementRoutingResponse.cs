@@ -51,7 +51,7 @@ namespace ZigBeeNet.ZDO.Command
 
             for (int cnt = 0; cnt < RoutingTableList.Count; cnt++)
             {
-                serializer.Serialize(RoutingTableList.[cnt], ZclDataType.Get(DataType.ROUTING_TABLE));
+                serializer.Serialize(RoutingTableList[cnt], ZclDataType.Get(DataType.ROUTING_TABLE));
             }
         }
 

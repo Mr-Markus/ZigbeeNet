@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using ZigBeeNet.CC.Network;
 using ZigBeeNet.CC.Packet;
 using ZigBeeNet.CC.Packet.AF;
 using ZigBeeNet.Logging;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
+using ZigBeeNet.ZCL;
+using static ZigBeeNet.ZigBeeNetworkManager;
 
 namespace ZigBeeNet.CC
 {
@@ -25,27 +28,39 @@ namespace ZigBeeNet.CC
 
         public string VersionString { get; set; }
         public IeeeAddress IeeeAddress { get; set; }
-        public ZigBeeChannel ZigBeeChannel { get; set; }
-        public ZigbeeAddress16 PanID { get; set; }
-        public IeeeAddress ExtendedPanId { get; set; }
-        public ZigBeeKey ZigBeeNetworkKey { get; set; }
-        public ZigBeeKey TcLinkKey { get; set; }
+        public ushort NwkAddress { get; set; }
+        public ZigBeeChannel ZigBeeChannel { get; }
+        public ZigBeeAddress16 PanID { get; }
+        public IeeeAddress ExtendedPanId { get; }
+        public ZigBeeKey ZigBeeNetworkKey { get; }
+        public ZigBeeKey TcLinkKey { get; }
+
+        ExtendedPanId IZigBeeTransportTransmit.ExtendedPanId => throw new NotImplementedException();
 
         public ZigBeeDongleTiCc2531(IZigbeePort serialPort)
         {
-            //TODO: Fill constructor
+            _networkManager = new NetworkManager(new CommandInterfaceImpl(serialPort), NetworkMode.Coordinator, 2500);
         }
 
-        public void SetMagicNumber(int magicNumber)
+        public void SetMagicNumber(byte magicNumber)
         {
-            throw new NotImplementedException();
+            _networkManager.SetMagicNumber(magicNumber);
         }
 
         public ZigBeeStatus Initialize()
         {
             _logger.Debug("CC2531 transport initialize");
 
-            throw new NotImplementedException();
+            // This basically just initialises the hardware so we can communicate with the 2531
+            VersionString = _networkManager.Startup();
+            if (VersionString == null)
+            {
+                return ZigBeeStatus.COMMUNICATION_ERROR;
+            }
+
+            IeeeAddress = new IeeeAddress(_networkManager.GetIeeeAddress());
+
+            return ZigBeeStatus.SUCCESS;
         }
 
         public bool Notify(AF_INCOMING_MSG msg)
@@ -131,18 +146,74 @@ namespace ZigBeeNet.CC
 
         public void SendCommand(ZigBeeApsFrame apsFrame)
         {
-            throw new NotImplementedException();
+            lock(_networkManager) {
+                ushort sender;
+                if (apsFrame.Profile == 0)
+                {
+                    sender = 0;
+                }
+                else
+                {
+                    sender = (ushort)GetSendingEndpoint(apsFrame.Profile);
+                }
+
+                // TODO: How to differentiate group and device addressing?????
+                bool groupCommand = false;
+                if (!groupCommand)
+                {
+                    _networkManager.SendCommand(new AF_DATA_REQUEST(apsFrame.DestinationAddress,
+                            (short)apsFrame.DestinationEndpoint, sender, apsFrame.Cluster,
+                            apsFrame.ApsCounter, (byte)0x30, (byte)apsFrame.Radius, apsFrame.Payload));
+                }
+                else
+                {
+                    networkManager.sendCommand(new AF_DATA_REQUEST_EXT(apsFrame.getDestinationAddress(), sender,
+                            apsFrame.getCluster(), apsFrame.getApsCounter(), (byte)(0), (byte)0, apsFrame.getPayload()));
+                }
+            }
         }
 
         public void Shutdown()
         {
-            throw new NotImplementedException();
+            _networkManager.Shutdown();
         }
 
         public ZigBeeStatus Startup(bool reinitialize)
         {
-            throw new NotImplementedException();
-        }
+            _logger.Debug("CC2531 transport startup");
+
+            // Add listeners for ZCL and ZDO received messages
+            _networkManager.AddAFMessageListener(this);
+            _networkManager.AddAsynchronousCommandListener(this);
+
+            if (!_networkManager.InitializeZigBeeNetwork(reinitialize))
+            {
+                return ZigBeeStatus.INVALID_STATE;
+            }
+
+            while (true)
+            {
+                if (_networkManager.GetDriverStatus() == DriverStatus.NETWORK_READY)
+                {
+                    break;
+                }
+                if (_networkManager.GetDriverStatus() == DriverStatus.CLOSED)
+                {
+                    return ZigBeeStatus.BAD_RESPONSE;
+                }
+                try
+                {
+                    Thread.Sleep(50);
+                }
+                catch (Exception e) {
+                    return ZigBeeStatus.BAD_RESPONSE;
+                }
+                }
+
+                CreateEndpoint(1, 0x104);
+
+                return ZigBeeStatus.SUCCESS;
+            }
 
         private byte GetSendingEndpoint(ushort profileId)
         {
@@ -179,6 +250,83 @@ namespace ZigBeeNet.CC
             _logger.Trace($"Registering a new endpoint {endpointId} for profile {profileId}");
 
             throw new NotImplementedException();
+        }
+
+        public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel)
+        {
+            return _networkManager.SetZigBeeChannel((byte)channel) ? ZigBeeStatus.SUCCESS : ZigBeeStatus.FAILURE;
+        }
+
+        public ZigBeeStatus SetZigBeePanId(ushort panId)
+        {
+            return _networkManager.SetZigBeePanId(panId) ? ZigBeeStatus.SUCCESS : ZigBeeStatus.FAILURE;
+        }
+
+        public ZigBeeStatus SetZigBeeExtendedPanId(ExtendedPanId panId)
+        {
+            return _networkManager.SetZigBeeExtendedPanId(panId) ? ZigBeeStatus.SUCCESS : ZigBeeStatus.FAILURE;
+        }
+
+        public ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key)
+        {
+            byte[] keyData = new byte[16];
+            int cnt = 0;
+            foreach (byte keyVal in key.Key)
+            {
+                keyData[cnt++] = keyVal;
+            }
+            return _networkManager.SetNetworkKey(keyData) ? ZigBeeStatus.SUCCESS : ZigBeeStatus.FAILURE;
+        }
+
+        public ZigBeeStatus SetTcLinkKey(ZigBeeKey key)
+        {
+            return ZigBeeStatus.FAILURE;
+        }
+
+        public void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTransportConfig(TransportConfig configuration)
+        {
+            foreach (TransportConfigOption option in configuration.GetOptions())
+            {
+                try
+                {
+                    switch (option)
+                    {
+                        case TransportConfigOption.SUPPORTED_INPUT_CLUSTERS:
+                            configuration.SetResult(option, SetSupportedInputClusters((List<ushort>)configuration.GetValue(option)));
+                            break;
+
+                        case TransportConfigOption.SUPPORTED_OUTPUT_CLUSTERS:
+                            configuration.SetResult(option, SetSupportedOutputClusters((List<ushort>)configuration.GetValue(option)));
+                            break;
+
+                        default:
+                            configuration.SetResult(option, ZigBeeStatus.UNSUPPORTED);
+                            _logger.Debug("Unsupported configuration option \"{}\" in CC2531 dongle", option);
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    configuration.SetResult(option, ZigBeeStatus.INVALID_ARGUMENTS);
+                }
+            }
+        }
+
+        private ZigBeeStatus SetSupportedInputClusters(List<ushort> supportedClusters)
+        {
+            _supportedInputClusters = supportedClusters;
+            return ZigBeeStatus.SUCCESS;
+        }
+
+        private ZigBeeStatus SetSupportedOutputClusters(List<ushort> supportedClusters)
+        {
+            _supportedOutputClusters = supportedClusters;
+            return ZigBeeStatus.SUCCESS;
         }
     }
 }

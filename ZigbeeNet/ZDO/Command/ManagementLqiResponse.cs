@@ -51,7 +51,7 @@ namespace ZigBeeNet.ZDO.Command
 
             for (int cnt = 0; cnt < NeighborTableList.Count; cnt++)
             {
-                serializer.Serialize(NeighborTableList.[cnt], ZclDataType.Get(DataType.NEIGHBOR_TABLE));
+                serializer.Serialize(NeighborTableList[cnt], ZclDataType.Get(DataType.NEIGHBOR_TABLE));
             }
         }
 
