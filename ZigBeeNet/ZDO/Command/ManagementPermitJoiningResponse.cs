@@ -5,7 +5,7 @@ using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Management Permit Joining Response value object class.

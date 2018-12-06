@@ -7,7 +7,7 @@ using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.Logging;
 
-namespace ZigbeeNet.App.Discovery
+namespace ZigBeeNet.App.Discovery
 {
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {

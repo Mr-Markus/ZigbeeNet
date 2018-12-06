@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigbeeNet.Transaction;
+using ZigBeeNet.Transaction;
 using ZigBeeNet;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZDO;
 
-namespace ZigbeeNet.ZDO.Command
+namespace ZigBeeNet.ZDO.Command
 {
     /**
      * Management Bind Request value object class.

@@ -4,7 +4,7 @@ using System.Text;
 using ZigBeeNet.DAO;
 using ZigBeeNet.ZDO.Field;
 
-namespace ZigbeeNet.DAO
+namespace ZigBeeNet.DAO
 {
     /**
  * This class provides a clean class to hold a data object for serialisation of a {@link ZigBeeNode}
