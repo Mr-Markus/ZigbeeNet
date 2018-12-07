@@ -12,7 +12,7 @@ namespace ZigBeeNet.CC.Frame
         public static ZigBeeApsFrame Create(ZToolPacket packet)
         {
             ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
-            apsFrame.Cluster = ZdoCommandType.GetValueByType(CommandType.POWER_DESCRIPTOR_RESPONSE).ClusterId;
+            apsFrame.Cluster = ZdoCommandType.GetValueByType(ZdoCommandType.CommandType.POWER_DESCRIPTOR_RESPONSE).ClusterId;
             apsFrame.DestinationEndpoint = 0;
             apsFrame.SourceAddress = (ushort)(packet.Packet[4] | (packet.Packet[5] << 8));
             apsFrame.SourceEndpoint = 0;
