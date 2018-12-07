@@ -10,12 +10,12 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /**
      * Command identifier command message field.
      */
-    public int CommandIdentifier { get; private set; }
+    public int CommandIdentifier { get; set; }
 
     /**
      * Status code command message field.
      */
-    public ZclStatus StatusCode { get; private set; }
+    public ZclStatus StatusCode { get; set; }
 
     /**
      * Default constructor.
@@ -24,7 +24,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     {
         IsGenericCommand = true;
         CommandId = 11;
-        Direction = ZclCommandDirection.ClientToServer;
+        Direction = ZclCommandDirection.CLIENT_TO_SERVER;
     }
 
 

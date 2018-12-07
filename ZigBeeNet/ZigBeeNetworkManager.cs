@@ -3,24 +3,19 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigBeeNet;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Command;
-using ZigBeeNet;
 using ZigBeeNet.App;
 using ZigBeeNet.Internal;
 using ZigBeeNet.Logging;
 using ZigBeeNet.Security;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.Transport;
-using ZigBeeNet.ZCL;
-using ZigBeeNet.ZDO;
-using ZigBeeNet.App.Discovery;
+using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet
 {
@@ -1094,7 +1089,7 @@ namespace ZigBeeNet
         {
             ManagementLeaveRequest command = new ManagementLeaveRequest();
 
-            command.DeviceAddress = leaveAddress;
+            command.setDeviceAddress(leaveAddress);
             command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
             command.SourceAddress = new ZigBeeEndpointAddress(0);
             command.RemoveChildrenRejoin = false;

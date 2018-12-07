@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.DAO;
+using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZDO.Command;
@@ -32,7 +34,7 @@ namespace ZigBeeNet.ZCL
         /**
          * The ZCL cluster ID for this cluster
          */
-        protected int _clusterId;
+        protected ushort _clusterId;
 
         /**
          * The name of this cluster
@@ -101,7 +103,7 @@ namespace ZigBeeNet.ZCL
          */
         protected abstract Dictionary<int, ZclAttribute> InitializeAttributes();
 
-        public ZclCluster(ZigBeeNetworkManager zigbeeManager, ZigBeeEndpoint zigbeeEndpoint, int clusterId, string clusterName)
+        public ZclCluster(ZigBeeNetworkManager zigbeeManager, ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
         {
             _attributes = InitializeAttributes();
 
@@ -116,7 +118,7 @@ namespace ZigBeeNet.ZCL
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
             if (IsClient())
             {
-                command.Direction = ZclCommandDirection.ServerToClient;
+                command.CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
             }
 
             return _zigbeeManager.unicast(command, new ZclTransactionMatcher());
@@ -218,11 +220,11 @@ namespace ZigBeeNet.ZCL
                 return null;
             }
 
-            ReadAttributesResponse response = result.getResponse();
-            if (response.getRecords().get(0).getStatus() == ZclStatus.SUCCESS)
+            ReadAttributesResponse response = result.GetResponse();
+            if (response.Records[0].Status == ZclStatus.SUCCESS)
             {
-                ReadAttributeStatusRecord attributeRecord = response.getRecords().get(0);
-                return _normalizer.normalizeZclData(attribute.ZclDataType, attributeRecord.getAttributeValue());
+                ReadAttributeStatusRecord attributeRecord = response.Records[0];
+                return _normalizer.normalizeZclData(attribute.ZclDataType, attributeRecord.AttributeValue);
             }
 
             return null;
@@ -264,8 +266,8 @@ namespace ZigBeeNet.ZCL
             command.setClusterId(_clusterId);
 
             AttributeReportingConfigurationRecord record = new AttributeReportingConfigurationRecord();
-            record.setDirection(0);
-            record.setAttributeIdentifier(attribute.Id);
+            record.Direction = 0;
+            record.AttributeIdentifier = attribute.Id;
             record.setAttributeDataType(attribute.ZclDataType);
             record.setMinimumReportingInterval(minInterval);
             record.setMaximumReportingInterval(maxInterval);
@@ -452,14 +454,14 @@ namespace ZigBeeNet.ZCL
         public Task<CommandResult> Bind(IeeeAddress address, int endpointId)
         {
             BindRequest command = new BindRequest();
-            command.setDestinationAddress(new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().GetAddress()));
-            command.setSrcAddress(_zigbeeEndpoint.GetIeeeAddress());
-            command.setSrcEndpoint(_zigbeeEndpoint.getEndpointId());
-            command.setBindCluster(_clusterId);
-            command.setDstAddrMode(3); // 64 bit addressing
-            command.setDstAddress(address);
-            command.setDstEndpoint(endpointId);
-            return _zigbeeEndpoint.sendTransaction(command, new BindRequest());
+            command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);
+            command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
+            command.SrcEndpoint = _zigbeeEndpoint.EndpointId;
+            command.BindCluster = _clusterId;
+            command.DstAddrMode = 3; // 64 bit addressing
+            command.DstAddress = address;
+            command.DstEndpoint = endpointId;
+            return _zigbeeEndpoint.SendTransaction(command, new BindRequest());
         }
 
         /**
@@ -472,14 +474,14 @@ namespace ZigBeeNet.ZCL
         public Task<CommandResult> Unbind(IeeeAddress address, int endpointId)
         {
             UnbindRequest command = new UnbindRequest();
-            command.setDestinationAddress(new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().GetAddress()));
-            command.setSrcAddress(_zigbeeEndpoint.GetIeeeAddress());
-            command.setSrcEndpoint(_zigbeeEndpoint.getEndpointId());
-            command.setBindCluster(_clusterId);
-            command.setDstAddrMode(3); // 64 bit addressing
-            command.setDstAddress(address);
-            command.setDstEndpoint(endpointId);
-            return _zigbeeEndpoint.sendTransaction(command, new UnbindRequest());
+            command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address));
+            command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
+            command.SrcEndpoint = _zigbeeEndpoint.EndpointId;
+            command.BindCluster = _clusterId);
+            command.DstAddrMode = 3; // 64 bit addressing
+            command.DstAddress = address;
+            command.DstEndpoint = endpointId;
+            return _zigbeeEndpoint.SendTransaction(command, new UnbindRequest());
         }
 
         /**
@@ -489,16 +491,16 @@ namespace ZigBeeNet.ZCL
          * @param commandIdentifier the command identifier to which this is a response
          * @param status the {@link ZclStatus} to send in the response
          */
-        public void SendDefaultResponse(int transactionId, int commandIdentifier, ZclStatus status)
+        public void SendDefaultResponse(byte transactionId, int commandIdentifier, ZclStatus status)
         {
             DefaultResponse defaultResponse = new DefaultResponse();
-            defaultResponse.setTransactionId(transactionId);
-            defaultResponse.setCommandIdentifier(commandIdentifier);
-            defaultResponse.setDestinationAddress(_zigbeeEndpoint.GetEndpointAddress());
-            defaultResponse.setClusterId(_clusterId);
-            defaultResponse.setStatusCode(status);
+            defaultResponse.TransactionId = transactionId;
+            defaultResponse.CommandIdentifier = commandIdentifier;
+            defaultResponse.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
+            defaultResponse.ClusterId = _clusterId;
+            defaultResponse.StatusCode = status;
 
-            _zigbeeEndpoint.sendTransaction(defaultResponse);
+            _zigbeeEndpoint.SendTransaction(defaultResponse);
         }
 
         /**
@@ -549,60 +551,54 @@ namespace ZigBeeNet.ZCL
          * @param rediscover true to perform a discovery even if it was previously completed
          * @return {@link Future} returning a {@link Boolean}
          */
-        public Task<Boolean> discoverAttributes(bool rediscover)
+        public Task<Boolean> DiscoverAttributes(bool rediscover)
         {
-            //    RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
-            //    @Override
-            //    public Boolean call() throws Exception {
-            //        // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
-            //        // cluster which would cause errors consolidating the responses
-            //        lock(_supportedAttributes) {
-            //            // If we don't want to rediscover, and we already have the list of attributes, then return
-            //            if (!rediscover && !supportedAttributes.isEmpty())
-            //            {
-            //                return true;
-            //            }
+            Task.Run(() => {
+                // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
+                // cluster which would cause errors consolidating the responses
+                lock (_supportedAttributes)
+                {
+                    // If we don't want to rediscover, and we already have the list of attributes, then return
+                    if (!rediscover && !supportedAttributes.isEmpty())
+                    {
+                        return true;
+                    }
 
-            //            int index = 0;
-            //            boolean complete = false;
-            //            Set<AttributeInformation> attributes = new HashSet<AttributeInformation>();
+                    int index = 0;
+                    bool complete = false;
+                    List<AttributeInformation> attributes = new List<AttributeInformation>();
 
-            //            do
-            //            {
-            //                final DiscoverAttributesCommand command = new DiscoverAttributesCommand();
-            //                command.setClusterId(clusterId);
-            //                command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
-            //                command.setStartAttributeIdentifier(index);
-            //                command.setMaximumAttributeIdentifiers(10);
+                    do
+                    {
+                        DiscoverAttributesCommand command = new DiscoverAttributesCommand();
+                        command.setClusterId(clusterId);
+                        command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
+                        command.setStartAttributeIdentifier(index);
+                        command.setMaximumAttributeIdentifiers(10);
 
-            //                CommandResult result = send(command).get();
-            //                if (result.isError())
-            //                {
-            //                    return false;
-            //                }
+                        CommandResult result = Send(command).Result;
+                        if (result.IsError())
+                        {
+                            return false;
+                        }
 
-            //                DiscoverAttributesResponse response = (DiscoverAttributesResponse)result.getResponse();
-            //                complete = response.getDiscoveryComplete();
-            //                if (response.getAttributeInformation() != null)
-            //                {
-            //                    attributes.addAll(response.getAttributeInformation());
-            //                    index = Collections.max(attributes).getIdentifier() + 1;
-            //                }
-            //            } while (!complete);
+                        DiscoverAttributesResponse response = (DiscoverAttributesResponse)result.GetResponse();
+                        complete = response.getDiscoveryComplete();
+                        if (response.getAttributeInformation() != null)
+                        {
+                            attributes.AddRange(response.getAttributeInformation());
+                            index = Collections.max(attributes).getIdentifier() + 1;
+                        }
+                    } while (!complete);
 
-            //            supportedAttributes.clear();
-            //            for (AttributeInformation attribute : attributes)
-            //            {
-            //                supportedAttributes.add(attribute.getIdentifier());
-            //            }
-            //        }
-            //        return true;
-            //    }
-            //});
-
-            //// start the thread to execute it
-            //new Thread(future).start();
-            //return future;
+                    supportedAttributes.clear();
+                    for (AttributeInformation attribute : attributes)
+                    {
+                        supportedAttributes.add(attribute.getIdentifier());
+                    }
+                }
+                return true;
+            });
         }
 
         /**
@@ -646,56 +642,56 @@ namespace ZigBeeNet.ZCL
          */
         public Task<bool> DiscoverCommandsReceived(bool rediscover)
         {
-            //    RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
-            //        @Override
-            //        public Boolean call() throws Exception {
-            //        // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
-            //        // cluster which would cause errors consolidating the responses
-            //        synchronized(supportedCommandsReceived) {
-            //            // If we don't want to rediscover, and we already have the list of attributes, then return
-            //            if (!rediscover && !supportedCommandsReceived.isEmpty())
-            //            {
-            //                return true;
-            //            }
+        RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
+                    @Override
+                    public Boolean call() throws Exception {
+            // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
+            // cluster which would cause errors consolidating the responses
+            synchronized(supportedCommandsReceived) {
+                // If we don't want to rediscover, and we already have the list of attributes, then return
+                if (!rediscover && !supportedCommandsReceived.isEmpty())
+                {
+                    return true;
+                }
 
-            //            int index = 0;
-            //            boolean complete = false;
-            //            Set<Integer> commands = new HashSet<Integer>();
+                int index = 0;
+                boolean complete = false;
+                Set<Integer> commands = new HashSet<Integer>();
 
-            //            do
-            //            {
-            //                final DiscoverCommandsReceived command = new DiscoverCommandsReceived();
-            //                command.setClusterId(clusterId);
-            //                command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
-            //                command.setStartCommandIdentifier(index);
-            //                command.setMaximumCommandIdentifiers(20);
+                do
+                {
+                    final DiscoverCommandsReceived command = new DiscoverCommandsReceived();
+                    command.setClusterId(clusterId);
+                    command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
+                    command.setStartCommandIdentifier(index);
+                    command.setMaximumCommandIdentifiers(20);
 
-            //                CommandResult result = send(command).get();
-            //                if (result.isError())
-            //                {
-            //                    return false;
-            //                }
+                    CommandResult result = send(command).get();
+                    if (result.isError())
+                    {
+                        return false;
+                    }
 
-            //                DiscoverCommandsReceivedResponse response = (DiscoverCommandsReceivedResponse)result
-            //                        .getResponse();
-            //                complete = response.getDiscoveryComplete();
-            //                if (response.getCommandIdentifiers() != null)
-            //                {
-            //                    commands.addAll(response.getCommandIdentifiers());
-            //                    index = Collections.max(commands) + 1;
-            //                }
-            //            } while (!complete);
+                    DiscoverCommandsReceivedResponse response = (DiscoverCommandsReceivedResponse)result
+                            .getResponse();
+                    complete = response.getDiscoveryComplete();
+                    if (response.getCommandIdentifiers() != null)
+                    {
+                        commands.addAll(response.getCommandIdentifiers());
+                        index = Collections.max(commands) + 1;
+                    }
+                } while (!complete);
 
-            //            supportedCommandsReceived.clear();
-            //            supportedCommandsReceived.addAll(commands);
-            //        }
-            //        return true;
-            //    }
-            //});
+                supportedCommandsReceived.clear();
+                supportedCommandsReceived.addAll(commands);
+            }
+            return true;
+        }
+    });
 
-            //    // start the thread to execute it
-            //    new Thread(future).start();
-            //    return future;
+                // start the thread to execute it
+                new Thread(future).start();
+                return future;
         }
 
         /**
@@ -739,56 +735,56 @@ namespace ZigBeeNet.ZCL
          */
         public Task<bool> DiscoverCommandsGenerated(bool rediscover)
         {
-            //    RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
-            //            @Override
-            //            public Boolean call() throws Exception {
-            //        // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
-            //        // cluster which would cause errors consolidating the responses
-            //        synchronized(supportedCommandsGenerated) {
-            //            // If we don't want to rediscover, and we already have the list of attributes, then return
-            //            if (!rediscover && !supportedCommandsGenerated.isEmpty())
-            //            {
-            //                return true;
-            //            }
-            //            int index = 0;
-            //            boolean complete = false;
-            //            Set<Integer> commands = new HashSet<Integer>();
+    RunnableFuture<Boolean> future = new FutureTask<Boolean>(new Callable<Boolean>() {
+                        @Override
+                        public Boolean call() throws Exception {
+        // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
+        // cluster which would cause errors consolidating the responses
+        synchronized(supportedCommandsGenerated) {
+            // If we don't want to rediscover, and we already have the list of attributes, then return
+            if (!rediscover && !supportedCommandsGenerated.isEmpty())
+            {
+                return true;
+            }
+            int index = 0;
+            boolean complete = false;
+            Set<Integer> commands = new HashSet<Integer>();
 
-            //            do
-            //            {
-            //                final DiscoverCommandsGenerated command = new DiscoverCommandsGenerated();
-            //                command.setClusterId(clusterId);
-            //                command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
-            //                command.setStartCommandIdentifier(index);
-            //                command.setMaximumCommandIdentifiers(20);
+            do
+            {
+                final DiscoverCommandsGenerated command = new DiscoverCommandsGenerated();
+                command.setClusterId(clusterId);
+                command.setDestinationAddress(zigbeeEndpoint.getEndpointAddress());
+                command.setStartCommandIdentifier(index);
+                command.setMaximumCommandIdentifiers(20);
 
-            //                CommandResult result = send(command).get();
-            //                if (result.isError())
-            //                {
-            //                    return false;
-            //                }
+                CommandResult result = send(command).get();
+                if (result.isError())
+                {
+                    return false;
+                }
 
-            //                DiscoverCommandsGeneratedResponse response = (DiscoverCommandsGeneratedResponse)result
-            //                        .getResponse();
-            //                complete = response.getDiscoveryComplete();
-            //                if (response.getCommandIdentifiers() != null)
-            //                {
-            //                    commands.addAll(response.getCommandIdentifiers());
-            //                    index = Collections.max(commands) + 1;
-            //                }
-            //            } while (!complete);
+                DiscoverCommandsGeneratedResponse response = (DiscoverCommandsGeneratedResponse)result
+                        .getResponse();
+                complete = response.getDiscoveryComplete();
+                if (response.getCommandIdentifiers() != null)
+                {
+                    commands.addAll(response.getCommandIdentifiers());
+                    index = Collections.max(commands) + 1;
+                }
+            } while (!complete);
 
-            //            supportedCommandsGenerated.clear();
-            //            supportedCommandsGenerated.addAll(commands);
-            //        }
+            supportedCommandsGenerated.clear();
+            supportedCommandsGenerated.addAll(commands);
+        }
 
-            //        return true;
-            //    }
-            //});
+        return true;
+    }
+});
 
-            //        // start the thread to execute it
-            //        new Thread(future).start();
-            //        return future;
+                    // start the thread to execute it
+                    new Thread(future).start();
+                    return future;
         }
 
         /**
@@ -796,7 +792,7 @@ namespace ZigBeeNet.ZCL
          *
          * @param listener the {@link ZclAttributeListener} to add
          */
-        public void AddAttributeListener(ZclAttributeListener listener)
+        public void AddAttributeListener(IZclAttributeListener listener)
         {
             // Don't add more than once.
             if (_attributeListeners.Contains(listener))
@@ -811,7 +807,7 @@ namespace ZigBeeNet.ZCL
          *
          * @param listener callback listener implementing {@link ZclAttributeListener} to remove
          */
-        public void removeAttributeListener(ZclAttributeListener listener)
+        public void removeAttributeListener(IZclAttributeListener listener)
         {
             _attributeListeners.Remove(listener);
         }

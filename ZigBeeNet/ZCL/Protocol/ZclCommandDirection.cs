@@ -6,7 +6,7 @@ namespace ZigBeeNet.ZCL.Protocol
 {
     public enum ZclCommandDirection : byte
     {
-        ClientToServer = 0x00,
-        ServerToClient = 0x01
+        CLIENT_TO_SERVER = 0x00,
+        SERVER_TO_CLIENT = 0x01
     }
 }

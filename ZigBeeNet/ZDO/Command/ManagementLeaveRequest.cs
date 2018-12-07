@@ -27,7 +27,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * RemoveChildren_Rejoin command message field.
         */
-        public Boolean removeChildrenRejoin;
+        public bool RemoveChildrenRejoin;
 
         /**
         * Default constructor.
@@ -64,7 +64,7 @@ namespace ZigBeeNet.ZDO.Command
         */
         public Boolean getRemoveChildrenRejoin()
         {
-            return removeChildrenRejoin;
+            return RemoveChildrenRejoin;
         }
 
         /**
@@ -74,7 +74,7 @@ namespace ZigBeeNet.ZDO.Command
         */
         public void setRemoveChildrenRejoin(Boolean removeChildrenRejoin)
         {
-            this.removeChildrenRejoin = removeChildrenRejoin;
+            this.RemoveChildrenRejoin = removeChildrenRejoin;
         }
 
         public override void Serialize(ZclFieldSerializer serializer)
@@ -82,7 +82,7 @@ namespace ZigBeeNet.ZDO.Command
             base.Serialize(serializer);
 
             serializer.Serialize(deviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(removeChildrenRejoin, ZclDataType.Get(DataType.BOOLEAN));
+            serializer.Serialize(RemoveChildrenRejoin, ZclDataType.Get(DataType.BOOLEAN));
         }
 
         public override void Deserialize(ZclFieldDeserializer deserializer)
@@ -90,7 +90,7 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             deviceAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            removeChildrenRejoin = (Boolean)deserializer.Deserialize(ZclDataType.Get(DataType.BOOLEAN));
+            RemoveChildrenRejoin = (Boolean)deserializer.Deserialize(ZclDataType.Get(DataType.BOOLEAN));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
@@ -112,7 +112,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", deviceAddress=")
                    .Append(deviceAddress)
                    .Append(", removeChildrenRejoin=")
-                   .Append(removeChildrenRejoin)
+                   .Append(RemoveChildrenRejoin)
                    .Append(']');
 
             return builder.ToString();

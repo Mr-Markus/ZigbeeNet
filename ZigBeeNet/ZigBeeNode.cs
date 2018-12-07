@@ -15,6 +15,7 @@ using ZigBeeNet.ZDO.Field;
 using static ZigBeeNet.App.Discovery.ZigBeeNodeServiceDiscoverer;
 using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 using static ZigBeeNet.ZDO.Field.PowerDescriptor;
+using ZigBeeNet.Transaction;
 
 namespace ZigBeeNet
 {
@@ -639,6 +640,20 @@ namespace ZigBeeNet
                 endpoint.SetDao(endpointDao);
                 Endpoints[endpoint.EndpointId] = endpoint;
             }
+        }
+
+        /// <summary>
+        /// Sends ZigBee command without waiting for response.
+        /// </summary>
+        /// <param name="command"></param>
+        public void SendTransaction(ZigBeeCommand command)
+        {
+            _network.SendTransaction(command);
+        }
+
+        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        {
+            return await _network.SendTransaction(command, responseMatcher);
         }
 
         public override string ToString()

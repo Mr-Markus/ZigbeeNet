@@ -2,9 +2,11 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ZigBeeNet.App;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Logging;
+using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Protocol;
@@ -198,7 +200,7 @@ namespace ZigBeeNet
          */
         private ZclCluster GetReceiveCluster(int clusterId, ZclCommandDirection direction)
         {
-            if (direction == ZclCommandDirection.ClientToServer)
+            if (direction == ZclCommandDirection.CLIENT_TO_SERVER)
             {
                 return GetOutputCluster(clusterId);
             }
@@ -438,6 +440,29 @@ namespace ZigBeeNet
                     _outputClusters.TryAdd(clusterDao.ClusterId, cluster);
                 }
             }
+        }
+
+        /**
+         * Sends ZigBee command without waiting for response.
+         *
+         * @param command the {@link ZigBeeCommand} to send
+        */
+        public void SendTransaction(ZigBeeCommand command)
+        {
+            command.DestinationAddress = GetEndpointAddress();
+        }
+
+        /**
+         * Sends {@link ZigBeeCommand} command and uses the {@link ZigBeeTransactionMatcher} to match the response.
+         *
+         * @param command the {@link ZigBeeCommand} to send
+         * @param responseMatcher the {@link ZigBeeTransactionMatcher} used to match the response to the request
+         * @return the {@link CommandResult} future.
+         */
+        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        {
+            command.DestinationAddress = GetEndpointAddress();
+            return await Node.SendTransaction(command, responseMatcher);
         }
 
         public override string ToString()

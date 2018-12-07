@@ -13,12 +13,12 @@ namespace ZigBeeNet.ZCL
         /**
          * True if this is a generic command
          */
-        protected bool GenericCommand { get; set; }
+        public bool GenericCommand { get; set; }
 
         /**
          * The command ID
          */
-        protected int CommandId { get; set; }
+        public int CommandId { get; set; }
 
         /**
          * The command direction for this command.
@@ -26,7 +26,7 @@ namespace ZigBeeNet.ZCL
          * If this command is to be sent <b>to</b> the server, this will return <i>true</i>.
          * If this command is to be sent <b>from</b> the server, this will return <i>false</i>.
          */
-        protected ZclCommandDirection CommandDirection { get; set; }
+        public ZclCommandDirection CommandDirection { get; set; }
 
 
         public override string ToString()
