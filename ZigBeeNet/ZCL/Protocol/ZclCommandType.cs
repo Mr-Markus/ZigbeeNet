@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.ZCL.Clusters.OnOff;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
