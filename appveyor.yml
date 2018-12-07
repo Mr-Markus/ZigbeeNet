@@ -1,0 +1,11 @@
+version: 1.0.{build}
+image:
+  - Visual Studio 2017
+  - Ubuntu1804
+install:
+  
+before_build:
+  - nuget restore ZigBeeNet.sln
+build:
+  verbosity: minimal
+  project: ZigBeeNet.sln
