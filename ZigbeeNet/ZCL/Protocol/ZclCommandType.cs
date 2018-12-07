@@ -5,6 +5,9 @@ using ZigBeeNet.ZCL.Clusters.OnOff;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
+
+
+
     public class ZclCommandType
     {
         private static readonly List<ZclCommandType> _commands;
