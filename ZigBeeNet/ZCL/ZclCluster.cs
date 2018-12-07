@@ -116,7 +116,7 @@ namespace ZigBeeNet.ZCL
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
             if (IsClient())
             {
-                command.Direction = ZclCommandDirection.ServerToClient;
+                command.Direction = ZclCommandDirection.SERVER_TO_CLIENT;
             }
 
             return _zigbeeManager.unicast(command, new ZclTransactionMatcher());

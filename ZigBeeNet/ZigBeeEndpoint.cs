@@ -198,7 +198,7 @@ namespace ZigBeeNet
          */
         private ZclCluster GetReceiveCluster(int clusterId, ZclCommandDirection direction)
         {
-            if (direction == ZclCommandDirection.ClientToServer)
+            if (direction == ZclCommandDirection.CLIENT_TO_SERVER)
             {
                 return GetOutputCluster(clusterId);
             }

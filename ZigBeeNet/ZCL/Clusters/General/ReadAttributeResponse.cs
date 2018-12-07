@@ -20,7 +20,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
         {
             IsGenericCommand = true;
             CommandId = 1;
-            Direction = ZclCommandDirection.ClientToServer;
+            Direction = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
 
