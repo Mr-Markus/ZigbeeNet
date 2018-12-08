@@ -7,7 +7,7 @@
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
-  <Import Project="..\ZigbeeNet\ZigBeeNet.projitems" Label="Shared" />
+  <Import Project="..\ZigBeeNet\ZigBeeNet.projitems" Label="Shared" />
 
   <ItemGroup>
     <PackageReference Include="BinarySerializer" Version="8.1.3" />
