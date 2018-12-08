@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -11,22 +12,22 @@ namespace ZigBeeNet.CC.Packet.ZDO
     /// </summary>
     public class ZDO_TC_DEVICE_IND : ZToolPacket
     {
-        public ZigBeeAddress64 IeeeAddr { get; private set; }
+        public ZToolAddress64 IeeeAddr { get; private set; }
 
-        public ZigBeeAddress16 NwkAddr { get; private set; }
+        public ZToolAddress16 NwkAddr { get; private set; }
 
-        public ZigBeeAddress16 SrcAddr { get; private set; }
+        public ZToolAddress16 SrcAddr { get; private set; }
 
         public ZDO_TC_DEVICE_IND(byte[] framedata)
         {
-            SrcAddr = new ZigBeeAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZToolAddress16(framedata[1], framedata[0]);
             byte[] bytes = new byte[8];
             for (int i = 0; i < 8; i++)
             {
                 bytes[i] = framedata[9 - i];
             }
-            IeeeAddr = new ZigBeeAddress64(bytes);
-            NwkAddr = new ZigBeeAddress16(framedata[11], framedata[10]);
+            IeeeAddr = new ZToolAddress64(bytes);
+            NwkAddr = new ZToolAddress16(framedata[11], framedata[10]);
 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_TC_DEVICE_IND), framedata);
         }

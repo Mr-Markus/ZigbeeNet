@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
@@ -23,9 +24,9 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Specifies the 64-bit IEEE address of the device to bind to
         /// </summary>
-        public ZigBeeAddress64 Destination { get; private set; }
+        public ZToolAddress64 Destination { get; private set; }
 
-        public ZB_BIND_DEVICE(bool create, DoubleByte commandId, ZigBeeAddress64 destination)
+        public ZB_BIND_DEVICE(bool create, DoubleByte commandId, ZToolAddress64 destination)
         {
             Create = create;
             CommandId = commandId;
@@ -36,7 +37,7 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
             framedata[1] = commandId.Lsb;
             framedata[2] = commandId.Msb;
 
-            byte[] dst = destination.ToByteArray();
+            byte[] dst = destination.Address;
             for (int i = 3; i < 8; i++)
             {
                 framedata[i] = dst[i - 3];

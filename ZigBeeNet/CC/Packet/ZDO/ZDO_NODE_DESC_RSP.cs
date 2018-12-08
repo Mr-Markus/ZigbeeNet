@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -12,7 +13,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// The message’s source network address
         /// </summary>
-        public ZigBeeAddress16 SrcAddr { get; private set; }
+        public ZToolAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// This field indicates either SUCCESS or FAILURE
@@ -22,7 +23,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Device’s short address of this Node descriptor 
         /// </summary>
-        public ZigBeeAddress16 NwkAddr { get; private set; }
+        public ZToolAddress16 NwkAddr { get; private set; }
 
         /// <summary>
         /// Logical Type
@@ -87,9 +88,9 @@ namespace ZigBeeNet.CC.Packet.ZDO
         public ZDO_NODE_DESC_RSP(byte[] framedata)
         {
 
-            SrcAddr = new ZigBeeAddress16(framedata[1], framedata[0]);
+            SrcAddr = new ZToolAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
-            NwkAddr = new ZigBeeAddress16(framedata[4], framedata[3]);
+            NwkAddr = new ZToolAddress16(framedata[4], framedata[3]);
             LogicalType = (ZigBeeNodeType)(framedata[5] & (byte)0x07);
             ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
             UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;

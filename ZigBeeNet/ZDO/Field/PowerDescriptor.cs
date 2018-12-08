@@ -213,7 +213,7 @@ namespace ZigBeeNet.ZDO.Field
          *
          * @param serializer the {@link ZclFieldSerializer} used to serialize
          */
-        public int[] Serialize(ZclFieldSerializer serializer)
+        public byte[] Serialize(ZclFieldSerializer serializer)
         {
             // Serialize the fields
 

@@ -89,13 +89,13 @@ namespace ZigBeeNet.CC.Implementation
 
         public void ReceivedAsynchronousCommand(ZToolPacket packet)
         {
-            _logger.Trace("Received a packet {} and waiting for {}", packet.Cmd, _commandId);
+            _logger.Trace("Received a packet {} and waiting for {}", packet.CMD, _commandId);
             _logger.Trace("received {} {}", packet.GetType(), packet.ToString());
             //if (packet.isError())
             //{
             //    return;
             //}
-            if (packet.Cmd != _commandId)
+            if ((ZToolCMD)packet.CMD.Value != _commandId)
             {
                 _logger.Trace("Received unexpected packet: " + packet.GetType().Name);
                 return;

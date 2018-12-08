@@ -9,6 +9,7 @@ using ZigBeeNet.CC.Packet.AF;
 using ZigBeeNet.CC.Packet.SimpleAPI;
 using ZigBeeNet.CC.Packet.SYS;
 using ZigBeeNet.CC.Packet.ZDO;
+using ZigBeeNet.CC.Util;
 using ZigBeeNet.Logging;
 using ZigBeeNet.Security;
 using ZigBeeNet.ZCL;
@@ -1180,7 +1181,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _currentPanId = new ZigBeeAddress16(result).Value;
+                _currentPanId = new ZToolAddress16(result).Value;
                 return _currentPanId;
             }
         }
@@ -1270,8 +1271,8 @@ namespace ZigBeeNet.CC.Network
 
         private void CreateCustomDevicesOnDongle()
         {
-            DoubleByte[] input;
-            DoubleByte[] output;
+            ushort[] input;
+            ushort[] output;
 
             if (_ep != null)
             {
@@ -1288,12 +1289,12 @@ namespace ZigBeeNet.CC.Network
                         }
                     }
 
-                    input = new DoubleByte[size];
+                    input = new ushort[size];
                     for (int j = 0; j < _inp[i].Length; j++)
                     {
                         if (_inp[i][j] != 0 && _inp[i][j] != ushort.MaxValue)
                         {
-                            input[j] = new DoubleByte(_inp[i][j]);
+                            input[j] = _inp[i][j];
                         }
                     }
 
@@ -1308,17 +1309,17 @@ namespace ZigBeeNet.CC.Network
                         }
                     }
 
-                    output = new DoubleByte[size];
+                    output = new ushort[size];
 
                     for (int j = 0; j < _out[i].Length; j++)
                     {
                         if (_out[i][j] != 0 && _out[i][j] != ushort.MaxValue)
                         {
-                            output[j] = new DoubleByte(_out[i][j]);
+                            output[j] = _out[i][j];
                         }
                     }
 
-                    if (newDevice(new AF_REGISTER(_ep[i], new DoubleByte(_prof[i]), new DoubleByte(_dev[i]), _ver[i], input, output)))
+                    if (newDevice(new AF_REGISTER(_ep[i], new DoubleByte(_prof[i]).Value, new DoubleByte(_dev[i]).Value, _ver[i], input, output)))
                     {
                         _logger.Debug("Custom device {} registered at endpoint {}", _dev[i], _ep[i]);
                     }

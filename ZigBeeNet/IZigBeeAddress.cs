@@ -14,6 +14,6 @@ namespace ZigBeeNet
         /**
          * Check whether this address is ZigBee group.
          */
-        bool IsGroup();
+        bool IsGroup { get; }
     }
 }

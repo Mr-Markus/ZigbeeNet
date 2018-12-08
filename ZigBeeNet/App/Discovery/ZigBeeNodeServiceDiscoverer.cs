@@ -364,7 +364,7 @@ namespace ZigBeeNet.App.Discovery
         {
             int startIndex = 0;
             int totalAssociatedDevices = 0;
-            List<int> associatedDevices = new List<int>();
+            List<ushort> associatedDevices = new List<ushort>();
 
             do
             {
@@ -657,8 +657,8 @@ namespace ZigBeeNet.App.Discovery
                 endpoint.ProfileId = simpleDescriptor.ProfileId;
                 endpoint.DeviceId = simpleDescriptor.DeviceId;
                 endpoint.DeviceVersion = simpleDescriptor.DeviceVersion;
-                endpoint.SetInputClusterIds(simpleDescriptor.InputClusterList.Select(id => (int)id).ToList());
-                endpoint.SetOutputClusterIds(simpleDescriptor.OutputClusterList.Select(id => (int)id).ToList());
+                endpoint.SetInputClusterIds(simpleDescriptor.InputClusterList.Select(id => id).ToList());
+                endpoint.SetOutputClusterIds(simpleDescriptor.OutputClusterList.Select(id => id).ToList());
 
                 return endpoint;
             }

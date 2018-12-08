@@ -87,7 +87,7 @@ namespace ZigBeeNet.ZCL.Protocol
 
     public class ZclClusterType
     {
-        private static readonly Dictionary<int, ZclClusterType> _idValueMap;
+        private static readonly Dictionary<ushort, ZclClusterType> _idValueMap;
 
         public ClusterType Type { get; private set; }
 
@@ -113,7 +113,7 @@ namespace ZigBeeNet.ZCL.Protocol
 
         static ZclClusterType()
         {
-            _idValueMap = new Dictionary<int, ZclClusterType>
+            _idValueMap = new Dictionary<ushort, ZclClusterType>
             {
                 { 0x0000, new ZclClusterType(0x0000, ProfileType.ZIGBEE_HOME_AUTOMATION, "Basic", ClusterType.BASIC) },
                 { 0x0001, new ZclClusterType(0x0001, ProfileType.ZIGBEE_HOME_AUTOMATION, "Power configuration", ClusterType.POWER_CONFIGURATION) },
@@ -195,10 +195,16 @@ namespace ZigBeeNet.ZCL.Protocol
             };
         }
 
-        public static ZclClusterType GetValueById(int clusterId)
+        public static ZclClusterType GetValueById(ushort clusterId)
         {
             // Use index instead of Linq (Where())-> performance
             return _idValueMap[clusterId];
+        }
+
+        public static ZclClusterType GetValueById(ClusterType clusterId)
+        {
+            // Use index instead of Linq (Where())-> performance
+            return _idValueMap[(ushort)clusterId];
         }
     }
 }

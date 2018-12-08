@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 using ZigBeeNet.Security;
 using ZigBeeNet.ZCL;
 
@@ -59,7 +60,7 @@ namespace ZigBeeNet.Transport
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
         /// </summary>
-        ZigBeeAddress16 PanID { get; }
+        ZToolAddress16 PanID { get; }
 
         /// <summary>
         /// Gets the ZigBee Extended PAN ID currently in use by the transport

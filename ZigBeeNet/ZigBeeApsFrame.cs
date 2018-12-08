@@ -19,7 +19,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Destination address.
         /// </summary>
-        public ZigBeeAddress64 DestinationIeeeAddress { get; set; }
+        public IeeeAddress DestinationIeeeAddress { get; set; }
 
         /// <summary>
         /// Source address

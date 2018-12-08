@@ -16,7 +16,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * NWKAddrRemoteDev command message field.
          */
-        public int NwkAddrRemoteDev { get; set; }
+        public ushort NwkAddrRemoteDev { get; set; }
 
         /**
          * StartIndex command message field.
@@ -68,7 +68,7 @@ namespace ZigBeeNet.ZDO.Command
             }
 
             IeeeAddrRemoteDev = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            NwkAddrRemoteDev = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrRemoteDev = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
             int? numAssocDev = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 

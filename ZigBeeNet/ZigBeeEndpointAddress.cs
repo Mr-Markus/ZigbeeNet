@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Extensions;
 using ZigBeeNet.Util;
 
 namespace ZigBeeNet
@@ -10,6 +11,11 @@ namespace ZigBeeNet
         public byte Endpoint { get; private set; }
 
         public ushort Address { get; set; }
+
+        public bool IsGroup
+        {
+            get { return false; }
+        }
 
         /**
          * Constructor for ZDO ZigBee devices where only the address is defined
@@ -57,14 +63,15 @@ namespace ZigBeeNet
             }
         }
 
-        public bool IsGroup()
-        {
-            return false;
-        }
-
         public override int GetHashCode()
         {
-            return Hash.CalcHashCode(new[] { (int)Address, (int)Endpoint });
+            byte[] hash = new byte[3];
+
+            hash[0] = Address.GetByte(0);
+            hash[1] = Address.GetByte(1);
+            hash[2] = Endpoint;
+
+            return Hash.CalcHashCode(hash);
         }
 
         public override bool Equals(object obj)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -12,23 +13,23 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies NWK address of the device generating the inquiry
         /// </summary>
-        public ZigBeeAddress16 DstAddr { get; private set; }
+        public ZToolAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Specifies NWK address of the destination device being queried
         /// </summary>
-        public ZigBeeAddress16 NwkAddrOfInterest { get; private set; }
+        public ZToolAddress16 NwkAddrOfInterest { get; private set; }
 
-        public ZDO_NODE_DESC_REQ(ZigBeeAddress16 dstAddr, ZigBeeAddress16 nwkAddrOfinterest)
+        public ZDO_NODE_DESC_REQ(ZToolAddress16 dstAddr, ZToolAddress16 nwkAddrOfinterest)
         {
             DstAddr = dstAddr;
             NwkAddrOfInterest = nwkAddrOfinterest;
 
             byte[] framedata = new byte[4];
-            framedata[0] = DstAddr.DoubleByte.Lsb;
-            framedata[1] = DstAddr.DoubleByte.Msb;
-            framedata[2] = NwkAddrOfInterest.DoubleByte.Lsb;
-            framedata[3] = NwkAddrOfInterest.DoubleByte.Msb;
+            framedata[0] = DstAddr.Lsb;
+            framedata[1] = DstAddr.Msb;
+            framedata[2] = NwkAddrOfInterest.Lsb;
+            framedata[3] = NwkAddrOfInterest.Msb;
 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_NODE_DESC_REQ), framedata);
         }

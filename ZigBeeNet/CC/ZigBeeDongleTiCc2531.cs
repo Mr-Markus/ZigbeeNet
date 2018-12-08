@@ -7,6 +7,7 @@ using ZigBeeNet.CC.Implementation;
 using ZigBeeNet.CC.Network;
 using ZigBeeNet.CC.Packet;
 using ZigBeeNet.CC.Packet.AF;
+using ZigBeeNet.CC.Util;
 using ZigBeeNet.Logging;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
@@ -32,7 +33,7 @@ namespace ZigBeeNet.CC
         public IeeeAddress IeeeAddress { get; set; }
         public ushort NwkAddress { get; set; }
         public ZigBeeChannel ZigBeeChannel { get; }
-        public ZigBeeAddress16 PanID { get; }
+        public ZToolAddress16 PanID { get; }
         public IeeeAddress ExtendedPanId { get; }
         public ZigBeeKey ZigBeeNetworkKey { get => _networkManager.GetZigBeeNetworkKey(); }
         public ZigBeeKey TcLinkKey { get => new ZigBeeKey(); }

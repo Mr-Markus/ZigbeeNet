@@ -34,7 +34,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * NWKAddrAssocDevList command message field.
          */
-        public List<int> NwkAddrAssocDevList { get; set; }
+        public List<ushort> NwkAddrAssocDevList { get; set; }
 
         /**
          * Default constructor.
@@ -65,7 +65,7 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             // Create lists
-            NwkAddrAssocDevList = new List<int>();
+            NwkAddrAssocDevList = new List<ushort>();
 
             Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
 
@@ -90,7 +90,7 @@ namespace ZigBeeNet.ZDO.Command
             {
                 for (int cnt = 0; cnt < numAssocDev; cnt++)
                 {
-                    NwkAddrAssocDevList.Add((int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS)));
+                    NwkAddrAssocDevList.Add((ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS)));
                 }
             }
         }

@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL.Clusters
@@ -48,14 +50,16 @@ namespace ZigBeeNet.ZCL.Clusters
         public const int ATTR_OFFWAITTIME = 0x4002;
 
         // Attribute initialisation
-        protected ConcurrentDictionary<int, ZclAttribute> InitializeAttributes()
+        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
         {
-            ConcurrentDictionary<int, ZclAttribute> attributeMap = new ConcurrentDictionary<int, ZclAttribute>();
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>();
 
-            attributeMap.TryAdd(ATTR_ONOFF, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_ONOFF, "OnOff", ZclDataType.BOOLEAN, true, true, false, true));
-            attributeMap.TryAdd(ATTR_GLOBALSCENECONTROL, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_GLOBALSCENECONTROL, "GlobalSceneControl", ZclDataType.BOOLEAN, false, true, false, false));
-            attributeMap.TryAdd(ATTR_OFFTIME, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_OFFTIME, "OffTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-            attributeMap.TryAdd(ATTR_OFFWAITTIME, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_OFFWAITTIME, "OffWaitTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            ZclClusterType onOff = ZclClusterType.GetValueById(ClusterType.ON_OFF);
+
+            attributeMap.Add(ATTR_ONOFF, new ZclAttribute(onOff, ATTR_ONOFF, "OnOff", ZclDataType.Get(DataType.BOOLEAN), true, true, false, true));
+            attributeMap.Add(ATTR_GLOBALSCENECONTROL, new ZclAttribute(onOff, ATTR_GLOBALSCENECONTROL, "GlobalSceneControl", ZclDataType.Get(DataType.BOOLEAN), false, true, false, false));
+            attributeMap.Add(ATTR_OFFTIME, new ZclAttribute(onOff, ATTR_OFFTIME, "OffTime", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_OFFWAITTIME, new ZclAttribute(onOff, ATTR_OFFWAITTIME, "OffWaitTime", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
 
             return attributeMap;
         }
@@ -75,7 +79,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * <p>
          * The OnOff attribute has the following values: 0 = Off, 1 = On
          * <p>
-         * The attribute is of type {@link Boolean}.
+         * The attribute is of type {@link bool}.
          * <p>
          * The implementation of this attribute by a device is MANDATORY
          *
@@ -83,7 +87,7 @@ namespace ZigBeeNet.ZCL.Clusters
          */
         public Task<CommandResult> GetOnOffAsync()
         {
-            return read(attributes.get(ATTR_ONOFF));
+            return Read(_attributes[ATTR_ONOFF]);
         }
 
         /**
@@ -98,21 +102,21 @@ namespace ZigBeeNet.ZCL.Clusters
          * <p>
          * This method will block until the response is received or a timeout occurs unless the current value is returned.
          * <p>
-         * The attribute is of type {@link Boolean}.
+         * The attribute is of type {@link bool}.
          * <p>
          * The implementation of this attribute by a device is MANDATORY
          *
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
-         * @return the {@link Boolean} attribute value, or null on error
+         * @return the {@link bool} attribute value, or null on error
          */
         public bool GetOnOff(long refreshPeriod)
         {
-            if (attributes.get(ATTR_ONOFF).isLastValueCurrent(refreshPeriod))
+            if (_attributes[ATTR_ONOFF].IsLastValueCurrent(refreshPeriod))
             {
-                return (bool)attributes.get(ATTR_ONOFF).getLastValue();
+                return (bool)_attributes[ATTR_ONOFF].LastValue;
             }
 
-            return (Boolean)readSync(attributes.get(ATTR_ONOFF));
+            return (bool)ReadSync(_attributes[ATTR_ONOFF]);
         }
 
         /**
@@ -120,7 +124,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * <p>
          * The OnOff attribute has the following values: 0 = Off, 1 = On
          * <p>
-         * The attribute is of type {@link Boolean}.
+         * The attribute is of type {@link bool}.
          * <p>
          * The implementation of this attribute by a device is MANDATORY
          *
@@ -128,9 +132,9 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param maxInterval {@link int} maximum reporting period
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOnOffReporting(int minInterval, int maxInterval)
+        public Task<CommandResult> SetOnOffReporting(int minInterval, int maxInterval)
         {
-            return setReporting(attributes.get(ATTR_ONOFF), minInterval, maxInterval);
+            return SetReporting(_attributes[ATTR_ONOFF], minInterval, maxInterval);
         }
 
         /**
@@ -148,15 +152,15 @@ namespace ZigBeeNet.ZCL.Clusters
          * <p>
          * The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.
          * <p>
-         * The attribute is of type {@link Boolean}.
+         * The attribute is of type {@link bool}.
          * <p>
          * The implementation of this attribute by a device is 
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> getGlobalSceneControlAsync()
+        public Task<CommandResult> GetGlobalSceneControlAsync()
         {
-            return read(attributes.get(ATTR_GLOBALSCENECONTROL));
+            return Read(_attributes[ATTR_GLOBALSCENECONTROL]);
         }
 
         /**
@@ -181,21 +185,21 @@ namespace ZigBeeNet.ZCL.Clusters
          * <p>
          * This method will block until the response is received or a timeout occurs unless the current value is returned.
          * <p>
-         * The attribute is of type {@link Boolean}.
+         * The attribute is of type {@link bool}.
          * <p>
          * The implementation of this attribute by a device is 
          *
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
-         * @return the {@link Boolean} attribute value, or null on error
+         * @return the {@link bool} attribute value, or null on error
          */
-        public Boolean getGlobalSceneControl(long refreshPeriod)
+        public bool GetGlobalSceneControl(long refreshPeriod)
         {
-            if (attributes.get(ATTR_GLOBALSCENECONTROL).isLastValueCurrent(refreshPeriod))
+            if (_attributes[ATTR_GLOBALSCENECONTROL].IsLastValueCurrent(refreshPeriod))
             {
-                return (Boolean)attributes.get(ATTR_GLOBALSCENECONTROL).getLastValue();
+                return (bool)_attributes[ATTR_GLOBALSCENECONTROL].LastValue;
             }
 
-            return (Boolean)readSync(attributes.get(ATTR_GLOBALSCENECONTROL));
+            return (bool)ReadSync(_attributes[ATTR_GLOBALSCENECONTROL]);
         }
 
         /**
@@ -208,9 +212,9 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param offTime the {@link Integer} attribute value to be set
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOffTime(Object value)
+        public Task<CommandResult> SetOffTime(object value)
         {
-            return write(attributes.get(ATTR_OFFTIME), value);
+            return Write(_attributes[ATTR_OFFTIME], value);
         }
 
         /**
@@ -222,9 +226,9 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> getOffTimeAsync()
+        public Task<CommandResult> GetOffTimeAsync()
         {
-            return read(attributes.get(ATTR_OFFTIME));
+            return Read(_attributes[ATTR_OFFTIME]);
         }
 
         /**
@@ -244,14 +248,14 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
          * @return the {@link Integer} attribute value, or null on error
          */
-        public Integer getOffTime(long refreshPeriod)
+        public ushort GetOffTime(long refreshPeriod)
         {
-            if (attributes.get(ATTR_OFFTIME).isLastValueCurrent(refreshPeriod))
+            if (_attributes[ATTR_OFFTIME].IsLastValueCurrent(refreshPeriod))
             {
-                return (Integer)attributes.get(ATTR_OFFTIME).getLastValue();
+                return (ushort)_attributes[ATTR_OFFTIME].LastValue;
             }
 
-            return (Integer)readSync(attributes.get(ATTR_OFFTIME));
+            return (ushort)ReadSync(_attributes[ATTR_OFFTIME]);
         }
 
         /**
@@ -268,9 +272,9 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param offWaitTime the {@link Integer} attribute value to be set
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> setOffWaitTime(Object value)
+        public Task<CommandResult> SetOffWaitTime(object value)
         {
-            return write(attributes.get(ATTR_OFFWAITTIME), value);
+            return Write(_attributes[ATTR_OFFWAITTIME], value);
         }
 
         /**
@@ -286,9 +290,9 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> getOffWaitTimeAsync()
+        public Task<CommandResult> GetOffWaitTimeAsync()
         {
-            return read(attributes.get(ATTR_OFFWAITTIME));
+            return Read(_attributes[ATTR_OFFWAITTIME]);
         }
 
         /**
@@ -312,14 +316,14 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
          * @return the {@link Integer} attribute value, or null on error
          */
-        public Integer getOffWaitTime(long refreshPeriod)
+        public ushort GetOffWaitTime(long refreshPeriod)
         {
-            if (attributes.get(ATTR_OFFWAITTIME).isLastValueCurrent(refreshPeriod))
+            if (_attributes[ATTR_OFFWAITTIME].IsLastValueCurrent(refreshPeriod))
             {
-                return (Integer)attributes.get(ATTR_OFFWAITTIME).getLastValue();
+                return (ushort)_attributes[ATTR_OFFWAITTIME].LastValue;
             }
 
-            return (Integer)readSync(attributes.get(ATTR_OFFWAITTIME));
+            return (ushort)ReadSync(_attributes[ATTR_OFFWAITTIME]);
         }
 
         /**
@@ -327,11 +331,11 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> offCommand()
+        public Task<CommandResult> OffCommand()
         {
             OffCommand command = new OffCommand();
 
-            return send(command);
+            return Send(command);
         }
 
         /**
@@ -339,11 +343,11 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> onCommand()
+        public Task<CommandResult> OnCommand()
         {
             OnCommand command = new OnCommand();
 
-            return send(command);
+            return Send(command);
         }
 
         /**
@@ -351,11 +355,11 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> toggleCommand()
+        public Task<CommandResult> ToggleCommand()
         {
             ToggleCommand command = new ToggleCommand();
 
-            return send(command);
+            return Send(command);
         }
 
         /**
@@ -367,15 +371,15 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param effectVariant {@link Integer} Effect Variant
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> offWithEffectCommand(Integer effectIdentifier, Integer effectVariant)
+        public Task<CommandResult> OffWithEffectCommand(byte effectIdentifier, byte effectVariant)
         {
             OffWithEffectCommand command = new OffWithEffectCommand();
 
             // Set the fields
-            command.setEffectIdentifier(effectIdentifier);
-            command.setEffectVariant(effectVariant);
+            command.EffectIdentifier = effectIdentifier;
+            command.EffectVariant = effectVariant;
 
-            return send(command);
+            return Send(command);
         }
 
         /**
@@ -385,11 +389,11 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> onWithRecallGlobalSceneCommand()
+        public Task<CommandResult> OnWithRecallGlobalSceneCommand()
         {
             OnWithRecallGlobalSceneCommand command = new OnWithRecallGlobalSceneCommand();
 
-            return send(command);
+            return Send(command);
         }
 
         /**
@@ -406,19 +410,19 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param offWaitTime {@link Integer} Off Wait Time
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Future<CommandResult> onWithTimedOffCommand(Integer onOffControl, Integer onTime, Integer offWaitTime)
+        public Task<CommandResult> OnWithTimedOffCommand(byte onOffControl, ushort onTime, ushort offWaitTime)
         {
             OnWithTimedOffCommand command = new OnWithTimedOffCommand();
 
             // Set the fields
-            command.setOnOffControl(onOffControl);
-            command.setOnTime(onTime);
-            command.setOffWaitTime(offWaitTime);
+            command.OnOffControl = onOffControl;
+            command.OnTime = onTime;
+            command.OffWaitTime = offWaitTime;
 
-            return send(command);
+            return Send(command);
         }
 
-        public ZclCommand getCommandFromId(int commandId)
+        public ZclCommand GetCommandFromId(int commandId)
         {
             switch (commandId)
             {

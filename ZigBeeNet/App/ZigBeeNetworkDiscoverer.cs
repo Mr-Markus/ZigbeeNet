@@ -7,6 +7,7 @@ using ZigBeeNet;
 using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.Command;
 
 namespace ZigBeeNet.App
 {
@@ -176,9 +177,9 @@ namespace ZigBeeNet.App
             {
                 DeviceAnnounce announce = (DeviceAnnounce)command;
 
-                _logger.Debug("{}: Device announce received. NWK={}", announce.getIeeeAddr(),
-                        announce.getNwkAddrOfInterest());
-                AddNode(announce.getIeeeAddr(), announce.getNwkAddrOfInterest());
+                _logger.Debug("{}: Device announce received. NWK={}", announce.IeeeAddr,
+                        announce.NwkAddrOfInterest);
+                AddNode(announce.IeeeAddr, announce.NwkAddrOfInterest);
             }
         }
 
@@ -227,18 +228,17 @@ namespace ZigBeeNet.App
                         }
 
                         NetworkAddressRequest request = new NetworkAddressRequest();
-                        request.setIeeeAddr(ieeeAddress);
-                        request.setRequestType(0);
-                        request.setStartIndex(0);
-                        request.setDestinationAddress(
-                                new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_RX_ON.getKey()));
+                        request.IeeeAddr = ieeeAddress;
+                        request.RequestType = 0;
+                        request.StartIndex = 0;
+                        request.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
                         CommandResult response;
-                        response = _networkManager.SendTransaction(request, request).get();
+                        response = _networkManager.SendTransaction(request, request).Result;
 
-                        NetworkAddressResponse nwkAddressResponse = response.GetResponse();
-                        if (nwkAddressResponse != null && nwkAddressResponse.getStatus() == ZdoStatus.SUCCESS)
+                        NetworkAddressResponse nwkAddressResponse = response.GetResponse<NetworkAddressResponse>();
+                        if (nwkAddressResponse != null && nwkAddressResponse.Status == ZdoStatus.SUCCESS)
                         {
-                            StartNodeDiscovery(nwkAddressResponse.getNwkAddrRemoteDev());
+                            StartNodeDiscovery(nwkAddressResponse.NwkAddrRemoteDev);
                             break;
                         }
 
@@ -274,12 +274,12 @@ namespace ZigBeeNet.App
             // Check if we need to do a rediscovery on this node first...
             lock (_discoveryStartTime)
             {
-                if (_discoveryStartTime[nodeNetworkAddress] != null && System.currentTimeMillis() - _discoveryStartTime[nodeNetworkAddress] < _requeryPeriod)
+                if (_discoveryStartTime.ContainsKey(nodeNetworkAddress) && DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - _discoveryStartTime[nodeNetworkAddress] < _requeryPeriod)
                 {
                     _logger.Trace("{}: NWK Discovery node discovery already in progress", nodeNetworkAddress);
                     return;
                 }
-                _discoveryStartTime[nodeNetworkAddress] = System.currentTimeMillis();
+                _discoveryStartTime[nodeNetworkAddress] = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             }
 
             _logger.Debug("{}: NWK Discovery scheduling node discovery", nodeNetworkAddress);
@@ -344,27 +344,27 @@ namespace ZigBeeNet.App
                 {
                     // Request extended response, start index for associated list is 0
                     IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
-                    ieeeAddressRequest.setDestinationAddress(new ZigBeeEndpointAddress(networkAddress));
-                    ieeeAddressRequest.setRequestType(1);
-                    ieeeAddressRequest.setStartIndex(startIndex);
-                    ieeeAddressRequest.setNwkAddrOfInterest(networkAddress);
-                    CommandResult response = _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest).get();
+                    ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
+                    ieeeAddressRequest.RequestType = 1;
+                    ieeeAddressRequest.StartIndex = startIndex;
+                    ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
+                    CommandResult response = _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest).Result;
                     if (response.IsError())
                     {
                         return false;
                     }
 
-                    IeeeAddressResponse ieeeAddressResponse = response.GetResponse();
+                    IeeeAddressResponse ieeeAddressResponse = response.GetResponse<IeeeAddressResponse>();
                     _logger.Debug("{}: NWK Discovery IeeeAddressRequest returned {}", networkAddress, ieeeAddressResponse);
-                    if (ieeeAddressResponse != null && ieeeAddressResponse.getStatus() == ZdoStatus.SUCCESS)
+                    if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
                     {
-                        ieeeAddress = ieeeAddressResponse.getIeeeAddrRemoteDev();
-                        if (startIndex.Equals(ieeeAddressResponse.getStartIndex()))
+                        ieeeAddress = ieeeAddressResponse.IeeeAddrRemoteDev;
+                        if (startIndex.Equals(ieeeAddressResponse.StartIndex))
                         {
-                            associatedDevices.AddRange(ieeeAddressResponse.getNwkAddrAssocDevList());
+                            associatedDevices.AddRange(ieeeAddressResponse.NwkAddrAssocDevList);
 
-                            startIndex += ieeeAddressResponse.getNwkAddrAssocDevList().size();
-                            totalAssociatedDevices = ieeeAddressResponse.getNwkAddrAssocDevList().size();
+                            startIndex += ieeeAddressResponse.NwkAddrAssocDevList.Count;
+                            totalAssociatedDevices = ieeeAddressResponse.NwkAddrAssocDevList.Count;
                         }
                     }
 

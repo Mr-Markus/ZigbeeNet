@@ -103,7 +103,7 @@ namespace ZigBeeNet.ZCL
          */
         protected abstract Dictionary<ushort, ZclAttribute> InitializeAttributes();
 
-        public ZclCluster(ZigBeeNetworkManager zigbeeManager, ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
+        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
         {
             _attributes = InitializeAttributes();
 
@@ -302,7 +302,7 @@ namespace ZigBeeNet.ZCL
          * @param maxInterval the maximum reporting interval
          * @return command future {@link CommandResult}
          */
-        public Task<CommandResult> setReporting(ZclAttribute attribute, int minInterval, int maxInterval)
+        public Task<CommandResult> SetReporting(ZclAttribute attribute, int minInterval, int maxInterval)
         {
             return SetReporting(attribute, minInterval, maxInterval, null);
         }
@@ -356,7 +356,7 @@ namespace ZigBeeNet.ZCL
          *
          * @return the cluster ID as {@link Integer}
          */
-        public int GetClusterId()
+        public ushort GetClusterId()
         {
             return _clusterId;
         }

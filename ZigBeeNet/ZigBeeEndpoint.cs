@@ -130,7 +130,7 @@ namespace ZigBeeNet
          * @param inputClusterIds
          *            the input cluster IDs
          */
-        public void SetInputClusterIds(List<int> inputClusterIds)
+        public void SetInputClusterIds(List<ushort> inputClusterIds)
         {
             this._inputClusters.Clear();
 
@@ -176,7 +176,7 @@ namespace ZigBeeNet
          * @param outputClusterIds
          *            the output cluster IDs
          */
-        public void SetOutputClusterIds(List<int> outputClusterIds)
+        public void SetOutputClusterIds(List<ushort> outputClusterIds)
         {
             this._outputClusters.Clear();
 
@@ -210,7 +210,7 @@ namespace ZigBeeNet
             }
         }
 
-        private ZclCluster GetClusterClass(int clusterId)
+        private ZclCluster GetClusterClass(ushort clusterId)
         {
             ZclClusterType clusterType = ZclClusterType.GetValueById(clusterId);
             if (clusterType == null)
@@ -241,7 +241,7 @@ namespace ZigBeeNet
             return cluster;
         }
 
-        private void UpdateClusters(ConcurrentDictionary<int, ZclCluster> clusters, List<int> newList, bool isInput)
+        private void UpdateClusters(ConcurrentDictionary<int, ZclCluster> clusters, List<ushort> newList, bool isInput)
         {
             // Get a list any clusters that are no longer in the list
             List<int> removeIds = new List<int>();
@@ -265,7 +265,7 @@ namespace ZigBeeNet
             }
 
             // Add any missing clusters into the list
-            foreach (int id in newList)
+            foreach (ushort id in newList)
             {
                 if (!clusters.ContainsKey(id))
                 {
@@ -351,7 +351,7 @@ namespace ZigBeeNet
             }
 
             // Get the cluster
-            ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.Direction);
+            ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.CommandDirection);
             if (cluster == null)
             {
                 _logger.Debug("{}: Cluster {} not found for attribute response", GetEndpointAddress(), command.ClusterId);
@@ -373,7 +373,7 @@ namespace ZigBeeNet
             }
 
             // If this is a specific cluster command, pass the command to the cluster command handler
-            if (!command.IsGenericCommand)
+            if (!command.GenericCommand)
             {
                 cluster.HandleCommand(command);
             }

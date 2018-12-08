@@ -98,7 +98,7 @@ namespace ZigBeeNet.CC.Packet
             if (exception != null)
             {
                 exceptionResponse.Error = true;
-                exceptionResponse.ErrorMessage = exception.Message;
+                exceptionResponse.ErrorMsg = exception.Message;
             }
 
             return exceptionResponse;
@@ -119,8 +119,8 @@ namespace ZigBeeNet.CC.Packet
                 var length = buffer[1];
                 await stream.ReadAsyncExact(buffer, 2, length + 3);
 
-                var type = (MessageType)(buffer[2] >> 5 & 0x07);
-                var subsystem = (SubSystem)(buffer[2] & 0x1f);
+                var type = (ZToolPacket.CommandType)(buffer[2] >> 5 & 0x07);
+                var subsystem = (ZToolPacket.CommandSubsystem)(buffer[2] & 0x1f);
                 var cmd1 = buffer[3];
                 var payload = buffer.Skip(4).Take(length).ToArray();
 
@@ -129,15 +129,15 @@ namespace ZigBeeNet.CC.Packet
 
                 DoubleByte cmd = new DoubleByte(buffer[3], buffer[2]);
 
-                return ParsePayload((ZToolCMD)cmd.Value, buffer.Skip(4).Take(length).ToArray());
+                return ParsePayload(cmd, buffer.Skip(4).Take(length).ToArray());
             }
 
             throw new InvalidDataException("unable to decode packet");
         }
 
-        public static ZToolPacket ParsePayload(ZToolCMD cmd, byte[] payload)
+        public static ZToolPacket ParsePayload(DoubleByte cmd, byte[] payload)
         {
-            switch (cmd)
+            switch ((ZToolCMD)cmd.Value)
             {
                 case ZToolCMD.SYS_RESET_RESPONSE:
                     return new SYS_RESET_RESPONSE(payload);

@@ -63,7 +63,7 @@ namespace ZigBeeNet
         /**
          * List of associated devices for the node, specified in a {@link List} {@link Integer}
          */
-        public List<int> AssociatedDevices { get; set; } = new List<int>();
+        public List<ushort> AssociatedDevices { get; set; } = new List<ushort>();
 
         /**
          * List of neighbors for the node, specified in a {@link NeighborTable}

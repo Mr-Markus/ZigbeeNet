@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -13,7 +14,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the short address of the device
         /// </summary>
-        public ZigBeeAddress16 ShortAddress { get; private set; }
+        public ZToolAddress16 ShortAddress { get; private set; }
 
         /// <summary>
         /// Value that the search was executed on
@@ -25,14 +26,14 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// </summary>
         public byte StartIndex { get; private set; }
 
-        public ZDO_IEEE_ADDR_REQ(ZigBeeAddress16 shortAddress, RequestType reqType, byte startIndex)
+        public ZDO_IEEE_ADDR_REQ(ZToolAddress16 shortAddress, RequestType reqType, byte startIndex)
         {
             ShortAddress = shortAddress;
             ReqType = reqType;
             StartIndex = startIndex;
 
             List<byte> data = new List<byte>();
-            data.AddRange(ShortAddress.ToByteArray());
+            data.AddRange(ShortAddress.Address);
             data.Add((byte)ReqType);
             data.Add(StartIndex);
 

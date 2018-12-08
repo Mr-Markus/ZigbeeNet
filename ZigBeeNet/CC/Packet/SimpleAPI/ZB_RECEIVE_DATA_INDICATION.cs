@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
@@ -12,7 +13,7 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
         /// <summary>
         /// Specifies the short address of the peer device that sent the data
         /// </summary>
-        public ZigBeeAddress16 Source { get; private set; }
+        public ZToolAddress16 Source { get; private set; }
 
         /// <summary>
         /// The command Id associated with the data
@@ -31,7 +32,7 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
 
         public ZB_RECEIVE_DATA_INDICATION(byte[] framedata)
         {
-            Source = new ZigBeeAddress16(framedata[1], framedata[0]);
+            Source = new ZToolAddress16(framedata[1], framedata[0]);
             Command = new DoubleByte(framedata[3], framedata[2]);
             Len = new DoubleByte(framedata[5], framedata[4]);
             Data = new byte[framedata.Length - 6];

@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Frame\ZdoNodeDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Frame\ZdoPowerDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Frame\ZdoSimpleDescriptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ErrorPacket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZToolCMD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\BlockingCommandReceiver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\CommandInterfaceImpl.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZToolParseException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Util\ByteUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Util\IByteArrayInputStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Util\ZToolAddress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Util\ZToolAddress64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommandResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZclClusterDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZigBeeEndpointDao.cs" />
@@ -253,7 +256,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZigBeeNodeType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Extensions\StreamExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ZigBeeAddress16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Util\ZToolAddress16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IeeeAddress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZToolPacketStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\SimpleAPI\ZB_ALLOW_BIND.cs" />

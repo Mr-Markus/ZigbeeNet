@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -17,7 +18,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the network address of the destination device whose Permit Join information is to be modified. 
         /// </summary>
-        public ZigBeeAddress16 DstAddr { get; private set; }
+        public ZToolAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Specifies the duration to permit joining.  0 = join disabled.  0xff = join enabled. 0x01-0xfe = number of seconds to permit joining
@@ -30,7 +31,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         public byte TCSignificance { get; private set; }
 
 
-        public ZDO_MGMT_PERMIT_JOIN_REQ(byte addrMode, ZigBeeAddress16 dstAddr, byte duration, bool tcsSignificant)
+        public ZDO_MGMT_PERMIT_JOIN_REQ(byte addrMode, ZToolAddress16 dstAddr, byte duration, bool tcsSignificant)
         {
             AddrMode = addrMode;
             DstAddr = dstAddr;
@@ -39,7 +40,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
 
             List<byte> data = new List<byte>();
             data.Add(AddrMode);
-            data.AddRange(DstAddr.ToByteArray());
+            data.AddRange(DstAddr.Address);
             data.Add(Duration);
             data.Add(TCSignificance);
 

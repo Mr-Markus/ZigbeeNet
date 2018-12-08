@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 using ZigBeeNet.ZCL;
 
 namespace ZigBeeNet.CC.Packet.ZDO
@@ -13,12 +14,12 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Specifies the destination address of the device generating the bind request
         /// </summary>
-        public ZigBeeAddress16 DstAddr { get; private set; }
+        public ZToolAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// 64 bit Binding source IEEE addres
         /// </summary>
-        public ZigBeeAddress64 SrcAddress { get; private set; }
+        public ZToolAddress64 SrcAddress { get; private set; }
 
         /// <summary>
         /// Specifies the binding source endpoint
@@ -38,7 +39,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Binding destination IEEE address. Not to be confused with DstAddr
         /// </summary>
-        public ZigBeeAddress64 DstAddress { get; private set; }
+        public ZToolAddress64 DstAddress { get; private set; }
 
         /// <summary>
         /// Specifies the binding destination endpoint. It is used only when DstAddrMode is 64 bits extended address
@@ -54,8 +55,8 @@ namespace ZigBeeNet.CC.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZigBeeAddress16 nwkDst, ZigBeeAddress64 ieeeSrc, byte epSrc, ZclClusterId cluster,
-            Address_Mode addressingMode, ZigBeeAddress64 ieeeDst, byte epDst)
+        public ZDO_BIND_REQ(ZToolAddress16 nwkDst, ZToolAddress64 ieeeSrc, byte epSrc, DoubleByte cluster,
+            Address_Mode addressingMode, ZToolAddress64 ieeeDst, byte epDst)
         {
 
             byte[] framedata;
@@ -67,21 +68,19 @@ namespace ZigBeeNet.CC.Packet.ZDO
             {
                 framedata = new byte[16];
             }
-            framedata[0] = nwkDst.DoubleByte.Lsb;
-            framedata[1] = nwkDst.DoubleByte.Msb;
-            byte[] bytes = ieeeSrc.ToByteArray();
+            framedata[0] = nwkDst.Lsb;
+            framedata[1] = nwkDst.Msb;
+            byte[] bytes = ieeeSrc.Address;
             for (int i = 0; i < 8; i++)
             {
                 framedata[i + 2] = (byte)(bytes[7 - i] & 0xFF);
             }
             framedata[10] = epSrc;
 
-            DoubleByte clusterByte = new DoubleByte((ushort)cluster);
-
-            framedata[11] = clusterByte.Lsb;
-            framedata[12] = clusterByte.Msb;
+            framedata[11] = cluster.Lsb;
+            framedata[12] = cluster.Msb;
             framedata[13] = (byte)addressingMode;
-            bytes = ieeeDst.ToByteArray();
+            bytes = ieeeDst.Address;
             if (addressingMode == Address_Mode.ADDRESS_64_BIT)
             {
                 for (int i = 0; i < 8; i++)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.SimpleAPI
 {
@@ -23,7 +24,7 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
         /// - ZB_BROADCAST_ADDR sends the data to all devices in the network.
         /// - ZB_BINDING_ADDR sends the data to a previously bound device. 
         /// </summary>
-        public ZigBeeAddress16 Destination { get; private set; }
+        public ZToolAddress16 Destination { get; private set; }
 
         /// <summary>
         /// A handle used to Identify the send data request. 
@@ -55,7 +56,7 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
             PayloadValue = new byte[0xff];
         }
 
-        public ZB_SEND_DATA_REQUEST(ZigBeeAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] payload)
+        public ZB_SEND_DATA_REQUEST(ZToolAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] payload)
         {
             // TODO: check buffer length
             Destination = destination;
@@ -67,8 +68,8 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
             PayloadValue = payload;
 
             byte[] framedata = new byte[PayloadValue.Length + 8];
-            framedata[0] = Destination.DoubleByte.Lsb;
-            framedata[1] = Destination.DoubleByte.Msb;
+            framedata[0] = Destination.Lsb;
+            framedata[1] = Destination.Msb;
             framedata[2] = CommandId.Lsb;
             framedata[3] = CommandId.Msb;
             framedata[4] = (byte)Handle;

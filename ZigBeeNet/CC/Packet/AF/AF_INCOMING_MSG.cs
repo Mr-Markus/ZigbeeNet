@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.AF
 {
@@ -22,7 +23,7 @@ namespace ZigBeeNet.CC.Packet.AF
         /// <summary>
         /// Specifies the ZigBee network address of the source device sending the message
         /// </summary>
-        public ZigBeeAddress16 SrcAddr { get; private set; }
+        public ZToolAddress16 SrcAddr { get; private set; }
 
         /// <summary>
         /// Specifies the source endpoint of the message 
@@ -74,7 +75,7 @@ namespace ZigBeeNet.CC.Packet.AF
         {
             GroupId = new DoubleByte(framedata[1], framedata[0]);
             ClusterId = new DoubleByte(framedata[3], framedata[2]);
-            SrcAddr = new ZigBeeAddress16(framedata[5], framedata[4]);
+            SrcAddr = new ZToolAddress16(framedata[5], framedata[4]);
             SrcEndpoint = framedata[6];
             DstEndpoint = framedata[7];
             WasBroadcast = framedata[8];

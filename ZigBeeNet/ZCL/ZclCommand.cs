@@ -18,7 +18,7 @@ namespace ZigBeeNet.ZCL
         /**
          * The command ID
          */
-        public int CommandId { get; set; }
+        public byte CommandId { get; set; }
 
         /**
          * The command direction for this command.

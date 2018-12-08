@@ -105,7 +105,7 @@ namespace ZigBeeNet.Serialization
                     value[0] = (byte)((byte)payload[index++] & 0xFF);
                     break;
                 case DataType.EXTENDED_PANID:
-                    int[] panId = new int[8];
+                    byte[] panId = new byte[8];
                     for (int iCnt = 7; iCnt >= 0; iCnt--)
                     {
                         panId[iCnt] = payload[index + iCnt];
@@ -114,7 +114,7 @@ namespace ZigBeeNet.Serialization
                     value[0] = new ExtendedPanId(panId);
                     break;
                 case DataType.IEEE_ADDRESS:
-                    int[] address = new int[8];
+                    byte[] address = new byte[8];
                     for (int iCnt = 7; iCnt >= 0; iCnt--)
                     {
                         address[iCnt] = payload[index + iCnt];

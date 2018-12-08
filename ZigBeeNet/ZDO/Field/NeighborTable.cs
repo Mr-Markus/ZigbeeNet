@@ -221,7 +221,7 @@ namespace ZigBeeNet.ZDO.Field
                     return false;
                 }
             }
-            else if (!ExtendedPanId.equals(other.ExtendedPanId))
+            else if (!ExtendedPanId.Equals(other.ExtendedPanId))
             {
                 return false;
             }

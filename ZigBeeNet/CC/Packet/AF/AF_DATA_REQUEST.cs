@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using ZigBeeNet.CC.Extensions;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.AF
 {
@@ -39,7 +40,7 @@ namespace ZigBeeNet.CC.Packet.AF
         /// The individual device address or group
         /// address of the entity to which the ASDU is being transferred
         /// </summary>
-        public ZigBeeAddress16 DstAddr { get; private set; }
+        public ZToolAddress16 DstAddr { get; private set; }
 
         /// <summary>
         /// Length of the data.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.CC.Util;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -9,14 +10,14 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /// <summary>
         /// Source address of the message
         /// </summary>
-        public ZigBeeAddress16 SrcAddr { get; private set; }
+        public ZToolAddress16 SrcAddr { get; private set; }
 
         public PacketStatus Status { get; private set; }
 
 
         public ZDO_MGMT_PERMIT_JOIN_RSP(byte[] data)
         {
-            SrcAddr = new ZigBeeAddress16(data[1], data[0]);
+            SrcAddr = new ZToolAddress16(data[1], data[0]);
             Status = (PacketStatus)data[2];
 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_MGMT_PERMIT_JOIN_RSP), data);

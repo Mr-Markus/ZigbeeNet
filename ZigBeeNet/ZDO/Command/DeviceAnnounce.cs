@@ -24,7 +24,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * NWKAddrOfInterest command message field.
         */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
         * IEEEAddr command message field.
@@ -57,7 +57,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
             IeeeAddr = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
             Capability = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_8_BIT));
         }

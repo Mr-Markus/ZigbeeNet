@@ -18,9 +18,9 @@ namespace ZigBeeNet.ZCL.Clusters.General
          */
         public ReportAttributesCommand()
         {
-            IsGenericCommand = true;
+            GenericCommand = true;
             CommandId = 10;
-            Direction = ZclCommandDirection.CLIENT_TO_SERVER;
+            CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
 

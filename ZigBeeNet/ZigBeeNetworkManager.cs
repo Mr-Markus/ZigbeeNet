@@ -638,10 +638,10 @@ namespace ZigBeeNet
                 // Create the cluster library header
                 ZclHeader zclHeader = new ZclHeader
                 {
-                    FrameType = zclCommand.IsGenericCommand ? ZclFrameType.ENTIRE_PROFILE_COMMAND : ZclFrameType.CLUSTER_SPECIFIC_COMMAND,
+                    FrameType = zclCommand.GenericCommand ? ZclFrameType.ENTIRE_PROFILE_COMMAND : ZclFrameType.CLUSTER_SPECIFIC_COMMAND,
                     CommandId = zclCommand.CommandId,
                     SequenceNumber = command.TransactionId.Value,
-                    Direction = zclCommand.Direction
+                    Direction = zclCommand.CommandDirection
                 };
 
                 command.Serialize(fieldSerializer);
@@ -762,12 +762,11 @@ namespace ZigBeeNet
             ZclCommandType commandType = null;
             if (zclHeader.FrameType == ZclFrameType.ENTIRE_PROFILE_COMMAND)
             {
-                commandType = ZclCommandType.getGeneric(zclHeader.CommandId);
+                commandType = ZclCommandType.GetGeneric(zclHeader.CommandId);
             }
             else
             {
-                commandType = ZclCommandType.getCommandType(apsFrame.Cluster, zclHeader.CommandId,
-                        zclHeader.Direction);
+                commandType = ZclCommandType.GetCommandType(apsFrame.Cluster, zclHeader.CommandId, zclHeader.Direction);
             }
 
             if (commandType == null)
@@ -777,7 +776,7 @@ namespace ZigBeeNet
                 return null;
             }
 
-            ZclCommand command = commandType.instantiateCommand();
+            ZclCommand command = commandType.GetCommand();
             if (command == null)
             {
                 _logger.Debug("No command found for {}, cluster={}, command={}", zclHeader.FrameType,
@@ -785,7 +784,7 @@ namespace ZigBeeNet
                 return null;
             }
 
-            command.Direction = zclHeader.Direction;
+            command.CommandDirection = zclHeader.Direction;
             command.Deserialize(fieldDeserializer);
             command.ClusterId = apsFrame.Cluster;
             command.TransactionId = zclHeader.SequenceNumber;
@@ -982,7 +981,7 @@ namespace ZigBeeNet
         public async Task<CommandResult> Send(IZigBeeAddress destination, ZclCommand command)
         {
             command.DestinationAddress = destination;
-            if (destination.IsGroup())
+            if (destination.IsGroup)
             {
                 return await Broadcast(command);
             }
