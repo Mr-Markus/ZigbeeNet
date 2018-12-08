@@ -25,7 +25,7 @@ namespace ZigBeeNet.ZCL
          * @param data the input data
          * @return the normalised output data
          */
-        protected object NormalizeZclData(ZclDataType zclDataType, object data)
+        public object NormalizeZclData(ZclDataType zclDataType, object data)
         {
             switch (zclDataType.DataType)
             {

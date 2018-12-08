@@ -121,6 +121,10 @@ namespace ZigBeeNet
             return Response;
         }
 
+        public TCommand GetResponse<TCommand>() where TCommand : ZigBeeCommand
+        {
+            return (TCommand)Response;
+        }
 
         public override string ToString()
         {

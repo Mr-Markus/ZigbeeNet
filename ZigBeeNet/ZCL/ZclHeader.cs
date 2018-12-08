@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL
 {
@@ -101,7 +102,7 @@ namespace ZigBeeNet.ZCL
                     break;
             }
 
-            frameControl |= Direction == ZclCommandDirection.ServerToClient ? MASK_DIRECTION : (byte)0b00000000;
+            frameControl |= Direction == ZclCommandDirection.SERVER_TO_CLIENT ? MASK_DIRECTION : (byte)0b00000000;
             frameControl |= DisableDefaultResponse ? MASK_DEFAULT_RESPONSE : (byte)0b00000000;
 
             byte[] zclFrame = new byte[payload.Length + 3];

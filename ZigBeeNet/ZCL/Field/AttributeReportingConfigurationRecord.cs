@@ -62,15 +62,15 @@ namespace ZigBeeNet.ZCL.Field
          * record is sent to a cluster client (or server) to configure how it should expect
          * reports from a server (or client) of the same cluster.
          */
-        public int Direction { get; private set; }
+        public int Direction { get; set; }
         /**
          * The attribute identifier.
          */
-        public int AttributeIdentifier { get; private set; }
+        public int AttributeIdentifier { get; set; }
         /**
          * The attribute data type.
          */
-        public ZclDataType AttributeDataType { get; private set; }
+        public ZclDataType AttributeDataType { get; set; }
         /**
          * The minimum reporting interval.
          * <p>
@@ -80,7 +80,7 @@ namespace ZigBeeNet.ZCL.Field
          * imposed by the specification of the cluster using this reporting mechanism or by
          * the applicable profile.
          */
-        public int MinimumReportingInterval { get; private set; }
+        public int MinimumReportingInterval { get; set; }
         /**
          * The maximum reporting interval.
          * <p>
@@ -90,7 +90,7 @@ namespace ZigBeeNet.ZCL.Field
          * attribute, and the configuration information for that attribute need not be
          * maintained.
          */
-        public int MaximumReportingInterval { get; private set; }
+        public int MaximumReportingInterval { get; set; }
         /**
          * The reportable change.
          * <p>
@@ -99,7 +99,7 @@ namespace ZigBeeNet.ZCL.Field
          * with 'analog' data type the field has the same data type as the attribute. The sign (if any) of the reportable
          * change field is ignored.
          */
-        public object ReportableChange { get; private set; }
+        public object ReportableChange { get; set; }
         /**
          * The maximum reporting interval.
          * <p>
@@ -113,7 +113,7 @@ namespace ZigBeeNet.ZCL.Field
          * server) cluster must be set somewhat higher than the maximum reporting interval
          * set for the attribute on the server (or client) cluster.
          */
-        public int TimeoutPeriod { get; private set; }
+        public int TimeoutPeriod { get; set; }
 
         public void Serialize(IZigBeeSerializer serializer)
         {

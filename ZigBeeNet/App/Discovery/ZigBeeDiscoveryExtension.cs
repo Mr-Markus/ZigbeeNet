@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using ZigBeeNet;
 using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
@@ -35,8 +37,10 @@ namespace ZigBeeNet.App.Discovery
          */
         private int _updatePeriod;
 
-        private ScheduledFuture<?> futureTask = null;
+        private Task _futureTask = null;
 
+        private CancellationTokenSource _cancellationTokenSource;
+        
         private ZigBeeNetworkManager _networkManager;
 
         private bool extensionStarted = false;
@@ -78,9 +82,9 @@ namespace ZigBeeNet.App.Discovery
 
             extensionStarted = false;
 
-            if (futureTask != null)
+            if (_futureTask != null)
             {
-                futureTask.cancel(true);
+                _cancellationTokenSource.Cancel();
             }
             _logger.Debug("DISCOVERY Extension: Shutdown");
         }
@@ -194,10 +198,10 @@ namespace ZigBeeNet.App.Discovery
 
         private void stopScheduler()
         {
-            if (futureTask != null)
+            if (_futureTask != null)
             {
-                futureTask.cancel(true);
-                futureTask = null;
+                _cancellationTokenSource.Cancel();
+                _futureTask = null;
             }
         }
 
@@ -205,7 +209,9 @@ namespace ZigBeeNet.App.Discovery
         {
             stopScheduler();
 
-            futureTask.Run(() =>
+            _cancellationTokenSource = new CancellationTokenSource();
+            
+            _futureTask = Task.Run(() =>
             {
                 _logger.Debug("DISCOVERY Extension: Starting mesh update");
                 foreach (ZigBeeNodeServiceDiscoverer node in nodeDiscovery.Values)
@@ -213,7 +219,7 @@ namespace ZigBeeNet.App.Discovery
                     _logger.Debug("DISCOVERY Extension: Starting mesh update for {}", node.Node.IeeeAddress);
                     node.UpdateMesh();
                 }
-            });
+            }, _cancellationTokenSource.Token);
         }
 
         public List<ZigBeeNodeServiceDiscoverer> GetNodeDiscoverers()

@@ -17,7 +17,7 @@ namespace ZigBeeNet.ZCL
          * identifier of the attribute that the reporting configuration details
          * apply to.
          */
-        public int Id { get; private set; }
+        public ushort Id { get; private set; }
 
         /**
          * Stores the name of this attribute;
@@ -108,7 +108,7 @@ namespace ZigBeeNet.ZCL
         /**
          * Constructor used to set the static information
          */
-        public ZclAttribute(ZclClusterType cluster, int id, string name, ZclDataType dataType,
+        public ZclAttribute(ZclClusterType cluster, ushort id, string name, ZclDataType dataType,
                 bool mandatory, bool readable, bool writeable, bool reportable)
         {
             this.cluster = cluster;

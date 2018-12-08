@@ -651,7 +651,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (simpleDescriptorResponse.Status == ZdoStatus.SUCCESS)
             {
-                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(NetworkManager, Node, endpointId);
+                ZigBeeEndpoint endpoint = new ZigBeeEndpoint(Node, endpointId);
                 SimpleDescriptor simpleDescriptor = simpleDescriptorResponse.SimpleDescriptor;
 
                 endpoint.ProfileId = simpleDescriptor.ProfileId;

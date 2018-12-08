@@ -15,12 +15,12 @@ namespace ZigBeeNet.ZCL.Field
      * whether reports of the attribute are received (0x01).
      *
      */
-    public int Direction { get; private set; }
+    public int Direction { get; set; }
 
     /**
      * The attribute identifier.
      */
-    public int AttributeIdentifier { get; private set; }
+    public int AttributeIdentifier { get; set; }
 
 
     public void Serialize(IZigBeeSerializer serializer)

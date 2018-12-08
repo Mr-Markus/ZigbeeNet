@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>ZigBeeNet</RootNamespace>
     <AssemblyName>ZigBeeNet</AssemblyName>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <Import Project="..\ZigbeeNet\ZigbeeNet.projitems" Label="Shared" />

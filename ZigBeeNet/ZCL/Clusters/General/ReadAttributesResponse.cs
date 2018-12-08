@@ -18,9 +18,9 @@ namespace ZigBeeNet.ZCL.Clusters.General
          */
         public ReadAttributesResponse()
         {
-            IsGenericCommand = true;
+            GenericCommand = true;
             CommandId = 1;
-            Direction = ZclCommandDirection.CLIENT_TO_SERVER;
+            CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
 

@@ -9,16 +9,16 @@ namespace ZigBeeNet.DAO
     {
         public string Label { get; set; }
 
-        public int ClusterId { get; set; }
+        public ushort ClusterId { get; set; }
 
         public bool IsClient { get; set; }
 
-        public Dictionary<int, ZclAttribute> Attributes { get; set; }
+        public Dictionary<ushort, ZclAttribute> Attributes { get; set; }
 
-        public List<int> SupportedCommandsReceived { get; set; }
+        public List<byte> SupportedCommandsReceived { get; set; }
 
-        public List<int> SupportedCommandsGenerated { get; set; }
+        public List<byte> SupportedCommandsGenerated { get; set; }
 
-        public List<int> SupportedAttributes { get; set; }
+        public List<ushort> SupportedAttributes { get; set; }
     }
 }

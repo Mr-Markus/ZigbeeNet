@@ -22,9 +22,9 @@ namespace ZigBeeNet.ZCL.Clusters.General
      */
     public DefaultResponse()
     {
-        IsGenericCommand = true;
+        GenericCommand = true;
         CommandId = 11;
-        Direction = ZclCommandDirection.CLIENT_TO_SERVER;
+        CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
     }
 
 

@@ -11,7 +11,7 @@ namespace ZigBeeNet.ZCL.Field
     /**
      * The attribute identifier.
      */
-    public int AttributeIdentifier { get; private set; }
+    public ushort AttributeIdentifier { get; private set; }
     /**
      * The attribute data type.
      */
@@ -32,7 +32,7 @@ namespace ZigBeeNet.ZCL.Field
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        AttributeIdentifier = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         AttributeDataType = ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER);
         AttributeValue = deserializer.ReadZigBeeType(AttributeDataType);
     }
