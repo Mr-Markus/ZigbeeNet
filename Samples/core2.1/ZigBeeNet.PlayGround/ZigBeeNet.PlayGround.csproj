@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZigbeeNet.core2.1\ZigbeeNet.core2.1.csproj" />
+    <ProjectReference Include="..\..\..\ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj" />
   </ItemGroup>
 
 </Project>
