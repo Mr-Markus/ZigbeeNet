@@ -166,7 +166,7 @@ namespace ZigBeeNet.CC.Network
             SetState(DriverStatus.HARDWARE_OPEN);
             if (!DongleReset())
             {
-                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {}.",
+                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {MagicByte}.",
                         string.Format("0x%02x", BOOTLOADER_MAGIC_BYTE));
                 if (!bootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
                 {
@@ -186,7 +186,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _logger.Debug("CC2531 version is {version}", version);
+                _logger.Debug("CC2531 version is {Version}", version);
             }
 
             return version;
@@ -201,13 +201,13 @@ namespace ZigBeeNet.CC.Network
             }
             if (_state == DriverStatus.NETWORK_READY)
             {
-                _logger.Trace("Closing NETWORK");
+                _logger.Debug("Closing NETWORK");
                 SetState(DriverStatus.HARDWARE_READY);
             }
             if (_state == DriverStatus.HARDWARE_OPEN || _state == DriverStatus.HARDWARE_READY
                     || _state == DriverStatus.NETWORK_INITIALIZING)
             {
-                _logger.Trace("Closing HARDWARE");
+                _logger.Debug("Closing HARDWARE");
                 _commandInterface.Close();
                 SetState(DriverStatus.CREATED);
             }
@@ -412,7 +412,6 @@ namespace ZigBeeNet.CC.Network
             lock (typeof(NetworkManager))
             {
                 _state = value;
-                Monitor.PulseAll(this);
             }
 
             if (_state == DriverStatus.HARDWARE_READY)
@@ -629,7 +628,7 @@ namespace ZigBeeNet.CC.Network
             {
                 requestor = _conversation3Way[clz];
                 _conversation3Way[clz] = null;
-                Monitor.Pulse(_conversation3Way);
+                //Monitor.Pulse(_conversation3Way);
             }
             if (requestor == null)
             {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Serilog;
 using ZigBeeNet;
+using ZigBeeNet.CC;
+using ZigBeeNet.Serial;
+using ZigBeeNet.Transport;
 
 namespace BasicSample
 {
@@ -21,7 +24,14 @@ namespace BasicSample
                 .CreateLogger();
             try
             {
-                
+                ZigBeeSerialPort port = new ZigBeeSerialPort("COM4");
+
+                IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(port);
+
+                ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
+
+                // Initialise the network
+                networkManager.Initialize();
             }
             catch (Exception ex)
             {

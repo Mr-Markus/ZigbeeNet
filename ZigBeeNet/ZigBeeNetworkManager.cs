@@ -205,6 +205,9 @@ namespace ZigBeeNet
          */
         public ZigBeeNetworkManager(IZigBeeTransportTransmit transport)
         {
+            List<IZigBeeNetworkStateListener> stateListeners = new List<IZigBeeNetworkStateListener>();
+            _stateListeners = new List<IZigBeeNetworkStateListener>(stateListeners).AsReadOnly();
+            
             Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> transitions = new Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>>();
 
             //transitions.put(null, new HashSet<>(Arrays.asList(ZigBeeTransportState.UNINITIALISED)));

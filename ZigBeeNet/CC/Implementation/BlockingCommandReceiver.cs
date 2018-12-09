@@ -83,7 +83,7 @@ namespace ZigBeeNet.CC.Implementation
         {
             lock (typeof(BlockingCommandReceiver)) {
                 _commandInterface.RemoveAsynchronousCommandListener(this);
-                Monitor.Pulse(this);
+                //Monitor.Pulse(this);
             }
         }
 

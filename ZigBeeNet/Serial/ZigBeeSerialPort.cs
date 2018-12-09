@@ -57,6 +57,8 @@ namespace ZigBeeNet.Serial
             Baudrate = baudrate;
 
             _serialPort = new SerialPort(portName, baudrate);
+
+            _cancellationToken = new CancellationTokenSource();
         }
 
         public void Close()
@@ -90,16 +92,11 @@ namespace ZigBeeNet.Serial
 
         public bool Open(int baudrate)
         {
-            if (_serialPort != null)
-            {
-                throw new InvalidOperationException("SerialPort already open");
-            }
-
             Baudrate = baudrate;
 
             bool success = false;
 
-            _logger.Debug("Opening port {} at {} baud.", PortName, baudrate);
+            _logger.Debug("Opening port {Port} at {Baudrate} baud.", PortName, baudrate);
 
             _serialPort = new SerialPort(PortName, baudrate);
 
@@ -120,7 +117,7 @@ namespace ZigBeeNet.Serial
             }
             catch (Exception ex)
             {
-                _logger.Debug("{} - Error opening port {}\n{}", ex.GetType().Name, PortName, ex.Message);
+                _logger.Debug("{Exception} - Error opening port {Port}\n{Port}", ex.GetType().Name, PortName, ex.Message);
             }
 
             if (_serialPort.IsOpen)
@@ -198,7 +195,7 @@ namespace ZigBeeNet.Serial
                 {
                     _serialPort.Write(value, 0, value.Length);
 
-                    _logger.Debug(BitConverter.ToString(value));
+                    _logger.Debug("Write data to serialport: {Data}", BitConverter.ToString(value));
                 }
                 catch (Exception e)
                 {

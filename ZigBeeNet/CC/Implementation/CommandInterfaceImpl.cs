@@ -150,7 +150,7 @@ namespace ZigBeeNet.CC.Implementation
          */
         public void SendPacket(ZToolPacket packet)
         {
-            _logger.Debug("->  {} ({}) ", packet.GetType().Name, packet);
+            _logger.Debug("->  {Type} ({Packet}) ", packet.GetType().Name, packet);
             byte[] pck = packet.Packet;
             SendRaw(pck);
         }
@@ -380,7 +380,7 @@ namespace ZigBeeNet.CC.Implementation
                 listeners = _asynchrounsCommandListeners.ToArray();
             }
 
-            _logger.Debug("Received Async Cmd: {}", packet);
+            _logger.Debug("Received Async Cmd: {Packet}", packet);
 
             foreach (IAsynchronousCommandListener listener in listeners)
             {
