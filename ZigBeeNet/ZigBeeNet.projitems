@@ -85,6 +85,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\DefaultSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serialization\IZigBeeSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Serial\ZigBeeSerialPort.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transaction\IZigBeeTransactionMatcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transaction\ZigBeeTransaction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\FlowControl.cs" />

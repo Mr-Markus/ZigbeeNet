@@ -305,9 +305,9 @@ namespace ZigBeeNet.CC.Packet
         public byte Read()
         {
 
-            byte b = _port.Read();
+            byte? b = _port.Read();
 
-            if (b == -1)
+            if (b == null)
             {
                 throw new ZToolParseException("Read -1 from input stream while reading packet!");
             }
@@ -316,7 +316,7 @@ namespace ZigBeeNet.CC.Packet
 
             // when verifying checksum you must add the checksum that we are verifying
             // when computing checksum, do not include start byte; when verifying, include checksum
-            Checksum.AddByte(b);
+            Checksum.AddByte(b.Value);
             // log.debug("Read byte " + ByteUtils.formatByte(b) + " at position " + bytesRead + ", data length is " +
             // this.length.getLength() + ", #escapeBytes is " + escapeBytes + ", remaining bytes is " +
             // this.getRemainingBytes());
@@ -333,7 +333,7 @@ namespace ZigBeeNet.CC.Packet
                  */
             }
 
-            return b;
+            return b.Value;
         }
 
         // TODO remove it seems useless, we can replace with a reading of all the bytes of the payload

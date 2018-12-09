@@ -285,10 +285,7 @@ namespace ZigBeeNet.CC.Implementation
         {
             lock (_port)
             {
-                for (int i = 0; i < packet.Length; i++)
-                {
-                    _port.Write(packet[i]);
-                }
+                _port.Write(packet);
             }
         }
 
@@ -314,10 +311,11 @@ namespace ZigBeeNet.CC.Implementation
                 {
                     // Notify asynchronous command listeners of unclaimed asynchronous command responses.
                     IAsynchronousCommandListener[] listeners;
-                    lock(_asynchrounsCommandListeners) {
+                    lock (_asynchrounsCommandListeners)
+                    {
                         listeners = _asynchrounsCommandListeners.ToArray();
                     }
-                foreach (IAsynchronousCommandListener asynchronousCommandListener in listeners)
+                    foreach (IAsynchronousCommandListener asynchronousCommandListener in listeners)
                     {
                         try
                         {
@@ -343,7 +341,7 @@ namespace ZigBeeNet.CC.Implementation
         {
             lock (_asynchrounsCommandListeners)
             {
-                if(_asynchrounsCommandListeners.Contains(listener) == false)
+                if (_asynchrounsCommandListeners.Contains(listener) == false)
                 {
                     _asynchrounsCommandListeners.Add(listener);
                     return true;

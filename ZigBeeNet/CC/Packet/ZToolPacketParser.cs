@@ -61,7 +61,7 @@ namespace ZigBeeNet.CC.Packet
             {
                 try
                 {
-                    byte val = _port.Read();
+                    byte? val = _port.Read();
                     if (val == ZToolPacket.START_BYTE)
                     {
                         // inputStream.mark(256);
@@ -78,7 +78,7 @@ namespace ZigBeeNet.CC.Packet
 
                         _packetHandler.HandlePacket(response);
                     }
-                    else if (val != -1)
+                    else if (val != null)
                     {
                         // Log if not end of stream.
                         _logger.Debug("Discarded stream: expected start byte but received {}", val);

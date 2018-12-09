@@ -666,21 +666,6 @@ namespace ZigBeeNet.App.Discovery
             return null;
         }
 
-
-
-
-        //    private class NodeServiceDiscoveryTask implements Runnable
-        //{
-        //        private int retryCnt = 0;
-        //private int retryMin = 0;
-
-        //@Override
-        //        public void run()
-        //{
-
-        //}
-        //    }
-
         /**
          * Starts service discovery for the node.
          */
