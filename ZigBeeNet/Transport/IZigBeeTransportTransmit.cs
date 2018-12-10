@@ -60,7 +60,7 @@ namespace ZigBeeNet.Transport
         /// <summary>
         /// Gets the ZigBee PAN ID currently in use by the transport
         /// </summary>
-        ZToolAddress16 PanID { get; }
+        ushort PanID { get; }
 
         /// <summary>
         /// Gets the ZigBee Extended PAN ID currently in use by the transport

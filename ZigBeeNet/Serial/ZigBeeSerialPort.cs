@@ -222,7 +222,15 @@ namespace ZigBeeNet.Serial
 
                         lock(_bufferSynchronisationObject)
                         {
-                            Array.Copy(message, _buffer, message.Length);
+                            //Array.Copy(message, _buffer, message.Length);
+                            foreach (byte recv in message)
+                            {
+                                _buffer[_end++] = recv;
+                                if (_end >= _maxLength)
+                                {
+                                    _end = 0;
+                                }
+                            }
                         }
                     }
                 }

@@ -80,6 +80,9 @@ namespace ZigBeeNet.Security
             {
                 throw new ArgumentException("NetworkKey array length must be 16 hex bytes");
             }
+
+            Key = new byte[key.Length];
+
             Array.Copy(key, Key, 16);
         }
       

@@ -15,13 +15,10 @@ namespace ZigBeeNet.CC.Packet.SimpleAPI
         /// </summary>
         public ZToolAddress16 Source { get; private set; }
 
-        public ZB_ALLOW_BIND_CONFIRM(ZToolAddress16 source)
+        public ZB_ALLOW_BIND_CONFIRM(byte[] framedata)
         {
-            Source = source;
+            Source = new ZToolAddress16(framedata[1], framedata[0]);
 
-            byte[] framedata = new byte[2];
-            framedata[0] = Source.Lsb;
-            framedata[1] = Source.Msb;
 
             BuildPacket(new DoubleByte(ZToolCMD.ZB_ALLOW_BIND_CONFIRM), framedata);
         }
