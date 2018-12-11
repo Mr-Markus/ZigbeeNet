@@ -145,7 +145,7 @@ namespace ZigBeeNet
 
             for (int cnt = 7; cnt >= 0; cnt--)
             {
-                builder.Append(string.Format("{0}2X", PanId[cnt]));
+                builder.Append(PanId[cnt].ToString("X2"));
             }
 
             return builder.ToString();
