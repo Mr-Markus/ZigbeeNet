@@ -68,14 +68,15 @@ namespace ZigBeeNet.Transaction
 
                 _networkManager.AddCommandListener(this);
 
-                int transactionId = _networkManager.SendCommand(_command);
+                int transactionId = _networkManager.SendCommand(command);
 
-                if (_command is ZclCommand cmd)
+                if (command is ZclCommand cmd)
                 {
                     cmd.TransactionId = (byte)transactionId;
+                    return new CommandResult(cmd);
                 }
 
-                return new CommandResult(_command);
+                return new CommandResult(command);
             });
         }
 

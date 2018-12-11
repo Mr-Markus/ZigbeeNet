@@ -320,7 +320,7 @@ namespace ZigBeeNet.CC.Implementation
                         }
                         catch (Exception e)
                         {
-                            _logger.Error("Error in incoming asynchronous message processing: ", e);
+                            _logger.Error("Error in incoming asynchronous message processing: {Error}", e);
                         }
                     }
                 }
@@ -387,7 +387,7 @@ namespace ZigBeeNet.CC.Implementation
                 }
                 catch (Exception e)
                 {
-                    _logger.Error("Error in incoming asynchronous message processing: ", e);
+                    _logger.Error("Error in incoming asynchronous message processing: {Error}", e);
                 }
             }
         }

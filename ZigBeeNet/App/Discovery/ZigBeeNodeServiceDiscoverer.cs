@@ -132,6 +132,8 @@ namespace ZigBeeNet.App.Discovery
             this.Node = node;
 
             _retryPeriod = DEFAULT_RETRY_PERIOD + new Random().Next(RETRY_RANDOM_TIME);
+
+            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         /**
@@ -163,7 +165,7 @@ namespace ZigBeeNet.App.Discovery
                 // Make sure there are still tasks to perform
                 if (newTasks.Count == 0)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: has no tasks to perform", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: has no tasks to perform", Node.IeeeAddress);
                     return;
                 }
 
@@ -180,7 +182,7 @@ namespace ZigBeeNet.App.Discovery
 
                 if (!startWorker)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: already scheduled or running", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: already scheduled or running", Node.IeeeAddress);
                 }
                 else
                 {
@@ -188,11 +190,11 @@ namespace ZigBeeNet.App.Discovery
                 }
             }
 
-            _logger.Debug("{}: Node SVC Discovery: scheduled {}", Node.IeeeAddress, DiscoveryTasks);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: scheduled {Task}", Node.IeeeAddress, DiscoveryTasks);
 
             var nodeDiscoveryTask = GetNodeServiceDiscoveryTask();
 
-            NetworkManager.ScheduleTask(nodeDiscoveryTask, new Random().Next(_retryPeriod));
+            //NetworkManager.ScheduleTask(nodeDiscoveryTask, new Random().Next(_retryPeriod));
         }
 
         private async Task Discovery(CancellationToken ct)
@@ -202,7 +204,7 @@ namespace ZigBeeNet.App.Discovery
 
             try
             {
-                _logger.Debug("{}: Node SVC Discovery: running", Node.IeeeAddress);
+                _logger.Debug("{IeeeAddress}: Node SVC Discovery: running", Node.IeeeAddress);
                 NodeDiscoveryTask? discoveryTask = null;
 
                 lock (DiscoveryTasks)
@@ -216,7 +218,7 @@ namespace ZigBeeNet.App.Discovery
                 if (discoveryTask == null)
                 {
                     LastDiscoveryCompleted = DateTime.UtcNow;
-                    _logger.Debug("{}: Node SVC Discovery: complete", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: complete", Node.IeeeAddress);
                     NetworkManager.UpdateNode(Node);
                     return;
                 }
@@ -248,7 +250,7 @@ namespace ZigBeeNet.App.Discovery
                         success = await RequestRoutingTable();
                         break;
                     default:
-                        _logger.Debug("{}: Node SVC Discovery: unknown task: {}", Node.IeeeAddress, discoveryTask);
+                        _logger.Debug("{IeeeAddress}: Node SVC Discovery: unknown task: {Task}", Node.IeeeAddress, discoveryTask);
                         break;
                 }
 
@@ -263,13 +265,13 @@ namespace ZigBeeNet.App.Discovery
                         DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
-                    _logger.Debug("{}: Node SVC Discovery: request {} successful. Advanced to {}.", Node.IeeeAddress, discoveryTask, DiscoveryTasks.Peek());
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} successful. Advanced to {Peek}.", Node.IeeeAddress, discoveryTask, DiscoveryTasks.Peek());
 
                     retryCnt = 0;
                 }
                 else if (retryCnt > MaxBackoff)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: request {} failed after {} attempts.", Node.IeeeAddress, discoveryTask, retryCnt);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed after {Count} attempts.", Node.IeeeAddress, discoveryTask, retryCnt);
 
                     lock (DiscoveryTasks)
                     {
@@ -284,13 +286,15 @@ namespace ZigBeeNet.App.Discovery
 
                     // We failed with the last request. Wait a bit then retry.
                     retryDelay = (new Random().Next(retryCnt) + 1 + retryMin) * _retryPeriod;
-                    _logger.Debug("{}: Node SVC Discovery: request {} failed. Retry {}, wait {}ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed. Retry {}, wait {Delay}ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
                 }
 
                 // Reschedule the task
                 var tmp = _cancellationTokenSource;
                 _cancellationTokenSource = new CancellationTokenSource();
-                _ = NetworkManager.ScheduleTask(Discovery(_cancellationTokenSource.Token), retryDelay);
+                //await NetworkManager.ScheduleTask(Discovery(_cancellationTokenSource.Token), retryDelay);
+
+                await Discovery(_cancellationTokenSource.Token);
                 tmp.Cancel();
             }
             catch (TaskCanceledException)
@@ -303,7 +307,7 @@ namespace ZigBeeNet.App.Discovery
             }
             catch (Exception e)
             {
-                _logger.Error("{}: Node SVC Discovery: exception: ", Node.IeeeAddress, e);
+                _logger.Error("{IeeeAddress}: Node SVC Discovery: exception: ", Node.IeeeAddress, e);
             }
         }
 
@@ -319,7 +323,7 @@ namespace ZigBeeNet.App.Discovery
         {
             _cancellationTokenSource.Cancel();
 
-            _logger.Debug("{}: Node SVC Discovery: stopped", Node.IeeeAddress);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: stopped", Node.IeeeAddress);
         }
 
         /**
@@ -338,7 +342,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(networkAddressRequest, networkAddressRequest);
             NetworkAddressResponse networkAddressResponse = (NetworkAddressResponse)response.Response;
 
-            _logger.Debug("{}: Node SVC Discovery: NetworkAddressRequest returned {}", Node.NetworkAddress, networkAddressResponse);
+            _logger.Debug("{NetworkAddress}: Node SVC Discovery: NetworkAddressRequest returned {Response}", Node.NetworkAddress, networkAddressResponse);
 
             if (networkAddressResponse == null)
             {
@@ -362,7 +366,7 @@ namespace ZigBeeNet.App.Discovery
          */
         private async Task<bool> RequestAssociatedNodes()
         {
-            int startIndex = 0;
+            byte startIndex = 0;
             int totalAssociatedDevices = 0;
             List<ushort> associatedDevices = new List<ushort>();
 
@@ -378,13 +382,13 @@ namespace ZigBeeNet.App.Discovery
 
                 IeeeAddressResponse ieeeAddressResponse = (IeeeAddressResponse)response.Response;
 
-                _logger.Debug("{}: Node SVC Discovery: IeeeAddressResponse returned {}", Node.IeeeAddress, ieeeAddressResponse);
+                _logger.Debug("{IeeeAddress}: Node SVC Discovery: IeeeAddressResponse returned {Response}", Node.IeeeAddress, ieeeAddressResponse);
 
                 if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
                 {
                     associatedDevices.AddRange(ieeeAddressResponse.NwkAddrAssocDevList);
 
-                    startIndex += ieeeAddressResponse.NwkAddrAssocDevList.Count;
+                    startIndex += (byte)ieeeAddressResponse.NwkAddrAssocDevList.Count;
                     totalAssociatedDevices = ieeeAddressResponse.NwkAddrAssocDevList.Count;
                 }
             } while (startIndex < totalAssociatedDevices);
@@ -408,7 +412,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(nodeDescriptorRequest, nodeDescriptorRequest);
             NodeDescriptorResponse nodeDescriptorResponse = (NodeDescriptorResponse)response.Response;
 
-            _logger.Debug("{}: Node SVC Discovery: NodeDescriptorResponse returned {}", Node.IeeeAddress, nodeDescriptorResponse);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: NodeDescriptorResponse returned {Response}", Node.IeeeAddress, nodeDescriptorResponse);
 
             if (nodeDescriptorResponse == null)
             {
@@ -439,7 +443,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(powerDescriptorRequest, powerDescriptorRequest);
             PowerDescriptorResponse powerDescriptorResponse = (PowerDescriptorResponse)response.Response;
 
-            _logger.Debug("{}: Node SVC Discovery: PowerDescriptorResponse returned {}", Node.IeeeAddress, powerDescriptorResponse);
+            _logger.Debug("IeeeAddress{}: Node SVC Discovery: PowerDescriptorResponse returned {Response}", Node.IeeeAddress, powerDescriptorResponse);
 
             if (powerDescriptorResponse == null)
             {
@@ -474,7 +478,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(activeEndpointsRequest, activeEndpointsRequest);
             ActiveEndpointsResponse activeEndpointsResponse = (ActiveEndpointsResponse)response.Response;
 
-            _logger.Debug("{}: Node SVC Discovery: ActiveEndpointsResponse returned {}", Node.IeeeAddress, response);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: ActiveEndpointsResponse returned {Response}", Node.IeeeAddress, response);
 
             if (activeEndpointsResponse == null)
             {
@@ -523,7 +527,7 @@ namespace ZigBeeNet.App.Discovery
                 CommandResult response = await NetworkManager.SendTransaction(neighborRequest, neighborRequest);
                 ManagementLqiResponse neighborResponse = (ManagementLqiResponse)response.Response;
 
-                _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest response {}", Node.IeeeAddress, response);
+                _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest response {Response}", Node.IeeeAddress, response);
 
                 if (neighborResponse == null)
                 {
@@ -532,7 +536,7 @@ namespace ZigBeeNet.App.Discovery
 
                 if (neighborResponse.Status == ZdoStatus.NOT_SUPPORTED)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest not supported", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest not supported", Node.IeeeAddress);
                     _supportsManagementLqi = false;
                     return true;
                 }
@@ -558,7 +562,7 @@ namespace ZigBeeNet.App.Discovery
 
             } while (startIndex < totalNeighbors);
 
-            _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} neighbors]", Node.IeeeAddress, neighbors.Count);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} neighbors]", Node.IeeeAddress, neighbors.Count);
 
             Node.Neighbors = neighbors;
 
@@ -586,7 +590,7 @@ namespace ZigBeeNet.App.Discovery
                 CommandResult response = await NetworkManager.SendTransaction(routeRequest, routeRequest);
                 ManagementRoutingResponse routingResponse = (ManagementRoutingResponse)response.Response;
 
-                _logger.Debug("{}: Node SVC Discovery: ManagementRoutingRequest returned {}", Node.IeeeAddress, response);
+                _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementRoutingRequest returned {Response}", Node.IeeeAddress, response);
 
                 if (routingResponse == null)
                 {
@@ -595,7 +599,7 @@ namespace ZigBeeNet.App.Discovery
 
                 if (routingResponse.Status == ZdoStatus.NOT_SUPPORTED)
                 {
-                    _logger.Debug("{}: Node SVC Discovery ManagementLqiRequest not supported", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery ManagementLqiRequest not supported", Node.IeeeAddress);
 
                     _supportsManagementRouting = false;
 
@@ -603,7 +607,7 @@ namespace ZigBeeNet.App.Discovery
                 }
                 else if (routingResponse.Status != ZdoStatus.SUCCESS)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
 
                     return false;
                 }
@@ -617,7 +621,7 @@ namespace ZigBeeNet.App.Discovery
 
             } while (startIndex < totalRoutes);
 
-            _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest complete [{} routes]", Node.IeeeAddress, routes.Count);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} routes]", Node.IeeeAddress, routes.Count);
 
             Node.Routes = routes;
 
@@ -642,7 +646,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(simpleDescriptorRequest, simpleDescriptorRequest);
             SimpleDescriptorResponse simpleDescriptorResponse = (SimpleDescriptorResponse)response.Response;
 
-            _logger.Debug("{}: Node SVC Discovery: SimpleDescriptorResponse returned {}", Node.IeeeAddress, simpleDescriptorResponse);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: SimpleDescriptorResponse returned {Response}", Node.IeeeAddress, simpleDescriptorResponse);
 
             if (simpleDescriptorResponse == null)
             {
@@ -671,7 +675,7 @@ namespace ZigBeeNet.App.Discovery
          */
         public void StartDiscovery()
         {
-            _logger.Debug("{}: Node SVC Discovery: start discovery", Node.IeeeAddress);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: start discovery", Node.IeeeAddress);
 
             List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
@@ -705,7 +709,7 @@ namespace ZigBeeNet.App.Discovery
          */
         public void UpdateMesh()
         {
-            _logger.Debug("{}: Node SVC Discovery: Update mesh", Node.IeeeAddress);
+            _logger.Debug("{IeeeAddress}: Node SVC Discovery: Update mesh", Node.IeeeAddress);
 
             List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 

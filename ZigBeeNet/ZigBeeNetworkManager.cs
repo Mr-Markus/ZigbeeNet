@@ -212,6 +212,8 @@ namespace ZigBeeNet
             List<IZigBeeNetworkNodeListener> nodeListeners = new List<IZigBeeNetworkNodeListener>();
             _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(nodeListeners);
 
+            List<IZigBeeAnnounceListener> announceListeners = new List<IZigBeeAnnounceListener>();
+            _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(announceListeners);
 
             Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> transitions = new Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>>();
 

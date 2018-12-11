@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Serilog;
 using ZigBeeNet;
+using ZigBeeNet.App.Discovery;
 using ZigBeeNet.CC;
 using ZigBeeNet.Security;
 using ZigBeeNet.Serial;
@@ -38,7 +39,11 @@ namespace BasicSample
                 IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(zigbeePort);
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
-                
+
+                ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
+                discoveryExtension.setUpdatePeriod(60);
+                networkManager.AddExtension(discoveryExtension);
+
                 // Initialise the network
                 networkManager.Initialize();
 
