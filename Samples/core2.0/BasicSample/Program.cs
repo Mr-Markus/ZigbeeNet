@@ -23,6 +23,7 @@ namespace BasicSample
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .CreateLogger();
+
             try
             {
                 TransportConfig transportOptions = new TransportConfig();

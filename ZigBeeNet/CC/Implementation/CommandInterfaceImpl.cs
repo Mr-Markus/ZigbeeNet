@@ -144,9 +144,6 @@ namespace ZigBeeNet.CC.Implementation
 
         /**
          * Send packet to dongle.
-         *
-         * @param packet the packet
-         * @throws IOException if IO exception occurs while sending packet
          */
         public void SendPacket(ZToolPacket packet)
         {

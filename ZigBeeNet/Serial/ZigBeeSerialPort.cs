@@ -20,6 +20,8 @@ namespace ZigBeeNet.Serial
 
         private CancellationTokenSource _cancellationToken;
 
+       // private ManualResetEventSlim _readResetEvent;
+
         /**
         * The circular fifo queue for receive data
         */
@@ -57,30 +59,34 @@ namespace ZigBeeNet.Serial
             Baudrate = baudrate;
 
             _serialPort = new SerialPort(portName, baudrate);
-
             _cancellationToken = new CancellationTokenSource();
+            //_readResetEvent = new ManualResetEventSlim(false);
         }
 
         public void Close()
         {
-            if(_cancellationToken != null)
+            if (_cancellationToken != null)
             {
                 _cancellationToken.Cancel();
             }
-            if(_serialPort != null)
+            if (_serialPort != null)
             {
-                if(_serialPort.IsOpen)
+                if (_serialPort.IsOpen)
                 {
                     _serialPort.Close();
                 }
                 _serialPort.Dispose();
                 _serialPort = null;
             }
+
+            //_readResetEvent.Set();
+            //_readResetEvent.Dispose();
         }
 
         public bool Open()
         {
-            try { 
+            try
+            {
                 return Open(115200);
             }
             catch (Exception e)
@@ -154,24 +160,29 @@ namespace ZigBeeNet.Serial
             {
                 while (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() < endTime)
                 {
-                    lock(_bufferSynchronisationObject) {
+                    lock (_bufferSynchronisationObject)
+                    {
                         if (_start != _end)
                         {
                             byte value = _buffer[_start++];
+
                             if (_start >= _maxLength)
                             {
                                 _start = 0;
                             }
+
                             return value;
                         }
                     }
 
-                    lock(_serialPort) {
+                    lock (_serialPort)
+                    {
                         if (_serialPort == null)
                         {
                             return null;
                         }
 
+                        //_readResetEvent.Wait(TimeSpan.FromMilliseconds(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
                         //Task.Delay(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
                     }
                 }
@@ -189,7 +200,7 @@ namespace ZigBeeNet.Serial
             if (_serialPort == null)
                 return;
 
-            if(IsOpen)
+            if (IsOpen)
             {
                 try
                 {
@@ -209,18 +220,18 @@ namespace ZigBeeNet.Serial
             while (IsOpen && _cancellationToken.IsCancellationRequested == false)
             {
                 int len = 0;
-                
+
                 try
                 {
                     len = _serialPort.BytesToRead;
                     if (len > 0)
                     {
                         byte[] message = new byte[len];
-                        
-                        int readbytes = 0;
-                        while (_serialPort.Read(message, readbytes, len - readbytes) <= 0);
 
-                        lock(_bufferSynchronisationObject)
+                        int readbytes = 0;
+                        while (_serialPort.Read(message, readbytes, len - readbytes) <= 0) ;
+
+                        lock (_bufferSynchronisationObject)
                         {
                             //Array.Copy(message, _buffer, message.Length);
                             foreach (byte recv in message)
@@ -232,6 +243,11 @@ namespace ZigBeeNet.Serial
                                 }
                             }
                         }
+
+                        //lock (_serialPort)
+                        //{
+                        //    _readResetEvent.Set();
+                        //}
                     }
                 }
                 catch (Exception e)

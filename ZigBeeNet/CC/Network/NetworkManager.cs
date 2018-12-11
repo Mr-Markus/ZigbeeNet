@@ -168,8 +168,8 @@ namespace ZigBeeNet.CC.Network
             SetState(DriverStatus.HARDWARE_OPEN);
             if (!DongleReset())
             {
-                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {MagicByte}.",
-                        string.Format("0x%02x", BOOTLOADER_MAGIC_BYTE));
+                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {MagicByte}.", "0x" + BOOTLOADER_MAGIC_BYTE.ToString("X2"));
+
                 if (!bootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
                 {
                     _logger.Warn("Attempt to get out from bootloader failed.");
@@ -206,8 +206,7 @@ namespace ZigBeeNet.CC.Network
                 _logger.Debug("Closing NETWORK");
                 SetState(DriverStatus.HARDWARE_READY);
             }
-            if (_state == DriverStatus.HARDWARE_OPEN || _state == DriverStatus.HARDWARE_READY
-                    || _state == DriverStatus.NETWORK_INITIALIZING)
+            if (_state == DriverStatus.HARDWARE_OPEN || _state == DriverStatus.HARDWARE_READY || _state == DriverStatus.NETWORK_INITIALIZING)
             {
                 _logger.Debug("Closing HARDWARE");
                 _commandInterface.Close();
@@ -348,7 +347,7 @@ namespace ZigBeeNet.CC.Network
                 _logger.Trace("CHANNEL set");
             }
 
-            _logger.Debug("Setting PAN to {Pan}.", string.Format("%04X", _pan & 0x0000ffff));
+            _logger.Debug("Setting PAN to {Pan}.", (_pan & 0x0000ffff).ToString("X4"));
             if (!DongleSetPanId())
             {
                 _logger.Error("Unable to set PANID for ZigBee Network");
@@ -360,7 +359,7 @@ namespace ZigBeeNet.CC.Network
             }
             if (_extendedPanId != null)
             {
-                _logger.Debug("Setting Extended PAN ID to {}.", _extendedPanId);
+                _logger.Debug("Setting Extended PAN ID to {PanId}.", _extendedPanId);
                 if (!DongleSetExtendedPanId())
                 {
                     _logger.Error("Unable to set EXT_PANID for ZigBee Network");
@@ -384,7 +383,7 @@ namespace ZigBeeNet.CC.Network
                     _logger.Trace("NETWORK_KEY set");
                 }
             }
-            _logger.Debug("Setting Distribute Network Key to {}.", _distributeNetworkKey);
+            _logger.Debug("Setting Distribute Network Key to {Key}.", _distributeNetworkKey);
             if (!dongleSetDistributeNetworkKey())
             {
                 _logger.Error("Unable to set DISTRIBUTE_NETWORK_KEY for ZigBee Network");
@@ -394,7 +393,7 @@ namespace ZigBeeNet.CC.Network
             {
                 _logger.Trace("DISTRIBUTE_NETWORK_KEY set");
             }
-            _logger.Debug("Setting Security Mode to {}.", _securityMode);
+            _logger.Debug("Setting Security Mode to {Mode}.", _securityMode);
             if (!dongleSetSecurityMode())
             {
                 _logger.Error("Unable to set SECURITY_MODE for ZigBee Network");
@@ -597,13 +596,11 @@ namespace ZigBeeNet.CC.Network
                     if (!requestor.IsAlive)
                     {
                         _logger.Error("Thread {} whom requested {} DIED before unlocking the conversation");
-                        _logger.Debug(
-                                "The thread {} who was waiting for {} to complete DIED, so we have to remove the lock");
+                        _logger.Debug("The thread {} who was waiting for {} to complete DIED, so we have to remove the lock");
                         _conversation3Way[clz] = null;
                         break;
                     }
-                    _logger.Trace("{} is waiting for {} to complete which was issued by {} to complete",
-                            new Object[] { Thread.CurrentThread, clz, requestor });
+                    _logger.Trace("{Thread} is waiting for {Clz} to complete which was issued by {Requestor} to complete", new object[] { Thread.CurrentThread, clz, requestor });
                     try
                     {
                         _hardwareSync.Wait();
@@ -637,12 +634,11 @@ namespace ZigBeeNet.CC.Network
             }
             if (requestor == null)
             {
-                _logger.Error("LOCKING BROKEN - SOMEONE RELEASE THE LOCK WITHOUT LOCKING IN ADVANCE for {}", clz);
+                _logger.Error("LOCKING BROKEN - SOMEONE RELEASE THE LOCK WITHOUT LOCKING IN ADVANCE for {Clz}", clz);
             }
             else if (requestor != Thread.CurrentThread)
             {
-                _logger.Error("Thread {} stolen the answer of {} waited by {}",
-                        new object[] { Thread.CurrentThread, clz, requestor });
+                _logger.Error("Thread {Thread} stolen the answer of {Clz} waited by {Requestor}", new object[] { Thread.CurrentThread, clz, requestor });
             }
         }
 
@@ -668,7 +664,7 @@ namespace ZigBeeNet.CC.Network
         {
             if (!WaitForHardware())
             {
-                _logger.Info("Failed to reach the {} level: getStackVerion() failed", DriverStatus.NETWORK_READY);
+                _logger.Info("Failed to reach the {Status} level: GetStackVerion() failed", DriverStatus.NETWORK_READY);
                 return null;
             }
 
@@ -717,7 +713,7 @@ namespace ZigBeeNet.CC.Network
         {
             if ((mask & ~(STARTOPT_CLEAR_CONFIG | STARTOPT_CLEAR_STATE)) != 0)
             {
-                _logger.Warn("Invalid ZCD_NV_STARTUP_OPTION mask {}.", String.Format("%08X", mask));
+                _logger.Warn("Invalid ZCD_NV_STARTUP_OPTION mask {Mask}.", mask.ToString("X8"));
                 return false;
             }
 
@@ -727,12 +723,12 @@ namespace ZigBeeNet.CC.Network
 
             if (response == null || response.Status != 0)
             {
-                _logger.Warn("Couldn't set ZCD_NV_STARTUP_OPTION mask {}", string.Format("%08X", mask));
+                _logger.Warn("Couldn't set ZCD_NV_STARTUP_OPTION mask {Mask}", mask.ToString("X8"));
                 return false;
             }
             else
             {
-                _logger.Trace("Set ZCD_NV_STARTUP_OPTION mask {}", string.Format("%08X", mask));
+                _logger.Trace("Set ZCD_NV_STARTUP_OPTION mask {}", mask.ToString("X8"));
             }
 
             return true;
@@ -1199,7 +1195,7 @@ namespace ZigBeeNet.CC.Network
         {
             if (!WaitForHardware())
             {
-                _logger.Info("Failed to reach the {} level: getCurrentChannel() failed", DriverStatus.HARDWARE_READY);
+                _logger.Info("Failed to reach the {Mode} level: GetCurrentChannel() failed", DriverStatus.HARDWARE_READY);
                 return byte.MaxValue;
             }
 
@@ -1220,25 +1216,25 @@ namespace ZigBeeNet.CC.Network
 
             if (response == null)
             {
-                _logger.Warn("Failed GetDeviceInfo for {} due to null value", type);
+                _logger.Warn("Failed GetDeviceInfo for {Type} due to null value", type);
                 return null;
             }
             else if (response.Param != type)
             {
-                _logger.Warn("Failed GetDeviceInfo for {} non matching response returned {}", type, response.Param);
+                _logger.Warn("Failed GetDeviceInfo for {Type} non matching response returned {Param}", type, response.Param);
                 return null;
             }
             else
             {
-                _logger.Trace("GetDeviceInfo for {} done", type);
+                _logger.Trace("GetDeviceInfo for {Type} done", type);
                 return response.Value;
             }
         }
 
         public int GetZigBeeNodeMode()
         {
-            ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP)SendSynchronous(
-                    new ZB_READ_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_LOGICAL_TYPE));
+            ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP)SendSynchronous(new ZB_READ_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_LOGICAL_TYPE));
+
             if (response != null && response.Status == 0)
             {
                 return response.Value[0];
@@ -1251,8 +1247,8 @@ namespace ZigBeeNet.CC.Network
 
         public ZigBeeKey GetZigBeeNetworkKey()
         {
-            ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP)SendSynchronous(
-                    new ZB_READ_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_PRECFGKEY));
+            ZB_READ_CONFIGURATION_RSP response = (ZB_READ_CONFIGURATION_RSP)SendSynchronous(new ZB_READ_CONFIGURATION(ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_PRECFGKEY));
+
             if (response != null && response.Status == 0)
             {
                 byte[] data = new byte[16];
@@ -1323,19 +1319,19 @@ namespace ZigBeeNet.CC.Network
                         }
                     }
 
-                    if (newDevice(new AF_REGISTER(_ep[i], new DoubleByte(_prof[i]).Value, new DoubleByte(_dev[i]).Value, _ver[i], input, output)))
+                    if (NewDevice(new AF_REGISTER(_ep[i], new DoubleByte(_prof[i]).Value, new DoubleByte(_dev[i]).Value, _ver[i], input, output)))
                     {
-                        _logger.Debug("Custom device {} registered at endpoint {}", _dev[i], _ep[i]);
+                        _logger.Debug("Custom device {Dev} registered at endpoint {Ep}", _dev[i], _ep[i]);
                     }
                     else
                     {
-                        _logger.Debug("Custom device {} registration failed at endpoint {}", _dev[i], _ep[i]);
+                        _logger.Debug("Custom device {Dev} registration failed at endpoint {Ep}", _dev[i], _ep[i]);
                     }
                 }
             }
         }
 
-        private bool newDevice(AF_REGISTER request)
+        private bool NewDevice(AF_REGISTER request)
         {
             try
             {
