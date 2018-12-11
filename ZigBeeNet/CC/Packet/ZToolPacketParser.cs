@@ -68,10 +68,10 @@ namespace ZigBeeNet.CC.Packet
                         ZToolPacketStream packetStream = new ZToolPacketStream(_port);
                         ZToolPacket response = packetStream.ParsePacket();
 
-                        _logger.Trace("Response is {} -> {}", response.GetType().Name, response);
+                        _logger.Trace("Response is {Type} -> {Response}", response.GetType().Name, response);
                         if (response.Error)
                         {
-                            _logger.Debug("Received a BAD PACKET {}", response.ToString());
+                            _logger.Debug("Received a BAD PACKET {Response}", response.ToString());
                             // inputStream.reset();
                             continue;
                         }
@@ -81,7 +81,7 @@ namespace ZigBeeNet.CC.Packet
                     else if (val != null)
                     {
                         // Log if not end of stream.
-                        _logger.Debug("Discarded stream: expected start byte but received {}", val);
+                        _logger.Debug("Discarded stream: expected start byte but received {Value}", val);
                     }
                 }
                 catch (IOException e)

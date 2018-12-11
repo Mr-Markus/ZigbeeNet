@@ -40,7 +40,7 @@ namespace ZigBeeNet.CC.Implementation
          */
         private Dictionary<ushort, ISynchronousCommandListener> _synchronousCommandListeners = new Dictionary<ushort, ISynchronousCommandListener>();
 
-        private static ManualResetEvent _commandListenerSync = new ManualResetEvent(true);
+        private static ManualResetEventSlim _commandListenerSync = new ManualResetEventSlim(true);
 
         /**
          * Asynchronous command listeners.
@@ -179,7 +179,7 @@ namespace ZigBeeNet.CC.Implementation
                 {
                     _synchronousCommandListeners.Remove(key);
                 }
-                _commandListenerSync.Reset();
+                _commandListenerSync.Set();
             }
         }
 
@@ -223,7 +223,7 @@ namespace ZigBeeNet.CC.Implementation
                         try
                         {
                             _logger.Trace("Waiting for other request {} to complete", id);
-                            _commandListenerSync.WaitOne(500);
+                            _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
                         catch (Exception ignored)
@@ -243,7 +243,7 @@ namespace ZigBeeNet.CC.Implementation
                         try
                         {
                             _logger.Trace("Waiting for other request to complete");
-                            _commandListenerSync.WaitOne(500);
+                            _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
                         catch (Exception ignored)
@@ -305,7 +305,7 @@ namespace ZigBeeNet.CC.Implementation
                 {
                     listener.ReceivedCommandResponse(packet);
                     _synchronousCommandListeners.Remove(id);
-                    _commandListenerSync.Reset();
+                    _commandListenerSync.Set();
                 }
                 else
                 {

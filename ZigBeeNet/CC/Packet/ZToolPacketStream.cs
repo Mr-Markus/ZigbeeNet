@@ -284,7 +284,6 @@ namespace ZigBeeNet.CC.Packet
                 //    return new UTIL_GET_DEVICE_INFO_RESPONSE(payload);
                 default:
                     _logger.Warn("Unknown command ID: {Command}", cmd);
-                    throw new NotImplementedException();
                     return new ZToolPacket(cmd, payload);
             }
         }

@@ -76,6 +76,8 @@ namespace ZigBeeNet.CC.Network
         private bool _distributeNetworkKey = true; // distribute network key in clear (be careful)
         private int _securityMode = 1;
 
+        private static ManualResetEventSlim _hardwareSync = new ManualResetEventSlim(false);
+        
         private byte[] _ep;
         private byte[] _prof;
         private byte[] _dev;
@@ -440,7 +442,7 @@ namespace ZigBeeNet.CC.Network
                     _logger.Debug("Waiting for hardware to become ready");
                     try
                     {
-                        Monitor.Wait(this);
+                        _hardwareSync.Wait();
                     }
                     catch (Exception ignored)
                     {
@@ -465,7 +467,7 @@ namespace ZigBeeNet.CC.Network
                         long timeout = StartupTimeout - (now - before);
                         if (timeout > 0)
                         {
-                            Monitor.Wait(timeout);
+                            _hardwareSync.Wait(TimeSpan.FromMilliseconds(timeout));
                         }
                         else
                         {
@@ -604,7 +606,7 @@ namespace ZigBeeNet.CC.Network
                             new Object[] { Thread.CurrentThread, clz, requestor });
                     try
                     {
-                        Monitor.Wait(_conversation3Way);
+                        _hardwareSync.Wait();
                     }
                     catch (Exception ex)
                     {
@@ -628,6 +630,9 @@ namespace ZigBeeNet.CC.Network
             {
                 requestor = _conversation3Way[clz];
                 _conversation3Way[clz] = null;
+
+                _hardwareSync.Set();
+
                 //Monitor.Pulse(_conversation3Way);
             }
             if (requestor == null)
@@ -919,7 +924,7 @@ namespace ZigBeeNet.CC.Network
                             }
                             try
                             {
-                                Monitor.Wait(sleeping);
+                                _hardwareSync.Wait(TimeSpan.FromMilliseconds(sleeping));
                             }
                             catch (Exception ignored)
                             {
