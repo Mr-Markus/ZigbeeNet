@@ -24,9 +24,13 @@ namespace BasicSample
                 .CreateLogger();
             try
             {
-                ZigBeeSerialPort port = new ZigBeeSerialPort("COM4");
+                Console.Write("Please enter your COM Port: ");
 
-                IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(port);
+                var port = Console.ReadLine();
+
+                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort(port);
+
+                IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(zigbeePort);
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 

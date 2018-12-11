@@ -1027,7 +1027,7 @@ namespace ZigBeeNet.CC.Network
             {
                 if (_commandInterface.RemoveAsynchronousCommandListener(_afMessageListenerFilter))
                 {
-                    _logger.Trace("Removed AsynchrounsCommandListener {} to ZigBeeSerialInterface",
+                    _logger.Trace("Removed AsynchrounsCommandListener {Type} to ZigBeeSerialInterface",
                             _afMessageListenerFilter.GetType().Name);
                 }
                 else

@@ -179,7 +179,7 @@ namespace ZigBeeNet.Serial
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error while reading byte from serialport");
+                _logger.Error(e, "Error while reading byte from serial port");
             }
             return null;
         }

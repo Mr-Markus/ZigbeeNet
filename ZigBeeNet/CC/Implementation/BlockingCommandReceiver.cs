@@ -18,6 +18,10 @@ namespace ZigBeeNet.CC.Implementation
          */
         private readonly ILog _logger = LogProvider.For<BlockingCommandReceiver>();
 
+        private object _getCommandLockObject;
+
+        private static ManualResetEvent _commandSync = new ManualResetEvent(true);
+
         /**
          * The command interface.
          */
@@ -40,6 +44,8 @@ namespace ZigBeeNet.CC.Implementation
          */
         public BlockingCommandReceiver(ZToolCMD commandId, ICommandInterface commandInterface)
         {
+            _getCommandLockObject = new object();
+
             _commandId = commandId;
             _commandInterface = commandInterface;
             _logger.Trace("Waiting for asynchronous response message {}.", commandId);
@@ -54,13 +60,13 @@ namespace ZigBeeNet.CC.Implementation
          */
         public ZToolPacket GetCommand(long timeoutMillis)
         {
-            lock (typeof(BlockingCommandReceiver)) {
+            lock (_getCommandLockObject) {
                 long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeoutMillis;
                 while (_commandPacket == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
                 {
                     try
                     {
-                        Monitor.Wait(wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                        _commandSync.WaitOne(TimeSpan.FromMilliseconds(wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
                     }
                     catch (Exception e)
                     {
@@ -81,9 +87,9 @@ namespace ZigBeeNet.CC.Implementation
          */
         public void Cleanup()
         {
-            lock (typeof(BlockingCommandReceiver)) {
+            lock (_getCommandLockObject) {
                 _commandInterface.RemoveAsynchronousCommandListener(this);
-                //Monitor.Pulse(this);
+                _commandSync.Reset();
             }
         }
 
