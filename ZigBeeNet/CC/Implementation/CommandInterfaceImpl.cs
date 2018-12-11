@@ -126,18 +126,18 @@ namespace ZigBeeNet.CC.Implementation
             {
                 // Received incoming message which can be either message from dongle or remote device.
                 case 0x40:
-                    _logger.Debug("<-- {} ({})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
+                    _logger.Debug("<-- Async incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
                     NotifyAsynchronousCommand(packet);
                     break;
 
                 // Received synchronous command response.
                 case 0x60:
-                    _logger.Debug("<-  {} ({})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
+                    _logger.Debug("<-- Sync incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
                     NotifySynchronousCommand(packet);
                     break;
 
                 default:
-                    _logger.Error("Received unknown packet. {}", packet.GetType().Name);
+                    _logger.Error("Received unknown packet. {Type}", packet.GetType().Name);
                     break;
             }
         }

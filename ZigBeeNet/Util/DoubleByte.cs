@@ -61,7 +61,7 @@ namespace ZigBeeNet
             this.Lsb = lsb;
         }
 
-        public ushort Value => BitConverter.ToUInt16(new byte[2] { Msb, Lsb }, 0);
+        public ushort Value => BitConverter.ToUInt16(new byte[2] { Lsb, Msb }, 0);
 
         public override string ToString()
         {

@@ -143,29 +143,29 @@ namespace ZigBeeNet.CC.Packet
                     return new SYS_RESET_RESPONSE(payload);
                 case ZToolCMD.SYS_VERSION_RESPONSE:
                     return new SYS_VERSION_RESPONSE(payload);
-                //case CommandType.SYS_PING_RESPONSE:
+                //case ZToolCMD.SYS_PING_RESPONSE:
                 //    return new SYS_PING_RESPONSE(payload);
-                //case CommandType.SYS_RPC_ERROR:
+                //case ZToolCMD.SYS_RPC_ERROR:
                 //    return new SYS_RPC_ERROR(payload);
-                //case CommandType.SYS_TEST_LOOPBACK_SRSP:
+                //case ZToolCMD.SYS_TEST_LOOPBACK_SRSP:
                 //    return new SYS_TEST_LOOPBACK_SRSP(payload);
                 case ZToolCMD.AF_DATA_CONFIRM:
                     return new AF_DATA_CONFIRM(payload);
                 case ZToolCMD.AF_DATA_SRSP:
                     return new AF_DATA_REQUEST_SRSP(payload);
-                //case CommandType.AF_DATA_SRSP_EXT:
-                //    return new AF_DATA_SRSP_EXT(payload);
+                case ZToolCMD.AF_DATA_SRSP_EXT:
+                    return new AF_DATA_SRSP_EXT(payload);
                 case ZToolCMD.AF_INCOMING_MSG:
                     return new AF_INCOMING_MSG(payload);
                 case ZToolCMD.AF_REGISTER_SRSP:
                     return new AF_REGISTER_SRSP(payload);
-                //case CommandType.ZB_ALLOW_BIND_CONFIRM:
-                //    return new ZB_ALLOW_BIND_CONFIRM(payload);
-                //case CommandType.ZB_ALLOW_BIND_RSP:
-                //    return new ZB_ALLOW_BIND_RSP(payload);
-                //case CommandType.ZB_APP_REGISTER_RSP:
+                case ZToolCMD.ZB_ALLOW_BIND_CONFIRM:
+                    return new ZB_ALLOW_BIND_CONFIRM(payload);
+                case ZToolCMD.ZB_ALLOW_BIND_RSP:
+                    return new ZB_ALLOW_BIND_RSP(payload);
+                //case ZToolCMD.ZB_APP_REGISTER_RSP:
                 //    return new ZB_APP_REGISTER_RSP(payload);
-                //case CommandType.ZB_BIND_CONFIRM:
+                //case ZToolCMD.ZB_BIND_CONFIRM:
                 //    return new ZB_BIND_CONFIRM(payload);
                 case ZToolCMD.ZB_BIND_DEVICE_RSP:
                     return new ZB_BIND_DEVICE_RSP(payload);
@@ -203,69 +203,69 @@ namespace ZigBeeNet.CC.Packet
                     return new ZDO_BIND_RSP(payload);
                 case ZToolCMD.ZDO_END_DEVICE_ANNCE_IND:
                     return new ZDO_END_DEVICE_ANNCE_IND(payload);
-                // case CommandType.ZDO_END_DEVICE_ANNCE_SRSP:
-                // return new ZDO_END_DEVICE_ANNCE_SRSP(payload);
-                // case CommandType.ZDO_END_DEVICE_BIND_REQ_SRSP:
-                // return new ZDO_END_DEVICE_BIND_REQ_SRSP(payload);
-                // case CommandType.ZDO_END_DEVICE_BIND_RSP:
+                //case ZToolCMD.ZDO_END_DEVICE_ANNCE_SRSP:
+                //    return new ZDO_END_DEVICE_ANNCE_SRSP(payload);
+                //case ZToolCMD.ZDO_END_DEVICE_BIND_REQ_SRSP:
+                //    return new ZDO_END_DEVICE_BIND_REQ_SRSP(payload);
+                //case ZToolCMD.ZDO_END_DEVICE_BIND_RSP:
                 // return new ZDO_END_DEVICE_BIND_RSP(payload);
-                // case CommandType.ZDO_IEEE_ADDR_REQ_SRSP:
-                // return new ZDO_IEEE_ADDR_REQ_SRSP(payload);
-                // case CommandType.ZDO_IEEE_ADDR_RSP:
-                // return new ZDO_IEEE_ADDR_RSP(payload);
-                // case CommandType.ZDO_MATCH_DESC_REQ_SRSP:
-                // return new ZDO_MATCH_DESC_REQ_SRSP(payload);
-                // case CommandType.ZDO_MATCH_DESC_RSP:
-                // return new ZDO_MATCH_DESC_RSP(payload);
-                // case CommandType.ZDO_MGMT_LEAVE_REQ_SRSP:
-                // return new ZDO_MGMT_LEAVE_REQ_SRSP(payload);
-                // case CommandType.ZDO_MGMT_LEAVE_RSP:
-                // return new ZDO_MGMT_LEAVE_RSP(payload);
-                // case CommandType.ZDO_MGMT_LQI_REQ_SRSP:
-                // return new ZDO_MGMT_LQI_REQ_SRSP(payload);
-                // case CommandType.ZDO_MGMT_LQI_RSP:
-                // return new ZDO_MGMT_LQI_RSP(payload);
-                // case CommandType.ZDO_MGMT_NWK_UPDATE_REQ_SRSP:
-                // return new ZDO_MGMT_NWK_UPDATE_REQ_SRSP(payload);
+                 case ZToolCMD.ZDO_IEEE_ADDR_REQ_SRSP:
+                 return new ZDO_IEEE_ADDR_REQ_SRSP(payload);
+                 case ZToolCMD.ZDO_IEEE_ADDR_RSP:
+                 return new ZDO_IEEE_ADDR_RSP(payload);
+                 //case ZToolCMD.ZDO_MATCH_DESC_REQ_SRSP:
+                 //return new ZDO_MATCH_DESC_REQ_SRSP(payload);
+                 //case ZToolCMD.ZDO_MATCH_DESC_RSP:
+                 //return new ZDO_MATCH_DESC_RSP(payload);
+                 //case ZToolCMD.ZDO_MGMT_LEAVE_REQ_SRSP:
+                 //return new ZDO_MGMT_LEAVE_REQ_SRSP(payload);
+                 //case ZToolCMD.ZDO_MGMT_LEAVE_RSP:
+                 //return new ZDO_MGMT_LEAVE_RSP(payload);
+                 //case ZToolCMD.ZDO_MGMT_LQI_REQ_SRSP:
+                 //return new ZDO_MGMT_LQI_REQ_SRSP(payload);
+                 //case ZToolCMD.ZDO_MGMT_LQI_RSP:
+                 //return new ZDO_MGMT_LQI_RSP(payload);
+                 //case ZToolCMD.ZDO_MGMT_NWK_UPDATE_REQ_SRSP:
+                 //return new ZDO_MGMT_NWK_UPDATE_REQ_SRSP(payload);
                 case ZToolCMD.ZDO_MGMT_PERMIT_JOIN_REQ_SRSP:
                     return new ZDO_MGMT_PERMIT_JOIN_REQ_SRSP(payload);
                 case ZToolCMD.ZDO_MGMT_PERMIT_JOIN_RSP:
                     return new ZDO_MGMT_PERMIT_JOIN_RSP(payload);
-                // case CommandType.ZDO_MGMT_RTG_RSP:
-                // return new ZDO_MGMT_RTG_RSP(payload);
-                // case CommandType.ZDO_MSG_CB_INCOMING:
-                // ZDO_MSG_CB_INCOMING incoming = new ZDO_MSG_CB_INCOMING(payload);
-                // return incoming.translate();
+                 case ZToolCMD.ZDO_MGMT_RTG_RSP:
+                 //return new ZDO_MGMT_RTG_RSP(payload);
+                 //case ZToolCMD.ZDO_MSG_CB_INCOMING:
+                 //ZDO_MSG_CB_INCOMING incoming = new ZDO_MSG_CB_INCOMING(payload);
+                 //return incoming.translate();
                 case ZToolCMD.ZDO_NODE_DESC_REQ_SRSP:
                     return new ZDO_NODE_DESC_REQ_SRSP(payload);
                 case ZToolCMD.ZDO_NODE_DESC_RSP:
                     return new ZDO_NODE_DESC_RSP(payload);
-                // case CommandType.ZDO_POWER_DESC_REQ_SRSP:
-                // return new ZDO_POWER_DESC_REQ_SRSP(payload);
-                // case CommandType.ZDO_POWER_DESC_RSP:
-                // return new ZDO_POWER_DESC_RSP(payload);
-                // case CommandType.ZDO_NWK_ADDR_REQ_SRSP:
-                // return new ZDO_NWK_ADDR_REQ_SRSP(payload);
-                // case CommandType.ZDO_NWK_ADDR_RSP:
-                // return new ZDO_NWK_ADDR_RSP(payload);
+                //case ZToolCMD.ZDO_POWER_DESC_REQ_SRSP:
+                //    return new ZDO_POWER_DESC_REQ_SRSP(payload);
+                //case ZToolCMD.ZDO_POWER_DESC_RSP:
+                //    return new ZDO_POWER_DESC_RSP(payload);
+                //case ZToolCMD.ZDO_NWK_ADDR_REQ_SRSP:
+                //    return new ZDO_NWK_ADDR_REQ_SRSP(payload);
+                //case ZToolCMD.ZDO_NWK_ADDR_RSP:
+                //    return new ZDO_NWK_ADDR_RSP(payload);
                 case ZToolCMD.ZDO_SIMPLE_DESC_REQ_SRSP:
                     return new ZDO_SIMPLE_DESC_REQ_SRSP(payload);
                 case ZToolCMD.ZDO_SIMPLE_DESC_RSP:
                     return new ZDO_SIMPLE_DESC_RSP(payload);
                 case ZToolCMD.ZDO_TC_DEVICE_IND:
                     return new ZDO_TC_DEVICE_IND(payload);
-                // case CommandType.ZDO_UNBIND_REQ_SRSP:
-                // return new ZDO_UNBIND_REQ_SRSP(payload);
-                // case CommandType.ZDO_UNBIND_RSP:
-                // return new ZDO_UNBIND_RSP(payload);
-                // case CommandType.ZDO_USER_DESC_REQ_SRSP:
-                // return new ZDO_USER_DESC_REQ_SRSP(payload);
-                // case CommandType.ZDO_USER_DESC_RSP:
-                // return new ZDO_USER_DESC_RSP(payload);
-                // case CommandType.ZDO_USER_DESC_CONF:
-                // return new ZDO_USER_DESC_CONF(payload);
-                // case CommandType.ZDO_USER_DESC_SET_SRSP:
-                // return new ZDO_USER_DESC_SET_SRSP(payload);
+                //case ZToolCMD.ZDO_UNBIND_REQ_SRSP:
+                //    return new ZDO_UNBIND_REQ_SRSP(payload);
+                //case ZToolCMD.ZDO_UNBIND_RSP:
+                //    return new ZDO_UNBIND_RSP(payload);
+                //case ZToolCMD.ZDO_USER_DESC_REQ_SRSP:
+                //    return new ZDO_USER_DESC_REQ_SRSP(payload);
+                //case ZToolCMD.ZDO_USER_DESC_RSP:
+                //    return new ZDO_USER_DESC_RSP(payload);
+                //case ZToolCMD.ZDO_USER_DESC_CONF:
+                //    return new ZDO_USER_DESC_CONF(payload);
+                //case ZToolCMD.ZDO_USER_DESC_SET_SRSP:
+                //    return new ZDO_USER_DESC_SET_SRSP(payload);
                 #endregion
 
                 case ZToolCMD.ZDO_STATE_CHANGE_IND:
@@ -274,13 +274,13 @@ namespace ZigBeeNet.CC.Packet
                     return new ZDO_STATUS_ERROR_RSP(payload);
                 case ZToolCMD.ZDO_MSG_CB_REGISTER_SRSP:
                     return new ZDO_MSG_CB_REGISTER_SRSP(payload);
-                //case CommandType.ZDO_STARTUP_FROM_APP_SRSP:
-                //    return new ZDO_STARTUP_FROM_APP_SRSP(payload);
-                //case CommandType.UTIL_SET_PANID_RESPONSE:
+                case ZToolCMD.ZDO_STARTUP_FROM_APP_SRSP:
+                    return new ZDO_STARTUP_FROM_APP_SRSP(payload);
+                //case ZToolCMD.UTIL_SET_PANID_RESPONSE:
                 //    return new UTIL_SET_PANID_RESPONSE(payload);
-                //case CommandType.UTIL_SET_CHANNELS_RESPONSE:
+                //case ZToolCMD.UTIL_SET_CHANNELS_RESPONSE:
                 //    return new UTIL_SET_CHANNELS_RESPONSE(payload);
-                //case CommandType.UTIL_GET_DEVICE_INFO_RESPONSE:
+                //case ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE:
                 //    return new UTIL_GET_DEVICE_INFO_RESPONSE(payload);
                 default:
                     _logger.Warn("Unknown command ID: {Command}", cmd);
@@ -292,7 +292,7 @@ namespace ZigBeeNet.CC.Packet
         public byte Read(string context)
         {
             byte b = Read();
-            _logger.Trace("Read {}  byte, val is {}", context, b);
+            _logger.Trace("Read {Context}  byte, val is {Byte}", context, b);
             return b;
         }
 

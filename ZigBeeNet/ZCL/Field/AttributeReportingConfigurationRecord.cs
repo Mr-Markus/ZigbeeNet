@@ -171,7 +171,7 @@ namespace ZigBeeNet.ZCL.Field
                 // change field are included in the payload, and the timeout period field is omitted.
                 // The record is sent to a cluster server (or client) to configure how it sends reports to
                 // a client (or server) of the same cluster.
-                AttributeDataType = ZclDataType.Get((int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
+                AttributeDataType = ZclDataType.Get((byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
                 MinimumReportingInterval = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
                 MaximumReportingInterval = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
                 if (AttributeDataType.IsAnalog)

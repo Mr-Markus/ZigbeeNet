@@ -7,7 +7,7 @@ namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
-        public List<IZigBeeCommandListener> CommandListeners { get; set; }
+        public List<IZigBeeCommandListener> CommandListeners { get; set; } = new List<IZigBeeCommandListener>();
 
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {

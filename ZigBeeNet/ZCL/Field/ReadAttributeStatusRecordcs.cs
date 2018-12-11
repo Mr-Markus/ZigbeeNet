@@ -43,7 +43,7 @@ namespace ZigBeeNet.ZCL.Field
             Status = (ZclStatus)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.ZCL_STATUS));
             if (Status == ZclStatus.SUCCESS)
             {
-                AttributeDataType = ZclDataType.Get((int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
+                AttributeDataType = ZclDataType.Get((byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
                 AttributeValue = deserializer.ReadZigBeeType(AttributeDataType);
             }
         }

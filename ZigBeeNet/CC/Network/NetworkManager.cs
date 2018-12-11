@@ -186,7 +186,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _logger.Debug("CC2531 version is {Version}", version);
+                _logger.Info("CC2531 version is {Version}", version);
             }
 
             return version;
@@ -1103,26 +1103,26 @@ namespace ZigBeeNet.CC.Network
          *
          * @return the PAN ID or -1 on failure
          */
-        //public ExtendedPanId GetCurrentExtendedPanId()
-        //{
-        //    if (!WaitForHardware())
-        //    {
-        //        _logger.Info("Failed to reach the {} level: getExtendedPanId() failed", DriverStatus.HARDWARE_READY);
-        //        return new ExtendedPanId();
-        //    }
+        public ExtendedPanId GetCurrentExtendedPanId()
+        {
+            if (!WaitForHardware())
+            {
+                _logger.Info("Failed to reach the {} level: getExtendedPanId() failed", DriverStatus.HARDWARE_READY);
+                return new ExtendedPanId();
+            }
 
-        //    byte[] result = GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.EXT_PAN_ID);
+            byte[] result = GetDeviceInfo(ZB_GET_DEVICE_INFO.DEV_INFO_TYPE.EXT_PAN_ID);
 
-        //    if (result == null)
-        //    {
-        //        // luckily -1 (aka 0xffffffffffffffffL) is not a valid extended PAN ID value
-        //        return new ExtendedPanId();
-        //    }
-        //    else
-        //    {
-        //        return new ExtendedPanId(result);
-        //    }
-        //}
+            if (result == null)
+            {
+                // luckily -1 (aka 0xffffffffffffffffL) is not a valid extended PAN ID value
+                return new ExtendedPanId();
+            }
+            else
+            {
+                return new ExtendedPanId(result);
+            }
+        }
 
         /**
          * Gets the IEEE address of our node on the network

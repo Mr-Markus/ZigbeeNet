@@ -30,15 +30,51 @@ namespace ZigBeeNet.CC
         private List<ushort> _supportedOutputClusters = new List<ushort>();
 
         public string VersionString { get; set; }
-        public IeeeAddress IeeeAddress { get; set; }
-        public ushort NwkAddress { get; set; }
-        public ZigBeeChannel ZigBeeChannel { get; }
-        public ZToolAddress16 PanID { get; }
-        public IeeeAddress ExtendedPanId { get; }
-        public ZigBeeKey ZigBeeNetworkKey { get => _networkManager.GetZigBeeNetworkKey(); }
-        public ZigBeeKey TcLinkKey { get => new ZigBeeKey(); }
 
-        ExtendedPanId IZigBeeTransportTransmit.ExtendedPanId => throw new NotImplementedException();
+        public IeeeAddress IeeeAddress { get; set; }
+
+        public ushort NwkAddress { get; set; }
+
+
+        public ZigBeeChannel ZigBeeChannel
+        {
+            get
+            {
+                return (ZigBeeChannel)_networkManager.GetCurrentChannel();
+            }
+        }
+
+        public ushort PanID
+        {
+            get
+            {
+                return _networkManager.GetCurrentPanId();
+            }
+        }
+        
+        public ExtendedPanId ExtendedPanId
+        {
+            get
+            {
+                return _networkManager.GetCurrentExtendedPanId();
+            }
+        }
+
+        public ZigBeeKey ZigBeeNetworkKey
+        {
+            get
+            {
+                return _networkManager.GetZigBeeNetworkKey();
+            }
+        }
+
+        public ZigBeeKey TcLinkKey
+        {
+            get
+            {
+                return new ZigBeeKey();
+            }
+        }
 
         public ZigBeeDongleTiCc2531(IZigBeePort serialPort)
         {
@@ -242,7 +278,7 @@ namespace ZigBeeNet.CC
                     return _Endpoint2Profile[endpointId];
                 } else
                 {
-                    _logger.Info($"No endpoint {endpointId} registered");
+                    _logger.Info("No endpoint {Endpoint} registered", endpointId);
                     return ushort.MaxValue;
                 }
             }
@@ -250,7 +286,7 @@ namespace ZigBeeNet.CC
 
         private byte CreateEndpoint(byte endpointId, ushort profileId)
         {
-            _logger.Trace("Registering a new endpoint {} for profile {}", endpointId, profileId);
+            _logger.Trace("Registering a new endpoint {Endpoint} for profile {Profile}", endpointId, profileId);
 
             AF_REGISTER_SRSP result;
             result = _networkManager.SendAFRegister(new AF_REGISTER(endpointId, profileId, 0, 0,
@@ -266,7 +302,7 @@ namespace ZigBeeNet.CC
             _sender2Endpoint[profileId] = endpointId;
             _Endpoint2Profile[endpointId] = profileId;
 
-            _logger.Debug("Registered endpoint {} with profile: {}", endpointId, profileId);
+            _logger.Debug("Registered endpoint {Endpoint} with profile: {Profile}", endpointId, profileId);
 
             return endpointId;
         }
@@ -325,7 +361,7 @@ namespace ZigBeeNet.CC
 
                         default:
                             configuration.SetResult(option, ZigBeeStatus.UNSUPPORTED);
-                            _logger.Debug("Unsupported configuration option \"{}\" in CC2531 dongle", option);
+                            _logger.Debug("Unsupported configuration option \"{Option}\" in CC2531 dongle", option);
                             break;
                     }
                 }
