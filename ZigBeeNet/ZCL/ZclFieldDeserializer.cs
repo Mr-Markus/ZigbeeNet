@@ -27,7 +27,28 @@ namespace ZigBeeNet.ZCL
 
         public object Deserialize(ZclDataType dataType)
         {
-            throw new NotImplementedException();
+            if(dataType.DataClass.IsAssignableFrom(typeof(IZclListItemField)))
+            {
+                List<IZclListItemField> list = new List<IZclListItemField>();
+                try
+                {
+                    while (Deserializer.GetSize() - Deserializer.GetPosition() > 0)
+                    {
+                        var item = (IZclListItemField)Activator.CreateInstance(dataType.DataClass);
+
+                        item.Deserialize(Deserializer);
+                        list.Add(item);
+                    }
+
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    // Eat the exception - this terminates the list!
+                }
+                return list;
+            }
+
+            return Deserializer.ReadZigBeeType(dataType);
         }
     }
 }

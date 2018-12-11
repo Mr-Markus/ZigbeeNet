@@ -59,7 +59,7 @@ namespace ZigBeeNet.ZDO.Command
 
             NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
             IeeeAddr = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Capability = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            Capability = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_8_BIT));
         }
 
         public override string ToString()

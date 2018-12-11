@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CC\Frame\ZdoPowerDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Frame\ZdoSimpleDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ErrorPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZDO\ZDO_MSG_CB_INCOMING.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Packet\ZToolCMD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\BlockingCommandReceiver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CC\Implementation\CommandInterfaceImpl.cs" />

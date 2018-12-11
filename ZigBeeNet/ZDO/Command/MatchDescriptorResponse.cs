@@ -25,7 +25,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * MatchList command message field.
         */
-        public List<int> MatchList { get; set; }
+        public List<ushort> MatchList { get; set; }
 
         /**
         * Default constructor.
@@ -55,7 +55,7 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             // Create lists
-            MatchList = new List<int>();
+            MatchList = new List<ushort>();
 
             Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
 
@@ -65,14 +65,14 @@ namespace ZigBeeNet.ZDO.Command
                 return;
             }
 
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            int? matchLength = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            byte? matchLength = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (matchLength != null)
             {
                 for (int cnt = 0; cnt < matchLength; cnt++)
                 {
-                    MatchList.Add((int)deserializer.Deserialize(ZclDataType.Get(DataType.ENDPOINT)));
+                    MatchList.Add((byte)deserializer.Deserialize(ZclDataType.Get(DataType.ENDPOINT)));
                 }
             }
         }

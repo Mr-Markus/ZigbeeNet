@@ -147,7 +147,7 @@ namespace ZigBeeNet.CC.Implementation
          */
         public void SendPacket(ZToolPacket packet)
         {
-            _logger.Debug("->  {Type} ({Packet}) ", packet.GetType().Name, packet);
+            _logger.Debug("-->  {Type} ({Packet}) ", packet.GetType().Name, packet);
             byte[] pck = packet.Packet;
             SendRaw(pck);
         }
@@ -219,7 +219,7 @@ namespace ZigBeeNet.CC.Implementation
                     {
                         try
                         {
-                            _logger.Trace("Waiting for other request {} to complete", id);
+                            _logger.Trace("Waiting for other request {Command} to complete", id);
                             _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
@@ -247,11 +247,11 @@ namespace ZigBeeNet.CC.Implementation
                         {
                         }
                     }
-                    _logger.Trace("Put synchronousCommandListeners listener for {} command", id);
+                    _logger.Trace("Put synchronousCommandListeners listener for {Command} command", id);
                     _synchronousCommandListeners[id] = listener;
                 }
             }
-            _logger.Trace("Sending SynchronousCommand {} ", packet);
+            _logger.Trace("Sending SynchronousCommand {Packet} ", packet);
             SendPacket(packet);
         }
 

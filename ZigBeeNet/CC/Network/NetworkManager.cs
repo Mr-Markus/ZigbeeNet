@@ -94,6 +94,9 @@ namespace ZigBeeNet.CC.Network
         private ushort _currentPanId = ushort.MaxValue;
 
         private Dictionary<Type, Thread> _conversation3Way = new Dictionary<Type, Thread>();
+        private object _stateSync = new object();
+        private object _hardwareWaitSync = new object();
+        private object _networkSync = new object();
 
         public NetworkManager(ICommandInterface commandInterface, NetworkMode mode, long timeout)
         {
@@ -293,10 +296,10 @@ namespace ZigBeeNet.CC.Network
             switch (response.Status)
             {
                 case 0:
-                    _logger.Info("Initialized ZigBee network with existing network _state.");
+                    _logger.Info("Initialized ZigBee network with existing network state.");
                     return true;
                 case 1:
-                    _logger.Info("Initialized ZigBee network with new or reset network _state.");
+                    _logger.Info("Initialized ZigBee network with new or reset network state.");
                     return true;
                 case 2:
                     _logger.Warn("Initializing ZigBee network failed.");
@@ -408,9 +411,9 @@ namespace ZigBeeNet.CC.Network
 
         private void SetState(DriverStatus value)
         {
-            _logger.Trace("{State} -> {Value}", _state, value);
+            _logger.Trace("{State} --> {Value}", _state, value);
 
-            lock (typeof(NetworkManager))
+            lock (_stateSync)
             {
                 _state = value;
             }
@@ -434,7 +437,7 @@ namespace ZigBeeNet.CC.Network
 
         private bool WaitForHardware()
         {
-            lock (typeof(NetworkManager))
+            lock (_hardwareWaitSync)
             {
                 while (_state == DriverStatus.CREATED || _state == DriverStatus.CLOSED)
                 {
@@ -455,7 +458,7 @@ namespace ZigBeeNet.CC.Network
         {
             long before = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             bool timedOut = false;
-            lock (typeof(NetworkManager))
+            lock (_networkSync)
             {
                 while (_state != DriverStatus.NETWORK_READY && _state != DriverStatus.CLOSED && !timedOut)
                 {
@@ -929,7 +932,7 @@ namespace ZigBeeNet.CC.Network
                     }
                     if (response[0] != null)
                     {
-                        _logger.Trace("{} -> {}", request.GetType().Name,
+                        _logger.Trace("{} --> {}", request.GetType().Name,
                                 response[0].GetType().Name);
                         break; // Break out as we have response.
                     }

@@ -189,21 +189,19 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD:
                     break;
+                case DataType.SIGNED_16_BIT_INTEGER:
+                    short s = (short)(payload[index++] + (payload[index++] << 8));
+
+                    value[0] = s;
+                    break;
                 case DataType.CLUSTERID:
                 case DataType.NWK_ADDRESS:
                 case DataType.BITMAP_16_BIT:
                 case DataType.ENUMERATION_16_BIT:
-                case DataType.SIGNED_16_BIT_INTEGER:
                 case DataType.UNSIGNED_16_BIT_INTEGER:
-                    short s = (short)(payload[index++] + (payload[index++] << 8));
-                    if (type == ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER))
-                    {
-                        value[0] = (byte)s;
-                    }
-                    else
-                    {
-                        value[0] = (byte)(s & 0xFFFF);
-                    }
+                    ushort us = (ushort)(payload[index++] + (payload[index++] << 8));
+
+                    value[0] = us;
                     break;
                 case DataType.UNSIGNED_24_BIT_INTEGER:
                     value[0] = payload[index++] + (payload[index++] << 8) + (payload[index++] << 16);
@@ -234,7 +232,7 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.NEIGHBOR_TABLE:
                     NeighborTable neighborTable = new NeighborTable();
-                    neighborTable.deserialize(this);
+                    neighborTable.Deserialize(this);
                     value[0] = neighborTable;
                     break;
                 case DataType.NODE_DESCRIPTOR:

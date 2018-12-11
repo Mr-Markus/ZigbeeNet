@@ -13,12 +13,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /**
      * The ZigBee Cluster Library Cluster ID
      */
-        public const int CLUSTER_ID = 0x0006;
+        public const ushort CLUSTER_ID = 0x0006;
 
         /**
          * The ZigBee Cluster Library Cluster Name
          */
-        public const String CLUSTER_NAME = "On/Off";
+        public const string CLUSTER_NAME = "On/Off";
 
         // Attribute constants
         /**

@@ -180,6 +180,7 @@ namespace ZigBeeNet
          * Our local network address
          */
         private ushort LocalNwkAddress = 0;
+        private object _networkStateSync = new object();
 
         public enum ZigBeeInitializeResponse
         {
@@ -252,7 +253,7 @@ namespace ZigBeeNet
         {
             SetNetworkState(ZigBeeTransportState.UNINITIALISED);
 
-            lock (typeof(ZigBeeNetworkManager))
+            lock (_networkStateSync)
             {
                 if (NetworkStateSerializer != null)
                 {
@@ -611,6 +612,7 @@ namespace ZigBeeNet
             ZclFieldSerializer fieldSerializer;
             try
             {
+                Serializer = new DefaultSerializer();
                 fieldSerializer = new ZclFieldSerializer(Serializer);
             }
             catch (Exception e)
@@ -683,7 +685,8 @@ namespace ZigBeeNet
             _logger.Debug("RX APS: {ApsFrame}", apsFrame);
 
             // Create the deserialiser
-            
+            Deserializer = new DefaultDeserializer(apsFrame.Payload);
+
             ZclFieldDeserializer fieldDeserializer = new ZclFieldDeserializer(Deserializer);
 
             ZigBeeCommand command = null;
@@ -903,7 +906,7 @@ namespace ZigBeeNet
 
         private void SetNetworkStateRunnable(ZigBeeTransportState state)
         {
-            lock (typeof(ZigBeeNetworkManager))
+            lock (_networkNodes)
             {
                 // Only notify users of state changes
                 if (state == NetworkState)

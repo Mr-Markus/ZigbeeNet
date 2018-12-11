@@ -59,7 +59,7 @@ namespace ZigBeeNet.ZDO.Field
          *
          * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
          */
-        public void deserialize(IZigBeeDeserializer deserializer)
+        public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
             ExtendedPanId = (ExtendedPanId)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.EXTENDED_PANID));

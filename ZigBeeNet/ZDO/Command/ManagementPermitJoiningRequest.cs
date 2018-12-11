@@ -46,7 +46,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(PermitDuration, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize((byte)PermitDuration, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(TcSignificance, ZclDataType.Get(DataType.BOOLEAN));
         }
 
