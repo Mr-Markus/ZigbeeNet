@@ -12,28 +12,27 @@ namespace ZigBeeNet.CC.Packet.ZDO
     public class ZDO_MSG_CB_INCOMING : ZToolPacket /* implements IRESPONSE_CALLBACK,IZDO */
     {
         private readonly ILog _logger = LogProvider.For<ZDO_MSG_CB_INCOMING>();
-
-
+        
         public static Dictionary<ushort, Type> ClusterToRSP { get; private set; }
 
         static ZDO_MSG_CB_INCOMING()
         {
             ClusterToRSP = new Dictionary<ushort, Type>() {
-                { 0x0013, typeof(ZDO_END_DEVICE_ANNCE_IND) },
-                    //{ 0x8000, typeof(ZDO_NWK_ADDR_RSP) },
+                    { 0x0013, typeof(ZDO_END_DEVICE_ANNCE_IND) },
+                    { 0x8000, typeof(ZDO_NWK_ADDR_RSP) },
                     { 0x8001, typeof(ZDO_IEEE_ADDR_RSP) },
                     { 0x8002, typeof(ZDO_NODE_DESC_RSP) },
-                    //{ 0x8003, typeof(ZDO_POWER_DESC_RSP) },
+                    { 0x8003, typeof(ZDO_POWER_DESC_RSP) },
                     { 0x8004, typeof(ZDO_SIMPLE_DESC_RSP) },
                     { 0x8005, typeof(ZDO_ACTIVE_EP_RSP) },
-                    //{ 0x8006, typeof(ZDO_MATCH_DESC_RSP) },
-                    //{ 0x8011, typeof(ZDO_USER_DESC_RSP) },
-                    //{ 0x8014, typeof(ZDO_USER_DESC_CONF) },
-                    //{ 0x8020, typeof(ZDO_END_DEVICE_BIND_RSP) },
+                    { 0x8006, typeof(ZDO_MATCH_DESC_RSP) },
+                    { 0x8011, typeof(ZDO_USER_DESC_RSP) },
+                    { 0x8014, typeof(ZDO_USER_DESC_CONF) },
+                    { 0x8020, typeof(ZDO_END_DEVICE_BIND_RSP) },
                     { 0x8021, typeof(ZDO_BIND_RSP) },
-                    //{ 0x8022, typeof(ZDO_UNBIND_RSP) },
-                    //{ 0x8031, typeof(ZDO_MGMT_LQI_RSP) },
-                    //{ 0x8034, typeof(ZDO_MGMT_LEAVE_RSP) },
+                    { 0x8022, typeof(ZDO_UNBIND_RSP) },
+                    { 0x8031, typeof(ZDO_MGMT_LQI_RSP) },
+                    { 0x8034, typeof(ZDO_MGMT_LEAVE_RSP) },
                     { 0x8036, typeof(ZDO_MGMT_PERMIT_JOIN_RSP) }
                 };
         }
@@ -42,25 +41,25 @@ namespace ZigBeeNet.CC.Packet.ZDO
 
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.SrcAddr</name>
         /// <summary>Short address (LSB-MSB) of the source of the ZDO message.</summary>
-        private ZToolAddress16 SrcAddr;
+        public ZToolAddress16 SrcAddr { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.WasBroadcast</name>
         /// <summary>This field indicates whether or not this ZDO message was broadcast.</summary>
-        private int WasBroadcast;
+        public int WasBroadcast { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.ClusterId</name>
         /// <summary>The ZDO Cluster Id of this message.</summary>
-        private DoubleByte ClusterId;
+        public DoubleByte ClusterId { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.SecurityUse</name>
         /// <summary>N/A - not used.</summary>
-        private int SecurityUse;
+        public int SecurityUse { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.SeqNum</name>
         /// <summary>The sequence number of this ZDO message.</summary>
-        private int SeqNum;
+        public int SeqNum { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.MacDstAddr</name>
         /// <summary>TThe MAC destination short address (LSB-MSB) of the ZDO message.</summary>
-        private ZToolAddress16 MacDstAddr;
+        public ZToolAddress16 MacDstAddr { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.Data</name>
         /// <summary>The data that corresponds to the Cluster Id of the message.</summary>
-        private byte[] Data;
+        public byte[] Data { get; private set; }
 
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING</name>
         /// <summary>Constructor</summary>
