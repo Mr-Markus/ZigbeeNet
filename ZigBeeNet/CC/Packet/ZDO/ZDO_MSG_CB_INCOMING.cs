@@ -37,8 +37,6 @@ namespace ZigBeeNet.CC.Packet.ZDO
                 };
         }
 
-        private int FCS;
-
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.SrcAddr</name>
         /// <summary>Short address (LSB-MSB) of the source of the ZDO message.</summary>
         public ZToolAddress16 SrcAddr { get; private set; }
@@ -76,9 +74,11 @@ namespace ZigBeeNet.CC.Packet.ZDO
             SeqNum = framedata[6];
             MacDstAddr = new ZToolAddress16(framedata[8], framedata[7]);
 
-            //Array.Copy(framedata, 9, Data, 0, framedata.Length);
+            //Data = new byte[framedata.Length - 10];
 
-            Data = framedata.Skip(9).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
+            //Array.Copy(framedata, 9, Data, 0, framedata.Length - 10);
+
+            Data = framedata.Skip(8).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_MSG_CB_INCOMING), framedata);
         }

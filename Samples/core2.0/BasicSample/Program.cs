@@ -102,6 +102,9 @@ namespace BasicSample
 
                                 if (node != null)
                                 {
+                                    ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 0);
+                                    node.AddEndpoint(ep);
+
                                     ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
 
                                     onOff.ToggleCommand();
@@ -134,13 +137,12 @@ namespace BasicSample
         public void NodeAdded(ZigBeeNode node)
         {
             Console.WriteLine("Node " + node.IeeeAddress + " added " + node);
+            //if (node.NetworkAddress != 0)
+            //{
+            //    ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
 
-            if (node.NetworkAddress != 0)
-            {
-                ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
-
-                onOff.ToggleCommand();
-            }
+            //    onOff.ToggleCommand();
+            //}
         }
 
         public void NodeRemoved(ZigBeeNode node)

@@ -219,17 +219,24 @@ namespace ZigBeeNet.Serial
         {
             while (IsOpen && _cancellationToken.IsCancellationRequested == false)
             {
-                int len = 0;
+                int length = _serialPort.BytesToRead;
+
+                var message = new byte[length];
+                var bytesRead = 0;
+                var bytesToRead = length;
 
                 try
                 {
-                    len = _serialPort.BytesToRead;
-                    if (len > 0)
+                    if (length > 0)
                     {
-                        byte[] message = new byte[len];
 
-                        int readbytes = 0;
-                        while (_serialPort.Read(message, readbytes, len - readbytes) <= 0) ;
+                        do
+                        {
+                            var n = _serialPort.Read(message, bytesRead, length - bytesRead); // read may return anything from 0 - length , 0 = end of stream
+                            if (n == 0) break;
+                            bytesRead += n;
+                            bytesToRead -= n;
+                        } while (bytesToRead > 0);
 
                         lock (_bufferSynchronisationObject)
                         {

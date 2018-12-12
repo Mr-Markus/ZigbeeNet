@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet;
 using ZigBeeNet.Logging;
@@ -25,6 +26,8 @@ namespace ZigBeeNet.Transaction
         private IZigBeeTransactionMatcher _responseMatcher;
         private ZigBeeCommand _command;
         private Task _timeoutTask;
+        private TaskCompletionSource<CommandResult> _task;
+        private CancellationTokenSource _timeoutCancel;
         private const int DEFAULT_TIMEOUT_MILLISECONDS = 8000;
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
@@ -47,24 +50,17 @@ namespace ZigBeeNet.Transaction
          * @param responseMatcher the {@link ZigBeeTransactionMatcher}
          * @return the {@link CommandResult} future.
          */
-        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            return Task.Run<CommandResult>(
-            () =>
-            {
-                this._command = command;
-                this._responseMatcher = responseMatcher;
+            this._command = command;
+            this._responseMatcher = responseMatcher;
 
-                //lock (_command)
-                //{
-                //    // Schedule a task to timeout the transaction
-                //    _timeoutTask = _networkManager.ScheduleTask(new Runnable() {
-                //    @Override
-                //    public void run()
-                //    {
-                //        timeoutTransaction();
-                //    }
-                //}
+            lock (_command)
+            {
+                _task = new TaskCompletionSource<CommandResult>();
+                // Schedule a task to timeout the transaction
+                _timeoutCancel = new CancellationTokenSource();
+                //_timeoutTask = _networkManager.ScheduleTask(new Task(() => TimeoutTransaction()), Timeout, _timeoutCancel);
 
                 _networkManager.AddCommandListener(this);
 
@@ -73,47 +69,48 @@ namespace ZigBeeNet.Transaction
                 if (command is ZclCommand cmd)
                 {
                     cmd.TransactionId = (byte)transactionId;
-                    return new CommandResult(cmd);
+                    _task.SetResult(new CommandResult(cmd));
                 }
+            }
 
-                return new CommandResult(command);
-            });
+
+            if (await Task.WhenAny(_task.Task, Task.Delay(Timeout)) == _task.Task)
+            {
+                return _task.Task.Result;
+            }
+            else
+            {
+                // Timeout
+                TimeoutTransaction();
+                return new CommandResult();
+            }            
         }
 
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
             // Ensure that received command is not processed before command is sent
             // and hence transaction ID for the command set.
-            //lock(_command)
-            //{
-            //    if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
-            //    {
-                   
+            lock (_command)
+            {
+                if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
+                {
+                    _timeoutCancel.Cancel();
+                    _task.SetResult(new CommandResult(receivedCommand));
+                }
+            }
 
-            //        //timeoutTask.cancel(false);
-
-            //        lock(transactionFuture) {
-            //            transactionFuture.set(new CommandResult(receivedCommand));
-            //            transactionFuture.notify();
-            //        }
-                    
-            //    }
-            //}
-
-            _logger.Debug("Transaction complete: {}", _command);
+            _logger.Debug("Transaction complete: {Command}", _command);
             _networkManager.RemoveCommandListener(this);
         }
 
-        //private void timeoutTransaction()
-        //{
-        //    _logger.Debug("Transaction timeout: {}",_command);
-        //    //lock(_command) {
-        //        synchronized(transactionFuture) {
-        //            transactionFuture.cancel(false);
-        //            transactionFuture.notify();
-        //        }
-        //        _networkManager.RemoveCommandListener(this);
-        //    //}
-        //}
+        private void TimeoutTransaction()
+        {
+            _logger.Debug("Transaction timeout: {Command}", _command);
+            lock (_command)
+            {
+                _task.SetCanceled();
+                _networkManager.RemoveCommandListener(this);
+            }
+        }
     }
 }

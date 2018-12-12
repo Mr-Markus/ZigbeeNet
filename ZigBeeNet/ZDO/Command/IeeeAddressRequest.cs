@@ -52,14 +52,15 @@ namespace ZigBeeNet.ZDO.Command
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
         {
-            if (!(response is IeeeAddressResponse)) {
-                return false;
+            if (response is IeeeAddressResponse rsp)
+            { 
+                return ((IeeeAddressRequest)request).NwkAddrOfInterest.Equals(rsp.NwkAddrRemoteDev);
             }
 
-            return ((IeeeAddressRequest)request).NwkAddrOfInterest.Equals(((IeeeAddressResponse)response).NwkAddrRemoteDev);
+            return false;
         }
 
-    public override string ToString()
+        public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 

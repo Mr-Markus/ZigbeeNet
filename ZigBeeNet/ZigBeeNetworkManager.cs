@@ -507,16 +507,18 @@ namespace ZigBeeNet
          * @param delay the delay in milliseconds before the task will be executed
          * @return the {@link ScheduledFuture} for the scheduled task
          */
-        public Task ScheduleTask(Task runnableTask, long delay)
+        public async Task ScheduleTask(Task runnableTask, int delay, CancellationTokenSource cancellation)
         {
             if (NetworkState != ZigBeeTransportState.ONLINE)
             {
-                return null;
+                return;
             }
-
-            runnableTask.Start(); //executorService.schedule(runnableTask, delay, TimeUnit.MILLISECONDS);
-
-            return runnableTask;
+            await Task.Delay(delay);
+            if (cancellation.IsCancellationRequested == false)
+            {
+                runnableTask.Start();
+            }
+            return;
         }
 
         /**

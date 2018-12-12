@@ -145,7 +145,7 @@ namespace ZigBeeNet.Serialization
                     List<byte> arrayN16 = new List<byte>(cntN16);
                     for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex++)
                     {
-                        arrayN16.Add((byte)(payload[index++] + ((payload[index++] << 8) & 0xffff)));
+                        arrayN16.Add((byte)(payload[index++] | ((payload[index++] << 8) & 0xffff)));
                     }
                     value[0] = arrayN16;
                     break;
@@ -190,7 +190,7 @@ namespace ZigBeeNet.Serialization
                 case DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD:
                     break;
                 case DataType.SIGNED_16_BIT_INTEGER:
-                    short s = (short)(payload[index++] + (payload[index++] << 8));
+                    short s = (short)(payload[index++] | (payload[index++] << 8));
 
                     value[0] = s;
                     break;
@@ -199,22 +199,22 @@ namespace ZigBeeNet.Serialization
                 case DataType.BITMAP_16_BIT:
                 case DataType.ENUMERATION_16_BIT:
                 case DataType.UNSIGNED_16_BIT_INTEGER:
-                    ushort us = (ushort)(payload[index++] + (payload[index++] << 8));
+                    ushort us = (ushort)(payload[index++] | (payload[index++] << 8));
 
                     value[0] = us;
                     break;
                 case DataType.UNSIGNED_24_BIT_INTEGER:
-                    value[0] = payload[index++] + (payload[index++] << 8) + (payload[index++] << 16);
+                    value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16);
                     break;
                 case DataType.BITMAP_32_BIT:
                 case DataType.SIGNED_32_BIT_INTEGER:
                 case DataType.UNSIGNED_32_BIT_INTEGER:
-                    value[0] = payload[index++] + (payload[index++] << 8) + (payload[index++] << 16)
+                    value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16)
                             + (payload[index++] << 24);
                     break;
                 case DataType.UNSIGNED_48_BIT_INTEGER:
-                    value[0] = (payload[index++]) + ((long)(payload[index++]) << 8) + ((long)(payload[index++]) << 16)
-                            + ((long)(payload[index++]) << 24) + ((long)(payload[index++]) << 32)
+                    value[0] = (payload[index++]) + ((long)(payload[index++]) << 8) | ((long)(payload[index++]) << 16)
+                            + ((long)(payload[index++]) << 24) | ((long)(payload[index++]) << 32)
                             + ((long)(payload[index++]) << 40);
                     break;
                 case DataType.SIGNED_8_BIT_INTEGER:

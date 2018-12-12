@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace ZigBeeNet.App.Discovery
         /**
          *
          */
-        private Dictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> nodeDiscovery = new Dictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
+        private ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> nodeDiscovery = new ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
 
         /**
          * Refresh period for the mesh update - in seconds
@@ -162,7 +163,8 @@ namespace ZigBeeNet.App.Discovery
         public void NodeRemoved(ZigBeeNode node)
         {
             _logger.Debug("DISCOVERY Extension: Removing discoverer for {IeeeAddress}", node.IeeeAddress);
-            nodeDiscovery.Remove(node.IeeeAddress);
+
+            nodeDiscovery.TryRemove(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer ignored);
         }
 
         public void CommandReceived(ZigBeeCommand command)

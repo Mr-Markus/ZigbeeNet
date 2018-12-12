@@ -59,8 +59,8 @@ namespace ZigBeeNet.ZDO.Command
                 serializer.Serialize(NwkAddrAssocDevList[cnt], ZclDataType.Get(DataType.NWK_ADDRESS));
             }
         }
-
         public override void Deserialize(ZclFieldDeserializer deserializer)
+
         {
             base.Deserialize(deserializer);
 
@@ -84,6 +84,12 @@ namespace ZigBeeNet.ZDO.Command
             }
 
             byte? numAssocDev = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+
+            if(deserializer.IsEndOfStream)
+            {
+                return;
+            }
+
             StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (numAssocDev != null)
