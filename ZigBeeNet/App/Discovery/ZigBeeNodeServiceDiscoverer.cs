@@ -54,7 +54,7 @@ namespace ZigBeeNet.App.Discovery
         /**
          * Default maximum number of retries to perform
          */
-        private const int DEFAULT_MAX_BACKOFF = 12;
+        private const int DEFAULT_MAX_BACKOFF = 2;
 
         /**
          * Default period between retries
@@ -197,9 +197,9 @@ namespace ZigBeeNet.App.Discovery
             //NetworkManager.ScheduleTask(nodeDiscoveryTask, new Random().Next(_retryPeriod));
         }
 
-        private async Task Discovery(CancellationToken ct)
+        private async Task Discovery(CancellationToken ct, int cnt)
         {
-            int retryCnt = 0;
+            int retryCnt = cnt;//0;
             int retryMin = 0;
 
             try
@@ -287,15 +287,19 @@ namespace ZigBeeNet.App.Discovery
                     // We failed with the last request. Wait a bit then retry.
                     retryDelay = (new Random().Next(retryCnt) + 1 + retryMin) * _retryPeriod;
                     _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed. Retry {}, wait {Delay}ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
+
+                    
                 }
+
 
                 // Reschedule the task
                 var tmp = _cancellationTokenSource;
                 _cancellationTokenSource = new CancellationTokenSource();
                 //await NetworkManager.ScheduleTask(Discovery(_cancellationTokenSource.Token), retryDelay);
 
-                await Discovery(_cancellationTokenSource.Token);
+                await Discovery(_cancellationTokenSource.Token, retryCnt);
                 tmp.Cancel();
+
             }
             catch (TaskCanceledException)
             {
@@ -313,7 +317,7 @@ namespace ZigBeeNet.App.Discovery
 
         private Task GetNodeServiceDiscoveryTask()
         {
-            return Discovery(_cancellationTokenSource.Token);
+            return Discovery(_cancellationTokenSource.Token, 0);
         }
 
         /**

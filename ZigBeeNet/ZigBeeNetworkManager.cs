@@ -952,7 +952,9 @@ namespace ZigBeeNet
                         {
                             Task.Run(() =>
                             {
+
                                 listener.NodeAdded(node);
+
                             }).ContinueWith((t) =>
                             {
                                 _logger.Error(t.Exception, "Error");
@@ -1384,7 +1386,7 @@ namespace ZigBeeNet
             {
                 return;
             }
-            _logger.Debug("{}: Node {} update", node.IeeeAddress, node.NetworkAddress);
+            _logger.Debug("{IeeeAddress}: Node {NetworkAddress} update", node.IeeeAddress, node.NetworkAddress);
 
             ZigBeeNode currentNode;
             lock (_networkNodes)
@@ -1394,8 +1396,7 @@ namespace ZigBeeNet
                 // Return if we don't know this node
                 if (currentNode == null)
                 {
-                    _logger.Debug("{}: Node {} is not known - can't be updated", node.IeeeAddress,
-                            node.NetworkAddress);
+                    _logger.Debug("{IeeeAddress}: Node {NetworkAddress} is not known - can't be updated", node.IeeeAddress, node.NetworkAddress);
                     return;
                 }
 

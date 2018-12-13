@@ -267,7 +267,7 @@ namespace ZigBeeNet
             {
                 BindingTable.Clear();
                 BindingTable.AddRange(bindingTable);
-                _logger.Debug("{}: Binding table updated: {}", IeeeAddress, bindingTable);
+                _logger.Debug("{Address}: Binding table updated: {BindingTable}", IeeeAddress, bindingTable);
             }
         }
 
@@ -660,11 +660,10 @@ namespace ZigBeeNet
         {
             if (NodeDescriptor == null)
             {
-                return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=" + string.Format("%04X", NetworkAddress) + "]";
+                return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=0x" + NetworkAddress.ToString("X4") + "]";
             }
 
-            return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=" + string.Format("%04X", NetworkAddress) + ", Type="
-                    + NodeDescriptor.LogicalNodeType + "]";
+            return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=0x" + NetworkAddress.ToString("X4") + ", Type=" + NodeDescriptor.LogicalNodeType + "]";
         }
     }
 }
