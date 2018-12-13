@@ -84,12 +84,6 @@ namespace ZigBeeNet.ZDO.Command
             }
 
             byte? numAssocDev = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-
-            if(deserializer.IsEndOfStream)
-            {
-                return;
-            }
-
             StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (numAssocDev != null)

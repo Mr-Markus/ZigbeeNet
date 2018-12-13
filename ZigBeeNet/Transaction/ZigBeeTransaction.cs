@@ -60,7 +60,6 @@ namespace ZigBeeNet.Transaction
                 _task = new TaskCompletionSource<CommandResult>();
                 // Schedule a task to timeout the transaction
                 _timeoutCancel = new CancellationTokenSource();
-                //_timeoutTask = _networkManager.ScheduleTask(new Task(() => TimeoutTransaction()), Timeout, _timeoutCancel);
 
                 _networkManager.AddCommandListener(this);
 
@@ -72,8 +71,7 @@ namespace ZigBeeNet.Transaction
                     _task.SetResult(new CommandResult(cmd));
                 }
             }
-
-
+            
             if (await Task.WhenAny(_task.Task, Task.Delay(Timeout)) == _task.Task)
             {
                 return _task.Task.Result;
@@ -105,6 +103,10 @@ namespace ZigBeeNet.Transaction
 
         private void TimeoutTransaction()
         {
+            if(_timeoutCancel.IsCancellationRequested)
+            {
+                return;
+            }
             _logger.Debug("Transaction timeout: {Command}", _command);
             lock (_command)
             {

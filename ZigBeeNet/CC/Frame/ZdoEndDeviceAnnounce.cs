@@ -18,9 +18,9 @@ namespace ZigBeeNet.CC.Frame
             apsFrame.SourceEndpoint = 0;
             apsFrame.Profile = 0;
 
-            apsFrame.Payload = new byte[packet.Packet.Length - 1];
+            apsFrame.Payload = new byte[packet.Packet.Length - 7];
 
-            Array.Copy(packet.Packet, 5, apsFrame.Payload, 0, packet.Packet.Length - 6);
+            Array.Copy(packet.Packet, 6, apsFrame.Payload, 0, packet.Packet.Length - 7);
             
             return apsFrame;
         }

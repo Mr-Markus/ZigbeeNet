@@ -284,7 +284,7 @@ namespace ZigBeeNet.App
 
             _logger.Debug("{NetworkAddress}: NWK Discovery scheduling node discovery", nodeNetworkAddress);
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 try
                 {
@@ -298,7 +298,7 @@ namespace ZigBeeNet.App
                             break;
                         }
 
-                        success = GetIeeeAddress(nodeNetworkAddress);
+                        success = await GetIeeeAddress(nodeNetworkAddress);
 
                         if (success)
                         {
@@ -331,7 +331,7 @@ namespace ZigBeeNet.App
          * @param networkAddress the network address of the node
          * @return true if the message was processed ok
          */
-        private bool GetIeeeAddress(ushort networkAddress)
+        private async Task<bool> GetIeeeAddress(ushort networkAddress)
         {
             try
             {
@@ -348,7 +348,7 @@ namespace ZigBeeNet.App
                     ieeeAddressRequest.RequestType = 1;
                     ieeeAddressRequest.StartIndex = startIndex;
                     ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
-                    CommandResult response = _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest).Result;
+                    CommandResult response = await _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest);
                     if (response.IsError())
                     {
                         return false;

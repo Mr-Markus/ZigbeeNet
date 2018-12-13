@@ -78,7 +78,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
 
             //Array.Copy(framedata, 9, Data, 0, framedata.Length - 10);
 
-            Data = framedata.Skip(8).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
+            Data = framedata.Skip(9).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_MSG_CB_INCOMING), framedata);
         }

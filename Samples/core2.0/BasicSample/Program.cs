@@ -73,62 +73,63 @@ namespace BasicSample
 
                 //networkManager.Startup(true);
 
-                Console.Write("How long to permit join? : ");
-                string duration = Console.ReadLine();
+                //Console.Write("How long to permit join? : ");
+                //string duration = Console.ReadLine();
 
-                int durationInt = 0;
+                //int durationInt = 0;
 
-                bool result = int.TryParse(duration, out durationInt);
+                //bool result = int.TryParse(duration, out durationInt);
 
-                if (result)
+                //if (result)
+                //{
+                ZigBeeNode coord = networkManager.GetNode(0);
+
+                coord.PermitJoin(true);
+
+                Console.WriteLine("Joining enabled...");
+
+                string cmd = Console.ReadLine();
+
+                while (cmd != "exit")
                 {
-                    ZigBeeNode coord = networkManager.GetNode(0);
-
-                    coord.PermitJoin(durationInt);
-
-                    Console.WriteLine("Joining enabled...");
-
-                    string cmd = Console.ReadLine();
-
-                    while (cmd != "exit")
+                    if (cmd == "toggle")
                     {
-                        if (cmd == "toggle") {
-                            Console.WriteLine("Destination Address: ");
-                            string nwkAddr = Console.ReadLine();
+                        Console.WriteLine("Destination Address: ");
+                        string nwkAddr = Console.ReadLine();
 
-                            if (ushort.TryParse(nwkAddr, out ushort addr))
+                        if (ushort.TryParse(nwkAddr, out ushort addr))
+                        {
+                            var node = networkManager.GetNode(addr);
+
+                            if (node != null)
                             {
-                                var node = networkManager.GetNode(addr);
+                                ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 0);
+                                node.AddEndpoint(ep);
 
-                                if (node != null)
-                                {
-                                    ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 0);
-                                    node.AddEndpoint(ep);
+                                ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
 
-                                    ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
-
-                                    onOff.ToggleCommand();
-                                }
+                                onOff.ToggleCommand();
                             }
                         }
-
-                        cmd = Console.ReadLine();
                     }
+
+                    cmd = Console.ReadLine();
                 }
+                //}
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
             //Console.ReadLine();
-        }        
+        }
     }
 
     public class ConsoleCommandListener : IZigBeeCommandListener
     {
         public void CommandReceived(ZigBeeCommand command)
         {
-            Console.WriteLine(command);
+            //Console.WriteLine(command);
         }
     }
 

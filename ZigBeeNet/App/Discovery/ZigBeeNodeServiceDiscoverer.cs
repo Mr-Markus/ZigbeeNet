@@ -340,7 +340,7 @@ namespace ZigBeeNet.App.Discovery
             networkAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ALL_DEVICES).Key);
 
             CommandResult response = await NetworkManager.SendTransaction(networkAddressRequest, networkAddressRequest);
-            NetworkAddressResponse networkAddressResponse = (NetworkAddressResponse)response.Response;
+            NetworkAddressResponse networkAddressResponse = response.GetResponse<NetworkAddressResponse>();
 
             _logger.Debug("{NetworkAddress}: Node SVC Discovery: NetworkAddressRequest returned {Response}", Node.NetworkAddress, networkAddressResponse);
 
@@ -351,7 +351,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (networkAddressResponse.Status == ZdoStatus.SUCCESS)
             {
-                Node.NetworkAddress = (ushort)networkAddressResponse.NwkAddrRemoteDev;
+                Node.NetworkAddress = networkAddressResponse.NwkAddrRemoteDev;
 
                 return true;
             }
