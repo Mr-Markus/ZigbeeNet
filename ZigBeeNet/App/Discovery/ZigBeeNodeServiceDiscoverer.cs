@@ -286,11 +286,8 @@ namespace ZigBeeNet.App.Discovery
 
                     // We failed with the last request. Wait a bit then retry.
                     retryDelay = (new Random().Next(retryCnt) + 1 + retryMin) * _retryPeriod;
-                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed. Retry {}, wait {Delay}ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
-
-                    
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed. Retry {Retry}, wait {Delay} ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
                 }
-
 
                 // Reschedule the task
                 var tmp = _cancellationTokenSource;
@@ -299,7 +296,6 @@ namespace ZigBeeNet.App.Discovery
 
                 await Discovery(_cancellationTokenSource.Token, retryCnt);
                 tmp.Cancel();
-
             }
             catch (TaskCanceledException)
             {
@@ -311,7 +307,7 @@ namespace ZigBeeNet.App.Discovery
             }
             catch (Exception e)
             {
-                _logger.Error("{IeeeAddress}: Node SVC Discovery: exception: ", Node.IeeeAddress, e);
+                _logger.Error("{IeeeAddress}: Node SVC Discovery: exception: {Exception}", Node.IeeeAddress, e);
             }
         }
 
@@ -519,7 +515,7 @@ namespace ZigBeeNet.App.Discovery
         private async Task<bool> RequestNeighborTable()
         {
             // Start index for the list is 0
-            int startIndex = 0;
+            byte startIndex = 0;
             int totalNeighbors = 0;
             List<NeighborTable> neighbors = new List<NeighborTable>();
             do
@@ -561,7 +557,7 @@ namespace ZigBeeNet.App.Discovery
                 neighbors.AddRange(neighborResponse.NeighborTableList);
 
                 // Continue with next request
-                startIndex += neighborResponse.NeighborTableList.Count;
+                startIndex += (byte)neighborResponse.NeighborTableList.Count;
                 totalNeighbors = neighborResponse.NeighborTableEntries;
 
             } while (startIndex < totalNeighbors);

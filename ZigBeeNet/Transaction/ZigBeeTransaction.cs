@@ -74,6 +74,8 @@ namespace ZigBeeNet.Transaction
             
             if (await Task.WhenAny(_task.Task, Task.Delay(Timeout)) == _task.Task)
             {
+                _timeoutCancel.Cancel();
+
                 return _task.Task.Result;
             }
             else

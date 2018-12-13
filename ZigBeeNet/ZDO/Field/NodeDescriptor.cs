@@ -11,13 +11,13 @@ namespace ZigBeeNet.ZDO.Field
     {
         private int _apsFlags;
 
-        public int BufferSize { get; private set; }
+        public byte BufferSize { get; private set; }
         public bool ComplexDescriptorAvailable { get; private set; }
-        public int ManufacturerCode { get; private set; }
+        public ushort ManufacturerCode { get; private set; }
         public LogicalType LogicalNodeType { get; private set; } = LogicalType.UNKNOWN;
         public List<ServerCapabilitiesType> ServerCapabilities { get; private set; } = new List<ServerCapabilitiesType>();
-        public int IncomingTransferSize { get; set; }
-        public int OutgoingTransferSize { get; private set; }
+        public ushort IncomingTransferSize { get; set; }
+        public ushort OutgoingTransferSize { get; private set; }
         public bool IsuserDescriptorAvailable { get; private set; }
 
         public List<FrequencyBandType> FrequencyBands { get; } = new List<FrequencyBandType>();
@@ -77,8 +77,8 @@ namespace ZigBeeNet.ZDO.Field
             // Default constructor - does nothing
         }
 
-        public NodeDescriptor(int apsFlags, int bufferSize, int macCapabilities, bool complexDescriptorAvailable,
-                int manufacturerCode, int logicalType, int serverMask, int transferSize, bool userDescriptorAvailable,
+        public NodeDescriptor(int apsFlags, byte bufferSize, int macCapabilities, bool complexDescriptorAvailable,
+                ushort manufacturerCode, int logicalType, ushort serverMask, ushort transferSize, bool userDescriptorAvailable,
                 int frequencyBands)
         {
             this.ComplexDescriptorAvailable = complexDescriptorAvailable;
@@ -143,7 +143,7 @@ namespace ZigBeeNet.ZDO.Field
             }
         }
 
-        private void SetServerCapabilities(int serverMask)
+        private void SetServerCapabilities(ushort serverMask)
         {
             this.ServerCapabilities.Clear();
             if ((serverMask & 0x01) != 0)
@@ -225,9 +225,9 @@ namespace ZigBeeNet.ZDO.Field
             // logicalType = (LogicalType) deserializer.deserialize(ZclDataType.SIGNED_8_BIT_INTEGER);
 
             // Some flags...
-            int value1 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
-            int value2 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
-            int value3 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
+            byte value1 = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
+            byte value2 = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
+            byte value3 = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.DATA_8_BIT));
 
             SetLogicalType(value1 & 0x07);
             ComplexDescriptorAvailable = (value1 & 0x08) != 0;
@@ -238,13 +238,13 @@ namespace ZigBeeNet.ZDO.Field
 
             // complexDescriptorAvailable = (Boolean) deserializer.deserialize(ZclDataType.BOOLEAN);
             // userDescriptorAvailable = (Boolean) deserializer.deserialize(ZclDataType.BOOLEAN);
-            ManufacturerCode = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            BufferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            IncomingTransferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ManufacturerCode = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            BufferSize = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            IncomingTransferSize = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
 
-            SetServerCapabilities((int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER)));
-            OutgoingTransferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            int descriptorCapabilities = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
+            SetServerCapabilities((ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER)));
+            OutgoingTransferSize = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            byte descriptorCapabilities = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
 
             IsextendedEndpointListAvailable = (descriptorCapabilities & 0x01) != 0;
             ExtendedSimpleDescriptorListAvailable = (descriptorCapabilities & 0x02) != 0;

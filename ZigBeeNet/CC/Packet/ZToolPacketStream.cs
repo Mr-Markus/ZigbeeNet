@@ -233,8 +233,8 @@ namespace ZigBeeNet.CC.Packet
                 case ZToolCMD.ZDO_MGMT_RTG_RSP:
                     return new ZDO_MGMT_RTG_RSP(payload);
                 case ZToolCMD.ZDO_MSG_CB_INCOMING:
-                    return new ZDO_MSG_CB_INCOMING(payload);
-                //return incoming.translate();
+                    ZDO_MSG_CB_INCOMING incoming = new ZDO_MSG_CB_INCOMING(payload);
+                    return incoming.Translate();
                 case ZToolCMD.ZDO_NODE_DESC_REQ_SRSP:
                     return new ZDO_NODE_DESC_REQ_SRSP(payload);
                 case ZToolCMD.ZDO_NODE_DESC_RSP:

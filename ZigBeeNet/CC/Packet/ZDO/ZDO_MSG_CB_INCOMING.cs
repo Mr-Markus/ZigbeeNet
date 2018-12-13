@@ -12,7 +12,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
     public class ZDO_MSG_CB_INCOMING : ZToolPacket /* implements IRESPONSE_CALLBACK,IZDO */
     {
         private readonly ILog _logger = LogProvider.For<ZDO_MSG_CB_INCOMING>();
-        
+
         public static Dictionary<ushort, Type> ClusterToRSP { get; private set; }
 
         static ZDO_MSG_CB_INCOMING()
@@ -86,49 +86,115 @@ namespace ZigBeeNet.CC.Packet.ZDO
         /**
          * Translates the ZigBee ZDO cluster packet into a ZTool RSP packet
          */
-        //public ZToolPacket Translate()
-        //{
-        //    ZToolPacket newPacket;
-        //    byte[] frame;
+        public ZToolPacket Translate()
+        {
+            ZToolPacket newPacket = null;
+            byte[] frame;
 
-        //    _logger.Trace("Translating ZDO cluster callback {ClusterId}", ClusterId);
+            _logger.Trace("Translating ZDO cluster callback {ClusterId}", ClusterId);
 
-        //    Type newPacketClass = ClusterToRSP[ClusterId.Value];
+            Type newPacketClass = ClusterToRSP[ClusterId.Value];
 
-        //    if (newPacketClass == null)
-        //    {
-        //        _logger.Error("Unhandled ZDO cluster callback {Cluster}", ClusterId);
-        //        return this;
-        //    }
-        //    else if (newPacketClass == typeof(ZDO_NWK_ADDR_RSP) || newPacketClass == typeof(ZDO_IEEE_ADDR_RSP)) {
-        //    // The address responses don't need SrcAddr. NumAssocDev and StartIndex positions are reversed.
+            if (newPacketClass == null)
+            {
+                _logger.Error("Unhandled ZDO cluster callback {Cluster}", ClusterId);
+                return this;
+            }
+            else if (newPacketClass == typeof(ZDO_NWK_ADDR_RSP) || newPacketClass == typeof(ZDO_IEEE_ADDR_RSP))
+            {
+                // The address responses don't need SrcAddr. NumAssocDev and StartIndex positions are reversed.
 
-        //    // The new response frame is at least 13 bytes long.
-        //    frame = new byte[Math.Max(Data.Length, 13)];
-        //    System.arraycopy(Data, 0, frame, 0, Data.Length);
-        //    // If RequestType == 1 there are two extra bytes in the frame
-        //    if (Data.Length > 12) {
-        //        frame[11] = Data[12]; // NumAssocDev
-        //        frame[12] = Data[11]; // StartIndex
-        //    } else {
-        //        frame[11] = 0;
-        //        frame[12] = 0;
-        //    }
-        //} else {
-        //    // Default frame translation, this works for most callbacks.
-        //    // Get 2 extra bytes at the beginning to put source address into.
-        //    frame = new byte[Data.Length + 2];
-        //    System.arraycopy(Data, 0, frame, 2, Data.Length);
-        //    frame[0] = SrcAddr.Lsb;
-        //    frame[1] = SrcAddr.Msb;
-        //}
+                // The new response frame is at least 13 bytes long.
+                frame = new byte[Math.Max(Data.Length, 13)];
+                Array.Copy(Data, 0, frame, 0, Data.Length);
+                // If RequestType == 1 there are two extra bytes in the frame
+                if (Data.Length > 12)
+                {
+                    frame[11] = Data[12]; // NumAssocDev
+                    frame[12] = Data[11]; // StartIndex
+                }
+                else
+                {
+                    frame[11] = 0;
+                    frame[12] = 0;
+                }
+            }
+            else
+            {
+                // Default frame translation, this works for most callbacks.
+                // Get 2 extra bytes at the beginning to put source address into.
+                frame = new byte[Data.Length + 2];
+                Array.Copy(Data, 0, frame, 2, Data.Length);
+                frame[0] = SrcAddr.Lsb;
+                frame[1] = SrcAddr.Msb;
+            }
 
-        //try {
-        //    newPacket = newPacketClass.getConstructor(int[].class).newInstance(frame);
-        //} catch (Exception e) {
-        //    logger.error("Error constructing response packet {}", e);
-        //    return this;
-        //}
+            try
+            {
+                //newPacket = Activator.CreateInstance(newPacketClass, frame);
+                switch (ClusterId.Value)
+                {
+                    case 0x0013:
+                        newPacket = new ZDO_END_DEVICE_ANNCE_IND(frame);
+                        break;
+                    case 0x8000:
+                        newPacket = new ZDO_NWK_ADDR_RSP(frame);
+                        break;
+                    case 0x8001:
+                        newPacket = new ZDO_IEEE_ADDR_RSP(frame);
+                        break;
+                    case 0x8002:
+                        newPacket = new ZDO_NODE_DESC_RSP(frame);
+                        break;
+                    case 0x8003:
+                        newPacket = new ZDO_POWER_DESC_RSP(frame);
+                        break;
+                    case 0x8004:
+                        newPacket = new ZDO_SIMPLE_DESC_RSP(frame);
+                        break;
+                    case 0x8005:
+                        newPacket = new ZDO_ACTIVE_EP_RSP(frame);
+                        break;
+                    case 0x8006:
+                        newPacket = new ZDO_MATCH_DESC_RSP(frame);
+                        break;
+                    case 0x8011:
+                        newPacket = new ZDO_USER_DESC_RSP(frame);
+                        break;
+                    case 0x8014:
+                        newPacket = new ZDO_USER_DESC_CONF(frame);
+                        break;
+                    case 0x8020:
+                        newPacket = new ZDO_END_DEVICE_BIND_RSP(frame);
+                        break;
+                    case 0x8021:
+                        newPacket = new ZDO_BIND_RSP(frame);
+                        break;
+                    case 0x8022:
+                        newPacket = new ZDO_UNBIND_RSP(frame);
+                        break;
+                    case 0x8031:
+                        newPacket = new ZDO_MGMT_LQI_RSP(frame);
+                        break;
+                    case 0x8034:
+                        newPacket = new ZDO_MGMT_LEAVE_RSP(frame);
+                        break;
+                    case 0x8036:
+                        newPacket = new ZDO_MGMT_PERMIT_JOIN_RSP(frame);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error constructing response packet {Exception}", e);
+                return this;
+            }
+
+            if (newPacket != null)
+                newPacket.FCS = this.FCS;
+
+            return newPacket;
+        }
 
         public override string ToString()
         {

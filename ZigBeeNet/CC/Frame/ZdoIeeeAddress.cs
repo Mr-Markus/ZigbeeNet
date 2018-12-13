@@ -18,7 +18,7 @@ namespace ZigBeeNet.CC.Frame
             apsFrame.Profile = 0;
 
             byte[] temp = new byte[packet.Packet.Length - 1];
-            Array.Copy(packet.Packet, 3, temp, 0, packet.Packet.Length - 1);
+            Array.Copy(packet.Packet, 3, temp, 0, packet.Packet.Length - 4);
 
             byte a = temp[12];
             temp[12] = temp[13];
