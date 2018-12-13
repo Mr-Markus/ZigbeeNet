@@ -132,7 +132,7 @@ namespace ZigBeeNet.App.Discovery
          * Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
          * the timer is restarted from the time of calling this method.
          */
-        public void refresh()
+        public void Refresh()
         {
             _logger.Debug("DISCOVERY Extension: Start mesh update task with interval of {UpdatePeriod} seconds", _updatePeriod);
 
@@ -173,7 +173,7 @@ namespace ZigBeeNet.App.Discovery
             if (command is ManagementLeaveResponse || command is DeviceAnnounce)
             {
                 _logger.Debug("DISCOVERY Extension: Mesh related command received. Triggering mesh update.");
-                refresh();
+                Refresh();
             }
         }
 

@@ -89,7 +89,7 @@ namespace ZigBeeNet.ZDO.Field
             SetLogicalType(logicalType);
             SetMacCapabilities(macCapabilities);
             SetFrequencyBands(frequencyBands);
-            setServerCapabilities(serverMask);
+            SetServerCapabilities(serverMask);
 
             this._apsFlags = apsFlags;
         }
@@ -143,7 +143,7 @@ namespace ZigBeeNet.ZDO.Field
             }
         }
 
-        private void setServerCapabilities(int serverMask)
+        private void SetServerCapabilities(int serverMask)
         {
             this.ServerCapabilities.Clear();
             if ((serverMask & 0x01) != 0)
@@ -242,7 +242,7 @@ namespace ZigBeeNet.ZDO.Field
             BufferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             IncomingTransferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
 
-            setServerCapabilities((int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER)));
+            SetServerCapabilities((int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER)));
             OutgoingTransferSize = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             int descriptorCapabilities = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
 
