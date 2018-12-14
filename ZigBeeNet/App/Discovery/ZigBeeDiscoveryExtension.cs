@@ -79,7 +79,7 @@ namespace ZigBeeNet.App.Discovery
             _networkManager.RemoveNetworkNodeListener(this);
             _networkManager.RemoveCommandListener(this);
 
-            networkDiscoverer.Shutdown();
+            networkDiscoverer?.Shutdown();
 
             extensionStarted = false;
 

@@ -71,7 +71,7 @@ namespace ZigBeeNet.Transaction
                     _task.SetResult(new CommandResult(cmd));
                 }
             }
-            
+
             if (await Task.WhenAny(_task.Task, Task.Delay(Timeout)) == _task.Task)
             {
                 _timeoutCancel.Cancel();
@@ -83,7 +83,7 @@ namespace ZigBeeNet.Transaction
                 // Timeout
                 TimeoutTransaction();
                 return new CommandResult();
-            }            
+            }
         }
 
         public void CommandReceived(ZigBeeCommand receivedCommand)
@@ -95,7 +95,7 @@ namespace ZigBeeNet.Transaction
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
                     _timeoutCancel.Cancel();
-                    _task.SetResult(new CommandResult(receivedCommand));
+                    _task.TrySetResult(new CommandResult(receivedCommand));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace ZigBeeNet.Transaction
 
         private void TimeoutTransaction()
         {
-            if(_timeoutCancel.IsCancellationRequested)
+            if (_timeoutCancel.IsCancellationRequested)
             {
                 return;
             }
