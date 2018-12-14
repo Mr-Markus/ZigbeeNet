@@ -20,7 +20,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * BindingTableEntries command message field.
          */
-        public int BindingTableEntries { get; set; }
+        public ushort BindingTableEntries { get; set; }
 
         /**
          * BindingTableList command message field.
@@ -65,8 +65,8 @@ namespace ZigBeeNet.ZDO.Command
                 return;
             }
 
-            BindingTableEntries = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            int? bindingTableListCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            BindingTableEntries = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ushort? bindingTableListCount = (ushort?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
 
             if (bindingTableListCount != null)
             {

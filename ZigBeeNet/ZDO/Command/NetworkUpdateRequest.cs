@@ -25,22 +25,22 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * ScanDuration command message field.
         */
-        public int ScanDuration { get; set; }
+        public byte ScanDuration { get; set; }
 
         /**
         * ScanCount command message field.
         */
-        public int ScanCount { get; set; }
+        public byte ScanCount { get; set; }
 
         /**
         * nwkUpdateId command message field.
         */
-        public int NwkUpdateId { get; set; }
+        public byte NwkUpdateId { get; set; }
 
         /**
         * nwkManagerAddr command message field.
         */
-        public int NwkManagerAddr { get; set; }
+        public ushort NwkManagerAddr { get; set; }
 
         /**
         * Default constructor.
@@ -66,10 +66,10 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             ScanChannels = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            ScanDuration = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ScanCount = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkUpdateId = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkManagerAddr = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            ScanDuration = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ScanCount = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkUpdateId = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkManagerAddr = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
         public override string ToString()

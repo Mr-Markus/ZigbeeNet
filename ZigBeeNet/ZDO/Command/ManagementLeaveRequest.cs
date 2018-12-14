@@ -22,12 +22,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * DeviceAddress command message field.
         */
-        public IeeeAddress deviceAddress;
+        public IeeeAddress DeviceAddress { get; set; }
 
         /**
         * RemoveChildren_Rejoin command message field.
         */
-        public bool RemoveChildrenRejoin;
+        public bool RemoveChildrenRejoin { get; set; }
 
         /**
         * Default constructor.
@@ -44,7 +44,7 @@ namespace ZigBeeNet.ZDO.Command
         */
         public IeeeAddress getDeviceAddress()
         {
-            return deviceAddress;
+            return DeviceAddress;
         }
 
         /**
@@ -54,7 +54,7 @@ namespace ZigBeeNet.ZDO.Command
         */
         public void setDeviceAddress(IeeeAddress deviceAddress)
         {
-            this.deviceAddress = deviceAddress;
+            this.DeviceAddress = deviceAddress;
         }
 
         /**
@@ -81,7 +81,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(deviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
+            serializer.Serialize(DeviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
             serializer.Serialize(RemoveChildrenRejoin, ZclDataType.Get(DataType.BOOLEAN));
         }
 
@@ -89,8 +89,8 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            deviceAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            RemoveChildrenRejoin = (Boolean)deserializer.Deserialize(ZclDataType.Get(DataType.BOOLEAN));
+            DeviceAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
+            RemoveChildrenRejoin = (bool)deserializer.Deserialize(ZclDataType.Get(DataType.BOOLEAN));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
@@ -110,7 +110,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append("ManagementLeaveRequest [")
                    .Append(base.ToString())
                    .Append(", deviceAddress=")
-                   .Append(deviceAddress)
+                   .Append(DeviceAddress)
                    .Append(", removeChildrenRejoin=")
                    .Append(RemoveChildrenRejoin)
                    .Append(']');

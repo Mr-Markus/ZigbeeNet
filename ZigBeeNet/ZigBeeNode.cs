@@ -137,7 +137,7 @@ namespace ZigBeeNet
          * @param duration sets the duration of the join enable. Setting this to 0 disables joining. Setting to a value
          *            greater than 255 seconds will permanently enable joining.
          */
-        public void PermitJoin(int duration)
+        public void PermitJoin(byte duration)
         {
             ManagementPermitJoiningRequest command = new ManagementPermitJoiningRequest();
 
@@ -280,7 +280,7 @@ namespace ZigBeeNet
          */
         public async Task<bool> UpdateBindingTable()
         {
-            int index = 0;
+            byte index = 0;
             int tableSize = 0;
             List<BindingTable> bindingTable = new List<BindingTable>();
 
@@ -301,7 +301,7 @@ namespace ZigBeeNet
                 if (response.StartIndex == index)
                 {
                     tableSize = response.BindingTableEntries;
-                    index += response.BindingTableList.Count;
+                    index += (byte)response.BindingTableList.Count;
                     bindingTable.AddRange(response.BindingTableList);
                 }
             } while (index < tableSize);

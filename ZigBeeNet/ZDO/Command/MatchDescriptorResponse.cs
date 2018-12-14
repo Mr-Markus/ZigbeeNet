@@ -20,7 +20,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * NWKAddrOfInterest command message field.
         */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
         * MatchList command message field.

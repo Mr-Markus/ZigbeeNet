@@ -27,7 +27,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * PermitDuration command message field.
          */
-        public int PermitDuration { get; set; }
+        public byte PermitDuration { get; set; }
 
         /**
          * TC_Significance command message field.
@@ -54,7 +54,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            PermitDuration = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            PermitDuration = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             TcSignificance = (bool)deserializer.Deserialize(ZclDataType.Get(DataType.BOOLEAN));
         }
 

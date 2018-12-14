@@ -31,14 +31,14 @@ namespace ZigBeeNet.ZDO.Command
          * 
          * The source endpoint for the binding entry.
          */
-        public int SrcEndpoint { get; set; }
+        public byte SrcEndpoint { get; set; }
 
         /**
          * BindCluster command message field.
          * 
          * The identifier of the cluster on the source device that is bound to the destination.
          */
-        public int BindCluster { get; set; }
+        public ushort BindCluster { get; set; }
 
         /**
          * DstAddrMode command message field.
@@ -51,7 +51,7 @@ namespace ZigBeeNet.ZDO.Command
          * 0x03 = 64-bit extended address for DstAddress and DstEndp present
          * 0x04 – 0xff = reserved
          */
-        public int DstAddrMode { get; set; }
+        public byte DstAddrMode { get; set; }
 
         /**
          * DstAddress command message field.
@@ -66,7 +66,7 @@ namespace ZigBeeNet.ZDO.Command
          * This field shall be present only if the DstAddrMode field has a value of 0x03 and,
          * if present, shall be the destination endpoint for the binding entry.
          */
-        public int DstEndpoint { get; set; }
+        public byte DstEndpoint { get; set; }
 
         /**
          * Default constructor.
@@ -93,11 +93,11 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             SrcAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            SrcEndpoint = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            BindCluster = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            DstAddrMode = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            SrcEndpoint = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            BindCluster = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            DstAddrMode = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             DstAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            DstEndpoint = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            DstEndpoint = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

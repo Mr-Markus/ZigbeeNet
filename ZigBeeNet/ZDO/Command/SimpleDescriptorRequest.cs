@@ -20,12 +20,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * NWKAddrOfInterest command message field.
          */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
          * Endpoint command message field.
          */
-        public int Endpoint { get; set; }
+        public byte Endpoint { get; set; }
 
         /**
          * Default constructor.
@@ -48,8 +48,8 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            Endpoint = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            Endpoint = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

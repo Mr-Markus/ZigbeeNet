@@ -31,18 +31,18 @@ namespace ZigBeeNet
          * The endpoint number for this endpoint. Applications shall only use endpoints 1-254. Endpoints 241-254 shall be
          * used only with the approval of the ZigBee Alliance.
          */
-        public int EndpointId { get; private set; }
+        public byte EndpointId { get; private set; }
 
         /**
          * The profile ID.
          */
-        public int ProfileId { get; set; }
+        public ushort ProfileId { get; set; }
 
         /**
          * The device ID. Specifies the device description supported on this endpoint. Device description identifiers shall
          * be obtained from the ZigBee Alliance.
          */
-        public int DeviceId { get; set; }
+        public ushort DeviceId { get; set; }
 
         /**
          * The device version.
@@ -73,7 +73,7 @@ namespace ZigBeeNet
          * @param node the parent {@link ZigBeeNode}
          * @param endpoint the endpoint number within the {@link ZigBeeNode}
          */
-        public ZigBeeEndpoint(ZigBeeNode node, int endpoint)
+        public ZigBeeEndpoint(ZigBeeNode node, byte endpoint)
         {
             this.Node = node;
             this.EndpointId = endpoint;

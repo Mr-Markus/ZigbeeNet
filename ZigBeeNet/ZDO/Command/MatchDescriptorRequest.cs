@@ -23,12 +23,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * NWKAddrOfInterest command message field.
         */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
         * ProfileID command message field.
         */
-        public int ProfileId { get; set; }
+        public ushort ProfileId { get; set; }
 
         /**
         * InClusterList command message field.
@@ -77,9 +77,9 @@ namespace ZigBeeNet.ZDO.Command
             InClusterList = new List<ushort>();
             OutClusterList = new List<ushort>();
 
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            ProfileId = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            int? inClusterCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            ProfileId = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            byte? inClusterCount = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (inClusterCount != null)
             {

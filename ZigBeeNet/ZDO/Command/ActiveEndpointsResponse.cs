@@ -18,12 +18,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * NWKAddrOfInterest command message field.
          */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
          * ActiveEPList command message field.
          */
-        public List<int> ActiveEpList { get; set; }
+        public List<byte> ActiveEpList { get; set; }
 
         /**
          * Default constructor.
@@ -52,7 +52,7 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             // Create lists
-            ActiveEpList = new List<int>();
+            ActiveEpList = new List<byte>();
 
             Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
 
@@ -62,14 +62,14 @@ namespace ZigBeeNet.ZDO.Command
                 return;
             }
 
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            int? activeEpCnt = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            byte? activeEpCnt = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (activeEpCnt != null)
             {
                 for (int cnt = 0; cnt < activeEpCnt; cnt++)
                 {
-                    ActiveEpList.Add((int)deserializer.Deserialize(ZclDataType.Get(DataType.ENDPOINT)));
+                    ActiveEpList.Add((byte)deserializer.Deserialize(ZclDataType.Get(DataType.ENDPOINT)));
                 }
             }
         }

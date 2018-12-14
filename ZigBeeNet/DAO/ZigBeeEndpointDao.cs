@@ -6,31 +6,31 @@ namespace ZigBeeNet.DAO
 {
     public class ZigBeeEndpointDao
     {
-        public int ProfileId { get; set; }
+        public ushort ProfileId { get; set; }
 
-        public int EndpointId { get; set; }
+        public byte EndpointId { get; set; }
 
         /**
          * Input cluster IDs
          */
-        public List<int> InputClusterIds { get; } = new List<int>();
+        public List<ushort> InputClusterIds { get; } = new List<ushort>();
 
         /**
          * Output cluster IDs
          */
-        public List<int> OutputClusterIds { get; } = new List<int>();
+        public List<ushort> OutputClusterIds { get; } = new List<ushort>();
 
         public List<ZclClusterDao> InputClusters { get; } = new List<ZclClusterDao>();
 
         public List<ZclClusterDao> OutputClusters { get; } = new List<ZclClusterDao>();
 
 
-        public void SetInputClusterIds(IEnumerable<int> ids)
+        public void SetInputClusterIds(IEnumerable<ushort> ids)
         {
             this.InputClusterIds.AddRange(ids);
         }
 
-        public void SetOutputClusterIds(IEnumerable<int> ids)
+        public void SetOutputClusterIds(IEnumerable<ushort> ids)
         {
             this.OutputClusterIds.AddRange(ids);
         }

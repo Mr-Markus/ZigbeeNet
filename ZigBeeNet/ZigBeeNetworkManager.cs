@@ -1030,7 +1030,7 @@ namespace ZigBeeNet
          *            value of 255 is not permitted and will be ignored.
          * @return {@link ZigBeeStatus} with the status of function
          */
-        public ZigBeeStatus PermitJoin(int duration)
+        public ZigBeeStatus PermitJoin(byte duration)
         {
             return PermitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ROUTERS_AND_COORD).Key), duration);
         }
@@ -1046,7 +1046,7 @@ namespace ZigBeeNet
          *            value of 255 is not permitted and will be ignored.
          * @return {@link ZigBeeStatus} with the status of function
          */
-        public ZigBeeStatus PermitJoin(ZigBeeEndpointAddress destination, int duration)
+        public ZigBeeStatus PermitJoin(ZigBeeEndpointAddress destination, byte duration)
         {
             if (duration < 0 || duration >= 255)
             {

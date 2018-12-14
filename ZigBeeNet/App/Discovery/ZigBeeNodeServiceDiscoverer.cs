@@ -487,7 +487,7 @@ namespace ZigBeeNet.App.Discovery
 
             // Get the simple descriptors for all endpoints
             List<ZigBeeEndpoint> endpoints = new List<ZigBeeEndpoint>();
-            foreach (int endpointId in activeEndpointsResponse.ActiveEpList)
+            foreach (byte endpointId in activeEndpointsResponse.ActiveEpList)
             {
                 ZigBeeEndpoint endpoint = await GetSimpleDescriptor(endpointId);
                 if (endpoint == null)
@@ -577,7 +577,7 @@ namespace ZigBeeNet.App.Discovery
         private async Task<bool> RequestRoutingTable()
         {
             // Start index for the list is 0
-            int startIndex = 0;
+            byte startIndex = 0;
             int totalRoutes = 0;
             List<RoutingTable> routes = new List<RoutingTable>();
 
@@ -616,7 +616,7 @@ namespace ZigBeeNet.App.Discovery
                 routes.AddRange(routingResponse.RoutingTableList);
 
                 // Continue with next request
-                startIndex += routingResponse.RoutingTableList.Count;
+                startIndex += (byte)routingResponse.RoutingTableList.Count;
                 totalRoutes = routingResponse.RoutingTableEntries;
 
             } while (startIndex < totalRoutes);
@@ -636,7 +636,7 @@ namespace ZigBeeNet.App.Discovery
          * @throws ExecutionException
          * @throws InterruptedException
          */
-        private async Task<ZigBeeEndpoint> GetSimpleDescriptor(int endpointId)
+        private async Task<ZigBeeEndpoint> GetSimpleDescriptor(byte endpointId)
         {
             SimpleDescriptorRequest simpleDescriptorRequest = new SimpleDescriptorRequest();
             simpleDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);

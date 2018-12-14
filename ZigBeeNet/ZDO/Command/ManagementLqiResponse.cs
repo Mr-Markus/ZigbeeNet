@@ -20,12 +20,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * NeighborTableEntries command message field.
          */
-        public int NeighborTableEntries { get; set; }
+        public byte NeighborTableEntries { get; set; }
 
         /**
          * StartIndex command message field.
          */
-        public int StartIndex { get; set; }
+        public byte StartIndex { get; set; }
 
         /**
          * NeighborTableList command message field.
@@ -68,9 +68,9 @@ namespace ZigBeeNet.ZDO.Command
                 // Don't read the full response if we have an error
                 return;
             }
-            NeighborTableEntries = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            int? neighborTableListCount = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NeighborTableEntries = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? neighborTableListCount = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (neighborTableListCount != null)
             {

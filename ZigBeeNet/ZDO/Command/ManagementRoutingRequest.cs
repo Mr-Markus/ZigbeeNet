@@ -20,7 +20,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * StartIndex command message field.
          */
-        public int StartIndex { get; set; }
+        public byte StartIndex { get; set; }
 
         /**
          * Default constructor.
@@ -41,7 +41,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

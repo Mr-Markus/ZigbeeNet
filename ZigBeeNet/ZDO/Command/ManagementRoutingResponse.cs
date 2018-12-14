@@ -20,12 +20,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * RoutingTableEntries command message field.
          */
-        public int RoutingTableEntries { get; set; }
+        public byte RoutingTableEntries { get; set; }
 
         /**
          * StartIndex command message field.
          */
-        public int StartIndex { get; set; }
+        public byte StartIndex { get; set; }
 
         /**
          * RoutingTableList command message field.
@@ -70,9 +70,9 @@ namespace ZigBeeNet.ZDO.Command
                 return;
             }
 
-            RoutingTableEntries = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            int? routingTableListCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            RoutingTableEntries = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? routingTableListCount = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (routingTableListCount != null)
             {

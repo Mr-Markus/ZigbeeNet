@@ -36,12 +36,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * TotalTransmissions command message field.
         */
-        public int totalTransmissions;
+        public ushort TotalTransmissions { get; set; }
 
         /**
         * TransmissionFailures command message field.
         */
-        public int TransmissionFailures { get; set; }
+        public ushort TransmissionFailures { get; set; }
 
         /**
         * EnergyValues command message field.
@@ -63,7 +63,7 @@ namespace ZigBeeNet.ZDO.Command
 
             serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
             serializer.Serialize(ScannedChannels, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(totalTransmissions, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(TotalTransmissions, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(TransmissionFailures, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(EnergyValues.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
@@ -89,9 +89,9 @@ namespace ZigBeeNet.ZDO.Command
             }
 
             ScannedChannels = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            totalTransmissions = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            TransmissionFailures = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            int? scannedChannelsListCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TotalTransmissions = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            TransmissionFailures = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            byte? scannedChannelsListCount = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (scannedChannelsListCount != null)
             {
@@ -113,7 +113,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", scannedChannels=")
                    .Append(ScannedChannels)
                    .Append(", totalTransmissions=")
-                   .Append(totalTransmissions)
+                   .Append(TotalTransmissions)
                    .Append(", transmissionFailures=")
                    .Append(TransmissionFailures)
                    .Append(", energyValues=")

@@ -20,17 +20,17 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * SourceTableEntries command message field.
          */
-        public int SourceTableEntries { get; set; }
+        public ushort SourceTableEntries { get; set; }
 
         /**
          * StartIndex command message field.
          */
-        public int StartIndex { get; set; }
+        public ushort StartIndex { get; set; }
 
         /**
          * SourceTableListCount command message field.
          */
-        public int SourceTableListCount { get; set; }
+        public ushort SourceTableListCount { get; set; }
 
         /**
          * SourceTableList command message field.
@@ -59,9 +59,9 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            SourceTableEntries = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SourceTableListCount = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SourceTableEntries = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            StartIndex = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SourceTableListCount = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             SourceTableList = (List<ulong>)deserializer.Deserialize(ZclDataType.Get(DataType.N_X_IEEE_ADDRESS));
         }
 

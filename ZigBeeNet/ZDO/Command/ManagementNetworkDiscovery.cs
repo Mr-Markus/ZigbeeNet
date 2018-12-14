@@ -24,12 +24,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * ScanDuration command message field.
         */
-        public int ScanDuration { get; set; }
+        public byte ScanDuration { get; set; }
 
         /**
         * StartIndex command message field.
         */
-        public int StartIndex { get; set; }
+        public byte StartIndex { get; set; }
 
         /**
         * Default constructor.
@@ -53,8 +53,8 @@ namespace ZigBeeNet.ZDO.Command
             base.Deserialize(deserializer);
 
             ScanChannels = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            ScanDuration = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ScanDuration = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public override string ToString()

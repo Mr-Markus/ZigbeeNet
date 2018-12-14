@@ -25,7 +25,7 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * EntryCount command message field.
 */
-        public int EntryCount { get; set; }
+        public ushort EntryCount { get; set; }
 
         /**
         * Default constructor.
@@ -53,7 +53,7 @@ namespace ZigBeeNet.ZDO.Command
                 // Don't read the full response if we have an error
                 return;
             }
-            EntryCount = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            EntryCount = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         public override string ToString()

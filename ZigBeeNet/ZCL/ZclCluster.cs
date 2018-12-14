@@ -452,7 +452,7 @@ namespace ZigBeeNet.ZCL
          * @param endpointId the destination endpoint ID
          * @return Command future
          */
-        public Task<CommandResult> Bind(IeeeAddress address, int endpointId)
+        public Task<CommandResult> Bind(IeeeAddress address, byte endpointId)
         {
             BindRequest command = new BindRequest();
             command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);
@@ -472,7 +472,7 @@ namespace ZigBeeNet.ZCL
          * @param endpointId the destination endpoint ID
          * @return Command future
          */
-        public Task<CommandResult> Unbind(IeeeAddress address, int endpointId)
+        public Task<CommandResult> Unbind(IeeeAddress address, byte endpointId)
         {
             UnbindRequest command = new UnbindRequest();
             command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);

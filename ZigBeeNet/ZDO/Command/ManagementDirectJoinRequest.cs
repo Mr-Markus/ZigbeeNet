@@ -22,12 +22,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * DeviceAddress command message field.
 */
-        public IeeeAddress deviceAddress;
+        public IeeeAddress DeviceAddress { get; set; }
 
         /**
         * CapabilityInformation command message field.
 */
-        public int capabilityInformation;
+        public byte CapabilityInformation { get; set; }
 
         /**
         * Default constructor.
@@ -44,7 +44,7 @@ namespace ZigBeeNet.ZDO.Command
 */
         public IeeeAddress getDeviceAddress()
         {
-            return deviceAddress;
+            return DeviceAddress;
         }
 
         /**
@@ -54,7 +54,7 @@ namespace ZigBeeNet.ZDO.Command
 */
         public void setDeviceAddress(IeeeAddress deviceAddress)
         {
-            this.deviceAddress = deviceAddress;
+            this.DeviceAddress = deviceAddress;
         }
 
         /**
@@ -64,7 +64,7 @@ namespace ZigBeeNet.ZDO.Command
 */
         public int getCapabilityInformation()
         {
-            return capabilityInformation;
+            return CapabilityInformation;
         }
 
         /**
@@ -72,25 +72,25 @@ namespace ZigBeeNet.ZDO.Command
         *
         * @param capabilityInformation the CapabilityInformation
 */
-        public void setCapabilityInformation(int capabilityInformation)
+        public void SetCapabilityInformation(byte capabilityInformation)
         {
-            this.capabilityInformation = capabilityInformation;
+            this.CapabilityInformation = capabilityInformation;
         }
 
         public override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(deviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(capabilityInformation, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(DeviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
+            serializer.Serialize(CapabilityInformation, ZclDataType.Get(DataType.BITMAP_8_BIT));
         }
 
         public override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            deviceAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            capabilityInformation = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            DeviceAddress = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
+            CapabilityInformation = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_8_BIT));
         }
 
         public override string ToString()
@@ -100,9 +100,9 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append("ManagementDirectJoinRequest [")
                    .Append(base.ToString())
                    .Append(", deviceAddress=")
-                   .Append(deviceAddress)
+                   .Append(DeviceAddress)
                    .Append(", capabilityInformation=")
-                   .Append(capabilityInformation)
+                   .Append(CapabilityInformation)
                    .Append(']');
 
             return builder.ToString();

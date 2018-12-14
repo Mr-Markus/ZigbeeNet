@@ -20,12 +20,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
         * NWKAddrOfInterest command message field.
         */
-        public int NwkAddrOfInterest { get; set; }
+        public ushort NwkAddrOfInterest { get; set; }
 
         /**
         * Length command message field.
         */
-        public int Length { get; set; }
+        public byte Length { get; set; }
 
         /**
         * ComplexDescriptor command message field.
@@ -60,8 +60,8 @@ namespace ZigBeeNet.ZDO.Command
                 // Don't read the full response if we have an error
                 return;
             }
-            NwkAddrOfInterest = (int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            Length = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            Length = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             ComplexDescriptor = (ComplexDescriptor)deserializer.Deserialize(ZclDataType.Get(DataType.COMPLEX_DESCRIPTOR));
         }
 

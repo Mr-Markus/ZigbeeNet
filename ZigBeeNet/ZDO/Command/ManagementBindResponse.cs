@@ -21,12 +21,12 @@ namespace ZigBeeNet.ZDO.Command
         /**
          * BindingTableEntries command message field.
          */
-        public int BindingTableEntries { get; set; }
+        public byte BindingTableEntries { get; set; }
 
         /**
          * StartIndex command message field.
          */
-        public int StartIndex { get; set; }
+        public byte StartIndex { get; set; }
 
         /**
          * BindingTableList command message field.
@@ -70,9 +70,9 @@ namespace ZigBeeNet.ZDO.Command
                 return;
             }
 
-            BindingTableEntries = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            int? bindingTableListCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            BindingTableEntries = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? bindingTableListCount = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (bindingTableListCount != null)
             {
