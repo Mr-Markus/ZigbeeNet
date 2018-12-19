@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.CC.Util;
+using ZigBeeNet.ZDO;
 
 namespace ZigBeeNet.CC.Packet.ZDO
 {
@@ -23,7 +24,7 @@ namespace ZigBeeNet.CC.Packet.ZDO
         public ZToolAddress16 SrcAddress { get; private set; }
         /// <name>TI.ZPI1.ZDO_NODE_DESC_RSP.Status</name>
         /// <summary>this field indicates either SUCCESS or FAILURE.</summary>
-        public int Status { get; private set; }
+        public ZdoStatus Status { get; private set; }
 
         // TODO: Add doc!
         private int CurrentMode;
@@ -40,13 +41,16 @@ namespace ZigBeeNet.CC.Packet.ZDO
         public ZDO_POWER_DESC_RSP(byte[] framedata)
         {
             this.SrcAddress = new ZToolAddress16(framedata[1], framedata[0]);
-            this.Status = framedata[2];
-            this.NwkAddr = new ZToolAddress16(framedata[4], framedata[3]);
-            this.CurrentMode = (framedata[5] & (0x0F));
-            this.AvailableSources = (framedata[5] & (0xF0)) >> 4;
-            this.CurrentSource = (framedata[6] & (0x0F));
-            this.CurrentLevel = (framedata[6] & (0xF0)) >> 4;
+            this.Status = (ZdoStatus)framedata[2];
 
+            if (Status == ZdoStatus.SUCCESS)
+            {
+                this.NwkAddr = new ZToolAddress16(framedata[4], framedata[3]);
+                this.CurrentMode = (framedata[5] & (0x0F));
+                this.AvailableSources = (framedata[5] & (0xF0)) >> 4;
+                this.CurrentSource = (framedata[6] & (0x0F));
+                this.CurrentLevel = (framedata[6] & (0xF0)) >> 4;
+            } 
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_POWER_DESC_RSP), framedata);
         }
 

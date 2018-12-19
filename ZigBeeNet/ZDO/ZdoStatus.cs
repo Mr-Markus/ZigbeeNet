@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigBeeNet.ZDO
 {
-    public enum ZdoStatus
+    public enum ZdoStatus : byte
     {
         UNKNOWN = 0xFF,
 

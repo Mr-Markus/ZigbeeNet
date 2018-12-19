@@ -297,7 +297,7 @@ namespace ZigBeeNet.CC.Implementation
             lock (_synchronousCommandListeners)
             {
                 ushort id = (ushort)(cmdId.Value & 0x1FFF);
-                ISynchronousCommandListener listener = _synchronousCommandListeners[id];
+                _synchronousCommandListeners.TryGetValue(id, out ISynchronousCommandListener listener);
                 if (listener != null)
                 {
                     listener.ReceivedCommandResponse(packet);

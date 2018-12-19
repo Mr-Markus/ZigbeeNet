@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
@@ -110,7 +111,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", startIndex=")
                    .Append(StartIndex)
                    .Append(", nwkAddrAssocDevList=")
-                   .Append(NwkAddrAssocDevList)
+                   .Append(string.Join(' ', NwkAddrAssocDevList))
                    .Append(']');
 
             return builder.ToString();

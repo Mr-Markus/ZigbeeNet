@@ -27,7 +27,7 @@ namespace ZigBeeNet.Transaction
         private ZigBeeCommand _command;
         private Task _timeoutTask;
         private TaskCompletionSource<CommandResult> _task;
-        private CancellationTokenSource _timeoutCancel;
+        private CancellationTokenSource _timeoutCancellationTokenSource;
         private const int DEFAULT_TIMEOUT_MILLISECONDS = 8000;
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
@@ -58,8 +58,6 @@ namespace ZigBeeNet.Transaction
             lock (_command)
             {
                 _task = new TaskCompletionSource<CommandResult>();
-                // Schedule a task to timeout the transaction
-                _timeoutCancel = new CancellationTokenSource();
 
                 _networkManager.AddCommandListener(this);
 
@@ -72,9 +70,13 @@ namespace ZigBeeNet.Transaction
                 }
             }
 
-            if (await Task.WhenAny(_task.Task, Task.Delay(Timeout)) == _task.Task)
+            // Schedule a task to timeout the transaction
+            _timeoutCancellationTokenSource = new CancellationTokenSource();
+            _timeoutTask = Task.Delay(Timeout, _timeoutCancellationTokenSource.Token);
+
+            if (await Task.WhenAny(_task.Task, _timeoutTask) == _task.Task)
             {
-                _timeoutCancel.Cancel();
+                _timeoutCancellationTokenSource.Cancel();
 
                 return _task.Task.Result;
             }
@@ -94,18 +96,18 @@ namespace ZigBeeNet.Transaction
             {
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
-                    _timeoutCancel.Cancel();
-                    _task.TrySetResult(new CommandResult(receivedCommand));
+                    _task.SetResult(new CommandResult(receivedCommand));
+                    _timeoutCancellationTokenSource.Cancel();
+
+                    _logger.Debug("Transaction complete: {Command}", _command);
+                    _networkManager.RemoveCommandListener(this);
                 }
             }
-
-            _logger.Debug("Transaction complete: {Command}", _command);
-            _networkManager.RemoveCommandListener(this);
         }
 
         private void TimeoutTransaction()
         {
-            if (_timeoutCancel.IsCancellationRequested)
+            if (_timeoutCancellationTokenSource.IsCancellationRequested)
             {
                 return;
             }

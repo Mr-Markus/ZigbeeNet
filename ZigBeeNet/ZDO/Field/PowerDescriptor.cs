@@ -228,8 +228,8 @@ namespace ZigBeeNet.ZDO.Field
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
-            int byte1 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            int byte2 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte byte1 = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte byte2 = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             setCurrentPowerMode(byte1 & 0x0f);
             SetAvailablePowerSources(byte1 >> 4 & 0x0f);

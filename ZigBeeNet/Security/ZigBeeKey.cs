@@ -149,7 +149,7 @@ namespace ZigBeeNet.Security
 
             for (int cnt = 0; cnt < 16; cnt++)
             {
-                builder.Append(string.Format("%02X", Key[cnt]));
+                builder.Append(Key[cnt].ToString("x2"));
             }
 
             return builder.ToString();
@@ -160,7 +160,7 @@ namespace ZigBeeNet.Security
          *
          * @return {@link ZigBeeKey} containing a random 128 bit key
          */
-        public static ZigBeeKey createRandom()
+        public static ZigBeeKey CreateRandom()
         {
             byte[] key = new byte[16];
             for (int cnt = 0; cnt < 16; cnt++)

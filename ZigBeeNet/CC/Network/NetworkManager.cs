@@ -731,7 +731,7 @@ namespace ZigBeeNet.CC.Network
             }
             else
             {
-                _logger.Trace("Set ZCD_NV_STARTUP_OPTION mask {}", mask.ToString("X8"));
+                _logger.Trace("Set ZCD_NV_STARTUP_OPTION mask {Mask}", mask.ToString("X8"));
             }
 
             return true;
