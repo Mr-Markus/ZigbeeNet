@@ -36,11 +36,7 @@ namespace ZigBeeNet.Internal
                 var x = "";
             }
 
-            if(commandListener == null)
-            {
-                // Hier stimmt gehörig was nicht :D .. in NotifyCommandListeners() wird nun eine NullRefEx geschmissen :D
-                var x = "";
-            }
+            var tmp = commandListener;
 
             if(_commandListeners.TryPeek(out commandListener))
             {
@@ -48,7 +44,7 @@ namespace ZigBeeNet.Internal
                 return;
             }
 
-            _commandListeners.Add(commandListener);
+            _commandListeners.Add(tmp);
         }
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
