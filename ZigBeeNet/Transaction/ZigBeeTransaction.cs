@@ -95,8 +95,6 @@ namespace ZigBeeNet.Transaction
             // and hence transaction ID for the command set.
             lock (_command)
             {
-               
-
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
                     _task.SetResult(new CommandResult(receivedCommand));

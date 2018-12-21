@@ -1022,7 +1022,7 @@ namespace ZigBeeNet
 
         /**
          * Enables or disables devices to join the whole network.
-         * <p>
+         * 
          * Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
          * since it allows devices to join the network without the installer knowing.
          *
@@ -1037,7 +1037,7 @@ namespace ZigBeeNet
 
         /**
          * Enables or disables devices to join the network.
-         * <p>
+         * 
          * Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
          * since it allows devices to join the network without the installer knowing.
          *
