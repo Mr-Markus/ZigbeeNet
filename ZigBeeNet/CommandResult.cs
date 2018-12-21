@@ -147,7 +147,7 @@ namespace ZigBeeNet
 
                 builder.Append("ERROR (")
                        .Append(status.ToString())
-                       .Append(String.Format(",0x{0}2X), ", (int)status))
+                       .Append(string.Format(",0x{0}), ", ((int)status).ToString("X2")))
                        .Append(Response);
             }
 

@@ -704,7 +704,7 @@ namespace ZigBeeNet
                     command = ReceiveZclCommand(fieldDeserializer, apsFrame);
                     break;
                 default:
-                    _logger.Debug("Received message with unknown profile {Profile}", string.Format("%04X", apsFrame.Profile));
+                    _logger.Debug("Received message with unknown profile {Profile}", apsFrame.Profile.ToString("X4"));
                     break;
             }
 

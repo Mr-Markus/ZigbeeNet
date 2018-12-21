@@ -54,7 +54,7 @@ namespace ZigBeeNet.Transaction
         {
             this._command = command;
             this._responseMatcher = responseMatcher;
-
+            counter++;
             lock (_command)
             {
                 _task = new TaskCompletionSource<CommandResult>();
@@ -88,12 +88,15 @@ namespace ZigBeeNet.Transaction
             }
         }
 
+        private int counter = 0;
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
             // Ensure that received command is not processed before command is sent
             // and hence transaction ID for the command set.
             lock (_command)
             {
+               
+
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
                     _task.SetResult(new CommandResult(receivedCommand));
