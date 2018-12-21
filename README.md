@@ -4,8 +4,6 @@ ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standar
 
 With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.
 
-This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and many ideas were adopted (almost a java -> c# port).
-
 ## What is Zigbee?
 
 Zigbee is a worldwide standard for low power, self-healing, mesh networks offering a complete and interoperable IoT solution for home and building automation:
@@ -52,8 +50,28 @@ namespace ZigBeeNet.PlayGround
         {
             try
             {
-                var zigbeeService = new ZigbeeService(new Options { Baudrate = 115200, Port = "COM3" });
-                zigbeeService.Start();
+                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort("COM4");
+
+                IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(zigbeePort);
+
+                ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
+
+                // Initialise the network
+                networkManager.Initialize();
+
+                networkManager.AddSupportedCluster(0x06);
+
+                ZigBeeStatus startupSucceded = networkManager.Startup(false);
+
+                if (startupSucceded == ZigBeeStatus.SUCCESS)
+                {
+                    Log.Logger.Information("ZigBee console starting up ... [OK]");
+                }
+                else
+                {
+                    Log.Logger.Information("ZigBee console starting up ... [FAIL]");
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -65,6 +83,8 @@ namespace ZigBeeNet.PlayGround
     }
 }
 ```
+## Information
+This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and many ideas were adopted (almost a java -> c# port).
 
 ## Contributing
 
