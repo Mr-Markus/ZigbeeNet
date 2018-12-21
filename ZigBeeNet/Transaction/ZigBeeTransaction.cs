@@ -52,27 +52,33 @@ namespace ZigBeeNet.Transaction
          */
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            _command = command;
-            _responseMatcher = responseMatcher;
-            _task = new TaskCompletionSource<CommandResult>();
-            _networkManager.AddCommandListener(this);
+            this._command = command;
+            this._responseMatcher = responseMatcher;
+            counter++;
+            lock (_command)
+            {
+                _task = new TaskCompletionSource<CommandResult>();
+
+                _networkManager.AddCommandListener(this);
+
+                int transactionId = _networkManager.SendCommand(command);
+
+                if (command is ZclCommand cmd)
+                {
+                    cmd.TransactionId = (byte)transactionId;
+                    _task.SetResult(new CommandResult(cmd));
+                }
+            }
 
             // Schedule a task to timeout the transaction
             _timeoutCancellationTokenSource = new CancellationTokenSource();
             _timeoutTask = Task.Delay(Timeout, _timeoutCancellationTokenSource.Token);
 
-            int transactionId = _networkManager.SendCommand(command);
-
-            if (command is ZclCommand cmd)
-            {
-                cmd.TransactionId = (byte)transactionId;
-            }
-
             if (await Task.WhenAny(_task.Task, _timeoutTask) == _task.Task)
             {
                 _timeoutCancellationTokenSource.Cancel();
 
-                return await _task.Task;
+                return _task.Task.Result;
             }
             else
             {
@@ -82,6 +88,7 @@ namespace ZigBeeNet.Transaction
             }
         }
 
+        private int counter = 0;
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
             // Ensure that received command is not processed before command is sent
@@ -90,28 +97,26 @@ namespace ZigBeeNet.Transaction
             {
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
-                    _networkManager.RemoveCommandListener(this);
-
                     _task.SetResult(new CommandResult(receivedCommand));
                     _timeoutCancellationTokenSource.Cancel();
 
                     _logger.Debug("Transaction complete: {Command}", _command);
+                    _networkManager.RemoveCommandListener(this);
                 }
             }
         }
 
         private void TimeoutTransaction()
         {
-
             if (_timeoutCancellationTokenSource.IsCancellationRequested)
             {
                 return;
             }
             _logger.Debug("Transaction timeout: {Command}", _command);
-            _networkManager.RemoveCommandListener(this);
             lock (_command)
             {
                 _task.SetCanceled();
+                _networkManager.RemoveCommandListener(this);
             }
         }
     }

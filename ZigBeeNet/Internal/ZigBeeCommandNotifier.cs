@@ -3,34 +3,52 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ZigBeeNet.Transaction;
 
 namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
-        public List<IZigBeeCommandListener> CommandListeners { get; set; } = new List<IZigBeeCommandListener>();
+        private ConcurrentBag<IZigBeeCommandListener> _commandListeners;
 
+        public ZigBeeCommandNotifier()
+        {
+            _commandListeners = new ConcurrentBag<IZigBeeCommandListener>();
+        }
+
+            
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (CommandListeners)
+            if(commandListener is ZigBeeTransaction)
             {
-                CommandListeners.Add(commandListener);
+                var x = "";
             }
+
+            _commandListeners.Add(commandListener);
         }
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (CommandListeners)
+            var removed = _commandListeners.TryTake(out commandListener);
+
+            if (!removed)
             {
-                CommandListeners.Remove(commandListener);
+                var x = "";
+            }
+            else
+            {
+                var x = "";
             }
         }
 
         public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            foreach (IZigBeeCommandListener commandListener in CommandListeners)
+            lock (_commandListeners)
             {
-                Task.Run(() => commandListener.CommandReceived(command));
+                foreach (IZigBeeCommandListener commandListener in _commandListeners)
+                {
+                    Task.Run(() => commandListener.CommandReceived(command));
+                }
             }
         }
     }
