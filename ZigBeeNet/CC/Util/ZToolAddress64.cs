@@ -40,6 +40,8 @@ namespace ZigBeeNet.CC.Util
 
         public ZToolAddress64(byte[] address)
         {
+            Address = new byte[8];
+
             Array.Copy(address, Address, address.Length);
         }
 

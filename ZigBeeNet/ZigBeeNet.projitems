@@ -140,6 +140,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Transport\TransportConfigOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\ZigBeeTransportState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\Hash.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\TaskExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\ConfigureReportingCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\ConfigureReportingResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\DefaultResponse.cs" />

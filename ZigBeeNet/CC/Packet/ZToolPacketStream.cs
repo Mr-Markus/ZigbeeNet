@@ -288,7 +288,7 @@ namespace ZigBeeNet.CC.Packet
         public byte Read(string context)
         {
             byte b = Read();
-            _logger.Debug("Read {Context}  byte, val is {Byte}", context, b);
+            _logger.Trace("Read {Context}  byte, val is {Byte}", context, b);
             return b;
         }
 

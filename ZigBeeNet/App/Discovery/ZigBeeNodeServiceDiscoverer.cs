@@ -265,7 +265,7 @@ namespace ZigBeeNet.App.Discovery
                         DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
-                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} successful. Advanced to {Peek}.", Node.IeeeAddress, discoveryTask, DiscoveryTasks.Peek());
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} successful.", Node.IeeeAddress, discoveryTask);
 
                     retryCnt = 0;
                 }

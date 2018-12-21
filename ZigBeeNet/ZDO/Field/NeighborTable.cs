@@ -17,7 +17,7 @@ namespace ZigBeeNet.ZDO.Field
 
         public IeeeAddress ExtendedAddress { get; private set; }
 
-        public int networkAddress { get; private set; }
+        public ushort NetworkAddress { get; private set; }
 
         public LogicalType DeviceType { get; private set; }
 
@@ -27,9 +27,9 @@ namespace ZigBeeNet.ZDO.Field
 
         public NeighborTableJoining PermitJoining { get; private set; }
 
-        public int depth;
+        public byte Depth;
 
-        public int lqi = 0;
+        public byte Lqi = 0;
 
         public enum NeighborTableRelationship
         {
@@ -64,17 +64,17 @@ namespace ZigBeeNet.ZDO.Field
             // Deserialize the fields
             ExtendedPanId = (ExtendedPanId)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.EXTENDED_PANID));
             ExtendedAddress = (IeeeAddress)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            networkAddress = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            NetworkAddress = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
 
-            int temp = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte temp = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             SetDeviceType(temp & 0x03);
             SetRxOnWhenIdle((temp & 0x0c) >> 2);
             SetRelationship((temp & 0x70) >> 4);
 
-            temp = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            temp = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             SetPermitJoining(temp & 0x03);
-            depth = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            lqi = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Depth = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Lqi = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         private void SetDeviceType(int deviceType)
@@ -160,12 +160,12 @@ namespace ZigBeeNet.ZDO.Field
         {
             int prime = 31;
             int result = 1;
-            result = prime * result + /*((depth == null) ? 0 :*/ depth.GetHashCode();
+            result = prime * result + /*((depth == null) ? 0 :*/ Depth.GetHashCode();
             result = prime * result + /*((DeviceType == null) ? 0 :*/ DeviceType.GetHashCode();
             result = prime * result + /*((ExtendedAddress == null) ? 0 :*/ ExtendedAddress.GetHashCode();
             result = prime * result + ((ExtendedPanId == null) ? 0 : ExtendedPanId.GetHashCode());
-            result = prime * result + /*((lqi == null) ? 0 : */ lqi.GetHashCode();
-            result = prime * result + /*((networkAddress == null) ? 0 :*/ networkAddress.GetHashCode();
+            result = prime * result + /*((lqi == null) ? 0 : */ Lqi.GetHashCode();
+            result = prime * result + /*((networkAddress == null) ? 0 :*/ NetworkAddress.GetHashCode();
             result = prime * result + /*((PermitJoining == null) ? 0 :*/ PermitJoining.GetHashCode();
             result = prime * result + /*((Relationship == null) ? 0 :*/ Relationship.GetHashCode();
             result = prime * result + /*((RxOnWhenIdle == null) ? 0 :*/ RxOnWhenIdle.GetHashCode();
@@ -195,7 +195,7 @@ namespace ZigBeeNet.ZDO.Field
             //        return false;
             //    }
             //}
-            /*else */if (!depth.Equals(other.depth))
+            /*else */if (!Depth.Equals(other.Depth))
             {
                 return false;
             }
@@ -232,7 +232,7 @@ namespace ZigBeeNet.ZDO.Field
             //        return false;
             //    }
             //}
-            else if (!lqi.Equals(other.lqi))
+            else if (!Lqi.Equals(other.Lqi))
             {
                 return false;
             }
@@ -243,7 +243,7 @@ namespace ZigBeeNet.ZDO.Field
             //        return false;
             //    }
             //}
-            else if (!networkAddress.Equals(other.networkAddress))
+            else if (!NetworkAddress.Equals(other.NetworkAddress))
             {
                 return false;
             }
@@ -265,9 +265,9 @@ namespace ZigBeeNet.ZDO.Field
         public override string ToString()
         {
             return "NeighborTable [extendedPanId=" + ExtendedPanId + ", extendedAddress=" + ExtendedAddress
-                    + ", networkAddress=" + networkAddress + ", deviceType=" + DeviceType + ", rxOnWhenIdle=" + RxOnWhenIdle
-                    + ", relationship=" + Relationship + ", permitJoining=" + PermitJoining + ", depth=" + depth + ", lqi="
-                    + lqi + "]";
+                    + ", networkAddress=" + NetworkAddress + ", deviceType=" + DeviceType + ", rxOnWhenIdle=" + RxOnWhenIdle
+                    + ", relationship=" + Relationship + ", permitJoining=" + PermitJoining + ", depth=" + Depth + ", lqi="
+                    + Lqi + "]";
         }
 
     }
