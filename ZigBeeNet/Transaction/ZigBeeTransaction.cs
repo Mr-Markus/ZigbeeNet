@@ -54,11 +54,11 @@ namespace ZigBeeNet.Transaction
         {
             this._command = command;
             this._responseMatcher = responseMatcher;
-            counter++;
+
             lock (_command)
             {
                 _task = new TaskCompletionSource<CommandResult>();
-
+                
                 _networkManager.AddCommandListener(this);
 
                 int transactionId = _networkManager.SendCommand(command);
@@ -66,7 +66,6 @@ namespace ZigBeeNet.Transaction
                 if (command is ZclCommand cmd)
                 {
                     cmd.TransactionId = (byte)transactionId;
-                    _task.SetResult(new CommandResult(cmd));
                 }
             }
 
@@ -97,11 +96,20 @@ namespace ZigBeeNet.Transaction
             {
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
+                    counter++;
+
+                    if(counter == 2 && _networkManager.IsTransactionStillInList(this))
+                    {
+                        var THIS_BREAK_POINT_SHOULD_NEVER_GETTING_HIT = "";
+                    }
+
+                    _networkManager.RemoveCommandListener(this);
+
                     _task.SetResult(new CommandResult(receivedCommand));
+
                     _timeoutCancellationTokenSource.Cancel();
 
                     _logger.Debug("Transaction complete: {Command}", _command);
-                    _networkManager.RemoveCommandListener(this);
                 }
             }
         }
@@ -115,8 +123,8 @@ namespace ZigBeeNet.Transaction
             _logger.Debug("Transaction timeout: {Command}", _command);
             lock (_command)
             {
-                _task.SetCanceled();
                 _networkManager.RemoveCommandListener(this);
+                _task.SetCanceled();
             }
         }
     }

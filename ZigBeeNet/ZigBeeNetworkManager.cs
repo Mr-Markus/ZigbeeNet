@@ -128,7 +128,7 @@ namespace ZigBeeNet
         /**
          * The {@link ZigBeeCommandNotifier}. This is used for sending notifications asynchronously to listeners.
          */
-        private ZigBeeCommandNotifier commandNotifier = new ZigBeeCommandNotifier();
+        private ZigBeeCommandNotifier _commandNotifier = new ZigBeeCommandNotifier();
 
         /**
          * The listeners of the ZigBee network state.
@@ -138,7 +138,7 @@ namespace ZigBeeNet
         /**
          * A Set used to remember if node discovery has been completed. This is used to manage the lifecycle notifications.
          */
-        private List<IeeeAddress> nodeDiscoveryComplete = new List<IeeeAddress>();
+        private List<IeeeAddress> _nodeDiscoveryComplete = new List<IeeeAddress>();
 
         /**
          * The serializer class used to serialize commands to data packets
@@ -232,21 +232,21 @@ namespace ZigBeeNet
 
         /**
          * Initializes ZigBee manager components and initializes the transport layer.
-         * <p>
+         * 
          * If a network state was previously serialized, it will be deserialized here if the serializer is set with the
          * {@link #setNetworkStateSerializer} method.
-         * <p>
+         * 
          * Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
          * includes -:
-         * <ul>
-         * <li>{@link #getZigBeeChannel}
-         * <li>{@link #setZigBeeChannel}
-         * <li>{@link #getZigBeePanId}
-         * <li>{@link #setZigBeePanId}
-         * <li>{@link #getZigBeeExtendedPanId}
-         * <li>{@link #setZigBeeExtendedPanId}
-         * </ul>
-         * <p>
+         * 
+         * {@link #getZigBeeChannel}
+         * {@link #setZigBeeChannel}
+         * {@link #getZigBeePanId}
+         * {@link #setZigBeePanId}
+         * {@link #getZigBeeExtendedPanId}
+         * {@link #setZigBeeExtendedPanId}
+         *
+         *
          * Once all transport initialization is complete, {@link #startup} must be called.
          *
          * @return {@link ZigBeeStatus}
@@ -674,13 +674,13 @@ namespace ZigBeeNet
 
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            commandNotifier.AddCommandListener(commandListener);
+            _commandNotifier.AddCommandListener(commandListener);
         }
 
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            commandNotifier.RemoveCommandListener(commandListener);
+            _commandNotifier.RemoveCommandListener(commandListener);
         }
 
 
@@ -722,7 +722,7 @@ namespace ZigBeeNet
             _logger.Debug("RX CMD: {Command}", command);
 
             // Notify the listeners
-            commandNotifier.NotifyCommandListeners(command);
+            _commandNotifier.NotifyCommandListeners(command);
         }
 
         private ZigBeeCommand ReceiveZdoCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
@@ -1288,7 +1288,7 @@ namespace ZigBeeNet
 
             _logger.Debug("{IeeeAddress}: Node {NetworkAddress} is removed from the network", node.IeeeAddress, node.NetworkAddress);
 
-            nodeDiscoveryComplete.Remove(node.IeeeAddress);
+            _nodeDiscoveryComplete.Remove(node.IeeeAddress);
 
             lock (_networkNodes)
             {
@@ -1408,10 +1408,10 @@ namespace ZigBeeNet
                 }
             }
 
-            bool updated = nodeDiscoveryComplete.Contains(node.IeeeAddress);
+            bool updated = _nodeDiscoveryComplete.Contains(node.IeeeAddress);
             if (!updated && node.IsDiscovered() || node.IeeeAddress.Equals(LocalIeeeAddress))
             {
-                nodeDiscoveryComplete.Add(node.IeeeAddress);
+                _nodeDiscoveryComplete.Add(node.IeeeAddress);
             }
 
             lock (_nodeListeners)
@@ -1504,6 +1504,11 @@ namespace ZigBeeNet
             SendCommand(command);
         }
 
+        // TODO: REMOVE THIS AFTER FIX MULTI THREADING ISSUES
+        public bool IsTransactionStillInList(ZigBeeTransaction transaction)
+        {
+            return _commandNotifier.HasObject(transaction);
+        }
 
         public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
