@@ -16,10 +16,22 @@ namespace ZigBeeNet.Internal
             _commandListeners = new ConcurrentBag<IZigBeeCommandListener>();
         }
 
-            
+
+        // TODO: REMOVE THIS AFTER FIX MULTI THREADING ISSUES
+        public bool HasObject(IZigBeeCommandListener listener)
+        {
+            foreach (var item in _commandListeners)
+            {
+                if (item == listener)
+                    return true;
+            }
+
+            return false;
+        }
+
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            if(commandListener is ZigBeeTransaction)
+            if (commandListener is ZigBeeTransaction)
             {
                 var x = "";
             }
@@ -43,12 +55,20 @@ namespace ZigBeeNet.Internal
 
         public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            lock (_commandListeners)
+            // Enumeration is thread-safe in ConcurrentBag http://dotnetpattern.com/csharp-concurrentbag
+            foreach (IZigBeeCommandListener commandListener in _commandListeners)
             {
-                foreach (IZigBeeCommandListener commandListener in _commandListeners)
+                Task.Run(() =>
                 {
-                    Task.Run(() => commandListener.CommandReceived(command));
-                }
+                    //try
+                    //{
+                        commandListener.CommandReceived(command);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    var x = "";
+                    //}
+                });
             }
         }
     }
