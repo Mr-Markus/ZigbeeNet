@@ -36,6 +36,18 @@ namespace ZigBeeNet.Internal
                 var x = "";
             }
 
+            if(commandListener == null)
+            {
+                // Hier stimmt gehörig was nicht :D .. in NotifyCommandListeners() wird nun eine NullRefEx geschmissen :D
+                var x = "";
+            }
+
+            if(_commandListeners.TryPeek(out commandListener))
+            {
+                // Da im java proj mit HashSet gearbeitet wird -> keine duplicates
+                return;
+            }
+
             _commandListeners.Add(commandListener);
         }
 
@@ -62,7 +74,23 @@ namespace ZigBeeNet.Internal
                 {
                     //try
                     //{
-                        commandListener.CommandReceived(command);
+
+                    var countBefore = _commandListeners.Count;
+
+                    commandListener.CommandReceived(command);
+
+                    var countAfter = _commandListeners.Count;
+
+                    if(commandListener is ZigBeeTransaction trans)
+                    {
+                        if (trans.IsTransactionMatch)
+                        {
+                            if(countBefore <= countAfter)
+                            {
+                                var THIS_BREAK_POINT_SHOULD_NEVER_GETTING_HIT = "";
+                            }
+                        }
+                    }
                     //}
                     //catch (Exception ex)
                     //{

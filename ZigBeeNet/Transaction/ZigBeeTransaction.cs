@@ -88,6 +88,7 @@ namespace ZigBeeNet.Transaction
         }
 
         private int counter = 0;
+        public bool IsTransactionMatch = false;
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
             // Ensure that received command is not processed before command is sent
@@ -96,6 +97,8 @@ namespace ZigBeeNet.Transaction
             {
                 if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
+                    IsTransactionMatch = true;
+
                     counter++;
 
                     if(counter == 2 && _networkManager.IsTransactionStillInList(this))
