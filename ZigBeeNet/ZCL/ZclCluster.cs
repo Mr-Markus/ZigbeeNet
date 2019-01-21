@@ -103,11 +103,12 @@ namespace ZigBeeNet.ZCL
          */
         protected abstract Dictionary<ushort, ZclAttribute> InitializeAttributes();
 
-        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
+        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager, ushort clusterId, string clusterName)
         {
             _attributes = InitializeAttributes();
 
             this._zigbeeEndpoint = zigbeeEndpoint;
+            this._zigbeeManager = zigBeeNetworkManager;
             this._clusterId = clusterId;
             this._clusterName = clusterName;
             this._normalizer = new ZclAttributeNormalizer();
@@ -115,7 +116,7 @@ namespace ZigBeeNet.ZCL
 
         protected Task<CommandResult> Send(ZclCommand command)
         {
-            command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
+            //command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
             if (IsClient())
             {
                 command.CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
@@ -940,10 +941,7 @@ namespace ZigBeeNet.ZCL
          * @param commandId the command ID
          * @return the {@link ZclCommand} or null if no command found.
          */
-        public ZclCommand GetCommandFromId(int commandId)
-        {
-            return null;
-        }
+        public abstract ZclCommand GetCommandFromId(int commandId);
 
         /**
          * Gets a response from the command ID (ie a command from server to client). If no command with the requested id is

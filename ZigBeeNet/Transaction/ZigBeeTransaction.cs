@@ -60,7 +60,7 @@ namespace ZigBeeNet.Transaction
             _timeout = DateTime.Now.AddMilliseconds(DEFAULT_TIMEOUT_MILLISECONDS);
 
             lock (_command)
-            {                
+            {
                 _networkManager.AddCommandListener(this);
 
                 int transactionId = _networkManager.SendCommand(command);
@@ -107,11 +107,14 @@ namespace ZigBeeNet.Transaction
                 {
                     if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                     {
+                        _result = new CommandResult(receivedCommand);
+
                         IsTransactionMatch = true;
 
                         _networkManager.RemoveCommandListener(this);
 
                         _logger.Debug("Transaction complete: {Command}", _command);
+
                     }
                 }
             }

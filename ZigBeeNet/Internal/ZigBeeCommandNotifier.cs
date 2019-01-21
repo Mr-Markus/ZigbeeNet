@@ -38,11 +38,12 @@ namespace ZigBeeNet.Internal
 
             var tmp = commandListener;
 
-            if(_commandListeners.TryPeek(out commandListener))
-            {
-                // Da im java proj mit HashSet gearbeitet wird -> keine duplicates
-                return;
-            }
+            //TODO make this working
+            //if(_commandListeners.TryPeek(out commandListener))
+            //{
+            //    // Da im java proj mit HashSet gearbeitet wird -> keine duplicates
+            //    return;
+            //}
 
             _commandListeners.Add(tmp);
         }
