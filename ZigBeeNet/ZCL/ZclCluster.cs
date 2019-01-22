@@ -493,7 +493,7 @@ namespace ZigBeeNet.ZCL
          * @param commandIdentifier the command identifier to which this is a response
          * @param status the {@link ZclStatus} to send in the response
          */
-        public void SendDefaultResponse(byte transactionId, int commandIdentifier, ZclStatus status)
+        public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status)
         {
             DefaultResponse defaultResponse = new DefaultResponse();
             defaultResponse.TransactionId = transactionId;

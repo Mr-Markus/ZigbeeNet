@@ -10,6 +10,7 @@ using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
+using ZigBeeNet.ZCL.Clusters.OnOff;
 
 namespace ZigBeeNet.PlayGround
 {
@@ -61,9 +62,13 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNode coord = networkManager.GetNode(0);
 
-                coord.PermitJoin(true);
+                coord.PermitJoin(false);
 
-                Console.WriteLine("Joining enabled...");
+                //Console.WriteLine("Joining enabled...");
+
+                ZigBeeNode light = new ZigBeeNode(networkManager, new IeeeAddress(BitConverter.GetBytes(3192981736732173)));
+                light.NetworkAddress = 35468;
+                networkManager.AddNode(light);
 
                 string cmd = Console.ReadLine();
 
@@ -83,8 +88,10 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 1);
-                                node.AddEndpoint(ep);
+                                var endpoint = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
+
+                                //ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 1);
+                                //node.AddEndpoint(ep);
 
                                 try
                                 {
@@ -135,22 +142,19 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "toggle")
                                     {
-                                        ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0), networkManager);
-
-                                        var result = onOff.ToggleCommand().GetAwaiter().GetResult();
+                                        networkManager.Send(endpoint, new ToggleCommand()).GetAwaiter().GetResult();
                                     }
                                     else if (cmd == "level")
                                     {
                                         Console.WriteLine("Level between 0 and 255: ");
                                         string level = Console.ReadLine();
 
-                                        MoveToLevelCommand command = new MoveToLevelCommand();
+                                        Console.WriteLine("time between 0 and 65535: ");
+                                        string time = Console.ReadLine();
 
-                                        // Set the fields
-                                        command.SetLevel((byte)int.Parse(level));
-                                        command.SetTransitionTime(0);
+                                        var command = new MoveToLevelCommand((byte)int.Parse(level), ushort.Parse(time));
 
-                                        networkManager.Send(new ZigBeeEndpointAddress(node.NetworkAddress, 1), command).GetAwaiter().GetResult();
+                                        networkManager.Send(endpoint, command).GetAwaiter().GetResult();
                                     }
                                 }
                                 catch (Exception ex)

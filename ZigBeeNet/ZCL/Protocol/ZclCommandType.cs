@@ -11,17 +11,17 @@ namespace ZigBeeNet.ZCL.Protocol
     {
         private static readonly List<ZclCommandType> _commands;
 
-        public int CommandId { get; private set; }
         public int ClusterType { get; set; }
-        public CommandType Type { get; set; }
+        public int CommandId { get; private set; }
         public ZclCommandDirection Direction { get; private set; }
+        public CommandType Type { get; set; }
 
         private ZclCommandType(int clusterType, int commandId, ZclCommandDirection direction, CommandType commandType)
         {
             this.ClusterType = clusterType;
             this.CommandId = commandId;
-            this.Type = Type;
-            this.Direction = Direction;
+            this.Type = commandType;
+            this.Direction = direction;
         }
 
         static ZclCommandType()

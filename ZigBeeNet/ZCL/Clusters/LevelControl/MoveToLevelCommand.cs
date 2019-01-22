@@ -10,12 +10,12 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
         /**
          * Level command message field.
          */
-        private byte level;
+        public byte Level { get; private set; }
 
         /**
          * Transition time command message field.
          */
-        private ushort transitionTime;
+        public ushort TransitionTime { get; private set; }
 
         /**
          * Default constructor.
@@ -28,56 +28,22 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        /**
-         * Gets Level.
-         *
-         * @return the Level
-         */
-        public int getLevel()
+        public MoveToLevelCommand(byte level, ushort transitionTime) : this()
         {
-            return level;
-        }
-
-        /**
-         * Sets Level.
-         *
-         * @param level the Level
-         */
-        public void SetLevel(byte level)
-        {
-            this.level = level;
-        }
-
-        /**
-         * Gets Transition time.
-         *
-         * @return the Transition time
-         */
-        public int getTransitionTime()
-        {
-            return transitionTime;
-        }
-
-        /**
-         * Sets Transition time.
-         *
-         * @param transitionTime the Transition time
-         */
-        public void SetTransitionTime(ushort transitionTime)
-        {
-            this.transitionTime = transitionTime;
+            Level = level;
+            TransitionTime = transitionTime;
         }
 
         public override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(level, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(transitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(Level, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         public override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            level = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            transitionTime = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Level = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TransitionTime = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         public override string ToString()
@@ -86,9 +52,9 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             builder.Append("MoveToLevelCommand [");
             builder.Append(base.ToString());
             builder.Append(", level=");
-            builder.Append(level);
+            builder.Append(Level);
             builder.Append(", transitionTime=");
-            builder.Append(transitionTime);
+            builder.Append(TransitionTime);
             builder.Append(']');
             return builder.ToString();
         }

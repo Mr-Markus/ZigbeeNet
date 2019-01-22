@@ -121,7 +121,7 @@ namespace BasicSample
                                 ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 0);
                                 node.AddEndpoint(ep);
 
-                                ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
+                                ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0), networkManager);
 
                                 onOff.ToggleCommand();
                             }

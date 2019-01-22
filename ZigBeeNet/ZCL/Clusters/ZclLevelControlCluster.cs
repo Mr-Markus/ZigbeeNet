@@ -582,13 +582,7 @@ namespace ZigBeeNet.ZCL.Clusters
          */
         public Task<CommandResult> MoveToLevelCommand(byte level, ushort transitionTime)
         {
-            MoveToLevelCommand command = new MoveToLevelCommand();
-
-            // Set the fields
-            command.SetLevel(level);
-            command.SetTransitionTime(transitionTime);
-
-            return Send(command);
+            return Send(new MoveToLevelCommand(level, transitionTime));
         }
 
         /**
@@ -713,8 +707,8 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             switch (commandId)
             {
-                case 0: // MOVE_TO_LEVEL_COMMAND
-                    return new MoveToLevelCommand();
+                //case 0: // MOVE_TO_LEVEL_COMMAND
+                //    return new MoveToLevelCommand();
                 case 1: // MOVE_COMMAND
                     return new MoveCommand();
                 //case 2: // STEP_COMMAND

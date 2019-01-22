@@ -13,8 +13,8 @@ namespace ZigBeeNet.ZCL
         private static byte MASK_DIRECTION = 0b00001000;
         private static byte MASK_DEFAULT_RESPONSE = 0b00010000;
                        
-        private static byte FRAME_TYPE_ENTIRE_PROFILE = 0x00;
-        private static byte FRAME_TYPE_CLUSTER_SPECIFIC = 0x01;
+        private const byte FRAME_TYPE_ENTIRE_PROFILE = 0x00;
+        private const byte FRAME_TYPE_CLUSTER_SPECIFIC = 0x01;
 
         /// <summary>
         /// The frame type sub-field
@@ -81,9 +81,34 @@ namespace ZigBeeNet.ZCL
             DisableDefaultResponse = false;
         }
 
-        public ZclHeader(ZclFieldDeserializer fieldSerializer)
+        public ZclHeader(ZclFieldDeserializer fieldDeserializer)
         {
-            
+            byte frameControl = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+
+            switch (frameControl & MASK_FRAME_TYPE)
+            {
+                case FRAME_TYPE_CLUSTER_SPECIFIC:
+                    FrameType = ZclFrameType.CLUSTER_SPECIFIC_COMMAND;
+                    break;
+                case FRAME_TYPE_ENTIRE_PROFILE:
+                    FrameType = ZclFrameType.ENTIRE_PROFILE_COMMAND;
+                    break;
+                default:
+                    break;
+            }
+
+            DisableDefaultResponse = (frameControl & MASK_DEFAULT_RESPONSE) != 0;
+            Direction = (frameControl & MASK_DIRECTION) == 0 ? ZclCommandDirection.CLIENT_TO_SERVER
+                    : ZclCommandDirection.SERVER_TO_CLIENT;
+            ManufacturerSpecific = (frameControl & MASK_MANUFACTURER_SPECIFIC) != 0;
+
+            // If manufacturerSpecific is set then get the manufacturer code
+            if (ManufacturerSpecific)
+            {
+                ManufacturerCode = (ushort)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            }
+            SequenceNumber = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            CommandId = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public byte[] Serialize(ZclFieldSerializer fieldSerializer, byte[] payload)

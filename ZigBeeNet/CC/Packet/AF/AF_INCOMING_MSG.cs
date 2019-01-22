@@ -86,7 +86,7 @@ namespace ZigBeeNet.CC.Packet.AF
             bytes[2] = (byte)framedata[12];
             bytes[1] = (byte)framedata[13];
             bytes[0] = (byte)framedata[14];
-            TimeStamp = BitConverter.ToInt64(bytes, 0);
+            TimeStamp = BitConverter.ToInt32(bytes, 0);
             TransSeqNumber = framedata[15];
             Len = framedata[16];
             Data = new byte[Len];
