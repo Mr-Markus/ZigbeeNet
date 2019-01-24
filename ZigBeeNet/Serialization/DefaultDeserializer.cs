@@ -218,10 +218,10 @@ namespace ZigBeeNet.Serialization
                             + ((long)(payload[index++]) << 40);
                     break;
                 case DataType.SIGNED_8_BIT_INTEGER:
-                    value[0] = (byte)((byte)payload[index++]);
+                    value[0] = (sbyte)(payload[index++]);
                     break;
                 case DataType.UNSIGNED_8_BIT_INTEGER:
-                    value[0] = (byte)((byte)payload[index++] & 0xFF);
+                    value[0] = (byte)(payload[index++] & 0xFF);
                     break;
                 case DataType.UTCTIME:
                     break;
@@ -265,7 +265,7 @@ namespace ZigBeeNet.Serialization
                     value[0] = ZclDataType.Get(payload[index++]);
                     break;
                 case DataType.BYTE_ARRAY:
-                    int cntB8 = (byte)((byte)payload[index++] & 0xFF);
+                    int cntB8 = (byte)(payload[index++] & 0xFF);
                     byte[] arrayB8 = new byte[cntB8];
                     for (int arrayIndex = 0; arrayIndex < cntB8; arrayIndex++)
                     {

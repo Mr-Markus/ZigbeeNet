@@ -10,12 +10,12 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
         /**
          * Move mode command message field.
          */
-        private int moveMode;
+        public byte MoveMode { get; private set; }
 
         /**
          * Rate command message field.
          */
-        private int rate;
+        public byte Rate { get; private set; }
 
         /**
          * Default constructor.
@@ -28,56 +28,22 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        /**
-         * Gets Move mode.
-         *
-         * @return the Move mode
-         */
-        public int getMoveMode()
+        public MoveCommand(byte moveMode, byte rate) : this()
         {
-            return moveMode;
-        }
-
-        /**
-         * Sets Move mode.
-         *
-         * @param moveMode the Move mode
-         */
-        public void SetMoveMode(int moveMode)
-        {
-            this.moveMode = moveMode;
-        }
-
-        /**
-         * Gets Rate.
-         *
-         * @return the Rate
-         */
-        public int getRate()
-        {
-            return rate;
-        }
-
-        /**
-         * Sets Rate.
-         *
-         * @param rate the Rate
-         */
-        public void SetRate(int rate)
-        {
-            this.rate = rate;
+            this.MoveMode = moveMode;
+            this.Rate = rate;
         }
 
         public override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(moveMode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(rate, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(MoveMode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(Rate, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            moveMode = (int)deserializer.Deserialize(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            rate = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            MoveMode = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            Rate = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public override string ToString()
@@ -86,9 +52,9 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             builder.Append("MoveCommand [");
             builder.Append(base.ToString());
             builder.Append(", moveMode=");
-            builder.Append(moveMode);
+            builder.Append(MoveMode);
             builder.Append(", rate=");
-            builder.Append(rate);
+            builder.Append(Rate);
             builder.Append(']');
             return builder.ToString();
         }

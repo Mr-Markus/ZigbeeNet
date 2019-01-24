@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZCL.Clusters.General;
-
+using ZigBeeNet.ZCL.Clusters.LevelControl;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
@@ -372,8 +372,8 @@ namespace ZigBeeNet.ZCL.Protocol
                 //    return new MoveToHueAndSaturationCommand();
                 //case CommandType.MOVE_TO_HUE_COMMAND:
                 //    return new MoveToHueCommand();
-                //case CommandType.MOVE_TO_LEVEL_COMMAND:
-                //    return new MoveToLevelCommand();
+                case CommandType.MOVE_TO_LEVEL_COMMAND:
+                    return new MoveToLevelCommand();
                 //case CommandType.MOVE_TO_LEVEL__WITH_ON_OFF__COMMAND:
                 //    return new MoveToLevelWithOnOffCommand();
                 //case CommandType.MOVE_TO_SATURATION_COMMAND:

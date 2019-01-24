@@ -22,7 +22,7 @@ namespace ZigBeeNet
             // Default implementation does nothing - overridden by each class
         }
 
-        public virtual void Deserialize(ZclFieldDeserializer serializer)
+        public virtual void Deserialize(ZclFieldDeserializer deserializer)
         {
             // Default implementation does nothing - overridden by each class
         }

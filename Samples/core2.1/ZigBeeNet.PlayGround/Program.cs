@@ -90,57 +90,9 @@ namespace ZigBeeNet.PlayGround
                             {
                                 var endpoint = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
 
-                                //ZigBeeEndpoint ep = new ZigBeeEndpoint(node, 1);
-                                //node.AddEndpoint(ep);
-
                                 try
                                 {
-                                    if(cmd == "bind")
-                                    {
-                                        //ZigBeeEndpoint sourceEndpoint;
-                                        //foreach (ZigBeeNode znode in networkManager.GetNodes())
-                                        //{
-                                        //    foreach (var endpoint in znode.Endpoints)
-                                        //    {
-                                        //        if (endpointId.Equals(znode.NetworkAddress + "/" + endpoint.Value.EndpointId))
-                                        //        {
-                                        //            sourceEndpoint = endpoint;
-                                        //            break;
-                                        //        }
-                                        //    }
-                                        //}
-
-                                         //= getEndpoint(networkManager, sourceEndpointParam);
-                                        //ZclCluster cluster = getCluster(sourceEndpoint, clusterSpecParam);
-
-                                        ZigBeeEndpoint sourceEndpoint = networkManager.GetNodes().Last().Endpoints[0];
-                                        ZclLevelControlCluster cluster = new ZclLevelControlCluster(sourceEndpoint, networkManager);
-                                        //ZclCluster cluster = sourceEndpoint.GetInputCluster(sourceEndpoint.GetInputClusterIds().FirstOrDefault());
-
-                                        IeeeAddress destAddress;
-                                        byte destEndpoint;
-
-                                        destAddress = networkManager.GetNodes().First().IeeeAddress;
-                                        destEndpoint = 1;
-
-                                        cluster.Bind(destAddress, destEndpoint);
-
-                                        //if (destEndpointParam != null)
-                                        //{
-                                        //    ZigBeeEndpoint destination = getEndpoint(networkManager, destEndpointParam);
-                                        //    destAddress = destination.getIeeeAddress();
-                                        //    destEndpoint = destination.getEndpointId();
-                                        //}
-                                        //else
-                                        //{
-                                        //destAddress = networkManager.GetNode(0).IeeeAddress;
-                                        //destEndpoint = 1;
-                                        //}
-
-                                        //ZclLevelControlCluster level = new ZclLevelControlCluster(node.GetEndpoint(0), networkManager);
-                                        //level.Bind(node.IeeeAddress, 0);
-                                    }
-                                    else if (cmd == "toggle")
+                                    if (cmd == "toggle")
                                     {
                                         networkManager.Send(endpoint, new ToggleCommand()).GetAwaiter().GetResult();
                                     }
@@ -152,9 +104,13 @@ namespace ZigBeeNet.PlayGround
                                         Console.WriteLine("time between 0 and 65535: ");
                                         string time = Console.ReadLine();
 
-                                        var command = new MoveToLevelCommand((byte)int.Parse(level), ushort.Parse(time));
+                                        var command = new MoveToLevelWithOnOffCommand(byte.Parse(level), ushort.Parse(time));
 
                                         networkManager.Send(endpoint, command).GetAwaiter().GetResult();
+                                    }
+                                    else if (cmd == "move")
+                                    {
+                                        networkManager.Send(endpoint, new MoveCommand(1, 100)).GetAwaiter().GetResult();
                                     }
                                 }
                                 catch (Exception ex)
@@ -189,9 +145,6 @@ namespace ZigBeeNet.PlayGround
             Console.WriteLine("Node " + node.IeeeAddress + " added " + node);
             if (node.NetworkAddress != 0)
             {
-                //    ZclOnOffCluster onOff = new ZclOnOffCluster(node.GetEndpoint(0));
-
-                //    onOff.ToggleCommand();
             }
         }
 

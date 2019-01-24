@@ -592,15 +592,9 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param rate {@link int} Rate
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> MoveCommand(int moveMode, int rate)
+        public Task<CommandResult> MoveCommand(byte moveMode, byte rate)
         {
-            MoveCommand command = new MoveCommand();
-
-            // Set the fields
-            command.SetMoveMode(moveMode);
-            command.SetRate(rate);
-
-            return Send(command);
+            return Send(new MoveCommand(moveMode, rate));
         }
 
         /**
@@ -642,16 +636,10 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param transitionTime {@link int} Transition time
          * @return the {@link Task<CommandResult>} command result future
          */
-        //public Task<CommandResult> moveToLevelWithOnOffCommand(int level, int transitionTime)
-        //{
-        //    MoveToLevelWithOnOffCommand command = new MoveToLevelWithOnOffCommand();
-
-        //    // Set the fields
-        //    command.setLevel(level);
-        //    command.setTransitionTime(transitionTime);
-
-        //    return Send(command);
-        //}
+        public Task<CommandResult> MoveToLevelWithOnOffCommand(byte level, ushort transitionTime)
+        {
+            return Send(new MoveToLevelWithOnOffCommand(level, transitionTime));
+        }
 
         /**
          * The Move (with On/Off) Command
