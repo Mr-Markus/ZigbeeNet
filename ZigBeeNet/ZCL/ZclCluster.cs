@@ -453,7 +453,7 @@ namespace ZigBeeNet.ZCL
          * @param endpointId the destination endpoint ID
          * @return Command future
          */
-        public Task<CommandResult> Bind(IeeeAddress address, byte endpointId)
+        public Task<CommandResult> Bind(IeeeAddress address, ushort networkAddress, byte endpointId)
         {
             BindRequest command = new BindRequest();
             command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
@@ -461,7 +461,7 @@ namespace ZigBeeNet.ZCL
             command.BindCluster = _clusterId;
             command.DstAddrMode = 3; // 64 bit addressing
             command.DstAddress = address;
-            command.DestinationAddress = new ZigBeeEndpointAddress(35468, 1);
+            command.DestinationAddress = new ZigBeeEndpointAddress(networkAddress, endpointId);
             command.DstEndpoint = endpointId;
             return _zigbeeEndpoint.SendTransaction(command, new BindRequest());
         }

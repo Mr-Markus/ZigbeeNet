@@ -62,13 +62,9 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNode coord = networkManager.GetNode(0);
 
-                coord.PermitJoin(false);
+                coord.PermitJoin(true);
 
-                //Console.WriteLine("Joining enabled...");
-
-                ZigBeeNode light = new ZigBeeNode(networkManager, new IeeeAddress(BitConverter.GetBytes(3192981736732173)));
-                light.NetworkAddress = 35468;
-                networkManager.AddNode(light);
+                Console.WriteLine("Joining enabled...");
 
                 string cmd = Console.ReadLine();
 
@@ -78,9 +74,8 @@ namespace ZigBeeNet.PlayGround
 
                     if (!string.IsNullOrEmpty(cmd))
                     {
-                        //Console.WriteLine("Destination Address: ");
-                        //string nwkAddr = Console.ReadLine();
-                        string nwkAddr = "35468";
+                        Console.WriteLine("Destination Address: ");
+                        string nwkAddr = Console.ReadLine();
 
                         if (ushort.TryParse(nwkAddr, out ushort addr))
                         {
@@ -89,18 +84,10 @@ namespace ZigBeeNet.PlayGround
                             if (node != null)
                             {
                                 var endpointAddress = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
-                                var endpoint = new ZigBeeEndpoint(node, 1);
-                                node.AddEndpoint(endpoint);
 
                                 try
                                 {
-                                    if (cmd == "bind")
-                                    {
-                                        var sourceEndpoint = new ZigBeeEndpoint(coord, 1);
-                                        ZclCluster cluster = new ZclOnOffCluster(sourceEndpoint, networkManager);
-                                        cluster.Bind(node.IeeeAddress, 1);
-                                    }
-                                    else if (cmd == "toggle")
+                                    if (cmd == "toggle")
                                     {
                                         networkManager.Send(endpointAddress, new ToggleCommand()).GetAwaiter().GetResult();
                                     }
