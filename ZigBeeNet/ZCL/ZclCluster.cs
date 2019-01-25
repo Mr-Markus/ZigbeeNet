@@ -456,12 +456,12 @@ namespace ZigBeeNet.ZCL
         public Task<CommandResult> Bind(IeeeAddress address, byte endpointId)
         {
             BindRequest command = new BindRequest();
-            command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);
             command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
             command.SrcEndpoint = _zigbeeEndpoint.EndpointId;
             command.BindCluster = _clusterId;
             command.DstAddrMode = 3; // 64 bit addressing
             command.DstAddress = address;
+            command.DestinationAddress = new ZigBeeEndpointAddress(35468, 1);
             command.DstEndpoint = endpointId;
             return _zigbeeEndpoint.SendTransaction(command, new BindRequest());
         }

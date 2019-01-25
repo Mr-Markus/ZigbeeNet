@@ -189,7 +189,7 @@ namespace ZigBeeNet.CC
                 byte sender;
                 if (apsFrame.Profile == 0)
                 {
-                    sender = 0;
+                    sender = 1;
                 }
                 else
                 {

@@ -88,13 +88,21 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                var endpoint = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
+                                var endpointAddress = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
+                                var endpoint = new ZigBeeEndpoint(node, 1);
+                                node.AddEndpoint(endpoint);
 
                                 try
                                 {
-                                    if (cmd == "toggle")
+                                    if (cmd == "bind")
                                     {
-                                        networkManager.Send(endpoint, new ToggleCommand()).GetAwaiter().GetResult();
+                                        var sourceEndpoint = new ZigBeeEndpoint(coord, 1);
+                                        ZclCluster cluster = new ZclOnOffCluster(sourceEndpoint, networkManager);
+                                        cluster.Bind(node.IeeeAddress, 1);
+                                    }
+                                    else if (cmd == "toggle")
+                                    {
+                                        networkManager.Send(endpointAddress, new ToggleCommand()).GetAwaiter().GetResult();
                                     }
                                     else if (cmd == "level")
                                     {
@@ -106,11 +114,11 @@ namespace ZigBeeNet.PlayGround
 
                                         var command = new MoveToLevelWithOnOffCommand(byte.Parse(level), ushort.Parse(time));
 
-                                        networkManager.Send(endpoint, command).GetAwaiter().GetResult();
+                                        networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
                                     }
                                     else if (cmd == "move")
                                     {
-                                        networkManager.Send(endpoint, new MoveCommand(1, 100)).GetAwaiter().GetResult();
+                                        networkManager.Send(endpointAddress, new MoveCommand(1, 100)).GetAwaiter().GetResult();
                                     }
                                 }
                                 catch (Exception ex)

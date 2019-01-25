@@ -631,8 +631,8 @@ namespace ZigBeeNet
                 // apsHeader.setSourceEndpoint(sourceEndpoint);
 
                 apsFrame.Profile = 0;
-                apsFrame.SourceEndpoint = 0;
-                apsFrame.DestinationEndpoint = 0;
+                apsFrame.SourceEndpoint = 1;
+                apsFrame.DestinationEndpoint = 1;
                 command.Serialize(fieldSerializer);
 
                 // Serialise the ZCL header and add the payload
