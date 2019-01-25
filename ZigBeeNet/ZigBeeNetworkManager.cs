@@ -582,7 +582,7 @@ namespace ZigBeeNet
             // Set the source address - should probably be improved!
             // Note that the endpoint is set (currently!) in the transport layer
             // TODO: Use only a single endpoint for HA and fix this here
-            command.SourceAddress = new ZigBeeEndpointAddress(LocalNwkAddress, 0);
+            command.SourceAddress = new ZigBeeEndpointAddress(LocalNwkAddress);
 
             _logger.Debug("TX CMD: {Command}", command);
 
@@ -643,7 +643,7 @@ namespace ZigBeeNet
 
             if (command is ZclCommand zclCommand)
             {
-                apsFrame.SourceEndpoint = 0;
+                apsFrame.SourceEndpoint = 1;
 
                 // TODO set the profile properly
                 apsFrame.Profile = 0x104;
