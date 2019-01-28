@@ -103,11 +103,12 @@ namespace ZigBeeNet.ZCL
          */
         protected abstract Dictionary<ushort, ZclAttribute> InitializeAttributes();
 
-        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
+        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager, ushort clusterId, string clusterName)
         {
             _attributes = InitializeAttributes();
 
             this._zigbeeEndpoint = zigbeeEndpoint;
+            this._zigbeeManager = zigBeeNetworkManager;
             this._clusterId = clusterId;
             this._clusterName = clusterName;
             this._normalizer = new ZclAttributeNormalizer();
@@ -115,7 +116,7 @@ namespace ZigBeeNet.ZCL
 
         protected Task<CommandResult> Send(ZclCommand command)
         {
-            command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
+            //command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
             if (IsClient())
             {
                 command.CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
@@ -452,15 +453,15 @@ namespace ZigBeeNet.ZCL
          * @param endpointId the destination endpoint ID
          * @return Command future
          */
-        public Task<CommandResult> Bind(IeeeAddress address, byte endpointId)
+        public Task<CommandResult> Bind(IeeeAddress address, ushort networkAddress, byte endpointId)
         {
             BindRequest command = new BindRequest();
-            command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);
             command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
             command.SrcEndpoint = _zigbeeEndpoint.EndpointId;
             command.BindCluster = _clusterId;
             command.DstAddrMode = 3; // 64 bit addressing
             command.DstAddress = address;
+            command.DestinationAddress = new ZigBeeEndpointAddress(networkAddress, endpointId);
             command.DstEndpoint = endpointId;
             return _zigbeeEndpoint.SendTransaction(command, new BindRequest());
         }
@@ -492,7 +493,7 @@ namespace ZigBeeNet.ZCL
          * @param commandIdentifier the command identifier to which this is a response
          * @param status the {@link ZclStatus} to send in the response
          */
-        public void SendDefaultResponse(byte transactionId, int commandIdentifier, ZclStatus status)
+        public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status)
         {
             DefaultResponse defaultResponse = new DefaultResponse();
             defaultResponse.TransactionId = transactionId;
@@ -940,10 +941,7 @@ namespace ZigBeeNet.ZCL
          * @param commandId the command ID
          * @return the {@link ZclCommand} or null if no command found.
          */
-        public ZclCommand GetCommandFromId(int commandId)
-        {
-            return null;
-        }
+        public abstract ZclCommand GetCommandFromId(int commandId);
 
         /**
          * Gets a response from the command ID (ie a command from server to client). If no command with the requested id is

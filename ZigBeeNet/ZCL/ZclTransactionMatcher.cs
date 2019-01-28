@@ -26,9 +26,9 @@ namespace ZigBeeNet.ZCL
 
             if (response is ZclCommand rsp && ((ZclCommand)request).TransactionId != null)
             {
-                int transactionId = ((ZclCommand)request).TransactionId.Value;
+                int? transactionId = ((ZclCommand)request).TransactionId;
 
-                return transactionId.Equals(rsp.TransactionId);
+                return transactionId == rsp.TransactionId;
             }
             else
             {

@@ -205,10 +205,8 @@ namespace ZigBeeNet
          *
          * @return true if the device is a Reduced Function Device
          */
-        public bool IsReducedFuntionDevice
-        {
-            get
-            {
+        public bool IsReducedFuntionDevice {
+            get {
                 if (NodeDescriptor == null)
                 {
                     return false;
@@ -217,10 +215,8 @@ namespace ZigBeeNet
             }
         }
 
-        public bool IsSecurityCapable
-        {
-            get
-            {
+        public bool IsSecurityCapable {
+            get {
                 if (NodeDescriptor == null)
                 {
                     return false;
@@ -229,10 +225,8 @@ namespace ZigBeeNet
             }
         }
 
-        public bool IsPrimaryTrustCenter
-        {
-            get
-            {
+        public bool IsPrimaryTrustCenter {
+            get {
                 if (NodeDescriptor == null)
                 {
                     return false;
@@ -253,10 +247,8 @@ namespace ZigBeeNet
          *
          * @return the {@link LogicalType} of the node
          */
-        public LogicalType LogicalType
-        {
-            get
-            {
+        public LogicalType LogicalType {
+            get {
                 return NodeDescriptor.LogicalNodeType;
             }
         }
@@ -452,13 +444,9 @@ namespace ZigBeeNet
                     endpoint.CommandReceived(zclCommand);
                 }
             }
-            else
+            else if (Endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
             {
-                ZigBeeEndpoint endpoint = Endpoints[endpointAddress.Endpoint];
-                if (endpoint != null)
-                {
-                    endpoint.CommandReceived(zclCommand);
-                }
+                endpoint.CommandReceived(zclCommand);
             }
         }
 

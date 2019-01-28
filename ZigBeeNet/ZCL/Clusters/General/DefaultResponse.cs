@@ -10,7 +10,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /**
      * Command identifier command message field.
      */
-    public int CommandIdentifier { get; set; }
+    public byte CommandIdentifier { get; set; }
 
     /**
      * Status code command message field.
@@ -36,7 +36,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
 
     public override void Deserialize(ZclFieldDeserializer deserializer)
     {
-        CommandIdentifier = (int)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        CommandIdentifier = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         StatusCode = (ZclStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZCL_STATUS));
     }
 
