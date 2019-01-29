@@ -40,9 +40,9 @@ namespace BasicSample
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
-                ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
-                discoveryExtension.setUpdatePeriod(60);
-                networkManager.AddExtension(discoveryExtension);
+                //ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
+                //discoveryExtension.setUpdatePeriod(60);
+                //networkManager.AddExtension(discoveryExtension);
 
                 // Initialise the network
                 networkManager.Initialize();

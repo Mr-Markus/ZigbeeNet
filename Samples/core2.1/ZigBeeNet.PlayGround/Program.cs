@@ -26,7 +26,11 @@ namespace ZigBeeNet.PlayGround
 
             try
             {
-                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort("COM3");
+                Console.Write("Enter COM Port: ");
+
+                string port = Console.ReadLine();
+
+                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort(port);
 
                 IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(zigbeePort);
 

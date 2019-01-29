@@ -1450,7 +1450,7 @@ namespace ZigBeeNet
          */
         public void AddSupportedCluster(byte cluster)
         {
-            _logger.Debug("Adding supported cluster {}", cluster);
+            _logger.Debug("Adding supported cluster {Cluster}", cluster);
             if (_clusterMatcher == null)
             {
                 _clusterMatcher = new ClusterMatcher(this);
