@@ -9,6 +9,7 @@ using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
+using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 
@@ -48,6 +49,7 @@ namespace ZigBeeNet.PlayGround
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
+
 
                 networkManager.AddSupportedCluster(0x06);
                 networkManager.AddSupportedCluster(0x08);
@@ -111,9 +113,34 @@ namespace ZigBeeNet.PlayGround
                                     {
                                         networkManager.Send(endpointAddress, new MoveCommand(1, 100)).GetAwaiter().GetResult();
                                     }
+                                    else if (cmd == "on")
+                                    {
+                                        networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
+                                    }
+                                    else if (cmd == "off")
+                                    {
+                                        networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                    }
+                                    else if (cmd == "effect")
+                                    {
+                                        networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+
+                                        bool state = false;
+                                        for (int i = 0; i < 10; i++)
+                                        {
+                                            if (state)
+                                                networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                            else
+                                                networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
+
+                                            state = !state;
+                                            System.Threading.Thread.Sleep(1500);
+                                        }
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
+                                    Log.Logger.Error(ex, "{Error}");
                                 }
                             }
                         }

@@ -32,6 +32,8 @@ namespace ZigBeeNet.ZCL.Clusters.General
             GenericCommand = true;
             CommandId = 0;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
+
+            Identifiers = new List<ushort>();
         }
 
         public override void Serialize(ZclFieldSerializer serializer)

@@ -142,5 +142,12 @@ namespace ZigBeeNet.ZCL
 
             return zclFrame;
         }
+
+        public override string ToString()
+        {
+            return "ZclHeader [frameType=" + FrameType + ", manufacturerSpecific=" + ManufacturerSpecific + ", direction="
+                    + Direction + ", disableDefaultResponse=" + DisableDefaultResponse + ", manufacturerCode="
+                    + ManufacturerCode + ", sequenceNumber=" + SequenceNumber + ", commandId=" + CommandId + "]";
+        }
     }
 }
