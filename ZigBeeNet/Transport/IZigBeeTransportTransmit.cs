@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.CC.Util;
+using ZigBeeNet.Hardware.CC.Util;
 using ZigBeeNet.Security;
 using ZigBeeNet.ZCL;
 

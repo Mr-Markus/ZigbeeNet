@@ -2,19 +2,14 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.DAO;
 using ZigBeeNet.ZDO.Command;
-using ZigBeeNet;
 using ZigBeeNet.App.Discovery;
-using ZigBeeNet.DAO;
 using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO.Field;
-using static ZigBeeNet.App.Discovery.ZigBeeNodeServiceDiscoverer;
 using static ZigBeeNet.ZDO.Field.NodeDescriptor;
-using static ZigBeeNet.ZDO.Field.PowerDescriptor;
 using ZigBeeNet.Transaction;
 
 namespace ZigBeeNet

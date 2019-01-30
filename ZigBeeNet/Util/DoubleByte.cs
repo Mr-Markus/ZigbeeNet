@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ZigBeeNet.CC.Packet;
+using ZigBeeNet.Hardware.CC.Packet;
 
 namespace ZigBeeNet
 {

@@ -1504,11 +1504,6 @@ namespace ZigBeeNet
             SendCommand(command);
         }
 
-        // TODO: REMOVE THIS AFTER FIX MULTI THREADING ISSUES
-        public bool IsTransactionStillInList(ZigBeeTransaction transaction)
-        {
-            return _commandNotifier.HasObject(transaction);
-        }
 
         public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {

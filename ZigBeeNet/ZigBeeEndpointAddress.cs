@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.CC.Extensions;
+using ZigBeeNet.Hardware.CC.Extensions;
 using ZigBeeNet.Util;
 
 namespace ZigBeeNet

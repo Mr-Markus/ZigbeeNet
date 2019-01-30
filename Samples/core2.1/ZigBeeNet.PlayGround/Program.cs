@@ -3,7 +3,7 @@ using System.Linq;
 using Serilog;
 using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
-using ZigBeeNet.CC;
+using ZigBeeNet.Hardware.CC;
 using ZigBeeNet.Serial;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;

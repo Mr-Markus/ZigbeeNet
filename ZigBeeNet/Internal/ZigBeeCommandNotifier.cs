@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using ZigBeeNet.Transaction;
+using ZigBeeNet.Logging;
 
 namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
+        private readonly ILog _logger = LogProvider.For<ZigBeeCommandNotifier>();
+
         private ConcurrentBag<IZigBeeCommandListener> _commandListeners;
 
         public ZigBeeCommandNotifier()
@@ -16,50 +16,14 @@ namespace ZigBeeNet.Internal
             _commandListeners = new ConcurrentBag<IZigBeeCommandListener>();
         }
 
-
-        // TODO: REMOVE THIS AFTER FIX MULTI THREADING ISSUES
-        public bool HasObject(IZigBeeCommandListener listener)
-        {
-            foreach (var item in _commandListeners)
-            {
-                if (item == listener)
-                    return true;
-            }
-
-            return false;
-        }
-
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            if (commandListener is ZigBeeTransaction)
-            {
-                var x = "";
-            }
-
-            var tmp = commandListener;
-
-            //TODO make this working
-            //if(_commandListeners.TryPeek(out commandListener))
-            //{
-            //    // Da im java proj mit HashSet gearbeitet wird -> keine duplicates
-            //    return;
-            //}
-
-            _commandListeners.Add(tmp);
+            _commandListeners.Add(commandListener);
         }
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            var removed = _commandListeners.TryTake(out commandListener);
-
-            if (!removed)
-            {
-                var x = "";
-            }
-            else
-            {
-                var x = "";
-            }
+            _commandListeners.TryTake(out commandListener);
         }
 
         public void NotifyCommandListeners(ZigBeeCommand command)
@@ -69,30 +33,15 @@ namespace ZigBeeNet.Internal
             {
                 Task.Run(() =>
                 {
-                    //try
-                    //{
-
-                    var countBefore = _commandListeners.Count;
-
-                    commandListener.CommandReceived(command);
-
-                    var countAfter = _commandListeners.Count;
-
-                    if(commandListener is ZigBeeTransaction trans)
+                    try
                     {
-                        if (trans.IsTransactionMatch)
-                        {
-                            if(countBefore <= countAfter)
-                            {
-                                var THIS_BREAK_POINT_SHOULD_NEVER_GETTING_HIT = "";
-                            }
-                        }
+                        commandListener.CommandReceived(command);
                     }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    var x = "";
-                    //}
+                    catch(Exception ex)
+                    {
+                        _logger.ErrorException("Error during the notification of commandListeners.", ex);
+                    }
+                    
                 });
             }
         }
