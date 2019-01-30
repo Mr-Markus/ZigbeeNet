@@ -141,6 +141,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Transport\ZigBeeTransportState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\Hash.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\TaskExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\Basic\PhysicalEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\Basic\PowerSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\Basic\ResetToFactoryDefaultsCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\ConfigureReportingCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\ConfigureReportingResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\General\DefaultResponse.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\OnWithRecallGlobalSceneCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\OnWithTimedOffCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\ToggleCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclBasicCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclLevelControlCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOnOffCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExtendedPanId.cs" />
