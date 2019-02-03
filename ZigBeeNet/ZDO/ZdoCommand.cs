@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO
 {
@@ -9,12 +10,12 @@ namespace ZigBeeNet.ZDO
     {
         public override void Serialize(ZclFieldSerializer serializer)
         {
-            
+            serializer.Serialize((byte)0, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer serializer)
+        public override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            base.Deserialize(serializer);
+            //deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
     }
 }
