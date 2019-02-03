@@ -10,7 +10,6 @@
   <Import Project="..\ZigBeeNet\ZigBeeNet.projitems" Label="Shared" />
 
   <ItemGroup>
-    <PackageReference Include="BinarySerializer" Version="8.1.3" />
     <PackageReference Include="LibLog" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
