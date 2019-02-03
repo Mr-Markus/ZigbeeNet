@@ -91,20 +91,23 @@ namespace ZigBeeNet.Hardware.CC.Packet.ZDO
             SrcAddr = new ZToolAddress16(framedata[1], framedata[0]);
             Status = (PacketStatus)framedata[2];
             NwkAddr = new ZToolAddress16(framedata[4], framedata[3]);
-            LogicalType = (ZigBeeNodeType)(framedata[5] & (byte)0x07);
-            ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
-            UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;
-            if (UserDescriptorAvailable)
-            {
-                APSFlags = (byte)(framedata[6] & (byte)0x0F);
-                FrequencyBand = (byte)(framedata[6] & (byte)0xF0 >> 4);
-                MacCapabilitiesFlags = (CapabilitiesFlags)framedata[10];
-                ManufacturerCode = new DoubleByte(framedata[11], framedata[12]);
-                MaxBufferSize = framedata[13];
-                MaxInTransferSize = new DoubleByte(framedata[14], framedata[15]);
-                ServerMask = new DoubleByte(framedata[16], framedata[17]);
-            }
 
+            if (Status == PacketStatus.SUCESS)
+            {
+                LogicalType = (ZigBeeNodeType)(framedata[5] & (byte)0x07);
+                ComplexDescriptorAvailable = ((framedata[5] & (0x08)) >> 3) == 1;
+                UserDescriptorAvailable = ((framedata[5] & (16)) >> 4) == 1;
+                if (UserDescriptorAvailable)
+                {
+                    APSFlags = (byte)(framedata[6] & (byte)0x0F);
+                    FrequencyBand = (byte)(framedata[6] & (byte)0xF0 >> 4);
+                    MacCapabilitiesFlags = (CapabilitiesFlags)framedata[10];
+                    ManufacturerCode = new DoubleByte(framedata[11], framedata[12]);
+                    MaxBufferSize = framedata[13];
+                    MaxInTransferSize = new DoubleByte(framedata[14], framedata[15]);
+                    ServerMask = new DoubleByte(framedata[16], framedata[17]);
+                }
+            }
             BuildPacket(new DoubleByte(ZToolCMD.ZDO_NODE_DESC_RSP), framedata);
         }
 

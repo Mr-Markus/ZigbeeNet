@@ -244,7 +244,7 @@ namespace ZigBeeNet.ZDO.Field
 
             SetServerCapabilities((short)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER)));
             OutgoingTransferSize = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            byte descriptorCapabilities = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
+            sbyte descriptorCapabilities = (sbyte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
 
             IsextendedEndpointListAvailable = (descriptorCapabilities & 0x01) != 0;
             ExtendedSimpleDescriptorListAvailable = (descriptorCapabilities & 0x02) != 0;

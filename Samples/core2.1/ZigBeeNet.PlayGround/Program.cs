@@ -12,6 +12,7 @@ using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
+using ZigBeeNet.ZDO.Command;
 
 namespace ZigBeeNet.PlayGround
 {
@@ -37,15 +38,15 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
-                //ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
-                //discoveryExtension.setUpdatePeriod(60);
-                //networkManager.AddExtension(discoveryExtension);
+                ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
+                discoveryExtension.setUpdatePeriod(60);
+                networkManager.AddExtension(discoveryExtension);
 
                 // Initialise the network
                 networkManager.Initialize();
 
                 networkManager.AddCommandListener(new ZigBeeNetworkDiscoverer(networkManager));
-                //networkManager.AddCommandListener(new ZigBeeDiscoveryExtension());
+                //networkManager.AddCommandListener(new ZigBeeNodeServiceDiscoverer(networkManager));
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
@@ -134,14 +135,25 @@ namespace ZigBeeNet.PlayGround
                                                 networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
 
                                             state = !state;
-                                            System.Threading.Thread.Sleep(1500);
+                                            System.Threading.Thread.Sleep(1000);
                                         }
+                                    } else if (cmd == "desc")
+                                    {
+                                        NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
+                                        {
+                                            DestinationAddress = endpointAddress,
+                                            NwkAddrOfInterest = addr
+                                        };
+                                        networkManager.SendTransaction(nodeDescriptorRequest);
                                     }
                                 }
                                 catch (Exception ex)
                                 {
                                     Log.Logger.Error(ex, "{Error}");
                                 }
+                            } else
+                            {
+                                Console.WriteLine($"Node {addr} not found");
                             }
                         }
                     }
