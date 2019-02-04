@@ -406,7 +406,7 @@ namespace ZigBeeNet.App.Discovery
         private async Task<bool> RequestNodeDescriptor()
         {
             NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest();
-            nodeDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress((ushort)Node.NetworkAddress);
+            nodeDescriptorRequest.DestinationAddress = new ZigBeeEndpointAddress(Node.NetworkAddress);
             nodeDescriptorRequest.NwkAddrOfInterest = Node.NetworkAddress;
 
             CommandResult response = await NetworkManager.SendTransaction(nodeDescriptorRequest, nodeDescriptorRequest);

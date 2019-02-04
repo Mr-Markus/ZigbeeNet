@@ -1,5 +1,4 @@
-﻿using BinarySerialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL.Protocol;

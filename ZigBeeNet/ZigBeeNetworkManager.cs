@@ -1505,6 +1505,5 @@ namespace ZigBeeNet
             ZigBeeTransaction transaction = new ZigBeeTransaction(this);
             return transaction.SendTransaction(command, responseMatcher);
         }
-
     }
 }

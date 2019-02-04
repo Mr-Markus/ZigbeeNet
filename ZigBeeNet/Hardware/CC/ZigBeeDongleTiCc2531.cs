@@ -164,7 +164,7 @@ namespace ZigBeeNet.Hardware.CC
                     apsFrame = ZdoManagementLeave.Create(packet);
                     break;
                 default:
-                    _logger.Debug($"Unhandled SerialPacket type {packet.CMD}");
+                    //_logger.Debug($"Unhandled SerialPacket type {packet.CMD}");
                     break;
             }
 
