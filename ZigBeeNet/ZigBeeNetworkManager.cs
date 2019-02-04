@@ -738,11 +738,6 @@ namespace ZigBeeNet
 
             try
             {
-                //Class <? extends ZdoCommand > commandClass = commandType.getCommandClass();
-                //Constructor <? extends ZdoCommand > constructor;
-                //constructor = commandClass.getConstructor();
-                //command = constructor.newInstance();
-
                 command = commandType.GetZdoCommand();
             }
             catch (Exception e)

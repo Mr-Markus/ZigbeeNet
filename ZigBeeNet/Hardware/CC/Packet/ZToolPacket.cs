@@ -172,7 +172,7 @@ namespace ZigBeeNet.Hardware.CC.Packet
                         builder.Append(' ');
                     }
                     first = false;
-                    builder.Append(string.Format("%02X", value));
+                    builder.Append(value.ToString("X2"));
                 }
                 return builder.ToString();
             }
