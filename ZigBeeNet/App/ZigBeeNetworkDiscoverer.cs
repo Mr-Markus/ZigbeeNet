@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet;
+using ZigBeeNet.App.Discovery;
 using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO;
@@ -96,7 +97,7 @@ namespace ZigBeeNet.App
             _networkManager.AddAnnounceListener(this);
 
             // Start discovery from root node.
-            StartNodeDiscovery(0);
+            // StartNodeDiscovery(0);
         }
 
         /**
@@ -180,6 +181,15 @@ namespace ZigBeeNet.App
                 _logger.Debug("{IeeeAddress}: Device announce received. NWK={NetworkAddress}", announce.IeeeAddr,
                         announce.NwkAddrOfInterest);
                 AddNode(announce.IeeeAddr, announce.NwkAddrOfInterest);
+
+                var node = _networkManager.GetNode(announce.IeeeAddr);
+
+                ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
+                //nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
+                nodeDiscoverer.StartDiscovery();
+
+                // TODO: Does only IeeeAddress Request
+                //StartNodeDiscovery(announce.NwkAddrOfInterest);
             }
         }
 

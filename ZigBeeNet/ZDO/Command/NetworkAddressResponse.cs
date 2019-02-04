@@ -70,10 +70,11 @@ namespace ZigBeeNet.ZDO.Command
             IeeeAddrRemoteDev = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
             NwkAddrRemoteDev = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
             byte? numAssocDev = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
-            if (numAssocDev != null)
+            if (numAssocDev != null && numAssocDev.Value > 0)
             {
+                StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+
                 for (int cnt = 0; cnt < numAssocDev; cnt++)
                 {
                     NwkAddrAssocDevList.Add((int)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS)));

@@ -134,7 +134,7 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            _logger.Debug("{}: Setting input clusters {}", GetEndpointAddress(), inputClusterIds);
+            _logger.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds);
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }
@@ -216,15 +216,18 @@ namespace ZigBeeNet
             if (clusterType == null)
             {
                 // Unsupported cluster
-                _logger.Debug("{}: Unsupported cluster {}", GetEndpointAddress(), clusterId);
+                _logger.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
                 return null;
             }
 
             // Create a cluster class
             ZclCluster cluster = null;
 
+            //TODO: Create Cluster object
 
-            throw new NotImplementedException();
+            //ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager, ushort clusterId, string clusterName
+            return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this, null, clusterType.ClusterId, clusterType.Label);
+
             //    Constructor <? extends ZclCluster > constructor;
             //    // try {
             //    try
@@ -260,7 +263,7 @@ namespace ZigBeeNet
             // Remove clusters no longer in use
             foreach (int id in removeIds)
             {
-                _logger.Debug("{}: Removing cluster {}", GetEndpointAddress(), id);
+                _logger.Debug("{Endpoint}: Removing cluster {Cluster}", GetEndpointAddress(), id);
                 clusters.TryRemove(id, out ZclCluster not_used);
             }
 

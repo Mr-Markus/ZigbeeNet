@@ -26,7 +26,7 @@ namespace ZigBeeNet.App.Discovery
          * responsible for monitoring the network for new devices and the initial
          * interrogation of their capabilities.
          */
-        private ZigBeeNetworkDiscoverer networkDiscoverer;
+        private ZigBeeNetworkDiscoverer _networkDiscoverer;
 
         /**
          *
@@ -61,8 +61,8 @@ namespace ZigBeeNet.App.Discovery
             _networkManager.AddNetworkNodeListener(this);
             _networkManager.AddCommandListener(this);
 
-            networkDiscoverer = new ZigBeeNetworkDiscoverer(_networkManager);
-            networkDiscoverer.Startup();
+            _networkDiscoverer = new ZigBeeNetworkDiscoverer(_networkManager);
+            _networkDiscoverer.Startup();
 
             if (_updatePeriod != 0)
             {
@@ -79,7 +79,7 @@ namespace ZigBeeNet.App.Discovery
             _networkManager.RemoveNetworkNodeListener(this);
             _networkManager.RemoveCommandListener(this);
 
-            networkDiscoverer?.Shutdown();
+            _networkDiscoverer?.Shutdown();
 
             extensionStarted = false;
 
@@ -96,7 +96,7 @@ namespace ZigBeeNet.App.Discovery
          *
          * @param updatePeriod number of seconds between mesh updates. Setting to 0 will stop updates.
          */
-        public void setUpdatePeriod(int updatePeriod)
+        public void SetUpdatePeriod(int updatePeriod)
         {
             _updatePeriod = updatePeriod;
 
@@ -123,7 +123,7 @@ namespace ZigBeeNet.App.Discovery
          * @return number of seconds between mesh updates. 0 indicates no automatic updates.
          *
          */
-        public int getUpdatePeriod()
+        public int GetUpdatePeriod()
         {
             return _updatePeriod;
         }
@@ -184,7 +184,7 @@ namespace ZigBeeNet.App.Discovery
          */
         public void RediscoverNode(ushort nodeAddress)
         {
-            networkDiscoverer.RediscoverNode(nodeAddress);
+            _networkDiscoverer.RediscoverNode(nodeAddress);
         }
 
         /**
@@ -195,7 +195,7 @@ namespace ZigBeeNet.App.Discovery
          */
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
-            networkDiscoverer.RediscoverNode(ieeeAddress);
+            _networkDiscoverer.RediscoverNode(ieeeAddress);
         }
 
         private void stopScheduler()

@@ -141,8 +141,8 @@ namespace ZigBeeNet.Serialization
                 case DataType.N_X_READ_ATTRIBUTE_STATUS_RECORD:
                     break;
                 case DataType.N_X_UNSIGNED_16_BIT_INTEGER:
-                    int cntN16 = (byte)((byte)payload[index++] & 0xFF);
-                    List<byte> arrayN16 = new List<byte>(cntN16);
+                    int cntN16 = (byte)(payload[index++] & 0xFF);
+                    List<ushort> arrayN16 = new List<ushort>(cntN16);
                     for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex++)
                     {
                         arrayN16.Add((byte)(payload[index++] | ((payload[index++] << 8) & 0xffff)));
