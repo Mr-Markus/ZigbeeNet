@@ -443,7 +443,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(powerDescriptorRequest, powerDescriptorRequest);
             PowerDescriptorResponse powerDescriptorResponse = (PowerDescriptorResponse)response.Response;
 
-            _logger.Debug("IeeeAddress{}: Node SVC Discovery: PowerDescriptorResponse returned {Response}", Node.IeeeAddress, powerDescriptorResponse);
+            _logger.Debug("IeeeAddress{IeeeAddress}: Node SVC Discovery: PowerDescriptorResponse returned {Response}", Node.IeeeAddress, powerDescriptorResponse);
 
             if (powerDescriptorResponse == null)
             {
@@ -542,7 +542,7 @@ namespace ZigBeeNet.App.Discovery
                 }
                 else if (neighborResponse.Status != ZdoStatus.SUCCESS)
                 {
-                    _logger.Debug("{}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
+                    _logger.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest failed", Node.IeeeAddress);
                     return false;
                 }
 

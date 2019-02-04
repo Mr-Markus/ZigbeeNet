@@ -103,12 +103,11 @@ namespace ZigBeeNet.ZCL
          */
         protected abstract Dictionary<ushort, ZclAttribute> InitializeAttributes();
 
-        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager, ushort clusterId, string clusterName)
+        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
         {
             _attributes = InitializeAttributes();
 
             this._zigbeeEndpoint = zigbeeEndpoint;
-            this._zigbeeManager = zigBeeNetworkManager;
             this._clusterId = clusterId;
             this._clusterName = clusterName;
             this._normalizer = new ZclAttributeNormalizer();
@@ -122,7 +121,7 @@ namespace ZigBeeNet.ZCL
                 command.CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
             }
 
-            return _zigbeeManager.SendTransaction(command, new ZclTransactionMatcher());
+            return _zigbeeEndpoint.SendTransaction(command, new ZclTransactionMatcher());
         }
 
         /**

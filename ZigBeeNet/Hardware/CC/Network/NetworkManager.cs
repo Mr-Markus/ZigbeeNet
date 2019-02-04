@@ -932,7 +932,7 @@ namespace ZigBeeNet.Hardware.CC.Network
                     }
                     if (response[0] != null)
                     {
-                        _logger.Trace("{} --> {}", request.GetType().Name,
+                        _logger.Trace("{Request} --> {Response}", request.GetType().Name,
                                 response[0].GetType().Name);
                         break; // Break out as we have response.
                     }
@@ -947,13 +947,13 @@ namespace ZigBeeNet.Hardware.CC.Network
                     }
                     else
                     {
-                        _logger.Debug("Failed to send {} [attempt {}]", request.GetType().Name, sending);
+                        _logger.Debug("Failed to send {Request} [attempt {Sending}]", request.GetType().Name, sending);
                         sending++;
                     }
                 }
                 catch (Exception ignored)
                 {
-                    _logger.Debug("Failed to send {} [attempt {}]", request.GetType().Name, sending);
+                    _logger.Debug("Failed to send {Request} [attempt {Sending}]", request.GetType().Name, sending);
                     _logger.Trace("Sending operation failed due to ", ignored);
                     sending++;
                 }

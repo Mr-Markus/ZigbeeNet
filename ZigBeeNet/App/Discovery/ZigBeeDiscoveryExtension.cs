@@ -109,7 +109,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (updatePeriod == 0)
             {
-                stopScheduler();
+                StopScheduler();
                 return;
             }
 
@@ -198,7 +198,7 @@ namespace ZigBeeNet.App.Discovery
             _networkDiscoverer.RediscoverNode(ieeeAddress);
         }
 
-        private void stopScheduler()
+        private void StopScheduler()
         {
             if (_futureTask != null)
             {
@@ -209,7 +209,7 @@ namespace ZigBeeNet.App.Discovery
 
         private void StartScheduler(int initialPeriod)
         {
-            stopScheduler();
+            StopScheduler();
 
             _cancellationTokenSource = new CancellationTokenSource();
             

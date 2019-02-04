@@ -14,7 +14,7 @@ namespace ZigBeeNet.Hardware.CC.Network
 
         public void ReceivedCommandResponse(ZToolPacket packet)
         {
-            _logger.Trace(" {} received as synchronous command.", packet.GetType().Name);
+            _logger.Trace(" {Packet} received as synchronous command.", packet.GetType().Name);
             lock(packet) {
                 OnResponseReceived?.Invoke(this, packet);
 

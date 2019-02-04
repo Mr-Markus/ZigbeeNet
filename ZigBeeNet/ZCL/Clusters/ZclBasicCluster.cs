@@ -129,8 +129,8 @@ namespace ZigBeeNet.ZCL.Clusters
          *
          * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
          */
-        public ZclBasicCluster(ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager)
-            : base(zigbeeEndpoint, zigBeeNetworkManager, CLUSTER_ID, CLUSTER_NAME)
+        public ZclBasicCluster(ZigBeeEndpoint zigbeeEndpoint)
+            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
         {
         }
 

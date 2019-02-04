@@ -8,6 +8,7 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.Logging;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
+using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Protocol;
 
@@ -210,7 +211,7 @@ namespace ZigBeeNet
             }
         }
 
-        private ZclCluster GetClusterClass(ushort clusterId)
+        public ZclCluster GetClusterClass(ushort clusterId)
         {
             ZclClusterType clusterType = ZclClusterType.GetValueById(clusterId);
             if (clusterType == null)
@@ -221,27 +222,10 @@ namespace ZigBeeNet
             }
 
             // Create a cluster class
-            ZclCluster cluster = null;
-
-            //TODO: Create Cluster object
-
-            //ZigBeeEndpoint zigbeeEndpoint, ZigBeeNetworkManager zigBeeNetworkManager, ushort clusterId, string clusterName
-            return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this, null, clusterType.ClusterId, clusterType.Label);
-
-            //    Constructor <? extends ZclCluster > constructor;
-            //    // try {
-            //    try
-            //    {
-            //        constructor = clusterType.getClusterClass().getConstructor(ZigBeeNetworkManager.class,
-            //            ZigBeeEndpoint.class);
-            //    cluster = constructor.newInstance(networkManager, this);
-            //} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-            //        | IllegalArgumentException | InvocationTargetException e) {
-            //    logger.debug("{}: Error instantiating cluster {}", getEndpointAddress(), clusterType);
-            //    return null;
-            //}
-
-            return cluster;
+            if (clusterType.ClusterClass != null)
+                return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this);
+            else
+                return null;
         }
 
         private void UpdateClusters(ConcurrentDictionary<int, ZclCluster> clusters, List<ushort> newList, bool isInput)
@@ -281,12 +265,12 @@ namespace ZigBeeNet
 
                     if (isInput)
                     {
-                        _logger.Debug("{}: Setting cluster {} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetServer();
                     }
                     else
                     {
-                        _logger.Debug("{}: Setting cluster {} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetClient();
                     }
 

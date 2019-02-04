@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.Logging;
+using ZigBeeNet.ZCL.Clusters;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
@@ -87,6 +89,8 @@ namespace ZigBeeNet.ZCL.Protocol
 
     public class ZclClusterType
     {
+        private ILog _logger = LogProvider.For<ZclClusterType>();
+
         private static readonly Dictionary<ushort, ZclClusterType> _idValueMap;
 
         public ClusterType Type { get; private set; }
@@ -100,22 +104,23 @@ namespace ZigBeeNet.ZCL.Protocol
 
         public Type ClusterClass
         {
-            get { return this.GetType(); }
+            get; private set;
         }
 
-        private ZclClusterType(int clusterId, ProfileType profileType, string label, ClusterType clusterType)
+        private ZclClusterType(int clusterId, ProfileType profileType, string label, ClusterType clusterType, Type clusterClass = null)
         {
             this.ClusterId = clusterId;
             this.ProfileType = profileType;
             this.Label = label;
             this.Type = clusterType;
+            this.ClusterClass = clusterClass;
         }
 
         static ZclClusterType()
         {
             _idValueMap = new Dictionary<ushort, ZclClusterType>
             {
-                { 0x0000, new ZclClusterType(0x0000, ProfileType.ZIGBEE_HOME_AUTOMATION, "Basic", ClusterType.BASIC) },
+                { 0x0000, new ZclClusterType(0x0000, ProfileType.ZIGBEE_HOME_AUTOMATION, "Basic", ClusterType.BASIC, typeof(ZclBasicCluster)) },
                 { 0x0001, new ZclClusterType(0x0001, ProfileType.ZIGBEE_HOME_AUTOMATION, "Power configuration", ClusterType.POWER_CONFIGURATION) },
                 { 0x0002, new ZclClusterType(0x0002, ProfileType.ZIGBEE_HOME_AUTOMATION, "Device Temperature Configuration", ClusterType.DEVICE_TEMPERATURE_CONFIGURATION) },
                 { 0x0003, new ZclClusterType(0x0003, ProfileType.ZIGBEE_HOME_AUTOMATION, "Identify", ClusterType.IDENTIFY) },
@@ -205,7 +210,7 @@ namespace ZigBeeNet.ZCL.Protocol
         {
             // Use index instead of Linq (Where())-> performance
             return _idValueMap[(ushort)clusterId];
-        }
+        }        
     }
 }
 

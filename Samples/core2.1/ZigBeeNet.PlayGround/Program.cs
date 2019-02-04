@@ -38,22 +38,19 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
+                ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
+                discoveryExtension.SetUpdatePeriod(60);
+                networkManager.AddExtension(discoveryExtension);
 
                 // Initialise the network
                 networkManager.Initialize();
 
+                networkManager.AddCommandListener(new ZigBeeNetworkDiscoverer(networkManager));
+                //networkManager.AddCommandListener(new ZigBeeNodeServiceDiscoverer(networkManager));
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
-                ZigBeeNetworkDiscoverer networkDiscoverer = new ZigBeeNetworkDiscoverer(networkManager);
-                networkManager.AddCommandListener(networkDiscoverer);
-                
-                ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
-                discoveryExtension.ExtensionInitialize(networkManager);
-                //discoveryExtension.SetUpdatePeriod(60);
-                //networkManager.AddExtension(discoveryExtension);
-                //networkManager.AddNetworkNodeListener(discoveryExtension);
 
                 networkManager.AddSupportedCluster(0x06);
                 networkManager.AddSupportedCluster(0x08);

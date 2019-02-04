@@ -23,7 +23,7 @@ namespace ZigBeeNet.Internal
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            _commandListeners.TryTake(out commandListener);
+            _commandListeners.TryTake(out _);
         }
 
         public void NotifyCommandListeners(ZigBeeCommand command)
