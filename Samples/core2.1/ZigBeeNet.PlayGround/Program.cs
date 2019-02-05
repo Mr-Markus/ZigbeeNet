@@ -9,6 +9,7 @@ using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
+using ZigBeeNet.ZCL.Clusters.ColorControl;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
@@ -54,6 +55,7 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddSupportedCluster(0x06);
                 networkManager.AddSupportedCluster(0x08);
+                networkManager.AddSupportedCluster(0x0300);
 
                 ZigBeeStatus startupSucceded = networkManager.Startup(false);
 
@@ -81,8 +83,8 @@ namespace ZigBeeNet.PlayGround
 
                     if (!string.IsNullOrEmpty(cmd))
                     {
-                        Console.WriteLine("Destination Address: ");
-                        string nwkAddr = Console.ReadLine();
+                        //Console.WriteLine("Destination Address: ");
+                        string nwkAddr = "5574"; // Console.ReadLine();
 
                         if (ushort.TryParse(nwkAddr, out ushort addr))
                         {
@@ -137,7 +139,8 @@ namespace ZigBeeNet.PlayGround
                                             state = !state;
                                             System.Threading.Thread.Sleep(1000);
                                         }
-                                    } else if (cmd == "desc")
+                                    }
+                                    else if (cmd == "desc")
                                     {
                                         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
                                         {
@@ -146,12 +149,60 @@ namespace ZigBeeNet.PlayGround
                                         };
                                         networkManager.SendTransaction(nodeDescriptorRequest);
                                     }
+                                    else if (cmd == "color")
+                                    {
+                                        //Console.WriteLine("ColorX between 0 and 65535: ");
+                                        //string x = Console.ReadLine();
+
+                                        //Console.WriteLine("ColorY between 0 and 65535: ");
+                                        //string y = Console.ReadLine();
+
+                                        Console.WriteLine("Red between 0 and 255: ");
+                                        string r = Console.ReadLine();
+
+                                        Console.WriteLine("Green between 0 and 255: ");
+                                        string g = Console.ReadLine();
+
+                                        Console.WriteLine("Blue between 0 and 255: ");
+                                        string b = Console.ReadLine();
+
+                                        if (double.TryParse(r, out double _r) && double.TryParse(g, out double _g) && double.TryParse(b, out double _b))
+                                        {
+                                            double[] xyY = RGBtoxyY(_r, _g, _b);
+
+                                            MoveToColorCommand command = new MoveToColorCommand()
+                                            {
+                                                ColorX = (ushort)(xyY[0] * 100000),
+                                                ColorY = (ushort)(xyY[1] * 100000),
+                                                TransitionTime = 10
+                                            };
+
+                                            networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
+                                        }
+                                    }
+                                    else if (cmd == "hue")
+                                    {
+                                        Console.WriteLine("Hue between 0 and 255: ");
+                                        string hue = Console.ReadLine();
+                                        if (byte.TryParse(hue, out byte _hue))
+                                        {
+                                            MoveToHueCommand command = new MoveToHueCommand()
+                                            {
+                                                Hue = _hue,
+                                                Direction = 0,
+                                                TransitionTime = 10
+                                            };
+
+                                            networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
+                                        }
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
                                     Log.Logger.Error(ex, "{Error}");
                                 }
-                            } else
+                            }
+                            else
                             {
                                 Console.WriteLine($"Node {addr} not found");
                             }
@@ -165,6 +216,27 @@ namespace ZigBeeNet.PlayGround
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        public static double[] RGBtoxyY(double r, double g, double b)
+        {
+            var red = (r > 0.04045) ? Math.Pow((r + 0.055) / (1.0 + 0.055), 2.4) : (r / 12.92);
+            var green = (g > 0.04045) ? Math.Pow((g + 0.055) / (1.0 + 0.055), 2.4) : (g / 12.92);
+            var blue = (b > 0.04045) ? Math.Pow((b + 0.055) / (1.0 + 0.055), 2.4) : (b / 12.92);
+
+            //RGB values to XYZ using the Wide RGB D65 conversion formula 
+            var X = red * 0.664511 + green * 0.154324 + blue * 0.162028;
+            var Y = red * 0.283881 + green * 0.668433 + blue * 0.047685;
+            var Z = red * 0.000088 + green * 0.072310 + blue * 0.986039;
+
+            //Calculate the xy values from the XYZ values 
+            var x = (X / (X + Y + Z)); //.toFixed(4);
+            var y = (Y / (X + Y + Z)); //.toFixed(4);
+
+            //if (isNaN(x)) x = 0;
+            //if (isNaN(y)) y = 0;
+
+            return new double[] { x, y };           
         }
     }
 

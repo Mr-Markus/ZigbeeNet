@@ -1443,7 +1443,7 @@ namespace ZigBeeNet
          *
          * @param cluster the supported cluster ID
          */
-        public void AddSupportedCluster(byte cluster)
+        public void AddSupportedCluster(ushort cluster)
         {
             _logger.Debug("Adding supported cluster {Cluster}", cluster);
             if (_clusterMatcher == null)
