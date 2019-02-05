@@ -83,8 +83,8 @@ namespace ZigBeeNet.PlayGround
 
                     if (!string.IsNullOrEmpty(cmd))
                     {
-                        //Console.WriteLine("Destination Address: ");
-                        string nwkAddr = "5574"; // Console.ReadLine();
+                        Console.WriteLine("Destination Address: ");
+                        string nwkAddr = Console.ReadLine();
 
                         if (ushort.TryParse(nwkAddr, out ushort addr))
                         {

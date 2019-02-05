@@ -181,15 +181,6 @@ namespace ZigBeeNet.App
                 _logger.Debug("{IeeeAddress}: Device announce received. NWK={NetworkAddress}", announce.IeeeAddr,
                         announce.NwkAddrOfInterest);
                 AddNode(announce.IeeeAddr, announce.NwkAddrOfInterest);
-
-                var node = _networkManager.GetNode(announce.IeeeAddr);
-
-                ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
-                //nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
-                nodeDiscoverer.StartDiscovery();
-
-                // TODO: Does only IeeeAddress Request
-                //StartNodeDiscovery(announce.NwkAddrOfInterest);
             }
         }
 

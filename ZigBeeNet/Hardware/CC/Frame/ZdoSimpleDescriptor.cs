@@ -17,7 +17,8 @@ namespace ZigBeeNet.Hardware.CC.Frame
             apsFrame.SourceAddress = (ushort)(packet.Packet[4] | (packet.Packet[5] << 8));
             apsFrame.SourceEndpoint = 0;
             apsFrame.Profile = 0;
-
+            apsFrame.Payload = new byte[packet.Packet.Length - 7];
+                       
             Array.Copy(packet.Packet, 6, apsFrame.Payload, 0, packet.Packet.Length - 7);
 
             return apsFrame;
