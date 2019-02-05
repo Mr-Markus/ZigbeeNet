@@ -90,7 +90,7 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                var endpointAddress = new ZigBeeEndpointAddress(node.NetworkAddress, 1);
+                                var endpointAddress = node.Endpoints.FirstOrDefault().Value.GetEndpointAddress();
 
                                 try
                                 {
