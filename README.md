@@ -83,12 +83,16 @@ namespace ZigBeeNet.PlayGround
     }
 }
 ```
-## Information
+## Hint
 This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsystems.zigbee and many ideas were adopted (almost a java -> c# port).
 
 ## Contributing
 
 Feel free to open an issue if you have any idea or enhancement. If you want to implement on code create a fork and open a pull request
+
+## Coding guidelines
+
+For a cleaner code we have some coding guidelines. you can find them [here](https://github.com/Mr-Markus/ZigbeeNet/blob/master/docs/coding-guidelines).
 
 ## License
 ZigBeeNet is provided under [The MIT License](https://github.com/Mr-Markus/ZigBeeNet/blob/master/LICENSE).
