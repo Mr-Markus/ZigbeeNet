@@ -6,7 +6,7 @@
     <AssemblyName>ZigBeeNet</AssemblyName>
   </PropertyGroup>
 
-  <Import Project="..\..\src\ZigBeeNet\ZigbeeNet.projitems" Label="Shared" />
+  <Import Project="..\..\src\ZigBeeNet\ZigBeeNet.projitems" Label="Shared" />
 
   <ItemGroup>
     <PackageReference Include="LibLog" Version="5.0.2">
