@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj" />
+    <ProjectReference Include="..\..\..\targets\ZigBeeNet.Hardware.TI.CC2531.core2.2\ZigBeeNet.Hardware.TI.CC2531.core2.2.csproj" />
   </ItemGroup>
 
 </Project>

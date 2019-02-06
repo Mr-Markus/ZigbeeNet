@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28516.95
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "ZigBeeNet\ZigBeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "src\ZigBeeNet\ZigBeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.netstandard2.0", "ZigBeeNet.netstandard2.0\ZigBeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.netstandard2.0", "targets\ZigBeeNet.netstandard2.0\ZigBeeNet.netstandard2.0.csproj", "{BB7AB6BF-1196-4FC4-9B08-8417D3551CB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7FF7F314-871A-4B42-ABCB-9D2FB5D14188}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.0", "ZigBeeNet.core2.0\ZigBeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.0", "targets\ZigBeeNet.core2.0\ZigBeeNet.core2.0.csproj", "{0E465DBE-8E60-4731-BB21-A052026BCE00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}"
 EndProject
@@ -28,11 +28,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.1", "core2.1", "{40BE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.1\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.1", "ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.1", "targets\ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.TI.CC2531", "src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.shproj", "{B7975147-A7E4-4959-85D3-C5CA0ADDAA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeNet.Hardware.TI.CC2531.core2.2", "targets\ZigBeeNet.Hardware.TI.CC2531.core2.2\ZigBeeNet.Hardware.TI.CC2531.core2.2.csproj", "{F0F9BA10-6339-4E29-911F-D1957E3895DF}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		ZigBeeNet\ZigBeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
+		src\ZigBeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
+		src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.projitems*{b7975147-a7e4-4959-85d3-c5ca0addaa17}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +60,10 @@ Global
 		{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F9BA10-6339-4E29-911F-D1957E3895DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F9BA10-6339-4E29-911F-D1957E3895DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F9BA10-6339-4E29-911F-D1957E3895DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F9BA10-6339-4E29-911F-D1957E3895DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +76,8 @@ Global
 		{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0} = {B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}
 		{8D086719-5BFD-4AC3-812A-93543AF2CE34} = {40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}
 		{4831C06C-DFA7-45B1-878C-F8FE7C8E636D} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
+		{B7975147-A7E4-4959-85D3-C5CA0ADDAA17} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{F0F9BA10-6339-4E29-911F-D1957E3895DF} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
