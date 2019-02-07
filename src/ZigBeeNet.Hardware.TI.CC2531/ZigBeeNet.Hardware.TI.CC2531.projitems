@@ -84,6 +84,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Packet\SYS\SYS_VERSION.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packet\SYS\SYS_VERSION_RESPONSE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_GET_DEVICE_INFO_RESPONSE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_LED_CONTROL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_LED_CONTROL_RESPONSE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_SET_CHANNELS_RESPONSE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_SET_PANID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packet\UTIL\UTIL_SET_PANID_RESPONSE.cs" />

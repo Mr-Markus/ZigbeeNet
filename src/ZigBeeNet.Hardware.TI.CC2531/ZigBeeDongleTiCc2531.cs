@@ -383,5 +383,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             _supportedOutputClusters = supportedClusters;
             return ZigBeeStatus.SUCCESS;
         }
+
+        public ZigBeeStatus SetLedMode(byte ledId, bool mode)
+        {
+            return _networkManager.SetLedMode(ledId, mode);
+        }
     }
 }

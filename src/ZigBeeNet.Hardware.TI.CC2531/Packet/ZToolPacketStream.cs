@@ -280,6 +280,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                     return new UTIL_SET_CHANNELS_RESPONSE(payload);
                 case ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE:
                     return new UTIL_GET_DEVICE_INFO_RESPONSE(payload);
+                case ZToolCMD.UTIL_LED_CONTROL_RESPONSE:
+                    return new UTIL_LED_CONTROL_RESPONSE(payload);
                 default:
                     _logger.Warn("Unknown command ID: {Command}", cmd);
                     return new ZToolPacket(cmd, payload);

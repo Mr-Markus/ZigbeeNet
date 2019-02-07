@@ -8,6 +8,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.AF;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SYS;
+using ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
 using ZigBeeNet.Logging;
@@ -535,6 +536,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             _securityMode = securityMode;
 
             return dongleSetSecurityMode();
+        }
+
+        public ZigBeeStatus SetLedMode(byte ledId, bool mode)
+        {
+            UTIL_LED_CONTROL_RESPONSE response = (UTIL_LED_CONTROL_RESPONSE)SendSynchronous(new UTIL_LED_CONTROL(ledId, mode));
+
+            return (response != null && response.Status == 0) ? ZigBeeStatus.SUCCESS : ZigBeeStatus.FAILURE;
         }
 
         public void AddAsynchronousCommandListener(IAsynchronousCommandListener asynchronousCommandListener)
