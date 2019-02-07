@@ -45,6 +45,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Transport\TransportConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\TransportConfigOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transport\ZigBeeTransportState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\CieColor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\ColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\Hash.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\TaskExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\Basic\PhysicalEnvironment.cs" />
