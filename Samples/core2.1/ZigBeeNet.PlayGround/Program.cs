@@ -7,6 +7,7 @@ using ZigBeeNet.Hardware.TI.CC2531;
 using ZigBeeNet.Serial;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;
+using ZigBeeNet.Util;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
@@ -166,14 +167,14 @@ namespace ZigBeeNet.PlayGround
                                         Console.WriteLine("Blue between 0 and 255: ");
                                         string b = Console.ReadLine();
 
-                                        if (double.TryParse(r, out double _r) && double.TryParse(g, out double _g) && double.TryParse(b, out double _b))
+                                        if (int.TryParse(r, out int _r) && int.TryParse(g, out int _g) && int.TryParse(b, out int _b))
                                         {
-                                            double[] xyY = RGBtoxyY(_r, _g, _b);
+                                            CieColor xyY = ColorConverter.RgbToCie(_r, _g, _b);
 
                                             MoveToColorCommand command = new MoveToColorCommand()
                                             {
-                                                ColorX = (ushort)(xyY[0] * 100000),
-                                                ColorY = (ushort)(xyY[1] * 100000),
+                                                ColorX = xyY.X,
+                                                ColorY = xyY.Y,
                                                 TransitionTime = 10
                                             };
 
@@ -182,8 +183,9 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "hue")
                                     {
-                                        Console.WriteLine("Hue between 0 and 255: ");
+                                        Console.WriteLine("Red between 0 and 255: ");
                                         string hue = Console.ReadLine();
+
                                         if (byte.TryParse(hue, out byte _hue))
                                         {
                                             MoveToHueCommand command = new MoveToHueCommand()
@@ -236,7 +238,7 @@ namespace ZigBeeNet.PlayGround
             //if (isNaN(x)) x = 0;
             //if (isNaN(y)) y = 0;
 
-            return new double[] { x, y };           
+            return new double[] { x, y };
         }
     }
 
