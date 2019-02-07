@@ -5,9 +5,9 @@ using System.Text;
 namespace ZigBeeNet.Util
 {
     public class CieColor { 
-        public double RawX { get; set; }
+        public double RawX { get; private set; }
 
-        public double RawY { get; set; }
+        public double RawY { get; private set; }
     
         public ushort X
         {
