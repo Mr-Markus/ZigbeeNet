@@ -11,6 +11,7 @@ namespace ZigBeeNet.CodeGenerator
         {
             ZclProtocolCodeGenerator.Generate();
 
+            Console.WriteLine("Code generation done. Press any key to close this window ...");
             Console.ReadLine();
         }
     }
