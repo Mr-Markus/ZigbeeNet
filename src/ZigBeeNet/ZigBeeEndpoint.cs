@@ -384,7 +384,7 @@ namespace ZigBeeNet
             clusters = new List<ZclClusterDao>();
             foreach (ZclCluster cluster in _inputClusters.Values)
             {
-                clusters.Add(cluster.getDao());
+                clusters.Add(cluster.GetDao());
             }
 
             dao.SetInputClusters(clusters);
@@ -392,7 +392,7 @@ namespace ZigBeeNet
             clusters = new List<ZclClusterDao>();
             foreach (ZclCluster cluster in _outputClusters.Values)
             {
-                clusters.Add(cluster.getDao());
+                clusters.Add(cluster.GetDao());
             }
             dao.SetOutputClusters(clusters);
 
