@@ -313,7 +313,7 @@ namespace ZigBeeNet.ZCL
          * @param attribute the {@link ZclAttribute} on which to enable reporting
          * @return command future {@link CommandResult}
          */
-        public Task<CommandResult> getReporting(ZclAttribute attribute)
+        public Task<CommandResult> GetReporting(ZclAttribute attribute)
         {
             ReadReportingConfigurationCommand command = new ReadReportingConfigurationCommand();
             command.ClusterId = _clusterId;
@@ -333,7 +333,7 @@ namespace ZigBeeNet.ZCL
          *
          * @return {@link Set} containing all {@link ZclAttributes} available in this cluster
          */
-        public IEnumerable<ZclAttribute> getAttributes()
+        public IEnumerable<ZclAttribute> GetAttributes()
         {
             IEnumerable<ZclAttribute> attr = new List<ZclAttribute>(_attributes.Values);
             return attr;
@@ -808,7 +808,7 @@ namespace ZigBeeNet.ZCL
          *
          * @param attribute the {@link ZclAttribute} to notify
          */
-        private void notifyAttributeListener(ZclAttribute attribute)
+        private void NotifyAttributeListener(ZclAttribute attribute)
         {
             foreach (IZclAttributeListener listener in _attributeListeners)
             {
@@ -819,6 +819,9 @@ namespace ZigBeeNet.ZCL
                 //        listener.attributeUpdated(attribute);
                 //    }
                 //});
+
+                // TODO: async ?
+                listener.AttributeUpdated(attribute);
             }
         }
 
@@ -852,7 +855,7 @@ namespace ZigBeeNet.ZCL
          *
          * @param command the {@link ZclCommand} to notify
          */
-        private void notifyCommandListener(ZclCommand command)
+        private void NotifyCommandListener(ZclCommand command)
         {
             foreach (IZclCommandListener listener in _commandListeners)
             {
@@ -863,6 +866,9 @@ namespace ZigBeeNet.ZCL
                 //        listener.commandReceived(command);
                 //    }
                 //});
+
+                // TODO: async ?
+                listener.CommandReceived(command);
             }
         }
 
@@ -884,7 +890,7 @@ namespace ZigBeeNet.ZCL
                 else
                 {
                     attribute.UpdateValue(_normalizer.NormalizeZclData(attribute.ZclDataType, report.AttributeValue));
-                    notifyAttributeListener(attribute);
+                    NotifyAttributeListener(attribute);
                 }
             }
         }
@@ -916,7 +922,7 @@ namespace ZigBeeNet.ZCL
                     else
                     {
                         attribute.UpdateValue(_normalizer.NormalizeZclData(attribute.ZclDataType, record.AttributeValue));
-                        notifyAttributeListener(attribute);
+                        NotifyAttributeListener(attribute);
                     }
                 }
             }
@@ -930,7 +936,7 @@ namespace ZigBeeNet.ZCL
          */
         public void HandleCommand(ZclCommand command)
         {
-            notifyCommandListener(command);
+            NotifyCommandListener(command);
         }
 
         /**
@@ -954,16 +960,17 @@ namespace ZigBeeNet.ZCL
             return null;
         }
 
-        public ZclClusterDao getDao()
+        public ZclClusterDao GetDao()
         {
-            ZclClusterDao dao = new ZclClusterDao();
-
-            dao.ClusterId = _clusterId;
-            dao.IsClient = _isClient;
-            dao.SupportedAttributes = _supportedAttributes;
-            dao.SupportedCommandsGenerated = _supportedCommandsGenerated;
-            dao.SupportedCommandsReceived =_supportedCommandsReceived;
-            dao.Attributes = _attributes;
+            ZclClusterDao dao = new ZclClusterDao
+            {
+                ClusterId = _clusterId,
+                IsClient = _isClient,
+                SupportedAttributes = _supportedAttributes,
+                SupportedCommandsGenerated = _supportedCommandsGenerated,
+                SupportedCommandsReceived = _supportedCommandsReceived,
+                Attributes = _attributes
+            };
 
             return dao;
         }

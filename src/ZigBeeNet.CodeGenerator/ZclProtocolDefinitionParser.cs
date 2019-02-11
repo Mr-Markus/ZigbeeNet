@@ -17,9 +17,11 @@ namespace ZigBeeNet.CodeGenerator
 
                 if (line.StartsWith("# ") && line.Contains("["))
                 {
-                    context.Profile = new Profile();
-                    context.Profile.ProfileName = getHeaderTitle(line);
-                    context.Profile.ProfileAbbreviation = GetHeaderAbbreviation(line);
+                    context.Profile = new Profile
+                    {
+                        ProfileName = getHeaderTitle(line),
+                        ProfileAbbreviation = GetHeaderAbbreviation(line)
+                    };
                     context.Profile.ProfileType = CodeGeneratorUtil.LabelToEnumerationValue(context.Profile.ProfileName);
                     context.Profile.ProfileId = GetHeaderId(line);
                     context.Profiles.Add(context.Profile.ProfileId, context.Profile);
@@ -77,10 +79,8 @@ namespace ZigBeeNet.CodeGenerator
                     context.Cluster.ClusterDescription = new List<string>();
                     context.Cluster.ClusterType = CodeGeneratorUtil.LabelToEnumerationValue(context.Cluster.ClusterName);
                     context.Cluster.ClusterId = GetHeaderId(line);
-                    context.Cluster.NameUpperCamelCase = CodeGeneratorUtil
-                            .LabelToUpperCamelCase(context.Cluster.ClusterName);
-                    context.Cluster.NameLowerCamelCase = CodeGeneratorUtil
-                            .UpperCamelCaseToLowerCamelCase(context.Cluster.ClusterName);
+                    context.Cluster.NameUpperCamelCase = CodeGeneratorUtil.LabelToUpperCamelCase(context.Cluster.ClusterName);
+                    context.Cluster.NameLowerCamelCase = CodeGeneratorUtil.UpperCamelCaseToLowerCamelCase(context.Cluster.ClusterName);
                     context.Profile.Clusters.Add(context.Cluster.ClusterId, context.Cluster);
                     Console.WriteLine("  (" + CodeGeneratorUtil.ToHex(context.Cluster.ClusterId) + ") " + context.Cluster.ClusterName);
 
@@ -201,8 +201,7 @@ namespace ZigBeeNet.CodeGenerator
                     context.Command.CommandLabel = getHeaderTitle(line).Trim();
                     string[] splits = context.Command.CommandLabel.Split(" ");
 
-                    if ("RESPONSE".Equals(splits[splits.Length - 2].ToUpper())
-                            && "COMMAND".Equals(splits[splits.Length - 1].ToUpper()))
+                    if ("RESPONSE".Equals(splits[splits.Length - 2].ToUpper()) && "COMMAND".Equals(splits[splits.Length - 1].ToUpper()))
                     {
                         StringBuilder sb = new StringBuilder();
                         for (int c = 0; c < splits.Length - 1; c++)
