@@ -33,7 +33,7 @@ namespace ZigBeeNet.ZCL
                 return;
             }
 
-            Serializer.AppendZigBeeType(value, dataType);
+            Serializer.AppendZigBeeType(value, dataType.DataType);
         }
     }
 }

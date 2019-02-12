@@ -10,7 +10,7 @@ namespace ZigBeeNet.Serialization
     {
         bool IsEndOfStream();
 
-        object ReadZigBeeType(ZclDataType type);
+        T ReadZigBeeType<T>(DataType type);
 
         int GetPosition();
 

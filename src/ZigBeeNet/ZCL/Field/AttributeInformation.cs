@@ -22,14 +22,14 @@ namespace ZigBeeNet.ZCL.Field
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType(Identifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType(AttributeDataType, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.AppendZigBeeType(Identifier, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.AppendZigBeeType(AttributeDataType, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            Identifier = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            AttributeDataType = (ZclDataType)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.ZIGBEE_DATA_TYPE));
+            Identifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            AttributeDataType = deserializer.ReadZigBeeType<ZclDataType>(DataType.ZIGBEE_DATA_TYPE);
         }
 
         public int CompareTo(AttributeInformation other)

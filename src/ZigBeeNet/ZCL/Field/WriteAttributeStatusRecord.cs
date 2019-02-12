@@ -11,25 +11,25 @@ namespace ZigBeeNet.ZCL.Field
         /**
          * The status.
          */
-        public int Status;
+        public byte Status;
         /**
          * The attribute identifier.
          */
-        public int AttributeIdentifier;
+        public ushort AttributeIdentifier;
 
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType(Status, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.AppendZigBeeType(AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.AppendZigBeeType(Status, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            Status = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Status = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             if (Status != 0)
             {
-                AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
         }
 

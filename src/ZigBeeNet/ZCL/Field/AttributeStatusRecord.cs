@@ -25,19 +25,19 @@ namespace ZigBeeNet.ZCL.Field
 
     public void Serialize(IZigBeeSerializer serializer)
     {
-        serializer.AppendZigBeeType(Status, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        serializer.AppendZigBeeType(Status, DataType.UNSIGNED_8_BIT_INTEGER);
         if (Status == ZclStatus.SUCCESS)
         {
-            serializer.AppendZigBeeType(Direction, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.AppendZigBeeType(AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.AppendZigBeeType(Direction, DataType.BOOLEAN);
+            serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
         }
     }
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        Status = (ZclStatus)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.ZCL_STATUS));
-        Direction = (bool)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.BOOLEAN));
-        AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        Status = deserializer.ReadZigBeeType<ZclStatus>(DataType.ZCL_STATUS);
+        Direction = deserializer.ReadZigBeeType<bool>(DataType.BOOLEAN);
+        AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
     }
 
     public override string ToString()

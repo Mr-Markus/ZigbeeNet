@@ -11,17 +11,17 @@ namespace ZigBeeNet.ZCL.Field
     /**
      * The attribute identifier.
      */
-    public int Value { get; private set; }
+    public ushort Value { get; private set; }
 
 
     public void Serialize(IZigBeeSerializer serializer)
     {
-        serializer.AppendZigBeeType(Value, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        serializer.AppendZigBeeType(Value, DataType.UNSIGNED_16_BIT_INTEGER);
     }
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        Value = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        Value = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
     }
 
     public override string ToString()

@@ -132,7 +132,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param maxInterval {@link int} maximum reporting period
          * @return the {@link Future<CommandResult>} command result future
          */
-        public Task<CommandResult> SetOnOffReporting(int minInterval, int maxInterval)
+        public Task<CommandResult> SetOnOffReporting(ushort minInterval, ushort maxInterval)
         {
             return SetReporting(_attributes[ATTR_ONOFF], minInterval, maxInterval);
         }

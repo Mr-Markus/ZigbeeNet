@@ -284,7 +284,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetCurrentHueReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetCurrentHueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_CURRENTHUE], minInterval, maxInterval, reportableChange);
         }
@@ -366,7 +366,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetCurrentSaturationReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetCurrentSaturationReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_CURRENTSATURATION], minInterval, maxInterval, reportableChange);
         }
@@ -495,7 +495,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetCurrentXReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetCurrentXReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_CURRENTX], minInterval, maxInterval, reportableChange);
         }
@@ -577,7 +577,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetCurrentYReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetCurrentYReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_CURRENTY], minInterval, maxInterval, reportableChange);
         }
@@ -771,7 +771,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetColorTemperatureReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetColorTemperatureReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_COLORTEMPERATURE], minInterval, maxInterval, reportableChange);
         }
@@ -898,7 +898,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetEnhancedCurrentHueReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetEnhancedCurrentHueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_ENHANCEDCURRENTHUE], minInterval, maxInterval, reportableChange);
         }

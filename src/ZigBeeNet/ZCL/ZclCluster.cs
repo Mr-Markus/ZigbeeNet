@@ -160,7 +160,7 @@ namespace ZigBeeNet.ZCL
          * @param value the value to set (as {@link Object})
          * @return command future {@link CommandResult}
          */
-        public Task<CommandResult> Write(int attribute, ZclDataType dataType, object value)
+        public Task<CommandResult> Write(ushort attribute, ZclDataType dataType, object value)
         {
             //logger.debug("{}: Writing cluster {}, attribute {}, value {}, as dataType {}", zigbeeEndpoint.getIeeeAddress(),
             //        clusterId, attribute, value, dataType);
@@ -260,7 +260,7 @@ namespace ZigBeeNet.ZCL
          * @param reportableChange the minimum change required to report an update
          * @return command future {@link CommandResult}
          */
-        public Task<CommandResult> SetReporting(ZclAttribute attribute, int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetReporting(ZclAttribute attribute, ushort minInterval, ushort maxInterval, object reportableChange)
         {
 
             ConfigureReportingCommand command = new ConfigureReportingCommand();
@@ -302,7 +302,7 @@ namespace ZigBeeNet.ZCL
          * @param maxInterval the maximum reporting interval
          * @return command future {@link CommandResult}
          */
-        public Task<CommandResult> SetReporting(ZclAttribute attribute, int minInterval, int maxInterval)
+        public Task<CommandResult> SetReporting(ZclAttribute attribute, ushort minInterval, ushort maxInterval)
         {
             return SetReporting(attribute, minInterval, maxInterval, null);
         }

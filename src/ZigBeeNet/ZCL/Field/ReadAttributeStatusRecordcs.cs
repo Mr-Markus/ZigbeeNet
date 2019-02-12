@@ -31,20 +31,20 @@ namespace ZigBeeNet.ZCL.Field
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType((short)AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType(Status, ZclDataType.Get(DataType.ZCL_STATUS));
-            serializer.AppendZigBeeType((byte)AttributeDataType.Id, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.AppendZigBeeType(AttributeValue, AttributeDataType);
+            serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.AppendZigBeeType(Status, DataType.ZCL_STATUS);
+            serializer.AppendZigBeeType((byte)AttributeDataType.Id, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.AppendZigBeeType(AttributeValue, AttributeDataType.DataType);
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            AttributeIdentifier = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Status = (ZclStatus)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.ZCL_STATUS));
+            AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Status = deserializer.ReadZigBeeType<ZclStatus>(DataType.ZCL_STATUS);
             if (Status == ZclStatus.SUCCESS)
             {
-                AttributeDataType = ZclDataType.Get((byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
-                AttributeValue = deserializer.ReadZigBeeType(AttributeDataType);
+                AttributeDataType = ZclDataType.Get(deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER));
+                AttributeValue = deserializer.ReadZigBeeType<object>(AttributeDataType.DataType);
             }
         }
 

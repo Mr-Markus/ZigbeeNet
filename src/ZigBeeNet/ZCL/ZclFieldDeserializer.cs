@@ -48,7 +48,7 @@ namespace ZigBeeNet.ZCL
                 return list;
             }
 
-            return Deserializer.ReadZigBeeType(dataType);
+            return Deserializer.ReadZigBeeType<object>(dataType.DataType);
         }
     }
 }
