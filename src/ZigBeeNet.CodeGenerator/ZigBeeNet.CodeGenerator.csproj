@@ -15,4 +15,8 @@
     <Folder Include="GenerationResults\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\targets\ZigBeeNet.netstandard2.0\ZigBeeNet.netstandard2.0.csproj" />
+  </ItemGroup>
+
 </Project>

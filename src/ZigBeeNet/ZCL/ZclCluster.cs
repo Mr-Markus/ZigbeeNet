@@ -946,7 +946,10 @@ namespace ZigBeeNet.ZCL
          * @param commandId the command ID
          * @return the {@link ZclCommand} or null if no command found.
          */
-        public abstract ZclCommand GetCommandFromId(int commandId);
+        public virtual ZclCommand GetCommandFromId(int commandId)
+        {
+            throw new NotImplementedException();
+        }
 
         /**
          * Gets a response from the command ID (ie a command from server to client). If no command with the requested id is

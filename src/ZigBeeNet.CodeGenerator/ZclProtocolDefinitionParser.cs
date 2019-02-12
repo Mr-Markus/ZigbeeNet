@@ -19,7 +19,7 @@ namespace ZigBeeNet.CodeGenerator
                 {
                     context.Profile = new Profile
                     {
-                        ProfileName = getHeaderTitle(line),
+                        ProfileName = GetHeaderTitle(line),
                         ProfileAbbreviation = GetHeaderAbbreviation(line)
                     };
                     context.Profile.ProfileType = CodeGeneratorUtil.LabelToEnumerationValue(context.Profile.ProfileName);
@@ -49,7 +49,7 @@ namespace ZigBeeNet.CodeGenerator
 
                 if (line.StartsWith("# "))
                 {
-                    string functionalDomainName = getHeaderTitle(line);
+                    string functionalDomainName = GetHeaderTitle(line);
 
                     Console.WriteLine(" Functional domain: " + functionalDomainName);
 
@@ -75,7 +75,7 @@ namespace ZigBeeNet.CodeGenerator
                 if (line.StartsWith("## "))
                 {
                     context.Cluster = new Cluster();
-                    context.Cluster.ClusterName = getHeaderTitle(line);
+                    context.Cluster.ClusterName = GetHeaderTitle(line);
                     context.Cluster.ClusterDescription = new List<string>();
                     context.Cluster.ClusterType = CodeGeneratorUtil.LabelToEnumerationValue(context.Cluster.ClusterName);
                     context.Cluster.ClusterId = GetHeaderId(line);
@@ -198,7 +198,7 @@ namespace ZigBeeNet.CodeGenerator
                 if (line.StartsWith("#### "))
                 {
                     context.Command = new Command();
-                    context.Command.CommandLabel = getHeaderTitle(line).Trim();
+                    context.Command.CommandLabel = GetHeaderTitle(line).Trim();
                     string[] splits = context.Command.CommandLabel.Split(" ");
 
                     if ("RESPONSE".Equals(splits[splits.Length - 2].ToUpper()) && "COMMAND".Equals(splits[splits.Length - 1].ToUpper()))
@@ -448,7 +448,7 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
-        private static string GetMatcherResponse(String definition)
+        private static string GetMatcherResponse(string definition)
         {
             if (!definition.Contains("."))
             {
@@ -461,7 +461,7 @@ namespace ZigBeeNet.CodeGenerator
             return parts[0] + "().get" + parts[1];
         }
 
-        private static string getHeaderTitle(String line)
+        private static string GetHeaderTitle(string line)
         {
             line = line.Substring(line.LastIndexOf("#") + 1);
             if (line.Contains("["))
@@ -533,7 +533,7 @@ namespace ZigBeeNet.CodeGenerator
                     attribute = null;
                     foreach (Attribute attr in context.Cluster.Attributes.Values)
                     {
-                        if (attr.AttributeLabel.Equals(getHeaderTitle(line).Substring(0, getHeaderTitle(line).IndexOf(" "))))
+                        if (attr.AttributeLabel.Equals(GetHeaderTitle(line).Substring(0, GetHeaderTitle(line).IndexOf(" "))))
                         {
                             attribute = attr;
                             break;

@@ -89,7 +89,7 @@ namespace ZigBeeNet.CodeGenerator.Zcl
                 { "ENUMERATION_8_BIT", new DataTypeMap("byte", 0x30, 1, false, 0xff) },
                 { "DATA_8_BIT", new DataTypeMap("byte", 0x08, 1, false) },
                 { "OCTET_STRING", new DataTypeMap("ByteArray", 0x41, -1, false) },
-                { "UTCTIME", new DataTypeMap("Calendar", 0xe2, 4, true, 0xffffffff) },
+                { "UTCTIME", new DataTypeMap("DateTime", 0xe2, 4, true, 0xffffffff) },
                 { "ZDO_STATUS", new DataTypeMap("ZdoStatus", 0, 0, false) },
                 { "ZCL_STATUS", new DataTypeMap("ZclStatus", 0, 0, false) },
                 { "ZIGBEE_DATA_TYPE", new DataTypeMap("ZclDataType", 0, 0, false) },
