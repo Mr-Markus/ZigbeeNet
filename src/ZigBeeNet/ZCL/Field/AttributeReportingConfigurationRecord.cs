@@ -62,11 +62,11 @@ namespace ZigBeeNet.ZCL.Field
          * record is sent to a cluster client (or server) to configure how it should expect
          * reports from a server (or client) of the same cluster.
          */
-        public int Direction { get; set; }
+        public byte Direction { get; set; }
         /**
          * The attribute identifier.
          */
-        public int AttributeIdentifier { get; set; }
+        public ushort AttributeIdentifier { get; set; }
         /**
          * The attribute data type.
          */
@@ -80,7 +80,7 @@ namespace ZigBeeNet.ZCL.Field
          * imposed by the specification of the cluster using this reporting mechanism or by
          * the applicable profile.
          */
-        public int MinimumReportingInterval { get; set; }
+        public ushort MinimumReportingInterval { get; set; }
         /**
          * The maximum reporting interval.
          * <p>
@@ -90,7 +90,7 @@ namespace ZigBeeNet.ZCL.Field
          * attribute, and the configuration information for that attribute need not be
          * maintained.
          */
-        public int MaximumReportingInterval { get; set; }
+        public ushort MaximumReportingInterval { get; set; }
         /**
          * The reportable change.
          * <p>
@@ -113,12 +113,12 @@ namespace ZigBeeNet.ZCL.Field
          * server) cluster must be set somewhat higher than the maximum reporting interval
          * set for the attribute on the server (or client) cluster.
          */
-        public int TimeoutPeriod { get; set; }
+        public ushort TimeoutPeriod { get; set; }
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType(Direction, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.AppendZigBeeType(AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.AppendZigBeeType(Direction, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
 
             if (Direction == 1)
             {
@@ -127,7 +127,7 @@ namespace ZigBeeNet.ZCL.Field
                 // maximum reporting interval field and the reportable change field are omitted. The
                 // record is sent to a cluster client (or server) to configure how it should expect
                 // reports from a server (or client) of the same cluster.
-                serializer.AppendZigBeeType(TimeoutPeriod, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.AppendZigBeeType(TimeoutPeriod, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             else
             {
@@ -136,9 +136,9 @@ namespace ZigBeeNet.ZCL.Field
                 // change field are included in the payload, and the timeout period field is omitted.
                 // The record is sent to a cluster server (or client) to configure how it sends reports to
                 // a client (or server) of the same cluster.
-                serializer.AppendZigBeeType(AttributeDataType.Id, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-                serializer.AppendZigBeeType(MinimumReportingInterval, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-                serializer.AppendZigBeeType(MaximumReportingInterval, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.AppendZigBeeType(AttributeDataType.Id, DataType.UNSIGNED_8_BIT_INTEGER);
+                serializer.AppendZigBeeType(MinimumReportingInterval, DataType.UNSIGNED_16_BIT_INTEGER);
+                serializer.AppendZigBeeType(MaximumReportingInterval, DataType.UNSIGNED_16_BIT_INTEGER);
 
                 // The reportable change field shall contain the minimum change to the attribute that
                 // will result in a report being issued. This field is of variable length. For attributes
@@ -146,15 +146,15 @@ namespace ZigBeeNet.ZCL.Field
                 // reportable change field is ignored. For attributes of 'discrete' data type this field is omitted.
                 if (AttributeDataType.IsAnalog)
                 {
-                    serializer.AppendZigBeeType(ReportableChange, AttributeDataType);
+                    serializer.AppendZigBeeType(ReportableChange, AttributeDataType.DataType);
                 }
             }
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            Direction = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Direction = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             if (Direction == 1)
             {
                 // If direction is set to 0x01, then the timeout period field is included in the payload,
@@ -162,7 +162,7 @@ namespace ZigBeeNet.ZCL.Field
                 // maximum reporting interval field and the reportable change field are omitted. The
                 // record is sent to a cluster client (or server) to configure how it should expect
                 // reports from a server (or client) of the same cluster.
-                TimeoutPeriod = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                TimeoutPeriod = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             else
             {
@@ -171,16 +171,16 @@ namespace ZigBeeNet.ZCL.Field
                 // change field are included in the payload, and the timeout period field is omitted.
                 // The record is sent to a cluster server (or client) to configure how it sends reports to
                 // a client (or server) of the same cluster.
-                AttributeDataType = ZclDataType.Get((byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
-                MinimumReportingInterval = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-                MaximumReportingInterval = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                AttributeDataType = ZclDataType.Get(deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER));
+                MinimumReportingInterval = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+                MaximumReportingInterval = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
                 if (AttributeDataType.IsAnalog)
                 {
                     // The reportable change field shall contain the minimum change to the attribute that
                     // will result in a report being issued. This field is of variable length. For attributes
                     // with 'analog' data typethe field has the same data type as the attribute. The sign (if any) of the
                     // reportable change field is ignored. For attributes of 'discrete' data type this field is omitted.
-                    ReportableChange = deserializer.ReadZigBeeType(AttributeDataType);
+                    ReportableChange = deserializer.ReadZigBeeType<object>(AttributeDataType.DataType);
                 }
             }
         }

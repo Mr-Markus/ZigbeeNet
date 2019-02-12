@@ -34,12 +34,12 @@ namespace ZigBeeNet.ZDO.Field
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
-            Endpoint = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ProfileId = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            DeviceId = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            DeviceVersion = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            InputClusterList = (List<ushort>)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.N_X_UNSIGNED_16_BIT_INTEGER));
-            OutputClusterList = (List<ushort>)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.N_X_UNSIGNED_16_BIT_INTEGER));
+            Endpoint = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ProfileId = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            DeviceId = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            DeviceVersion = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            InputClusterList = deserializer.ReadZigBeeType<List<ushort>>(DataType.N_X_UNSIGNED_16_BIT_INTEGER);
+            OutputClusterList = deserializer.ReadZigBeeType<List<ushort>>(DataType.N_X_UNSIGNED_16_BIT_INTEGER);
         }
 
         public override int GetHashCode()

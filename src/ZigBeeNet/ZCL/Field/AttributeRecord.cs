@@ -15,24 +15,24 @@ namespace ZigBeeNet.ZCL.Field
      * whether reports of the attribute are received (0x01).
      *
      */
-    public int Direction { get; set; }
+    public byte Direction { get; set; }
 
     /**
      * The attribute identifier.
      */
-    public int AttributeIdentifier { get; set; }
+    public ushort AttributeIdentifier { get; set; }
 
 
     public void Serialize(IZigBeeSerializer serializer)
     {
-        serializer.AppendZigBeeType(Direction, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-        serializer.AppendZigBeeType(AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        serializer.AppendZigBeeType(Direction, DataType.UNSIGNED_8_BIT_INTEGER);
+        serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
     }
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        Direction = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-        AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+        Direction = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+        AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
     }
 
     public override string ToString()

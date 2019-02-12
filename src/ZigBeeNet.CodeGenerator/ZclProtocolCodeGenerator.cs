@@ -1193,7 +1193,7 @@ namespace ZigBeeNet.CodeGenerator
                                         // This checks for a single response
                                         code.AppendLine("        if (status == ZclStatus.SUCCESS)");
                                         code.AppendLine("        {");
-                                        code.AppendLine("            serializer.Serialize(status, ZclDataType.ZCL_STATUS);");
+                                        code.AppendLine("            serializer.Serialize(status, DataType.ZCL_STATUS);");
                                         code.AppendLine("            return;");
                                         code.AppendLine("        }");
                                     }
@@ -1208,19 +1208,19 @@ namespace ZigBeeNet.CodeGenerator
                                             code.AppendLine("        if (" + field.ListSizer + " " + field.ConditionOperator + " " + field.Condition + ")");
                                             code.AppendLine("        {");
                                         }
-                                        code.AppendLine("            serializer.Serialize(" + field.NameLowerCamelCase + ", ZclDataType." + field.DataType + ");");
+                                        code.AppendLine("            serializer.Serialize(" + field.NameLowerCamelCase + ", DataType." + field.DataType + ");");
                                         code.AppendLine("        }");
                                     }
                                     else
                                     {
                                         code.AppendLine("        for (int cnt = 0; cnt < " + field.NameLowerCamelCase + ".Count; cnt++) {");
-                                        code.AppendLine("            serializer.Serialize(" + field.NameLowerCamelCase + ".Get(cnt), ZclDataType." + field.DataType + ");");
+                                        code.AppendLine("            serializer.Serialize(" + field.NameLowerCamelCase + ".Get(cnt), DataType." + field.DataType + ");");
                                         code.AppendLine("        }");
                                     }
                                 }
                                 else
                                 {
-                                    code.AppendLine("        serializer.Serialize(" + field.NameLowerCamelCase + ", ZclDataType." + field.DataType + ");");
+                                    code.AppendLine("        serializer.Serialize(" + field.NameLowerCamelCase + ", DataType." + field.DataType + ");");
                                 }
                             }
                             code.AppendLine("    }");
@@ -1255,20 +1255,20 @@ namespace ZigBeeNet.CodeGenerator
                                             code.AppendLine("        if (" + field.ListSizer + " " + field.ConditionOperator + " " + field.Condition + ")");
                                             code.AppendLine("        {");
                                         }
-                                        code.AppendLine("            " + field.NameUpperCamelCase + " = (" + field.DataTypeClass + ") deserializer.Deserialize(" + "ZclDataType." + field.DataType + ");");
+                                        code.AppendLine("            " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(DataType." + field.DataType + ");");
                                         code.AppendLine("        }");
                                     }
                                     else
                                     {
                                         code.AppendLine("        for (int cnt = 0; cnt < " + field.NameLowerCamelCase + ".Count; cnt++)");
                                         code.AppendLine("        {");
-                                        code.AppendLine("            " + field.NameLowerCamelCase + " = (" + field.DataTypeClass + ") deserializer.Deserialize(" + "ZclDataType." + field.DataType + ");");
+                                        code.AppendLine("            " + field.NameLowerCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(DataType." + field.DataType + ");");
                                         code.AppendLine("        }");
                                     }
                                 }
                                 else
                                 {
-                                    code.AppendLine("        " + field.NameLowerCamelCase + " = (" + field.DataTypeClass + ") deserializer.Deserialize(" + "ZclDataType." + field.DataType + ");");
+                                    code.AppendLine("        " + field.NameLowerCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(DataType." + field.DataType + ");");
                                 }
                             }
                             code.AppendLine("    }");

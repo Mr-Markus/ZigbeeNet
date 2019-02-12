@@ -43,15 +43,15 @@ namespace ZigBeeNet.Serialization
         /**
          * {@inheritDoc}
          */
-        public object ReadZigBeeType(ZclDataType type)
+        public T ReadZigBeeType<T>(DataType type)
         {
             if (index == payload.Length)
             {
-                return null;
+                return default(T);
             }
 
             object[] value = new object[1];
-            switch (type.DataType)
+            switch (type)
             {
                 case DataType.BOOLEAN:
                     value[0] = payload[index++] == 0 ? false : true;
@@ -150,11 +150,11 @@ namespace ZigBeeNet.Serialization
                     value[0] = arrayN16;
                     break;
                 case DataType.N_X_UNSIGNED_8_BIT_INTEGER:
-                    int cntN8 = (byte)((byte)payload[index++] & 0xFF);
+                    int cntN8 = (byte)(payload[index++] & 0xFF);
                     List<byte> arrayN8 = new List<byte>(cntN8);
                     for (int arrayIndex = 0; arrayIndex < cntN8; arrayIndex++)
                     {
-                        arrayN8.Add((byte)(payload[index++]));
+                        arrayN8.Add(payload[index++]);
                     }
                     value[0] = arrayN8;
                     break;
@@ -169,16 +169,18 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.N_X_ATTRIBUTE_IDENTIFIER:
                     int cntX16 = (payload.Length - index) / 2;
-                    List<byte> arrayX16 = new List<byte>(cntX16);
+                    List<ushort> arrayX16 = new List<ushort>(cntX16);
                     for (int arrayIndex = 0; arrayIndex < cntX16; arrayIndex++)
                     {
-                        arrayX16.Add((byte)(payload[index++]));
+                        arrayX16.Add(BitConverter.ToUInt16(payload, index));
+
+                        index += 2;
                     }
                     value[0] = arrayX16;
                     break;
                 case DataType.UNSIGNED_8_BIT_INTEGER_ARRAY:
                     int cnt8Array = payload.Length - index;
-                    int[] intarray8 = new int[cnt8Array];
+                    byte[] intarray8 = new byte[cnt8Array];
                     for (int arrayIndex = 0; arrayIndex < cnt8Array; arrayIndex++)
                     {
                         intarray8[arrayIndex] = payload[index++];
@@ -224,6 +226,7 @@ namespace ZigBeeNet.Serialization
                     value[0] = (byte)(payload[index++] & 0xFF);
                     break;
                 case DataType.UTCTIME:
+                    //TODO: Implement date deserialization
                     break;
                 case DataType.ROUTING_TABLE:
                     RoutingTable routingTable = new RoutingTable();
@@ -274,9 +277,9 @@ namespace ZigBeeNet.Serialization
                     value[0] = new ByteArray(arrayB8);
                     break;
                 default:
-                    throw new ArgumentException("No reader defined in " + this.GetType().Name + " for " + type.ToString() + " (" + type.Id + ")");
+                    throw new ArgumentException("No reader defined in " + this.GetType().Name + " for " + type.ToString() + " (" + (byte)type + ")");
             }
-            return value[0];
+            return (T)value[0];
         }
     }
 }

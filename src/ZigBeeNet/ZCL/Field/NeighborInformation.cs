@@ -11,52 +11,52 @@ namespace ZigBeeNet.ZCL.Field
         /**
          * The neighbor address.
          */
-        public long neighborAddress;
+        public IeeeAddress NeighborAddress;
         /**
          * The coordinate 1
          */
-        public int Coordinate1;
+        public ushort Coordinate1;
         /**
          * The coordinate 2
          */
-        public int Coordinate2;
+        public ushort Coordinate2;
         /**
          * The coordinate 3
          */
-        public int Coordinate3;
+        public ushort Coordinate3;
         /**
          * The RSSI.
          */
-        public int Rssi;
+        public byte Rssi;
         /**
          * The RSSI measurement count.
          */
-        public int MeasurementCount;
+        public byte MeasurementCount;
 
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType(neighborAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.AppendZigBeeType((short)Coordinate1, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType((short)Coordinate2, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType((short)Coordinate3, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.AppendZigBeeType((byte)Rssi, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.AppendZigBeeType((byte)MeasurementCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.AppendZigBeeType(NeighborAddress, DataType.IEEE_ADDRESS);
+            serializer.AppendZigBeeType((short)Coordinate1, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.AppendZigBeeType((short)Coordinate2, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.AppendZigBeeType((short)Coordinate3, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.AppendZigBeeType((byte)Rssi, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.AppendZigBeeType((byte)MeasurementCount, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            neighborAddress = (long)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Coordinate1 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Coordinate2 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Coordinate3 = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Rssi = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            MeasurementCount = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NeighborAddress = deserializer.ReadZigBeeType<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Coordinate1 = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Coordinate2 = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Coordinate3 = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Rssi = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            MeasurementCount = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()
         {
-            return "Neighbor Information: coordinate1=" + Coordinate1 + ", neighborAddress=" + neighborAddress
+            return "Neighbor Information: coordinate1=" + Coordinate1 + ", neighborAddress=" + NeighborAddress
                     + ", coordinate2=" + Coordinate2 + ", coordinate3=" + Coordinate3 + ", rssi=" + Rssi
                     + ", measurementCount=" + MeasurementCount;
         }

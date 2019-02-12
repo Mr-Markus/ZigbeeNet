@@ -62,19 +62,19 @@ namespace ZigBeeNet.ZDO.Field
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
-            ExtendedPanId = (ExtendedPanId)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.EXTENDED_PANID));
-            ExtendedAddress = (IeeeAddress)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            NetworkAddress = (ushort)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ExtendedPanId = deserializer.ReadZigBeeType<ExtendedPanId>(DataType.EXTENDED_PANID);
+            ExtendedAddress = deserializer.ReadZigBeeType<IeeeAddress>(DataType.IEEE_ADDRESS);
+            NetworkAddress = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
 
-            byte temp = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte temp = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             SetDeviceType(temp & 0x03);
             SetRxOnWhenIdle((temp & 0x0c) >> 2);
             SetRelationship((temp & 0x70) >> 4);
 
-            temp = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            temp = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             SetPermitJoining(temp & 0x03);
-            Depth = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Lqi = (byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Depth = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Lqi = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         private void SetDeviceType(int deviceType)

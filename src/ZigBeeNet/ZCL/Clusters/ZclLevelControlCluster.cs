@@ -155,7 +155,7 @@ namespace ZigBeeNet.ZCL.Clusters
          * @param reportableChange {@link object} delta required to trigger report
          * @return the {@link Task<CommandResult>} command result future
          */
-        public Task<CommandResult> SetCurrentLevelReporting(int minInterval, int maxInterval, object reportableChange)
+        public Task<CommandResult> SetCurrentLevelReporting(ushort minInterval, ushort maxInterval, object reportableChange)
         {
             return SetReporting(_attributes[ATTR_CURRENTLEVEL], minInterval, maxInterval, reportableChange);
         }

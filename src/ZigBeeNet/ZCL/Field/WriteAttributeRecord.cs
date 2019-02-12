@@ -11,7 +11,7 @@ namespace ZigBeeNet.ZCL.Field
     /**
      * The attribute identifier.
      */
-    public int AttributeIdentifier;
+    public ushort AttributeIdentifier;
         /**
          * The attribute data type.
          */
@@ -25,16 +25,16 @@ namespace ZigBeeNet.ZCL.Field
 
     public void Serialize(IZigBeeSerializer serializer)
     {
-        serializer.AppendZigBeeType(AttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-        serializer.AppendZigBeeType(AttributeDataType.Id, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-        serializer.AppendZigBeeType(AttributeValue, AttributeDataType);
+        serializer.AppendZigBeeType(AttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
+        serializer.AppendZigBeeType(AttributeDataType.Id, DataType.UNSIGNED_8_BIT_INTEGER);
+        serializer.AppendZigBeeType(AttributeValue, AttributeDataType.DataType);
     }
 
     public void Deserialize(IZigBeeDeserializer deserializer)
     {
-        AttributeIdentifier = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-        AttributeDataType = ZclDataType.Get((byte)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
-        AttributeValue = deserializer.ReadZigBeeType(AttributeDataType);
+        AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+        AttributeDataType = ZclDataType.Get(deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER));
+        AttributeValue = deserializer.ReadZigBeeType<object>(AttributeDataType.DataType);
     }
 
     public override string ToString()
