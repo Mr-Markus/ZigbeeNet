@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using Serilog;
 using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
+using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
 using ZigBeeNet.Serial;
 using ZigBeeNet.Transaction;
@@ -40,6 +44,9 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
+                JsonNetworkSerializer deviceSerializer = new JsonNetworkSerializer("devices.json");
+                networkManager.NetworkStateSerializer = deviceSerializer;
+
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
                 discoveryExtension.SetUpdatePeriod(60);
                 networkManager.AddExtension(discoveryExtension);
@@ -52,11 +59,13 @@ namespace ZigBeeNet.PlayGround
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
-
-
+                               
                 networkManager.AddSupportedCluster(0x06);
                 networkManager.AddSupportedCluster(0x08);
                 networkManager.AddSupportedCluster(0x0300);
+
+                ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
+                ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
 
                 ZigBeeStatus startupSucceded = networkManager.Startup(false);
 
@@ -80,7 +89,7 @@ namespace ZigBeeNet.PlayGround
 
                 while (cmd != "exit")
                 {
-                    Console.WriteLine(networkManager.GetNodes().Count + " node(s)");
+                    Console.WriteLine(networkManager.Nodes.Count + " node(s)");
 
                     if (!string.IsNullOrEmpty(cmd))
                     {
@@ -93,7 +102,18 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                var endpointAddress = node.Endpoints.FirstOrDefault().Value.GetEndpointAddress();
+                                ZigBeeEndpointAddress endpointAddress = null;
+                                var endpoint = node.Endpoints.Values.FirstOrDefault();
+
+                                if (endpoint != null)
+                                    endpointAddress = endpoint.GetEndpointAddress();
+
+                                if (endpointAddress == null)
+                                {
+                                    Console.WriteLine("No endpoint found");
+
+                                    continue;
+                                }
 
                                 try
                                 {
@@ -152,12 +172,6 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "color")
                                     {
-                                        //Console.WriteLine("ColorX between 0 and 65535: ");
-                                        //string x = Console.ReadLine();
-
-                                        //Console.WriteLine("ColorY between 0 and 65535: ");
-                                        //string y = Console.ReadLine();
-
                                         Console.WriteLine("Red between 0 and 255: ");
                                         string r = Console.ReadLine();
 
@@ -268,6 +282,56 @@ namespace ZigBeeNet.PlayGround
         public void NodeUpdated(ZigBeeNode node)
         {
             Console.WriteLine("Node updated " + node);
+        }
+    }
+
+    public class JsonNetworkSerializer : IZigBeeNetworkStateSerializer
+    {
+        private string _filename;
+
+        public JsonNetworkSerializer(string filename)
+        {
+            _filename = filename;
+        }
+
+        public void Deserialize(ZigBeeNetworkManager networkManager)
+        {
+            if (File.Exists(_filename) == false)
+                return;
+
+            List<ZigBeeNodeDao> nodes = JsonConvert.DeserializeObject<List<ZigBeeNodeDao>>(File.ReadAllText(_filename));
+
+            if (nodes == null)
+                return;
+
+            foreach (var nodeDao in nodes)
+            {
+                ZigBeeNode node = new ZigBeeNode(networkManager, new IeeeAddress(nodeDao.IeeeAddress));
+                node.SetDao(nodeDao);
+                               
+                networkManager.AddNode(node);
+            }
+        }
+
+        public void Serialize(ZigBeeNetworkManager networkManager)
+        {
+
+            List<ZigBeeNodeDao> nodes = new List<ZigBeeNodeDao>();
+
+            foreach (var node in networkManager.Nodes)
+            {
+                ZigBeeNodeDao nodeDao = node.GetDao();
+                nodes.Add(nodeDao);
+            }
+
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            string json = JsonConvert.SerializeObject(nodes, Formatting.Indented, settings);
+
+            File.WriteAllText(_filename, json);
         }
     }
 }
