@@ -109,13 +109,17 @@ namespace ZigBeeNet.PlayGround
                                         Console.WriteLine("time between 0 and 65535: ");
                                         string time = Console.ReadLine();
 
-                                        var command = new MoveToLevelWithOnOffCommand(byte.Parse(level), ushort.Parse(time));
+                                        var command = new MoveToLevelWithOnOffCommand()
+                                        {
+                                            Level = byte.Parse(level),
+                                            TransitionTime = ushort.Parse(time)
+                                        };
 
                                         networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
                                     }
                                     else if (cmd == "move")
                                     {
-                                        networkManager.Send(endpointAddress, new MoveCommand(1, 100)).GetAwaiter().GetResult();
+                                        networkManager.Send(endpointAddress, new MoveCommand() { MoveMode = 1, Rate = 100 }).GetAwaiter().GetResult();
                                     }
                                     else if (cmd == "on")
                                     {
