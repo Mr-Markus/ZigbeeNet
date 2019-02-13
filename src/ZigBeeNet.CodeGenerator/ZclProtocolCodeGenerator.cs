@@ -25,6 +25,7 @@ namespace ZigBeeNet.CodeGenerator
 
         private static int _lineLen = 120;
         private static string _generatedDate;
+        private static string _outRootPath;
 
         private static bool FileCompare(string file1, string file2)
         {
@@ -144,7 +145,8 @@ namespace ZigBeeNet.CodeGenerator
             //string definitionFilePathZse = "./src/main/resources/zse_definition.md";
             //string definitionFilePathMan = "./src/main/resources/manufacturer_definition.md";
 
-            string outRootPath = "../../../../ZigBeeNet";
+            if(args != null && args.Length > 0)
+                _outRootPath = args[0]; // "../../../../ZigBeeNet/ZCL/Clusters";
 
             Context contextZcl = new Context();
             FileInfo definitionFileZcl = new FileInfo(definitionFilePathZcl);
@@ -1304,10 +1306,10 @@ namespace ZigBeeNet.CodeGenerator
 
                         Console.WriteLine(code.ToString());
 
-                        var outputPath = Path.Combine("..", "..", "..", "GenerationResults", cluster.ClusterName.Replace("/", ""));
+                        var outputPath = Path.Combine(_outRootPath, cluster.ClusterName.Replace("/", "").Replace(" ", ""));
                         //var outputPath = @"C:\src\ZigbeeNet\src\ZigBeeNet\CodeGenTest\" + cluster.ClusterName.Replace("/", "");
                         var commmandClassFile = command.NameUpperCamelCase + ".cs";
-                        var commandFullPath = Path.Combine(outputPath, commmandClassFile);
+                        var commandFullPath = Path.Combine(outputPath, commmandClassFile.Replace(" ", ""));
 
                         Directory.CreateDirectory(outputPath);
 
@@ -1977,12 +1979,12 @@ namespace ZigBeeNet.CodeGenerator
 
                     Console.WriteLine(code.ToString());
 
-                    var outputPath = Path.Combine("..", "..", "..", "GenerationResults");
+                    //var outputPath = Path.Combine("..", "..", "..", "GenerationResults");
                     //var outputPath = @"C:\src\ZigbeeNet\src\ZigBeeNet\CodeGenTest\";
                     var commandClassFile = "Zcl" + cluster.NameUpperCamelCase + "Cluster.cs";
-                    var clusterFullPath = Path.Combine(outputPath, commandClassFile);
+                    var clusterFullPath = Path.Combine(_outRootPath, commandClassFile);
 
-                    Directory.CreateDirectory(outputPath);
+                    Directory.CreateDirectory(_outRootPath);
 
                     File.Delete(clusterFullPath);
 
