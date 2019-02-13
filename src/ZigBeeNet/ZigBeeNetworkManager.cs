@@ -16,6 +16,7 @@ using ZigBeeNet.Security;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.App.Discovery;
 
 namespace ZigBeeNet
 {
@@ -126,6 +127,89 @@ namespace ZigBeeNet
         public IZigBeeTransportTransmit Transport { get; set; }
 
         /**
+        * The serializer class used to serialize commands to data packets
+        */
+        public IZigBeeSerializer Serializer { get; set; }
+
+        /**
+         * The deserializer class used to deserialize commands from data packets
+         */
+        public IZigBeeDeserializer Deserializer { get; set; }
+
+        /**
+         * The current {@link ZigBeeTransportState}
+         */
+        public ZigBeeTransportState NetworkState { get; set; }
+
+        /**
+         * Our local {@link IeeeAddress}
+         */
+        public IeeeAddress LocalIeeeAddress { get; set; }
+
+        public ZigBeeChannel ZigbeeChannel
+        {
+            get
+            {
+                return Transport.ZigBeeChannel;
+            }
+        }
+
+        /**
+         * Gets the ZigBee PAN ID currently in use by the transport
+         *
+         * @return the PAN ID
+         */
+        public ushort ZigBeePanId
+        {
+            get
+            {
+                return (ushort)(Transport.PanID & 0xFFFF);
+            }
+        }
+
+        /**
+         * Get the transport layer version string
+         *
+         * @return {@link String} containing the transport layer version
+         */
+        public string TransportVersionString
+        {
+            get
+            {
+                return Transport.VersionString;
+            }
+        }
+
+        /**
+         * Gets the current Trust Centre link key used by the system
+         *
+         * @return the current trust centre link {@link ZigBeeKey}
+         */
+        public ZigBeeKey ZigBeeLinkKey
+        {
+            get
+            {
+                return Transport.TcLinkKey;
+            }
+        }
+
+        /**
+         * Gets a {@link Set} of {@link ZigBeeNode}s known by the network
+         *
+         * @return {@link Set} of {@link ZigBeeNode}s
+         */
+        public List<ZigBeeNode> Nodes
+        {
+            get
+            {
+                lock (_networkNodes)
+                {
+                    return new List<ZigBeeNode>(_networkNodes.Values);
+                }
+            }
+        }
+
+        /**
          * The {@link ZigBeeCommandNotifier}. This is used for sending notifications asynchronously to listeners.
          */
         private ZigBeeCommandNotifier _commandNotifier = new ZigBeeCommandNotifier();
@@ -141,16 +225,6 @@ namespace ZigBeeNet
         private List<IeeeAddress> _nodeDiscoveryComplete = new List<IeeeAddress>();
 
         /**
-         * The serializer class used to serialize commands to data packets
-         */
-        public IZigBeeSerializer Serializer { get; set; }
-
-        /**
-         * The deserializer class used to deserialize commands from data packets
-         */
-        public IZigBeeDeserializer Deserializer { get; set; }
-
-        /**
          * List of {@link ZigBeeNetworkExtension}s that are available to this network. Extensions are added
          * with the {@link #addApplication(ZigBeeNetworkExtension extension)} method.
          */
@@ -162,19 +236,9 @@ namespace ZigBeeNet
         private ClusterMatcher _clusterMatcher = null;
 
         /**
-         * The current {@link ZigBeeTransportState}
-         */
-        public ZigBeeTransportState NetworkState { get; set; }
-
-        /**
          * Map of allowable state transitions
          */
         private Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> validStateTransitions;
-
-        /**
-         * Our local {@link IeeeAddress}
-         */
-        public IeeeAddress LocalIeeeAddress { get; set; }
 
         /**
          * Our local network address
@@ -282,7 +346,7 @@ namespace ZigBeeNet
         {
             ushort nwkAddress = Transport.NwkAddress;
             IeeeAddress ieeeAddress = Transport.IeeeAddress;
-            if (/*nwkAddress != null &&*/ ieeeAddress != null)
+            if (ieeeAddress != null)
             {
                 ZigBeeNode node = GetNode(ieeeAddress);
                 if (node == null)
@@ -293,14 +357,6 @@ namespace ZigBeeNet
 
                     AddNode(node);
                 }
-            }
-        }
-
-        public ZigBeeChannel ZigbeeChannel
-        {
-            get
-            {
-                return Transport.ZigBeeChannel;
             }
         }
 
@@ -317,19 +373,6 @@ namespace ZigBeeNet
         public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel)
         {
             return Transport.SetZigBeeChannel(channel);
-        }
-
-        /**
-         * Gets the ZigBee PAN ID currently in use by the transport
-         *
-         * @return the PAN ID
-         */
-        public ushort ZigBeePanId
-        {
-            get
-            {
-                return (ushort)(Transport.PanID & 0xFFFF);
-            }
         }
 
         /**
@@ -419,20 +462,7 @@ namespace ZigBeeNet
         {
             return Transport.SetTcLinkKey(key);
         }
-
-        /**
-         * Gets the current Trust Centre link key used by the system
-         *
-         * @return the current trust centre link {@link ZigBeeKey}
-         */
-        public ZigBeeKey ZigBeeLinkKey
-        {
-            get
-            {
-                return Transport.TcLinkKey;
-            }
-        }
-
+        
         /**
          * Adds an installation key for the specified address. The {@link ZigBeeKey} should have an address associated with
          * it.
@@ -556,19 +586,6 @@ namespace ZigBeeNet
         //    return executorService.scheduleAtFixedRate(runnableTask, initialDelay, period, TimeUnit.MILLISECONDS);
         //}
 
-        /**
-         * Get the transport layer version string
-         *
-         * @return {@link String} containing the transport layer version
-         */
-        public string TransportVersionString
-        {
-            get
-            {
-                return Transport.VersionString;
-            }
-        }
-
         public int SendCommand(ZigBeeCommand command)
         {
             // Create the application frame
@@ -671,7 +688,6 @@ namespace ZigBeeNet
             return command.TransactionId.Value;
         }
 
-
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
             _commandNotifier.AddCommandListener(commandListener);
@@ -682,7 +698,6 @@ namespace ZigBeeNet
         {
             _commandNotifier.RemoveCommandListener(commandListener);
         }
-
 
         public void ReceiveCommand(ZigBeeApsFrame apsFrame)
         {
@@ -816,7 +831,6 @@ namespace ZigBeeNet
             modifiedStateListeners.Remove(statusListener);
             _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
         }
-
 
         public void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, IeeeAddress ieeeAddress)
         {
@@ -1214,24 +1228,11 @@ namespace ZigBeeNet
         public void RediscoverNode(IeeeAddress address)
         {
 
-            //ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)getExtension(ZigBeeDiscoveryExtension.class);
-            //if (networkDiscoverer == null) {
-            //    return;
-            //}
-            //_networkDiscoverer.rediscoverNode(address);
-        }
-
-        /**
-         * Gets a {@link Set} of {@link ZigBeeNode}s known by the network
-         *
-         * @return {@link Set} of {@link ZigBeeNode}s
-         */
-        public List<ZigBeeNode> GetNodes()
-        {
-            lock (_networkNodes)
-            {
-                return new List<ZigBeeNode>(_networkNodes.Values);
+            ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)GetExtension(typeof(ZigBeeDiscoveryExtension));
+            if (networkDiscoverer == null) {
+                return;
             }
+            networkDiscoverer.RediscoverNode(address);
         }
 
         /**
@@ -1398,8 +1399,8 @@ namespace ZigBeeNet
                 // Return if there were no updates
                 if (!currentNode.UpdateNode(node))
                 {
-                    // _logger.Debug("{}: Node {} is not updated", node.getIeeeAddress(), node.getNetworkAddress());
-                    // return;
+                     _logger.Debug("{IeeeAddress}: Node {NwkAddress} is not updated", node.IeeeAddress, node.NetworkAddress);
+                     return;
                 }
             }
 

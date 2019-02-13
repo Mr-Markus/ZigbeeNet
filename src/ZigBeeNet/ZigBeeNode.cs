@@ -33,7 +33,7 @@ namespace ZigBeeNet
         /**
          * The extended {@link IeeeAddress} for the node
          */
-        public IeeeAddress IeeeAddress { get; private set; }
+        public IeeeAddress IeeeAddress { get; set; }
 
         /**
          * The 16 bit network address for the node
@@ -101,6 +101,11 @@ namespace ZigBeeNet
          * Broadcast endpoint definition
          */
         private const int BROADCAST_ENDPOINT = 0xFF;
+
+        public ZigBeeNode()
+        {
+
+        }
 
         /**
          * Constructor
@@ -500,6 +505,11 @@ namespace ZigBeeNet
         public bool IsDiscovered()
         {
             return NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
+        }
+
+        public void UpdateNetworkManager(ZigBeeNetworkManager networkManager)
+        {
+            _network = networkManager;
         }
 
         /**
