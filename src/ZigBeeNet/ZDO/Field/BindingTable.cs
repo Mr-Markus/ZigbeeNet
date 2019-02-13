@@ -19,12 +19,12 @@ namespace ZigBeeNet.ZDO.Field
         /**
          * The source endpoint for the binding entry.
          */
-        public int SrcEndpoint { get; private set; }
+        public byte SrcEndpoint { get; private set; }
 
         /**
          * The identifier of the cluster on the source device that is bound to the destination device.
          */
-        public int ClusterId { get; private set; }
+        public ushort ClusterId { get; private set; }
 
 
         /**
@@ -35,12 +35,12 @@ namespace ZigBeeNet.ZDO.Field
          * <li>0x03 - IEEE address
          * </ul>
          */
-        public int DstAddrMode { get; private set; }
+        public byte DstAddrMode { get; private set; }
 
         /**
          * Destination address if the address mode is group addressing
          */
-        public int DstGroupAddr { get; private set; }
+        public ushort DstGroupAddr { get; private set; }
 
         /**
          * Destination address if the address mode is a node address
@@ -50,41 +50,41 @@ namespace ZigBeeNet.ZDO.Field
         /**
          * Destination endpoint if the address mode is a node address
          */
-        public int DstNodeEndpoint { get; private set; }
+        public byte DstNodeEndpoint { get; private set; }
 
 
         public void Serialize(IZigBeeSerializer serializer)
         {
-            serializer.AppendZigBeeType(SrcAddr, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.AppendZigBeeType(SrcEndpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.AppendZigBeeType(ClusterId, ZclDataType.Get(DataType.CLUSTERID));
-            serializer.AppendZigBeeType(DstAddrMode, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.AppendZigBeeType(SrcAddr, DataType.IEEE_ADDRESS);
+            serializer.AppendZigBeeType(SrcEndpoint, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.AppendZigBeeType(ClusterId, DataType.CLUSTERID);
+            serializer.AppendZigBeeType(DstAddrMode, DataType.UNSIGNED_8_BIT_INTEGER);
 
             if (DstAddrMode == 1)
             {
-                serializer.AppendZigBeeType(DstGroupAddr, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.AppendZigBeeType(DstGroupAddr, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             else if (DstAddrMode == 3)
             {
-                serializer.AppendZigBeeType(DstAddr, ZclDataType.Get(DataType.IEEE_ADDRESS));
-                serializer.AppendZigBeeType(DstNodeEndpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+                serializer.AppendZigBeeType(DstAddr, DataType.IEEE_ADDRESS);
+                serializer.AppendZigBeeType(DstNodeEndpoint, DataType.UNSIGNED_8_BIT_INTEGER);
             }
         }
 
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
-            SrcAddr = (IeeeAddress)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            SrcEndpoint = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ClusterId = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.CLUSTERID));
-            DstAddrMode = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            SrcAddr = deserializer.ReadZigBeeType<IeeeAddress>(DataType.IEEE_ADDRESS);
+            SrcEndpoint = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ClusterId = deserializer.ReadZigBeeType<ushort>(DataType.CLUSTERID);
+            DstAddrMode = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             if (DstAddrMode == 1)
             {
-                DstGroupAddr = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                DstGroupAddr = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             else if (DstAddrMode == 3)
             {
-                DstAddr = (IeeeAddress)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.IEEE_ADDRESS));
-                DstNodeEndpoint = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+                DstAddr = deserializer.ReadZigBeeType<IeeeAddress>(DataType.IEEE_ADDRESS);
+                DstNodeEndpoint = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             }
         }
 

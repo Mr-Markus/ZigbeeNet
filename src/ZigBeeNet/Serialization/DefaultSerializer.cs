@@ -25,14 +25,14 @@ namespace ZigBeeNet.Serialization
             }
         }
 
-        public void AppendZigBeeType(object data, ZclDataType type)
+        public void AppendZigBeeType(object data, DataType type)
         {
             if (data == null)
             {
                 throw new ArgumentException("You can not append null data to a stream");
             }
 
-            switch (type.DataType)
+            switch (type)
             {
                 case DataType.BOOLEAN:
                     _buffer[_length++] = (bool)data ? (byte)0x01 : (byte)0x00;
@@ -206,7 +206,7 @@ namespace ZigBeeNet.Serialization
                     break;
                 default:
                     throw new ArgumentException("No writer defined in " + this.GetType().Name
-                            + " for " + type.ToString() + " (" + type.Id + ")");
+                            + " for " + type.ToString() + " (" + (byte)type + ")");
             }
 }
     }

@@ -9,7 +9,7 @@ namespace ZigBeeNet.ZDO.Field
     public class RoutingTable
     {
 
-        public int DestinationAddress;
+        public ushort DestinationAddress;
 
         public DiscoveryState Status;
 
@@ -19,7 +19,7 @@ namespace ZigBeeNet.ZDO.Field
 
         public bool IsRouteRecordRequired;
 
-        public int IsNextHopAddress;
+        public ushort IsNextHopAddress;
 
         public enum DiscoveryState
         {
@@ -39,8 +39,8 @@ namespace ZigBeeNet.ZDO.Field
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
-            DestinationAddress = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            int temp = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            DestinationAddress = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            byte temp = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             switch (temp & 0x07)
             {
                 case 0:
@@ -66,7 +66,7 @@ namespace ZigBeeNet.ZDO.Field
             IsMemoryConstrained = (temp & 0x08) != 0;
             IsManyToOne = (temp & 0x10) != 0;
             IsRouteRecordRequired = (temp & 0x20) != 0;
-            IsNextHopAddress = (int)deserializer.ReadZigBeeType(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            IsNextHopAddress = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
 
