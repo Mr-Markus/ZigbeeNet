@@ -294,15 +294,15 @@ namespace ZigBeeNet.CodeGenerator
             //    return;
             //}
 
-            //try
-            //{
-            //    generateAttributeEnumeration(context, packageRoot, sourceRootPath);
-            //}
-            //catch (final IOException e) {
-            //    Console.WriteLine("Failed to generate attribute enum classes.");
-            //    e.printStackTrace();
-            //    return;
-            //}
+            try
+            {
+                GenerateAttributeEnumeration(context);
+            }
+            catch (Exception e) {
+                Console.WriteLine("Failed to generate attribute enum classes.");
+                Console.WriteLine(e.ToString());
+                return;
+            }
 
             //try
             //{
@@ -318,7 +318,7 @@ namespace ZigBeeNet.CodeGenerator
             {
                 GenerateZclCommandClasses(context/*, packageRoot, sourceRootPath*/);
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 Console.WriteLine("Failed to generate profile message classes.\n" + e.ToString());
                 return;
@@ -328,7 +328,7 @@ namespace ZigBeeNet.CodeGenerator
             {
                 GenerateZclClusterClasses(context/*, packageRoot, sourceRootPath*/);
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 Console.WriteLine("Failed to generate cluster classes.\n" + e.ToString());
                 return;
@@ -1993,7 +1993,7 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
-        private static void generateAttributeEnumeration(Context context)
+        private static void GenerateAttributeEnumeration(Context context)
         {
 
             List<Profile> profiles = new List<Profile>(context.Profiles.Values);
@@ -2012,9 +2012,9 @@ namespace ZigBeeNet.CodeGenerator
                                 continue;
                             }
 
-                            string packageRoot = "ZigBeeNet.ZCL.Clusters." + cluster.ClusterType.Replace("_", "").ToLower();
+                            string packageRoot = "ZigBeeNet.ZCL.Clusters.";
 
-                            string className = attribute.NameUpperCamelCase + "Enum";
+                            string className = attribute.NameUpperCamelCase;
 
                             OutputEnum(packageRoot, className, attribute.ValueMap, cluster.ClusterName, attribute.AttributeLabel);
                         }
@@ -2058,20 +2058,9 @@ namespace ZigBeeNet.CodeGenerator
 
         private static void OutputEnum(string packageRoot, string className, SortedDictionary<int, string> valueMap, string parentName, string label)
         {
-
-            //final string packagePath = getPackagePath(sourceRootPath, packageRoot);
-            //final File packageFile = getPackageFile(packagePath);
-
-            //final PrintWriter out = getClassOut(packageFile, className);
             var code = new StringBuilder();
             CodeGeneratorUtil.OutputLicense(code);
 
-            code.AppendLine("package " + packageRoot + ";");
-            /*
-             using System;
-using System.Collections.Generic;
-using System.Text;
-             */
             code.AppendLine();
             code.AppendLine("using System;");
             code.AppendLine("using System.Collections.Generic;");
@@ -2082,8 +2071,10 @@ using System.Text;
             OutputClassGenerated(code);
 
             code.AppendLine();
-            code.AppendLine("public enum " + className);
+            code.AppendLine("namespace " + packageRoot + parentName);
             code.AppendLine("{");
+            code.AppendLine("   public enum " + className);
+            code.AppendLine("   {");
             bool first = true;
 
             foreach (int key in valueMap.Keys)
@@ -2101,39 +2092,52 @@ using System.Text;
                 // code.AppendLine(" * <p>");
                 // code.AppendLine(" * See {@link " + cmd.nameUpperCamelCase + "}");
                 // code.AppendLine(" */");
-                code.Append("    " + CodeGeneratorUtil.LabelToEnumerationValue(value) + key.ToString("X4")); // string.format("(0x%04X)", key));
+                code.Append("       " + CodeGeneratorUtil.LabelToEnumerationValue(value) + " = 0x" + key.ToString("X4")); // string.format("(0x%04X)", key));
             }
-            code.AppendLine(";");
-            code.AppendLine();
 
-            code.AppendLine("    /**");
-            code.AppendLine("     * A mapping between the integer code and its corresponding " + className
-                                + " type to facilitate lookup by value.");
-            code.AppendLine("     */");
-            code.AppendLine("    private static Map<Integer, " + className + "> idMap;");
             code.AppendLine();
-            code.AppendLine("    static {");
-            code.AppendLine("        idMap = new HashMap<Integer, " + className + ">();");
-            code.AppendLine("        for (" + className + " enumValue : values()) {");
-            code.AppendLine("            idMap.put(enumValue.key, enumValue);");
-            code.AppendLine("        }");
-            code.AppendLine("    }");
-            code.AppendLine();
-            code.AppendLine("    private final int key;");
-            code.AppendLine();
-            code.AppendLine("    " + className + "(final int key) {");
-            code.AppendLine("        this.key = key;");
-            code.AppendLine("    }");
-            code.AppendLine();
-
-            code.AppendLine("    public int getKey() {");
-            code.AppendLine("        return key;");
-            code.AppendLine("    }");
-            code.AppendLine();
-            code.AppendLine("    public static " + className + " getByValue(final int value) {");
-            code.AppendLine("        return idMap.get(value);");
-            code.AppendLine("    }");
+            code.AppendLine("   }");
             code.AppendLine("}");
+
+            var outputPath = Path.Combine(_outRootPath, parentName);
+            var enumFile = className + ".cs";
+            var enumFileFullPath = Path.Combine(outputPath, enumFile.Replace(" ", ""));
+
+            Directory.CreateDirectory(outputPath);
+            File.Delete(enumFileFullPath);
+            File.WriteAllText(enumFileFullPath, code.ToString(), Encoding.UTF8);
+
+            //code.AppendLine(";");
+            //code.AppendLine();
+
+            //code.AppendLine("    /**");
+            //code.AppendLine("     * A mapping between the integer code and its corresponding " + className
+            //                    + " type to facilitate lookup by value.");
+            //code.AppendLine("     */");
+            //code.AppendLine("    private static Map<Integer, " + className + "> idMap;");
+            //code.AppendLine();
+            //code.AppendLine("    static {");
+            //code.AppendLine("        idMap = new HashMap<Integer, " + className + ">();");
+            //code.AppendLine("        for (" + className + " enumValue : values()) {");
+            //code.AppendLine("            idMap.put(enumValue.key, enumValue);");
+            //code.AppendLine("        }");
+            //code.AppendLine("    }");
+            //code.AppendLine();
+            //code.AppendLine("    private final int key;");
+            //code.AppendLine();
+            //code.AppendLine("    " + className + "(final int key) {");
+            //code.AppendLine("        this.key = key;");
+            //code.AppendLine("    }");
+            //code.AppendLine();
+
+            //code.AppendLine("    public int getKey() {");
+            //code.AppendLine("        return key;");
+            //code.AppendLine("    }");
+            //code.AppendLine();
+            //code.AppendLine("    public static " + className + " getByValue(final int value) {");
+            //code.AppendLine("        return idMap.get(value);");
+            //code.AppendLine("    }");
+            //code.AppendLine("}");
 
             // TODO: safe file
         }
