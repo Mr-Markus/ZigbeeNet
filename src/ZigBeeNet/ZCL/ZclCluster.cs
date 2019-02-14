@@ -222,7 +222,7 @@ namespace ZigBeeNet.ZCL
             }
 
             ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
-            if (response.Records[0].Status == ZclStatus.SUCCESS)
+            if (response.Records != null && response.Records[0].Status == ZclStatus.SUCCESS)
             {
                 ReadAttributeStatusRecord attributeRecord = response.Records[0];
                 return _normalizer.NormalizeZclData(attribute.ZclDataType, attributeRecord.AttributeValue);

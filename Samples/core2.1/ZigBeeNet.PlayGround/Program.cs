@@ -214,7 +214,13 @@ namespace ZigBeeNet.PlayGround
                                             };
 
                                             networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
-                                        }
+                                        } 
+                                    }
+                                    else if (cmd == "read")
+                                    {
+                                        var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetOnOff(0);
+
+                                        var lastValue = value;
                                     }
                                 }
                                 catch (Exception ex)

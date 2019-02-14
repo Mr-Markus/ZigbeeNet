@@ -341,7 +341,7 @@ namespace ZigBeeNet
             ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.CommandDirection);
             if (cluster == null)
             {
-                _logger.Debug("{}: Cluster {} not found for attribute response", GetEndpointAddress(), command.ClusterId);
+                _logger.Debug("{EndpointAdress}: Cluster {Cluster} not found for attribute response", GetEndpointAddress(), command.ClusterId);
                 return;
             }
 

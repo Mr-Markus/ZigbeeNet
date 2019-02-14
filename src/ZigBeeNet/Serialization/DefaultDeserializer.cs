@@ -133,6 +133,20 @@ namespace ZigBeeNet.Serialization
                 case DataType.N_X_ATTRIBUTE_SELECTOR:
                     break;
                 case DataType.N_X_ATTRIBUTE_STATUS_RECORD:
+                    //TODO: Deserialize
+                    List<ReadAttributeStatusRecord> records = new List<ReadAttributeStatusRecord>();
+
+                    for (int arrayIndex = 0; arrayIndex < payload.Length / 2; arrayIndex++)
+                    {
+                        ReadAttributeStatusRecord statusRecord = new ReadAttributeStatusRecord();
+                        statusRecord.Deserialize(this);
+
+                        records.Add(statusRecord);
+
+                        index += 2;
+                    }
+
+                    value[0] = records;
                     break;
                 case DataType.N_X_EXTENSION_FIELD_SET:
                     break;

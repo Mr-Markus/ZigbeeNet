@@ -121,15 +121,15 @@ namespace ZigBeeNet.ZCL.Protocol
             _idValueMap = new Dictionary<ushort, ZclClusterType>
             {
                 { 0x0000, new ZclClusterType(0x0000, ProfileType.ZIGBEE_HOME_AUTOMATION, "Basic", ClusterType.BASIC, typeof(ZclBasicCluster)) },
-                { 0x0001, new ZclClusterType(0x0001, ProfileType.ZIGBEE_HOME_AUTOMATION, "Power configuration", ClusterType.POWER_CONFIGURATION) },
-                { 0x0002, new ZclClusterType(0x0002, ProfileType.ZIGBEE_HOME_AUTOMATION, "Device Temperature Configuration", ClusterType.DEVICE_TEMPERATURE_CONFIGURATION) },
-                { 0x0003, new ZclClusterType(0x0003, ProfileType.ZIGBEE_HOME_AUTOMATION, "Identify", ClusterType.IDENTIFY) },
-                { 0x0004, new ZclClusterType(0x0004, ProfileType.ZIGBEE_HOME_AUTOMATION, "Groups", ClusterType.GROUPS) },
-                { 0x0005, new ZclClusterType(0x0005, ProfileType.ZIGBEE_HOME_AUTOMATION, "Scenes", ClusterType.SCENES) },
-                { 0x0006, new ZclClusterType(0x0006, ProfileType.ZIGBEE_HOME_AUTOMATION, "On/Off", ClusterType.ON_OFF) },
-                { 0x0007, new ZclClusterType(0x0007, ProfileType.ZIGBEE_HOME_AUTOMATION, "On/off Switch Configuration", ClusterType.ON_OFF_SWITCH_CONFIGURATION) },
-                { 0x0008, new ZclClusterType(0x0008, ProfileType.ZIGBEE_HOME_AUTOMATION, "Level Control", ClusterType.LEVEL_CONTROL) },
-                { 0x0009, new ZclClusterType(0x0009, ProfileType.ZIGBEE_HOME_AUTOMATION, "Alarms", ClusterType.ALARMS) },
+                { 0x0001, new ZclClusterType(0x0001, ProfileType.ZIGBEE_HOME_AUTOMATION, "Power configuration", ClusterType.POWER_CONFIGURATION, typeof(ZclPowerConfigurationCluster)) },
+                { 0x0002, new ZclClusterType(0x0002, ProfileType.ZIGBEE_HOME_AUTOMATION, "Device Temperature Configuration", ClusterType.DEVICE_TEMPERATURE_CONFIGURATION, typeof(ZclDeviceTemperatureConfigurationCluster)) },
+                { 0x0003, new ZclClusterType(0x0003, ProfileType.ZIGBEE_HOME_AUTOMATION, "Identify", ClusterType.IDENTIFY, typeof(ZclIdentifyCluster)) },
+                { 0x0004, new ZclClusterType(0x0004, ProfileType.ZIGBEE_HOME_AUTOMATION, "Groups", ClusterType.GROUPS, typeof(ZclGroupsCluster)) },
+                { 0x0005, new ZclClusterType(0x0005, ProfileType.ZIGBEE_HOME_AUTOMATION, "Scenes", ClusterType.SCENES, typeof(ZclScenesCluster)) },
+                { 0x0006, new ZclClusterType(0x0006, ProfileType.ZIGBEE_HOME_AUTOMATION, "On/Off", ClusterType.ON_OFF, typeof(ZclOnOffCluster)) },
+                { 0x0007, new ZclClusterType(0x0007, ProfileType.ZIGBEE_HOME_AUTOMATION, "On/off Switch Configuration", ClusterType.ON_OFF_SWITCH_CONFIGURATION, typeof(ZclOnOffCluster)) },
+                { 0x0008, new ZclClusterType(0x0008, ProfileType.ZIGBEE_HOME_AUTOMATION, "Level Control", ClusterType.LEVEL_CONTROL, typeof(ZclLevelControlCluster)) },
+                { 0x0009, new ZclClusterType(0x0009, ProfileType.ZIGBEE_HOME_AUTOMATION, "Alarms", ClusterType.ALARMS, typeof(ZclAlarmsCluster)) },
                 { 0x000A, new ZclClusterType(0x000A, ProfileType.ZIGBEE_HOME_AUTOMATION, "Time", ClusterType.TIME) },
                 { 0x000B, new ZclClusterType(0x000B, ProfileType.ZIGBEE_HOME_AUTOMATION, "RSSI Location", ClusterType.RSSI_LOCATION) },
                 { 0x000C, new ZclClusterType(0x000C, ProfileType.ZIGBEE_HOME_AUTOMATION, "Analog Input (Basic)", ClusterType.ANALOG_INPUT__BASIC) },
@@ -195,7 +195,7 @@ namespace ZigBeeNet.ZCL.Protocol
                 { 0x0B03, new ZclClusterType(0x0B03, ProfileType.ZIGBEE_HOME_AUTOMATION, "Appliance Statistics", ClusterType.APPLIANCE_STATISTICS) },
                 { 0x0B04, new ZclClusterType(0x0B04, ProfileType.ZIGBEE_HOME_AUTOMATION, "Electrical Measurement", ClusterType.ELECTRICAL_MEASUREMENT) },
                 { 0x0B05, new ZclClusterType(0x0B05, ProfileType.ZIGBEE_HOME_AUTOMATION, "Diagnostics", ClusterType.DIAGNOSTICS) },
-                { 0xFFFF, new ZclClusterType(0xFFFF, ProfileType.ZIGBEE_HOME_AUTOMATION, "General", ClusterType.GENERAL) },
+                { 0xFFFF, new ZclClusterType(0xFFFF, ProfileType.ZIGBEE_HOME_AUTOMATION, "General", ClusterType.GENERAL, typeof(ZclGeneralCluster)) },
                 { 0x1000, new ZclClusterType(0x1000, ProfileType.ZIGBEE_LIGHT_LINK, "Touchlink", ClusterType.TOUCHLINK) },
             };
         }
