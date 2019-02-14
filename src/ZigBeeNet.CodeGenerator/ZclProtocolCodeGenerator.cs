@@ -380,7 +380,7 @@ namespace ZigBeeNet.CodeGenerator
 
                         Console.WriteLine(code.ToString());
 
-                        var outputPath = Path.Combine(_outRootPath, cluster.ClusterName.Replace("/", "").Replace(" ", ""));
+                        var outputPath = Path.Combine(_outRootPath, cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(","").Replace(")", ""));
                         var commmandClassFile = command.NameUpperCamelCase + ".cs";
                         var commandFullPath = Path.Combine(outputPath, commmandClassFile.Replace(" ", ""));
 
@@ -940,7 +940,7 @@ namespace ZigBeeNet.CodeGenerator
             var code = new StringBuilder();
             CodeGeneratorUtil.OutputLicense(code);
 
-            parentName = parentName.Replace(" ", "");
+            parentName = parentName.Replace(" ", "").Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", "");
 
             code.AppendLine();
             code.AppendLine("using System;");
@@ -956,7 +956,7 @@ namespace ZigBeeNet.CodeGenerator
 
             code.AppendLine("namespace " + packageRoot + parentName);
             code.AppendLine("{");
-            code.AppendLine("   public enum " + className);
+            code.AppendLine("   public enum " + className.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
             code.AppendLine("   {");
 
             bool first = true;
