@@ -16,6 +16,10 @@ namespace ZigBeeNet
             {
                 return BitConverter.ToUInt64(_address, 0);
             }
+            set
+            {
+                SetAddress(value);
+            }
         }
 
         /**
@@ -45,7 +49,7 @@ namespace ZigBeeNet
         {
             try
             {
-                SetAddress((ulong)BigInteger.Parse(address, System.Globalization.NumberStyles.HexNumber));
+                SetAddress(ulong.Parse(address));
             }
             catch (FormatException e)
             {
@@ -97,15 +101,8 @@ namespace ZigBeeNet
         }
 
         public override string ToString()
-        {
-            StringBuilder builder = new StringBuilder();
-
-            for (int cnt = 7; cnt >= 0; cnt--)
-            {
-                builder.Append(string.Format("{0}", _address[cnt]));
-            }
-
-            return builder.ToString();
+        {             
+            return Value.ToString();
         }
 
         public int CompareTo(IeeeAddress other)

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "src\ZigBeeNet\ZigBeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstandard2.0", "{3F0FEB1F-792D-49A5-AD31-7725B2C68BE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.1", "core2.1", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.2", "core2.2", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.1\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
