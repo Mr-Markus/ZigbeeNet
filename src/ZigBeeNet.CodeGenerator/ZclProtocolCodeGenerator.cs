@@ -359,14 +359,14 @@ namespace ZigBeeNet.CodeGenerator
 
         //    }
 
-        private static void OutputClassJavaDoc(string description)
+        private static void OutputClassDoc(StringBuilder code, string description)
         {
-            Console.WriteLine("/**");
-            Console.WriteLine(" * " + description);
-            Console.WriteLine(" *");
-            Console.WriteLine(" * Code is auto-generated. Modifications may be overwritten!");
-            Console.WriteLine(" *");
-            Console.WriteLine(" */");
+            code.AppendLine("/**");
+            code.AppendLine(" * " + description);
+            code.AppendLine(" *");
+            code.AppendLine(" * Code is auto-generated. Modifications may be overwritten!");
+            code.AppendLine(" *");
+            code.AppendLine(" */");
         }
 
         private static DirectoryInfo GetPackageFile(string packagePath)
@@ -1816,7 +1816,7 @@ namespace ZigBeeNet.CodeGenerator
                         {
                             OutputAttributeJavaDoc(code, "Set", attribute, zclDataType);
                             code.AppendLine("       public Task<CommandResult> Set" + attribute.NameUpperCamelCase.Replace("_", "") + "(object value)");
-                            code.AppendLine("       {"); 
+                            code.AppendLine("       {");
                             code.AppendLine("           return Write(_attributes[" + attribute.EnumName + "], value);");
                             code.AppendLine("       }");
                             code.AppendLine();
@@ -1880,7 +1880,7 @@ namespace ZigBeeNet.CodeGenerator
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("       * @param " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass+ "} " + field.FieldLabel);
+                            code.AppendLine("       * @param " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass + "} " + field.FieldLabel);
                         }
 
                         code.AppendLine("       * @return the Task<CommandResult> command result Task");
@@ -1991,140 +1991,148 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
-        //    private static void generateAttributeEnumeration(Context context, string packageRootPrefix, File sourceRootPath)
-        //            throws IOException
-        //{
+        private static void generateAttributeEnumeration(Context context)
+        {
 
-        //    final LinkedList<Profile> profiles = new LinkedList<Profile>(context.profiles.values());
-        //        for (final Profile profile : profiles) {
-        //            final LinkedList<Cluster> clusters = new LinkedList<Cluster>(profile.clusters.values());
-        //            for (final Cluster cluster : clusters) {
-        //                if (cluster.attributes.size() != 0) {
-        //                    for (final Attribute attribute : cluster.attributes.values()) {
-        //                        if (attribute.valueMap.isEmpty()) {
-        //                            continue;
-        //                        }
+            List<Profile> profiles = new List<Profile>(context.Profiles.Values);
 
-        //                        final string packageRoot = packageRootPrefix + packageZclProtocolCommand + "."
-        //                                + cluster.clusterType.replace("_", "").toLowerCase();
+            foreach (Profile profile in profiles)
+            {
+                List<Cluster> clusters = new List<Cluster>(profile.Clusters.Values);
+                foreach (Cluster cluster in clusters)
+                {
+                    if (cluster.Attributes.Count != 0)
+                    {
+                        foreach (Attribute attribute in cluster.Attributes.Values)
+                        {
+                            if (attribute.ValueMap.Count == 0)
+                            {
+                                continue;
+                            }
 
-        //final string className = attribute.nameUpperCamelCase + "Enum";
+                            string packageRoot = "ZigBeeNet.ZCL.Clusters." + cluster.ClusterType.Replace("_", "").ToLower();
 
-        //outputEnum(packageRoot, sourceRootPath, className, attribute.valueMap, cluster.clusterName,
-        //        attribute.attributeLabel);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
+                            string className = attribute.NameUpperCamelCase + "Enum";
 
-        //    private static void generateFieldEnumeration(Context context, string packageRootPrefix, File sourceRootPath)
-        //            throws IOException
-        //{
+                            outputEnum(packageRoot, className, attribute.ValueMap, cluster.ClusterName, attribute.AttributeLabel);
+                        }
+                    }
+                }
+            }
+        }
 
-        //    final LinkedList<Profile> profiles = new LinkedList<Profile>(context.profiles.values());
-        //        for (final Profile profile : profiles) {
-        //            final LinkedList<Cluster> clusters = new LinkedList<Cluster>(profile.clusters.values());
-        //            for (final Cluster cluster : clusters) {
-        //                final ArrayList<Command> commands = new ArrayList<Command>();
-        //commands.addAll(cluster.received.values());
-        //                commands.addAll(cluster.generated.values());
-
-        //                if (commands.size() != 0) {
-        //                    for (final Command command : commands) {
-        //                        for (final Field field : command.fields.values()) {
-        //                            if (field.valueMap.isEmpty()) {
-        //                                continue;
-        //                            }
-
-        //                            final string packageRoot = packageRootPrefix + packageZclProtocolCommand + "."
-        //                                    + cluster.clusterType.replace("_", "").toLowerCase();
-
-        //final string className = field.nameUpperCamelCase + "Enum";
-
-        //outputEnum(packageRoot, sourceRootPath, className, field.valueMap, cluster.clusterName,
-        //        field.fieldLabel);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    private static void outputEnum(string packageRoot, File sourceRootPath, string className,
-        //            Map<Integer, string> valueMap, string parentName, string label) throws IOException
-        //{
-
-        //    final string packagePath = getPackagePath(sourceRootPath, packageRoot);
-        //    final File packageFile = getPackageFile(packagePath);
-
-        //    final PrintWriter out = getClassOut(packageFile, className);
-
-        //    CodeGeneratorUtil.outputLicense(out);
-
-        //    Console.WriteLine("package " + packageRoot + ";");
-
-        //    Console.WriteLine();
-        //    Console.WriteLine("import java.util.HashMap;");
-        //    Console.WriteLine("import java.util.Map;");
-        //    Console.WriteLine();
-        //    Console.WriteLine("import javax.annotation.Generated;");
-
-        //    Console.WriteLine();
-        //    outputClassJavaDoc(out, "Enumeration of " + parentName + " attribute " + label + " options.");
-        //    outputClassGenerated(out);
-        //    Console.WriteLine("public enum " + className + " {");
-        //    boolean first = true;
-        //        for (final Integer key : valueMap.keySet()) {
-        //        string value = valueMap.get(key);
-
-        //        if (!first)
+        //        private static void generateFieldEnumeration(Context context, string packageRootPrefix, File sourceRootPath)
+        //                    throws IOException
         //        {
-        //            Console.WriteLine(",");
-        //        }
-        //        first = false;
-        //            // Console.WriteLine(" /**");
-        //            // Console.WriteLine(" * " + cmd.commandLabel);
-        //            // Console.WriteLine(" * <p>");
-        //            // Console.WriteLine(" * See {@link " + cmd.nameUpperCamelCase + "}");
-        //            // Console.WriteLine(" */");
-        //            out.print("    " + CodeGeneratorUtil.labelToEnumerationValue(value) + string.format("(0x%04X)", key));
+
+        //            final LinkedList<Profile> profiles = new LinkedList<Profile>(context.profiles.values());
+        //                for (final Profile profile : profiles) {
+        //                    final LinkedList<Cluster> clusters = new LinkedList<Cluster>(profile.clusters.values());
+        //                    for (final Cluster cluster : clusters) {
+        //                        final ArrayList<Command> commands = new ArrayList<Command>();
+        //        commands.addAll(cluster.received.values());
+        //                        commands.addAll(cluster.generated.values());
+
+        //                        if (commands.size() != 0) {
+        //                            for (final Command command : commands) {
+        //                                for (final Field field : command.fields.values()) {
+        //                                    if (field.valueMap.isEmpty()) {
+        //                                        continue;
+        //                                    }
+
+        //                                    final string packageRoot = packageRootPrefix + packageZclProtocolCommand + "."
+        //                                            + cluster.clusterType.replace("_", "").toLowerCase();
+
+        //        final string className = field.nameUpperCamelCase + "Enum";
+
+        //        outputEnum(packageRoot, sourceRootPath, className, field.valueMap, cluster.clusterName,
+        //                field.fieldLabel);
         //    }
-        //    Console.WriteLine(";");
-        //    Console.WriteLine();
-
-        //    Console.WriteLine("    /**");
-        //    Console.WriteLine("     * A mapping between the integer code and its corresponding " + className
-        //                + " type to facilitate lookup by value.");
-        //    Console.WriteLine("     */");
-        //    Console.WriteLine("    private static Map<Integer, " + className + "> idMap;");
-        //    Console.WriteLine();
-        //    Console.WriteLine("    static {");
-        //    Console.WriteLine("        idMap = new HashMap<Integer, " + className + ">();");
-        //    Console.WriteLine("        for (" + className + " enumValue : values()) {");
-        //    Console.WriteLine("            idMap.put(enumValue.key, enumValue);");
-        //    Console.WriteLine("        }");
-        //    Console.WriteLine("    }");
-        //    Console.WriteLine();
-        //    Console.WriteLine("    private final int key;");
-        //    Console.WriteLine();
-        //    Console.WriteLine("    " + className + "(final int key) {");
-        //    Console.WriteLine("        this.key = key;");
-        //    Console.WriteLine("    }");
-        //    Console.WriteLine();
-
-        //    Console.WriteLine("    public int getKey() {");
-        //    Console.WriteLine("        return key;");
-        //    Console.WriteLine("    }");
-        //    Console.WriteLine();
-        //    Console.WriteLine("    public static " + className + " getByValue(final int value) {");
-        //    Console.WriteLine("        return idMap.get(value);");
-        //    Console.WriteLine("    }");
-        //    Console.WriteLine("}");
-
-        //        out.flush();
-        //        out.close();
         //}
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        private static void OutputEnum(string packageRoot, string className, Dictionary<int, string> valueMap, string parentName, string label)
+        {
+
+            //final string packagePath = getPackagePath(sourceRootPath, packageRoot);
+            //final File packageFile = getPackageFile(packagePath);
+
+            //final PrintWriter out = getClassOut(packageFile, className);
+            var code = new StringBuilder();
+            CodeGeneratorUtil.OutputLicense(code);
+
+            code.AppendLine("package " + packageRoot + ";");
+            /*
+             using System;
+using System.Collections.Generic;
+using System.Text;
+             */
+            code.AppendLine();
+            code.AppendLine("using System;");
+            code.AppendLine("using System.Collections.Generic;");
+            code.AppendLine("using System.Text;");
+            code.AppendLine();
+            ö
+            OutputClassDoc(code, "Enumeration of " + parentName + " attribute " + label + " options.");
+            OutputClassGenerated(code);
+
+            code.AppendLine();
+            code.AppendLine("public enum " + className + " {");
+            boolean first = true;
+            for (final Integer key : valueMap.keySet())
+            {
+                string value = valueMap.get(key);
+
+                if (!first)
+                {
+                    code.AppendLine(",");
+                }
+                first = false;
+                    // code.AppendLine(" /**");
+                    // code.AppendLine(" * " + cmd.commandLabel);
+                    // code.AppendLine(" * <p>");
+                    // code.AppendLine(" * See {@link " + cmd.nameUpperCamelCase + "}");
+                    // code.AppendLine(" */");
+                    out.print("    " + CodeGeneratorUtil.labelToEnumerationValue(value) + string.format("(0x%04X)", key));
+            }
+            code.AppendLine(";");
+            code.AppendLine();
+
+            code.AppendLine("    /**");
+            code.AppendLine("     * A mapping between the integer code and its corresponding " + className
+                                + " type to facilitate lookup by value.");
+            code.AppendLine("     */");
+            code.AppendLine("    private static Map<Integer, " + className + "> idMap;");
+            code.AppendLine();
+            code.AppendLine("    static {");
+            code.AppendLine("        idMap = new HashMap<Integer, " + className + ">();");
+            code.AppendLine("        for (" + className + " enumValue : values()) {");
+            code.AppendLine("            idMap.put(enumValue.key, enumValue);");
+            code.AppendLine("        }");
+            code.AppendLine("    }");
+            code.AppendLine();
+            code.AppendLine("    private final int key;");
+            code.AppendLine();
+            code.AppendLine("    " + className + "(final int key) {");
+            code.AppendLine("        this.key = key;");
+            code.AppendLine("    }");
+            code.AppendLine();
+
+            code.AppendLine("    public int getKey() {");
+            code.AppendLine("        return key;");
+            code.AppendLine("    }");
+            code.AppendLine();
+            code.AppendLine("    public static " + className + " getByValue(final int value) {");
+            code.AppendLine("        return idMap.get(value);");
+            code.AppendLine("    }");
+            code.AppendLine("}");
+
+                out.flush();
+                out.close();
+        }
 
         private static void OutputAttributeJavaDoc(StringBuilder builder, string type, Attribute attribute, DataTypeMap zclDataType)
         {
