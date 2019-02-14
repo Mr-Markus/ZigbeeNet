@@ -10,11 +10,6 @@ namespace ZigBeeNet.CodeGenerator
 {
     public static class ZclProtocolCodeGenerator
     {
-        private const string _packageZcl = ".ZCL";
-        private const string _packageZclField = _packageZcl + ".Field";
-        private const string _packageZclCluster = _packageZcl + ".Clusters";
-        private const string _packageZclProtocol = _packageZcl + ".Protocol";
-        private const string _packageZclProtocolCommand = _packageZclCluster;
         private const int _lineLen = 120;
 
         private static string _generatedDate;
@@ -75,7 +70,8 @@ namespace ZigBeeNet.CodeGenerator
             {
                 GenerateFieldEnumeration(context);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine("Failed to generate field enum classes.");
                 Console.WriteLine(e.ToString());
                 return;
@@ -124,14 +120,15 @@ namespace ZigBeeNet.CodeGenerator
         private static void GenerateZclCommandClasses(Context context)
         {
             List<Profile> profiles = new List<Profile>(context.Profiles.Values);
+
             foreach (Profile profile in profiles)
             {
-
                 List<Cluster> clusters = new List<Cluster>(profile.Clusters.Values);
+
                 foreach (Cluster cluster in clusters)
                 {
-
                     List<Command> commands = new List<Command>();
+
                     commands.AddRange(cluster.Received.Values);
                     commands.AddRange(cluster.Generated.Values);
 
@@ -157,6 +154,7 @@ namespace ZigBeeNet.CodeGenerator
                         foreach (Field field in fields)
                         {
                             string typeName;
+
                             if (field.DataTypeClass.StartsWith("List"))
                             {
                                 typeName = field.DataTypeClass;
@@ -178,16 +176,17 @@ namespace ZigBeeNet.CodeGenerator
                                 case "int[]":
                                     continue;
                                 case "IeeeAddress":
-                                    //code.AppendLine("import " + _packageRootPrefix + "." + typeName + ";");
+                                    //code.AppendLine("");
                                     continue;
                                 case "ZclStatus":
-                                    //code.AppendLine("import " + packageRootPrefix + packageZcl + ".ZclStatus;");
+                                    //code.AppendLine("");
                                     continue;
                                 case "ImageUpgradeStatus":
-                                    //code.AppendLine("import " + packageRootPrefix + packageZclField + ".ImageUpgradeStatus;");
+                                    //code.AppendLine("");
                                     continue;
                             }
-                            //code.AppendLine("import " + packageRootPrefix + packageName + "." + typeName + ";");
+
+                            //code.AppendLine("");
                         }
 
                         code.AppendLine();
@@ -517,7 +516,7 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (useList)
                     {
-                        // imports.add(packageRootPrefix + packageZclField + ".*");
+                        // imports.add(packageRootPrefix + packageZclField);
                     }
 
                     bool addAttributeTypes = false;
@@ -567,11 +566,9 @@ namespace ZigBeeNet.CodeGenerator
                         //imports.Add(packageRoot + _packageZcl + ".ZclCommand");
                     }
 
-                    // imports.add(packageRoot + packageZcl + ".ZclCommandMessage");
-                    //imports.Add("");
-
-                    // imports.add(packageRoot + ".ZigBeeDestination");
-                    //imports.Add(packageRoot + ".ZigBeeEndpoint");
+                    // imports.Add(packageRoot + packageZcl + ".ZclCommandMessage");
+                    // imports.Add(packageRoot + ".ZigBeeDestination");
+                    // imports.Add(packageRoot + ".ZigBeeEndpoint");
 
                     if (cluster.Attributes.Count != 0 || commands.Count != 0)
                     {
@@ -582,16 +579,16 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (cluster.Attributes.Count != 0 || commands.Count != 0)
                     {
-                        //imports.Add("java.util.concurrent.Future");
+                        //imports.Add("");
                     }
 
-                    // imports.add("com.zsmartsystems.zigbee.model.ZigBeeType");
+                    // importsAadd("");
 
                     foreach (Attribute attribute in cluster.Attributes.Values)
                     {
                         if (attribute.AttributeAccess.ToLower().Contains("read"))
                         {
-                            // imports.add("java.util.Calendar");
+                            // imports.Add("");
                         }
                     }
 
@@ -610,6 +607,7 @@ namespace ZigBeeNet.CodeGenerator
                     importList = importList.Distinct().ToList();
                     importList.Sort();
 
+                    // NOT USED
                     foreach (string importClass in importList)
                     {
                         code.AppendLine("using " + importClass + ";");
@@ -853,6 +851,7 @@ namespace ZigBeeNet.CodeGenerator
                         code.AppendLine("           }");
                         code.AppendLine("       }");
                     }
+
                     code.AppendLine("   }");
 
                     code.AppendLine("}");
