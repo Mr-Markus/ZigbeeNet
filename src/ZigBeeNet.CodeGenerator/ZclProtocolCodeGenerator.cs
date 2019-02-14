@@ -145,7 +145,7 @@ namespace ZigBeeNet.CodeGenerator
             //string definitionFilePathZse = "./src/main/resources/zse_definition.md";
             //string definitionFilePathMan = "./src/main/resources/manufacturer_definition.md";
 
-            if(args != null && args.Length > 0)
+            if (args != null && args.Length > 0)
                 _outRootPath = args[0]; // "../../../../ZigBeeNet/ZCL/Clusters";
 
             Context contextZcl = new Context();
@@ -2016,7 +2016,7 @@ namespace ZigBeeNet.CodeGenerator
 
                             string className = attribute.NameUpperCamelCase + "Enum";
 
-                            outputEnum(packageRoot, className, attribute.ValueMap, cluster.ClusterName, attribute.AttributeLabel);
+                            OutputEnum(packageRoot, className, attribute.ValueMap, cluster.ClusterName, attribute.AttributeLabel);
                         }
                     }
                 }
@@ -2056,7 +2056,7 @@ namespace ZigBeeNet.CodeGenerator
         //                }
         //            }
 
-        private static void OutputEnum(string packageRoot, string className, Dictionary<int, string> valueMap, string parentName, string label)
+        private static void OutputEnum(string packageRoot, string className, SortedDictionary<int, string> valueMap, string parentName, string label)
         {
 
             //final string packagePath = getPackagePath(sourceRootPath, packageRoot);
@@ -2077,28 +2077,31 @@ using System.Text;
             code.AppendLine("using System.Collections.Generic;");
             code.AppendLine("using System.Text;");
             code.AppendLine();
-            ö
+
             OutputClassDoc(code, "Enumeration of " + parentName + " attribute " + label + " options.");
             OutputClassGenerated(code);
 
             code.AppendLine();
-            code.AppendLine("public enum " + className + " {");
-            boolean first = true;
-            for (final Integer key : valueMap.keySet())
+            code.AppendLine("public enum " + className);
+            code.AppendLine("{");
+            bool first = true;
+
+            foreach (int key in valueMap.Keys)
             {
-                string value = valueMap.get(key);
+                string value = valueMap[key];
 
                 if (!first)
                 {
                     code.AppendLine(",");
                 }
+
                 first = false;
-                    // code.AppendLine(" /**");
-                    // code.AppendLine(" * " + cmd.commandLabel);
-                    // code.AppendLine(" * <p>");
-                    // code.AppendLine(" * See {@link " + cmd.nameUpperCamelCase + "}");
-                    // code.AppendLine(" */");
-                    out.print("    " + CodeGeneratorUtil.labelToEnumerationValue(value) + string.format("(0x%04X)", key));
+                // code.AppendLine(" /**");
+                // code.AppendLine(" * " + cmd.commandLabel);
+                // code.AppendLine(" * <p>");
+                // code.AppendLine(" * See {@link " + cmd.nameUpperCamelCase + "}");
+                // code.AppendLine(" */");
+                code.Append("    " + CodeGeneratorUtil.LabelToEnumerationValue(value) + key.ToString("X4")); // string.format("(0x%04X)", key));
             }
             code.AppendLine(";");
             code.AppendLine();
@@ -2132,8 +2135,7 @@ using System.Text;
             code.AppendLine("    }");
             code.AppendLine("}");
 
-                out.flush();
-                out.close();
+            // TODO: safe file
         }
 
         private static void OutputAttributeJavaDoc(StringBuilder builder, string type, Attribute attribute, DataTypeMap zclDataType)
