@@ -184,6 +184,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\OnWithRecallGlobalSceneCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\OnWithTimedOffCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OnOff\ToggleCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\ImageBlockCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\ImageBlockResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\ImageNotifyCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\ImagePageCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\QueryNextImageCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\QueryNextImageResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\QuerySpecificFileCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\QuerySpecificFileResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\UpgradeEndCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\OTAUpgrade\UpgradeEndResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\PollControl\CheckInCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\PollControl\CheckInResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\PollControl\FastPollStopCommand.cs" />
@@ -286,6 +296,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOccupancySensingCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOnOffCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOnOffSwitchConfigurationCluster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclOTAUpgradeCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclPollControlCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclPowerConfigurationCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclPressureMeasurementCluster.cs" />

@@ -23,6 +23,7 @@ namespace ZigBeeNet.CodeGenerator
             _generatedDate = DateTime.UtcNow.ToShortDateString() + " - " + DateTime.UtcNow.ToShortTimeString();
 
             string definitionFilePathZcl = "./Resources/zcl_definition.md";
+            string definitionFilePathOta = "./Resources/ota_definition.md";
 
             if (args != null && args.Length > 0)
             {
@@ -31,16 +32,23 @@ namespace ZigBeeNet.CodeGenerator
 
             Context contextZcl = new Context();
             FileInfo definitionFileZcl = new FileInfo(definitionFilePathZcl);
+            FileInfo definitionFileOta = new FileInfo(definitionFilePathOta);
 
             if (!definitionFileZcl.Exists)
             {
-                Console.WriteLine("Definition file does not exist: " + definitionFilePathZcl);
+                Console.WriteLine("ZCL definition file does not exist: " + definitionFilePathZcl);
+            }
+            else if (!definitionFileOta.Exists)
+            {
+                Console.WriteLine("OTA definition file does not exist: " + definitionFilePathZcl);
             }
             else
             {
                 try
                 {
                     contextZcl.Lines = new List<string>(File.ReadAllLines(definitionFilePathZcl, Encoding.UTF8));
+                    contextZcl.Lines.AddRange(File.ReadAllLines(definitionFilePathOta, Encoding.UTF8));
+
                     GenerateZclCode(contextZcl);
                 }
                 catch (IOException e)
