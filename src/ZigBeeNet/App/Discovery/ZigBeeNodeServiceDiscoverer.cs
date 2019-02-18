@@ -54,7 +54,7 @@ namespace ZigBeeNet.App.Discovery
         /**
          * Default maximum number of retries to perform
          */
-        private const int DEFAULT_MAX_BACKOFF = 2;
+        private const int DEFAULT_MAX_BACKOFF = 8;
 
         /**
          * Default period between retries
@@ -680,7 +680,7 @@ namespace ZigBeeNet.App.Discovery
             List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
             // Always request the network address - in case it's changed
-            tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
+            //tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
 
             if (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN)
             {
