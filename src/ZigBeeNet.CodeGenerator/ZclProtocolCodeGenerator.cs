@@ -219,7 +219,7 @@ namespace ZigBeeNet.CodeGenerator
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("           /**");
+                            code.AppendLine("       /**");
                             code.AppendLine("           * " + field.FieldLabel + " command message field.");
                             if (field.Description.Count != 0)
                             {
@@ -250,7 +250,7 @@ namespace ZigBeeNet.CodeGenerator
                                 + (cluster.Received.ContainsValue(command) ? "CLIENT_TO_SERVER" : "SERVER_TO_CLIENT")
                                 + ";");
 
-                        code.AppendLine("    }");
+                        code.AppendLine("           }");
 
                         if (fields.Count > 0)
                         {
