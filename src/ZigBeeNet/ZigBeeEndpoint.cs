@@ -182,7 +182,7 @@ namespace ZigBeeNet
         {
             this._outputClusters.Clear();
 
-            _logger.Debug("{}: Setting output clusters {}", GetEndpointAddress(), outputClusterIds);
+            _logger.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_outputClusters, outputClusterIds, false);
         }
