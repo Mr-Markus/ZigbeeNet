@@ -59,7 +59,7 @@ namespace ZigBeeNet.PlayGround
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
-                               
+
                 networkManager.AddSupportedCluster(0x06);
                 networkManager.AddSupportedCluster(0x08);
                 networkManager.AddSupportedCluster(0x0300);
@@ -81,7 +81,6 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNode coord = networkManager.GetNode(0);
 
-                coord.PermitJoin(true);
 
                 Console.WriteLine("Joining enabled...");
 
@@ -91,7 +90,15 @@ namespace ZigBeeNet.PlayGround
                 {
                     Console.WriteLine(networkManager.Nodes.Count + " node(s)");
 
-                    if (!string.IsNullOrEmpty(cmd))
+                    if(cmd == "join")
+                    {
+                        coord.PermitJoin(true);
+                    }
+                    else if (cmd == "unjoin")
+                    {
+                        coord.PermitJoin(false);
+                    }
+                    else if (!string.IsNullOrEmpty(cmd))
                     {
                         Console.WriteLine("Destination Address: ");
                         string nwkAddr = Console.ReadLine();
@@ -214,11 +221,36 @@ namespace ZigBeeNet.PlayGround
                                             };
 
                                             networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
-                                        } 
+                                        }
                                     }
                                     else if (cmd == "read")
                                     {
-                                        var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetOnOff(0);
+                                        var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetAttribute(ZclOnOffCluster.ATTR_ONOFF);
+
+                                        var result = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).Read(0).Result;
+
+                                        if (result.IsSuccess())
+                                        {
+                                            ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
+                                            if (response.Records.Count == 0)
+                                            {
+                                                Console.WriteLine("No records returned");
+                                                continue;
+                                            }
+
+                                            ZclStatus statusCode = response.Records[0].Status;
+                                            if (statusCode == ZclStatus.SUCCESS)
+                                            {
+                                                Console.WriteLine("Cluster " + string.Format("%04X", response.ClusterId) + ", Attribute "
+                                                        + response.Records[0].AttributeIdentifier + ", type "
+                                                        + response.Records[0].AttributeDataType + ", value: "
+                                                        + response.Records[0].AttributeValue);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Attribute value read error: " + statusCode);
+                                            }
+                                        }
 
                                         var lastValue = value;
                                     }
@@ -318,7 +350,7 @@ namespace ZigBeeNet.PlayGround
             {
                 ZigBeeNode node = new ZigBeeNode(networkManager, new IeeeAddress(nodeDao.IeeeAddress));
                 node.SetDao(nodeDao);
-                               
+
                 networkManager.AddNode(node);
             }
         }
@@ -330,8 +362,11 @@ namespace ZigBeeNet.PlayGround
 
             foreach (var node in networkManager.Nodes)
             {
-                ZigBeeNodeDao nodeDao = node.GetDao();
-                nodes.Add(nodeDao);
+                if (node.NetworkAddress != 0)
+                {
+                    ZigBeeNodeDao nodeDao = node.GetDao();
+                    nodes.Add(nodeDao);
+                }
             }
 
             var settings = new JsonSerializerSettings()

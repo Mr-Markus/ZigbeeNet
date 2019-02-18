@@ -70,8 +70,7 @@ namespace ZigBeeNet.ZCL.Protocol
     public class ZclDataType
     {
         private static Dictionary<int, ZclDataType> _codeTypeMapping;
-
-
+               
         public string Label { get; private set; }
         public Type DataClass { get; private set; }
         public int Id { get; private set; }
@@ -157,64 +156,11 @@ namespace ZigBeeNet.ZCL.Protocol
         {
             return _codeTypeMapping.Values.Single(dt => dt.DataType == type);
         }
+
+        public override string ToString()
+        {
+            return Label;
+        }
     }
-
-    //public enum ZclDataType
-    //{
-    //    BITMAP_16_BIT("16-bit Bitmap", typeof(int), 0x19, false),
-    //BITMAP_32_BIT("32-bit Bitmap", typeof(int), 0x1B, false),
-    //BITMAP_8_BIT("Bitmap 8-bit", typeof(int), 0x18, false),
-    //BOOLEAN("Boolean", typeof(bool), 0x10, false),
-    //BYTE_ARRAY("Byte array", ByteArray.class, 0x00, false),
-    //CHARACTER_STRING("Character String", typeof(string), 0x42, false),
-    //DATA_8_BIT("8-bit data", typeof(int), 0x08, false),
-    //ENUMERATION_16_BIT("16-bit enumeration", typeof(int), 0x31, false),
-    //ENUMERATION_8_BIT("8-bit Enumeration", typeof(int), 0x30, false),
-    //IEEE_ADDRESS("IEEE Address", typeof(ZigbeeAddress64), 0xF0, false),
-    //N_X_ATTRIBUTE_IDENTIFIER("N X Attribute identifier", typeof(int), 0x00, false),
-    //N_X_ATTRIBUTE_INFORMATION("N X Attribute information", AttributeInformation.class, 0x00, false),
-    //N_X_ATTRIBUTE_RECORD("N X Attribute record", typeof(AttributeRecord), 0x00, false),
-    //N_X_ATTRIBUTE_REPORT("N X Attribute report", AttributeReport.class, 0x00, false),
-    //N_X_ATTRIBUTE_REPORTING_CONFIGURATION_RECORD("N X Attribute reporting configuration record", AttributeReportingConfigurationRecord.class, 0x00, false),
-    //N_X_ATTRIBUTE_SELECTOR("N X Attribute selector", typeof(object), 0x00, false),
-    //N_X_ATTRIBUTE_STATUS_RECORD("N X Attribute status record", AttributeStatusRecord.class, 0x00, false),
-    //N_X_EXTENDED_ATTRIBUTE_INFORMATION("N x Extended Attribute Information", ExtendedAttributeInformation.class, 0x00, false),
-    //N_X_EXTENSION_FIELD_SET("N X Extension field set", ExtensionFieldSet.class, 0x00, false),
-    //N_X_NEIGHBORS_INFORMATION("N X Neighbors information", NeighborInformation.class, 0x00, false),
-    //N_X_READ_ATTRIBUTE_STATUS_RECORD("N X Read attribute status record", ReadAttributeStatusRecord.class, 0x00, false),
-    //N_X_UNSIGNED_16_BIT_INTEGER("N X Unsigned 16-bit integer", typeof(int), 0x00, false),
-    //N_X_UNSIGNED_8_BIT_INTEGER("N x Unsigned 8-bit Integer", typeof(int), 0x00, false),
-    //N_X_WRITE_ATTRIBUTE_RECORD("N X Write attribute record", Writetypeof(AttributeRecord), 0x00, false),
-    //N_X_WRITE_ATTRIBUTE_STATUS_RECORD("N X Write attribute status record", WriteAttributeStatusRecord.class, 0x00, false),
-    //OCTET_STRING("Octet string", ByteArray.class, 0x41, false),
-    //SIGNED_16_BIT_INTEGER("Signed 16-bit Integer", typeof(int), 0x29, true),
-    //SIGNED_32_BIT_INTEGER("Signed 32-bit Integer", typeof(int), 0x2B, true),
-    //SIGNED_8_BIT_INTEGER("Signed 8-bit Integer", typeof(int), 0x28, true),
-    //UNSIGNED_16_BIT_INTEGER("Unsigned 16-bit integer", typeof(int), 0x21, true),
-    //UNSIGNED_24_BIT_INTEGER("Unsigned 24-bit integer", typeof(int), 0x22, true),
-    //UNSIGNED_32_BIT_INTEGER("Unsigned 32-bit integer", typeof(int), 0x23, true),
-    //UNSIGNED_48_BIT_INTEGER("Unsigned 48-bit integer", typeof(long), 0x25, true),
-    //UNSIGNED_8_BIT_INTEGER("Unsigned 8-bit integer", typeof(int), 0x20, true),
-    //UTCTIME("UTCTime", Calendar.class, 0xE2, true),
-    //X_UNSIGNED_8_BIT_INTEGER("X Unsigned 8-bit integer", typeof(int), 0x00, false),
-    //ZCL_STATUS("Zcl Status", typeof(ZclStatus), 0x00, false),
-    //EXTENDED_PANID("EXTENDED_PANID", ExtendedPanId.class, 0x00, false),
-    //BINDING_TABLE("Binding Table", BindingTable.class, 0x00, false),
-    //CLUSTERID("ClusterId", typeof(int), 0x00, false),
-    //COMPLEX_DESCRIPTOR("Complex Descriptor", ComplexDescriptor.class, 0x00, false),
-    //ENDPOINT("Endpoint", typeof(int), 0x00, false),
-    //NEIGHBOR_TABLE("Neighbor Table", NeighborTable.class, 0x00, false),
-    //NODE_DESCRIPTOR("Node Descriptor", NodeDescriptor.class, 0x00, false),
-    //NWK_ADDRESS("NWK address", typeof(int), 0x00, false),
-    //N_X_BINDING_TABLE("N x Binding Table", BindingTable.class, 0x00, false),
-    //N_X_IEEE_ADDRESS("N X IEEE Address", typeof(long), 0x00, false),
-    //POWER_DESCRIPTOR("Power Descriptor", PowerDescriptor.class, 0x00, false),
-    //ROUTING_TABLE("Routing Table", RoutingTable.class, 0x00, false),
-    //SIMPLE_DESCRIPTOR("Simple Descriptor", SimpleDescriptor.class, 0x00, false),
-    //USER_DESCRIPTOR("User Descriptor", UserDescriptor.class, 0x00, false),
-    //ZDO_STATUS("Zdo Status", ZdoStatus.class, 0x00, false),
-    //UNSIGNED_8_BIT_INTEGER_ARRAY("Unsigned 8 bit Integer Array", int[].class, 0x00, false),
-    //ZIGBEE_DATA_TYPE("ZigBee Data Type", typeof(ZclDataType), 0x00, false);
-
 }
 
