@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.App;
@@ -135,7 +136,7 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            _logger.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds);
+            _logger.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }

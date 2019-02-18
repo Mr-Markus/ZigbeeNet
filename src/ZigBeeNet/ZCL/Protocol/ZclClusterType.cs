@@ -152,7 +152,7 @@ namespace ZigBeeNet.ZCL.Protocol
                 { 0x0202, new ZclClusterType(0x0202, ProfileType.ZIGBEE_HOME_AUTOMATION, "Fan Control", ClusterType.FAN_CONTROL) },
                 { 0x0203, new ZclClusterType(0x0203, ProfileType.ZIGBEE_HOME_AUTOMATION, "Dehumidification Control", ClusterType.DEHUMIDIFICATION_CONTROL) },
                 { 0x0204, new ZclClusterType(0x0204, ProfileType.ZIGBEE_HOME_AUTOMATION, "Thermostat User Interface Configuration", ClusterType.THERMOSTAT_USER_INTERFACE_CONFIGURATION) },
-                { 0x0300, new ZclClusterType(0x0300, ProfileType.ZIGBEE_HOME_AUTOMATION, "Color Control", ClusterType.COLOR_CONTROL) },
+                { 0x0300, new ZclClusterType(0x0300, ProfileType.ZIGBEE_HOME_AUTOMATION, "Color Control", ClusterType.COLOR_CONTROL, typeof(ZclColorControlCluster)) },
                 { 0x0301, new ZclClusterType(0x0301, ProfileType.ZIGBEE_HOME_AUTOMATION, "Ballast Configuration", ClusterType.BALLAST_CONFIGURATION) },
                 { 0x0400, new ZclClusterType(0x0400, ProfileType.ZIGBEE_HOME_AUTOMATION, "Illuminance measurement", ClusterType.ILLUMINANCE_MEASUREMENT) },
                 { 0x0401, new ZclClusterType(0x0401, ProfileType.ZIGBEE_HOME_AUTOMATION, "Illuminance level sensing", ClusterType.ILLUMINANCE_LEVEL_SENSING) },
@@ -203,7 +203,10 @@ namespace ZigBeeNet.ZCL.Protocol
         public static ZclClusterType GetValueById(ushort clusterId)
         {
             // Use index instead of Linq (Where())-> performance
-            return _idValueMap[clusterId];
+            if (_idValueMap.TryGetValue(clusterId, out ZclClusterType result))
+                return result;
+            else
+                return null;
         }
 
         public static ZclClusterType GetValueById(ClusterType clusterId)

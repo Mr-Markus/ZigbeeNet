@@ -225,9 +225,9 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "read")
                                     {
-                                        var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetAttribute(ZclOnOffCluster.ATTR_ONOFF);
+                                        //var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetAttribute(ZclOnOffCluster.ATTR_ONOFF);
 
-                                        var result = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).Read(0).Result;
+                                        var result = ((ZclColorControlCluster)endpoint.GetInputCluster(ZclColorControlCluster.CLUSTER_ID)).Read(ZclColorControlCluster.ATTR_CURRENTY).Result;
 
                                         if (result.IsSuccess())
                                         {
@@ -251,8 +251,6 @@ namespace ZigBeeNet.PlayGround
                                                 Console.WriteLine("Attribute value read error: " + statusCode);
                                             }
                                         }
-
-                                        var lastValue = value;
                                     }
                                 }
                                 catch (Exception ex)
