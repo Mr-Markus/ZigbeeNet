@@ -693,7 +693,7 @@ namespace ZigBeeNet.CodeGenerator
                     }
 
                     code.AppendLine();
-                    code.AppendLine("        return attributeMap;");
+                    code.AppendLine("           return attributeMap;");
                     code.AppendLine("       }");
                     code.AppendLine();
 
