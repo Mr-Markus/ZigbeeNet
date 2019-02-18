@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\ota_definition.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\zcl_definition.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

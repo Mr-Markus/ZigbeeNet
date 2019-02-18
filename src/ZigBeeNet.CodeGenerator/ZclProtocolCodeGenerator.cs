@@ -23,6 +23,7 @@ namespace ZigBeeNet.CodeGenerator
             _generatedDate = DateTime.UtcNow.ToShortDateString() + " - " + DateTime.UtcNow.ToShortTimeString();
 
             string definitionFilePathZcl = "./Resources/zcl_definition.md";
+            string definitionFilePathOta = "./Resources/ota_definition.md";
 
             if (args != null && args.Length > 0)
             {
@@ -31,16 +32,23 @@ namespace ZigBeeNet.CodeGenerator
 
             Context contextZcl = new Context();
             FileInfo definitionFileZcl = new FileInfo(definitionFilePathZcl);
+            FileInfo definitionFileOta = new FileInfo(definitionFilePathOta);
 
             if (!definitionFileZcl.Exists)
             {
-                Console.WriteLine("Definition file does not exist: " + definitionFilePathZcl);
+                Console.WriteLine("ZCL definition file does not exist: " + definitionFilePathZcl);
+            }
+            else if (!definitionFileOta.Exists)
+            {
+                Console.WriteLine("OTA definition file does not exist: " + definitionFilePathZcl);
             }
             else
             {
                 try
                 {
                     contextZcl.Lines = new List<string>(File.ReadAllLines(definitionFilePathZcl, Encoding.UTF8));
+                    contextZcl.Lines.AddRange(File.ReadAllLines(definitionFilePathOta, Encoding.UTF8));
+
                     GenerateZclCode(contextZcl);
                 }
                 catch (IOException e)
@@ -214,12 +222,12 @@ namespace ZigBeeNet.CodeGenerator
                         OutputClassGenerated(code);
                         code.AppendLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
                         code.AppendLine("{");
-                        code.AppendLine("   public class " + className + " : ZclCommand");
-                        code.AppendLine("   {");
+                        code.AppendLine("       public class " + className + " : ZclCommand");
+                        code.AppendLine("       {");
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("       /**");
+                            code.AppendLine("           /**");
                             code.AppendLine("           * " + field.FieldLabel + " command message field.");
                             if (field.Description.Count != 0)
                             {
@@ -255,8 +263,8 @@ namespace ZigBeeNet.CodeGenerator
                         if (fields.Count > 0)
                         {
                             code.AppendLine();
-                            code.AppendLine("    public override void Serialize(ZclFieldSerializer serializer)");
-                            code.AppendLine("    {");
+                            code.AppendLine("           public override void Serialize(ZclFieldSerializer serializer)");
+                            code.AppendLine("           {");
                             foreach (Field field in fields)
                             {
                                 // Rules...
@@ -269,43 +277,48 @@ namespace ZigBeeNet.CodeGenerator
                                     {
                                         // Special case where a ZclStatus may be sent, or, a list of results.
                                         // This checks for a single response
-                                        code.AppendLine("        if (Status == ZclStatus.SUCCESS)");
-                                        code.AppendLine("        {");
-                                        code.AppendLine("            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));");
-                                        code.AppendLine("            return;");
-                                        code.AppendLine("        }");
+                                        code.AppendLine("               if (Status == ZclStatus.SUCCESS)");
+                                        code.AppendLine("               {");
+                                        code.AppendLine("                   serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));");
+                                        code.AppendLine("                   return;");
+                                        code.AppendLine("               }");
                                     }
                                     else if (field.ConditionOperator != null)
                                     {
                                         if (field.ConditionOperator == "&&")
                                         {
-                                            code.AppendLine("        if ((" + field.ListSizer + " & " + field.Condition + ") != 0) {");
+                                            code.AppendLine();
+                                            code.AppendLine("               if ((" + CodeGeneratorUtil.LabelToUpperCamelCase(field.ListSizer) + " & " + field.Condition + ") != 0)");
+                                            code.AppendLine("               {");
                                         }
                                         else
                                         {
-                                            code.AppendLine("        if (" + field.ListSizer + " " + field.ConditionOperator + " " + field.Condition + ")");
-                                            code.AppendLine("        {");
+                                            code.AppendLine();
+                                            code.AppendLine("               if (" + CodeGeneratorUtil.LabelToUpperCamelCase(field.ListSizer) + " " + field.ConditionOperator + " " + field.Condition + ")");
+                                            code.AppendLine("               {");
                                         }
-                                        code.AppendLine("            serializer.Serialize(" + field.NameUpperCamelCase + ", ZclDataType.Get(DataType." + field.DataType + "));");
-                                        code.AppendLine("        }");
+                                        code.AppendLine("               serializer.Serialize(" + field.NameUpperCamelCase + ", ZclDataType.Get(DataType." + field.DataType + "));");
+                                        code.AppendLine("               }");
                                     }
                                     else
                                     {
-                                        code.AppendLine("        for (int cnt = 0; cnt < " + field.NameUpperCamelCase + ".Count; cnt++) {");
-                                        code.AppendLine("            serializer.Serialize(" + field.NameUpperCamelCase + ".Get(cnt), ZclDataType.Get(DataType." + field.DataType + "));");
-                                        code.AppendLine("        }");
+                                        code.AppendLine();
+                                        code.AppendLine("               for (int cnt = 0; cnt < " + field.NameUpperCamelCase + ".Count; cnt++)");
+                                        code.AppendLine("               {");
+                                        code.AppendLine("                   serializer.Serialize(" + field.NameUpperCamelCase + ".Get(cnt), ZclDataType.Get(DataType." + field.DataType + "));");
+                                        code.AppendLine("               }");
                                     }
                                 }
                                 else
                                 {
-                                    code.AppendLine("        serializer.Serialize(" + field.NameUpperCamelCase + ", ZclDataType.Get(DataType." + field.DataType + "));");
+                                    code.AppendLine("            serializer.Serialize(" + field.NameUpperCamelCase + ", ZclDataType.Get(DataType." + field.DataType + "));");
                                 }
                             }
-                            code.AppendLine("    }");
+                            code.AppendLine("           }");
 
                             code.AppendLine();
-                            code.AppendLine("    public override void Deserialize(ZclFieldDeserializer deserializer)");
-                            code.AppendLine("    {");
+                            code.AppendLine("           public override void Deserialize(ZclFieldDeserializer deserializer)");
+                            code.AppendLine("           {");
 
                             foreach (Field field in fields)
                             {
@@ -315,41 +328,44 @@ namespace ZigBeeNet.CodeGenerator
                                     {
                                         // Special case where a ZclStatus may be sent, or, a list of results.
                                         // This checks for a single response
-                                        code.AppendLine("        if (deserializer.RemainingLength == 1)");
-                                        code.AppendLine("        {");
-                                        code.AppendLine("            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));");
-                                        code.AppendLine("            return;");
-                                        code.AppendLine("        }");
+                                        code.AppendLine("               if (deserializer.RemainingLength == 1)");
+                                        code.AppendLine("               {");
+                                        code.AppendLine("                   Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));");
+                                        code.AppendLine("                   return;");
+                                        code.AppendLine("               }");
                                     }
                                     else if (field.ConditionOperator != null)
                                     {
                                         if (field.ConditionOperator == "&&")
                                         {
-                                            code.AppendLine("        if ((" + field.ListSizer + " & " + field.Condition + ") != 0)");
-                                            code.AppendLine("        {");
+                                            code.AppendLine();
+                                            code.AppendLine("               if ((" + CodeGeneratorUtil.LabelToUpperCamelCase(field.ListSizer) + " & " + field.Condition + ") != 0)");
+                                            code.AppendLine("               {");
                                         }
                                         else
                                         {
-                                            code.AppendLine("        if (" + field.ListSizer + " " + field.ConditionOperator + " " + field.Condition + ")");
-                                            code.AppendLine("        {");
+                                            code.AppendLine();
+                                            code.AppendLine("               if (" + CodeGeneratorUtil.LabelToUpperCamelCase(field.ListSizer) + " " + field.ConditionOperator + " " + field.Condition + ")");
+                                            code.AppendLine("               {");
                                         }
-                                        code.AppendLine("            " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
-                                        code.AppendLine("        }");
+                                        code.AppendLine("                   " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
+                                        code.AppendLine("               }");
                                     }
                                     else
                                     {
-                                        code.AppendLine("        for (int cnt = 0; cnt < " + field.NameLowerCamelCase + ".Count; cnt++)");
-                                        code.AppendLine("        {");
-                                        code.AppendLine("            " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
-                                        code.AppendLine("        }");
+                                        code.AppendLine();
+                                        code.AppendLine("               for (int cnt = 0; cnt < " + field.NameLowerCamelCase + ".Count; cnt++)");
+                                        code.AppendLine("               {");
+                                        code.AppendLine("                   " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
+                                        code.AppendLine("               }");
                                     }
                                 }
                                 else
                                 {
-                                    code.AppendLine("        " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
+                                    code.AppendLine("               " + field.NameUpperCamelCase + " = deserializer.Deserialize<" + field.DataTypeClass + ">(ZclDataType.Get(DataType." + field.DataType + "));");
                                 }
                             }
-                            code.AppendLine("    }");
+                            code.AppendLine("           }");
                         }
 
                         int fieldLen = 0;
@@ -359,23 +375,23 @@ namespace ZigBeeNet.CodeGenerator
                         }
 
                         code.AppendLine();
-                        code.AppendLine("       public override string ToString()");
-                        code.AppendLine("       {");
-                        code.AppendLine("           var builder = new StringBuilder();");
+                        code.AppendLine("           public override string ToString()");
+                        code.AppendLine("           {");
+                        code.AppendLine("               var builder = new StringBuilder();");
                         code.AppendLine();
-                        code.AppendLine("           builder.Append(\"" + className + " [\");");
-                        code.AppendLine("           builder.Append(base.ToString());");
+                        code.AppendLine("               builder.Append(\"" + className + " [\");");
+                        code.AppendLine("               builder.Append(base.ToString());");
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("           builder.Append(\", " + field.NameUpperCamelCase + "=\");");
-                            code.AppendLine("           builder.Append(" + field.NameUpperCamelCase + ");");
+                            code.AppendLine("               builder.Append(\", " + field.NameUpperCamelCase + "=\");");
+                            code.AppendLine("               builder.Append(" + field.NameUpperCamelCase + ");");
                         }
-                        code.AppendLine("           builder.Append(\']\');");
+                        code.AppendLine("               builder.Append(\']\');");
                         code.AppendLine();
-                        code.AppendLine("           return builder.ToString();");
+                        code.AppendLine("               return builder.ToString();");
+                        code.AppendLine("           }");
+                        code.AppendLine();
                         code.AppendLine("       }");
-                        code.AppendLine();
-                        code.AppendLine("   }");
                         code.AppendLine("}");
 
                         Console.WriteLine(code.ToString());
@@ -685,7 +701,7 @@ namespace ZigBeeNet.CodeGenerator
                     }
 
                     code.AppendLine();
-                    code.AppendLine("        return attributeMap;");
+                    code.AppendLine("           return attributeMap;");
                     code.AppendLine("       }");
                     code.AppendLine();
 
