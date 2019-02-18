@@ -186,7 +186,7 @@ namespace ZigBeeNet
          *
          * @return true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.
          */
-        public bool IsFullFuntionDevice()
+        public bool IsFullFunctionDevice()
         {
             if (NodeDescriptor == null)
             {
