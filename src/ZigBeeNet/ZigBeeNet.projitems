@@ -310,6 +310,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclThermostatCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclThermostatUserInterfaceConfigurationCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclTimeCluster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclTouchlinkCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Clusters\ZclTunnelingCluster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeInformation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\AttributeRecord.cs" />

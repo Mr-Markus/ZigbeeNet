@@ -223,10 +223,12 @@ namespace ZigBeeNet
             }
 
             // Create a cluster class
-            if (clusterType.ClusterClass != null)
-                return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this);
-            else
-                return null;
+            //if (clusterType.ClusterClass != null)
+            //    return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this);
+            //else
+            //    return null;
+
+            return clusterType.ClusterFactory(this);
         }
 
         private void UpdateClusters(ConcurrentDictionary<int, ZclCluster> clusters, List<ushort> newList, bool isInput)
