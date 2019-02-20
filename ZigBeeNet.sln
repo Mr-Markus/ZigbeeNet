@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28531.58
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "src\ZigBeeNet\ZigBeeNet.shproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutoCode", "AutoCode", "{69
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "src\ZigBeeNet.CodeGenerator\ZigBeeNet.CodeGenerator.csproj", "{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.netstandard2.0", "targets\ZigBeeNet.Hardware.TI.CC2531.netstandard2.0\ZigBeeNet.Hardware.TI.CC2531.netstandard2.0.csproj", "{28648B13-7C14-4969-8AC7-EF247A88C5AE}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\ZigBeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
@@ -72,6 +74,10 @@ Global
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28648B13-7C14-4969-8AC7-EF247A88C5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28648B13-7C14-4969-8AC7-EF247A88C5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28648B13-7C14-4969-8AC7-EF247A88C5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28648B13-7C14-4969-8AC7-EF247A88C5AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{B7975147-A7E4-4959-85D3-C5CA0ADDAA17} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{F0F9BA10-6339-4E29-911F-D1957E3895DF} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
+		{28648B13-7C14-4969-8AC7-EF247A88C5AE} = {FCDAF8B3-7162-4A42-AEB6-87AF6A06E9C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
