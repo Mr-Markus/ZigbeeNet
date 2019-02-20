@@ -203,7 +203,7 @@ namespace ZigBeeNet.ZCL.Protocol
                 { 0x0B04, new ZclClusterType(0x0B04, ProfileType.ZIGBEE_HOME_AUTOMATION, "Electrical Measurement", ClusterType.ELECTRICAL_MEASUREMENT, (endpoint) => new ZclElectricalMeasurementCluster(endpoint)) },
                 { 0x0B05, new ZclClusterType(0x0B05, ProfileType.ZIGBEE_HOME_AUTOMATION, "Diagnostics", ClusterType.DIAGNOSTICS, (endpoint) => new ZclDiagnosticsCluster(endpoint)) },
                 { 0xFFFF, new ZclClusterType(0xFFFF, ProfileType.ZIGBEE_HOME_AUTOMATION, "General", ClusterType.GENERAL, (endpoint) => new ZclGeneralCluster(endpoint)) },
-                { 0x1000, new ZclClusterType(0x1000, ProfileType.ZIGBEE_LIGHT_LINK, "Touchlink", ClusterType.TOUCHLINK, (endpoint) => throw new NotSupportedException("Touchlink cluster not supported.")) },
+                { 0x1000, new ZclClusterType(0x1000, ProfileType.ZIGBEE_LIGHT_LINK, "Touchlink", ClusterType.TOUCHLINK, (endpoint) => new ZclTouchlinkCluster(endpoint)) },
             };
         }
 
