@@ -195,11 +195,11 @@ namespace ZigBeeNet.ZDO.Field
             }
         }
 
-        /**
-         * Serialise the contents of the structure.
-         *
-         * @param serializer the {@link ZclFieldSerializer} used to serialize
-         */
+        /// <summary>
+         /// Serialise the contents of the structure.
+         ///
+         /// @param serializer the {@link ZclFieldSerializer} used to serialize
+         /// </summary>
         public byte[] Serialize(ZclFieldSerializer serializer)
         {
             // Serialize the fields
@@ -214,11 +214,11 @@ namespace ZigBeeNet.ZDO.Field
             return serializer.Payload;
         }
 
-        /**
-         * Deserialise the contents of the structure.
-         *
-         * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
-         */
+        /// <summary>
+         /// Deserialise the contents of the structure.
+         ///
+         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
@@ -261,7 +261,7 @@ namespace ZigBeeNet.ZDO.Field
             result = prime * result + (ExtendedSimpleDescriptorListAvailable ? 1231 : 1237);
             result = prime * result + ((FrequencyBands == null) ? 0 : FrequencyBands.GetHashCode());
             result = prime * result + IncomingTransferSize;
-            result = prime * result + /*((LogicalNodeType == null) ? 0 : */ LogicalNodeType.GetHashCode();
+            result = prime * result + LogicalNodeType.GetHashCode();
             result = prime * result + ((MacCapabilities == null) ? 0 : MacCapabilities.GetHashCode());
             result = prime * result + ManufacturerCode;
             result = prime * result + OutgoingTransferSize;

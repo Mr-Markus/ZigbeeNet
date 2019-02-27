@@ -11,23 +11,23 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/**
- * Thermostat User Interface Configurationcluster implementation (Cluster ID 0x0204).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Thermostat User Interface Configurationcluster implementation (Cluster ID 0x0204).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclThermostatUserInterfaceConfigurationCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0204;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Thermostat User Interface Configuration";
 
        // Attribute initialisation
@@ -38,11 +38,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Thermostat User Interface Configuration cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Thermostat User Interface Configuration cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclThermostatUserInterfaceConfigurationCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

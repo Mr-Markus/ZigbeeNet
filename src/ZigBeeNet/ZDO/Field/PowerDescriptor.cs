@@ -7,81 +7,81 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Field
 {
-    /**
-    * The node power descriptor gives a dynamic indication of the power status of the
-    * node and is mandatory for each node. There shall be only one node power
-    * descriptor in a node.
-    */
+    /// <summary>
+    /// The node power descriptor gives a dynamic indication of the power status of the
+    /// node and is mandatory for each node. There shall be only one node power
+    /// descriptor in a node.
+    /// </summary>
     public class PowerDescriptor
     {
         public enum PowerSourceType
         {
-            /**
-             * Mains power - continuous
-             */
+            /// <summary>
+             /// Mains power - continuous
+             /// </summary>
             MAINS,
-            /**
-             * Rechargable battery
-             */
+            /// <summary>
+             /// Rechargable battery
+             /// </summary>
             RECHARGABLE_BATTERY,
-            /**
-             * Disposable battery
-             */
+            /// <summary>
+             /// Disposable battery
+             /// </summary>
             DISPOSABLE_BATTERY,
-            /**
-             * Default for unknown
-             */
+            /// <summary>
+             /// Default for unknown
+             /// </summary>
             UNKNOWN
         }
 
         public enum PowerLevelType
         {
-            /**
-             * Power level is critical - battery should be changed immediately
-             */
+            /// <summary>
+             /// Power level is critical - battery should be changed immediately
+             /// </summary>
             CRITICAL,
-            /**
-             * Power is low (below 33%)
-             */
+            /// <summary>
+             /// Power is low (below 33%)
+             /// </summary>
             LOW,
-            /**
-             * Power is medium (33% to 66%)
-             */
+            /// <summary>
+             /// Power is medium (33% to 66%)
+             /// </summary>
             MEDIUM,
-            /**
-             * Power is full (above 66%)
-             */
+            /// <summary>
+             /// Power is full (above 66%)
+             /// </summary>
             FULL,
-            /**
-             * Default for unknown
-             */
+            /// <summary>
+             /// Default for unknown
+             /// </summary>
             UNKNOWN
         }
 
-        /**
-         * The current power mode field of the node power descriptor is four bits in length
-         * and specifies the current sleep/power-saving mode of the node.
-         */
+        /// <summary>
+         /// The current power mode field of the node power descriptor is four bits in length
+         /// and specifies the current sleep/power-saving mode of the node.
+         /// </summary>
         public enum CurrentPowerModeType
         {
-            /**
-             * Receiver synchronized with the receiver on when idle subfield
-             * of the node descriptor.
-             */
+            /// <summary>
+             /// Receiver synchronized with the receiver on when idle subfield
+             /// of the node descriptor.
+             /// </summary>
             RECEIVER_ON_IDLE,
-            /**
-             * Receiver comes on periodically as defined by the node
-             * power descriptor.
-             */
+            /// <summary>
+             /// Receiver comes on periodically as defined by the node
+             /// power descriptor.
+             /// </summary>
             RECEIVER_ON_PERIODICALLY,
-            /**
-             * Receiver comes on when stimulated, e.g. by a user pressing a
-             * button.
-             */
+            /// <summary>
+             /// Receiver comes on when stimulated, e.g. by a user pressing a
+             /// button.
+             /// </summary>
             RECEIVER_ON_STIMULATED,
-            /**
-             * Default for unknown
-             */
+            /// <summary>
+             /// Default for unknown
+             /// </summary>
             UNKNOWN
         }
 
@@ -95,13 +95,13 @@ namespace ZigBeeNet.ZDO.Field
             // Default constructor - does nothing
         }
 
-        /**
-         *
-         * @param currentPowerMode {@link CurrentPowerModeType}
-         * @param availablePowerSources {@link Set} of available {@link PowerSourceType}
-         * @param currentPowerSource {@linkPowerSourceType }
-         * @param powerLevel {@link PowerLevelType}
-         */
+        /// <summary>
+         ///
+         /// @param currentPowerMode {@link CurrentPowerModeType}
+         /// @param availablePowerSources {@link Set} of available {@link PowerSourceType}
+         /// @param currentPowerSource {@linkPowerSourceType }
+         /// @param powerLevel {@link PowerLevelType}
+         /// </summary>
         public PowerDescriptor(CurrentPowerModeType currentPowerMode, List<PowerSourceType> availablePowerSources, PowerSourceType currentPowerSource, PowerLevelType powerLevel)
         {
             this.CurrentPowerMode = currentPowerMode;
@@ -110,14 +110,14 @@ namespace ZigBeeNet.ZDO.Field
             this.PowerLevel = powerLevel;
         }
 
-        /**
-         * Creates a PowerDescriptor
-         *
-         * @param currentPowerMode
-         * @param availablePowerSources
-         * @param currentPowerSource
-         * @param powerLevel
-         */
+        /// <summary>
+         /// Creates a PowerDescriptor
+         ///
+         /// @param currentPowerMode
+         /// @param availablePowerSources
+         /// @param currentPowerSource
+         /// @param powerLevel
+         /// </summary>
         public PowerDescriptor(int currentPowerMode, int availablePowerSources, int currentPowerSource, int powerLevel)
         {
             setCurrentPowerMode(currentPowerMode);
@@ -184,11 +184,11 @@ namespace ZigBeeNet.ZDO.Field
             }
         }
 
-        /**
-         * Sets the current power mode for the descriptor
-         *
-         * @param currentPowerMode the {@link CurrentPowerModeType}
-         */
+        /// <summary>
+         /// Sets the current power mode for the descriptor
+         ///
+         /// @param currentPowerMode the {@link CurrentPowerModeType}
+         /// </summary>
         public void setCurrentPowerMode(int currentPowerMode)
         {
             switch (currentPowerMode)
@@ -208,11 +208,11 @@ namespace ZigBeeNet.ZDO.Field
             }
         }
 
-        /**
-         * Serialise the contents of the structure.
-         *
-         * @param serializer the {@link ZclFieldSerializer} used to serialize
-         */
+        /// <summary>
+         /// Serialise the contents of the structure.
+         ///
+         /// @param serializer the {@link ZclFieldSerializer} used to serialize
+         /// </summary>
         public byte[] Serialize(ZclFieldSerializer serializer)
         {
             // Serialize the fields
@@ -220,11 +220,11 @@ namespace ZigBeeNet.ZDO.Field
             return serializer.Payload;
         }
 
-        /**
-         * Deserialise the contents of the structure.
-         *
-         * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
-         */
+        /// <summary>
+         /// Deserialise the contents of the structure.
+         ///
+         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
@@ -242,9 +242,9 @@ namespace ZigBeeNet.ZDO.Field
             int prime = 31;
             int result = 1;
             result = prime * result + ((AvailablePowerSources == null) ? 0 : AvailablePowerSources.GetHashCode());
-            result = prime * result + /*((CurrentPowerMode == null) ? 0 :*/ CurrentPowerMode.GetHashCode();
-            result = prime * result + /*((CurrentPowerSource == null) ? 0 :*/ CurrentPowerSource.GetHashCode();
-            result = prime * result + /*((PowerLevel == null) ? 0 :*/ PowerLevel.GetHashCode();
+            result = prime * CurrentPowerMode.GetHashCode();
+            result = prime * CurrentPowerSource.GetHashCode();
+            result = prime * PowerLevel.GetHashCode();
             return result;
         }
 

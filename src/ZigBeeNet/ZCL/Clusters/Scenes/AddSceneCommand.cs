@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/**
- * Add Scene Command value object class.
- *
- * Cluster: Scenes. Command is sentTO the server.
- * This command is a specific command used for the Scenes cluster.
- *
- * The Add Scene command shall be addressed to a single device (not a group). *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Add Scene Command value object class.
+ ///
+ /// Cluster: Scenes. Command is sentTO the server.
+ /// This command is a specific command used for the Scenes cluster.
+ ///
+ /// The Add Scene command shall be addressed to a single device (not a group). ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class AddSceneCommand : ZclCommand
        {
-           /**
-           * Group ID command message field.
-           */
+           /// <summary>
+           /// Group ID command message field.
+           /// </summary>
            public ushort GroupID { get; set; }
 
-           /**
-           * Scene ID command message field.
-           */
+           /// <summary>
+           /// Scene ID command message field.
+           /// </summary>
            public byte SceneID { get; set; }
 
-           /**
-           * Transition time command message field.
-           */
+           /// <summary>
+           /// Transition time command message field.
+           /// </summary>
            public ushort TransitionTime { get; set; }
 
-           /**
-           * Scene Name command message field.
-           */
+           /// <summary>
+           /// Scene Name command message field.
+           /// </summary>
            public string SceneName { get; set; }
 
-           /**
-           * Extension field sets command message field.
-           */
+           /// <summary>
+           /// Extension field sets command message field.
+           /// </summary>
            public List<ExtensionFieldSet> ExtensionFieldSets { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public AddSceneCommand()
            {
                GenericCommand = false;

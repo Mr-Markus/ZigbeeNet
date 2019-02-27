@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASZone;
 
-/**
- * Zone Status Change Notification Command value object class.
- *
- * Cluster: IAS Zone. Command is sentFROM the server.
- * This command is a specific command used for the IAS Zone cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Zone Status Change Notification Command value object class.
+ ///
+ /// Cluster: IAS Zone. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS Zone cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {
        public class ZoneStatusChangeNotificationCommand : ZclCommand
        {
-           /**
-           * Zone Status command message field.
-           */
+           /// <summary>
+           /// Zone Status command message field.
+           /// </summary>
            public ushort ZoneStatus { get; set; }
 
-           /**
-           * Extended Status command message field.
-           */
+           /// <summary>
+           /// Extended Status command message field.
+           /// </summary>
            public byte ExtendedStatus { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ZoneStatusChangeNotificationCommand()
            {
                GenericCommand = false;

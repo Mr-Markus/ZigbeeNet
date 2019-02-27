@@ -6,39 +6,39 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Device Announce value object class.
-    * 
-    * The Device_annce is provided to enable ZigBee devices on the network to notify
-    * other ZigBee devices that the device has joined or re-joined the network,
-    * identifying the device's 64-bit IEEE address and new 16-bit NWK address, and
-    * informing the Remote Devices of the capability of the ZigBee device. This
-    * command shall be invoked for all ZigBee end devices upon join or rejoin. This
-    * command may also be invoked by ZigBee routers upon join or rejoin as part of
-    * NWK address conflict resolution. The destination addressing on this primitive is
-    * broadcast to all devices for which macRxOnWhenIdle = TRUE.
-    * 
-    */
+    /// <summary>
+    /// Device Announce value object class.
+    /// 
+    /// The Device_annce is provided to enable ZigBee devices on the network to notify
+    /// other ZigBee devices that the device has joined or re-joined the network,
+    /// identifying the device's 64-bit IEEE address and new 16-bit NWK address, and
+    /// informing the Remote Devices of the capability of the ZigBee device. This
+    /// command shall be invoked for all ZigBee end devices upon join or rejoin. This
+    /// command may also be invoked by ZigBee routers upon join or rejoin as part of
+    /// NWK address conflict resolution. The destination addressing on this primitive is
+    /// broadcast to all devices for which macRxOnWhenIdle = TRUE.
+    /// 
+    /// </summary>
     public class DeviceAnnounce : ZdoResponse
     {
-        /**
-        * NWKAddrOfInterest command message field.
-        */
+        /// <summary>
+        /// NWKAddrOfInterest command message field.
+        /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-        * IEEEAddr command message field.
-        */
+        /// <summary>
+        /// IEEEAddr command message field.
+        /// </summary>
         public IeeeAddress IeeeAddr { get; set; }
 
-        /**
-        * Capability command message field.
-        */
+        /// <summary>
+        /// Capability command message field.
+        /// </summary>
         public int Capability { get; set; }
 
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public DeviceAnnounce()
         {
             ClusterId = 0x0013;

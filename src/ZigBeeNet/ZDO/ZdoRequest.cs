@@ -4,30 +4,30 @@ using System.Text;
 
 namespace ZigBeeNet.ZDO
 {
-    /**
-     * Abstract class for ZDO response commands.
-     */
+    /// <summary>
+     /// Abstract class for ZDO response commands.
+     /// </summary>
     public abstract class ZdoRequest : ZdoCommand
     {
-        /**
-         * Destination address;
-         */
+        /// <summary>
+         /// Destination address;
+         /// </summary>
         // protected int destinationAddress;
 
-        /**
-         * Gets destination address.
-         *
-         * @return the destination address
-         */
+        /// <summary>
+         /// Gets destination address.
+         ///
+         /// @return the destination address
+         /// </summary>
         // public int getDestinationAddress() {
         // return destinationAddress;
         // }
 
-        /**
-         * Set the destination address
-         *
-         * @param destinationAddress the destination address as {@link int}
-         */
+        /// <summary>
+         /// Set the destination address
+         ///
+         /// @param destinationAddress the destination address as {@link int}
+         /// </summary>
         // public void setDestinationAddress(int destinationAddress) {
         // this.destinationAddress = destinationAddress;
         // }

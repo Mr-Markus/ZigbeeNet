@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Discover Attributes Extended value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The Discover Attributes Extended command is generated when a remote device wishes to discover the * identifiers and types of the attributes on a device which are supported within the cluster to which this * command is directed, including whether the attribute is readable, writeable or reportable. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Discover Attributes Extended value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The Discover Attributes Extended command is generated when a remote device wishes to discover the /// identifiers and types of the attributes on a device which are supported within the cluster to which this /// command is directed, including whether the attribute is readable, writeable or reportable. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverAttributesExtended : ZclCommand
        {
-           /**
-           * Start attribute identifier command message field.
-           */
+           /// <summary>
+           /// Start attribute identifier command message field.
+           /// </summary>
            public ushort StartAttributeIdentifier { get; set; }
 
-           /**
-           * Maximum attribute identifiers command message field.
-           */
+           /// <summary>
+           /// Maximum attribute identifiers command message field.
+           /// </summary>
            public byte MaximumAttributeIdentifiers { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public DiscoverAttributesExtended()
            {
                GenericCommand = true;

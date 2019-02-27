@@ -12,53 +12,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 
-/**
- * Level Controlcluster implementation (Cluster ID 0x0008).
- *
- * This cluster provides an interface for controlling a characteristic of a device that * can be set to a level, for example the brightness of a light, the degree of closure of * a door, or the power output of a heater. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Level Controlcluster implementation (Cluster ID 0x0008).
+ ///
+ /// This cluster provides an interface for controlling a characteristic of a device that /// can be set to a level, for example the brightness of a light, the degree of closure of /// a door, or the power output of a heater. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclLevelControlCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0008;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Level Control";
 
-       /* Attribute constants */
-       /**
-        * The CurrentLevel attribute represents the current level of this device. The        * meaning of 'level' is device dependent. Value is between 0 and 254.       */
+       //// Attribute constants /// </summary>
+       /// <summary>
+        /// The CurrentLevel attribute represents the current level of this device. The        /// meaning of 'level' is device dependent. Value is between 0 and 254.       /// </summary>
        public static ushort ATTR_CURRENTLEVEL = 0x0000;
 
-       /**
-        * The RemainingTime attribute represents the time remaining until the current        * command is complete - it is specified in 1/10ths of a second.       */
+       /// <summary>
+        /// The RemainingTime attribute represents the time remaining until the current        /// command is complete - it is specified in 1/10ths of a second.       /// </summary>
        public static ushort ATTR_REMAININGTIME = 0x0001;
 
-       /**
-        * The OnOffTransitionTime attribute represents the time taken to move to or from        * the target level when On of Off commands are received by an On/Off cluster on        * the same endpoint. It is specified in 1/10ths of a second.        * <p>        * The actual time taken should be as close to OnOffTransitionTime as the device is        * able. N.B. If the device is not able to move at a variable rate, the        * OnOffTransitionTime attribute should not be implemented.       */
+       /// <summary>
+        /// The OnOffTransitionTime attribute represents the time taken to move to or from        /// the target level when On of Off commands are received by an On/Off cluster on        /// the same endpoint. It is specified in 1/10ths of a second.        /// <p>        /// The actual time taken should be as close to OnOffTransitionTime as the device is        /// able. N.B. If the device is not able to move at a variable rate, the        /// OnOffTransitionTime attribute should not be implemented.       /// </summary>
        public static ushort ATTR_ONOFFTRANSITIONTIME = 0x0010;
 
-       /**
-        * The OnLevel attribute determines the value that the CurrentLevel attribute is set to        * when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If        * the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       */
+       /// <summary>
+        /// The OnLevel attribute determines the value that the CurrentLevel attribute is set to        /// when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If        /// the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       /// </summary>
        public static ushort ATTR_ONLEVEL = 0x0011;
 
-       /**
-        * The OnTransitionTime attribute represents the time taken to move the current level from the        * minimum level to the maximum level when an On command is received by an On/Off cluster on        * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,        * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       */
+       /// <summary>
+        /// The OnTransitionTime attribute represents the time taken to move the current level from the        /// minimum level to the maximum level when an On command is received by an On/Off cluster on        /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,        /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       /// </summary>
        public static ushort ATTR_ONTRANSITIONTIME = 0x0012;
 
-       /**
-        * The OffTransitionTime attribute represents the time taken to move the current level from the        * maximum level to the minimum level when an Off command is received by an On/Off cluster on        * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,        * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       */
+       /// <summary>
+        /// The OffTransitionTime attribute represents the time taken to move the current level from the        /// maximum level to the minimum level when an Off command is received by an On/Off cluster on        /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,        /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       /// </summary>
        public static ushort ATTR_OFFTRANSITIONTIME = 0x0013;
 
-       /**
-        * The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move        * command is received with a Rate parameter of 0xFF.       */
+       /// <summary>
+        /// The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move        /// command is received with a Rate parameter of 0xFF.       /// </summary>
        public static ushort ATTR_DEFAULTMOVERATE = 0x0014;
 
 
@@ -80,42 +80,42 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Level Control cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Level Control cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclLevelControlCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /**
-       * Get the CurrentLevel attribute [attribute ID0].
-       *
-       * The CurrentLevel attribute represents the current level of this device. The       * meaning of 'level' is device dependent. Value is between 0 and 254.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the CurrentLevel attribute [attribute ID0].
+       ///
+       /// The CurrentLevel attribute represents the current level of this device. The       /// meaning of 'level' is device dependent. Value is between 0 and 254.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetCurrentLevelAsync()
        {
            return Read(_attributes[ATTR_CURRENTLEVEL]);
        }
 
-       /**
-       * Synchronously Get the CurrentLevel attribute [attribute ID0].
-       *
-       * The CurrentLevel attribute represents the current level of this device. The       * meaning of 'level' is device dependent. Value is between 0 and 254.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the CurrentLevel attribute [attribute ID0].
+       ///
+       /// The CurrentLevel attribute represents the current level of this device. The       /// meaning of 'level' is device dependent. Value is between 0 and 254.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetCurrentLevel(long refreshPeriod)
        {
            if (_attributes[ATTR_CURRENTLEVEL].IsLastValueCurrent(refreshPeriod))
@@ -127,50 +127,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the CurrentLevel attribute [attribute ID0].
-       *
-       * The CurrentLevel attribute represents the current level of this device. The       * meaning of 'level' is device dependent. Value is between 0 and 254.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the CurrentLevel attribute [attribute ID0].
+       ///
+       /// The CurrentLevel attribute represents the current level of this device. The       /// meaning of 'level' is device dependent. Value is between 0 and 254.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetCurrentLevelReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_CURRENTLEVEL], minInterval, maxInterval, reportableChange);
        }
 
 
-       /**
-       * Get the RemainingTime attribute [attribute ID1].
-       *
-       * The RemainingTime attribute represents the time remaining until the current       * command is complete - it is specified in 1/10ths of a second.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the RemainingTime attribute [attribute ID1].
+       ///
+       /// The RemainingTime attribute represents the time remaining until the current       /// command is complete - it is specified in 1/10ths of a second.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetRemainingTimeAsync()
        {
            return Read(_attributes[ATTR_REMAININGTIME]);
        }
 
-       /**
-       * Synchronously Get the RemainingTime attribute [attribute ID1].
-       *
-       * The RemainingTime attribute represents the time remaining until the current       * command is complete - it is specified in 1/10ths of a second.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the RemainingTime attribute [attribute ID1].
+       ///
+       /// The RemainingTime attribute represents the time remaining until the current       /// command is complete - it is specified in 1/10ths of a second.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetRemainingTime(long refreshPeriod)
        {
            if (_attributes[ATTR_REMAININGTIME].IsLastValueCurrent(refreshPeriod))
@@ -182,48 +182,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OnOffTransitionTime attribute [attribute ID16].
-       *
-       * The OnOffTransitionTime attribute represents the time taken to move to or from       * the target level when On of Off commands are received by an On/Off cluster on       * the same endpoint. It is specified in 1/10ths of a second.       * <p>       * The actual time taken should be as close to OnOffTransitionTime as the device is       * able. N.B. If the device is not able to move at a variable rate, the       * OnOffTransitionTime attribute should not be implemented.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param onOffTransitionTime the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OnOffTransitionTime attribute [attribute ID16].
+       ///
+       /// The OnOffTransitionTime attribute represents the time taken to move to or from       /// the target level when On of Off commands are received by an On/Off cluster on       /// the same endpoint. It is specified in 1/10ths of a second.       /// <p>       /// The actual time taken should be as close to OnOffTransitionTime as the device is       /// able. N.B. If the device is not able to move at a variable rate, the       /// OnOffTransitionTime attribute should not be implemented.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param onOffTransitionTime the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOnOffTransitionTime(object value)
        {
            return Write(_attributes[ATTR_ONOFFTRANSITIONTIME], value);
        }
 
 
-       /**
-       * Get the OnOffTransitionTime attribute [attribute ID16].
-       *
-       * The OnOffTransitionTime attribute represents the time taken to move to or from       * the target level when On of Off commands are received by an On/Off cluster on       * the same endpoint. It is specified in 1/10ths of a second.       * <p>       * The actual time taken should be as close to OnOffTransitionTime as the device is       * able. N.B. If the device is not able to move at a variable rate, the       * OnOffTransitionTime attribute should not be implemented.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OnOffTransitionTime attribute [attribute ID16].
+       ///
+       /// The OnOffTransitionTime attribute represents the time taken to move to or from       /// the target level when On of Off commands are received by an On/Off cluster on       /// the same endpoint. It is specified in 1/10ths of a second.       /// <p>       /// The actual time taken should be as close to OnOffTransitionTime as the device is       /// able. N.B. If the device is not able to move at a variable rate, the       /// OnOffTransitionTime attribute should not be implemented.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOnOffTransitionTimeAsync()
        {
            return Read(_attributes[ATTR_ONOFFTRANSITIONTIME]);
        }
 
-       /**
-       * Synchronously Get the OnOffTransitionTime attribute [attribute ID16].
-       *
-       * The OnOffTransitionTime attribute represents the time taken to move to or from       * the target level when On of Off commands are received by an On/Off cluster on       * the same endpoint. It is specified in 1/10ths of a second.       * <p>       * The actual time taken should be as close to OnOffTransitionTime as the device is       * able. N.B. If the device is not able to move at a variable rate, the       * OnOffTransitionTime attribute should not be implemented.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OnOffTransitionTime attribute [attribute ID16].
+       ///
+       /// The OnOffTransitionTime attribute represents the time taken to move to or from       /// the target level when On of Off commands are received by an On/Off cluster on       /// the same endpoint. It is specified in 1/10ths of a second.       /// <p>       /// The actual time taken should be as close to OnOffTransitionTime as the device is       /// able. N.B. If the device is not able to move at a variable rate, the       /// OnOffTransitionTime attribute should not be implemented.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOnOffTransitionTime(long refreshPeriod)
        {
            if (_attributes[ATTR_ONOFFTRANSITIONTIME].IsLastValueCurrent(refreshPeriod))
@@ -235,48 +235,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OnLevel attribute [attribute ID17].
-       *
-       * The OnLevel attribute determines the value that the CurrentLevel attribute is set to       * when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       * the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param onLevel the byte attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OnLevel attribute [attribute ID17].
+       ///
+       /// The OnLevel attribute determines the value that the CurrentLevel attribute is set to       /// when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       /// the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param onLevel the byte attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOnLevel(object value)
        {
            return Write(_attributes[ATTR_ONLEVEL], value);
        }
 
 
-       /**
-       * Get the OnLevel attribute [attribute ID17].
-       *
-       * The OnLevel attribute determines the value that the CurrentLevel attribute is set to       * when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       * the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OnLevel attribute [attribute ID17].
+       ///
+       /// The OnLevel attribute determines the value that the CurrentLevel attribute is set to       /// when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       /// the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOnLevelAsync()
        {
            return Read(_attributes[ATTR_ONLEVEL]);
        }
 
-       /**
-       * Synchronously Get the OnLevel attribute [attribute ID17].
-       *
-       * The OnLevel attribute determines the value that the CurrentLevel attribute is set to       * when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       * the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OnLevel attribute [attribute ID17].
+       ///
+       /// The OnLevel attribute determines the value that the CurrentLevel attribute is set to       /// when the OnOff attribute of an On/Off cluster on the same endpoint is set to On. If       /// the OnLevel attribute is not implemented, or is set to 0xff, it has no effect.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetOnLevel(long refreshPeriod)
        {
            if (_attributes[ATTR_ONLEVEL].IsLastValueCurrent(refreshPeriod))
@@ -288,48 +288,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OnTransitionTime attribute [attribute ID18].
-       *
-       * The OnTransitionTime attribute represents the time taken to move the current level from the       * minimum level to the maximum level when an On command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param onTransitionTime the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OnTransitionTime attribute [attribute ID18].
+       ///
+       /// The OnTransitionTime attribute represents the time taken to move the current level from the       /// minimum level to the maximum level when an On command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param onTransitionTime the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOnTransitionTime(object value)
        {
            return Write(_attributes[ATTR_ONTRANSITIONTIME], value);
        }
 
 
-       /**
-       * Get the OnTransitionTime attribute [attribute ID18].
-       *
-       * The OnTransitionTime attribute represents the time taken to move the current level from the       * minimum level to the maximum level when an On command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OnTransitionTime attribute [attribute ID18].
+       ///
+       /// The OnTransitionTime attribute represents the time taken to move the current level from the       /// minimum level to the maximum level when an On command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOnTransitionTimeAsync()
        {
            return Read(_attributes[ATTR_ONTRANSITIONTIME]);
        }
 
-       /**
-       * Synchronously Get the OnTransitionTime attribute [attribute ID18].
-       *
-       * The OnTransitionTime attribute represents the time taken to move the current level from the       * minimum level to the maximum level when an On command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OnTransitionTime attribute [attribute ID18].
+       ///
+       /// The OnTransitionTime attribute represents the time taken to move the current level from the       /// minimum level to the maximum level when an On command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOnTransitionTime(long refreshPeriod)
        {
            if (_attributes[ATTR_ONTRANSITIONTIME].IsLastValueCurrent(refreshPeriod))
@@ -341,48 +341,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OffTransitionTime attribute [attribute ID19].
-       *
-       * The OffTransitionTime attribute represents the time taken to move the current level from the       * maximum level to the minimum level when an Off command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param offTransitionTime the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OffTransitionTime attribute [attribute ID19].
+       ///
+       /// The OffTransitionTime attribute represents the time taken to move the current level from the       /// maximum level to the minimum level when an Off command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param offTransitionTime the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOffTransitionTime(object value)
        {
            return Write(_attributes[ATTR_OFFTRANSITIONTIME], value);
        }
 
 
-       /**
-       * Get the OffTransitionTime attribute [attribute ID19].
-       *
-       * The OffTransitionTime attribute represents the time taken to move the current level from the       * maximum level to the minimum level when an Off command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OffTransitionTime attribute [attribute ID19].
+       ///
+       /// The OffTransitionTime attribute represents the time taken to move the current level from the       /// maximum level to the minimum level when an Off command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOffTransitionTimeAsync()
        {
            return Read(_attributes[ATTR_OFFTRANSITIONTIME]);
        }
 
-       /**
-       * Synchronously Get the OffTransitionTime attribute [attribute ID19].
-       *
-       * The OffTransitionTime attribute represents the time taken to move the current level from the       * maximum level to the minimum level when an Off command is received by an On/Off cluster on       * the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       * or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OffTransitionTime attribute [attribute ID19].
+       ///
+       /// The OffTransitionTime attribute represents the time taken to move the current level from the       /// maximum level to the minimum level when an Off command is received by an On/Off cluster on       /// the same endpoint.  It is specified in 10ths of a second.  If this command is not implemented,       /// or contains a value of 0xffff, the OnOffTransitionTime will be used instead.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOffTransitionTime(long refreshPeriod)
        {
            if (_attributes[ATTR_OFFTRANSITIONTIME].IsLastValueCurrent(refreshPeriod))
@@ -394,48 +394,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the DefaultMoveRate attribute [attribute ID20].
-       *
-       * The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       * command is received with a Rate parameter of 0xFF.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param defaultMoveRate the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the DefaultMoveRate attribute [attribute ID20].
+       ///
+       /// The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       /// command is received with a Rate parameter of 0xFF.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param defaultMoveRate the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetDefaultMoveRate(object value)
        {
            return Write(_attributes[ATTR_DEFAULTMOVERATE], value);
        }
 
 
-       /**
-       * Get the DefaultMoveRate attribute [attribute ID20].
-       *
-       * The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       * command is received with a Rate parameter of 0xFF.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the DefaultMoveRate attribute [attribute ID20].
+       ///
+       /// The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       /// command is received with a Rate parameter of 0xFF.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetDefaultMoveRateAsync()
        {
            return Read(_attributes[ATTR_DEFAULTMOVERATE]);
        }
 
-       /**
-       * Synchronously Get the DefaultMoveRate attribute [attribute ID20].
-       *
-       * The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       * command is received with a Rate parameter of 0xFF.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the DefaultMoveRate attribute [attribute ID20].
+       ///
+       /// The DefaultMoveRate attribute determines the movement rate, in units per second, when a Move       /// command is received with a Rate parameter of 0xFF.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetDefaultMoveRate(long refreshPeriod)
        {
            if (_attributes[ATTR_DEFAULTMOVERATE].IsLastValueCurrent(refreshPeriod))
@@ -447,14 +447,14 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * The Move to Level Command
-       *
-       * On receipt of this command, a device SHALL move from its current level to the       * value given in the Level field. The meaning of ‘level’ is device dependent –e.g.,       * for a light it MAY mean brightness level.The movement SHALL be as continuous as       * technically practical, i.e., not a step function, and the time taken to move to       * the new level SHALL be equal to the value of the Transition time field, in tenths       * of a second, or as close to this as the device is able.If the Transition time field       * takes the value 0xffff then the time taken to move to the new level SHALL instead       * be determined by the OnOffTransitionTimeattribute. If OnOffTransitionTime, which is       * an optional attribute, is not present, the device SHALL move to its new level as fast       * as it is able.       *
-       * @param level {@link byte} Level
-       * @param transitionTime {@link ushort} Transition time
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Move to Level Command
+       ///
+       /// On receipt of this command, a device SHALL move from its current level to the       /// value given in the Level field. The meaning of ‘level’ is device dependent –e.g.,       /// for a light it MAY mean brightness level.The movement SHALL be as continuous as       /// technically practical, i.e., not a step function, and the time taken to move to       /// the new level SHALL be equal to the value of the Transition time field, in tenths       /// of a second, or as close to this as the device is able.If the Transition time field       /// takes the value 0xffff then the time taken to move to the new level SHALL instead       /// be determined by the OnOffTransitionTimeattribute. If OnOffTransitionTime, which is       /// an optional attribute, is not present, the device SHALL move to its new level as fast       /// as it is able.       ///
+       /// @param level {@link byte} Level
+       /// @param transitionTime {@link ushort} Transition time
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> MoveToLevelCommand(byte level, ushort transitionTime)
        {
            MoveToLevelCommand command = new MoveToLevelCommand();
@@ -466,13 +466,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Move Command
-       *
-       * @param moveMode {@link byte} Move mode
-       * @param rate {@link byte} Rate
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Move Command
+       ///
+       /// @param moveMode {@link byte} Move mode
+       /// @param rate {@link byte} Rate
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> MoveCommand(byte moveMode, byte rate)
        {
            MoveCommand command = new MoveCommand();
@@ -484,14 +484,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Step Command
-       *
-       * @param stepMode {@link byte} Step mode
-       * @param stepSize {@link byte} Step size
-       * @param transitionTime {@link ushort} Transition time
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Step Command
+       ///
+       /// @param stepMode {@link byte} Step mode
+       /// @param stepSize {@link byte} Step size
+       /// @param transitionTime {@link ushort} Transition time
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> StepCommand(byte stepMode, byte stepSize, ushort transitionTime)
        {
            StepCommand command = new StepCommand();
@@ -504,11 +504,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Stop Command
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Stop Command
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> StopCommand()
        {
            StopCommand command = new StopCommand();
@@ -516,13 +516,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Move to Level (with On/Off) Command
-       *
-       * @param level {@link byte} Level
-       * @param transitionTime {@link ushort} Transition time
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Move to Level (with On/Off) Command
+       ///
+       /// @param level {@link byte} Level
+       /// @param transitionTime {@link ushort} Transition time
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> MoveToLevelWithOnOffCommand(byte level, ushort transitionTime)
        {
            MoveToLevelWithOnOffCommand command = new MoveToLevelWithOnOffCommand();
@@ -534,13 +534,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Move (with On/Off) Command
-       *
-       * @param moveMode {@link byte} Move mode
-       * @param rate {@link byte} Rate
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Move (with On/Off) Command
+       ///
+       /// @param moveMode {@link byte} Move mode
+       /// @param rate {@link byte} Rate
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> MoveWithOnOffCommand(byte moveMode, byte rate)
        {
            MoveWithOnOffCommand command = new MoveWithOnOffCommand();
@@ -552,14 +552,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Step (with On/Off) Command
-       *
-       * @param stepMode {@link byte} Step mode
-       * @param stepSize {@link byte} Step size
-       * @param transitionTime {@link ushort} Transition time
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Step (with On/Off) Command
+       ///
+       /// @param stepMode {@link byte} Step mode
+       /// @param stepSize {@link byte} Step size
+       /// @param transitionTime {@link ushort} Transition time
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> StepWithOnOffCommand(byte stepMode, byte stepSize, ushort transitionTime)
        {
            StepWithOnOffCommand command = new StepWithOnOffCommand();
@@ -572,11 +572,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Stop 2 Command
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Stop 2 Command
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> Stop2Command()
        {
            Stop2Command command = new Stop2Command();

@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/**
- * Query Specific File Command value object class.
- *
- * Cluster: OTA Upgrade. Command is sentTO the server.
- * This command is a specific command used for the OTA Upgrade cluster.
- *
- * Client devices shall send a Query Specific File Request command to the server to request for a file that * is specific and unique to it. Such file could contain non-firmware data such as security credential * (needed for upgrading from Smart Energy 1.1 to Smart Energy 2.0), configuration or log. When the * device decides to send the Query Specific File Request command is manufacturer specific. However, * one example is during upgrading from SE 1.1 to 2.0 where the client may have already obtained new * SE 2.0 image and now needs new SE 2.0 security credential data. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Query Specific File Command value object class.
+ ///
+ /// Cluster: OTA Upgrade. Command is sentTO the server.
+ /// This command is a specific command used for the OTA Upgrade cluster.
+ ///
+ /// Client devices shall send a Query Specific File Request command to the server to request for a file that /// is specific and unique to it. Such file could contain non-firmware data such as security credential /// (needed for upgrading from Smart Energy 1.1 to Smart Energy 2.0), configuration or log. When the /// device decides to send the Query Specific File Request command is manufacturer specific. However, /// one example is during upgrading from SE 1.1 to 2.0 where the client may have already obtained new /// SE 2.0 image and now needs new SE 2.0 security credential data. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class QuerySpecificFileCommand : ZclCommand
        {
-           /**
-           * Request node address command message field.
-           */
+           /// <summary>
+           /// Request node address command message field.
+           /// </summary>
            public IeeeAddress RequestNodeAddress { get; set; }
 
-           /**
-           * Manufacturer code command message field.
-           */
+           /// <summary>
+           /// Manufacturer code command message field.
+           /// </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /**
-           * Image type command message field.
-           */
+           /// <summary>
+           /// Image type command message field.
+           /// </summary>
            public ushort ImageType { get; set; }
 
-           /**
-           * File Version command message field.
-           */
+           /// <summary>
+           /// File Version command message field.
+           /// </summary>
            public uint FileVersion { get; set; }
 
-           /**
-           * Zigbee Stack Version command message field.
-           */
+           /// <summary>
+           /// Zigbee Stack Version command message field.
+           /// </summary>
            public ushort ZigbeeStackVersion { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public QuerySpecificFileCommand()
            {
                GenericCommand = false;

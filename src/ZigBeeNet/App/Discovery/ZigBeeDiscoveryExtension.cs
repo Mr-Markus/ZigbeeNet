@@ -15,27 +15,27 @@ namespace ZigBeeNet.App.Discovery
 {
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {
-        /**
-         * The _logger.
-         */
+        /// <summary>
+         /// The _logger.
+         /// </summary>
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
 
-        /**
-         * The ZigBee network {@link ZigBeeNetworkDiscoverer}. The discover is
-         * responsible for monitoring the network for new devices and the initial
-         * interrogation of their capabilities.
-         */
+        /// <summary>
+         /// The ZigBee network {@link ZigBeeNetworkDiscoverer}. The discover is
+         /// responsible for monitoring the network for new devices and the initial
+         /// interrogation of their capabilities.
+         /// </summary>
         private ZigBeeNetworkDiscoverer _networkDiscoverer;
 
-        /**
-         *
-         */
+        /// <summary>
+         ///
+         /// </summary>
         private ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> nodeDiscovery = new ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
 
-        /**
-         * Refresh period for the mesh update - in seconds
-         */
+        /// <summary>
+         /// Refresh period for the mesh update - in seconds
+         /// </summary>
         private int _updatePeriod;
 
         private Task _futureTask = null;
@@ -90,12 +90,12 @@ namespace ZigBeeNet.App.Discovery
             _logger.Debug("DISCOVERY Extension: Shutdown");
         }
 
-        /**
-         * Sets the update period for the mesh update service. This is the number of seconds between
-         * subsequent mesh updates. Setting the period to 0 will disable mesh updates.
-         *
-         * @param updatePeriod number of seconds between mesh updates. Setting to 0 will stop updates.
-         */
+        /// <summary>
+         /// Sets the update period for the mesh update service. This is the number of seconds between
+         /// subsequent mesh updates. Setting the period to 0 will disable mesh updates.
+         ///
+         /// @param updatePeriod number of seconds between mesh updates. Setting to 0 will stop updates.
+         /// </summary>
         public void SetUpdatePeriod(int updatePeriod)
         {
             _updatePeriod = updatePeriod;
@@ -116,22 +116,22 @@ namespace ZigBeeNet.App.Discovery
             StartScheduler(updatePeriod);
         }
 
-        /**
-         * Gets the current period at which the mesh data is being updated (in seconds). A return value of 0 indicates that
-         * automatic updates are currently disabled.
-         *
-         * @return number of seconds between mesh updates. 0 indicates no automatic updates.
-         *
-         */
+        /// <summary>
+         /// Gets the current period at which the mesh data is being updated (in seconds). A return value of 0 indicates that
+         /// automatic updates are currently disabled.
+         ///
+         /// @return number of seconds between mesh updates. 0 indicates no automatic updates.
+         ///
+         /// </summary>
         public int GetUpdatePeriod()
         {
             return _updatePeriod;
         }
 
-        /**
-         * Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
-         * the timer is restarted from the time of calling this method.
-         */
+        /// <summary>
+         /// Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
+         /// the timer is restarted from the time of calling this method.
+         /// </summary>
         public void Refresh()
         {
             _logger.Debug("DISCOVERY Extension: Start mesh update task with interval of {UpdatePeriod} seconds", _updatePeriod);
@@ -177,22 +177,22 @@ namespace ZigBeeNet.App.Discovery
             }
         }
 
-        /**
-         * Starts a discovery on a node.
-         *
-         * @param nodeAddress the network address of the node to discover
-         */
+        /// <summary>
+         /// Starts a discovery on a node.
+         ///
+         /// @param nodeAddress the network address of the node to discover
+         /// </summary>
         public void RediscoverNode(ushort nodeAddress)
         {
             _networkDiscoverer.RediscoverNode(nodeAddress);
         }
 
-        /**
-         * Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
-         * the response to trigger a full discovery.
-         *
-         * @param ieeeAddress the {@link IeeeAddress} of the node to discover
-         */
+        /// <summary>
+         /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
+         /// the response to trigger a full discovery.
+         ///
+         /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
+         /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
             _networkDiscoverer.RediscoverNode(ieeeAddress);

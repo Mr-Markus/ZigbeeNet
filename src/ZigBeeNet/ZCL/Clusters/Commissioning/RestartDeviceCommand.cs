@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Commissioning;
 
-/**
- * Restart Device Command value object class.
- *
- * Cluster: Commissioning. Command is sentTO the server.
- * This command is a specific command used for the Commissioning cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Restart Device Command value object class.
+ ///
+ /// Cluster: Commissioning. Command is sentTO the server.
+ /// This command is a specific command used for the Commissioning cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Commissioning
 {
        public class RestartDeviceCommand : ZclCommand
        {
-           /**
-           * Option command message field.
-           */
+           /// <summary>
+           /// Option command message field.
+           /// </summary>
            public byte Option { get; set; }
 
-           /**
-           * Delay command message field.
-           */
+           /// <summary>
+           /// Delay command message field.
+           /// </summary>
            public byte Delay { get; set; }
 
-           /**
-           * Jitter command message field.
-           */
+           /// <summary>
+           /// Jitter command message field.
+           /// </summary>
            public byte Jitter { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RestartDeviceCommand()
            {
                GenericCommand = false;

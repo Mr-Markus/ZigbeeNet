@@ -6,34 +6,34 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Management Network Discovery value object class.
-    * 
-    * The Mgmt_NWK_Disc_req is generated from a Local Device requesting that the
-    * Remote Device execute a Scan to report back networks in the vicinity of the Local
-    * Device. The destination addressing on this command shall be unicast.
-    * 
-    */
+    /// <summary>
+    /// Management Network Discovery value object class.
+    /// 
+    /// The Mgmt_NWK_Disc_req is generated from a Local Device requesting that the
+    /// Remote Device execute a Scan to report back networks in the vicinity of the Local
+    /// Device. The destination addressing on this command shall be unicast.
+    /// 
+    /// </summary>
     public class ManagementNetworkDiscovery : ZdoResponse
     {
-        /**
-        * ScanChannels command message field.
-        */
+        /// <summary>
+        /// ScanChannels command message field.
+        /// </summary>
         public int ScanChannels { get; set; }
 
-        /**
-        * ScanDuration command message field.
-        */
+        /// <summary>
+        /// ScanDuration command message field.
+        /// </summary>
         public byte ScanDuration { get; set; }
 
-        /**
-        * StartIndex command message field.
-        */
+        /// <summary>
+        /// StartIndex command message field.
+        /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ManagementNetworkDiscovery()
         {
             ClusterId = 0x0030;

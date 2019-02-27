@@ -6,34 +6,34 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.DAO
 {
-    /**
- * This class provides a clean class to hold a data object for serialisation of a {@link ZigBeeNode}
- */
+    /// <summary>
+ /// This class provides a clean class to hold a data object for serialisation of a {@link ZigBeeNode}
+ /// </summary>
     public class ZigBeeNodeDao
     {
-        /**
-         * The extended {@link IeeeAddress} for the node
-         */
+        /// <summary>
+         /// The extended {@link IeeeAddress} for the node
+         /// </summary>
         public string IeeeAddress { get; set; }
 
-        /**
-         * The 16 bit network address for the node
-         */
+        /// <summary>
+         /// The 16 bit network address for the node
+         /// </summary>
         public ushort NetworkAddress { get; set; }
 
-        /**
-         * The {@link NodeDescriptor} for the node
-         */
+        /// <summary>
+         /// The {@link NodeDescriptor} for the node
+         /// </summary>
         public NodeDescriptor NodeDescriptor { get; set; }
 
-        /**
-         * The {@link PowerDescriptor} for the node
-         */
+        /// <summary>
+         /// The {@link PowerDescriptor} for the node
+         /// </summary>
         public PowerDescriptor PowerDescriptor { get; set; }
 
-        /**
-         * The list of endpoints for this node
-         */
+        /// <summary>
+         /// The list of endpoints for this node
+         /// </summary>
         public List<ZigBeeEndpointDao> Endpoints { get; set; }
 
         public List<BindingTable> BindingTable { get; set; }

@@ -6,45 +6,45 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Network Update Request value object class.
-    * 
-    * This command is provided to allow updating of network configuration parameters
-    * or to request information from devices on network conditions in the local
-    * operating environment. The destination addressing on this primitive shall be
-    * unicast or broadcast to all devices for which macRxOnWhenIdle = TRUE.
-    * 
-    */
+    /// <summary>
+    /// Network Update Request value object class.
+    /// 
+    /// This command is provided to allow updating of network configuration parameters
+    /// or to request information from devices on network conditions in the local
+    /// operating environment. The destination addressing on this primitive shall be
+    /// unicast or broadcast to all devices for which macRxOnWhenIdle = TRUE.
+    /// 
+    /// </summary>
     public class NetworkUpdateRequest : ZdoRequest
     {
-        /**
-        * ScanChannels command message field.
-        */
+        /// <summary>
+        /// ScanChannels command message field.
+        /// </summary>
         public int ScanChannels { get; set; }
 
-        /**
-        * ScanDuration command message field.
-        */
+        /// <summary>
+        /// ScanDuration command message field.
+        /// </summary>
         public byte ScanDuration { get; set; }
 
-        /**
-        * ScanCount command message field.
-        */
+        /// <summary>
+        /// ScanCount command message field.
+        /// </summary>
         public byte ScanCount { get; set; }
 
-        /**
-        * nwkUpdateId command message field.
-        */
+        /// <summary>
+        /// nwkUpdateId command message field.
+        /// </summary>
         public byte NwkUpdateId { get; set; }
 
-        /**
-        * nwkManagerAddr command message field.
-        */
+        /// <summary>
+        /// nwkManagerAddr command message field.
+        /// </summary>
         public ushort NwkManagerAddr { get; set; }
 
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public NetworkUpdateRequest()
         {
             ClusterId = 0x0038;

@@ -7,9 +7,9 @@ namespace ZigBeeNet
     public class ZigBeeGroupAddress : IZigBeeAddress, IComparable<IZigBeeAddress>
     {
 
-        /**
-         * The group ID.
-         */
+        /// <summary>
+         /// The group ID.
+         /// </summary>
         public ushort GroupId
         {
             get
@@ -24,37 +24,37 @@ namespace ZigBeeNet
 
         public ushort Address { get; set; }
 
-        /**
-         * The group label.
-         */
+        /// <summary>
+         /// The group label.
+         /// </summary>
         private string Label { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ZigBeeGroupAddress()
         {
         }
 
-        /**
-         * Constructor which sets group ID.
-         *
-         * @param groupId
-         *            the group ID
-         */
+        /// <summary>
+         /// Constructor which sets group ID.
+         ///
+         /// @param groupId
+         ///            the group ID
+         /// </summary>
         public ZigBeeGroupAddress(ushort groupId)
         {
             GroupId = groupId;
         }
 
-        /**
-         * Constructor which sets group ID and label.
-         *
-         * @param groupId
-         *            the group ID
-         * @param label
-         *            the group label
-         */
+        /// <summary>
+         /// Constructor which sets group ID and label.
+         ///
+         /// @param groupId
+         ///            the group ID
+         /// @param label
+         ///            the group label
+         /// </summary>
         public ZigBeeGroupAddress(ushort groupId, string label)
         {
             GroupId = groupId;

@@ -31,11 +31,11 @@ namespace ZigBeeNet.ZDO.Field
             VALIDATION_UNDERWAY
         }
 
-        /**
-         * Deserialise the contents of the structure.
-         *
-         * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
-         */
+        /// <summary>
+         /// Deserialise the contents of the structure.
+         ///
+         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
@@ -75,12 +75,12 @@ namespace ZigBeeNet.ZDO.Field
         {
             int prime = 31;
             int result = 1;
-            result = prime * result + /*((DestinationAddress == null) ? 0 :*/ DestinationAddress.GetHashCode();
+            result = prime * result + DestinationAddress.GetHashCode();
             result = prime * result + (IsManyToOne ? 1231 : 1237);
             result = prime * result + (IsMemoryConstrained ? 1231 : 1237);
-            result = prime * result + /*((IsNextHopAddress == null) ? 0 : */ IsNextHopAddress.GetHashCode();
+            result = prime * result + IsNextHopAddress.GetHashCode();
             result = prime * result + (IsRouteRecordRequired ? 1231 : 1237);
-            result = prime * result + /*((Status == null) ? 0 :*/ Status.GetHashCode();
+            result = prime * result + Status.GetHashCode();
             return result;
         }
 
@@ -108,7 +108,7 @@ namespace ZigBeeNet.ZDO.Field
             //        return false;
             //    }
             //}
-            /*else*/
+            ////else/// </summary>
             if (!DestinationAddress.Equals(other.DestinationAddress))
             {
                 return false;

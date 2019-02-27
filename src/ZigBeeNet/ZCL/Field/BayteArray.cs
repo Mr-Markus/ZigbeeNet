@@ -7,18 +7,18 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class ByteArray
     {
-        /**
-         * The base byte array.
-         */
+        /// <summary>
+         /// The base byte array.
+         /// </summary>
         private byte[] _value;
 
-        /**
-         * Constructor taking part of an existing integer array
-         *
-         * @param payload the existing integer array
-         * @param from the start offset of the array (inclusive)
-         * @param to the end offset of the array (exclusive)
-         */
+        /// <summary>
+         /// Constructor taking part of an existing integer array
+         ///
+         /// @param payload the existing integer array
+         /// @param from the start offset of the array (inclusive)
+         /// @param to the end offset of the array (exclusive)
+         /// </summary>
         public ByteArray(byte[] payload, int start, int finish)
         {
             _value = new byte[finish - start];
@@ -29,33 +29,33 @@ namespace ZigBeeNet.ZCL.Field
             }
         }
 
-        /**
-         * Constructor taking an existing integer array
-         *
-         * @param payload the existing integer array
-         * @param from the start offset of the array (inclusive)
-         * @param to the end offset of the array (exclusive)
-         */
+        /// <summary>
+         /// Constructor taking an existing integer array
+         ///
+         /// @param payload the existing integer array
+         /// @param from the start offset of the array (inclusive)
+         /// @param to the end offset of the array (exclusive)
+         /// </summary>
         public ByteArray(byte[] payload)
             : this(payload, 0, payload.Length)
         {
         }
 
-        /**
-         * Gets the byte array value.
-         *
-         * @return the value
-         */
+        /// <summary>
+         /// Gets the byte array value.
+         ///
+         /// @return the value
+         /// </summary>
         public byte[] Get()
         {
             return _value;
         }
 
-        /**
-         * Gets the byte array as an array of integers
-         *
-         * @return the integer array
-         */
+        /// <summary>
+         /// Gets the byte array as an array of integers
+         ///
+         /// @return the integer array
+         /// </summary>
         public int[] GetAsIntArray()
         {
             int[] intArray = new int[_value.Length];
@@ -67,31 +67,31 @@ namespace ZigBeeNet.ZCL.Field
             return intArray;
         }
 
-        /**
-         * Get the length of the underlying byte array
-         *
-         * @return the length of the data in the array
-         */
+        /// <summary>
+         /// Get the length of the underlying byte array
+         ///
+         /// @return the length of the data in the array
+         /// </summary>
         public int Size()
         {
             return _value.Length;
         }
 
-        /**
-         * Sets the byte array value.
-         *
-         * @param value the value as a byte array
-         */
+        /// <summary>
+         /// Sets the byte array value.
+         ///
+         /// @param value the value as a byte array
+         /// </summary>
         public void Set(byte[] value)
         {
             this._value = value;
         }
 
-        /**
-         * Sets the byte array value from an integer array.
-         *
-         * @param value the value as an integer array
-         */
+        /// <summary>
+         /// Sets the byte array value from an integer array.
+         ///
+         /// @param value the value as an integer array
+         /// </summary>
         public void Set(int[] value)
         {
             this._value = new byte[value.Length];

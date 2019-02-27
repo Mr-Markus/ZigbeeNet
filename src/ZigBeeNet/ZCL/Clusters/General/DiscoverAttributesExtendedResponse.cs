@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Discover Attributes Extended Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The Discover Attributes Extended Response command is generated in response to a Discover Attributes * Extended command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Discover Attributes Extended Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The Discover Attributes Extended Response command is generated in response to a Discover Attributes /// Extended command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverAttributesExtendedResponse : ZclCommand
        {
-           /**
-           * Discovery complete command message field.
-           */
+           /// <summary>
+           /// Discovery complete command message field.
+           /// </summary>
            public bool DiscoveryComplete { get; set; }
 
-           /**
-           * Attribute Information command message field.
-           */
+           /// <summary>
+           /// Attribute Information command message field.
+           /// </summary>
            public List<ExtendedAttributeInformation> AttributeInformation { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public DiscoverAttributesExtendedResponse()
            {
                GenericCommand = true;

@@ -9,24 +9,24 @@ namespace ZigBeeNet.ZDO.Command
 {
     public class IeeeAddressRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * NWKAddrOfInterest command message field.
-         */
+        /// <summary>
+         /// NWKAddrOfInterest command message field.
+         /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-         * RequestType command message field.
-         */
+        /// <summary>
+         /// RequestType command message field.
+         /// </summary>
         public byte RequestType { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public IeeeAddressRequest()
         {
             ClusterId = 0x0001;

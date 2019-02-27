@@ -7,23 +7,23 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Fire Command value object class.
- *
- * Cluster: IAS ACE. Command is sentTO the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Fire Command value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentTO the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class FireCommand : ZclCommand
        {
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public FireCommand()
            {
                GenericCommand = false;

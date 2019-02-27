@@ -8,29 +8,29 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class NeighborInformation : IZclListItemField
     {
-        /**
-         * The neighbor address.
-         */
+        /// <summary>
+         /// The neighbor address.
+         /// </summary>
         public IeeeAddress NeighborAddress;
-        /**
-         * The coordinate 1
-         */
+        /// <summary>
+         /// The coordinate 1
+         /// </summary>
         public ushort Coordinate1;
-        /**
-         * The coordinate 2
-         */
+        /// <summary>
+         /// The coordinate 2
+         /// </summary>
         public ushort Coordinate2;
-        /**
-         * The coordinate 3
-         */
+        /// <summary>
+         /// The coordinate 3
+         /// </summary>
         public ushort Coordinate3;
-        /**
-         * The RSSI.
-         */
+        /// <summary>
+         /// The RSSI.
+         /// </summary>
         public byte Rssi;
-        /**
-         * The RSSI measurement count.
-         */
+        /// <summary>
+         /// The RSSI measurement count.
+         /// </summary>
         public byte MeasurementCount;
 
 

@@ -11,23 +11,23 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/**
- * Binary Value (BACnet Extended)cluster implementation (Cluster ID 0x060D).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Binary Value (BACnet Extended)cluster implementation (Cluster ID 0x060D).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclBinaryValueBACnetExtendedCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x060D;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Binary Value (BACnet Extended)";
 
        // Attribute initialisation
@@ -38,11 +38,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Binary Value (BACnet Extended) cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Binary Value (BACnet Extended) cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclBinaryValueBACnetExtendedCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

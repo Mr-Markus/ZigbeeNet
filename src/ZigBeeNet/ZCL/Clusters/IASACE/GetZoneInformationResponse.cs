@@ -7,44 +7,44 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Zone Information Response value object class.
- *
- * Cluster: IAS ACE. Command is sentFROM the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Zone Information Response value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetZoneInformationResponse : ZclCommand
        {
-           /**
-           * Zone ID command message field.
-           */
+           /// <summary>
+           /// Zone ID command message field.
+           /// </summary>
            public byte ZoneID { get; set; }
 
-           /**
-           * Zone Type command message field.
-           */
+           /// <summary>
+           /// Zone Type command message field.
+           /// </summary>
            public ushort ZoneType { get; set; }
 
-           /**
-           * IEEE address command message field.
-           */
+           /// <summary>
+           /// IEEE address command message field.
+           /// </summary>
            public IeeeAddress IEEEAddress { get; set; }
 
-           /**
-           * Zone Label command message field.
-           *
-          * Provides the ZoneLabel stored in the IAS CIE. If none is programmed, the IAS ACE server SHALL transmit a string with a length          * of zero.There is no minimum or maximum length to the Zone Label field; however, the Zone Label SHOULD be between 16 to 24          * alphanumeric characters in length.          * <p>          * The string encoding SHALL be UTF-8.           */
+           /// <summary>
+           /// Zone Label command message field.
+           ///
+          /// Provides the ZoneLabel stored in the IAS CIE. If none is programmed, the IAS ACE server SHALL transmit a string with a length          /// of zero.There is no minimum or maximum length to the Zone Label field; however, the Zone Label SHOULD be between 16 to 24          /// alphanumeric characters in length.          /// <p>          /// The string encoding SHALL be UTF-8.           /// </summary>
            public string ZoneLabel { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetZoneInformationResponse()
            {
                GenericCommand = false;

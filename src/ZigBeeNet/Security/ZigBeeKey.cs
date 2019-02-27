@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ZigBeeNet.Security
 {
-    /**
- * Represents a 128 bit ZigBee key
- *
- * @author Chris Jackson
- *
- */
+    /// <summary>
+ /// Represents a 128 bit ZigBee key
+ ///
+ /// @author Chris Jackson
+ ///
+ /// </summary>
     public class ZigBeeKey
     {
         public byte[] Key { get; set; }
@@ -18,30 +18,30 @@ namespace ZigBeeNet.Security
         public byte SequenceNumber { get; set; }
         public IeeeAddress address { get; set; }
 
-        /**
-         * Default constructor. Creates a network key of 0
-         */
+        /// <summary>
+         /// Default constructor. Creates a network key of 0
+         /// </summary>
         public ZigBeeKey()
         {
             Key = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
-        /**
-         * Create an {@link ZigBeeKey} from a {@link String}. The string must contain 32 hexadecimal numbers
-         * to make up a 16 byte key. Numbers can be formatted in various ways -:
-         * <ul>
-         * <li>1234ABCD ...
-         * <li>12 34 AB CD ...
-         * <li>12,34,AB,CD ...
-         * <li>12:34:AB:CD ...
-         * <li>0x12 0x34 0xAB 0xCD ...
-         * <li>0x12,0x34,0xAB,0xCD ...
-         * <li>0x12:0x34:0xAB:0xCD ...
-         * </ul>
-         *
-         * @param key the key as a {@link String}
-         * @throws IllegalArgumentException
-         */
+        /// <summary>
+         /// Create an {@link ZigBeeKey} from a {@link String}. The string must contain 32 hexadecimal numbers
+         /// to make up a 16 byte key. Numbers can be formatted in various ways -:
+         /// <ul>
+         /// <li>1234ABCD ...
+         /// <li>12 34 AB CD ...
+         /// <li>12,34,AB,CD ...
+         /// <li>12:34:AB:CD ...
+         /// <li>0x12 0x34 0xAB 0xCD ...
+         /// <li>0x12,0x34,0xAB,0xCD ...
+         /// <li>0x12:0x34:0xAB:0xCD ...
+         /// </ul>
+         ///
+         /// @param key the key as a {@link String}
+         /// @throws IllegalArgumentException
+         /// </summary>
         public ZigBeeKey(string keyString)
         {
             if (keyString == null)
@@ -68,12 +68,12 @@ namespace ZigBeeNet.Security
             }
         }
 
-        /**
-         * Create a {@link ZigBeeKey} from an int array
-         *
-         * @param key the key as an int array. Array length must be 16.
-         * @throws IllegalArgumentException
-         */
+        /// <summary>
+         /// Create a {@link ZigBeeKey} from an int array
+         ///
+         /// @param key the key as an int array. Array length must be 16.
+         /// @throws IllegalArgumentException
+         /// </summary>
         public ZigBeeKey(byte[] key)
         {
             if (key.Length != 16)
@@ -86,22 +86,22 @@ namespace ZigBeeNet.Security
             Array.Copy(key, Key, 16);
         }
       
-        /**
-         * Returns true if this key has an address associated with it
-         *
-         * @return true if this key has an address associated with it
-         */
+        /// <summary>
+         /// Returns true if this key has an address associated with it
+         ///
+         /// @return true if this key has an address associated with it
+         /// </summary>
         public bool HasAddress()
         {
             return address != null;
         }
 
-        /**
-         * Check if the NetworkKey is valid. This checks the length of the ID, and checks
-         * it is not 00000000000000000000000000000000.
-         *
-         * @return true if the key is valid
-         */
+        /// <summary>
+         /// Check if the NetworkKey is valid. This checks the length of the ID, and checks
+         /// it is not 00000000000000000000000000000000.
+         ///
+         /// @return true if the key is valid
+         /// </summary>
         public bool IsValid()
         {
             if (Key == null || Key.Length != 16)
@@ -155,11 +155,11 @@ namespace ZigBeeNet.Security
             return builder.ToString();
         }
 
-        /**
-         * Create a {@link ZigBeeKey} with a random key
-         *
-         * @return {@link ZigBeeKey} containing a random 128 bit key
-         */
+        /// <summary>
+         /// Create a {@link ZigBeeKey} with a random key
+         ///
+         /// @return {@link ZigBeeKey} containing a random 128 bit key
+         /// </summary>
         public static ZigBeeKey CreateRandom()
         {
             byte[] key = new byte[16];

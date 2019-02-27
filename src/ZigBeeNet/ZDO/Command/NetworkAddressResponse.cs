@@ -8,29 +8,29 @@ namespace ZigBeeNet.ZDO.Command
 {
     public class NetworkAddressResponse : ZdoResponse
     {
-        /**
-         * IEEEAddrRemoteDev command message field.
-         */
+        /// <summary>
+         /// IEEEAddrRemoteDev command message field.
+         /// </summary>
         public IeeeAddress IeeeAddrRemoteDev { get; set; }
 
-        /**
-         * NWKAddrRemoteDev command message field.
-         */
+        /// <summary>
+         /// NWKAddrRemoteDev command message field.
+         /// </summary>
         public ushort NwkAddrRemoteDev { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * NWKAddrAssocDevList command message field.
-         */
+        /// <summary>
+         /// NWKAddrAssocDevList command message field.
+         /// </summary>
         public List<int> NwkAddrAssocDevList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public NetworkAddressResponse()
         {
             ClusterId = 0x8000;

@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * RSSI Ping Command value object class.
- *
- * Cluster: RSSI Location. Command is sentFROM the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// RSSI Ping Command value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentFROM the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class RSSIPingCommand : ZclCommand
        {
-           /**
-           * Location Type command message field.
-           */
+           /// <summary>
+           /// Location Type command message field.
+           /// </summary>
            public byte LocationType { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RSSIPingCommand()
            {
                GenericCommand = false;

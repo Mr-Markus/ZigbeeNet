@@ -11,23 +11,23 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/**
- * Messagingcluster implementation (Cluster ID 0x0703).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Messagingcluster implementation (Cluster ID 0x0703).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclMessagingCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0703;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Messaging";
 
        // Attribute initialisation
@@ -38,11 +38,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Messaging cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Messaging cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclMessagingCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

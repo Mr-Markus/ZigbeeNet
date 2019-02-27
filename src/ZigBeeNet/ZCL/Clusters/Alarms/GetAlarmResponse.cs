@@ -7,44 +7,44 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Alarms;
 
-/**
- * Get Alarm Response value object class.
- *
- * Cluster: Alarms. Command is sentFROM the server.
- * This command is a specific command used for the Alarms cluster.
- *
- * If there is at least one alarm record in the alarm table then the status field is set to SUCCESS. * The alarm code, cluster identifier and time stamp fields SHALL all be present and SHALL take their * values from the item in the alarm table that they are reporting.If there  are  no more  alarms logged * in the  alarm table  then the  status field is set  to NOT_FOUND  and the alarm code, cluster * identifier and time stamp fields SHALL be omitted. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Alarm Response value object class.
+ ///
+ /// Cluster: Alarms. Command is sentFROM the server.
+ /// This command is a specific command used for the Alarms cluster.
+ ///
+ /// If there is at least one alarm record in the alarm table then the status field is set to SUCCESS. /// The alarm code, cluster identifier and time stamp fields SHALL all be present and SHALL take their /// values from the item in the alarm table that they are reporting.If there  are  no more  alarms logged /// in the  alarm table  then the  status field is set  to NOT_FOUND  and the alarm code, cluster /// identifier and time stamp fields SHALL be omitted. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Alarms
 {
        public class GetAlarmResponse : ZclCommand
        {
-           /**
-           * Status command message field.
-           */
+           /// <summary>
+           /// Status command message field.
+           /// </summary>
            public byte Status { get; set; }
 
-           /**
-           * Alarm code command message field.
-           */
+           /// <summary>
+           /// Alarm code command message field.
+           /// </summary>
            public byte AlarmCode { get; set; }
 
-           /**
-           * Cluster identifier command message field.
-           */
+           /// <summary>
+           /// Cluster identifier command message field.
+           /// </summary>
            public ushort ClusterIdentifier { get; set; }
 
-           /**
-           * Timestamp command message field.
-           */
+           /// <summary>
+           /// Timestamp command message field.
+           /// </summary>
            public uint Timestamp { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetAlarmResponse()
            {
                GenericCommand = false;

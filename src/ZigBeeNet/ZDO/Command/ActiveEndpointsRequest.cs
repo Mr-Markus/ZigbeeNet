@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Active Endpoints Request value object class.
-     * 
-     * The Active_EP_req command is generated from a local device wishing to acquire
-     * the list of endpoints on a remote device with simple descriptors. This command
-     * shall be unicast either to the remote device itself or to an alternative device that
-     * contains the discovery information of the remote device.
-     */
+    /// <summary>
+     /// Active Endpoints Request value object class.
+     /// 
+     /// The Active_EP_req command is generated from a local device wishing to acquire
+     /// the list of endpoints on a remote device with simple descriptors. This command
+     /// shall be unicast either to the remote device itself or to an alternative device that
+     /// contains the discovery information of the remote device.
+     /// </summary>
     public class ActiveEndpointsRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * NWKAddrOfInterest command message field.
-         */
+        /// <summary>
+         /// NWKAddrOfInterest command message field.
+         /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ActiveEndpointsRequest()
         {
             ClusterId = 0x0005;

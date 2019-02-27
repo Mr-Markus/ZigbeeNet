@@ -6,50 +6,50 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Field
 {
-    /**
-     * Binding Table field.
-     */
+    /// <summary>
+     /// Binding Table field.
+     /// </summary>
     public class BindingTable
     {
-        /**
-         * The source IEEE address for the binding entry.
-         */
+        /// <summary>
+         /// The source IEEE address for the binding entry.
+         /// </summary>
         public IeeeAddress SrcAddr { get; private set; }
 
-        /**
-         * The source endpoint for the binding entry.
-         */
+        /// <summary>
+         /// The source endpoint for the binding entry.
+         /// </summary>
         public byte SrcEndpoint { get; private set; }
 
-        /**
-         * The identifier of the cluster on the source device that is bound to the destination device.
-         */
+        /// <summary>
+         /// The identifier of the cluster on the source device that is bound to the destination device.
+         /// </summary>
         public ushort ClusterId { get; private set; }
 
 
-        /**
-         * Destination address mode
-         * <p>
-         * <ul>
-         * <li>0x01 - Group address
-         * <li>0x03 - IEEE address
-         * </ul>
-         */
+        /// <summary>
+         /// Destination address mode
+         /// <p>
+         /// <ul>
+         /// <li>0x01 - Group address
+         /// <li>0x03 - IEEE address
+         /// </ul>
+         /// </summary>
         public byte DstAddrMode { get; private set; }
 
-        /**
-         * Destination address if the address mode is group addressing
-         */
+        /// <summary>
+         /// Destination address if the address mode is group addressing
+         /// </summary>
         public ushort DstGroupAddr { get; private set; }
 
-        /**
-         * Destination address if the address mode is a node address
-         */
+        /// <summary>
+         /// Destination address if the address mode is a node address
+         /// </summary>
         public IeeeAddress DstAddr { get; private set; }
 
-        /**
-         * Destination endpoint if the address mode is a node address
-         */
+        /// <summary>
+         /// Destination endpoint if the address mode is a node address
+         /// </summary>
         public byte DstNodeEndpoint { get; private set; }
 
 

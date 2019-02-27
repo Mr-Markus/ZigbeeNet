@@ -11,23 +11,23 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/**
- * Appliance Events and Alertscluster implementation (Cluster ID 0x0B02).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Appliance Events and Alertscluster implementation (Cluster ID 0x0B02).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclApplianceEventsAndAlertsCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0B02;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Appliance Events and Alerts";
 
        // Attribute initialisation
@@ -38,11 +38,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Appliance Events and Alerts cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Appliance Events and Alerts cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclApplianceEventsAndAlertsCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

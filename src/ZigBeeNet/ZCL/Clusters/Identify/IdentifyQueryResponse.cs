@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Identify;
 
-/**
- * Identify Query Response value object class.
- *
- * Cluster: Identify. Command is sentFROM the server.
- * This command is a specific command used for the Identify cluster.
- *
- * The identify query response command is generated in response to receiving an * Identify Query command in the case that the device is currently identifying itself. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Identify Query Response value object class.
+ ///
+ /// Cluster: Identify. Command is sentFROM the server.
+ /// This command is a specific command used for the Identify cluster.
+ ///
+ /// The identify query response command is generated in response to receiving an /// Identify Query command in the case that the device is currently identifying itself. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Identify
 {
        public class IdentifyQueryResponse : ZclCommand
        {
-           /**
-           * Identify Time command message field.
-           */
+           /// <summary>
+           /// Identify Time command message field.
+           /// </summary>
            public ushort IdentifyTime { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public IdentifyQueryResponse()
            {
                GenericCommand = false;

@@ -8,34 +8,34 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management Bind Response value object class.
-     * 
-     * The Mgmt_Bind_rsp is generated in response to a Mgmt_Bind_req. If this
-     * management command is not supported, a status of NOT_SUPPORTED shall be
-     * returned and all parameter fields after the Status field shall be omitted. Otherwise,
-     * the Remote Device shall implement the following processing.
-     */
+    /// <summary>
+     /// Management Bind Response value object class.
+     /// 
+     /// The Mgmt_Bind_rsp is generated in response to a Mgmt_Bind_req. If this
+     /// management command is not supported, a status of NOT_SUPPORTED shall be
+     /// returned and all parameter fields after the Status field shall be omitted. Otherwise,
+     /// the Remote Device shall implement the following processing.
+     /// </summary>
     public class ManagementBindResponse : ZdoResponse
     {
-        /**
-         * BindingTableEntries command message field.
-         */
+        /// <summary>
+         /// BindingTableEntries command message field.
+         /// </summary>
         public byte BindingTableEntries { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * BindingTableList command message field.
-         */
+        /// <summary>
+         /// BindingTableList command message field.
+         /// </summary>
         public List<BindingTable> BindingTableList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementBindResponse()
         {
             ClusterId = 0x8033;

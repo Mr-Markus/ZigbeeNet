@@ -7,50 +7,50 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Management Network Update Notify value object class.
-    * 
-    * The Mgmt_NWK_Update_notify is provided to enable ZigBee devices to report
-    * the condition on local channels to a network manager. The scanned channel list is
-    * the report of channels scanned and it is followed by a list of records, one for each
-    * channel scanned, each record including one byte of the energy level measured
-    * during the scan, or 0xff if there is too much interference on this channel.
-    * <br>
-    * When sent in response to a Mgmt_NWK_Update_req command the Status field
-    * shall represent the Status of the request. When sent unsolicited the Status field
-    * shall be set to SUCCESS.
-    * A Status of NOT_SUPPORTED indicates that the request was directed to a device
-    * which was not the ZigBee Coordinator or that the ZigBee Coordinator does not
-    * support End Device Binding. Otherwise, End_Device_Bind_req processing is
-    * performed as described below, including transmission of the
-    * End_Device_Bind_rsp.
-    * 
-    */
+    /// <summary>
+    /// Management Network Update Notify value object class.
+    /// 
+    /// The Mgmt_NWK_Update_notify is provided to enable ZigBee devices to report
+    /// the condition on local channels to a network manager. The scanned channel list is
+    /// the report of channels scanned and it is followed by a list of records, one for each
+    /// channel scanned, each record including one byte of the energy level measured
+    /// during the scan, or 0xff if there is too much interference on this channel.
+    /// <br>
+    /// When sent in response to a Mgmt_NWK_Update_req command the Status field
+    /// shall represent the Status of the request. When sent unsolicited the Status field
+    /// shall be set to SUCCESS.
+    /// A Status of NOT_SUPPORTED indicates that the request was directed to a device
+    /// which was not the ZigBee Coordinator or that the ZigBee Coordinator does not
+    /// support End Device Binding. Otherwise, End_Device_Bind_req processing is
+    /// performed as described below, including transmission of the
+    /// End_Device_Bind_rsp.
+    /// 
+    /// </summary>
     public class ManagementNetworkUpdateNotify : ZdoResponse
     {
-        /**
-        * ScannedChannels command message field.
-        */
+        /// <summary>
+        /// ScannedChannels command message field.
+        /// </summary>
         public int ScannedChannels { get; set; }
 
-        /**
-        * TotalTransmissions command message field.
-        */
+        /// <summary>
+        /// TotalTransmissions command message field.
+        /// </summary>
         public ushort TotalTransmissions { get; set; }
 
-        /**
-        * TransmissionFailures command message field.
-        */
+        /// <summary>
+        /// TransmissionFailures command message field.
+        /// </summary>
         public ushort TransmissionFailures { get; set; }
 
-        /**
-        * EnergyValues command message field.
-        */
+        /// <summary>
+        /// EnergyValues command message field.
+        /// </summary>
         public List<int> EnergyValues { get; set; }
 
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ManagementNetworkUpdateNotify()
         {
             ClusterId = 0x8038;

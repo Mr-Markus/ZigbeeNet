@@ -9,25 +9,25 @@ using ZigBeeNet.ZDO;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management Bind Request value object class.
-     * 
-     * The Mgmt_Bind_req is generated from a Local Device wishing to retrieve the
-     * contents of the Binding Table from the Remote Device. The destination
-     * addressing on this command shall be unicast only and the destination address
-     * must be that of a Primary binding table cache or source device holding its own
-     * binding table.
-     */
+    /// <summary>
+     /// Management Bind Request value object class.
+     /// 
+     /// The Mgmt_Bind_req is generated from a Local Device wishing to retrieve the
+     /// contents of the Binding Table from the Remote Device. The destination
+     /// addressing on this command shall be unicast only and the destination address
+     /// must be that of a Primary binding table cache or source device holding its own
+     /// binding table.
+     /// </summary>
     public class ManagementBindRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementBindRequest()
         {
             ClusterId = 0x0033;

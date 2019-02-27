@@ -11,40 +11,40 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/**
- * Temperature measurementcluster implementation (Cluster ID 0x0402).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Temperature measurementcluster implementation (Cluster ID 0x0402).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclTemperatureMeasurementCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0402;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Temperature measurement";
 
-       /* Attribute constants */
-       /**
-        * MeasuredValue represents the temperature in degrees Celsius as follows:-        * MeasuredValue = 100 x temperature in degrees Celsius.        * <p>        * Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a        * <p>        * MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this        * format allows is 0.01 ºC.        * <p>        * A MeasuredValue of 0x8000 indicates that the temperature measurement is        * invalid.        * <p>        * MeasuredValue is updated continuously as new measurements are made.       */
+       //// Attribute constants /// </summary>
+       /// <summary>
+        /// MeasuredValue represents the temperature in degrees Celsius as follows:-        /// MeasuredValue = 100 x temperature in degrees Celsius.        /// <p>        /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a        /// <p>        /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this        /// format allows is 0.01 ºC.        /// <p>        /// A MeasuredValue of 0x8000 indicates that the temperature measurement is        /// invalid.        /// <p>        /// MeasuredValue is updated continuously as new measurements are made.       /// </summary>
        public static ushort ATTR_MEASUREDVALUE = 0x0000;
 
-       /**
-        * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue        * that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that        * the minimum value is unknown.       */
+       /// <summary>
+        /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue        /// that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that        /// the minimum value is unknown.       /// </summary>
        public static ushort ATTR_MINMEASUREDVALUE = 0x0001;
 
-       /**
-        * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue        * that is capable of being measured.        * <p>        * MaxMeasuredValue shall be greater than MinMeasuredValue.        * <p>        * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.        * <p>        * A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       */
+       /// <summary>
+        /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue        /// that is capable of being measured.        /// <p>        /// MaxMeasuredValue shall be greater than MinMeasuredValue.        /// <p>        /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.        /// <p>        /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       /// </summary>
        public static ushort ATTR_MAXMEASUREDVALUE = 0x0002;
 
-       /**
-        * The Tolerance attribute indicates the magnitude of the possible error that is        * associated with MeasuredValue . The true value is located in the range        * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       */
+       /// <summary>
+        /// The Tolerance attribute indicates the magnitude of the possible error that is        /// associated with MeasuredValue . The true value is located in the range        /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       /// </summary>
        public static ushort ATTR_TOLERANCE = 0x0003;
 
 
@@ -63,42 +63,42 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Temperature measurement cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Temperature measurement cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclTemperatureMeasurementCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /**
-       * Get the MeasuredValue attribute [attribute ID0].
-       *
-       * MeasuredValue represents the temperature in degrees Celsius as follows:-       * MeasuredValue = 100 x temperature in degrees Celsius.       * <p>       * Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       * <p>       * MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       * format allows is 0.01 ºC.       * <p>       * A MeasuredValue of 0x8000 indicates that the temperature measurement is       * invalid.       * <p>       * MeasuredValue is updated continuously as new measurements are made.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MeasuredValue attribute [attribute ID0].
+       ///
+       /// MeasuredValue represents the temperature in degrees Celsius as follows:-       /// MeasuredValue = 100 x temperature in degrees Celsius.       /// <p>       /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       /// <p>       /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       /// format allows is 0.01 ºC.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the temperature measurement is       /// invalid.       /// <p>       /// MeasuredValue is updated continuously as new measurements are made.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MEASUREDVALUE]);
        }
 
-       /**
-       * Synchronously Get the MeasuredValue attribute [attribute ID0].
-       *
-       * MeasuredValue represents the temperature in degrees Celsius as follows:-       * MeasuredValue = 100 x temperature in degrees Celsius.       * <p>       * Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       * <p>       * MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       * format allows is 0.01 ºC.       * <p>       * A MeasuredValue of 0x8000 indicates that the temperature measurement is       * invalid.       * <p>       * MeasuredValue is updated continuously as new measurements are made.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MeasuredValue attribute [attribute ID0].
+       ///
+       /// MeasuredValue represents the temperature in degrees Celsius as follows:-       /// MeasuredValue = 100 x temperature in degrees Celsius.       /// <p>       /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       /// <p>       /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       /// format allows is 0.01 ºC.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the temperature measurement is       /// invalid.       /// <p>       /// MeasuredValue is updated continuously as new measurements are made.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public short GetMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -110,50 +110,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the MeasuredValue attribute [attribute ID0].
-       *
-       * MeasuredValue represents the temperature in degrees Celsius as follows:-       * MeasuredValue = 100 x temperature in degrees Celsius.       * <p>       * Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       * <p>       * MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       * format allows is 0.01 ºC.       * <p>       * A MeasuredValue of 0x8000 indicates that the temperature measurement is       * invalid.       * <p>       * MeasuredValue is updated continuously as new measurements are made.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the MeasuredValue attribute [attribute ID0].
+       ///
+       /// MeasuredValue represents the temperature in degrees Celsius as follows:-       /// MeasuredValue = 100 x temperature in degrees Celsius.       /// <p>       /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a       /// <p>       /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this       /// format allows is 0.01 ºC.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the temperature measurement is       /// invalid.       /// <p>       /// MeasuredValue is updated continuously as new measurements are made.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetMeasuredValueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_MEASUREDVALUE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /**
-       * Get the MinMeasuredValue attribute [attribute ID1].
-       *
-       * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       * that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that       * the minimum value is unknown.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MinMeasuredValue attribute [attribute ID1].
+       ///
+       /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       /// that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that       /// the minimum value is unknown.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMinMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MINMEASUREDVALUE]);
        }
 
-       /**
-       * Synchronously Get the MinMeasuredValue attribute [attribute ID1].
-       *
-       * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       * that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that       * the minimum value is unknown.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MinMeasuredValue attribute [attribute ID1].
+       ///
+       /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       /// that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that       /// the minimum value is unknown.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public short GetMinMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MINMEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -165,31 +165,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MaxMeasuredValue attribute [attribute ID2].
-       *
-       * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       * that is capable of being measured.       * <p>       * MaxMeasuredValue shall be greater than MinMeasuredValue.       * <p>       * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       * <p>       * A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MaxMeasuredValue attribute [attribute ID2].
+       ///
+       /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       /// that is capable of being measured.       /// <p>       /// MaxMeasuredValue shall be greater than MinMeasuredValue.       /// <p>       /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       /// <p>       /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMaxMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MAXMEASUREDVALUE]);
        }
 
-       /**
-       * Synchronously Get the MaxMeasuredValue attribute [attribute ID2].
-       *
-       * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       * that is capable of being measured.       * <p>       * MaxMeasuredValue shall be greater than MinMeasuredValue.       * <p>       * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       * <p>       * A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       *
-       * The attribute is of type short.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MaxMeasuredValue attribute [attribute ID2].
+       ///
+       /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       /// that is capable of being measured.       /// <p>       /// MaxMeasuredValue shall be greater than MinMeasuredValue.       /// <p>       /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       /// <p>       /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.       ///
+       /// The attribute is of type short.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public short GetMaxMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXMEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -201,31 +201,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the Tolerance attribute [attribute ID3].
-       *
-       * The Tolerance attribute indicates the magnitude of the possible error that is       * associated with MeasuredValue . The true value is located in the range       * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the Tolerance attribute [attribute ID3].
+       ///
+       /// The Tolerance attribute indicates the magnitude of the possible error that is       /// associated with MeasuredValue . The true value is located in the range       /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetToleranceAsync()
        {
            return Read(_attributes[ATTR_TOLERANCE]);
        }
 
-       /**
-       * Synchronously Get the Tolerance attribute [attribute ID3].
-       *
-       * The Tolerance attribute indicates the magnitude of the possible error that is       * associated with MeasuredValue . The true value is located in the range       * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the Tolerance attribute [attribute ID3].
+       ///
+       /// The Tolerance attribute indicates the magnitude of the possible error that is       /// associated with MeasuredValue . The true value is located in the range       /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetTolerance(long refreshPeriod)
        {
            if (_attributes[ATTR_TOLERANCE].IsLastValueCurrent(refreshPeriod))
@@ -237,19 +237,19 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the Tolerance attribute [attribute ID3].
-       *
-       * The Tolerance attribute indicates the magnitude of the possible error that is       * associated with MeasuredValue . The true value is located in the range       * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the Tolerance attribute [attribute ID3].
+       ///
+       /// The Tolerance attribute indicates the magnitude of the possible error that is       /// associated with MeasuredValue . The true value is located in the range       /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetToleranceReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_TOLERANCE], minInterval, maxInterval, reportableChange);

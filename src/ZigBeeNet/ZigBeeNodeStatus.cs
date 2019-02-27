@@ -6,24 +6,24 @@ namespace ZigBeeNet
 {
     public enum ZigBeeNodeStatus : byte
     {
-        /**
-      * A device has joined the network without security
-      */
+        /// <summary>
+      /// A device has joined the network without security
+      /// </summary>
         UNSECURED_JOIN,
 
-        /**
-         * A device has securely rejoined the network
-         */
+        /// <summary>
+         /// A device has securely rejoined the network
+         /// </summary>
         SECURED_REJOIN,
 
-        /**
-         * A device has unsecurely rejoined the network
-         */
+        /// <summary>
+         /// A device has unsecurely rejoined the network
+         /// </summary>
         UNSECURED_REJOIN,
 
-        /**
-         * A device has left the network
-         */
+        /// <summary>
+         /// A device has left the network
+         /// </summary>
         DEVICE_LEFT
 
     }

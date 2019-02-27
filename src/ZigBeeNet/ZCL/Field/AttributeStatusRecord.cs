@@ -8,17 +8,17 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class AttributeStatusRecord : IZclListItemField
     {
-    /**
-     * The status.
-     */
+    /// <summary>
+     /// The status.
+     /// </summary>
     public ZclStatus Status { get; private set; }
-        /**
-         * The direction.
-         */
+        /// <summary>
+         /// The direction.
+         /// </summary>
         public bool Direction { get; private set; }
-        /**
-         * The attribute identifier.
-         */
+        /// <summary>
+         /// The attribute identifier.
+         /// </summary>
         public int AttributeIdentifier { get; private set; }
 
 

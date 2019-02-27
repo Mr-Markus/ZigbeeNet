@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/**
- * Move Color Command value object class.
- *
- * Cluster: Color Control. Command is sentTO the server.
- * This command is a specific command used for the Color Control cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Move Color Command value object class.
+ ///
+ /// Cluster: Color Control. Command is sentTO the server.
+ /// This command is a specific command used for the Color Control cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
        public class MoveColorCommand : ZclCommand
        {
-           /**
-           * RateX command message field.
-           */
+           /// <summary>
+           /// RateX command message field.
+           /// </summary>
            public short RateX { get; set; }
 
-           /**
-           * RateY command message field.
-           */
+           /// <summary>
+           /// RateY command message field.
+           /// </summary>
            public short RateY { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public MoveColorCommand()
            {
                GenericCommand = false;

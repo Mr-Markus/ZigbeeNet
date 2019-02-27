@@ -6,20 +6,20 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Discovery Store Request Request value object class.
-    * 
-    * The Discovery_store_req is provided to enable ZigBee end devices on the
-    * network to request storage of their discovery cache information on a Primary
-    * Discovery Cache device. Included in the request is the amount of storage space
-    * the Local Device requires.
-    * 
-    */
+    /// <summary>
+    /// Discovery Store Request Request value object class.
+    /// 
+    /// The Discovery_store_req is provided to enable ZigBee end devices on the
+    /// network to request storage of their discovery cache information on a Primary
+    /// Discovery Cache device. Included in the request is the amount of storage space
+    /// the Local Device requires.
+    /// 
+    /// </summary>
     public class DiscoveryStoreRequestRequest : ZdoRequest
     {
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public DiscoveryStoreRequestRequest()
         {
             ClusterId = 0x0016;

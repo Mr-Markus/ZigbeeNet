@@ -7,42 +7,42 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Match Descriptor Request value object class.
-    * 
-    * The Match_Desc_req command is generated from a local device wishing to find
-    * remote devices supporting a specific simple descriptor match criterion. This
-    * command shall either be broadcast to all devices for which macRxOnWhenIdle =
-    * TRUE, or unicast. If the command is unicast, it shall be directed either to the
-    * remote device itself or to an alternative device that contains the discovery
-    * information of the remote device.
-    * 
-    */
+    /// <summary>
+    /// Match Descriptor Request value object class.
+    /// 
+    /// The Match_Desc_req command is generated from a local device wishing to find
+    /// remote devices supporting a specific simple descriptor match criterion. This
+    /// command shall either be broadcast to all devices for which macRxOnWhenIdle =
+    /// TRUE, or unicast. If the command is unicast, it shall be directed either to the
+    /// remote device itself or to an alternative device that contains the discovery
+    /// information of the remote device.
+    /// 
+    /// </summary>
     public class MatchDescriptorRequest : ZdoRequest
     {
-        /**
-        * NWKAddrOfInterest command message field.
-        */
+        /// <summary>
+        /// NWKAddrOfInterest command message field.
+        /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-        * ProfileID command message field.
-        */
+        /// <summary>
+        /// ProfileID command message field.
+        /// </summary>
         public ushort ProfileId { get; set; }
 
-        /**
-        * InClusterList command message field.
-        */
+        /// <summary>
+        /// InClusterList command message field.
+        /// </summary>
         public List<ushort> InClusterList { get; set; }
 
-        /**
-        * OutClusterList command message field.
-        */
+        /// <summary>
+        /// OutClusterList command message field.
+        /// </summary>
         public List<ushort> OutClusterList { get; set; }
 
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public MatchDescriptorRequest()
         {
             ClusterId = 0x0006;

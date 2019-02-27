@@ -7,104 +7,104 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Zone ID Map Response value object class.
- *
- * Cluster: IAS ACE. Command is sentFROM the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * The 16 fields of the payload indicate whether each of the Zone IDs from 0 to 0xff is allocated or not. If bit n * of Zone ID Map section N is set to 1, then Zone ID (16 x N + n ) is allocated, else it is not allocated *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Zone ID Map Response value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// The 16 fields of the payload indicate whether each of the Zone IDs from 0 to 0xff is allocated or not. If bit n /// of Zone ID Map section N is set to 1, then Zone ID (16 x N + n ) is allocated, else it is not allocated ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetZoneIDMapResponse : ZclCommand
        {
-           /**
-           * Zone ID Map section 0 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 0 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection0 { get; set; }
 
-           /**
-           * Zone ID Map section 1 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 1 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection1 { get; set; }
 
-           /**
-           * Zone ID Map section 2 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 2 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection2 { get; set; }
 
-           /**
-           * Zone ID Map section 3 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 3 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection3 { get; set; }
 
-           /**
-           * Zone ID Map section 4 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 4 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection4 { get; set; }
 
-           /**
-           * Zone ID Map section 5 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 5 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection5 { get; set; }
 
-           /**
-           * Zone ID Map section 6 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 6 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection6 { get; set; }
 
-           /**
-           * Zone ID Map section 7 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 7 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection7 { get; set; }
 
-           /**
-           * Zone ID Map section 8 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 8 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection8 { get; set; }
 
-           /**
-           * Zone ID Map section 9 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 9 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection9 { get; set; }
 
-           /**
-           * Zone ID Map section 10 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 10 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection10 { get; set; }
 
-           /**
-           * Zone ID Map section 11 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 11 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection11 { get; set; }
 
-           /**
-           * Zone ID Map section 12 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 12 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection12 { get; set; }
 
-           /**
-           * Zone ID Map section 13 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 13 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection13 { get; set; }
 
-           /**
-           * Zone ID Map section 14 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 14 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection14 { get; set; }
 
-           /**
-           * Zone ID Map section 15 command message field.
-           */
+           /// <summary>
+           /// Zone ID Map section 15 command message field.
+           /// </summary>
            public ushort ZoneIDMapSection15 { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetZoneIDMapResponse()
            {
                GenericCommand = false;

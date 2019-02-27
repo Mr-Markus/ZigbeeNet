@@ -20,130 +20,166 @@ using ZigBeeNet.App.Discovery;
 
 namespace ZigBeeNet
 {
-    /**
-     * ZigBeeNetworkManager implements functions for managing the ZigBee interfaces. The network manager is the central
-     * class of the framework. It provides the interface with the dongles to send and receive data, and application
-     * interfaces to provide listeners for system events (eg network status with the {@link IZigBeeNetworkStateListener} or
-     * changes to nodes with the {@link IZigBeeNetworkNodeListener} or to receive incoming commands with the
-     * {@link IZigBeeCommandListener}).
-     * 
-     * The ZigBeeNetworkManager maintains a list of all {@link ZigBeeNode}s that are known on the network. Depending on the
-     * system configuration, different discovery methods may be utilised to maintain this list. A Coordinator may actively
-     * look for all nodes on the network while a Router implementation may only need to know about specific nodes that it is
-     * communicating with.
-     * 
-     * The ZigBeeNetworkManager also maintains a list of {@link ZigBeeNetworkExtension}s which allow the functionality of
-     * the network to be extended. Extensions may provide different levels of functionality - an extension may be as simple
-     * as configuring the framework to work with a specific feature, or could provide a detailed application.
-     * 
-     * Lifecycle
-     * The ZigBeeNetworkManager lifecycle is as follows -:
-     * 
-     * Instantiate a {@link IZigBeeTransportTransmit} class
-     * Instantiate a {@link ZigBeeNetworkManager} class passing the previously created {@link IZigBeeTransportTransmit}
-     * class
-     * Optionally set the {@link ZigBeeSerializer} and {@link ZigBeeDeserializer} using the {@link #setSerializer}
-     * method
-     * Call the {@link #initialize} method to perform the initial initialization of the ZigBee network
-     * Set the network configuration (see below).
-     * Call the {@link #startup} method to start using the configured ZigBee network. Configuration methods may not be
-     * used.
-     * Call the {@link shutdown} method to close the network
-     * 
-     * Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
-     * includes -:
-     * 
-     * {@link #getZigBeeChannel}
-     * {@link #setZigBeeChannel(ZigBeeChannel)}
-     * {@link #getZigBeePanId}
-     * {@link #setZigBeePanId(int)}
-     * {@link #getZigBeeExtendedPanId}
-     * {@link #setZigBeeExtendedPanId(ExtendedPanId)}
-     * {@link #getZigBeeNetworkKey()}
-     * {@link #setZigBeeNetworkKey(ZigBeeKey)}
-     * {@link #getZigBeeLinkKey()}
-     * {@link #setZigBeeLinkKey(ZigBeeKey)}
-     * 
-     * Once all transport initialization is complete, {@link #startup} must be called.
-     */
+    /// <summary>
+    /// ZigBeeNetworkManager implements functions for managing the ZigBee interfaces. The network manager is the central
+    /// class of the framework. It provides the interface with the dongles to send and receive data, and application
+    /// interfaces to provide listeners for system events (eg network status with the {@link IZigBeeNetworkStateListener} or
+    /// changes to nodes with the {@link IZigBeeNetworkNodeListener} or to receive incoming commands with the
+    /// {@link IZigBeeCommandListener}).
+    /// 
+    /// The ZigBeeNetworkManager maintains a list of all {@link ZigBeeNode}s that are known on the network. Depending on the
+    /// system configuration, different discovery methods may be utilised to maintain this list. A Coordinator may actively
+    /// look for all nodes on the network while a Router implementation may only need to know about specific nodes that it is
+    /// communicating with.
+    /// 
+    /// The ZigBeeNetworkManager also maintains a list of {@link ZigBeeNetworkExtension}s which allow the functionality of
+    /// the network to be extended. Extensions may provide different levels of functionality - an extension may be as simple
+    /// as configuring the framework to work with a specific feature, or could provide a detailed application.
+    /// 
+    /// Lifecycle
+    /// The ZigBeeNetworkManager lifecycle is as follows -:
+    /// 
+    /// Instantiate a {@link IZigBeeTransportTransmit} class
+    /// Instantiate a {@link ZigBeeNetworkManager} class passing the previously created {@link IZigBeeTransportTransmit}
+    /// class
+    /// Optionally set the {@link ZigBeeSerializer} and {@link ZigBeeDeserializer} using the {@link #setSerializer}
+    /// method
+    /// Call the {@link #initialize} method to perform the initial initialization of the ZigBee network
+    /// Set the network configuration (see below).
+    /// Call the {@link #startup} method to start using the configured ZigBee network. Configuration methods may not be
+    /// used.
+    /// Call the {@link shutdown} method to close the network
+    /// 
+    /// Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
+    /// includes -:
+    /// 
+    /// {@link #getZigBeeChannel}
+    /// {@link #setZigBeeChannel(ZigBeeChannel)}
+    /// {@link #getZigBeePanId}
+    /// {@link #setZigBeePanId(int)}
+    /// {@link #getZigBeeExtendedPanId}
+    /// {@link #setZigBeeExtendedPanId(ExtendedPanId)}
+    /// {@link #getZigBeeNetworkKey()}
+    /// {@link #setZigBeeNetworkKey(ZigBeeKey)}
+    /// {@link #getZigBeeLinkKey()}
+    /// {@link #setZigBeeLinkKey(ZigBeeKey)}
+    /// 
+    /// Once all transport initialization is complete, {@link #startup} must be called.
+    /// </summary>
     public class ZigBeeNetworkManager : IZigBeeNetwork, IZigBeeTransportReceive
     {
-        /**
-         * The _logger.
-         */
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
-
-        /**
-         * The nodes in the ZigBee network - maps {@link IeeeAddress} to {@link ZigBeeNode}
-         */
+        /// <summary>
+        /// The nodes in the ZigBee network - maps IeeeAddress to ZigBeeNode
+        /// </summary>
         private ConcurrentDictionary<IeeeAddress, ZigBeeNode> _networkNodes = new ConcurrentDictionary<IeeeAddress, ZigBeeNode>();
 
-        /**
-         * The groups in the ZigBee network.
-         */
+        /// <summary>
+        /// The groups in the ZigBee network
+        /// </summary>
         private Dictionary<ushort, ZigBeeGroupAddress> _networkGroups = new Dictionary<ushort, ZigBeeGroupAddress>();
 
-        /**
-         * The node listeners of the ZigBee network. Registered listeners will be
-         * notified of additions, deletions and changes to {@link ZigBeeNode}s.
-         */
+        /// <summary>
+        /// The node listeners of the ZigBee network. Registered listeners will be
+        /// notified of additions, deletions and changes to ZigBeeNodes.
+        /// </summary>
         private ReadOnlyCollection<IZigBeeNetworkNodeListener> _nodeListeners;
 
-        /**
-         * The announce listeners are notified whenever a new device is discovered.
-         * This can be called from the transport layer, or internally by methods watching
-         * the network state.
-         */
+        /// <summary>
+        /// The announce listeners are notified whenever a new device is discovered.
+        /// This can be called from the transport layer, or internally by methods watching
+        /// the network state.
+        /// </summary>
         private ReadOnlyCollection<IZigBeeAnnounceListener> _announceListeners;
 
-        /**
-         * {@link AtomicInteger} used to generate transaction sequence numbers
-         */
+        /// <summary>
+        /// AtomicInteger used to generate transaction sequence numbers
+        /// </summary>
         private static volatile int _sequenceNumber;
 
-        /**
-         * {@link AtomicInteger} used to generate APS header counters
-         */
+        /// <summary>
+        /// AtomicInteger used to generate APS header counters
+        /// </summary>
         private static volatile int _apsCounter;
 
-        /**
-         * The network state serializer
-         */
+        /// <summary>
+        /// The ZigBeeCommandNotifier. This is used for sending notifications asynchronously to listeners.
+        /// </summary>
+        private ZigBeeCommandNotifier _commandNotifier = new ZigBeeCommandNotifier();
+
+        /// <summary>
+        /// The listeners of the ZigBee network state.
+        /// </summary>
+        private ReadOnlyCollection<IZigBeeNetworkStateListener> _stateListeners;
+
+        /// <summary>
+        /// A Set used to remember if node discovery has been completed. This is used to manage the lifecycle notifications.
+        /// </summary>
+        private List<IeeeAddress> _nodeDiscoveryComplete = new List<IeeeAddress>();
+
+        /// <summary>
+        /// List of ZigBeeNetworkExtensions that are available to this network. Extensions are added
+        /// with the #addApplication(ZigBeeNetworkExtension extension)} method.
+        /// </summary>
+        private List<IZigBeeNetworkExtension> _extensions = new List<IZigBeeNetworkExtension>();
+
+        /// <summary>
+        /// A ClusterMatcher used to respond to the {@link MatchDescriptorRequest} command.
+        /// </summary>
+        private ClusterMatcher _clusterMatcher = null;
+
+        /// <summary>
+        /// Map of allowable state transitions
+        /// </summary>
+        private Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> validStateTransitions;
+
+        /// <summary>
+        /// Our local network address
+        /// </summary>
+        private ushort LocalNwkAddress = 0;
+        private object _networkStateSync = new object();
+
+        /// <summary>
+        /// The network state serializer
+        /// </summary>
         public IZigBeeNetworkStateSerializer NetworkStateSerializer { get; set; }
 
-        ///**
-        // * Executor service to execute update threads for discovery or mesh updates etc.
-        // * We use a {@link Executors.newScheduledThreadPool} to provide a fixed number of threads as otherwise this could
-        // * result in a large number of simultaneous threads in large networks.
-        // */
+        /// <summary>
+        /// Executor service to execute update threads for discovery or mesh updates etc.
+        /// We use a {@link Executors.newScheduledThreadPool} to provide a fixed number of threads as otherwise this could
+        /// result in a large number of simultaneous threads in large networks.
+        /// </summary>
         //private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(6);
 
-        /**
-         * The {@link IZigBeeTransportTransmit} implementation. This provides the interface
-         * for sending data to the network which is an implementation of a ZigBee
-         * interface (eg a Dongle).
-         */
+        /// <summary>
+        /// The {@link IZigBeeTransportTransmit} implementation. This provides the interface
+        /// for sending data to the network which is an implementation of a ZigBee
+        /// interface (eg a Dongle).
+        /// </summary>
         public IZigBeeTransportTransmit Transport { get; set; }
 
-        /**
-        * The serializer class used to serialize commands to data packets
-        */
+        /// <summary>
+        /// The serializer class used to serialize commands to data packets
+        /// </summary>
         public IZigBeeSerializer Serializer { get; set; }
 
-        /**
-         * The deserializer class used to deserialize commands from data packets
-         */
+        /// <summary>
+        /// The deserializer class used to deserialize commands from data packets
+        /// </summary>
         public IZigBeeDeserializer Deserializer { get; set; }
 
-        /**
-         * The current {@link ZigBeeTransportState}
-         */
+        /// <summary>
+        /// The current {@link ZigBeeTransportState}
+        /// </summary>
         public ZigBeeTransportState NetworkState { get; set; }
 
-        /**
-         * Our local {@link IeeeAddress}
-         */
+        /// <summary>
+        /// Our local {@link IeeeAddress}
+        /// </summary>
         public IeeeAddress LocalIeeeAddress { get; set; }
 
         public ZigBeeChannel ZigbeeChannel
@@ -154,11 +190,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets the ZigBee PAN ID currently in use by the transport
-         *
-         * @return the PAN ID
-         */
+        /// <summary>
+        /// Gets the ZigBee PAN ID currently in use by the transport
+        ///
+        /// @return the PAN ID
+        /// </summary>
         public ushort ZigBeePanId
         {
             get
@@ -167,11 +203,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Get the transport layer version string
-         *
-         * @return {@link String} containing the transport layer version
-         */
+        /// <summary>
+        /// Get the transport layer version string
+        ///
+        /// @return {@link String} containing the transport layer version
+        /// </summary>
         public string TransportVersionString
         {
             get
@@ -180,11 +216,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets the current Trust Centre link key used by the system
-         *
-         * @return the current trust centre link {@link ZigBeeKey}
-         */
+        /// <summary>
+        /// Gets the current Trust Centre link key used by the system
+        ///
+        /// @return the current trust centre link {@link ZigBeeKey}
+        /// </summary>
         public ZigBeeKey ZigBeeLinkKey
         {
             get
@@ -193,11 +229,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets a {@link Set} of {@link ZigBeeNode}s known by the network
-         *
-         * @return {@link Set} of {@link ZigBeeNode}s
-         */
+        /// <summary>
+        /// Gets a {@link Set} of {@link ZigBeeNode}s known by the network
+        ///
+        /// @return {@link Set} of {@link ZigBeeNode}s
+        /// </summary>
         public List<ZigBeeNode> Nodes
         {
             get
@@ -209,65 +245,26 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * The {@link ZigBeeCommandNotifier}. This is used for sending notifications asynchronously to listeners.
-         */
-        private ZigBeeCommandNotifier _commandNotifier = new ZigBeeCommandNotifier();
-
-        /**
-         * The listeners of the ZigBee network state.
-         */
-        private ReadOnlyCollection<IZigBeeNetworkStateListener> _stateListeners;
-
-        /**
-         * A Set used to remember if node discovery has been completed. This is used to manage the lifecycle notifications.
-         */
-        private List<IeeeAddress> _nodeDiscoveryComplete = new List<IeeeAddress>();
-
-        /**
-         * List of {@link ZigBeeNetworkExtension}s that are available to this network. Extensions are added
-         * with the {@link #addApplication(ZigBeeNetworkExtension extension)} method.
-         */
-        private List<IZigBeeNetworkExtension> _extensions = new List<IZigBeeNetworkExtension>();
-
-        /**
-         * A ClusterMatcher used to respond to the {@link MatchDescriptorRequest} command.
-         */
-        private ClusterMatcher _clusterMatcher = null;
-
-        /**
-         * Map of allowable state transitions
-         */
-        private Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> validStateTransitions;
-
-        /**
-         * Our local network address
-         */
-        private ushort LocalNwkAddress = 0;
-        private object _networkStateSync = new object();
-
         public enum ZigBeeInitializeResponse
         {
-            /**
-             * Device is initialized successfully and is currently joined to a network
-             */
+            /// <summary>
+            /// Device is initialized successfully and is currently joined to a network
+            /// </summary>
             JOINED,
-            /**
-             * Device initialization failed
-             */
+            /// <summary>
+            /// Device initialization failed
+            /// </summary>
             FAILED,
-            /**
-             * Device is initialized successfully and is currently not joined to a network
-             */
+            /// <summary>
+            /// Device is initialized successfully and is currently not joined to a network
+            /// </summary>
             NOT_JOINED
         }
 
-        /**
-         * Constructor which configures serial port and ZigBee network.
-         *
-         * @param transport the dongle
-         * @param resetNetwork whether network is to be reset
-         */
+        /// <summary>
+        /// Constructor which configures serial port and ZigBee network.
+        /// </summary>
+        /// <param name="transport">Transport the dongle</param>
         public ZigBeeNetworkManager(IZigBeeTransportTransmit transport)
         {
             List<IZigBeeNetworkStateListener> stateListeners = new List<IZigBeeNetworkStateListener>();
@@ -294,27 +291,26 @@ namespace ZigBeeNet
             transport.SetZigBeeTransportReceive(this);
         }
 
-        /**
-         * Initializes ZigBee manager components and initializes the transport layer.
-         * 
-         * If a network state was previously serialized, it will be deserialized here if the serializer is set with the
-         * {@link #setNetworkStateSerializer} method.
-         * 
-         * Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
-         * includes -:
-         * 
-         * {@link #getZigBeeChannel}
-         * {@link #setZigBeeChannel}
-         * {@link #getZigBeePanId}
-         * {@link #setZigBeePanId}
-         * {@link #getZigBeeExtendedPanId}
-         * {@link #setZigBeeExtendedPanId}
-         *
-         *
-         * Once all transport initialization is complete, {@link #startup} must be called.
-         *
-         * @return {@link ZigBeeStatus}
-         */
+        /// <summary>
+        /// Initializes ZigBee manager components and initializes the transport layer.
+        /// 
+        /// If a network state was previously serialized, it will be deserialized here if the serializer is set with the
+        /// {@link #setNetworkStateSerializer} method.
+        /// 
+        /// Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
+        /// includes -:
+        /// 
+        /// {@link #getZigBeeChannel}
+        /// {@link #setZigBeeChannel}
+        /// {@link #getZigBeePanId}
+        /// {@link #setZigBeePanId}
+        /// {@link #getZigBeeExtendedPanId}
+        /// {@link #setZigBeeExtendedPanId}
+        /// 
+        /// 
+        /// Once all transport initialization is complete, {@link #startup} must be called.
+        /// </summary>
+        /// <returns>Status</returns>
         public ZigBeeStatus Initialize()
         {
             SetNetworkState(ZigBeeTransportState.UNINITIALISED);
@@ -360,32 +356,32 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Sets the ZigBee RF channel. The allowable channel range is 11 to 26 for 2.4GHz, however the transport
-         * implementation may allow any value it supports.
-         * <p>
-         * Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
-         * call.
-         *
-         * @param channel {@link int} defining the channel to use
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Sets the ZigBee RF channel.The allowable channel range is 11 to 26 for 2.4GHz, however the transport
+        /// implementation may allow any value it supports.
+        /// <p>
+        /// Note that this method may only be called following the {
+        ///  @link #initialize} call, and before the {@link #startup}
+        /// call.
+        /// </summary>
+        /// <param name="channel">Defining the channel to use</param>
+        /// <returns>Status</returns>
         public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel)
         {
             return Transport.SetZigBeeChannel(channel);
         }
 
-        /**
-         * Sets the ZigBee PAN ID to the specified value. The range of the PAN ID is 0 to 0x3FFF.
-         * Additionally a value of 0xFFFF is allowed to indicate the user doesn't care and a random value
-         * can be set by the transport.
-         * <p>
-         * Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
-         * call.
-         *
-         * @param panId the new PAN ID
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Sets the ZigBee PAN ID to the specified value. The range of the PAN ID is 0 to 0x3FFF.
+        /// Additionally a value of 0xFFFF is allowed to indicate the user doesn't care and a random value
+        /// can be set by the transport.
+        /// <p>
+        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// call.
+        ///
+        /// @param panId the new PAN ID
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus SetZigBeePanId(ushort panId)
         {
             if (panId < 0 || panId > 0xfffe)
@@ -395,11 +391,11 @@ namespace ZigBeeNet
             return Transport.SetZigBeePanId(panId);
         }
 
-        /**
-         * Gets the ZigBee Extended PAN ID currently in use by the transport
-         *
-         * @return the PAN ID
-         */
+        /// <summary>
+        /// Gets the ZigBee Extended PAN ID currently in use by the transport
+        ///
+        /// @return the PAN ID
+        /// </summary>
         public ExtendedPanId ZigBeeExtendedPanId
         {
             get
@@ -408,39 +404,39 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Sets the ZigBee Extended PAN ID to the specified value
-         * <p>
-         * Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
-         * call.
-         *
-         * @param panId the new {@link ExtendedPanId}
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Sets the ZigBee Extended PAN ID to the specified value
+        /// <p>
+        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// call.
+        ///
+        /// @param panId the new {@link ExtendedPanId}
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus SetZigBeeExtendedPanId(ExtendedPanId panId)
         {
             return Transport.SetZigBeeExtendedPanId(panId);
         }
 
-        /**
-         * Set the current network key in use by the system.
-         * <p>
-         * Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
-         * call.
-         *
-         * @param key the new network key as {@link ZigBeeKey}
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Set the current network key in use by the system.
+        /// <p>
+        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// call.
+        ///
+        /// @param key the new network key as {@link ZigBeeKey}
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key)
         {
             return Transport.SetZigBeeNetworkKey(key);
         }
 
-        /**
-         * Gets the current network key used by the system
-         *
-         * @return the current network {@link ZigBeeKey}
-         */
+        /// <summary>
+        /// Gets the current network key used by the system
+        ///
+        /// @return the current network {@link ZigBeeKey}
+        /// </summary>
         public ZigBeeKey ZigBeeNetworkKey
         {
             get
@@ -449,27 +445,27 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Set the current link key in use by the system.
-         * <p>
-         * Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
-         * call.
-         *
-         * @param key the new link key as {@link ZigBeeKey}
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Set the current link key in use by the system.
+        /// <p>
+        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// call.
+        ///
+        /// @param key the new link key as {@link ZigBeeKey}
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus SetZigBeeLinkKey(ZigBeeKey key)
         {
             return Transport.SetTcLinkKey(key);
         }
-        
-        /**
-         * Adds an installation key for the specified address. The {@link ZigBeeKey} should have an address associated with
-         * it.
-         *
-         * @param key the install key as {@link ZigBeeKey} to be used. The key must contain a partner address.
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+
+        /// <summary>
+        /// Adds an installation key for the specified address. The {@link ZigBeeKey} should have an address associated with
+        /// it.
+        ///
+        /// @param key the install key as {@link ZigBeeKey} to be used. The key must contain a partner address.
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus SetZigBeeInstallKey(ZigBeeKey key)
         {
             if (!key.HasAddress())
@@ -482,14 +478,14 @@ namespace ZigBeeNet
             return config.GetResult(TransportConfigOption.INSTALL_KEY);
         }
 
-        /**
-         * Starts up ZigBee manager components.
-         * <p>
-         *
-         * @param reinitialize true if the provider is to reinitialise the network with the parameters configured since the
-         *            {@link #initialize} method was called.
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Starts up ZigBee manager components.
+        /// <p>
+        ///
+        /// @param reinitialize true if the provider is to reinitialise the network with the parameters configured since the
+        ///            {@link #initialize} method was called.
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus Startup(bool reinitialize)
         {
             ZigBeeStatus status = Transport.Startup(reinitialize);
@@ -502,9 +498,9 @@ namespace ZigBeeNet
             return ZigBeeStatus.SUCCESS;
         }
 
-        /**
-         * Shuts down ZigBee manager components.
-         */
+        /// <summary>
+        /// Shuts down ZigBee manager components.
+        /// </summary>
         public void Shutdown()
         {
             //executorService.shutdownNow();
@@ -530,13 +526,13 @@ namespace ZigBeeNet
             Transport.Shutdown();
         }
 
-        /**
-         * Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
-         *
-         * @param runnableTask the {@link Runnable} to execute
-         * @param delay the delay in milliseconds before the task will be executed
-         * @return the {@link ScheduledFuture} for the scheduled task
-         */
+        /// <summary>
+        /// Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
+        ///
+        /// @param runnableTask the {@link Runnable} to execute
+        /// @param delay the delay in milliseconds before the task will be executed
+        /// @return the {@link ScheduledFuture} for the scheduled task
+        /// </summary>
         public async Task ScheduleTask(Task runnableTask, int delay, CancellationTokenSource cancellation)
         {
             if (NetworkState != ZigBeeTransportState.ONLINE)
@@ -550,41 +546,6 @@ namespace ZigBeeNet
             }
             return;
         }
-
-        /**
-         * Stops the current execution of a task and schedules a runnable task for execution again.
-         * This uses a fixed size scheduler to limit thread execution.
-         *
-         * @param futureTask the {@link ScheduledFuture} for the current scheduled task
-         * @param runnableTask the {@link Runnable} to execute
-         * @param delay the delay in milliseconds before the task will be executed
-         * @return the {@link ScheduledFuture} for the scheduled task
-         */
-        //public Task RescheduleTask(Task runnableTask, long delay)
-        //{
-        //    if (NetworkState != ZigBeeTransportState.ONLINE)
-        //    {
-        //        return null;
-        //    }
-
-        //    runnableTask.Start(); //executorService.schedule(runnableTask, delay, TimeUnit.MILLISECONDS);
-
-        //    return runnableTask;
-        //}
-
-        /**
-         * Schedules a runnable task for periodic execution. This uses a fixed size scheduler to limit thread execution
-         * resources.
-         *
-         * @param runnableTask the {@link Runnable} to execute
-         * @param initialDelay the delay in milliseconds before the task will be executed
-         * @param period the period in milliseconds between each subsequent execution
-         * @return the {@link ScheduledFuture} for the scheduled task
-         */
-        //public ScheduledFuture<?> scheduleTask(Runnable runnableTask, long initialDelay, long period)
-        //{
-        //    return executorService.scheduleAtFixedRate(runnableTask, initialDelay, period, TimeUnit.MILLISECONDS);
-        //}
 
         public int SendCommand(ZigBeeCommand command)
         {
@@ -806,12 +767,12 @@ namespace ZigBeeNet
             return command;
         }
 
-        /**
-         * Add a {@link IZigBeeAnnounceListener} that will be notified whenever a new device is detected
-         * on the network.
-         *
-         * @param statusListener the new {@link IZigBeeAnnounceListener} to add
-         */
+        /// <summary>
+        /// Add a {@link IZigBeeAnnounceListener} that will be notified whenever a new device is detected
+        /// on the network.
+        ///
+        /// @param statusListener the new {@link IZigBeeAnnounceListener} to add
+        /// </summary>
         public void AddAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
             List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(_announceListeners);
@@ -819,11 +780,11 @@ namespace ZigBeeNet
             _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
         }
 
-        /**
-         * Remove a {@link IZigBeeAnnounceListener}
-         *
-         * @param statusListener the new {@link IZigBeeAnnounceListener} to remove
-         */
+        /// <summary>
+        /// Remove a {@link IZigBeeAnnounceListener}
+        ///
+        /// @param statusListener the new {@link IZigBeeAnnounceListener} to remove
+        /// </summary>
         public void RemoveAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
             List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(
@@ -880,11 +841,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Adds a {@link IZigBeeNetworkStateListener} to receive notifications when the network state changes.
-         *
-         * @param stateListener the {@link IZigBeeNetworkStateListener} to receive the notifications
-         */
+        /// <summary>
+        /// Adds a {@link IZigBeeNetworkStateListener} to receive notifications when the network state changes.
+        ///
+        /// @param stateListener the {@link IZigBeeNetworkStateListener} to receive the notifications
+        /// </summary>
         public void AddNetworkStateListener(IZigBeeNetworkStateListener stateListener)
         {
             List<IZigBeeNetworkStateListener> modifiedStateListeners = new List<IZigBeeNetworkStateListener>(_stateListeners);
@@ -892,11 +853,11 @@ namespace ZigBeeNet
             _stateListeners = new List<IZigBeeNetworkStateListener>(modifiedStateListeners).AsReadOnly();
         }
 
-        /**
-         * Removes a {@link IZigBeeNetworkStateListener}.
-         *
-         * @param stateListener the {@link IZigBeeNetworkStateListener} to stop receiving the notifications
-         */
+        /// <summary>
+        /// Removes a {@link IZigBeeNetworkStateListener}.
+        ///
+        /// @param stateListener the {@link IZigBeeNetworkStateListener} to stop receiving the notifications
+        /// </summary>
         public void RemoveNetworkStateListener(IZigBeeNetworkStateListener stateListener)
         {
             List<IZigBeeNetworkStateListener> modifiedStateListeners = new List<IZigBeeNetworkStateListener>(_stateListeners);
@@ -986,13 +947,13 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Sends {@link ZclCommand} command to {@link ZigBeeAddress}.
-         *
-         * @param destination the destination
-         * @param command the {@link ZclCommand}
-         * @return the command result future
-         */
+        /// <summary>
+        /// Sends {@link ZclCommand} command to {@link ZigBeeAddress}.
+        ///
+        /// @param destination the destination
+        /// @param command the {@link ZclCommand}
+        /// @return the command result future
+        /// </summary>
         public async Task<CommandResult> Send(IZigBeeAddress destination, ZclCommand command)
         {
             command.DestinationAddress = destination;
@@ -1007,12 +968,12 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Broadcasts command i.e. does not wait for response.
-         *
-         * @param command the {@link ZigBeeCommand}
-         * @return the {@link CommandResult} future.
-         */
+        /// <summary>
+        /// Broadcasts command i.e. does not wait for response.
+        ///
+        /// @param command the {@link ZigBeeCommand}
+        /// @return the {@link CommandResult} future.
+        /// </summary>
         private Task<CommandResult> Broadcast(ZigBeeCommand command)
         {
             return Task.Run(() =>
@@ -1029,32 +990,32 @@ namespace ZigBeeNet
             });
         }
 
-        /**
-         * Enables or disables devices to join the whole network.
-         * 
-         * Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
-         * since it allows devices to join the network without the installer knowing.
-         *
-         * @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
-         *            value of 255 is not permitted and will be ignored.
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Enables or disables devices to join the whole network.
+        /// 
+        /// Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
+        /// since it allows devices to join the network without the installer knowing.
+        ///
+        /// @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
+        ///            value of 255 is not permitted and will be ignored.
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus PermitJoin(byte duration)
         {
             return PermitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ROUTERS_AND_COORD).Key), duration);
         }
 
-        /**
-         * Enables or disables devices to join the network.
-         * 
-         * Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
-         * since it allows devices to join the network without the installer knowing.
-         *
-         * @param destination the {@link ZigBeeEndpointAddress} to send the join request to
-         * @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
-         *            value of 255 is not permitted and will be ignored.
-         * @return {@link ZigBeeStatus} with the status of function
-         */
+        /// <summary>
+        /// Enables or disables devices to join the network.
+        /// 
+        /// Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
+        /// since it allows devices to join the network without the installer knowing.
+        ///
+        /// @param destination the {@link ZigBeeEndpointAddress} to send the join request to
+        /// @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
+        ///            value of 255 is not permitted and will be ignored.
+        /// @return {@link ZigBeeStatus} with the status of function
+        /// </summary>
         public ZigBeeStatus PermitJoin(ZigBeeEndpointAddress destination, byte duration)
         {
             if (duration < 0 || duration >= 255)
@@ -1092,13 +1053,13 @@ namespace ZigBeeNet
             return ZigBeeStatus.SUCCESS;
         }
 
-        /**
-         * Sends a ZDO Leave Request to a device requesting that an end device leave the network.
-         *
-         * @param destinationAddress the network address to send the request to - this is the device parent or the the
-         *            device we want to leave.
-         * @param leaveAddress the {@link IeeeAddress} of the end device we want to leave the network
-         */
+        /// <summary>
+        /// Sends a ZDO Leave Request to a device requesting that an end device leave the network.
+        ///
+        /// @param destinationAddress the network address to send the request to - this is the device parent or the the
+        ///            device we want to leave.
+        /// @param leaveAddress the {@link IeeeAddress} of the end device we want to leave the network
+        /// </summary>
         public void Leave(ushort destinationAddress, IeeeAddress leaveAddress)
         {
             ManagementLeaveRequest command = new ManagementLeaveRequest();
@@ -1185,11 +1146,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Adds a {@link IZigBeeNetworkNodeListener} that will be notified when node information changes
-         *
-         * @param networkNodeListener the {@link IZigBeeNetworkNodeListener} to add
-         */
+        /// <summary>
+        /// Adds a {@link IZigBeeNetworkNodeListener} that will be notified when node information changes
+        ///
+        /// @param networkNodeListener the {@link IZigBeeNetworkNodeListener} to add
+        /// </summary>
         public void AddNetworkNodeListener(IZigBeeNetworkNodeListener networkNodeListener)
         {
             if (networkNodeListener == null)
@@ -1204,11 +1165,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Removes a {@link IZigBeeNetworkNodeListener} that will be notified when node information changes
-         *
-         * @param networkNodeListener the {@link IZigBeeNetworkNodeListener} to remove
-         */
+        /// <summary>
+        /// Removes a {@link IZigBeeNetworkNodeListener} that will be notified when node information changes
+        ///
+        /// @param networkNodeListener the {@link IZigBeeNetworkNodeListener} to remove
+        /// </summary>
         public void RemoveNetworkNodeListener(IZigBeeNetworkNodeListener networkNodeListener)
         {
             lock (_nodeListeners)
@@ -1219,28 +1180,29 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Starts a rediscovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
-         * the response to trigger a full discovery.
-         *
-         * @param ieeeAddress the {@link IeeeAddress} of the node to rediscover
-         */
+        /// <summary>
+        /// Starts a rediscovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
+        /// the response to trigger a full discovery.
+        ///
+        /// @param ieeeAddress the {@link IeeeAddress} of the node to rediscover
+        /// </summary>
         public void RediscoverNode(IeeeAddress address)
         {
 
             ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)GetExtension(typeof(ZigBeeDiscoveryExtension));
-            if (networkDiscoverer == null) {
+            if (networkDiscoverer == null)
+            {
                 return;
             }
             networkDiscoverer.RediscoverNode(address);
         }
 
-        /**
-         * Gets a node given the 16 bit network address
-         *
-         * @param networkAddress the 16 bit network address as {@link Integer}
-         * @return the {@link ZigBeeNode} or null if the node with the requested network address was not found
-         */
+        /// <summary>
+        /// Gets a node given the 16 bit network address
+        ///
+        /// @param networkAddress the 16 bit network address as {@link Integer}
+        /// @return the {@link ZigBeeNode} or null if the node with the requested network address was not found
+        /// </summary>
         public ZigBeeNode GetNode(ushort networkAddress)
         {
             lock (_networkNodes)
@@ -1256,12 +1218,12 @@ namespace ZigBeeNet
             return null;
         }
 
-        /**
-         * Gets a node given the {@link IeeeAddress}
-         *
-         * @param ieeeAddress the {@link IeeeAddress}
-         * @return the {@link ZigBeeNode} or null if the node was not found
-         */
+        /// <summary>
+        /// Gets a node given the {@link IeeeAddress}
+        ///
+        /// @param ieeeAddress the {@link IeeeAddress}
+        /// @return the {@link ZigBeeNode} or null if the node was not found
+        /// </summary>
         public ZigBeeNode GetNode(IeeeAddress ieeeAddress)
         {
             ZigBeeNode node = null;
@@ -1270,11 +1232,11 @@ namespace ZigBeeNet
             return node;
         }
 
-        /**
-         * Removes a {@link ZigBeeNode} from the network
-         *
-         * @param node the {@link ZigBeeNode} to remove - must not be null
-         */
+        /// <summary>
+        /// Removes a {@link ZigBeeNode} from the network
+        ///
+        /// @param node the {@link ZigBeeNode} to remove - must not be null
+        /// </summary>
         public void RemoveNode(ZigBeeNode node)
         {
             if (node == null)
@@ -1320,11 +1282,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Adds a {@link ZigBeeNode} to the network
-         *
-         * @param node the {@link ZigBeeNode} to add
-         */
+        /// <summary>
+        /// Adds a {@link ZigBeeNode} to the network
+        ///
+        /// @param node the {@link ZigBeeNode} to add
+        /// </summary>
         public void AddNode(ZigBeeNode node)
         {
             if (node == null)
@@ -1371,11 +1333,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Update a {@link ZigBeeNode} within the network
-         *
-         * @param node the {@link ZigBeeNode} to update
-         */
+        /// <summary>
+        /// Update a {@link ZigBeeNode} within the network
+        ///
+        /// @param node the {@link ZigBeeNode} to update
+        /// </summary>
         public void UpdateNode(ZigBeeNode node)
         {
             if (node == null)
@@ -1399,8 +1361,8 @@ namespace ZigBeeNet
                 // Return if there were no updates
                 if (!currentNode.UpdateNode(node))
                 {
-                     _logger.Debug("{IeeeAddress}: Node {NwkAddress} is not updated", node.IeeeAddress, node.NetworkAddress);
-                     return;
+                    _logger.Debug("{IeeeAddress}: Node {NwkAddress} is not updated", node.IeeeAddress, node.NetworkAddress);
+                    return;
                 }
             }
 
@@ -1437,13 +1399,13 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Adds a cluster to the list of clusters we will respond to with the {@link MatchDescriptorRequest}. Adding a
-         * cluster here is only required in order to respond to this request. Typically the application should provide
-         * further support for such clusters.
-         *
-         * @param cluster the supported cluster ID
-         */
+        /// <summary>
+        /// Adds a cluster to the list of clusters we will respond to with the {@link MatchDescriptorRequest}. Adding a
+        /// cluster here is only required in order to respond to this request. Typically the application should provide
+        /// further support for such clusters.
+        ///
+        /// @param cluster the supported cluster ID
+        /// </summary>
         public void AddSupportedCluster(ushort cluster)
         {
             _logger.Debug("Adding supported cluster {Cluster}", cluster);
@@ -1455,11 +1417,11 @@ namespace ZigBeeNet
             _clusterMatcher.AddCluster(cluster);
         }
 
-        /**
-         * Adds a functional extension to the network.
-         *
-         * @param extension the new {@link ZigBeeNetworkExtension}
-         */
+        /// <summary>
+        /// Adds a functional extension to the network.
+        ///
+        /// @param extension the new {@link ZigBeeNetworkExtension}
+        /// </summary>
         public void AddExtension(IZigBeeNetworkExtension extension)
         {
             lock (_extensions)
@@ -1475,13 +1437,13 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets a functional extension that has been registered with the network.
-         *
-         * @param <T> {@link ZigBeeNetworkExtension}
-         * @param requestedExtension the {@link ZigBeeNetworkExtension} to get
-         * @return the requested {@link ZigBeeNetworkExtension} if it exists, or null
-         */
+        /// <summary>
+        /// Gets a functional extension that has been registered with the network.
+        ///
+        /// @param <T> {@link ZigBeeNetworkExtension}
+        /// @param requestedExtension the {@link ZigBeeNetworkExtension} to get
+        /// @return the requested {@link ZigBeeNetworkExtension} if it exists, or null
+        /// </summary>
         public IZigBeeNetworkExtension GetExtension(Type requestedExtension)
         {
             foreach (IZigBeeNetworkExtension extensionCheck in _extensions)
@@ -1499,7 +1461,6 @@ namespace ZigBeeNet
         {
             SendCommand(command);
         }
-
 
         public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {

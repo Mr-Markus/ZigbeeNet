@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Read Attributes Command value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The read attributes command is generated when a device wishes to determine the * values of one or more attributes located on another device. Each attribute * identifier field shall contain the identifier of the attribute to be read. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Read Attributes Command value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The read attributes command is generated when a device wishes to determine the /// values of one or more attributes located on another device. Each attribute /// identifier field shall contain the identifier of the attribute to be read. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class ReadAttributesCommand : ZclCommand
        {
-           /**
-           * Identifiers command message field.
-           */
+           /// <summary>
+           /// Identifiers command message field.
+           /// </summary>
            public List<ushort> Identifiers { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ReadAttributesCommand()
            {
                GenericCommand = true;

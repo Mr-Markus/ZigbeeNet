@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management Routing Request value object class.
-     * 
-     * The Mgmt_Rtg_req is generated from a Local Device wishing to retrieve the
-     * contents of the Routing Table from the Remote Device. The destination
-     * addressing on this command shall be unicast only and the destination address
-     * must be that of the ZigBee Router or ZigBee Coordinator.
-     */
+    /// <summary>
+     /// Management Routing Request value object class.
+     /// 
+     /// The Mgmt_Rtg_req is generated from a Local Device wishing to retrieve the
+     /// contents of the Routing Table from the Remote Device. The destination
+     /// addressing on this command shall be unicast only and the destination address
+     /// must be that of the ZigBee Router or ZigBee Coordinator.
+     /// </summary>
     public class ManagementRoutingRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementRoutingRequest()
         {
             ClusterId = 0x0032;

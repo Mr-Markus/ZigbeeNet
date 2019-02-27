@@ -12,47 +12,47 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 
-/**
- * On/Offcluster implementation (Cluster ID 0x0006).
- *
- * Attributes and commands for switching devices between ‘On’ and ‘Off’ states. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// On/Offcluster implementation (Cluster ID 0x0006).
+ ///
+ /// Attributes and commands for switching devices between ‘On’ and ‘Off’ states. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclOnOffCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0006;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "On/Off";
 
-       /* Attribute constants */
-       /**
-        * The OnOff attribute has the following values: 0 = Off, 1 = On       */
+       //// Attribute constants /// </summary>
+       /// <summary>
+        /// The OnOff attribute has the following values: 0 = Off, 1 = On       /// </summary>
        public static ushort ATTR_ONOFF = 0x0000;
 
-       /**
-        * In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
-        * introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
-        * scene that is stored with group identifier 0 and scene identifier 0.        * <p>        * The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
-        * scene, and to prevent a second on command destroying the current settings by going back to the global scene.        * <p>        * The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
-        * such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.        * <p>        * The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       */
+       /// <summary>
+        /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
+        /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
+        /// scene that is stored with group identifier 0 and scene identifier 0.        /// <p>        /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
+        /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.        /// <p>        /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
+        /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.        /// <p>        /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       /// </summary>
        public static ushort ATTR_GLOBALSCENECONTROL = 0x4000;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_OFFTIME = 0x4001;
 
-       /**
-        * The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
-        * turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
-        * person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       */
+       /// <summary>
+        /// The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
+        /// turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
+        /// person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       /// </summary>
        public static ushort ATTR_OFFWAITTIME = 0x4002;
 
 
@@ -71,42 +71,42 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a On/Off cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a On/Off cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclOnOffCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /**
-       * Get the OnOff attribute [attribute ID0].
-       *
-       * The OnOff attribute has the following values: 0 = Off, 1 = On       *
-       * The attribute is of type bool.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OnOff attribute [attribute ID0].
+       ///
+       /// The OnOff attribute has the following values: 0 = Off, 1 = On       ///
+       /// The attribute is of type bool.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOnOffAsync()
        {
            return Read(_attributes[ATTR_ONOFF]);
        }
 
-       /**
-       * Synchronously Get the OnOff attribute [attribute ID0].
-       *
-       * The OnOff attribute has the following values: 0 = Off, 1 = On       *
-       * The attribute is of type bool.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OnOff attribute [attribute ID0].
+       ///
+       /// The OnOff attribute has the following values: 0 = Off, 1 = On       ///
+       /// The attribute is of type bool.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public bool GetOnOff(long refreshPeriod)
        {
            if (_attributes[ATTR_ONOFF].IsLastValueCurrent(refreshPeriod))
@@ -118,57 +118,57 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the OnOff attribute [attribute ID0].
-       *
-       * The OnOff attribute has the following values: 0 = Off, 1 = On       *
-       * The attribute is of type bool.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the OnOff attribute [attribute ID0].
+       ///
+       /// The OnOff attribute has the following values: 0 = Off, 1 = On       ///
+       /// The attribute is of type bool.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOnOffReporting(ushort minInterval, ushort maxInterval)
        {
            return SetReporting(_attributes[ATTR_ONOFF], minInterval, maxInterval);
        }
 
 
-       /**
-       * Get the GlobalSceneControl attribute [attribute ID16384].
-       *
-       * In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
-       * introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
-       * scene that is stored with group identifier 0 and scene identifier 0.       * <p>       * The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
-       * scene, and to prevent a second on command destroying the current settings by going back to the global scene.       * <p>       * The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
-       * such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.       * <p>       * The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       *
-       * The attribute is of type bool.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the GlobalSceneControl attribute [attribute ID16384].
+       ///
+       /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
+       /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
+       /// scene that is stored with group identifier 0 and scene identifier 0.       /// <p>       /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
+       /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.       /// <p>       /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
+       /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.       /// <p>       /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       ///
+       /// The attribute is of type bool.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetGlobalSceneControlAsync()
        {
            return Read(_attributes[ATTR_GLOBALSCENECONTROL]);
        }
 
-       /**
-       * Synchronously Get the GlobalSceneControl attribute [attribute ID16384].
-       *
-       * In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
-       * introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
-       * scene that is stored with group identifier 0 and scene identifier 0.       * <p>       * The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
-       * scene, and to prevent a second on command destroying the current settings by going back to the global scene.       * <p>       * The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
-       * such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.       * <p>       * The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       *
-       * The attribute is of type bool.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the GlobalSceneControl attribute [attribute ID16384].
+       ///
+       /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
+       /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
+       /// scene that is stored with group identifier 0 and scene identifier 0.       /// <p>       /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
+       /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.       /// <p>       /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
+       /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.       /// <p>       /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.       ///
+       /// The attribute is of type bool.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public bool GetGlobalSceneControl(long refreshPeriod)
        {
            if (_attributes[ATTR_GLOBALSCENECONTROL].IsLastValueCurrent(refreshPeriod))
@@ -180,45 +180,45 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OffTime attribute [attribute ID16385].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @param offTime the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OffTime attribute [attribute ID16385].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @param offTime the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOffTime(object value)
        {
            return Write(_attributes[ATTR_OFFTIME], value);
        }
 
 
-       /**
-       * Get the OffTime attribute [attribute ID16385].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OffTime attribute [attribute ID16385].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOffTimeAsync()
        {
            return Read(_attributes[ATTR_OFFTIME]);
        }
 
-       /**
-       * Synchronously Get the OffTime attribute [attribute ID16385].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OffTime attribute [attribute ID16385].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOffTime(long refreshPeriod)
        {
            if (_attributes[ATTR_OFFTIME].IsLastValueCurrent(refreshPeriod))
@@ -230,54 +230,54 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set the OffWaitTime attribute [attribute ID16386].
-       *
-       * The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
-       * turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
-       * person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @param offWaitTime the ushort attribute value to be set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set the OffWaitTime attribute [attribute ID16386].
+       ///
+       /// The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
+       /// turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
+       /// person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @param offWaitTime the ushort attribute value to be set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetOffWaitTime(object value)
        {
            return Write(_attributes[ATTR_OFFWAITTIME], value);
        }
 
 
-       /**
-       * Get the OffWaitTime attribute [attribute ID16386].
-       *
-       * The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
-       * turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
-       * person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OffWaitTime attribute [attribute ID16386].
+       ///
+       /// The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
+       /// turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
+       /// person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOffWaitTimeAsync()
        {
            return Read(_attributes[ATTR_OFFWAITTIME]);
        }
 
-       /**
-       * Synchronously Get the OffWaitTime attribute [attribute ID16386].
-       *
-       * The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
-       * turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
-       * person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is 
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OffWaitTime attribute [attribute ID16386].
+       ///
+       /// The OffWaitTime attribute specifies the length of time (in 1/10ths second) that the “off” state SHALL be guarded to prevent an on command
+       /// turning the device back to its “on” state (e.g., when leaving a room, the lights are turned off but an occupancy sensor detects the leaving
+       /// person and attempts to turn the lights back on). If this attribute is set to 0x0000, the device SHALL remain in its current state.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is 
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOffWaitTime(long refreshPeriod)
        {
            if (_attributes[ATTR_OFFWAITTIME].IsLastValueCurrent(refreshPeriod))
@@ -289,11 +289,11 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * The Off Command
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Off Command
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> OffCommand()
        {
            OffCommand command = new OffCommand();
@@ -301,11 +301,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The On Command
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The On Command
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> OnCommand()
        {
            OnCommand command = new OnCommand();
@@ -313,11 +313,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Toggle Command
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Toggle Command
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> ToggleCommand()
        {
            ToggleCommand command = new ToggleCommand();
@@ -325,14 +325,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Off With Effect Command
-       *
-       * The Off With Effect command allows devices to be turned off using enhanced ways of fading.       *
-       * @param effectIdentifier {@link byte} Effect Identifier
-       * @param effectVariant {@link byte} Effect Variant
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Off With Effect Command
+       ///
+       /// The Off With Effect command allows devices to be turned off using enhanced ways of fading.       ///
+       /// @param effectIdentifier {@link byte} Effect Identifier
+       /// @param effectVariant {@link byte} Effect Variant
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> OffWithEffectCommand(byte effectIdentifier, byte effectVariant)
        {
            OffWithEffectCommand command = new OffWithEffectCommand();
@@ -344,12 +344,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The On With Recall Global Scene Command
-       *
-       * The On With Recall Global Scene command allows the recall of the settings when the device was turned off.       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The On With Recall Global Scene Command
+       ///
+       /// The On With Recall Global Scene command allows the recall of the settings when the device was turned off.       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> OnWithRecallGlobalSceneCommand()
        {
            OnWithRecallGlobalSceneCommand command = new OnWithRecallGlobalSceneCommand();
@@ -357,15 +357,15 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The On With Timed Off Command
-       *
-       * The On With Timed Off command allows devices to be turned on for a specific duration       * with a guarded off duration so that SHOULD the device be subsequently switched off,       * further On With Timed Off commands, received during this time, are prevented from       * turning the devices back on. Note that the device can be periodically re-kicked by       * subsequent On With Timed Off commands, e.g., from an on/off sensor.       *
-       * @param onOffControl {@link byte} On Off Control
-       * @param onTime {@link ushort} On Time
-       * @param offWaitTime {@link ushort} Off Wait Time
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The On With Timed Off Command
+       ///
+       /// The On With Timed Off command allows devices to be turned on for a specific duration       /// with a guarded off duration so that SHOULD the device be subsequently switched off,       /// further On With Timed Off commands, received during this time, are prevented from       /// turning the devices back on. Note that the device can be periodically re-kicked by       /// subsequent On With Timed Off commands, e.g., from an on/off sensor.       ///
+       /// @param onOffControl {@link byte} On Off Control
+       /// @param onTime {@link ushort} On Time
+       /// @param offWaitTime {@link ushort} Off Wait Time
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> OnWithTimedOffCommand(byte onOffControl, ushort onTime, ushort offWaitTime)
        {
            OnWithTimedOffCommand command = new OnWithTimedOffCommand();

@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management LQI Request value object class.
-     * 
-     * The Mgmt_Lqi_req is generated from a Local Device wishing to obtain a
-     * neighbor list for the Remote Device along with associated LQI values to each
-     * neighbor. The destination addressing on this command shall be unicast only and
-     * the destination address must be that of a ZigBee Coordinator or ZigBee Router.
-     */
+    /// <summary>
+     /// Management LQI Request value object class.
+     /// 
+     /// The Mgmt_Lqi_req is generated from a Local Device wishing to obtain a
+     /// neighbor list for the Remote Device along with associated LQI values to each
+     /// neighbor. The destination addressing on this command shall be unicast only and
+     /// the destination address must be that of a ZigBee Coordinator or ZigBee Router.
+     /// </summary>
     public class ManagementLqiRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex;
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementLqiRequest()
         {
             ClusterId = 0x0031;

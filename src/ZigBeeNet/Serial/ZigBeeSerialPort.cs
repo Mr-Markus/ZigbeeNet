@@ -22,29 +22,29 @@ namespace ZigBeeNet.Serial
 
        // private ManualResetEventSlim _readResetEvent;
 
-        /**
-        * The circular fifo queue for receive data
-        */
+        /// <summary>
+        /// The circular fifo queue for receive data
+        /// </summary>
         private byte[] _buffer = new byte[512];
 
-        /**
-        * The receive buffer end pointer (where we put the newly received data)
-        */
+        /// <summary>
+        /// The receive buffer end pointer (where we put the newly received data)
+        /// </summary>
         private int _end = 0;
 
-        /**
-         * The receive buffer start pointer (where we take the data to pass to the application)
-         */
+        /// <summary>
+         /// The receive buffer start pointer (where we take the data to pass to the application)
+         /// </summary>
         private int _start = 0;
 
-        /**
-         * The length of the receive buffer
-         */
+        /// <summary>
+         /// The length of the receive buffer
+         /// </summary>
         private int _maxLength = 512;
 
-        /**
-         * Synchronisation object for buffer queue manipulation
-         */
+        /// <summary>
+         /// Synchronisation object for buffer queue manipulation
+         /// </summary>
         private object _bufferSynchronisationObject = new object();
 
         public string PortName { get; set; }

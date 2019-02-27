@@ -7,25 +7,25 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASZone;
 
-/**
- * Initiate Normal Operation Mode Command value object class.
- *
- * Cluster: IAS Zone. Command is sentTO the server.
- * This command is a specific command used for the IAS Zone cluster.
- *
- * Used to tell the IAS Zone server to commence normal operation mode. * <br> * Upon receipt, the IAS Zone server SHALL commence normal operational mode. * <br> * Any configurations and changes made (e.g., CurrentZoneSensitivityLevel attribute) to the IAS Zone server SHALL be retained. * <br> * Upon commencing normal operation mode, the IAS Zone server SHALL send a Zone Status Change Notification command updating the ZoneStatus
- * attribute Test bit to zero (i.e., “operation mode”). *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Initiate Normal Operation Mode Command value object class.
+ ///
+ /// Cluster: IAS Zone. Command is sentTO the server.
+ /// This command is a specific command used for the IAS Zone cluster.
+ ///
+ /// Used to tell the IAS Zone server to commence normal operation mode. /// <br> /// Upon receipt, the IAS Zone server SHALL commence normal operational mode. /// <br> /// Any configurations and changes made (e.g., CurrentZoneSensitivityLevel attribute) to the IAS Zone server SHALL be retained. /// <br> /// Upon commencing normal operation mode, the IAS Zone server SHALL send a Zone Status Change Notification command updating the ZoneStatus
+ /// attribute Test bit to zero (i.e., “operation mode”). ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {
        public class InitiateNormalOperationModeCommand : ZclCommand
        {
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public InitiateNormalOperationModeCommand()
            {
                GenericCommand = false;

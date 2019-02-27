@@ -8,13 +8,13 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class WriteAttributeStatusRecord : IZclListItemField
     {
-        /**
-         * The status.
-         */
+        /// <summary>
+         /// The status.
+         /// </summary>
         public byte Status;
-        /**
-         * The attribute identifier.
-         */
+        /// <summary>
+         /// The attribute identifier.
+         /// </summary>
         public ushort AttributeIdentifier;
 
 

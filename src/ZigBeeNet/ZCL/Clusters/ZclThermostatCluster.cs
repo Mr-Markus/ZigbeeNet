@@ -12,128 +12,128 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/**
- * Thermostatcluster implementation (Cluster ID 0x0201).
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Thermostatcluster implementation (Cluster ID 0x0201).
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclThermostatCluster : ZclCluster
    {
-       /**
-       * The ZigBee Cluster Library Cluster ID
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster ID
+       /// </summary>
        public static ushort CLUSTER_ID = 0x0201;
 
-       /**
-       * The ZigBee Cluster Library Cluster Name
-       */
+       /// <summary>
+       /// The ZigBee Cluster Library Cluster Name
+       /// </summary>
        public static string CLUSTER_NAME = "Thermostat";
 
-       /* Attribute constants */
-       /**
-        * LocalTemperature represents the temperature in degrees Celsius, as measured locally.       */
+       //// Attribute constants /// </summary>
+       /// <summary>
+        /// LocalTemperature represents the temperature in degrees Celsius, as measured locally.       /// </summary>
        public static ushort ATTR_LOCALTEMPERATURE = 0x0000;
 
-       /**
-        * OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       */
+       /// <summary>
+        /// OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       /// </summary>
        public static ushort ATTR_OUTDOORTEMPERATURE = 0x0001;
 
-       /**
-        * Occupancy specifies whether the heated/cooled space is occupied or not       */
+       /// <summary>
+        /// Occupancy specifies whether the heated/cooled space is occupied or not       /// </summary>
        public static ushort ATTR_OCCUPANCY = 0x0002;
 
-       /**
-        * The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be        * set to. This is a limitation imposed by the manufacturer.       */
+       /// <summary>
+        /// The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be        /// set to. This is a limitation imposed by the manufacturer.       /// </summary>
        public static ushort ATTR_ABSMINHEATSETPOINTLIMIT = 0x0003;
 
-       /**
-        * The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be        * set to. This is a limitation imposed by the manufacturer.       */
+       /// <summary>
+        /// The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be        /// set to. This is a limitation imposed by the manufacturer.       /// </summary>
        public static ushort ATTR_ABSMAXHEATSETPOINTLIMIT = 0x0004;
 
-       /**
-        * The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be        * set to. This is a limitation imposed by the manufacturer.       */
+       /// <summary>
+        /// The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be        /// set to. This is a limitation imposed by the manufacturer.       /// </summary>
        public static ushort ATTR_ABSMINCOOLSETPOINTLIMIT = 0x0005;
 
-       /**
-        * The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be        * set to. This is a limitation imposed by the manufacturer.       */
+       /// <summary>
+        /// The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be        /// set to. This is a limitation imposed by the manufacturer.       /// </summary>
        public static ushort ATTR_ABSMAXCOOLSETPOINTLIMIT = 0x0006;
 
-       /**
-        * The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI        * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the        * thermostat is in “off” or “heating” mode.       */
+       /// <summary>
+        /// The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI        /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the        /// thermostat is in “off” or “heating” mode.       /// </summary>
        public static ushort ATTR_PICOOLINGDEMAND = 0x0007;
 
-       /**
-        * The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI        * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the        * thermostat is in “off” or “cooling” mode.       */
+       /// <summary>
+        /// The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI        /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the        /// thermostat is in “off” or “cooling” mode.       /// </summary>
        public static ushort ATTR_PIHEATINGDEMAND = 0x0008;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_HVACSYSTEMTYPECONFIGURATION = 0x0009;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_LOCALTEMPERATURECALIBRATION = 0x0010;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_OCCUPIEDCOOLINGSETPOINT = 0x0011;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_OCCUPIEDHEATINGSETPOINT = 0x0012;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_UNOCCUPIEDCOOLINGSETPOINT = 0x0013;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_UNOCCUPIEDHEATINGSETPOINT = 0x0014;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_MINHEATSETPOINTLIMIT = 0x0015;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_MAXHEATSETPOINTLIMIT = 0x0016;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_MINCOOLSETPOINTLIMIT = 0x0017;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_MAXCOOLSETPOINTLIMIT = 0x0018;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_MINSETPOINTDEADBAND = 0x0019;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_REMOTESENSING = 0x001A;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_CONTROLSEQUENCEOFOPERATION = 0x001B;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_SYSTEMMODE = 0x001C;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_ALARMMASK = 0x001D;
 
-       /**
-       */
+       /// <summary>
+       /// </summary>
        public static ushort ATTR_THERMOSTATRUNNINGMODE = 0x001E;
 
-       /**
-        * This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes        * values. Each bit within the four bytes indicates the unique error.       */
+       /// <summary>
+        /// This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes        /// values. Each bit within the four bytes indicates the unique error.       /// </summary>
        public static ushort ATTR_ACERRORCODE = 0x0044;
 
 
@@ -174,42 +174,42 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /**
-       * Default constructor to create a Thermostat cluster.
-       *
-       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       */
+       /// <summary>
+       /// Default constructor to create a Thermostat cluster.
+       ///
+       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+       /// </summary>
        public ZclThermostatCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /**
-       * Get the LocalTemperature attribute [attribute ID0].
-       *
-       * LocalTemperature represents the temperature in degrees Celsius, as measured locally.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the LocalTemperature attribute [attribute ID0].
+       ///
+       /// LocalTemperature represents the temperature in degrees Celsius, as measured locally.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetLocalTemperatureAsync()
        {
            return Read(_attributes[ATTR_LOCALTEMPERATURE]);
        }
 
-       /**
-       * Synchronously Get the LocalTemperature attribute [attribute ID0].
-       *
-       * LocalTemperature represents the temperature in degrees Celsius, as measured locally.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the LocalTemperature attribute [attribute ID0].
+       ///
+       /// LocalTemperature represents the temperature in degrees Celsius, as measured locally.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetLocalTemperature(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCALTEMPERATURE].IsLastValueCurrent(refreshPeriod))
@@ -221,50 +221,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the LocalTemperature attribute [attribute ID0].
-       *
-       * LocalTemperature represents the temperature in degrees Celsius, as measured locally.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the LocalTemperature attribute [attribute ID0].
+       ///
+       /// LocalTemperature represents the temperature in degrees Celsius, as measured locally.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetLocalTemperatureReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_LOCALTEMPERATURE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /**
-       * Get the OutdoorTemperature attribute [attribute ID1].
-       *
-       * OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OutdoorTemperature attribute [attribute ID1].
+       ///
+       /// OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOutdoorTemperatureAsync()
        {
            return Read(_attributes[ATTR_OUTDOORTEMPERATURE]);
        }
 
-       /**
-       * Synchronously Get the OutdoorTemperature attribute [attribute ID1].
-       *
-       * OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OutdoorTemperature attribute [attribute ID1].
+       ///
+       /// OutdoorTemperature represents the temperature in degrees Celsius, as measured locally.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOutdoorTemperature(long refreshPeriod)
        {
            if (_attributes[ATTR_OUTDOORTEMPERATURE].IsLastValueCurrent(refreshPeriod))
@@ -276,31 +276,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the Occupancy attribute [attribute ID2].
-       *
-       * Occupancy specifies whether the heated/cooled space is occupied or not       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the Occupancy attribute [attribute ID2].
+       ///
+       /// Occupancy specifies whether the heated/cooled space is occupied or not       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOccupancyAsync()
        {
            return Read(_attributes[ATTR_OCCUPANCY]);
        }
 
-       /**
-       * Synchronously Get the Occupancy attribute [attribute ID2].
-       *
-       * Occupancy specifies whether the heated/cooled space is occupied or not       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the Occupancy attribute [attribute ID2].
+       ///
+       /// Occupancy specifies whether the heated/cooled space is occupied or not       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetOccupancy(long refreshPeriod)
        {
            if (_attributes[ATTR_OCCUPANCY].IsLastValueCurrent(refreshPeriod))
@@ -312,31 +312,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the AbsMinHeatSetpointLimit attribute [attribute ID3].
-       *
-       * The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the AbsMinHeatSetpointLimit attribute [attribute ID3].
+       ///
+       /// The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetAbsMinHeatSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_ABSMINHEATSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the AbsMinHeatSetpointLimit attribute [attribute ID3].
-       *
-       * The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the AbsMinHeatSetpointLimit attribute [attribute ID3].
+       ///
+       /// The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetAbsMinHeatSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_ABSMINHEATSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -348,31 +348,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the AbsMaxHeatSetpointLimit attribute [attribute ID4].
-       *
-       * The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the AbsMaxHeatSetpointLimit attribute [attribute ID4].
+       ///
+       /// The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetAbsMaxHeatSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_ABSMAXHEATSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the AbsMaxHeatSetpointLimit attribute [attribute ID4].
-       *
-       * The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the AbsMaxHeatSetpointLimit attribute [attribute ID4].
+       ///
+       /// The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetAbsMaxHeatSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_ABSMAXHEATSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -384,31 +384,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the AbsMinCoolSetpointLimit attribute [attribute ID5].
-       *
-       * The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the AbsMinCoolSetpointLimit attribute [attribute ID5].
+       ///
+       /// The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetAbsMinCoolSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_ABSMINCOOLSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the AbsMinCoolSetpointLimit attribute [attribute ID5].
-       *
-       * The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the AbsMinCoolSetpointLimit attribute [attribute ID5].
+       ///
+       /// The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetAbsMinCoolSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_ABSMINCOOLSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -420,31 +420,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the AbsMaxCoolSetpointLimit attribute [attribute ID6].
-       *
-       * The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the AbsMaxCoolSetpointLimit attribute [attribute ID6].
+       ///
+       /// The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetAbsMaxCoolSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_ABSMAXCOOLSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the AbsMaxCoolSetpointLimit attribute [attribute ID6].
-       *
-       * The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be       * set to. This is a limitation imposed by the manufacturer.       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the AbsMaxCoolSetpointLimit attribute [attribute ID6].
+       ///
+       /// The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint MAY be       /// set to. This is a limitation imposed by the manufacturer.       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetAbsMaxCoolSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_ABSMAXCOOLSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -456,31 +456,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the PICoolingDemand attribute [attribute ID7].
-       *
-       * The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “heating” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the PICoolingDemand attribute [attribute ID7].
+       ///
+       /// The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “heating” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetPICoolingDemandAsync()
        {
            return Read(_attributes[ATTR_PICOOLINGDEMAND]);
        }
 
-       /**
-       * Synchronously Get the PICoolingDemand attribute [attribute ID7].
-       *
-       * The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “heating” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the PICoolingDemand attribute [attribute ID7].
+       ///
+       /// The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “heating” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetPICoolingDemand(long refreshPeriod)
        {
            if (_attributes[ATTR_PICOOLINGDEMAND].IsLastValueCurrent(refreshPeriod))
@@ -492,50 +492,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the PICoolingDemand attribute [attribute ID7].
-       *
-       * The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “heating” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the PICoolingDemand attribute [attribute ID7].
+       ///
+       /// The PICoolingDemandattribute is 8 bits in length and specifies the level of cooling demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “heating” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetPICoolingDemandReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_PICOOLINGDEMAND], minInterval, maxInterval, reportableChange);
        }
 
 
-       /**
-       * Get the PIHeatingDemand attribute [attribute ID8].
-       *
-       * The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “cooling” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the PIHeatingDemand attribute [attribute ID8].
+       ///
+       /// The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “cooling” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetPIHeatingDemandAsync()
        {
            return Read(_attributes[ATTR_PIHEATINGDEMAND]);
        }
 
-       /**
-       * Synchronously Get the PIHeatingDemand attribute [attribute ID8].
-       *
-       * The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “cooling” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the PIHeatingDemand attribute [attribute ID8].
+       ///
+       /// The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “cooling” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetPIHeatingDemand(long refreshPeriod)
        {
            if (_attributes[ATTR_PIHEATINGDEMAND].IsLastValueCurrent(refreshPeriod))
@@ -547,48 +547,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Set reporting for the PIHeatingDemand attribute [attribute ID8].
-       *
-       * The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       * (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       * thermostat is in “off” or “cooling” mode.       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @param minInterval minimum reporting period
-       * @param maxInterval maximum reporting period
-       * @param reportableChange {@link Object} delta required to trigger report
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Set reporting for the PIHeatingDemand attribute [attribute ID8].
+       ///
+       /// The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI       /// (proportional  integral) control loop in use by the thermostat (if any), in percent.  This value is 0 when the       /// thermostat is in “off” or “cooling” mode.       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @param minInterval minimum reporting period
+       /// @param maxInterval maximum reporting period
+       /// @param reportableChange {@link Object} delta required to trigger report
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetPIHeatingDemandReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_PIHEATINGDEMAND], minInterval, maxInterval, reportableChange);
        }
 
 
-       /**
-       * Get the HVACSystemTypeConfiguration attribute [attribute ID9].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the HVACSystemTypeConfiguration attribute [attribute ID9].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetHVACSystemTypeConfigurationAsync()
        {
            return Read(_attributes[ATTR_HVACSYSTEMTYPECONFIGURATION]);
        }
 
-       /**
-       * Synchronously Get the HVACSystemTypeConfiguration attribute [attribute ID9].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the HVACSystemTypeConfiguration attribute [attribute ID9].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetHVACSystemTypeConfiguration(long refreshPeriod)
        {
            if (_attributes[ATTR_HVACSYSTEMTYPECONFIGURATION].IsLastValueCurrent(refreshPeriod))
@@ -600,29 +600,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the LocalTemperatureCalibration attribute [attribute ID16].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the LocalTemperatureCalibration attribute [attribute ID16].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetLocalTemperatureCalibrationAsync()
        {
            return Read(_attributes[ATTR_LOCALTEMPERATURECALIBRATION]);
        }
 
-       /**
-       * Synchronously Get the LocalTemperatureCalibration attribute [attribute ID16].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the LocalTemperatureCalibration attribute [attribute ID16].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetLocalTemperatureCalibration(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCALTEMPERATURECALIBRATION].IsLastValueCurrent(refreshPeriod))
@@ -634,29 +634,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the OccupiedCoolingSetpoint attribute [attribute ID17].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OccupiedCoolingSetpoint attribute [attribute ID17].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOccupiedCoolingSetpointAsync()
        {
            return Read(_attributes[ATTR_OCCUPIEDCOOLINGSETPOINT]);
        }
 
-       /**
-       * Synchronously Get the OccupiedCoolingSetpoint attribute [attribute ID17].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OccupiedCoolingSetpoint attribute [attribute ID17].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOccupiedCoolingSetpoint(long refreshPeriod)
        {
            if (_attributes[ATTR_OCCUPIEDCOOLINGSETPOINT].IsLastValueCurrent(refreshPeriod))
@@ -668,29 +668,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the OccupiedHeatingSetpoint attribute [attribute ID18].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the OccupiedHeatingSetpoint attribute [attribute ID18].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetOccupiedHeatingSetpointAsync()
        {
            return Read(_attributes[ATTR_OCCUPIEDHEATINGSETPOINT]);
        }
 
-       /**
-       * Synchronously Get the OccupiedHeatingSetpoint attribute [attribute ID18].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the OccupiedHeatingSetpoint attribute [attribute ID18].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetOccupiedHeatingSetpoint(long refreshPeriod)
        {
            if (_attributes[ATTR_OCCUPIEDHEATINGSETPOINT].IsLastValueCurrent(refreshPeriod))
@@ -702,29 +702,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the UnoccupiedCoolingSetpoint attribute [attribute ID19].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the UnoccupiedCoolingSetpoint attribute [attribute ID19].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetUnoccupiedCoolingSetpointAsync()
        {
            return Read(_attributes[ATTR_UNOCCUPIEDCOOLINGSETPOINT]);
        }
 
-       /**
-       * Synchronously Get the UnoccupiedCoolingSetpoint attribute [attribute ID19].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the UnoccupiedCoolingSetpoint attribute [attribute ID19].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetUnoccupiedCoolingSetpoint(long refreshPeriod)
        {
            if (_attributes[ATTR_UNOCCUPIEDCOOLINGSETPOINT].IsLastValueCurrent(refreshPeriod))
@@ -736,29 +736,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the UnoccupiedHeatingSetpoint attribute [attribute ID20].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the UnoccupiedHeatingSetpoint attribute [attribute ID20].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetUnoccupiedHeatingSetpointAsync()
        {
            return Read(_attributes[ATTR_UNOCCUPIEDHEATINGSETPOINT]);
        }
 
-       /**
-       * Synchronously Get the UnoccupiedHeatingSetpoint attribute [attribute ID20].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the UnoccupiedHeatingSetpoint attribute [attribute ID20].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetUnoccupiedHeatingSetpoint(long refreshPeriod)
        {
            if (_attributes[ATTR_UNOCCUPIEDHEATINGSETPOINT].IsLastValueCurrent(refreshPeriod))
@@ -770,29 +770,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MinHeatSetpointLimit attribute [attribute ID21].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MinHeatSetpointLimit attribute [attribute ID21].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMinHeatSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_MINHEATSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the MinHeatSetpointLimit attribute [attribute ID21].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MinHeatSetpointLimit attribute [attribute ID21].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetMinHeatSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_MINHEATSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -804,29 +804,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MaxHeatSetpointLimit attribute [attribute ID22].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MaxHeatSetpointLimit attribute [attribute ID22].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMaxHeatSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_MAXHEATSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the MaxHeatSetpointLimit attribute [attribute ID22].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MaxHeatSetpointLimit attribute [attribute ID22].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetMaxHeatSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXHEATSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -838,29 +838,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MinCoolSetpointLimit attribute [attribute ID23].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MinCoolSetpointLimit attribute [attribute ID23].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMinCoolSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_MINCOOLSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the MinCoolSetpointLimit attribute [attribute ID23].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MinCoolSetpointLimit attribute [attribute ID23].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetMinCoolSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_MINCOOLSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -872,29 +872,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MaxCoolSetpointLimit attribute [attribute ID24].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MaxCoolSetpointLimit attribute [attribute ID24].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMaxCoolSetpointLimitAsync()
        {
            return Read(_attributes[ATTR_MAXCOOLSETPOINTLIMIT]);
        }
 
-       /**
-       * Synchronously Get the MaxCoolSetpointLimit attribute [attribute ID24].
-       *
-       * The attribute is of type ushort.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MaxCoolSetpointLimit attribute [attribute ID24].
+       ///
+       /// The attribute is of type ushort.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public ushort GetMaxCoolSetpointLimit(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXCOOLSETPOINTLIMIT].IsLastValueCurrent(refreshPeriod))
@@ -906,29 +906,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the MinSetpointDeadBand attribute [attribute ID25].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the MinSetpointDeadBand attribute [attribute ID25].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetMinSetpointDeadBandAsync()
        {
            return Read(_attributes[ATTR_MINSETPOINTDEADBAND]);
        }
 
-       /**
-       * Synchronously Get the MinSetpointDeadBand attribute [attribute ID25].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the MinSetpointDeadBand attribute [attribute ID25].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetMinSetpointDeadBand(long refreshPeriod)
        {
            if (_attributes[ATTR_MINSETPOINTDEADBAND].IsLastValueCurrent(refreshPeriod))
@@ -940,29 +940,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the RemoteSensing attribute [attribute ID26].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the RemoteSensing attribute [attribute ID26].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetRemoteSensingAsync()
        {
            return Read(_attributes[ATTR_REMOTESENSING]);
        }
 
-       /**
-       * Synchronously Get the RemoteSensing attribute [attribute ID26].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the RemoteSensing attribute [attribute ID26].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetRemoteSensing(long refreshPeriod)
        {
            if (_attributes[ATTR_REMOTESENSING].IsLastValueCurrent(refreshPeriod))
@@ -974,29 +974,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the ControlSequenceOfOperation attribute [attribute ID27].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the ControlSequenceOfOperation attribute [attribute ID27].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetControlSequenceOfOperationAsync()
        {
            return Read(_attributes[ATTR_CONTROLSEQUENCEOFOPERATION]);
        }
 
-       /**
-       * Synchronously Get the ControlSequenceOfOperation attribute [attribute ID27].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the ControlSequenceOfOperation attribute [attribute ID27].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetControlSequenceOfOperation(long refreshPeriod)
        {
            if (_attributes[ATTR_CONTROLSEQUENCEOFOPERATION].IsLastValueCurrent(refreshPeriod))
@@ -1008,29 +1008,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the SystemMode attribute [attribute ID28].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the SystemMode attribute [attribute ID28].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetSystemModeAsync()
        {
            return Read(_attributes[ATTR_SYSTEMMODE]);
        }
 
-       /**
-       * Synchronously Get the SystemMode attribute [attribute ID28].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is MANDATORY
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the SystemMode attribute [attribute ID28].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is MANDATORY
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetSystemMode(long refreshPeriod)
        {
            if (_attributes[ATTR_SYSTEMMODE].IsLastValueCurrent(refreshPeriod))
@@ -1042,29 +1042,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the AlarmMask attribute [attribute ID29].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the AlarmMask attribute [attribute ID29].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetAlarmMaskAsync()
        {
            return Read(_attributes[ATTR_ALARMMASK]);
        }
 
-       /**
-       * Synchronously Get the AlarmMask attribute [attribute ID29].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the AlarmMask attribute [attribute ID29].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetAlarmMask(long refreshPeriod)
        {
            if (_attributes[ATTR_ALARMMASK].IsLastValueCurrent(refreshPeriod))
@@ -1076,29 +1076,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the ThermostatRunningMode attribute [attribute ID30].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the ThermostatRunningMode attribute [attribute ID30].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetThermostatRunningModeAsync()
        {
            return Read(_attributes[ATTR_THERMOSTATRUNNINGMODE]);
        }
 
-       /**
-       * Synchronously Get the ThermostatRunningMode attribute [attribute ID30].
-       *
-       * The attribute is of type byte.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the ThermostatRunningMode attribute [attribute ID30].
+       ///
+       /// The attribute is of type byte.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public byte GetThermostatRunningMode(long refreshPeriod)
        {
            if (_attributes[ATTR_THERMOSTATRUNNINGMODE].IsLastValueCurrent(refreshPeriod))
@@ -1110,31 +1110,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * Get the ACErrorCode attribute [attribute ID68].
-       *
-       * This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes       * values. Each bit within the four bytes indicates the unique error.       *
-       * The attribute is of type int.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Get the ACErrorCode attribute [attribute ID68].
+       ///
+       /// This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes       /// values. Each bit within the four bytes indicates the unique error.       ///
+       /// The attribute is of type int.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetACErrorCodeAsync()
        {
            return Read(_attributes[ATTR_ACERRORCODE]);
        }
 
-       /**
-       * Synchronously Get the ACErrorCode attribute [attribute ID68].
-       *
-       * This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes       * values. Each bit within the four bytes indicates the unique error.       *
-       * The attribute is of type int.
-       *
-       * The implementation of this attribute by a device is OPTIONAL
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// Synchronously Get the ACErrorCode attribute [attribute ID68].
+       ///
+       /// This indicates the type of errors encountered within the Mini Split AC. Error values are reported with four bytes       /// values. Each bit within the four bytes indicates the unique error.       ///
+       /// The attribute is of type int.
+       ///
+       /// The implementation of this attribute by a device is OPTIONAL
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public int GetACErrorCode(long refreshPeriod)
        {
            if (_attributes[ATTR_ACERRORCODE].IsLastValueCurrent(refreshPeriod))
@@ -1146,13 +1146,13 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /**
-       * The Setpoint Raise/Lower Command
-       *
-       * @param mode {@link byte} Mode
-       * @param amount {@link sbyte} Amount
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Setpoint Raise/Lower Command
+       ///
+       /// @param mode {@link byte} Mode
+       /// @param amount {@link sbyte} Amount
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetpointRaiseLowerCommand(byte mode, sbyte amount)
        {
            SetpointRaiseLowerCommand command = new SetpointRaiseLowerCommand();
@@ -1164,18 +1164,18 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Set Weekly Schedule
-       *
-       * The set weekly schedule command is used to update the thermostat weekly set point schedule from a management system.       * If the thermostat already has a weekly set point schedule programmed then it SHOULD replace each daily set point set       * as it receives the updates from the management system. For example if the thermostat has 4 set points for every day of       * the week and is sent a Set Weekly Schedule command with one set point for Saturday then the thermostat SHOULD remove       * all 4 set points for Saturday and replace those with the updated set point but leave all other days unchanged.       * <br>       * If the schedule is larger than what fits in one ZigBee frame or contains more than 10 transitions, the schedule SHALL       * then be sent using multipleSet Weekly Schedule Commands.       *
-       * @param numberOfTransitions {@link byte} Number of Transitions
-       * @param dayOfWeek {@link byte} Day of Week
-       * @param mode {@link byte} Mode
-       * @param transition {@link ushort} Transition
-       * @param heatSet {@link ushort} Heat Set
-       * @param coolSet {@link ushort} Cool Set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Set Weekly Schedule
+       ///
+       /// The set weekly schedule command is used to update the thermostat weekly set point schedule from a management system.       /// If the thermostat already has a weekly set point schedule programmed then it SHOULD replace each daily set point set       /// as it receives the updates from the management system. For example if the thermostat has 4 set points for every day of       /// the week and is sent a Set Weekly Schedule command with one set point for Saturday then the thermostat SHOULD remove       /// all 4 set points for Saturday and replace those with the updated set point but leave all other days unchanged.       /// <br>       /// If the schedule is larger than what fits in one ZigBee frame or contains more than 10 transitions, the schedule SHALL       /// then be sent using multipleSet Weekly Schedule Commands.       ///
+       /// @param numberOfTransitions {@link byte} Number of Transitions
+       /// @param dayOfWeek {@link byte} Day of Week
+       /// @param mode {@link byte} Mode
+       /// @param transition {@link ushort} Transition
+       /// @param heatSet {@link ushort} Heat Set
+       /// @param coolSet {@link ushort} Cool Set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> SetWeeklySchedule(byte numberOfTransitions, byte dayOfWeek, byte mode, ushort transition, ushort heatSet, ushort coolSet)
        {
            SetWeeklySchedule command = new SetWeeklySchedule();
@@ -1191,13 +1191,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Get Weekly Schedule
-       *
-       * @param daysToReturn {@link byte} Days To Return
-       * @param modeToReturn {@link byte} Mode To Return
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Get Weekly Schedule
+       ///
+       /// @param daysToReturn {@link byte} Days To Return
+       /// @param modeToReturn {@link byte} Mode To Return
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetWeeklySchedule(byte daysToReturn, byte modeToReturn)
        {
            GetWeeklySchedule command = new GetWeeklySchedule();
@@ -1209,11 +1209,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Clear Weekly Schedule
-       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Clear Weekly Schedule
+       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> ClearWeeklySchedule()
        {
            ClearWeeklySchedule command = new ClearWeeklySchedule();
@@ -1221,12 +1221,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Get Relay Status Log
-       *
-       * The Get Relay Status Log command is used to query the thermostat internal relay status log. This command has no payload.       * <br>       * The log storing order is First in First Out (FIFO) when the log is generated and stored into the Queue.       * <br>       * The first record in the log (i.e., the oldest) one, is the first to be replaced when there is a new record and there is       * no more space in the log. Thus, the newest record will overwrite the oldest one if there is no space left.       * <br>       * The log storing order is Last In First Out (LIFO) when the log is being retrieved from the Queue by a client device.       * Once the "Get Relay Status Log Response" frame is sent by the Server, the "Unread Entries" attribute       * SHOULD be decremented to indicate the number of unread records that remain in the queue.       * <br>       * If the "Unread Entries"attribute reaches zero and the Client sends a new "Get Relay Status Log Request", the Server       * MAY send one of the following items as a response:       * <br>       * i) resend the last Get Relay Status Log Response       * or       * ii) generate new log record at the time of request and send Get Relay Status Log Response with the new data       *
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Get Relay Status Log
+       ///
+       /// The Get Relay Status Log command is used to query the thermostat internal relay status log. This command has no payload.       /// <br>       /// The log storing order is First in First Out (FIFO) when the log is generated and stored into the Queue.       /// <br>       /// The first record in the log (i.e., the oldest) one, is the first to be replaced when there is a new record and there is       /// no more space in the log. Thus, the newest record will overwrite the oldest one if there is no space left.       /// <br>       /// The log storing order is Last In First Out (LIFO) when the log is being retrieved from the Queue by a client device.       /// Once the "Get Relay Status Log Response" frame is sent by the Server, the "Unread Entries" attribute       /// SHOULD be decremented to indicate the number of unread records that remain in the queue.       /// <br>       /// If the "Unread Entries"attribute reaches zero and the Client sends a new "Get Relay Status Log Request", the Server       /// MAY send one of the following items as a response:       /// <br>       /// i) resend the last Get Relay Status Log Response       /// or       /// ii) generate new log record at the time of request and send Get Relay Status Log Response with the new data       ///
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetRelayStatusLog()
        {
            GetRelayStatusLog command = new GetRelayStatusLog();
@@ -1234,17 +1234,17 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Get Weekly Schedule Response
-       *
-       * @param numberOfTransitions {@link byte} Number of Transitions
-       * @param dayOfWeek {@link byte} Day of Week
-       * @param mode {@link byte} Mode
-       * @param transition {@link ushort} Transition
-       * @param heatSet {@link ushort} Heat Set
-       * @param coolSet {@link ushort} Cool Set
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Get Weekly Schedule Response
+       ///
+       /// @param numberOfTransitions {@link byte} Number of Transitions
+       /// @param dayOfWeek {@link byte} Day of Week
+       /// @param mode {@link byte} Mode
+       /// @param transition {@link ushort} Transition
+       /// @param heatSet {@link ushort} Heat Set
+       /// @param coolSet {@link ushort} Cool Set
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetWeeklyScheduleResponse(byte numberOfTransitions, byte dayOfWeek, byte mode, ushort transition, ushort heatSet, ushort coolSet)
        {
            GetWeeklyScheduleResponse command = new GetWeeklyScheduleResponse();
@@ -1260,17 +1260,17 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /**
-       * The Get Relay Status Log Response
-       *
-       * @param timeOfDay {@link ushort} Time of day
-       * @param relayStatus {@link byte} Relay Status
-       * @param localTemperature {@link ushort} Local Temperature
-       * @param humidity {@link byte} Humidity
-       * @param setpoint {@link ushort} Setpoint
-       * @param unreadEntries {@link ushort} Unread Entries
-       * @return the Task<CommandResult> command result Task
-       */
+       /// <summary>
+       /// The Get Relay Status Log Response
+       ///
+       /// @param timeOfDay {@link ushort} Time of day
+       /// @param relayStatus {@link byte} Relay Status
+       /// @param localTemperature {@link ushort} Local Temperature
+       /// @param humidity {@link byte} Humidity
+       /// @param setpoint {@link ushort} Setpoint
+       /// @param unreadEntries {@link ushort} Unread Entries
+       /// @return the Task<CommandResult> command result Task
+       /// </summary>
        public Task<CommandResult> GetRelayStatusLogResponse(ushort timeOfDay, byte relayStatus, ushort localTemperature, byte humidity, ushort setpoint, ushort unreadEntries)
        {
            GetRelayStatusLogResponse command = new GetRelayStatusLogResponse();

@@ -8,9 +8,9 @@ using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 
 namespace ZigBeeNet.ZDO.Field
 {
-    /**
-     * Class representing the ZigBee neighbor table
-     */
+    /// <summary>
+     /// Class representing the ZigBee neighbor table
+     /// </summary>
     public class NeighborTable
     {
         public ExtendedPanId ExtendedPanId { get; private set; }
@@ -54,11 +54,11 @@ namespace ZigBeeNet.ZDO.Field
             UNKNOWN
         }
 
-        /**
-         * Deserialise the contents of the structure.
-         *
-         * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
-         */
+        /// <summary>
+         /// Deserialise the contents of the structure.
+         ///
+         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields
@@ -195,7 +195,7 @@ namespace ZigBeeNet.ZDO.Field
             //        return false;
             //    }
             //}
-            /*else */if (!Depth.Equals(other.Depth))
+            ////else /// </summary>if (!Depth.Equals(other.Depth))
             {
                 return false;
             }

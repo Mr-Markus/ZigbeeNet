@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Simple Descriptor Request value object class.
-     * 
-     * The Simple_Desc_req command is generated from a local device wishing to
-     * inquire as to the simple descriptor of a remote device on a specified endpoint. This
-     * command shall be unicast either to the remote device itself or to an alternative
-     * device that contains the discovery information of the remote device.
-     */
+    /// <summary>
+     /// Simple Descriptor Request value object class.
+     /// 
+     /// The Simple_Desc_req command is generated from a local device wishing to
+     /// inquire as to the simple descriptor of a remote device on a specified endpoint. This
+     /// command shall be unicast either to the remote device itself or to an alternative
+     /// device that contains the discovery information of the remote device.
+     /// </summary>
     public class SimpleDescriptorRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * NWKAddrOfInterest command message field.
-         */
+        /// <summary>
+         /// NWKAddrOfInterest command message field.
+         /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-         * Endpoint command message field.
-         */
+        /// <summary>
+         /// Endpoint command message field.
+         /// </summary>
         public byte Endpoint { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public SimpleDescriptorRequest()
         {
             ClusterId = 0x0004;

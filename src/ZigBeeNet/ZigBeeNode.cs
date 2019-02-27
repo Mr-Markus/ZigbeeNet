@@ -14,92 +14,92 @@ using ZigBeeNet.Transaction;
 
 namespace ZigBeeNet
 {
-    /**
-     * Defines a ZigBee Node. A node is a physical entity on the network and will
-     * contain one or more {@link ZigBeeEndpoint}s.
-     *
-     */
+    /// <summary>
+     /// Defines a ZigBee Node. A node is a physical entity on the network and will
+     /// contain one or more {@link ZigBeeEndpoint}s.
+     ///
+     /// </summary>
     public class ZigBeeNode : IZigBeeCommandListener
     {
         private readonly ILog _logger = LogProvider.For<ZigBeeNode>();
 
-        /**
-         * The {@link Logger}.
-         */
+        /// <summary>
+         /// The {@link Logger}.
+         /// </summary>
         //private Logger logger = LoggerFactory.getLogger(ZigBeeNode.class);
 
         public DateTime LastUpdateTime { get; set; }
 
-        /**
-         * The extended {@link IeeeAddress} for the node
-         */
+        /// <summary>
+         /// The extended {@link IeeeAddress} for the node
+         /// </summary>
         public IeeeAddress IeeeAddress { get; set; }
 
-        /**
-         * The 16 bit network address for the node
-         */
+        /// <summary>
+         /// The 16 bit network address for the node
+         /// </summary>
         public ushort NetworkAddress { get; set; }
 
-        /**
-         * The {@link NodeDescriptor} for the node
-         */
+        /// <summary>
+         /// The {@link NodeDescriptor} for the node
+         /// </summary>
         public NodeDescriptor NodeDescriptor { get; set; } = new NodeDescriptor();
 
-        /**
-         * The {@link PowerDescriptor} for the node
-         */
+        /// <summary>
+         /// The {@link PowerDescriptor} for the node
+         /// </summary>
         public PowerDescriptor PowerDescriptor { get; set; } = new PowerDescriptor();
 
-        /**
-         * The time the node information was last updated. This is set from the mesh update class when it the
-         * updates neighbor table, routing table etc.
-         */
+        /// <summary>
+         /// The time the node information was last updated. This is set from the mesh update class when it the
+         /// updates neighbor table, routing table etc.
+         /// </summary>
 
-        /**
-         * List of associated devices for the node, specified in a {@link List} {@link Integer}
-         */
+        /// <summary>
+         /// List of associated devices for the node, specified in a {@link List} {@link Integer}
+         /// </summary>
         public List<ushort> AssociatedDevices { get; set; } = new List<ushort>();
 
-        /**
-         * List of neighbors for the node, specified in a {@link NeighborTable}
-         */
+        /// <summary>
+         /// List of neighbors for the node, specified in a {@link NeighborTable}
+         /// </summary>
         public List<NeighborTable> Neighbors { get; set; } = new List<NeighborTable>();
 
-        /**
-         * List of routes within the node, specified in a {@link RoutingTable}
-         */
+        /// <summary>
+         /// List of routes within the node, specified in a {@link RoutingTable}
+         /// </summary>
         public List<RoutingTable> Routes { get; set; } = new List<RoutingTable>();
 
-        /**
-         * List of binding records
-         */
+        /// <summary>
+         /// List of binding records
+         /// </summary>
         public List<BindingTable> BindingTable { get; set; } = new List<BindingTable>();
 
-        /**
-         * List of endpoints this node exposes
-         */
+        /// <summary>
+         /// List of endpoints this node exposes
+         /// </summary>
         public ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; private set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
 
-        /**
-         * The node service discoverer that is responsible for the discovery of services, and periodic update or routes and
-         * Neighbors
-         */
+        /// <summary>
+         /// The node service discoverer that is responsible for the discovery of services, and periodic update or routes and
+         /// Neighbors
+         /// </summary>
         private ZigBeeNodeServiceDiscoverer _serviceDiscoverer;
 
-        /**
-         * The endpoint listeners of the ZigBee network. Registered listeners will be
-         * notified of additions, deletions and changes to {@link ZigBeeEndpoint}s.
-         */
+        /// <summary>
+         /// The endpoint listeners of the ZigBee network. Registered listeners will be
+         /// notified of additions, deletions and changes to {@link ZigBeeEndpoint}s.
+         /// </summary>
         private ReadOnlyCollection<IZigBeeNetworkEndpointListener> _endpointListeners = new ReadOnlyCollection<IZigBeeNetworkEndpointListener>(new List<IZigBeeNetworkEndpointListener>());
 
-        /**
-         * The {@link ZigBeeNetwork} that manages this node
-         */
+        /// <summary>
+         /// The {@link ZigBeeNetwork} that manages this node
+         /// </summary>
         private IZigBeeNetwork _network;
 
-        /**
-         * Broadcast endpoint definition
-         */
+        /// <summary>
+         /// Broadcast endpoint definition
+         /// </summary>
         private const int BROADCAST_ENDPOINT = 0xFF;
 
         public ZigBeeNode()
@@ -107,13 +107,13 @@ namespace ZigBeeNet
 
         }
 
-        /**
-         * Constructor
-         *
-         * @param networkManager the {@link ZigBeeNetworkManager}
-         * @param ieeeAddress the {@link IeeeAddress} of the node
-         * @throws {@link IllegalArgumentException} if ieeeAddress is null
-         */
+        /// <summary>
+         /// Constructor
+         ///
+         /// @param networkManager the {@link ZigBeeNetworkManager}
+         /// @param ieeeAddress the {@link IeeeAddress} of the node
+         /// @throws {@link IllegalArgumentException} if ieeeAddress is null
+         /// </summary>
         public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress)
         {
             this._network = network;
@@ -128,15 +128,15 @@ namespace ZigBeeNet
 
         }
 
-        /**
-         * Enables or disables nodes to join to this node.
-         * <p>
-         * Nodes can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
-         * since it allows nodes to join the network without the installer knowing.
-         *
-         * @param duration sets the duration of the join enable. Setting this to 0 disables joining. Setting to a value
-         *            greater than 255 seconds will permanently enable joining.
-         */
+        /// <summary>
+         /// Enables or disables nodes to join to this node.
+         /// <p>
+         /// Nodes can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
+         /// since it allows nodes to join the network without the installer knowing.
+         ///
+         /// @param duration sets the duration of the join enable. Setting this to 0 disables joining. Setting to a value
+         ///            greater than 255 seconds will permanently enable joining.
+         /// </summary>
         public void PermitJoin(byte duration)
         {
             ManagementPermitJoiningRequest command = new ManagementPermitJoiningRequest();
@@ -157,14 +157,14 @@ namespace ZigBeeNet
             _network.SendTransaction(command);
         }
 
-        /**
-         * Enables or disables nodes to join to this node.
-         * <p>
-         * Nodes can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
-         * since it allows nodes to join the network without the installer knowing.
-         *
-         * @param enable if true joining is enabled, otherwise it is disabled
-         */
+        /// <summary>
+         /// Enables or disables nodes to join to this node.
+         /// <p>
+         /// Nodes can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
+         /// since it allows nodes to join the network without the installer knowing.
+         ///
+         /// @param enable if true joining is enabled, otherwise it is disabled
+         /// </summary>
         public void PermitJoin(bool enable)
         {
             if (enable)
@@ -177,15 +177,15 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Returns true if the node is a Full Function Device. Returns false if not an FFD or logical type is unknown.
-         * <p>
-         * A FFD (Full Function Device) is a device that has full levels of functionality.
-         * It can be used for sending and receiving data, but it can also route data from other nodes.
-         * FFDs are Coordinators and Routers
-         *
-         * @return true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.
-         */
+        /// <summary>
+         /// Returns true if the node is a Full Function Device. Returns false if not an FFD or logical type is unknown.
+         /// <p>
+         /// A FFD (Full Function Device) is a device that has full levels of functionality.
+         /// It can be used for sending and receiving data, but it can also route data from other nodes.
+         /// FFDs are Coordinators and Routers
+         ///
+         /// @return true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.
+         /// </summary>
         public bool IsFullFunctionDevice()
         {
             if (NodeDescriptor == null)
@@ -195,16 +195,16 @@ namespace ZigBeeNet
             return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
         }
 
-        /**
-         * Returns true if the node is a Reduced Function Device. Returns false if not an RFD or logical type is unknown.
-         * <p>
-         * An RFD (Reduced Function Device) is a device that has a reduced level of functionality.
-         * Typically it is an end node which may be typically a sensor or switch. RFDs can only talk to FFDs
-         * as they contain no routing functionality. These devices can be very low power devices because they
-         * do not need to route other traffic and they can be put into a sleep mode when they are not in use.
-         *
-         * @return true if the device is a Reduced Function Device
-         */
+        /// <summary>
+         /// Returns true if the node is a Reduced Function Device. Returns false if not an RFD or logical type is unknown.
+         /// <p>
+         /// An RFD (Reduced Function Device) is a device that has a reduced level of functionality.
+         /// Typically it is an end node which may be typically a sensor or switch. RFDs can only talk to FFDs
+         /// as they contain no routing functionality. These devices can be very low power devices because they
+         /// do not need to route other traffic and they can be put into a sleep mode when they are not in use.
+         ///
+         /// @return true if the device is a Reduced Function Device
+         /// </summary>
         public bool IsReducedFuntionDevice {
             get {
                 if (NodeDescriptor == null)
@@ -235,18 +235,18 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets the {@link LogicalType} of the node.
-         * 
-         * Possible types are -:
-         * 
-         * {@link LogicalType#COORDINATOR}
-         * {@link LogicalType#ROUTER}
-         * {@link LogicalType#END_DEVICE}
-         * 
-         *
-         * @return the {@link LogicalType} of the node
-         */
+        /// <summary>
+         /// Gets the {@link LogicalType} of the node.
+         /// 
+         /// Possible types are -:
+         /// 
+         /// {@link LogicalType#COORDINATOR}
+         /// {@link LogicalType#ROUTER}
+         /// {@link LogicalType#END_DEVICE}
+         /// 
+         ///
+         /// @return the {@link LogicalType} of the node
+         /// </summary>
         public LogicalType LogicalType {
             get {
                 return NodeDescriptor.LogicalNodeType;
@@ -263,13 +263,13 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Request an update of the binding table for this node.
-         * 
-         * This method returns a future to a bool. Upon success the caller should call {@link #getBindingTable()}
-         *
-         * @return {@link Future} returning a {@link Boolean}
-         */
+        /// <summary>
+         /// Request an update of the binding table for this node.
+         /// 
+         /// This method returns a future to a bool. Upon success the caller should call {@link #getBindingTable()}
+         ///
+         /// @return {@link Future} returning a {@link Boolean}
+         /// </summary>
         public async Task<bool> UpdateBindingTable()
         {
             byte index = 0;
@@ -302,12 +302,12 @@ namespace ZigBeeNet
             return true;
         }
 
-        /**
-         * Gets an endpoint given the {@link ZigBeeAddress} address.
-         *
-         * @param endpointId the endpoint ID to get
-         * @return the {@link ZigBeeEndpoint}
-         */
+        /// <summary>
+         /// Gets an endpoint given the {@link ZigBeeAddress} address.
+         ///
+         /// @param endpointId the endpoint ID to get
+         /// @return the {@link ZigBeeEndpoint}
+         /// </summary>
         public ZigBeeEndpoint GetEndpoint(byte endpointId)
         {
             lock (Endpoints)
@@ -316,11 +316,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Adds an endpoint to the node
-         *
-         * @param endpoint the {@link ZigBeeEndpoint} to add
-         */
+        /// <summary>
+         /// Adds an endpoint to the node
+         ///
+         /// @param endpoint the {@link ZigBeeEndpoint} to add
+         /// </summary>
         public void AddEndpoint(ZigBeeEndpoint endpoint)
         {
             //lock (Endpoints)
@@ -343,11 +343,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Updates an endpoint information in the node
-         *
-         * @param endpoint the {@link ZigBeeEndpoint} to update
-         */
+        /// <summary>
+         /// Updates an endpoint information in the node
+         ///
+         /// @param endpoint the {@link ZigBeeEndpoint} to update
+         /// </summary>
         public void UpdateEndpoint(ZigBeeEndpoint endpoint)
         {
             lock (Endpoints)
@@ -369,11 +369,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Removes endpoint by network address.
-         *
-         * @param endpointId the network address
-         */
+        /// <summary>
+         /// Removes endpoint by network address.
+         ///
+         /// @param endpointId the network address
+         /// </summary>
         public void RemoveEndpoint(byte endpointId)
         {
             ZigBeeEndpoint endpoint;
@@ -450,9 +450,9 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Starts service discovery for the node.
-         */
+        /// <summary>
+         /// Starts service discovery for the node.
+         /// </summary>
         //public void StartDiscovery()
         //{
         //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
@@ -480,9 +480,9 @@ namespace ZigBeeNet
         //    _serviceDiscoverer.StartDiscovery(tasks);
         //}
 
-        /**
-         * Starts service discovery for the node in order to update the mesh
-         */
+        /// <summary>
+         /// Starts service discovery for the node in order to update the mesh
+         /// </summary>
         //public void UpdateMesh()
         //{
         //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
@@ -497,11 +497,11 @@ namespace ZigBeeNet
         //    _serviceDiscoverer.StartDiscovery(tasks);
         //}
 
-        /**
-         * Checks if basic device discovery is complete.
-         *
-         * @return true if basic device information is known
-         */
+        /// <summary>
+         /// Checks if basic device discovery is complete.
+         ///
+         /// @return true if basic device information is known
+         /// </summary>
         public bool IsDiscovered()
         {
             return NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
@@ -512,13 +512,13 @@ namespace ZigBeeNet
             _network = networkManager;
         }
 
-        /**
-         * Updates the node. This will copy data from another node into this node. Updated elements are checked for equality
-         * and the method will only return true if the node data has been changed.
-         *
-         * @param node the {@link ZigBeeNode} that contains the newer node data.
-         * @return true if there were changes made as a result of the update
-         */
+        /// <summary>
+         /// Updates the node. This will copy data from another node into this node. Updated elements are checked for equality
+         /// and the method will only return true if the node data has been changed.
+         ///
+         /// @param node the {@link ZigBeeNode} that contains the newer node data.
+         /// @return true if there were changes made as a result of the update
+         /// </summary>
         public bool UpdateNode(ZigBeeNode node)
         {
             if (!node.IeeeAddress.Equals(IeeeAddress))
@@ -591,11 +591,11 @@ namespace ZigBeeNet
             return updated;
         }
 
-        /**
-         * Gets a {@link ZigBeeNodeDao} representing the node
-         *
-         * @return the {@link ZigBeeNodeDao}
-         */
+        /// <summary>
+         /// Gets a {@link ZigBeeNodeDao} representing the node
+         ///
+         /// @return the {@link ZigBeeNodeDao}
+         /// </summary>
         public ZigBeeNodeDao GetDao()
         {
             ZigBeeNodeDao dao = new ZigBeeNodeDao();

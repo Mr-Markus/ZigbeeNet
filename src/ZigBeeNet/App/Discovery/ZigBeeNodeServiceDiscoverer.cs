@@ -12,98 +12,98 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.App.Discovery
 {
-    /**
-     * This class contains methods for discovering the services and features of a {@link ZigBeeNode}. All discovery methods
-     * are private and the class is utilised by calling {@link #startDiscovery(Set)} with a set of
-     * {@link #NodeDiscoveryState} for the stages wishing to be discovered or updated.
-     * 
-     * A single worker thread is ensured - if the thread is already active when {@link #startDiscovery(Set)} is called, the
-     * new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
-     * running, it will be started.
-     * 
-     * This class provides a centralised helper, used for discovering and updating information about the {@link ZigBeeNode}
-     * 
-     * A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
-     * supported, then this will not be issued again on subsequent requests.
-     * 
-     * Once the discovery update is complete the {@link ZigBeeNetworkManager#updateNode(ZigBeeNode)} is called to alert
-     * users.
-     */
+    /// <summary>
+     /// This class contains methods for discovering the services and features of a {@link ZigBeeNode}. All discovery methods
+     /// are private and the class is utilised by calling {@link #startDiscovery(Set)} with a set of
+     /// {@link #NodeDiscoveryState} for the stages wishing to be discovered or updated.
+     /// 
+     /// A single worker thread is ensured - if the thread is already active when {@link #startDiscovery(Set)} is called, the
+     /// new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
+     /// running, it will be started.
+     /// 
+     /// This class provides a centralised helper, used for discovering and updating information about the {@link ZigBeeNode}
+     /// 
+     /// A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
+     /// supported, then this will not be issued again on subsequent requests.
+     /// 
+     /// Once the discovery update is complete the {@link ZigBeeNetworkManager#updateNode(ZigBeeNode)} is called to alert
+     /// users.
+     /// </summary>
     public class ZigBeeNodeServiceDiscoverer
     {
-        /**
-         * The _logger.
-         */
+        /// <summary>
+         /// The _logger.
+         /// </summary>
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
-        /**
-         * The {@link ZigBeeNetworkManager}.
-         */
+        /// <summary>
+         /// The {@link ZigBeeNetworkManager}.
+         /// </summary>
         public ZigBeeNetworkManager NetworkManager { get; private set; }
 
-        /**
-       * The maximum number of retries to perform before failing the request
-       */
+        /// <summary>
+       /// The maximum number of retries to perform before failing the request
+       /// </summary>
         public int MaxBackoff { get; set; } = DEFAULT_MAX_BACKOFF;
 
-        /**
-         * The {@link ZigBeeNode}.
-         */
+        /// <summary>
+         /// The {@link ZigBeeNode}.
+         /// </summary>
         public ZigBeeNode Node { get; set; }
 
-        /**
-         * Default maximum number of retries to perform
-         */
+        /// <summary>
+         /// Default maximum number of retries to perform
+         /// </summary>
         private const int DEFAULT_MAX_BACKOFF = 8;
 
-        /**
-         * Default period between retries
-         */
+        /// <summary>
+         /// Default period between retries
+         /// </summary>
         private const int DEFAULT_RETRY_PERIOD = 2100;
 
-        /**
-         * A random jitter will be added to the retry time for each device to avoid any sort of synchronisation
-         */
+        /// <summary>
+         /// A random jitter will be added to the retry time for each device to avoid any sort of synchronisation
+         /// </summary>
         private const int RETRY_RANDOM_TIME = 250;
 
-        /**
-         * The minimum number of milliseconds to wait before retrying the request
-         */
+        /// <summary>
+         /// The minimum number of milliseconds to wait before retrying the request
+         /// </summary>
         private readonly int _retryPeriod = DEFAULT_RETRY_PERIOD;
 
-        /**
-         * Flag to indicate if the device supports the {@link ManagementLqiRequest}
-         * This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
-         */
+        /// <summary>
+         /// Flag to indicate if the device supports the {@link ManagementLqiRequest}
+         /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
+         /// </summary>
         private bool _supportsManagementLqi = true;
 
-        /**
-         * Flag to indicate if the device supports the {@link ManagementRoutingRequest}.
-         * This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
-         */
+        /// <summary>
+         /// Flag to indicate if the device supports the {@link ManagementRoutingRequest}.
+         /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
+         /// </summary>
         private bool _supportsManagementRouting = true;
 
-        ///**
-        // * The task being run
-        // */
+        ///// <summary>
+        // /// The task being run
+        // /// </summary>
         //private Task _futureTask;
 
         private CancellationTokenSource _cancellationTokenSource;
 
-        /**
-         * Record of the last time we started a service discovery or update
-         */
+        /// <summary>
+         /// Record of the last time we started a service discovery or update
+         /// </summary>
         public DateTime LastDiscoveryStarted { get; private set; }
 
-        /**
-         * Record of the last time we completed a service discovery or update
-         */
+        /// <summary>
+         /// Record of the last time we completed a service discovery or update
+         /// </summary>
         public DateTime LastDiscoveryCompleted { get; private set; }
 
-        /**
-         *
-         *
-         */
+        /// <summary>
+         ///
+         ///
+         /// </summary>
         public enum NodeDiscoveryTask
         {
             NWK_ADDRESS,
@@ -115,17 +115,17 @@ namespace ZigBeeNet.App.Discovery
             ROUTES
         }
 
-        /**
-         * The list of tasks we need to complete
-         */
+        /// <summary>
+         /// The list of tasks we need to complete
+         /// </summary>
         public Queue<NodeDiscoveryTask> DiscoveryTasks { get; private set; } = new Queue<NodeDiscoveryTask>();
 
-        /**
-         * Creates the discovery class
-         *
-         * @param networkManager the {@link ZigBeeNetworkManager} for the network
-         * @param node the {@link ZigBeeNode} whose services we want to discover
-         */
+        /// <summary>
+         /// Creates the discovery class
+         ///
+         /// @param networkManager the {@link ZigBeeNetworkManager} for the network
+         /// @param node the {@link ZigBeeNode} whose services we want to discover
+         /// </summary>
         public ZigBeeNodeServiceDiscoverer(ZigBeeNetworkManager networkManager, ZigBeeNode node)
         {
             this.NetworkManager = networkManager;
@@ -136,16 +136,16 @@ namespace ZigBeeNet.App.Discovery
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        /**
-         * Performs node service discovery. This discovers node level attributes such as the endpoints and
-         * descriptors, as well as updating routing and neighbor tables - as needed.
-         * 
-         * If any of the tasks requested are already in the queue, they will not be added again.
-         * 
-         * If the worker thread is not running, it will be started.
-         *
-         * @param newTasks a set of {@link NodeDiscoveryTask}s to be performed
-         */
+        /// <summary>
+         /// Performs node service discovery. This discovers node level attributes such as the endpoints and
+         /// descriptors, as well as updating routing and neighbor tables - as needed.
+         /// 
+         /// If any of the tasks requested are already in the queue, they will not be added again.
+         /// 
+         /// If the worker thread is not running, it will be started.
+         ///
+         /// @param newTasks a set of {@link NodeDiscoveryTask}s to be performed
+         /// </summary>
         private void StartDiscovery(List<NodeDiscoveryTask> newTasks)
         {
             // Tasks are managed in a queue. The worker thread will only remove the task from the queue once the task is
@@ -285,7 +285,7 @@ namespace ZigBeeNet.App.Discovery
                     retryMin = retryCnt / 4;
 
                     // We failed with the last request. Wait a bit then retry.
-                    retryDelay = (new Random().Next(retryCnt) + 1 + retryMin) * _retryPeriod;
+                    retryDelay = (new Random().Next(retryCnt) + 1 + retryMin); /// _retryPeriod;
                     _logger.Debug("{IeeeAddress}: Node SVC Discovery: request {Task} failed. Retry {Retry}, wait {Delay} ms before retry.", Node.IeeeAddress, discoveryTask, retryCnt, retryDelay);
                 }
 
@@ -316,9 +316,9 @@ namespace ZigBeeNet.App.Discovery
             return Discovery(_cancellationTokenSource.Token, 0);
         }
 
-        /**
-         * Stops service discovery and removes any scheduled tasks
-         */
+        /// <summary>
+         /// Stops service discovery and removes any scheduled tasks
+         /// </summary>
         public void StopDiscovery()
         {
             _cancellationTokenSource.Cancel();
@@ -326,11 +326,11 @@ namespace ZigBeeNet.App.Discovery
             _logger.Debug("{IeeeAddress}: Node SVC Discovery: stopped", Node.IeeeAddress);
         }
 
-        /**
-         * Get node descriptor
-         *
-         * @return true if the message was processed ok
-         */
+        /// <summary>
+         /// Get node descriptor
+         ///
+         /// @return true if the message was processed ok
+         /// </summary>
         private async Task<bool> RequestNetworkAddress()
         {
             NetworkAddressRequest networkAddressRequest = new NetworkAddressRequest();
@@ -359,11 +359,11 @@ namespace ZigBeeNet.App.Discovery
             return false;
         }
 
-        /**
-         * Get Node Network address and the list of associated devices
-         *
-         * @return true if the message was processed ok
-         */
+        /// <summary>
+         /// Get Node Network address and the list of associated devices
+         ///
+         /// @return true if the message was processed ok
+         /// </summary>
         private async Task<bool> RequestAssociatedNodes()
         {
             byte startIndex = 0;
@@ -398,11 +398,11 @@ namespace ZigBeeNet.App.Discovery
             return true;
         }
 
-        /**
-         * Get node descriptor
-         *
-         * @return true if the message was processed ok
-         */
+        /// <summary>
+         /// Get node descriptor
+         ///
+         /// @return true if the message was processed ok
+         /// </summary>
         private async Task<bool> RequestNodeDescriptor()
         {
             NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest();
@@ -429,11 +429,11 @@ namespace ZigBeeNet.App.Discovery
             return false;
         }
 
-        /**
-         * Get node power descriptor
-         *
-         * @return true if the message was processed ok, or if the end device does not support the power descriptor
-         */
+        /// <summary>
+         /// Get node power descriptor
+         ///
+         /// @return true if the message was processed ok, or if the end device does not support the power descriptor
+         /// </summary>
         private async Task<bool> RequestPowerDescriptor()
         {
             PowerDescriptorRequest powerDescriptorRequest = new PowerDescriptorRequest();
@@ -464,11 +464,11 @@ namespace ZigBeeNet.App.Discovery
             return false;
         }
 
-        /**
-         * Get the active endpoints for a node
-         *
-         * @return true if the message was processed ok
-         */
+        /// <summary>
+         /// Get the active endpoints for a node
+         ///
+         /// @return true if the message was processed ok
+         /// </summary>
         private async Task<bool> RequestActiveEndpoints()
         {
             ActiveEndpointsRequest activeEndpointsRequest = new ActiveEndpointsRequest();
@@ -507,11 +507,11 @@ namespace ZigBeeNet.App.Discovery
             return true;
         }
 
-        /**
-         * Get node neighbor table by making a {@link ManagementLqiRequest} call.
-         *
-         * @return list of {@link NeighborTable} if the request was processed ok, null otherwise
-         */
+        /// <summary>
+         /// Get node neighbor table by making a {@link ManagementLqiRequest} call.
+         ///
+         /// @return list of {@link NeighborTable} if the request was processed ok, null otherwise
+         /// </summary>
         private async Task<bool> RequestNeighborTable()
         {
             // Start index for the list is 0
@@ -569,11 +569,11 @@ namespace ZigBeeNet.App.Discovery
             return true;
         }
 
-        /**
-         * Get node routing table by making a {@link ManagementRoutingRequest} request
-         *
-         * @return list of {@link RoutingTable} if the request was processed ok, null otherwise
-         */
+        /// <summary>
+         /// Get node routing table by making a {@link ManagementRoutingRequest} request
+         ///
+         /// @return list of {@link RoutingTable} if the request was processed ok, null otherwise
+         /// </summary>
         private async Task<bool> RequestRoutingTable()
         {
             // Start index for the list is 0
@@ -628,14 +628,14 @@ namespace ZigBeeNet.App.Discovery
             return true;
         }
 
-        /**
-         * Get the simple descriptor for an endpoint and create the {@link ZigBeeEndpoint}
-         *
-         * @param endpointId the endpoint id to request
-         * @return the newly created {@link ZigBeeEndpoint} for the endpoint, or null on error
-         * @throws ExecutionException
-         * @throws InterruptedException
-         */
+        /// <summary>
+         /// Get the simple descriptor for an endpoint and create the {@link ZigBeeEndpoint}
+         ///
+         /// @param endpointId the endpoint id to request
+         /// @return the newly created {@link ZigBeeEndpoint} for the endpoint, or null on error
+         /// @throws ExecutionException
+         /// @throws InterruptedException
+         /// </summary>
         private async Task<ZigBeeEndpoint> GetSimpleDescriptor(byte endpointId)
         {
             SimpleDescriptorRequest simpleDescriptorRequest = new SimpleDescriptorRequest();
@@ -670,9 +670,9 @@ namespace ZigBeeNet.App.Discovery
             return null;
         }
 
-        /**
-         * Starts service discovery for the node.
-         */
+        /// <summary>
+         /// Starts service discovery for the node.
+         /// </summary>
         public void StartDiscovery()
         {
             _logger.Debug("{IeeeAddress}: Node SVC Discovery: start discovery", Node.IeeeAddress);
@@ -702,11 +702,11 @@ namespace ZigBeeNet.App.Discovery
             StartDiscovery(tasks);
         }
 
-        /**
-         * Starts service discovery for the node in order to update the mesh. This adds the
-         * {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
-         * {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
-         */
+        /// <summary>
+         /// Starts service discovery for the node in order to update the mesh. This adds the
+         /// {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
+         /// {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
+         /// </summary>
         public void UpdateMesh()
         {
             _logger.Debug("{IeeeAddress}: Node SVC Discovery: Update mesh", Node.IeeeAddress);

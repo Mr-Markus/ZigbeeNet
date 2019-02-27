@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Write Attributes Command value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The write attributes command is generated when a device wishes to change the * values of one or more attributes located on another device. Each write attribute * record shall contain the identifier and the actual value of the attribute to be * written. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Write Attributes Command value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The write attributes command is generated when a device wishes to change the /// values of one or more attributes located on another device. Each write attribute /// record shall contain the identifier and the actual value of the attribute to be /// written. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class WriteAttributesCommand : ZclCommand
        {
-           /**
-           * Records command message field.
-           */
+           /// <summary>
+           /// Records command message field.
+           /// </summary>
            public List<WriteAttributeRecord> Records { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public WriteAttributesCommand()
            {
                GenericCommand = true;

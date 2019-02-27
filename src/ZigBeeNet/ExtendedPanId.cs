@@ -17,19 +17,19 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Default constructor. Creates a PAN Id of 0
-         */
+        /// <summary>
+         /// Default constructor. Creates a PAN Id of 0
+         /// </summary>
         public ExtendedPanId()
         {
             PanId = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
-        /**
-         * Create an {@link ExtendedPanId} from a {@link BigInteger}
-         *
-         * @param panId the panId as a {@link BigInteger}
-         */
+        /// <summary>
+         /// Create an {@link ExtendedPanId} from a {@link BigInteger}
+         ///
+         /// @param panId the panId as a {@link BigInteger}
+         /// </summary>
         public ExtendedPanId(BigInteger panId)
         {
             PanId = new byte[8];
@@ -46,23 +46,23 @@ namespace ZigBeeNet
             PanId[7] = (byte)((longVal >> 56) & 0xff);
         }
 
-        /**
-         * Create an {@link ExtendedPanId} from a {@link String} defined in hexadecimal notation.
-         *
-         * @param panId the panId as a {@link String}
-         */
+        /// <summary>
+         /// Create an {@link ExtendedPanId} from a {@link String} defined in hexadecimal notation.
+         ///
+         /// @param panId the panId as a {@link String}
+         /// </summary>
         public ExtendedPanId(string panId)
             : this(BigInteger.Parse(panId, System.Globalization.NumberStyles.HexNumber))
         {
 
         }
 
-        /**
-         * Create an {@link ExtendedPanId} from an int array
-         *
-         * @param panId the panId as an int array. Array length must be 8.
-         * @throws InvalidParameterException
-         */
+        /// <summary>
+         /// Create an {@link ExtendedPanId} from an int array
+         ///
+         /// @param panId the panId as an int array. Array length must be 8.
+         /// @throws InvalidParameterException
+         /// </summary>
         public ExtendedPanId(byte[] panId)
         {
             if (panId == null)
@@ -81,12 +81,12 @@ namespace ZigBeeNet
 
 
 
-        /**
-         * Check if the ExtendedPanId is valid. This checks the length of the ID, and checks
-         * it is not 0000000000000000 or FFFFFFFFFFFFFFFF.
-         *
-         * @return true if the extended PAN ID is valid
-         */
+        /// <summary>
+         /// Check if the ExtendedPanId is valid. This checks the length of the ID, and checks
+         /// it is not 0000000000000000 or FFFFFFFFFFFFFFFF.
+         ///
+         /// @return true if the extended PAN ID is valid
+         /// </summary>
         public bool IsValid()
         {
             if (PanId == null || PanId.Length != 8)

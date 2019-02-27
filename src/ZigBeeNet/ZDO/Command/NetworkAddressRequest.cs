@@ -7,39 +7,39 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Network Address Request value object class.
-     * <p>
-     * The NWK_addr_req is generated from a Local Device wishing to inquire as to the
-     * 16-bit address of the Remote Device based on its known IEEE address. The
-     * destination addressing on this command shall be unicast or broadcast to all
-     * devices for which macRxOnWhenIdle = TRUE.
-     */
+    /// <summary>
+     /// Network Address Request value object class.
+     /// <p>
+     /// The NWK_addr_req is generated from a Local Device wishing to inquire as to the
+     /// 16-bit address of the Remote Device based on its known IEEE address. The
+     /// destination addressing on this command shall be unicast or broadcast to all
+     /// devices for which macRxOnWhenIdle = TRUE.
+     /// </summary>
     public class NetworkAddressRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * IEEEAddr command message field.
-         */
+        /// <summary>
+         /// IEEEAddr command message field.
+         /// </summary>
         public IeeeAddress IeeeAddr { get; set; }
 
-        /**
-         * RequestType command message field.
-         * 
-         * Request type for this command:
-         * 0x00 – Single device response
-         * 0x01 – Extended response
-         * 0x02-0xFF – reserved
-         */
+        /// <summary>
+         /// RequestType command message field.
+         /// 
+         /// Request type for this command:
+         /// 0x00 – Single device response
+         /// 0x01 – Extended response
+         /// 0x02-0xFF – reserved
+         /// </summary>
         public byte RequestType { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public NetworkAddressRequest()
         {
             ClusterId = 0x0000;

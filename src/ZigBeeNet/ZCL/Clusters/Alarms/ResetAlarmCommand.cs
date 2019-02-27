@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Alarms;
 
-/**
- * Reset Alarm Command value object class.
- *
- * Cluster: Alarms. Command is sentTO the server.
- * This command is a specific command used for the Alarms cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Reset Alarm Command value object class.
+ ///
+ /// Cluster: Alarms. Command is sentTO the server.
+ /// This command is a specific command used for the Alarms cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Alarms
 {
        public class ResetAlarmCommand : ZclCommand
        {
-           /**
-           * Alarm code command message field.
-           */
+           /// <summary>
+           /// Alarm code command message field.
+           /// </summary>
            public byte AlarmCode { get; set; }
 
-           /**
-           * Cluster identifier command message field.
-           */
+           /// <summary>
+           /// Cluster identifier command message field.
+           /// </summary>
            public ushort ClusterIdentifier { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ResetAlarmCommand()
            {
                GenericCommand = false;

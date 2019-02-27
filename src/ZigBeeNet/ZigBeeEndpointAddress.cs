@@ -17,27 +17,27 @@ namespace ZigBeeNet
             get { return false; }
         }
 
-        /**
-         * Constructor for ZDO ZigBee devices where only the address is defined
-         *
-         * @param address
-         *            the network address
-         *
-         */
+        /// <summary>
+         /// Constructor for ZDO ZigBee devices where only the address is defined
+         ///
+         /// @param address
+         ///            the network address
+         ///
+         /// </summary>
         public ZigBeeEndpointAddress(ushort address)
         {
             this.Address = address;
             this.Endpoint = 0;
         }
 
-        /**
-         * Constructor for standard ZigBee devices where the address and endpoint are defined
-         *
-         * @param address
-         *            the network address
-         * @param endpoint
-         *            the endpoint number
-         */
+        /// <summary>
+         /// Constructor for standard ZigBee devices where the address and endpoint are defined
+         ///
+         /// @param address
+         ///            the network address
+         /// @param endpoint
+         ///            the endpoint number
+         /// </summary>
         public ZigBeeEndpointAddress(ushort address, byte endpoint)
         {
             this.Address = address;

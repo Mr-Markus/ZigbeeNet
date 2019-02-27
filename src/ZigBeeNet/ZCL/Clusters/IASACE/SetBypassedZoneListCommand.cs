@@ -7,30 +7,30 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Set Bypassed Zone List Command value object class.
- *
- * Cluster: IAS ACE. Command is sentFROM the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * Sets the list of bypassed zones on the IAS ACE client. This command can be sent either as a response to the * GetBypassedZoneList command or unsolicited when the list of bypassed zones changes on the ACE server. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Set Bypassed Zone List Command value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// Sets the list of bypassed zones on the IAS ACE client. This command can be sent either as a response to the /// GetBypassedZoneList command or unsolicited when the list of bypassed zones changes on the ACE server. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class SetBypassedZoneListCommand : ZclCommand
        {
-           /**
-           * Zone ID command message field.
-           *
-          * Zone ID is the index of the Zone in the CIE's zone table and is an array of Zone IDs for each zone that is bypassed          * where X is equal to the value of the Number of Zones field. There is no order imposed by the numbering of the Zone ID          * field in this command payload. IAS ACE servers SHOULD provide the array of Zone IDs in ascending order.           */
+           /// <summary>
+           /// Zone ID command message field.
+           ///
+          /// Zone ID is the index of the Zone in the CIE's zone table and is an array of Zone IDs for each zone that is bypassed          /// where X is equal to the value of the Number of Zones field. There is no order imposed by the numbering of the Zone ID          /// field in this command payload. IAS ACE servers SHOULD provide the array of Zone IDs in ascending order.           /// </summary>
            public List<byte> ZoneID { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public SetBypassedZoneListCommand()
            {
                GenericCommand = false;

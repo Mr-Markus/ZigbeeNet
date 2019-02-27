@@ -7,48 +7,48 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/**
- * Get Scene Membership Response value object class.
- *
- * Cluster: Scenes. Command is sentFROM the server.
- * This command is a specific command used for the Scenes cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Scene Membership Response value object class.
+ ///
+ /// Cluster: Scenes. Command is sentFROM the server.
+ /// This command is a specific command used for the Scenes cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class GetSceneMembershipResponse : ZclCommand
        {
-           /**
-           * Status command message field.
-           */
+           /// <summary>
+           /// Status command message field.
+           /// </summary>
            public byte Status { get; set; }
 
-           /**
-           * Capacity command message field.
-           */
+           /// <summary>
+           /// Capacity command message field.
+           /// </summary>
            public byte Capacity { get; set; }
 
-           /**
-           * Group ID command message field.
-           */
+           /// <summary>
+           /// Group ID command message field.
+           /// </summary>
            public ushort GroupID { get; set; }
 
-           /**
-           * Scene count command message field.
-           */
+           /// <summary>
+           /// Scene count command message field.
+           /// </summary>
            public byte SceneCount { get; set; }
 
-           /**
-           * Scene list command message field.
-           */
+           /// <summary>
+           /// Scene list command message field.
+           /// </summary>
            public List<byte> SceneList { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetSceneMembershipResponse()
            {
                GenericCommand = false;

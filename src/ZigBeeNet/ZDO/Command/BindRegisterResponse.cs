@@ -8,28 +8,28 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Bind Register Response value object class.
-    * 
-    * The Bind_Register_rsp is generated from a primary binding table cache device in
-    * response to a Bind_Register_req and contains the status of the request. This
-    * command shall be unicast to the requesting device.
-    */
+    /// <summary>
+    /// Bind Register Response value object class.
+    /// 
+    /// The Bind_Register_rsp is generated from a primary binding table cache device in
+    /// response to a Bind_Register_req and contains the status of the request. This
+    /// command shall be unicast to the requesting device.
+    /// </summary>
     public class BindRegisterResponse : ZdoResponse
     {
-        /**
-         * BindingTableEntries command message field.
-         */
+        /// <summary>
+         /// BindingTableEntries command message field.
+         /// </summary>
         public ushort BindingTableEntries { get; set; }
 
-        /**
-         * BindingTableList command message field.
-         */
+        /// <summary>
+         /// BindingTableList command message field.
+         /// </summary>
         public List<List<BindingTable>> BindingTableList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public BindRegisterResponse()
         {
             ClusterId = 0x8023;

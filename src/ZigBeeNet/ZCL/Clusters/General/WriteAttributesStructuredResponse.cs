@@ -7,36 +7,36 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Write Attributes Structured Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The write attributes structured response command is generated in response to a * write attributes structured command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Write Attributes Structured Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The write attributes structured response command is generated in response to a /// write attributes structured command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class WriteAttributesStructuredResponse : ZclCommand
        {
-           /**
-           * Status command message field.
-           *
-          * Status is only provided if the command was successful, and the write          * attribute status records are not included for successfully          * written attributes, in order to save bandwidth.           */
+           /// <summary>
+           /// Status command message field.
+           ///
+          /// Status is only provided if the command was successful, and the write          /// attribute status records are not included for successfully          /// written attributes, in order to save bandwidth.           /// </summary>
            public ZclStatus Status { get; set; }
 
-           /**
-           * Records command message field.
-           *
-          * Note that write attribute status records are not included for successfully          * written attributes, in order to save bandwidth.  In the case of successful          * writing of all attributes, only a single write attribute status record          * SHALL be included in the command, with the status field set to SUCCESS and the          * attribute identifier field omitted.           */
+           /// <summary>
+           /// Records command message field.
+           ///
+          /// Note that write attribute status records are not included for successfully          /// written attributes, in order to save bandwidth.  In the case of successful          /// writing of all attributes, only a single write attribute status record          /// SHALL be included in the command, with the status field set to SUCCESS and the          /// attribute identifier field omitted.           /// </summary>
            public List<WriteAttributeStatusRecord> Records { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public WriteAttributesStructuredResponse()
            {
                GenericCommand = true;

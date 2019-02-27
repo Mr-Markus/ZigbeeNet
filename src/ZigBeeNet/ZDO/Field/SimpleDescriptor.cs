@@ -13,11 +13,11 @@ namespace ZigBeeNet.ZDO.Field
 
         public ushort ProfileId { get; set; }
 
-        /**
-         * The application device identifier field of the simple descriptor is sixteen bits in length and specifies the
-         * device description supported on this endpoint. Device description identifiers shall be obtained from the ZigBee
-         * Alliance.
-         */
+        /// <summary>
+         /// The application device identifier field of the simple descriptor is sixteen bits in length and specifies the
+         /// device description supported on this endpoint. Device description identifiers shall be obtained from the ZigBee
+         /// Alliance.
+         /// </summary>
         public ushort DeviceId { get; set; }
 
         public byte DeviceVersion { get; set; }
@@ -26,11 +26,11 @@ namespace ZigBeeNet.ZDO.Field
 
         public List<ushort> OutputClusterList;
 
-        /**
-         * Deserialise the contents of the structure.
-         *
-         * @param deserializer the {@link ZigBeeDeserializer} used to deserialize
-         */
+        /// <summary>
+         /// Deserialise the contents of the structure.
+         ///
+         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             // Deserialize the fields

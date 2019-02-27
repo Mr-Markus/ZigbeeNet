@@ -7,49 +7,49 @@ namespace ZigBeeNet.ZDO
     public abstract class ZdoResponse : ZdoCommand
     {
 
-        /**
-         * Source address;
-         */
+        /// <summary>
+         /// Source address;
+         /// </summary>
         // protected int sourceAddress;
 
-        /**
-         * The response status.
-         */
+        /// <summary>
+         /// The response status.
+         /// </summary>
         public ZdoStatus Status { get; set; }
 
-        /**
-         * Gets source address.
-         *
-         * @return the destination address
-         */
+        /// <summary>
+         /// Gets source address.
+         ///
+         /// @return the destination address
+         /// </summary>
         // public int getSourceAddress() {
         // return sourceAddress;
         // }
 
-        /**
-         * Set the source address
-         *
-         * @param sourceAddress the source address as {@link int}
-         */
+        /// <summary>
+         /// Set the source address
+         ///
+         /// @param sourceAddress the source address as {@link int}
+         /// </summary>
         // public void setSourceAddress(int sourceAddress) {
         // this.sourceAddress = sourceAddress;
         // }
 
-        /**
-         * Gets the response status
-         *
-         * @return the response status
-         */
+        /// <summary>
+         /// Gets the response status
+         ///
+         /// @return the response status
+         /// </summary>
         //public ZdoStatus GetStatus()
         //{
         //    return Status;
         //}
 
-        ///**
-        // * Sets the response status
-        // *
-        // * @param status the response status as {@link int}
-        // */
+        ///// <summary>
+        // /// Sets the response status
+        // ///
+        // /// @param status the response status as {@link int}
+        // /// </summary>
         //public void SetStatus(ZdoStatus status)
         //{
         //    this.Status = status;

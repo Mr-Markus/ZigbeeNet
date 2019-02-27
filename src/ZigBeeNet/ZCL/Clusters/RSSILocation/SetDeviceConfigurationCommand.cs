@@ -7,48 +7,48 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * Set Device Configuration Command value object class.
- *
- * Cluster: RSSI Location. Command is sentTO the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Set Device Configuration Command value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentTO the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class SetDeviceConfigurationCommand : ZclCommand
        {
-           /**
-           * Power command message field.
-           */
+           /// <summary>
+           /// Power command message field.
+           /// </summary>
            public short Power { get; set; }
 
-           /**
-           * Path Loss Exponent command message field.
-           */
+           /// <summary>
+           /// Path Loss Exponent command message field.
+           /// </summary>
            public ushort PathLossExponent { get; set; }
 
-           /**
-           * Calculation Period command message field.
-           */
+           /// <summary>
+           /// Calculation Period command message field.
+           /// </summary>
            public ushort CalculationPeriod { get; set; }
 
-           /**
-           * Number RSSI Measurements command message field.
-           */
+           /// <summary>
+           /// Number RSSI Measurements command message field.
+           /// </summary>
            public byte NumberRSSIMeasurements { get; set; }
 
-           /**
-           * Reporting Period command message field.
-           */
+           /// <summary>
+           /// Reporting Period command message field.
+           /// </summary>
            public ushort ReportingPeriod { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public SetDeviceConfigurationCommand()
            {
                GenericCommand = false;

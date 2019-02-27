@@ -305,571 +305,571 @@ namespace ZigBeeNet.ZDO
         }
         public enum CommandType : ushort
         {
-            /**
-             * Active Endpoints Request
-             *
-             * See {@link ActiveEndpointsRequest}
-             */
+            /// <summary>
+             /// Active Endpoints Request
+             ///
+             /// See {@link ActiveEndpointsRequest}
+             /// </summary>
             ACTIVE_ENDPOINTS_REQUEST = 0x0005,
 
-            /**
-            * Active Endpoints Response
-            *
-            * See {@link ActiveEndpointsResponse}
-            */
+            /// <summary>
+            /// Active Endpoints Response
+            ///
+            /// See {@link ActiveEndpointsResponse}
+            /// </summary>
             ACTIVE_ENDPOINTS_RESPONSE = 0x8005,
 
-            /**
-            * Active Endpoint Store Request
-            *
-            * See {@link ActiveEndpointStoreRequest}
-            */
+            /// <summary>
+            /// Active Endpoint Store Request
+            ///
+            /// See {@link ActiveEndpointStoreRequest}
+            /// </summary>
             ACTIVE_ENDPOINT_STORE_REQUEST = 0x0019,
 
-            /**
-            * Active Endpoint Store Response
-            * 
-            * See {@link ActiveEndpointStoreResponse}
-            */
+            /// <summary>
+            /// Active Endpoint Store Response
+            /// 
+            /// See {@link ActiveEndpointStoreResponse}
+            /// </summary>
             ACTIVE_ENDPOINT_STORE_RESPONSE = 0x8019,
 
-            /**
-            * Backup Bind Table Request
-            * 
-            * See {@link BackupBindTableRequest}
-            */
+            /// <summary>
+            /// Backup Bind Table Request
+            /// 
+            /// See {@link BackupBindTableRequest}
+            /// </summary>
             BACKUP_BIND_TABLE_REQUEST = 0x0027,
 
-            /**
-            * Backup Bind Table Response
-            * 
-            * See {@link BackupBindTableResponse}
-            */
+            /// <summary>
+            /// Backup Bind Table Response
+            /// 
+            /// See {@link BackupBindTableResponse}
+            /// </summary>
             BACKUP_BIND_TABLE_RESPONSE = 0x8027,
 
-            /**
-            * Backup Source Bind Request
-            * 
-            * See {@link BackupSourceBindRequest}
-            */
+            /// <summary>
+            /// Backup Source Bind Request
+            /// 
+            /// See {@link BackupSourceBindRequest}
+            /// </summary>
             BACKUP_SOURCE_BIND_REQUEST = 0x0029,
 
-            /**
-            * Bind Register
-            * 
-            * See {@link BindRegister}
-            */
+            /// <summary>
+            /// Bind Register
+            /// 
+            /// See {@link BindRegister}
+            /// </summary>
             BIND_REGISTER = 0x0023,
 
-            /**
-            * Bind Register Response
-            * 
-            * See {@link BindRegisterResponse}
-            */
+            /// <summary>
+            /// Bind Register Response
+            /// 
+            /// See {@link BindRegisterResponse}
+            /// </summary>
             BIND_REGISTER_RESPONSE = 0x8023,
 
-            /**
-            * Bind Request
-            * 
-            * See {@link BindRequest}
-            */
+            /// <summary>
+            /// Bind Request
+            /// 
+            /// See {@link BindRequest}
+            /// </summary>
             BIND_REQUEST = 0x0021,
 
-            /**
-            * Bind Response
-            * 
-            * See {@link BindResponse}
-            */
+            /// <summary>
+            /// Bind Response
+            /// 
+            /// See {@link BindResponse}
+            /// </summary>
             BIND_RESPONSE = 0x8021,
 
-            /**
-            * Cache Request
-            * 
-            * See {@link CacheRequest}
-            */
+            /// <summary>
+            /// Cache Request
+            /// 
+            /// See {@link CacheRequest}
+            /// </summary>
             CACHE_REQUEST = 0x0037,
 
-            /**
-            * Complex Descriptor Request
-            * 
-            * See {@link ComplexDescriptorRequest}
-            */
+            /// <summary>
+            /// Complex Descriptor Request
+            /// 
+            /// See {@link ComplexDescriptorRequest}
+            /// </summary>
             COMPLEX_DESCRIPTOR_REQUEST = 0x0010,
 
-            /**
-            * Complex Descriptor Response
-            * 
-            * See {@link ComplexDescriptorResponse}
-            */
+            /// <summary>
+            /// Complex Descriptor Response
+            /// 
+            /// See {@link ComplexDescriptorResponse}
+            /// </summary>
             COMPLEX_DESCRIPTOR_RESPONSE = 0x8010,
 
-            /**
-            * Device Announce
-            * 
-            * See {@link DeviceAnnounce}
-            */
+            /// <summary>
+            /// Device Announce
+            /// 
+            /// See {@link DeviceAnnounce}
+            /// </summary>
             DEVICE_ANNOUNCE = 0x0013,
 
-            /**
-            * Discovery Cache Request
-            * 
-            * See {@link DiscoveryCacheRequest}
-            */
+            /// <summary>
+            /// Discovery Cache Request
+            /// 
+            /// See {@link DiscoveryCacheRequest}
+            /// </summary>
             DISCOVERY_CACHE_REQUEST = 0x0012,
 
-            /**
-            * Discovery Cache Response
-            * 
-            * See {@link DiscoveryCacheResponse}
-            */
+            /// <summary>
+            /// Discovery Cache Response
+            /// 
+            /// See {@link DiscoveryCacheResponse}
+            /// </summary>
             DISCOVERY_CACHE_RESPONSE = 0x8012,
 
-            /**
-            * Discovery Store Request Request
-            * 
-            * See {@link DiscoveryStoreRequestRequest}
-            */
+            /// <summary>
+            /// Discovery Store Request Request
+            /// 
+            /// See {@link DiscoveryStoreRequestRequest}
+            /// </summary>
             DISCOVERY_STORE_REQUEST_REQUEST = 0x0016,
 
-            /**
-            * Discovery Store Response
-            * 
-            * See {@link DiscoveryStoreResponse}
-            */
+            /// <summary>
+            /// Discovery Store Response
+            /// 
+            /// See {@link DiscoveryStoreResponse}
+            /// </summary>
             DISCOVERY_STORE_RESPONSE = 0x8016,
 
-            /**
-            * End Device Bind Request
-            * 
-            * See {@link EndDeviceBindRequest}
-            */
+            /// <summary>
+            /// End Device Bind Request
+            /// 
+            /// See {@link EndDeviceBindRequest}
+            /// </summary>
             END_DEVICE_BIND_REQUEST = 0x0020,
 
-            /**
-            * End Device Bind Response
-            * 
-            * See {@link EndDeviceBindResponse}
-            */
+            /// <summary>
+            /// End Device Bind Response
+            /// 
+            /// See {@link EndDeviceBindResponse}
+            /// </summary>
             END_DEVICE_BIND_RESPONSE = 0x8020,
 
-            /**
-            * Extended Active Endpoint Request
-            * 
-            * See {@link ExtendedActiveEndpointRequest}
-            */
+            /// <summary>
+            /// Extended Active Endpoint Request
+            /// 
+            /// See {@link ExtendedActiveEndpointRequest}
+            /// </summary>
             EXTENDED_ACTIVE_ENDPOINT_REQUEST = 0x001E,
 
-            /**
-            * Extended Active Endpoint Response
-            * 
-            * See {@link ExtendedActiveEndpointResponse}
-            */
+            /// <summary>
+            /// Extended Active Endpoint Response
+            /// 
+            /// See {@link ExtendedActiveEndpointResponse}
+            /// </summary>
             EXTENDED_ACTIVE_ENDPOINT_RESPONSE = 0x801E,
 
-            /**
-            * Extended Simple Descriptor Request
-            * 
-            * See {@link ExtendedSimpleDescriptorRequest}
-            */
+            /// <summary>
+            /// Extended Simple Descriptor Request
+            /// 
+            /// See {@link ExtendedSimpleDescriptorRequest}
+            /// </summary>
             EXTENDED_SIMPLE_DESCRIPTOR_REQUEST = 0x001D,
 
-            /**
-            * Extended Simple Descriptor Response
-            * 
-            * See {@link ExtendedSimpleDescriptorResponse}
-            */
+            /// <summary>
+            /// Extended Simple Descriptor Response
+            /// 
+            /// See {@link ExtendedSimpleDescriptorResponse}
+            /// </summary>
             EXTENDED_SIMPLE_DESCRIPTOR_RESPONSE = 0x801D,
 
-            /**
-            * Find Node Cache Request
-            * 
-            * See {@link FindNodeCacheRequest}
-            */
+            /// <summary>
+            /// Find Node Cache Request
+            /// 
+            /// See {@link FindNodeCacheRequest}
+            /// </summary>
             FIND_NODE_CACHE_REQUEST = 0x001C,
 
-            /**
-            * Find Node Cache Response
-            * 
-            * See {@link FindNodeCacheResponse}
-            */
+            /// <summary>
+            /// Find Node Cache Response
+            /// 
+            /// See {@link FindNodeCacheResponse}
+            /// </summary>
             FIND_NODE_CACHE_RESPONSE = 0x801C,
 
-            /**
-            * IEEE Address Request
-            * 
-            * See {@link IeeeAddressRequest}
-            */
+            /// <summary>
+            /// IEEE Address Request
+            /// 
+            /// See {@link IeeeAddressRequest}
+            /// </summary>
             IEEE_ADDRESS_REQUEST = 0x0001,
 
-            /**
-            * IEEE Address Response
-            * 
-            * See {@link IeeeAddressResponse}
-            */
+            /// <summary>
+            /// IEEE Address Response
+            /// 
+            /// See {@link IeeeAddressResponse}
+            /// </summary>
             IEEE_ADDRESS_RESPONSE = 0x8001,
 
-            /**
-            * Management Bind Request
-            * 
-            * See {@link ManagementBindRequest}
-            */
+            /// <summary>
+            /// Management Bind Request
+            /// 
+            /// See {@link ManagementBindRequest}
+            /// </summary>
             MANAGEMENT_BIND_REQUEST = 0x0033,
 
-            /**
-            * Management Bind Response
-            * 
-            * See {@link ManagementBindResponse}
-            */
+            /// <summary>
+            /// Management Bind Response
+            /// 
+            /// See {@link ManagementBindResponse}
+            /// </summary>
             MANAGEMENT_BIND_RESPONSE = 0x8033,
 
-            /**
-            * Management Cache Response
-            * 
-            * See {@link ManagementCacheResponse}
-            */
+            /// <summary>
+            /// Management Cache Response
+            /// 
+            /// See {@link ManagementCacheResponse}
+            /// </summary>
             MANAGEMENT_CACHE_RESPONSE = 0x8037,
 
-            /**
-            * Management Direct Join Request
-            * 
-            * See {@link ManagementDirectJoinRequest}
-            */
+            /// <summary>
+            /// Management Direct Join Request
+            /// 
+            /// See {@link ManagementDirectJoinRequest}
+            /// </summary>
             MANAGEMENT_DIRECT_JOIN_REQUEST = 0x0035,
 
-            /**
-            * Management Direct Join Response
-            * 
-            * See {@link ManagementDirectJoinResponse}
-            */
+            /// <summary>
+            /// Management Direct Join Response
+            /// 
+            /// See {@link ManagementDirectJoinResponse}
+            /// </summary>
             MANAGEMENT_DIRECT_JOIN_RESPONSE = 0x8035,
 
-            /**
-            * Management Leave Request
-            * 
-            * See {@link ManagementLeaveRequest}
-            */
+            /// <summary>
+            /// Management Leave Request
+            /// 
+            /// See {@link ManagementLeaveRequest}
+            /// </summary>
             MANAGEMENT_LEAVE_REQUEST = 0x0034,
 
-            /**
-            * Management Leave Response
-            * 
-            * See {@link ManagementLeaveResponse}
-            */
+            /// <summary>
+            /// Management Leave Response
+            /// 
+            /// See {@link ManagementLeaveResponse}
+            /// </summary>
             MANAGEMENT_LEAVE_RESPONSE = 0x8034,
 
-            /**
-            * Management LQI Request
-            * 
-            * See {@link ManagementLqiRequest}
-            */
+            /// <summary>
+            /// Management LQI Request
+            /// 
+            /// See {@link ManagementLqiRequest}
+            /// </summary>
             MANAGEMENT_LQI_REQUEST = 0x0031,
 
-            /**
-            * Management LQI Response
-            * 
-            * See {@link ManagementLqiResponse}
-            */
+            /// <summary>
+            /// Management LQI Response
+            /// 
+            /// See {@link ManagementLqiResponse}
+            /// </summary>
             MANAGEMENT_LQI_RESPONSE = 0x8031,
 
-            /**
-            * Management Network Discovery
-            * 
-            * See {@link ManagementNetworkDiscovery}
-            */
+            /// <summary>
+            /// Management Network Discovery
+            /// 
+            /// See {@link ManagementNetworkDiscovery}
+            /// </summary>
             MANAGEMENT_NETWORK_DISCOVERY = 0x0030,
 
-            /**
-            * Management Network Discovery Response
-            * 
-            * See {@link ManagementNetworkDiscoveryResponse}
-            */
+            /// <summary>
+            /// Management Network Discovery Response
+            /// 
+            /// See {@link ManagementNetworkDiscoveryResponse}
+            /// </summary>
             MANAGEMENT_NETWORK_DISCOVERY_RESPONSE = 0x8030,
 
-            /**
-            * Management Network Update Notify
-            * 
-            * See {@link ManagementNetworkUpdateNotify}
-            */
+            /// <summary>
+            /// Management Network Update Notify
+            /// 
+            /// See {@link ManagementNetworkUpdateNotify}
+            /// </summary>
             MANAGEMENT_NETWORK_UPDATE_NOTIFY = 0x8038,
 
-            /**
-            * Management Permit Joining Request
-            * 
-            * See {@link ManagementPermitJoiningRequest}
-            */
+            /// <summary>
+            /// Management Permit Joining Request
+            /// 
+            /// See {@link ManagementPermitJoiningRequest}
+            /// </summary>
             MANAGEMENT_PERMIT_JOINING_REQUEST = 0x0036,
 
-            /**
-            * Management Permit Joining Response
-            * 
-            * See {@link ManagementPermitJoiningResponse}
-            */
+            /// <summary>
+            /// Management Permit Joining Response
+            /// 
+            /// See {@link ManagementPermitJoiningResponse}
+            /// </summary>
             MANAGEMENT_PERMIT_JOINING_RESPONSE = 0x8036,
 
-            /**
-            * Management Routing Request
-            * 
-            * See {@link ManagementRoutingRequest}
-            */
+            /// <summary>
+            /// Management Routing Request
+            /// 
+            /// See {@link ManagementRoutingRequest}
+            /// </summary>
             MANAGEMENT_ROUTING_REQUEST = 0x0032,
 
-            /**
-            * Management Routing Response
-            * 
-            * See {@link ManagementRoutingResponse}
-            */
+            /// <summary>
+            /// Management Routing Response
+            /// 
+            /// See {@link ManagementRoutingResponse}
+            /// </summary>
             MANAGEMENT_ROUTING_RESPONSE = 0x8032,
 
-            /**
-            * Match Descriptor Request
-            * 
-            * See {@link MatchDescriptorRequest}
-            */
+            /// <summary>
+            /// Match Descriptor Request
+            /// 
+            /// See {@link MatchDescriptorRequest}
+            /// </summary>
             MATCH_DESCRIPTOR_REQUEST = 0x0006,
 
-            /**
-            * Match Descriptor Response
-            * 
-            * See {@link MatchDescriptorResponse}
-            */
+            /// <summary>
+            /// Match Descriptor Response
+            /// 
+            /// See {@link MatchDescriptorResponse}
+            /// </summary>
             MATCH_DESCRIPTOR_RESPONSE = 0x8006,
 
-            /**
-            * Network Address Request
-            * 
-            * See {@link NetworkAddressRequest}
-            */
+            /// <summary>
+            /// Network Address Request
+            /// 
+            /// See {@link NetworkAddressRequest}
+            /// </summary>
             NETWORK_ADDRESS_REQUEST = 0x0000,
 
-            /**
-            * Network Address Response
-            * 
-            * See {@link NetworkAddressResponse}
-            */
+            /// <summary>
+            /// Network Address Response
+            /// 
+            /// See {@link NetworkAddressResponse}
+            /// </summary>
             NETWORK_ADDRESS_RESPONSE = 0x8000,
 
-            /**
-            * Network Update Request
-            * 
-            * See {@link NetworkUpdateRequest}
-            */
+            /// <summary>
+            /// Network Update Request
+            /// 
+            /// See {@link NetworkUpdateRequest}
+            /// </summary>
             NETWORK_UPDATE_REQUEST = 0x0038,
 
-            /**
-            * Node Descriptor Request
-            * 
-            * See {@link NodeDescriptorRequest}
-            */
+            /// <summary>
+            /// Node Descriptor Request
+            /// 
+            /// See {@link NodeDescriptorRequest}
+            /// </summary>
             NODE_DESCRIPTOR_REQUEST = 0x0002,
 
-            /**
-            * Node Descriptor Response
-            * 
-            * See {@link NodeDescriptorResponse}
-            */
+            /// <summary>
+            /// Node Descriptor Response
+            /// 
+            /// See {@link NodeDescriptorResponse}
+            /// </summary>
             NODE_DESCRIPTOR_RESPONSE = 0x8002,
 
-            /**
-            * Node Descriptor Store Request
-            * 
-            * See {@link NodeDescriptorStoreRequest}
-            */
+            /// <summary>
+            /// Node Descriptor Store Request
+            /// 
+            /// See {@link NodeDescriptorStoreRequest}
+            /// </summary>
             NODE_DESCRIPTOR_STORE_REQUEST = 0x0017,
 
-            /**
-            * Node Descriptor Store Response
-            * 
-            * See {@link NodeDescriptorStoreResponse}
-            */
+            /// <summary>
+            /// Node Descriptor Store Response
+            /// 
+            /// See {@link NodeDescriptorStoreResponse}
+            /// </summary>
             NODE_DESCRIPTOR_STORE_RESPONSE = 0x8017,
 
-            /**
-            * Power Descriptor Request
-            * 
-            * See {@link PowerDescriptorRequest}
-            */
+            /// <summary>
+            /// Power Descriptor Request
+            /// 
+            /// See {@link PowerDescriptorRequest}
+            /// </summary>
             POWER_DESCRIPTOR_REQUEST = 0x0003,
 
-            /**
-            * Power Descriptor Response
-            * 
-            * See {@link PowerDescriptorResponse}
-            */
+            /// <summary>
+            /// Power Descriptor Response
+            /// 
+            /// See {@link PowerDescriptorResponse}
+            /// </summary>
             POWER_DESCRIPTOR_RESPONSE = 0x8003,
 
-            /**
-            * Power Descriptor Store Request
-            * 
-            * See {@link PowerDescriptorStoreRequest}
-            */
+            /// <summary>
+            /// Power Descriptor Store Request
+            /// 
+            /// See {@link PowerDescriptorStoreRequest}
+            /// </summary>
             POWER_DESCRIPTOR_STORE_REQUEST = 0x0018,
 
-            /**
-            * Power Descriptor Store Response
-            * 
-            * See {@link PowerDescriptorStoreResponse}
-            */
+            /// <summary>
+            /// Power Descriptor Store Response
+            /// 
+            /// See {@link PowerDescriptorStoreResponse}
+            /// </summary>
             POWER_DESCRIPTOR_STORE_RESPONSE = 0x8018,
 
-            /**
-            * Recover Bind Table Request
-            * 
-            * See {@link RecoverBindTableRequest}
-            */
+            /// <summary>
+            /// Recover Bind Table Request
+            /// 
+            /// See {@link RecoverBindTableRequest}
+            /// </summary>
             RECOVER_BIND_TABLE_REQUEST = 0x0028,
 
-            /**
-            * Recover Bind Table Response
-            * 
-            * See {@link RecoverBindTableResponse}
-            */
+            /// <summary>
+            /// Recover Bind Table Response
+            /// 
+            /// See {@link RecoverBindTableResponse}
+            /// </summary>
             RECOVER_BIND_TABLE_RESPONSE = 0x8028,
 
-            /**
-            * Recover Source Bind Request
-            * 
-            * See {@link RecoverSourceBindRequest}
-            */
+            /// <summary>
+            /// Recover Source Bind Request
+            /// 
+            /// See {@link RecoverSourceBindRequest}
+            /// </summary>
             RECOVER_SOURCE_BIND_REQUEST = 0x002A,
 
-            /**
-            * Recover Source Bind Response
-            * 
-            * See {@link RecoverSourceBindResponse}
-            */
+            /// <summary>
+            /// Recover Source Bind Response
+            /// 
+            /// See {@link RecoverSourceBindResponse}
+            /// </summary>
             RECOVER_SOURCE_BIND_RESPONSE = 0x8029,
 
-            /**
-            * Remove Backup Bind Entry Response
-            * 
-            * See {@link RemoveBackupBindEntryResponse}
-            */
+            /// <summary>
+            /// Remove Backup Bind Entry Response
+            /// 
+            /// See {@link RemoveBackupBindEntryResponse}
+            /// </summary>
             REMOVE_BACKUP_BIND_ENTRY_RESPONSE = 0x8026,
 
-            /**
-            * Remove Backup Bind Table Request
-            * 
-            * See {@link RemoveBackupBindTableRequest}
-            */
+            /// <summary>
+            /// Remove Backup Bind Table Request
+            /// 
+            /// See {@link RemoveBackupBindTableRequest}
+            /// </summary>
             REMOVE_BACKUP_BIND_TABLE_REQUEST = 0x0026,
 
-            /**
-            * Remove Node Cache
-            * 
-            * See {@link RemoveNodeCache}
-            */
+            /// <summary>
+            /// Remove Node Cache
+            /// 
+            /// See {@link RemoveNodeCache}
+            /// </summary>
             REMOVE_NODE_CACHE = 0x801B,
 
-            /**
-            * Remove Node Cache Request
-            * 
-            * See {@link RemoveNodeCacheRequest}
-            */
+            /// <summary>
+            /// Remove Node Cache Request
+            /// 
+            /// See {@link RemoveNodeCacheRequest}
+            /// </summary>
             REMOVE_NODE_CACHE_REQUEST = 0x001B,
 
-            /**
-            * Replace Device Request
-            * 
-            * See {@link ReplaceDeviceRequest}
-            */
+            /// <summary>
+            /// Replace Device Request
+            /// 
+            /// See {@link ReplaceDeviceRequest}
+            /// </summary>
             REPLACE_DEVICE_REQUEST = 0x0024,
 
-            /**
-            * Replace Device Response
-            * 
-            * See {@link ReplaceDeviceResponse}
-            */
+            /// <summary>
+            /// Replace Device Response
+            /// 
+            /// See {@link ReplaceDeviceResponse}
+            /// </summary>
             REPLACE_DEVICE_RESPONSE = 0x8024,
 
-            /**
-            * Simple Descriptor Request
-            * 
-            * See {@link SimpleDescriptorRequest}
-            */
+            /// <summary>
+            /// Simple Descriptor Request
+            /// 
+            /// See {@link SimpleDescriptorRequest}
+            /// </summary>
             SIMPLE_DESCRIPTOR_REQUEST = 0x0004,
 
-            /**
-            * Simple Descriptor Response
-            * 
-            * See {@link SimpleDescriptorResponse}
-            */
+            /// <summary>
+            /// Simple Descriptor Response
+            /// 
+            /// See {@link SimpleDescriptorResponse}
+            /// </summary>
             SIMPLE_DESCRIPTOR_RESPONSE = 0x8004,
 
-            /**
-            * Simple Descriptor Store
-            * 
-            * See {@link SimpleDescriptorStore}
-            */
+            /// <summary>
+            /// Simple Descriptor Store
+            /// 
+            /// See {@link SimpleDescriptorStore}
+            /// </summary>
             SIMPLE_DESCRIPTOR_STORE = 0x001A,
 
-            /**
-            * Simple Descriptor Store Response
-            * 
-            * See {@link SimpleDescriptorStoreResponse}
-            */
+            /// <summary>
+            /// Simple Descriptor Store Response
+            /// 
+            /// See {@link SimpleDescriptorStoreResponse}
+            /// </summary>
             SIMPLE_DESCRIPTOR_STORE_RESPONSE = 0x801A,
 
-            /**
-            * Store Backup Bind Entry Request
-            * 
-            * See {@link StoreBackupBindEntryRequest}
-            */
+            /// <summary>
+            /// Store Backup Bind Entry Request
+            /// 
+            /// See {@link StoreBackupBindEntryRequest}
+            /// </summary>
             STORE_BACKUP_BIND_ENTRY_REQUEST = 0x0025,
 
-            /**
-            * Store Backup Bind Entry Response
-            * 
-            * See {@link StoreBackupBindEntryResponse}
-            */
+            /// <summary>
+            /// Store Backup Bind Entry Response
+            /// 
+            /// See {@link StoreBackupBindEntryResponse}
+            /// </summary>
             STORE_BACKUP_BIND_ENTRY_RESPONSE = 0x8025,
 
-            /**
-            * System Server Discovery Request
-            * 
-            * See {@link SystemServerDiscoveryRequest}
-            */
+            /// <summary>
+            /// System Server Discovery Request
+            /// 
+            /// See {@link SystemServerDiscoveryRequest}
+            /// </summary>
             SYSTEM_SERVER_DISCOVERY_REQUEST = 0x0015,
 
-            /**
-            * Unbind Request
-            * 
-            * See {@link UnbindRequest}
-            */
+            /// <summary>
+            /// Unbind Request
+            /// 
+            /// See {@link UnbindRequest}
+            /// </summary>
             UNBIND_REQUEST = 0x0022,
 
-            /**
-            * Unbind Response
-            * 
-            * See {@link UnbindResponse}
-            */
+            /// <summary>
+            /// Unbind Response
+            /// 
+            /// See {@link UnbindResponse}
+            /// </summary>
             UNBIND_RESPONSE = 0x8022,
 
-            /**
-            * User Descriptor Conf
-            * 
-            * See {@link UserDescriptorConf}
-            */
+            /// <summary>
+            /// User Descriptor Conf
+            /// 
+            /// See {@link UserDescriptorConf}
+            /// </summary>
             USER_DESCRIPTOR_CONF = 0x8014,
 
-            /**
-            * User Descriptor Request
-            * 
-            * See {@link UserDescriptorRequest}
-            */
+            /// <summary>
+            /// User Descriptor Request
+            /// 
+            /// See {@link UserDescriptorRequest}
+            /// </summary>
             USER_DESCRIPTOR_REQUEST = 0x0011,
 
-            /**
-            * User Descriptor Response
-            * 
-            * See {@link UserDescriptorResponse}
-            */
+            /// <summary>
+            /// User Descriptor Response
+            /// 
+            /// See {@link UserDescriptorResponse}
+            /// </summary>
             USER_DESCRIPTOR_RESPONSE = 0x8011,
 
-            /**
-            * User Descriptor Set Request
-            * 
-            * See {@link UserDescriptorSetRequest}
-            */
+            /// <summary>
+            /// User Descriptor Set Request
+            /// 
+            /// See {@link UserDescriptorSetRequest}
+            /// </summary>
             USER_DESCRIPTOR_SET_REQUEST = 0x0014,
         }
 

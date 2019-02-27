@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Groups;
 
-/**
- * View Group Command value object class.
- *
- * Cluster: Groups. Command is sentTO the server.
- * This command is a specific command used for the Groups cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// View Group Command value object class.
+ ///
+ /// Cluster: Groups. Command is sentTO the server.
+ /// This command is a specific command used for the Groups cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Groups
 {
        public class ViewGroupCommand : ZclCommand
        {
-           /**
-           * Group ID command message field.
-           */
+           /// <summary>
+           /// Group ID command message field.
+           /// </summary>
            public ushort GroupID { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ViewGroupCommand()
            {
                GenericCommand = false;

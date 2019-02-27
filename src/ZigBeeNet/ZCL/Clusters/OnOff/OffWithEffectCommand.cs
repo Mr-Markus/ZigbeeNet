@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 
-/**
- * Off With Effect Command value object class.
- *
- * Cluster: On/Off. Command is sentTO the server.
- * This command is a specific command used for the On/Off cluster.
- *
- * The Off With Effect command allows devices to be turned off using enhanced ways of fading. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Off With Effect Command value object class.
+ ///
+ /// Cluster: On/Off. Command is sentTO the server.
+ /// This command is a specific command used for the On/Off cluster.
+ ///
+ /// The Off With Effect command allows devices to be turned off using enhanced ways of fading. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OnOff
 {
        public class OffWithEffectCommand : ZclCommand
        {
-           /**
-           * Effect Identifier command message field.
-           */
+           /// <summary>
+           /// Effect Identifier command message field.
+           /// </summary>
            public byte EffectIdentifier { get; set; }
 
-           /**
-           * Effect Variant command message field.
-           */
+           /// <summary>
+           /// Effect Variant command message field.
+           /// </summary>
            public byte EffectVariant { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public OffWithEffectCommand()
            {
                GenericCommand = false;

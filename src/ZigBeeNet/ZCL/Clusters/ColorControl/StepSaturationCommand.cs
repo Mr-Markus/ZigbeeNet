@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/**
- * Step Saturation Command value object class.
- *
- * Cluster: Color Control. Command is sentTO the server.
- * This command is a specific command used for the Color Control cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Step Saturation Command value object class.
+ ///
+ /// Cluster: Color Control. Command is sentTO the server.
+ /// This command is a specific command used for the Color Control cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
        public class StepSaturationCommand : ZclCommand
        {
-           /**
-           * Step mode command message field.
-           */
+           /// <summary>
+           /// Step mode command message field.
+           /// </summary>
            public byte StepMode { get; set; }
 
-           /**
-           * Step size command message field.
-           */
+           /// <summary>
+           /// Step size command message field.
+           /// </summary>
            public byte StepSize { get; set; }
 
-           /**
-           * Transition time command message field.
-           */
+           /// <summary>
+           /// Transition time command message field.
+           /// </summary>
            public byte TransitionTime { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public StepSaturationCommand()
            {
                GenericCommand = false;

@@ -6,19 +6,19 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-   * Discovery Cache Request value object class.
-   * 
-   * The Discovery_Cache_req is provided to enable devices on the network to locate
-   * a Primary Discovery Cache device on the network. The destination addressing on
-   * this primitive shall be broadcast to all devices for which macRxOnWhenIdle =
-   * TRUE.
-   */
+    /// <summary>
+   /// Discovery Cache Request value object class.
+   /// 
+   /// The Discovery_Cache_req is provided to enable devices on the network to locate
+   /// a Primary Discovery Cache device on the network. The destination addressing on
+   /// this primitive shall be broadcast to all devices for which macRxOnWhenIdle =
+   /// TRUE.
+   /// </summary>
     public class DiscoveryCacheRequest : ZdoRequest
     {
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public DiscoveryCacheRequest()
         {
             ClusterId = 0x0012;

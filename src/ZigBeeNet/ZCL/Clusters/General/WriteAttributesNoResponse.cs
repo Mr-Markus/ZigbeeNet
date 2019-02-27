@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Write Attributes No Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The write attributes no response command is generated when a device wishes to * change the value of one or more attributes located on another device but does not * require a response. Each write attribute record shall contain the identifier and the * actual value of the attribute to be written. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Write Attributes No Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The write attributes no response command is generated when a device wishes to /// change the value of one or more attributes located on another device but does not /// require a response. Each write attribute record shall contain the identifier and the /// actual value of the attribute to be written. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class WriteAttributesNoResponse : ZclCommand
        {
-           /**
-           * Records command message field.
-           */
+           /// <summary>
+           /// Records command message field.
+           /// </summary>
            public List<WriteAttributeRecord> Records { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public WriteAttributesNoResponse()
            {
                GenericCommand = true;

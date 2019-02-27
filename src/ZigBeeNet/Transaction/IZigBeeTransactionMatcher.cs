@@ -5,19 +5,19 @@ using ZigBeeNet;
 
 namespace ZigBeeNet.Transaction
 {
-    /**
-     * Defines the interface for transaction matcher
-     *
-     */
+    /// <summary>
+     /// Defines the interface for transaction matcher
+     ///
+     /// </summary>
     public interface IZigBeeTransactionMatcher
     {
-        /**
-         * Matches request and response.
-         *
-         * @param request the request {@link ZigBeeCommand}
-         * @param response the response {@link ZigBeeCommand}
-         * @return true if request matches response
-         */
+        /// <summary>
+         /// Matches request and response.
+         ///
+         /// @param request the request {@link ZigBeeCommand}
+         /// @param response the response {@link ZigBeeCommand}
+         /// @return true if request matches response
+         /// </summary>
         bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response);
     }
 }

@@ -40,9 +40,9 @@ namespace ZigBeeNet.Serialization
             index += n;
         }
 
-        /**
-         * {@inheritDoc}
-         */
+        /// <summary>
+         /// {@inheritDoc}
+         /// </summary>
         public T ReadZigBeeType<T>(DataType type)
         {
             if (index == payload.Length)

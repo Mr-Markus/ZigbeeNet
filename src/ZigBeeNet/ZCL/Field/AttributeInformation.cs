@@ -8,14 +8,14 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class AttributeInformation : IZclListItemField, IComparable<AttributeInformation>
     {
-        /**
-         * The ZigBee attribute data type.
-         */
+        /// <summary>
+         /// The ZigBee attribute data type.
+         /// </summary>
         public ZclDataType AttributeDataType { get; set; }
 
-        /**
-         * The ZigBee attribute identifier number within the cluster.
-         */
+        /// <summary>
+         /// The ZigBee attribute identifier number within the cluster.
+         /// </summary>
         public ushort Identifier { get; set; }
 
 

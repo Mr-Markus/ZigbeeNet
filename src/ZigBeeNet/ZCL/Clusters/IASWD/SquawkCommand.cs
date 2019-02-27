@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASWD;
 
-/**
- * Squawk Command value object class.
- *
- * Cluster: IAS WD. Command is sentTO the server.
- * This command is a specific command used for the IAS WD cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Squawk Command value object class.
+ ///
+ /// Cluster: IAS WD. Command is sentTO the server.
+ /// This command is a specific command used for the IAS WD cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASWD
 {
        public class SquawkCommand : ZclCommand
        {
-           /**
-           * Header command message field.
-           */
+           /// <summary>
+           /// Header command message field.
+           /// </summary>
            public byte Header { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public SquawkCommand()
            {
                GenericCommand = false;

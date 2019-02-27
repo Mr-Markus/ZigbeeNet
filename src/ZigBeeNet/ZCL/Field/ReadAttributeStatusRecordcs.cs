@@ -8,24 +8,24 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class ReadAttributeStatusRecord : IZclListItemField
     {
-        /**
-         * The attribute identifier.
-         */
+        /// <summary>
+         /// The attribute identifier.
+         /// </summary>
         public ushort AttributeIdentifier { get; private set; }
 
-        /**
-         * The status.
-         */
+        /// <summary>
+         /// The status.
+         /// </summary>
         public ZclStatus Status { get; private set; }
 
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public ZclDataType AttributeDataType { get; private set; }
 
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public object AttributeValue { get; private set; }
 
 

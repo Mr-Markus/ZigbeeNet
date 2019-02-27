@@ -5,9 +5,9 @@ using ZigBeeNet;
 
 namespace ZigBeeNet
 {
-    /**
-     * Broadcast response.
-     */
+    /// <summary>
+     /// Broadcast response.
+     /// </summary>
     public class BroadcastResponse : ZigBeeCommand
     {
     }

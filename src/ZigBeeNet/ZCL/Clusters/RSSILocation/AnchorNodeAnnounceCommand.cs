@@ -7,43 +7,43 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * Anchor Node Announce Command value object class.
- *
- * Cluster: RSSI Location. Command is sentTO the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Anchor Node Announce Command value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentTO the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class AnchorNodeAnnounceCommand : ZclCommand
        {
-           /**
-           * Anchor Node Address command message field.
-           */
+           /// <summary>
+           /// Anchor Node Address command message field.
+           /// </summary>
            public IeeeAddress AnchorNodeAddress { get; set; }
 
-           /**
-           * Coordinate 1 command message field.
-           */
+           /// <summary>
+           /// Coordinate 1 command message field.
+           /// </summary>
            public short Coordinate1 { get; set; }
 
-           /**
-           * Coordinate 2 command message field.
-           */
+           /// <summary>
+           /// Coordinate 2 command message field.
+           /// </summary>
            public short Coordinate2 { get; set; }
 
-           /**
-           * Coordinate 3 command message field.
-           */
+           /// <summary>
+           /// Coordinate 3 command message field.
+           /// </summary>
            public short Coordinate3 { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public AnchorNodeAnnounceCommand()
            {
                GenericCommand = false;

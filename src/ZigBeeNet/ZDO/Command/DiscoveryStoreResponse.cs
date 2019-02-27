@@ -6,22 +6,22 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Discovery Store Response value object class.
-    * 
-    * The Discovery_store_rsp is provided to notify a Local Device of the request status
-    * from a Primary Discovery Cache device. Included in the response is a status code
-    * to notify the Local Device whether the request is successful (the Primary Cache
-    * Device has space to store the discovery cache data for the Local Device), whether
-    * the request is unsupported (meaning the Remote Device is not a Primary
-    * Discovery Cache device), or insufficient space exists.
-    * 
-    */
+    /// <summary>
+    /// Discovery Store Response value object class.
+    /// 
+    /// The Discovery_store_rsp is provided to notify a Local Device of the request status
+    /// from a Primary Discovery Cache device. Included in the response is a status code
+    /// to notify the Local Device whether the request is successful (the Primary Cache
+    /// Device has space to store the discovery cache data for the Local Device), whether
+    /// the request is unsupported (meaning the Remote Device is not a Primary
+    /// Discovery Cache device), or insufficient space exists.
+    /// 
+    /// </summary>
     public class DiscoveryStoreResponse : ZdoResponse
     {
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public DiscoveryStoreResponse()
         {
             ClusterId = 0x8016;

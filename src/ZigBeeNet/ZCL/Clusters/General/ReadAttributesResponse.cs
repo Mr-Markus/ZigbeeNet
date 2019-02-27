@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Read Attributes Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The read attributes response command is generated in response to a read attributes * or read attributes structured command. The command frame shall contain a read * attribute status record for each attribute identifier specified in the original read * attributes or read attributes structured command. For each read attribute status * record, the attribute identifier field shall contain the identifier specified in the * original read attributes or read attributes structured command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Read Attributes Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The read attributes response command is generated in response to a read attributes /// or read attributes structured command. The command frame shall contain a read /// attribute status record for each attribute identifier specified in the original read /// attributes or read attributes structured command. For each read attribute status /// record, the attribute identifier field shall contain the identifier specified in the /// original read attributes or read attributes structured command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class ReadAttributesResponse : ZclCommand
        {
-           /**
-           * Records command message field.
-           */
+           /// <summary>
+           /// Records command message field.
+           /// </summary>
            public List<ReadAttributeStatusRecord> Records { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ReadAttributesResponse()
            {
                GenericCommand = true;

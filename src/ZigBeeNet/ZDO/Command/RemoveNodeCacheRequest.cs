@@ -6,23 +6,23 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Remove Node Cache Request value object class.
-    * 
-    * The Remove_node_cache_req is provided to enable ZigBee devices on the
-    * network to request removal of discovery cache information for a specified ZigBee
-    * end device from a Primary Discovery Cache device. The effect of a successful
-    * Remove_node_cache_req is to undo a previously successful Discovery_store_req
-    * and additionally remove any cache information stored on behalf of the specified
-    * ZigBee end device on the Primary Discovery Cache device.
-    * 
-*/
+    /// <summary>
+    /// Remove Node Cache Request value object class.
+    /// 
+    /// The Remove_node_cache_req is provided to enable ZigBee devices on the
+    /// network to request removal of discovery cache information for a specified ZigBee
+    /// end device from a Primary Discovery Cache device. The effect of a successful
+    /// Remove_node_cache_req is to undo a previously successful Discovery_store_req
+    /// and additionally remove any cache information stored on behalf of the specified
+    /// ZigBee end device on the Primary Discovery Cache device.
+    /// 
+/// </summary>
 
     public class RemoveNodeCacheRequest : ZdoRequest
     {
-        /**
-        * Default constructor.
-*/
+        /// <summary>
+        /// Default constructor.
+/// </summary>
         public RemoveNodeCacheRequest()
         {
             ClusterId = 0x001B;

@@ -8,18 +8,18 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class WriteAttributeRecord : IZclListItemField
     {
-    /**
-     * The attribute identifier.
-     */
+    /// <summary>
+     /// The attribute identifier.
+     /// </summary>
     public ushort AttributeIdentifier;
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public ZclDataType AttributeDataType;
 
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public object AttributeValue;
 
 

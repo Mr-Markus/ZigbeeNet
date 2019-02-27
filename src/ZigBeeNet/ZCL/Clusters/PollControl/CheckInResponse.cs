@@ -7,40 +7,40 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.PollControl;
 
-/**
- * Check In Response value object class.
- *
- * Cluster: Poll Control. Command is sentTO the server.
- * This command is a specific command used for the Poll Control cluster.
- *
- * The Check-in Response is sent in response to the receipt of a Check-in command. The Check-in Response is used by the Poll Control Client to
- * indicate whether it would like the device implementing the Poll Control Cluster Server to go into a fast poll mode and for how long. If the Poll
- * Control Cluster Client indicates that it would like the device to go into a fast poll mode, it is responsible for telling the device to stop
- * fast polling when it is done sending messages to the fast polling device. * <br> * If the Poll Control Server receives a Check-In Response from a client for which there is no binding (unbound), it SHOULD respond with a
- * Default Response with a status value indicating ACTION_DENIED. * <br> * If the Poll Control Server receives a Check-In Response from a client for which there is a binding (bound) with an invalid fast poll interval
- * it SHOULD respond with a Default Response with status INVALID_VALUE. * <br> * If the Poll Control Server receives a Check-In Response from a bound client after temporary fast poll mode is completed it SHOULD respond
- * with a Default Response with a status value indicating TIMEOUT. * <br> * In all of the above cases, the Server SHALL respond with a Default Response not equal to ZCL_SUCCESS. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Check In Response value object class.
+ ///
+ /// Cluster: Poll Control. Command is sentTO the server.
+ /// This command is a specific command used for the Poll Control cluster.
+ ///
+ /// The Check-in Response is sent in response to the receipt of a Check-in command. The Check-in Response is used by the Poll Control Client to
+ /// indicate whether it would like the device implementing the Poll Control Cluster Server to go into a fast poll mode and for how long. If the Poll
+ /// Control Cluster Client indicates that it would like the device to go into a fast poll mode, it is responsible for telling the device to stop
+ /// fast polling when it is done sending messages to the fast polling device. /// <br> /// If the Poll Control Server receives a Check-In Response from a client for which there is no binding (unbound), it SHOULD respond with a
+ /// Default Response with a status value indicating ACTION_DENIED. /// <br> /// If the Poll Control Server receives a Check-In Response from a client for which there is a binding (bound) with an invalid fast poll interval
+ /// it SHOULD respond with a Default Response with status INVALID_VALUE. /// <br> /// If the Poll Control Server receives a Check-In Response from a bound client after temporary fast poll mode is completed it SHOULD respond
+ /// with a Default Response with a status value indicating TIMEOUT. /// <br> /// In all of the above cases, the Server SHALL respond with a Default Response not equal to ZCL_SUCCESS. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.PollControl
 {
        public class CheckInResponse : ZclCommand
        {
-           /**
-           * Start Fast Polling command message field.
-           */
+           /// <summary>
+           /// Start Fast Polling command message field.
+           /// </summary>
            public bool StartFastPolling { get; set; }
 
-           /**
-           * Fast Poll Timeout command message field.
-           */
+           /// <summary>
+           /// Fast Poll Timeout command message field.
+           /// </summary>
            public ushort FastPollTimeout { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public CheckInResponse()
            {
                GenericCommand = false;

@@ -4,73 +4,73 @@ using System.Text;
 
 namespace ZigBeeNet.Transport
 {
-    /**
- * Enumeration defining all possible configuration options for the {@link ZigBeeTransportTransmit}. Configuration is
- * updated via the {@link ZigBeeTransportTransmit#updateTransportConfig(java.util.Dictionary)} method.
- *
- * @author Chris Jackson
- *
- */
+    /// <summary>
+ /// Enumeration defining all possible configuration options for the {@link ZigBeeTransportTransmit}. Configuration is
+ /// updated via the {@link ZigBeeTransportTransmit#updateTransportConfig(java.util.Dictionary)} method.
+ ///
+ /// @author Chris Jackson
+ ///
+ /// </summary>
     public enum TransportConfigOption
     {
-        /**
-         * Defines the concentrator type.
-         * <p>
-         * Value must be one of {@link ConcentratorType}.
-         *
-         * @deprecated use CONCENTRATOR_CONFIG
-         */
+        /// <summary>
+         /// Defines the concentrator type.
+         /// <p>
+         /// Value must be one of {@link ConcentratorType}.
+         ///
+         /// @deprecated use CONCENTRATOR_CONFIG
+         /// </summary>
         CONCENTRATOR_TYPE,
-        /**
-         * Defines the concentrator type.
-         * <p>
-         * Value must be one of {@link ConcentratorConfigs}.
-         */
+        /// <summary>
+         /// Defines the concentrator type.
+         /// <p>
+         /// Value must be one of {@link ConcentratorConfigs}.
+         /// </summary>
         CONCENTRATOR_CONFIG,
-        /**
-         * Configures the trust centre join mode.
-         * <p>
-         * Value must be one of {@link TrustCentreJoinMode} enumeration.
-         */
+        /// <summary>
+         /// Configures the trust centre join mode.
+         /// <p>
+         /// Value must be one of {@link TrustCentreJoinMode} enumeration.
+         /// </summary>
         TRUST_CENTRE_JOIN_MODE,
-        /**
-         * Sets the trust centre link key.
-         * <p>
-         * Value must be a {@link ZigBeeKey}.
-         */
+        /// <summary>
+         /// Sets the trust centre link key.
+         /// <p>
+         /// Value must be a {@link ZigBeeKey}.
+         /// </summary>
         TRUST_CENTRE_LINK_KEY,
-        /**
-         * Sets a list of supported input clusters. This is primarily intended to allow the application to configure
-         * clusters that are matched in the MatchDescriptorRequest.
-         * <p>
-         * Value must be a {@link Collection} of Integer defining the input clusters
-         */
+        /// <summary>
+         /// Sets a list of supported input clusters. This is primarily intended to allow the application to configure
+         /// clusters that are matched in the MatchDescriptorRequest.
+         /// <p>
+         /// Value must be a {@link Collection} of Integer defining the input clusters
+         /// </summary>
         SUPPORTED_INPUT_CLUSTERS,
-        /**
-         * Sets a list of supported output clusters. This is primarily intended to allow the application to configure
-         * clusters that are matched in the MatchDescriptorRequest.
-         * <p>
-         * Value must be a {@link Collection} of Integer defining the output clusters
-         */
+        /// <summary>
+         /// Sets a list of supported output clusters. This is primarily intended to allow the application to configure
+         /// clusters that are matched in the MatchDescriptorRequest.
+         /// <p>
+         /// Value must be a {@link Collection} of Integer defining the output clusters
+         /// </summary>
         SUPPORTED_OUTPUT_CLUSTERS,
-        /**
-         * Sets an installation key for the specified address. Using a blank key (ie all zeros) may be used to remove
-         * the install key. This is dongle specific if the key can be removed or if it will time out.
-         * <p>
-         * Value must be a {@link ZigBeeNodeKey}
-         */
+        /// <summary>
+         /// Sets an installation key for the specified address. Using a blank key (ie all zeros) may be used to remove
+         /// the install key. This is dongle specific if the key can be removed or if it will time out.
+         /// <p>
+         /// Value must be a {@link ZigBeeNodeKey}
+         /// </summary>
         INSTALL_KEY,
-        /**
-         * Sets the device type used by the dongle. This allows to set the dongle as a coordinator or a router.
-         * <p>
-         * Value must be {@link DeviceType}
-         */
+        /// <summary>
+         /// Sets the device type used by the dongle. This allows to set the dongle as a coordinator or a router.
+         /// <p>
+         /// Value must be {@link DeviceType}
+         /// </summary>
         DEVICE_TYPE,
-        /**
-         * Sets the device radio power. Power level is defined in dBm.
-         * <p>
-         * Value must be {@link Integer}
-         */
+        /// <summary>
+         /// Sets the device radio power. Power level is defined in dBm.
+         /// <p>
+         /// Value must be {@link Integer}
+         /// </summary>
         RADIO_TX_POWER
     }
 }

@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/**
- * Upgrade End Response value object class.
- *
- * Cluster: OTA Upgrade. Command is sentFROM the server.
- * This command is a specific command used for the OTA Upgrade cluster.
- *
- * When an upgrade server receives an Upgrade End Request command with a status of * INVALID_IMAGE, REQUIRE_MORE_IMAGE, or ABORT, no additional processing shall be done * in its part. If the upgrade server receives an Upgrade End Request command with a status of * SUCCESS, it shall generate an Upgrade End Response with the manufacturer code and image type * received in the Upgrade End Request along with the times indicating when the device should upgrade * to the new image. * <br> * The server may send an unsolicited Upgrade End Response command to the client. This may be used * for example if the server wants to synchronize the upgrade on multiple clients simultaneously. For * client devices, the upgrade server may unicast or broadcast Upgrade End Response command * indicating a single client device or multiple client devices shall switch to using their new images. The * command may not be reliably received by sleepy devices if it is sent unsolicited. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Upgrade End Response value object class.
+ ///
+ /// Cluster: OTA Upgrade. Command is sentFROM the server.
+ /// This command is a specific command used for the OTA Upgrade cluster.
+ ///
+ /// When an upgrade server receives an Upgrade End Request command with a status of /// INVALID_IMAGE, REQUIRE_MORE_IMAGE, or ABORT, no additional processing shall be done /// in its part. If the upgrade server receives an Upgrade End Request command with a status of /// SUCCESS, it shall generate an Upgrade End Response with the manufacturer code and image type /// received in the Upgrade End Request along with the times indicating when the device should upgrade /// to the new image. /// <br> /// The server may send an unsolicited Upgrade End Response command to the client. This may be used /// for example if the server wants to synchronize the upgrade on multiple clients simultaneously. For /// client devices, the upgrade server may unicast or broadcast Upgrade End Response command /// indicating a single client device or multiple client devices shall switch to using their new images. The /// command may not be reliably received by sleepy devices if it is sent unsolicited. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class UpgradeEndResponse : ZclCommand
        {
-           /**
-           * Manufacturer code command message field.
-           */
+           /// <summary>
+           /// Manufacturer code command message field.
+           /// </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /**
-           * Image type command message field.
-           */
+           /// <summary>
+           /// Image type command message field.
+           /// </summary>
            public ushort ImageType { get; set; }
 
-           /**
-           * File Version command message field.
-           */
+           /// <summary>
+           /// File Version command message field.
+           /// </summary>
            public uint FileVersion { get; set; }
 
-           /**
-           * Current Time command message field.
-           */
+           /// <summary>
+           /// Current Time command message field.
+           /// </summary>
            public uint CurrentTime { get; set; }
 
-           /**
-           * Upgrade Time command message field.
-           */
+           /// <summary>
+           /// Upgrade Time command message field.
+           /// </summary>
            public uint UpgradeTime { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public UpgradeEndResponse()
            {
                GenericCommand = false;

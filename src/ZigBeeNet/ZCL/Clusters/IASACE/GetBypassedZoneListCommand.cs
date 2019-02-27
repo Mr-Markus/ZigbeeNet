@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Bypassed Zone List Command value object class.
- *
- * Cluster: IAS ACE. Command is sentTO the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * Provides IAS ACE clients with a way to retrieve the list of zones to be bypassed. This provides them with the ability * to provide greater local functionality (i.e., at the IAS ACE client) for users to modify the Bypassed Zone List and reduce * communications to the IAS ACE server when trying to arm the CIE security system. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Bypassed Zone List Command value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentTO the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// Provides IAS ACE clients with a way to retrieve the list of zones to be bypassed. This provides them with the ability /// to provide greater local functionality (i.e., at the IAS ACE client) for users to modify the Bypassed Zone List and reduce /// communications to the IAS ACE server when trying to arm the CIE security system. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetBypassedZoneListCommand : ZclCommand
        {
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetBypassedZoneListCommand()
            {
                GenericCommand = false;

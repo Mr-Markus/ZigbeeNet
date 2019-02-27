@@ -7,13 +7,13 @@ using ZigBeeNet.ZCL;
 
 namespace ZigBeeNet.ZCL
 {
-    /**
-     * The ZCL transaction response matcher.
-     * 
-     * Implements {@link ZigBeeTransactionMatcher} to check if a ZCL transaction matches a request.
-     * The matcher will return true if the request and response transaction IDs match and the request destination address,
-     * and response source address match.
-     */
+    /// <summary>
+     /// The ZCL transaction response matcher.
+     /// 
+     /// Implements {@link ZigBeeTransactionMatcher} to check if a ZCL transaction matches a request.
+     /// The matcher will return true if the request and response transaction IDs match and the request destination address,
+     /// and response source address match.
+     /// </summary>
     public class ZclTransactionMatcher : IZigBeeTransactionMatcher
     {
 

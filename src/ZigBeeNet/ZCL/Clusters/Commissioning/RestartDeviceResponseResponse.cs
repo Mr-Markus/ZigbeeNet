@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Commissioning;
 
-/**
- * Restart Device Response Response value object class.
- *
- * Cluster: Commissioning. Command is sentFROM the server.
- * This command is a specific command used for the Commissioning cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Restart Device Response Response value object class.
+ ///
+ /// Cluster: Commissioning. Command is sentFROM the server.
+ /// This command is a specific command used for the Commissioning cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Commissioning
 {
        public class RestartDeviceResponseResponse : ZclCommand
        {
-           /**
-           * Status command message field.
-           */
+           /// <summary>
+           /// Status command message field.
+           /// </summary>
            public byte Status { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RestartDeviceResponseResponse()
            {
                GenericCommand = false;

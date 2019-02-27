@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * Request Own Location Command value object class.
- *
- * Cluster: RSSI Location. Command is sentFROM the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Request Own Location Command value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentFROM the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class RequestOwnLocationCommand : ZclCommand
        {
-           /**
-           * Requesting Address command message field.
-           */
+           /// <summary>
+           /// Requesting Address command message field.
+           /// </summary>
            public IeeeAddress RequestingAddress { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RequestOwnLocationCommand()
            {
                GenericCommand = false;

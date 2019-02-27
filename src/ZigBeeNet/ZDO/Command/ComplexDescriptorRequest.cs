@@ -6,25 +6,25 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Complex Descriptor Request value object class.
-    * 
-    * The Complex_Desc_req command is generated from a local device wishing to
-    * inquire as to the complex descriptor of a remote device. This command shall be
-    * unicast either to the remote device itself or to an alternative device that contains
-    * the discovery information of the remote device.
-    * 
-    */
+    /// <summary>
+    /// Complex Descriptor Request value object class.
+    /// 
+    /// The Complex_Desc_req command is generated from a local device wishing to
+    /// inquire as to the complex descriptor of a remote device. This command shall be
+    /// unicast either to the remote device itself or to an alternative device that contains
+    /// the discovery information of the remote device.
+    /// 
+    /// </summary>
     public class ComplexDescriptorRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-        * NWKAddrOfInterest command message field.
-*/
+        /// <summary>
+        /// NWKAddrOfInterest command message field.
+/// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
-        /**
-        * Default constructor.
-*/
+        /// <summary>
+        /// Default constructor.
+/// </summary>
         public ComplexDescriptorRequest()
         {
             ClusterId = 0x0010;

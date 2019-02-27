@@ -7,53 +7,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * RSSI Response value object class.
- *
- * Cluster: RSSI Location. Command is sentTO the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// RSSI Response value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentTO the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class RSSIResponse : ZclCommand
        {
-           /**
-           * Replying Device command message field.
-           */
+           /// <summary>
+           /// Replying Device command message field.
+           /// </summary>
            public IeeeAddress ReplyingDevice { get; set; }
 
-           /**
-           * Coordinate 1 command message field.
-           */
+           /// <summary>
+           /// Coordinate 1 command message field.
+           /// </summary>
            public short Coordinate1 { get; set; }
 
-           /**
-           * Coordinate 2 command message field.
-           */
+           /// <summary>
+           /// Coordinate 2 command message field.
+           /// </summary>
            public short Coordinate2 { get; set; }
 
-           /**
-           * Coordinate 3 command message field.
-           */
+           /// <summary>
+           /// Coordinate 3 command message field.
+           /// </summary>
            public short Coordinate3 { get; set; }
 
-           /**
-           * RSSI command message field.
-           */
+           /// <summary>
+           /// RSSI command message field.
+           /// </summary>
            public sbyte RSSI { get; set; }
 
-           /**
-           * Number RSSI Measurements command message field.
-           */
+           /// <summary>
+           /// Number RSSI Measurements command message field.
+           /// </summary>
            public byte NumberRSSIMeasurements { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RSSIResponse()
            {
                GenericCommand = false;

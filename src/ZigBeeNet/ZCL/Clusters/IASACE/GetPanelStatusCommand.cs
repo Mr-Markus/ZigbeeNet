@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Panel Status Command value object class.
- *
- * Cluster: IAS ACE. Command is sentTO the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * This command is used by ACE clients to request an update to the status (e.g., security * system arm state) of the ACE server (i.e., the IAS CIE). In particular, this command is * useful for battery-powered ACE clients with polling rates longer than the ZigBee standard * check-in rate. * <br> * On receipt of this command, the ACE server responds with the status of the security system. * The IAS ACE server SHALL generate a Get Panel Status Response command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Panel Status Command value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentTO the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// This command is used by ACE clients to request an update to the status (e.g., security /// system arm state) of the ACE server (i.e., the IAS CIE). In particular, this command is /// useful for battery-powered ACE clients with polling rates longer than the ZigBee standard /// check-in rate. /// <br> /// On receipt of this command, the ACE server responds with the status of the security system. /// The IAS ACE server SHALL generate a Get Panel Status Response command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetPanelStatusCommand : ZclCommand
        {
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetPanelStatusCommand()
            {
                GenericCommand = false;

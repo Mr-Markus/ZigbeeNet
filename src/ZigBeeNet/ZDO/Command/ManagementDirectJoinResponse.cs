@@ -6,20 +6,20 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Management Direct Join Response value object class.
-    * 
-    * The Mgmt_Direct_Join_rsp is generated in response to a Mgmt_Direct_Join_req.
-    * If this management command is not supported, a status of NOT_SUPPORTED
-    * shall be returned. Otherwise, the Remote Device shall implement the following
-    * processing.
-    * 
-    */
+    /// <summary>
+    /// Management Direct Join Response value object class.
+    /// 
+    /// The Mgmt_Direct_Join_rsp is generated in response to a Mgmt_Direct_Join_req.
+    /// If this management command is not supported, a status of NOT_SUPPORTED
+    /// shall be returned. Otherwise, the Remote Device shall implement the following
+    /// processing.
+    /// 
+    /// </summary>
     public class ManagementDirectJoinResponse : ZdoResponse
     {
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ManagementDirectJoinResponse()
         {
             ClusterId = 0x8035;

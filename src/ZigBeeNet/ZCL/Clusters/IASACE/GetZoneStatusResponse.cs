@@ -7,50 +7,50 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Zone Status Response value object class.
- *
- * Cluster: IAS ACE. Command is sentFROM the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * This command updates requesting IAS ACE clients in the system of changes to the IAS Zone server statuses recorded * by the ACE server (e.g., IAS CIE device). *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Zone Status Response value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// This command updates requesting IAS ACE clients in the system of changes to the IAS Zone server statuses recorded /// by the ACE server (e.g., IAS CIE device). ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetZoneStatusResponse : ZclCommand
        {
-           /**
-           * Zone Status Complete command message field.
-           *
-          * Indicates whether there are additional Zone IDs managed by the IAS ACE Server with Zone Status information to be obtained.          * A value of zero (i.e. FALSE) indicates there are additional Zone IDs for which Zone Status information is available and          * that the IAS ACE client SHOULD send another Get Zone Status command.A value of one (i.e. TRUE) indicates there are no          * more Zone IDs for the IAS ACE client to query and the IAS ACE client has received all the Zone Status information for all          * IAS Zones managed by the IAS ACE server.          * <p>          * The IAS ACE client SHOULD NOT typically send another Get Zone Status command.           */
+           /// <summary>
+           /// Zone Status Complete command message field.
+           ///
+          /// Indicates whether there are additional Zone IDs managed by the IAS ACE Server with Zone Status information to be obtained.          /// A value of zero (i.e. FALSE) indicates there are additional Zone IDs for which Zone Status information is available and          /// that the IAS ACE client SHOULD send another Get Zone Status command.A value of one (i.e. TRUE) indicates there are no          /// more Zone IDs for the IAS ACE client to query and the IAS ACE client has received all the Zone Status information for all          /// IAS Zones managed by the IAS ACE server.          /// <p>          /// The IAS ACE client SHOULD NOT typically send another Get Zone Status command.           /// </summary>
            public bool ZoneStatusComplete { get; set; }
 
-           /**
-           * Number of zones command message field.
-           */
+           /// <summary>
+           /// Number of zones command message field.
+           /// </summary>
            public byte NumberOfZones { get; set; }
 
-           /**
-           * Ias Ace Zone Status command message field.
-           */
+           /// <summary>
+           /// Ias Ace Zone Status command message field.
+           /// </summary>
            public byte IasAceZoneStatus { get; set; }
 
-           /**
-           * Zone Id command message field.
-           */
+           /// <summary>
+           /// Zone Id command message field.
+           /// </summary>
            public byte ZoneId { get; set; }
 
-           /**
-           * Zone Status command message field.
-           */
+           /// <summary>
+           /// Zone Status command message field.
+           /// </summary>
            public ushort ZoneStatus { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetZoneStatusResponse()
            {
                GenericCommand = false;

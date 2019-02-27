@@ -6,20 +6,20 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Recover Bind Table Request value object class.
-    * 
-    * The Recover_Bind_Table_req is generated from a local primary binding table
-    * cache and sent to a remote backup binding table cache device when it wants a
-    * complete restore of the binding table. The destination addressing mode for this
-    * request is unicast.
-    * 
-    */
+    /// <summary>
+    /// Recover Bind Table Request value object class.
+    /// 
+    /// The Recover_Bind_Table_req is generated from a local primary binding table
+    /// cache and sent to a remote backup binding table cache device when it wants a
+    /// complete restore of the binding table. The destination addressing mode for this
+    /// request is unicast.
+    /// 
+    /// </summary>
     public class RecoverBindTableRequest : ZdoRequest
     {
-        /**
-        * Default constructor.
-        */
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public RecoverBindTableRequest()
         {
             ClusterId = 0x0028;

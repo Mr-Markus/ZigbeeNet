@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Discover Commands Received Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The Discover Commands Received Response is generated in response to a Discover Commands Received * command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Discover Commands Received Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The Discover Commands Received Response is generated in response to a Discover Commands Received /// command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverCommandsReceivedResponse : ZclCommand
        {
-           /**
-           * Discovery complete command message field.
-           */
+           /// <summary>
+           /// Discovery complete command message field.
+           /// </summary>
            public bool DiscoveryComplete { get; set; }
 
-           /**
-           * Command identifiers command message field.
-           */
+           /// <summary>
+           /// Command identifiers command message field.
+           /// </summary>
            public List<byte> CommandIdentifiers { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public DiscoverCommandsReceivedResponse()
            {
                GenericCommand = true;

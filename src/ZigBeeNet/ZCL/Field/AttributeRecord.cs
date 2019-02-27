@@ -8,18 +8,18 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class AttributeRecord : IZclListItemField
     {
-    /**
-     * The direction.
-     * <p>
-     * The direction field specifies whether values of the attribute are reported (0x00), or
-     * whether reports of the attribute are received (0x01).
-     *
-     */
+    /// <summary>
+     /// The direction.
+     /// <p>
+     /// The direction field specifies whether values of the attribute are reported (0x00), or
+     /// whether reports of the attribute are received (0x01).
+     ///
+     /// </summary>
     public byte Direction { get; set; }
 
-    /**
-     * The attribute identifier.
-     */
+    /// <summary>
+     /// The attribute identifier.
+     /// </summary>
     public ushort AttributeIdentifier { get; set; }
 
 

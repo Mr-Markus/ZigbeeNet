@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/**
- * Remove Scene Command value object class.
- *
- * Cluster: Scenes. Command is sentTO the server.
- * This command is a specific command used for the Scenes cluster.
- *
- * The Remove All Scenes may be addressed to a single device or to a group. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Remove Scene Command value object class.
+ ///
+ /// Cluster: Scenes. Command is sentTO the server.
+ /// This command is a specific command used for the Scenes cluster.
+ ///
+ /// The Remove All Scenes may be addressed to a single device or to a group. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class RemoveSceneCommand : ZclCommand
        {
-           /**
-           * Group ID command message field.
-           */
+           /// <summary>
+           /// Group ID command message field.
+           /// </summary>
            public ushort GroupID { get; set; }
 
-           /**
-           * Scene ID command message field.
-           */
+           /// <summary>
+           /// Scene ID command message field.
+           /// </summary>
            public byte SceneID { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public RemoveSceneCommand()
            {
                GenericCommand = false;

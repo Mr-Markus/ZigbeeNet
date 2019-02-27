@@ -6,14 +6,14 @@ namespace ZigBeeNet
 {
     public interface IZigBeeAddress : IComparable<IZigBeeAddress>
     {
-        /**
-         * The network address for this address.
-         */
+        /// <summary>
+         /// The network address for this address.
+         /// </summary>
         ushort Address { get; set; }
 
-        /**
-         * Check whether this address is ZigBee group.
-         */
+        /// <summary>
+         /// Check whether this address is ZigBee group.
+         /// </summary>
         bool IsGroup { get; }
     }
 }

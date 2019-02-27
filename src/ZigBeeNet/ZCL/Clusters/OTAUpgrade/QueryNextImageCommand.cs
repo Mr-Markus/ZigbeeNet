@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/**
- * Query Next Image Command value object class.
- *
- * Cluster: OTA Upgrade. Command is sentTO the server.
- * This command is a specific command used for the OTA Upgrade cluster.
- *
- * Client devices shall send a Query Next Image Request command to the server to see if there is new * OTA upgrade image available. ZR devices may send the command after receiving Image Notify * command. ZED device shall periodically wake up and send the command to the upgrade server. Client * devices query what the next image is, based on their own information. * <br> * The server takes the client’s information in the command and determines whether it has a suitable * image for the particular client. The decision should be based on specific policy that is specific to the * upgrade server and outside the scope of this document.. However, a recommended default policy is for * the server to send back a response that indicates the availability of an image that matches the * manufacturer code, image type, and the highest available file version of that image on the * server. However, the server may choose to upgrade, downgrade, or reinstall clients’ image, as its * policy dictates. If client’s hardware version is included in the command, the server shall examine the * value against the minimum and maximum hardware versions included in the OTA file header. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Query Next Image Command value object class.
+ ///
+ /// Cluster: OTA Upgrade. Command is sentTO the server.
+ /// This command is a specific command used for the OTA Upgrade cluster.
+ ///
+ /// Client devices shall send a Query Next Image Request command to the server to see if there is new /// OTA upgrade image available. ZR devices may send the command after receiving Image Notify /// command. ZED device shall periodically wake up and send the command to the upgrade server. Client /// devices query what the next image is, based on their own information. /// <br> /// The server takes the client’s information in the command and determines whether it has a suitable /// image for the particular client. The decision should be based on specific policy that is specific to the /// upgrade server and outside the scope of this document.. However, a recommended default policy is for /// the server to send back a response that indicates the availability of an image that matches the /// manufacturer code, image type, and the highest available file version of that image on the /// server. However, the server may choose to upgrade, downgrade, or reinstall clients’ image, as its /// policy dictates. If client’s hardware version is included in the command, the server shall examine the /// value against the minimum and maximum hardware versions included in the OTA file header. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class QueryNextImageCommand : ZclCommand
        {
-           /**
-           * Field control command message field.
-           */
+           /// <summary>
+           /// Field control command message field.
+           /// </summary>
            public byte FieldControl { get; set; }
 
-           /**
-           * Manufacturer code command message field.
-           */
+           /// <summary>
+           /// Manufacturer code command message field.
+           /// </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /**
-           * Image type command message field.
-           */
+           /// <summary>
+           /// Image type command message field.
+           /// </summary>
            public ushort ImageType { get; set; }
 
-           /**
-           * File version command message field.
-           */
+           /// <summary>
+           /// File version command message field.
+           /// </summary>
            public uint FileVersion { get; set; }
 
-           /**
-           * Hardware version command message field.
-           */
+           /// <summary>
+           /// Hardware version command message field.
+           /// </summary>
            public ushort HardwareVersion { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public QueryNextImageCommand()
            {
                GenericCommand = false;

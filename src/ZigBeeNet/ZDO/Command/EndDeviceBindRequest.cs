@@ -7,51 +7,51 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * End Device Bind Request value object class.
-    * 
-    * The End_Device_Bind_req is generated from a Local Device wishing to perform
-    * End Device Bind with a Remote Device. The End_Device_Bind_req is generated,
-    * typically based on some user action like a button press. The destination addressing
-    * on this command shall be unicast, and the destination address shall be that of the
-    * ZigBee Coordinator.
-    * 
-    */
+    /// <summary>
+    /// End Device Bind Request value object class.
+    /// 
+    /// The End_Device_Bind_req is generated from a Local Device wishing to perform
+    /// End Device Bind with a Remote Device. The End_Device_Bind_req is generated,
+    /// typically based on some user action like a button press. The destination addressing
+    /// on this command shall be unicast, and the destination address shall be that of the
+    /// ZigBee Coordinator.
+    /// 
+    /// </summary>
     public class EndDeviceBindRequest : ZdoRequest
     {
-        /**
-        * BindingTarget command message field.
-*/
+        /// <summary>
+        /// BindingTarget command message field.
+/// </summary>
         public int BindingTarget { get; set; }
 
-        /**
-        * SrcAddress command message field.
-*/
+        /// <summary>
+        /// SrcAddress command message field.
+/// </summary>
         public IeeeAddress SrcAddress { get; set; }
 
-        /**
-        * SrcEndpoint command message field.
-*/
+        /// <summary>
+        /// SrcEndpoint command message field.
+/// </summary>
         public int SrcEndpoint { get; set; }
 
-        /**
-        * ProfileID command message field.
-*/
+        /// <summary>
+        /// ProfileID command message field.
+/// </summary>
         public int ProfileId { get; set; }
 
-        /**
-        * InClusterList command message field.
-*/
+        /// <summary>
+        /// InClusterList command message field.
+/// </summary>
         public List<ushort> InClusterList { get; set; }
 
-        /**
-        * OutClusterList command message field.
-*/
+        /// <summary>
+        /// OutClusterList command message field.
+/// </summary>
         public List<ushort> OutClusterList { get; set; }
 
-        /**
-        * Default constructor.
-*/
+        /// <summary>
+        /// Default constructor.
+/// </summary>
         public EndDeviceBindRequest()
         {
             ClusterId = 0x0020;

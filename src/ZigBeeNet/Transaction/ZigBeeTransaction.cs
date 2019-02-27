@@ -9,16 +9,16 @@ using ZigBeeNet.ZCL;
 
 namespace ZigBeeNet.Transaction
 {
-    /**
-     * Transaction class to handle the sending of commands and timeout in the event there is no response.
-     *
-     */
+    /// <summary>
+     /// Transaction class to handle the sending of commands and timeout in the event there is no response.
+     ///
+     /// </summary>
     public class ZigBeeTransaction : IZigBeeCommandListener
     {
 
-        /**
-         * The logger.
-         */
+        /// <summary>
+         /// The logger.
+         /// </summary>
         private ILog _logger = LogProvider.For<ZigBeeTransaction>();
 
         private ZigBeeNetworkManager _networkManager;
@@ -35,23 +35,23 @@ namespace ZigBeeNet.Transaction
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
 
-        /**
-         * Transaction constructor
-         * 
-         * @param networkManager the {@link ZigBeeNetworkManager} to which the transaction is being sent
-         */
+        /// <summary>
+         /// Transaction constructor
+         /// 
+         /// @param networkManager the {@link ZigBeeNetworkManager} to which the transaction is being sent
+         /// </summary>
         public ZigBeeTransaction(ZigBeeNetworkManager networkManager)
         {
             this._networkManager = networkManager;
         }
 
-        /**
-         * Sends ZigBeeCommand command and uses the ZigBeeTransactionMatcher to match the response.
-         * The task will be timed out if there is no response.
-         *
-         * @param command the ZigBeeCommand
-         * @param responseMatcher the ZigBeeTransactionMatcher
-         */
+        /// <summary>
+         /// Sends ZigBeeCommand command and uses the ZigBeeTransactionMatcher to match the response.
+         /// The task will be timed out if there is no response.
+         ///
+         /// @param command the ZigBeeCommand
+         /// @param responseMatcher the ZigBeeTransactionMatcher
+         /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
             _command = command;

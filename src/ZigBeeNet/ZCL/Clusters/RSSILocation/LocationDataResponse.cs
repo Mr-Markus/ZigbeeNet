@@ -7,73 +7,73 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * Location Data Response value object class.
- *
- * Cluster: RSSI Location. Command is sentFROM the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Location Data Response value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentFROM the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class LocationDataResponse : ZclCommand
        {
-           /**
-           * Status command message field.
-           */
+           /// <summary>
+           /// Status command message field.
+           /// </summary>
            public byte Status { get; set; }
 
-           /**
-           * Location Type command message field.
-           */
+           /// <summary>
+           /// Location Type command message field.
+           /// </summary>
            public byte LocationType { get; set; }
 
-           /**
-           * Coordinate 1 command message field.
-           */
+           /// <summary>
+           /// Coordinate 1 command message field.
+           /// </summary>
            public short Coordinate1 { get; set; }
 
-           /**
-           * Coordinate 2 command message field.
-           */
+           /// <summary>
+           /// Coordinate 2 command message field.
+           /// </summary>
            public short Coordinate2 { get; set; }
 
-           /**
-           * Coordinate 3 command message field.
-           */
+           /// <summary>
+           /// Coordinate 3 command message field.
+           /// </summary>
            public short Coordinate3 { get; set; }
 
-           /**
-           * Power command message field.
-           */
+           /// <summary>
+           /// Power command message field.
+           /// </summary>
            public short Power { get; set; }
 
-           /**
-           * Path Loss Exponent command message field.
-           */
+           /// <summary>
+           /// Path Loss Exponent command message field.
+           /// </summary>
            public ushort PathLossExponent { get; set; }
 
-           /**
-           * Location Method command message field.
-           */
+           /// <summary>
+           /// Location Method command message field.
+           /// </summary>
            public byte LocationMethod { get; set; }
 
-           /**
-           * Quality Measure command message field.
-           */
+           /// <summary>
+           /// Quality Measure command message field.
+           /// </summary>
            public byte QualityMeasure { get; set; }
 
-           /**
-           * Location Age command message field.
-           */
+           /// <summary>
+           /// Location Age command message field.
+           /// </summary>
            public ushort LocationAge { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public LocationDataResponse()
            {
                GenericCommand = false;

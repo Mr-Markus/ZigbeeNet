@@ -7,34 +7,34 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management Routing Response value object class.
-     * 
-     * The Mgmt_Rtg_rsp is generated in response to an Mgmt_Rtg_req. If this
-     * management command is not supported, a status of NOT_SUPPORTED shall be
-     * returned and all parameter fields after the Status field shall be omitted. Otherwise,
-     * the Remote Device shall implement the following processing.
-     */
+    /// <summary>
+     /// Management Routing Response value object class.
+     /// 
+     /// The Mgmt_Rtg_rsp is generated in response to an Mgmt_Rtg_req. If this
+     /// management command is not supported, a status of NOT_SUPPORTED shall be
+     /// returned and all parameter fields after the Status field shall be omitted. Otherwise,
+     /// the Remote Device shall implement the following processing.
+     /// </summary>
     public class ManagementRoutingResponse : ZdoResponse
     {
-        /**
-         * RoutingTableEntries command message field.
-         */
+        /// <summary>
+         /// RoutingTableEntries command message field.
+         /// </summary>
         public byte RoutingTableEntries { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * RoutingTableList command message field.
-         */
+        /// <summary>
+         /// RoutingTableList command message field.
+         /// </summary>
         public List<RoutingTable> RoutingTableList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementRoutingResponse()
         {
             ClusterId = 0x8032;

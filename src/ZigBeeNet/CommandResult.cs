@@ -10,54 +10,54 @@ namespace ZigBeeNet
     public class CommandResult
     {
 
-        /**
-         * The response command.
-         */
+        /// <summary>
+         /// The response command.
+         /// </summary>
         public ZigBeeCommand Response { get; private set; }
 
-        /**
-         * Constructor which sets the received response command or null if timeout occurs.
-         *
-         * @param response the response command.
-         */
+        /// <summary>
+         /// Constructor which sets the received response command or null if timeout occurs.
+         ///
+         /// @param response the response command.
+         /// </summary>
         public CommandResult(ZigBeeCommand response)
         {
             this.Response = response;
         }
 
-        /**
-         * Constructor for timeout situations.
-         */
+        /// <summary>
+         /// Constructor for timeout situations.
+         /// </summary>
         public CommandResult()
         {
             this.Response = null;
         }
 
-        /**
-         * Checks whether command execution was successful.
-         *
-         * @return TRUE if command execution was successful.
-         */
+        /// <summary>
+         /// Checks whether command execution was successful.
+         ///
+         /// @return TRUE if command execution was successful.
+         /// </summary>
         public bool IsSuccess()
         {
             return !(IsTimeout() || IsError());
         }
 
-        /**
-         * Checks whether command timed out.
-         *
-         * @return TRUE if timeout occurred
-         */
+        /// <summary>
+         /// Checks whether command timed out.
+         ///
+         /// @return TRUE if timeout occurred
+         /// </summary>
         public bool IsTimeout()
         {
             return Response == null;
         }
 
-        /**
-         * Checks if message status code was received in default response.
-         *
-         * @return the message status code
-         */
+        /// <summary>
+         /// Checks if message status code was received in default response.
+         ///
+         /// @return the message status code
+         /// </summary>
         public bool IsError()
         {
             if (HasStatusCode())
@@ -70,11 +70,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Check if default response was received.
-         *
-         * @return TRUE if default response was received
-         */
+        /// <summary>
+         /// Check if default response was received.
+         ///
+         /// @return TRUE if default response was received
+         /// </summary>
         private bool HasStatusCode()
         {
             if (Response != null)
@@ -87,11 +87,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets status code received in default response.
-         *
-         * @return the status code
-         */
+        /// <summary>
+         /// Gets status code received in default response.
+         ///
+         /// @return the status code
+         /// </summary>
         public int GetStatusCode()
         {
             if (HasStatusCode())
@@ -111,11 +111,11 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Gets the received response.
-         *
-         * @return the received response {@link ZigBeeCommand}
-         */
+        /// <summary>
+         /// Gets the received response.
+         ///
+         /// @return the received response {@link ZigBeeCommand}
+         /// </summary>
         public ZigBeeCommand GetResponse()
         {
             return Response;

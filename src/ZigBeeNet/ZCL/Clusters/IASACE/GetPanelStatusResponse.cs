@@ -7,52 +7,52 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Get Panel Status Response value object class.
- *
- * Cluster: IAS ACE. Command is sentFROM the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * This command updates requesting IAS ACE clients in the system of changes to the security panel status recorded by * the ACE server (e.g., IAS CIE device). *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Panel Status Response value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentFROM the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// This command updates requesting IAS ACE clients in the system of changes to the security panel status recorded by /// the ACE server (e.g., IAS CIE device). ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetPanelStatusResponse : ZclCommand
        {
-           /**
-           * Panel Status command message field.
-           *
-          * Defines the current status of the alarm panel.           */
+           /// <summary>
+           /// Panel Status command message field.
+           ///
+          /// Defines the current status of the alarm panel.           /// </summary>
            public byte PanelStatus { get; set; }
 
-           /**
-           * Seconds Remaining command message field.
-           *
-          * Indicates the number of seconds remaining for  the server to be in the state indicated in the PanelStatus parameter.          * The SecondsRemaining parameter SHALL be provided if the PanelStatus parameter has a value of 0x04 (Exit delay) or 0x05 (Entry delay).          * <p>          * The default value SHALL be 0x00.           */
+           /// <summary>
+           /// Seconds Remaining command message field.
+           ///
+          /// Indicates the number of seconds remaining for  the server to be in the state indicated in the PanelStatus parameter.          /// The SecondsRemaining parameter SHALL be provided if the PanelStatus parameter has a value of 0x04 (Exit delay) or 0x05 (Entry delay).          /// <p>          /// The default value SHALL be 0x00.           /// </summary>
            public byte SecondsRemaining { get; set; }
 
-           /**
-           * Audible Notification command message field.
-           *
-          * Provide the ACE client with information on which type of audible notification it SHOULD make for the zone status change. This field is useful
-          * for telling the ACE client to play a standard chime or other audio indication or to mute and not sound an audible notification at all. This
-          * field also allows manufacturers to create additional audible alert types (e.g., dog barking, windchimes, conga drums) to enable users to
-          * customise their system.           */
+           /// <summary>
+           /// Audible Notification command message field.
+           ///
+          /// Provide the ACE client with information on which type of audible notification it SHOULD make for the zone status change. This field is useful
+          /// for telling the ACE client to play a standard chime or other audio indication or to mute and not sound an audible notification at all. This
+          /// field also allows manufacturers to create additional audible alert types (e.g., dog barking, windchimes, conga drums) to enable users to
+          /// customise their system.           /// </summary>
            public byte AudibleNotification { get; set; }
 
-           /**
-           * Alarm Status command message field.
-           *
-          * Provides the ACE client with information on the type of alarm the panel is in if its Panel Status field indicates it is “in alarm.” This field
-          * MAY be useful for ACE clients to display or otherwise initiate notification for users.           */
+           /// <summary>
+           /// Alarm Status command message field.
+           ///
+          /// Provides the ACE client with information on the type of alarm the panel is in if its Panel Status field indicates it is “in alarm.” This field
+          /// MAY be useful for ACE clients to display or otherwise initiate notification for users.           /// </summary>
            public byte AlarmStatus { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetPanelStatusResponse()
            {
                GenericCommand = false;

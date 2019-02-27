@@ -7,41 +7,41 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/**
- * Arm Command value object class.
- *
- * Cluster: IAS ACE. Command is sentTO the server.
- * This command is a specific command used for the IAS ACE cluster.
- *
- * On receipt of this command, the receiving device sets its arm mode according to the value of the Arm Mode field. It * is not guaranteed that an Arm command will succeed. Based on the current state of * the IAS CIE, and its related devices, the command can be rejected. The device SHALL generate an Arm Response command * to indicate the resulting armed state *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Arm Command value object class.
+ ///
+ /// Cluster: IAS ACE. Command is sentTO the server.
+ /// This command is a specific command used for the IAS ACE cluster.
+ ///
+ /// On receipt of this command, the receiving device sets its arm mode according to the value of the Arm Mode field. It /// is not guaranteed that an Arm command will succeed. Based on the current state of /// the IAS CIE, and its related devices, the command can be rejected. The device SHALL generate an Arm Response command /// to indicate the resulting armed state ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class ArmCommand : ZclCommand
        {
-           /**
-           * Arm Mode command message field.
-           */
+           /// <summary>
+           /// Arm Mode command message field.
+           /// </summary>
            public byte ArmMode { get; set; }
 
-           /**
-           * Arm/Disarm Code command message field.
-           *
-          * The Arm/DisarmCode SHALL be a code entered into the ACE client (e.g., security keypad) or system by the          * user upon arming/disarming. The server MAY validate the Arm/Disarm Code received from the IAS ACE client          * in Arm command payload before arming or disarming the system. If the client does not have the capability          * to input an Arm/Disarm Code (e.g., keyfob),or the system does not require one, the client SHALL a transmit          * a string with a length of zero.          * <p>          * There is no minimum or maximum length to the Arm/Disarm Code; however, the          * Arm/Disarm Code SHOULD be between four and eight alphanumeric characters in length.          * <p>          * The string encoding SHALL be UTF-8.           */
+           /// <summary>
+           /// Arm/Disarm Code command message field.
+           ///
+          /// The Arm/DisarmCode SHALL be a code entered into the ACE client (e.g., security keypad) or system by the          /// user upon arming/disarming. The server MAY validate the Arm/Disarm Code received from the IAS ACE client          /// in Arm command payload before arming or disarming the system. If the client does not have the capability          /// to input an Arm/Disarm Code (e.g., keyfob),or the system does not require one, the client SHALL a transmit          /// a string with a length of zero.          /// <p>          /// There is no minimum or maximum length to the Arm/Disarm Code; however, the          /// Arm/Disarm Code SHOULD be between four and eight alphanumeric characters in length.          /// <p>          /// The string encoding SHALL be UTF-8.           /// </summary>
            public string ArmDisarmCode { get; set; }
 
-           /**
-           * Zone ID command message field.
-           *
-          * Zone ID is the index of the Zone in the CIE's zone table. If none is programmed, the Zone          * ID default value SHALL be indicated in this field.           */
+           /// <summary>
+           /// Zone ID command message field.
+           ///
+          /// Zone ID is the index of the Zone in the CIE's zone table. If none is programmed, the Zone          /// ID default value SHALL be indicated in this field.           /// </summary>
            public byte ZoneID { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ArmCommand()
            {
                GenericCommand = false;

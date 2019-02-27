@@ -6,18 +6,18 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-   * Cache Request value object class.
-   * 
-   * The Mgmt_Cache_req is provided to enable ZigBee devices on the network to
-   * retrieve a list of ZigBee End Devices registered with a Primary Discovery Cache
-   * device. The destination addressing on this primitive shall be unicast.
-   */
+    /// <summary>
+   /// Cache Request value object class.
+   /// 
+   /// The Mgmt_Cache_req is provided to enable ZigBee devices on the network to
+   /// retrieve a list of ZigBee End Devices registered with a Primary Discovery Cache
+   /// device. The destination addressing on this primitive shall be unicast.
+   /// </summary>
     public class CacheRequest : ZdoRequest
     {
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public CacheRequest()
         {
             ClusterId = 0x0037;

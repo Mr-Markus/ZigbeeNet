@@ -7,35 +7,35 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASZone;
 
-/**
- * Zone Enroll Response value object class.
- *
- * Cluster: IAS Zone. Command is sentTO the server.
- * This command is a specific command used for the IAS Zone cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Zone Enroll Response value object class.
+ ///
+ /// Cluster: IAS Zone. Command is sentTO the server.
+ /// This command is a specific command used for the IAS Zone cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {
        public class ZoneEnrollResponse : ZclCommand
        {
-           /**
-           * Enroll response code command message field.
-           *
-          * Specifies the duration, in seconds, for which the IAS Zone server SHALL operate in its test mode.          * Specifies the sensitivity level the IAS Zone server SHALL use for the duration of the Test Mode and with which it must update its
-          * CurrentZoneSensitivityLevel attribute.          * <p>          * The permitted values of Current Zone Sensitivity Level are shown defined for the CurrentZoneSensitivityLevel Attribute.           */
+           /// <summary>
+           /// Enroll response code command message field.
+           ///
+          /// Specifies the duration, in seconds, for which the IAS Zone server SHALL operate in its test mode.          /// Specifies the sensitivity level the IAS Zone server SHALL use for the duration of the Test Mode and with which it must update its
+          /// CurrentZoneSensitivityLevel attribute.          /// <p>          /// The permitted values of Current Zone Sensitivity Level are shown defined for the CurrentZoneSensitivityLevel Attribute.           /// </summary>
            public byte EnrollResponseCode { get; set; }
 
-           /**
-           * Zone ID command message field.
-           */
+           /// <summary>
+           /// Zone ID command message field.
+           /// </summary>
            public byte ZoneID { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ZoneEnrollResponse()
            {
                GenericCommand = false;

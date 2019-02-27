@@ -8,17 +8,17 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class AttributeReport : IZclListItemField
     {
-        /**
-         * The attribute identifier.
-         */
+        /// <summary>
+         /// The attribute identifier.
+         /// </summary>
         public ushort AttributeIdentifier { get; private set; }
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public ZclDataType AttributeDataType { get; private set; }
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public object AttributeValue { get; private set; }
 
 

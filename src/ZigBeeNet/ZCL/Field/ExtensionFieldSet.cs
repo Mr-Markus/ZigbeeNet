@@ -8,19 +8,19 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class ExtensionFieldSet : IZclListItemField
     {
-        /**
-         * The cluster id.
-         */
+        /// <summary>
+         /// The cluster id.
+         /// </summary>
         public ushort ClusterId { get; private set; }
 
-        /**
-         * The data length.
-         */
+        /// <summary>
+         /// The data length.
+         /// </summary>
         // private int length;
 
-        /**
-         * The extension data.
-         */
+        /// <summary>
+         /// The extension data.
+         /// </summary>
         public byte[] Data { get; private set; }
 
 

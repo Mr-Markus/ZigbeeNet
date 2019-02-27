@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Groups;
 
-/**
- * Get Group Membership Response value object class.
- *
- * Cluster: Groups. Command is sentFROM the server.
- * This command is a specific command used for the Groups cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Group Membership Response value object class.
+ ///
+ /// Cluster: Groups. Command is sentFROM the server.
+ /// This command is a specific command used for the Groups cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Groups
 {
        public class GetGroupMembershipResponse : ZclCommand
        {
-           /**
-           * Capacity command message field.
-           */
+           /// <summary>
+           /// Capacity command message field.
+           /// </summary>
            public byte Capacity { get; set; }
 
-           /**
-           * Group count command message field.
-           */
+           /// <summary>
+           /// Group count command message field.
+           /// </summary>
            public byte GroupCount { get; set; }
 
-           /**
-           * Group list command message field.
-           */
+           /// <summary>
+           /// Group list command message field.
+           /// </summary>
            public List<ushort> GroupList { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetGroupMembershipResponse()
            {
                GenericCommand = false;

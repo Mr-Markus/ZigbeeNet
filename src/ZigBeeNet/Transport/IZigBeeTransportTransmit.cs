@@ -138,7 +138,7 @@ namespace ZigBeeNet.Transport
         void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive);
 
         /// <summary>
-        /// * Sets the transport configuration.
+        /// /// Sets the transport configuration.
         /// 
         /// This method passes a Map 
         /// of TransportConfigOption s to the transport layer.Each option

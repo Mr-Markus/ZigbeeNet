@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Read Reporting Configuration Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The Read Reporting Configuration Response command is used to respond to a * Read Reporting Configuration command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Read Reporting Configuration Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The Read Reporting Configuration Response command is used to respond to a /// Read Reporting Configuration command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class ReadReportingConfigurationResponse : ZclCommand
        {
-           /**
-           * Records command message field.
-           */
+           /// <summary>
+           /// Records command message field.
+           /// </summary>
            public List<AttributeReportingConfigurationRecord> Records { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ReadReportingConfigurationResponse()
            {
                GenericCommand = true;

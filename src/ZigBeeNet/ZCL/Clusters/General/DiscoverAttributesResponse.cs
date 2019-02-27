@@ -7,35 +7,35 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Discover Attributes Response value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The discover attributes response command is generated in response to a discover * attributes command. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Discover Attributes Response value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The discover attributes response command is generated in response to a discover /// attributes command. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverAttributesResponse : ZclCommand
        {
-           /**
-           * Discovery Complete command message field.
-           *
-          * The discovery complete field is a Boolean field. A value of 0 indicates that there          * are more attributes to be discovered that have an attribute identifier value greater          * than the last attribute identifier in the last attribute information field. A value          * of 1 indicates that there are no more attributes to be discovered.          * The attribute identifier field SHALL contain the identifier of a discovered attribute.          * Attributes SHALL be included in ascending order, starting with the lowest attribute          * identifier that is greater than or equal to the start attribute identifier field of the          * received Discover Attributes command.           */
+           /// <summary>
+           /// Discovery Complete command message field.
+           ///
+          /// The discovery complete field is a Boolean field. A value of 0 indicates that there          /// are more attributes to be discovered that have an attribute identifier value greater          /// than the last attribute identifier in the last attribute information field. A value          /// of 1 indicates that there are no more attributes to be discovered.          /// The attribute identifier field SHALL contain the identifier of a discovered attribute.          /// Attributes SHALL be included in ascending order, starting with the lowest attribute          /// identifier that is greater than or equal to the start attribute identifier field of the          /// received Discover Attributes command.           /// </summary>
            public bool DiscoveryComplete { get; set; }
 
-           /**
-           * Attribute Information command message field.
-           */
+           /// <summary>
+           /// Attribute Information command message field.
+           /// </summary>
            public List<AttributeInformation> AttributeInformation { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public DiscoverAttributesResponse()
            {
                GenericCommand = true;

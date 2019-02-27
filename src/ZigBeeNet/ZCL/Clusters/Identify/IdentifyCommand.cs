@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Identify;
 
-/**
- * Identify Command value object class.
- *
- * Cluster: Identify. Command is sentTO the server.
- * This command is a specific command used for the Identify cluster.
- *
- * The identify command starts or stops the receiving device identifying itself. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Identify Command value object class.
+ ///
+ /// Cluster: Identify. Command is sentTO the server.
+ /// This command is a specific command used for the Identify cluster.
+ ///
+ /// The identify command starts or stops the receiving device identifying itself. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Identify
 {
        public class IdentifyCommand : ZclCommand
        {
-           /**
-           * Identify Time command message field.
-           */
+           /// <summary>
+           /// Identify Time command message field.
+           /// </summary>
            public ushort IdentifyTime { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public IdentifyCommand()
            {
                GenericCommand = false;

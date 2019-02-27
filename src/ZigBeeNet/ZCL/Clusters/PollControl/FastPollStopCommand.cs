@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.PollControl;
 
-/**
- * Fast Poll Stop Command value object class.
- *
- * Cluster: Poll Control. Command is sentTO the server.
- * This command is a specific command used for the Poll Control cluster.
- *
- * The Fast Poll Stop command is used to stop the fast poll mode initiated by the Check-in response. The Fast Poll Stop command has no payload. * <br> * If the Poll Control Server receives a Fast Poll Stop from an unbound client it SHOULD send back a DefaultResponse with a value field
- * indicating “ACTION_DENIED” . The Server SHALL respond with a DefaultResponse not equal to ZCL_SUCCESS. * <br> * If the Poll Control Server receives a Fast Poll Stop command from a bound client but it is unable to stop fast polling due to the fact that there
- * is another bound client which has requested that polling continue it SHOULD respond with a Default Response with a status of
- * “ACTION_DENIED” * <br> * If a Poll Control Server receives a Fast Poll Stop command from a bound client but it is not FastPolling it SHOULD respond with a Default
- * Response with a status of ACTION_DENIED. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Fast Poll Stop Command value object class.
+ ///
+ /// Cluster: Poll Control. Command is sentTO the server.
+ /// This command is a specific command used for the Poll Control cluster.
+ ///
+ /// The Fast Poll Stop command is used to stop the fast poll mode initiated by the Check-in response. The Fast Poll Stop command has no payload. /// <br> /// If the Poll Control Server receives a Fast Poll Stop from an unbound client it SHOULD send back a DefaultResponse with a value field
+ /// indicating “ACTION_DENIED” . The Server SHALL respond with a DefaultResponse not equal to ZCL_SUCCESS. /// <br> /// If the Poll Control Server receives a Fast Poll Stop command from a bound client but it is unable to stop fast polling due to the fact that there
+ /// is another bound client which has requested that polling continue it SHOULD respond with a Default Response with a status of
+ /// “ACTION_DENIED” /// <br> /// If a Poll Control Server receives a Fast Poll Stop command from a bound client but it is not FastPolling it SHOULD respond with a Default
+ /// Response with a status of ACTION_DENIED. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.PollControl
 {
        public class FastPollStopCommand : ZclCommand
        {
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public FastPollStopCommand()
            {
                GenericCommand = false;

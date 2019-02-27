@@ -108,7 +108,7 @@ namespace ZigBeeNet.ZCL.Protocol
         //    get; private set;
         //}
 
-        private ZclClusterType(int clusterId, ProfileType profileType, string label, ClusterType clusterType, Func<ZigBeeEndpoint, ZclCluster> clusterFactory /*Type clusterClass = null*/)
+        private ZclClusterType(int clusterId, ProfileType profileType, string label, ClusterType clusterType, Func<ZigBeeEndpoint, ZclCluster> clusterFactory)
         {
             this.ClusterId = clusterId;
             this.ProfileType = profileType;

@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/**
- * Get Device Configuration Command value object class.
- *
- * Cluster: RSSI Location. Command is sentTO the server.
- * This command is a specific command used for the RSSI Location cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Get Device Configuration Command value object class.
+ ///
+ /// Cluster: RSSI Location. Command is sentTO the server.
+ /// This command is a specific command used for the RSSI Location cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class GetDeviceConfigurationCommand : ZclCommand
        {
-           /**
-           * Target Address command message field.
-           */
+           /// <summary>
+           /// Target Address command message field.
+           /// </summary>
            public IeeeAddress TargetAddress { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public GetDeviceConfigurationCommand()
            {
                GenericCommand = false;

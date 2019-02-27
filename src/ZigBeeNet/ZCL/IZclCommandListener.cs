@@ -4,14 +4,14 @@ using System.Text;
 
 namespace ZigBeeNet.ZCL
 {
-    /**
-    * Command listener. Listeners are called when an ZclCommand for the Cluster is received.
-    */
+    /// <summary>
+    /// Command listener. Listeners are called when an ZclCommand for the Cluster is received.
+    /// </summary>
     public interface IZclCommandListener
     {
-        /**
-         * Called when a ZclCommand is received for this cluster.
-         */
+        /// <summary>
+         /// Called when a ZclCommand is received for this cluster.
+         /// </summary>
         void CommandReceived(ZclCommand command);
     }
 }

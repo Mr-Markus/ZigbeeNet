@@ -7,34 +7,34 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-     * Management LQI Response value object class.
-     * 
-     * The Mgmt_Lqi_rsp is generated in response to an Mgmt_Lqi_req. If this
-     * management command is not supported, a status of NOT_SUPPORTED shall be
-     * returned and all parameter fields after the Status field shall be omitted. Otherwise,
-     * the Remote Device shall implement the following processing.
-     */
+    /// <summary>
+     /// Management LQI Response value object class.
+     /// 
+     /// The Mgmt_Lqi_rsp is generated in response to an Mgmt_Lqi_req. If this
+     /// management command is not supported, a status of NOT_SUPPORTED shall be
+     /// returned and all parameter fields after the Status field shall be omitted. Otherwise,
+     /// the Remote Device shall implement the following processing.
+     /// </summary>
     public class ManagementLqiResponse : ZdoResponse
     {
-        /**
-         * NeighborTableEntries command message field.
-         */
+        /// <summary>
+         /// NeighborTableEntries command message field.
+         /// </summary>
         public byte NeighborTableEntries { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public byte StartIndex { get; set; }
 
-        /**
-         * NeighborTableList command message field.
-         */
+        /// <summary>
+         /// NeighborTableList command message field.
+         /// </summary>
         public List<NeighborTable> NeighborTableList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public ManagementLqiResponse()
         {
             ClusterId = 0x8031;

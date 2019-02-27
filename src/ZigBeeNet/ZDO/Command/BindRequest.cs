@@ -6,71 +6,71 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-   * Bind Request value object class.
-   * 
-   * The Bind_req is generated from a Local Device wishing to create a Binding Table
-   * entry for the source and destination addresses contained as parameters. The
-   * destination addressing on this command shall be unicast only, and the destination
-   * address shall be that of a Primary binding table cache or to the SrcAddress itself.
-   * The Binding Manager is optionally supported on the source device (unless that
-   * device is also the ZigBee Coordinator) so that device shall issue a
-   * NOT_SUPPORTED status to the Bind_req if not supported.
-   */
+    /// <summary>
+   /// Bind Request value object class.
+   /// 
+   /// The Bind_req is generated from a Local Device wishing to create a Binding Table
+   /// entry for the source and destination addresses contained as parameters. The
+   /// destination addressing on this command shall be unicast only, and the destination
+   /// address shall be that of a Primary binding table cache or to the SrcAddress itself.
+   /// The Binding Manager is optionally supported on the source device (unless that
+   /// device is also the ZigBee Coordinator) so that device shall issue a
+   /// NOT_SUPPORTED status to the Bind_req if not supported.
+   /// </summary>
     public class BindRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
-        /**
-         * SrcAddress command message field.
-         * 
-         * The IEEE address for the source.
-         */
+        /// <summary>
+         /// SrcAddress command message field.
+         /// 
+         /// The IEEE address for the source.
+         /// </summary>
         public IeeeAddress SrcAddress { get; set; }
 
-        /**
-         * SrcEndpoint command message field.
-         * 
-         * The source endpoint for the binding entry.
-         */
+        /// <summary>
+         /// SrcEndpoint command message field.
+         /// 
+         /// The source endpoint for the binding entry.
+         /// </summary>
         public byte SrcEndpoint { get; set; }
 
-        /**
-         * BindCluster command message field.
-         * 
-         * The identifier of the cluster on the source device that is bound to the destination.
-         */
+        /// <summary>
+         /// BindCluster command message field.
+         /// 
+         /// The identifier of the cluster on the source device that is bound to the destination.
+         /// </summary>
         public ushort BindCluster { get; set; }
 
-        /**
-         * DstAddrMode command message field.
-         * 
-         * The addressing mode for the destination address used in this command. This field
-         * can take one of the non-reserved values from the following list:
-         * 0x00 = reserved
-         * 0x01 = 16-bit group address for DstAddress and DstEndp not present
-         * 0x02 = reserved
-         * 0x03 = 64-bit extended address for DstAddress and DstEndp present
-         * 0x04 – 0xff = reserved
-         */
+        /// <summary>
+         /// DstAddrMode command message field.
+         /// 
+         /// The addressing mode for the destination address used in this command. This field
+         /// can take one of the non-reserved values from the following list:
+         /// 0x00 = reserved
+         /// 0x01 = 16-bit group address for DstAddress and DstEndp not present
+         /// 0x02 = reserved
+         /// 0x03 = 64-bit extended address for DstAddress and DstEndp present
+         /// 0x04 – 0xff = reserved
+         /// </summary>
         public byte DstAddrMode { get; set; }
 
-        /**
-         * DstAddress command message field.
-         * 
-         * The destination address for the binding entry.
-         */
+        /// <summary>
+         /// DstAddress command message field.
+         /// 
+         /// The destination address for the binding entry.
+         /// </summary>
         public IeeeAddress DstAddress { get; set; }
 
-        /**
-         * DstEndpoint command message field.
-         * 
-         * This field shall be present only if the DstAddrMode field has a value of 0x03 and,
-         * if present, shall be the destination endpoint for the binding entry.
-         */
+        /// <summary>
+         /// DstEndpoint command message field.
+         /// 
+         /// This field shall be present only if the DstAddrMode field has a value of 0x03 and,
+         /// if present, shall be the destination endpoint for the binding entry.
+         /// </summary>
         public byte DstEndpoint { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public BindRequest()
         {
             ClusterId = 0x0021;

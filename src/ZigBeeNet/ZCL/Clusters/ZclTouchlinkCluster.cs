@@ -6,14 +6,14 @@ namespace ZigBeeNet.ZCL.Clusters
 {
     public class ZclTouchlinkCluster : ZclCluster
     {
-        /**
-         * The ZigBee Cluster Library Cluster ID
-         */
+        /// <summary>
+         /// The ZigBee Cluster Library Cluster ID
+         /// </summary>
         public static ushort CLUSTER_ID = 0x1000;
 
-        /**
-         * The ZigBee Cluster Library Cluster Name
-         */
+        /// <summary>
+         /// The ZigBee Cluster Library Cluster Name
+         /// </summary>
         public static string CLUSTER_NAME = "Touchlink";
 
         // Attribute initialisation
@@ -24,11 +24,11 @@ namespace ZigBeeNet.ZCL.Clusters
             return attributeMap;
         }
 
-        /**
-         * Default constructor to create a Touchlink cluster.
-         *
-         * @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-         */
+        /// <summary>
+         /// Default constructor to create a Touchlink cluster.
+         ///
+         /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+         /// </summary>
         public ZclTouchlinkCluster(ZigBeeEndpoint zigbeeEndpoint)
             : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
         {

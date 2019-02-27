@@ -7,39 +7,39 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZDO.Command
 {
-    /**
-    * Backup Source Bind Request value object class.
-    * 
-    * The Backup_Source_Bind_req is generated from a local primary binding table
-    * cache and sent to a remote backup binding table cache device to request backup
-    * storage of its entire source table. The destination addressing mode for this request
-    * is unicast.
-    */
+    /// <summary>
+    /// Backup Source Bind Request value object class.
+    /// 
+    /// The Backup_Source_Bind_req is generated from a local primary binding table
+    /// cache and sent to a remote backup binding table cache device to request backup
+    /// storage of its entire source table. The destination addressing mode for this request
+    /// is unicast.
+    /// </summary>
     public class BackupSourceBindRequest : ZdoRequest
     {
-        /**
-         * SourceTableEntries command message field.
-         */
+        /// <summary>
+         /// SourceTableEntries command message field.
+         /// </summary>
         public ushort SourceTableEntries { get; set; }
 
-        /**
-         * StartIndex command message field.
-         */
+        /// <summary>
+         /// StartIndex command message field.
+         /// </summary>
         public ushort StartIndex { get; set; }
 
-        /**
-         * SourceTableListCount command message field.
-         */
+        /// <summary>
+         /// SourceTableListCount command message field.
+         /// </summary>
         public ushort SourceTableListCount { get; set; }
 
-        /**
-         * SourceTableList command message field.
-         */
+        /// <summary>
+         /// SourceTableList command message field.
+         /// </summary>
         public List<ulong> SourceTableList { get; set; }
 
-        /**
-         * Default constructor.
-         */
+        /// <summary>
+         /// Default constructor.
+         /// </summary>
         public BackupSourceBindRequest()
         {
             ClusterId = 0x0029;

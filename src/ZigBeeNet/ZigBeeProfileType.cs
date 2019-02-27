@@ -8,34 +8,34 @@ namespace ZigBeeNet
 
     public enum ProfileType
     {
-        /**
-         * ZigBee Home Automation
-         */
+        /// <summary>
+         /// ZigBee Home Automation
+         /// </summary>
         ZIGBEE_HOME_AUTOMATION,
 
-        /**
-         * ZigBee Smart Energy
-         */
+        /// <summary>
+         /// ZigBee Smart Energy
+         /// </summary>
         ZIGBEE_SMART_ENERGY,
 
-        /**
-         * ZigBee Green Power
-         */
+        /// <summary>
+         /// ZigBee Green Power
+         /// </summary>
         ZIGBEE_GREEN_POWER,
 
-        /**
-         * Manufacturer Telegesis
-         */
+        /// <summary>
+         /// Manufacturer Telegesis
+         /// </summary>
         MANUFACTURER_TELEGESIS,
 
-        /**
-         * ZigBee Light Link
-         */
+        /// <summary>
+         /// ZigBee Light Link
+         /// </summary>
         ZIGBEE_LIGHT_LINK,
 
-        /**
-         * Manufacturer Digi
-         */
+        /// <summary>
+         /// Manufacturer Digi
+         /// </summary>
         MANUFACTURER_DIGI,
     }
 

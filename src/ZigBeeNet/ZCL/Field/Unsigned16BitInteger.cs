@@ -8,9 +8,9 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class Unsigned16BitInteger : IZclListItemField
     {
-    /**
-     * The attribute identifier.
-     */
+    /// <summary>
+     /// The attribute identifier.
+     /// </summary>
     public ushort Value { get; private set; }
 
 

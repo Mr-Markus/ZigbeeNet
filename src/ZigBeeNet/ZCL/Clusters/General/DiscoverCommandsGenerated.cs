@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/**
- * Discover Commands Generated value object class.
- *
- * Cluster: General. Command is sentTO the server.
- * This command is a generic command used across the profile.
- *
- * The Discover Commands Generated command is generated when a remote device wishes to discover the * commands that a cluster may generate on the device to which this command is directed. *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Discover Commands Generated value object class.
+ ///
+ /// Cluster: General. Command is sentTO the server.
+ /// This command is a generic command used across the profile.
+ ///
+ /// The Discover Commands Generated command is generated when a remote device wishes to discover the /// commands that a cluster may generate on the device to which this command is directed. ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverCommandsGenerated : ZclCommand
        {
-           /**
-           * Start command identifier command message field.
-           */
+           /// <summary>
+           /// Start command identifier command message field.
+           /// </summary>
            public byte StartCommandIdentifier { get; set; }
 
-           /**
-           * Maximum command identifiers command message field.
-           */
+           /// <summary>
+           /// Maximum command identifiers command message field.
+           /// </summary>
            public byte MaximumCommandIdentifiers { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public DiscoverCommandsGenerated()
            {
                GenericCommand = true;

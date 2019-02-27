@@ -8,29 +8,29 @@ namespace ZigBeeNet.ZCL.Field
 {
     public class ExtendedAttributeInformation : IZclListItemField
     {
-        /**
-         * The attribute identifier.
-         */
+        /// <summary>
+         /// The attribute identifier.
+         /// </summary>
         public ushort AttributeIdentifier { get; private set; }
 
-        /**
-         * The attribute data type.
-         */
+        /// <summary>
+         /// The attribute data type.
+         /// </summary>
         public byte AttributeDataType { get; private set; }
 
-        /**
-         * True if the attribute can be read
-         */
+        /// <summary>
+         /// True if the attribute can be read
+         /// </summary>
         public bool Readable { get; private set; }
 
-        /**
-         * True if the attribute can be written
-         */
+        /// <summary>
+         /// True if the attribute can be written
+         /// </summary>
         public bool Writable { get; private set; }
 
-        /**
-         * True if the attribute provides reports
-         */
+        /// <summary>
+         /// True if the attribute provides reports
+         /// </summary>
         public bool Reportable { get; private set; }
 
 

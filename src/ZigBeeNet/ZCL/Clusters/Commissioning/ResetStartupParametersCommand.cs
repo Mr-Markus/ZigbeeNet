@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Commissioning;
 
-/**
- * Reset Startup Parameters Command value object class.
- *
- * Cluster: Commissioning. Command is sentTO the server.
- * This command is a specific command used for the Commissioning cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Reset Startup Parameters Command value object class.
+ ///
+ /// Cluster: Commissioning. Command is sentTO the server.
+ /// This command is a specific command used for the Commissioning cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Commissioning
 {
        public class ResetStartupParametersCommand : ZclCommand
        {
-           /**
-           * Option command message field.
-           */
+           /// <summary>
+           /// Option command message field.
+           /// </summary>
            public byte Option { get; set; }
 
-           /**
-           * Index command message field.
-           */
+           /// <summary>
+           /// Index command message field.
+           /// </summary>
            public byte Index { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public ResetStartupParametersCommand()
            {
                GenericCommand = false;

@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.DoorLock;
 
-/**
- * Unlock Door Command value object class.
- *
- * Cluster: Door Lock. Command is sentTO the server.
- * This command is a specific command used for the Door Lock cluster.
- *
- * Code is auto-generated. Modifications may be overwritten!
- */
+/// <summary>
+ /// Unlock Door Command value object class.
+ ///
+ /// Cluster: Door Lock. Command is sentTO the server.
+ /// This command is a specific command used for the Door Lock cluster.
+ ///
+ /// Code is auto-generated. Modifications may be overwritten!
+ /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.DoorLock
 {
        public class UnlockDoorCommand : ZclCommand
        {
-           /**
-           * Pin code command message field.
-           */
+           /// <summary>
+           /// Pin code command message field.
+           /// </summary>
            public ByteArray PinCode { get; set; }
 
 
-           /**
-           * Default constructor.
-           */
+           /// <summary>
+           /// Default constructor.
+           /// </summary>
            public UnlockDoorCommand()
            {
                GenericCommand = false;

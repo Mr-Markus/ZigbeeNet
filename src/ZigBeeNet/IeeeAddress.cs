@@ -22,29 +22,29 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Default constructor. Creates an address 0
-         */
+        /// <summary>
+         /// Default constructor. Creates an address 0
+         /// </summary>
         public IeeeAddress()
         {
             this._address = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
-        /**
-         * Create an {@link IeeeAddress} from a {@link BigInteger}
-         *
-         * @param address the address as a {@link BigInteger}
-         */
+        /// <summary>
+         /// Create an {@link IeeeAddress} from a {@link BigInteger}
+         ///
+         /// @param address the address as a {@link BigInteger}
+         /// </summary>
         public IeeeAddress(BigInteger address) : this()
         {
             SetAddress((ulong)address);
         }
 
-        /**
-         * Create an {@link IeeeAddress} from a {@link String}
-         *
-         * @param address the address as a {@link String}
-         */
+        /// <summary>
+         /// Create an {@link IeeeAddress} from a {@link String}
+         ///
+         /// @param address the address as a {@link String}
+         /// </summary>
         public IeeeAddress(string address) : this()
         {
             try
@@ -57,12 +57,12 @@ namespace ZigBeeNet
             }
         }
 
-        /**
-         * Create an {@link IeeeAddress} from an int array
-         *
-         * @param address the address as an int array. Array length must be 8.
-         * @throws IllegalArgumentException
-         */
+        /// <summary>
+         /// Create an {@link IeeeAddress} from an int array
+         ///
+         /// @param address the address as an int array. Array length must be 8.
+         /// @throws IllegalArgumentException
+         /// </summary>
         public IeeeAddress(byte[] address)
         {
             if (address.Length != 8)
