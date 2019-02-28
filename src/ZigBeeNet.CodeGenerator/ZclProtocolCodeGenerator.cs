@@ -649,12 +649,12 @@ namespace ZigBeeNet.CodeGenerator
                     code.AppendLine("       /**");
                     code.AppendLine("       * The ZigBee Cluster Library Cluster ID");
                     code.AppendLine("       */");
-                    code.AppendLine("       public static ushort CLUSTER_ID = 0x" + cluster.ClusterId.ToString("X4") + ";");
+                    code.AppendLine("       public const ushort CLUSTER_ID = 0x" + cluster.ClusterId.ToString("X4") + ";");
                     code.AppendLine();
                     code.AppendLine("       /**");
                     code.AppendLine("       * The ZigBee Cluster Library Cluster Name");
                     code.AppendLine("       */");
-                    code.AppendLine("       public static string CLUSTER_NAME = \"" + cluster.ClusterName + "\";");
+                    code.AppendLine("       public const string CLUSTER_NAME = \"" + cluster.ClusterName + "\";");
                     code.AppendLine();
 
                     if (cluster.Attributes.Count != 0)
@@ -665,7 +665,7 @@ namespace ZigBeeNet.CodeGenerator
                             code.AppendLine("       /**");
                             OutputWithLinebreak(code, "       ", attribute.AttributeDescription);
                             code.AppendLine("       */");
-                            code.AppendLine("       public static ushort " + attribute.EnumName + " = 0x" + attribute.AttributeId.ToString("X4") + ";");
+                            code.AppendLine("       public const ushort " + attribute.EnumName + " = 0x" + attribute.AttributeId.ToString("X4") + ";");
                             code.AppendLine();
                         }
 
