@@ -4,7 +4,6 @@ using System.Text;
 
 namespace ZigBeeNet.CodeGenerator.Zcl
 {
-
 	public class DataTypeMap
 	{
 		public string DataClass { get; set; }
@@ -30,11 +29,11 @@ namespace ZigBeeNet.CodeGenerator.Zcl
 
 	public static class ZclDataType
 	{
-		public static Dictionary<string, DataTypeMap> _dataTypeMapping;
+		public static readonly Dictionary<string, DataTypeMap> Mapping;
 
 		static ZclDataType()
 		{
-			_dataTypeMapping = new Dictionary<string, DataTypeMap>
+			Mapping = new Dictionary<string, DataTypeMap>
 			{
 				{ "CHARACTER_STRING", new DataTypeMap("string", 0x42, -1, false) },
 				{ "IEEE_ADDRESS", new DataTypeMap("IeeeAddress", 0xf0, 8, false, 0xffffffff) },
@@ -98,12 +97,6 @@ namespace ZigBeeNet.CodeGenerator.Zcl
 				{ "BYTE_ARRAY", new DataTypeMap("ByteArray", 0, 0, false) },
 				{ "IMAGE_UPGRADE_STATUS", new DataTypeMap("ImageUpgradeStatus", 0, 0, false) }
 			};
-		}
-
-		// TODO: use Indexer
-		public static Dictionary<string, DataTypeMap> GetDataTypeMapping()
-		{
-			return _dataTypeMapping;
 		}
 	}
 }

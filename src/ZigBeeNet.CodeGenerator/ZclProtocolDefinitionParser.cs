@@ -362,7 +362,7 @@ namespace ZigBeeNet.CodeGenerator
                     dataType.DataTypeName = dataTypeName;
                     dataType.DataTypeType = field.DataType;
 
-                    dataType.DataTypeClass = ZclDataType.GetDataTypeMapping()[field.DataType].DataClass;
+                    dataType.DataTypeClass = ZclDataType.Mapping[field.DataType].DataClass;
                     if (dataType.DataTypeClass == null)
                     {
                         throw new InvalidOperationException("Type not mapped: " + field.DataType);
@@ -573,7 +573,7 @@ namespace ZigBeeNet.CodeGenerator
             dataType.DataTypeName = columns[2].Trim();
             dataType.DataTypeType = attribute.DataType;
             Console.WriteLine(" Type:::" + attribute.AttributeLabel + ":: " + dataType.DataTypeType);
-            dataType.DataTypeClass = ZclDataType.GetDataTypeMapping()[attribute.DataType].DataClass;
+            dataType.DataTypeClass = ZclDataType.Mapping[attribute.DataType].DataClass;
 
             if (dataType.DataTypeClass == null)
             {
