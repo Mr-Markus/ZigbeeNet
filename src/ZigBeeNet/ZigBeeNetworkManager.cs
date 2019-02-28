@@ -135,13 +135,13 @@ namespace ZigBeeNet
         /// <summary>
         /// Map of allowable state transitions
         /// </summary>
-        private Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> validStateTransitions;
+        private readonly Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> _validStateTransitions;
 
         /// <summary>
         /// Our local network address
         /// </summary>
-        private ushort LocalNwkAddress = 0;
-        private object _networkStateSync = new object();
+        private ushort _localNwkAddress = 0;
+        private readonly object _networkStateSync = new object();
 
         /// <summary>
         /// The network state serializer
@@ -175,7 +175,7 @@ namespace ZigBeeNet
         /// <summary>
         /// The current {@link ZigBeeTransportState}
         /// </summary>
-        public ZigBeeTransportState NetworkState { get; set; }
+        public ZigBeeTransportState NetworkState { get; set; } = ZigBeeTransportState.UNINITIALISED;
 
         /// <summary>
         /// Our local {@link IeeeAddress}
@@ -284,7 +284,7 @@ namespace ZigBeeNet
             transitions[ZigBeeTransportState.ONLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.OFFLINE });
             transitions[ZigBeeTransportState.OFFLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.ONLINE });
 
-            validStateTransitions = transitions;
+            _validStateTransitions = transitions;
 
             Transport = transport;
 
@@ -313,10 +313,15 @@ namespace ZigBeeNet
         /// <returns>Status</returns>
         public ZigBeeStatus Initialize()
         {
-            SetNetworkState(ZigBeeTransportState.UNINITIALISED);
-
             lock (_networkStateSync)
             {
+                if (NetworkState != ZigBeeTransportState.UNINITIALISED)
+                {
+                    return ZigBeeStatus.INVALID_STATE;
+                }
+
+                SetNetworkState(ZigBeeTransportState.INITIALISING);
+
                 if (NetworkStateSerializer != null)
                 {
                     NetworkStateSerializer.Deserialize(this);
@@ -359,9 +364,9 @@ namespace ZigBeeNet
         /// <summary>
         /// Sets the ZigBee RF channel.The allowable channel range is 11 to 26 for 2.4GHz, however the transport
         /// implementation may allow any value it supports.
-        /// <p>
-        /// Note that this method may only be called following the {
-        ///  @link #initialize} call, and before the {@link #startup}
+        /// 
+        /// Note that this method may only be called following the 
+        /// {@link #initialize} call, and before the {@link #startup}
         /// call.
         /// </summary>
         /// <param name="channel">Defining the channel to use</param>
@@ -375,7 +380,7 @@ namespace ZigBeeNet
         /// Sets the ZigBee PAN ID to the specified value. The range of the PAN ID is 0 to 0x3FFF.
         /// Additionally a value of 0xFFFF is allowed to indicate the user doesn't care and a random value
         /// can be set by the transport.
-        /// <p>
+        /// 
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
@@ -406,7 +411,7 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Sets the ZigBee Extended PAN ID to the specified value
-        /// <p>
+        /// 
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
@@ -420,7 +425,7 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Set the current network key in use by the system.
-        /// <p>
+        /// 
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
@@ -447,7 +452,7 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Set the current link key in use by the system.
-        /// <p>
+        /// 
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
@@ -472,7 +477,9 @@ namespace ZigBeeNet
             {
                 return ZigBeeStatus.INVALID_ARGUMENTS;
             }
+
             TransportConfig config = new TransportConfig(TransportConfigOption.INSTALL_KEY, key);
+
             Transport.UpdateTransportConfig(config);
 
             return config.GetResult(TransportConfigOption.INSTALL_KEY);
@@ -480,7 +487,7 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Starts up ZigBee manager components.
-        /// <p>
+        /// 
         ///
         /// @param reinitialize true if the provider is to reinitialise the network with the parameters configured since the
         ///            {@link #initialize} method was called.
@@ -488,13 +495,24 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeStatus Startup(bool reinitialize)
         {
+            lock (_networkStateSync)
+            {
+                if(NetworkState == ZigBeeTransportState.UNINITIALISED)
+                {
+                    return ZigBeeStatus.INVALID_STATE;
+                }
+            }
+
             ZigBeeStatus status = Transport.Startup(reinitialize);
+
             if (status != ZigBeeStatus.SUCCESS)
             {
                 SetNetworkState(ZigBeeTransportState.OFFLINE);
                 return status;
             }
+
             SetNetworkState(ZigBeeTransportState.ONLINE);
+
             return ZigBeeStatus.SUCCESS;
         }
 
@@ -560,7 +578,7 @@ namespace ZigBeeNet
             // Set the source address - should probably be improved!
             // Note that the endpoint is set (currently!) in the transport layer
             // TODO: Use only a single endpoint for HA and fix this here
-            command.SourceAddress = new ZigBeeEndpointAddress(LocalNwkAddress);
+            command.SourceAddress = new ZigBeeEndpointAddress(_localNwkAddress);
 
             _logger.Debug("TX CMD: {Command}", command);
 
@@ -569,7 +587,7 @@ namespace ZigBeeNet
             apsFrame.SecurityEnabled = command.ApsSecurity;
 
             // TODO: Set the source address correctly?
-            apsFrame.SourceAddress = LocalNwkAddress;
+            apsFrame.SourceAddress = _localNwkAddress;
 
             apsFrame.Radius = 31;
 
@@ -888,7 +906,7 @@ namespace ZigBeeNet
                     return;
                 }
 
-                if (!validStateTransitions[NetworkState].Contains(state))
+                if (!_validStateTransitions[NetworkState].Contains(state))
                 {
                     _logger.Debug("Ignoring invalid network state transition from {NetworkState} to {State}", NetworkState, state);
                     return;
@@ -901,7 +919,7 @@ namespace ZigBeeNet
                 // and ensure that the local node is added
                 if (state == ZigBeeTransportState.ONLINE)
                 {
-                    LocalNwkAddress = Transport.NwkAddress;
+                    _localNwkAddress = Transport.NwkAddress;
                     LocalIeeeAddress = Transport.IeeeAddress;
 
                     // Make sure that we know the local node, and that the network address is correct.
