@@ -4,19 +4,19 @@ using System.Text;
 
 namespace ZigBeeNet.CodeGenerator.Zcl
 {
-    public class Context
-    {
-        public List<string> Lines;
+	public class Context
+	{
+		public List<string> Lines { get; set; }
 
-        public Profile Profile;
-        public Cluster Cluster;
-        public Command Command;
+		public Profile Profile { get; set; }
+		public Cluster Cluster { get; set; }
+		public Command Command { get; set; }
 
-        public bool Received;
-        public bool Generated;
-        public bool Attribute;
+		public bool Received { get; set; }
+		public bool Generated { get; set; }
+		public bool Attribute { get; set; }
 
-        public Dictionary<string, DataType> DataTypes = new Dictionary<string, DataType>();
-        public SortedDictionary<int, Profile> Profiles = new SortedDictionary<int, Profile>();
-    }
+		public Dictionary<string, DataType> DataTypes { get; set; } = new Dictionary<string, DataType>();
+		public SortedDictionary<int, Profile> Profiles { get; set; } = new SortedDictionary<int, Profile>();
+	}
 }

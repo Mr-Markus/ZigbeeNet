@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ZigBeeNet.CodeGenerator.Zcl
 {
-    public class Field
-    {
-        public int FieldId;
-        public string FieldLabel;
-        public string FieldType;
-        public string DataType;
-        public string DataTypeClass;
-        public string NameUpperCamelCase;
-        public string NameLowerCamelCase;
-        public string ListSizer;
-        public bool CompleteOnZero;
-        public string Condition;
-        public string ConditionOperator;
-        public List<string> Description;
-        public SortedDictionary<int, string> ValueMap;
-    }
+	public class Field
+	{
+		public int FieldId { get; set; }
+		public string FieldLabel { get; set; }
+		public string FieldType { get; set; }
+		public string DataType { get; set; }
+		public string DataTypeClass { get; set; }
+		public string NameUpperCamelCase { get; set; }
+		public string NameLowerCamelCase { get; set; }
+		public string ListSizer { get; set; }
+		public bool CompleteOnZero { get; set; }
+		public string Condition { get; set; }
+		public string ConditionOperator { get; set; }
+		public List<string> Description { get; set; }
+		public SortedDictionary<int, string> ValueMap { get; set; }
+	}
 }

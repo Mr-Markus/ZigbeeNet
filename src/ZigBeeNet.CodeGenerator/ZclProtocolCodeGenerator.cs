@@ -713,7 +713,7 @@ namespace ZigBeeNet.CodeGenerator
 
                     foreach (Attribute attribute in cluster.Attributes.Values)
                     {
-                        DataTypeMap zclDataType = ZclDataType.GetDataTypeMapping()[attribute.DataType];
+                        DataTypeMap zclDataType = ZclDataType.Mapping[attribute.DataType];
 
                         if (attribute.AttributeAccess.ToLower().Contains("write"))
                         {
