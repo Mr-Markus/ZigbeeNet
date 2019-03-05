@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ZigBeeNet.ZCL.Protocol
+{
+    public enum DataType : byte
+    {
+        BITMAP_16_BIT = 0x19,
+        BITMAP_32_BIT = 0x1B,
+        BITMAP_8_BIT = 0x18,
+        BOOLEAN = 0x10,
+        BYTE_ARRAY = 0x00,
+        CHARACTER_STRING = 0x42,
+        DATA_8_BIT = 0x08,
+        ENUMERATION_16_BIT = 0x31,
+        ENUMERATION_8_BIT = 0x30,
+        IEEE_ADDRESS = 0xF0,
+        N_X_ATTRIBUTE_IDENTIFIER = 0x81,
+        N_X_ATTRIBUTE_INFORMATION = 0x82,
+        N_X_ATTRIBUTE_RECORD = 0x83,
+        N_X_ATTRIBUTE_REPORT = 0x84,
+        N_X_ATTRIBUTE_REPORTING_CONFIGURATION_RECORD = 0x85,
+        N_X_ATTRIBUTE_SELECTOR = 0x86,
+        N_X_ATTRIBUTE_STATUS_RECORD = 0x87,
+        N_X_EXTENDED_ATTRIBUTE_INFORMATION = 0x88,
+        N_X_EXTENSION_FIELD_SET = 0x89,
+        N_X_NEIGHBORS_INFORMATION = 0x8a,
+        N_X_READ_ATTRIBUTE_STATUS_RECORD = 0x8b,
+        N_X_UNSIGNED_16_BIT_INTEGER = 0x8c,
+        N_X_UNSIGNED_8_BIT_INTEGER = 0x8d,
+        N_X_WRITE_ATTRIBUTE_RECORD = 0x8e,
+        N_X_WRITE_ATTRIBUTE_STATUS_RECORD = 0x8f,
+        OCTET_STRING = 0x41,
+        SIGNED_16_BIT_INTEGER = 0x29,
+        SIGNED_32_BIT_INTEGER = 0x2B,
+        SIGNED_8_BIT_INTEGER = 0x28,
+        UNSIGNED_16_BIT_INTEGER = 0x21,
+        UNSIGNED_24_BIT_INTEGER = 0x22,
+        UNSIGNED_32_BIT_INTEGER = 0x23,
+        UNSIGNED_48_BIT_INTEGER = 0x25,
+        UNSIGNED_8_BIT_INTEGER = 0x20,
+        UTCTIME = 0xE2,
+        X_UNSIGNED_8_BIT_INTEGER = 0x91,
+        ZCL_STATUS = 0x92,
+        EXTENDED_PANID = 0x93,
+        BINDING_TABLE = 0x94,
+        CLUSTERID = 0x95,
+        COMPLEX_DESCRIPTOR = 0x96,
+        ENDPOINT = 0x97,
+        NEIGHBOR_TABLE = 0x98,
+        NODE_DESCRIPTOR = 0x99,
+        NWK_ADDRESS = 0x9a,
+        N_X_BINDING_TABLE = 0x9b,
+        N_X_IEEE_ADDRESS = 0x9c,
+        POWER_DESCRIPTOR = 0x9d,
+        ROUTING_TABLE = 0x9e,
+        SIMPLE_DESCRIPTOR = 0x9f,
+        USER_DESCRIPTOR = 0xa1,
+        ZDO_STATUS = 0xa2,
+        UNSIGNED_8_BIT_INTEGER_ARRAY = 0xa3,
+        ZIGBEE_DATA_TYPE = 0xa4
+    }
+
+}

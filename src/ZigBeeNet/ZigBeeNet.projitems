@@ -328,6 +328,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Field\WriteAttributeStatusRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\IZclAttributeListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\IZclCommandListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Protocol\CommandType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZCL\Protocol\DataType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\Protocol\ZclCommandType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclAttributeNormalizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ZCL\ZclCluster.cs" />
