@@ -1,4 +1,4 @@
-# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib?svg=true)](https://ci.appveyor.com/project/Mr-Markus/ZigBeeNet)
+# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib?svg=true)](https://ci.appveyor.com/project/Mr-Markus/ZigBeeNet) [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net) 
 
 ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard, .NET Core and more .NET platforms. 
 
@@ -38,6 +38,10 @@ Source: [http://www.ti.com/tool/z-stack](http://www.ti.com/tool/z-stack)
 This library is still under development. Breaking changes are possible at all time. A wiki will be comming ASAP
 
 ## Usage
+
+For a detailed description about how to use ZigbeeNet see our [wiki page](https://github.com/Mr-Markus/ZigbeeNet/wiki).
+
+A basic example here:
 
 ```
 using System;
