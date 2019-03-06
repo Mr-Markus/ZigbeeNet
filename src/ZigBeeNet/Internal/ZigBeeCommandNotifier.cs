@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ZigBeeNet.Logging;
 
@@ -9,21 +10,27 @@ namespace ZigBeeNet.Internal
     {
         private readonly ILog _logger = LogProvider.For<ZigBeeCommandNotifier>();
 
-        private ConcurrentBag<IZigBeeCommandListener> _commandListeners;
+        private List<IZigBeeCommandListener> _commandListeners;
 
         public ZigBeeCommandNotifier()
         {
-            _commandListeners = new ConcurrentBag<IZigBeeCommandListener>();
+            _commandListeners = new List<IZigBeeCommandListener>();
         }
 
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            _commandListeners.Add(commandListener);
+            lock (commandListener)
+            {
+                _commandListeners.Add(commandListener);
+            }
         }
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            _commandListeners.TryTake(out _);
+            lock (commandListener)
+            {
+                _commandListeners.Remove(commandListener);
+            }
         }
 
         public void NotifyCommandListeners(ZigBeeCommand command)

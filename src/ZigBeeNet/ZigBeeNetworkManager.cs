@@ -87,14 +87,14 @@ namespace ZigBeeNet
         /// The node listeners of the ZigBee network. Registered listeners will be
         /// notified of additions, deletions and changes to ZigBeeNodes.
         /// </summary>
-        private ReadOnlyCollection<IZigBeeNetworkNodeListener> _nodeListeners;
+        private List<IZigBeeNetworkNodeListener> _nodeListeners;
 
         /// <summary>
         /// The announce listeners are notified whenever a new device is discovered.
         /// This can be called from the transport layer, or internally by methods watching
         /// the network state.
         /// </summary>
-        private ReadOnlyCollection<IZigBeeAnnounceListener> _announceListeners;
+        private List<IZigBeeAnnounceListener> _announceListeners;
 
         /// <summary>
         /// AtomicInteger used to generate transaction sequence numbers
@@ -270,11 +270,9 @@ namespace ZigBeeNet
             List<IZigBeeNetworkStateListener> stateListeners = new List<IZigBeeNetworkStateListener>();
             _stateListeners = new List<IZigBeeNetworkStateListener>(stateListeners).AsReadOnly();
 
-            List<IZigBeeNetworkNodeListener> nodeListeners = new List<IZigBeeNetworkNodeListener>();
-            _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(nodeListeners);
+            _nodeListeners = new List<IZigBeeNetworkNodeListener>();
 
-            List<IZigBeeAnnounceListener> announceListeners = new List<IZigBeeAnnounceListener>();
-            _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(announceListeners);
+            _announceListeners = new List<IZigBeeAnnounceListener>();
 
             Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> transitions = new Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>>();
 
@@ -793,9 +791,7 @@ namespace ZigBeeNet
         /// </summary>
         public void AddAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
-            List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(_announceListeners);
-            modifiedStateListeners.Add(statusListener);
-            _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
+            _announceListeners.Add(statusListener);
         }
 
         /// <summary>
@@ -805,10 +801,7 @@ namespace ZigBeeNet
         /// </summary>
         public void RemoveAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
-            List<IZigBeeAnnounceListener> modifiedStateListeners = new List<IZigBeeAnnounceListener>(
-                    _announceListeners);
-            modifiedStateListeners.Remove(statusListener);
-            _announceListeners = new ReadOnlyCollection<IZigBeeAnnounceListener>(modifiedStateListeners);
+            _announceListeners.Remove(statusListener);
         }
 
         public void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, IeeeAddress ieeeAddress)
@@ -1177,9 +1170,7 @@ namespace ZigBeeNet
             }
             lock (_nodeListeners)
             {
-                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
-                modifiedListeners.Add(networkNodeListener);
-                _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(modifiedListeners);
+                _nodeListeners.Add(networkNodeListener);
             }
         }
 
@@ -1192,9 +1183,7 @@ namespace ZigBeeNet
         {
             lock (_nodeListeners)
             {
-                List<IZigBeeNetworkNodeListener> modifiedListeners = new List<IZigBeeNetworkNodeListener>(_nodeListeners);
-                modifiedListeners.Remove(networkNodeListener);
-                _nodeListeners = new ReadOnlyCollection<IZigBeeNetworkNodeListener>(modifiedListeners);
+                _nodeListeners.Remove(networkNodeListener);
             }
         }
 

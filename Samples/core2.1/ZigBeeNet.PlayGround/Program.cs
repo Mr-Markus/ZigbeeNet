@@ -45,7 +45,7 @@ namespace ZigBeeNet.PlayGround
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
                 JsonNetworkSerializer deviceSerializer = new JsonNetworkSerializer("devices.json");
-                networkManager.NetworkStateSerializer = deviceSerializer;
+                //networkManager.NetworkStateSerializer = deviceSerializer;
 
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
                 discoveryExtension.SetUpdatePeriod(60);
@@ -54,7 +54,7 @@ namespace ZigBeeNet.PlayGround
                 // Initialise the network
                 networkManager.Initialize();
 
-                networkManager.AddCommandListener(new ZigBeeNetworkDiscoverer(networkManager));
+                //networkManager.AddCommandListener(new ZigBeeNetworkDiscoverer(networkManager));
                 //networkManager.AddCommandListener(new ZigBeeNodeServiceDiscoverer(networkManager));
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
