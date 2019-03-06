@@ -13,80 +13,80 @@ using ZigBeeNet.ZDO.Command;
 namespace ZigBeeNet.App
 {
     /// <summary>
- /// {@link ZigBeeNetworkDiscoverer} is used to discover devices in the network.
- /// <p>
- /// Notifications will be sent to the listeners when nodes and endpoints are discovered.
- /// Device listeners are always notified first as each endpoint discovery completes.
- /// Once a node is fully discovered and all its endpoints are included into the network,
- /// we can notify the node listeners.
- ///
- /// @author Chris Jackson
- /// </summary>
+    /// {@link ZigBeeNetworkDiscoverer} is used to discover devices in the network.
+    /// <p>
+    /// Notifications will be sent to the listeners when nodes and endpoints are discovered.
+    /// Device listeners are always notified first as each endpoint discovery completes.
+    /// Once a node is fully discovered and all its endpoints are included into the network,
+    /// we can notify the node listeners.
+    ///
+    /// @author Chris Jackson
+    /// </summary>
     public class ZigBeeNetworkDiscoverer : IZigBeeCommandListener, IZigBeeAnnounceListener
     {
         /// <summary>
-         /// The _logger.
-         /// </summary>
+        /// The _logger.
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkDiscoverer>();
 
         /// <summary>
-         /// Default maximum number of retries to perform
-         /// </summary>
+        /// Default maximum number of retries to perform
+        /// </summary>
         private const int DEFAULT_MAX_RETRY_COUNT = 3;
 
         /// <summary>
-         /// Default period between retries
-         /// </summary>
+        /// Default period between retries
+        /// </summary>
         private const int DEFAULT_RETRY_PERIOD = 1500;
 
         /// <summary>
-         /// Default minimum time before information can be queried again for same network address or endpoint.
-         /// </summary>
+        /// Default minimum time before information can be queried again for same network address or endpoint.
+        /// </summary>
         private const int DEFAULT_REQUERY_TIME = 300000;
 
         /// <summary>
-         /// The ZigBee network manager.
-         /// </summary>
+        /// The ZigBee network manager.
+        /// </summary>
         private ZigBeeNetworkManager _networkManager;
 
         /// <summary>
-         /// Period between retries
-         /// </summary>
+        /// Period between retries
+        /// </summary>
         private int _retryPeriod = DEFAULT_RETRY_PERIOD;
 
         /// <summary>
-         /// Period between retries
-         /// </summary>
+        /// Period between retries
+        /// </summary>
         private int _retryCount = DEFAULT_MAX_RETRY_COUNT;
 
         /// <summary>
-         /// The minimum time before performing a requery
-         /// </summary>
+        /// The minimum time before performing a requery
+        /// </summary>
         private int _requeryPeriod = DEFAULT_REQUERY_TIME;
 
         /// <summary>
-         /// Map of node discovery times.
-         /// </summary>
+        /// Map of node discovery times.
+        /// </summary>
         private Dictionary<ushort, long> _discoveryStartTime = new Dictionary<ushort, long>();
 
         /// <summary>
-         /// Flag used to initialise the discoverer once the network is ONLINE
-         /// </summary>
+        /// Flag used to initialise the discoverer once the network is ONLINE
+        /// </summary>
         private bool _initialized = false;
 
         /// <summary>
-         /// Discovers ZigBee network state.
-         ///
-         /// @param _networkManager the {@link ZigBeeNetworkManager}
-         /// </summary>
+        /// Discovers ZigBee network state.
+        ///
+        /// @param _networkManager the {@link ZigBeeNetworkManager}
+        /// </summary>
         public ZigBeeNetworkDiscoverer(ZigBeeNetworkManager networkManager)
         {
             _networkManager = networkManager;
         }
 
         /// <summary>
-         /// Starts up ZigBee network discoverer. This adds a listener to wait for the network to go online.
-         /// </summary>
+        /// Starts up ZigBee network discoverer. This adds a listener to wait for the network to go online.
+        /// </summary>
         public void Startup()
         {
             _logger.Debug("Network discovery task: starting");
@@ -101,8 +101,8 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Shuts down ZigBee network discoverer.
-         /// </summary>
+        /// Shuts down ZigBee network discoverer.
+        /// </summary>
         public void Shutdown()
         {
             _logger.Debug("Network discovery task: shutdown");
@@ -112,31 +112,31 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Sets the retry period in milliseconds. This is the amount of time the service will wait following a failed
-         /// request before performing a retry.
-         ///
-         /// @param retryPeriod the period in milliseconds between retries
-         /// </summary>
+        /// Sets the retry period in milliseconds. This is the amount of time the service will wait following a failed
+        /// request before performing a retry.
+        ///
+        /// @param retryPeriod the period in milliseconds between retries
+        /// </summary>
         public void SetRetryPeriod(int retryPeriod)
         {
             _retryPeriod = retryPeriod;
         }
 
         /// <summary>
-         /// Sets the maximum number of retries the service will perform at any stage before failing.
-         ///
-         /// @param retryCount the maximum number of retries.
-         /// </summary>
+        /// Sets the maximum number of retries the service will perform at any stage before failing.
+        ///
+        /// @param retryCount the maximum number of retries.
+        /// </summary>
         public void SetRetryCount(int retryCount)
         {
             _retryCount = retryCount;
         }
 
         /// <summary>
-         /// Sets the minimum period between requeries on each node
-         ///
-         /// @param requeryPeriod the requery period in milliseconds
-         /// </summary>
+        /// Sets the minimum period between requeries on each node
+        ///
+        /// @param requeryPeriod the requery period in milliseconds
+        /// </summary>
         public void SetRequeryPeriod(int requeryPeriod)
         {
             _requeryPeriod = requeryPeriod;
@@ -185,27 +185,82 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Starts a discovery on a node.
-         ///
-         /// @param nodeAddress the network address of the node to discover
-         /// </summary>
-        public void RediscoverNode(ushort nodeAddress)
+        /// Starts a discovery on a node given the network address.
+        ///
+        ///  @param networkAddress the network address of the node to discover
+        /// </summary>
+        public void RediscoverNode(ushort networkAddress)
         {
             if (!_initialized)
             {
-                _logger.Debug("Network discovery task: can't perform rediscovery on {NetworkAddress} until initialization complete.",
-                        nodeAddress);
+                _logger.Debug("Network discovery task: can't perform rediscovery on {NetworkAddress} until initialization complete.", networkAddress);
                 return;
             }
-            StartNodeDiscovery(nodeAddress);
+
+            _logger.Debug("{NetworkAddress}: NWK Discovery starting node rediscovery", networkAddress);
+            int retries = 0;
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    do
+                    {
+                        // Request basic response, start index for associated list is 0
+                        IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
+                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
+                        ieeeAddressRequest.RequestType = 0;
+                        ieeeAddressRequest.StartIndex = 0;
+                        ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
+                        CommandResult response = await _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest);
+
+                        if (response.IsError())
+                        {
+                            return;
+                        }
+
+                        IeeeAddressResponse ieeeAddressResponse = (IeeeAddressResponse)response.GetResponse();
+
+                        _logger.Debug("{NetworkAddress}: NWK Discovery IeeeAddressRequest returned {IeeeAddressResponse}", networkAddress, ieeeAddressResponse);
+
+                        if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
+                        {
+                            AddNode(ieeeAddressResponse.IeeeAddrRemoteDev, ieeeAddressResponse.NwkAddrRemoteDev);
+                            StartNodeDiscovery(ieeeAddressResponse.NwkAddrRemoteDev);
+                            break;
+                        }
+
+                        // We failed with the last request. Wait a bit then retry
+                        try
+                        {
+                            _logger.Debug("{NetworkAddress}: NWK Discovery node rediscovery request failed. Wait before retry.", networkAddress);
+
+                            await Task.Delay(_retryPeriod);
+                        }
+                        catch (ThreadAbortException e)
+                        {
+                            break;
+                        }
+
+                    } while (retries++ < _retryCount);
+                }
+                catch (Exception e) // TODO: Handle more secific Exception here (ThreadAbortException etc.)
+                {
+                    _logger.Debug("NWK Discovery Error in checkIeeeAddressResponse ", e);
+                }
+                
+                _logger.Debug("{NetworkAddress}: NWK Discovery finishing node rediscovery after {Retries} attempts", networkAddress, retries);
+            });
+
+            // StartNodeDiscovery(nodeAddress);
         }
 
         /// <summary>
-         /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
-         /// the response to trigger a full discovery.
-         ///
-         /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
-         /// </summary>
+        /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
+        /// the response to trigger a full discovery.
+        ///
+        /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
+        /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
             if (!_initialized)
@@ -243,8 +298,8 @@ namespace ZigBeeNet.App
                             break;
                         }
 
-                        // We failed with the last request. Wait a bit then retry
-                        try
+                    // We failed with the last request. Wait a bit then retry
+                    try
                         {
                             _logger.Debug("{IeeeAddress}: NWK Discovery node rediscovery request failed. Wait before retry.",
                                     ieeeAddress);
@@ -265,11 +320,11 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Performs the top level node discovery. This discovers node level attributes such as the endpoints and
-         /// descriptors.
-         ///
-         /// @param networkAddress the network address to start a discovery on
-         /// </summary>
+        /// Performs the top level node discovery. This discovers node level attributes such as the endpoints and
+        /// descriptors.
+        ///
+        /// @param networkAddress the network address to start a discovery on
+        /// </summary>
         private void StartNodeDiscovery(ushort nodeNetworkAddress)
         {
             // Check if we need to do a rediscovery on this node first...
@@ -306,8 +361,8 @@ namespace ZigBeeNet.App
                             break;
                         }
 
-                        // We failed with the last request. Wait a bit then retry
-                        try
+                    // We failed with the last request. Wait a bit then retry
+                    try
                         {
                             Thread.Sleep(_retryPeriod);
                         }
@@ -327,11 +382,11 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Get Node IEEE address
-         ///
-         /// @param networkAddress the network address of the node
-         /// @return true if the message was processed ok
-         /// </summary>
+        /// Get Node IEEE address
+        ///
+        /// @param networkAddress the network address of the node
+        /// @return true if the message was processed ok
+        /// </summary>
         private async Task<bool> GetIeeeAddress(ushort networkAddress)
         {
             try
@@ -388,11 +443,11 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-         /// Updates {@link ZigBeeNode} and adds it to the {@link ZigBeeNetworkManager}
-         ///
-         /// @param ieeeAddress the {@link IeeeAddress} of the newly announced node
-         /// @param networkAddress the network address of the newly announced node
-         /// </summary>
+        /// Updates {@link ZigBeeNode} and adds it to the {@link ZigBeeNetworkManager}
+        ///
+        /// @param ieeeAddress the {@link IeeeAddress} of the newly announced node
+        /// @param networkAddress the network address of the newly announced node
+        /// </summary>
         private void AddNode(IeeeAddress ieeeAddress, ushort networkAddress)
         {
             ZigBeeNode node = _networkManager.GetNode(ieeeAddress);
