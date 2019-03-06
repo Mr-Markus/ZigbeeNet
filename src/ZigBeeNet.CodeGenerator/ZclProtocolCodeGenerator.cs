@@ -15,6 +15,7 @@ namespace ZigBeeNet.CodeGenerator
         private static string _generatedDate;
         private static string _outRootPath;
 
+
         /**
          * The main method for running the code generator.
          */
