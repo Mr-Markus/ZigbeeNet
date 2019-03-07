@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/// <summary>
- /// Configure Reporting Command value object class.
- ///
- /// Cluster: General. Command is sentTO the server.
- /// This command is a generic command used across the profile.
- ///
- /// The Configure Reporting command is used to configure the reporting mechanism /// for one or more of the attributes of a cluster. /// <br> /// The individual cluster definitions specify which attributes shall be available to this /// reporting mechanism, however specific implementations of a cluster may make /// additional attributes available. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Configure Reporting Command value object class.
+ 
+ Cluster: General. Command is sentTO the server.
+  This command is a generic command used across the profile.
+ 
+ * The Configure Reporting command is used to configure the reporting mechanism * for one or more of the attributes of a cluster. * <br> * The individual cluster definitions specify which attributes shall be available to this * reporting mechanism, however specific implementations of a cluster may make * additional attributes available. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class ConfigureReportingCommand : ZclCommand
        {
-           /// <summary>
-           /// Records command message field.
-           /// </summary>
+           <summary>
+            Records command message field.
+           </summary>
            public List<AttributeReportingConfigurationRecord> Records { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ConfigureReportingCommand()
            {
                GenericCommand = true;

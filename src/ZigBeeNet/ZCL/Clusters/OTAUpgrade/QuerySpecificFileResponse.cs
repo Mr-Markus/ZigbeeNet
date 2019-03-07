@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/// <summary>
- /// Query Specific File Response value object class.
- ///
- /// Cluster: OTA Upgrade. Command is sentFROM the server.
- /// This command is a specific command used for the OTA Upgrade cluster.
- ///
- /// The server sends Query Specific File Response after receiving Query Specific File Request from a /// client. The server shall determine whether it first supports the Query Specific File Request command. /// Then it shall determine whether it has the specific file being requested by the client using all the /// information included in the request. The upgrade server sends a Query Specific File Response with /// one of the following status: SUCCESS, NO_IMAGE_AVAILABLE or NOT_AUTHORIZED. /// <br> /// A status of NO_IMAGE_AVAILABLE indicates that the server currently does not have the device /// specific file available for the client. A status of NOT_AUTHORIZED indicates the server is not /// authorized to send the file to the client. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Query Specific File Response value object class.
+ 
+ Cluster: OTA Upgrade. Command is sentFROM the server.
+  This command is a specific command used for the OTA Upgrade cluster.
+ 
+ * The server sends Query Specific File Response after receiving Query Specific File Request from a * client. The server shall determine whether it first supports the Query Specific File Request command. * Then it shall determine whether it has the specific file being requested by the client using all the * information included in the request. The upgrade server sends a Query Specific File Response with * one of the following status: SUCCESS, NO_IMAGE_AVAILABLE or NOT_AUTHORIZED. * <br> * A status of NO_IMAGE_AVAILABLE indicates that the server currently does not have the device * specific file available for the client. A status of NOT_AUTHORIZED indicates the server is not * authorized to send the file to the client. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class QuerySpecificFileResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public ZclStatus Status { get; set; }
 
-           /// <summary>
-           /// Manufacturer code command message field.
-           /// </summary>
+           <summary>
+            Manufacturer code command message field.
+           </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /// <summary>
-           /// Image type command message field.
-           /// </summary>
+           <summary>
+            Image type command message field.
+           </summary>
            public ushort ImageType { get; set; }
 
-           /// <summary>
-           /// File Version command message field.
-           /// </summary>
+           <summary>
+            File Version command message field.
+           </summary>
            public uint FileVersion { get; set; }
 
-           /// <summary>
-           /// Image Size command message field.
-           /// </summary>
+           <summary>
+            Image Size command message field.
+           </summary>
            public uint ImageSize { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public QuerySpecificFileResponse()
            {
                GenericCommand = false;

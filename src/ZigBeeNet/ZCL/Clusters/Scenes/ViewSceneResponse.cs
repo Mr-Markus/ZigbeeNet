@@ -7,53 +7,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// View Scene Response value object class.
- ///
- /// Cluster: Scenes. Command is sentFROM the server.
- /// This command is a specific command used for the Scenes cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ View Scene Response value object class.
+ 
+ Cluster: Scenes. Command is sentFROM the server.
+  This command is a specific command used for the Scenes cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class ViewSceneResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public byte Status { get; set; }
 
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
+           <summary>
+            Group ID command message field.
+           </summary>
            public ushort GroupID { get; set; }
 
-           /// <summary>
-           /// Scene ID command message field.
-           /// </summary>
+           <summary>
+            Scene ID command message field.
+           </summary>
            public byte SceneID { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
+           <summary>
+            Transition time command message field.
+           </summary>
            public ushort TransitionTime { get; set; }
 
-           /// <summary>
-           /// Scene Name command message field.
-           /// </summary>
+           <summary>
+            Scene Name command message field.
+           </summary>
            public string SceneName { get; set; }
 
-           /// <summary>
-           /// Extension field sets command message field.
-           /// </summary>
+           <summary>
+            Extension field sets command message field.
+           </summary>
            public List<ExtensionFieldSet> ExtensionFieldSets { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ViewSceneResponse()
            {
                GenericCommand = false;

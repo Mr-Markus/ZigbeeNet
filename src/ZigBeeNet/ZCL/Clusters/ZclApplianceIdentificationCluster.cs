@@ -11,24 +11,24 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Appliance Identificationcluster implementation (Cluster ID 0x0B00).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Appliance Identificationcluster implementation (Cluster ID 0x0B00).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclApplianceIdentificationCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0B00;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0B00;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Appliance Identification";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Appliance Identification";
 
        // Attribute initialisation
        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
@@ -38,11 +38,10 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Appliance Identification cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Appliance Identification cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclApplianceIdentificationCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

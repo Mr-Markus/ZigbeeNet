@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of IASZone attribute Enroll response code options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
+<sumamry>
+ * Enumeration of IASZone attribute Enroll response code options.
+ *
+ * Code is auto-generated. Modifications may be overwritten!
+ *
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {

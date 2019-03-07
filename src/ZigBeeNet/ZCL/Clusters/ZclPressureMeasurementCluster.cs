@@ -11,62 +11,62 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Pressure measurementcluster implementation (Cluster ID 0x0403).
- ///
- /// The cluster provides an interface to pressure measurement functionality, /// including configuration and provision of notifications of pressure measurements. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Pressure measurementcluster implementation (Cluster ID 0x0403).
+ 
+ * The cluster provides an interface to pressure measurement functionality, * including configuration and provision of notifications of pressure measurements. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclPressureMeasurementCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0403;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0403;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Pressure measurement";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Pressure measurement";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// MeasuredValue represents the pressure in kPa as follows:-        /// <p>        /// MeasuredValue = 10 x Pressure        /// <p>        /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a        /// MeasuredValue in the range 0x8001 to 0x7fff.        /// <p>        /// Note:- The maximum resolution this format allows is 0.1 kPa.        /// <p>        /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.        /// MeasuredValue is updated continuously as new measurements are made.       /// </summary>
-       public static ushort ATTR_MEASUREDVALUE = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * MeasuredValue represents the pressure in kPa as follows:-        * <p>        * MeasuredValue = 10 x Pressure        * <p>        * Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a        * MeasuredValue in the range 0x8001 to 0x7fff.        * <p>        * Note:- The maximum resolution this format allows is 0.1 kPa.        * <p>        * A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.        * MeasuredValue is updated continuously as new measurements are made.       </summary>
+       public const ushort ATTR_MEASUREDVALUE = 0x0000;
 
-       /// <summary>
-        /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue        /// that can be measured. A value of 0x8000 means this attribute is not defined.       /// </summary>
-       public static ushort ATTR_MINMEASUREDVALUE = 0x0001;
+       <summary>
+        * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue        * that can be measured. A value of 0x8000 means this attribute is not defined.       </summary>
+       public const ushort ATTR_MINMEASUREDVALUE = 0x0001;
 
-       /// <summary>
-        /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue        /// that can be measured. A value of 0x8000 means this attribute is not defined.        /// <p>        /// MaxMeasuredValue shall be greater than MinMeasuredValue.        /// <p>        /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       /// </summary>
-       public static ushort ATTR_MAXMEASUREDVALUE = 0x0002;
+       <summary>
+        * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue        * that can be measured. A value of 0x8000 means this attribute is not defined.        * <p>        * MaxMeasuredValue shall be greater than MinMeasuredValue.        * <p>        * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       </summary>
+       public const ushort ATTR_MAXMEASUREDVALUE = 0x0002;
 
-       /// <summary>
-        /// The Tolerance attribute indicates the magnitude of the possible error that is        /// associated with MeasuredValue . The true value is located in the range        /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       /// </summary>
-       public static ushort ATTR_TOLERANCE = 0x0003;
+       <summary>
+        * The Tolerance attribute indicates the magnitude of the possible error that is        * associated with MeasuredValue . The true value is located in the range        * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       </summary>
+       public const ushort ATTR_TOLERANCE = 0x0003;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_SCALEDVALUE = 0x0010;
+       <summary>
+       </summary>
+       public const ushort ATTR_SCALEDVALUE = 0x0010;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MINSCALEDVALUE = 0x0011;
+       <summary>
+       </summary>
+       public const ushort ATTR_MINSCALEDVALUE = 0x0011;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MAXSCALEDVALUE = 0x0012;
+       <summary>
+       </summary>
+       public const ushort ATTR_MAXSCALEDVALUE = 0x0012;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_SCALEDTOLERANCE = 0x0013;
+       <summary>
+       </summary>
+       public const ushort ATTR_SCALEDTOLERANCE = 0x0013;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_SCALE = 0x0014;
+       <summary>
+       </summary>
+       public const ushort ATTR_SCALE = 0x0014;
 
 
        // Attribute initialisation
@@ -89,42 +89,41 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Pressure measurement cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Pressure measurement cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclPressureMeasurementCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Get the MeasuredValue attribute [attribute ID0].
-       ///
-       /// MeasuredValue represents the pressure in kPa as follows:-       /// <p>       /// MeasuredValue = 10 x Pressure       /// <p>       /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       /// MeasuredValue in the range 0x8001 to 0x7fff.       /// <p>       /// Note:- The maximum resolution this format allows is 0.1 kPa.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       /// MeasuredValue is updated continuously as new measurements are made.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MeasuredValue attribute [attribute ID0].
+       
+       * MeasuredValue represents the pressure in kPa as follows:-       * <p>       * MeasuredValue = 10 x Pressure       * <p>       * Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       * MeasuredValue in the range 0x8001 to 0x7fff.       * <p>       * Note:- The maximum resolution this format allows is 0.1 kPa.       * <p>       * A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       * MeasuredValue is updated continuously as new measurements are made.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MEASUREDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MeasuredValue attribute [attribute ID0].
-       ///
-       /// MeasuredValue represents the pressure in kPa as follows:-       /// <p>       /// MeasuredValue = 10 x Pressure       /// <p>       /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       /// MeasuredValue in the range 0x8001 to 0x7fff.       /// <p>       /// Note:- The maximum resolution this format allows is 0.1 kPa.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       /// MeasuredValue is updated continuously as new measurements are made.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MeasuredValue attribute [attribute ID0].
+       
+       * MeasuredValue represents the pressure in kPa as follows:-       * <p>       * MeasuredValue = 10 x Pressure       * <p>       * Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       * MeasuredValue in the range 0x8001 to 0x7fff.       * <p>       * Note:- The maximum resolution this format allows is 0.1 kPa.       * <p>       * A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       * MeasuredValue is updated continuously as new measurements are made.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -136,50 +135,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set reporting for the MeasuredValue attribute [attribute ID0].
-       ///
-       /// MeasuredValue represents the pressure in kPa as follows:-       /// <p>       /// MeasuredValue = 10 x Pressure       /// <p>       /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       /// MeasuredValue in the range 0x8001 to 0x7fff.       /// <p>       /// Note:- The maximum resolution this format allows is 0.1 kPa.       /// <p>       /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       /// MeasuredValue is updated continuously as new measurements are made.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param minInterval minimum reporting period
-       /// @param maxInterval maximum reporting period
-       /// @param reportableChange {@link Object} delta required to trigger report
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set reporting for the MeasuredValue attribute [attribute ID0].
+       
+       * MeasuredValue represents the pressure in kPa as follows:-       * <p>       * MeasuredValue = 10 x Pressure       * <p>       * Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a       * MeasuredValue in the range 0x8001 to 0x7fff.       * <p>       * Note:- The maximum resolution this format allows is 0.1 kPa.       * <p>       * A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.       * MeasuredValue is updated continuously as new measurements are made.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= minInterval minimum reporting period<param>
+       <param name= maxInterval maximum reporting period</param>
+       <param name= reportableChange {@link Object} delta required to trigger report</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetMeasuredValueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_MEASUREDVALUE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /// <summary>
-       /// Get the MinMeasuredValue attribute [attribute ID1].
-       ///
-       /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       /// that can be measured. A value of 0x8000 means this attribute is not defined.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MinMeasuredValue attribute [attribute ID1].
+       
+       * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       * that can be measured. A value of 0x8000 means this attribute is not defined.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMinMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MINMEASUREDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MinMeasuredValue attribute [attribute ID1].
-       ///
-       /// The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       /// that can be measured. A value of 0x8000 means this attribute is not defined.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MinMeasuredValue attribute [attribute ID1].
+       
+       * The MinMeasuredValue attribute indicates the minimum value of MeasuredValue       * that can be measured. A value of 0x8000 means this attribute is not defined.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetMinMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MINMEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -191,31 +190,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MaxMeasuredValue attribute [attribute ID2].
-       ///
-       /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       /// that can be measured. A value of 0x8000 means this attribute is not defined.       /// <p>       /// MaxMeasuredValue shall be greater than MinMeasuredValue.       /// <p>       /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MaxMeasuredValue attribute [attribute ID2].
+       
+       * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       * that can be measured. A value of 0x8000 means this attribute is not defined.       * <p>       * MaxMeasuredValue shall be greater than MinMeasuredValue.       * <p>       * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMaxMeasuredValueAsync()
        {
            return Read(_attributes[ATTR_MAXMEASUREDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MaxMeasuredValue attribute [attribute ID2].
-       ///
-       /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       /// that can be measured. A value of 0x8000 means this attribute is not defined.       /// <p>       /// MaxMeasuredValue shall be greater than MinMeasuredValue.       /// <p>       /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MaxMeasuredValue attribute [attribute ID2].
+       
+       * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       * that can be measured. A value of 0x8000 means this attribute is not defined.       * <p>       * MaxMeasuredValue shall be greater than MinMeasuredValue.       * <p>       * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetMaxMeasuredValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXMEASUREDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -227,50 +226,50 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set reporting for the MaxMeasuredValue attribute [attribute ID2].
-       ///
-       /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       /// that can be measured. A value of 0x8000 means this attribute is not defined.       /// <p>       /// MaxMeasuredValue shall be greater than MinMeasuredValue.       /// <p>       /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param minInterval minimum reporting period
-       /// @param maxInterval maximum reporting period
-       /// @param reportableChange {@link Object} delta required to trigger report
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set reporting for the MaxMeasuredValue attribute [attribute ID2].
+       
+       * The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue       * that can be measured. A value of 0x8000 means this attribute is not defined.       * <p>       * MaxMeasuredValue shall be greater than MinMeasuredValue.       * <p>       * MinMeasuredValue and MaxMeasuredValue define the range of the sensor.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= minInterval minimum reporting period<param>
+       <param name= maxInterval maximum reporting period</param>
+       <param name= reportableChange {@link Object} delta required to trigger report</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetMaxMeasuredValueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_MAXMEASUREDVALUE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /// <summary>
-       /// Get the Tolerance attribute [attribute ID3].
-       ///
-       /// The Tolerance attribute indicates the magnitude of the possible error that is       /// associated with MeasuredValue . The true value is located in the range       /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Tolerance attribute [attribute ID3].
+       
+       * The Tolerance attribute indicates the magnitude of the possible error that is       * associated with MeasuredValue . The true value is located in the range       * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetToleranceAsync()
        {
            return Read(_attributes[ATTR_TOLERANCE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Tolerance attribute [attribute ID3].
-       ///
-       /// The Tolerance attribute indicates the magnitude of the possible error that is       /// associated with MeasuredValue . The true value is located in the range       /// (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Tolerance attribute [attribute ID3].
+       
+       * The Tolerance attribute indicates the magnitude of the possible error that is       * associated with MeasuredValue . The true value is located in the range       * (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetTolerance(long refreshPeriod)
        {
            if (_attributes[ATTR_TOLERANCE].IsLastValueCurrent(refreshPeriod))
@@ -282,29 +281,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ScaledValue attribute [attribute ID16].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ScaledValue attribute [attribute ID16].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetScaledValueAsync()
        {
            return Read(_attributes[ATTR_SCALEDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ScaledValue attribute [attribute ID16].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ScaledValue attribute [attribute ID16].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetScaledValue(long refreshPeriod)
        {
            if (_attributes[ATTR_SCALEDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -316,47 +315,47 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set reporting for the ScaledValue attribute [attribute ID16].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param minInterval minimum reporting period
-       /// @param maxInterval maximum reporting period
-       /// @param reportableChange {@link Object} delta required to trigger report
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set reporting for the ScaledValue attribute [attribute ID16].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= minInterval minimum reporting period<param>
+       <param name= maxInterval maximum reporting period</param>
+       <param name= reportableChange {@link Object} delta required to trigger report</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetScaledValueReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_SCALEDVALUE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /// <summary>
-       /// Get the MinScaledValue attribute [attribute ID17].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MinScaledValue attribute [attribute ID17].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMinScaledValueAsync()
        {
            return Read(_attributes[ATTR_MINSCALEDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MinScaledValue attribute [attribute ID17].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MinScaledValue attribute [attribute ID17].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetMinScaledValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MINSCALEDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -368,29 +367,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MaxScaledValue attribute [attribute ID18].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MaxScaledValue attribute [attribute ID18].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMaxScaledValueAsync()
        {
            return Read(_attributes[ATTR_MAXSCALEDVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MaxScaledValue attribute [attribute ID18].
-       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MaxScaledValue attribute [attribute ID18].
+       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetMaxScaledValue(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXSCALEDVALUE].IsLastValueCurrent(refreshPeriod))
@@ -402,29 +401,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ScaledTolerance attribute [attribute ID19].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ScaledTolerance attribute [attribute ID19].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetScaledToleranceAsync()
        {
            return Read(_attributes[ATTR_SCALEDTOLERANCE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ScaledTolerance attribute [attribute ID19].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ScaledTolerance attribute [attribute ID19].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetScaledTolerance(long refreshPeriod)
        {
            if (_attributes[ATTR_SCALEDTOLERANCE].IsLastValueCurrent(refreshPeriod))
@@ -436,47 +435,47 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set reporting for the ScaledTolerance attribute [attribute ID19].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param minInterval minimum reporting period
-       /// @param maxInterval maximum reporting period
-       /// @param reportableChange {@link Object} delta required to trigger report
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set reporting for the ScaledTolerance attribute [attribute ID19].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= minInterval minimum reporting period<param>
+       <param name= maxInterval maximum reporting period</param>
+       <param name= reportableChange {@link Object} delta required to trigger report</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetScaledToleranceReporting(ushort minInterval, ushort maxInterval, object reportableChange)
        {
            return SetReporting(_attributes[ATTR_SCALEDTOLERANCE], minInterval, maxInterval, reportableChange);
        }
 
 
-       /// <summary>
-       /// Get the Scale attribute [attribute ID20].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Scale attribute [attribute ID20].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetScaleAsync()
        {
            return Read(_attributes[ATTR_SCALE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Scale attribute [attribute ID20].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Scale attribute [attribute ID20].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetScale(long refreshPeriod)
        {
            if (_attributes[ATTR_SCALE].IsLastValueCurrent(refreshPeriod))

@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// Store Scene Command value object class.
- ///
- /// Cluster: Scenes. Command is sentTO the server.
- /// This command is a specific command used for the Scenes cluster.
- ///
- /// The Store Scene command may be addressed to a single device or to a group. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Store Scene Command value object class.
+ 
+ Cluster: Scenes. Command is sentTO the server.
+  This command is a specific command used for the Scenes cluster.
+ 
+ * The Store Scene command may be addressed to a single device or to a group. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class StoreSceneCommand : ZclCommand
        {
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
+           <summary>
+            Group ID command message field.
+           </summary>
            public ushort GroupID { get; set; }
 
-           /// <summary>
-           /// Scene ID command message field.
-           /// </summary>
+           <summary>
+            Scene ID command message field.
+           </summary>
            public byte SceneID { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public StoreSceneCommand()
            {
                GenericCommand = false;

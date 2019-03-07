@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASWD;
 
-/// <summary>
- /// Start Warning Command value object class.
- ///
- /// Cluster: IAS WD. Command is sentTO the server.
- /// This command is a specific command used for the IAS WD cluster.
- ///
- /// This command starts the WD operation. The WD alerts the surrounding area by /// audible (siren) and visual (strobe) signals. /// <br> /// A Start Warning command shall always terminate the effect of any previous /// command that is still current. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Start Warning Command value object class.
+ 
+ Cluster: IAS WD. Command is sentTO the server.
+  This command is a specific command used for the IAS WD cluster.
+ 
+ * This command starts the WD operation. The WD alerts the surrounding area by * audible (siren) and visual (strobe) signals. * <br> * A Start Warning command shall always terminate the effect of any previous * command that is still current. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASWD
 {
        public class StartWarningCommand : ZclCommand
        {
-           /// <summary>
-           /// Header command message field.
-           /// </summary>
+           <summary>
+            Header command message field.
+           </summary>
            public byte Header { get; set; }
 
-           /// <summary>
-           /// Warning duration command message field.
-           /// </summary>
+           <summary>
+            Warning duration command message field.
+           </summary>
            public ushort WarningDuration { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public StartWarningCommand()
            {
                GenericCommand = false;

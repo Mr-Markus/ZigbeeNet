@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASZone;
 
-/// <summary>
- /// Zone Enroll Request Command value object class.
- ///
- /// Cluster: IAS Zone. Command is sentFROM the server.
- /// This command is a specific command used for the IAS Zone cluster.
- ///
- /// The Zone Enroll Request command is generated when a device embodying the Zone server cluster wishes /// to be  enrolled as an active  alarm device. It  must do this immediately it has joined the network /// (during commissioning). ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Zone Enroll Request Command value object class.
+ 
+ Cluster: IAS Zone. Command is sentFROM the server.
+  This command is a specific command used for the IAS Zone cluster.
+ 
+ * The Zone Enroll Request command is generated when a device embodying the Zone server cluster wishes * to be  enrolled as an active  alarm device. It  must do this immediately it has joined the network * (during commissioning). 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {
        public class ZoneEnrollRequestCommand : ZclCommand
        {
-           /// <summary>
-           /// Zone Type command message field.
-           /// </summary>
+           <summary>
+            Zone Type command message field.
+           </summary>
            public ushort ZoneType { get; set; }
 
-           /// <summary>
-           /// Manufacturer Code command message field.
-           /// </summary>
+           <summary>
+            Manufacturer Code command message field.
+           </summary>
            public ushort ManufacturerCode { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ZoneEnrollRequestCommand()
            {
                GenericCommand = false;

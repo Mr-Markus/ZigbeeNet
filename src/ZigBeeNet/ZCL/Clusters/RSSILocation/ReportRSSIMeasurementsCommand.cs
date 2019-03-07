@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Report RSSI Measurements Command value object class.
- ///
- /// Cluster: RSSI Location. Command is sentFROM the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Report RSSI Measurements Command value object class.
+ 
+ Cluster: RSSI Location. Command is sentFROM the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class ReportRSSIMeasurementsCommand : ZclCommand
        {
-           /// <summary>
-           /// Reporting Address command message field.
-           /// </summary>
+           <summary>
+            Reporting Address command message field.
+           </summary>
            public IeeeAddress ReportingAddress { get; set; }
 
-           /// <summary>
-           /// Number of Neighbors command message field.
-           /// </summary>
+           <summary>
+            Number of Neighbors command message field.
+           </summary>
            public byte NumberOfNeighbors { get; set; }
 
-           /// <summary>
-           /// Neighbors Information command message field.
-           /// </summary>
+           <summary>
+            Neighbors Information command message field.
+           </summary>
            public List<NeighborInformation> NeighborsInformation { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ReportRSSIMeasurementsCommand()
            {
                GenericCommand = false;

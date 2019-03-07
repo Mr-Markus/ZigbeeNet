@@ -11,24 +11,24 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Fan Controlcluster implementation (Cluster ID 0x0202).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Fan Controlcluster implementation (Cluster ID 0x0202).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclFanControlCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0202;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0202;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Fan Control";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Fan Control";
 
        // Attribute initialisation
        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
@@ -38,11 +38,10 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Fan Control cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Fan Control cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclFanControlCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {

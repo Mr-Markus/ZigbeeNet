@@ -7,49 +7,49 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/// <summary>
- /// Query Next Image Response value object class.
- ///
- /// Cluster: OTA Upgrade. Command is sentFROM the server.
- /// This command is a specific command used for the OTA Upgrade cluster.
- ///
- /// The upgrade server sends a Query Next Image Response with one of the following status: SUCCESS, /// NO_IMAGE_AVAILABLE or NOT_AUTHORIZED. When a SUCCESS status is sent, it is /// considered to be the explicit authorization to a device by the upgrade server that the device may /// upgrade to a specific software image. /// <br> /// A status of NO_IMAGE_AVAILABLE indicates that the server is authorized to upgrade the client but /// it currently does not have the (new) OTA upgrade image available for the client. For all clients (both /// ZR and ZED)9 , they shall continue sending Query Next Image Requests to the server periodically until /// an image becomes available. /// <br> /// A status of NOT_AUTHORIZED indicates the server is not authorized to upgrade the client. In this /// case, the client may perform discovery again to find another upgrade server. The client may implement /// an intelligence to avoid querying the same unauthorized server. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Query Next Image Response value object class.
+ 
+ Cluster: OTA Upgrade. Command is sentFROM the server.
+  This command is a specific command used for the OTA Upgrade cluster.
+ 
+ * The upgrade server sends a Query Next Image Response with one of the following status: SUCCESS, * NO_IMAGE_AVAILABLE or NOT_AUTHORIZED. When a SUCCESS status is sent, it is * considered to be the explicit authorization to a device by the upgrade server that the device may * upgrade to a specific software image. * <br> * A status of NO_IMAGE_AVAILABLE indicates that the server is authorized to upgrade the client but * it currently does not have the (new) OTA upgrade image available for the client. For all clients (both * ZR and ZED)9 , they shall continue sending Query Next Image Requests to the server periodically until * an image becomes available. * <br> * A status of NOT_AUTHORIZED indicates the server is not authorized to upgrade the client. In this * case, the client may perform discovery again to find another upgrade server. The client may implement * an intelligence to avoid querying the same unauthorized server. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class QueryNextImageResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public ZclStatus Status { get; set; }
 
-           /// <summary>
-           /// Manufacturer code command message field.
-           /// </summary>
+           <summary>
+            Manufacturer code command message field.
+           </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /// <summary>
-           /// Image type command message field.
-           /// </summary>
+           <summary>
+            Image type command message field.
+           </summary>
            public ushort ImageType { get; set; }
 
-           /// <summary>
-           /// File Version command message field.
-           /// </summary>
+           <summary>
+            File Version command message field.
+           </summary>
            public uint FileVersion { get; set; }
 
-           /// <summary>
-           /// Image Size command message field.
-           /// </summary>
+           <summary>
+            Image Size command message field.
+           </summary>
            public uint ImageSize { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public QueryNextImageResponse()
            {
                GenericCommand = false;

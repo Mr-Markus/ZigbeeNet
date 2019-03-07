@@ -7,48 +7,48 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Set Absolute Location Command value object class.
- ///
- /// Cluster: RSSI Location. Command is sentTO the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Set Absolute Location Command value object class.
+ 
+ Cluster: RSSI Location. Command is sentTO the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class SetAbsoluteLocationCommand : ZclCommand
        {
-           /// <summary>
-           /// Coordinate 1 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 1 command message field.
+           </summary>
            public short Coordinate1 { get; set; }
 
-           /// <summary>
-           /// Coordinate 2 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 2 command message field.
+           </summary>
            public short Coordinate2 { get; set; }
 
-           /// <summary>
-           /// Coordinate 3 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 3 command message field.
+           </summary>
            public short Coordinate3 { get; set; }
 
-           /// <summary>
-           /// Power command message field.
-           /// </summary>
+           <summary>
+            Power command message field.
+           </summary>
            public short Power { get; set; }
 
-           /// <summary>
-           /// Path Loss Exponent command message field.
-           /// </summary>
+           <summary>
+            Path Loss Exponent command message field.
+           </summary>
            public ushort PathLossExponent { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SetAbsoluteLocationCommand()
            {
                GenericCommand = false;

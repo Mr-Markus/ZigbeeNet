@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 
-/// <summary>
- /// Step (with On/Off) Command value object class.
- ///
- /// Cluster: Level Control. Command is sentTO the server.
- /// This command is a specific command used for the Level Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Step (with On/Off) Command value object class.
+ 
+ Cluster: Level Control. Command is sentTO the server.
+  This command is a specific command used for the Level Control cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.LevelControl
 {
        public class StepWithOnOffCommand : ZclCommand
        {
-           /// <summary>
-           /// Step mode command message field.
-           /// </summary>
+           <summary>
+            Step mode command message field.
+           </summary>
            public byte StepMode { get; set; }
 
-           /// <summary>
-           /// Step size command message field.
-           /// </summary>
+           <summary>
+            Step size command message field.
+           </summary>
            public byte StepSize { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
+           <summary>
+            Transition time command message field.
+           </summary>
            public ushort TransitionTime { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public StepWithOnOffCommand()
            {
                GenericCommand = false;

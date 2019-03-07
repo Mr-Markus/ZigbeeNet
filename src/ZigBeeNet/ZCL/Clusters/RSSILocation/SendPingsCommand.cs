@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Send Pings Command value object class.
- ///
- /// Cluster: RSSI Location. Command is sentTO the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Send Pings Command value object class.
+ 
+ Cluster: RSSI Location. Command is sentTO the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class SendPingsCommand : ZclCommand
        {
-           /// <summary>
-           /// Target Address command message field.
-           /// </summary>
+           <summary>
+            Target Address command message field.
+           </summary>
            public IeeeAddress TargetAddress { get; set; }
 
-           /// <summary>
-           /// Number RSSI Measurements command message field.
-           /// </summary>
+           <summary>
+            Number RSSI Measurements command message field.
+           </summary>
            public byte NumberRSSIMeasurements { get; set; }
 
-           /// <summary>
-           /// Calculation Period command message field.
-           /// </summary>
+           <summary>
+            Calculation Period command message field.
+           </summary>
            public ushort CalculationPeriod { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SendPingsCommand()
            {
                GenericCommand = false;

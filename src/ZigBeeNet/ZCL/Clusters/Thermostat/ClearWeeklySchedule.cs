@@ -7,23 +7,23 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Clear Weekly Schedule value object class.
- ///
- /// Cluster: Thermostat. Command is sentTO the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Clear Weekly Schedule value object class.
+ 
+ Cluster: Thermostat. Command is sentTO the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class ClearWeeklySchedule : ZclCommand
        {
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ClearWeeklySchedule()
            {
                GenericCommand = false;

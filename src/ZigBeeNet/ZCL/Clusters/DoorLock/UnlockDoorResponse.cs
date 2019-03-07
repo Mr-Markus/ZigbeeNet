@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.DoorLock;
 
-/// <summary>
- /// Unlock Door Response value object class.
- ///
- /// Cluster: Door Lock. Command is sentFROM the server.
- /// This command is a specific command used for the Door Lock cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Unlock Door Response value object class.
+ 
+ Cluster: Door Lock. Command is sentFROM the server.
+  This command is a specific command used for the Door Lock cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.DoorLock
 {
        public class UnlockDoorResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public byte Status { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public UnlockDoorResponse()
            {
                GenericCommand = false;

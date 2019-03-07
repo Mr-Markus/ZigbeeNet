@@ -7,43 +7,43 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Anchor Node Announce Command value object class.
- ///
- /// Cluster: RSSI Location. Command is sentTO the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Anchor Node Announce Command value object class.
+ 
+ Cluster: RSSI Location. Command is sentTO the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class AnchorNodeAnnounceCommand : ZclCommand
        {
-           /// <summary>
-           /// Anchor Node Address command message field.
-           /// </summary>
+           <summary>
+            Anchor Node Address command message field.
+           </summary>
            public IeeeAddress AnchorNodeAddress { get; set; }
 
-           /// <summary>
-           /// Coordinate 1 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 1 command message field.
+           </summary>
            public short Coordinate1 { get; set; }
 
-           /// <summary>
-           /// Coordinate 2 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 2 command message field.
+           </summary>
            public short Coordinate2 { get; set; }
 
-           /// <summary>
-           /// Coordinate 3 command message field.
-           /// </summary>
+           <summary>
+            Coordinate 3 command message field.
+           </summary>
            public short Coordinate3 { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public AnchorNodeAnnounceCommand()
            {
                GenericCommand = false;

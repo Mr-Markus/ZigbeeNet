@@ -11,145 +11,145 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Diagnosticscluster implementation (Cluster ID 0x0B05).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Diagnosticscluster implementation (Cluster ID 0x0B05).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclDiagnosticsCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0B05;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0B05;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Diagnostics";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Diagnostics";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACRXBCAST = 0x0100;
+       /* Attribute constants */
+       <summary>
+       </summary>
+       public const ushort ATTR_MACRXBCAST = 0x0100;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACTXBCAST = 0x0101;
+       <summary>
+       </summary>
+       public const ushort ATTR_MACTXBCAST = 0x0101;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACRXUCAST = 0x0102;
+       <summary>
+       </summary>
+       public const ushort ATTR_MACRXUCAST = 0x0102;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACTXUCAST = 0x0103;
+       <summary>
+       </summary>
+       public const ushort ATTR_MACTXUCAST = 0x0103;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACTXUCASTRETRY = 0x0104;
+       <summary>
+       </summary>
+       public const ushort ATTR_MACTXUCASTRETRY = 0x0104;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_MACTXUCASTFAIL = 0x0105;
+       <summary>
+       </summary>
+       public const ushort ATTR_MACTXUCASTFAIL = 0x0105;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSRXBCAST = 0x0106;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSRXBCAST = 0x0106;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSTXBCAST = 0x0107;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSTXBCAST = 0x0107;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSRXUCAST = 0x0108;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSRXUCAST = 0x0108;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSTXUCASTSUCCESS = 0x0109;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSTXUCASTSUCCESS = 0x0109;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSTXUCASTRETRY = 0x010A;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSTXUCASTRETRY = 0x010A;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSTXUCASTFAIL = 0x010B;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSTXUCASTFAIL = 0x010B;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_ROUTEDISCINITIATED = 0x010C;
+       <summary>
+       </summary>
+       public const ushort ATTR_ROUTEDISCINITIATED = 0x010C;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_NEIGHBORADDED = 0x010D;
+       <summary>
+       </summary>
+       public const ushort ATTR_NEIGHBORADDED = 0x010D;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_NEIGHBORREMOVED = 0x010E;
+       <summary>
+       </summary>
+       public const ushort ATTR_NEIGHBORREMOVED = 0x010E;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_NEIGHBORSTALE = 0x010F;
+       <summary>
+       </summary>
+       public const ushort ATTR_NEIGHBORSTALE = 0x010F;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_JOININDICATION = 0x0110;
+       <summary>
+       </summary>
+       public const ushort ATTR_JOININDICATION = 0x0110;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_CHILDMOVED = 0x0111;
+       <summary>
+       </summary>
+       public const ushort ATTR_CHILDMOVED = 0x0111;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_NWKFCFAILURE = 0x0112;
+       <summary>
+       </summary>
+       public const ushort ATTR_NWKFCFAILURE = 0x0112;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSFCFAILURE = 0x0113;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSFCFAILURE = 0x0113;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSUNAUTHORIZEDKEY = 0x0114;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSUNAUTHORIZEDKEY = 0x0114;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_NWKDECRYPTFAILURES = 0x0115;
+       <summary>
+       </summary>
+       public const ushort ATTR_NWKDECRYPTFAILURES = 0x0115;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_APSDECRYPTFAILURES = 0x0116;
+       <summary>
+       </summary>
+       public const ushort ATTR_APSDECRYPTFAILURES = 0x0116;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_PACKETBUFFERALLOCATEFAILURES = 0x0117;
+       <summary>
+       </summary>
+       public const ushort ATTR_PACKETBUFFERALLOCATEFAILURES = 0x0117;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_RELAYEDUCAST = 0x0118;
+       <summary>
+       </summary>
+       public const ushort ATTR_RELAYEDUCAST = 0x0118;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_PHYTOMACQUEUELIMITREACHED = 0x0119;
+       <summary>
+       </summary>
+       public const ushort ATTR_PHYTOMACQUEUELIMITREACHED = 0x0119;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_PACKETVALIDATEDROPCOUNT = 0x011A;
+       <summary>
+       </summary>
+       public const ushort ATTR_PACKETVALIDATEDROPCOUNT = 0x011A;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_AVERAGEMACRETRYPERAPSMESSAGESENT = 0x011B;
+       <summary>
+       </summary>
+       public const ushort ATTR_AVERAGEMACRETRYPERAPSMESSAGESENT = 0x011B;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_LASTMESSAGELQI = 0x011C;
+       <summary>
+       </summary>
+       public const ushort ATTR_LASTMESSAGELQI = 0x011C;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_LASTMESSAGERSSI = 0x011D;
+       <summary>
+       </summary>
+       public const ushort ATTR_LASTMESSAGERSSI = 0x011D;
 
 
        // Attribute initialisation
@@ -193,40 +193,39 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Diagnostics cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Diagnostics cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclDiagnosticsCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Get the MacRxBcast attribute [attribute ID256].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacRxBcast attribute [attribute ID256].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacRxBcastAsync()
        {
            return Read(_attributes[ATTR_MACRXBCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacRxBcast attribute [attribute ID256].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacRxBcast attribute [attribute ID256].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetMacRxBcast(long refreshPeriod)
        {
            if (_attributes[ATTR_MACRXBCAST].IsLastValueCurrent(refreshPeriod))
@@ -238,29 +237,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MacTxBcast attribute [attribute ID257].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacTxBcast attribute [attribute ID257].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacTxBcastAsync()
        {
            return Read(_attributes[ATTR_MACTXBCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacTxBcast attribute [attribute ID257].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacTxBcast attribute [attribute ID257].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetMacTxBcast(long refreshPeriod)
        {
            if (_attributes[ATTR_MACTXBCAST].IsLastValueCurrent(refreshPeriod))
@@ -272,29 +271,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MacRxUcast attribute [attribute ID258].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacRxUcast attribute [attribute ID258].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacRxUcastAsync()
        {
            return Read(_attributes[ATTR_MACRXUCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacRxUcast attribute [attribute ID258].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacRxUcast attribute [attribute ID258].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetMacRxUcast(long refreshPeriod)
        {
            if (_attributes[ATTR_MACRXUCAST].IsLastValueCurrent(refreshPeriod))
@@ -306,29 +305,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MacTxUcast attribute [attribute ID259].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacTxUcast attribute [attribute ID259].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacTxUcastAsync()
        {
            return Read(_attributes[ATTR_MACTXUCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacTxUcast attribute [attribute ID259].
-       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacTxUcast attribute [attribute ID259].
+       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetMacTxUcast(long refreshPeriod)
        {
            if (_attributes[ATTR_MACTXUCAST].IsLastValueCurrent(refreshPeriod))
@@ -340,29 +339,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MacTxUcastRetry attribute [attribute ID260].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacTxUcastRetry attribute [attribute ID260].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacTxUcastRetryAsync()
        {
            return Read(_attributes[ATTR_MACTXUCASTRETRY]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacTxUcastRetry attribute [attribute ID260].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacTxUcastRetry attribute [attribute ID260].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetMacTxUcastRetry(long refreshPeriod)
        {
            if (_attributes[ATTR_MACTXUCASTRETRY].IsLastValueCurrent(refreshPeriod))
@@ -374,29 +373,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the MacTxUcastFail attribute [attribute ID261].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MacTxUcastFail attribute [attribute ID261].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMacTxUcastFailAsync()
        {
            return Read(_attributes[ATTR_MACTXUCASTFAIL]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MacTxUcastFail attribute [attribute ID261].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MacTxUcastFail attribute [attribute ID261].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetMacTxUcastFail(long refreshPeriod)
        {
            if (_attributes[ATTR_MACTXUCASTFAIL].IsLastValueCurrent(refreshPeriod))
@@ -408,29 +407,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSRxBcast attribute [attribute ID262].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSRxBcast attribute [attribute ID262].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSRxBcastAsync()
        {
            return Read(_attributes[ATTR_APSRXBCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSRxBcast attribute [attribute ID262].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSRxBcast attribute [attribute ID262].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSRxBcast(long refreshPeriod)
        {
            if (_attributes[ATTR_APSRXBCAST].IsLastValueCurrent(refreshPeriod))
@@ -442,29 +441,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSTxBcast attribute [attribute ID263].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSTxBcast attribute [attribute ID263].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSTxBcastAsync()
        {
            return Read(_attributes[ATTR_APSTXBCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSTxBcast attribute [attribute ID263].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSTxBcast attribute [attribute ID263].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSTxBcast(long refreshPeriod)
        {
            if (_attributes[ATTR_APSTXBCAST].IsLastValueCurrent(refreshPeriod))
@@ -476,29 +475,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSRxUcast attribute [attribute ID264].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSRxUcast attribute [attribute ID264].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSRxUcastAsync()
        {
            return Read(_attributes[ATTR_APSRXUCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSRxUcast attribute [attribute ID264].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSRxUcast attribute [attribute ID264].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSRxUcast(long refreshPeriod)
        {
            if (_attributes[ATTR_APSRXUCAST].IsLastValueCurrent(refreshPeriod))
@@ -510,29 +509,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSTxUcastSuccess attribute [attribute ID265].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSTxUcastSuccess attribute [attribute ID265].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSTxUcastSuccessAsync()
        {
            return Read(_attributes[ATTR_APSTXUCASTSUCCESS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSTxUcastSuccess attribute [attribute ID265].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSTxUcastSuccess attribute [attribute ID265].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSTxUcastSuccess(long refreshPeriod)
        {
            if (_attributes[ATTR_APSTXUCASTSUCCESS].IsLastValueCurrent(refreshPeriod))
@@ -544,29 +543,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSTxUcastRetry attribute [attribute ID266].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSTxUcastRetry attribute [attribute ID266].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSTxUcastRetryAsync()
        {
            return Read(_attributes[ATTR_APSTXUCASTRETRY]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSTxUcastRetry attribute [attribute ID266].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSTxUcastRetry attribute [attribute ID266].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSTxUcastRetry(long refreshPeriod)
        {
            if (_attributes[ATTR_APSTXUCASTRETRY].IsLastValueCurrent(refreshPeriod))
@@ -578,29 +577,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSTxUcastFail attribute [attribute ID267].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSTxUcastFail attribute [attribute ID267].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSTxUcastFailAsync()
        {
            return Read(_attributes[ATTR_APSTXUCASTFAIL]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSTxUcastFail attribute [attribute ID267].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSTxUcastFail attribute [attribute ID267].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSTxUcastFail(long refreshPeriod)
        {
            if (_attributes[ATTR_APSTXUCASTFAIL].IsLastValueCurrent(refreshPeriod))
@@ -612,29 +611,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the RouteDiscInitiated attribute [attribute ID268].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the RouteDiscInitiated attribute [attribute ID268].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetRouteDiscInitiatedAsync()
        {
            return Read(_attributes[ATTR_ROUTEDISCINITIATED]);
        }
 
-       /// <summary>
-       /// Synchronously Get the RouteDiscInitiated attribute [attribute ID268].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the RouteDiscInitiated attribute [attribute ID268].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetRouteDiscInitiated(long refreshPeriod)
        {
            if (_attributes[ATTR_ROUTEDISCINITIATED].IsLastValueCurrent(refreshPeriod))
@@ -646,29 +645,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NeighborAdded attribute [attribute ID269].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NeighborAdded attribute [attribute ID269].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNeighborAddedAsync()
        {
            return Read(_attributes[ATTR_NEIGHBORADDED]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NeighborAdded attribute [attribute ID269].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NeighborAdded attribute [attribute ID269].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNeighborAdded(long refreshPeriod)
        {
            if (_attributes[ATTR_NEIGHBORADDED].IsLastValueCurrent(refreshPeriod))
@@ -680,29 +679,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NeighborRemoved attribute [attribute ID270].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NeighborRemoved attribute [attribute ID270].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNeighborRemovedAsync()
        {
            return Read(_attributes[ATTR_NEIGHBORREMOVED]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NeighborRemoved attribute [attribute ID270].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NeighborRemoved attribute [attribute ID270].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNeighborRemoved(long refreshPeriod)
        {
            if (_attributes[ATTR_NEIGHBORREMOVED].IsLastValueCurrent(refreshPeriod))
@@ -714,29 +713,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NeighborStale attribute [attribute ID271].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NeighborStale attribute [attribute ID271].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNeighborStaleAsync()
        {
            return Read(_attributes[ATTR_NEIGHBORSTALE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NeighborStale attribute [attribute ID271].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NeighborStale attribute [attribute ID271].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNeighborStale(long refreshPeriod)
        {
            if (_attributes[ATTR_NEIGHBORSTALE].IsLastValueCurrent(refreshPeriod))
@@ -748,29 +747,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the JoinIndication attribute [attribute ID272].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the JoinIndication attribute [attribute ID272].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetJoinIndicationAsync()
        {
            return Read(_attributes[ATTR_JOININDICATION]);
        }
 
-       /// <summary>
-       /// Synchronously Get the JoinIndication attribute [attribute ID272].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the JoinIndication attribute [attribute ID272].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetJoinIndication(long refreshPeriod)
        {
            if (_attributes[ATTR_JOININDICATION].IsLastValueCurrent(refreshPeriod))
@@ -782,29 +781,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ChildMoved attribute [attribute ID273].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ChildMoved attribute [attribute ID273].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetChildMovedAsync()
        {
            return Read(_attributes[ATTR_CHILDMOVED]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ChildMoved attribute [attribute ID273].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ChildMoved attribute [attribute ID273].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetChildMoved(long refreshPeriod)
        {
            if (_attributes[ATTR_CHILDMOVED].IsLastValueCurrent(refreshPeriod))
@@ -816,29 +815,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NWKFCFailure attribute [attribute ID274].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NWKFCFailure attribute [attribute ID274].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNWKFCFailureAsync()
        {
            return Read(_attributes[ATTR_NWKFCFAILURE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NWKFCFailure attribute [attribute ID274].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NWKFCFailure attribute [attribute ID274].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNWKFCFailure(long refreshPeriod)
        {
            if (_attributes[ATTR_NWKFCFAILURE].IsLastValueCurrent(refreshPeriod))
@@ -850,29 +849,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSFCFailure attribute [attribute ID275].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSFCFailure attribute [attribute ID275].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSFCFailureAsync()
        {
            return Read(_attributes[ATTR_APSFCFAILURE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSFCFailure attribute [attribute ID275].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSFCFailure attribute [attribute ID275].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSFCFailure(long refreshPeriod)
        {
            if (_attributes[ATTR_APSFCFAILURE].IsLastValueCurrent(refreshPeriod))
@@ -884,29 +883,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSUnauthorizedKey attribute [attribute ID276].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSUnauthorizedKey attribute [attribute ID276].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSUnauthorizedKeyAsync()
        {
            return Read(_attributes[ATTR_APSUNAUTHORIZEDKEY]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSUnauthorizedKey attribute [attribute ID276].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSUnauthorizedKey attribute [attribute ID276].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSUnauthorizedKey(long refreshPeriod)
        {
            if (_attributes[ATTR_APSUNAUTHORIZEDKEY].IsLastValueCurrent(refreshPeriod))
@@ -918,29 +917,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NWKDecryptFailures attribute [attribute ID277].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NWKDecryptFailures attribute [attribute ID277].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNWKDecryptFailuresAsync()
        {
            return Read(_attributes[ATTR_NWKDECRYPTFAILURES]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NWKDecryptFailures attribute [attribute ID277].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NWKDecryptFailures attribute [attribute ID277].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNWKDecryptFailures(long refreshPeriod)
        {
            if (_attributes[ATTR_NWKDECRYPTFAILURES].IsLastValueCurrent(refreshPeriod))
@@ -952,29 +951,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the APSDecryptFailures attribute [attribute ID278].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the APSDecryptFailures attribute [attribute ID278].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAPSDecryptFailuresAsync()
        {
            return Read(_attributes[ATTR_APSDECRYPTFAILURES]);
        }
 
-       /// <summary>
-       /// Synchronously Get the APSDecryptFailures attribute [attribute ID278].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the APSDecryptFailures attribute [attribute ID278].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAPSDecryptFailures(long refreshPeriod)
        {
            if (_attributes[ATTR_APSDECRYPTFAILURES].IsLastValueCurrent(refreshPeriod))
@@ -986,29 +985,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the PacketBufferAllocateFailures attribute [attribute ID279].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the PacketBufferAllocateFailures attribute [attribute ID279].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPacketBufferAllocateFailuresAsync()
        {
            return Read(_attributes[ATTR_PACKETBUFFERALLOCATEFAILURES]);
        }
 
-       /// <summary>
-       /// Synchronously Get the PacketBufferAllocateFailures attribute [attribute ID279].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the PacketBufferAllocateFailures attribute [attribute ID279].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetPacketBufferAllocateFailures(long refreshPeriod)
        {
            if (_attributes[ATTR_PACKETBUFFERALLOCATEFAILURES].IsLastValueCurrent(refreshPeriod))
@@ -1020,29 +1019,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the RelayedUcast attribute [attribute ID280].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the RelayedUcast attribute [attribute ID280].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetRelayedUcastAsync()
        {
            return Read(_attributes[ATTR_RELAYEDUCAST]);
        }
 
-       /// <summary>
-       /// Synchronously Get the RelayedUcast attribute [attribute ID280].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the RelayedUcast attribute [attribute ID280].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetRelayedUcast(long refreshPeriod)
        {
            if (_attributes[ATTR_RELAYEDUCAST].IsLastValueCurrent(refreshPeriod))
@@ -1054,29 +1053,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the PhytoMACqueuelimitreached attribute [attribute ID281].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the PhytoMACqueuelimitreached attribute [attribute ID281].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPhytoMACqueuelimitreachedAsync()
        {
            return Read(_attributes[ATTR_PHYTOMACQUEUELIMITREACHED]);
        }
 
-       /// <summary>
-       /// Synchronously Get the PhytoMACqueuelimitreached attribute [attribute ID281].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the PhytoMACqueuelimitreached attribute [attribute ID281].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetPhytoMACqueuelimitreached(long refreshPeriod)
        {
            if (_attributes[ATTR_PHYTOMACQUEUELIMITREACHED].IsLastValueCurrent(refreshPeriod))
@@ -1088,29 +1087,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the PacketValidatedropcount attribute [attribute ID282].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the PacketValidatedropcount attribute [attribute ID282].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPacketValidatedropcountAsync()
        {
            return Read(_attributes[ATTR_PACKETVALIDATEDROPCOUNT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the PacketValidatedropcount attribute [attribute ID282].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the PacketValidatedropcount attribute [attribute ID282].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetPacketValidatedropcount(long refreshPeriod)
        {
            if (_attributes[ATTR_PACKETVALIDATEDROPCOUNT].IsLastValueCurrent(refreshPeriod))
@@ -1122,29 +1121,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the AverageMACRetryPerAPSMessageSent attribute [attribute ID283].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the AverageMACRetryPerAPSMessageSent attribute [attribute ID283].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetAverageMACRetryPerAPSMessageSentAsync()
        {
            return Read(_attributes[ATTR_AVERAGEMACRETRYPERAPSMESSAGESENT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the AverageMACRetryPerAPSMessageSent attribute [attribute ID283].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the AverageMACRetryPerAPSMessageSent attribute [attribute ID283].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetAverageMACRetryPerAPSMessageSent(long refreshPeriod)
        {
            if (_attributes[ATTR_AVERAGEMACRETRYPERAPSMESSAGESENT].IsLastValueCurrent(refreshPeriod))
@@ -1156,29 +1155,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LastMessageLQI attribute [attribute ID284].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LastMessageLQI attribute [attribute ID284].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLastMessageLQIAsync()
        {
            return Read(_attributes[ATTR_LASTMESSAGELQI]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LastMessageLQI attribute [attribute ID284].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LastMessageLQI attribute [attribute ID284].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetLastMessageLQI(long refreshPeriod)
        {
            if (_attributes[ATTR_LASTMESSAGELQI].IsLastValueCurrent(refreshPeriod))
@@ -1190,29 +1189,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LastMessageRSSI attribute [attribute ID285].
-       ///
-       /// The attribute is of type sbyte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LastMessageRSSI attribute [attribute ID285].
+       
+        The attribute is of type sbyte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLastMessageRSSIAsync()
        {
            return Read(_attributes[ATTR_LASTMESSAGERSSI]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LastMessageRSSI attribute [attribute ID285].
-       ///
-       /// The attribute is of type sbyte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LastMessageRSSI attribute [attribute ID285].
+       
+        The attribute is of type sbyte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public sbyte GetLastMessageRSSI(long refreshPeriod)
        {
            if (_attributes[ATTR_LASTMESSAGERSSI].IsLastValueCurrent(refreshPeriod))

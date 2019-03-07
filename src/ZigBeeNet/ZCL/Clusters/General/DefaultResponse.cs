@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/// <summary>
- /// Default Response value object class.
- ///
- /// Cluster: General. Command is sentTO the server.
- /// This command is a generic command used across the profile.
- ///
- /// The default response command is generated when a device receives a unicast /// command, there is no other relevant response specified for the command, and /// either an error results or the Disable default response bit of its Frame control field /// is set to 0. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Default Response value object class.
+ 
+ Cluster: General. Command is sentTO the server.
+  This command is a generic command used across the profile.
+ 
+ * The default response command is generated when a device receives a unicast * command, there is no other relevant response specified for the command, and * either an error results or the Disable default response bit of its Frame control field * is set to 0. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DefaultResponse : ZclCommand
        {
-           /// <summary>
-           /// Command identifier command message field.
-           /// </summary>
+           <summary>
+            Command identifier command message field.
+           </summary>
            public byte CommandIdentifier { get; set; }
 
-           /// <summary>
-           /// Status code command message field.
-           /// </summary>
+           <summary>
+            Status code command message field.
+           </summary>
            public ZclStatus StatusCode { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public DefaultResponse()
            {
                GenericCommand = true;

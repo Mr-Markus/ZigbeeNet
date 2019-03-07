@@ -7,28 +7,28 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/// <summary>
- /// Arm Response value object class.
- ///
- /// Cluster: IAS ACE. Command is sentFROM the server.
- /// This command is a specific command used for the IAS ACE cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Arm Response value object class.
+ 
+ Cluster: IAS ACE. Command is sentFROM the server.
+  This command is a specific command used for the IAS ACE cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class ArmResponse : ZclCommand
        {
-           /// <summary>
-           /// Arm Notification command message field.
-           /// </summary>
+           <summary>
+            Arm Notification command message field.
+           </summary>
            public byte ArmNotification { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ArmResponse()
            {
                GenericCommand = false;

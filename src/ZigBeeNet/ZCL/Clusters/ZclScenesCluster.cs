@@ -12,50 +12,50 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// Scenescluster implementation (Cluster ID 0x0005).
- ///
- /// The scenes cluster provides attributes and commands for setting up and recalling /// scenes. Each scene corresponds to a set of stored values of specified attributes for /// one or more clusters on the same end point as the scenes cluster. /// <p> /// In most cases scenes are associated with a particular group ID. Scenes may also /// exist without a group, in which case the value 0x0000 replaces the group ID. Note /// that extra care is required in these cases to avoid a scene ID collision, and that /// commands related to scenes without a group may only be unicast, i.e.: they may /// not be multicast or broadcast. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Scenescluster implementation (Cluster ID 0x0005).
+ 
+ * The scenes cluster provides attributes and commands for setting up and recalling * scenes. Each scene corresponds to a set of stored values of specified attributes for * one or more clusters on the same end point as the scenes cluster. * <p> * In most cases scenes are associated with a particular group ID. Scenes may also * exist without a group, in which case the value 0x0000 replaces the group ID. Note * that extra care is required in these cases to avoid a scene ID collision, and that * commands related to scenes without a group may only be unicast, i.e.: they may * not be multicast or broadcast. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclScenesCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0005;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0005;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Scenes";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Scenes";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// The SceneCount attribute specifies the number of scenes currently in the device's        /// scene table.       /// </summary>
-       public static ushort ATTR_SCENECOUNT = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * The SceneCount attribute specifies the number of scenes currently in the device's        * scene table.       </summary>
+       public const ushort ATTR_SCENECOUNT = 0x0000;
 
-       /// <summary>
-        /// The CurrentScene attribute holds the Scene ID of the scene last invoked.       /// </summary>
-       public static ushort ATTR_CURRENTSCENE = 0x0001;
+       <summary>
+        * The CurrentScene attribute holds the Scene ID of the scene last invoked.       </summary>
+       public const ushort ATTR_CURRENTSCENE = 0x0001;
 
-       /// <summary>
-        /// The CurrentGroup attribute holds the Group ID of the scene last invoked, or        /// 0x0000 if the scene last invoked is not associated with a group.       /// </summary>
-       public static ushort ATTR_CURRENTGROUP = 0x0002;
+       <summary>
+        * The CurrentGroup attribute holds the Group ID of the scene last invoked, or        * 0x0000 if the scene last invoked is not associated with a group.       </summary>
+       public const ushort ATTR_CURRENTGROUP = 0x0002;
 
-       /// <summary>
-        /// The SceneValid attribute indicates whether the state of the device corresponds to        /// that associated with the CurrentScene and CurrentGroup attributes. TRUE        /// indicates that these attributes are valid, FALSE indicates that they are not valid.        /// <p>        /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a        /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a        /// scene is stored or recalled, the state of the device is modified, this attribute is set to        /// FALSE.       /// </summary>
-       public static ushort ATTR_SCENEVALID = 0x0003;
+       <summary>
+        * The SceneValid attribute indicates whether the state of the device corresponds to        * that associated with the CurrentScene and CurrentGroup attributes. TRUE        * indicates that these attributes are valid, FALSE indicates that they are not valid.        * <p>        * Before a scene has been stored or recalled, this attribute is set to FALSE. After a        * successful Store Scene or Recall Scene command it is set to TRUE. If, after a        * scene is stored or recalled, the state of the device is modified, this attribute is set to        * FALSE.       </summary>
+       public const ushort ATTR_SCENEVALID = 0x0003;
 
-       /// <summary>
-        /// The most significant bit of the NameSupport attribute indicates whether or not        /// scene names are supported. A value of 1 indicates that they are supported, and a        /// value of 0 indicates that they are not supported.       /// </summary>
-       public static ushort ATTR_NAMESUPPORT = 0x0004;
+       <summary>
+        * The most significant bit of the NameSupport attribute indicates whether or not        * scene names are supported. A value of 1 indicates that they are supported, and a        * value of 0 indicates that they are not supported.       </summary>
+       public const ushort ATTR_NAMESUPPORT = 0x0004;
 
-       /// <summary>
-        /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address        /// of the device that last configured the scene table.        /// <p>        /// The value 0xffffffffffffffff indicates that the device has not been configured, or        /// that the address of the device that last configured the scenes cluster is not known.       /// </summary>
-       public static ushort ATTR_LASTCONFIGUREDBY = 0x0005;
+       <summary>
+        * The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address        * of the device that last configured the scene table.        * <p>        * The value 0xffffffffffffffff indicates that the device has not been configured, or        * that the address of the device that last configured the scenes cluster is not known.       </summary>
+       public const ushort ATTR_LASTCONFIGUREDBY = 0x0005;
 
 
        // Attribute initialisation
@@ -75,42 +75,41 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Scenes cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Scenes cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclScenesCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Get the SceneCount attribute [attribute ID0].
-       ///
-       /// The SceneCount attribute specifies the number of scenes currently in the device's       /// scene table.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the SceneCount attribute [attribute ID0].
+       
+       * The SceneCount attribute specifies the number of scenes currently in the device's       * scene table.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetSceneCountAsync()
        {
            return Read(_attributes[ATTR_SCENECOUNT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the SceneCount attribute [attribute ID0].
-       ///
-       /// The SceneCount attribute specifies the number of scenes currently in the device's       /// scene table.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the SceneCount attribute [attribute ID0].
+       
+       * The SceneCount attribute specifies the number of scenes currently in the device's       * scene table.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetSceneCount(long refreshPeriod)
        {
            if (_attributes[ATTR_SCENECOUNT].IsLastValueCurrent(refreshPeriod))
@@ -122,31 +121,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the CurrentScene attribute [attribute ID1].
-       ///
-       /// The CurrentScene attribute holds the Scene ID of the scene last invoked.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the CurrentScene attribute [attribute ID1].
+       
+       * The CurrentScene attribute holds the Scene ID of the scene last invoked.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCurrentSceneAsync()
        {
            return Read(_attributes[ATTR_CURRENTSCENE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the CurrentScene attribute [attribute ID1].
-       ///
-       /// The CurrentScene attribute holds the Scene ID of the scene last invoked.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the CurrentScene attribute [attribute ID1].
+       
+       * The CurrentScene attribute holds the Scene ID of the scene last invoked.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetCurrentScene(long refreshPeriod)
        {
            if (_attributes[ATTR_CURRENTSCENE].IsLastValueCurrent(refreshPeriod))
@@ -158,31 +157,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the CurrentGroup attribute [attribute ID2].
-       ///
-       /// The CurrentGroup attribute holds the Group ID of the scene last invoked, or       /// 0x0000 if the scene last invoked is not associated with a group.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the CurrentGroup attribute [attribute ID2].
+       
+       * The CurrentGroup attribute holds the Group ID of the scene last invoked, or       * 0x0000 if the scene last invoked is not associated with a group.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCurrentGroupAsync()
        {
            return Read(_attributes[ATTR_CURRENTGROUP]);
        }
 
-       /// <summary>
-       /// Synchronously Get the CurrentGroup attribute [attribute ID2].
-       ///
-       /// The CurrentGroup attribute holds the Group ID of the scene last invoked, or       /// 0x0000 if the scene last invoked is not associated with a group.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the CurrentGroup attribute [attribute ID2].
+       
+       * The CurrentGroup attribute holds the Group ID of the scene last invoked, or       * 0x0000 if the scene last invoked is not associated with a group.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetCurrentGroup(long refreshPeriod)
        {
            if (_attributes[ATTR_CURRENTGROUP].IsLastValueCurrent(refreshPeriod))
@@ -194,31 +193,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the SceneValid attribute [attribute ID3].
-       ///
-       /// The SceneValid attribute indicates whether the state of the device corresponds to       /// that associated with the CurrentScene and CurrentGroup attributes. TRUE       /// indicates that these attributes are valid, FALSE indicates that they are not valid.       /// <p>       /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a       /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a       /// scene is stored or recalled, the state of the device is modified, this attribute is set to       /// FALSE.       ///
-       /// The attribute is of type bool.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the SceneValid attribute [attribute ID3].
+       
+       * The SceneValid attribute indicates whether the state of the device corresponds to       * that associated with the CurrentScene and CurrentGroup attributes. TRUE       * indicates that these attributes are valid, FALSE indicates that they are not valid.       * <p>       * Before a scene has been stored or recalled, this attribute is set to FALSE. After a       * successful Store Scene or Recall Scene command it is set to TRUE. If, after a       * scene is stored or recalled, the state of the device is modified, this attribute is set to       * FALSE.       
+        The attribute is of type bool.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetSceneValidAsync()
        {
            return Read(_attributes[ATTR_SCENEVALID]);
        }
 
-       /// <summary>
-       /// Synchronously Get the SceneValid attribute [attribute ID3].
-       ///
-       /// The SceneValid attribute indicates whether the state of the device corresponds to       /// that associated with the CurrentScene and CurrentGroup attributes. TRUE       /// indicates that these attributes are valid, FALSE indicates that they are not valid.       /// <p>       /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a       /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a       /// scene is stored or recalled, the state of the device is modified, this attribute is set to       /// FALSE.       ///
-       /// The attribute is of type bool.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the SceneValid attribute [attribute ID3].
+       
+       * The SceneValid attribute indicates whether the state of the device corresponds to       * that associated with the CurrentScene and CurrentGroup attributes. TRUE       * indicates that these attributes are valid, FALSE indicates that they are not valid.       * <p>       * Before a scene has been stored or recalled, this attribute is set to FALSE. After a       * successful Store Scene or Recall Scene command it is set to TRUE. If, after a       * scene is stored or recalled, the state of the device is modified, this attribute is set to       * FALSE.       
+        The attribute is of type bool.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public bool GetSceneValid(long refreshPeriod)
        {
            if (_attributes[ATTR_SCENEVALID].IsLastValueCurrent(refreshPeriod))
@@ -230,31 +229,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NameSupport attribute [attribute ID4].
-       ///
-       /// The most significant bit of the NameSupport attribute indicates whether or not       /// scene names are supported. A value of 1 indicates that they are supported, and a       /// value of 0 indicates that they are not supported.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NameSupport attribute [attribute ID4].
+       
+       * The most significant bit of the NameSupport attribute indicates whether or not       * scene names are supported. A value of 1 indicates that they are supported, and a       * value of 0 indicates that they are not supported.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNameSupportAsync()
        {
            return Read(_attributes[ATTR_NAMESUPPORT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NameSupport attribute [attribute ID4].
-       ///
-       /// The most significant bit of the NameSupport attribute indicates whether or not       /// scene names are supported. A value of 1 indicates that they are supported, and a       /// value of 0 indicates that they are not supported.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NameSupport attribute [attribute ID4].
+       
+       * The most significant bit of the NameSupport attribute indicates whether or not       * scene names are supported. A value of 1 indicates that they are supported, and a       * value of 0 indicates that they are not supported.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetNameSupport(long refreshPeriod)
        {
            if (_attributes[ATTR_NAMESUPPORT].IsLastValueCurrent(refreshPeriod))
@@ -266,31 +265,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LastConfiguredBy attribute [attribute ID5].
-       ///
-       /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address       /// of the device that last configured the scene table.       /// <p>       /// The value 0xffffffffffffffff indicates that the device has not been configured, or       /// that the address of the device that last configured the scenes cluster is not known.       ///
-       /// The attribute is of type IeeeAddress.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LastConfiguredBy attribute [attribute ID5].
+       
+       * The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address       * of the device that last configured the scene table.       * <p>       * The value 0xffffffffffffffff indicates that the device has not been configured, or       * that the address of the device that last configured the scenes cluster is not known.       
+        The attribute is of type IeeeAddress.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLastConfiguredByAsync()
        {
            return Read(_attributes[ATTR_LASTCONFIGUREDBY]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LastConfiguredBy attribute [attribute ID5].
-       ///
-       /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address       /// of the device that last configured the scene table.       /// <p>       /// The value 0xffffffffffffffff indicates that the device has not been configured, or       /// that the address of the device that last configured the scenes cluster is not known.       ///
-       /// The attribute is of type IeeeAddress.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LastConfiguredBy attribute [attribute ID5].
+       
+       * The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address       * of the device that last configured the scene table.       * <p>       * The value 0xffffffffffffffff indicates that the device has not been configured, or       * that the address of the device that last configured the scenes cluster is not known.       
+        The attribute is of type IeeeAddress.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public IeeeAddress GetLastConfiguredBy(long refreshPeriod)
        {
            if (_attributes[ATTR_LASTCONFIGUREDBY].IsLastValueCurrent(refreshPeriod))
@@ -302,17 +301,17 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// The Add Scene Command
-       ///
-       /// The Add Scene command shall be addressed to a single device (not a group).       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @param transitionTime {@link ushort} Transition time
-       /// @param sceneName {@link string} Scene Name
-       /// @param extensionFieldSets {@link List<ExtensionFieldSet>} Extension field sets
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Add Scene Command
+       
+       * The Add Scene command shall be addressed to a single device (not a group).       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <param name= transitionTime {@link ushort} Transition time</param>
+       <param name= sceneName {@link string} Scene Name</param>
+       <param name= extensionFieldSets {@link List<ExtensionFieldSet>} Extension field sets</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AddSceneCommand(ushort groupID, byte sceneID, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
        {
            AddSceneCommand command = new AddSceneCommand();
@@ -327,14 +326,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The View Scene Command
-       ///
-       /// The View Scene command shall be addressed to a single device (not a group).       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The View Scene Command
+       
+       * The View Scene command shall be addressed to a single device (not a group).       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ViewSceneCommand(ushort groupID, byte sceneID)
        {
            ViewSceneCommand command = new ViewSceneCommand();
@@ -346,14 +345,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove Scene Command
-       ///
-       /// The Remove All Scenes may be addressed to a single device or to a group.       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove Scene Command
+       
+       * The Remove All Scenes may be addressed to a single device or to a group.       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveSceneCommand(ushort groupID, byte sceneID)
        {
            RemoveSceneCommand command = new RemoveSceneCommand();
@@ -365,13 +364,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove All Scenes Command
-       ///
-       /// The Remove All Scenes may be addressed to a single device or to a group.       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove All Scenes Command
+       
+       * The Remove All Scenes may be addressed to a single device or to a group.       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveAllScenesCommand(ushort groupID)
        {
            RemoveAllScenesCommand command = new RemoveAllScenesCommand();
@@ -382,14 +381,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Store Scene Command
-       ///
-       /// The Store Scene command may be addressed to a single device or to a group.       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Store Scene Command
+       
+       * The Store Scene command may be addressed to a single device or to a group.       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> StoreSceneCommand(ushort groupID, byte sceneID)
        {
            StoreSceneCommand command = new StoreSceneCommand();
@@ -401,14 +400,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Recall Scene Command
-       ///
-       /// The Recall Scene command may be addressed to a single device or to a group.       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Recall Scene Command
+       
+       * The Recall Scene command may be addressed to a single device or to a group.       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RecallSceneCommand(ushort groupID, byte sceneID)
        {
            RecallSceneCommand command = new RecallSceneCommand();
@@ -420,13 +419,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Scene Membership Command
-       ///
-       /// The Get Scene Membership command can be used to find an unused scene       /// number within the group when no commissioning tool is in the network, or for a       /// commissioning tool to get used scenes for a group on a single device or on all       /// devices in the group.       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Scene Membership Command
+       
+       * The Get Scene Membership command can be used to find an unused scene       * number within the group when no commissioning tool is in the network, or for a       * commissioning tool to get used scenes for a group on a single device or on all       * devices in the group.       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetSceneMembershipCommand(ushort groupID)
        {
            GetSceneMembershipCommand command = new GetSceneMembershipCommand();
@@ -437,14 +436,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Add Scene Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Add Scene Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AddSceneResponse(byte status, ushort groupID, byte sceneID)
        {
            AddSceneResponse command = new AddSceneResponse();
@@ -457,17 +456,17 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The View Scene Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @param transitionTime {@link ushort} Transition time
-       /// @param sceneName {@link string} Scene Name
-       /// @param extensionFieldSets {@link List<ExtensionFieldSet>} Extension field sets
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The View Scene Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <param name= transitionTime {@link ushort} Transition time</param>
+       <param name= sceneName {@link string} Scene Name</param>
+       <param name= extensionFieldSets {@link List<ExtensionFieldSet>} Extension field sets</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ViewSceneResponse(byte status, ushort groupID, byte sceneID, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
        {
            ViewSceneResponse command = new ViewSceneResponse();
@@ -483,14 +482,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove Scene Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove Scene Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveSceneResponse(byte status, ushort groupID, byte sceneID)
        {
            RemoveSceneResponse command = new RemoveSceneResponse();
@@ -503,13 +502,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove All Scenes Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove All Scenes Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveAllScenesResponse(byte status, ushort groupID)
        {
            RemoveAllScenesResponse command = new RemoveAllScenesResponse();
@@ -521,14 +520,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Store Scene Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneID {@link byte} Scene ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Store Scene Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneID {@link byte} Scene ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> StoreSceneResponse(byte status, ushort groupID, byte sceneID)
        {
            StoreSceneResponse command = new StoreSceneResponse();
@@ -541,16 +540,16 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Scene Membership Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param capacity {@link byte} Capacity
-       /// @param groupID {@link ushort} Group ID
-       /// @param sceneCount {@link byte} Scene count
-       /// @param sceneList {@link List<byte>} Scene list
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Scene Membership Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= capacity {@link byte} Capacity</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= sceneCount {@link byte} Scene count</param>
+       <param name= sceneList {@link List<byte>} Scene list</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetSceneMembershipResponse(byte status, byte capacity, ushort groupID, byte sceneCount, List<byte> sceneList)
        {
            GetSceneMembershipResponse command = new GetSceneMembershipResponse();

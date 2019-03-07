@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Groups;
 
-/// <summary>
- /// Add Group Command value object class.
- ///
- /// Cluster: Groups. Command is sentTO the server.
- /// This command is a specific command used for the Groups cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Add Group Command value object class.
+ 
+ Cluster: Groups. Command is sentTO the server.
+  This command is a specific command used for the Groups cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Groups
 {
        public class AddGroupCommand : ZclCommand
        {
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
+           <summary>
+            Group ID command message field.
+           </summary>
            public ushort GroupID { get; set; }
 
-           /// <summary>
-           /// Group Name command message field.
-           /// </summary>
+           <summary>
+            Group Name command message field.
+           </summary>
            public string GroupName { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public AddGroupCommand()
            {
                GenericCommand = false;

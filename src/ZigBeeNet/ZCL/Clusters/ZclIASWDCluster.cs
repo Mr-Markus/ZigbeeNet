@@ -12,42 +12,42 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASWD;
 
-/// <summary>
- /// IAS WDcluster implementation (Cluster ID 0x0502).
- ///
- /// The IAS WD cluster provides an interface to the functionality of any Warning /// Device equipment of the IAS system. Using this cluster, a ZigBee enabled CIE /// device can access a ZigBee enabled IAS WD device and issue alarm warning /// indications (siren, strobe lighting, etc.) when a system alarm condition is detected. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+IAS WDcluster implementation (Cluster ID 0x0502).
+ 
+ * The IAS WD cluster provides an interface to the functionality of any Warning * Device equipment of the IAS system. Using this cluster, a ZigBee enabled CIE * device can access a ZigBee enabled IAS WD device and issue alarm warning * indications (siren, strobe lighting, etc.) when a system alarm condition is detected. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclIASWDCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0502;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0502;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "IAS WD";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "IAS WD";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// The MaxDuration attribute specifies the maximum time in seconds that the siren        /// will sound continuously, regardless of start/stop commands.       /// </summary>
-       public static ushort ATTR_MAXDURATION = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * The MaxDuration attribute specifies the maximum time in seconds that the siren        * will sound continuously, regardless of start/stop commands.       </summary>
+       public const ushort ATTR_MAXDURATION = 0x0000;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_ZONETYPE = 0x0001;
+       <summary>
+       </summary>
+       public const ushort ATTR_ZONETYPE = 0x0001;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_ZONESTATUS = 0x0002;
+       <summary>
+       </summary>
+       public const ushort ATTR_ZONESTATUS = 0x0002;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_IAS_CIE_ADDRESS = 0x0010;
+       <summary>
+       </summary>
+       public const ushort ATTR_IAS_CIE_ADDRESS = 0x0010;
 
 
        // Attribute initialisation
@@ -65,59 +65,58 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a IAS WD cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a IAS WD cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclIASWDCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Set the MaxDuration attribute [attribute ID0].
-       ///
-       /// The MaxDuration attribute specifies the maximum time in seconds that the siren       /// will sound continuously, regardless of start/stop commands.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param maxDuration the ushort attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the MaxDuration attribute [attribute ID0].
+       
+       * The MaxDuration attribute specifies the maximum time in seconds that the siren       * will sound continuously, regardless of start/stop commands.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= maxDuration the ushort attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetMaxDuration(object value)
        {
            return Write(_attributes[ATTR_MAXDURATION], value);
        }
 
 
-       /// <summary>
-       /// Get the MaxDuration attribute [attribute ID0].
-       ///
-       /// The MaxDuration attribute specifies the maximum time in seconds that the siren       /// will sound continuously, regardless of start/stop commands.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the MaxDuration attribute [attribute ID0].
+       
+       * The MaxDuration attribute specifies the maximum time in seconds that the siren       * will sound continuously, regardless of start/stop commands.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetMaxDurationAsync()
        {
            return Read(_attributes[ATTR_MAXDURATION]);
        }
 
-       /// <summary>
-       /// Synchronously Get the MaxDuration attribute [attribute ID0].
-       ///
-       /// The MaxDuration attribute specifies the maximum time in seconds that the siren       /// will sound continuously, regardless of start/stop commands.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the MaxDuration attribute [attribute ID0].
+       
+       * The MaxDuration attribute specifies the maximum time in seconds that the siren       * will sound continuously, regardless of start/stop commands.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetMaxDuration(long refreshPeriod)
        {
            if (_attributes[ATTR_MAXDURATION].IsLastValueCurrent(refreshPeriod))
@@ -129,29 +128,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ZoneType attribute [attribute ID1].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ZoneType attribute [attribute ID1].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetZoneTypeAsync()
        {
            return Read(_attributes[ATTR_ZONETYPE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ZoneType attribute [attribute ID1].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ZoneType attribute [attribute ID1].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetZoneType(long refreshPeriod)
        {
            if (_attributes[ATTR_ZONETYPE].IsLastValueCurrent(refreshPeriod))
@@ -163,29 +162,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ZoneStatus attribute [attribute ID2].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ZoneStatus attribute [attribute ID2].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetZoneStatusAsync()
        {
            return Read(_attributes[ATTR_ZONESTATUS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ZoneStatus attribute [attribute ID2].
-       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ZoneStatus attribute [attribute ID2].
+       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetZoneStatus(long refreshPeriod)
        {
            if (_attributes[ATTR_ZONESTATUS].IsLastValueCurrent(refreshPeriod))
@@ -197,45 +196,45 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the IAS_CIE_Address attribute [attribute ID16].
-       ///
-       /// The attribute is of type IeeeAddress.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param iASCIEAddress the IeeeAddress attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the IAS_CIE_Address attribute [attribute ID16].
+       
+        The attribute is of type IeeeAddress.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= iASCIEAddress the IeeeAddress attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetIASCIEAddress(object value)
        {
            return Write(_attributes[ATTR_IAS_CIE_ADDRESS], value);
        }
 
 
-       /// <summary>
-       /// Get the IAS_CIE_Address attribute [attribute ID16].
-       ///
-       /// The attribute is of type IeeeAddress.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the IAS_CIE_Address attribute [attribute ID16].
+       
+        The attribute is of type IeeeAddress.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetIASCIEAddressAsync()
        {
            return Read(_attributes[ATTR_IAS_CIE_ADDRESS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the IAS_CIE_Address attribute [attribute ID16].
-       ///
-       /// The attribute is of type IeeeAddress.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the IAS_CIE_Address attribute [attribute ID16].
+       
+        The attribute is of type IeeeAddress.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public IeeeAddress GetIASCIEAddress(long refreshPeriod)
        {
            if (_attributes[ATTR_IAS_CIE_ADDRESS].IsLastValueCurrent(refreshPeriod))
@@ -247,14 +246,14 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// The Start Warning Command
-       ///
-       /// This command starts the WD operation. The WD alerts the surrounding area by       /// audible (siren) and visual (strobe) signals.       /// <br>       /// A Start Warning command shall always terminate the effect of any previous       /// command that is still current.       ///
-       /// @param header {@link byte} Header
-       /// @param warningDuration {@link ushort} Warning duration
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Start Warning Command
+       
+       * This command starts the WD operation. The WD alerts the surrounding area by       * audible (siren) and visual (strobe) signals.       * <br>       * A Start Warning command shall always terminate the effect of any previous       * command that is still current.       </summary>
+       <param name= header {@link byte} Header</param>
+       <param name= warningDuration {@link ushort} Warning duration</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> StartWarningCommand(byte header, ushort warningDuration)
        {
            StartWarningCommand command = new StartWarningCommand();
@@ -266,12 +265,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Squawk Command
-       ///
-       /// @param header {@link byte} Header
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Squawk Command
+       </summary>
+       <param name= header {@link byte} Header</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SquawkCommand(byte header)
        {
            SquawkCommand command = new SquawkCommand();

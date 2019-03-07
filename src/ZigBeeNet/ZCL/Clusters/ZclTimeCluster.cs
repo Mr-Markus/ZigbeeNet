@@ -11,57 +11,57 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Timecluster implementation (Cluster ID 0x000A).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Timecluster implementation (Cluster ID 0x000A).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclTimeCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x000A;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x000A;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Time";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Time";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// The Time attribute is 32-bits in length and holds the time value of a real time        /// clock. This attribute has data type UTCTime, but note that it may not actually be        /// synchronised to UTC - see discussion of the TimeStatus attribute below.        /// <p>        /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this        /// attribute shall set the real time clock to the written value, otherwise it cannot be        /// written. The value 0xffffffff indicates an invalid time.       /// </summary>
-       public static ushort ATTR_TIME = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * The Time attribute is 32-bits in length and holds the time value of a real time        * clock. This attribute has data type UTCTime, but note that it may not actually be        * synchronised to UTC - see discussion of the TimeStatus attribute below.        * <p>        * If the Master bit of the TimeStatus attribute has a value of 0, writing to this        * attribute shall set the real time clock to the written value, otherwise it cannot be        * written. The value 0xffffffff indicates an invalid time.       </summary>
+       public const ushort ATTR_TIME = 0x0000;
 
-       /// <summary>
-        /// The TimeStatus attribute holds a number of bit fields.       /// </summary>
-       public static ushort ATTR_TIMESTATUS = 0x0001;
+       <summary>
+        * The TimeStatus attribute holds a number of bit fields.       </summary>
+       public const ushort ATTR_TIMESTATUS = 0x0001;
 
-       /// <summary>
-        /// The TimeZone attribute indicates the local time zone, as a signed offset in seconds        /// from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       /// </summary>
-       public static ushort ATTR_TIMEZONE = 0x0002;
+       <summary>
+        * The TimeZone attribute indicates the local time zone, as a signed offset in seconds        * from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       </summary>
+       public const ushort ATTR_TIMEZONE = 0x0002;
 
-       /// <summary>
-        /// The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff        /// indicates an invalid DST start time.       /// </summary>
-       public static ushort ATTR_DSTSTART = 0x0003;
+       <summary>
+        * The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff        * indicates an invalid DST start time.       </summary>
+       public const ushort ATTR_DSTSTART = 0x0003;
 
-       /// <summary>
-        /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff        /// indicates an invalid DST end time.        /// <p>        /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any        /// one of them is implemented the other two must also be implemented.        /// Note that this attribute should be set to a new value once every year.        /// <p>        /// Note that this attribute should be set to a new value once every year, and should be        /// written synchronously with the DstStart attribute.        /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff        /// indicates an invalid DST end time.        /// <p>        /// Note that this attribute should be set to a new value once every year, and should be        /// written synchronously with the DstStart attribute       /// </summary>
-       public static ushort ATTR_DSTEND = 0x0004;
+       <summary>
+        * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff        * indicates an invalid DST end time.        * <p>        * Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any        * one of them is implemented the other two must also be implemented.        * Note that this attribute should be set to a new value once every year.        * <p>        * Note that this attribute should be set to a new value once every year, and should be        * written synchronously with the DstStart attribute.        * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff        * indicates an invalid DST end time.        * <p>        * Note that this attribute should be set to a new value once every year, and should be        * written synchronously with the DstStart attribute       </summary>
+       public const ushort ATTR_DSTEND = 0x0004;
 
-       /// <summary>
-        /// The DstShift attribute represents a signed offset in seconds from the standard time,        /// to be applied between the times DstStart and DstEnd to calculate the Local Time.        /// The value 0xffffffff indicates an invalid DST shift.        /// <p>        /// The range of this attribute is +/- one day. Note that the actual range of DST values        /// employed by countries is much smaller than this, so the manufacturer has the        /// option to impose a smaller range.       /// </summary>
-       public static ushort ATTR_DSTSHIFT = 0x0005;
+       <summary>
+        * The DstShift attribute represents a signed offset in seconds from the standard time,        * to be applied between the times DstStart and DstEnd to calculate the Local Time.        * The value 0xffffffff indicates an invalid DST shift.        * <p>        * The range of this attribute is +/- one day. Note that the actual range of DST values        * employed by countries is much smaller than this, so the manufacturer has the        * option to impose a smaller range.       </summary>
+       public const ushort ATTR_DSTSHIFT = 0x0005;
 
-       /// <summary>
-        /// A device may derive the time by reading the Time and TimeZone attributes        /// and adding them together. If implemented however, the optional StandardTime        /// attribute indicates this time directly. The value 0xffffffff indicates an invalid        /// Standard Time.       /// </summary>
-       public static ushort ATTR_STANDARDTIME = 0x0006;
+       <summary>
+        * A device may derive the time by reading the Time and TimeZone attributes        * and adding them together. If implemented however, the optional StandardTime        * attribute indicates this time directly. The value 0xffffffff indicates an invalid        * Standard Time.       </summary>
+       public const ushort ATTR_STANDARDTIME = 0x0006;
 
-       /// <summary>
-        /// A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd        /// and DstShift attributes and performing the calculation. If implemented however,        /// the optional LocalTime attribute indicates this time directly. The value 0xffffffff        /// indicates an invalid Local Time.       /// </summary>
-       public static ushort ATTR_LOCALTIME = 0x0007;
+       <summary>
+        * A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd        * and DstShift attributes and performing the calculation. If implemented however,        * the optional LocalTime attribute indicates this time directly. The value 0xffffffff        * indicates an invalid Local Time.       </summary>
+       public const ushort ATTR_LOCALTIME = 0x0007;
 
 
        // Attribute initialisation
@@ -83,59 +83,58 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Time cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Time cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclTimeCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Set the Time attribute [attribute ID0].
-       ///
-       /// The Time attribute is 32-bits in length and holds the time value of a real time       /// clock. This attribute has data type UTCTime, but note that it may not actually be       /// synchronised to UTC - see discussion of the TimeStatus attribute below.       /// <p>       /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this       /// attribute shall set the real time clock to the written value, otherwise it cannot be       /// written. The value 0xffffffff indicates an invalid time.       ///
-       /// The attribute is of type DateTime.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param time the DateTime attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Time attribute [attribute ID0].
+       
+       * The Time attribute is 32-bits in length and holds the time value of a real time       * clock. This attribute has data type UTCTime, but note that it may not actually be       * synchronised to UTC - see discussion of the TimeStatus attribute below.       * <p>       * If the Master bit of the TimeStatus attribute has a value of 0, writing to this       * attribute shall set the real time clock to the written value, otherwise it cannot be       * written. The value 0xffffffff indicates an invalid time.       
+        The attribute is of type DateTime.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= time the DateTime attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetTime(object value)
        {
            return Write(_attributes[ATTR_TIME], value);
        }
 
 
-       /// <summary>
-       /// Get the Time attribute [attribute ID0].
-       ///
-       /// The Time attribute is 32-bits in length and holds the time value of a real time       /// clock. This attribute has data type UTCTime, but note that it may not actually be       /// synchronised to UTC - see discussion of the TimeStatus attribute below.       /// <p>       /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this       /// attribute shall set the real time clock to the written value, otherwise it cannot be       /// written. The value 0xffffffff indicates an invalid time.       ///
-       /// The attribute is of type DateTime.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Time attribute [attribute ID0].
+       
+       * The Time attribute is 32-bits in length and holds the time value of a real time       * clock. This attribute has data type UTCTime, but note that it may not actually be       * synchronised to UTC - see discussion of the TimeStatus attribute below.       * <p>       * If the Master bit of the TimeStatus attribute has a value of 0, writing to this       * attribute shall set the real time clock to the written value, otherwise it cannot be       * written. The value 0xffffffff indicates an invalid time.       
+        The attribute is of type DateTime.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetTimeAsync()
        {
            return Read(_attributes[ATTR_TIME]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Time attribute [attribute ID0].
-       ///
-       /// The Time attribute is 32-bits in length and holds the time value of a real time       /// clock. This attribute has data type UTCTime, but note that it may not actually be       /// synchronised to UTC - see discussion of the TimeStatus attribute below.       /// <p>       /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this       /// attribute shall set the real time clock to the written value, otherwise it cannot be       /// written. The value 0xffffffff indicates an invalid time.       ///
-       /// The attribute is of type DateTime.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Time attribute [attribute ID0].
+       
+       * The Time attribute is 32-bits in length and holds the time value of a real time       * clock. This attribute has data type UTCTime, but note that it may not actually be       * synchronised to UTC - see discussion of the TimeStatus attribute below.       * <p>       * If the Master bit of the TimeStatus attribute has a value of 0, writing to this       * attribute shall set the real time clock to the written value, otherwise it cannot be       * written. The value 0xffffffff indicates an invalid time.       
+        The attribute is of type DateTime.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public DateTime GetTime(long refreshPeriod)
        {
            if (_attributes[ATTR_TIME].IsLastValueCurrent(refreshPeriod))
@@ -147,48 +146,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the TimeStatus attribute [attribute ID1].
-       ///
-       /// The TimeStatus attribute holds a number of bit fields.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param timeStatus the ushort attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the TimeStatus attribute [attribute ID1].
+       
+       * The TimeStatus attribute holds a number of bit fields.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= timeStatus the ushort attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetTimeStatus(object value)
        {
            return Write(_attributes[ATTR_TIMESTATUS], value);
        }
 
 
-       /// <summary>
-       /// Get the TimeStatus attribute [attribute ID1].
-       ///
-       /// The TimeStatus attribute holds a number of bit fields.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the TimeStatus attribute [attribute ID1].
+       
+       * The TimeStatus attribute holds a number of bit fields.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetTimeStatusAsync()
        {
            return Read(_attributes[ATTR_TIMESTATUS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the TimeStatus attribute [attribute ID1].
-       ///
-       /// The TimeStatus attribute holds a number of bit fields.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the TimeStatus attribute [attribute ID1].
+       
+       * The TimeStatus attribute holds a number of bit fields.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetTimeStatus(long refreshPeriod)
        {
            if (_attributes[ATTR_TIMESTATUS].IsLastValueCurrent(refreshPeriod))
@@ -200,48 +199,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the TimeZone attribute [attribute ID2].
-       ///
-       /// The TimeZone attribute indicates the local time zone, as a signed offset in seconds       /// from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param timeZone the int attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the TimeZone attribute [attribute ID2].
+       
+       * The TimeZone attribute indicates the local time zone, as a signed offset in seconds       * from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= timeZone the int attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetTimeZone(object value)
        {
            return Write(_attributes[ATTR_TIMEZONE], value);
        }
 
 
-       /// <summary>
-       /// Get the TimeZone attribute [attribute ID2].
-       ///
-       /// The TimeZone attribute indicates the local time zone, as a signed offset in seconds       /// from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the TimeZone attribute [attribute ID2].
+       
+       * The TimeZone attribute indicates the local time zone, as a signed offset in seconds       * from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetTimeZoneAsync()
        {
            return Read(_attributes[ATTR_TIMEZONE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the TimeZone attribute [attribute ID2].
-       ///
-       /// The TimeZone attribute indicates the local time zone, as a signed offset in seconds       /// from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the TimeZone attribute [attribute ID2].
+       
+       * The TimeZone attribute indicates the local time zone, as a signed offset in seconds       * from the Time attribute value. The value 0xffffffff indicates an invalid time zone.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public int GetTimeZone(long refreshPeriod)
        {
            if (_attributes[ATTR_TIMEZONE].IsLastValueCurrent(refreshPeriod))
@@ -253,48 +252,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the DstStart attribute [attribute ID3].
-       ///
-       /// The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       /// indicates an invalid DST start time.       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param dstStart the uint attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the DstStart attribute [attribute ID3].
+       
+       * The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       * indicates an invalid DST start time.       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= dstStart the uint attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetDstStart(object value)
        {
            return Write(_attributes[ATTR_DSTSTART], value);
        }
 
 
-       /// <summary>
-       /// Get the DstStart attribute [attribute ID3].
-       ///
-       /// The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       /// indicates an invalid DST start time.       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the DstStart attribute [attribute ID3].
+       
+       * The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       * indicates an invalid DST start time.       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetDstStartAsync()
        {
            return Read(_attributes[ATTR_DSTSTART]);
        }
 
-       /// <summary>
-       /// Synchronously Get the DstStart attribute [attribute ID3].
-       ///
-       /// The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       /// indicates an invalid DST start time.       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the DstStart attribute [attribute ID3].
+       
+       * The DstStart attribute indicates the DST start time in seconds. The value 0xffffffff       * indicates an invalid DST start time.       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetDstStart(long refreshPeriod)
        {
            if (_attributes[ATTR_DSTSTART].IsLastValueCurrent(refreshPeriod))
@@ -306,48 +305,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the DstEnd attribute [attribute ID4].
-       ///
-       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       /// one of them is implemented the other two must also be implemented.       /// Note that this attribute should be set to a new value once every year.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute.       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param dstEnd the uint attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the DstEnd attribute [attribute ID4].
+       
+       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       * one of them is implemented the other two must also be implemented.       * Note that this attribute should be set to a new value once every year.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute.       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= dstEnd the uint attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetDstEnd(object value)
        {
            return Write(_attributes[ATTR_DSTEND], value);
        }
 
 
-       /// <summary>
-       /// Get the DstEnd attribute [attribute ID4].
-       ///
-       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       /// one of them is implemented the other two must also be implemented.       /// Note that this attribute should be set to a new value once every year.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute.       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the DstEnd attribute [attribute ID4].
+       
+       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       * one of them is implemented the other two must also be implemented.       * Note that this attribute should be set to a new value once every year.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute.       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetDstEndAsync()
        {
            return Read(_attributes[ATTR_DSTEND]);
        }
 
-       /// <summary>
-       /// Synchronously Get the DstEnd attribute [attribute ID4].
-       ///
-       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       /// one of them is implemented the other two must also be implemented.       /// Note that this attribute should be set to a new value once every year.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute.       /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       /// indicates an invalid DST end time.       /// <p>       /// Note that this attribute should be set to a new value once every year, and should be       /// written synchronously with the DstStart attribute       ///
-       /// The attribute is of type uint.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the DstEnd attribute [attribute ID4].
+       
+       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any       * one of them is implemented the other two must also be implemented.       * Note that this attribute should be set to a new value once every year.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute.       * The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff       * indicates an invalid DST end time.       * <p>       * Note that this attribute should be set to a new value once every year, and should be       * written synchronously with the DstStart attribute       
+        The attribute is of type uint.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public uint GetDstEnd(long refreshPeriod)
        {
            if (_attributes[ATTR_DSTEND].IsLastValueCurrent(refreshPeriod))
@@ -359,48 +358,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the DstShift attribute [attribute ID5].
-       ///
-       /// The DstShift attribute represents a signed offset in seconds from the standard time,       /// to be applied between the times DstStart and DstEnd to calculate the Local Time.       /// The value 0xffffffff indicates an invalid DST shift.       /// <p>       /// The range of this attribute is +/- one day. Note that the actual range of DST values       /// employed by countries is much smaller than this, so the manufacturer has the       /// option to impose a smaller range.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param dstShift the int attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the DstShift attribute [attribute ID5].
+       
+       * The DstShift attribute represents a signed offset in seconds from the standard time,       * to be applied between the times DstStart and DstEnd to calculate the Local Time.       * The value 0xffffffff indicates an invalid DST shift.       * <p>       * The range of this attribute is +/- one day. Note that the actual range of DST values       * employed by countries is much smaller than this, so the manufacturer has the       * option to impose a smaller range.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= dstShift the int attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetDstShift(object value)
        {
            return Write(_attributes[ATTR_DSTSHIFT], value);
        }
 
 
-       /// <summary>
-       /// Get the DstShift attribute [attribute ID5].
-       ///
-       /// The DstShift attribute represents a signed offset in seconds from the standard time,       /// to be applied between the times DstStart and DstEnd to calculate the Local Time.       /// The value 0xffffffff indicates an invalid DST shift.       /// <p>       /// The range of this attribute is +/- one day. Note that the actual range of DST values       /// employed by countries is much smaller than this, so the manufacturer has the       /// option to impose a smaller range.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the DstShift attribute [attribute ID5].
+       
+       * The DstShift attribute represents a signed offset in seconds from the standard time,       * to be applied between the times DstStart and DstEnd to calculate the Local Time.       * The value 0xffffffff indicates an invalid DST shift.       * <p>       * The range of this attribute is +/- one day. Note that the actual range of DST values       * employed by countries is much smaller than this, so the manufacturer has the       * option to impose a smaller range.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetDstShiftAsync()
        {
            return Read(_attributes[ATTR_DSTSHIFT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the DstShift attribute [attribute ID5].
-       ///
-       /// The DstShift attribute represents a signed offset in seconds from the standard time,       /// to be applied between the times DstStart and DstEnd to calculate the Local Time.       /// The value 0xffffffff indicates an invalid DST shift.       /// <p>       /// The range of this attribute is +/- one day. Note that the actual range of DST values       /// employed by countries is much smaller than this, so the manufacturer has the       /// option to impose a smaller range.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the DstShift attribute [attribute ID5].
+       
+       * The DstShift attribute represents a signed offset in seconds from the standard time,       * to be applied between the times DstStart and DstEnd to calculate the Local Time.       * The value 0xffffffff indicates an invalid DST shift.       * <p>       * The range of this attribute is +/- one day. Note that the actual range of DST values       * employed by countries is much smaller than this, so the manufacturer has the       * option to impose a smaller range.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public int GetDstShift(long refreshPeriod)
        {
            if (_attributes[ATTR_DSTSHIFT].IsLastValueCurrent(refreshPeriod))
@@ -412,31 +411,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the StandardTime attribute [attribute ID6].
-       ///
-       /// A device may derive the time by reading the Time and TimeZone attributes       /// and adding them together. If implemented however, the optional StandardTime       /// attribute indicates this time directly. The value 0xffffffff indicates an invalid       /// Standard Time.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the StandardTime attribute [attribute ID6].
+       
+       * A device may derive the time by reading the Time and TimeZone attributes       * and adding them together. If implemented however, the optional StandardTime       * attribute indicates this time directly. The value 0xffffffff indicates an invalid       * Standard Time.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetStandardTimeAsync()
        {
            return Read(_attributes[ATTR_STANDARDTIME]);
        }
 
-       /// <summary>
-       /// Synchronously Get the StandardTime attribute [attribute ID6].
-       ///
-       /// A device may derive the time by reading the Time and TimeZone attributes       /// and adding them together. If implemented however, the optional StandardTime       /// attribute indicates this time directly. The value 0xffffffff indicates an invalid       /// Standard Time.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the StandardTime attribute [attribute ID6].
+       
+       * A device may derive the time by reading the Time and TimeZone attributes       * and adding them together. If implemented however, the optional StandardTime       * attribute indicates this time directly. The value 0xffffffff indicates an invalid       * Standard Time.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public int GetStandardTime(long refreshPeriod)
        {
            if (_attributes[ATTR_STANDARDTIME].IsLastValueCurrent(refreshPeriod))
@@ -448,31 +447,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LocalTime attribute [attribute ID7].
-       ///
-       /// A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd       /// and DstShift attributes and performing the calculation. If implemented however,       /// the optional LocalTime attribute indicates this time directly. The value 0xffffffff       /// indicates an invalid Local Time.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LocalTime attribute [attribute ID7].
+       
+       * A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd       * and DstShift attributes and performing the calculation. If implemented however,       * the optional LocalTime attribute indicates this time directly. The value 0xffffffff       * indicates an invalid Local Time.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLocalTimeAsync()
        {
            return Read(_attributes[ATTR_LOCALTIME]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LocalTime attribute [attribute ID7].
-       ///
-       /// A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd       /// and DstShift attributes and performing the calculation. If implemented however,       /// the optional LocalTime attribute indicates this time directly. The value 0xffffffff       /// indicates an invalid Local Time.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LocalTime attribute [attribute ID7].
+       
+       * A device may derive the time by reading the Time, TimeZone, DstStart, DstEnd       * and DstShift attributes and performing the calculation. If implemented however,       * the optional LocalTime attribute indicates this time directly. The value 0xffffffff       * indicates an invalid Local Time.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public int GetLocalTime(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCALTIME].IsLastValueCurrent(refreshPeriod))

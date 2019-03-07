@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of Basic attribute PowerSource options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
+<sumamry>
+ * Enumeration of Basic attribute PowerSource options.
+ *
+ * Code is auto-generated. Modifications may be overwritten!
+ *
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Basic
 {

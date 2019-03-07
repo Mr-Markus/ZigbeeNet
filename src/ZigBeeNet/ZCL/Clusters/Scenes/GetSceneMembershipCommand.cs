@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// Get Scene Membership Command value object class.
- ///
- /// Cluster: Scenes. Command is sentTO the server.
- /// This command is a specific command used for the Scenes cluster.
- ///
- /// The Get Scene Membership command can be used to find an unused scene /// number within the group when no commissioning tool is in the network, or for a /// commissioning tool to get used scenes for a group on a single device or on all /// devices in the group. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Scene Membership Command value object class.
+ 
+ Cluster: Scenes. Command is sentTO the server.
+  This command is a specific command used for the Scenes cluster.
+ 
+ * The Get Scene Membership command can be used to find an unused scene * number within the group when no commissioning tool is in the network, or for a * commissioning tool to get used scenes for a group on a single device or on all * devices in the group. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class GetSceneMembershipCommand : ZclCommand
        {
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
+           <summary>
+            Group ID command message field.
+           </summary>
            public ushort GroupID { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetSceneMembershipCommand()
            {
                GenericCommand = false;

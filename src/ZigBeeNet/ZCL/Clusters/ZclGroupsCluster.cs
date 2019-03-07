@@ -12,25 +12,25 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Groups;
 
-/// <summary>
- /// Groupscluster implementation (Cluster ID 0x0004).
- ///
- /// The ZigBee specification provides the capability for group addressing. That is, /// any endpoint on any device may be assigned to one or more groups, each labeled /// with a 16-bit identifier (0x0001 – 0xfff7), which acts for all intents and purposes /// like a network address. Once a group is established, frames, sent using the /// APSDE-DATA.request primitive and having a DstAddrMode of 0x01, denoting /// group addressing, will be delivered to every endpoint assigned to the group /// address named in the DstAddr parameter of the outgoing APSDE-DATA.request /// primitive on every device in the network for which there are such endpoints. /// <p> /// Management of group membership on each device and endpoint is implemented /// by the APS, but the over-the-air messages that allow for remote management and /// commissioning of groups are defined here in the cluster library on the theory that, /// while the basic group addressing facilities are integral to the operation of the /// stack, not every device will need or want to implement this management cluster. /// Furthermore, the placement of the management commands here allows developers /// of proprietary profiles to avoid implementing the library cluster but still exploit /// group addressing ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Groupscluster implementation (Cluster ID 0x0004).
+ 
+ * The ZigBee specification provides the capability for group addressing. That is, * any endpoint on any device may be assigned to one or more groups, each labeled * with a 16-bit identifier (0x0001 – 0xfff7), which acts for all intents and purposes * like a network address. Once a group is established, frames, sent using the * APSDE-DATA.request primitive and having a DstAddrMode of 0x01, denoting * group addressing, will be delivered to every endpoint assigned to the group * address named in the DstAddr parameter of the outgoing APSDE-DATA.request * primitive on every device in the network for which there are such endpoints. * <p> * Management of group membership on each device and endpoint is implemented * by the APS, but the over-the-air messages that allow for remote management and * commissioning of groups are defined here in the cluster library on the theory that, * while the basic group addressing facilities are integral to the operation of the * stack, not every device will need or want to implement this management cluster. * Furthermore, the placement of the management commands here allows developers * of proprietary profiles to avoid implementing the library cluster but still exploit * group addressing 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclGroupsCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0004;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0004;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Groups";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Groups";
 
        // Attribute initialisation
        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
@@ -40,24 +40,23 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Groups cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Groups cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclGroupsCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// The Add Group Command
-       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param groupName {@link string} Group Name
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Add Group Command
+       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= groupName {@link string} Group Name</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AddGroupCommand(ushort groupID, string groupName)
        {
            AddGroupCommand command = new AddGroupCommand();
@@ -69,12 +68,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The View Group Command
-       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The View Group Command
+       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ViewGroupCommand(ushort groupID)
        {
            ViewGroupCommand command = new ViewGroupCommand();
@@ -85,13 +84,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Group Membership Command
-       ///
-       /// @param groupCount {@link byte} Group count
-       /// @param groupList {@link List<ushort>} Group list
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Group Membership Command
+       </summary>
+       <param name= groupCount {@link byte} Group count</param>
+       <param name= groupList {@link List<ushort>} Group list</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetGroupMembershipCommand(byte groupCount, List<ushort> groupList)
        {
            GetGroupMembershipCommand command = new GetGroupMembershipCommand();
@@ -103,12 +102,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove Group Command
-       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove Group Command
+       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveGroupCommand(ushort groupID)
        {
            RemoveGroupCommand command = new RemoveGroupCommand();
@@ -119,11 +118,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove All Groups Command
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove All Groups Command
+       </summary>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveAllGroupsCommand()
        {
            RemoveAllGroupsCommand command = new RemoveAllGroupsCommand();
@@ -131,13 +130,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Add Group If Identifying Command
-       ///
-       /// @param groupID {@link ushort} Group ID
-       /// @param groupName {@link string} Group Name
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Add Group If Identifying Command
+       </summary>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= groupName {@link string} Group Name</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AddGroupIfIdentifyingCommand(ushort groupID, string groupName)
        {
            AddGroupIfIdentifyingCommand command = new AddGroupIfIdentifyingCommand();
@@ -149,13 +148,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Add Group Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Add Group Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AddGroupResponse(byte status, ushort groupID)
        {
            AddGroupResponse command = new AddGroupResponse();
@@ -167,14 +166,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The View Group Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @param groupName {@link string} Group Name
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The View Group Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <param name= groupName {@link string} Group Name</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ViewGroupResponse(byte status, ushort groupID, string groupName)
        {
            ViewGroupResponse command = new ViewGroupResponse();
@@ -187,14 +186,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Group Membership Response
-       ///
-       /// @param capacity {@link byte} Capacity
-       /// @param groupCount {@link byte} Group count
-       /// @param groupList {@link List<ushort>} Group list
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Group Membership Response
+       </summary>
+       <param name= capacity {@link byte} Capacity</param>
+       <param name= groupCount {@link byte} Group count</param>
+       <param name= groupList {@link List<ushort>} Group list</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetGroupMembershipResponse(byte capacity, byte groupCount, List<ushort> groupList)
        {
            GetGroupMembershipResponse command = new GetGroupMembershipResponse();
@@ -207,13 +206,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Remove Group Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param groupID {@link ushort} Group ID
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Remove Group Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= groupID {@link ushort} Group ID</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RemoveGroupResponse(byte status, ushort groupID)
        {
            RemoveGroupResponse command = new RemoveGroupResponse();

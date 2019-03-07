@@ -7,53 +7,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Get Relay Status Log Response value object class.
- ///
- /// Cluster: Thermostat. Command is sentFROM the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Relay Status Log Response value object class.
+ 
+ Cluster: Thermostat. Command is sentFROM the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class GetRelayStatusLogResponse : ZclCommand
        {
-           /// <summary>
-           /// Time of day command message field.
-           /// </summary>
+           <summary>
+            Time of day command message field.
+           </summary>
            public ushort TimeOfDay { get; set; }
 
-           /// <summary>
-           /// Relay Status command message field.
-           /// </summary>
+           <summary>
+            Relay Status command message field.
+           </summary>
            public byte RelayStatus { get; set; }
 
-           /// <summary>
-           /// Local Temperature command message field.
-           /// </summary>
+           <summary>
+            Local Temperature command message field.
+           </summary>
            public ushort LocalTemperature { get; set; }
 
-           /// <summary>
-           /// Humidity command message field.
-           /// </summary>
+           <summary>
+            Humidity command message field.
+           </summary>
            public byte Humidity { get; set; }
 
-           /// <summary>
-           /// Setpoint command message field.
-           /// </summary>
+           <summary>
+            Setpoint command message field.
+           </summary>
            public ushort Setpoint { get; set; }
 
-           /// <summary>
-           /// Unread Entries command message field.
-           /// </summary>
+           <summary>
+            Unread Entries command message field.
+           </summary>
            public ushort UnreadEntries { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetRelayStatusLogResponse()
            {
                GenericCommand = false;

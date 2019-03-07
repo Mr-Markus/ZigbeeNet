@@ -7,32 +7,32 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.PollControl;
 
-/// <summary>
- /// Set Short Poll Interval Command value object class.
- ///
- /// Cluster: Poll Control. Command is sentTO the server.
- /// This command is a specific command used for the Poll Control cluster.
- ///
- /// The Set Short Poll Interval command is used to set the Read Only ShortPollInterval attribute. /// <br> /// When the Poll Control Server receives the Set Short Poll Interval Command, it SHOULD check its internal minimal limit and the attributes
- /// relationship if the new Short Poll Interval is acceptable. If the new value is acceptable, the new value SHALL be saved to the
- /// ShortPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE
- /// and the ShortPollInterval attribute value is not updated. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Set Short Poll Interval Command value object class.
+ 
+ Cluster: Poll Control. Command is sentTO the server.
+  This command is a specific command used for the Poll Control cluster.
+ 
+ * The Set Short Poll Interval command is used to set the Read Only ShortPollInterval attribute. * <br> * When the Poll Control Server receives the Set Short Poll Interval Command, it SHOULD check its internal minimal limit and the attributes
+ * relationship if the new Short Poll Interval is acceptable. If the new value is acceptable, the new value SHALL be saved to the
+ * ShortPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE
+ * and the ShortPollInterval attribute value is not updated. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.PollControl
 {
        public class SetShortPollIntervalCommand : ZclCommand
        {
-           /// <summary>
-           /// New Short Poll Interval command message field.
-           /// </summary>
+           <summary>
+            New Short Poll Interval command message field.
+           </summary>
            public ushort NewShortPollInterval { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SetShortPollIntervalCommand()
            {
                GenericCommand = false;

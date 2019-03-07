@@ -7,23 +7,23 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Groups;
 
-/// <summary>
- /// Remove All Groups Command value object class.
- ///
- /// Cluster: Groups. Command is sentTO the server.
- /// This command is a specific command used for the Groups cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Remove All Groups Command value object class.
+ 
+ Cluster: Groups. Command is sentTO the server.
+  This command is a specific command used for the Groups cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Groups
 {
        public class RemoveAllGroupsCommand : ZclCommand
        {
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public RemoveAllGroupsCommand()
            {
                GenericCommand = false;

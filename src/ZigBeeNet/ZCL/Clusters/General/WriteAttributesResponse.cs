@@ -7,29 +7,29 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/// <summary>
- /// Write Attributes Response value object class.
- ///
- /// Cluster: General. Command is sentTO the server.
- /// This command is a generic command used across the profile.
- ///
- /// The write attributes response command is generated in response to a write /// attributes command. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Write Attributes Response value object class.
+ 
+ Cluster: General. Command is sentTO the server.
+  This command is a generic command used across the profile.
+ 
+ * The write attributes response command is generated in response to a write * attributes command. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class WriteAttributesResponse : ZclCommand
        {
-           /// <summary>
-           /// Records command message field.
-           /// </summary>
+           <summary>
+            Records command message field.
+           </summary>
            public List<WriteAttributeStatusRecord> Records { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public WriteAttributesResponse()
            {
                GenericCommand = true;

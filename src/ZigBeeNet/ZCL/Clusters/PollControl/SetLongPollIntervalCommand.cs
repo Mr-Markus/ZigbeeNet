@@ -7,32 +7,32 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.PollControl;
 
-/// <summary>
- /// Set Long Poll Interval Command value object class.
- ///
- /// Cluster: Poll Control. Command is sentTO the server.
- /// This command is a specific command used for the Poll Control cluster.
- ///
- /// The Set Long Poll Interval command is used to set the Read Only LongPollInterval attribute. /// <br> /// When the Poll Control Server receives the Set Long Poll Interval Command, it SHOULD check its internal minimal limit and the attributes
- /// relationship if the new Long Poll Interval is acceptable. If the new value is acceptable, the new value SHALL be saved to the
- /// LongPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE and
- /// the LongPollInterval attribute value is not updated. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Set Long Poll Interval Command value object class.
+ 
+ Cluster: Poll Control. Command is sentTO the server.
+  This command is a specific command used for the Poll Control cluster.
+ 
+ * The Set Long Poll Interval command is used to set the Read Only LongPollInterval attribute. * <br> * When the Poll Control Server receives the Set Long Poll Interval Command, it SHOULD check its internal minimal limit and the attributes
+ * relationship if the new Long Poll Interval is acceptable. If the new value is acceptable, the new value SHALL be saved to the
+ * LongPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE and
+ * the LongPollInterval attribute value is not updated. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.PollControl
 {
        public class SetLongPollIntervalCommand : ZclCommand
        {
-           /// <summary>
-           /// New Long Poll Interval command message field.
-           /// </summary>
+           <summary>
+            New Long Poll Interval command message field.
+           </summary>
            public ushort NewLongPollInterval { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SetLongPollIntervalCommand()
            {
                GenericCommand = false;

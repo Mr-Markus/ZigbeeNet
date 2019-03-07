@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/// <summary>
- /// Step Color Command value object class.
- ///
- /// Cluster: Color Control. Command is sentTO the server.
- /// This command is a specific command used for the Color Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Step Color Command value object class.
+ 
+ Cluster: Color Control. Command is sentTO the server.
+  This command is a specific command used for the Color Control cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
        public class StepColorCommand : ZclCommand
        {
-           /// <summary>
-           /// StepX command message field.
-           /// </summary>
+           <summary>
+            StepX command message field.
+           </summary>
            public short StepX { get; set; }
 
-           /// <summary>
-           /// StepY command message field.
-           /// </summary>
+           <summary>
+            StepY command message field.
+           </summary>
            public short StepY { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
+           <summary>
+            Transition time command message field.
+           </summary>
            public ushort TransitionTime { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public StepColorCommand()
            {
                GenericCommand = false;

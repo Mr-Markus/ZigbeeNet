@@ -7,23 +7,23 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.IASACE;
 
-/// <summary>
- /// Get Zone ID Map Command value object class.
- ///
- /// Cluster: IAS ACE. Command is sentTO the server.
- /// This command is a specific command used for the IAS ACE cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Zone ID Map Command value object class.
+ 
+ Cluster: IAS ACE. Command is sentTO the server.
+  This command is a specific command used for the IAS ACE cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
        public class GetZoneIDMapCommand : ZclCommand
        {
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetZoneIDMapCommand()
            {
                GenericCommand = false;

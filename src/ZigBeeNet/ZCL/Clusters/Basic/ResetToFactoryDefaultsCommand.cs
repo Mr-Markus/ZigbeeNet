@@ -7,24 +7,24 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Basic;
 
-/// <summary>
- /// Reset to Factory Defaults Command value object class.
- ///
- /// Cluster: Basic. Command is sentTO the server.
- /// This command is a specific command used for the Basic cluster.
- ///
- /// On receipt of this command, the device resets all the attributes of all its clusters /// to their factory defaults. Note that ZigBee networking functionality,bindings, groups /// or other persistent data are not affected by this command ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Reset to Factory Defaults Command value object class.
+ 
+ Cluster: Basic. Command is sentTO the server.
+  This command is a specific command used for the Basic cluster.
+ 
+ * On receipt of this command, the device resets all the attributes of all its clusters * to their factory defaults. Note that ZigBee networking functionality,bindings, groups * or other persistent data are not affected by this command 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Basic
 {
        public class ResetToFactoryDefaultsCommand : ZclCommand
        {
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ResetToFactoryDefaultsCommand()
            {
                GenericCommand = false;

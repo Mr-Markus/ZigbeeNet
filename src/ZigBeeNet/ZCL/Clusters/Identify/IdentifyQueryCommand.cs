@@ -7,23 +7,23 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Identify;
 
-/// <summary>
- /// Identify Query Command value object class.
- ///
- /// Cluster: Identify. Command is sentTO the server.
- /// This command is a specific command used for the Identify cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Identify Query Command value object class.
+ 
+ Cluster: Identify. Command is sentTO the server.
+  This command is a specific command used for the Identify cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Identify
 {
        public class IdentifyQueryCommand : ZclCommand
        {
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public IdentifyQueryCommand()
            {
                GenericCommand = false;

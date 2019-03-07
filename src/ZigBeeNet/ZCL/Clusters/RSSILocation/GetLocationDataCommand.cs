@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Get Location Data Command value object class.
- ///
- /// Cluster: RSSI Location. Command is sentTO the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Location Data Command value object class.
+ 
+ Cluster: RSSI Location. Command is sentTO the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class GetLocationDataCommand : ZclCommand
        {
-           /// <summary>
-           /// Header command message field.
-           /// </summary>
+           <summary>
+            Header command message field.
+           </summary>
            public byte Header { get; set; }
 
-           /// <summary>
-           /// Number Responses command message field.
-           /// </summary>
+           <summary>
+            Number Responses command message field.
+           </summary>
            public byte NumberResponses { get; set; }
 
-           /// <summary>
-           /// Target Address command message field.
-           /// </summary>
+           <summary>
+            Target Address command message field.
+           </summary>
            public IeeeAddress TargetAddress { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetLocationDataCommand()
            {
                GenericCommand = false;

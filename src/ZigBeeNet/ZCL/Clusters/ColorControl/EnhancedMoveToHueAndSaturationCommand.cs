@@ -7,38 +7,38 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/// <summary>
- /// Enhanced Move To Hue and Saturation Command value object class.
- ///
- /// Cluster: Color Control. Command is sentTO the server.
- /// This command is a specific command used for the Color Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Enhanced Move To Hue and Saturation Command value object class.
+ 
+ Cluster: Color Control. Command is sentTO the server.
+  This command is a specific command used for the Color Control cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
        public class EnhancedMoveToHueAndSaturationCommand : ZclCommand
        {
-           /// <summary>
-           /// Hue command message field.
-           /// </summary>
+           <summary>
+            Hue command message field.
+           </summary>
            public ushort Hue { get; set; }
 
-           /// <summary>
-           /// Saturation command message field.
-           /// </summary>
+           <summary>
+            Saturation command message field.
+           </summary>
            public byte Saturation { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
+           <summary>
+            Transition time command message field.
+           </summary>
            public ushort TransitionTime { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public EnhancedMoveToHueAndSaturationCommand()
            {
                GenericCommand = false;

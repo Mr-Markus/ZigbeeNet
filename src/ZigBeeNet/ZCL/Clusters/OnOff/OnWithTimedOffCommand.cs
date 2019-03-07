@@ -7,39 +7,39 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 
-/// <summary>
- /// On With Timed Off Command value object class.
- ///
- /// Cluster: On/Off. Command is sentTO the server.
- /// This command is a specific command used for the On/Off cluster.
- ///
- /// The On With Timed Off command allows devices to be turned on for a specific duration /// with a guarded off duration so that SHOULD the device be subsequently switched off, /// further On With Timed Off commands, received during this time, are prevented from /// turning the devices back on. Note that the device can be periodically re-kicked by /// subsequent On With Timed Off commands, e.g., from an on/off sensor. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ On With Timed Off Command value object class.
+ 
+ Cluster: On/Off. Command is sentTO the server.
+  This command is a specific command used for the On/Off cluster.
+ 
+ * The On With Timed Off command allows devices to be turned on for a specific duration * with a guarded off duration so that SHOULD the device be subsequently switched off, * further On With Timed Off commands, received during this time, are prevented from * turning the devices back on. Note that the device can be periodically re-kicked by * subsequent On With Timed Off commands, e.g., from an on/off sensor. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OnOff
 {
        public class OnWithTimedOffCommand : ZclCommand
        {
-           /// <summary>
-           /// On Off Control command message field.
-           /// </summary>
+           <summary>
+            On Off Control command message field.
+           </summary>
            public byte OnOffControl { get; set; }
 
-           /// <summary>
-           /// On Time command message field.
-           /// </summary>
+           <summary>
+            On Time command message field.
+           </summary>
            public ushort OnTime { get; set; }
 
-           /// <summary>
-           /// Off Wait Time command message field.
-           /// </summary>
+           <summary>
+            Off Wait Time command message field.
+           </summary>
            public ushort OffWaitTime { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public OnWithTimedOffCommand()
            {
                GenericCommand = false;

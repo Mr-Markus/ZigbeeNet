@@ -7,48 +7,48 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// Get Scene Membership Response value object class.
- ///
- /// Cluster: Scenes. Command is sentFROM the server.
- /// This command is a specific command used for the Scenes cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Scene Membership Response value object class.
+ 
+ Cluster: Scenes. Command is sentFROM the server.
+  This command is a specific command used for the Scenes cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
        public class GetSceneMembershipResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public byte Status { get; set; }
 
-           /// <summary>
-           /// Capacity command message field.
-           /// </summary>
+           <summary>
+            Capacity command message field.
+           </summary>
            public byte Capacity { get; set; }
 
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
+           <summary>
+            Group ID command message field.
+           </summary>
            public ushort GroupID { get; set; }
 
-           /// <summary>
-           /// Scene count command message field.
-           /// </summary>
+           <summary>
+            Scene count command message field.
+           </summary>
            public byte SceneCount { get; set; }
 
-           /// <summary>
-           /// Scene list command message field.
-           /// </summary>
+           <summary>
+            Scene list command message field.
+           </summary>
            public List<byte> SceneList { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetSceneMembershipResponse()
            {
                GenericCommand = false;

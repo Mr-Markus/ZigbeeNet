@@ -12,24 +12,24 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Commissioning;
 
-/// <summary>
- /// Commissioningcluster implementation (Cluster ID 0x0015).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Commissioningcluster implementation (Cluster ID 0x0015).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclCommissioningCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0015;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0015;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Commissioning";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Commissioning";
 
        // Attribute initialisation
        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
@@ -39,25 +39,24 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Commissioning cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Commissioning cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclCommissioningCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// The Restart Device Command
-       ///
-       /// @param option {@link byte} Option
-       /// @param delay {@link byte} Delay
-       /// @param jitter {@link byte} Jitter
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Restart Device Command
+       </summary>
+       <param name= option {@link byte} Option</param>
+       <param name= delay {@link byte} Delay</param>
+       <param name= jitter {@link byte} Jitter</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RestartDeviceCommand(byte option, byte delay, byte jitter)
        {
            RestartDeviceCommand command = new RestartDeviceCommand();
@@ -70,13 +69,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Save Startup Parameters Command
-       ///
-       /// @param option {@link byte} Option
-       /// @param index {@link byte} Index
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Save Startup Parameters Command
+       </summary>
+       <param name= option {@link byte} Option</param>
+       <param name= index {@link byte} Index</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SaveStartupParametersCommand(byte option, byte index)
        {
            SaveStartupParametersCommand command = new SaveStartupParametersCommand();
@@ -88,13 +87,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Restore Startup Parameters Command
-       ///
-       /// @param option {@link byte} Option
-       /// @param index {@link byte} Index
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Restore Startup Parameters Command
+       </summary>
+       <param name= option {@link byte} Option</param>
+       <param name= index {@link byte} Index</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RestoreStartupParametersCommand(byte option, byte index)
        {
            RestoreStartupParametersCommand command = new RestoreStartupParametersCommand();
@@ -106,13 +105,13 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Reset Startup Parameters Command
-       ///
-       /// @param option {@link byte} Option
-       /// @param index {@link byte} Index
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Reset Startup Parameters Command
+       </summary>
+       <param name= option {@link byte} Option</param>
+       <param name= index {@link byte} Index</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ResetStartupParametersCommand(byte option, byte index)
        {
            ResetStartupParametersCommand command = new ResetStartupParametersCommand();
@@ -124,12 +123,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Restart Device Response Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Restart Device Response Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RestartDeviceResponseResponse(byte status)
        {
            RestartDeviceResponseResponse command = new RestartDeviceResponseResponse();
@@ -140,12 +139,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Save Startup Parameters Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Save Startup Parameters Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SaveStartupParametersResponse(byte status)
        {
            SaveStartupParametersResponse command = new SaveStartupParametersResponse();
@@ -156,12 +155,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Restore Startup Parameters Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Restore Startup Parameters Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RestoreStartupParametersResponse(byte status)
        {
            RestoreStartupParametersResponse command = new RestoreStartupParametersResponse();
@@ -172,12 +171,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Reset Startup Parameters Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Reset Startup Parameters Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ResetStartupParametersResponse(byte status)
        {
            ResetStartupParametersResponse command = new ResetStartupParametersResponse();

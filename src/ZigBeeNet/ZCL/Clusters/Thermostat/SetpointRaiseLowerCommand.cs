@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Setpoint Raise/Lower Command value object class.
- ///
- /// Cluster: Thermostat. Command is sentTO the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Setpoint Raise/Lower Command value object class.
+ 
+ Cluster: Thermostat. Command is sentTO the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class SetpointRaiseLowerCommand : ZclCommand
        {
-           /// <summary>
-           /// Mode command message field.
-           /// </summary>
+           <summary>
+            Mode command message field.
+           </summary>
            public byte Mode { get; set; }
 
-           /// <summary>
-           /// Amount command message field.
-           /// </summary>
+           <summary>
+            Amount command message field.
+           </summary>
            public sbyte Amount { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SetpointRaiseLowerCommand()
            {
                GenericCommand = false;

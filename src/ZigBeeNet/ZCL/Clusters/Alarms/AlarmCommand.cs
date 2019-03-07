@@ -7,34 +7,34 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Alarms;
 
-/// <summary>
- /// Alarm Command value object class.
- ///
- /// Cluster: Alarms. Command is sentFROM the server.
- /// This command is a specific command used for the Alarms cluster.
- ///
- /// The alarm command signals an alarm situation on the sending device. /// <br> /// An alarm command is generated when a  cluster  which has alarm functionality detects an alarm /// condition, e.g., an attribute has taken on a value that is outside a ‘safe’ range. The details /// are given by individual cluster specifications. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Alarm Command value object class.
+ 
+ Cluster: Alarms. Command is sentFROM the server.
+  This command is a specific command used for the Alarms cluster.
+ 
+ * The alarm command signals an alarm situation on the sending device. * <br> * An alarm command is generated when a  cluster  which has alarm functionality detects an alarm * condition, e.g., an attribute has taken on a value that is outside a ‘safe’ range. The details * are given by individual cluster specifications. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Alarms
 {
        public class AlarmCommand : ZclCommand
        {
-           /// <summary>
-           /// Alarm code command message field.
-           /// </summary>
+           <summary>
+            Alarm code command message field.
+           </summary>
            public byte AlarmCode { get; set; }
 
-           /// <summary>
-           /// Cluster identifier command message field.
-           /// </summary>
+           <summary>
+            Cluster identifier command message field.
+           </summary>
            public ushort ClusterIdentifier { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public AlarmCommand()
            {
                GenericCommand = false;

@@ -7,54 +7,54 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Set Weekly Schedule value object class.
- ///
- /// Cluster: Thermostat. Command is sentTO the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// The set weekly schedule command is used to update the thermostat weekly set point schedule from a management system. /// If the thermostat already has a weekly set point schedule programmed then it SHOULD replace each daily set point set /// as it receives the updates from the management system. For example if the thermostat has 4 set points for every day of /// the week and is sent a Set Weekly Schedule command with one set point for Saturday then the thermostat SHOULD remove /// all 4 set points for Saturday and replace those with the updated set point but leave all other days unchanged. /// <br> /// If the schedule is larger than what fits in one ZigBee frame or contains more than 10 transitions, the schedule SHALL /// then be sent using multipleSet Weekly Schedule Commands. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Set Weekly Schedule value object class.
+ 
+ Cluster: Thermostat. Command is sentTO the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+ * The set weekly schedule command is used to update the thermostat weekly set point schedule from a management system. * If the thermostat already has a weekly set point schedule programmed then it SHOULD replace each daily set point set * as it receives the updates from the management system. For example if the thermostat has 4 set points for every day of * the week and is sent a Set Weekly Schedule command with one set point for Saturday then the thermostat SHOULD remove * all 4 set points for Saturday and replace those with the updated set point but leave all other days unchanged. * <br> * If the schedule is larger than what fits in one ZigBee frame or contains more than 10 transitions, the schedule SHALL * then be sent using multipleSet Weekly Schedule Commands. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class SetWeeklySchedule : ZclCommand
        {
-           /// <summary>
-           /// Number of Transitions command message field.
-           /// </summary>
+           <summary>
+            Number of Transitions command message field.
+           </summary>
            public byte NumberOfTransitions { get; set; }
 
-           /// <summary>
-           /// Day of Week command message field.
-           /// </summary>
+           <summary>
+            Day of Week command message field.
+           </summary>
            public byte DayOfWeek { get; set; }
 
-           /// <summary>
-           /// Mode command message field.
-           /// </summary>
+           <summary>
+            Mode command message field.
+           </summary>
            public byte Mode { get; set; }
 
-           /// <summary>
-           /// Transition command message field.
-           /// </summary>
+           <summary>
+            Transition command message field.
+           </summary>
            public ushort Transition { get; set; }
 
-           /// <summary>
-           /// Heat Set command message field.
-           /// </summary>
+           <summary>
+            Heat Set command message field.
+           </summary>
            public ushort HeatSet { get; set; }
 
-           /// <summary>
-           /// Cool Set command message field.
-           /// </summary>
+           <summary>
+            Cool Set command message field.
+           </summary>
            public ushort CoolSet { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SetWeeklySchedule()
            {
                GenericCommand = false;

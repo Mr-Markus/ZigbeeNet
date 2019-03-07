@@ -11,62 +11,62 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Multistate Output (Basic)cluster implementation (Cluster ID 0x0013).
- ///
- /// The Multistate Output (Basic) cluster provides an interface for setting the value of an output /// that can take one of a number of discrete values, and accessing characteristics of that value. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Multistate Output (Basic)cluster implementation (Cluster ID 0x0013).
+ 
+ * The Multistate Output (Basic) cluster provides an interface for setting the value of an output * that can take one of a number of discrete values, and accessing characteristics of that value. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclMultistateOutputBasicCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0013;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0013;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Multistate Output (Basic)";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Multistate Output (Basic)";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// This  attribute, of type Array of Character strings, holds descriptions of all possible        /// states of a multistate PresentValue.  The number of descriptions matches the number of states        /// defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as        /// an index into the array. If the size of this array is changed, the NumberOfStates property SHALL        /// also be changed to the same value. The character set used SHALL be ASCII, and the attribute        /// SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       /// </summary>
-       public static ushort ATTR_STATETEXT = 0x000E;
+       /* Attribute constants */
+       <summary>
+        * This  attribute, of type Array of Character strings, holds descriptions of all possible        * states of a multistate PresentValue.  The number of descriptions matches the number of states        * defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as        * an index into the array. If the size of this array is changed, the NumberOfStates property SHALL        * also be changed to the same value. The character set used SHALL be ASCII, and the attribute        * SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       </summary>
+       public const ushort ATTR_STATETEXT = 0x000E;
 
-       /// <summary>
-        /// The Description attribute, of type Character string, MAY be used to hold a description        /// of the usage of the input, output or value, as appropriate to the cluster. The character        /// set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,        /// which SHALL be printable but are otherwise unrestricted.       /// </summary>
-       public static ushort ATTR_DESCRIPTION = 0x001C;
+       <summary>
+        * The Description attribute, of type Character string, MAY be used to hold a description        * of the usage of the input, output or value, as appropriate to the cluster. The character        * set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,        * which SHALL be printable but are otherwise unrestricted.       </summary>
+       public const ushort ATTR_DESCRIPTION = 0x001C;
 
-       /// <summary>
-        /// This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate        /// PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.        /// If the value of this property is changed, the size of the StateText array, if present, SHALL also        /// be changed to the same value. The states are numbered consecutively, starting with 1.       /// </summary>
-       public static ushort ATTR_NUMBEROFSTATES = 0x004A;
+       <summary>
+        * This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate        * PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.        * If the value of this property is changed, the size of the StateText array, if present, SHALL also        * be changed to the same value. The states are numbered consecutively, starting with 1.       </summary>
+       public const ushort ATTR_NUMBEROFSTATES = 0x004A;
 
-       /// <summary>
-        /// The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical        /// input, output or value that the cluster represents is not in service. For an Input cluster, when        /// OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will        /// not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the        /// PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not        /// affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute        /// MAY be written to freely by software local to the device that the cluster resides on.       /// </summary>
-       public static ushort ATTR_OUTOFSERVICE = 0x0051;
+       <summary>
+        * The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical        * input, output or value that the cluster represents is not in service. For an Input cluster, when        * OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will        * not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the        * PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not        * affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute        * MAY be written to freely by software local to the device that the cluster resides on.       </summary>
+       public const ushort ATTR_OUTOFSERVICE = 0x0051;
 
-       /// <summary>
-        /// The PresentValue attribute indicates the current value of the input, output or        /// value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary        /// clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The        /// PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray        /// attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,        /// i.e., with a priority of 16.       /// </summary>
-       public static ushort ATTR_PRESENTVALUE = 0x0055;
+       <summary>
+        * The PresentValue attribute indicates the current value of the input, output or        * value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary        * clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The        * PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray        * attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,        * i.e., with a priority of 16.       </summary>
+       public const ushort ATTR_PRESENTVALUE = 0x0055;
 
-       /// <summary>
-        /// The Reliability attribute, of type 8-bit enumeration, provides an indication of whether        /// the PresentValueor the operation of the physical input, output or value in question (as        /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why        /// not. The Reliability attribute MAY have any of the following values:        /// <p>        /// NO-FAULT-DETECTED (0)        /// OVER-RANGE (2)        /// UNDER-RANGE (3)        /// OPEN-LOOP (4)        /// SHORTED-LOOP (5)        /// UNRELIABLE-OTHER (7)        /// PROCESS-ERROR (8)        /// MULTI-STATE-FAULT (9)        /// CONFIGURATION-ERROR (10)       /// </summary>
-       public static ushort ATTR_RELIABILITY = 0x0067;
+       <summary>
+        * The Reliability attribute, of type 8-bit enumeration, provides an indication of whether        * the PresentValueor the operation of the physical input, output or value in question (as        * appropriate for the cluster) is “reliable” as far as can be determined and, if not, why        * not. The Reliability attribute MAY have any of the following values:        * <p>        * NO-FAULT-DETECTED (0)        * OVER-RANGE (2)        * UNDER-RANGE (3)        * OPEN-LOOP (4)        * SHORTED-LOOP (5)        * UNRELIABLE-OTHER (7)        * PROCESS-ERROR (8)        * MULTI-STATE-FAULT (9)        * CONFIGURATION-ERROR (10)       </summary>
+       public const ushort ATTR_RELIABILITY = 0x0067;
 
-       /// <summary>
-        /// The RelinquishDefault attribute is the default value to be used for the PresentValue        /// attribute when all elements of the PriorityArray attribute are marked as invalid.       /// </summary>
-       public static ushort ATTR_RELINQUISHDEFAULT = 0x0068;
+       <summary>
+        * The RelinquishDefault attribute is the default value to be used for the PresentValue        * attribute when all elements of the PriorityArray attribute are marked as invalid.       </summary>
+       public const ushort ATTR_RELINQUISHDEFAULT = 0x0068;
 
-       /// <summary>
-        /// This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”        /// of the analog sensor. Three of the flags are associated with the values of other optional attributes        /// of this cluster. A more detailed status could be determined by reading the optional attributes (if        /// supported) that are linked to these flags. The relationship between individual flags is not defined.        /// <p>        /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE        /// <p>        /// where:        /// <p>        /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).        /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same        /// endpoint.        /// <p>        /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,        /// otherwise logical FALSE (0).        /// <p>        /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.        /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken        /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the        /// physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer        /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of        /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is        /// not writeable.        /// <p>        /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise        /// logical FALSE (0).       /// </summary>
-       public static ushort ATTR_STATUSFLAGS = 0x006F;
+       <summary>
+        * This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”        * of the analog sensor. Three of the flags are associated with the values of other optional attributes        * of this cluster. A more detailed status could be determined by reading the optional attributes (if        * supported) that are linked to these flags. The relationship between individual flags is not defined.        * <p>        * The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE        * <p>        * where:        * <p>        * IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).        * This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same        * endpoint.        * <p>        * FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,        * otherwise logical FALSE (0).        * <p>        * OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.        * Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken        * to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the        * physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer        * tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of        * the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is        * not writeable.        * <p>        * OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise        * logical FALSE (0).       </summary>
+       public const ushort ATTR_STATUSFLAGS = 0x006F;
 
-       /// <summary>
-        /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific        /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).        /// ApplicationType is subdivided into Group, Type and an Index number, as follows.        /// <p>        /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.        /// <p>        /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute        /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.        /// <p>        /// Index = Bits 0 -15 The specific application usage of the cluster.       /// </summary>
-       public static ushort ATTR_APPLICATIONTYPE = 0x0100;
+       <summary>
+        * The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific        * application usage for this cluster. (Note: This attribute has no BACnet equivalent).        * ApplicationType is subdivided into Group, Type and an Index number, as follows.        * <p>        * Group = Bits 24 -31 An indication of the cluster this attribute is part of.        * <p>        * Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute        * of the cluster represents. For Binary and Multistate clusters, the application usage domain.        * <p>        * Index = Bits 0 -15 The specific application usage of the cluster.       </summary>
+       public const ushort ATTR_APPLICATIONTYPE = 0x0100;
 
 
        // Attribute initialisation
@@ -89,59 +89,58 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Multistate Output (Basic) cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Multistate Output (Basic) cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclMultistateOutputBasicCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Set the StateText attribute [attribute ID14].
-       ///
-       /// This  attribute, of type Array of Character strings, holds descriptions of all possible       /// states of a multistate PresentValue.  The number of descriptions matches the number of states       /// defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       /// an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       /// also be changed to the same value. The character set used SHALL be ASCII, and the attribute       /// SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param stateText the string attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the StateText attribute [attribute ID14].
+       
+       * This  attribute, of type Array of Character strings, holds descriptions of all possible       * states of a multistate PresentValue.  The number of descriptions matches the number of states       * defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       * an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       * also be changed to the same value. The character set used SHALL be ASCII, and the attribute       * SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= stateText the string attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetStateText(object value)
        {
            return Write(_attributes[ATTR_STATETEXT], value);
        }
 
 
-       /// <summary>
-       /// Get the StateText attribute [attribute ID14].
-       ///
-       /// This  attribute, of type Array of Character strings, holds descriptions of all possible       /// states of a multistate PresentValue.  The number of descriptions matches the number of states       /// defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       /// an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       /// also be changed to the same value. The character set used SHALL be ASCII, and the attribute       /// SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the StateText attribute [attribute ID14].
+       
+       * This  attribute, of type Array of Character strings, holds descriptions of all possible       * states of a multistate PresentValue.  The number of descriptions matches the number of states       * defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       * an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       * also be changed to the same value. The character set used SHALL be ASCII, and the attribute       * SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetStateTextAsync()
        {
            return Read(_attributes[ATTR_STATETEXT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the StateText attribute [attribute ID14].
-       ///
-       /// This  attribute, of type Array of Character strings, holds descriptions of all possible       /// states of a multistate PresentValue.  The number of descriptions matches the number of states       /// defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       /// an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       /// also be changed to the same value. The character set used SHALL be ASCII, and the attribute       /// SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the StateText attribute [attribute ID14].
+       
+       * This  attribute, of type Array of Character strings, holds descriptions of all possible       * states of a multistate PresentValue.  The number of descriptions matches the number of states       * defined in the NumberOfStates property. The PresentValue, interpreted as an integer, serves as       * an index into the array. If the size of this array is changed, the NumberOfStates property SHALL       * also be changed to the same value. The character set used SHALL be ASCII, and the attribute       * SHALL contain a maximum of 16 characters, which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public string GetStateText(long refreshPeriod)
        {
            if (_attributes[ATTR_STATETEXT].IsLastValueCurrent(refreshPeriod))
@@ -153,48 +152,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Description attribute [attribute ID28].
-       ///
-       /// The Description attribute, of type Character string, MAY be used to hold a description       /// of the usage of the input, output or value, as appropriate to the cluster. The character       /// set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       /// which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param description the string attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Description attribute [attribute ID28].
+       
+       * The Description attribute, of type Character string, MAY be used to hold a description       * of the usage of the input, output or value, as appropriate to the cluster. The character       * set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       * which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= description the string attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetDescription(object value)
        {
            return Write(_attributes[ATTR_DESCRIPTION], value);
        }
 
 
-       /// <summary>
-       /// Get the Description attribute [attribute ID28].
-       ///
-       /// The Description attribute, of type Character string, MAY be used to hold a description       /// of the usage of the input, output or value, as appropriate to the cluster. The character       /// set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       /// which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Description attribute [attribute ID28].
+       
+       * The Description attribute, of type Character string, MAY be used to hold a description       * of the usage of the input, output or value, as appropriate to the cluster. The character       * set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       * which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetDescriptionAsync()
        {
            return Read(_attributes[ATTR_DESCRIPTION]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Description attribute [attribute ID28].
-       ///
-       /// The Description attribute, of type Character string, MAY be used to hold a description       /// of the usage of the input, output or value, as appropriate to the cluster. The character       /// set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       /// which SHALL be printable but are otherwise unrestricted.       ///
-       /// The attribute is of type string.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Description attribute [attribute ID28].
+       
+       * The Description attribute, of type Character string, MAY be used to hold a description       * of the usage of the input, output or value, as appropriate to the cluster. The character       * set used SHALL be ASCII, and the attribute SHALL contain a maximum of 16 characters,       * which SHALL be printable but are otherwise unrestricted.       
+        The attribute is of type string.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public string GetDescription(long refreshPeriod)
        {
            if (_attributes[ATTR_DESCRIPTION].IsLastValueCurrent(refreshPeriod))
@@ -206,48 +205,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the NumberOfStates attribute [attribute ID74].
-       ///
-       /// This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       /// PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       /// If the value of this property is changed, the size of the StateText array, if present, SHALL also       /// be changed to the same value. The states are numbered consecutively, starting with 1.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param numberOfStates the ushort attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the NumberOfStates attribute [attribute ID74].
+       
+       * This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       * PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       * If the value of this property is changed, the size of the StateText array, if present, SHALL also       * be changed to the same value. The states are numbered consecutively, starting with 1.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= numberOfStates the ushort attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetNumberOfStates(object value)
        {
            return Write(_attributes[ATTR_NUMBEROFSTATES], value);
        }
 
 
-       /// <summary>
-       /// Get the NumberOfStates attribute [attribute ID74].
-       ///
-       /// This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       /// PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       /// If the value of this property is changed, the size of the StateText array, if present, SHALL also       /// be changed to the same value. The states are numbered consecutively, starting with 1.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NumberOfStates attribute [attribute ID74].
+       
+       * This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       * PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       * If the value of this property is changed, the size of the StateText array, if present, SHALL also       * be changed to the same value. The states are numbered consecutively, starting with 1.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNumberOfStatesAsync()
        {
            return Read(_attributes[ATTR_NUMBEROFSTATES]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NumberOfStates attribute [attribute ID74].
-       ///
-       /// This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       /// PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       /// If the value of this property is changed, the size of the StateText array, if present, SHALL also       /// be changed to the same value. The states are numbered consecutively, starting with 1.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NumberOfStates attribute [attribute ID74].
+       
+       * This attribute, of type Unsigned 16-bit integer, defines the number of states that a multistate       * PresentValue MAY have. The NumberOfStates property SHALL always have a value greater than zero.       * If the value of this property is changed, the size of the StateText array, if present, SHALL also       * be changed to the same value. The states are numbered consecutively, starting with 1.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetNumberOfStates(long refreshPeriod)
        {
            if (_attributes[ATTR_NUMBEROFSTATES].IsLastValueCurrent(refreshPeriod))
@@ -259,48 +258,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the OutOfService attribute [attribute ID81].
-       ///
-       /// The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       /// input, output or value that the cluster represents is not in service. For an Input cluster, when       /// OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       /// not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       /// PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       /// affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       /// MAY be written to freely by software local to the device that the cluster resides on.       ///
-       /// The attribute is of type bool.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param outOfService the bool attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the OutOfService attribute [attribute ID81].
+       
+       * The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       * input, output or value that the cluster represents is not in service. For an Input cluster, when       * OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       * not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       * PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       * affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       * MAY be written to freely by software local to the device that the cluster resides on.       
+        The attribute is of type bool.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= outOfService the bool attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetOutOfService(object value)
        {
            return Write(_attributes[ATTR_OUTOFSERVICE], value);
        }
 
 
-       /// <summary>
-       /// Get the OutOfService attribute [attribute ID81].
-       ///
-       /// The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       /// input, output or value that the cluster represents is not in service. For an Input cluster, when       /// OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       /// not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       /// PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       /// affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       /// MAY be written to freely by software local to the device that the cluster resides on.       ///
-       /// The attribute is of type bool.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the OutOfService attribute [attribute ID81].
+       
+       * The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       * input, output or value that the cluster represents is not in service. For an Input cluster, when       * OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       * not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       * PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       * affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       * MAY be written to freely by software local to the device that the cluster resides on.       
+        The attribute is of type bool.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetOutOfServiceAsync()
        {
            return Read(_attributes[ATTR_OUTOFSERVICE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the OutOfService attribute [attribute ID81].
-       ///
-       /// The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       /// input, output or value that the cluster represents is not in service. For an Input cluster, when       /// OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       /// not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       /// PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       /// affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       /// MAY be written to freely by software local to the device that the cluster resides on.       ///
-       /// The attribute is of type bool.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the OutOfService attribute [attribute ID81].
+       
+       * The OutOfService attribute, of type Boolean, indicates whether (TRUE) or not (FALSE) the physical       * input, output or value that the cluster represents is not in service. For an Input cluster, when       * OutOfService is TRUE the PresentValue attribute is decoupled from the physical input and  will       * not track changes to the  physical input. For an Output cluster, when OutOfService is TRUE the       * PresentValue attribute is decoupled from the physical output, so changes to PresentValue will not       * affect the physical output. For a Value cluster, when OutOfService is TRUE the PresentValue attribute       * MAY be written to freely by software local to the device that the cluster resides on.       
+        The attribute is of type bool.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public bool GetOutOfService(long refreshPeriod)
        {
            if (_attributes[ATTR_OUTOFSERVICE].IsLastValueCurrent(refreshPeriod))
@@ -312,48 +311,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the PresentValue attribute [attribute ID85].
-       ///
-       /// The PresentValue attribute indicates the current value of the input, output or       /// value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       /// clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       /// PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       /// attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       /// i.e., with a priority of 16.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param presentValue the ushort attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the PresentValue attribute [attribute ID85].
+       
+       * The PresentValue attribute indicates the current value of the input, output or       * value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       * clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       * PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       * attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       * i.e., with a priority of 16.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= presentValue the ushort attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetPresentValue(object value)
        {
            return Write(_attributes[ATTR_PRESENTVALUE], value);
        }
 
 
-       /// <summary>
-       /// Get the PresentValue attribute [attribute ID85].
-       ///
-       /// The PresentValue attribute indicates the current value of the input, output or       /// value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       /// clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       /// PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       /// attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       /// i.e., with a priority of 16.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the PresentValue attribute [attribute ID85].
+       
+       * The PresentValue attribute indicates the current value of the input, output or       * value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       * clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       * PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       * attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       * i.e., with a priority of 16.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPresentValueAsync()
        {
            return Read(_attributes[ATTR_PRESENTVALUE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the PresentValue attribute [attribute ID85].
-       ///
-       /// The PresentValue attribute indicates the current value of the input, output or       /// value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       /// clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       /// PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       /// attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       /// i.e., with a priority of 16.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the PresentValue attribute [attribute ID85].
+       
+       * The PresentValue attribute indicates the current value of the input, output or       * value, as appropriate  for the cluster. For Analog clusters it is of type single precision, for Binary       * clusters it is of type  Boolean, and for multistate clusters it is of type Unsigned 16-bit integer. The       * PresentValue attribute of an input cluster SHALL be writable when OutOfService is TRUE. When the PriorityArray       * attribute is implemented, writing to PresentValue SHALL be equivalent to writing to element 16 of PriorityArray,       * i.e., with a priority of 16.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetPresentValue(long refreshPeriod)
        {
            if (_attributes[ATTR_PRESENTVALUE].IsLastValueCurrent(refreshPeriod))
@@ -365,48 +364,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Reliability attribute [attribute ID103].
-       ///
-       /// The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       /// the PresentValueor the operation of the physical input, output or value in question (as       /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       /// not. The Reliability attribute MAY have any of the following values:       /// <p>       /// NO-FAULT-DETECTED (0)       /// OVER-RANGE (2)       /// UNDER-RANGE (3)       /// OPEN-LOOP (4)       /// SHORTED-LOOP (5)       /// UNRELIABLE-OTHER (7)       /// PROCESS-ERROR (8)       /// MULTI-STATE-FAULT (9)       /// CONFIGURATION-ERROR (10)       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param reliability the byte attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Reliability attribute [attribute ID103].
+       
+       * The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       * the PresentValueor the operation of the physical input, output or value in question (as       * appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       * not. The Reliability attribute MAY have any of the following values:       * <p>       * NO-FAULT-DETECTED (0)       * OVER-RANGE (2)       * UNDER-RANGE (3)       * OPEN-LOOP (4)       * SHORTED-LOOP (5)       * UNRELIABLE-OTHER (7)       * PROCESS-ERROR (8)       * MULTI-STATE-FAULT (9)       * CONFIGURATION-ERROR (10)       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= reliability the byte attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetReliability(object value)
        {
            return Write(_attributes[ATTR_RELIABILITY], value);
        }
 
 
-       /// <summary>
-       /// Get the Reliability attribute [attribute ID103].
-       ///
-       /// The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       /// the PresentValueor the operation of the physical input, output or value in question (as       /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       /// not. The Reliability attribute MAY have any of the following values:       /// <p>       /// NO-FAULT-DETECTED (0)       /// OVER-RANGE (2)       /// UNDER-RANGE (3)       /// OPEN-LOOP (4)       /// SHORTED-LOOP (5)       /// UNRELIABLE-OTHER (7)       /// PROCESS-ERROR (8)       /// MULTI-STATE-FAULT (9)       /// CONFIGURATION-ERROR (10)       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Reliability attribute [attribute ID103].
+       
+       * The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       * the PresentValueor the operation of the physical input, output or value in question (as       * appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       * not. The Reliability attribute MAY have any of the following values:       * <p>       * NO-FAULT-DETECTED (0)       * OVER-RANGE (2)       * UNDER-RANGE (3)       * OPEN-LOOP (4)       * SHORTED-LOOP (5)       * UNRELIABLE-OTHER (7)       * PROCESS-ERROR (8)       * MULTI-STATE-FAULT (9)       * CONFIGURATION-ERROR (10)       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetReliabilityAsync()
        {
            return Read(_attributes[ATTR_RELIABILITY]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Reliability attribute [attribute ID103].
-       ///
-       /// The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       /// the PresentValueor the operation of the physical input, output or value in question (as       /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       /// not. The Reliability attribute MAY have any of the following values:       /// <p>       /// NO-FAULT-DETECTED (0)       /// OVER-RANGE (2)       /// UNDER-RANGE (3)       /// OPEN-LOOP (4)       /// SHORTED-LOOP (5)       /// UNRELIABLE-OTHER (7)       /// PROCESS-ERROR (8)       /// MULTI-STATE-FAULT (9)       /// CONFIGURATION-ERROR (10)       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Reliability attribute [attribute ID103].
+       
+       * The Reliability attribute, of type 8-bit enumeration, provides an indication of whether       * the PresentValueor the operation of the physical input, output or value in question (as       * appropriate for the cluster) is “reliable” as far as can be determined and, if not, why       * not. The Reliability attribute MAY have any of the following values:       * <p>       * NO-FAULT-DETECTED (0)       * OVER-RANGE (2)       * UNDER-RANGE (3)       * OPEN-LOOP (4)       * SHORTED-LOOP (5)       * UNRELIABLE-OTHER (7)       * PROCESS-ERROR (8)       * MULTI-STATE-FAULT (9)       * CONFIGURATION-ERROR (10)       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetReliability(long refreshPeriod)
        {
            if (_attributes[ATTR_RELIABILITY].IsLastValueCurrent(refreshPeriod))
@@ -418,48 +417,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the RelinquishDefault attribute [attribute ID104].
-       ///
-       /// The RelinquishDefault attribute is the default value to be used for the PresentValue       /// attribute when all elements of the PriorityArray attribute are marked as invalid.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param relinquishDefault the ushort attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the RelinquishDefault attribute [attribute ID104].
+       
+       * The RelinquishDefault attribute is the default value to be used for the PresentValue       * attribute when all elements of the PriorityArray attribute are marked as invalid.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= relinquishDefault the ushort attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetRelinquishDefault(object value)
        {
            return Write(_attributes[ATTR_RELINQUISHDEFAULT], value);
        }
 
 
-       /// <summary>
-       /// Get the RelinquishDefault attribute [attribute ID104].
-       ///
-       /// The RelinquishDefault attribute is the default value to be used for the PresentValue       /// attribute when all elements of the PriorityArray attribute are marked as invalid.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the RelinquishDefault attribute [attribute ID104].
+       
+       * The RelinquishDefault attribute is the default value to be used for the PresentValue       * attribute when all elements of the PriorityArray attribute are marked as invalid.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetRelinquishDefaultAsync()
        {
            return Read(_attributes[ATTR_RELINQUISHDEFAULT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the RelinquishDefault attribute [attribute ID104].
-       ///
-       /// The RelinquishDefault attribute is the default value to be used for the PresentValue       /// attribute when all elements of the PriorityArray attribute are marked as invalid.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the RelinquishDefault attribute [attribute ID104].
+       
+       * The RelinquishDefault attribute is the default value to be used for the PresentValue       * attribute when all elements of the PriorityArray attribute are marked as invalid.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetRelinquishDefault(long refreshPeriod)
        {
            if (_attributes[ATTR_RELINQUISHDEFAULT].IsLastValueCurrent(refreshPeriod))
@@ -471,31 +470,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the StatusFlags attribute [attribute ID111].
-       ///
-       /// This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”       /// of the analog sensor. Three of the flags are associated with the values of other optional attributes       /// of this cluster. A more detailed status could be determined by reading the optional attributes (if       /// supported) that are linked to these flags. The relationship between individual flags is not defined.       /// <p>       /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE       /// <p>       /// where:       /// <p>       /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).       /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same       /// endpoint.       /// <p>       /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,       /// otherwise logical FALSE (0).       /// <p>       /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.       /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken       /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the       /// physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer       /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of       /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is       /// not writeable.       /// <p>       /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise       /// logical FALSE (0).       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the StatusFlags attribute [attribute ID111].
+       
+       * This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”       * of the analog sensor. Three of the flags are associated with the values of other optional attributes       * of this cluster. A more detailed status could be determined by reading the optional attributes (if       * supported) that are linked to these flags. The relationship between individual flags is not defined.       * <p>       * The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE       * <p>       * where:       * <p>       * IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).       * This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same       * endpoint.       * <p>       * FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,       * otherwise logical FALSE (0).       * <p>       * OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.       * Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken       * to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the       * physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer       * tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of       * the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is       * not writeable.       * <p>       * OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise       * logical FALSE (0).       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetStatusFlagsAsync()
        {
            return Read(_attributes[ATTR_STATUSFLAGS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the StatusFlags attribute [attribute ID111].
-       ///
-       /// This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”       /// of the analog sensor. Three of the flags are associated with the values of other optional attributes       /// of this cluster. A more detailed status could be determined by reading the optional attributes (if       /// supported) that are linked to these flags. The relationship between individual flags is not defined.       /// <p>       /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE       /// <p>       /// where:       /// <p>       /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).       /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same       /// endpoint.       /// <p>       /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,       /// otherwise logical FALSE (0).       /// <p>       /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.       /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken       /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the       /// physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer       /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of       /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is       /// not writeable.       /// <p>       /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise       /// logical FALSE (0).       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the StatusFlags attribute [attribute ID111].
+       
+       * This attribute, of type bitmap, represents four Boolean flags that indicate the general “health”       * of the analog sensor. Three of the flags are associated with the values of other optional attributes       * of this cluster. A more detailed status could be determined by reading the optional attributes (if       * supported) that are linked to these flags. The relationship between individual flags is not defined.       * <p>       * The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE       * <p>       * where:       * <p>       * IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).       * This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same       * endpoint.       * <p>       * FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,       * otherwise logical FALSE (0).       * <p>       * OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.       * Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken       * to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the       * physical input. For an Output cluster, “overridden” is taken to mean that the physical output is no longer       * tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of       * the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is       * not writeable.       * <p>       * OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise       * logical FALSE (0).       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetStatusFlags(long refreshPeriod)
        {
            if (_attributes[ATTR_STATUSFLAGS].IsLastValueCurrent(refreshPeriod))
@@ -507,31 +506,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the ApplicationType attribute [attribute ID256].
-       ///
-       /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific       /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).       /// ApplicationType is subdivided into Group, Type and an Index number, as follows.       /// <p>       /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.       /// <p>       /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute       /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.       /// <p>       /// Index = Bits 0 -15 The specific application usage of the cluster.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ApplicationType attribute [attribute ID256].
+       
+       * The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific       * application usage for this cluster. (Note: This attribute has no BACnet equivalent).       * ApplicationType is subdivided into Group, Type and an Index number, as follows.       * <p>       * Group = Bits 24 -31 An indication of the cluster this attribute is part of.       * <p>       * Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute       * of the cluster represents. For Binary and Multistate clusters, the application usage domain.       * <p>       * Index = Bits 0 -15 The specific application usage of the cluster.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetApplicationTypeAsync()
        {
            return Read(_attributes[ATTR_APPLICATIONTYPE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ApplicationType attribute [attribute ID256].
-       ///
-       /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific       /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).       /// ApplicationType is subdivided into Group, Type and an Index number, as follows.       /// <p>       /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.       /// <p>       /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute       /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.       /// <p>       /// Index = Bits 0 -15 The specific application usage of the cluster.       ///
-       /// The attribute is of type int.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ApplicationType attribute [attribute ID256].
+       
+       * The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific       * application usage for this cluster. (Note: This attribute has no BACnet equivalent).       * ApplicationType is subdivided into Group, Type and an Index number, as follows.       * <p>       * Group = Bits 24 -31 An indication of the cluster this attribute is part of.       * <p>       * Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute       * of the cluster represents. For Binary and Multistate clusters, the application usage domain.       * <p>       * Index = Bits 0 -15 The specific application usage of the cluster.       
+        The attribute is of type int.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public int GetApplicationType(long refreshPeriod)
        {
            if (_attributes[ATTR_APPLICATIONTYPE].IsLastValueCurrent(refreshPeriod))

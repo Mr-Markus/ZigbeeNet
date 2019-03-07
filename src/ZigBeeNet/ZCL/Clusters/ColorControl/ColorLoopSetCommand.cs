@@ -7,48 +7,48 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/// <summary>
- /// Color Loop Set Command value object class.
- ///
- /// Cluster: Color Control. Command is sentTO the server.
- /// This command is a specific command used for the Color Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Color Loop Set Command value object class.
+ 
+ Cluster: Color Control. Command is sentTO the server.
+  This command is a specific command used for the Color Control cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
        public class ColorLoopSetCommand : ZclCommand
        {
-           /// <summary>
-           /// Update Flags command message field.
-           /// </summary>
+           <summary>
+            Update Flags command message field.
+           </summary>
            public byte UpdateFlags { get; set; }
 
-           /// <summary>
-           /// Action command message field.
-           /// </summary>
+           <summary>
+            Action command message field.
+           </summary>
            public byte Action { get; set; }
 
-           /// <summary>
-           /// Direction command message field.
-           /// </summary>
+           <summary>
+            Direction command message field.
+           </summary>
            public byte Direction { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
+           <summary>
+            Transition time command message field.
+           </summary>
            public ushort TransitionTime { get; set; }
 
-           /// <summary>
-           /// Start Hue command message field.
-           /// </summary>
+           <summary>
+            Start Hue command message field.
+           </summary>
            public ushort StartHue { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ColorLoopSetCommand()
            {
                GenericCommand = false;

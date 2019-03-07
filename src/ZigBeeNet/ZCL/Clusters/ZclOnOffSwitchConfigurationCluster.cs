@@ -11,34 +11,34 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// On/off Switch Configurationcluster implementation (Cluster ID 0x0007).
- ///
- /// Attributes and commands for configuring On/Off switching devices ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+On/off Switch Configurationcluster implementation (Cluster ID 0x0007).
+ 
+ * Attributes and commands for configuring On/Off switching devices 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclOnOffSwitchConfigurationCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0007;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0007;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "On/off Switch Configuration";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "On/off Switch Configuration";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       /// </summary>
-       public static ushort ATTR_SWITCHTYPE = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       </summary>
+       public const ushort ATTR_SWITCHTYPE = 0x0000;
 
-       /// <summary>
-        /// The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster        /// to be generated when the switch moves between its two states       /// </summary>
-       public static ushort ATTR_SWITCHACTIONS = 0x0010;
+       <summary>
+        * The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster        * to be generated when the switch moves between its two states       </summary>
+       public const ushort ATTR_SWITCHACTIONS = 0x0010;
 
 
        // Attribute initialisation
@@ -54,42 +54,41 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a On/off Switch Configuration cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a On/off Switch Configuration cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclOnOffSwitchConfigurationCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Get the SwitchType attribute [attribute ID0].
-       ///
-       /// The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the SwitchType attribute [attribute ID0].
+       
+       * The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetSwitchTypeAsync()
        {
            return Read(_attributes[ATTR_SWITCHTYPE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the SwitchType attribute [attribute ID0].
-       ///
-       /// The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the SwitchType attribute [attribute ID0].
+       
+       * The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetSwitchType(long refreshPeriod)
        {
            if (_attributes[ATTR_SWITCHTYPE].IsLastValueCurrent(refreshPeriod))
@@ -101,48 +100,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the SwitchActions attribute [attribute ID16].
-       ///
-       /// The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       /// to be generated when the switch moves between its two states       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param switchActions the byte attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the SwitchActions attribute [attribute ID16].
+       
+       * The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       * to be generated when the switch moves between its two states       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= switchActions the byte attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetSwitchActions(object value)
        {
            return Write(_attributes[ATTR_SWITCHACTIONS], value);
        }
 
 
-       /// <summary>
-       /// Get the SwitchActions attribute [attribute ID16].
-       ///
-       /// The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       /// to be generated when the switch moves between its two states       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the SwitchActions attribute [attribute ID16].
+       
+       * The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       * to be generated when the switch moves between its two states       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetSwitchActionsAsync()
        {
            return Read(_attributes[ATTR_SWITCHACTIONS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the SwitchActions attribute [attribute ID16].
-       ///
-       /// The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       /// to be generated when the switch moves between its two states       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the SwitchActions attribute [attribute ID16].
+       
+       * The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster       * to be generated when the switch moves between its two states       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetSwitchActions(long refreshPeriod)
        {
            if (_attributes[ATTR_SWITCHACTIONS].IsLastValueCurrent(refreshPeriod))

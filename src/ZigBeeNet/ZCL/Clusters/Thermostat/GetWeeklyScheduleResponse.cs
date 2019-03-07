@@ -7,53 +7,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Get Weekly Schedule Response value object class.
- ///
- /// Cluster: Thermostat. Command is sentFROM the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Weekly Schedule Response value object class.
+ 
+ Cluster: Thermostat. Command is sentFROM the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class GetWeeklyScheduleResponse : ZclCommand
        {
-           /// <summary>
-           /// Number of Transitions command message field.
-           /// </summary>
+           <summary>
+            Number of Transitions command message field.
+           </summary>
            public byte NumberOfTransitions { get; set; }
 
-           /// <summary>
-           /// Day of Week command message field.
-           /// </summary>
+           <summary>
+            Day of Week command message field.
+           </summary>
            public byte DayOfWeek { get; set; }
 
-           /// <summary>
-           /// Mode command message field.
-           /// </summary>
+           <summary>
+            Mode command message field.
+           </summary>
            public byte Mode { get; set; }
 
-           /// <summary>
-           /// Transition command message field.
-           /// </summary>
+           <summary>
+            Transition command message field.
+           </summary>
            public ushort Transition { get; set; }
 
-           /// <summary>
-           /// Heat Set command message field.
-           /// </summary>
+           <summary>
+            Heat Set command message field.
+           </summary>
            public ushort HeatSet { get; set; }
 
-           /// <summary>
-           /// Cool Set command message field.
-           /// </summary>
+           <summary>
+            Cool Set command message field.
+           </summary>
            public ushort CoolSet { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetWeeklyScheduleResponse()
            {
                GenericCommand = false;

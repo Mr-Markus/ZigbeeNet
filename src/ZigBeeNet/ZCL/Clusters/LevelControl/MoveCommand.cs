@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 
-/// <summary>
- /// Move Command value object class.
- ///
- /// Cluster: Level Control. Command is sentTO the server.
- /// This command is a specific command used for the Level Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Move Command value object class.
+ 
+ Cluster: Level Control. Command is sentTO the server.
+  This command is a specific command used for the Level Control cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.LevelControl
 {
        public class MoveCommand : ZclCommand
        {
-           /// <summary>
-           /// Move mode command message field.
-           /// </summary>
+           <summary>
+            Move mode command message field.
+           </summary>
            public byte MoveMode { get; set; }
 
-           /// <summary>
-           /// Rate command message field.
-           /// </summary>
+           <summary>
+            Rate command message field.
+           </summary>
            public byte Rate { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public MoveCommand()
            {
                GenericCommand = false;

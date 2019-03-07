@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of BinaryInputBasic attribute Reliability options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
+<sumamry>
+ * Enumeration of BinaryInputBasic attribute Reliability options.
+ *
+ * Code is auto-generated. Modifications may be overwritten!
+ *
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.BinaryInputBasic
 {

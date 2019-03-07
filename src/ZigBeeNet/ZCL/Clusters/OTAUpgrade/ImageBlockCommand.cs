@@ -7,64 +7,64 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/// <summary>
- /// Image Block Command value object class.
- ///
- /// Cluster: OTA Upgrade. Command is sentTO the server.
- /// This command is a specific command used for the OTA Upgrade cluster.
- ///
- /// The client device requests the image data at its leisure by sending Image Block Request command to /// the upgrade server. The client knows the total number of request commands it needs to send from the /// image size value received in Query Next Image Response command. /// <br> /// The client repeats Image Block Requests until it has successfully obtained all data. Manufacturer code, /// image type and file version are included in all further queries regarding that image. The information /// eliminates the need for the server to remember which OTA Upgrade Image is being used for each /// download process. /// <br> /// If the client supports the BlockRequestDelay attribute it shall include the value of the attribute as the /// BlockRequestDelay field of the Image Block Request message. The client shall ensure that it delays at /// least BlockRequestDelay milliseconds after the previous Image Block Request was sent before sending /// the next Image Block Request message. A client may delay its next Image Block Requests longer than /// its BlockRequestDelay attribute. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Image Block Command value object class.
+ 
+ Cluster: OTA Upgrade. Command is sentTO the server.
+  This command is a specific command used for the OTA Upgrade cluster.
+ 
+ * The client device requests the image data at its leisure by sending Image Block Request command to * the upgrade server. The client knows the total number of request commands it needs to send from the * image size value received in Query Next Image Response command. * <br> * The client repeats Image Block Requests until it has successfully obtained all data. Manufacturer code, * image type and file version are included in all further queries regarding that image. The information * eliminates the need for the server to remember which OTA Upgrade Image is being used for each * download process. * <br> * If the client supports the BlockRequestDelay attribute it shall include the value of the attribute as the * BlockRequestDelay field of the Image Block Request message. The client shall ensure that it delays at * least BlockRequestDelay milliseconds after the previous Image Block Request was sent before sending * the next Image Block Request message. A client may delay its next Image Block Requests longer than * its BlockRequestDelay attribute. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class ImageBlockCommand : ZclCommand
        {
-           /// <summary>
-           /// Field control command message field.
-           /// </summary>
+           <summary>
+            Field control command message field.
+           </summary>
            public byte FieldControl { get; set; }
 
-           /// <summary>
-           /// Manufacturer code command message field.
-           /// </summary>
+           <summary>
+            Manufacturer code command message field.
+           </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /// <summary>
-           /// Image type command message field.
-           /// </summary>
+           <summary>
+            Image type command message field.
+           </summary>
            public ushort ImageType { get; set; }
 
-           /// <summary>
-           /// File version command message field.
-           /// </summary>
+           <summary>
+            File version command message field.
+           </summary>
            public uint FileVersion { get; set; }
 
-           /// <summary>
-           /// File offset command message field.
-           /// </summary>
+           <summary>
+            File offset command message field.
+           </summary>
            public uint FileOffset { get; set; }
 
-           /// <summary>
-           /// Maximum data size command message field.
-           /// </summary>
+           <summary>
+            Maximum data size command message field.
+           </summary>
            public byte MaximumDataSize { get; set; }
 
-           /// <summary>
-           /// Request node address command message field.
-           /// </summary>
+           <summary>
+            Request node address command message field.
+           </summary>
            public IeeeAddress RequestNodeAddress { get; set; }
 
-           /// <summary>
-           /// BlockRequestDelay command message field.
-           /// </summary>
+           <summary>
+            BlockRequestDelay command message field.
+           </summary>
            public ushort BlockRequestDelay { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ImageBlockCommand()
            {
                GenericCommand = false;

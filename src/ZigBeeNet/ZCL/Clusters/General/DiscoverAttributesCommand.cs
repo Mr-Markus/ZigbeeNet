@@ -7,36 +7,36 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/// <summary>
- /// Discover Attributes Command value object class.
- ///
- /// Cluster: General. Command is sentTO the server.
- /// This command is a generic command used across the profile.
- ///
- /// The discover attributes command is generated when a remote device wishes to /// discover the identifiers and types of the attributes on a device which are supported /// within the cluster to which this command is directed. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Discover Attributes Command value object class.
+ 
+ Cluster: General. Command is sentTO the server.
+  This command is a generic command used across the profile.
+ 
+ * The discover attributes command is generated when a remote device wishes to * discover the identifiers and types of the attributes on a device which are supported * within the cluster to which this command is directed. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
        public class DiscoverAttributesCommand : ZclCommand
        {
-           /// <summary>
-           /// Start attribute identifier command message field.
-           ///
-          /// The start attribute identifier field is 16 bits in length and specifies the value          /// of the identifier at which to begin the attribute discovery.           /// </summary>
+           <summary>
+            Start attribute identifier command message field.
+           
+          * The start attribute identifier field is 16 bits in length and specifies the value          * of the identifier at which to begin the attribute discovery.           </summary>
            public ushort StartAttributeIdentifier { get; set; }
 
-           /// <summary>
-           /// Maximum attribute identifiers command message field.
-           ///
-          /// The  maximum attribute identifiers field is 8 bits in length and specifies the          /// maximum number of attribute identifiers that are to be returned in the resulting          /// Discover Attributes Response command.           /// </summary>
+           <summary>
+            Maximum attribute identifiers command message field.
+           
+          * The  maximum attribute identifiers field is 8 bits in length and specifies the          * maximum number of attribute identifiers that are to be returned in the resulting          * Discover Attributes Response command.           </summary>
            public byte MaximumAttributeIdentifiers { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public DiscoverAttributesCommand()
            {
                GenericCommand = true;

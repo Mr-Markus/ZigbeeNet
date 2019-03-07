@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Commissioning;
 
-/// <summary>
- /// Save Startup Parameters Command value object class.
- ///
- /// Cluster: Commissioning. Command is sentTO the server.
- /// This command is a specific command used for the Commissioning cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Save Startup Parameters Command value object class.
+ 
+ Cluster: Commissioning. Command is sentTO the server.
+  This command is a specific command used for the Commissioning cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Commissioning
 {
        public class SaveStartupParametersCommand : ZclCommand
        {
-           /// <summary>
-           /// Option command message field.
-           /// </summary>
+           <summary>
+            Option command message field.
+           </summary>
            public byte Option { get; set; }
 
-           /// <summary>
-           /// Index command message field.
-           /// </summary>
+           <summary>
+            Index command message field.
+           </summary>
            public byte Index { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public SaveStartupParametersCommand()
            {
                GenericCommand = false;

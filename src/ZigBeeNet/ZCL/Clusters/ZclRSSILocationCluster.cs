@@ -12,77 +12,77 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// RSSI Locationcluster implementation (Cluster ID 0x000B).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+RSSI Locationcluster implementation (Cluster ID 0x000B).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclRSSILocationCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x000B;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x000B;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "RSSI Location";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "RSSI Location";
 
-       //// Attribute constants /// </summary>
-       /// <summary>
-        /// The LocationType attribute is 8 bits long and is divided into bit fields.       /// </summary>
-       public static ushort ATTR_LOCATIONTYPE = 0x0000;
+       /* Attribute constants */
+       <summary>
+        * The LocationType attribute is 8 bits long and is divided into bit fields.       </summary>
+       public const ushort ATTR_LOCATIONTYPE = 0x0000;
 
-       /// <summary>
-       /// </summary>
-       public static ushort ATTR_LOCATIONMETHOD = 0x0001;
+       <summary>
+       </summary>
+       public const ushort ATTR_LOCATIONMETHOD = 0x0001;
 
-       /// <summary>
-        /// The LocationAge attribute indicates the amount of time, measured in seconds, that        /// has transpired since the location information was last calculated. This attribute is        /// not valid if the Absolute bit of the LocationType attribute is set to one.       /// </summary>
-       public static ushort ATTR_LOCATIONAGE = 0x0002;
+       <summary>
+        * The LocationAge attribute indicates the amount of time, measured in seconds, that        * has transpired since the location information was last calculated. This attribute is        * not valid if the Absolute bit of the LocationType attribute is set to one.       </summary>
+       public const ushort ATTR_LOCATIONAGE = 0x0002;
 
-       /// <summary>
-        /// The QualityMeasure attribute is a measure of confidence in the corresponding        /// location information. The higher the value, the more confident the transmitting        /// device is in the location information. A value of 0x64 indicates complete (100%)        /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed        /// confidence metric is mandated – the metric may be application and manufacturer        /// dependent).        /// <p>        /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.       /// </summary>
-       public static ushort ATTR_QUALITYMEASURE = 0x0003;
+       <summary>
+        * The QualityMeasure attribute is a measure of confidence in the corresponding        * location information. The higher the value, the more confident the transmitting        * device is in the location information. A value of 0x64 indicates complete (100%)        * confidence and a value of 0x00 indicates zero confidence. (Note: no fixed        * confidence metric is mandated – the metric may be application and manufacturer        * dependent).        * <p>        * This field is not valid if the Absolute bit of the LocationType attribute is set to one.       </summary>
+       public const ushort ATTR_QUALITYMEASURE = 0x0003;
 
-       /// <summary>
-        /// The NumberOfDevices attribute is the number of devices whose location data        /// were used to calculate the last location value. This attribute is related to the        /// QualityMeasure attribute.       /// </summary>
-       public static ushort ATTR_NUMBEROFDEVICES = 0x0004;
+       <summary>
+        * The NumberOfDevices attribute is the number of devices whose location data        * were used to calculate the last location value. This attribute is related to the        * QualityMeasure attribute.       </summary>
+       public const ushort ATTR_NUMBEROFDEVICES = 0x0004;
 
-       /// <summary>
-        /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        /// <p>        /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        /// <p>        /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of        /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       /// </summary>
-       public static ushort ATTR_COORDINATE1 = 0x0010;
+       <summary>
+        * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        * <p>        * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        * <p>        * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        * between 0x8001 and 0x7fff. The same range applies to y and z. A value of        * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       </summary>
+       public const ushort ATTR_COORDINATE1 = 0x0010;
 
-       /// <summary>
-        /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        /// <p>        /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        /// <p>        /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of        /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       /// </summary>
-       public static ushort ATTR_COORDINATE2 = 0x0011;
+       <summary>
+        * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        * <p>        * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        * <p>        * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        * between 0x8001 and 0x7fff. The same range applies to y and z. A value of        * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       </summary>
+       public const ushort ATTR_COORDINATE2 = 0x0011;
 
-       /// <summary>
-        /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        /// <p>        /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        /// <p>        /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of        /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       /// </summary>
-       public static ushort ATTR_COORDINATE3 = 0x0012;
+       <summary>
+        * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit        * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.        * <p>        * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10        * <p>        * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1        * between 0x8001 and 0x7fff. The same range applies to y and z. A value of        * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       </summary>
+       public const ushort ATTR_COORDINATE3 = 0x0012;
 
-       /// <summary>
-        /// The Power attribute specifies the value of the average power P0, measured in        /// dBm, received at a reference distance of one meter from the transmitter.        /// <p>        /// P0 = Power / 100        /// <p>        /// A value of 0x8000 indicates that Power is unknown.       /// </summary>
-       public static ushort ATTR_POWER = 0x0013;
+       <summary>
+        * The Power attribute specifies the value of the average power P0, measured in        * dBm, received at a reference distance of one meter from the transmitter.        * <p>        * P0 = Power / 100        * <p>        * A value of 0x8000 indicates that Power is unknown.       </summary>
+       public const ushort ATTR_POWER = 0x0013;
 
-       /// <summary>
-        /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,        /// an exponent that describes the rate at which the signal power decays with        /// increasing distance from the transmitter.        /// <p>        /// n = PathLossExponent / 100        /// <p>        /// A value of 0xffff indicates that PathLossExponent is unknown.       /// </summary>
-       public static ushort ATTR_PATHLOSSEXPONENT = 0x0014;
+       <summary>
+        * The PathLossExponent attribute specifies the value of the Path Loss Exponent n,        * an exponent that describes the rate at which the signal power decays with        * increasing distance from the transmitter.        * <p>        * n = PathLossExponent / 100        * <p>        * A value of 0xffff indicates that PathLossExponent is unknown.       </summary>
+       public const ushort ATTR_PATHLOSSEXPONENT = 0x0014;
 
-       /// <summary>
-        /// The ReportingPeriod attribute specifies the time in seconds between successive        /// reports of the device's location by means of the Location Data Notification        /// command. The minimum value this attribute can take is specified by the profile in        /// use. If ReportingPeriod is zero, the device does not automatically report its        /// location. Note that location information can always be polled at any time.       /// </summary>
-       public static ushort ATTR_REPORTINGPERIOD = 0x0015;
+       <summary>
+        * The ReportingPeriod attribute specifies the time in seconds between successive        * reports of the device's location by means of the Location Data Notification        * command. The minimum value this attribute can take is specified by the profile in        * use. If ReportingPeriod is zero, the device does not automatically report its        * location. Note that location information can always be polled at any time.       </summary>
+       public const ushort ATTR_REPORTINGPERIOD = 0x0015;
 
-       /// <summary>
-        /// The CalculationPeriod attribute specifies the time in seconds between successive        /// calculations of the device's location. If CalculationPeriod is less than the        /// physically possible minimum period that the calculation can be performed, the        /// calculation will be repeated as frequently as possible.       /// </summary>
-       public static ushort ATTR_CALCULATIONPERIOD = 0x0016;
+       <summary>
+        * The CalculationPeriod attribute specifies the time in seconds between successive        * calculations of the device's location. If CalculationPeriod is less than the        * physically possible minimum period that the calculation can be performed, the        * calculation will be repeated as frequently as possible.       </summary>
+       public const ushort ATTR_CALCULATIONPERIOD = 0x0016;
 
-       /// <summary>
-        /// The NumberRSSIMeasurements attribute specifies the number of RSSI        /// measurements to be used to generate one location estimate. The measurements are        /// averaged to improve accuracy. NumberRSSIMeasurements must be greater than or        /// equal to 1.       /// </summary>
-       public static ushort ATTR_NUMBERRSSIMEASUREMENTS = 0x0017;
+       <summary>
+        * The NumberRSSIMeasurements attribute specifies the number of RSSI        * measurements to be used to generate one location estimate. The measurements are        * averaged to improve accuracy. NumberRSSIMeasurements must be greater than or        * equal to 1.       </summary>
+       public const ushort ATTR_NUMBERRSSIMEASUREMENTS = 0x0017;
 
 
        // Attribute initialisation
@@ -109,42 +109,41 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a RSSI Location cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a RSSI Location cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclRSSILocationCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// Get the LocationType attribute [attribute ID0].
-       ///
-       /// The LocationType attribute is 8 bits long and is divided into bit fields.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LocationType attribute [attribute ID0].
+       
+       * The LocationType attribute is 8 bits long and is divided into bit fields.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLocationTypeAsync()
        {
            return Read(_attributes[ATTR_LOCATIONTYPE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LocationType attribute [attribute ID0].
-       ///
-       /// The LocationType attribute is 8 bits long and is divided into bit fields.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LocationType attribute [attribute ID0].
+       
+       * The LocationType attribute is 8 bits long and is divided into bit fields.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetLocationType(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCATIONTYPE].IsLastValueCurrent(refreshPeriod))
@@ -156,29 +155,29 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LocationMethod attribute [attribute ID1].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LocationMethod attribute [attribute ID1].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLocationMethodAsync()
        {
            return Read(_attributes[ATTR_LOCATIONMETHOD]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LocationMethod attribute [attribute ID1].
-       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LocationMethod attribute [attribute ID1].
+       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetLocationMethod(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCATIONMETHOD].IsLastValueCurrent(refreshPeriod))
@@ -190,31 +189,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the LocationAge attribute [attribute ID2].
-       ///
-       /// The LocationAge attribute indicates the amount of time, measured in seconds, that       /// has transpired since the location information was last calculated. This attribute is       /// not valid if the Absolute bit of the LocationType attribute is set to one.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the LocationAge attribute [attribute ID2].
+       
+       * The LocationAge attribute indicates the amount of time, measured in seconds, that       * has transpired since the location information was last calculated. This attribute is       * not valid if the Absolute bit of the LocationType attribute is set to one.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetLocationAgeAsync()
        {
            return Read(_attributes[ATTR_LOCATIONAGE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the LocationAge attribute [attribute ID2].
-       ///
-       /// The LocationAge attribute indicates the amount of time, measured in seconds, that       /// has transpired since the location information was last calculated. This attribute is       /// not valid if the Absolute bit of the LocationType attribute is set to one.       ///
-       /// The attribute is of type ushort.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the LocationAge attribute [attribute ID2].
+       
+       * The LocationAge attribute indicates the amount of time, measured in seconds, that       * has transpired since the location information was last calculated. This attribute is       * not valid if the Absolute bit of the LocationType attribute is set to one.       
+        The attribute is of type ushort.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public ushort GetLocationAge(long refreshPeriod)
        {
            if (_attributes[ATTR_LOCATIONAGE].IsLastValueCurrent(refreshPeriod))
@@ -226,31 +225,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the QualityMeasure attribute [attribute ID3].
-       ///
-       /// The QualityMeasure attribute is a measure of confidence in the corresponding       /// location information. The higher the value, the more confident the transmitting       /// device is in the location information. A value of 0x64 indicates complete (100%)       /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed       /// confidence metric is mandated – the metric may be application and manufacturer       /// dependent).       /// <p>       /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the QualityMeasure attribute [attribute ID3].
+       
+       * The QualityMeasure attribute is a measure of confidence in the corresponding       * location information. The higher the value, the more confident the transmitting       * device is in the location information. A value of 0x64 indicates complete (100%)       * confidence and a value of 0x00 indicates zero confidence. (Note: no fixed       * confidence metric is mandated – the metric may be application and manufacturer       * dependent).       * <p>       * This field is not valid if the Absolute bit of the LocationType attribute is set to one.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetQualityMeasureAsync()
        {
            return Read(_attributes[ATTR_QUALITYMEASURE]);
        }
 
-       /// <summary>
-       /// Synchronously Get the QualityMeasure attribute [attribute ID3].
-       ///
-       /// The QualityMeasure attribute is a measure of confidence in the corresponding       /// location information. The higher the value, the more confident the transmitting       /// device is in the location information. A value of 0x64 indicates complete (100%)       /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed       /// confidence metric is mandated – the metric may be application and manufacturer       /// dependent).       /// <p>       /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the QualityMeasure attribute [attribute ID3].
+       
+       * The QualityMeasure attribute is a measure of confidence in the corresponding       * location information. The higher the value, the more confident the transmitting       * device is in the location information. A value of 0x64 indicates complete (100%)       * confidence and a value of 0x00 indicates zero confidence. (Note: no fixed       * confidence metric is mandated – the metric may be application and manufacturer       * dependent).       * <p>       * This field is not valid if the Absolute bit of the LocationType attribute is set to one.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetQualityMeasure(long refreshPeriod)
        {
            if (_attributes[ATTR_QUALITYMEASURE].IsLastValueCurrent(refreshPeriod))
@@ -262,31 +261,31 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Get the NumberOfDevices attribute [attribute ID4].
-       ///
-       /// The NumberOfDevices attribute is the number of devices whose location data       /// were used to calculate the last location value. This attribute is related to the       /// QualityMeasure attribute.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NumberOfDevices attribute [attribute ID4].
+       
+       * The NumberOfDevices attribute is the number of devices whose location data       * were used to calculate the last location value. This attribute is related to the       * QualityMeasure attribute.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNumberOfDevicesAsync()
        {
            return Read(_attributes[ATTR_NUMBEROFDEVICES]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NumberOfDevices attribute [attribute ID4].
-       ///
-       /// The NumberOfDevices attribute is the number of devices whose location data       /// were used to calculate the last location value. This attribute is related to the       /// QualityMeasure attribute.       ///
-       /// The attribute is of type byte.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NumberOfDevices attribute [attribute ID4].
+       
+       * The NumberOfDevices attribute is the number of devices whose location data       * were used to calculate the last location value. This attribute is related to the       * QualityMeasure attribute.       
+        The attribute is of type byte.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public byte GetNumberOfDevices(long refreshPeriod)
        {
            if (_attributes[ATTR_NUMBEROFDEVICES].IsLastValueCurrent(refreshPeriod))
@@ -298,48 +297,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Coordinate1 attribute [attribute ID16].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param coordinate1 the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Coordinate1 attribute [attribute ID16].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= coordinate1 the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetCoordinate1(object value)
        {
            return Write(_attributes[ATTR_COORDINATE1], value);
        }
 
 
-       /// <summary>
-       /// Get the Coordinate1 attribute [attribute ID16].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Coordinate1 attribute [attribute ID16].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCoordinate1Async()
        {
            return Read(_attributes[ATTR_COORDINATE1]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Coordinate1 attribute [attribute ID16].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Coordinate1 attribute [attribute ID16].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetCoordinate1(long refreshPeriod)
        {
            if (_attributes[ATTR_COORDINATE1].IsLastValueCurrent(refreshPeriod))
@@ -351,48 +350,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Coordinate2 attribute [attribute ID17].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param coordinate2 the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Coordinate2 attribute [attribute ID17].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= coordinate2 the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetCoordinate2(object value)
        {
            return Write(_attributes[ATTR_COORDINATE2], value);
        }
 
 
-       /// <summary>
-       /// Get the Coordinate2 attribute [attribute ID17].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Coordinate2 attribute [attribute ID17].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCoordinate2Async()
        {
            return Read(_attributes[ATTR_COORDINATE2]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Coordinate2 attribute [attribute ID17].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Coordinate2 attribute [attribute ID17].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetCoordinate2(long refreshPeriod)
        {
            if (_attributes[ATTR_COORDINATE2].IsLastValueCurrent(refreshPeriod))
@@ -404,48 +403,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Coordinate3 attribute [attribute ID18].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param coordinate3 the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Coordinate3 attribute [attribute ID18].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= coordinate3 the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetCoordinate3(object value)
        {
            return Write(_attributes[ATTR_COORDINATE3], value);
        }
 
 
-       /// <summary>
-       /// Get the Coordinate3 attribute [attribute ID18].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Coordinate3 attribute [attribute ID18].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCoordinate3Async()
        {
            return Read(_attributes[ATTR_COORDINATE3]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Coordinate3 attribute [attribute ID18].
-       ///
-       /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       /// <p>       /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       /// <p>       /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of       /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Coordinate3 attribute [attribute ID18].
+       
+       * The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit       * integers, and represent orthogonal linear coordinates x, y, z in meters as follows.       * <p>       * x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10       * <p>       * The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1       * between 0x8001 and 0x7fff. The same range applies to y and z. A value of       * 0x8000 for any of the coordinates indicates that the coordinate is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetCoordinate3(long refreshPeriod)
        {
            if (_attributes[ATTR_COORDINATE3].IsLastValueCurrent(refreshPeriod))
@@ -457,48 +456,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the Power attribute [attribute ID19].
-       ///
-       /// The Power attribute specifies the value of the average power P0, measured in       /// dBm, received at a reference distance of one meter from the transmitter.       /// <p>       /// P0 = Power / 100       /// <p>       /// A value of 0x8000 indicates that Power is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param power the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the Power attribute [attribute ID19].
+       
+       * The Power attribute specifies the value of the average power P0, measured in       * dBm, received at a reference distance of one meter from the transmitter.       * <p>       * P0 = Power / 100       * <p>       * A value of 0x8000 indicates that Power is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= power the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetPower(object value)
        {
            return Write(_attributes[ATTR_POWER], value);
        }
 
 
-       /// <summary>
-       /// Get the Power attribute [attribute ID19].
-       ///
-       /// The Power attribute specifies the value of the average power P0, measured in       /// dBm, received at a reference distance of one meter from the transmitter.       /// <p>       /// P0 = Power / 100       /// <p>       /// A value of 0x8000 indicates that Power is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the Power attribute [attribute ID19].
+       
+       * The Power attribute specifies the value of the average power P0, measured in       * dBm, received at a reference distance of one meter from the transmitter.       * <p>       * P0 = Power / 100       * <p>       * A value of 0x8000 indicates that Power is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPowerAsync()
        {
            return Read(_attributes[ATTR_POWER]);
        }
 
-       /// <summary>
-       /// Synchronously Get the Power attribute [attribute ID19].
-       ///
-       /// The Power attribute specifies the value of the average power P0, measured in       /// dBm, received at a reference distance of one meter from the transmitter.       /// <p>       /// P0 = Power / 100       /// <p>       /// A value of 0x8000 indicates that Power is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the Power attribute [attribute ID19].
+       
+       * The Power attribute specifies the value of the average power P0, measured in       * dBm, received at a reference distance of one meter from the transmitter.       * <p>       * P0 = Power / 100       * <p>       * A value of 0x8000 indicates that Power is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetPower(long refreshPeriod)
        {
            if (_attributes[ATTR_POWER].IsLastValueCurrent(refreshPeriod))
@@ -510,48 +509,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the PathLossExponent attribute [attribute ID20].
-       ///
-       /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       /// an exponent that describes the rate at which the signal power decays with       /// increasing distance from the transmitter.       /// <p>       /// n = PathLossExponent / 100       /// <p>       /// A value of 0xffff indicates that PathLossExponent is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @param pathLossExponent the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the PathLossExponent attribute [attribute ID20].
+       
+       * The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       * an exponent that describes the rate at which the signal power decays with       * increasing distance from the transmitter.       * <p>       * n = PathLossExponent / 100       * <p>       * A value of 0xffff indicates that PathLossExponent is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <param name= pathLossExponent the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetPathLossExponent(object value)
        {
            return Write(_attributes[ATTR_PATHLOSSEXPONENT], value);
        }
 
 
-       /// <summary>
-       /// Get the PathLossExponent attribute [attribute ID20].
-       ///
-       /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       /// an exponent that describes the rate at which the signal power decays with       /// increasing distance from the transmitter.       /// <p>       /// n = PathLossExponent / 100       /// <p>       /// A value of 0xffff indicates that PathLossExponent is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the PathLossExponent attribute [attribute ID20].
+       
+       * The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       * an exponent that describes the rate at which the signal power decays with       * increasing distance from the transmitter.       * <p>       * n = PathLossExponent / 100       * <p>       * A value of 0xffff indicates that PathLossExponent is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetPathLossExponentAsync()
        {
            return Read(_attributes[ATTR_PATHLOSSEXPONENT]);
        }
 
-       /// <summary>
-       /// Synchronously Get the PathLossExponent attribute [attribute ID20].
-       ///
-       /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       /// an exponent that describes the rate at which the signal power decays with       /// increasing distance from the transmitter.       /// <p>       /// n = PathLossExponent / 100       /// <p>       /// A value of 0xffff indicates that PathLossExponent is unknown.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is MANDATORY
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the PathLossExponent attribute [attribute ID20].
+       
+       * The PathLossExponent attribute specifies the value of the Path Loss Exponent n,       * an exponent that describes the rate at which the signal power decays with       * increasing distance from the transmitter.       * <p>       * n = PathLossExponent / 100       * <p>       * A value of 0xffff indicates that PathLossExponent is unknown.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is MANDATORY
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetPathLossExponent(long refreshPeriod)
        {
            if (_attributes[ATTR_PATHLOSSEXPONENT].IsLastValueCurrent(refreshPeriod))
@@ -563,48 +562,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the ReportingPeriod attribute [attribute ID21].
-       ///
-       /// The ReportingPeriod attribute specifies the time in seconds between successive       /// reports of the device's location by means of the Location Data Notification       /// command. The minimum value this attribute can take is specified by the profile in       /// use. If ReportingPeriod is zero, the device does not automatically report its       /// location. Note that location information can always be polled at any time.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param reportingPeriod the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the ReportingPeriod attribute [attribute ID21].
+       
+       * The ReportingPeriod attribute specifies the time in seconds between successive       * reports of the device's location by means of the Location Data Notification       * command. The minimum value this attribute can take is specified by the profile in       * use. If ReportingPeriod is zero, the device does not automatically report its       * location. Note that location information can always be polled at any time.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= reportingPeriod the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetReportingPeriod(object value)
        {
            return Write(_attributes[ATTR_REPORTINGPERIOD], value);
        }
 
 
-       /// <summary>
-       /// Get the ReportingPeriod attribute [attribute ID21].
-       ///
-       /// The ReportingPeriod attribute specifies the time in seconds between successive       /// reports of the device's location by means of the Location Data Notification       /// command. The minimum value this attribute can take is specified by the profile in       /// use. If ReportingPeriod is zero, the device does not automatically report its       /// location. Note that location information can always be polled at any time.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the ReportingPeriod attribute [attribute ID21].
+       
+       * The ReportingPeriod attribute specifies the time in seconds between successive       * reports of the device's location by means of the Location Data Notification       * command. The minimum value this attribute can take is specified by the profile in       * use. If ReportingPeriod is zero, the device does not automatically report its       * location. Note that location information can always be polled at any time.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetReportingPeriodAsync()
        {
            return Read(_attributes[ATTR_REPORTINGPERIOD]);
        }
 
-       /// <summary>
-       /// Synchronously Get the ReportingPeriod attribute [attribute ID21].
-       ///
-       /// The ReportingPeriod attribute specifies the time in seconds between successive       /// reports of the device's location by means of the Location Data Notification       /// command. The minimum value this attribute can take is specified by the profile in       /// use. If ReportingPeriod is zero, the device does not automatically report its       /// location. Note that location information can always be polled at any time.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the ReportingPeriod attribute [attribute ID21].
+       
+       * The ReportingPeriod attribute specifies the time in seconds between successive       * reports of the device's location by means of the Location Data Notification       * command. The minimum value this attribute can take is specified by the profile in       * use. If ReportingPeriod is zero, the device does not automatically report its       * location. Note that location information can always be polled at any time.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetReportingPeriod(long refreshPeriod)
        {
            if (_attributes[ATTR_REPORTINGPERIOD].IsLastValueCurrent(refreshPeriod))
@@ -616,48 +615,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the CalculationPeriod attribute [attribute ID22].
-       ///
-       /// The CalculationPeriod attribute specifies the time in seconds between successive       /// calculations of the device's location. If CalculationPeriod is less than the       /// physically possible minimum period that the calculation can be performed, the       /// calculation will be repeated as frequently as possible.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param calculationPeriod the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the CalculationPeriod attribute [attribute ID22].
+       
+       * The CalculationPeriod attribute specifies the time in seconds between successive       * calculations of the device's location. If CalculationPeriod is less than the       * physically possible minimum period that the calculation can be performed, the       * calculation will be repeated as frequently as possible.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= calculationPeriod the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetCalculationPeriod(object value)
        {
            return Write(_attributes[ATTR_CALCULATIONPERIOD], value);
        }
 
 
-       /// <summary>
-       /// Get the CalculationPeriod attribute [attribute ID22].
-       ///
-       /// The CalculationPeriod attribute specifies the time in seconds between successive       /// calculations of the device's location. If CalculationPeriod is less than the       /// physically possible minimum period that the calculation can be performed, the       /// calculation will be repeated as frequently as possible.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the CalculationPeriod attribute [attribute ID22].
+       
+       * The CalculationPeriod attribute specifies the time in seconds between successive       * calculations of the device's location. If CalculationPeriod is less than the       * physically possible minimum period that the calculation can be performed, the       * calculation will be repeated as frequently as possible.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetCalculationPeriodAsync()
        {
            return Read(_attributes[ATTR_CALCULATIONPERIOD]);
        }
 
-       /// <summary>
-       /// Synchronously Get the CalculationPeriod attribute [attribute ID22].
-       ///
-       /// The CalculationPeriod attribute specifies the time in seconds between successive       /// calculations of the device's location. If CalculationPeriod is less than the       /// physically possible minimum period that the calculation can be performed, the       /// calculation will be repeated as frequently as possible.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the CalculationPeriod attribute [attribute ID22].
+       
+       * The CalculationPeriod attribute specifies the time in seconds between successive       * calculations of the device's location. If CalculationPeriod is less than the       * physically possible minimum period that the calculation can be performed, the       * calculation will be repeated as frequently as possible.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetCalculationPeriod(long refreshPeriod)
        {
            if (_attributes[ATTR_CALCULATIONPERIOD].IsLastValueCurrent(refreshPeriod))
@@ -669,48 +668,48 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// Set the NumberRSSIMeasurements attribute [attribute ID23].
-       ///
-       /// The NumberRSSIMeasurements attribute specifies the number of RSSI       /// measurements to be used to generate one location estimate. The measurements are       /// averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       /// equal to 1.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @param numberRSSIMeasurements the short attribute value to be set
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Set the NumberRSSIMeasurements attribute [attribute ID23].
+       
+       * The NumberRSSIMeasurements attribute specifies the number of RSSI       * measurements to be used to generate one location estimate. The measurements are       * averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       * equal to 1.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <param name= numberRSSIMeasurements the short attribute value to be set</param>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> SetNumberRSSIMeasurements(object value)
        {
            return Write(_attributes[ATTR_NUMBERRSSIMEASUREMENTS], value);
        }
 
 
-       /// <summary>
-       /// Get the NumberRSSIMeasurements attribute [attribute ID23].
-       ///
-       /// The NumberRSSIMeasurements attribute specifies the number of RSSI       /// measurements to be used to generate one location estimate. The measurements are       /// averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       /// equal to 1.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Get the NumberRSSIMeasurements attribute [attribute ID23].
+       
+       * The NumberRSSIMeasurements attribute specifies the number of RSSI       * measurements to be used to generate one location estimate. The measurements are       * averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       * equal to 1.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public Task<CommandResult> GetNumberRSSIMeasurementsAsync()
        {
            return Read(_attributes[ATTR_NUMBERRSSIMEASUREMENTS]);
        }
 
-       /// <summary>
-       /// Synchronously Get the NumberRSSIMeasurements attribute [attribute ID23].
-       ///
-       /// The NumberRSSIMeasurements attribute specifies the number of RSSI       /// measurements to be used to generate one location estimate. The measurements are       /// averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       /// equal to 1.       ///
-       /// The attribute is of type short.
-       ///
-       /// The implementation of this attribute by a device is OPTIONAL
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+       * Synchronously Get the NumberRSSIMeasurements attribute [attribute ID23].
+       
+       * The NumberRSSIMeasurements attribute specifies the number of RSSI       * measurements to be used to generate one location estimate. The measurements are       * averaged to improve accuracy. NumberRSSIMeasurements must be greater than or       * equal to 1.       
+        The attribute is of type short.
+       
+        The implementation of this attribute by a device is OPTIONAL
+      </summary>
+       <returns> the Task<CommandResult> command result Task</returns>
+       
        public short GetNumberRSSIMeasurements(long refreshPeriod)
        {
            if (_attributes[ATTR_NUMBERRSSIMEASUREMENTS].IsLastValueCurrent(refreshPeriod))
@@ -722,16 +721,16 @@ namespace ZigBeeNet.ZCL.Clusters
        }
 
 
-       /// <summary>
-       /// The Set Absolute Location Command
-       ///
-       /// @param coordinate1 {@link short} Coordinate 1
-       /// @param coordinate2 {@link short} Coordinate 2
-       /// @param coordinate3 {@link short} Coordinate 3
-       /// @param power {@link short} Power
-       /// @param pathLossExponent {@link ushort} Path Loss Exponent
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Set Absolute Location Command
+       </summary>
+       <param name= coordinate1 {@link short} Coordinate 1</param>
+       <param name= coordinate2 {@link short} Coordinate 2</param>
+       <param name= coordinate3 {@link short} Coordinate 3</param>
+       <param name= power {@link short} Power</param>
+       <param name= pathLossExponent {@link ushort} Path Loss Exponent</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SetAbsoluteLocationCommand(short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent)
        {
            SetAbsoluteLocationCommand command = new SetAbsoluteLocationCommand();
@@ -746,16 +745,16 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Set Device Configuration Command
-       ///
-       /// @param power {@link short} Power
-       /// @param pathLossExponent {@link ushort} Path Loss Exponent
-       /// @param calculationPeriod {@link ushort} Calculation Period
-       /// @param numberRSSIMeasurements {@link byte} Number RSSI Measurements
-       /// @param reportingPeriod {@link ushort} Reporting Period
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Set Device Configuration Command
+       </summary>
+       <param name= power {@link short} Power</param>
+       <param name= pathLossExponent {@link ushort} Path Loss Exponent</param>
+       <param name= calculationPeriod {@link ushort} Calculation Period</param>
+       <param name= numberRSSIMeasurements {@link byte} Number RSSI Measurements</param>
+       <param name= reportingPeriod {@link ushort} Reporting Period</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SetDeviceConfigurationCommand(short power, ushort pathLossExponent, ushort calculationPeriod, byte numberRSSIMeasurements, ushort reportingPeriod)
        {
            SetDeviceConfigurationCommand command = new SetDeviceConfigurationCommand();
@@ -770,12 +769,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Device Configuration Command
-       ///
-       /// @param targetAddress {@link IeeeAddress} Target Address
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Device Configuration Command
+       </summary>
+       <param name= targetAddress {@link IeeeAddress} Target Address</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetDeviceConfigurationCommand(IeeeAddress targetAddress)
        {
            GetDeviceConfigurationCommand command = new GetDeviceConfigurationCommand();
@@ -786,14 +785,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Get Location Data Command
-       ///
-       /// @param header {@link byte} Header
-       /// @param numberResponses {@link byte} Number Responses
-       /// @param targetAddress {@link IeeeAddress} Target Address
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Get Location Data Command
+       </summary>
+       <param name= header {@link byte} Header</param>
+       <param name= numberResponses {@link byte} Number Responses</param>
+       <param name= targetAddress {@link IeeeAddress} Target Address</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> GetLocationDataCommand(byte header, byte numberResponses, IeeeAddress targetAddress)
        {
            GetLocationDataCommand command = new GetLocationDataCommand();
@@ -806,17 +805,17 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The RSSI Response
-       ///
-       /// @param replyingDevice {@link IeeeAddress} Replying Device
-       /// @param coordinate1 {@link short} Coordinate 1
-       /// @param coordinate2 {@link short} Coordinate 2
-       /// @param coordinate3 {@link short} Coordinate 3
-       /// @param rSSI {@link sbyte} RSSI
-       /// @param numberRSSIMeasurements {@link byte} Number RSSI Measurements
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The RSSI Response
+       </summary>
+       <param name= replyingDevice {@link IeeeAddress} Replying Device</param>
+       <param name= coordinate1 {@link short} Coordinate 1</param>
+       <param name= coordinate2 {@link short} Coordinate 2</param>
+       <param name= coordinate3 {@link short} Coordinate 3</param>
+       <param name= rSSI {@link sbyte} RSSI</param>
+       <param name= numberRSSIMeasurements {@link byte} Number RSSI Measurements</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RSSIResponse(IeeeAddress replyingDevice, short coordinate1, short coordinate2, short coordinate3, sbyte rSSI, byte numberRSSIMeasurements)
        {
            RSSIResponse command = new RSSIResponse();
@@ -832,14 +831,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Send Pings Command
-       ///
-       /// @param targetAddress {@link IeeeAddress} Target Address
-       /// @param numberRSSIMeasurements {@link byte} Number RSSI Measurements
-       /// @param calculationPeriod {@link ushort} Calculation Period
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Send Pings Command
+       </summary>
+       <param name= targetAddress {@link IeeeAddress} Target Address</param>
+       <param name= numberRSSIMeasurements {@link byte} Number RSSI Measurements</param>
+       <param name= calculationPeriod {@link ushort} Calculation Period</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> SendPingsCommand(IeeeAddress targetAddress, byte numberRSSIMeasurements, ushort calculationPeriod)
        {
            SendPingsCommand command = new SendPingsCommand();
@@ -852,15 +851,15 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Anchor Node Announce Command
-       ///
-       /// @param anchorNodeAddress {@link IeeeAddress} Anchor Node Address
-       /// @param coordinate1 {@link short} Coordinate 1
-       /// @param coordinate2 {@link short} Coordinate 2
-       /// @param coordinate3 {@link short} Coordinate 3
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Anchor Node Announce Command
+       </summary>
+       <param name= anchorNodeAddress {@link IeeeAddress} Anchor Node Address</param>
+       <param name= coordinate1 {@link short} Coordinate 1</param>
+       <param name= coordinate2 {@link short} Coordinate 2</param>
+       <param name= coordinate3 {@link short} Coordinate 3</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> AnchorNodeAnnounceCommand(IeeeAddress anchorNodeAddress, short coordinate1, short coordinate2, short coordinate3)
        {
            AnchorNodeAnnounceCommand command = new AnchorNodeAnnounceCommand();
@@ -874,17 +873,17 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Device Configuration Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param power {@link short} Power
-       /// @param pathLossExponent {@link ushort} Path Loss Exponent
-       /// @param calculationPeriod {@link ushort} Calculation Period
-       /// @param numberRSSIMeasurements {@link byte} Number RSSI Measurements
-       /// @param reportingPeriod {@link ushort} Reporting Period
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Device Configuration Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= power {@link short} Power</param>
+       <param name= pathLossExponent {@link ushort} Path Loss Exponent</param>
+       <param name= calculationPeriod {@link ushort} Calculation Period</param>
+       <param name= numberRSSIMeasurements {@link byte} Number RSSI Measurements</param>
+       <param name= reportingPeriod {@link ushort} Reporting Period</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> DeviceConfigurationResponse(byte status, short power, ushort pathLossExponent, ushort calculationPeriod, byte numberRSSIMeasurements, ushort reportingPeriod)
        {
            DeviceConfigurationResponse command = new DeviceConfigurationResponse();
@@ -900,21 +899,21 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Location Data Response
-       ///
-       /// @param status {@link byte} Status
-       /// @param locationType {@link byte} Location Type
-       /// @param coordinate1 {@link short} Coordinate 1
-       /// @param coordinate2 {@link short} Coordinate 2
-       /// @param coordinate3 {@link short} Coordinate 3
-       /// @param power {@link short} Power
-       /// @param pathLossExponent {@link ushort} Path Loss Exponent
-       /// @param locationMethod {@link byte} Location Method
-       /// @param qualityMeasure {@link byte} Quality Measure
-       /// @param locationAge {@link ushort} Location Age
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Location Data Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <param name= locationType {@link byte} Location Type</param>
+       <param name= coordinate1 {@link short} Coordinate 1</param>
+       <param name= coordinate2 {@link short} Coordinate 2</param>
+       <param name= coordinate3 {@link short} Coordinate 3</param>
+       <param name= power {@link short} Power</param>
+       <param name= pathLossExponent {@link ushort} Path Loss Exponent</param>
+       <param name= locationMethod {@link byte} Location Method</param>
+       <param name= qualityMeasure {@link byte} Quality Measure</param>
+       <param name= locationAge {@link ushort} Location Age</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> LocationDataResponse(byte status, byte locationType, short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent, byte locationMethod, byte qualityMeasure, ushort locationAge)
        {
            LocationDataResponse command = new LocationDataResponse();
@@ -934,20 +933,20 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Location Data Notification Command
-       ///
-       /// @param locationType {@link byte} Location Type
-       /// @param coordinate1 {@link short} Coordinate 1
-       /// @param coordinate2 {@link short} Coordinate 2
-       /// @param coordinate3 {@link short} Coordinate 3
-       /// @param power {@link short} Power
-       /// @param pathLossExponent {@link ushort} Path Loss Exponent
-       /// @param locationMethod {@link byte} Location Method
-       /// @param qualityMeasure {@link byte} Quality Measure
-       /// @param locationAge {@link ushort} Location Age
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Location Data Notification Command
+       </summary>
+       <param name= locationType {@link byte} Location Type</param>
+       <param name= coordinate1 {@link short} Coordinate 1</param>
+       <param name= coordinate2 {@link short} Coordinate 2</param>
+       <param name= coordinate3 {@link short} Coordinate 3</param>
+       <param name= power {@link short} Power</param>
+       <param name= pathLossExponent {@link ushort} Path Loss Exponent</param>
+       <param name= locationMethod {@link byte} Location Method</param>
+       <param name= qualityMeasure {@link byte} Quality Measure</param>
+       <param name= locationAge {@link ushort} Location Age</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> LocationDataNotificationCommand(byte locationType, short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent, byte locationMethod, byte qualityMeasure, ushort locationAge)
        {
            LocationDataNotificationCommand command = new LocationDataNotificationCommand();
@@ -966,11 +965,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Compact Location Data Notification Command
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Compact Location Data Notification Command
+       </summary>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> CompactLocationDataNotificationCommand()
        {
            CompactLocationDataNotificationCommand command = new CompactLocationDataNotificationCommand();
@@ -978,12 +977,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The RSSI Ping Command
-       ///
-       /// @param locationType {@link byte} Location Type
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The RSSI Ping Command
+       </summary>
+       <param name= locationType {@link byte} Location Type</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RSSIPingCommand(byte locationType)
        {
            RSSIPingCommand command = new RSSIPingCommand();
@@ -994,11 +993,11 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The RSSI Request Command
-       ///
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The RSSI Request Command
+       </summary>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RSSIRequestCommand()
        {
            RSSIRequestCommand command = new RSSIRequestCommand();
@@ -1006,14 +1005,14 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Report RSSI Measurements Command
-       ///
-       /// @param reportingAddress {@link IeeeAddress} Reporting Address
-       /// @param numberOfNeighbors {@link byte} Number of Neighbors
-       /// @param neighborsInformation {@link List<NeighborInformation>} Neighbors Information
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Report RSSI Measurements Command
+       </summary>
+       <param name= reportingAddress {@link IeeeAddress} Reporting Address</param>
+       <param name= numberOfNeighbors {@link byte} Number of Neighbors</param>
+       <param name= neighborsInformation {@link List<NeighborInformation>} Neighbors Information</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> ReportRSSIMeasurementsCommand(IeeeAddress reportingAddress, byte numberOfNeighbors, List<NeighborInformation> neighborsInformation)
        {
            ReportRSSIMeasurementsCommand command = new ReportRSSIMeasurementsCommand();
@@ -1026,12 +1025,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Request Own Location Command
-       ///
-       /// @param requestingAddress {@link IeeeAddress} Requesting Address
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Request Own Location Command
+       </summary>
+       <param name= requestingAddress {@link IeeeAddress} Requesting Address</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> RequestOwnLocationCommand(IeeeAddress requestingAddress)
        {
            RequestOwnLocationCommand command = new RequestOwnLocationCommand();

@@ -12,24 +12,24 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.DoorLock;
 
-/// <summary>
- /// Door Lockcluster implementation (Cluster ID 0x0101).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+Door Lockcluster implementation (Cluster ID 0x0101).
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
    public class ZclDoorLockCluster : ZclCluster
    {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0101;
+       <summary>
+        The ZigBee Cluster Library Cluster ID
+       </summary>
+       public const ushort CLUSTER_ID = 0x0101;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Door Lock";
+       <summary>
+        The ZigBee Cluster Library Cluster Name
+       </summary>
+       public const string CLUSTER_NAME = "Door Lock";
 
        // Attribute initialisation
        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
@@ -39,23 +39,22 @@ namespace ZigBeeNet.ZCL.Clusters
            return attributeMap;
        }
 
-       /// <summary>
-       /// Default constructor to create a Door Lock cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
+        Default constructor to create a Door Lock cluster.
+       
+       <param name= zigbeeEndpoint the {@link ZigBeeEndpoint}
+       </param>
        public ZclDoorLockCluster(ZigBeeEndpoint zigbeeEndpoint)
            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
        {
        }
 
 
-       /// <summary>
-       /// The Lock Door Command
-       ///
-       /// @param pinCode {@link ByteArray} Pin code
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Lock Door Command
+       </summary>
+       <param name= pinCode {@link ByteArray} Pin code</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> LockDoorCommand(ByteArray pinCode)
        {
            LockDoorCommand command = new LockDoorCommand();
@@ -66,12 +65,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Unlock Door Command
-       ///
-       /// @param pinCode {@link ByteArray} Pin code
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Unlock Door Command
+       </summary>
+       <param name= pinCode {@link ByteArray} Pin code</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> UnlockDoorCommand(ByteArray pinCode)
        {
            UnlockDoorCommand command = new UnlockDoorCommand();
@@ -82,12 +81,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Lock Door Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Lock Door Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> LockDoorResponse(byte status)
        {
            LockDoorResponse command = new LockDoorResponse();
@@ -98,12 +97,12 @@ namespace ZigBeeNet.ZCL.Clusters
            return Send(command);
        }
 
-       /// <summary>
-       /// The Unlock Door Response
-       ///
-       /// @param status {@link byte} Status
-       /// @return the Task<CommandResult> command result Task
-       /// </summary>
+       <summary>
+        The Unlock Door Response
+       </summary>
+       <param name= status {@link byte} Status</param>
+       <returns the Task<CommandResult> command result Task
+       </returns>
        public Task<CommandResult> UnlockDoorResponse(byte status)
        {
            UnlockDoorResponse command = new UnlockDoorResponse();

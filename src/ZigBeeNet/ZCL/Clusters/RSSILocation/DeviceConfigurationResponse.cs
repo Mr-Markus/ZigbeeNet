@@ -7,53 +7,53 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.RSSILocation;
 
-/// <summary>
- /// Device Configuration Response value object class.
- ///
- /// Cluster: RSSI Location. Command is sentFROM the server.
- /// This command is a specific command used for the RSSI Location cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Device Configuration Response value object class.
+ 
+ Cluster: RSSI Location. Command is sentFROM the server.
+  This command is a specific command used for the RSSI Location cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.RSSILocation
 {
        public class DeviceConfigurationResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public byte Status { get; set; }
 
-           /// <summary>
-           /// Power command message field.
-           /// </summary>
+           <summary>
+            Power command message field.
+           </summary>
            public short Power { get; set; }
 
-           /// <summary>
-           /// Path Loss Exponent command message field.
-           /// </summary>
+           <summary>
+            Path Loss Exponent command message field.
+           </summary>
            public ushort PathLossExponent { get; set; }
 
-           /// <summary>
-           /// Calculation Period command message field.
-           /// </summary>
+           <summary>
+            Calculation Period command message field.
+           </summary>
            public ushort CalculationPeriod { get; set; }
 
-           /// <summary>
-           /// Number RSSI Measurements command message field.
-           /// </summary>
+           <summary>
+            Number RSSI Measurements command message field.
+           </summary>
            public byte NumberRSSIMeasurements { get; set; }
 
-           /// <summary>
-           /// Reporting Period command message field.
-           /// </summary>
+           <summary>
+            Reporting Period command message field.
+           </summary>
            public ushort ReportingPeriod { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public DeviceConfigurationResponse()
            {
                GenericCommand = false;

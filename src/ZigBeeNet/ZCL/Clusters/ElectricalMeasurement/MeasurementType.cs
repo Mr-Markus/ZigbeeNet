@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of ElectricalMeasurement attribute MeasurementType options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
+<sumamry>
+ * Enumeration of ElectricalMeasurement attribute MeasurementType options.
+ *
+ * Code is auto-generated. Modifications may be overwritten!
+ *
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ElectricalMeasurement
 {

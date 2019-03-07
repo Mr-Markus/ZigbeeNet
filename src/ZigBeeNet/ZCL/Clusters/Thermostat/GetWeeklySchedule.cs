@@ -7,33 +7,33 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
 
-/// <summary>
- /// Get Weekly Schedule value object class.
- ///
- /// Cluster: Thermostat. Command is sentTO the server.
- /// This command is a specific command used for the Thermostat cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Get Weekly Schedule value object class.
+ 
+ Cluster: Thermostat. Command is sentTO the server.
+  This command is a specific command used for the Thermostat cluster.
+ 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
        public class GetWeeklySchedule : ZclCommand
        {
-           /// <summary>
-           /// Days To Return command message field.
-           /// </summary>
+           <summary>
+            Days To Return command message field.
+           </summary>
            public byte DaysToReturn { get; set; }
 
-           /// <summary>
-           /// Mode To Return command message field.
-           /// </summary>
+           <summary>
+            Mode To Return command message field.
+           </summary>
            public byte ModeToReturn { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public GetWeeklySchedule()
            {
                GenericCommand = false;

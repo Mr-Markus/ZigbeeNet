@@ -7,54 +7,54 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.OTAUpgrade;
 
-/// <summary>
- /// Image Block Response value object class.
- ///
- /// Cluster: OTA Upgrade. Command is sentFROM the server.
- /// This command is a specific command used for the OTA Upgrade cluster.
- ///
- /// Upon receipt of an Image Block Request command the server shall generate an Image Block Response. /// If the server is able to retrieve the data for the client and does not wish to change the image download /// rate, it will respond with a status of SUCCESS and it will include all the fields in the payload. The use /// of file offset allows the server to send packets with variable data size during the upgrade process. This /// allows the server to support a case when the network topology of a client may change during the /// upgrade process, for example, mobile client may move around during the upgrade process. If the client /// has moved a few hops away, the data size shall be smaller. Moreover, using file offset eliminates the /// need for data padding since each Image Block Response command may contain different data size. A /// simple server implementation may choose to only support largest possible data size for the worst-case /// scenario in order to avoid supporting sending packets with variable data size. /// <br> /// The server shall respect the maximum data size value requested by the client and shall not send the data /// with length greater than that value. The server may send the data with length smaller than the value /// depending on the network topology of the client. For example, the client may be able to receive 100 /// bytes of data at once so it sends the request with 100 as maximum data size. But after considering all /// the security headers (perhaps from both APS and network levels) and source routing overhead (for /// example, the client is five hops away), the largest possible data size that the server can send to the /// client shall be smaller than 100 bytes. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
+<summary>
+ Image Block Response value object class.
+ 
+ Cluster: OTA Upgrade. Command is sentFROM the server.
+  This command is a specific command used for the OTA Upgrade cluster.
+ 
+ * Upon receipt of an Image Block Request command the server shall generate an Image Block Response. * If the server is able to retrieve the data for the client and does not wish to change the image download * rate, it will respond with a status of SUCCESS and it will include all the fields in the payload. The use * of file offset allows the server to send packets with variable data size during the upgrade process. This * allows the server to support a case when the network topology of a client may change during the * upgrade process, for example, mobile client may move around during the upgrade process. If the client * has moved a few hops away, the data size shall be smaller. Moreover, using file offset eliminates the * need for data padding since each Image Block Response command may contain different data size. A * simple server implementation may choose to only support largest possible data size for the worst-case * scenario in order to avoid supporting sending packets with variable data size. * <br> * The server shall respect the maximum data size value requested by the client and shall not send the data * with length greater than that value. The server may send the data with length smaller than the value * depending on the network topology of the client. For example, the client may be able to receive 100 * bytes of data at once so it sends the request with 100 as maximum data size. But after considering all * the security headers (perhaps from both APS and network levels) and source routing overhead (for * example, the client is five hops away), the largest possible data size that the server can send to the * client shall be smaller than 100 bytes. 
+  Code is auto-generated. Modifications may be overwritten!
+ </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
 {
        public class ImageBlockResponse : ZclCommand
        {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
+           <summary>
+            Status command message field.
+           </summary>
            public ZclStatus Status { get; set; }
 
-           /// <summary>
-           /// Manufacturer code command message field.
-           /// </summary>
+           <summary>
+            Manufacturer code command message field.
+           </summary>
            public ushort ManufacturerCode { get; set; }
 
-           /// <summary>
-           /// Image type command message field.
-           /// </summary>
+           <summary>
+            Image type command message field.
+           </summary>
            public ushort ImageType { get; set; }
 
-           /// <summary>
-           /// File Version command message field.
-           /// </summary>
+           <summary>
+            File Version command message field.
+           </summary>
            public uint FileVersion { get; set; }
 
-           /// <summary>
-           /// File offset command message field.
-           /// </summary>
+           <summary>
+            File offset command message field.
+           </summary>
            public uint FileOffset { get; set; }
 
-           /// <summary>
-           /// Image Data command message field.
-           /// </summary>
+           <summary>
+            Image Data command message field.
+           </summary>
            public ByteArray ImageData { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
+           <summary>
+            Default constructor.
+           </summary>
            public ImageBlockResponse()
            {
                GenericCommand = false;
