@@ -20,6 +20,10 @@ namespace ZigBeeNet.ZCL.Protocol
         public bool IsAnalog { get; private set; }
         public DataType DataType { get; private set; }
 
+        public ZclDataType()
+        {
+
+        }
 
         private ZclDataType(string label, Type dataClass, int id, bool analogue, DataType dataType)
         {
