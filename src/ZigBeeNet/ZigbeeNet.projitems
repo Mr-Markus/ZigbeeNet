@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZclClusterDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZigBeeEndpointDao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ZigBeeNodeDao.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ConcurrentBagExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DataTypeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\ZigBeeCommandNotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IZigBeeAddress.cs" />
