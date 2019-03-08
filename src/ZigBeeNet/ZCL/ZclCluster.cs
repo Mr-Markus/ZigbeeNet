@@ -129,14 +129,26 @@ namespace ZigBeeNet.ZCL
         /// Read an attribute
         ///
         /// @param attribute the attribute to read
-        /// @return command future
+        /// @return command Task
         /// </summary>
         public Task<CommandResult> Read(ushort attribute)
+        {
+            return Read(new List<ushort>(new[] { attribute }));
+        }
+
+        /// <summary>
+        /// Read a number of attributes given a list of attribute IDs. Care must be taken not to request too many attributes
+        /// so as to exceed the allowable frame length
+        ///
+        /// @param attributes List of attribute identifiers to read
+        /// @return command Task
+        /// </summary>
+        public Task<CommandResult> Read(List<ushort> attributes)
         {
             ReadAttributesCommand command = new ReadAttributesCommand();
 
             command.ClusterId = _clusterId;
-            command.Identifiers = new List<ushort>(new[] { attribute });
+            command.Identifiers = attributes;
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
 
             return Send(command);
@@ -146,7 +158,7 @@ namespace ZigBeeNet.ZCL
         /// Read an attribute
         ///
         /// @param attribute the {@link ZclAttribute} to read
-        /// @return command future
+        /// @return command Task
         /// </summary>
         public Task<CommandResult> Read(ZclAttribute attribute)
         {
@@ -157,9 +169,9 @@ namespace ZigBeeNet.ZCL
         /// Write an attribute
         ///
         /// @param attribute the attribute ID to write
-        /// @param dataType the {@link ZclDataType} of the object
-        /// @param value the value to set (as {@link Object})
-        /// @return command future {@link CommandResult}
+        /// @param dataType the ZclDataType of the object
+        /// @param value the value to set (as Object)
+        /// @return command Task CommandResult
         /// </summary>
         public Task<CommandResult> Write(ushort attribute, ZclDataType dataType, object value)
         {
@@ -183,9 +195,9 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Write an attribute
         ///
-        /// @param attribute the {@link ZclAttribute} to write
-        /// @param value the value to set (as {@link Object})
-        /// @return command future {@link CommandResult}
+        /// @param attribute the ZclAttribute to write
+        /// @param value the value to set (as Object)
+        /// @return command Task CommandResult
         /// </summary>
         public Task<CommandResult> Write(ZclAttribute attribute, object value)
         {
@@ -195,16 +207,16 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Read an attribute
         ///
-        /// @param attribute the {@link ZclAttribute} to read
-        /// @return
+        /// @param attribute the ZclAttribute to read
         /// </summary>
         protected object ReadSync(ZclAttribute attribute)
         {
-            // _logger.Debug("readSync request: {}", attribute);
+            // _logger.Debug("readSync request: {Attribute}", attribute);
             CommandResult result;
             try
             {
-                result = Read(attribute).Result;
+                // TODO: Consider removing the call to .Result and use async/await all the way. (GodeGenerator and calls must be adjusted)
+                result = Read(attribute).Result; 
             }
             catch (TaskCanceledException e) // TODO: Check if this is the right exception to catch here
             {
@@ -234,36 +246,35 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Configures the reporting for the specified attribute ID for analog attributes.
-        /// <p>
-        /// <b>minInterval</b>:
+        /// 
+        /// minInterval:
         /// The minimum reporting interval field is 16 bits in length and shall contain the
         /// minimum interval, in seconds, between issuing reports of the specified attribute.
         /// If minInterval is set to 0x0000, then there is no minimum limit, unless one is
         /// imposed by the specification of the cluster using this reporting mechanism or by
         /// the applicable profile.
-        /// <p>
-        /// <b>maxInterval</b>:
+        /// 
+        /// maxInterval:
         /// The maximum reporting interval field is 16 bits in length and shall contain the
         /// maximum interval, in seconds, between issuing reports of the specified attribute.
         /// If maxInterval is set to 0xffff, then the device shall not issue reports for the specified
         /// attribute, and the configuration information for that attribute need not be
         /// maintained.
-        /// <p>
-        /// <b>reportableChange</b>:
+        /// 
+        /// reportableChange:
         /// The reportable change field shall contain the minimum change to the attribute that
         /// will result in a report being issued. This field is of variable length. For attributes
         /// with 'analog' data type the field has the same data type as the attribute. The sign (if any) of the reportable
         /// change field is ignored.
         ///
-        /// @param attribute the {@link ZclAttribute} to configure reporting
+        /// @param attribute the ZclAttribute to configure reporting
         /// @param minInterval the minimum reporting interval
         /// @param maxInterval the maximum reporting interval
         /// @param reportableChange the minimum change required to report an update
-        /// @return command future {@link CommandResult}
+        /// @return command Task CommandResult
         /// </summary>
         public Task<CommandResult> SetReporting(ZclAttribute attribute, ushort minInterval, ushort maxInterval, object reportableChange)
         {
-
             ConfigureReportingCommand command = new ConfigureReportingCommand();
             command.ClusterId = _clusterId;
 
@@ -283,15 +294,15 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Configures the reporting for the specified attribute ID for discrete attributes.
-        /// <p>
-        /// <b>minInterval</b>:
+        /// 
+        /// minInterval:
         /// The minimum reporting interval field is 16 bits in length and shall contain the
         /// minimum interval, in seconds, between issuing reports of the specified attribute.
         /// If minInterval is set to 0x0000, then there is no minimum limit, unless one is
         /// imposed by the specification of the cluster using this reporting mechanism or by
         /// the applicable profile.
-        /// <p>
-        /// <b>maxInterval</b>:
+        /// 
+        /// maxInterval:
         /// The maximum reporting interval field is 16 bits in length and shall contain the
         /// maximum interval, in seconds, between issuing reports of the specified attribute.
         /// If maxInterval is set to 0xffff, then the device shall not issue reports for the specified
@@ -301,7 +312,7 @@ namespace ZigBeeNet.ZCL
         /// @param attribute the {@link ZclAttribute} to configure reporting
         /// @param minInterval the minimum reporting interval
         /// @param maxInterval the maximum reporting interval
-        /// @return command future {@link CommandResult}
+        /// @return command Task CommandResult
         /// </summary>
         public Task<CommandResult> SetReporting(ZclAttribute attribute, ushort minInterval, ushort maxInterval)
         {
@@ -311,8 +322,8 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Gets the reporting configuration for an attribute
         ///
-        /// @param attribute the {@link ZclAttribute} on which to enable reporting
-        /// @return command future {@link CommandResult}
+        /// @param attribute the ZclAttribute on which to enable reporting
+        /// @return command Task CommandResult
         /// </summary>
         public Task<CommandResult> GetReporting(ZclAttribute attribute)
         {
@@ -332,7 +343,7 @@ namespace ZigBeeNet.ZCL
         /// attributes, even if they are not actually supported by the device. The
         /// user should check to see if this is implemented.
         ///
-        /// @return {@link Set} containing all {@link ZclAttributes} available in this cluster
+        /// @return IEnumerable containing all ZclAttributes available in this cluster
         /// </summary>
         public IEnumerable<ZclAttribute> GetAttributes()
         {
@@ -343,9 +354,9 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Gets an attribute from the attribute ID
         ///
-        /// @param id
-        ///            the attribute ID
-        /// @return the {@link ZclAttribute}
+        /// @param the attribute ID
+        ///            
+        /// @return the ZclAttribute
         /// </summary>
         public ZclAttribute GetAttribute(ushort id)
         {
@@ -355,7 +366,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Gets the cluster ID for this cluster
         ///
-        /// @return the cluster ID as {@link Integer}
+        /// @return the cluster ID as Integer
         /// </summary>
         public ushort GetClusterId()
         {
@@ -365,7 +376,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Gets the cluster name for this cluster
         ///
-        /// @return the cluster name as {@link String}
+        /// @return the cluster name as String
         /// </summary>
         public string GetClusterName()
         {
@@ -375,7 +386,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Returns the ZigBee address of this cluster
         ///
-        /// @return the {@link ZigBeeEndpointAddress} of the cluster
+        /// @return the ZigBeeEndpointAddress of the cluster
         /// </summary>
         public ZigBeeEndpointAddress GetZigBeeAddress()
         {
@@ -385,7 +396,6 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Sets the server flag for this cluster. This means the cluster is listed
         /// in the devices input cluster list
-        ///
         /// </summary>
         public void SetServer()
         {
@@ -451,7 +461,7 @@ namespace ZigBeeNet.ZCL
         ///
         /// @param address the destination {@link IeeeAddress}
         /// @param endpointId the destination endpoint ID
-        /// @return Command future
+        /// @return command Task
         /// </summary>
         public Task<CommandResult> Bind(IeeeAddress address, ushort networkAddress, byte endpointId)
         {
@@ -467,11 +477,11 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Removes a binding from the cluster to the destination {@link ZigBeeEndpoint}.
+        /// Removes a binding from the cluster to the destination ZigBeeEndpoint.
         ///
-        /// @param address the destination {@link IeeeAddress}
+        /// @param address the destination IeeeAddress
         /// @param endpointId the destination endpoint ID
-        /// @return Command future
+        /// @return command Task
         /// </summary>
         public Task<CommandResult> Unbind(IeeeAddress address, byte endpointId)
         {
@@ -491,7 +501,7 @@ namespace ZigBeeNet.ZCL
         ///
         /// @param transactionId the transaction ID to use in the response
         /// @param commandIdentifier the command identifier to which this is a response
-        /// @param status the {@link ZclStatus} to send in the response
+        /// @param status the ZclStatus to send in the response
         /// </summary>
         public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status)
         {
@@ -511,7 +521,7 @@ namespace ZigBeeNet.ZCL
         /// device. Once a successful call to {@link #discoverAttributes()} has been made, the list will reflect the
         /// attributes supported by the remote device.
         ///
-        /// @return {@link Set} of {@link Integer} containing the list of supported attributes
+        /// @return IEnumerable of ushort containing the list of supported attributes
         /// </summary>
         public IEnumerable<ushort> GetSupportedAttributes()
         {
@@ -528,7 +538,7 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Checks if the cluster supports a specified attribute ID.
-        /// Note that if {@link #discoverAttributes(boolean)} has not been called, this method will return false.
+        /// Note that if DiscoverAttributes(bool) has not been called, this method will return false.
         ///
         /// @param attributeId the attribute to check
         /// @return true if the attribute is known to be supported, otherwise false
@@ -543,15 +553,15 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Discovers the list of attributes supported by the cluster on the remote device.
-        /// <p>
+        /// 
         /// If the discovery has already been completed, and rediscover is false, then the future will complete immediately
         /// and the user can use existing results. Normally there should not be a need to set rediscover to true.
-        /// <p>
-        /// This method returns a future to a boolean. Upon success the caller should call {@link #getSupportedAttributes()}
+        /// 
+        /// This method returns a future to a boolean. Upon success the caller should call GetSupportedAttributes()
         /// to get the list of supported attributes.
         ///
         /// @param rediscover true to perform a discovery even if it was previously completed
-        /// @return {@link Future} returning a {@link Boolean}
+        /// @return Task returning a bool
         /// </summary>
         public async Task<bool> DiscoverAttributes(bool rediscover)
         {
@@ -603,9 +613,9 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Returns a list of all the commands the remote device can receive. This will be an empty list if the
-        /// {@link #discoverCommandsReceived()} method has not completed.
+        /// DiscoverCommandsReceived() method has not completed.
         ///
-        /// @return a {@link Set} of command IDs the device supports
+        /// @return a IEnumerable of command IDs the device supports
         /// </summary>
         public IEnumerable<byte> GetSupportedCommandsReceived()
         {
@@ -617,7 +627,7 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Checks if the cluster supports a specified received command ID.
-        /// Note that if {@link #discoverCommandsReceived(boolean)} has not been called, this method will return false.
+        /// Note that if DiscoverCommandsReceived(boolean) has not been called, this method will return false.
         ///
         /// @param commandId the attribute to check
         /// @return true if the command is known to be supported, otherwise false
@@ -632,13 +642,13 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Discovers the list of commands received by the cluster on the remote device. If the discovery is successful,
-        /// users should call {@link ZclCluster#getSupportedCommandsReceived()} to get the list of supported commands.
-        /// <p>
+        /// users should call ZclCluster GetSupportedCommandsReceived() to get the list of supported commands.
+        /// 
         /// If the discovery has already been completed, and rediscover is false, then the future will complete immediately
         /// and the user can use existing results. Normally there should not be a need to set rediscover to true.
         ///
         /// @param rediscover true to perform a discovery even if it was previously completed
-        /// @return Command future {@link Boolean} with the success of the discovery
+        /// @return Command future bool with the success of the discovery
         /// </summary>
         public async Task<bool> DiscoverCommandsReceived(bool rediscover)
         {
@@ -685,9 +695,9 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Returns a list of all the commands the remote device can generate. This will be an empty list if the
-        /// {@link #discoverCommandsGenerated()} method has not completed.
+        /// DiscoverCommandsGenerated() method has not completed.
         ///
-        /// @return a {@link Set} of command IDs the device supports
+        /// @return a IEnumerable of command IDs the device supports
         /// </summary>
         public IEnumerable<byte> GetSupportedCommandsGenerated()
         {
@@ -699,7 +709,7 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Checks if the cluster supports a specified generated command ID.
-        /// Note that if {@link #discoverCommandsGenerated(boolean)} has not been called, this method will return false.
+        /// Note that if DiscoverCommandsGenerated(bool) has not been called, this method will return false.
         ///
         /// @param commandId the attribute to check
         /// @return true if the command is known to be supported, otherwise false
@@ -714,13 +724,13 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Discovers the list of commands generated by the cluster on the remote device If the discovery is successful,
-        /// users should call {@link ZclCluster#getSupportedCommandsGenerated()} to get the list of supported commands.
-        /// <p>
+        /// users should call ZclCluster GetSupportedCommandsGenerated() to get the list of supported commands.
+        /// 
         /// If the discovery has already been completed, and rediscover is false, then the future will complete immediately
         /// and the user can use existing results. Normally there should not be a need to set rediscover to true.
         ///
         /// @param rediscover true to perform a discovery even if it was previously completed
-        /// @return Command future {@link Boolean} with the success of the discovery
+        /// @return Command future bool with the success of the discovery
         /// </summary>
         public async Task<bool> DiscoverCommandsGenerated(bool rediscover)
         {
@@ -765,9 +775,9 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Adds a {@link ZclAttributeListener} to receive reports when an attribute is updated
+        /// Adds a ZclAttributeListener to receive reports when an attribute is updated
         ///
-        /// @param listener the {@link ZclAttributeListener} to add
+        /// @param listener the ZclAttributeListener to add
         /// </summary>
         public void AddAttributeListener(IZclAttributeListener listener)
         {
@@ -785,7 +795,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Remove an attribute listener from the cluster.
         ///
-        /// @param listener callback listener implementing {@link ZclAttributeListener} to remove
+        /// @param listener callback listener implementing ZclAttributeListener to remove
         /// </summary>
         public void RemoveAttributeListener(IZclAttributeListener listener)
         {
@@ -796,9 +806,9 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Notify attribute listeners of an updated {@link ZclAttribute}.
+        /// Notify attribute listeners of an updated ZclAttribute.
         ///
-        /// @param attribute the {@link ZclAttribute} to notify
+        /// @param attribute the ZclAttribute to notify
         /// </summary>
         private void NotifyAttributeListener(ZclAttribute attribute)
         {
@@ -818,9 +828,9 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Adds a {@link ZclCommandListener} to receive commands
+        /// Adds a ZclCommandListener to receive commands
         ///
-        /// @param listener the {@link ZclCommandListener} to add
+        /// @param listener the ZclCommandListener to add
         /// </summary>
         public void AddCommandListener(IZclCommandListener listener)
         {
@@ -833,9 +843,9 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Remove a {@link ZclCommandListener} from the cluster.
+        /// Remove a ZclCommandListener from the cluster.
         ///
-        /// @param listener callback listener implementing {@link ZclCommandListener} to remove
+        /// @param listener callback listener implementing ZclCommandListener to remove
         /// </summary>
         public void RemoveCommandListener(IZclCommandListener listener)
         {
@@ -843,9 +853,9 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Notify command listeners of an received {@link ZclCommand}.
+        /// Notify command listeners of an received ZclCommand.
         ///
-        /// @param command the {@link ZclCommand} to notify
+        /// @param command the ZclCommand to notify
         /// </summary>
         private void NotifyCommandListener(ZclCommand command)
         {
@@ -867,7 +877,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Processes a list of attribute reports for this cluster
         ///
-        /// @param reports {@List} of {@link AttributeReport}
+        /// @param reports List of AttributeReport
         /// </summary>
         public void HandleAttributeReport(List<AttributeReport> reports)
         {
@@ -890,7 +900,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Processes a list of attribute status reports for this cluster
         ///
-        /// @param reports {@List} of {@link ReadAttributeStatusRecord}
+        /// @param reports List of ReadAttributeStatusRecord
         /// </summary>
         public void HandleAttributeStatus(List<ReadAttributeStatusRecord> records)
         {
@@ -924,7 +934,7 @@ namespace ZigBeeNet.ZCL
         /// Processes a command received in this cluster. This is called from the node so we already know that the command is
         /// addressed to this endpoint and this cluster.
         ///
-        /// @param command the received {@link ZclCommand}
+        /// @param command the received ZclCommand
         /// </summary>
         public void HandleCommand(ZclCommand command)
         {
@@ -936,7 +946,7 @@ namespace ZigBeeNet.ZCL
         /// found, null is returned.
         ///
         /// @param commandId the command ID
-        /// @return the {@link ZclCommand} or null if no command found.
+        /// @return the ZclCommand or null if no command found.
         /// </summary>
         public virtual ZclCommand GetCommandFromId(int commandId)
         {
@@ -948,7 +958,7 @@ namespace ZigBeeNet.ZCL
         /// found, null is returned.
         ///
         /// @param commandId the command ID
-        /// @return the {@link ZclCommand} or null if no command found.
+        /// @return the ZclCommand or null if no command found.
         /// </summary>
         public ZclCommand GetResponseFromId(int commandId)
         {
