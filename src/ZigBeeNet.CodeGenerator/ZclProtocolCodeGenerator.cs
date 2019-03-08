@@ -227,22 +227,22 @@ namespace ZigBeeNet.CodeGenerator
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("           <summary>");
-                            code.AppendLine("            " + field.FieldLabel + " command message field.");
+                            code.AppendLine("           ///<summary>");
+                            code.AppendLine("           /// " + field.FieldLabel + " command message field.");
                             if (field.Description.Count != 0)
                             {
                                 code.AppendLine("           ");
                                 OutputWithLinebreak(code, "         ", field.Description);
                             }
-                            code.AppendLine("           </summary>");
+                            code.AppendLine("         ///  </summary>");
                             code.AppendLine("           public " + field.DataTypeClass + " " + field.NameUpperCamelCase + " { get; set; }");
                             code.AppendLine();
                         }
 
                         code.AppendLine();
-                        code.AppendLine("           <summary>");
-                        code.AppendLine("            Default constructor.");
-                        code.AppendLine("           </summary>");
+                        code.AppendLine("           ///<summary>");
+                        code.AppendLine("          ///  Default constructor.");
+                        code.AppendLine("         ///  </summary>");
                         code.AppendLine("           public " + className + "()");
                         code.AppendLine("           {");
                         code.AppendLine("               GenericCommand = " + ((cluster.ClusterType.Equals("GENERAL")) ? "true" : "false") + ";");
@@ -650,14 +650,14 @@ namespace ZigBeeNet.CodeGenerator
                     code.AppendLine("{");
                     code.AppendLine("   public class " + className + " : ZclCluster");
                     code.AppendLine("   {");
-                    code.AppendLine("       <summary>");
-                    code.AppendLine("        The ZigBee Cluster Library Cluster ID");
-                    code.AppendLine("       </summary>");
+                    code.AppendLine("      /// <summary>");
+                    code.AppendLine("       /// The ZigBee Cluster Library Cluster ID");
+                    code.AppendLine("     ///  </summary>");
                     code.AppendLine("       public const ushort CLUSTER_ID = 0x" + cluster.ClusterId.ToString("X4") + ";");
                     code.AppendLine();
-                    code.AppendLine("       <summary>");
-                    code.AppendLine("        The ZigBee Cluster Library Cluster Name");
-                    code.AppendLine("       </summary>");
+                    code.AppendLine("     ///  <summary>");
+                    code.AppendLine("      ///  The ZigBee Cluster Library Cluster Name");
+                    code.AppendLine("     ///  </summary>");
                     code.AppendLine("       public const string CLUSTER_NAME = \"" + cluster.ClusterName + "\";");
                     code.AppendLine();
 
@@ -666,9 +666,9 @@ namespace ZigBeeNet.CodeGenerator
                         code.AppendLine("       /* Attribute constants */");
                         foreach (Attribute attribute in cluster.Attributes.Values)
                         {
-                            code.AppendLine("       <summary>");
+                            code.AppendLine("      /// <summary>");
                             OutputWithLinebreak(code, "       ", attribute.AttributeDescription);
-                            code.AppendLine("       </summary>");
+                            code.AppendLine("     ///  </summary>");
                             code.AppendLine("       public const ushort " + attribute.EnumName + " = 0x" + attribute.AttributeId.ToString("X4") + ";");
                             code.AppendLine();
                         }
@@ -773,8 +773,8 @@ namespace ZigBeeNet.CodeGenerator
                     foreach (Command command in commands)
                     {
                         code.AppendLine();
-                        code.AppendLine("       <summary>");
-                        code.AppendLine("        The " + command.CommandLabel);
+                        code.AppendLine("      /// <summary>");
+                        code.AppendLine("      ///  The " + command.CommandLabel);
 
                         if (command.CommandDescription.Count != 0)
                         {
@@ -782,7 +782,7 @@ namespace ZigBeeNet.CodeGenerator
                             OutputWithLinebreak(code, "      ", command.CommandDescription);
                         }
 
-                        code.AppendLine("       </summary>");
+                        code.AppendLine("      /// </summary>");
 
                         List<Field> fields = new List<Field>(command.Fields.Values);
 
@@ -1005,8 +1005,8 @@ namespace ZigBeeNet.CodeGenerator
         private static void OutputAttributeDoc(StringBuilder code, string type, Attribute attribute, DataTypeMap zclDataType)
         {
             code.AppendLine();
-            code.AppendLine("       <summary>");
-            code.AppendLine("       * " + type + " the " + attribute.AttributeLabel + " attribute [attribute ID" + attribute.AttributeId + "].");
+            code.AppendLine("      /// <summary>");
+            code.AppendLine("       ///"+type + " the " + attribute.AttributeLabel + " attribute [attribute ID" + attribute.AttributeId + "].");
 
             if (attribute.AttributeDescription.Count() != 0)
             {
@@ -1029,7 +1029,7 @@ namespace ZigBeeNet.CodeGenerator
             code.AppendLine("        The attribute is of type " + attribute.DataTypeClass + ".");
             code.AppendLine("       ");
             code.AppendLine("        The implementation of this attribute by a device is " + attribute.AttributeImplementation.ToUpper());
-            code.AppendLine("      </summary>");
+            code.AppendLine("      ///<summary>");
 
             if ("Set reporting for".Equals(type))
             {
