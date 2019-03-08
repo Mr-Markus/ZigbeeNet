@@ -78,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         private int _securityMode = 1;
 
         private static ManualResetEventSlim _hardwareSync = new ManualResetEventSlim(false);
-        
+
         private byte[] _ep;
         private byte[] _prof;
         private byte[] _dev;
@@ -429,7 +429,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         {
             //if (!_messageListeners.Contains(_afMessageListenerFilter))
             //{
-                _commandInterface.AddAsynchronousCommandListener(_afMessageListenerFilter);
+            _commandInterface.AddAsynchronousCommandListener(_afMessageListenerFilter);
             //}
             // if (!announceListeners.contains(announceListenerFilter)) {
             _commandInterface.AddAsynchronousCommandListener(_announceListenerFilter);
@@ -876,16 +876,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         private ZToolPacket SendSynchronous(ZToolPacket request, int timeout)
         {
             ZToolPacket[] response = new ZToolPacket[] { null };
-            // final int RESEND_MAX_RETRY = 3;
             int sending = 1;
 
-            _logger.Trace("{} sending as synchronous command.", request.GetType().Name);
+            _logger.Trace("{Request} sending as synchronous command.", request.GetType().Name);
 
             SynchronousCommandListener listener = new SynchronousCommandListener();
 
             listener.OnResponseReceived += (object sender, ZToolPacket packet) =>
             {
                 response[0] = packet;
+                _hardwareSync.Set();
             };
 
             //    public void receivedCommandResponse(ZToolPacket packet)
@@ -916,38 +916,39 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                     {
                         _logger.Error("Synchronous command send failed due to unexpected exception.", ex);
                     }
-                    _logger.Trace("{} sent (synchronous command, attempt {}).", request.GetType().Name, sending);
-                    lock (response)
+
+                    _logger.Trace("{Request} sent (synchronous command, attempt {Count}).", request.GetType().Name, sending);
+
+                    long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
+
+                    while (response[0] == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
                     {
-                        long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
-                        while (response[0] == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
+                        long sleeping = wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+                        _logger.Trace("Waiting for synchronous command up to {Sleeping}ms till {WakeUpTime} Unixtime", sleeping, wakeUpTime);
+
+                        if (sleeping <= 0)
                         {
-                            long sleeping = wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                            _logger.Trace("Waiting for synchronous command up to {}ms till {} Unixtime", sleeping,
-                                    wakeUpTime);
-                            if (sleeping <= 0)
-                            {
-                                break;
-                            }
-                            try
-                            {
-                                _hardwareSync.Wait(TimeSpan.FromMilliseconds(sleeping));
-                            }
-                            catch (Exception ignored)
-                            {
-                            }
+                            break;
+                        }
+                        try
+                        {
+                            _hardwareSync.Wait(TimeSpan.FromMilliseconds(sleeping));
+                            _hardwareSync.Reset();
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.Trace("_hardwareSync.Wait() Exception" + Environment.NewLine + e.ToString());
                         }
                     }
                     if (response[0] != null)
                     {
-                        _logger.Trace("{Request} --> {Response}", request.GetType().Name,
-                                response[0].GetType().Name);
+                        _logger.Trace("{Request} --> {Response}", request.GetType().Name, response[0].GetType().Name);
                         break; // Break out as we have response.
                     }
                     else
                     {
-                        _logger.Debug("{} executed and timed out while waiting for response.",
-                                request.GetType().Name);
+                        _logger.Debug("{Request} executed and timed out while waiting for response.", request.GetType().Name);
                     }
                     if (ResendOnlyException)
                     {
