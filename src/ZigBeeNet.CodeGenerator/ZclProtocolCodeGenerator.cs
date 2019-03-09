@@ -114,12 +114,12 @@ namespace ZigBeeNet.CodeGenerator
 
         private static void OutputClassDoc(StringBuilder code, string description)
         {
-            code.AppendLine("/**");
-            code.AppendLine(" * " + description);
-            code.AppendLine(" *");
-            code.AppendLine(" * Code is auto-generated. Modifications may be overwritten!");
-            code.AppendLine(" *");
-            code.AppendLine(" */");
+            code.AppendLine("///<summary>");
+            code.AppendLine(" /// " + description);
+            code.AppendLine(" ///");
+            code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
+            code.AppendLine("///");
+            code.AppendLine(" ///</summary>");
         }
 
         private static void GenerateZclCommandClasses(Context context)
@@ -195,26 +195,26 @@ namespace ZigBeeNet.CodeGenerator
                         }
 
                         code.AppendLine();
-                        code.AppendLine("/**");
-                        code.AppendLine(" * " + command.CommandLabel + " value object class.");
+                        code.AppendLine("///<summary>");
+                        code.AppendLine(" /// " + command.CommandLabel + " value object class.");
 
-                        code.AppendLine(" *");
-                        code.AppendLine(" * Cluster: " + cluster.ClusterName + ". Command is sent"
+                        code.AppendLine(" ");
+                        code.AppendLine(" /// Cluster: " + cluster.ClusterName + ". Command is sent"
                                 + (cluster.Received.ContainsValue(command) ? "TO" : "FROM") + " the server.");
-                        code.AppendLine(" * This command is " + ((cluster.ClusterType.Equals("GENERAL"))
+                        code.AppendLine(" /// This command is " + ((cluster.ClusterType.Equals("GENERAL"))
                                 ? "a generic command used across the profile."
                                 : "a specific command used for the " + cluster.ClusterName + " cluster."));
 
                         if (command.CommandDescription.Count > 0)
                         {
-                            code.AppendLine(" *");
+                            code.AppendLine(" ");
                             OutputWithLinebreak(code, "", command.CommandDescription);
                         }
 
-                        code.AppendLine(" *");
-                        code.AppendLine(" * Code is auto-generated. Modifications may be overwritten!");
+                        code.AppendLine(" ");
+                        code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
 
-                        code.AppendLine(" */");
+                        code.AppendLine(" ///</summary>");
                         code.AppendLine();
                         code.AppendLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
                         code.AppendLine("{");
@@ -223,22 +223,22 @@ namespace ZigBeeNet.CodeGenerator
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("           /**");
-                            code.AppendLine("           * " + field.FieldLabel + " command message field.");
+                            code.AppendLine("           ///<summary>");
+                            code.AppendLine("           /// " + field.FieldLabel + " command message field.");
                             if (field.Description.Count != 0)
                             {
-                                code.AppendLine("           *");
+                                code.AppendLine("           ");
                                 OutputWithLinebreak(code, "         ", field.Description);
                             }
-                            code.AppendLine("           */");
+                            code.AppendLine("           ///</summary>");
                             code.AppendLine("           public " + field.DataTypeClass + " " + field.NameUpperCamelCase + " { get; set; }");
                             code.AppendLine();
                         }
 
                         code.AppendLine();
-                        code.AppendLine("           /**");
-                        code.AppendLine("           * Default constructor.");
-                        code.AppendLine("           */");
+                        code.AppendLine("          ///<summary>");
+                        code.AppendLine("           /// Default constructor.");
+                        code.AppendLine("           ///</summary>");
                         code.AppendLine("           public " + className + "()");
                         code.AppendLine("           {");
                         code.AppendLine("               GenericCommand = " + ((cluster.ClusterType.Equals("GENERAL")) ? "true" : "false") + ";");
@@ -392,7 +392,7 @@ namespace ZigBeeNet.CodeGenerator
 
                         Console.WriteLine(code.ToString());
 
-                        var outputPath = Path.Combine(_outRootPath, cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(","").Replace(")", ""));
+                        var outputPath = Path.Combine(_outRootPath, cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
                         var commmandClassFile = command.NameUpperCamelCase + ".cs";
                         var commandFullPath = Path.Combine(outputPath, commmandClassFile.Replace(" ", ""));
 
@@ -417,7 +417,7 @@ namespace ZigBeeNet.CodeGenerator
                     return;
                 }
 
-                builder.Append(indent + " *");
+                builder.Append(indent + "\r\n" + "///");
 
                 int len = 2;
                 foreach (string word in words)
@@ -425,7 +425,7 @@ namespace ZigBeeNet.CodeGenerator
                     if (len + word.Length > _lineLen)
                     {
                         builder.AppendLine();
-                        builder.Append(indent + " *");
+                        builder.Append(indent + "\r\n" + "///");
                         len = 2;
                     }
 
@@ -627,44 +627,44 @@ namespace ZigBeeNet.CodeGenerator
                     }
 
                     code.AppendLine();
-                    code.AppendLine("/**");
-                    code.AppendLine(" * " + cluster.ClusterName + "cluster implementation (Cluster ID 0x" + cluster.ClusterId.ToString("X4") + ").");
+                    code.AppendLine("///<summary>");
+                    code.AppendLine(" /// " + cluster.ClusterName + "cluster implementation (Cluster ID 0x" + cluster.ClusterId.ToString("X4") + ").");
 
                     if (cluster.ClusterDescription.Count > 0)
                     {
-                        code.AppendLine(" *");
+                        code.AppendLine(" ");
                     }
 
                     OutputWithLinebreak(code, "", cluster.ClusterDescription);
 
-                    code.AppendLine(" *");
-                    code.AppendLine(" * Code is auto-generated. Modifications may be overwritten!");
+                    code.AppendLine(" ");
+                    code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
 
-                    code.AppendLine(" */");
+                    code.AppendLine(" ///</summary>");
 
                     code.AppendLine("namespace ZigBeeNet.ZCL.Clusters");
                     code.AppendLine("{");
                     code.AppendLine("   public class " + className + " : ZclCluster");
                     code.AppendLine("   {");
-                    code.AppendLine("       /**");
-                    code.AppendLine("       * The ZigBee Cluster Library Cluster ID");
-                    code.AppendLine("       */");
+                    code.AppendLine("       ///<summary>");
+                    code.AppendLine("       /// The ZigBee Cluster Library Cluster ID");
+                    code.AppendLine("       ///</summary>");
                     code.AppendLine("       public const ushort CLUSTER_ID = 0x" + cluster.ClusterId.ToString("X4") + ";");
                     code.AppendLine();
-                    code.AppendLine("       /**");
-                    code.AppendLine("       * The ZigBee Cluster Library Cluster Name");
-                    code.AppendLine("       */");
+                    code.AppendLine("       ///<summary>");
+                    code.AppendLine("       /// The ZigBee Cluster Library Cluster Name");
+                    code.AppendLine("       ///</summary>");
                     code.AppendLine("       public const string CLUSTER_NAME = \"" + cluster.ClusterName + "\";");
                     code.AppendLine();
 
                     if (cluster.Attributes.Count != 0)
                     {
-                        code.AppendLine("       /* Attribute constants */");
+                        code.AppendLine("       ///* Attribute constants ///");
                         foreach (Attribute attribute in cluster.Attributes.Values)
                         {
-                            code.AppendLine("       /**");
-                            OutputWithLinebreak(code, "       ", attribute.AttributeDescription);
-                            code.AppendLine("       */");
+                            code.AppendLine("       ///<summary>");
+                            OutputWithLinebreak(code, "      /// ", attribute.AttributeDescription);
+                            code.AppendLine("       ///</summary>");
                             code.AppendLine("       public const ushort " + attribute.EnumName + " = 0x" + attribute.AttributeId.ToString("X4") + ";");
                             code.AppendLine();
                         }
@@ -700,11 +700,11 @@ namespace ZigBeeNet.CodeGenerator
                     code.AppendLine("       }");
                     code.AppendLine();
 
-                    code.AppendLine("       /**");
-                    code.AppendLine("       * Default constructor to create a " + cluster.ClusterName + " cluster.");
-                    code.AppendLine("       *");
-                    code.AppendLine("       * @param zigbeeEndpoint the {@link ZigBeeEndpoint}");
-                    code.AppendLine("       */");
+                    code.AppendLine("       ///<summary>");
+                    code.AppendLine("       /// Default constructor to create a " + cluster.ClusterName + " cluster.");
+                    code.AppendLine("       ");
+                    code.AppendLine("        ///<param name=zigbeeEndpoint the {@link ZigBeeEndpoint}");
+                    code.AppendLine("       ///</param>");
                     code.AppendLine("       public " + className + "(ZigBeeEndpoint zigbeeEndpoint)");
                     code.AppendLine("           : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)");
                     code.AppendLine("       {");
@@ -768,26 +768,26 @@ namespace ZigBeeNet.CodeGenerator
                     foreach (Command command in commands)
                     {
                         code.AppendLine();
-                        code.AppendLine("       /**");
-                        code.AppendLine("       * The " + command.CommandLabel);
+                        code.AppendLine("       ///</summary>");
+                        code.AppendLine("       /// The " + command.CommandLabel);
 
                         if (command.CommandDescription.Count != 0)
                         {
-                            code.AppendLine("       *");
+                            code.AppendLine("       ");
                             OutputWithLinebreak(code, "      ", command.CommandDescription);
                         }
 
-                        code.AppendLine("       *");
+                        code.AppendLine("       ");
 
                         List<Field> fields = new List<Field>(command.Fields.Values);
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("       * @param " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass + "} " + field.FieldLabel);
+                            code.AppendLine("       ///<param name= " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass + "} " + field.FieldLabel + "///</param>");
                         }
 
-                        code.AppendLine("       * @return the Task<CommandResult> command result Task");
-                        code.AppendLine("       */");
+                        code.AppendLine("       ///<returns> the Task<CommandResult> command result Task");
+                        code.AppendLine("     ///</returns>");
                         code.Append("       public Task<CommandResult> " + command.NameUpperCamelCase + "(");
 
                         bool first = true;
