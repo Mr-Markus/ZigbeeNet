@@ -115,11 +115,11 @@ namespace ZigBeeNet.CodeGenerator
         private static void OutputClassDoc(StringBuilder code, string description)
         {
             code.AppendLine("///<summary>");
-            code.AppendLine(" /// " + description);
-            code.AppendLine(" ///");
-            code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
+            code.AppendLine("/// " + description);
             code.AppendLine("///");
-            code.AppendLine(" ///</summary>");
+            code.AppendLine("/// Code is auto-generated. Modifications may be overwritten!");
+            code.AppendLine("///");
+            code.AppendLine("///</summary>");
         }
 
         private static void GenerateZclCommandClasses(Context context)
@@ -196,15 +196,15 @@ namespace ZigBeeNet.CodeGenerator
 
                         code.AppendLine();
                         code.AppendLine("///<summary>");
-                        code.AppendLine(" /// " + command.CommandLabel + " value object class.");
+                        code.AppendLine("/// " + command.CommandLabel + " value object class.");
 
                         code.AppendLine(" ");
-                        code.AppendLine(" /// Cluster: " + cluster.ClusterName + ". Command is sent"
+                        code.AppendLine("/// Cluster: " + cluster.ClusterName + ". Command is sent"
                                 + (cluster.Received.ContainsValue(command) ? "TO" : "FROM") + " the server.");
-                        code.AppendLine(" /// This command is " + ((cluster.ClusterType.Equals("GENERAL"))
+                        code.AppendLine("/// This command is " + ((cluster.ClusterType.Equals("GENERAL"))
                                 ? "a generic command used across the profile."
                                 : "a specific command used for the " + cluster.ClusterName + " cluster."));
-
+                     
                         if (command.CommandDescription.Count > 0)
                         {
                             code.AppendLine(" ");
@@ -212,9 +212,9 @@ namespace ZigBeeNet.CodeGenerator
                         }
 
                         code.AppendLine(" ");
-                        code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
+                        code.AppendLine("/// Code is auto-generated. Modifications may be overwritten!");
 
-                        code.AppendLine(" ///</summary>");
+                        code.AppendLine("///</summary>");
                         code.AppendLine();
                         code.AppendLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.ClusterName.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
                         code.AppendLine("{");
@@ -236,7 +236,7 @@ namespace ZigBeeNet.CodeGenerator
                         }
 
                         code.AppendLine();
-                        code.AppendLine("          ///<summary>");
+                        code.AppendLine("           ///<summary>");
                         code.AppendLine("           /// Default constructor.");
                         code.AppendLine("           ///</summary>");
                         code.AppendLine("           public " + className + "()");
@@ -255,7 +255,7 @@ namespace ZigBeeNet.CodeGenerator
                                 + ";");
 
                         code.AppendLine("           }");
-
+                       
                         if (fields.Count > 0)
                         {
                             code.AppendLine();
@@ -417,7 +417,7 @@ namespace ZigBeeNet.CodeGenerator
                     return;
                 }
 
-                builder.Append(indent + "\r\n" + "///");
+                builder.Append(indent + "\r\n" + "      ///");
 
                 int len = 2;
                 foreach (string word in words)
@@ -425,7 +425,7 @@ namespace ZigBeeNet.CodeGenerator
                     if (len + word.Length > _lineLen)
                     {
                         builder.AppendLine();
-                        builder.Append(indent + "\r\n" + "///");
+                        builder.Append(indent + "\r\n" + "      ///");
                         len = 2;
                     }
 
@@ -434,12 +434,13 @@ namespace ZigBeeNet.CodeGenerator
 
                     len += word.Length;
                 }
-
+               
                 if (len != 0)
                 {
                     Console.WriteLine();
                 }
             }
+            
         }
 
         private static void GenerateZclClusterClasses(Context context)
@@ -458,8 +459,7 @@ namespace ZigBeeNet.CodeGenerator
                     commands.AddRange(cluster.Received.Values);
                     commands.AddRange(cluster.Generated.Values);
 
-                    var code = new StringBuilder();
-
+                    var code = new StringBuilder();              
                     CodeGeneratorUtil.OutputLicense(code);
 
                     code.AppendLine();
@@ -484,7 +484,7 @@ namespace ZigBeeNet.CodeGenerator
                     {
                         List<Field> fields = new List<Field>(command.Fields.Values);
                         Console.WriteLine("Checking command " + command.CommandLabel);
-
+                        Console.WriteLine(code);
                         foreach (Field field in fields)
                         {
                             Console.WriteLine("Checking " + field.DataTypeClass);
@@ -628,7 +628,7 @@ namespace ZigBeeNet.CodeGenerator
 
                     code.AppendLine();
                     code.AppendLine("///<summary>");
-                    code.AppendLine(" /// " + cluster.ClusterName + "cluster implementation (Cluster ID 0x" + cluster.ClusterId.ToString("X4") + ").");
+                    code.AppendLine("///" + cluster.ClusterName + "cluster implementation (Cluster ID 0x" + cluster.ClusterId.ToString("X4") + ").");
 
                     if (cluster.ClusterDescription.Count > 0)
                     {
@@ -638,10 +638,10 @@ namespace ZigBeeNet.CodeGenerator
                     OutputWithLinebreak(code, "", cluster.ClusterDescription);
 
                     code.AppendLine(" ");
-                    code.AppendLine(" /// Code is auto-generated. Modifications may be overwritten!");
+                    code.AppendLine("/// Code is auto-generated. Modifications may be overwritten!");
 
-                    code.AppendLine(" ///</summary>");
-
+                    code.AppendLine("///</summary>");
+                    Console.WriteLine(code);
                     code.AppendLine("namespace ZigBeeNet.ZCL.Clusters");
                     code.AppendLine("{");
                     code.AppendLine("   public class " + className + " : ZclCluster");
@@ -659,12 +659,12 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (cluster.Attributes.Count != 0)
                     {
-                        code.AppendLine("       ///* Attribute constants ///");
+                        code.AppendLine("           /// Attribute constants ///");
                         foreach (Attribute attribute in cluster.Attributes.Values)
                         {
-                            code.AppendLine("       ///<summary>");
-                            OutputWithLinebreak(code, "      /// ", attribute.AttributeDescription);
-                            code.AppendLine("       ///</summary>");
+                            code.AppendLine("         ///<summary>");
+                            OutputWithLinebreak(code, "", attribute.AttributeDescription);
+                            code.AppendLine("       "+"\r\n"+"      ///</summary>");
                             code.AppendLine("       public const ushort " + attribute.EnumName + " = 0x" + attribute.AttributeId.ToString("X4") + ";");
                             code.AppendLine();
                         }
@@ -783,10 +783,10 @@ namespace ZigBeeNet.CodeGenerator
 
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("       ///<param name= " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass + "} " + field.FieldLabel + "///</param>");
+                            code.AppendLine("   ///<param name= " + field.NameLowerCamelCase + " {@link " + field.DataTypeClass + "} " + field.FieldLabel + "///</param>");
                         }
 
-                        code.AppendLine("       ///<returns> the Task<CommandResult> command result Task");
+                        code.AppendLine("      ///<returns> the Task<CommandResult> command result Task");
                         code.AppendLine("     ///</returns>");
                         code.Append("       public Task<CommandResult> " + command.NameUpperCamelCase + "(");
 
@@ -1000,59 +1000,59 @@ namespace ZigBeeNet.CodeGenerator
         private static void OutputAttributeDoc(StringBuilder code, string type, Attribute attribute, DataTypeMap zclDataType)
         {
             code.AppendLine();
-            code.AppendLine("       /**");
-            code.AppendLine("       * " + type + " the " + attribute.AttributeLabel + " attribute [attribute ID" + attribute.AttributeId + "].");
+            code.AppendLine("       ///<summary>");
+            code.AppendLine("       /// " + type + " the " + attribute.AttributeLabel + " attribute [attribute ID" + attribute.AttributeId + "].");
 
             if (attribute.AttributeDescription.Count() != 0)
             {
-                code.AppendLine("       *");
+                code.AppendLine("       ");
                 OutputWithLinebreak(code, "      ", attribute.AttributeDescription);
             }
 
             if ("Synchronously get".Equals(type))
             {
-                code.AppendLine("       *");
-                code.AppendLine("       * This method can return cached data if the attribute has already been received.");
-                code.AppendLine("       * The parameter refreshPeriod is used to control this. If the attribute has been received");
-                code.AppendLine("       * within refreshPeriod milliseconds, then the method will immediately return the last value");
-                code.AppendLine("       * received. If refreshPeriod is set to 0, then the attribute will always be updated.");
-                code.AppendLine("       *");
-                code.AppendLine("       * This method will block until the response is received or a timeout occurs unless the current value is returned.");
+                code.AppendLine("       ");
+                code.AppendLine("       ///This method can return cached data if the attribute has already been received.");
+                code.AppendLine("       ///The parameter refreshPeriod is used to control this. If the attribute has been received");
+                code.AppendLine("       ///within refreshPeriod milliseconds, then the method will immediately return the last value");
+                code.AppendLine("       ///received. If refreshPeriod is set to 0, then the attribute will always be updated.");
+                code.AppendLine("       ");
+                code.AppendLine("       ///This method will block until the response is received or a timeout occurs unless the current value is returned.");
             }
 
-            code.AppendLine("       *");
-            code.AppendLine("       * The attribute is of type " + attribute.DataTypeClass + ".");
-            code.AppendLine("       *");
-            code.AppendLine("       * The implementation of this attribute by a device is " + attribute.AttributeImplementation.ToUpper());
-            code.AppendLine("       *");
+            code.AppendLine("       ");
+            code.AppendLine("       /// The attribute is of type " + attribute.DataTypeClass + ".");
+            code.AppendLine("       ");
+            code.AppendLine("       ///The implementation of this attribute by a device is " + attribute.AttributeImplementation.ToUpper());
+            code.AppendLine("       ");
 
             if ("Set reporting for".Equals(type))
             {
-                code.AppendLine("       * @param minInterval minimum reporting period");
-                code.AppendLine("       * @param maxInterval maximum reporting period");
+                code.AppendLine("       ///<param name=minInterval minimum reporting period></param>");
+                code.AppendLine("       ///<param name= maxInterval maximum reporting period></param>");
 
                 if (zclDataType.Analogue)
                 {
-                    code.AppendLine("       * @param reportableChange {@link Object} delta required to trigger report");
+                    code.AppendLine("       ///<param name=reportableChange {@link Object} delta required to trigger report></param>");
                 }
             }
             else if ("Set".Equals(type))
             {
-                code.AppendLine("       * @param " + attribute.NameLowerCamelCase + " the " + attribute.DataTypeClass + " attribute value to be set");
+                code.AppendLine("       ///<param name=" + attribute.NameLowerCamelCase + " the " + attribute.DataTypeClass + " attribute value to be set></param>");
             }
 
             if ("Synchronously get".Equals(type))
             {
                 code.AppendLine(
-                        "       * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed");
-                code.AppendLine("       * @return the " + attribute.DataTypeClass + " attribute value, or null on error");
+                        "       ///<param name= refreshPeriod the maximum age of the data (in milliseconds) before an update is needed</param>");
+                code.AppendLine("       ///<returns> the " + attribute.DataTypeClass + " attribute value, or null on error</returns>");
             }
             else
             {
-                code.AppendLine("       * @return the Task<CommandResult> command result Task");
+                code.AppendLine("       ///<returns> the Task<CommandResult> command result Task</returns>");
             }
 
-            code.AppendLine("       */");
+            code.AppendLine("       ");
         }
 
         //private static string GetFieldType(Field field)
