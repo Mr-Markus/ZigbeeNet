@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of MultistateOutputBasic attribute StatusFlags options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.MultistateOutputBasic
 {
+   /// <summary>
+   /// Enumeration of MultistateOutputBasic attribute StatusFlags options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum StatusFlags
    {
        IN_ALARM = 0x0001,

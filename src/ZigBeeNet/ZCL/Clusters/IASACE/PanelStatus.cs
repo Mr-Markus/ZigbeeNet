@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of IASACE attribute Panel Status options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
+   /// <summary>
+   /// Enumeration of IASACE attribute Panel Status options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum PanelStatus
    {
        PANEL_DISARMED = 0x0000,

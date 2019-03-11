@@ -11,42 +11,42 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Pump Configuration and Controlcluster implementation (Cluster ID 0x0200).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
-   public class ZclPumpConfigurationAndControlCluster : ZclCluster
-   {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0200;
+    /// <summary>
+    /// Pump Configuration and Controlcluster implementation (Cluster ID 0x0200).
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class ZclPumpConfigurationAndControlCluster : ZclCluster
+    {
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster ID
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0200;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Pump Configuration and Control";
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster Name
+        /// </summary>
+        public const string CLUSTER_NAME = "Pump Configuration and Control";
 
-       // Attribute initialisation
-       protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
-       {
-           Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
+        // Attribute initialisation
+        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
+        {
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
 
-           return attributeMap;
-       }
+            return attributeMap;
+        }
 
-       /// <summary>
-       /// Default constructor to create a Pump Configuration and Control cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
-       public ZclPumpConfigurationAndControlCluster(ZigBeeEndpoint zigbeeEndpoint)
-           : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
-       {
-       }
+        /// <summary>
+        /// Default constructor to create a Pump Configuration and Control cluster.
+        ///
+        /// <param name ="zigbeeEndpoint">The ZigBeeEndpoint</param>
+        /// </summary>
+        public ZclPumpConfigurationAndControlCluster(ZigBeeEndpoint zigbeeEndpoint)
+            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
+        {
+        }
 
-   }
+    }
 }

@@ -7,76 +7,75 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.ColorControl;
 
-/// <summary>
- /// Step Saturation Command value object class.
- ///
- /// Cluster: Color Control. Command is sentTO the server.
- /// This command is a specific command used for the Color Control cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
-       public class StepSaturationCommand : ZclCommand
-       {
-           /// <summary>
-           /// Step mode command message field.
-           /// </summary>
-           public byte StepMode { get; set; }
+    /// <summary>
+    /// Step Saturation Command value object class.
+    /// <para>
+    /// Cluster: Color Control. Command is sentTO the server.
+    /// This command is a specific command used for the Color Control cluster.
+    /// </para>
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class StepSaturationCommand : ZclCommand
+    {
+        /// <summary>
+        /// Step mode command message field.
+        /// </summary>
+        public byte StepMode { get; set; }
 
-           /// <summary>
-           /// Step size command message field.
-           /// </summary>
-           public byte StepSize { get; set; }
+        /// <summary>
+        /// Step size command message field.
+        /// </summary>
+        public byte StepSize { get; set; }
 
-           /// <summary>
-           /// Transition time command message field.
-           /// </summary>
-           public byte TransitionTime { get; set; }
+        /// <summary>
+        /// Transition time command message field.
+        /// </summary>
+        public byte TransitionTime { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
-           public StepSaturationCommand()
-           {
-               GenericCommand = false;
-               ClusterId = 768;
-               CommandId = 5;
-               CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
-           }
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public StepSaturationCommand()
+        {
+            GenericCommand = false;
+            ClusterId = 768;
+            CommandId = 5;
+            CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
+        }
 
-           public override void Serialize(ZclFieldSerializer serializer)
-           {
+        public override void Serialize(ZclFieldSerializer serializer)
+        {
             serializer.Serialize(StepMode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(StepSize, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        }
 
-           public override void Deserialize(ZclFieldDeserializer deserializer)
-           {
-               StepMode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-               StepSize = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-               TransitionTime = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        public override void Deserialize(ZclFieldDeserializer deserializer)
+        {
+            StepMode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            StepSize = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TransitionTime = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        }
 
-           public override string ToString()
-           {
-               var builder = new StringBuilder();
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
 
-               builder.Append("StepSaturationCommand [");
-               builder.Append(base.ToString());
-               builder.Append(", StepMode=");
-               builder.Append(StepMode);
-               builder.Append(", StepSize=");
-               builder.Append(StepSize);
-               builder.Append(", TransitionTime=");
-               builder.Append(TransitionTime);
-               builder.Append(']');
+            builder.Append("StepSaturationCommand [");
+            builder.Append(base.ToString());
+            builder.Append(", StepMode=");
+            builder.Append(StepMode);
+            builder.Append(", StepSize=");
+            builder.Append(StepSize);
+            builder.Append(", TransitionTime=");
+            builder.Append(TransitionTime);
+            builder.Append(']');
 
-               return builder.ToString();
-           }
-
-       }
+            return builder.ToString();
+        }
+    }
 }

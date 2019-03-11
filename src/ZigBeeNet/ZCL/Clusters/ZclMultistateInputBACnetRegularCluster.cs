@@ -11,42 +11,42 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Multistate Input (BACnet Regular)cluster implementation (Cluster ID 0x060E).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
-   public class ZclMultistateInputBACnetRegularCluster : ZclCluster
-   {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x060E;
+    /// <summary>
+    /// Multistate Input (BACnet Regular)cluster implementation (Cluster ID 0x060E).
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class ZclMultistateInputBACnetRegularCluster : ZclCluster
+    {
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster ID
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x060E;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Multistate Input (BACnet Regular)";
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster Name
+        /// </summary>
+        public const string CLUSTER_NAME = "Multistate Input (BACnet Regular)";
 
-       // Attribute initialisation
-       protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
-       {
-           Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
+        // Attribute initialisation
+        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
+        {
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
 
-           return attributeMap;
-       }
+            return attributeMap;
+        }
 
-       /// <summary>
-       /// Default constructor to create a Multistate Input (BACnet Regular) cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
-       public ZclMultistateInputBACnetRegularCluster(ZigBeeEndpoint zigbeeEndpoint)
-           : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
-       {
-       }
+        /// <summary>
+        /// Default constructor to create a Multistate Input (BACnet Regular) cluster.
+        ///
+        /// <param name ="zigbeeEndpoint">The ZigBeeEndpoint</param>
+        /// </summary>
+        public ZclMultistateInputBACnetRegularCluster(ZigBeeEndpoint zigbeeEndpoint)
+            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
+        {
+        }
 
-   }
+    }
 }
