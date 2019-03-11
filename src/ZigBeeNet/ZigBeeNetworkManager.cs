@@ -141,6 +141,9 @@ namespace ZigBeeNet
         /// Our local network address
         /// </summary>
         private ushort _localNwkAddress = 0;
+
+        public ushort LocalNwkAddress => _localNwkAddress;
+
         private readonly object _networkStateSync = new object();
 
         /// <summary>

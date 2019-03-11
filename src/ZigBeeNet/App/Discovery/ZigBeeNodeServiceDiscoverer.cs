@@ -153,11 +153,15 @@ namespace ZigBeeNet.App.Discovery
             lock (DiscoveryTasks)
             {
                 // Remove any tasks that we know are not supported by this device
-                if (!_supportsManagementLqi && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
+                if ((!_supportsManagementLqi || Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN) && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
                 {
                     newTasks.Remove(NodeDiscoveryTask.NEIGHBORS);
                 }
-                if (!_supportsManagementRouting && newTasks.Contains(NodeDiscoveryTask.ROUTES))
+
+                if ((!_supportsManagementRouting ||
+                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN ||
+                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.END_DEVICE)
+                    && newTasks.Contains(NodeDiscoveryTask.ROUTES))
                 {
                     newTasks.Remove(NodeDiscoveryTask.ROUTES);
                 }
@@ -690,12 +694,10 @@ namespace ZigBeeNet.App.Discovery
                 tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
             }
 
-            if (Node.Endpoints.Count == 0 && Node.NetworkAddress != 0)
+            if (Node.Endpoints.Count == 0 && !NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress))
             {
                 tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
             }
-
-            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
 
             await StartDiscoveryAsync(tasks);
         }
