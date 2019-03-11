@@ -172,6 +172,22 @@ namespace ZigBeeNet.PlayGround
                                             System.Threading.Thread.Sleep(1000);
                                         }
                                     }
+                                    else if (cmd == "stress")
+                                    {
+                                        networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+
+                                        bool state = false;
+                                        for (int i = 0; i < 100; i++)
+                                        {
+                                            if (state)
+                                                networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                            else
+                                                networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
+
+                                            state = !state;
+                                            System.Threading.Thread.Sleep(1);
+                                        }
+                                    }
                                     else if (cmd == "desc")
                                     {
                                         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
