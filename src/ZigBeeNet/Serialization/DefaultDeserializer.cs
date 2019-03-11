@@ -288,6 +288,11 @@ namespace ZigBeeNet.Serialization
                     }
                     value[0] = new ByteArray(arrayB8);
                     break;
+                case DataType.FLOAT_32_BIT:
+                    int val = payload[index++] + (payload[index++] << 8) + (payload[index++] << 16) + (payload[index++] << 24);
+                    byte[] valBytes = BitConverter.GetBytes(val);
+                    value[0] = BitConverter.ToSingle(valBytes, 0);
+                    break;
                 default:
                     throw new ArgumentException("No reader defined in " + this.GetType().Name + " for " + type.ToString() + " (" + (byte)type + ")");
             }
