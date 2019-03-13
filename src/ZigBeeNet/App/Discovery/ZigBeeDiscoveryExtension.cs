@@ -152,7 +152,7 @@ namespace ZigBeeNet.App.Discovery
 
             ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
             nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
-            nodeDiscoverer.StartDiscovery();
+            _ = nodeDiscoverer.StartDiscovery();
         }
 
         public void NodeUpdated(ZigBeeNode node)

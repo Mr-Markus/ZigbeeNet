@@ -23,7 +23,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 
         private int _length;
 
-        private bool generic = false;
+        private bool _generic = false;
 
         private IZigBeePort _port;
 
@@ -56,7 +56,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 DoubleByte apiId = new DoubleByte(apiIdMSB, apiIdLSB);
                 // TODO Remove generic never used
                 // generic = true;
-                if (generic)
+                if (_generic)
                 {
                     // log.info("Parsing data as generic");
                     int i = 0;
