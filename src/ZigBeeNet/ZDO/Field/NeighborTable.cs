@@ -172,7 +172,7 @@ namespace ZigBeeNet.ZDO.Field
             return result;
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
             {
@@ -188,14 +188,14 @@ namespace ZigBeeNet.ZDO.Field
             }
             NeighborTable other = (NeighborTable)obj;
 
-            //if (depth == null)
+            //if (Depth == null)
             //{
-            //    if (other.depth != null)
+            //    if (other.Depth != null)
             //    {
             //        return false;
             //    }
             //}
-            ////else /// </summary>if (!Depth.Equals(other.Depth))
+            if (!Depth.Equals(other.Depth))
             {
                 return false;
             }
