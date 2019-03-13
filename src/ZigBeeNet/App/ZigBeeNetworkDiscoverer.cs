@@ -13,7 +13,7 @@ using ZigBeeNet.ZDO.Command;
 namespace ZigBeeNet.App
 {
     /// <summary>
-    /// {@link ZigBeeNetworkDiscoverer} is used to discover devices in the network.
+    /// <see cref="ZigBeeNetworkDiscoverer"> is used to discover devices in the network.
     /// <p>
     /// Notifications will be sent to the listeners when nodes and endpoints are discovered.
     /// Device listeners are always notified first as each endpoint discovery completes.
@@ -77,7 +77,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Discovers ZigBee network state.
         ///
-        /// @param _networkManager the {@link ZigBeeNetworkManager}
+        /// <param name="_networkManager">the <see cref="ZigBeeNetworkManager"></param>
         /// </summary>
         public ZigBeeNetworkDiscoverer(ZigBeeNetworkManager networkManager)
         {
@@ -115,7 +115,7 @@ namespace ZigBeeNet.App
         /// Sets the retry period in milliseconds. This is the amount of time the service will wait following a failed
         /// request before performing a retry.
         ///
-        /// @param retryPeriod the period in milliseconds between retries
+        /// <param name="retryPeriod">the period in milliseconds between retries</param>
         /// </summary>
         public void SetRetryPeriod(int retryPeriod)
         {
@@ -125,7 +125,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Sets the maximum number of retries the service will perform at any stage before failing.
         ///
-        /// @param retryCount the maximum number of retries.
+        /// <param name="retryCount">the maximum number of retries.</param>
         /// </summary>
         public void SetRetryCount(int retryCount)
         {
@@ -135,7 +135,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Sets the minimum period between requeries on each node
         ///
-        /// @param requeryPeriod the requery period in milliseconds
+        /// <param name="requeryPeriod">the requery period in milliseconds</param>
         /// </summary>
         public void SetRequeryPeriod(int requeryPeriod)
         {
@@ -256,10 +256,10 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-        /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
+        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
         /// the response to trigger a full discovery.
         ///
-        /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to discover</param>
         /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
@@ -324,7 +324,7 @@ namespace ZigBeeNet.App
         /// Performs the top level node discovery. This discovers node level attributes such as the endpoints and
         /// descriptors.
         ///
-        /// @param networkAddress the network address to start a discovery on
+        /// <param name="networkAddress">the network address to start a discovery on</param>
         /// </summary>
         private void StartNodeDiscovery(ushort nodeNetworkAddress)
         {
@@ -452,8 +452,8 @@ namespace ZigBeeNet.App
         /// Discovers the IeeeAddress of a remote device. This uses a broadcast request to try to discover the
         /// device.
         ///
-        /// @param networkAddress the network address of the node
-        /// @return true if the message was processed ok
+        /// <param name="networkAddress">the network address of the node</param>
+        /// <returns>true if the message was processed ok</returns>
         /// </summary>
         private async Task<bool> GetIeeeAddress(ushort networkAddress)
         {
@@ -487,8 +487,8 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Updates ZigBeeNode and adds it to the ZigBeeNetworkManager
         ///
-        /// @param ieeeAddress the {@link IeeeAddress} of the newly announced node
-        /// @param networkAddress the network address of the newly announced node
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the newly announced node</param>
+        /// <param name="networkAddress">the network address of the newly announced node</param>
         /// </summary>
         private void AddNode(IeeeAddress ieeeAddress, ushort networkAddress)
         {

@@ -13,7 +13,7 @@ using ZigBeeNet.ZDO.Field;
 namespace ZigBeeNet.App.Discovery
 {
     /// <summary>
-    /// This class contains methods for discovering the services and features of a {@link ZigBeeNode}. All discovery methods
+    /// This class contains methods for discovering the services and features of a <see cref="ZigBeeNode">. All discovery methods
     /// are private and the class is utilised by calling {@link #startDiscovery(Set)} with a set of
     /// {@link #NodeDiscoveryState} for the stages wishing to be discovered or updated.
     /// 
@@ -21,7 +21,7 @@ namespace ZigBeeNet.App.Discovery
     /// new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
     /// running, it will be started.
     /// 
-    /// This class provides a centralised helper, used for discovering and updating information about the {@link ZigBeeNode}
+    /// This class provides a centralised helper, used for discovering and updating information about the <see cref="ZigBeeNode">
     /// 
     /// A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
     /// supported, then this will not be issued again on subsequent requests.
@@ -37,7 +37,7 @@ namespace ZigBeeNet.App.Discovery
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
         /// <summary>
-        /// The {@link ZigBeeNetworkManager}.
+        /// The <see cref="ZigBeeNetworkManager">.
         /// </summary>
         public ZigBeeNetworkManager NetworkManager { get; private set; }
 
@@ -47,7 +47,7 @@ namespace ZigBeeNet.App.Discovery
         public int MaxBackoff { get; set; } = DEFAULT_MAX_BACKOFF;
 
         /// <summary>
-        /// The {@link ZigBeeNode}.
+        /// The <see cref="ZigBeeNode">.
         /// </summary>
         public ZigBeeNode Node { get; set; }
 
@@ -72,13 +72,13 @@ namespace ZigBeeNet.App.Discovery
         private readonly int _retryPeriod = DEFAULT_RETRY_PERIOD;
 
         /// <summary>
-        /// Flag to indicate if the device supports the {@link ManagementLqiRequest}
+        /// Flag to indicate if the device supports the <see cref="ManagementLqiRequest">
         /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
         /// </summary>
         private bool _supportsManagementLqi = true;
 
         /// <summary>
-        /// Flag to indicate if the device supports the {@link ManagementRoutingRequest}.
+        /// Flag to indicate if the device supports the <see cref="ManagementRoutingRequest">.
         /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
         /// </summary>
         private bool _supportsManagementRouting = true;
@@ -123,8 +123,8 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Creates the discovery class
         ///
-        /// @param networkManager the {@link ZigBeeNetworkManager} for the network
-        /// @param node the {@link ZigBeeNode} whose services we want to discover
+        /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> for the network</param>
+        /// <param name="node">the <see cref="ZigBeeNode"> whose services we want to discover</param>
         /// </summary>
         public ZigBeeNodeServiceDiscoverer(ZigBeeNetworkManager networkManager, ZigBeeNode node)
         {
@@ -144,7 +144,7 @@ namespace ZigBeeNet.App.Discovery
         /// 
         /// If the worker thread is not running, it will be started.
         ///
-        /// @param newTasks a set of {@link NodeDiscoveryTask}s to be performed
+        /// <param name="newTasks">a set of <see cref="NodeDiscoveryTask">s to be performed</param>
         /// </summary>
         private async Task StartDiscoveryAsync(List<NodeDiscoveryTask> newTasks)
         {
@@ -331,7 +331,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Get node descriptor
         ///
-        /// @return true if the message was processed ok
+        /// <returns>true if the message was processed ok</returns>
         /// </summary>
         private async Task<bool> RequestNetworkAddress()
         {
@@ -364,7 +364,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Get Node Network address and the list of associated devices
         ///
-        /// @return true if the message was processed ok
+        /// <returns>true if the message was processed ok</returns>
         /// </summary>
         private async Task<bool> RequestAssociatedNodes()
         {
@@ -403,7 +403,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Get node descriptor
         ///
-        /// @return true if the message was processed ok
+        /// <returns>true if the message was processed ok</returns>
         /// </summary>
         private async Task<bool> RequestNodeDescriptor()
         {
@@ -434,7 +434,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Get node power descriptor
         ///
-        /// @return true if the message was processed ok, or if the end device does not support the power descriptor
+        /// <returns>true if the message was processed ok, or if the end device does not support the power descriptor</returns>
         /// </summary>
         private async Task<bool> RequestPowerDescriptor()
         {
@@ -469,7 +469,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Get the active endpoints for a node
         ///
-        /// @return true if the message was processed ok
+        /// <returns>true if the message was processed ok</returns>
         /// </summary>
         private async Task<bool> RequestActiveEndpoints()
         {
@@ -510,9 +510,9 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Get node neighbor table by making a {@link ManagementLqiRequest} call.
+        /// Get node neighbor table by making a <see cref="ManagementLqiRequest"> call.
         ///
-        /// @return list of {@link NeighborTable} if the request was processed ok, null otherwise
+        /// <returns>list of <see cref="NeighborTable"> if the request was processed ok, null otherwise</returns>
         /// </summary>
         private async Task<bool> RequestNeighborTable()
         {
@@ -572,9 +572,9 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Get node routing table by making a {@link ManagementRoutingRequest} request
+        /// Get node routing table by making a <see cref="ManagementRoutingRequest"> request
         ///
-        /// @return list of {@link RoutingTable} if the request was processed ok, null otherwise
+        /// <returns>list of <see cref="RoutingTable"> if the request was processed ok, null otherwise</returns>
         /// </summary>
         private async Task<bool> RequestRoutingTable()
         {
@@ -631,10 +631,10 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Get the simple descriptor for an endpoint and create the {@link ZigBeeEndpoint}
+        /// Get the simple descriptor for an endpoint and create the <see cref="ZigBeeEndpoint">
         ///
-        /// @param endpointId the endpoint id to request
-        /// @return the newly created {@link ZigBeeEndpoint} for the endpoint, or null on error
+        /// <param name="endpointId">the endpoint id to request</param>
+        /// <returns>the newly created <see cref="ZigBeeEndpoint"> for the endpoint, or null on error</returns>
         /// @throws ExecutionException
         /// @throws InterruptedException
         /// </summary>

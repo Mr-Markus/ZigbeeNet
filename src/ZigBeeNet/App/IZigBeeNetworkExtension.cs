@@ -8,10 +8,10 @@ namespace ZigBeeNet.App
     /// Defines the interface for a ZigBee Extension.
     /// <p>
     /// Extensions provide specific functionality in the framework and can be instantiated and registered with the network
-    /// manager. An extension is registered with the {@link ZigBeeNetworkManager}, and the manager will take care of
+    /// manager. An extension is registered with the <see cref="ZigBeeNetworkManager">, and the manager will take care of
     /// starting and stopping the extension.
     /// <p>
-    /// Extensions should register with the standard {@link ZigBeeNetworkManager} listeners to receive network notifications
+    /// Extensions should register with the standard <see cref="ZigBeeNetworkManager"> listeners to receive network notifications
     /// -:
     /// <ul>
     /// <li>ZigBeeNetworkStateListener for network state changes
@@ -27,8 +27,8 @@ namespace ZigBeeNet.App
         /// the extension is registered. The extension should not assume that the network is online, and should
         /// not attempt to communicate on the network until after {@link #extensionStartup()} is called.
         ///
-        /// @param networkManager The {@link ZigBeeNetworkManager} of the network
-        /// @return {@link ZigBeeStatus#SUCCESS} if the extension initialized successfully
+        /// <param name="networkManager">The <see cref="ZigBeeNetworkManager"> of the network</param>
+        /// <returns>{@link ZigBeeStatus#SUCCESS} if the extension initialized successfully</returns>
         /// </summary>
         ZigBeeStatus ExtensionInitialize(ZigBeeNetworkManager networkManager);
 

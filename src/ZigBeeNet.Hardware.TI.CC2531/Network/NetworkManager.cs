@@ -867,7 +867,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Sends a command without waiting for the response
          *
-         * @param request {@link ZToolPacket}
+         * @param request <see cref="ZToolPacket">
          */
         public void SendCommand(ZToolPacket request)
         {
@@ -1031,7 +1031,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Removes an Application Framework message listener that was previously added with the addAFMessageListener method
          *
-         * @param listener a class that implements the {@link ApplicationFrameworkMessageListener} interface
+         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
          * @return true if the listener was added
          */
         public bool removeAFMessageListener(IApplicationFrameworkMessageListener listener)
@@ -1072,7 +1072,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Adds an Application Framework message listener
          *
-         * @param listener a class that implements the {@link ApplicationFrameworkMessageListener} interface
+         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
          * @return true if the listener was added
          */
         public bool AddAFMessageListener(IApplicationFrameworkMessageListener listener)

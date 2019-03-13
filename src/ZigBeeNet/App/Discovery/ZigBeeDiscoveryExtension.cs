@@ -16,32 +16,32 @@ namespace ZigBeeNet.App.Discovery
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {
         /// <summary>
-         /// The _logger.
-         /// </summary>
+        /// The _logger.
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
 
         /// <summary>
-         /// The ZigBee network {@link ZigBeeNetworkDiscoverer}. The discover is
-         /// responsible for monitoring the network for new devices and the initial
-         /// interrogation of their capabilities.
-         /// </summary>
+        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer">. The discover is
+        /// responsible for monitoring the network for new devices and the initial
+        /// interrogation of their capabilities.
+        /// </summary>
         private ZigBeeNetworkDiscoverer _networkDiscoverer;
 
         /// <summary>
-         ///
-         /// </summary>
+        ///
+        /// </summary>
         private ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> nodeDiscovery = new ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
 
         /// <summary>
-         /// Refresh period for the mesh update - in seconds
-         /// </summary>
+        /// Refresh period for the mesh update - in seconds
+        /// </summary>
         private int _updatePeriod;
 
         private Task _futureTask = null;
 
         private CancellationTokenSource _cancellationTokenSource;
-        
+
         private ZigBeeNetworkManager _networkManager;
 
         private bool extensionStarted = false;
@@ -91,11 +91,11 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-         /// Sets the update period for the mesh update service. This is the number of seconds between
-         /// subsequent mesh updates. Setting the period to 0 will disable mesh updates.
-         ///
-         /// @param updatePeriod number of seconds between mesh updates. Setting to 0 will stop updates.
-         /// </summary>
+        /// Sets the update period for the mesh update service. This is the number of seconds between
+        /// subsequent mesh updates. Setting the period to 0 will disable mesh updates.
+        ///
+        /// <param name="updatePeriod">number of seconds between mesh updates. Setting to 0 will stop updates</param>
+        /// </summary>
         public void SetUpdatePeriod(int updatePeriod)
         {
             _updatePeriod = updatePeriod;
@@ -117,21 +117,21 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-         /// Gets the current period at which the mesh data is being updated (in seconds). A return value of 0 indicates that
-         /// automatic updates are currently disabled.
-         ///
-         /// @return number of seconds between mesh updates. 0 indicates no automatic updates.
-         ///
-         /// </summary>
+        /// Gets the current period at which the mesh data is being updated (in seconds). A return value of 0 indicates that
+        /// automatic updates are currently disabled.
+        ///
+        /// <returns>number of seconds between mesh updates. 0 indicates no automatic updates.</returns>
+        ///
+        /// </summary>
         public int GetUpdatePeriod()
         {
             return _updatePeriod;
         }
 
         /// <summary>
-         /// Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
-         /// the timer is restarted from the time of calling this method.
-         /// </summary>
+        /// Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
+        /// the timer is restarted from the time of calling this method.
+        /// </summary>
         public void Refresh()
         {
             _logger.Debug("DISCOVERY Extension: Start mesh update task with interval of {UpdatePeriod} seconds", _updatePeriod);
@@ -178,21 +178,21 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-         /// Starts a discovery on a node.
-         ///
-         /// @param nodeAddress the network address of the node to discover
-         /// </summary>
+        /// Starts a discovery on a node.
+        ///
+        /// <param name="nodeAddress">the network address of the node to discove</param>
+        /// </summary>
         public void RediscoverNode(ushort nodeAddress)
         {
             _networkDiscoverer.RediscoverNode(nodeAddress);
         }
 
         /// <summary>
-         /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
-         /// the response to trigger a full discovery.
-         ///
-         /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
-         /// </summary>
+        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
+        /// the response to trigger a full discovery.
+        ///
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to discove</param>
+        /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
             _networkDiscoverer.RediscoverNode(ieeeAddress);
@@ -212,7 +212,7 @@ namespace ZigBeeNet.App.Discovery
             StopScheduler();
 
             _cancellationTokenSource = new CancellationTokenSource();
-            
+
             _futureTask = Task.Run(() =>
             {
                 _logger.Debug("DISCOVERY Extension: Starting mesh update");

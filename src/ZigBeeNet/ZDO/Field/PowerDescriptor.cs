@@ -97,10 +97,10 @@ namespace ZigBeeNet.ZDO.Field
 
         /// <summary>
          ///
-         /// @param currentPowerMode {@link CurrentPowerModeType}
-         /// @param availablePowerSources {@link Set} of available {@link PowerSourceType}
-         /// @param currentPowerSource {@linkPowerSourceType }
-         /// @param powerLevel {@link PowerLevelType}
+         /// <param name="currentPowerMode"><see cref="CurrentPowerModeType"></param>
+         /// <param name="availablePowerSources"><see cref="Set"> of available <see cref="PowerSourceType"></param>
+         /// <param name="currentPowerSource">{@linkPowerSourceType }</param>
+         /// <param name="powerLevel"><see cref="PowerLevelType"></param>
          /// </summary>
         public PowerDescriptor(CurrentPowerModeType currentPowerMode, List<PowerSourceType> availablePowerSources, PowerSourceType currentPowerSource, PowerLevelType powerLevel)
         {
@@ -187,7 +187,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Sets the current power mode for the descriptor
          ///
-         /// @param currentPowerMode the {@link CurrentPowerModeType}
+         /// <param name="currentPowerMode">the <see cref="CurrentPowerModeType"></param>
          /// </summary>
         public void setCurrentPowerMode(int currentPowerMode)
         {
@@ -211,7 +211,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Serialise the contents of the structure.
          ///
-         /// @param serializer the {@link ZclFieldSerializer} used to serialize
+         /// <param name="serializer">the <see cref="ZclFieldSerializer"> used to serialize</param>
          /// </summary>
         public byte[] Serialize(ZclFieldSerializer serializer)
         {
@@ -223,7 +223,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Deserialise the contents of the structure.
          ///
-         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// <param name="deserializer">the <see cref="ZigBeeDeserializer"> used to deserialize</param>
          /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {

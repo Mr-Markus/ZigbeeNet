@@ -27,7 +27,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
          /// Default constructor to create a Touchlink cluster.
          ///
-         /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
+         /// <param name="zigbeeEndpoint">the <see cref="ZigBeeEndpoint"></param>
          /// </summary>
         public ZclTouchlinkCluster(ZigBeeEndpoint zigbeeEndpoint)
             : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)

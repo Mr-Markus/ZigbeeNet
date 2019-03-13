@@ -7,8 +7,8 @@ namespace ZigBeeNet.ZCL
 {
     /// <summary>
     /// The attribute normalizer allows attribute type conversion to ensure that attribute data stored in the
-    /// {@link ZclAttribute} class is always of the type defined in the library. This ensures that any devices not conforming
-    /// to the ZCL definition of the attribute type can be normalized before updating the {@link ZclAttribute}. This in turn
+    /// <see cref="ZclAttribute"> class is always of the type defined in the library. This ensures that any devices not conforming
+    /// to the ZCL definition of the attribute type can be normalized before updating the <see cref="ZclAttribute">. This in turn
     /// guarantees that applications can rely on the data type.
     /// </summary>
     public class ZclAttributeNormalizer
@@ -21,9 +21,9 @@ namespace ZigBeeNet.ZCL
         /// <summary>
          /// Normalize ZCL data
          ///
-         /// @param dataType The {@link ZclDataType} used for the normalised output
-         /// @param data the input data
-         /// @return the normalised output data
+         /// <param name="dataType">The <see cref="ZclDataType"> used for the normalised output</param>
+         /// <param name="data">the input data</param>
+         /// <returns>the normalised output data</returns>
          /// </summary>
         public object NormalizeZclData(ZclDataType zclDataType, object data)
         {

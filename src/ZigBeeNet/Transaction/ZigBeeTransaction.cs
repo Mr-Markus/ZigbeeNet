@@ -34,7 +34,7 @@ namespace ZigBeeNet.Transaction
         /// <summary>
          /// Transaction constructor
          /// 
-         /// @param networkManager the {@link ZigBeeNetworkManager} to which the transaction is being sent
+         /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> to which the transaction is being sent</param>
          /// </summary>
         public ZigBeeTransaction(ZigBeeNetworkManager networkManager)
         {
@@ -45,8 +45,8 @@ namespace ZigBeeNet.Transaction
          /// Sends ZigBeeCommand command and uses the ZigBeeTransactionMatcher to match the response.
          /// The task will be timed out if there is no response.
          ///
-         /// @param command the ZigBeeCommand
-         /// @param responseMatcher the ZigBeeTransactionMatcher
+         /// <param name="command">the ZigBeeCommand</param>
+         /// <param name="responseMatcher">the ZigBeeTransactionMatcher</param>
          /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {

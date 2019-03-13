@@ -26,9 +26,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link ExtendedPanId} from a {@link BigInteger}
+         /// Create an <see cref="ExtendedPanId"> from a <see cref="BigInteger">
          ///
-         /// @param panId the panId as a {@link BigInteger}
+         /// <param name="panId">the panId as a <see cref="BigInteger"></param>
          /// </summary>
         public ExtendedPanId(BigInteger panId)
         {
@@ -47,9 +47,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link ExtendedPanId} from a {@link String} defined in hexadecimal notation.
+         /// Create an <see cref="ExtendedPanId"> from a <see cref="String"> defined in hexadecimal notation.
          ///
-         /// @param panId the panId as a {@link String}
+         /// <param name="panId">the panId as a <see cref="String"></param>
          /// </summary>
         public ExtendedPanId(string panId)
             : this(BigInteger.Parse(panId, System.Globalization.NumberStyles.HexNumber))
@@ -58,9 +58,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link ExtendedPanId} from an int array
+         /// Create an <see cref="ExtendedPanId"> from an int array
          ///
-         /// @param panId the panId as an int array. Array length must be 8.
+         /// <param name="panId">the panId as an int array. Array length must be 8.</param>
          /// @throws InvalidParameterException
          /// </summary>
         public ExtendedPanId(byte[] panId)
@@ -85,7 +85,7 @@ namespace ZigBeeNet
          /// Check if the ExtendedPanId is valid. This checks the length of the ID, and checks
          /// it is not 0000000000000000 or FFFFFFFFFFFFFFFF.
          ///
-         /// @return true if the extended PAN ID is valid
+         /// <returns>true if the extended PAN ID is valid</returns>
          /// </summary>
         public bool IsValid()
         {

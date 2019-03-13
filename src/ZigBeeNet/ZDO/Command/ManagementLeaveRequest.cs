@@ -40,7 +40,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Gets DeviceAddress.
         ///
-        /// @return the DeviceAddress
+        /// <returns>the DeviceAddress</returns>
         /// </summary>
         public IeeeAddress getDeviceAddress()
         {
@@ -50,7 +50,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Sets DeviceAddress.
         ///
-        /// @param deviceAddress the DeviceAddress
+        /// <param name="deviceAddress">the DeviceAddress</param>
         /// </summary>
         public void setDeviceAddress(IeeeAddress deviceAddress)
         {
@@ -60,7 +60,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Gets RemoveChildren_Rejoin.
         ///
-        /// @return the RemoveChildren_Rejoin
+        /// <returns>the RemoveChildren_Rejoin</returns>
         /// </summary>
         public Boolean getRemoveChildrenRejoin()
         {
@@ -70,7 +70,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Sets RemoveChildren_Rejoin.
         ///
-        /// @param removeChildrenRejoin the RemoveChildren_Rejoin
+        /// <param name="removeChildrenRejoin">the RemoveChildren_Rejoin</param>
         /// </summary>
         public void setRemoveChildrenRejoin(Boolean removeChildrenRejoin)
         {

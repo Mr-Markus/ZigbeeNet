@@ -36,7 +36,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
          * Construct which sets input stream where the packet is read from the and handler
          * which further processes the received packet.
          *
-         * @param port the {@link ZigBeePort}
+         * @param port the <see cref="ZigBeePort">
          * @param packetHandler the packet handler
          */
         public ZToolPacketParser(IZigBeePort port, IZToolPacketHandler packetHandler)

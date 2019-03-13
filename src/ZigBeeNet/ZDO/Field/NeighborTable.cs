@@ -57,7 +57,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Deserialise the contents of the structure.
          ///
-         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// <param name="deserializer">the <see cref="ZigBeeDeserializer"> used to deserialize</param>
          /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {

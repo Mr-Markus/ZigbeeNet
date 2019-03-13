@@ -198,7 +198,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Serialise the contents of the structure.
          ///
-         /// @param serializer the {@link ZclFieldSerializer} used to serialize
+         /// <param name="serializer">the <see cref="ZclFieldSerializer"> used to serialize</param>
          /// </summary>
         public byte[] Serialize(ZclFieldSerializer serializer)
         {
@@ -217,7 +217,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Deserialise the contents of the structure.
          ///
-         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// <param name="deserializer">the <see cref="ZigBeeDeserializer"> used to deserialize</param>
          /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {

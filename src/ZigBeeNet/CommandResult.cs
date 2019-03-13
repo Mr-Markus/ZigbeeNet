@@ -18,7 +18,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Constructor which sets the received response command or null if timeout occurs.
          ///
-         /// @param response the response command.
+         /// <param name="response">the response command.</param>
          /// </summary>
         public CommandResult(ZigBeeCommand response)
         {
@@ -36,7 +36,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Checks whether command execution was successful.
          ///
-         /// @return TRUE if command execution was successful.
+         /// <returns>TRUE if command execution was successful.</returns>
          /// </summary>
         public bool IsSuccess()
         {
@@ -46,7 +46,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Checks whether command timed out.
          ///
-         /// @return TRUE if timeout occurred
+         /// <returns>TRUE if timeout occurred</returns>
          /// </summary>
         public bool IsTimeout()
         {
@@ -56,7 +56,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Checks if message status code was received in default response.
          ///
-         /// @return the message status code
+         /// <returns>the message status code</returns>
          /// </summary>
         public bool IsError()
         {
@@ -73,7 +73,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Check if default response was received.
          ///
-         /// @return TRUE if default response was received
+         /// <returns>TRUE if default response was received</returns>
          /// </summary>
         private bool HasStatusCode()
         {
@@ -90,7 +90,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Gets status code received in default response.
          ///
-         /// @return the status code
+         /// <returns>the status code</returns>
          /// </summary>
         public int GetStatusCode()
         {
@@ -114,7 +114,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Gets the received response.
          ///
-         /// @return the received response {@link ZigBeeCommand}
+         /// <returns>the received response <see cref="ZigBeeCommand"></returns>
          /// </summary>
         public ZigBeeCommand GetResponse()
         {
