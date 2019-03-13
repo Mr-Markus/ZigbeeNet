@@ -21,14 +21,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
          * The packet handler.
          */
         private IZToolPacketHandler _packetHandler;
+
         /**
          * The input port.
          */
         private IZigBeePort _port;
+
         /**
          * The parser parserThread.
          */
-        private Task parserTask = null;
+        private Task _parserTask = null;
 
         private CancellationTokenSource _cancellationToken;
         
@@ -47,8 +49,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             _cancellationToken = new CancellationTokenSource();
             _packetHandler = packetHandler;
 
-            parserTask = new Task(Run);
-            parserTask.Start();
+            _parserTask = new Task(Run);
+            _parserTask.Start();
         }
 
         /**
@@ -111,7 +113,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
          */
         public bool IsAlive()
         {
-            return parserTask != null && parserTask.Status == TaskStatus.Running;
+            return _parserTask != null && _parserTask.Status == TaskStatus.Running;
         }
 
     }
