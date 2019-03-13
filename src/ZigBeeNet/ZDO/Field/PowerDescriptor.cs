@@ -291,7 +291,7 @@ namespace ZigBeeNet.ZDO.Field
 
         public override string ToString()
         {
-            return CurrentPowerMode + ", " + AvailablePowerSources + ", " + CurrentPowerSource + ", " + PowerLevel;
+            return CurrentPowerMode + ", " + string.Join(", ", AvailablePowerSources) + ", " + CurrentPowerSource + ", " + PowerLevel;
         }
     }
 }
