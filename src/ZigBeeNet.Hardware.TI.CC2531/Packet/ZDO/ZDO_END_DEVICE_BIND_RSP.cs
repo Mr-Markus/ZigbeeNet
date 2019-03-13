@@ -5,7 +5,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Util;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    public class ZDO_END_DEVICE_BIND_RSP : ZToolPacket /* implements IRESPONE_CALLBACK,IZDO */
+    public class ZDO_END_DEVICE_BIND_RSP : ZToolPacket //// implements IRESPONE_CALLBACK,IZDO /// </summary>
     {
         /// <name>TI.ZPI1.ZDO_END_DEVICE_BIND_RSP.SrcAddress</name>
         /// <summary>the message's source network address</summary>

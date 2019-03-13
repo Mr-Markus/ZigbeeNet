@@ -5,12 +5,9 @@ using ZigBeeNet.Hardware.TI.CC2531.Util;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    /**
- * This command is generated to request the destination device to return its neighbor table.
- *
- * @author <a href="mailto:alfiva@aaa.upv.es">Alvaro Fides Valero</a>
- * @author Chris Jackson
- */
+    /// <summary>
+    /// This command is generated to request the destination device to return its neighbor table.
+    /// </summary>
     public class ZDO_MGMT_LQI_REQ : ZToolPacket
     {
         /// <name>TI.ZPI1.ZDO_MGMT_LQI_REQ.DstAddr</name>

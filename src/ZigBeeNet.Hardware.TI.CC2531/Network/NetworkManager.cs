@@ -128,12 +128,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             BOOTLOADER_MAGIC_BYTE = magicNumber;
         }
 
-        /**
-         * Set timeout and retry count
-         *
-         * @param retries the maximum number of retries to perform
-         * @param timeout the maximum timeout between retries
-         */
+        /// <summary>
+        /// Set timeout and retry count
+        ///
+        /// <param name="retries">the maximum number of retries to perform</param>
+        /// <param name="timeout">the maximum timeout between retries</param>
+        /// </summary>
         public void SetRetryConfiguration(int retries, int timeout)
         {
             RESEND_MAX_RETRY = retries;
@@ -587,9 +587,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         //    }
         //}
 
-        /**
-         * @param request
-         */
+        /// <summary>
+        /// <paramref name="request"/>
+        /// </summary>
         private void WaitAndLock3WayConversation(ZToolPacket request)
         {
             lock (_conversation3Way)
@@ -619,11 +619,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        /**
-         * Release the lock held for the 3-way communication
-         *
-         * @param request
-         */
+        /// <summary>
+        /// Release the lock held for the 3-way communication
+        ///
+        /// <paramref name="request"/>
+        /// </summary>
         private void UnLock3WayConversation(ZToolPacket request)
         {
             Type clz = request.GetType();
@@ -768,15 +768,15 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return mask;
         }
 
-        /**
-         * Sets the ZigBee RF channel. The allowable channel range is 11 to 26.
-         * <p>
-         * This method will sanity check the channel and if the mask is invalid
-         * the default channel will be used.
-         *
-         * @param channelMask
-         * @return
-         */
+        /// <summary>
+        /// Sets the ZigBee RF channel. The allowable channel range is 11 to 26.
+        /// <p>
+        /// This method will sanity check the channel and if the mask is invalid
+        /// the default channel will be used.
+        ///
+        /// <paramref name="channelMask"/>
+        /// <returns></returns>
+        /// </summary>
         private bool DongleSetChannel(byte[] channelMask)
         {
             // Error check the channels.
@@ -864,11 +864,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response != null && response.Status == 0;
         }
 
-        /**
-         * Sends a command without waiting for the response
-         *
-         * @param request <see cref="ZToolPacket">
-         */
+        /// <summary>
+        /// Sends a command without waiting for the response
+        ///
+        /// <param name="request"><see cref="ZToolPacket"></param>
+        /// </summary>
         public void SendCommand(ZToolPacket request)
         {
             SendSynchronous(request);
@@ -1013,12 +1013,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return result;
         }
 
-        /**
-         * Sends an Application Framework data request and waits for the response.
-         *
-         * @param request {@link AF_DATA_REQUEST}
-         */
-        public AF_DATA_SRSP_EXT sendAFDataRequestExt(AF_DATA_REQUEST_EXT request)
+        /// <summary>
+        /// Sends an Application Framework data request and waits for the response.
+        ///
+        /// <param name="request">{@link AF_DATA_REQUEST}</param>
+        /// </summary>
+        public AF_DATA_SRSP_EXT SendAFDataRequestExt(AF_DATA_REQUEST_EXT request)
         {
             if (!WaitForNetwork())
             {
@@ -1028,13 +1028,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response;
         }
 
-        /**
-         * Removes an Application Framework message listener that was previously added with the addAFMessageListener method
-         *
-         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
-         * @return true if the listener was added
-         */
-        public bool removeAFMessageListener(IApplicationFrameworkMessageListener listener)
+        /// <summary>
+        /// Removes an Application Framework message listener that was previously added with the addAFMessageListener method
+        ///
+        /// <param name="listener">a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface</param>
+        /// <returns>true if the listener was added</returns>
+        /// </summary>
+        public bool RemoveAFMessageListener(IApplicationFrameworkMessageListener listener)
         {
             bool result;
             lock (_messageListeners)
@@ -1069,12 +1069,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        /**
-         * Adds an Application Framework message listener
-         *
-         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
-         * @return true if the listener was added
-         */
+        /// <summary>
+        /// Adds an Application Framework message listener
+        ///
+        /// <param name="listener">a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface</param>
+        /// <returns>true if the listener was added</returns>
+        /// </summary>
         public bool AddAFMessageListener(IApplicationFrameworkMessageListener listener)
         {
             lock (_messageListeners)
@@ -1117,11 +1117,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return _state == DriverStatus.HARDWARE_READY || _state == DriverStatus.NETWORK_INITIALIZING || _state == DriverStatus.NETWORK_READY;
         }
 
-        /**
-         * Gets the extended PAN ID
-         *
-         * @return the PAN ID or -1 on failure
-         */
+        /// <summary>
+        /// Gets the extended PAN ID
+        ///
+        /// <returns>the PAN ID or -1 on failure</returns>
+        /// </summary>
         public ExtendedPanId GetCurrentExtendedPanId()
         {
             if (!WaitForHardware())
@@ -1143,11 +1143,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        /**
-         * Gets the IEEE address of our node on the network
-         *
-         * @return the IEEE address as a long or -1 on failure
-         */
+        /// <summary>
+        /// Gets the IEEE address of our node on the network
+        ///
+        /// <returns>the IEEE address as a long or -1 on failure</returns>
+        /// </summary>
         public ulong GetIeeeAddress()
         {
             if (_ieeeAddress != ulong.MaxValue)
@@ -1174,11 +1174,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        /**
-         * Gets the current PAN ID
-         *
-         * @return current PAN ID as an int or -1 on failure
-         */
+        /// <summary>
+        /// Gets the current PAN ID
+        ///
+        /// <returns>current PAN ID as an int or -1 on failure</returns>
+        /// </summary>
         public ushort GetCurrentPanId()
         {
             if (!WaitForHardware())
@@ -1204,11 +1204,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        /**
-         * Gets the current ZigBee channe number
-         *
-         * @return the current channel as an int, or -1 on failure
-         */
+        /// <summary>
+        /// Gets the current ZigBee channe number
+        ///
+        /// <returns>the current channel as an int, or -1 on failure</returns>
+        /// </summary>
         public byte GetCurrentChannel()
         {
             if (!WaitForHardware())

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Util
 {
-    /**
-     * Big Endian container for 64-bit XBee Address
-     * <p/>
-     * See device addressing in manual p.32
-     */
+    /// <summary>
+     /// Big Endian container for 64-bit XBee Address
+     /// <p/>
+     /// See device addressing in manual p.32
+     /// </summary>
     public class ZToolAddress64 : ZToolAddress
     {
 

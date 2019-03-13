@@ -12,35 +12,35 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 {
     public class ZToolPacketParser
     {
-        /**
-         * The logger.
-         */
+        /// <summary>
+        /// The logger.
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<ZToolPacketParser>();
 
-        /**
-         * The packet handler.
-         */
+        /// <summary>
+        /// The packet handler.
+        /// </summary>
         private IZToolPacketHandler _packetHandler;
 
-        /**
-         * The input port.
-         */
+        /// <summary>
+        /// The input port.
+        /// </summary>
         private IZigBeePort _port;
 
-        /**
-         * The parser parserThread.
-         */
+        /// <summary>
+        /// The parser parserThread.
+        /// </summary>
         private Task _parserTask = null;
 
         private CancellationTokenSource _cancellationToken;
-        
-        /**
-         * Construct which sets input stream where the packet is read from the and handler
-         * which further processes the received packet.
-         *
-         * @param port the <see cref="ZigBeePort">
-         * @param packetHandler the packet handler
-         */
+
+        /// <summary>
+        /// Construct which sets input stream where the packet is read from the and handler
+        /// which further processes the received packet.
+        ///
+        /// <param name="port">the <see cref="ZigBeePort"></param>
+        /// <param name="packetHandler">the packet handler</param>
+        /// </summary>
         public ZToolPacketParser(IZigBeePort port, IZToolPacketHandler packetHandler)
         {
             _logger.Trace("Creating ZToolPacketParser");
@@ -53,9 +53,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             _parserTask.Start();
         }
 
-        /**
-         * Run method executed by the parser thread.
-         */
+        /// <summary>
+        /// Run method executed by the parser thread.
+        /// </summary>
         public void Run()
         {
             _logger.Trace("ZToolPacketParser parserThread started");
@@ -98,19 +98,19 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             _logger.Debug("ZToolPacketParser parserThread exited.");
         }
 
-        /**
-         * Requests parser thread to shutdown.
-         */
+        /// <summary>
+        /// Requests parser thread to shutdown.
+        /// </summary>
         public void Close()
         {
             _cancellationToken.Cancel();
         }
 
-        /**
-         * Checks if parser thread is alive.
-         *
-         * @return true if parser thread is alive.
-         */
+        /// <summary>
+        /// Checks if parser thread is alive.
+        ///
+        /// <returns>true if parser thread is alive.</returns>
+        /// </summary>
         public bool IsAlive()
         {
             return _parserTask != null && _parserTask.Status == TaskStatus.Running;

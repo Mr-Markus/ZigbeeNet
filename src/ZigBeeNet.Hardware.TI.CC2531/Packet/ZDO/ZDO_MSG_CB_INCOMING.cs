@@ -9,7 +9,7 @@ using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    public class ZDO_MSG_CB_INCOMING : ZToolPacket /* implements IRESPONSE_CALLBACK,IZDO */
+    public class ZDO_MSG_CB_INCOMING : ZToolPacket //// implements IRESPONSE_CALLBACK,IZDO /// </summary>
     {
         private readonly ILog _logger = LogProvider.For<ZDO_MSG_CB_INCOMING>();
 
@@ -83,9 +83,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MSG_CB_INCOMING), framedata);
         }
 
-        /**
-         * Translates the ZigBee ZDO cluster packet into a ZTool RSP packet
-         */
+        /// <summary>
+        /// Translates the ZigBee ZDO cluster packet into a ZTool RSP packet
+        /// </summary>
         public ZToolPacket Translate()
         {
             ZToolPacket newPacket = null;

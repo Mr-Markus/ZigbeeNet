@@ -5,7 +5,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Util;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    public class ZDO_NWK_ADDR_RSP : ZToolPacket /* implements IRESPONSE_CALLBACK,IZDO */
+    public class ZDO_NWK_ADDR_RSP : ZToolPacket //// implements IRESPONSE_CALLBACK,IZDO /// </summary>
     {
         /// <name>TI.ZPI1.ZDO_NWK_ADDR_RSP.AssocDevList</name>
         /// <summary>Dynamic array, array of 16 bit short addresses - list of network address for associated devices. This

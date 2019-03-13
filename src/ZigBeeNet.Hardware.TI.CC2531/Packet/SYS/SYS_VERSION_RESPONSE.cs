@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
 {
-    public class SYS_VERSION_RESPONSE : ZToolPacket /* implements /*IRESPONSE,ISYTEM */
+    public class SYS_VERSION_RESPONSE : ZToolPacket //// implements ////IRESPONSE,ISYTEM /// </summary>
     {
     /// <name>TI.ZPI2.SYS_VERSION_RESPONSE.HwRev</name>
     /// <summary>Hardware revision</summary>

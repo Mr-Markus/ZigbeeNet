@@ -15,13 +15,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
         {
         }
 
-        /**
-         * There is a slight problem with this method that you might have noticed; a Java int is signed, so we can't make
-         * use of the 32nd bit. This means we this method does not support a four byte value with msb greater than 01111111
-         * ((2^7-1) or 127).
-         * <p/>
-         * TODO use long instead of int to support 4 bytes values. note that long assignments are not atomic.
-         */
+        /// <summary>
+         /// There is a slight problem with this method that you might have noticed; a Java int is signed, so we can't make
+         /// use of the 32nd bit. This means we this method does not support a four byte value with msb greater than 01111111
+         /// ((2^7-1) or 127).
+         /// <p/>
+         /// TODO use long instead of int to support 4 bytes values. note that long assignments are not atomic.
+         /// </summary>
         public static int ConvertMultiByteToInt(byte[] bytes)
         {
 
@@ -164,10 +164,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
             return s;
         }
 
-        /**
-         * @param b the int value to check if it contains a byte representable value
-         * @return true if the value of the int could be expressed with 8 bits
-         */
+        /// <summary>
+         /// <param name="b">the int value to check if it contains a byte representable value</param>
+         /// <returns>true</returns>
+         /// </summary>
         public static bool IsByteValue(byte b)
         {
             bool valid = ((b & 0xffffff00) == 0 || (b & 0xffffff00) == 0xffffff00);

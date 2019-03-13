@@ -17,55 +17,55 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
     /// </summary>
     public class CommandInterfaceImpl : IZToolPacketHandler, ICommandInterface
     {
-        /**
-         * The logger.
-         */
+        /// <summary>
+        /// The logger.
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<CommandInterfaceImpl>();
 
-        /**
-         * The port interface.
-         */
+        /// <summary>
+        /// The port interface.
+        /// </summary>
         private IZigBeePort _port;
-        /**
-         * The packet parser.
-         */
+        /// <summary>
+        /// The packet parser.
+        /// </summary>
         private ZToolPacketParser _parser;
-        /**
-         * Support parallel processing of different command types.
-         * Only one command per command ID can be in process at a time.
-         */
+        /// <summary>
+        /// Support parallel processing of different command types.
+        /// Only one command per command ID can be in process at a time.
+        /// </summary>
         private bool _supportMultipleSynchrounsCommand = false;
-        /**
-         * Synchronous command listeners.
-         */
+        /// <summary>
+        /// Synchronous command listeners.
+        /// </summary>
         private Dictionary<ushort, ISynchronousCommandListener> _synchronousCommandListeners = new Dictionary<ushort, ISynchronousCommandListener>();
 
         private static ManualResetEventSlim _commandListenerSync = new ManualResetEventSlim(true);
 
-        /**
-         * Asynchronous command listeners.
-         */
+        /// <summary>
+        /// Asynchronous command listeners.
+        /// </summary>
         private List<IAsynchronousCommandListener> _asynchrounsCommandListeners = new List<IAsynchronousCommandListener>();
-        /**
-         * Timeout times for synchronous command listeners.
-         */
+        /// <summary>
+        /// Timeout times for synchronous command listeners.
+        /// </summary>
         private Dictionary<ISynchronousCommandListener, long> _synchronousCommandListenerTimeouts = new Dictionary<ISynchronousCommandListener, long>();
 
-        /**
-         * Constructor for configuring the ZigBee Network connection parameters.
-         *
-         * @param port the ZigBee transport implementation.
-         */
+        /// <summary>
+        /// Constructor for configuring the ZigBee Network connection parameters.
+        ///
+        /// <param name="port">the ZigBee transport implementation.</param>
+        /// </summary>
         public CommandInterfaceImpl(IZigBeePort port)
         {
             this._port = port;
         }
 
-        /**
-         * Opens connection to ZigBee Network.
-         *
-         * @return true if connection startup was success.
-         */
+        /// <summary>
+        /// Opens connection to ZigBee Network.
+        ///
+        /// <returns>true</returns>
+        /// </summary>
 
         public bool Open()
         {
@@ -77,9 +77,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             return true;
         }
 
-        /**
-         * Closes connection to ZigBee Network.
-         */
+        /// <summary>
+        /// Closes connection to ZigBee Network.
+        /// </summary>
         public void Close()
         {
             lock (_port)
@@ -95,13 +95,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /* ZToolPacketHandler */
+        //// ZToolPacketHandler /// </summary>
 
-        /**
-         * Exception in packet parsing.
-         *
-         * @param th the exception
-         */
+        /// <summary>
+        /// Exception in packet parsing.
+        ///
+        /// <param name="th">the exception</param>
+        /// </summary>
         public void Error(Exception th)
         {
             if (th is IOException)
@@ -114,11 +114,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /**
-         * Handle parsed packet.
-         *
-         * @param packet the packet
-         */
+        /// <summary>
+        /// Handle parsed packet.
+        ///
+        /// <param name="packet">the packet</param>
+        /// </summary>
         public void HandlePacket(ZToolPacket packet)
         {
             DoubleByte cmdId = packet.CMD;
@@ -142,9 +142,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /**
-         * Send packet to dongle.
-         */
+        /// <summary>
+        /// Send packet to dongle.
+        /// </summary>
         public void SendPacket(ZToolPacket packet)
         {
             _logger.Debug("-->  {Type} ({Packet}) ", packet.GetType().Name, packet);
@@ -152,9 +152,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             SendRaw(pck);
         }
 
-        /**
-         * Cleans expired synchronous command listeners.
-         */
+        /// <summary>
+        /// Cleans expired synchronous command listeners.
+        /// </summary>
         private void CleanExpiredSynchronousCommandListeners()
         {
             long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -180,14 +180,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /**
-         * Sends synchronous command and adds listener.
-         *
-         * @param packet the command packet
-         * @param listener the synchronous command response listener
-         * @param timeoutMillis the timeout
-         * @throws IOException if IO exception occurs in packet sending
-         */
+        /// <summary>
+        /// Sends synchronous command and adds listener.
+        ///
+        /// <param name="packet">the command packet</param>
+        /// <param name="listener">the synchronous command response listener</param>
+        /// <param name="timeoutMillis">the timeout</param>
+        /// @throws IOException if IO exception occurs in packet sending
+        /// </summary>
         public void SendSynchronousCommand(ZToolPacket packet, ISynchronousCommandListener listener, long timeoutMillis)
         {
             if (timeoutMillis == -1L)
@@ -255,12 +255,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             SendPacket(packet);
         }
 
-        /**
-         * Sends asynchronous command.
-         *
-         * @param packet the packet.
-         * @throws IOException if IO exception occurs in packet sending.
-         */
+        /// <summary>
+        /// Sends asynchronous command.
+        ///
+        /// <param name="packet">the packet.</param>
+        /// @throws IOException if IO exception occurs in packet sending.
+        /// </summary>
         public void SendAsynchronousCommand(ZToolPacket packet)
         {
             byte value = (byte)(packet.CMD.Msb & 0xE0);
@@ -272,12 +272,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             SendPacket(packet);
         }
 
-        /**
-         * Send raw bytes to output stream.
-         *
-         * @param packet the byte buffer
-         * @throws IOException if IO exception occurs when writing or flushing bytes.
-         */
+        /// <summary>
+        /// Send raw bytes to output stream.
+        ///
+        /// <param name="packet">the byte buffer</param>
+        /// @throws IOException if IO exception occurs when writing or flushing bytes.
+        /// </summary>
         public void SendRaw(byte[] packet)
         {
             lock (_port)
@@ -286,11 +286,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /**
-         * Notifies listeners about synchronous command response.
-         *
-         * @param packet the received packet
-         */
+        /// <summary>
+        /// Notifies listeners about synchronous command response.
+        ///
+        /// <param name="packet">the received packet</param>
+        /// </summary>
         private void NotifySynchronousCommand(ZToolPacket packet)
         {
             DoubleByte cmdId = packet.CMD;
@@ -328,12 +328,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
         }
 
-        /**
-         * Adds asynchronous command listener.
-         *
-         * @param listener the listener
-         * @return true if listener did not already exist.
-         */
+        /// <summary>
+        /// Adds asynchronous command listener.
+        ///
+        /// <param name="listener">the listener</param>
+        /// <returns>true if listener did not already exist.</returns>
+        /// </summary>
         public bool AddAsynchronousCommandListener(IAsynchronousCommandListener listener)
         {
             lock (_asynchrounsCommandListeners)
@@ -347,12 +347,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             return false;
         }
 
-        /**
-         * Removes asynchronous command listener.
-         *
-         * @param listener the listener
-         * @return true if listener did not already exist.
-         */
+        /// <summary>
+        /// Removes asynchronous command listener.
+        ///
+        /// <param name="listener">the listener</param>
+        /// <returns>true if listener did not already exist.</returns>
+        /// </summary>
         public bool RemoveAsynchronousCommandListener(IAsynchronousCommandListener listener)
         {
             bool result;
@@ -363,11 +363,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             return result;
         }
 
-        /**
-         * Notifies listeners about asynchronous message.
-         *
-         * @param packet the packet containing the message
-         */
+        /// <summary>
+        /// Notifies listeners about asynchronous message.
+        ///
+        /// <param name="packet">the packet containing the message</param>
+        /// </summary>
         private void NotifyAsynchronousCommand(ZToolPacket packet)
         {
             IAsynchronousCommandListener[] listeners;

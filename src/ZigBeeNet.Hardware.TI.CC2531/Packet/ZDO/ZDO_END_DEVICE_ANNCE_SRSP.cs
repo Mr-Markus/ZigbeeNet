@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    public class ZDO_END_DEVICE_ANNCE_SRSP : ZToolPacket /* implements IRSPONSE,IZDO */
+    public class ZDO_END_DEVICE_ANNCE_SRSP : ZToolPacket //// implements IRSPONSE,IZDO /// </summary>
     {
         /// <name>TI.ZPI1.ZDO_END_DEVICE_ANNCE_SRSP.Status</name>
         /// <summary>Status</summary>

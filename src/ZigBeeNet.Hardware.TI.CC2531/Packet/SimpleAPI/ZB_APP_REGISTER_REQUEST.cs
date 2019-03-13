@@ -57,25 +57,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             this.InputCommandsNum = num6;
             this.InputCommandsList = new DoubleByte[numArray1.Length];
             this.InputCommandsList = numArray1;
-            /*
-             * if (numArray1.Length > 0xff)
-             * {
-             * throw new Exception("Error creating object.");
-             * }
-             * this.InputCommandsList = new ushort[0xff];
-             * Array.Copy(numArray1, this.InputCommandsList, numArray1.Length);
-             */
+
             this.OutputCommandsNum = num7;
             this.OutputCommandsList = new DoubleByte[numArray2.Length];
             this.OutputCommandsList = numArray2;
-            /*
-             * if (numArray2.Length > 0xff)
-             * {
-             * throw new Exception("Error creating object.");
-             * }
-             * this.OutputCommandsList = new ushort[0xff];
-             * Array.Copy(numArray2, this.OutputCommandsList, numArray2.Length);
-             */
+
             byte[] framedata = new byte[9 + this.InputCommandsList.Length * 2 + this.OutputCommandsList.Length * 2];
             framedata[0] = this.AppEndPoint;
             framedata[1] = this.AppProfileID.Lsb;

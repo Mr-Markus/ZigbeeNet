@@ -6,14 +6,14 @@ using ZigBeeNet.ZDO;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    /**
- * Processes the response of the Power Descriptor. Only a single Power Descriptor
- * is available per node.
- * <p>
- * The node power descriptor gives a dynamic indication of the power status of
- * the node and is mandatory for each node. There shall be only one node
- * power descriptor in a node.
- */
+    /// <summary>
+    /// Processes the response of the Power Descriptor. Only a single Power Descriptor
+    /// is available per node.
+    /// 
+    /// The node power descriptor gives a dynamic indication of the power status of
+    /// the node and is mandatory for each node. There shall be only one node
+    /// power descriptor in a node.
+    /// </summary>
     public class ZDO_POWER_DESC_RSP : ZToolPacket
     {
         /// <name>TI.ZPI1.ZDO_NODE_DESC_RSP.NWKAddrOfInterest</name>
@@ -50,7 +50,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 this.AvailableSources = (framedata[5] & (0xF0)) >> 4;
                 this.CurrentSource = (framedata[6] & (0x0F));
                 this.CurrentLevel = (framedata[6] & (0xF0)) >> 4;
-            } 
+            }
             BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_POWER_DESC_RSP), framedata);
         }
 

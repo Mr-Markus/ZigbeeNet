@@ -6,16 +6,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
 {
     public class AF_DATA_SRSP_EXT : ZToolPacket
     {
-        /**
-         * Response status.
-         */
+        /// <summary>
+        /// Response status.
+        /// </summary>
         public int Status { get; private set; }
 
-        /**
-         * Constructor which sets frame data.
-         *
-         * @param framedata the frame data
-         */
+        /// <summary>
+        /// Constructor which sets frame data.
+        ///
+        /// <param name="framedata">the frame data</param>
+        /// </summary>
         public AF_DATA_SRSP_EXT(byte[] framedata)
         {
             Status = framedata[0];

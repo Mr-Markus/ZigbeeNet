@@ -62,7 +62,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
         BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE), framedata);
     }
 
-    public String toString()
+    public override string ToString()
     {
         return "UTIL_GET_DEVICE_INFO_RESPONSE{" + "AssocDevicesList=" + AssocDevicesList
                 + ", DeviceState=" + DeviceState + ", DeviceType=" + DeviceType + ", IEEEAddr=" + IEEEAddr

@@ -8,40 +8,40 @@ using ZigBeeNet.Logging;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
 {
-    /**
- * Blocking receiver for asynchronous commands.
- */
+    /// <summary>
+    /// Blocking receiver for asynchronous commands.
+    /// </summary>
     public class BlockingCommandReceiver : IAsynchronousCommandListener
     {
-        /**
-         * The logger.
-         */
+        /// <summary>
+        /// The logger.
+        /// </summary>
         private readonly ILog _logger = LogProvider.For<BlockingCommandReceiver>();
 
         private object _getCommandLockObject;
 
         private static ManualResetEvent _commandSync = new ManualResetEvent(true);
 
-        /**
-         * The command interface.
-         */
+        /// <summary>
+        /// The command interface.
+        /// </summary>
         private ICommandInterface _commandInterface;
-        /**
-         * The command ID to wait for.
-         */
+        /// <summary>
+        /// The command ID to wait for.
+        /// </summary>
         private ZToolCMD _commandId;
-        /**
-         * The command packet.
-         */
+        /// <summary>
+        /// The command packet.
+        /// </summary>
         private ZToolPacket _commandPacket = null;
 
-        /**
-         * The constructor for setting expected command ID and command interface.
-         * Sets self as listener for command in command interface.
-         *
-         * @param commandId the command ID
-         * @param commandInterface the command interface
-         */
+        /// <summary>
+        /// The constructor for setting expected command ID and command interface.
+        /// Sets self as listener for command in command interface.
+        ///
+        /// <param name="commandId">the command ID</param>  
+        /// <param name="commandInterface">the command interface</param>  
+        /// </summary>
         public BlockingCommandReceiver(ZToolCMD commandId, ICommandInterface commandInterface)
         {
             _getCommandLockObject = new object();
@@ -52,15 +52,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             _commandInterface.AddAsynchronousCommandListener(this);
         }
 
-        /**
-         * Gets command packet and blocks until the command packet is available or timeoutMillis occurs.
-         * 
-         * @param timeoutMillis the timeout in milliseconds
-         * @return the command packet or null if time out occurs.
-         */
+        /// <summary>
+        /// Gets command packet and blocks until the command packet is available or timeoutMillis occurs.
+        /// 
+        /// <param name="timeoutMillis">the timeout in milliseconds</param>
+        /// <returns>the command packet or null if time out occurs.</returns>
+        /// </summary>
         public ZToolPacket GetCommand(long timeoutMillis)
         {
-            lock (_getCommandLockObject) {
+            lock (_getCommandLockObject)
+            {
                 long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeoutMillis;
                 while (_commandPacket == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
                 {
@@ -82,12 +83,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             return _commandPacket;
         }
 
-        /**
-         * Clean up asynchronous command listener from command interface.
-         */
+        /// <summary>
+        /// Clean up asynchronous command listener from command interface.
+        /// </summary>
         public void Cleanup()
         {
-            lock (_getCommandLockObject) {
+            lock (_getCommandLockObject)
+            {
                 _commandInterface.RemoveAsynchronousCommandListener(this);
                 _commandSync.Reset();
             }
@@ -106,7 +108,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                 _logger.Trace("Received unexpected packet: " + packet.GetType().Name);
                 return;
             }
-            lock(typeof(BlockingCommandReceiver)) {
+            lock (typeof(BlockingCommandReceiver))
+            {
                 _commandPacket = packet;
                 _logger.Trace("Received expected response: {}", packet.GetType().Name);
                 Cleanup();

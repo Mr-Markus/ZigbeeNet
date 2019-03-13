@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Util
 {
-    /**
-  * Represents a double byte XBeeApi Address.
-  */
+    /// <summary>
+  /// Represents a double byte XBeeApi Address.
+  /// </summary>
     public class ZToolAddress16 : ZToolAddress
     {
 
@@ -17,12 +17,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
 
         private DoubleByte _doubleByte = new DoubleByte();
 
-        /**
-         * Provide address as msb byte and lsb byte
-         *
-         * @param msb
-         * @param lsb
-         */
+        /// <summary>
+         /// Provide address as msb byte and lsb byte
+         ///
+         /// <param name="msb"></param>
+         /// <param name="lsb"></param>
+         /// </summary>
         public ZToolAddress16(byte msb, byte lsb)
         {
             this._doubleByte.Msb = msb;

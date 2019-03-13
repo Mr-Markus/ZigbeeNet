@@ -295,12 +295,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             return b;
         }
 
-        /**
-         * TODO implement as class that extends inputstream?
-         * <p/>
-         * This method reads bytes from the underlying input stream and performs the following tasks: keeps track of how
-         * many bytes we've read, un-escapes bytes if necessary and verifies the checksum.
-         */
+        /// <summary>
+        /// TODO implement as class that extends inputstream?
+        /// 
+        /// This method reads bytes from the underlying input stream and performs the following tasks: keeps track of how
+        /// many bytes we've read, un-escapes bytes if necessary and verifies the checksum.
+        /// </summary>
         public byte Read()
         {
 
@@ -326,10 +326,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 Done = true;
 
                 // log.debug("Checksum byte is " + b);
-                /*
-                 * if (!checksum.verify()) {/////////////Maybe expected in ZTool is 0x00, not FF//////////////////// throw
-                 * new ZToolParseException("Checksum is incorrect.  Expected 0xff, but got " + checksum.getChecksum()); }
-                 */
+                ////
+                /// if (!checksum.verify()) {/////////////Maybe expected in ZTool is 0x00, not FF//////////////////// throw
+                /// new ZToolParseException("Checksum is incorrect.  Expected 0xff, but got " + checksum.getChecksum()); }
+                /// </summary>
             }
 
             return b.Value;
@@ -349,22 +349,22 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             return value;
         }
 
-        /**
-         * Returns number of bytes remaining, relative to the stated packet length (not including checksum).
-         *
-         * @return number of bytes remaining to be read excluding checksum
-         */
+        /// <summary>
+        /// Returns number of bytes remaining, relative to the stated packet length (not including checksum).
+        ///
+        /// <returns>number of bytes remaining to be read excluding checksum</returns>
+        /// </summary>
         public int GetFrameDataBytesRead()
         {
             // subtract out the 1 length bytes and API PROFILE_ID_HOME_AUTOMATION 2 bytes
             return BytesRead - 3;
         }
 
-        /**
-         * Number of bytes remaining to be read, including the checksum
-         *
-         * @return number of bytes remaining to be read including checksum
-         */
+        /// <summary>
+        /// Number of bytes remaining to be read, including the checksum
+        ///
+        /// <returns>number of bytes remaining to be read including checksum</returns>
+        /// </summary>
         public int GetRemainingBytes()
         {
             // add one for checksum byte (not included) in packet length

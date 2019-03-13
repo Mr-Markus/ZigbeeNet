@@ -34,14 +34,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             this.DescLen = num3;
             this.Descriptor = new byte[buffer1.Length];
             this.Descriptor = buffer1;
-            /*
-             * if (buffer1.Length > 15)
-             * {
-             * throw new Exception("Error creating object.");
-             * }
-             * this.Descriptor = new byte[15];
-             * Array.Copy(buffer1, this.Descriptor, buffer1.Length);
-             */
+            ////
+            /// if (buffer1.Length > 15)
+            /// {
+            /// throw new Exception("Error creating object.");
+            /// }
+            /// this.Descriptor = new byte[15];
+            /// Array.Copy(buffer1, this.Descriptor, buffer1.Length);
+            /// </summary>
 
             byte[] framedata = new byte[5 + this.Descriptor.Length];
             framedata[0] = this.DstAddr.Lsb;

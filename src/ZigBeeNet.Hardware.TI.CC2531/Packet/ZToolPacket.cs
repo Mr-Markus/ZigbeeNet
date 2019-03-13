@@ -104,11 +104,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
         }
 
-        /**
-         * I started off using bytes but quickly realized that java bytes are signed, so effectively only 7 bits.
-         * We should be able to use int instead.
-         *
-         */ // PROTECTED?
+        /// <summary>
+        /// I started off using bytes but quickly realized that java bytes are signed, so effectively only 7 bits.
+        /// We should be able to use int instead.
+        ///
+        /// </summary> // PROTECTED?
         public ZToolPacket()
         {
         }
@@ -154,14 +154,15 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             Packet[Packet.Length - 1] = FCS;
         }
 
-        /**
-         * Gets a hex dump of the packet data
-         *
-         * @return <see cref="String"> containing the packet data
-         */
+        /// <summary>
+        /// Gets a hex dump of the packet data
+        ///
+        /// <returns><see cref="String"> containing the packet data</returns>
+        /// </summary>
         public string PacketString
         {
-            get {
+            get
+            {
                 StringBuilder builder = new StringBuilder();
 
                 bool first = true;
@@ -186,7 +187,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
         }
 
-    public override string ToString()
+        public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
