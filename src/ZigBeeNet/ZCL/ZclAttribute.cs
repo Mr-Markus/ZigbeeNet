@@ -17,17 +17,17 @@ namespace ZigBeeNet.ZCL
          /// identifier of the attribute that the reporting configuration details
          /// apply to.
          /// </summary>
-        public ushort Id { get; private set; }
+        public ushort Id { get; set; }
 
         /// <summary>
          /// Stores the name of this attribute;
          /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
          /// Defines the ZigBee data type.
          /// </summary>
-        public ZclDataType ZclDataType { get; private set; }
+        public ZclDataType ZclDataType { get; set; }
 
         /// <summary>
         /// Returns true if the implementation of this attribute in the cluster is
@@ -37,27 +37,27 @@ namespace ZigBeeNet.ZCL
         ///
         /// return true if the attribute must be implemented
         /// </summary>
-        public bool Mandatory { get; private set; }
+        public bool Mandatory { get; set; }
 
         /// <summary>
          /// Returns true if this attribute is supported by this device
          /// </summary>
-        public bool Implemented { get; private set; }
+        public bool Implemented { get; set; }
 
         /// <summary>
          /// True if this attribute is readable
          /// </summary>
-        public bool Readable { get; private set; }
+        public bool Readable { get; set; }
 
         /// <summary>
          /// True if this attribute is writeable
          /// </summary>
-        public bool Writeable { get; private set; }
+        public bool Writeable { get; set; }
 
         /// <summary>
          /// True if this attribute is reportable
          /// </summary>
-        public bool Reportable { get; private set; }
+        public bool Reportable { get; set; }
 
         /// <summary>
          /// The minimum reporting interval field is 16-bits in length and shall
@@ -66,7 +66,7 @@ namespace ZigBeeNet.ZCL
          /// reporting interval has not been configured, this field shall contain the
          /// value 0xffff.
          /// </summary>
-        public int MinimumReportingPeriod { get; private set; }
+        public int MinimumReportingPeriod { get; set; }
 
         /// <summary>
          /// The maximum reporting interval field is 16-bits in length and shall
@@ -75,7 +75,7 @@ namespace ZigBeeNet.ZCL
          /// reporting interval has not been configured, this field shall contain the
          /// value 0xffff.
          /// </summary>
-        public int MaximumReportingPeriod { get; private set; }
+        public int MaximumReportingPeriod { get; set; }
 
         /// <summary>
          /// The reportable change field shall contain the minimum change to the
@@ -84,7 +84,7 @@ namespace ZigBeeNet.ZCL
          /// the reportable change has not been configured, this field shall contain
          /// the invalid value for the relevant data type
          /// </summary>
-        public object ReportingChange { get; private set; }
+        public object ReportingChange { get; set; }
 
         /// <summary>
          /// The timeout period field is 16-bits in length and shall contain the
@@ -93,17 +93,17 @@ namespace ZigBeeNet.ZCL
          /// period has not been configured, this field shall contain the value
          /// 0xffff.
          /// </summary>
-        public int ReportingTimeout { get; private set; }
+        public int ReportingTimeout { get; set; }
 
         /// <summary>
          /// Records the last time a report was received
          /// </summary>
-        public DateTime LastReportTime { get; private set; }
+        public DateTime LastReportTime { get; set; }
 
         /// <summary>
          /// Records the last value received
          /// </summary>
-        public object LastValue { get; private set; }
+        public object LastValue { get; set; }
 
         /// <summary>
          /// Constructor used to set the static information
