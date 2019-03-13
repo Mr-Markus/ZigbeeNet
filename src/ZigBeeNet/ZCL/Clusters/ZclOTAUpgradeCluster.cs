@@ -49,7 +49,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "OTA Upgrade";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The attribute is used to store the IEEE address of the upgrade server resulted from the discovery of the
         /// upgrade server’s identity. If the value is set to a non-zero value and corresponds to an IEEE address of

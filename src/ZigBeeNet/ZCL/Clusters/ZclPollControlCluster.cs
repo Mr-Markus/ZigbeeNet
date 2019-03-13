@@ -42,7 +42,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Poll Control";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The Poll Control server is responsible for checking in with the poll control client periodically to see if the poll control  client wants to
         /// modify the poll rate of the poll control server.  This is due to the fact that  the  PollControl server is implemented on an end device that MAY
@@ -61,7 +62,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// An end device that implements the Poll Control server MAY optionally expose a LongPollInterval attribute.
         /// The Long Poll Interval represents the maximum amount of time in quarter-seconds between MAC Data Requests
         /// from the end device to its parent.
-        /// <p>
+        /// 
         /// The LongPollInterval defines the frequency of polling that an end device does when it is NOT in fast poll mode.  The LongPollInterval SHOULD
         /// be longer than the ShortPollInterval attribute but shorter than the CheckinInterval attribute.A  value of 0xffffffff is reserved to
         /// indicate that the device does not have or does not know its long poll interval
@@ -253,7 +254,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// An end device that implements the Poll Control server MAY optionally expose a LongPollInterval attribute.
         /// The Long Poll Interval represents the maximum amount of time in quarter-seconds between MAC Data Requests
         /// from the end device to its parent.
-        /// <p>
+        /// 
         /// The LongPollInterval defines the frequency of polling that an end device does when it is NOT in fast poll mode.  The LongPollInterval SHOULD
         /// be longer than the ShortPollInterval attribute but shorter than the CheckinInterval attribute.A  value of 0xffffffff is reserved to
         /// indicate that the device does not have or does not know its long poll interval
@@ -275,7 +276,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// An end device that implements the Poll Control server MAY optionally expose a LongPollInterval attribute.
         /// The Long Poll Interval represents the maximum amount of time in quarter-seconds between MAC Data Requests
         /// from the end device to its parent.
-        /// <p>
+        /// 
         /// The LongPollInterval defines the frequency of polling that an end device does when it is NOT in fast poll mode.  The LongPollInterval SHOULD
         /// be longer than the ShortPollInterval attribute but shorter than the CheckinInterval attribute.A  value of 0xffffffff is reserved to
         /// indicate that the device does not have or does not know its long poll interval
@@ -303,7 +304,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// An end device that implements the Poll Control server MAY optionally expose a LongPollInterval attribute.
         /// The Long Poll Interval represents the maximum amount of time in quarter-seconds between MAC Data Requests
         /// from the end device to its parent.
-        /// <p>
+        /// 
         /// The LongPollInterval defines the frequency of polling that an end device does when it is NOT in fast poll mode.  The LongPollInterval SHOULD
         /// be longer than the ShortPollInterval attribute but shorter than the CheckinInterval attribute.A  value of 0xffffffff is reserved to
         /// indicate that the device does not have or does not know its long poll interval

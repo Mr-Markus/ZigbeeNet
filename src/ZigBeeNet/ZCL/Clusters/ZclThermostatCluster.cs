@@ -31,7 +31,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Thermostat";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// LocalTemperature represents the temperature in degrees Celsius, as measured locally.
         /// </summary>

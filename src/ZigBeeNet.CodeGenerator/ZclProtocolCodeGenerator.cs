@@ -661,7 +661,9 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (cluster.Attributes.Count != 0)
                     {
-                        code.AppendLine("        /// <summary> Attribute constants /// </summary>");
+                        code.AppendLine("        /* Attribute constants */");
+                        code.AppendLine();
+
                         foreach (Attribute attribute in cluster.Attributes.Values)
                         {
                             code.AppendLine("        /// <summary>");

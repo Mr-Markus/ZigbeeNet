@@ -33,10 +33,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Occupancy sensing";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The Occupancy attribute is a bitmap.
-        /// <p>
+        /// 
         /// Bit 0 specifies the sensed occupancy as follows: 1 = occupied, 0 = unoccupied.
         /// All other bits are reserved.
         /// </summary>
@@ -117,7 +118,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Get the Occupancy attribute [attribute ID0].
         ///
         /// The Occupancy attribute is a bitmap.
-        /// <p>
+        /// 
         /// Bit 0 specifies the sensed occupancy as follows: 1 = occupied, 0 = unoccupied.
         /// All other bits are reserved.
         ///
@@ -136,7 +137,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Synchronously Get the Occupancy attribute [attribute ID0].
         ///
         /// The Occupancy attribute is a bitmap.
-        /// <p>
+        /// 
         /// Bit 0 specifies the sensed occupancy as follows: 1 = occupied, 0 = unoccupied.
         /// All other bits are reserved.
         ///
@@ -161,7 +162,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Set reporting for the Occupancy attribute [attribute ID0].
         ///
         /// The Occupancy attribute is a bitmap.
-        /// <p>
+        /// 
         /// Bit 0 specifies the sensed occupancy as follows: 1 = occupied, 0 = unoccupied.
         /// All other bits are reserved.
         ///

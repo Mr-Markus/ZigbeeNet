@@ -30,12 +30,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Time";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The Time attribute is 32-bits in length and holds the time value of a real time
         /// clock. This attribute has data type UTCTime, but note that it may not actually be
         /// synchronised to UTC - see discussion of the TimeStatus attribute below.
-        /// <p>
+        /// 
         /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this
         /// attribute shall set the real time clock to the written value, otherwise it cannot be
         /// written. The value 0xffffffff indicates an invalid time.
@@ -62,16 +63,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any
         /// one of them is implemented the other two must also be implemented.
         /// Note that this attribute should be set to a new value once every year.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute.
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute
         /// </summary>
@@ -81,7 +82,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The DstShift attribute represents a signed offset in seconds from the standard time,
         /// to be applied between the times DstStart and DstEnd to calculate the Local Time.
         /// The value 0xffffffff indicates an invalid DST shift.
-        /// <p>
+        /// 
         /// The range of this attribute is +/- one day. Note that the actual range of DST values
         /// employed by countries is much smaller than this, so the manufacturer has the
         /// option to impose a smaller range.
@@ -141,7 +142,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Time attribute is 32-bits in length and holds the time value of a real time
         /// clock. This attribute has data type UTCTime, but note that it may not actually be
         /// synchronised to UTC - see discussion of the TimeStatus attribute below.
-        /// <p>
+        /// 
         /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this
         /// attribute shall set the real time clock to the written value, otherwise it cannot be
         /// written. The value 0xffffffff indicates an invalid time.
@@ -165,7 +166,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Time attribute is 32-bits in length and holds the time value of a real time
         /// clock. This attribute has data type UTCTime, but note that it may not actually be
         /// synchronised to UTC - see discussion of the TimeStatus attribute below.
-        /// <p>
+        /// 
         /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this
         /// attribute shall set the real time clock to the written value, otherwise it cannot be
         /// written. The value 0xffffffff indicates an invalid time.
@@ -187,7 +188,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Time attribute is 32-bits in length and holds the time value of a real time
         /// clock. This attribute has data type UTCTime, but note that it may not actually be
         /// synchronised to UTC - see discussion of the TimeStatus attribute below.
-        /// <p>
+        /// 
         /// If the Master bit of the TimeStatus attribute has a value of 0, writing to this
         /// attribute shall set the real time clock to the written value, otherwise it cannot be
         /// written. The value 0xffffffff indicates an invalid time.
@@ -388,16 +389,16 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any
         /// one of them is implemented the other two must also be implemented.
         /// Note that this attribute should be set to a new value once every year.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute.
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute
         ///
@@ -419,16 +420,16 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any
         /// one of them is implemented the other two must also be implemented.
         /// Note that this attribute should be set to a new value once every year.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute.
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute
         ///
@@ -448,16 +449,16 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that the three attributes DstStart, DstEnd and DstShift are optional, but if any
         /// one of them is implemented the other two must also be implemented.
         /// Note that this attribute should be set to a new value once every year.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute.
         /// The DstEnd attribute indicates the DST end time in seconds. The value 0xffffffff
         /// indicates an invalid DST end time.
-        /// <p>
+        /// 
         /// Note that this attribute should be set to a new value once every year, and should be
         /// written synchronously with the DstStart attribute
         ///
@@ -484,7 +485,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The DstShift attribute represents a signed offset in seconds from the standard time,
         /// to be applied between the times DstStart and DstEnd to calculate the Local Time.
         /// The value 0xffffffff indicates an invalid DST shift.
-        /// <p>
+        /// 
         /// The range of this attribute is +/- one day. Note that the actual range of DST values
         /// employed by countries is much smaller than this, so the manufacturer has the
         /// option to impose a smaller range.
@@ -508,7 +509,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The DstShift attribute represents a signed offset in seconds from the standard time,
         /// to be applied between the times DstStart and DstEnd to calculate the Local Time.
         /// The value 0xffffffff indicates an invalid DST shift.
-        /// <p>
+        /// 
         /// The range of this attribute is +/- one day. Note that the actual range of DST values
         /// employed by countries is much smaller than this, so the manufacturer has the
         /// option to impose a smaller range.
@@ -530,7 +531,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The DstShift attribute represents a signed offset in seconds from the standard time,
         /// to be applied between the times DstStart and DstEnd to calculate the Local Time.
         /// The value 0xffffffff indicates an invalid DST shift.
-        /// <p>
+        /// 
         /// The range of this attribute is +/- one day. Note that the actual range of DST values
         /// employed by countries is much smaller than this, so the manufacturer has the
         /// option to impose a smaller range.

@@ -32,7 +32,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "On/off Switch Configuration";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.
         /// </summary>

@@ -33,7 +33,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "On/Off";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The OnOff attribute has the following values: 0 = Off, 1 = On
         /// </summary>
@@ -43,13 +44,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
         /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
         /// scene that is stored with group identifier 0 and scene identifier 0.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
         /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
         /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.
         /// </summary>
         public const ushort ATTR_GLOBALSCENECONTROL = 0x4000;
@@ -155,13 +156,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
         /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
         /// scene that is stored with group identifier 0 and scene identifier 0.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
         /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
         /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.
         ///
         /// The attribute is of type bool.
@@ -181,13 +182,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// In order to support the use case where the user gets back the last setting of the devices (e.g. level settings for lamps), a global scene is
         /// introduced which is stored when the devices are turned off and recalled when the devices are turned on. The global scene is defined as the
         /// scene that is stored with group identifier 0 and scene identifier 0.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is defined in order to prevent a second off command storing the all-devices-off situation as a global
         /// scene, and to prevent a second on command destroying the current settings by going back to the global scene.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute SHALL be set to TRUE after the reception of a command which causes the OnOff attribute to be set to TRUE,
         /// such as a standard On command, a Move to level (with on/off) command, a Recall scene command or a On with recall global scene command.
-        /// <p>
+        /// 
         /// The GlobalSceneControl attribute is set to FALSE after reception of a Off with effect command.
         ///
         /// The attribute is of type bool.

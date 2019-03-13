@@ -36,7 +36,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "IAS WD";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The MaxDuration attribute specifies the maximum time in seconds that the siren
         /// will sound continuously, regardless of start/stop commands.

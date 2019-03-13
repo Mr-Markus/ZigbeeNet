@@ -36,14 +36,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Color Control";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The CurrentHue attribute contains the current hue value of the light. It is updated
         /// as fast as practical during commands that change the hue.
-        /// <p>
+        /// 
         /// The hue in degrees shall be related to the CurrentHue attribute by the relationship
         /// Hue = CurrentHue x 360 / 254 (CurrentHue in the range 0 - 254 inclusive)
-        /// <p>
+        /// 
         /// If this attribute is implemented then the CurrentSaturation and ColorMode
         /// attributes shall also be implemented.
         /// </summary>
@@ -70,9 +71,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentX attribute contains the current value of the normalized chromaticity
         /// value x, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of x shall be related to the CurrentX attribute by the relationship
-        /// <p>
+        /// 
         /// x = CurrentX / 65535 (CurrentX in the range 0 to 65279 inclusive)
         /// </summary>
         public const ushort ATTR_CURRENTX = 0x0003;
@@ -81,9 +82,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentY attribute contains the current value of the normalized chromaticity
         /// value y, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of y shall be related to the CurrentY attribute by the relationship
-        /// <p>
+        /// 
         /// y = CurrentY / 65535 (CurrentY in the range 0 to 65279 inclusive)
         /// </summary>
         public const ushort ATTR_CURRENTY = 0x0004;
@@ -104,14 +105,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ColorTemperature attribute contains a scaled inverse of the current value of
         /// the color temperature. It is updated as fast as practical during commands that
         /// change the color.
-        /// <p>
+        /// 
         /// The color temperature value in Kelvins shall be related to the ColorTemperature
         /// attribute by the relationship
-        /// <p>
+        /// 
         /// Color temperature = 1,000,000 / ColorTemperature (ColorTemperature in the
         /// range 1 to 65279 inclusive, giving a color temperature range from 1,000,000
         /// Kelvins to 15.32 Kelvins).
-        /// <p>
+        /// 
         /// The value ColorTemperature = 0 indicates an undefined value. The value
         /// ColorTemperature = 65535 indicates an invalid value.
         /// </summary>
@@ -178,7 +179,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The ColorCapabilitiesattribute specifies the color capabilities of the device supporting the
         /// color control cluster.
-        /// <p>
+        /// 
         /// Note:The support of the CurrentXand CurrentYattributes is mandatory regardless of color capabilities.
         /// </summary>
         public const ushort ATTR_COLORCAPABILITIES = 0x400A;
@@ -246,10 +247,10 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The CurrentHue attribute contains the current hue value of the light. It is updated
         /// as fast as practical during commands that change the hue.
-        /// <p>
+        /// 
         /// The hue in degrees shall be related to the CurrentHue attribute by the relationship
         /// Hue = CurrentHue x 360 / 254 (CurrentHue in the range 0 - 254 inclusive)
-        /// <p>
+        /// 
         /// If this attribute is implemented then the CurrentSaturation and ColorMode
         /// attributes shall also be implemented.
         ///
@@ -269,10 +270,10 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The CurrentHue attribute contains the current hue value of the light. It is updated
         /// as fast as practical during commands that change the hue.
-        /// <p>
+        /// 
         /// The hue in degrees shall be related to the CurrentHue attribute by the relationship
         /// Hue = CurrentHue x 360 / 254 (CurrentHue in the range 0 - 254 inclusive)
-        /// <p>
+        /// 
         /// If this attribute is implemented then the CurrentSaturation and ColorMode
         /// attributes shall also be implemented.
         ///
@@ -298,10 +299,10 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The CurrentHue attribute contains the current hue value of the light. It is updated
         /// as fast as practical during commands that change the hue.
-        /// <p>
+        /// 
         /// The hue in degrees shall be related to the CurrentHue attribute by the relationship
         /// Hue = CurrentHue x 360 / 254 (CurrentHue in the range 0 - 254 inclusive)
-        /// <p>
+        /// 
         /// If this attribute is implemented then the CurrentSaturation and ColorMode
         /// attributes shall also be implemented.
         ///
@@ -442,9 +443,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentX attribute contains the current value of the normalized chromaticity
         /// value x, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of x shall be related to the CurrentX attribute by the relationship
-        /// <p>
+        /// 
         /// x = CurrentX / 65535 (CurrentX in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -464,9 +465,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentX attribute contains the current value of the normalized chromaticity
         /// value x, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of x shall be related to the CurrentX attribute by the relationship
-        /// <p>
+        /// 
         /// x = CurrentX / 65535 (CurrentX in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -492,9 +493,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentX attribute contains the current value of the normalized chromaticity
         /// value x, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of x shall be related to the CurrentX attribute by the relationship
-        /// <p>
+        /// 
         /// x = CurrentX / 65535 (CurrentX in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -518,9 +519,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentY attribute contains the current value of the normalized chromaticity
         /// value y, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of y shall be related to the CurrentY attribute by the relationship
-        /// <p>
+        /// 
         /// y = CurrentY / 65535 (CurrentY in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -540,9 +541,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentY attribute contains the current value of the normalized chromaticity
         /// value y, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of y shall be related to the CurrentY attribute by the relationship
-        /// <p>
+        /// 
         /// y = CurrentY / 65535 (CurrentY in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -568,9 +569,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The CurrentY attribute contains the current value of the normalized chromaticity
         /// value y, as defined in the CIE xyY Color Space. It is updated as fast as practical
         /// during commands that change the color.
-        /// <p>
+        /// 
         /// The value of y shall be related to the CurrentY attribute by the relationship
-        /// <p>
+        /// 
         /// y = CurrentY / 65535 (CurrentY in the range 0 to 65279 inclusive)
         ///
         /// The attribute is of type ushort.
@@ -674,14 +675,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ColorTemperature attribute contains a scaled inverse of the current value of
         /// the color temperature. It is updated as fast as practical during commands that
         /// change the color.
-        /// <p>
+        /// 
         /// The color temperature value in Kelvins shall be related to the ColorTemperature
         /// attribute by the relationship
-        /// <p>
+        /// 
         /// Color temperature = 1,000,000 / ColorTemperature (ColorTemperature in the
         /// range 1 to 65279 inclusive, giving a color temperature range from 1,000,000
         /// Kelvins to 15.32 Kelvins).
-        /// <p>
+        /// 
         /// The value ColorTemperature = 0 indicates an undefined value. The value
         /// ColorTemperature = 65535 indicates an invalid value.
         ///
@@ -702,14 +703,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ColorTemperature attribute contains a scaled inverse of the current value of
         /// the color temperature. It is updated as fast as practical during commands that
         /// change the color.
-        /// <p>
+        /// 
         /// The color temperature value in Kelvins shall be related to the ColorTemperature
         /// attribute by the relationship
-        /// <p>
+        /// 
         /// Color temperature = 1,000,000 / ColorTemperature (ColorTemperature in the
         /// range 1 to 65279 inclusive, giving a color temperature range from 1,000,000
         /// Kelvins to 15.32 Kelvins).
-        /// <p>
+        /// 
         /// The value ColorTemperature = 0 indicates an undefined value. The value
         /// ColorTemperature = 65535 indicates an invalid value.
         ///
@@ -736,14 +737,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ColorTemperature attribute contains a scaled inverse of the current value of
         /// the color temperature. It is updated as fast as practical during commands that
         /// change the color.
-        /// <p>
+        /// 
         /// The color temperature value in Kelvins shall be related to the ColorTemperature
         /// attribute by the relationship
-        /// <p>
+        /// 
         /// Color temperature = 1,000,000 / ColorTemperature (ColorTemperature in the
         /// range 1 to 65279 inclusive, giving a color temperature range from 1,000,000
         /// Kelvins to 15.32 Kelvins).
-        /// <p>
+        /// 
         /// The value ColorTemperature = 0 indicates an undefined value. The value
         /// ColorTemperature = 65535 indicates an invalid value.
         ///
@@ -1131,7 +1132,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The ColorCapabilitiesattribute specifies the color capabilities of the device supporting the
         /// color control cluster.
-        /// <p>
+        /// 
         /// Note:The support of the CurrentXand CurrentYattributes is mandatory regardless of color capabilities.
         ///
         /// The attribute is of type ushort.
@@ -1150,7 +1151,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The ColorCapabilitiesattribute specifies the color capabilities of the device supporting the
         /// color control cluster.
-        /// <p>
+        /// 
         /// Note:The support of the CurrentXand CurrentYattributes is mandatory regardless of color capabilities.
         ///
         /// The attribute is of type ushort.

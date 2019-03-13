@@ -41,7 +41,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Scenes";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The SceneCount attribute specifies the number of scenes currently in the device's
         /// scene table.
@@ -63,7 +64,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The SceneValid attribute indicates whether the state of the device corresponds to
         /// that associated with the CurrentScene and CurrentGroup attributes. TRUE
         /// indicates that these attributes are valid, FALSE indicates that they are not valid.
-        /// <p>
+        /// 
         /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a
         /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a
         /// scene is stored or recalled, the state of the device is modified, this attribute is set to
@@ -81,7 +82,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address
         /// of the device that last configured the scene table.
-        /// <p>
+        /// 
         /// The value 0xffffffffffffffff indicates that the device has not been configured, or
         /// that the address of the device that last configured the scenes cluster is not known.
         /// </summary>
@@ -240,7 +241,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The SceneValid attribute indicates whether the state of the device corresponds to
         /// that associated with the CurrentScene and CurrentGroup attributes. TRUE
         /// indicates that these attributes are valid, FALSE indicates that they are not valid.
-        /// <p>
+        /// 
         /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a
         /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a
         /// scene is stored or recalled, the state of the device is modified, this attribute is set to
@@ -263,7 +264,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The SceneValid attribute indicates whether the state of the device corresponds to
         /// that associated with the CurrentScene and CurrentGroup attributes. TRUE
         /// indicates that these attributes are valid, FALSE indicates that they are not valid.
-        /// <p>
+        /// 
         /// Before a scene has been stored or recalled, this attribute is set to FALSE. After a
         /// successful Store Scene or Recall Scene command it is set to TRUE. If, after a
         /// scene is stored or recalled, the state of the device is modified, this attribute is set to
@@ -333,7 +334,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address
         /// of the device that last configured the scene table.
-        /// <p>
+        /// 
         /// The value 0xffffffffffffffff indicates that the device has not been configured, or
         /// that the address of the device that last configured the scenes cluster is not known.
         ///
@@ -353,7 +354,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The LastConfiguredBy attribute is 64-bits in length and specifies the IEEE address
         /// of the device that last configured the scene table.
-        /// <p>
+        /// 
         /// The value 0xffffffffffffffff indicates that the device has not been configured, or
         /// that the address of the device that last configured the scenes cluster is not known.
         ///

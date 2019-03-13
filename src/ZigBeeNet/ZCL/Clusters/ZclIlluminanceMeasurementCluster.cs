@@ -34,15 +34,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Illuminance measurement";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// MeasuredValue represents the Illuminance in Lux (symbol lx) as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10,000 x log10 Illuminance + 1
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 1 to 0xfffe.
-        /// <p>
+        /// 
         /// The following special values of MeasuredValue apply.
         /// <li>0x0000 indicates a value of Illuminance that is too low to be measured.</li>
         /// <li>0xffff indicates that the Illuminance measurement is invalid.</li>
@@ -58,9 +59,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff indicates that this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         /// </summary>
         public const ushort ATTR_MAXMEASUREDVALUE = 0x0002;
@@ -109,12 +110,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the Illuminance in Lux (symbol lx) as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10,000 x log10 Illuminance + 1
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 1 to 0xfffe.
-        /// <p>
+        /// 
         /// The following special values of MeasuredValue apply.
         /// <li>0x0000 indicates a value of Illuminance that is too low to be measured.</li>
         /// <li>0xffff indicates that the Illuminance measurement is invalid.</li>
@@ -134,12 +135,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Synchronously Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the Illuminance in Lux (symbol lx) as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10,000 x log10 Illuminance + 1
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 1 to 0xfffe.
-        /// <p>
+        /// 
         /// The following special values of MeasuredValue apply.
         /// <li>0x0000 indicates a value of Illuminance that is too low to be measured.</li>
         /// <li>0xffff indicates that the Illuminance measurement is invalid.</li>
@@ -165,12 +166,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Set reporting for the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the Illuminance in Lux (symbol lx) as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10,000 x log10 Illuminance + 1
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 1 to 0xfffe.
-        /// <p>
+        /// 
         /// The following special values of MeasuredValue apply.
         /// <li>0x0000 indicates a value of Illuminance that is too low to be measured.</li>
         /// <li>0xffff indicates that the Illuminance measurement is invalid.</li>
@@ -235,9 +236,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff indicates that this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         ///
         /// The attribute is of type ushort.
@@ -256,9 +257,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff indicates that this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         ///
         /// The attribute is of type ushort.

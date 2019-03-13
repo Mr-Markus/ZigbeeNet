@@ -35,7 +35,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Level Control";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The CurrentLevel attribute represents the current level of this device. The
         /// meaning of 'level' is device dependent. Value is between 0 and 254.
@@ -52,7 +53,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The OnOffTransitionTime attribute represents the time taken to move to or from
         /// the target level when On of Off commands are received by an On/Off cluster on
         /// the same endpoint. It is specified in 1/10ths of a second.
-        /// <p>
+        /// 
         /// The actual time taken should be as close to OnOffTransitionTime as the device is
         /// able. N.B. If the device is not able to move at a variable rate, the
         /// OnOffTransitionTime attribute should not be implemented.
@@ -225,7 +226,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The OnOffTransitionTime attribute represents the time taken to move to or from
         /// the target level when On of Off commands are received by an On/Off cluster on
         /// the same endpoint. It is specified in 1/10ths of a second.
-        /// <p>
+        /// 
         /// The actual time taken should be as close to OnOffTransitionTime as the device is
         /// able. N.B. If the device is not able to move at a variable rate, the
         /// OnOffTransitionTime attribute should not be implemented.
@@ -249,7 +250,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The OnOffTransitionTime attribute represents the time taken to move to or from
         /// the target level when On of Off commands are received by an On/Off cluster on
         /// the same endpoint. It is specified in 1/10ths of a second.
-        /// <p>
+        /// 
         /// The actual time taken should be as close to OnOffTransitionTime as the device is
         /// able. N.B. If the device is not able to move at a variable rate, the
         /// OnOffTransitionTime attribute should not be implemented.
@@ -271,7 +272,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The OnOffTransitionTime attribute represents the time taken to move to or from
         /// the target level when On of Off commands are received by an On/Off cluster on
         /// the same endpoint. It is specified in 1/10ths of a second.
-        /// <p>
+        /// 
         /// The actual time taken should be as close to OnOffTransitionTime as the device is
         /// able. N.B. If the device is not able to move at a variable rate, the
         /// OnOffTransitionTime attribute should not be implemented.

@@ -33,17 +33,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Pressure measurement";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// MeasuredValue represents the pressure in kPa as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Pressure
-        /// <p>
+        /// 
         /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a
         /// MeasuredValue in the range 0x8001 to 0x7fff.
-        /// <p>
+        /// 
         /// Note:- The maximum resolution this format allows is 0.1 kPa.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.
         /// MeasuredValue is updated continuously as new measurements are made.
         /// </summary>
@@ -58,9 +59,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0x8000 means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         /// </summary>
         public const ushort ATTR_MAXMEASUREDVALUE = 0x0002;
@@ -128,14 +129,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the pressure in kPa as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Pressure
-        /// <p>
+        /// 
         /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a
         /// MeasuredValue in the range 0x8001 to 0x7fff.
-        /// <p>
+        /// 
         /// Note:- The maximum resolution this format allows is 0.1 kPa.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
@@ -154,14 +155,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Synchronously Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the pressure in kPa as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Pressure
-        /// <p>
+        /// 
         /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a
         /// MeasuredValue in the range 0x8001 to 0x7fff.
-        /// <p>
+        /// 
         /// Note:- The maximum resolution this format allows is 0.1 kPa.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
@@ -186,14 +187,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Set reporting for the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the pressure in kPa as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Pressure
-        /// <p>
+        /// 
         /// Where -3276.7 kPa <= Pressure <= 3276.7 kPa, corresponding to a
         /// MeasuredValue in the range 0x8001 to 0x7fff.
-        /// <p>
+        /// 
         /// Note:- The maximum resolution this format allows is 0.1 kPa.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the pressure measurement is invalid.
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
@@ -257,9 +258,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0x8000 means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         ///
         /// The attribute is of type short.
@@ -278,9 +279,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0x8000 means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         ///
         /// The attribute is of type short.
@@ -305,9 +306,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0x8000 means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
         ///
         /// The attribute is of type short.

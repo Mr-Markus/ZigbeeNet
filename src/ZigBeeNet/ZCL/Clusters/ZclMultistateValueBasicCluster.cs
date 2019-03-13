@@ -33,7 +33,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Multistate Value (Basic)";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// This  attribute, of type Array of Character strings, holds descriptions of all possible
         /// states of a multistate PresentValue.  The number of descriptions matches the number of states
@@ -86,7 +87,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the PresentValueor the operation of the physical input, output or value in question (as
         /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why
         /// not. The Reliability attribute MAY have any of the following values:
-        /// <p>
+        /// 
         /// NO-FAULT-DETECTED (0)
         /// OVER-RANGE (2)
         /// UNDER-RANGE (3)
@@ -110,18 +111,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// of the analog sensor. Three of the flags are associated with the values of other optional attributes
         /// of this cluster. A more detailed status could be determined by reading the optional attributes (if
         /// supported) that are linked to these flags. The relationship between individual flags is not defined.
-        /// <p>
+        /// 
         /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE
-        /// <p>
+        /// 
         /// where:
-        /// <p>
+        /// 
         /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).
         /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same
         /// endpoint.
-        /// <p>
+        /// 
         /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,
         /// otherwise logical FALSE (0).
-        /// <p>
+        /// 
         /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.
         /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken
         /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the
@@ -129,7 +130,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of
         /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is
         /// not writeable.
-        /// <p>
+        /// 
         /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise
         /// logical FALSE (0).
         /// </summary>
@@ -139,12 +140,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific
         /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).
         /// ApplicationType is subdivided into Group, Type and an Index number, as follows.
-        /// <p>
+        /// 
         /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.
-        /// <p>
+        /// 
         /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute
         /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.
-        /// <p>
+        /// 
         /// Index = Bits 0 -15The specific application usage of the cluster.
         /// </summary>
         public const ushort ATTR_APPLICATIONTYPE = 0x0100;
@@ -534,7 +535,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the PresentValueor the operation of the physical input, output or value in question (as
         /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why
         /// not. The Reliability attribute MAY have any of the following values:
-        /// <p>
+        /// 
         /// NO-FAULT-DETECTED (0)
         /// OVER-RANGE (2)
         /// UNDER-RANGE (3)
@@ -565,7 +566,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the PresentValueor the operation of the physical input, output or value in question (as
         /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why
         /// not. The Reliability attribute MAY have any of the following values:
-        /// <p>
+        /// 
         /// NO-FAULT-DETECTED (0)
         /// OVER-RANGE (2)
         /// UNDER-RANGE (3)
@@ -594,7 +595,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the PresentValueor the operation of the physical input, output or value in question (as
         /// appropriate for the cluster) is “reliable” as far as can be determined and, if not, why
         /// not. The Reliability attribute MAY have any of the following values:
-        /// <p>
+        /// 
         /// NO-FAULT-DETECTED (0)
         /// OVER-RANGE (2)
         /// UNDER-RANGE (3)
@@ -688,18 +689,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// of the analog sensor. Three of the flags are associated with the values of other optional attributes
         /// of this cluster. A more detailed status could be determined by reading the optional attributes (if
         /// supported) that are linked to these flags. The relationship between individual flags is not defined.
-        /// <p>
+        /// 
         /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE
-        /// <p>
+        /// 
         /// where:
-        /// <p>
+        /// 
         /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).
         /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same
         /// endpoint.
-        /// <p>
+        /// 
         /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,
         /// otherwise logical FALSE (0).
-        /// <p>
+        /// 
         /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.
         /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken
         /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the
@@ -707,7 +708,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of
         /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is
         /// not writeable.
-        /// <p>
+        /// 
         /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise
         /// logical FALSE (0).
         ///
@@ -729,18 +730,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// of the analog sensor. Three of the flags are associated with the values of other optional attributes
         /// of this cluster. A more detailed status could be determined by reading the optional attributes (if
         /// supported) that are linked to these flags. The relationship between individual flags is not defined.
-        /// <p>
+        /// 
         /// The four flags are Bit 0 = IN_ALARM, Bit 1 = FAULT, Bit 2 = OVERRIDDEN, Bit 3 = OUT OF SERVICE
-        /// <p>
+        /// 
         /// where:
-        /// <p>
+        /// 
         /// IN_ALARM -Logical FALSE (0) if the EventStateattribute has a value of NORMAL, otherwise logical TRUE (1).
         /// This bit is always 0 unless the cluster implementing the EventState attribute is implemented on the same
         /// endpoint.
-        /// <p>
+        /// 
         /// FAULT -Logical TRUE (1) if the Reliability attribute is present and does not have a value of NO FAULT DETECTED,
         /// otherwise logical FALSE (0).
-        /// <p>
+        /// 
         /// OVERRIDDEN -Logical TRUE (1) if the cluster has been overridden by some  mechanism local to the device.
         /// Otherwise, the value is logical FALSE (0). In this context, for an input cluster, “overridden” is taken
         /// to mean that the PresentValue and Reliability(optional) attributes are no longer tracking changes to the
@@ -748,7 +749,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// tracking changes to the PresentValue attribute and the Reliability attribute is no longer a reflection of
         /// the physical output. For a Value cluster, “overridden” is taken to mean that the PresentValue attribute is
         /// not writeable.
-        /// <p>
+        /// 
         /// OUT OF SERVICE -Logical TRUE (1) if the OutOfService attribute has a value of TRUE, otherwise
         /// logical FALSE (0).
         ///
@@ -775,12 +776,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific
         /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).
         /// ApplicationType is subdivided into Group, Type and an Index number, as follows.
-        /// <p>
+        /// 
         /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.
-        /// <p>
+        /// 
         /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute
         /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.
-        /// <p>
+        /// 
         /// Index = Bits 0 -15The specific application usage of the cluster.
         ///
         /// The attribute is of type int.
@@ -800,12 +801,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The ApplicationType attribute is an unsigned 32 bit integer that indicates the specific
         /// application usage for this cluster. (Note: This attribute has no BACnet equivalent).
         /// ApplicationType is subdivided into Group, Type and an Index number, as follows.
-        /// <p>
+        /// 
         /// Group = Bits 24 -31 An indication of the cluster this attribute is part of.
-        /// <p>
+        /// 
         /// Type = Bits 16 -23 For Analog clusters, the physical quantity that the Present Value attribute
         /// of the cluster represents. For Binary and Multistate clusters, the application usage domain.
-        /// <p>
+        /// 
         /// Index = Bits 0 -15The specific application usage of the cluster.
         ///
         /// The attribute is of type int.

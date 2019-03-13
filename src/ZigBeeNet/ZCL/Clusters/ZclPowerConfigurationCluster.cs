@@ -33,7 +33,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Power configuration";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The MainsVoltage attribute is 16-bits in length and specifies the actual (measured)
         /// RMS voltage (or DC voltage in the case of a DC supply) currently applied to the
@@ -44,13 +45,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The MainsFrequency attribute is 8-bits in length and represents the frequency, in
         /// Hertz, of the mains as determined by the device as follows:-
-        /// <p>
+        /// 
         /// MainsFrequency = 0.5 x measured frequency
-        /// <p>
+        /// 
         /// Where 2 Hz <= measured frequency <= 506 Hz, corresponding to a
-        /// <p>
+        /// 
         /// MainsFrequency in the range 1 to 0xfd.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 2 Hz.
         /// The following special values of MainsFrequency apply.
         /// <li>0x00 indicates a frequency that is too low to be measured.</li>
@@ -69,16 +70,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageMinThreshold attribute is 16-bits in length and specifies the
         /// lower alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be less than MainsVoltageMaxThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage drops below the threshold specified by
         /// MainsVoltageMinThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute increases to
         /// greater than or equal to MainsVoltageMinThreshold before the timer expires, the
         /// device shall stop and reset the timer. If the timer expires, an alarm shall be
         /// generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x00.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         /// </summary>
         public const ushort ATTR_MAINSVOLTAGEMINTHRESHOLD = 0x0011;
@@ -88,15 +89,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// upper alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be greater than
         /// MainsVoltageMinThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage rises above the threshold specified by
         /// MainsVoltageMaxThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute drops to lower
         /// than or equal to MainsVoltageMaxThreshold before the timer expires, the device
         /// shall stop and reset the timer. If the timer expires, an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x01.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         /// </summary>
         public const ushort ATTR_MAINSVOLTAGEMAXTHRESHOLD = 0x0012;
@@ -105,7 +106,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageDwellTripPoint attribute is 16-bits in length and specifies the
         /// length of time, in seconds that the value of MainsVoltage may exist beyond either
         /// of its thresholds before an alarm is generated.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then the associated alarms shall not be
         /// generated.
         /// </summary>
@@ -162,12 +163,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The BatteryVoltageMinThreshold attribute is 8-bits in length and specifies the low
         /// voltage alarm threshold, measured in units of 100mV, for the BatteryVoltage
         /// attribute.
-        /// <p>
+        /// 
         /// If the value of BatteryVoltage drops below the threshold specified by
         /// BatteryVoltageMinThreshold an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x10.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xff then this alarm shall not be generated.
         /// </summary>
         public const ushort ATTR_BATTERYVOLTAGEMINTHRESHOLD = 0x0036;
@@ -297,13 +298,13 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MainsFrequency attribute is 8-bits in length and represents the frequency, in
         /// Hertz, of the mains as determined by the device as follows:-
-        /// <p>
+        /// 
         /// MainsFrequency = 0.5 x measured frequency
-        /// <p>
+        /// 
         /// Where 2 Hz <= measured frequency <= 506 Hz, corresponding to a
-        /// <p>
+        /// 
         /// MainsFrequency in the range 1 to 0xfd.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 2 Hz.
         /// The following special values of MainsFrequency apply.
         /// <li>0x00 indicates a frequency that is too low to be measured.</li>
@@ -326,13 +327,13 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MainsFrequency attribute is 8-bits in length and represents the frequency, in
         /// Hertz, of the mains as determined by the device as follows:-
-        /// <p>
+        /// 
         /// MainsFrequency = 0.5 x measured frequency
-        /// <p>
+        /// 
         /// Where 2 Hz <= measured frequency <= 506 Hz, corresponding to a
-        /// <p>
+        /// 
         /// MainsFrequency in the range 1 to 0xfd.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 2 Hz.
         /// The following special values of MainsFrequency apply.
         /// <li>0x00 indicates a frequency that is too low to be measured.</li>
@@ -421,16 +422,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageMinThreshold attribute is 16-bits in length and specifies the
         /// lower alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be less than MainsVoltageMaxThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage drops below the threshold specified by
         /// MainsVoltageMinThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute increases to
         /// greater than or equal to MainsVoltageMinThreshold before the timer expires, the
         /// device shall stop and reset the timer. If the timer expires, an alarm shall be
         /// generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x00.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -452,16 +453,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageMinThreshold attribute is 16-bits in length and specifies the
         /// lower alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be less than MainsVoltageMaxThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage drops below the threshold specified by
         /// MainsVoltageMinThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute increases to
         /// greater than or equal to MainsVoltageMinThreshold before the timer expires, the
         /// device shall stop and reset the timer. If the timer expires, an alarm shall be
         /// generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x00.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -481,16 +482,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageMinThreshold attribute is 16-bits in length and specifies the
         /// lower alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be less than MainsVoltageMaxThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage drops below the threshold specified by
         /// MainsVoltageMinThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute increases to
         /// greater than or equal to MainsVoltageMinThreshold before the timer expires, the
         /// device shall stop and reset the timer. If the timer expires, an alarm shall be
         /// generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x00.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -517,15 +518,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// upper alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be greater than
         /// MainsVoltageMinThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage rises above the threshold specified by
         /// MainsVoltageMaxThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute drops to lower
         /// than or equal to MainsVoltageMaxThreshold before the timer expires, the device
         /// shall stop and reset the timer. If the timer expires, an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x01.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -548,15 +549,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// upper alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be greater than
         /// MainsVoltageMinThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage rises above the threshold specified by
         /// MainsVoltageMaxThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute drops to lower
         /// than or equal to MainsVoltageMaxThreshold before the timer expires, the device
         /// shall stop and reset the timer. If the timer expires, an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x01.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -577,15 +578,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// upper alarm threshold, measured in units of 100mV, for the MainsVoltage
         /// attribute. The value of this attribute shall be greater than
         /// MainsVoltageMinThreshold.
-        /// <p>
+        /// 
         /// If the value of MainsVoltage rises above the threshold specified by
         /// MainsVoltageMaxThreshold, the device shall start a timer to expire after
         /// MainsVoltageDwellTripPoint seconds. If the value of this attribute drops to lower
         /// than or equal to MainsVoltageMaxThreshold before the timer expires, the device
         /// shall stop and reset the timer. If the timer expires, an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x01.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then this alarm shall not be generated.
         ///
         /// The attribute is of type ushort.
@@ -611,7 +612,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageDwellTripPoint attribute is 16-bits in length and specifies the
         /// length of time, in seconds that the value of MainsVoltage may exist beyond either
         /// of its thresholds before an alarm is generated.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then the associated alarms shall not be
         /// generated.
         ///
@@ -634,7 +635,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageDwellTripPoint attribute is 16-bits in length and specifies the
         /// length of time, in seconds that the value of MainsVoltage may exist beyond either
         /// of its thresholds before an alarm is generated.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then the associated alarms shall not be
         /// generated.
         ///
@@ -655,7 +656,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The MainsVoltageDwellTripPoint attribute is 16-bits in length and specifies the
         /// length of time, in seconds that the value of MainsVoltage may exist beyond either
         /// of its thresholds before an alarm is generated.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xffff then the associated alarms shall not be
         /// generated.
         ///
@@ -1130,12 +1131,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The BatteryVoltageMinThreshold attribute is 8-bits in length and specifies the low
         /// voltage alarm threshold, measured in units of 100mV, for the BatteryVoltage
         /// attribute.
-        /// <p>
+        /// 
         /// If the value of BatteryVoltage drops below the threshold specified by
         /// BatteryVoltageMinThreshold an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x10.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xff then this alarm shall not be generated.
         ///
         /// The attribute is of type byte.
@@ -1157,12 +1158,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The BatteryVoltageMinThreshold attribute is 8-bits in length and specifies the low
         /// voltage alarm threshold, measured in units of 100mV, for the BatteryVoltage
         /// attribute.
-        /// <p>
+        /// 
         /// If the value of BatteryVoltage drops below the threshold specified by
         /// BatteryVoltageMinThreshold an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x10.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xff then this alarm shall not be generated.
         ///
         /// The attribute is of type byte.
@@ -1182,12 +1183,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The BatteryVoltageMinThreshold attribute is 8-bits in length and specifies the low
         /// voltage alarm threshold, measured in units of 100mV, for the BatteryVoltage
         /// attribute.
-        /// <p>
+        /// 
         /// If the value of BatteryVoltage drops below the threshold specified by
         /// BatteryVoltageMinThreshold an alarm shall be generated.
-        /// <p>
+        /// 
         /// The Alarm Code field included in the generated alarm shall be 0x10.
-        /// <p>
+        /// 
         /// If this attribute takes the value 0xff then this alarm shall not be generated.
         ///
         /// The attribute is of type byte.

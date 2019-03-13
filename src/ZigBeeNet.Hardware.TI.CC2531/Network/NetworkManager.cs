@@ -388,7 +388,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                 }
             }
             _logger.Debug("Setting Distribute Network Key to {Key}.", _distributeNetworkKey);
-            if (!dongleSetDistributeNetworkKey())
+            if (!DongleSetDistributeNetworkKey())
             {
                 _logger.Error("Unable to set DISTRIBUTE_NETWORK_KEY for ZigBee Network");
                 return false;
@@ -398,7 +398,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                 _logger.Trace("DISTRIBUTE_NETWORK_KEY set");
             }
             _logger.Debug("Setting Security Mode to {Mode}.", _securityMode);
-            if (!dongleSetSecurityMode())
+            if (!DongleSetSecurityMode())
             {
                 _logger.Error("Unable to set SECURITY_MODE for ZigBee Network");
                 return false;
@@ -528,14 +528,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         {
             _distributeNetworkKey = distributeNetworkKey;
 
-            return dongleSetDistributeNetworkKey();
+            return DongleSetDistributeNetworkKey();
         }
 
         public bool SetSecurityMode(int securityMode)
         {
             _securityMode = securityMode;
 
-            return dongleSetSecurityMode();
+            return DongleSetSecurityMode();
         }
 
         public ZigBeeStatus SetLedMode(byte ledId, bool mode)
@@ -842,7 +842,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response != null && response.Status == 0;
         }
 
-        private bool dongleSetDistributeNetworkKey()
+        private bool DongleSetDistributeNetworkKey()
         {
             ZB_WRITE_CONFIGURATION_RSP response = (ZB_WRITE_CONFIGURATION_RSP)SendSynchronous(new ZB_WRITE_CONFIGURATION(
                     ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_PRECFGKEYS_ENABLE, new byte[] { _distributeNetworkKey ? (byte)0x00 : (byte)0x01 }));
@@ -850,7 +850,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response != null && response.Status == 0;
         }
 
-        private bool dongleSetSecurityMode()
+        private bool DongleSetSecurityMode()
         {
             ZB_WRITE_CONFIGURATION_RSP response = (ZB_WRITE_CONFIGURATION_RSP)SendSynchronous(new ZB_WRITE_CONFIGURATION(
                     ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_SECURITY_MODE, new byte[] { (byte)_securityMode }));

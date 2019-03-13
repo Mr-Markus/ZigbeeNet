@@ -30,7 +30,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Diagnostics";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// </summary>
         public const ushort ATTR_MACRXBCAST = 0x0100;

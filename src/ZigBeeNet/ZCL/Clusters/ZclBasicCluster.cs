@@ -31,7 +31,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Basic";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The ZCLVersion attribute is 8 bits in length and specifies the version number of
         /// the ZigBee Cluster Library that all clusters on this endpoint conform to.
@@ -112,7 +113,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The DisableLocalConfig attribute allows a number of local device configuration
         /// functions to be disabled.
-        /// <p>
+        /// 
         /// The intention of this attribute is to allow disabling of any local configuration
         /// user interface, for example to prevent reset or binding buttons being activated by
         /// unauthorised persons in a public building.
@@ -732,7 +733,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DisableLocalConfig attribute allows a number of local device configuration
         /// functions to be disabled.
-        /// <p>
+        /// 
         /// The intention of this attribute is to allow disabling of any local configuration
         /// user interface, for example to prevent reset or binding buttons being activated by
         /// unauthorised persons in a public building.
@@ -755,7 +756,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DisableLocalConfig attribute allows a number of local device configuration
         /// functions to be disabled.
-        /// <p>
+        /// 
         /// The intention of this attribute is to allow disabling of any local configuration
         /// user interface, for example to prevent reset or binding buttons being activated by
         /// unauthorised persons in a public building.
@@ -776,7 +777,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The DisableLocalConfig attribute allows a number of local device configuration
         /// functions to be disabled.
-        /// <p>
+        /// 
         /// The intention of this attribute is to allow disabling of any local configuration
         /// user interface, for example to prevent reset or binding buttons being activated by
         /// unauthorised persons in a public building.

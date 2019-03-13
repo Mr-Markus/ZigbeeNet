@@ -33,21 +33,22 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Flow measurement";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// MeasuredValue represents the flow in m3/h as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Flow
-        /// <p>
+        /// 
         /// Where 0 m3/h <= Flow <= 6,553.4 m3
-        /// <p>
+        /// 
         /// /h, corresponding to a MeasuredValue in the
         /// range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 0.1 m3/h.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0xffff indicates that the pressure measurement is invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         /// </summary>
         public const ushort ATTR_MEASUREDVALUE = 0x0000;
@@ -61,9 +62,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor
         /// </summary>
         public const ushort ATTR_MAXMEASUREDVALUE = 0x0002;
@@ -106,18 +107,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the flow in m3/h as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Flow
-        /// <p>
+        /// 
         /// Where 0 m3/h <= Flow <= 6,553.4 m3
-        /// <p>
+        /// 
         /// /h, corresponding to a MeasuredValue in the
         /// range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 0.1 m3/h.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0xffff indicates that the pressure measurement is invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type ushort.
@@ -135,18 +136,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Synchronously Get the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the flow in m3/h as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Flow
-        /// <p>
+        /// 
         /// Where 0 m3/h <= Flow <= 6,553.4 m3
-        /// <p>
+        /// 
         /// /h, corresponding to a MeasuredValue in the
         /// range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 0.1 m3/h.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0xffff indicates that the pressure measurement is invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type ushort.
@@ -170,18 +171,18 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Set reporting for the MeasuredValue attribute [attribute ID0].
         ///
         /// MeasuredValue represents the flow in m3/h as follows:-
-        /// <p>
+        /// 
         /// MeasuredValue = 10 x Flow
-        /// <p>
+        /// 
         /// Where 0 m3/h <= Flow <= 6,553.4 m3
-        /// <p>
+        /// 
         /// /h, corresponding to a MeasuredValue in the
         /// range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// The maximum resolution this format allows is 0.1 m3/h.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0xffff indicates that the pressure measurement is invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type ushort.
@@ -244,9 +245,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor
         ///
         /// The attribute is of type ushort.
@@ -265,9 +266,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that can be measured. A value of 0xffff means this attribute is not defined.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor
         ///
         /// The attribute is of type ushort.

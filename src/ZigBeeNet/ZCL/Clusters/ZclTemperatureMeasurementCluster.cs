@@ -30,19 +30,20 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Temperature measurement";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// MeasuredValue represents the temperature in degrees Celsius as follows:-
         /// MeasuredValue = 100 x temperature in degrees Celsius.
-        /// <p>
+        /// 
         /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a
-        /// <p>
+        /// 
         /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this
         /// format allows is 0.01 ºC.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the temperature measurement is
         /// invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         /// </summary>
         public const ushort ATTR_MEASUREDVALUE = 0x0000;
@@ -57,11 +58,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that is capable of being measured.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
-        /// <p>
+        /// 
         /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.
         /// </summary>
         public const ushort ATTR_MAXMEASUREDVALUE = 0x0002;
@@ -105,15 +106,15 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// MeasuredValue represents the temperature in degrees Celsius as follows:-
         /// MeasuredValue = 100 x temperature in degrees Celsius.
-        /// <p>
+        /// 
         /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a
-        /// <p>
+        /// 
         /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this
         /// format allows is 0.01 ºC.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the temperature measurement is
         /// invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type short.
@@ -132,15 +133,15 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// MeasuredValue represents the temperature in degrees Celsius as follows:-
         /// MeasuredValue = 100 x temperature in degrees Celsius.
-        /// <p>
+        /// 
         /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a
-        /// <p>
+        /// 
         /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this
         /// format allows is 0.01 ºC.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the temperature measurement is
         /// invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type short.
@@ -165,15 +166,15 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// MeasuredValue represents the temperature in degrees Celsius as follows:-
         /// MeasuredValue = 100 x temperature in degrees Celsius.
-        /// <p>
+        /// 
         /// Where -273.15°C <= temperature <= 327.67 ºC, corresponding to a
-        /// <p>
+        /// 
         /// MeasuredValue in the range 0x954d to 0x7fff. The maximum resolution this
         /// format allows is 0.01 ºC.
-        /// <p>
+        /// 
         /// A MeasuredValue of 0x8000 indicates that the temperature measurement is
         /// invalid.
-        /// <p>
+        /// 
         /// MeasuredValue is updated continuously as new measurements are made.
         ///
         /// The attribute is of type short.
@@ -238,11 +239,11 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that is capable of being measured.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
-        /// <p>
+        /// 
         /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.
         ///
         /// The attribute is of type short.
@@ -261,11 +262,11 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue
         /// that is capable of being measured.
-        /// <p>
+        /// 
         /// MaxMeasuredValue shall be greater than MinMeasuredValue.
-        /// <p>
+        /// 
         /// MinMeasuredValue and MaxMeasuredValue define the range of the sensor.
-        /// <p>
+        /// 
         /// A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.
         ///
         /// The attribute is of type short.

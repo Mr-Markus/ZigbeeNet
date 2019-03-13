@@ -31,7 +31,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "RSSI Location";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The LocationType attribute is 8 bits long and is divided into bit fields.
         /// </summary>
@@ -55,7 +56,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed
         /// confidence metric is mandated – the metric may be application and manufacturer
         /// dependent).
-        /// <p>
+        /// 
         /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.
         /// </summary>
         public const ushort ATTR_QUALITYMEASURE = 0x0003;
@@ -70,9 +71,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -82,9 +83,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -94,9 +95,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -106,9 +107,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Power attribute specifies the value of the average power P0, measured in
         /// dBm, received at a reference distance of one meter from the transmitter.
-        /// <p>
+        /// 
         /// P0 = Power / 100
-        /// <p>
+        /// 
         /// A value of 0x8000 indicates that Power is unknown.
         /// </summary>
         public const ushort ATTR_POWER = 0x0013;
@@ -117,9 +118,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,
         /// an exponent that describes the rate at which the signal power decays with
         /// increasing distance from the transmitter.
-        /// <p>
+        /// 
         /// n = PathLossExponent / 100
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that PathLossExponent is unknown.
         /// </summary>
         public const ushort ATTR_PATHLOSSEXPONENT = 0x0014;
@@ -308,7 +309,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed
         /// confidence metric is mandated – the metric may be application and manufacturer
         /// dependent).
-        /// <p>
+        /// 
         /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.
         ///
         /// The attribute is of type byte.
@@ -331,7 +332,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// confidence and a value of 0x00 indicates zero confidence. (Note: no fixed
         /// confidence metric is mandated – the metric may be application and manufacturer
         /// dependent).
-        /// <p>
+        /// 
         /// This field is not valid if the Absolute bit of the LocationType attribute is set to one.
         ///
         /// The attribute is of type byte.
@@ -398,9 +399,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -423,9 +424,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -446,9 +447,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -475,9 +476,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -500,9 +501,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -523,9 +524,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -552,9 +553,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -577,9 +578,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -600,9 +601,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Coordinate1, Coordinate2 and Coordinate3 attributes are signed 16-bit
         /// integers, and represent orthogonal linear coordinates x, y, z in meters as follows.
-        /// <p>
+        /// 
         /// x = Coordinate1 / 10, y = Coordinate2 / 10, z = Coordinate3 / 10
-        /// <p>
+        /// 
         /// The range of x is -3276.7 to 3276.7 meters, corresponding to Coordinate1
         /// between 0x8001 and 0x7fff. The same range applies to y and z. A value of
         /// 0x8000 for any of the coordinates indicates that the coordinate is unknown.
@@ -629,9 +630,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Power attribute specifies the value of the average power P0, measured in
         /// dBm, received at a reference distance of one meter from the transmitter.
-        /// <p>
+        /// 
         /// P0 = Power / 100
-        /// <p>
+        /// 
         /// A value of 0x8000 indicates that Power is unknown.
         ///
         /// The attribute is of type short.
@@ -652,9 +653,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Power attribute specifies the value of the average power P0, measured in
         /// dBm, received at a reference distance of one meter from the transmitter.
-        /// <p>
+        /// 
         /// P0 = Power / 100
-        /// <p>
+        /// 
         /// A value of 0x8000 indicates that Power is unknown.
         ///
         /// The attribute is of type short.
@@ -673,9 +674,9 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Power attribute specifies the value of the average power P0, measured in
         /// dBm, received at a reference distance of one meter from the transmitter.
-        /// <p>
+        /// 
         /// P0 = Power / 100
-        /// <p>
+        /// 
         /// A value of 0x8000 indicates that Power is unknown.
         ///
         /// The attribute is of type short.
@@ -701,9 +702,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,
         /// an exponent that describes the rate at which the signal power decays with
         /// increasing distance from the transmitter.
-        /// <p>
+        /// 
         /// n = PathLossExponent / 100
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that PathLossExponent is unknown.
         ///
         /// The attribute is of type short.
@@ -725,9 +726,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,
         /// an exponent that describes the rate at which the signal power decays with
         /// increasing distance from the transmitter.
-        /// <p>
+        /// 
         /// n = PathLossExponent / 100
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that PathLossExponent is unknown.
         ///
         /// The attribute is of type short.
@@ -747,9 +748,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The PathLossExponent attribute specifies the value of the Path Loss Exponent n,
         /// an exponent that describes the rate at which the signal power decays with
         /// increasing distance from the transmitter.
-        /// <p>
+        /// 
         /// n = PathLossExponent / 100
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that PathLossExponent is unknown.
         ///
         /// The attribute is of type short.

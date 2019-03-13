@@ -44,12 +44,13 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Alarms";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The AlarmCount attribute is 16-bits in length and specifies the number of entries
         /// currently in the alarm table. This attribute shall be specified in the range 0x00 to
         /// the maximum defined in the profile using this cluster.
-        /// <p>
+        /// 
         /// If alarm logging is not implemented this attribute shall always take the value
         /// 0x00.
         /// </summary>
@@ -85,7 +86,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The AlarmCount attribute is 16-bits in length and specifies the number of entries
         /// currently in the alarm table. This attribute shall be specified in the range 0x00 to
         /// the maximum defined in the profile using this cluster.
-        /// <p>
+        /// 
         /// If alarm logging is not implemented this attribute shall always take the value
         /// 0x00.
         ///
@@ -106,7 +107,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The AlarmCount attribute is 16-bits in length and specifies the number of entries
         /// currently in the alarm table. This attribute shall be specified in the range 0x00 to
         /// the maximum defined in the profile using this cluster.
-        /// <p>
+        /// 
         /// If alarm logging is not implemented this attribute shall always take the value
         /// 0x00.
         ///

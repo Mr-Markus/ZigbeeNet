@@ -34,7 +34,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Illuminance level sensing";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// The LevelStatus attribute indicates whether the measured illuminance is above,
         /// below, or within a band around IlluminanceTargetLevel .
@@ -53,14 +54,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// notifications without 'chatter'. Such a dead band and hysteresis bands must be
         /// provided by any implementation of this cluster. (N.B. Manufacturer specific
         /// attributes may be provided to configure these).
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel represents illuminance in Lux (symbol lx) as follows:
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel = 10,000 x log10 Illuminance
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that this attribute is not valid.
         /// </summary>
         public const ushort ATTR_ILLUMINANCETARGETLEVEL = 0x0010;
@@ -198,14 +199,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// notifications without 'chatter'. Such a dead band and hysteresis bands must be
         /// provided by any implementation of this cluster. (N.B. Manufacturer specific
         /// attributes may be provided to configure these).
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel represents illuminance in Lux (symbol lx) as follows:
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel = 10,000 x log10 Illuminance
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that this attribute is not valid.
         ///
         /// The attribute is of type ushort.
@@ -228,14 +229,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// notifications without 'chatter'. Such a dead band and hysteresis bands must be
         /// provided by any implementation of this cluster. (N.B. Manufacturer specific
         /// attributes may be provided to configure these).
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel represents illuminance in Lux (symbol lx) as follows:
-        /// <p>
+        /// 
         /// IlluminanceTargetLevel = 10,000 x log10 Illuminance
-        /// <p>
+        /// 
         /// Where 1 lx <= Illuminance <=3.576 Mlx, corresponding to a MeasuredValue in
         /// the range 0 to 0xfffe.
-        /// <p>
+        /// 
         /// A value of 0xffff indicates that this attribute is not valid.
         ///
         /// The attribute is of type ushort.

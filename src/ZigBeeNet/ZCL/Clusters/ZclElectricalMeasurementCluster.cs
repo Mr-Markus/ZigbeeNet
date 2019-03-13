@@ -41,7 +41,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// </summary>
         public const string CLUSTER_NAME = "Electrical Measurement";
 
-        /// <summary> Attribute constants /// </summary>
+        /* Attribute constants */
+
         /// <summary>
         /// This attribute indicates a device’s measurement capabilities. This will be indicated by setting
         /// the desire measurement bits to 1.
