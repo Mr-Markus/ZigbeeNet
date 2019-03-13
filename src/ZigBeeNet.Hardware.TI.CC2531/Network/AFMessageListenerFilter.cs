@@ -57,7 +57,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         public void ReceivedUnclaimedSynchronousCommandResponse(ZToolPacket packet)
         {
             // No need to handle unclaimed responses here
-            throw new NotImplementedException();
         }
     }
 }
