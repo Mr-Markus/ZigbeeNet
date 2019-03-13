@@ -96,7 +96,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", startIndex=")
                    .Append(StartIndex)
                    .Append(", routingTableList=")
-                   .Append(RoutingTableList)
+                   .Append(string.Join(", ", RoutingTableList))
                    .Append(']');
 
             return builder.ToString();

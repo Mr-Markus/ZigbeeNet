@@ -22,15 +22,11 @@ namespace ZigBeeNet.Transaction
         private ILog _logger = LogProvider.For<ZigBeeTransaction>();
 
         private ZigBeeNetworkManager _networkManager;
-        //private ZigBeeTransactionFuture transactionFuture;
         private IZigBeeTransactionMatcher _responseMatcher;
         private ZigBeeCommand _command;
         private CommandResult _result;
         private DateTime _timeout;
 
-        //private Task _timeoutTask;
-        //private TaskCompletionSource<CommandResult> _task;
-        //private CancellationTokenSource _timeoutCancellationTokenSource;
         private const int DEFAULT_TIMEOUT_MILLISECONDS = 8000;
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
@@ -95,7 +91,6 @@ namespace ZigBeeNet.Transaction
             });
         }
 
-        private int counter = 0;
         public bool IsTransactionMatch = false;
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
@@ -114,7 +109,6 @@ namespace ZigBeeNet.Transaction
                         _networkManager.RemoveCommandListener(this);
 
                         _logger.Debug("Transaction complete: {Command}", _command);
-
                     }
                 }
             }

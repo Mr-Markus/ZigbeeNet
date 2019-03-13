@@ -366,10 +366,10 @@ namespace ZigBeeNet.ZDO.Field
         {
             return "NodeDescriptor [apsFlags=" + _apsFlags + ", bufferSize=" + BufferSize + ", complexDescriptorAvailable="
                     + ComplexDescriptorAvailable + ", manufacturerCode=" + ManufacturerCode + ", logicalType=" + LogicalNodeType
-                    + ", serverCapabilities=" + ServerCapabilities + ", incomingTransferSize=" + IncomingTransferSize
+                    + ", serverCapabilities=" + string.Join(", ", ServerCapabilities) + ", incomingTransferSize=" + IncomingTransferSize
                     + ", outgoingTransferSize=" + OutgoingTransferSize + ", userDescriptorAvailable="
-                    + IsuserDescriptorAvailable + ", frequencyBands=" + FrequencyBands + ", macCapabilities="
-                    + MacCapabilities + ", extendedEndpointListAvailable=" + IsextendedEndpointListAvailable
+                    + IsuserDescriptorAvailable + ", frequencyBands=" + string.Join(", ", FrequencyBands) + ", macCapabilities="
+                    + string.Join(", ", MacCapabilities) + ", extendedEndpointListAvailable=" + IsextendedEndpointListAvailable
                     + ", extendedSimpleDescriptorListAvailable=" + ExtendedSimpleDescriptorListAvailable
                     + ", stackCompliance=" + StackCompliance + "]";
         }

@@ -720,7 +720,7 @@ namespace ZigBeeNet.App.Discovery
                 tasks.Add(NodeDiscoveryTask.ROUTES);
             }
 
-            StartDiscoveryAsync(tasks);
+            _ = StartDiscoveryAsync(tasks);
         }
 
     }
