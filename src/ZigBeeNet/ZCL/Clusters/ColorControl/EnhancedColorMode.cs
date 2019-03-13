@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of ColorControl attribute EnhancedColorMode options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
+   /// <summary>
+   /// Enumeration of ColorControl attribute EnhancedColorMode options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum EnhancedColorMode
    {
        CURRENTHUE_AND_CURRENTSATURATION = 0x0000,

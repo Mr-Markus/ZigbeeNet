@@ -127,8 +127,8 @@ namespace ZigBeeNet.ZCL
         /// If the last update time is more recent than the allowedAge then this will return true. allowedAge is defined in
         /// milliseconds.
         ///
-        /// @param allowedAge the number of milliseconds to consider the value current
-        /// @return true if the last value can be considered current
+        /// <param name="allowedAge">the number of milliseconds to consider the value current</param>
+        /// <returns>true if the last value can be considered current</returns>
         /// </summary>
         public bool IsLastValueCurrent(long allowedAge)
         {
@@ -149,7 +149,7 @@ namespace ZigBeeNet.ZCL
         /// Updates the attribute value This will also record the time of the last update
         ///
         /// @param attributeValue
-        ///            the attribute value to be updated {@link Object}
+        ///            the attribute value to be updated <see cref="Object">
         /// </summary>
         public void UpdateValue(object attributeValue)
         {

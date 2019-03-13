@@ -85,7 +85,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", nwkAddrOfInterest=")
                    .Append(NwkAddrOfInterest)
                    .Append(", activeEpList=")
-                   .Append(ActiveEpList)
+                   .Append(string.Join(", ", ActiveEpList))
                    .Append(']');
 
             return builder.ToString();

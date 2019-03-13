@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of OnoffSwitchConfiguration attribute SwitchActions options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OnoffSwitchConfiguration
 {
+   /// <summary>
+   /// Enumeration of OnoffSwitchConfiguration attribute SwitchActions options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum SwitchActions
    {
        ON = 0x0000,

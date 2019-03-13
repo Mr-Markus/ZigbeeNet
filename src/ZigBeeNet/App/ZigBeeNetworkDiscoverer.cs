@@ -13,7 +13,7 @@ using ZigBeeNet.ZDO.Command;
 namespace ZigBeeNet.App
 {
     /// <summary>
-    /// {@link ZigBeeNetworkDiscoverer} is used to discover devices in the network.
+    /// <see cref="ZigBeeNetworkDiscoverer"> is used to discover devices in the network.
     /// <p>
     /// Notifications will be sent to the listeners when nodes and endpoints are discovered.
     /// Device listeners are always notified first as each endpoint discovery completes.
@@ -77,7 +77,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Discovers ZigBee network state.
         ///
-        /// @param _networkManager the {@link ZigBeeNetworkManager}
+        /// <param name="_networkManager">the <see cref="ZigBeeNetworkManager"></param>
         /// </summary>
         public ZigBeeNetworkDiscoverer(ZigBeeNetworkManager networkManager)
         {
@@ -115,7 +115,7 @@ namespace ZigBeeNet.App
         /// Sets the retry period in milliseconds. This is the amount of time the service will wait following a failed
         /// request before performing a retry.
         ///
-        /// @param retryPeriod the period in milliseconds between retries
+        /// <param name="retryPeriod">the period in milliseconds between retries</param>
         /// </summary>
         public void SetRetryPeriod(int retryPeriod)
         {
@@ -125,7 +125,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Sets the maximum number of retries the service will perform at any stage before failing.
         ///
-        /// @param retryCount the maximum number of retries.
+        /// <param name="retryCount">the maximum number of retries.</param>
         /// </summary>
         public void SetRetryCount(int retryCount)
         {
@@ -135,7 +135,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Sets the minimum period between requeries on each node
         ///
-        /// @param requeryPeriod the requery period in milliseconds
+        /// <param name="requeryPeriod">the requery period in milliseconds</param>
         /// </summary>
         public void SetRequeryPeriod(int requeryPeriod)
         {
@@ -237,7 +237,7 @@ namespace ZigBeeNet.App
 
                             await Task.Delay(_retryPeriod);
                         }
-                        catch (ThreadAbortException e)
+                        catch (ThreadAbortException)
                         {
                             break;
                         }
@@ -248,7 +248,7 @@ namespace ZigBeeNet.App
                 {
                     _logger.Debug("NWK Discovery Error in checkIeeeAddressResponse ", e);
                 }
-                
+
                 _logger.Debug("{NetworkAddress}: NWK Discovery finishing node rediscovery after {Retries} attempts", networkAddress, retries);
             });
 
@@ -256,10 +256,10 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-        /// Starts a discovery on a node. This will send a {@link NetworkAddressRequest} as a broadcast and will receive
+        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
         /// the response to trigger a full discovery.
         ///
-        /// @param ieeeAddress the {@link IeeeAddress} of the node to discover
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to discover</param>
         /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
@@ -270,7 +270,7 @@ namespace ZigBeeNet.App
                 return;
             }
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 _logger.Debug("{IeeeAddress}: NWK Discovery starting node rediscovery", ieeeAddress);
                 int retries = 0;
@@ -288,8 +288,7 @@ namespace ZigBeeNet.App
                         request.RequestType = 0;
                         request.StartIndex = 0;
                         request.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
-                        CommandResult response;
-                        response = _networkManager.SendTransaction(request, request).Result;
+                        CommandResult response = await _networkManager.SendTransaction(request, request);
 
                         NetworkAddressResponse nwkAddressResponse = response.GetResponse<NetworkAddressResponse>();
                         if (nwkAddressResponse != null && nwkAddressResponse.Status == ZdoStatus.SUCCESS)
@@ -298,23 +297,25 @@ namespace ZigBeeNet.App
                             break;
                         }
 
-                    // We failed with the last request. Wait a bit then retry
-                    try
+                        // We failed with the last request. Wait a bit then retry
+                        try
                         {
-                            _logger.Debug("{IeeeAddress}: NWK Discovery node rediscovery request failed. Wait before retry.",
-                                    ieeeAddress);
-                            Thread.Sleep(_retryPeriod);
+                            _logger.Debug("{IeeeAddress}: NWK Discovery node rediscovery request failed. Wait before retry.", ieeeAddress);
+
+                            await Task.Delay(_retryPeriod);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             break;
                         }
+
                     } while (retries++ < _retryCount);
                 }
                 catch (Exception e)
                 {
                     _logger.Debug("NWK Discovery error in rediscoverNode ", e);
                 }
+
                 _logger.Debug("{IeeeAddress}: NWK Discovery finishing node rediscovery", ieeeAddress);
             });
         }
@@ -323,7 +324,7 @@ namespace ZigBeeNet.App
         /// Performs the top level node discovery. This discovers node level attributes such as the endpoints and
         /// descriptors.
         ///
-        /// @param networkAddress the network address to start a discovery on
+        /// <param name="networkAddress">the network address to start a discovery on</param>
         /// </summary>
         private void StartNodeDiscovery(ushort nodeNetworkAddress)
         {
@@ -340,6 +341,7 @@ namespace ZigBeeNet.App
 
             _logger.Debug("{NetworkAddress}: NWK Discovery scheduling node discovery", nodeNetworkAddress);
 
+            // TODO: Return Task ?
             Task.Run(async () =>
             {
                 try
@@ -347,6 +349,7 @@ namespace ZigBeeNet.App
                     _logger.Debug("{NetworkAddress}: NWK Discovery starting node discovery", nodeNetworkAddress);
                     int retries = 0;
                     bool success;
+
                     do
                     {
                         if (Thread.CurrentThread.ThreadState == ThreadState.WaitSleepJoin)
@@ -361,15 +364,29 @@ namespace ZigBeeNet.App
                             break;
                         }
 
-                    // We failed with the last request. Wait a bit then retry
-                    try
+                        try
                         {
-                            Thread.Sleep(_retryPeriod);
+                            // We failed with the last request. Wait a bit then retry
+                            await Task.Delay(_retryPeriod);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                            break;
+                            // If we don't know the node yet, then try to find the IEEE address
+                            // before requesting the associated nodes.
+                            if (_networkManager.GetNode(nodeNetworkAddress) == null)
+                            {
+                                success = await GetIeeeAddress(nodeNetworkAddress);
+                                continue;
+                            }
+
+                            success = await GetAssociatedNodes(nodeNetworkAddress);
+
+                            if (success)
+                            {
+                                break;
+                            }
                         }
+
                     } while (retries++ < _retryCount);
 
                     _logger.Debug("{NetworkAddress}: NWK Discovery ending node discovery", nodeNetworkAddress);
@@ -381,72 +398,97 @@ namespace ZigBeeNet.App
             });
         }
 
-        /// <summary>
-        /// Get Node IEEE address
-        ///
-        /// @param networkAddress the network address of the node
-        /// @return true if the message was processed ok
-        /// </summary>
-        private async Task<bool> GetIeeeAddress(ushort networkAddress)
+        /**
+     * Get the associated nodes for this address, and start a discovery of the associated nodes.
+     *
+     * @param networkAddress the network address of the node
+     * @return true if the message was processed ok
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+        private async Task<bool> GetAssociatedNodes(ushort networkAddress)
         {
-            try
+            int startIndex = 0;
+            int totalAssociatedDevices = 0;
+            List<ushort> associatedDevices = new List<ushort>();
+
+            do
             {
-                byte startIndex = 0;
-                int totalAssociatedDevices = 0;
-                List<ushort> associatedDevices = new List<ushort>();
-                IeeeAddress ieeeAddress = null;
-
-                do
+                // Request extended response, start index for associated list is 0
+                IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
+                ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
+                ieeeAddressRequest.RequestType = 1;
+                ieeeAddressRequest.StartIndex = (byte)startIndex;
+                ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
+                CommandResult response = await _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest);
+                if (response.IsError())
                 {
-                    // Request extended response, start index for associated list is 0
-                    IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
-                    ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
-                    ieeeAddressRequest.RequestType = 1;
-                    ieeeAddressRequest.StartIndex = startIndex;
-                    ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
-                    CommandResult response = await _networkManager.SendTransaction(ieeeAddressRequest, ieeeAddressRequest);
-                    if (response.IsError())
-                    {
-                        return false;
-                    }
-
-                    IeeeAddressResponse ieeeAddressResponse = response.GetResponse<IeeeAddressResponse>();
-                    _logger.Debug("{NetworkAddress}: NWK Discovery IeeeAddressRequest returned {IeeeAddress}", networkAddress, ieeeAddressResponse);
-                    if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
-                    {
-                        ieeeAddress = ieeeAddressResponse.IeeeAddrRemoteDev;
-                        if (startIndex.Equals(ieeeAddressResponse.StartIndex))
-                        {
-                            associatedDevices.AddRange(ieeeAddressResponse.NwkAddrAssocDevList);
-
-                            startIndex += (byte)ieeeAddressResponse.NwkAddrAssocDevList.Count;
-                            totalAssociatedDevices = ieeeAddressResponse.NwkAddrAssocDevList.Count;
-                        }
-                    }
-
-                } while (startIndex < totalAssociatedDevices);
-
-                AddNode(ieeeAddress, networkAddress);
-
-                // Start discovery for any associated nodes
-                foreach (ushort deviceNetworkAddress in associatedDevices)
-                {
-                    StartNodeDiscovery(deviceNetworkAddress);
+                    return false;
                 }
-            }
-            catch (Exception e)
+
+                IeeeAddressResponse ieeeAddressResponse = (IeeeAddressResponse)response.GetResponse();
+
+                _logger.Debug("{NetworkAddress}: NWK Discovery IeeeAddressRequest returned {IeeeAddressResponse}", networkAddress, ieeeAddressResponse);
+
+                if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS && startIndex.Equals(ieeeAddressResponse.StartIndex))
+                {
+                    associatedDevices.AddRange(ieeeAddressResponse.NwkAddrAssocDevList);
+
+                    startIndex += ieeeAddressResponse.NwkAddrAssocDevList.Count;
+                    totalAssociatedDevices = ieeeAddressResponse.NwkAddrAssocDevList.Count;
+                }
+            } while (startIndex < totalAssociatedDevices);
+
+            // Start discovery for any associated nodes
+            foreach (var deviceNetworkAddress in associatedDevices)
             {
-                _logger.Debug("NWK Discovery Error in checkIeeeAddressResponse {Error}", e);
+                StartNodeDiscovery(deviceNetworkAddress);
             }
 
             return true;
         }
 
         /// <summary>
-        /// Updates {@link ZigBeeNode} and adds it to the {@link ZigBeeNetworkManager}
+        /// Discovers the IeeeAddress of a remote device. This uses a broadcast request to try to discover the
+        /// device.
         ///
-        /// @param ieeeAddress the {@link IeeeAddress} of the newly announced node
-        /// @param networkAddress the network address of the newly announced node
+        /// <param name="networkAddress">the network address of the node</param>
+        /// <returns>true if the message was processed ok</returns>
+        /// </summary>
+        private async Task<bool> GetIeeeAddress(ushort networkAddress)
+        {
+            // Request basic response, start index for associated list is 0
+            IeeeAddressRequest request = new IeeeAddressRequest();
+            request.RequestType = 0;
+            request.StartIndex = 0;
+            request.NwkAddrOfInterest = networkAddress;
+            request.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
+            CommandResult response = await _networkManager.SendTransaction(request, request);
+
+            if (response.IsError())
+            {
+                return false;
+            }
+
+            IeeeAddressResponse ieeeAddressResponse = (IeeeAddressResponse)response.GetResponse();
+
+            _logger.Debug("{NetworkAddress}: NWK Discovery IeeeAddressRequest returned {IeeeAddressResponse}", networkAddress, ieeeAddressResponse);
+
+            if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
+            {
+                AddNode(ieeeAddressResponse.IeeeAddrRemoteDev, ieeeAddressResponse.NwkAddrRemoteDev);
+                StartNodeDiscovery(ieeeAddressResponse.NwkAddrRemoteDev);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Updates ZigBeeNode and adds it to the ZigBeeNetworkManager
+        ///
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the newly announced node</param>
+        /// <param name="networkAddress">the network address of the newly announced node</param>
         /// </summary>
         private void AddNode(IeeeAddress ieeeAddress, ushort networkAddress)
         {

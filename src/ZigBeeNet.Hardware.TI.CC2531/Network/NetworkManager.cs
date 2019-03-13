@@ -78,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         private int _securityMode = 1;
 
         private static ManualResetEventSlim _hardwareSync = new ManualResetEventSlim(false);
-        
+
         private byte[] _ep;
         private byte[] _prof;
         private byte[] _dev;
@@ -172,14 +172,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             SetState(DriverStatus.HARDWARE_OPEN);
             if (!DongleReset())
             {
-                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {MagicByte}.", "0x" + BOOTLOADER_MAGIC_BYTE.ToString("X2"));
-
-                if (!bootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
-                {
-                    _logger.Warn("Attempt to get out from bootloader failed.");
-                    Shutdown();
-                    return null;
-                }
+                Shutdown();
+                return null;
             }
 
             SetState(DriverStatus.HARDWARE_READY);
@@ -388,7 +382,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                 }
             }
             _logger.Debug("Setting Distribute Network Key to {Key}.", _distributeNetworkKey);
-            if (!dongleSetDistributeNetworkKey())
+            if (!DongleSetDistributeNetworkKey())
             {
                 _logger.Error("Unable to set DISTRIBUTE_NETWORK_KEY for ZigBee Network");
                 return false;
@@ -398,7 +392,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                 _logger.Trace("DISTRIBUTE_NETWORK_KEY set");
             }
             _logger.Debug("Setting Security Mode to {Mode}.", _securityMode);
-            if (!dongleSetSecurityMode())
+            if (!DongleSetSecurityMode())
             {
                 _logger.Error("Unable to set SECURITY_MODE for ZigBee Network");
                 return false;
@@ -429,7 +423,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         {
             //if (!_messageListeners.Contains(_afMessageListenerFilter))
             //{
-                _commandInterface.AddAsynchronousCommandListener(_afMessageListenerFilter);
+            _commandInterface.AddAsynchronousCommandListener(_afMessageListenerFilter);
             //}
             // if (!announceListeners.contains(announceListenerFilter)) {
             _commandInterface.AddAsynchronousCommandListener(_announceListenerFilter);
@@ -528,14 +522,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         {
             _distributeNetworkKey = distributeNetworkKey;
 
-            return dongleSetDistributeNetworkKey();
+            return DongleSetDistributeNetworkKey();
         }
 
         public bool SetSecurityMode(int securityMode)
         {
             _securityMode = securityMode;
 
-            return dongleSetSecurityMode();
+            return DongleSetSecurityMode();
         }
 
         public ZigBeeStatus SetLedMode(byte ledId, bool mode)
@@ -653,7 +647,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        private bool bootloaderGetOut(byte magicByte)
+        private bool BootloaderGetOut(byte magicByte)
         {
             BlockingCommandReceiver waiter = new BlockingCommandReceiver(ZToolCMD.SYS_RESET_RESPONSE, _commandInterface);
 
@@ -717,7 +711,19 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
 
             SYS_RESET_RESPONSE response = (SYS_RESET_RESPONSE)waiter.GetCommand(ResetTimeout);
 
-            return response != null;
+            if (response == null)
+            {
+                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte 0x{BootLoaderMagicByte}.", BOOTLOADER_MAGIC_BYTE.ToString("X2"));
+
+                if (!BootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
+                {
+                    _logger.Warn("Attempt to get out from bootloader failed.");
+
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool DongleSetStartupOption(ulong mask)
@@ -842,7 +848,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response != null && response.Status == 0;
         }
 
-        private bool dongleSetDistributeNetworkKey()
+        private bool DongleSetDistributeNetworkKey()
         {
             ZB_WRITE_CONFIGURATION_RSP response = (ZB_WRITE_CONFIGURATION_RSP)SendSynchronous(new ZB_WRITE_CONFIGURATION(
                     ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_PRECFGKEYS_ENABLE, new byte[] { _distributeNetworkKey ? (byte)0x00 : (byte)0x01 }));
@@ -850,7 +856,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             return response != null && response.Status == 0;
         }
 
-        private bool dongleSetSecurityMode()
+        private bool DongleSetSecurityMode()
         {
             ZB_WRITE_CONFIGURATION_RSP response = (ZB_WRITE_CONFIGURATION_RSP)SendSynchronous(new ZB_WRITE_CONFIGURATION(
                     ZB_WRITE_CONFIGURATION.CONFIG_ID.ZCD_NV_SECURITY_MODE, new byte[] { (byte)_securityMode }));
@@ -861,7 +867,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Sends a command without waiting for the response
          *
-         * @param request {@link ZToolPacket}
+         * @param request <see cref="ZToolPacket">
          */
         public void SendCommand(ZToolPacket request)
         {
@@ -876,16 +882,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         private ZToolPacket SendSynchronous(ZToolPacket request, int timeout)
         {
             ZToolPacket[] response = new ZToolPacket[] { null };
-            // final int RESEND_MAX_RETRY = 3;
             int sending = 1;
 
-            _logger.Trace("{} sending as synchronous command.", request.GetType().Name);
+            _logger.Trace("{Request} sending as synchronous command.", request.GetType().Name);
 
             SynchronousCommandListener listener = new SynchronousCommandListener();
 
             listener.OnResponseReceived += (object sender, ZToolPacket packet) =>
             {
                 response[0] = packet;
+                _hardwareSync.Set();
             };
 
             //    public void receivedCommandResponse(ZToolPacket packet)
@@ -916,38 +922,39 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                     {
                         _logger.Error("Synchronous command send failed due to unexpected exception.", ex);
                     }
-                    _logger.Trace("{} sent (synchronous command, attempt {}).", request.GetType().Name, sending);
-                    lock (response)
+
+                    _logger.Trace("{Request} sent (synchronous command, attempt {Count}).", request.GetType().Name, sending);
+
+                    long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
+
+                    while (response[0] == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
                     {
-                        long wakeUpTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
-                        while (response[0] == null && wakeUpTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
+                        long sleeping = wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+                        _logger.Trace("Waiting for synchronous command up to {Sleeping}ms till {WakeUpTime} Unixtime", sleeping, wakeUpTime);
+
+                        if (sleeping <= 0)
                         {
-                            long sleeping = wakeUpTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                            _logger.Trace("Waiting for synchronous command up to {}ms till {} Unixtime", sleeping,
-                                    wakeUpTime);
-                            if (sleeping <= 0)
-                            {
-                                break;
-                            }
-                            try
-                            {
-                                _hardwareSync.Wait(TimeSpan.FromMilliseconds(sleeping));
-                            }
-                            catch (Exception ignored)
-                            {
-                            }
+                            break;
+                        }
+                        try
+                        {
+                            _hardwareSync.Wait(TimeSpan.FromMilliseconds(sleeping));
+                            _hardwareSync.Reset();
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.Trace("_hardwareSync.Wait() Exception" + Environment.NewLine + e.ToString());
                         }
                     }
                     if (response[0] != null)
                     {
-                        _logger.Trace("{Request} --> {Response}", request.GetType().Name,
-                                response[0].GetType().Name);
+                        _logger.Trace("{Request} --> {Response}", request.GetType().Name, response[0].GetType().Name);
                         break; // Break out as we have response.
                     }
                     else
                     {
-                        _logger.Debug("{} executed and timed out while waiting for response.",
-                                request.GetType().Name);
+                        _logger.Debug("{Request} executed and timed out while waiting for response.", request.GetType().Name);
                     }
                     if (ResendOnlyException)
                     {
@@ -1024,7 +1031,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Removes an Application Framework message listener that was previously added with the addAFMessageListener method
          *
-         * @param listener a class that implements the {@link ApplicationFrameworkMessageListener} interface
+         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
          * @return true if the listener was added
          */
         public bool removeAFMessageListener(IApplicationFrameworkMessageListener listener)
@@ -1065,7 +1072,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         /**
          * Adds an Application Framework message listener
          *
-         * @param listener a class that implements the {@link ApplicationFrameworkMessageListener} interface
+         * @param listener a class that implements the <see cref="ApplicationFrameworkMessageListener"> interface
          * @return true if the listener was added
          */
         public bool AddAFMessageListener(IApplicationFrameworkMessageListener listener)

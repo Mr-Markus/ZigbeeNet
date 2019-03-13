@@ -125,7 +125,7 @@ namespace ZigBeeNet.Transport
         /// The ZCL method allows the stack to specify the NWK (Network) header, the APS (Application Support Sublayer) and
         /// the payload. The headers are provided separately to allow the framework to specify the configuration in some
         /// detail, while allowing the transport implementation (eg dongle) to format the data as per its needs. The payload
-        /// is serialised by the framework using the {@link ZigBeeSerializer} interface, thus allowing the format to be set
+        /// is serialised by the framework using the <see cref="ZigBeeSerializer"> interface, thus allowing the format to be set
         /// for different hardware implementations.
         /// </summary>
         void SendCommand(ZigBeeApsFrame apsFrame);

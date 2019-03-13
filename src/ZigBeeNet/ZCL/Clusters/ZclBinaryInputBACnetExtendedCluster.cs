@@ -11,42 +11,42 @@ using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 
-/// <summary>
- /// Binary Input (BACnet Extended)cluster implementation (Cluster ID 0x0609).
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 namespace ZigBeeNet.ZCL.Clusters
 {
-   public class ZclBinaryInputBACnetExtendedCluster : ZclCluster
-   {
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster ID
-       /// </summary>
-       public static ushort CLUSTER_ID = 0x0609;
+    /// <summary>
+    /// Binary Input (BACnet Extended)cluster implementation (Cluster ID 0x0609).
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class ZclBinaryInputBACnetExtendedCluster : ZclCluster
+    {
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster ID
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0609;
 
-       /// <summary>
-       /// The ZigBee Cluster Library Cluster Name
-       /// </summary>
-       public static string CLUSTER_NAME = "Binary Input (BACnet Extended)";
+        /// <summary>
+        /// The ZigBee Cluster Library Cluster Name
+        /// </summary>
+        public const string CLUSTER_NAME = "Binary Input (BACnet Extended)";
 
-       // Attribute initialisation
-       protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
-       {
-           Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
+        // Attribute initialisation
+        protected override Dictionary<ushort, ZclAttribute> InitializeAttributes()
+        {
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(0);
 
-           return attributeMap;
-       }
+            return attributeMap;
+        }
 
-       /// <summary>
-       /// Default constructor to create a Binary Input (BACnet Extended) cluster.
-       ///
-       /// @param zigbeeEndpoint the {@link ZigBeeEndpoint}
-       /// </summary>
-       public ZclBinaryInputBACnetExtendedCluster(ZigBeeEndpoint zigbeeEndpoint)
-           : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
-       {
-       }
+        /// <summary>
+        /// Default constructor to create a Binary Input (BACnet Extended) cluster.
+        ///
+        /// <param name ="zigbeeEndpoint">The ZigBeeEndpoint</param>
+        /// </summary>
+        public ZclBinaryInputBACnetExtendedCluster(ZigBeeEndpoint zigbeeEndpoint)
+            : base(zigbeeEndpoint, CLUSTER_ID, CLUSTER_NAME)
+        {
+        }
 
-   }
+    }
 }

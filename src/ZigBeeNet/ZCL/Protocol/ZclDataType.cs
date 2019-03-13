@@ -8,8 +8,6 @@ using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.ZCL.Protocol
 {
-
-   
     public class ZclDataType
     {
         private static Dictionary<int, ZclDataType> _codeTypeMapping;
@@ -20,6 +18,10 @@ namespace ZigBeeNet.ZCL.Protocol
         public bool IsAnalog { get; private set; }
         public DataType DataType { get; private set; }
 
+        public ZclDataType()
+        {
+
+        }
 
         private ZclDataType(string label, Type dataClass, int id, bool analogue, DataType dataType)
         {
@@ -41,8 +43,9 @@ namespace ZigBeeNet.ZCL.Protocol
             _codeTypeMapping[0x00] = new ZclDataType("Byte array", typeof(ByteArray), 0x00, false, DataType.BYTE_ARRAY);
             _codeTypeMapping[0x42] = new ZclDataType("Character String", typeof(string), 0x42, false, DataType.CHARACTER_STRING);
             _codeTypeMapping[0x08] = new ZclDataType("8-bit data", typeof(byte), 0x08, false, DataType.DATA_8_BIT);
-            _codeTypeMapping[0x31] = new ZclDataType("16-bit enumeration", typeof(ushort), 0x31, false, DataType.ENUMERATION_16_BIT);
+            _codeTypeMapping[0x31] = new ZclDataType("16-bit Enumeration", typeof(ushort), 0x31, false, DataType.ENUMERATION_16_BIT);
             _codeTypeMapping[0x30] = new ZclDataType("8-bit Enumeration", typeof(byte), 0x30, false, DataType.ENUMERATION_8_BIT);
+            _codeTypeMapping[0x39] = new ZclDataType("Single precision float", typeof(float), 0x39, true, DataType.FLOAT_32_BIT);
             _codeTypeMapping[0xF0] = new ZclDataType("IEEE Address", typeof(IeeeAddress), 0xF0, false, DataType.IEEE_ADDRESS);
             _codeTypeMapping[0x81] = new ZclDataType("N X Attribute identifier", typeof(ushort), 0x00, false, DataType.N_X_ATTRIBUTE_IDENTIFIER);
             _codeTypeMapping[0x82] = new ZclDataType("N X Attribute information", typeof(AttributeInformation), 0x00, false, DataType.N_X_ATTRIBUTE_INFORMATION);

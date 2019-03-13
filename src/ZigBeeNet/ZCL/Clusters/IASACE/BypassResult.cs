@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of IASACE attribute Bypass Result options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASACE
 {
+   /// <summary>
+   /// Enumeration of IASACE attribute Bypass Result options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum BypassResult
    {
        ZONE_BYPASSED = 0x0000,

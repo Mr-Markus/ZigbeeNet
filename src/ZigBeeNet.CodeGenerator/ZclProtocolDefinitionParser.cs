@@ -172,7 +172,7 @@ namespace ZigBeeNet.CodeGenerator
 
                 if (line.StartsWith("##### Expected Response"))
                 {
-                    parseExpectedResponse(context);
+                    ParseExpectedResponse(context);
                     continue;
                 }
 
@@ -405,7 +405,7 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
-        private static void parseExpectedResponse(Context context)
+        private static void ParseExpectedResponse(Context context)
         {
             context.Command.ResponseMatchers = new Dictionary<string, string>();
             while (context.Lines.Count > 0)
@@ -628,7 +628,7 @@ namespace ZigBeeNet.CodeGenerator
                 }
                 if (addBreak && attribute.AttributeDescription.Count > 0)
                 {
-                    attribute.AttributeDescription.Add("<p>");
+                    attribute.AttributeDescription.Add("");
                     addBreak = false;
                 }
                 attribute.AttributeDescription.Add(line.Trim());

@@ -20,7 +20,7 @@ namespace ZigBeeNet.ZDO
         /// <summary>
          /// Gets source address.
          ///
-         /// @return the destination address
+         /// <returns>the destination address</returns>
          /// </summary>
         // public int getSourceAddress() {
         // return sourceAddress;
@@ -29,7 +29,7 @@ namespace ZigBeeNet.ZDO
         /// <summary>
          /// Set the source address
          ///
-         /// @param sourceAddress the source address as {@link int}
+         /// <param name="sourceAddress">the source address as <see cref="int"></param>
          /// </summary>
         // public void setSourceAddress(int sourceAddress) {
         // this.sourceAddress = sourceAddress;
@@ -38,7 +38,7 @@ namespace ZigBeeNet.ZDO
         /// <summary>
          /// Gets the response status
          ///
-         /// @return the response status
+         /// <returns>the response status</returns>
          /// </summary>
         //public ZdoStatus GetStatus()
         //{
@@ -48,7 +48,7 @@ namespace ZigBeeNet.ZDO
         ///// <summary>
         // /// Sets the response status
         // ///
-        // /// @param status the response status as {@link int}
+        // /// <param name="status">the response status as <see cref="int"></param>
         // /// </summary>
         //public void SetStatus(ZdoStatus status)
         //{

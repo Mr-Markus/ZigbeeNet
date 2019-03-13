@@ -157,7 +157,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         /**
          * Gets a hex dump of the packet data
          *
-         * @return {@link String} containing the packet data
+         * @return <see cref="String"> containing the packet data
          */
         public string PacketString
         {

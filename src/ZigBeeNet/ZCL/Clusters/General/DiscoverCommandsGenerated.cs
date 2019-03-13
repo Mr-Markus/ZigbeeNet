@@ -7,67 +7,68 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.General;
 
-/// <summary>
- /// Discover Commands Generated value object class.
- ///
- /// Cluster: General. Command is sentTO the server.
- /// This command is a generic command used across the profile.
- ///
- /// The Discover Commands Generated command is generated when a remote device wishes to discover the /// commands that a cluster may generate on the device to which this command is directed. ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
-       public class DiscoverCommandsGenerated : ZclCommand
-       {
-           /// <summary>
-           /// Start command identifier command message field.
-           /// </summary>
-           public byte StartCommandIdentifier { get; set; }
+    /// <summary>
+    /// Discover Commands Generated value object class.
+    /// <para>
+    /// Cluster: General. Command is sentTO the server.
+    /// This command is a generic command used across the profile.
+    ///
+    /// The Discover Commands Generated command is generated when a remote device wishes to discover the
+    /// commands that a cluster may generate on the device to which this command is directed.
+    /// </para>
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class DiscoverCommandsGenerated : ZclCommand
+    {
+        /// <summary>
+        /// Start command identifier command message field.
+        /// </summary>
+        public byte StartCommandIdentifier { get; set; }
 
-           /// <summary>
-           /// Maximum command identifiers command message field.
-           /// </summary>
-           public byte MaximumCommandIdentifiers { get; set; }
+        /// <summary>
+        /// Maximum command identifiers command message field.
+        /// </summary>
+        public byte MaximumCommandIdentifiers { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
-           public DiscoverCommandsGenerated()
-           {
-               GenericCommand = true;
-               CommandId = 19;
-               CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
-           }
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public DiscoverCommandsGenerated()
+        {
+            GenericCommand = true;
+            CommandId = 19;
+            CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
+        }
 
-           public override void Serialize(ZclFieldSerializer serializer)
-           {
+        public override void Serialize(ZclFieldSerializer serializer)
+        {
             serializer.Serialize(StartCommandIdentifier, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(MaximumCommandIdentifiers, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        }
 
-           public override void Deserialize(ZclFieldDeserializer deserializer)
-           {
-               StartCommandIdentifier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-               MaximumCommandIdentifiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        public override void Deserialize(ZclFieldDeserializer deserializer)
+        {
+            StartCommandIdentifier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            MaximumCommandIdentifiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        }
 
-           public override string ToString()
-           {
-               var builder = new StringBuilder();
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
 
-               builder.Append("DiscoverCommandsGenerated [");
-               builder.Append(base.ToString());
-               builder.Append(", StartCommandIdentifier=");
-               builder.Append(StartCommandIdentifier);
-               builder.Append(", MaximumCommandIdentifiers=");
-               builder.Append(MaximumCommandIdentifiers);
-               builder.Append(']');
+            builder.Append("DiscoverCommandsGenerated [");
+            builder.Append(base.ToString());
+            builder.Append(", StartCommandIdentifier=");
+            builder.Append(StartCommandIdentifier);
+            builder.Append(", MaximumCommandIdentifiers=");
+            builder.Append(MaximumCommandIdentifiers);
+            builder.Append(']');
 
-               return builder.ToString();
-           }
-
-       }
+            return builder.ToString();
+        }
+    }
 }

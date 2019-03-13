@@ -15,9 +15,9 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Constructor taking part of an existing integer array
          ///
-         /// @param payload the existing integer array
-         /// @param from the start offset of the array (inclusive)
-         /// @param to the end offset of the array (exclusive)
+         /// <param name="payload">the existing integer array</param>
+         /// <param name="from">the start offset of the array (inclusive)</param>
+         /// <param name="to">the end offset of the array (exclusive)</param>
          /// </summary>
         public ByteArray(byte[] payload, int start, int finish)
         {
@@ -32,9 +32,9 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Constructor taking an existing integer array
          ///
-         /// @param payload the existing integer array
-         /// @param from the start offset of the array (inclusive)
-         /// @param to the end offset of the array (exclusive)
+         /// <param name="payload">the existing integer array</param>
+         /// <param name="from">the start offset of the array (inclusive)</param>
+         /// <param name="to">the end offset of the array (exclusive)</param>
          /// </summary>
         public ByteArray(byte[] payload)
             : this(payload, 0, payload.Length)
@@ -44,7 +44,7 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Gets the byte array value.
          ///
-         /// @return the value
+         /// <returns>the value</returns>
          /// </summary>
         public byte[] Get()
         {
@@ -54,7 +54,7 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Gets the byte array as an array of integers
          ///
-         /// @return the integer array
+         /// <returns>the integer array</returns>
          /// </summary>
         public int[] GetAsIntArray()
         {
@@ -70,7 +70,7 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Get the length of the underlying byte array
          ///
-         /// @return the length of the data in the array
+         /// <returns>the length of the data in the array</returns>
          /// </summary>
         public int Size()
         {
@@ -80,7 +80,7 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Sets the byte array value.
          ///
-         /// @param value the value as a byte array
+         /// <param name="value">the value as a byte array</param>
          /// </summary>
         public void Set(byte[] value)
         {
@@ -90,7 +90,7 @@ namespace ZigBeeNet.ZCL.Field
         /// <summary>
          /// Sets the byte array value from an integer array.
          ///
-         /// @param value the value as an integer array
+         /// <param name="value">the value as an integer array</param>
          /// </summary>
         public void Set(int[] value)
         {
