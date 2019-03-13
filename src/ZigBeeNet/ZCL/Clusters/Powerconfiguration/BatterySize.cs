@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of Powerconfiguration attribute BatterySize options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Powerconfiguration
 {
+   /// <summary>
+   /// Enumeration of Powerconfiguration attribute BatterySize options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum BatterySize
    {
        NO_BATTERY = 0x0000,

@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of BinaryInputBasic attribute StatusFlags options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.BinaryInputBasic
 {
+   /// <summary>
+   /// Enumeration of BinaryInputBasic attribute StatusFlags options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum StatusFlags
    {
        IN_ALARM = 0x0001,

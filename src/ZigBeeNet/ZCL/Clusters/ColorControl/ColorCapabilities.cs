@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of ColorControl attribute ColorCapabilities options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ColorControl
 {
+   /// <summary>
+   /// Enumeration of ColorControl attribute ColorCapabilities options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum ColorCapabilities
    {
        HUE_AND_SATURATION = 0x0001,
