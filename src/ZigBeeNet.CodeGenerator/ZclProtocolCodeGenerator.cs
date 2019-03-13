@@ -202,7 +202,7 @@ namespace ZigBeeNet.CodeGenerator
                         code.AppendLine("    /// " + command.CommandLabel + " value object class.");
 
                         code.AppendLine("    /// <para>");
-                        code.AppendLine("    /// Cluster: " + cluster.ClusterName + ". Command is sent"
+                        code.AppendLine("    /// Cluster: " + cluster.ClusterName + ". Command is sent "
                                 + (cluster.Received.ContainsValue(command) ? "TO" : "FROM") + " the server.");
                         code.AppendLine("    /// This command is " + ((cluster.ClusterType.Equals("GENERAL"))
                                 ? "a generic command used across the profile."
