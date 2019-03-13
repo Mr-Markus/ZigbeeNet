@@ -172,14 +172,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             SetState(DriverStatus.HARDWARE_OPEN);
             if (!DongleReset())
             {
-                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte {MagicByte}.", "0x" + BOOTLOADER_MAGIC_BYTE.ToString("X2"));
-
-                if (!bootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
-                {
-                    _logger.Warn("Attempt to get out from bootloader failed.");
-                    Shutdown();
-                    return null;
-                }
+                Shutdown();
+                return null;
             }
 
             SetState(DriverStatus.HARDWARE_READY);
@@ -653,7 +647,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
         }
 
-        private bool bootloaderGetOut(byte magicByte)
+        private bool BootloaderGetOut(byte magicByte)
         {
             BlockingCommandReceiver waiter = new BlockingCommandReceiver(ZToolCMD.SYS_RESET_RESPONSE, _commandInterface);
 
@@ -717,7 +711,19 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
 
             SYS_RESET_RESPONSE response = (SYS_RESET_RESPONSE)waiter.GetCommand(ResetTimeout);
 
-            return response != null;
+            if (response == null)
+            {
+                _logger.Warn("Dongle reset failed. Assuming bootloader is running and sending magic byte 0x{BootLoaderMagicByte}.", BOOTLOADER_MAGIC_BYTE.ToString("X2"));
+
+                if (!BootloaderGetOut(BOOTLOADER_MAGIC_BYTE))
+                {
+                    _logger.Warn("Attempt to get out from bootloader failed.");
+
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool DongleSetStartupOption(ulong mask)
