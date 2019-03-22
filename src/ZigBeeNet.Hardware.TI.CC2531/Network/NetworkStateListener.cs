@@ -32,7 +32,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         public void ReceivedUnclaimedSynchronousCommandResponse(ZToolPacket packet)
         {
             // Processing not requiered
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO: Realy throwing an exception ?
         }
     }
 }
