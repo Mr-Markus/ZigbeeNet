@@ -186,7 +186,8 @@ namespace ZigBeeNet.PlayGround
                                                 await networkManager.Send(endpointAddress, new OnCommand());
 
                                             state = !state;
-                                            System.Threading.Thread.Sleep(1);
+
+                                            await Task.Delay(1);
                                         }
                                     }
                                     else if (cmd == "desc")
