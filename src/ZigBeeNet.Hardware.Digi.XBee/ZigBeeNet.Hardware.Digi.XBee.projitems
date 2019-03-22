@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f33fa6e6-8d2e-42e7-8538-3437d1e996ca</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ZigBeeNet.Hardware.Digi.XBee</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\RxStateMachine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\CommandStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\DeliveryStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\DiscoveryStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\EncryptionOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\IXBeeCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\IXBeeEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\IXBeeResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\ModemStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\ReceiveOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\TransmitOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeActiveScanResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeApiEnableResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeApiModeResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeAtCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeAtQueueParameterCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeAtResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeCoordinatorEnableResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeCreateSourceRouteCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeDetailedVersionResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeEncryptionEnableResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeEncryptionOptionsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeEnergyScanResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeExtendedPanIdConfigResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeExtendedPanIdResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeFirmwareVersionResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeFrame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetActiveScanCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetApiEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetApiModeCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetCoordinatorEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetDetailedVersionCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetEncryptionEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetEncryptionOptionsCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetEnergyScanCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetExtendedPanIdCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetExtendedPanIdConfigCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetFirmwareVersionCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetHardwareVersionCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetIeeeAddressHighCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetIeeeAddressLowCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetIeeeLowCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetJoinNotificationCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetOperatingChannelCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetPanIdCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetScanChannelsCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeGetZigbeeStackProfileCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeHardwareVersionResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeIeeeAddressHighResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeIeeeAddressLowCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeIeeeAddressLowResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeJoinNotificationResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeLinkKeyResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeManyToOneRouteRequestEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeModemStatusEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeNetworkKeyResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeNetworkResetResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeNodeDiscoveryResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeOperatingChannelResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeOtaFirmwareUpdateStatusEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeePanIdResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeReceivePacketEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeReceivePacketExplicitEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeResetResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeRouteRecordEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSaveDataResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeScanChannelsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetApiEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetApiModeCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetCoordinatorEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetEncryptionEnableCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetEncryptionOptionsCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetEnergyScanCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetJoinNotificationCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetLinkKeyCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetNetworkKeyCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetNetworkResetCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetNodeDiscoveryCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetResetCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetSaveDataCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetScanChannelsCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetSoftwareResetCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSetZigbeeStackProfileCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeSoftwareResetResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeTransmitRequestCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeTransmitRequestExplicitCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeTransmitStatusResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Protocol\XBeeZigbeeStackProfileResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\XBeeFrameHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\IXBeeEventListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\NetworkManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packet\ZToolPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ZigBeeDongleDigiXBee.cs" />
+  </ItemGroup>
+</Project>
