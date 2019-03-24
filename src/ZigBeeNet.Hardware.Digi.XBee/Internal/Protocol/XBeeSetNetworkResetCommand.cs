@@ -26,9 +26,24 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     {
         
         /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
         ///  Sends broadcast transmission to reset network layer parameters on all nodes in the PAN. 
         ///
         /// </summary>
         private bool _resetRemoteDevices;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetResetRemoteDevices(bool resetRemoteDevices)
+        {
+            this._resetRemoteDevices = resetRemoteDevices;
+        }
     }
 }

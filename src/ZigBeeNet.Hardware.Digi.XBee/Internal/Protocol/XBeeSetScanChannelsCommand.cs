@@ -23,5 +23,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetScanChannelsCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _channels;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetChannels(int channels)
+        {
+            this._channels = channels;
+        }
     }
 }

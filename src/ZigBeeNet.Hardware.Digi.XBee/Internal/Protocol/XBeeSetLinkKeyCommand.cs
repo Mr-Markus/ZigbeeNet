@@ -10,6 +10,7 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
+    using ZigBeeNet.Security.ZigBeeKey;
     
     
     /// <summary>
@@ -23,5 +24,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetLinkKeyCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private ZigBeeKey _linkKey;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetLinkKey(ZigBeeKey linkKey)
+        {
+            this._linkKey = linkKey;
+        }
     }
 }

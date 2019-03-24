@@ -25,5 +25,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetApiModeCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _mode;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetMode(int mode)
+        {
+            this._mode = mode;
+        }
     }
 }

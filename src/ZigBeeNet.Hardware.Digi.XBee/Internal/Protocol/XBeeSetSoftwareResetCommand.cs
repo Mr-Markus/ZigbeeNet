@@ -22,5 +22,15 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetSoftwareResetCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
     }
 }

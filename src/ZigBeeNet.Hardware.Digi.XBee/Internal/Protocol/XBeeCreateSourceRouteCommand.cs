@@ -46,5 +46,30 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private int _networkAddress;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _addressList;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetIeeeAddress(IeeeAddress ieeeAddress)
+        {
+            this._ieeeAddress = ieeeAddress;
+        }
+        
+        public void SetNetworkAddress(int networkAddress)
+        {
+            this._networkAddress = networkAddress;
+        }
+        
+        public void SetAddressList(int addressList)
+        {
+            this._addressList = addressList;
+        }
     }
 }

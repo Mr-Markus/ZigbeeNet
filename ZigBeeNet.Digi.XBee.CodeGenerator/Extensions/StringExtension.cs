@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace ZigBeeNet.Digi.XBee.CodeGenerator.Extensions
 {
@@ -29,6 +26,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Extensions
 
         public static string ToLowerCamelCase(this string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
             string cc = ToCamelCase(value);
 
             return cc.Substring(0, 1).ToLower() + cc.Substring(1);
@@ -36,21 +38,41 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Extensions
 
         public static string ToUpperCamelCase(this string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
             return ToCamelCase(value);
         }
 
         public static string ToProperCase(this string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
             return value.Substring(0, 1).ToUpper() + value.Substring(1).ToLower();
         }
 
         public static string UpperCaseFirstCharacter(this string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
             return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
 
         public static string LowerCaseFirstCharacter(this string value)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
             return value.Substring(0, 1).ToLower() + value.Substring(1);
         }
     }

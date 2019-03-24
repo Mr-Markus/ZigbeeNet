@@ -25,5 +25,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetEnergyScanCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _scanTime;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetScanTime(int scanTime)
+        {
+            this._scanTime = scanTime;
+        }
     }
 }

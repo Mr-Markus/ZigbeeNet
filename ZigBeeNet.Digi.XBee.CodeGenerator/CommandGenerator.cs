@@ -191,7 +191,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             Console.WriteLine("Processing command class " + command.Name + "  [" + className + "()]");
 
             CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, "ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol");
-            CodeTypeDeclaration protocolClass = new CodeTypeDeclaration(className);
+            CodeTypeDeclaration protocolClass = new CodeTypeDeclaration(className)
+            {
+                IsClass = true,
+                TypeAttributes = System.Reflection.TypeAttributes.Public
+            };
 
             StringBuilder descriptionStringBuilder = new StringBuilder();
             descriptionStringBuilder.AppendLine($"Class to implement the XBee command \" {command.Name} \".");
@@ -221,7 +225,18 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             codeNamespace.Types.Add(protocolClass);
 
-            foreach (var group in commandParameterGroup)
+            CreateParameterGroups(codeNamespace, protocolClass, commandParameterGroup, null);
+
+            CreateParameterGroups(codeNamespace, protocolClass, responseParameterGroup, (group, stringBuilder) =>
+            {
+                stringBuilder.AppendLine("Response field");
+                if (bool.TrueString.Equals(group.Multiple))
+                {
+                    stringBuilder.AppendLine("Field accepts multiple responses.");
+                }
+            });
+
+            foreach (ParameterGroup group in commandParameterGroup)
             {
                 foreach (var parameter in group.Parameters)
                 {
@@ -231,41 +246,145 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     }
 
                     // Constant...
-                    if (parameter.Value != null && parameter.Value.Length != 0)
-                    {
-                        continue;
-                    }
-
-                    if (!string.IsNullOrEmpty(parameter.Description))
-                    {
-                        StringBuilder parameterStringBuilder = new StringBuilder();
-                        OutputWithLineBreak(parameterStringBuilder, "    ", parameter.Description);
-
-                        CreateParameterDefinition(codeNamespace, protocolClass, parameterStringBuilder, parameter);
-                    }
-                }
-            }          
-
-            foreach (ParameterGroup group in responseParameterGroup)
-            {
-                foreach (Parameter parameter in group.Parameters)
-                {
-                    if (parameter.AutoSize != null)
-                    {
-                        continue;
-                    }
-                    // Constant
                     if (!string.IsNullOrEmpty(parameter.Value))
                     {
                         continue;
                     }
 
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.AppendLine("Response field");
-                    if (bool.TrueString.Equals(group.Multiple))
+                    if (!string.IsNullOrEmpty(parameter.Description))
                     {
-                        stringBuilder.AppendLine("Field accepts multiple responses.");
+                        OutputWithLineBreak(stringBuilder, "    ", parameter.Description);
                     }
+
+                    CodeFieldReferenceExpression parameterReference = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), $"_{parameter.Name.ToLowerCamelCase()}");
+                    if (parameter.Multiple || parameter.Bitfield)
+                    {
+                        //TODO: Eliminate redundant code below
+                        //IList<string[]> methodStrings = new List<string[]>
+                        //{
+                        //    new[] { "Add", "", "", "Add" },
+                        //    new[] { "Remove", "", "", "Remove" },
+                        //    new[] { "Add", "IEnumerable<", ">", "AddRange" },
+                        //};
+
+                        //foreach(string[] methodString in methodStrings)
+                        //{
+                        //    CodeMemberMethod addMethod = CreateMethod($"{methodString[0]}{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        //    {
+                        //        new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{methodString[1]}{GetTypeClass(parameter.DataType, codeNamespace).BaseType}{methodString[2]}")), $"{parameter.Name.ToLowerCamelCase()}")
+                        //    });
+                        //    CodeMethodInvokeExpression addInvoke = new CodeMethodInvokeExpression(parameterReference, $"{methodString[3]}", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
+                        //    addMethod.Statements.Add(addInvoke);
+                        //    protocolClass.Members.Add(addMethod);
+                        //    // Todo: Add Comment to method[0]
+                        //}
+
+                        CodeMemberMethod addMethod = CreateMethod($"Add{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        {
+                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
+                        });
+                        CodeMethodInvokeExpression addInvoke = new CodeMethodInvokeExpression(parameterReference, "Add", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
+                        addMethod.Statements.Add(addInvoke);
+                        protocolClass.Members.Add(addMethod);
+                        //Todo: Add Comment to method[0]
+
+                        CodeMemberMethod removeMethod = CreateMethod($"Remove{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        {
+                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
+                        });
+                        CodeMethodInvokeExpression removeInvoke = new CodeMethodInvokeExpression(parameterReference, "Remove", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
+                        removeMethod.Statements.Add(removeInvoke);
+                        protocolClass.Members.Add(removeMethod);
+                        //Todo: Add Comment to method[0]
+
+                        CodeMemberMethod setMethod = CreateMethod($"Set{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        {
+                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"IEnumerable<{GetTypeClass(parameter.DataType, codeNamespace).BaseType}>")), $"{parameter.Name.ToLowerCamelCase()}")
+                        });
+                        CodeMethodInvokeExpression setInvoke = new CodeMethodInvokeExpression(parameterReference, "AddRange", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
+                        setMethod.Statements.Add(setInvoke);
+                        protocolClass.Members.Add(setMethod);
+                        //Todo: Add Comment to method[0]
+                    }
+                    else
+                    {
+                        CodeMemberMethod setMethod = CreateMethod($"Set{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        {
+                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
+                        });
+
+                        setMethod.Statements.Add(new CodeAssignStatement(parameterReference, new CodeArgumentReferenceExpression($"{parameter.Name.ToLowerCamelCase()}")));
+                        protocolClass.Members.Add(setMethod);
+                        //Todo: Add Comment to method[0]
+
+                        if (parameter.Minimum != null && parameter.Maximum != null)
+                        {
+                            // TODO: See CommandGenerator.java line 613
+                            // Create a CodeConditionStatement that tests a boolean value named boolean.
+                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
+                                // The condition to test.
+                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
+                                // The statements to execute if the condition evaluates to true.
+                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
+                                // The statements to execute if the condition evalues to false.
+                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                        }
+
+                        if (parameter.Minimum != null)
+                        {
+                            // TODO: See CommandGenerator.java line 620
+                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
+                                // The condition to test.
+                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
+                                // The statements to execute if the condition evaluates to true.
+                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
+                                // The statements to execute if the condition evalues to false.
+                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                        }
+
+                        if (parameter.Maximum != null)
+                        {
+                            // TODO: See CommandGenerator.java line 627
+                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
+                                // The condition to test.
+                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
+                                // The statements to execute if the condition evaluates to true.
+                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
+                                // The statements to execute if the condition evalues to false.
+                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                        }
+                    }
+                }
+                //CreateParameterSetter(group.Parameters);
+            }
+
+            // TODO: Go on with line 249 CommndGenerator.java
+
+            GenerateCode(compileUnit, className);
+        }
+
+        private void CreateParameterGroups(CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass, IList<ParameterGroup> parameterGroups, Action<ParameterGroup, StringBuilder> action)
+        {
+            foreach (ParameterGroup group in parameterGroups)
+            {
+                foreach (var parameter in group.Parameters)
+                {
+                    if (parameter.AutoSize != null)
+                    {
+                        continue;
+                    }
+
+                    // Constant...
+                    if (!string.IsNullOrEmpty(parameter.Value))
+                    {
+                        continue;
+                    }
+
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    action?.Invoke(group, stringBuilder);
+
                     if (!string.IsNullOrEmpty(parameter.Description))
                     {
                         OutputWithLineBreak(stringBuilder, "    ", parameter.Description);
@@ -273,11 +392,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     CreateParameterDefinition(codeNamespace, protocolClass, stringBuilder, parameter);
                 }
             }
-
-
-
-
-            GenerateCode(compileUnit, className);
         }
 
         private void CreateParameterDefinition(CodeNamespace codeNamespace, CodeTypeDeclaration codeTypeDeclaration, StringBuilder codeComment, Parameter parameter)
@@ -304,6 +418,31 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             codeTypeDeclaration.Members.Add(codeMemberField);
         }
 
+        private CodeMemberProperty CreateProperty(string propertyName, CodeTypeReference propertyType, StringBuilder propertyComments, bool hasGet, bool hasSet)
+        {
+            CodeMemberProperty codeMemberProperty = new CodeMemberProperty
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Name = propertyName,
+                HasGet = hasGet,
+                HasSet = hasSet,
+                Type = propertyType,
+            };
+            AddCodeComment(codeMemberProperty, propertyComments);
+            return codeMemberProperty;
+        }
+
+        private CodeMemberMethod CreateMethod(string methodName, CodeParameterDeclarationExpressionCollection declarationExpressionCollection)
+        {
+            CodeMemberMethod codeMemberMethod = new CodeMemberMethod
+            {
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                Name = methodName,
+            };
+            codeMemberMethod.Parameters.AddRange(declarationExpressionCollection);
+            return codeMemberMethod;
+        }
+
         private static void CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, string namespaceString)
         {
             compileUnit = new CodeCompileUnit();
@@ -320,9 +459,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
         private static CodeMemberField CreateCodeMemberField(string memberName, string typeString, MemberAttributes memberAttributes, bool initializeMember)
         {
-            CodeMemberField codeMemberField = new CodeMemberField();
-            codeMemberField.Name = $"_{memberName.ToLowerCamelCase()}";
-            codeMemberField.Type = new CodeTypeReference(new CodeTypeParameter(typeString));
+            CodeMemberField codeMemberField = new CodeMemberField
+            {
+                Name = $"_{memberName.ToLowerCamelCase()}",
+                Type = new CodeTypeReference(new CodeTypeParameter(typeString))
+            };
 
             if (initializeMember)
             {
@@ -344,11 +485,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             if (provider.FileExtension[0] == '.')
             {
-                sourceFile = $@"D:\Development\HomeAutomation\Digi_XBee\ZigbeeNet\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}{provider.FileExtension}";
             }
             else
             {
-                sourceFile = $@"D:\Development\HomeAutomation\Digi_XBee\ZigbeeNet\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}.{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}.{provider.FileExtension}";
             }
 
             var codeGeneratorOptions = new CodeGeneratorOptions
@@ -356,7 +497,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 BracingStyle = "C",
             };
             IndentedTextWriter tw = new IndentedTextWriter(new StreamWriter(sourceFile, false), "    ");
-            //provider.GenerateCodeFromType(codeTypeDeclaration, tw, codeGeneratorOptions);
             provider.GenerateCodeFromCompileUnit(codeCompileUnit, tw, codeGeneratorOptions);
             tw.Close();
         }

@@ -24,5 +24,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetJoinNotificationCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _enableNotification;
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void SetEnableNotification(bool enableNotification)
+        {
+            this._enableNotification = enableNotification;
+        }
     }
 }

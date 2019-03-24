@@ -10,6 +10,7 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
+    using System.Collections.Generic;
     
     
     /// <summary>
@@ -20,5 +21,35 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// </summary>
     public class XBeeSetEncryptionOptionsCommand : XBeeFrame, IXBeeCommand 
     {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int _frameId;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<EncryptionOptions> _encryptionOptions = new List<EncryptionOptions>();
+        
+        public void SetFrameId(int frameId)
+        {
+            this._frameId = frameId;
+        }
+        
+        public void AddEncryptionOptions(EncryptionOptions encryptionOptions)
+        {
+            this._encryptionOptions.Add(encryptionOptions);
+        }
+        
+        public void RemoveEncryptionOptions(EncryptionOptions encryptionOptions)
+        {
+            this._encryptionOptions.Remove(encryptionOptions);
+        }
+        
+        public void SetEncryptionOptions(IEnumerable<EncryptionOptions> encryptionOptions)
+        {
+            this._encryptionOptions.AddRange(encryptionOptions);
+        }
     }
 }

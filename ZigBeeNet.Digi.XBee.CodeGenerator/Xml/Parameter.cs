@@ -35,10 +35,10 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Xml
         public bool Optional { get; set; }
 
         [XmlElement("minimum")]
-        public int Minimum { get; set; }
+        public int? Minimum { get; set; }
 
         [XmlElement("maximum")]
-        public int Maximum { get; set; }
+        public int? Maximum { get; set; }
 
         [XmlElement("value")]
         public string Value { get; set; }
