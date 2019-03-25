@@ -106,61 +106,97 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private int _data;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The ieeeAddress to set as <see cref="IeeeAddress"/>
+        /// </summary>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
             this._ieeeAddress = ieeeAddress;
         }
         
+        /// <summary>
+        /// The networkAddress to set as <see cref="uint16"/>
+        /// </summary>
         public void SetNetworkAddress(int networkAddress)
         {
             this._networkAddress = networkAddress;
         }
         
+        /// <summary>
+        /// The sourceEndpoint to set as <see cref="uint8"/>
+        /// </summary>
         public void SetSourceEndpoint(int sourceEndpoint)
         {
             this._sourceEndpoint = sourceEndpoint;
         }
         
+        /// <summary>
+        /// The destinationEndpoint to set as <see cref="uint8"/>
+        /// </summary>
         public void SetDestinationEndpoint(int destinationEndpoint)
         {
             this._destinationEndpoint = destinationEndpoint;
         }
         
+        /// <summary>
+        /// The cluster to set as <see cref="uint16"/>
+        /// </summary>
         public void SetCluster(int cluster)
         {
             this._cluster = cluster;
         }
         
+        /// <summary>
+        /// The profileId to set as <see cref="uint16"/>
+        /// </summary>
         public void SetProfileId(int profileId)
         {
             this._profileId = profileId;
         }
         
+        /// <summary>
+        /// The broadcastRadius to set as <see cref="uint8"/>
+        /// </summary>
         public void SetBroadcastRadius(int broadcastRadius)
         {
             this._broadcastRadius = broadcastRadius;
         }
         
+        /// <summary>
+        /// The options to add to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void AddOptions(TransmitOptions options)
         {
             this._options.Add(options);
         }
         
+        /// <summary>
+        /// The options to remove to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void RemoveOptions(TransmitOptions options)
         {
             this._options.Remove(options);
         }
         
+        /// <summary>
+        /// The options to set to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void SetOptions(IEnumerable<TransmitOptions> options)
         {
             this._options.AddRange(options);
         }
         
+        /// <summary>
+        /// The data to set as <see cref="uint8[]"/>
+        /// </summary>
         public void SetData(int data)
         {
             this._data = data;

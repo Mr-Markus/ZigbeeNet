@@ -34,11 +34,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private int _channels;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The channels to set as <see cref="uint16"/>
+        /// </summary>
         public void SetChannels(int channels)
         {
             this._channels = channels;

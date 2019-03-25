@@ -236,6 +236,15 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 }
             });
 
+            CreateParameterSetters(commandParameterGroup, codeNamespace, protocolClass);
+
+            // TODO: Go on with line 249 CommndGenerator.java
+
+            GenerateCode(compileUnit, className);
+        }
+
+        private void CreateParameterSetters(List<ParameterGroup> commandParameterGroup, CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass)
+        {
             foreach (ParameterGroup group in commandParameterGroup)
             {
                 foreach (var parameter in group.Parameters)
@@ -260,52 +269,24 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     CodeFieldReferenceExpression parameterReference = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), $"_{parameter.Name.ToLowerCamelCase()}");
                     if (parameter.Multiple || parameter.Bitfield)
                     {
-                        //TODO: Eliminate redundant code below
-                        //IList<string[]> methodStrings = new List<string[]>
-                        //{
-                        //    new[] { "Add", "", "", "Add" },
-                        //    new[] { "Remove", "", "", "Remove" },
-                        //    new[] { "Add", "IEnumerable<", ">", "AddRange" },
-                        //};
-
-                        //foreach(string[] methodString in methodStrings)
-                        //{
-                        //    CodeMemberMethod addMethod = CreateMethod($"{methodString[0]}{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
-                        //    {
-                        //        new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{methodString[1]}{GetTypeClass(parameter.DataType, codeNamespace).BaseType}{methodString[2]}")), $"{parameter.Name.ToLowerCamelCase()}")
-                        //    });
-                        //    CodeMethodInvokeExpression addInvoke = new CodeMethodInvokeExpression(parameterReference, $"{methodString[3]}", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
-                        //    addMethod.Statements.Add(addInvoke);
-                        //    protocolClass.Members.Add(addMethod);
-                        //    // Todo: Add Comment to method[0]
-                        //}
-
-                        CodeMemberMethod addMethod = CreateMethod($"Add{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        IList<string[]> methodStrings = new List<string[]>
                         {
-                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
-                        });
-                        CodeMethodInvokeExpression addInvoke = new CodeMethodInvokeExpression(parameterReference, "Add", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
-                        addMethod.Statements.Add(addInvoke);
-                        protocolClass.Members.Add(addMethod);
-                        //Todo: Add Comment to method[0]
+                            new[] { "Add", "", "", "Add" },
+                            new[] { "Remove", "", "", "Remove" },
+                            new[] { "Set", "IEnumerable<", ">", "AddRange" },
+                        };
 
-                        CodeMemberMethod removeMethod = CreateMethod($"Remove{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                        foreach (string[] methodString in methodStrings)
                         {
-                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
-                        });
-                        CodeMethodInvokeExpression removeInvoke = new CodeMethodInvokeExpression(parameterReference, "Remove", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
-                        removeMethod.Statements.Add(removeInvoke);
-                        protocolClass.Members.Add(removeMethod);
-                        //Todo: Add Comment to method[0]
-
-                        CodeMemberMethod setMethod = CreateMethod($"Set{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
-                        {
-                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"IEnumerable<{GetTypeClass(parameter.DataType, codeNamespace).BaseType}>")), $"{parameter.Name.ToLowerCamelCase()}")
-                        });
-                        CodeMethodInvokeExpression setInvoke = new CodeMethodInvokeExpression(parameterReference, "AddRange", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
-                        setMethod.Statements.Add(setInvoke);
-                        protocolClass.Members.Add(setMethod);
-                        //Todo: Add Comment to method[0]
+                            CodeMemberMethod memberMethod = CreateMethod($"{methodString[0]}{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
+                            {
+                                new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{methodString[1]}{GetTypeClass(parameter.DataType, codeNamespace).BaseType}{methodString[2]}")), $"{parameter.Name.ToLowerCamelCase()}")
+                            });
+                            CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(parameterReference, $"{methodString[3]}", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
+                            memberMethod.Statements.Add(invokeExpression);
+                            AddCodeComment(memberMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to {methodString[0].ToLower()} to the set as <see cref=\"{parameter.DataType}\"/>"));
+                            protocolClass.Members.Add(memberMethod);
+                        }
                     }
                     else
                     {
@@ -313,55 +294,35 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         {
                             new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
                         });
-
+                        AddCodeComment(setMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to set as <see cref=\"{parameter.DataType}\"/>"));
                         setMethod.Statements.Add(new CodeAssignStatement(parameterReference, new CodeArgumentReferenceExpression($"{parameter.Name.ToLowerCamelCase()}")));
-                        protocolClass.Members.Add(setMethod);
-                        //Todo: Add Comment to method[0]
 
                         if (parameter.Minimum != null && parameter.Maximum != null)
                         {
-                            // TODO: See CommandGenerator.java line 613
-                            // Create a CodeConditionStatement that tests a boolean value named boolean.
-                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
-                                // The condition to test.
-                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
-                                // The statements to execute if the condition evaluates to true.
-                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
-                                // The statements to execute if the condition evalues to false.
-                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                            setMethod.Statements.Add(CreateConditionStatement(parameter, $"The value passed is out of range. Range is {parameter.Minimum} to {parameter.Maximum}"));
                         }
 
-                        if (parameter.Minimum != null)
+                        else if (parameter.Minimum != null)
                         {
-                            // TODO: See CommandGenerator.java line 620
-                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
-                                // The condition to test.
-                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
-                                // The statements to execute if the condition evaluates to true.
-                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
-                                // The statements to execute if the condition evalues to false.
-                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                            setMethod.Statements.Add(CreateConditionStatement(parameter, $"The value passed is out of range. Value must be greater than {parameter.Minimum}"));
                         }
 
-                        if (parameter.Maximum != null)
+                        else if (parameter.Maximum != null)
                         {
-                            // TODO: See CommandGenerator.java line 627
-                            CodeConditionStatement conditionalStatement = new CodeConditionStatement(
-                                // The condition to test.
-                                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
-                                // The statements to execute if the condition evaluates to true.
-                                new CodeStatement[] { new CodeCommentStatement("If condition is true, execute these statements.") },
-                                // The statements to execute if the condition evalues to false.
-                                new CodeStatement[] { new CodeCommentStatement("Else block. If condition is false, execute these statements.") });
+                            setMethod.Statements.Add(CreateConditionStatement(parameter, $"The value passed is out of range. Value must be less than {parameter.Maximum}"));
                         }
+                        protocolClass.Members.Add(setMethod);
                     }
                 }
-                //CreateParameterSetter(group.Parameters);
             }
+        }
 
-            // TODO: Go on with line 249 CommndGenerator.java
-
-            GenerateCode(compileUnit, className);
+        private CodeConditionStatement CreateConditionStatement(Parameter parameter, string message)
+        {
+            return new CodeConditionStatement(
+                new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} < {parameter.Minimum} || {parameter.Name.ToLowerCamelCase()} > {parameter.Maximum}"),
+                new CodeStatement[] { new CodeThrowExceptionStatement(new CodeObjectCreateExpression(new CodeTypeReference(typeof(ArgumentOutOfRangeException)),
+                                new CodePrimitiveExpression(message))) });
         }
 
         private void CreateParameterGroups(CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass, IList<ParameterGroup> parameterGroups, Action<ParameterGroup, StringBuilder> action)

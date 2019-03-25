@@ -32,11 +32,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private bool _enable;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The enable to set as <see cref="Boolean"/>
+        /// </summary>
         public void SetEnable(bool enable)
         {
             this._enable = enable;

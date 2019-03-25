@@ -35,11 +35,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private bool _enableNotification;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The enableNotification to set as <see cref="Boolean"/>
+        /// </summary>
         public void SetEnableNotification(bool enableNotification)
         {
             this._enableNotification = enableNotification;

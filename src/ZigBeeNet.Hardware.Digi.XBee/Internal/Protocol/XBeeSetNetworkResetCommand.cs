@@ -36,11 +36,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private bool _resetRemoteDevices;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The resetRemoteDevices to set as <see cref="Boolean"/>
+        /// </summary>
         public void SetResetRemoteDevices(bool resetRemoteDevices)
         {
             this._resetRemoteDevices = resetRemoteDevices;

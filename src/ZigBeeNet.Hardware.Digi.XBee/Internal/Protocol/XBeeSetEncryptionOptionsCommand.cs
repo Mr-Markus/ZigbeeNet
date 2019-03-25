@@ -32,21 +32,33 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private List<EncryptionOptions> _encryptionOptions = new List<EncryptionOptions>();
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The encryptionOptions to add to the set as <see cref="EncryptionOptions"/>
+        /// </summary>
         public void AddEncryptionOptions(EncryptionOptions encryptionOptions)
         {
             this._encryptionOptions.Add(encryptionOptions);
         }
         
+        /// <summary>
+        /// The encryptionOptions to remove to the set as <see cref="EncryptionOptions"/>
+        /// </summary>
         public void RemoveEncryptionOptions(EncryptionOptions encryptionOptions)
         {
             this._encryptionOptions.Remove(encryptionOptions);
         }
         
+        /// <summary>
+        /// The encryptionOptions to set to the set as <see cref="EncryptionOptions"/>
+        /// </summary>
         public void SetEncryptionOptions(IEnumerable<EncryptionOptions> encryptionOptions)
         {
             this._encryptionOptions.AddRange(encryptionOptions);

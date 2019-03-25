@@ -70,36 +70,57 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private int _data;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The ieeeAddress to set as <see cref="IeeeAddress"/>
+        /// </summary>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
             this._ieeeAddress = ieeeAddress;
         }
         
+        /// <summary>
+        /// The networkAddress to set as <see cref="uint16"/>
+        /// </summary>
         public void SetNetworkAddress(int networkAddress)
         {
             this._networkAddress = networkAddress;
         }
         
+        /// <summary>
+        /// The options to add to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void AddOptions(TransmitOptions options)
         {
             this._options.Add(options);
         }
         
+        /// <summary>
+        /// The options to remove to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void RemoveOptions(TransmitOptions options)
         {
             this._options.Remove(options);
         }
         
+        /// <summary>
+        /// The options to set to the set as <see cref="TransmitOptions"/>
+        /// </summary>
         public void SetOptions(IEnumerable<TransmitOptions> options)
         {
             this._options.AddRange(options);
         }
         
+        /// <summary>
+        /// The data to set as <see cref="uint8[]"/>
+        /// </summary>
         public void SetData(int data)
         {
             this._data = data;

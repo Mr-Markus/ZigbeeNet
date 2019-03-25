@@ -43,16 +43,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private int _parameterValue;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The atCommand to set as <see cref="AtCommand"/>
+        /// </summary>
         public void SetAtCommand(string atCommand)
         {
             this._atCommand = atCommand;
         }
         
+        /// <summary>
+        /// The parameterValue to set as <see cref="Data"/>
+        /// </summary>
         public void SetParameterValue(int parameterValue)
         {
             this._parameterValue = parameterValue;

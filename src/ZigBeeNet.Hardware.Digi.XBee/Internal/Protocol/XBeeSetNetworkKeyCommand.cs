@@ -33,11 +33,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private ZigBeeKey _networkKey;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The networkKey to set as <see cref="ZigBeeKey"/>
+        /// </summary>
         public void SetNetworkKey(ZigBeeKey networkKey)
         {
             this._networkKey = networkKey;

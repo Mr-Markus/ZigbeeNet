@@ -33,11 +33,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// </summary>
         private int _stackProfile;
         
+        /// <summary>
+        /// The frameId to set as <see cref="uint8"/>
+        /// </summary>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
+        /// <summary>
+        /// The stackProfile to set as <see cref="uint8"/>
+        /// </summary>
         public void SetStackProfile(int stackProfile)
         {
             this._stackProfile = stackProfile;
