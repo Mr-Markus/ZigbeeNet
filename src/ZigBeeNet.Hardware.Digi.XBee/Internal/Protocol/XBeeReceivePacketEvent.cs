@@ -49,5 +49,37 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private int _data;
+        
+        /// <summary>
+        /// Return the ieeeAddress as <see cref="IeeeAddress"/>
+        /// </summary>
+        public IeeeAddress GetIeeeAddress()
+        {
+            return _ieeeAddress;
+        }
+        
+        /// <summary>
+        /// Return the networkAddress as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetNetworkAddress()
+        {
+            return _networkAddress;
+        }
+        
+        /// <summary>
+        /// Return the receiveOptions as <see cref="ReceiveOptions"/>
+        /// </summary>
+        public ReceiveOptions GetReceiveOptions()
+        {
+            return _receiveOptions;
+        }
+        
+        /// <summary>
+        /// Return the data as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetData()
+        {
+            return _data;
+        }
     }
 }

@@ -56,5 +56,45 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private DiscoveryStatus _discoveryStatus;
+        
+        /// <summary>
+        /// Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetFrameId()
+        {
+            return _frameId;
+        }
+        
+        /// <summary>
+        /// Return the networkAddress as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetNetworkAddress()
+        {
+            return _networkAddress;
+        }
+        
+        /// <summary>
+        /// Return the transmitRetryCount as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetTransmitRetryCount()
+        {
+            return _transmitRetryCount;
+        }
+        
+        /// <summary>
+        /// Return the deliveryStatus as <see cref="DeliveryStatus"/>
+        /// </summary>
+        public DeliveryStatus GetDeliveryStatus()
+        {
+            return _deliveryStatus;
+        }
+        
+        /// <summary>
+        /// Return the discoveryStatus as <see cref="DiscoveryStatus"/>
+        /// </summary>
+        public DiscoveryStatus GetDiscoveryStatus()
+        {
+            return _discoveryStatus;
+        }
     }
 }

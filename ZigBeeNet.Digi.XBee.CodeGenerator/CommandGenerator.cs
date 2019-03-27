@@ -238,16 +238,83 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateParameterSetters(commandParameterGroup, codeNamespace, protocolClass);
 
-            // TODO: Go on with line 249 CommndGenerator.java
+            CreateParameterGetter(responseParameterGroup, codeNamespace, protocolClass);
+
+            if (commandParameterGroup != null && commandParameterGroup.Count != 0)
+            {
+                // TODO: Go on with line 270 CommndGenerator.java
+            }
 
             GenerateCode(compileUnit, className);
+        }
+
+        private void CreateParameterGetter(List<ParameterGroup> responseParameterGroup, CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass)
+        {
+            foreach (ParameterGroup group in responseParameterGroup)
+            {
+                if (group.Multiple)
+                {
+                    AddNamespaceImport(codeNamespace, "System.Collections.Generic");
+                    CodeMemberMethod memberMethod = CreateMethod($"Get{group.Name.ToUpperCamelCase()}s", null, new CodeTypeReference($"List<{group.Name.ToLowerCamelCase()}>"), new CodeMethodReturnStatement(new CodeArgumentReferenceExpression($"{group.Name.ToUpperCamelCase()}s")));
+
+                    // TODO: Add a adequate comment to the method
+                    //AddCodeComment(memberMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to {methodString[0].ToLower()} to the set as <see cref=\"{parameter.DataType}\"/>"));
+                    protocolClass.Members.Add(memberMethod);
+                    continue;
+                }
+                // TODO: Go on with line 512 CommndGenerator.java
+                foreach (Parameter parameter in group.Parameters)
+                {
+                    if (parameter.AutoSize != null)
+                    {
+                        continue;
+                    }
+
+                    // Constant...
+                    if (!string.IsNullOrEmpty(parameter.Value))
+                    {
+                        continue;
+                    }
+
+                    StringBuilder stringBuilder = new StringBuilder();
+                    if (!string.IsNullOrEmpty(parameter.Description))
+                    {
+                        OutputWithLineBreak(stringBuilder, "    ", parameter.Description);
+                    }
+
+                    stringBuilder.Clear();
+                    if (parameter.Multiple)
+                    {
+                        stringBuilder.Append($"Return the {parameter.Name.ToLowerCamelCase()} as a list of <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                    }
+                    else
+                    {
+                        stringBuilder.Append($"Return the {parameter.Name.ToLowerCamelCase()} as <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                    }
+
+                    CodeMemberMethod getMethod;
+                    if (parameter.Multiple || parameter.Bitfield)
+                    {
+                        getMethod = CreateMethod($"Get{parameter.Name.ToUpperCamelCase()}", null, new CodeTypeReference($"List<{GetTypeClass(parameter.DataType, codeNamespace).BaseType}>"), null);
+                    }
+                    else
+                    {
+                        getMethod = CreateMethod($"Get{parameter.Name.ToUpperCamelCase()}", null, new CodeTypeReference($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}"), null);
+                    }
+
+                    // TODO: Test if this is appropriate. Especially if the return type is a list.
+                    getMethod.Statements.Add(new CodeMethodReturnStatement(new CodeArgumentReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}")));
+                    AddCodeComment(getMethod, stringBuilder);
+                    protocolClass.Members.Add(getMethod);
+                }
+            }
         }
 
         private void CreateParameterSetters(List<ParameterGroup> commandParameterGroup, CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass)
         {
             foreach (ParameterGroup group in commandParameterGroup)
             {
-                foreach (var parameter in group.Parameters)
+                foreach (Parameter parameter in group.Parameters)
                 {
                     if (parameter.AutoSize != null)
                     {
@@ -281,7 +348,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                             CodeMemberMethod memberMethod = CreateMethod($"{methodString[0]}{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
                             {
                                 new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{methodString[1]}{GetTypeClass(parameter.DataType, codeNamespace).BaseType}{methodString[2]}")), $"{parameter.Name.ToLowerCamelCase()}")
-                            });
+                            }, null, null);
                             CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(parameterReference, $"{methodString[3]}", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
                             memberMethod.Statements.Add(invokeExpression);
                             AddCodeComment(memberMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to {methodString[0].ToLower()} to the set as <see cref=\"{parameter.DataType}\"/>"));
@@ -292,8 +359,8 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     {
                         CodeMemberMethod setMethod = CreateMethod($"Set{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
                         {
-                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}")
-                        });
+                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}"),
+                        }, null, null);
                         AddCodeComment(setMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to set as <see cref=\"{parameter.DataType}\"/>"));
                         setMethod.Statements.Add(new CodeAssignStatement(parameterReference, new CodeArgumentReferenceExpression($"{parameter.Name.ToLowerCamelCase()}")));
 
@@ -393,14 +460,28 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             return codeMemberProperty;
         }
 
-        private CodeMemberMethod CreateMethod(string methodName, CodeParameterDeclarationExpressionCollection declarationExpressionCollection)
+        private CodeMemberMethod CreateMethod(string methodName, CodeParameterDeclarationExpressionCollection declarationExpressionCollection, CodeTypeReference returnType, CodeMethodReturnStatement returnStatement)
         {
             CodeMemberMethod codeMemberMethod = new CodeMemberMethod
             {
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                Name = methodName,
+                Name = methodName
             };
-            codeMemberMethod.Parameters.AddRange(declarationExpressionCollection);
+
+            if (declarationExpressionCollection != null)
+            {
+                codeMemberMethod.Parameters.AddRange(declarationExpressionCollection);
+            }
+
+            if (returnType != null)
+            {
+                codeMemberMethod.ReturnType = returnType;
+            }
+
+            if (returnStatement != null)
+            {
+                codeMemberMethod.Statements.Add(returnStatement);
+            }
             return codeMemberMethod;
         }
 
@@ -498,27 +579,42 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     }
                 case "ZigBeeKey":
                     {
-                        AddNamespaceImport(codeNamespace, ($"{_zigbeeSecurityPackage}.ZigBeeKey"));
+                        if (codeNamespace != null)
+                        {
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeeSecurityPackage}.ZigBeeKey"));
+                        }
                         return new CodeTypeReference("ZigBeeKey");
                     }
                 case "IeeeAddress":
                     {
-                        AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.IeeeAddress"));
+                        if (codeNamespace != null)
+                        {
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.IeeeAddress"));
+                        }
                         return new CodeTypeReference("IeeeAddress");
                     }
                 case "ExtendedPanId":
                     {
-                        AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ExtendedPanId"));
+                        if (codeNamespace != null)
+                        {
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ExtendedPanId"));
+                        }
                         return new CodeTypeReference("ExtendedPanId");
                     }
                 case "ZigBeeDeviceAddress":
                     {
-                        AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeDeviceAddress"));
+                        if (codeNamespace != null)
+                        {
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeDeviceAddress"));
+                        }
                         return new CodeTypeReference("ZigBeeDeviceAddress");
                     }
                 case "ZigBeeGroupAddress":
                     {
-                        AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeGroupAddress"));
+                        if (codeNamespace != null)
+                        {
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeGroupAddress"));
+                        }
                         return new CodeTypeReference("ZigBeeGroupAddress");
                     }
                 default:

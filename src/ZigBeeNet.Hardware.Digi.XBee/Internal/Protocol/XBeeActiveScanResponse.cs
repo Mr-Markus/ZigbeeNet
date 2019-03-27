@@ -76,5 +76,77 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private int _rssi;
+        
+        /// <summary>
+        /// Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetFrameId()
+        {
+            return _frameId;
+        }
+        
+        /// <summary>
+        /// Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
+        public CommandStatus GetCommandStatus()
+        {
+            return _commandStatus;
+        }
+        
+        /// <summary>
+        /// Return the asType as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetAsType()
+        {
+            return _asType;
+        }
+        
+        /// <summary>
+        /// Return the channel as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetChannel()
+        {
+            return _channel;
+        }
+        
+        /// <summary>
+        /// Return the extendedPanId as <see cref="ExtendedPanId"/>
+        /// </summary>
+        public ExtendedPanId GetExtendedPanId()
+        {
+            return _extendedPanId;
+        }
+        
+        /// <summary>
+        /// Return the allowJoin as <see cref="System.Boolean"/>
+        /// </summary>
+        public bool GetAllowJoin()
+        {
+            return _allowJoin;
+        }
+        
+        /// <summary>
+        /// Return the stackProfile as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetStackProfile()
+        {
+            return _stackProfile;
+        }
+        
+        /// <summary>
+        /// Return the lqi as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetLqi()
+        {
+            return _lqi;
+        }
+        
+        /// <summary>
+        /// Return the rssi as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetRssi()
+        {
+            return _rssi;
+        }
     }
 }

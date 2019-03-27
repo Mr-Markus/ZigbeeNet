@@ -39,5 +39,29 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private int _versionInfo;
+        
+        /// <summary>
+        /// Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetFrameId()
+        {
+            return _frameId;
+        }
+        
+        /// <summary>
+        /// Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
+        public CommandStatus GetCommandStatus()
+        {
+            return _commandStatus;
+        }
+        
+        /// <summary>
+        /// Return the versionInfo as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetVersionInfo()
+        {
+            return _versionInfo;
+        }
     }
 }

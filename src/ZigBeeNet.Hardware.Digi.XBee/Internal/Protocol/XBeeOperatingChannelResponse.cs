@@ -40,5 +40,29 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private int _channel;
+        
+        /// <summary>
+        /// Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetFrameId()
+        {
+            return _frameId;
+        }
+        
+        /// <summary>
+        /// Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
+        public CommandStatus GetCommandStatus()
+        {
+            return _commandStatus;
+        }
+        
+        /// <summary>
+        /// Return the channel as <see cref="System.Int32"/>
+        /// </summary>
+        public int GetChannel()
+        {
+            return _channel;
+        }
     }
 }

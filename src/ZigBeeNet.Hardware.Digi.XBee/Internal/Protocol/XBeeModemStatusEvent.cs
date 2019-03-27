@@ -26,5 +26,13 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///
         /// </summary>
         private ModemStatus _status;
+        
+        /// <summary>
+        /// Return the status as <see cref="ModemStatus"/>
+        /// </summary>
+        public ModemStatus GetStatus()
+        {
+            return _status;
+        }
     }
 }
