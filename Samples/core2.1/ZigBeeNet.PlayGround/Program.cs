@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Serilog;
-using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
@@ -82,14 +81,13 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNode coord = networkManager.GetNode(0);
 
-
                 Console.WriteLine("Joining enabled...");
 
-                string cmd = Console.ReadLine();
-
+                string cmd = string.Empty;
+                
                 while (cmd != "exit")
                 {
-                    Console.WriteLine(networkManager.Nodes.Count + " node(s)");
+                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
 
                     if (cmd == "join")
                     {
@@ -101,7 +99,10 @@ namespace ZigBeeNet.PlayGround
                     }
                     else if (!string.IsNullOrEmpty(cmd))
                     {
-                        Console.WriteLine("Destination Address: ");
+                        var tmp = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("Destination Address: ");
+                        Console.ForegroundColor = tmp;
                         string nwkAddr = Console.ReadLine();
 
                         if (ushort.TryParse(nwkAddr, out ushort addr))
@@ -170,7 +171,7 @@ namespace ZigBeeNet.PlayGround
                                                 await networkManager.Send(endpointAddress, new OnCommand());
 
                                             state = !state;
-                                            System.Threading.Thread.Sleep(1000);
+                                            await Task.Delay(1000);
                                         }
                                     }
                                     else if (cmd == "stress")
@@ -244,9 +245,7 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "read")
                                     {
-                                        //var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetAttribute(ZclOnOffCluster.ATTR_ONOFF);
-
-                                        var result = await ((ZclColorControlCluster)endpoint.GetInputCluster(ZclColorControlCluster.CLUSTER_ID)).Read(ZclColorControlCluster.ATTR_CURRENTY);
+                                        var result = await ((ZclElectricalMeasurementCluster)endpoint.GetInputCluster(ZclElectricalMeasurementCluster.CLUSTER_ID)).Read(ZclElectricalMeasurementCluster.ATTR_MEASUREMENTTYPE);
 
                                         if (result.IsSuccess())
                                         {
@@ -260,7 +259,7 @@ namespace ZigBeeNet.PlayGround
                                             ZclStatus statusCode = response.Records[0].Status;
                                             if (statusCode == ZclStatus.SUCCESS)
                                             {
-                                                Console.WriteLine("Cluster " + string.Format("%04X", response.ClusterId) + ", Attribute "
+                                                Console.WriteLine("Cluster " + response.ClusterId.ToString("X4") + ", Attribute "
                                                         + response.Records[0].AttributeIdentifier + ", type "
                                                         + response.Records[0].AttributeDataType + ", value: "
                                                         + response.Records[0].AttributeValue);
@@ -284,6 +283,10 @@ namespace ZigBeeNet.PlayGround
                         }
                     }
 
+                    var currentForeGroundColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write("cmd> ");
+                    Console.ForegroundColor = currentForeGroundColor;
                     cmd = Console.ReadLine();
                 }
             }

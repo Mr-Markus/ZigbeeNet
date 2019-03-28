@@ -14,10 +14,10 @@ namespace ZigBeeNet.App.Discovery
 {
     /// <summary>
     /// This class contains methods for discovering the services and features of a <see cref="ZigBeeNode">. All discovery methods
-    /// are private and the class is utilised by calling {@link #startDiscovery(Set)} with a set of
-    /// {@link #NodeDiscoveryState} for the stages wishing to be discovered or updated.
+    /// are private and the class is utilised by calling StartDiscovery() with a set of
+    /// <see cref="NodeDiscoveryState"</see> for the stages wishing to be discovered or updated.
     /// 
-    /// A single worker thread is ensured - if the thread is already active when {@link #startDiscovery(Set)} is called, the
+    /// A single worker thread is ensured - if the thread is already active when StartDiscovery() is called, the
     /// new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
     /// running, it will be started.
     /// 
@@ -26,7 +26,7 @@ namespace ZigBeeNet.App.Discovery
     /// A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
     /// supported, then this will not be issued again on subsequent requests.
     /// 
-    /// Once the discovery update is complete the {@link ZigBeeNetworkManager#updateNode(ZigBeeNode)} is called to alert
+    /// Once the discovery update is complete the ZigBeeNetworkManager#updateNode() is called to alert
     /// users.
     /// </summary>
     public class ZigBeeNodeServiceDiscoverer
@@ -635,8 +635,6 @@ namespace ZigBeeNet.App.Discovery
         ///
         /// <param name="endpointId">the endpoint id to request</param>
         /// <returns>the newly created <see cref="ZigBeeEndpoint"> for the endpoint, or null on error</returns>
-        /// @throws ExecutionException
-        /// @throws InterruptedException
         /// </summary>
         private async Task<ZigBeeEndpoint> GetSimpleDescriptor(byte endpointId)
         {
@@ -704,8 +702,8 @@ namespace ZigBeeNet.App.Discovery
 
         /// <summary>
         /// Starts service discovery for the node in order to update the mesh. This adds the
-        /// {@link NodeDiscoveryTask#NEIGHBORS} and {@link NodeDiscoveryTask#ROUTES} tasks to the task list. Note that
-        /// {@link NodeDiscoveryTask#ROUTES} is not added for end devices.
+        /// <see cref="NodeDiscoveryTask"></see> and <see cref="NodeDiscoveryTask></see> tasks to the task list. Note that
+        /// <see cref="NodeDiscoveryTask</see> is not added for end devices.
         /// </summary>
         public void UpdateMesh()
         {
