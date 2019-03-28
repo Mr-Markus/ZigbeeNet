@@ -416,8 +416,8 @@ namespace ZigBeeNet
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
-        /// <param name="panId">the new <see cref="ExtendedPanId"></param>
-        /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
+        /// <param name="panId">the new <see cref="ExtendedPanId"/></param>
+        /// <returns><see cref="ZigBeeStatus"/> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus SetZigBeeExtendedPanId(ExtendedPanId panId)
         {
@@ -430,7 +430,7 @@ namespace ZigBeeNet
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
-        /// <param name="key">the new network key as <see cref="ZigBeeKey"></param>
+        /// <param name="key">the new network key as <see cref="ZigBeeKey"/></param>
         /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key)
@@ -441,7 +441,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Gets the current network key used by the system
         ///
-        /// <returns>the current network <see cref="ZigBeeKey"></returns>
+        /// <returns>the current network <see cref="ZigBeeKey"/></returns>
         /// </summary>
         public ZigBeeKey ZigBeeNetworkKey
         {
@@ -457,7 +457,7 @@ namespace ZigBeeNet
         /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
         /// call.
         ///
-        /// <param name="key">the new link key as <see cref="ZigBeeKey"></param>
+        /// <param name="key">the new link key as <see cref="ZigBeeKey"/></param>
         /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus SetZigBeeLinkKey(ZigBeeKey key)
@@ -466,11 +466,11 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Adds an installation key for the specified address. The <see cref="ZigBeeKey"> should have an address associated with
+        /// Adds an installation key for the specified address. The <see cref="ZigBeeKey"/> should have an address associated with
         /// it.
         ///
-        /// <param name="key">the install key as <see cref="ZigBeeKey"> to be used. The key must contain a partner address.</param>
-        /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
+        /// <param name="key">the install key as <see cref="ZigBeeKey"/> to be used. The key must contain a partner address.</param>
+        /// <returns><see cref="ZigBeeStatus"/> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus SetZigBeeInstallKey(ZigBeeKey key)
         {
@@ -489,9 +489,8 @@ namespace ZigBeeNet
         /// <summary>
         /// Starts up ZigBee manager components.
         /// 
-        ///
-        /// <param name="reinitialize">true if the provider is to reinitialise the network with the parameters configured since the</param>
-        ///            {@link #initialize} method was called.
+        /// <param name="reinitialize">true if the provider is to reinitialise the network with the parameters configured since the <see cref="Initialize"/> method was called.</param>
+        ///            
         /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus Startup(bool reinitialize)
@@ -548,9 +547,9 @@ namespace ZigBeeNet
         /// <summary>
         /// Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
         ///
-        /// <param name="runnableTask">the <see cref="Runnable"> to execute</param>
+        /// <param name="runnableTask">the <see cref="Runnable"/> to execute</param>
         /// <param name="delay">the delay in milliseconds before the task will be executed</param>
-        /// <returns>the <see cref="ScheduledFuture"> for the scheduled task</returns>
+        /// <returns>the <see cref="Task"/> for the scheduled task</returns>
         /// </summary>
         public async Task ScheduleTask(Task runnableTask, int delay, CancellationTokenSource cancellation)
         {
@@ -787,10 +786,10 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Add a <see cref="IZigBeeAnnounceListener"> that will be notified whenever a new device is detected
+        /// Add a <see cref="IZigBeeAnnounceListener"/> that will be notified whenever a new device is detected
         /// on the network.
         ///
-        /// <param name="statusListener">the new <see cref="IZigBeeAnnounceListener"> to add</param>
+        /// <param name="statusListener">the new <see cref="IZigBeeAnnounceListener"/> to add</param>
         /// </summary>
         public void AddAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
@@ -798,9 +797,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Remove a <see cref="IZigBeeAnnounceListener">
+        /// Remove a <see cref="IZigBeeAnnounceListener"/>
         ///
-        /// <param name="statusListener">the new <see cref="IZigBeeAnnounceListener"> to remove</param>
+        /// <param name="statusListener">the new <see cref="IZigBeeAnnounceListener"/> to remove</param>
         /// </summary>
         public void RemoveAnnounceListener(IZigBeeAnnounceListener statusListener)
         {
@@ -856,9 +855,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Adds a <see cref="IZigBeeNetworkStateListener"> to receive notifications when the network state changes.
+        /// Adds a <see cref="IZigBeeNetworkStateListener"/> to receive notifications when the network state changes.
         ///
-        /// <param name="stateListener">the <see cref="IZigBeeNetworkStateListener"> to receive the notifications</param>
+        /// <param name="stateListener">the <see cref="IZigBeeNetworkStateListener"/> to receive the notifications</param>
         /// </summary>
         public void AddNetworkStateListener(IZigBeeNetworkStateListener stateListener)
         {
@@ -868,7 +867,7 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Removes a <see cref="IZigBeeNetworkStateListener">.
+        /// Removes a <see cref="IZigBeeNetworkStateListener"/>.
         ///
         /// <param name="stateListener">the <see cref="IZigBeeNetworkStateListener"> to stop receiving the notifications</param>
         /// </summary>
@@ -962,10 +961,10 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Sends <see cref="ZclCommand"> command to <see cref="ZigBeeAddress">.
+        /// Sends <see cref="ZclCommand"/> command to <see cref="ZigBeeAddress"/>.
         ///
         /// <param name="destination">the destination</param>
-        /// <param name="command">the <see cref="ZclCommand"></param>
+        /// <param name="command">the <see cref="ZclCommand"/></param>
         /// <returns>the command result future</returns>
         /// </summary>
         public async Task<CommandResult> Send(IZigBeeAddress destination, ZclCommand command)
@@ -985,8 +984,8 @@ namespace ZigBeeNet
         /// <summary>
         /// Broadcasts command i.e. does not wait for response.
         ///
-        /// <param name="command">the <see cref="ZigBeeCommand"></param>
-        /// <returns>the <see cref="CommandResult"> future.</returns>
+        /// <param name="command">the <see cref="ZigBeeCommand"/></param>
+        /// <returns>the <see cref="CommandResult"/> <see cref="Task"/>.</returns>
         /// </summary>
         private Task<CommandResult> Broadcast(ZigBeeCommand command)
         {
@@ -1010,9 +1009,9 @@ namespace ZigBeeNet
         /// Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
         /// since it allows devices to join the network without the installer knowing.
         ///
-        /// <param name="duration">sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a</param>
-        ///            value of 255 is not permitted and will be ignored.
-        /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
+        /// <param name="duration">sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a value of 255 is not permitted and will be ignored.</param>
+        ///            
+        /// <returns><see cref="ZigBeeStatus"/> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus PermitJoin(byte duration)
         {
@@ -1025,10 +1024,10 @@ namespace ZigBeeNet
         /// Devices can only join the network when joining is enabled. It is not advised to leave joining enabled permanently
         /// since it allows devices to join the network without the installer knowing.
         ///
-        /// <param name="destination">the <see cref="ZigBeeEndpointAddress"> to send the join request to</param>
-        /// <param name="duration">sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a</param>
-        ///            value of 255 is not permitted and will be ignored.
-        /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
+        /// <param name="destination">the <see cref="ZigBeeEndpointAddress"/> to send the join request to</param>
+        /// <param name="duration">sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a value of 255 is not permitted and will be ignored.</param>
+        ///            
+        /// <returns><see cref="ZigBeeStatus"/> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus PermitJoin(ZigBeeEndpointAddress destination, byte duration)
         {
@@ -1070,9 +1069,9 @@ namespace ZigBeeNet
         /// <summary>
         /// Sends a ZDO Leave Request to a device requesting that an end device leave the network.
         ///
-        /// <param name="destinationAddress">the network address to send the request to - this is the device parent or the the</param>
-        ///            device we want to leave.
-        /// <param name="leaveAddress">the <see cref="IeeeAddress"> of the end device we want to leave the network</param>
+        /// <param name="destinationAddress">the network address to send the request to - this is the device parent or the the device we want to leave.</param>
+        ///            
+        /// <param name="leaveAddress">the <see cref="IeeeAddress"/> of the end device we want to leave the network</param>
         /// </summary>
         public void Leave(ushort destinationAddress, IeeeAddress leaveAddress)
         {
@@ -1161,9 +1160,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Adds a <see cref="IZigBeeNetworkNodeListener"> that will be notified when node information changes
+        /// Adds a <see cref="IZigBeeNetworkNodeListener"/> that will be notified when node information changes
         ///
-        /// <param name="networkNodeListener">the <see cref="IZigBeeNetworkNodeListener"> to add</param>
+        /// <param name="networkNodeListener">the <see cref="IZigBeeNetworkNodeListener"/> to add</param>
         /// </summary>
         public void AddNetworkNodeListener(IZigBeeNetworkNodeListener networkNodeListener)
         {
@@ -1180,7 +1179,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Removes a <see cref="IZigBeeNetworkNodeListener"> that will be notified when node information changes
         ///
-        /// <param name="networkNodeListener">the <see cref="IZigBeeNetworkNodeListener"> to remove</param>
+        /// <param name="networkNodeListener">the <see cref="IZigBeeNetworkNodeListener"/> to remove</param>
         /// </summary>
         public void RemoveNetworkNodeListener(IZigBeeNetworkNodeListener networkNodeListener)
         {
@@ -1191,10 +1190,10 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Starts a rediscovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
+        /// Starts a rediscovery on a node. This will send a <see cref="NetworkAddressRequest"/> as a broadcast and will receive
         /// the response to trigger a full discovery.
         ///
-        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to rediscover</param>
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"/> of the node to rediscover</param>
         /// </summary>
         public void RediscoverNode(IeeeAddress address)
         {
@@ -1210,8 +1209,8 @@ namespace ZigBeeNet
         /// <summary>
         /// Gets a node given the 16 bit network address
         ///
-        /// <param name="networkAddress">the 16 bit network address as <see cref="Integer"></param>
-        /// <returns>the <see cref="ZigBeeNode"> or null if the node with the requested network address was not found</returns>
+        /// <param name="networkAddress">the 16 bit network address as <see cref="ushort"/></param>
+        /// <returns>the <see cref="ZigBeeNode"/> or null if the node with the requested network address was not found</returns>
         /// </summary>
         public ZigBeeNode GetNode(ushort networkAddress)
         {
@@ -1229,10 +1228,10 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Gets a node given the <see cref="IeeeAddress">
+        /// Gets a node given the <see cref="IeeeAddress"/>
         ///
-        /// <param name="ieeeAddress">the <see cref="IeeeAddress"></param>
-        /// <returns>the <see cref="ZigBeeNode"> or null if the node was not found</returns>
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"/></param>
+        /// <returns>the <see cref="ZigBeeNode"/> or null if the node was not found</returns>
         /// </summary>
         public ZigBeeNode GetNode(IeeeAddress ieeeAddress)
         {
@@ -1243,9 +1242,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Removes a <see cref="ZigBeeNode"> from the network
+        /// Removes a <see cref="ZigBeeNode"/> from the network
         ///
-        /// <param name="node">the <see cref="ZigBeeNode"> to remove - must not be null</param>
+        /// <param name="node">the <see cref="ZigBeeNode"/> to remove - must not be null</param>
         /// </summary>
         public void RemoveNode(ZigBeeNode node)
         {
@@ -1293,9 +1292,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Adds a <see cref="ZigBeeNode"> to the network
+        /// Adds a <see cref="ZigBeeNode"/> to the network
         ///
-        /// <param name="node">the <see cref="ZigBeeNode"> to add</param>
+        /// <param name="node">the <see cref="ZigBeeNode"/> to add</param>
         /// </summary>
         public void AddNode(ZigBeeNode node)
         {
@@ -1344,9 +1343,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Update a <see cref="ZigBeeNode"> within the network
+        /// Update a <see cref="ZigBeeNode"/> within the network
         ///
-        /// <param name="node">the <see cref="ZigBeeNode"> to update</param>
+        /// <param name="node">the <see cref="ZigBeeNode"/> to update</param>
         /// </summary>
         public void UpdateNode(ZigBeeNode node)
         {
@@ -1410,7 +1409,7 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-        /// Adds a cluster to the list of clusters we will respond to with the <see cref="MatchDescriptorRequest">. Adding a
+        /// Adds a cluster to the list of clusters we will respond to with the <see cref="MatchDescriptorRequest"/>. Adding a
         /// cluster here is only required in order to respond to this request. Typically the application should provide
         /// further support for such clusters.
         ///
@@ -1430,7 +1429,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Adds a functional extension to the network.
         ///
-        /// <param name="extension">the new <see cref="ZigBeeNetworkExtension"></param>
+        /// <param name="extension">the new <see cref="ZigBeeNetworkExtension"/></param>
         /// </summary>
         public void AddExtension(IZigBeeNetworkExtension extension)
         {
@@ -1450,9 +1449,9 @@ namespace ZigBeeNet
         /// <summary>
         /// Gets a functional extension that has been registered with the network.
         ///
-        /// <param name="<T>"><see cref="ZigBeeNetworkExtension"></param>
-        /// <param name="requestedExtension">the <see cref="ZigBeeNetworkExtension"> to get</param>
-        /// <returns>the requested <see cref="ZigBeeNetworkExtension"> if it exists, or null</returns>
+        /// <param name="<T>"><see cref="ZigBeeNetworkExtension"/></param>
+        /// <param name="requestedExtension">the <see cref="ZigBeeNetworkExtension"/> to get</param>
+        /// <returns>the requested <see cref="ZigBeeNetworkExtension"/> if it exists, or null</returns>
         /// </summary>
         public IZigBeeNetworkExtension GetExtension(Type requestedExtension)
         {
