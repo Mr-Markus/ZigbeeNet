@@ -22,7 +22,7 @@ namespace ZigBeeNet.App.Discovery
 
 
         /// <summary>
-        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer">. The discover is
+        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is
         /// responsible for monitoring the network for new devices and the initial
         /// interrogation of their capabilities.
         /// </summary>
@@ -188,10 +188,10 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
+        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"/> as a broadcast and will receive
         /// the response to trigger a full discovery.
         ///
-        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to discove</param>
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"/> of the node to discove</param>
         /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {

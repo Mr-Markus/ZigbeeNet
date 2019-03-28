@@ -13,14 +13,13 @@ using ZigBeeNet.ZDO.Command;
 namespace ZigBeeNet.App
 {
     /// <summary>
-    /// <see cref="ZigBeeNetworkDiscoverer"> is used to discover devices in the network.
-    /// <p>
+    /// <see cref="ZigBeeNetworkDiscoverer"/> is used to discover devices in the network.
+    /// 
     /// Notifications will be sent to the listeners when nodes and endpoints are discovered.
     /// Device listeners are always notified first as each endpoint discovery completes.
     /// Once a node is fully discovered and all its endpoints are included into the network,
     /// we can notify the node listeners.
     ///
-    /// @author Chris Jackson
     /// </summary>
     public class ZigBeeNetworkDiscoverer : IZigBeeCommandListener, IZigBeeAnnounceListener
     {
@@ -187,7 +186,7 @@ namespace ZigBeeNet.App
         /// <summary>
         /// Starts a discovery on a node given the network address.
         ///
-        ///  @param networkAddress the network address of the node to discover
+        /// <param name="requeryPeriod">networkAddress the network address of the node to discover</param>
         /// </summary>
         public void RediscoverNode(ushort networkAddress)
         {
@@ -256,10 +255,10 @@ namespace ZigBeeNet.App
         }
 
         /// <summary>
-        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"> as a broadcast and will receive
+        /// Starts a discovery on a node. This will send a <see cref="NetworkAddressRequest"/> as a broadcast and will receive
         /// the response to trigger a full discovery.
         ///
-        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node to discover</param>
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"/> of the node to discover</param>
         /// </summary>
         public void RediscoverNode(IeeeAddress ieeeAddress)
         {
@@ -324,7 +323,7 @@ namespace ZigBeeNet.App
         /// Performs the top level node discovery. This discovers node level attributes such as the endpoints and
         /// descriptors.
         ///
-        /// <param name="networkAddress">the network address to start a discovery on</param>
+        /// <param name="nodeNetworkAddress">the network address to start a discovery on</param>
         /// </summary>
         private void StartNodeDiscovery(ushort nodeNetworkAddress)
         {
@@ -399,13 +398,11 @@ namespace ZigBeeNet.App
         }
 
         /**
-     * Get the associated nodes for this address, and start a discovery of the associated nodes.
-     *
-     * @param networkAddress the network address of the node
-     * @return true if the message was processed ok
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
+        * Get the associated nodes for this address, and start a discovery of the associated nodes.
+        *
+        * <param name="networkAddress">networkAddress the network address of the node</param>
+        * <returns>true if the message was processed ok</returns>
+        */
         private async Task<bool> GetAssociatedNodes(ushort networkAddress)
         {
             int startIndex = 0;

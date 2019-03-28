@@ -13,15 +13,15 @@ using ZigBeeNet.ZDO.Field;
 namespace ZigBeeNet.App.Discovery
 {
     /// <summary>
-    /// This class contains methods for discovering the services and features of a <see cref="ZigBeeNode">. All discovery methods
+    /// This class contains methods for discovering the services and features of a <see cref="ZigBeeNode"/>. All discovery methods
     /// are private and the class is utilised by calling StartDiscovery() with a set of
-    /// <see cref="NodeDiscoveryState"</see> for the stages wishing to be discovered or updated.
+    /// <see cref="NodeDiscoveryState"/> for the stages wishing to be discovered or updated.
     /// 
     /// A single worker thread is ensured - if the thread is already active when StartDiscovery() is called, the
     /// new tasks will be added to the existing task queue if they are not already in the queue. If the worker thread is not
     /// running, it will be started.
     /// 
-    /// This class provides a centralised helper, used for discovering and updating information about the <see cref="ZigBeeNode">
+    /// This class provides a centralised helper, used for discovering and updating information about the <see cref="ZigBeeNode"/>
     /// 
     /// A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
     /// supported, then this will not be issued again on subsequent requests.
@@ -37,7 +37,7 @@ namespace ZigBeeNet.App.Discovery
         private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
 
         /// <summary>
-        /// The <see cref="ZigBeeNetworkManager">.
+        /// The <see cref="ZigBeeNetworkManager"/>.
         /// </summary>
         public ZigBeeNetworkManager NetworkManager { get; private set; }
 
@@ -47,7 +47,7 @@ namespace ZigBeeNet.App.Discovery
         public int MaxBackoff { get; set; } = DEFAULT_MAX_BACKOFF;
 
         /// <summary>
-        /// The <see cref="ZigBeeNode">.
+        /// The <see cref="ZigBeeNode"/>.
         /// </summary>
         public ZigBeeNode Node { get; set; }
 
@@ -72,20 +72,20 @@ namespace ZigBeeNet.App.Discovery
         private readonly int _retryPeriod = DEFAULT_RETRY_PERIOD;
 
         /// <summary>
-        /// Flag to indicate if the device supports the <see cref="ManagementLqiRequest">
-        /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
+        /// Flag to indicate if the device supports the <see cref="ManagementLqiRequest"/>
+        /// This is updated to false if the device responds with <see cref="ZdoStatus.NOT_SUPPORTED"/>
         /// </summary>
         private bool _supportsManagementLqi = true;
 
         /// <summary>
-        /// Flag to indicate if the device supports the <see cref="ManagementRoutingRequest">.
-        /// This is updated to false if the device responds with {@link ZdoStatus#NOT_SUPPORTED}
+        /// Flag to indicate if the device supports the <see cref="ManagementRoutingRequest"/>.
+        /// This is updated to false if the device responds with <see cref="ZdoStatus.NOT_SUPPORTED"/>
         /// </summary>
         private bool _supportsManagementRouting = true;
 
-        ///// <summary>
-        // /// The task being run
-        // /// </summary>
+        /// <summary>
+        /// The task being run
+        /// </summary>
         //private Task _futureTask;
 
         private CancellationTokenSource _cancellationTokenSource;
@@ -123,8 +123,8 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// Creates the discovery class
         ///
-        /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> for the network</param>
-        /// <param name="node">the <see cref="ZigBeeNode"> whose services we want to discover</param>
+        /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"/> for the network</param>
+        /// <param name="node">the <see cref="ZigBeeNode"/> whose services we want to discover</param>
         /// </summary>
         public ZigBeeNodeServiceDiscoverer(ZigBeeNetworkManager networkManager, ZigBeeNode node)
         {
@@ -144,7 +144,7 @@ namespace ZigBeeNet.App.Discovery
         /// 
         /// If the worker thread is not running, it will be started.
         ///
-        /// <param name="newTasks">a set of <see cref="NodeDiscoveryTask">s to be performed</param>
+        /// <param name="newTasks">a set of <see cref="NodeDiscoveryTask"/>s to be performed</param>
         /// </summary>
         private async Task StartDiscoveryAsync(List<NodeDiscoveryTask> newTasks)
         {
