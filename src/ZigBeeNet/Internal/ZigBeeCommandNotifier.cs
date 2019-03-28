@@ -36,22 +36,37 @@ namespace ZigBeeNet.Internal
 
         public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            var tmp = new List<IZigBeeCommandListener>(_commandListeners);
+            /*
+             * https://stackoverflow.com/questions/24172232/is-list-copy-thread-safe
+             * 
+             * List() with the following ctor calls internally CopyTo()
+             * so either we have to lock the instantiation of the List or the enumeration
+             */
 
-            foreach (IZigBeeCommandListener commandListener in tmp)
+            /*
+            lock (_lock)
             {
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        commandListener.CommandReceived(command);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.ErrorException("Error during the notification of commandListeners.", ex);
-                    }
+                var tmp = new List<IZigBeeCommandListener>(_commandListeners);
+            }
+            */
 
-                });
+            // TODO: Consider using a .net build in Concurrent Collection
+            lock (_lock)
+            {
+                foreach (IZigBeeCommandListener commandListener in _commandListeners)
+                {
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            commandListener.CommandReceived(command);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.ErrorException("Error during the notification of commandListeners.", ex);
+                        }
+                    });
+                }
             }
         }
     }
