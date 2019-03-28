@@ -9,6 +9,7 @@ namespace ZigBeeNet.Internal
     public class ZigBeeCommandNotifier
     {
         private readonly ILog _logger = LogProvider.For<ZigBeeCommandNotifier>();
+        private readonly object _lock = new object();
 
         private List<IZigBeeCommandListener> _commandListeners;
 
@@ -19,7 +20,7 @@ namespace ZigBeeNet.Internal
 
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (commandListener)
+            lock (_lock)
             {
                 _commandListeners.Add(commandListener);
             }
@@ -27,7 +28,7 @@ namespace ZigBeeNet.Internal
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (commandListener)
+            lock (_lock)
             {
                 _commandListeners.Remove(commandListener);
             }
@@ -35,8 +36,9 @@ namespace ZigBeeNet.Internal
 
         public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            // Enumeration is thread-safe in ConcurrentBag http://dotnetpattern.com/csharp-concurrentbag
-            foreach (IZigBeeCommandListener commandListener in _commandListeners)
+            var tmp = new List<IZigBeeCommandListener>(_commandListeners);
+
+            foreach (IZigBeeCommandListener commandListener in tmp)
             {
                 Task.Run(() =>
                 {
@@ -44,11 +46,11 @@ namespace ZigBeeNet.Internal
                     {
                         commandListener.CommandReceived(command);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         _logger.ErrorException("Error during the notification of commandListeners.", ex);
                     }
-                    
+
                 });
             }
         }
