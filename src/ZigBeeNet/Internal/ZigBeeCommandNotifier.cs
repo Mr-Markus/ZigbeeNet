@@ -39,7 +39,7 @@ namespace ZigBeeNet.Internal
             /*
              * https://stackoverflow.com/questions/24172232/is-list-copy-thread-safe
              * 
-             * List() with the following ctor calls internally CopyTo()
+             * List() with the following ctor calls internally CopyTo() which is not threadsafe
              * so either we have to lock the instantiation of the List or the enumeration
              */
 
