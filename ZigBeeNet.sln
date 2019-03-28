@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard2.0", "netstanda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.2", "core2.2", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.1\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.2\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.core2.1", "targets\ZigBeeNet.core2.1\ZigBeeNet.core2.1.csproj", "{4831C06C-DFA7-45B1-878C-F8FE7C8E636D}"
 EndProject
