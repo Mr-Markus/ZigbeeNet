@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASWD
     /// <summary>
     /// Start Warning Command value object class.
     /// <para>
-    /// Cluster: IAS WD. Command is sentTO the server.
+    /// Cluster: IAS WD. Command is sent TO the server.
     /// This command is a specific command used for the IAS WD cluster.
     ///
     /// This command starts the WD operation. The WD alerts the surrounding area by

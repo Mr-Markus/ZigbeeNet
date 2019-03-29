@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
     /// <summary>
     /// Get Relay Status Log value object class.
     /// <para>
-    /// Cluster: Thermostat. Command is sentTO the server.
+    /// Cluster: Thermostat. Command is sent TO the server.
     /// This command is a specific command used for the Thermostat cluster.
     ///
     /// The Get Relay Status Log command is used to query the thermostat internal relay status log. This command has no payload.

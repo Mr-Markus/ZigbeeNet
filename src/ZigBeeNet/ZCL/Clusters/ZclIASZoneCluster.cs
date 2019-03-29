@@ -516,8 +516,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Zone Enroll Response
         ///
-        /// <param name="enrollResponseCode" <see cref="byte" Enroll response code
-        /// <param name="zoneID" <see cref="byte" Zone ID
+        /// <param name="enrollResponseCode"><see cref="byte"/> Enroll response code</param>
+        /// <param name="zoneID"><see cref="byte"/> Zone ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ZoneEnrollResponse(byte enrollResponseCode, byte zoneID)
@@ -570,8 +570,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Some types of IAS Zone servers that MAY benefit from this command are: motion sensors and fire sensor/smoke alarm listeners (i.e., a device
         /// that listens for a non-communicating fire sensor to alarm and communicates this to the IAS CIE).
         ///
-        /// <param name="testModeDuration" <see cref="byte" Test Mode Duration
-        /// <param name="currentZoneSensitivityLevel" <see cref="byte" Current Zone Sensitivity Level
+        /// <param name="testModeDuration"><see cref="byte"/> Test Mode Duration</param>
+        /// <param name="currentZoneSensitivityLevel"><see cref="byte"/> Current Zone Sensitivity Level</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> InitiateTestModeCommand(byte testModeDuration, byte currentZoneSensitivityLevel)
@@ -588,8 +588,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Zone Status Change Notification Command
         ///
-        /// <param name="zoneStatus" <see cref="ushort" Zone Status
-        /// <param name="extendedStatus" <see cref="byte" Extended Status
+        /// <param name="zoneStatus"><see cref="ushort"/> Zone Status</param>
+        /// <param name="extendedStatus"><see cref="byte"/> Extended Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ZoneStatusChangeNotificationCommand(ushort zoneStatus, byte extendedStatus)
@@ -610,8 +610,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// to be  enrolled as an active  alarm device. It  must do this immediately it has joined the network
         /// (during commissioning).
         ///
-        /// <param name="zoneType" <see cref="ushort" Zone Type
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer Code
+        /// <param name="zoneType"><see cref="ushort"/> Zone Type</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer Code</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ZoneEnrollRequestCommand(ushort zoneType, ushort manufacturerCode)

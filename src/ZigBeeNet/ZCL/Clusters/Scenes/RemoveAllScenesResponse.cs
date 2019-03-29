@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
     /// <summary>
     /// Remove All Scenes Response value object class.
     /// <para>
-    /// Cluster: Scenes. Command is sentFROM the server.
+    /// Cluster: Scenes. Command is sent FROM the server.
     /// This command is a specific command used for the Scenes cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

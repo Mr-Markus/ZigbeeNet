@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
     /// <summary>
     /// Remove All Scenes Command value object class.
     /// <para>
-    /// Cluster: Scenes. Command is sentTO the server.
+    /// Cluster: Scenes. Command is sent TO the server.
     /// This command is a specific command used for the Scenes cluster.
     ///
     /// The Remove All Scenes may be addressed to a single device or to a group.

@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Get Zone ID Map Response value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentFROM the server.
+    /// Cluster: IAS ACE. Command is sent FROM the server.
     /// This command is a specific command used for the IAS ACE cluster.
     ///
     /// The 16 fields of the payload indicate whether each of the Zone IDs from 0 to 0xff is allocated or not. If bit n

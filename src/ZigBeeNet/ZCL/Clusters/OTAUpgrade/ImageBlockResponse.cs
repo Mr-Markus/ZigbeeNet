@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
     /// <summary>
     /// Image Block Response value object class.
     /// <para>
-    /// Cluster: OTA Upgrade. Command is sentFROM the server.
+    /// Cluster: OTA Upgrade. Command is sent FROM the server.
     /// This command is a specific command used for the OTA Upgrade cluster.
     ///
     /// Upon receipt of an Image Block Request command the server shall generate an Image Block Response.

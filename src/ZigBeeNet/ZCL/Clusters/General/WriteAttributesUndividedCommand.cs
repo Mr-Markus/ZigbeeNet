@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /// <summary>
     /// Write Attributes Undivided Command value object class.
     /// <para>
-    /// Cluster: General. Command is sentTO the server.
+    /// Cluster: General. Command is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
     /// The write attributes undivided command is generated when a device wishes to

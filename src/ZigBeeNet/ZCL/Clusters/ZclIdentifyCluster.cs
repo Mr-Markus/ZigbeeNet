@@ -170,7 +170,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The identify command starts or stops the receiving device identifying itself.
         ///
-        /// <param name="identifyTime" <see cref="ushort" Identify Time
+        /// <param name="identifyTime"><see cref="ushort"/> Identify Time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> IdentifyCommand(ushort identifyTime)
@@ -201,7 +201,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The identify query response command is generated in response to receiving an
         /// Identify Query command in the case that the device is currently identifying itself.
         ///
-        /// <param name="identifyTime" <see cref="ushort" Identify Time
+        /// <param name="identifyTime"><see cref="ushort"/> Identify Time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> IdentifyQueryResponse(ushort identifyTime)

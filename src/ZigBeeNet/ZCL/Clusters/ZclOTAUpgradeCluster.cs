@@ -636,11 +636,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// notify all clients disregard of their manufacturers, image types or file versions. Query jitter is needed
         /// to protect the server from being flooded with clients’ queries for next image.
         ///
-        /// <param name="payloadType" <see cref="byte" Payload type
-        /// <param name="queryJitter" <see cref="byte" Query jitter
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="newFileVersion" <see cref="uint" New File Version
+        /// <param name="payloadType"><see cref="byte"/> Payload type</param>
+        /// <param name="queryJitter"><see cref="byte"/> Query jitter</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="newFileVersion"><see cref="uint"/> New File Version</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ImageNotifyCommand(byte payloadType, byte queryJitter, ushort manufacturerCode, ushort imageType, uint newFileVersion)
@@ -674,11 +674,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// policy dictates. If client’s hardware version is included in the command, the server shall examine the
         /// value against the minimum and maximum hardware versions included in the OTA file header.
         ///
-        /// <param name="fieldControl" <see cref="byte" Field control
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File version
-        /// <param name="hardwareVersion" <see cref="ushort" Hardware version
+        /// <param name="fieldControl"><see cref="byte"/> Field control</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File version</param>
+        /// <param name="hardwareVersion"><see cref="ushort"/> Hardware version</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> QueryNextImageCommand(byte fieldControl, ushort manufacturerCode, ushort imageType, uint fileVersion, ushort hardwareVersion)
@@ -713,14 +713,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the next Image Block Request message. A client may delay its next Image Block Requests longer than
         /// its BlockRequestDelay attribute.
         ///
-        /// <param name="fieldControl" <see cref="byte" Field control
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File version
-        /// <param name="fileOffset" <see cref="uint" File offset
-        /// <param name="maximumDataSize" <see cref="byte" Maximum data size
-        /// <param name="requestNodeAddress" <see cref="IeeeAddress" Request node address
-        /// <param name="blockRequestDelay" <see cref="ushort" BlockRequestDelay
+        /// <param name="fieldControl"><see cref="byte"/> Field control</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File version</param>
+        /// <param name="fileOffset"><see cref="uint"/> File offset</param>
+        /// <param name="maximumDataSize"><see cref="byte"/> Maximum data size</param>
+        /// <param name="requestNodeAddress"><see cref="IeeeAddress"/> Request node address</param>
+        /// <param name="blockRequestDelay"><see cref="ushort"/> BlockRequestDelay</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ImageBlockCommand(byte fieldControl, ushort manufacturerCode, ushort imageType, uint fileVersion, uint fileOffset, byte maximumDataSize, IeeeAddress requestNodeAddress, ushort blockRequestDelay)
@@ -759,15 +759,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Request, the client may choose to request the missing block of data using Image Block Request
         /// command, instead of requesting the whole page again.
         ///
-        /// <param name="fieldControl" <see cref="byte" Field control
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File version
-        /// <param name="fileOffset" <see cref="uint" File offset
-        /// <param name="maximumDataSize" <see cref="byte" Maximum data size
-        /// <param name="pageSize" <see cref="ushort" Page size
-        /// <param name="responseSpacing" <see cref="ushort" Response spacing
-        /// <param name="requestNodeAddress" <see cref="IeeeAddress" Request node address
+        /// <param name="fieldControl"><see cref="byte"/> Field control</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File version</param>
+        /// <param name="fileOffset"><see cref="uint"/> File offset</param>
+        /// <param name="maximumDataSize"><see cref="byte"/> Maximum data size</param>
+        /// <param name="pageSize"><see cref="ushort"/> Page size</param>
+        /// <param name="responseSpacing"><see cref="ushort"/> Response spacing</param>
+        /// <param name="requestNodeAddress"><see cref="IeeeAddress"/> Request node address</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ImagePageCommand(byte fieldControl, ushort manufacturerCode, ushort imageType, uint fileVersion, uint fileOffset, byte maximumDataSize, ushort pageSize, ushort responseSpacing, IeeeAddress requestNodeAddress)
@@ -810,10 +810,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Upgrade End Request with status of ABORT at anytime during the download process. The client shall
         /// then try to reinitiate the download process again at a later time.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> UpgradeEndCommand(ZclStatus status, ushort manufacturerCode, ushort imageType, uint fileVersion)
@@ -839,11 +839,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// one example is during upgrading from SE 1.1 to 2.0 where the client may have already obtained new
         /// SE 2.0 image and now needs new SE 2.0 security credential data.
         ///
-        /// <param name="requestNodeAddress" <see cref="IeeeAddress" Request node address
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
-        /// <param name="zigbeeStackVersion" <see cref="ushort" Zigbee Stack Version
+        /// <param name="requestNodeAddress"><see cref="IeeeAddress"/> Request node address</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
+        /// <param name="zigbeeStackVersion"><see cref="ushort"/> Zigbee Stack Version</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> QuerySpecificFileCommand(IeeeAddress requestNodeAddress, ushort manufacturerCode, ushort imageType, uint fileVersion, ushort zigbeeStackVersion)
@@ -877,11 +877,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// case, the client may perform discovery again to find another upgrade server. The client may implement
         /// an intelligence to avoid querying the same unauthorized server.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
-        /// <param name="imageSize" <see cref="uint" Image Size
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
+        /// <param name="imageSize"><see cref="uint"/> Image Size</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> QueryNextImageResponse(ZclStatus status, ushort manufacturerCode, ushort imageType, uint fileVersion, uint imageSize)
@@ -920,12 +920,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// example, the client is five hops away), the largest possible data size that the server can send to the
         /// client shall be smaller than 100 bytes.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
-        /// <param name="fileOffset" <see cref="uint" File offset
-        /// <param name="imageData" <see cref="ByteArray" Image Data
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
+        /// <param name="fileOffset"><see cref="uint"/> File offset</param>
+        /// <param name="imageData"><see cref="ByteArray"/> Image Data</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ImageBlockResponse(ZclStatus status, ushort manufacturerCode, ushort imageType, uint fileVersion, uint fileOffset, ByteArray imageData)
@@ -959,11 +959,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// indicating a single client device or multiple client devices shall switch to using their new images. The
         /// command may not be reliably received by sleepy devices if it is sent unsolicited.
         ///
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
-        /// <param name="currentTime" <see cref="uint" Current Time
-        /// <param name="upgradeTime" <see cref="uint" Upgrade Time
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
+        /// <param name="currentTime"><see cref="uint"/> Current Time</param>
+        /// <param name="upgradeTime"><see cref="uint"/> Upgrade Time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> UpgradeEndResponse(ushort manufacturerCode, ushort imageType, uint fileVersion, uint currentTime, uint upgradeTime)
@@ -993,11 +993,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// specific file available for the client. A status of NOT_AUTHORIZED indicates the server is not
         /// authorized to send the file to the client.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="manufacturerCode" <see cref="ushort" Manufacturer code
-        /// <param name="imageType" <see cref="ushort" Image type
-        /// <param name="fileVersion" <see cref="uint" File Version
-        /// <param name="imageSize" <see cref="uint" Image Size
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="manufacturerCode"><see cref="ushort"/> Manufacturer code</param>
+        /// <param name="imageType"><see cref="ushort"/> Image type</param>
+        /// <param name="fileVersion"><see cref="uint"/> File Version</param>
+        /// <param name="imageSize"><see cref="uint"/> Image Size</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> QuerySpecificFileResponse(ZclStatus status, ushort manufacturerCode, ushort imageType, uint fileVersion, uint imageSize)

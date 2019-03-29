@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Identify
     /// <summary>
     /// Identify Query Response value object class.
     /// <para>
-    /// Cluster: Identify. Command is sentFROM the server.
+    /// Cluster: Identify. Command is sent FROM the server.
     /// This command is a specific command used for the Identify cluster.
     ///
     /// The identify query response command is generated in response to receiving an

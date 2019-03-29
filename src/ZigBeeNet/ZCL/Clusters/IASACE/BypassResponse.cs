@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Bypass Response value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentFROM the server.
+    /// Cluster: IAS ACE. Command is sent FROM the server.
     /// This command is a specific command used for the IAS ACE cluster.
     ///
     /// Provides the response of the security panel to the request from the IAS ACE client to bypass zones via a Bypass command.

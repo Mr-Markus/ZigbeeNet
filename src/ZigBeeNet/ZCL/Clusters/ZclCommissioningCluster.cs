@@ -53,9 +53,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Restart Device Command
         ///
-        /// <param name="option" <see cref="byte" Option
-        /// <param name="delay" <see cref="byte" Delay
-        /// <param name="jitter" <see cref="byte" Jitter
+        /// <param name="option"><see cref="byte"/> Option</param>
+        /// <param name="delay"><see cref="byte"/> Delay</param>
+        /// <param name="jitter"><see cref="byte"/> Jitter</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RestartDeviceCommand(byte option, byte delay, byte jitter)
@@ -73,8 +73,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Save Startup Parameters Command
         ///
-        /// <param name="option" <see cref="byte" Option
-        /// <param name="index" <see cref="byte" Index
+        /// <param name="option"><see cref="byte"/> Option</param>
+        /// <param name="index"><see cref="byte"/> Index</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SaveStartupParametersCommand(byte option, byte index)
@@ -91,8 +91,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Restore Startup Parameters Command
         ///
-        /// <param name="option" <see cref="byte" Option
-        /// <param name="index" <see cref="byte" Index
+        /// <param name="option"><see cref="byte"/> Option</param>
+        /// <param name="index"><see cref="byte"/> Index</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RestoreStartupParametersCommand(byte option, byte index)
@@ -109,8 +109,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Reset Startup Parameters Command
         ///
-        /// <param name="option" <see cref="byte" Option
-        /// <param name="index" <see cref="byte" Index
+        /// <param name="option"><see cref="byte"/> Option</param>
+        /// <param name="index"><see cref="byte"/> Index</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ResetStartupParametersCommand(byte option, byte index)
@@ -127,7 +127,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Restart Device Response Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RestartDeviceResponseResponse(byte status)
@@ -143,7 +143,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Save Startup Parameters Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SaveStartupParametersResponse(byte status)
@@ -159,7 +159,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Restore Startup Parameters Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RestoreStartupParametersResponse(byte status)
@@ -175,7 +175,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Reset Startup Parameters Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ResetStartupParametersResponse(byte status)

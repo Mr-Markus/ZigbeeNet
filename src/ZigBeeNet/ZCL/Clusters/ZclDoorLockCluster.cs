@@ -53,7 +53,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Lock Door Command
         ///
-        /// <param name="pinCode" <see cref="ByteArray" Pin code
+        /// <param name="pinCode"><see cref="ByteArray"/> Pin code</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> LockDoorCommand(ByteArray pinCode)
@@ -69,7 +69,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Unlock Door Command
         ///
-        /// <param name="pinCode" <see cref="ByteArray" Pin code
+        /// <param name="pinCode"><see cref="ByteArray"/> Pin code</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> UnlockDoorCommand(ByteArray pinCode)
@@ -85,7 +85,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Lock Door Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> LockDoorResponse(byte status)
@@ -101,7 +101,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Unlock Door Response
         ///
-        /// <param name="status" <see cref="byte" Status
+        /// <param name="status"><see cref="byte"/> Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> UnlockDoorResponse(byte status)

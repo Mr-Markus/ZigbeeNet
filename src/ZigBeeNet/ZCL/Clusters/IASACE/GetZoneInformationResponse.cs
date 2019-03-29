@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Get Zone Information Response value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentFROM the server.
+    /// Cluster: IAS ACE. Command is sent FROM the server.
     /// This command is a specific command used for the IAS ACE cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.PollControl
     /// <summary>
     /// Fast Poll Stop Command value object class.
     /// <para>
-    /// Cluster: Poll Control. Command is sentTO the server.
+    /// Cluster: Poll Control. Command is sent TO the server.
     /// This command is a specific command used for the Poll Control cluster.
     ///
     /// The Fast Poll Stop command is used to stop the fast poll mode initiated by the Check-in response. The Fast Poll Stop command has no payload.

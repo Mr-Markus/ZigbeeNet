@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
     /// <summary>
     /// Zone Status Change Notification Command value object class.
     /// <para>
-    /// Cluster: IAS Zone. Command is sentFROM the server.
+    /// Cluster: IAS Zone. Command is sent FROM the server.
     /// This command is a specific command used for the IAS Zone cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

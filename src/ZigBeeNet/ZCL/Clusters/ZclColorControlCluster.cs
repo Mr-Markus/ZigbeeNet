@@ -1262,9 +1262,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Hue Command
         ///
-        /// <param name="hue" <see cref="byte" Hue
-        /// <param name="direction" <see cref="byte" Direction
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="hue"><see cref="byte"/> Hue</param>
+        /// <param name="direction"><see cref="byte"/> Direction</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToHueCommand(byte hue, byte direction, ushort transitionTime)
@@ -1282,8 +1282,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move Hue Command
         ///
-        /// <param name="moveMode" <see cref="byte" Move mode
-        /// <param name="rate" <see cref="byte" Rate
+        /// <param name="moveMode"><see cref="byte"/> Move mode</param>
+        /// <param name="rate"><see cref="byte"/> Rate</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveHueCommand(byte moveMode, byte rate)
@@ -1300,9 +1300,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Step Hue Command
         ///
-        /// <param name="stepMode" <see cref="byte" Step mode
-        /// <param name="stepSize" <see cref="byte" Step size
-        /// <param name="transitionTime" <see cref="byte" Transition time
+        /// <param name="stepMode"><see cref="byte"/> Step mode</param>
+        /// <param name="stepSize"><see cref="byte"/> Step size</param>
+        /// <param name="transitionTime"><see cref="byte"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StepHueCommand(byte stepMode, byte stepSize, byte transitionTime)
@@ -1320,8 +1320,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Saturation Command
         ///
-        /// <param name="saturation" <see cref="byte" Saturation
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="saturation"><see cref="byte"/> Saturation</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToSaturationCommand(byte saturation, ushort transitionTime)
@@ -1338,8 +1338,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move Saturation Command
         ///
-        /// <param name="moveMode" <see cref="byte" Move mode
-        /// <param name="rate" <see cref="byte" Rate
+        /// <param name="moveMode"><see cref="byte"/> Move mode</param>
+        /// <param name="rate"><see cref="byte"/> Rate</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveSaturationCommand(byte moveMode, byte rate)
@@ -1356,9 +1356,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Step Saturation Command
         ///
-        /// <param name="stepMode" <see cref="byte" Step mode
-        /// <param name="stepSize" <see cref="byte" Step size
-        /// <param name="transitionTime" <see cref="byte" Transition time
+        /// <param name="stepMode"><see cref="byte"/> Step mode</param>
+        /// <param name="stepSize"><see cref="byte"/> Step size</param>
+        /// <param name="transitionTime"><see cref="byte"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StepSaturationCommand(byte stepMode, byte stepSize, byte transitionTime)
@@ -1376,9 +1376,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Hue and Saturation Command
         ///
-        /// <param name="hue" <see cref="byte" Hue
-        /// <param name="saturation" <see cref="byte" Saturation
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="hue"><see cref="byte"/> Hue</param>
+        /// <param name="saturation"><see cref="byte"/> Saturation</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToHueAndSaturationCommand(byte hue, byte saturation, ushort transitionTime)
@@ -1396,9 +1396,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Color Command
         ///
-        /// <param name="colorX" <see cref="ushort" ColorX
-        /// <param name="colorY" <see cref="ushort" ColorY
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="colorX"><see cref="ushort"/> ColorX</param>
+        /// <param name="colorY"><see cref="ushort"/> ColorY</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToColorCommand(ushort colorX, ushort colorY, ushort transitionTime)
@@ -1416,8 +1416,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move Color Command
         ///
-        /// <param name="rateX" <see cref="short" RateX
-        /// <param name="rateY" <see cref="short" RateY
+        /// <param name="rateX"><see cref="short"/> RateX</param>
+        /// <param name="rateY"><see cref="short"/> RateY</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveColorCommand(short rateX, short rateY)
@@ -1434,9 +1434,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Step Color Command
         ///
-        /// <param name="stepX" <see cref="short" StepX
-        /// <param name="stepY" <see cref="short" StepY
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="stepX"><see cref="short"/> StepX</param>
+        /// <param name="stepY"><see cref="short"/> StepY</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StepColorCommand(short stepX, short stepY, ushort transitionTime)
@@ -1454,8 +1454,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Color Temperature Command
         ///
-        /// <param name="colorTemperature" <see cref="ushort" Color Temperature
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="colorTemperature"><see cref="ushort"/> Color Temperature</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToColorTemperatureCommand(ushort colorTemperature, ushort transitionTime)
@@ -1472,9 +1472,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Enhanced Move To Hue Command
         ///
-        /// <param name="hue" <see cref="ushort" Hue
-        /// <param name="direction" <see cref="byte" Direction
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="hue"><see cref="ushort"/> Hue</param>
+        /// <param name="direction"><see cref="byte"/> Direction</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> EnhancedMoveToHueCommand(ushort hue, byte direction, ushort transitionTime)
@@ -1492,9 +1492,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Enhanced Step Hue Command
         ///
-        /// <param name="stepMode" <see cref="byte" Step Mode
-        /// <param name="stepSize" <see cref="ushort" Step Size
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="stepMode"><see cref="byte"/> Step Mode</param>
+        /// <param name="stepSize"><see cref="ushort"/> Step Size</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> EnhancedStepHueCommand(byte stepMode, ushort stepSize, ushort transitionTime)
@@ -1512,9 +1512,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Enhanced Move To Hue and Saturation Command
         ///
-        /// <param name="hue" <see cref="ushort" Hue
-        /// <param name="saturation" <see cref="byte" Saturation
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="hue"><see cref="ushort"/> Hue</param>
+        /// <param name="saturation"><see cref="byte"/> Saturation</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> EnhancedMoveToHueAndSaturationCommand(ushort hue, byte saturation, ushort transitionTime)
@@ -1532,11 +1532,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Color Loop Set Command
         ///
-        /// <param name="updateFlags" <see cref="byte" Update Flags
-        /// <param name="action" <see cref="byte" Action
-        /// <param name="direction" <see cref="byte" Direction
-        /// <param name="transitionTime" <see cref="ushort" Transition time
-        /// <param name="startHue" <see cref="ushort" Start Hue
+        /// <param name="updateFlags"><see cref="byte"/> Update Flags</param>
+        /// <param name="action"><see cref="byte"/> Action</param>
+        /// <param name="direction"><see cref="byte"/> Direction</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
+        /// <param name="startHue"><see cref="ushort"/> Start Hue</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ColorLoopSetCommand(byte updateFlags, byte action, byte direction, ushort transitionTime, ushort startHue)

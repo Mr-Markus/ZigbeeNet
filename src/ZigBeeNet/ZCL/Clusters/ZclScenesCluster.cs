@@ -380,11 +380,11 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Add Scene command shall be addressed to a single device (not a group).
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
-        /// <param name="transitionTime" <see cref="ushort" Transition time
-        /// <param name="sceneName" <see cref="string" Scene Name
-        /// <param name="extensionFieldSets" <see cref="List<ExtensionFieldSet>" Extension field sets
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
+        /// <param name="sceneName"><see cref="string"/> Scene Name</param>
+        /// <param name="extensionFieldSets"><see cref="List<ExtensionFieldSet>"/> Extension field sets</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AddSceneCommand(ushort groupID, byte sceneID, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
@@ -406,8 +406,8 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The View Scene command shall be addressed to a single device (not a group).
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ViewSceneCommand(ushort groupID, byte sceneID)
@@ -426,8 +426,8 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Remove All Scenes may be addressed to a single device or to a group.
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveSceneCommand(ushort groupID, byte sceneID)
@@ -446,7 +446,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Remove All Scenes may be addressed to a single device or to a group.
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveAllScenesCommand(ushort groupID)
@@ -464,8 +464,8 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Store Scene command may be addressed to a single device or to a group.
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StoreSceneCommand(ushort groupID, byte sceneID)
@@ -484,8 +484,8 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Recall Scene command may be addressed to a single device or to a group.
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RecallSceneCommand(ushort groupID, byte sceneID)
@@ -507,7 +507,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// commissioning tool to get used scenes for a group on a single device or on all
         /// devices in the group.
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetSceneMembershipCommand(ushort groupID)
@@ -523,9 +523,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Add Scene Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AddSceneResponse(byte status, ushort groupID, byte sceneID)
@@ -543,12 +543,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The View Scene Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
-        /// <param name="transitionTime" <see cref="ushort" Transition time
-        /// <param name="sceneName" <see cref="string" Scene Name
-        /// <param name="extensionFieldSets" <see cref="List<ExtensionFieldSet>" Extension field sets
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
+        /// <param name="sceneName"><see cref="string"/> Scene Name</param>
+        /// <param name="extensionFieldSets"><see cref="List<ExtensionFieldSet>"/> Extension field sets</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ViewSceneResponse(byte status, ushort groupID, byte sceneID, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
@@ -569,9 +569,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove Scene Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveSceneResponse(byte status, ushort groupID, byte sceneID)
@@ -589,8 +589,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove All Scenes Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveAllScenesResponse(byte status, ushort groupID)
@@ -607,9 +607,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Store Scene Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneID" <see cref="byte" Scene ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneID"><see cref="byte"/> Scene ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StoreSceneResponse(byte status, ushort groupID, byte sceneID)
@@ -627,11 +627,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Scene Membership Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="capacity" <see cref="byte" Capacity
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="sceneCount" <see cref="byte" Scene count
-        /// <param name="sceneList" <see cref="List<byte>" Scene list
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="capacity"><see cref="byte"/> Capacity</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="sceneCount"><see cref="byte"/> Scene count</param>
+        /// <param name="sceneList"><see cref="List<byte>"/> Scene list</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetSceneMembershipResponse(byte status, byte capacity, ushort groupID, byte sceneCount, List<byte> sceneList)

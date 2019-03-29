@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
     /// <summary>
     /// Get Scene Membership Command value object class.
     /// <para>
-    /// Cluster: Scenes. Command is sentTO the server.
+    /// Cluster: Scenes. Command is sent TO the server.
     /// This command is a specific command used for the Scenes cluster.
     ///
     /// The Get Scene Membership command can be used to find an unused scene

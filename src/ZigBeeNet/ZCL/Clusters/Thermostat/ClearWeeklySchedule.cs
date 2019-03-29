@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
     /// <summary>
     /// Clear Weekly Schedule value object class.
     /// <para>
-    /// Cluster: Thermostat. Command is sentTO the server.
+    /// Cluster: Thermostat. Command is sent TO the server.
     /// This command is a specific command used for the Thermostat cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

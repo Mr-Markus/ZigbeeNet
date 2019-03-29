@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Commissioning
     /// <summary>
     /// Save Startup Parameters Command value object class.
     /// <para>
-    /// Cluster: Commissioning. Command is sentTO the server.
+    /// Cluster: Commissioning. Command is sent TO the server.
     /// This command is a specific command used for the Commissioning cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

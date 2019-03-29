@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
     /// <summary>
     /// Zone Enroll Response value object class.
     /// <para>
-    /// Cluster: IAS Zone. Command is sentTO the server.
+    /// Cluster: IAS Zone. Command is sent TO the server.
     /// This command is a specific command used for the IAS Zone cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

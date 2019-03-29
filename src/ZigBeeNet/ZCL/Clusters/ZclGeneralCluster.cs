@@ -57,7 +57,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values of one or more attributes located on another device. Each attribute
         /// identifier field shall contain the identifier of the attribute to be read.
         ///
-        /// <param name="identifiers" <see cref="List<ushort>" Identifiers
+        /// <param name="identifiers"><see cref="List<ushort>"/> Identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReadAttributesCommand(List<ushort> identifiers)
@@ -80,7 +80,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// record, the attribute identifier field shall contain the identifier specified in the
         /// original read attributes or read attributes structured command.
         ///
-        /// <param name="records" <see cref="List<ReadAttributeStatusRecord>" Records
+        /// <param name="records"><see cref="List<ReadAttributeStatusRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReadAttributesResponse(List<ReadAttributeStatusRecord> records)
@@ -101,7 +101,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// record shall contain the identifier and the actual value of the attribute to be
         /// written.
         ///
-        /// <param name="records" <see cref="List<WriteAttributeRecord>" Records
+        /// <param name="records"><see cref="List<WriteAttributeRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesCommand(List<WriteAttributeRecord> records)
@@ -128,7 +128,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// command, except that the command identifier field shall be set to indicate the
         /// write attributes undivided command.
         ///
-        /// <param name="records" <see cref="List<WriteAttributeRecord>" Records
+        /// <param name="records"><see cref="List<WriteAttributeRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesUndividedCommand(List<WriteAttributeRecord> records)
@@ -147,7 +147,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The write attributes response command is generated in response to a write
         /// attributes command.
         ///
-        /// <param name="records" <see cref="List<WriteAttributeStatusRecord>" Records
+        /// <param name="records"><see cref="List<WriteAttributeStatusRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesResponse(List<WriteAttributeStatusRecord> records)
@@ -168,7 +168,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// require a response. Each write attribute record shall contain the identifier and the
         /// actual value of the attribute to be written.
         ///
-        /// <param name="records" <see cref="List<WriteAttributeRecord>" Records
+        /// <param name="records"><see cref="List<WriteAttributeRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesNoResponse(List<WriteAttributeRecord> records)
@@ -191,7 +191,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// reporting mechanism, however specific implementations of a cluster may make
         /// additional attributes available.
         ///
-        /// <param name="records" <see cref="List<AttributeReportingConfigurationRecord>" Records
+        /// <param name="records"><see cref="List<AttributeReportingConfigurationRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ConfigureReportingCommand(List<AttributeReportingConfigurationRecord> records)
@@ -210,8 +210,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Configure Reporting Response command is generated in response to a
         /// Configure Reporting command.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="records" <see cref="List<AttributeStatusRecord>" Records
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="records"><see cref="List<AttributeStatusRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ConfigureReportingResponse(ZclStatus status, List<AttributeStatusRecord> records)
@@ -231,7 +231,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Read Reporting Configuration command is used to read the configuration
         /// details of the reporting mechanism for one or more of the attributes of a cluster.
         ///
-        /// <param name="records" <see cref="List<AttributeRecord>" Records
+        /// <param name="records"><see cref="List<AttributeRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReadReportingConfigurationCommand(List<AttributeRecord> records)
@@ -250,7 +250,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Read Reporting Configuration Response command is used to respond to a
         /// Read Reporting Configuration command.
         ///
-        /// <param name="records" <see cref="List<AttributeReportingConfigurationRecord>" Records
+        /// <param name="records"><see cref="List<AttributeReportingConfigurationRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReadReportingConfigurationResponse(List<AttributeReportingConfigurationRecord> records)
@@ -271,7 +271,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// elsewhere in the ZCL, define which attributes are to be reported and at what
         /// interval.
         ///
-        /// <param name="reports" <see cref="List<AttributeReport>" Reports
+        /// <param name="reports"><see cref="List<AttributeReport>"/> Reports</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReportAttributesCommand(List<AttributeReport> reports)
@@ -292,8 +292,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// either an error results or the Disable default response bit of its Frame control field
         /// is set to 0.
         ///
-        /// <param name="commandIdentifier" <see cref="byte" Command identifier
-        /// <param name="statusCode" <see cref="ZclStatus" Status code
+        /// <param name="commandIdentifier"><see cref="byte"/> Command identifier</param>
+        /// <param name="statusCode"><see cref="ZclStatus"/> Status code</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DefaultResponse(byte commandIdentifier, ZclStatus statusCode)
@@ -314,8 +314,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// discover the identifiers and types of the attributes on a device which are supported
         /// within the cluster to which this command is directed.
         ///
-        /// <param name="startAttributeIdentifier" <see cref="ushort" Start attribute identifier
-        /// <param name="maximumAttributeIdentifiers" <see cref="byte" Maximum attribute identifiers
+        /// <param name="startAttributeIdentifier"><see cref="ushort"/> Start attribute identifier</param>
+        /// <param name="maximumAttributeIdentifiers"><see cref="byte"/> Maximum attribute identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverAttributesCommand(ushort startAttributeIdentifier, byte maximumAttributeIdentifiers)
@@ -335,8 +335,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The discover attributes response command is generated in response to a discover
         /// attributes command.
         ///
-        /// <param name="discoveryComplete" <see cref="bool" Discovery Complete
-        /// <param name="attributeInformation" <see cref="List<AttributeInformation>" Attribute Information
+        /// <param name="discoveryComplete"><see cref="bool"/> Discovery Complete</param>
+        /// <param name="attributeInformation"><see cref="List<AttributeInformation>"/> Attribute Information</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverAttributesResponse(bool discoveryComplete, List<AttributeInformation> attributeInformation)
@@ -358,7 +358,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// device. Each attribute identifier field shall contain the identifier of the attribute to
         /// be read.
         ///
-        /// <param name="attributeSelectors" <see cref="object" Attribute selectors
+        /// <param name="attributeSelectors"><see cref="object"/> Attribute selectors</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReadAttributesStructuredCommand(object attributeSelectors)
@@ -379,8 +379,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// attribute record shall contain the identifier and the actual value of the attribute, or
         /// element thereof, to be written.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="attributeSelectors" <see cref="object" Attribute selectors
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="attributeSelectors"><see cref="object"/> Attribute selectors</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesStructuredCommand(ZclStatus status, object attributeSelectors)
@@ -400,8 +400,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The write attributes structured response command is generated in response to a
         /// write attributes structured command.
         ///
-        /// <param name="status" <see cref="ZclStatus" Status
-        /// <param name="records" <see cref="List<WriteAttributeStatusRecord>" Records
+        /// <param name="status"><see cref="ZclStatus"/> Status</param>
+        /// <param name="records"><see cref="List<WriteAttributeStatusRecord>"/> Records</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> WriteAttributesStructuredResponse(ZclStatus status, List<WriteAttributeStatusRecord> records)
@@ -421,8 +421,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Discover Commands Received command is generated when a remote device wishes to discover the
         /// optional and mandatory commands the cluster to which this command is sent can process.
         ///
-        /// <param name="startCommandIdentifier" <see cref="byte" Start command identifier
-        /// <param name="maximumCommandIdentifiers" <see cref="byte" Maximum command identifiers
+        /// <param name="startCommandIdentifier"><see cref="byte"/> Start command identifier</param>
+        /// <param name="maximumCommandIdentifiers"><see cref="byte"/> Maximum command identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverCommandsReceived(byte startCommandIdentifier, byte maximumCommandIdentifiers)
@@ -442,8 +442,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Discover Commands Received Response is generated in response to a Discover Commands Received
         /// command.
         ///
-        /// <param name="discoveryComplete" <see cref="bool" Discovery complete
-        /// <param name="commandIdentifiers" <see cref="List<byte>" Command identifiers
+        /// <param name="discoveryComplete"><see cref="bool"/> Discovery complete</param>
+        /// <param name="commandIdentifiers"><see cref="List<byte>"/> Command identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverCommandsReceivedResponse(bool discoveryComplete, List<byte> commandIdentifiers)
@@ -463,8 +463,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Discover Commands Generated command is generated when a remote device wishes to discover the
         /// commands that a cluster may generate on the device to which this command is directed.
         ///
-        /// <param name="startCommandIdentifier" <see cref="byte" Start command identifier
-        /// <param name="maximumCommandIdentifiers" <see cref="byte" Maximum command identifiers
+        /// <param name="startCommandIdentifier"><see cref="byte"/> Start command identifier</param>
+        /// <param name="maximumCommandIdentifiers"><see cref="byte"/> Maximum command identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverCommandsGenerated(byte startCommandIdentifier, byte maximumCommandIdentifiers)
@@ -484,8 +484,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Discover Commands Generated Response is generated in response to a Discover Commands Generated
         /// command.
         ///
-        /// <param name="discoveryComplete" <see cref="bool" Discovery complete
-        /// <param name="commandIdentifiers" <see cref="List<byte>" Command identifiers
+        /// <param name="discoveryComplete"><see cref="bool"/> Discovery complete</param>
+        /// <param name="commandIdentifiers"><see cref="List<byte>"/> Command identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverCommandsGeneratedResponse(bool discoveryComplete, List<byte> commandIdentifiers)
@@ -506,8 +506,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// identifiers and types of the attributes on a device which are supported within the cluster to which this
         /// command is directed, including whether the attribute is readable, writeable or reportable.
         ///
-        /// <param name="startAttributeIdentifier" <see cref="ushort" Start attribute identifier
-        /// <param name="maximumAttributeIdentifiers" <see cref="byte" Maximum attribute identifiers
+        /// <param name="startAttributeIdentifier"><see cref="ushort"/> Start attribute identifier</param>
+        /// <param name="maximumAttributeIdentifiers"><see cref="byte"/> Maximum attribute identifiers</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverAttributesExtended(ushort startAttributeIdentifier, byte maximumAttributeIdentifiers)
@@ -527,8 +527,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The Discover Attributes Extended Response command is generated in response to a Discover Attributes
         /// Extended command.
         ///
-        /// <param name="discoveryComplete" <see cref="bool" Discovery complete
-        /// <param name="attributeInformation" <see cref="List<ExtendedAttributeInformation>" Attribute Information
+        /// <param name="discoveryComplete"><see cref="bool"/> Discovery complete</param>
+        /// <param name="attributeInformation"><see cref="List<ExtendedAttributeInformation>"/> Attribute Information</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DiscoverAttributesExtendedResponse(bool discoveryComplete, List<ExtendedAttributeInformation> attributeInformation)

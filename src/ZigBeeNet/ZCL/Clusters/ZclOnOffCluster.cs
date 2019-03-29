@@ -361,8 +361,8 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// The Off With Effect command allows devices to be turned off using enhanced ways of fading.
         ///
-        /// <param name="effectIdentifier" <see cref="byte" Effect Identifier
-        /// <param name="effectVariant" <see cref="byte" Effect Variant
+        /// <param name="effectIdentifier"><see cref="byte"/> Effect Identifier</param>
+        /// <param name="effectVariant"><see cref="byte"/> Effect Variant</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> OffWithEffectCommand(byte effectIdentifier, byte effectVariant)
@@ -399,9 +399,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// turning the devices back on. Note that the device can be periodically re-kicked by
         /// subsequent On With Timed Off commands, e.g., from an on/off sensor.
         ///
-        /// <param name="onOffControl" <see cref="byte" On Off Control
-        /// <param name="onTime" <see cref="ushort" On Time
-        /// <param name="offWaitTime" <see cref="ushort" Off Wait Time
+        /// <param name="onOffControl"><see cref="byte"/> On Off Control</param>
+        /// <param name="onTime"><see cref="ushort"/> On Time</param>
+        /// <param name="offWaitTime"><see cref="ushort"/> Off Wait Time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> OnWithTimedOffCommand(byte onOffControl, ushort onTime, ushort offWaitTime)

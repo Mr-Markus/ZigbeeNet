@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.RSSILocation
     /// <summary>
     /// Set Absolute Location Command value object class.
     /// <para>
-    /// Cluster: RSSI Location. Command is sentTO the server.
+    /// Cluster: RSSI Location. Command is sent TO the server.
     /// This command is a specific command used for the RSSI Location cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

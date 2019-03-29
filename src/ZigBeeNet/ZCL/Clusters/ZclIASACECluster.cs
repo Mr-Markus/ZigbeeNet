@@ -63,9 +63,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the IAS CIE, and its related devices, the command can be rejected. The device SHALL generate an Arm Response command
         /// to indicate the resulting armed state
         ///
-        /// <param name="armMode" <see cref="byte" Arm Mode
-        /// <param name="armDisarmCode" <see cref="string" Arm/Disarm Code
-        /// <param name="zoneID" <see cref="byte" Zone ID
+        /// <param name="armMode"><see cref="byte"/> Arm Mode</param>
+        /// <param name="armDisarmCode"><see cref="string"/> Arm/Disarm Code</param>
+        /// <param name="zoneID"><see cref="byte"/> Zone ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ArmCommand(byte armMode, string armDisarmCode, byte zoneID)
@@ -90,9 +90,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the window on his IAS ACE client (e.g., security keypad), and if the IAS ACE server indicates that zone is
         /// successfully by-passed, arm his security system while he is away.
         ///
-        /// <param name="numberOfZones" <see cref="byte" Number of Zones
-        /// <param name="zoneIDs" <see cref="List<byte>" Zone IDs
-        /// <param name="armDisarmCode" <see cref="string" Arm/Disarm Code
+        /// <param name="numberOfZones"><see cref="byte"/> Number of Zones</param>
+        /// <param name="zoneIDs"><see cref="List<byte>"/> Zone IDs</param>
+        /// <param name="armDisarmCode"><see cref="string"/> Arm/Disarm Code</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> BypassCommand(byte numberOfZones, List<byte> zoneIDs, string armDisarmCode)
@@ -158,7 +158,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Zone Information Command
         ///
-        /// <param name="zoneID" <see cref="byte" Zone ID
+        /// <param name="zoneID"><see cref="byte"/> Zone ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetZoneInformationCommand(byte zoneID)
@@ -217,10 +217,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// managed by the IAS ACE server, sending the Zone Status of all zones MAY not fit into a single Get ZoneStatus Response command.
         /// IAS ACE clients MAY need to send multiple Get Zone Status commands in order to get the information they seek.
         ///
-        /// <param name="startingZoneID" <see cref="byte" Starting Zone ID
-        /// <param name="maxZoneIDs" <see cref="byte" Max Zone IDs
-        /// <param name="zoneStatusMaskFlag" <see cref="bool" Zone Status Mask Flag
-        /// <param name="zoneStatusMask" <see cref="ushort" Zone Status Mask
+        /// <param name="startingZoneID"><see cref="byte"/> Starting Zone ID</param>
+        /// <param name="maxZoneIDs"><see cref="byte"/> Max Zone IDs</param>
+        /// <param name="zoneStatusMaskFlag"><see cref="bool"/> Zone Status Mask Flag</param>
+        /// <param name="zoneStatusMask"><see cref="ushort"/> Zone Status Mask</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetZoneStatusCommand(byte startingZoneID, byte maxZoneIDs, bool zoneStatusMaskFlag, ushort zoneStatusMask)
@@ -239,7 +239,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Arm Response
         ///
-        /// <param name="armNotification" <see cref="byte" Arm Notification
+        /// <param name="armNotification"><see cref="byte"/> Arm Notification</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ArmResponse(byte armNotification)
@@ -258,22 +258,22 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The 16 fields of the payload indicate whether each of the Zone IDs from 0 to 0xff is allocated or not. If bit n
         /// of Zone ID Map section N is set to 1, then Zone ID (16 x N + n ) is allocated, else it is not allocated
         ///
-        /// <param name="zoneIDMapSection0" <see cref="ushort" Zone ID Map section 0
-        /// <param name="zoneIDMapSection1" <see cref="ushort" Zone ID Map section 1
-        /// <param name="zoneIDMapSection2" <see cref="ushort" Zone ID Map section 2
-        /// <param name="zoneIDMapSection3" <see cref="ushort" Zone ID Map section 3
-        /// <param name="zoneIDMapSection4" <see cref="ushort" Zone ID Map section 4
-        /// <param name="zoneIDMapSection5" <see cref="ushort" Zone ID Map section 5
-        /// <param name="zoneIDMapSection6" <see cref="ushort" Zone ID Map section 6
-        /// <param name="zoneIDMapSection7" <see cref="ushort" Zone ID Map section 7
-        /// <param name="zoneIDMapSection8" <see cref="ushort" Zone ID Map section 8
-        /// <param name="zoneIDMapSection9" <see cref="ushort" Zone ID Map section 9
-        /// <param name="zoneIDMapSection10" <see cref="ushort" Zone ID Map section 10
-        /// <param name="zoneIDMapSection11" <see cref="ushort" Zone ID Map section 11
-        /// <param name="zoneIDMapSection12" <see cref="ushort" Zone ID Map section 12
-        /// <param name="zoneIDMapSection13" <see cref="ushort" Zone ID Map section 13
-        /// <param name="zoneIDMapSection14" <see cref="ushort" Zone ID Map section 14
-        /// <param name="zoneIDMapSection15" <see cref="ushort" Zone ID Map section 15
+        /// <param name="zoneIDMapSection0"><see cref="ushort"/> Zone ID Map section 0</param>
+        /// <param name="zoneIDMapSection1"><see cref="ushort"/> Zone ID Map section 1</param>
+        /// <param name="zoneIDMapSection2"><see cref="ushort"/> Zone ID Map section 2</param>
+        /// <param name="zoneIDMapSection3"><see cref="ushort"/> Zone ID Map section 3</param>
+        /// <param name="zoneIDMapSection4"><see cref="ushort"/> Zone ID Map section 4</param>
+        /// <param name="zoneIDMapSection5"><see cref="ushort"/> Zone ID Map section 5</param>
+        /// <param name="zoneIDMapSection6"><see cref="ushort"/> Zone ID Map section 6</param>
+        /// <param name="zoneIDMapSection7"><see cref="ushort"/> Zone ID Map section 7</param>
+        /// <param name="zoneIDMapSection8"><see cref="ushort"/> Zone ID Map section 8</param>
+        /// <param name="zoneIDMapSection9"><see cref="ushort"/> Zone ID Map section 9</param>
+        /// <param name="zoneIDMapSection10"><see cref="ushort"/> Zone ID Map section 10</param>
+        /// <param name="zoneIDMapSection11"><see cref="ushort"/> Zone ID Map section 11</param>
+        /// <param name="zoneIDMapSection12"><see cref="ushort"/> Zone ID Map section 12</param>
+        /// <param name="zoneIDMapSection13"><see cref="ushort"/> Zone ID Map section 13</param>
+        /// <param name="zoneIDMapSection14"><see cref="ushort"/> Zone ID Map section 14</param>
+        /// <param name="zoneIDMapSection15"><see cref="ushort"/> Zone ID Map section 15</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetZoneIDMapResponse(ushort zoneIDMapSection0, ushort zoneIDMapSection1, ushort zoneIDMapSection2, ushort zoneIDMapSection3, ushort zoneIDMapSection4, ushort zoneIDMapSection5, ushort zoneIDMapSection6, ushort zoneIDMapSection7, ushort zoneIDMapSection8, ushort zoneIDMapSection9, ushort zoneIDMapSection10, ushort zoneIDMapSection11, ushort zoneIDMapSection12, ushort zoneIDMapSection13, ushort zoneIDMapSection14, ushort zoneIDMapSection15)
@@ -304,10 +304,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Zone Information Response
         ///
-        /// <param name="zoneID" <see cref="byte" Zone ID
-        /// <param name="zoneType" <see cref="ushort" Zone Type
-        /// <param name="iEEEAddress" <see cref="IeeeAddress" IEEE address
-        /// <param name="zoneLabel" <see cref="string" Zone Label
+        /// <param name="zoneID"><see cref="byte"/> Zone ID</param>
+        /// <param name="zoneType"><see cref="ushort"/> Zone Type</param>
+        /// <param name="iEEEAddress"><see cref="IeeeAddress"/> IEEE address</param>
+        /// <param name="zoneLabel"><see cref="string"/> Zone Label</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetZoneInformationResponse(byte zoneID, ushort zoneType, IeeeAddress iEEEAddress, string zoneLabel)
@@ -330,10 +330,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// An IAS ACE server SHOULD send a Zone Status Changed command upon a change to an IAS Zone device’s ZoneStatus that it manages (i.e.,
         /// IAS ACE server SHOULD send a Zone Status Changed command upon receipt of a Zone Status Change Notification command).
         ///
-        /// <param name="zoneID" <see cref="byte" Zone ID
-        /// <param name="zoneStatus" <see cref="ushort" Zone Status
-        /// <param name="audibleNotification" <see cref="byte" Audible Notification
-        /// <param name="zoneLabel" <see cref="string" Zone Label
+        /// <param name="zoneID"><see cref="byte"/> Zone ID</param>
+        /// <param name="zoneStatus"><see cref="ushort"/> Zone Status</param>
+        /// <param name="audibleNotification"><see cref="byte"/> Audible Notification</param>
+        /// <param name="zoneLabel"><see cref="string"/> Zone Label</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ZoneStatusChangedCommand(byte zoneID, ushort zoneStatus, byte audibleNotification, string zoneLabel)
@@ -364,10 +364,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// update the Seconds Remaining. In some markets (e.g., North America), the final 10 seconds of the Arming Away/Stay/Night sequence
         /// requires a separate audible notification (e.g., a double tone).
         ///
-        /// <param name="panelStatus" <see cref="byte" Panel Status
-        /// <param name="secondsRemaining" <see cref="byte" Seconds Remaining
-        /// <param name="audibleNotification" <see cref="byte" Audible Notification
-        /// <param name="alarmStatus" <see cref="byte" Alarm Status
+        /// <param name="panelStatus"><see cref="byte"/> Panel Status</param>
+        /// <param name="secondsRemaining"><see cref="byte"/> Seconds Remaining</param>
+        /// <param name="audibleNotification"><see cref="byte"/> Audible Notification</param>
+        /// <param name="alarmStatus"><see cref="byte"/> Alarm Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> PanelStatusChangedCommand(byte panelStatus, byte secondsRemaining, byte audibleNotification, byte alarmStatus)
@@ -389,10 +389,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// This command updates requesting IAS ACE clients in the system of changes to the security panel status recorded by
         /// the ACE server (e.g., IAS CIE device).
         ///
-        /// <param name="panelStatus" <see cref="byte" Panel Status
-        /// <param name="secondsRemaining" <see cref="byte" Seconds Remaining
-        /// <param name="audibleNotification" <see cref="byte" Audible Notification
-        /// <param name="alarmStatus" <see cref="byte" Alarm Status
+        /// <param name="panelStatus"><see cref="byte"/> Panel Status</param>
+        /// <param name="secondsRemaining"><see cref="byte"/> Seconds Remaining</param>
+        /// <param name="audibleNotification"><see cref="byte"/> Audible Notification</param>
+        /// <param name="alarmStatus"><see cref="byte"/> Alarm Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetPanelStatusResponse(byte panelStatus, byte secondsRemaining, byte audibleNotification, byte alarmStatus)
@@ -414,7 +414,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Sets the list of bypassed zones on the IAS ACE client. This command can be sent either as a response to the
         /// GetBypassedZoneList command or unsolicited when the list of bypassed zones changes on the ACE server.
         ///
-        /// <param name="zoneID" <see cref="List<byte>" Zone ID
+        /// <param name="zoneID"><see cref="List<byte>"/> Zone ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetBypassedZoneListCommand(List<byte> zoneID)
@@ -432,7 +432,7 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// Provides the response of the security panel to the request from the IAS ACE client to bypass zones via a Bypass command.
         ///
-        /// <param name="bypassResult" <see cref="List<byte>" Bypass Result
+        /// <param name="bypassResult"><see cref="List<byte>"/> Bypass Result</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> BypassResponse(List<byte> bypassResult)
@@ -451,11 +451,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// This command updates requesting IAS ACE clients in the system of changes to the IAS Zone server statuses recorded
         /// by the ACE server (e.g., IAS CIE device).
         ///
-        /// <param name="zoneStatusComplete" <see cref="bool" Zone Status Complete
-        /// <param name="numberOfZones" <see cref="byte" Number of zones
-        /// <param name="iasAceZoneStatus" <see cref="byte" Ias Ace Zone Status
-        /// <param name="zoneId" <see cref="byte" Zone Id
-        /// <param name="zoneStatus" <see cref="ushort" Zone Status
+        /// <param name="zoneStatusComplete"><see cref="bool"/> Zone Status Complete</param>
+        /// <param name="numberOfZones"><see cref="byte"/> Number of zones</param>
+        /// <param name="iasAceZoneStatus"><see cref="byte"/> Ias Ace Zone Status</param>
+        /// <param name="zoneId"><see cref="byte"/> Zone Id</param>
+        /// <param name="zoneStatus"><see cref="ushort"/> Zone Status</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetZoneStatusResponse(bool zoneStatusComplete, byte numberOfZones, byte iasAceZoneStatus, byte zoneId, ushort zoneStatus)

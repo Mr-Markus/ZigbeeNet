@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OnOff
     /// <summary>
     /// On With Recall Global Scene Command value object class.
     /// <para>
-    /// Cluster: On/Off. Command is sentTO the server.
+    /// Cluster: On/Off. Command is sent TO the server.
     /// This command is a specific command used for the On/Off cluster.
     ///
     /// The On With Recall Global Scene command allows the recall of the settings when the device was turned off.

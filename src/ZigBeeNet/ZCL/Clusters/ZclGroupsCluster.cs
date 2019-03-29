@@ -71,8 +71,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Add Group Command
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="groupName" <see cref="string" Group Name
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="groupName"><see cref="string"/> Group Name</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AddGroupCommand(ushort groupID, string groupName)
@@ -89,7 +89,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The View Group Command
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ViewGroupCommand(ushort groupID)
@@ -105,8 +105,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Group Membership Command
         ///
-        /// <param name="groupCount" <see cref="byte" Group count
-        /// <param name="groupList" <see cref="List<ushort>" Group list
+        /// <param name="groupCount"><see cref="byte"/> Group count</param>
+        /// <param name="groupList"><see cref="List<ushort>"/> Group list</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetGroupMembershipCommand(byte groupCount, List<ushort> groupList)
@@ -123,7 +123,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove Group Command
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveGroupCommand(ushort groupID)
@@ -151,8 +151,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Add Group If Identifying Command
         ///
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="groupName" <see cref="string" Group Name
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="groupName"><see cref="string"/> Group Name</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AddGroupIfIdentifyingCommand(ushort groupID, string groupName)
@@ -169,8 +169,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Add Group Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AddGroupResponse(byte status, ushort groupID)
@@ -187,9 +187,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The View Group Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
-        /// <param name="groupName" <see cref="string" Group Name
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
+        /// <param name="groupName"><see cref="string"/> Group Name</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ViewGroupResponse(byte status, ushort groupID, string groupName)
@@ -207,9 +207,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Group Membership Response
         ///
-        /// <param name="capacity" <see cref="byte" Capacity
-        /// <param name="groupCount" <see cref="byte" Group count
-        /// <param name="groupList" <see cref="List<ushort>" Group list
+        /// <param name="capacity"><see cref="byte"/> Capacity</param>
+        /// <param name="groupCount"><see cref="byte"/> Group count</param>
+        /// <param name="groupList"><see cref="List<ushort>"/> Group list</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetGroupMembershipResponse(byte capacity, byte groupCount, List<ushort> groupList)
@@ -227,8 +227,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove Group Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="groupID" <see cref="ushort" Group ID
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="groupID"><see cref="ushort"/> Group ID</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RemoveGroupResponse(byte status, ushort groupID)

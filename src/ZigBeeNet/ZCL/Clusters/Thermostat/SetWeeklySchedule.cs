@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
     /// <summary>
     /// Set Weekly Schedule value object class.
     /// <para>
-    /// Cluster: Thermostat. Command is sentTO the server.
+    /// Cluster: Thermostat. Command is sent TO the server.
     /// This command is a specific command used for the Thermostat cluster.
     ///
     /// The set weekly schedule command is used to update the thermostat weekly set point schedule from a management system.

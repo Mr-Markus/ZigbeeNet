@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Identify
     /// <summary>
     /// Identify Command value object class.
     /// <para>
-    /// Cluster: Identify. Command is sentTO the server.
+    /// Cluster: Identify. Command is sent TO the server.
     /// This command is a specific command used for the Identify cluster.
     ///
     /// The identify command starts or stops the receiving device identifying itself.

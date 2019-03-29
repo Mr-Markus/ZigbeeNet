@@ -1214,8 +1214,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Setpoint Raise/Lower Command
         ///
-        /// <param name="mode" <see cref="byte" Mode
-        /// <param name="amount" <see cref="sbyte" Amount
+        /// <param name="mode"><see cref="byte"/> Mode</param>
+        /// <param name="amount"><see cref="sbyte"/> Amount</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetpointRaiseLowerCommand(byte mode, sbyte amount)
@@ -1241,12 +1241,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// If the schedule is larger than what fits in one ZigBee frame or contains more than 10 transitions, the schedule SHALL
         /// then be sent using multipleSet Weekly Schedule Commands.
         ///
-        /// <param name="numberOfTransitions" <see cref="byte" Number of Transitions
-        /// <param name="dayOfWeek" <see cref="byte" Day of Week
-        /// <param name="mode" <see cref="byte" Mode
-        /// <param name="transition" <see cref="ushort" Transition
-        /// <param name="heatSet" <see cref="ushort" Heat Set
-        /// <param name="coolSet" <see cref="ushort" Cool Set
+        /// <param name="numberOfTransitions"><see cref="byte"/> Number of Transitions</param>
+        /// <param name="dayOfWeek"><see cref="byte"/> Day of Week</param>
+        /// <param name="mode"><see cref="byte"/> Mode</param>
+        /// <param name="transition"><see cref="ushort"/> Transition</param>
+        /// <param name="heatSet"><see cref="ushort"/> Heat Set</param>
+        /// <param name="coolSet"><see cref="ushort"/> Cool Set</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetWeeklySchedule(byte numberOfTransitions, byte dayOfWeek, byte mode, ushort transition, ushort heatSet, ushort coolSet)
@@ -1267,8 +1267,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Weekly Schedule
         ///
-        /// <param name="daysToReturn" <see cref="byte" Days To Return
-        /// <param name="modeToReturn" <see cref="byte" Mode To Return
+        /// <param name="daysToReturn"><see cref="byte"/> Days To Return</param>
+        /// <param name="modeToReturn"><see cref="byte"/> Mode To Return</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetWeeklySchedule(byte daysToReturn, byte modeToReturn)
@@ -1327,12 +1327,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Weekly Schedule Response
         ///
-        /// <param name="numberOfTransitions" <see cref="byte" Number of Transitions
-        /// <param name="dayOfWeek" <see cref="byte" Day of Week
-        /// <param name="mode" <see cref="byte" Mode
-        /// <param name="transition" <see cref="ushort" Transition
-        /// <param name="heatSet" <see cref="ushort" Heat Set
-        /// <param name="coolSet" <see cref="ushort" Cool Set
+        /// <param name="numberOfTransitions"><see cref="byte"/> Number of Transitions</param>
+        /// <param name="dayOfWeek"><see cref="byte"/> Day of Week</param>
+        /// <param name="mode"><see cref="byte"/> Mode</param>
+        /// <param name="transition"><see cref="ushort"/> Transition</param>
+        /// <param name="heatSet"><see cref="ushort"/> Heat Set</param>
+        /// <param name="coolSet"><see cref="ushort"/> Cool Set</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetWeeklyScheduleResponse(byte numberOfTransitions, byte dayOfWeek, byte mode, ushort transition, ushort heatSet, ushort coolSet)
@@ -1353,12 +1353,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Relay Status Log Response
         ///
-        /// <param name="timeOfDay" <see cref="ushort" Time of day
-        /// <param name="relayStatus" <see cref="byte" Relay Status
-        /// <param name="localTemperature" <see cref="ushort" Local Temperature
-        /// <param name="humidity" <see cref="byte" Humidity
-        /// <param name="setpoint" <see cref="ushort" Setpoint
-        /// <param name="unreadEntries" <see cref="ushort" Unread Entries
+        /// <param name="timeOfDay"><see cref="ushort"/> Time of day</param>
+        /// <param name="relayStatus"><see cref="byte"/> Relay Status</param>
+        /// <param name="localTemperature"><see cref="ushort"/> Local Temperature</param>
+        /// <param name="humidity"><see cref="byte"/> Humidity</param>
+        /// <param name="setpoint"><see cref="ushort"/> Setpoint</param>
+        /// <param name="unreadEntries"><see cref="ushort"/> Unread Entries</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetRelayStatusLogResponse(ushort timeOfDay, byte relayStatus, ushort localTemperature, byte humidity, ushort setpoint, ushort unreadEntries)

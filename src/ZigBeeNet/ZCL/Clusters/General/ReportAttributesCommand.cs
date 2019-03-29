@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /// <summary>
     /// Report Attributes Command value object class.
     /// <para>
-    /// Cluster: General. Command is sentTO the server.
+    /// Cluster: General. Command is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
     /// The report attributes command is used by a device to report the values of one or

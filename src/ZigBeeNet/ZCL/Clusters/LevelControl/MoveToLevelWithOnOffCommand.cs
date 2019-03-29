@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
     /// <summary>
     /// Move to Level (with On/Off) Command value object class.
     /// <para>
-    /// Cluster: Level Control. Command is sentTO the server.
+    /// Cluster: Level Control. Command is sent TO the server.
     /// This command is a specific command used for the Level Control cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

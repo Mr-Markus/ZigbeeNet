@@ -559,8 +559,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// an optional attribute, is not present, the device SHALL move to its new level as fast
         /// as it is able.
         ///
-        /// <param name="level" <see cref="byte" Level
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="level"><see cref="byte"/> Level</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToLevelCommand(byte level, ushort transitionTime)
@@ -577,8 +577,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move Command
         ///
-        /// <param name="moveMode" <see cref="byte" Move mode
-        /// <param name="rate" <see cref="byte" Rate
+        /// <param name="moveMode"><see cref="byte"/> Move mode</param>
+        /// <param name="rate"><see cref="byte"/> Rate</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveCommand(byte moveMode, byte rate)
@@ -595,9 +595,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Step Command
         ///
-        /// <param name="stepMode" <see cref="byte" Step mode
-        /// <param name="stepSize" <see cref="byte" Step size
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="stepMode"><see cref="byte"/> Step mode</param>
+        /// <param name="stepSize"><see cref="byte"/> Step size</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StepCommand(byte stepMode, byte stepSize, ushort transitionTime)
@@ -627,8 +627,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move to Level (with On/Off) Command
         ///
-        /// <param name="level" <see cref="byte" Level
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="level"><see cref="byte"/> Level</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveToLevelWithOnOffCommand(byte level, ushort transitionTime)
@@ -645,8 +645,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Move (with On/Off) Command
         ///
-        /// <param name="moveMode" <see cref="byte" Move mode
-        /// <param name="rate" <see cref="byte" Rate
+        /// <param name="moveMode"><see cref="byte"/> Move mode</param>
+        /// <param name="rate"><see cref="byte"/> Rate</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> MoveWithOnOffCommand(byte moveMode, byte rate)
@@ -663,9 +663,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Step (with On/Off) Command
         ///
-        /// <param name="stepMode" <see cref="byte" Step mode
-        /// <param name="stepSize" <see cref="byte" Step size
-        /// <param name="transitionTime" <see cref="ushort" Transition time
+        /// <param name="stepMode"><see cref="byte"/> Step mode</param>
+        /// <param name="stepSize"><see cref="byte"/> Step size</param>
+        /// <param name="transitionTime"><see cref="ushort"/> Transition time</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StepWithOnOffCommand(byte stepMode, byte stepSize, ushort transitionTime)

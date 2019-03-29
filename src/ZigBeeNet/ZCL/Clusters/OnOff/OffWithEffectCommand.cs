@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OnOff
     /// <summary>
     /// Off With Effect Command value object class.
     /// <para>
-    /// Cluster: On/Off. Command is sentTO the server.
+    /// Cluster: On/Off. Command is sent TO the server.
     /// This command is a specific command used for the On/Off cluster.
     ///
     /// The Off With Effect command allows devices to be turned off using enhanced ways of fading.

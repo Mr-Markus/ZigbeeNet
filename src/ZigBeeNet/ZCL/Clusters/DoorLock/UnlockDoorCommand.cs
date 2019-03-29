@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.DoorLock
     /// <summary>
     /// Unlock Door Command value object class.
     /// <para>
-    /// Cluster: Door Lock. Command is sentTO the server.
+    /// Cluster: Door Lock. Command is sent TO the server.
     /// This command is a specific command used for the Door Lock cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

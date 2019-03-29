@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.PollControl
     /// <summary>
     /// Set Long Poll Interval Command value object class.
     /// <para>
-    /// Cluster: Poll Control. Command is sentTO the server.
+    /// Cluster: Poll Control. Command is sent TO the server.
     /// This command is a specific command used for the Poll Control cluster.
     ///
     /// The Set Long Poll Interval command is used to set the Read Only LongPollInterval attribute.

@@ -971,11 +971,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Set Absolute Location Command
         ///
-        /// <param name="coordinate1" <see cref="short" Coordinate 1
-        /// <param name="coordinate2" <see cref="short" Coordinate 2
-        /// <param name="coordinate3" <see cref="short" Coordinate 3
-        /// <param name="power" <see cref="short" Power
-        /// <param name="pathLossExponent" <see cref="ushort" Path Loss Exponent
+        /// <param name="coordinate1"><see cref="short"/> Coordinate 1</param>
+        /// <param name="coordinate2"><see cref="short"/> Coordinate 2</param>
+        /// <param name="coordinate3"><see cref="short"/> Coordinate 3</param>
+        /// <param name="power"><see cref="short"/> Power</param>
+        /// <param name="pathLossExponent"><see cref="ushort"/> Path Loss Exponent</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetAbsoluteLocationCommand(short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent)
@@ -995,11 +995,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Set Device Configuration Command
         ///
-        /// <param name="power" <see cref="short" Power
-        /// <param name="pathLossExponent" <see cref="ushort" Path Loss Exponent
-        /// <param name="calculationPeriod" <see cref="ushort" Calculation Period
-        /// <param name="numberRSSIMeasurements" <see cref="byte" Number RSSI Measurements
-        /// <param name="reportingPeriod" <see cref="ushort" Reporting Period
+        /// <param name="power"><see cref="short"/> Power</param>
+        /// <param name="pathLossExponent"><see cref="ushort"/> Path Loss Exponent</param>
+        /// <param name="calculationPeriod"><see cref="ushort"/> Calculation Period</param>
+        /// <param name="numberRSSIMeasurements"><see cref="byte"/> Number RSSI Measurements</param>
+        /// <param name="reportingPeriod"><see cref="ushort"/> Reporting Period</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetDeviceConfigurationCommand(short power, ushort pathLossExponent, ushort calculationPeriod, byte numberRSSIMeasurements, ushort reportingPeriod)
@@ -1019,7 +1019,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Device Configuration Command
         ///
-        /// <param name="targetAddress" <see cref="IeeeAddress" Target Address
+        /// <param name="targetAddress"><see cref="IeeeAddress"/> Target Address</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetDeviceConfigurationCommand(IeeeAddress targetAddress)
@@ -1035,9 +1035,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Location Data Command
         ///
-        /// <param name="header" <see cref="byte" Header
-        /// <param name="numberResponses" <see cref="byte" Number Responses
-        /// <param name="targetAddress" <see cref="IeeeAddress" Target Address
+        /// <param name="header"><see cref="byte"/> Header</param>
+        /// <param name="numberResponses"><see cref="byte"/> Number Responses</param>
+        /// <param name="targetAddress"><see cref="IeeeAddress"/> Target Address</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetLocationDataCommand(byte header, byte numberResponses, IeeeAddress targetAddress)
@@ -1055,12 +1055,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The RSSI Response
         ///
-        /// <param name="replyingDevice" <see cref="IeeeAddress" Replying Device
-        /// <param name="coordinate1" <see cref="short" Coordinate 1
-        /// <param name="coordinate2" <see cref="short" Coordinate 2
-        /// <param name="coordinate3" <see cref="short" Coordinate 3
-        /// <param name="rSSI" <see cref="sbyte" RSSI
-        /// <param name="numberRSSIMeasurements" <see cref="byte" Number RSSI Measurements
+        /// <param name="replyingDevice"><see cref="IeeeAddress"/> Replying Device</param>
+        /// <param name="coordinate1"><see cref="short"/> Coordinate 1</param>
+        /// <param name="coordinate2"><see cref="short"/> Coordinate 2</param>
+        /// <param name="coordinate3"><see cref="short"/> Coordinate 3</param>
+        /// <param name="rSSI"><see cref="sbyte"/> RSSI</param>
+        /// <param name="numberRSSIMeasurements"><see cref="byte"/> Number RSSI Measurements</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RSSIResponse(IeeeAddress replyingDevice, short coordinate1, short coordinate2, short coordinate3, sbyte rSSI, byte numberRSSIMeasurements)
@@ -1081,9 +1081,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Send Pings Command
         ///
-        /// <param name="targetAddress" <see cref="IeeeAddress" Target Address
-        /// <param name="numberRSSIMeasurements" <see cref="byte" Number RSSI Measurements
-        /// <param name="calculationPeriod" <see cref="ushort" Calculation Period
+        /// <param name="targetAddress"><see cref="IeeeAddress"/> Target Address</param>
+        /// <param name="numberRSSIMeasurements"><see cref="byte"/> Number RSSI Measurements</param>
+        /// <param name="calculationPeriod"><see cref="ushort"/> Calculation Period</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SendPingsCommand(IeeeAddress targetAddress, byte numberRSSIMeasurements, ushort calculationPeriod)
@@ -1101,10 +1101,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Anchor Node Announce Command
         ///
-        /// <param name="anchorNodeAddress" <see cref="IeeeAddress" Anchor Node Address
-        /// <param name="coordinate1" <see cref="short" Coordinate 1
-        /// <param name="coordinate2" <see cref="short" Coordinate 2
-        /// <param name="coordinate3" <see cref="short" Coordinate 3
+        /// <param name="anchorNodeAddress"><see cref="IeeeAddress"/> Anchor Node Address</param>
+        /// <param name="coordinate1"><see cref="short"/> Coordinate 1</param>
+        /// <param name="coordinate2"><see cref="short"/> Coordinate 2</param>
+        /// <param name="coordinate3"><see cref="short"/> Coordinate 3</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AnchorNodeAnnounceCommand(IeeeAddress anchorNodeAddress, short coordinate1, short coordinate2, short coordinate3)
@@ -1123,12 +1123,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Device Configuration Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="power" <see cref="short" Power
-        /// <param name="pathLossExponent" <see cref="ushort" Path Loss Exponent
-        /// <param name="calculationPeriod" <see cref="ushort" Calculation Period
-        /// <param name="numberRSSIMeasurements" <see cref="byte" Number RSSI Measurements
-        /// <param name="reportingPeriod" <see cref="ushort" Reporting Period
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="power"><see cref="short"/> Power</param>
+        /// <param name="pathLossExponent"><see cref="ushort"/> Path Loss Exponent</param>
+        /// <param name="calculationPeriod"><see cref="ushort"/> Calculation Period</param>
+        /// <param name="numberRSSIMeasurements"><see cref="byte"/> Number RSSI Measurements</param>
+        /// <param name="reportingPeriod"><see cref="ushort"/> Reporting Period</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> DeviceConfigurationResponse(byte status, short power, ushort pathLossExponent, ushort calculationPeriod, byte numberRSSIMeasurements, ushort reportingPeriod)
@@ -1149,16 +1149,16 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Location Data Response
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="locationType" <see cref="byte" Location Type
-        /// <param name="coordinate1" <see cref="short" Coordinate 1
-        /// <param name="coordinate2" <see cref="short" Coordinate 2
-        /// <param name="coordinate3" <see cref="short" Coordinate 3
-        /// <param name="power" <see cref="short" Power
-        /// <param name="pathLossExponent" <see cref="ushort" Path Loss Exponent
-        /// <param name="locationMethod" <see cref="byte" Location Method
-        /// <param name="qualityMeasure" <see cref="byte" Quality Measure
-        /// <param name="locationAge" <see cref="ushort" Location Age
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="locationType"><see cref="byte"/> Location Type</param>
+        /// <param name="coordinate1"><see cref="short"/> Coordinate 1</param>
+        /// <param name="coordinate2"><see cref="short"/> Coordinate 2</param>
+        /// <param name="coordinate3"><see cref="short"/> Coordinate 3</param>
+        /// <param name="power"><see cref="short"/> Power</param>
+        /// <param name="pathLossExponent"><see cref="ushort"/> Path Loss Exponent</param>
+        /// <param name="locationMethod"><see cref="byte"/> Location Method</param>
+        /// <param name="qualityMeasure"><see cref="byte"/> Quality Measure</param>
+        /// <param name="locationAge"><see cref="ushort"/> Location Age</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> LocationDataResponse(byte status, byte locationType, short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent, byte locationMethod, byte qualityMeasure, ushort locationAge)
@@ -1183,15 +1183,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Location Data Notification Command
         ///
-        /// <param name="locationType" <see cref="byte" Location Type
-        /// <param name="coordinate1" <see cref="short" Coordinate 1
-        /// <param name="coordinate2" <see cref="short" Coordinate 2
-        /// <param name="coordinate3" <see cref="short" Coordinate 3
-        /// <param name="power" <see cref="short" Power
-        /// <param name="pathLossExponent" <see cref="ushort" Path Loss Exponent
-        /// <param name="locationMethod" <see cref="byte" Location Method
-        /// <param name="qualityMeasure" <see cref="byte" Quality Measure
-        /// <param name="locationAge" <see cref="ushort" Location Age
+        /// <param name="locationType"><see cref="byte"/> Location Type</param>
+        /// <param name="coordinate1"><see cref="short"/> Coordinate 1</param>
+        /// <param name="coordinate2"><see cref="short"/> Coordinate 2</param>
+        /// <param name="coordinate3"><see cref="short"/> Coordinate 3</param>
+        /// <param name="power"><see cref="short"/> Power</param>
+        /// <param name="pathLossExponent"><see cref="ushort"/> Path Loss Exponent</param>
+        /// <param name="locationMethod"><see cref="byte"/> Location Method</param>
+        /// <param name="qualityMeasure"><see cref="byte"/> Quality Measure</param>
+        /// <param name="locationAge"><see cref="ushort"/> Location Age</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> LocationDataNotificationCommand(byte locationType, short coordinate1, short coordinate2, short coordinate3, short power, ushort pathLossExponent, byte locationMethod, byte qualityMeasure, ushort locationAge)
@@ -1227,7 +1227,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The RSSI Ping Command
         ///
-        /// <param name="locationType" <see cref="byte" Location Type
+        /// <param name="locationType"><see cref="byte"/> Location Type</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RSSIPingCommand(byte locationType)
@@ -1255,9 +1255,9 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Report RSSI Measurements Command
         ///
-        /// <param name="reportingAddress" <see cref="IeeeAddress" Reporting Address
-        /// <param name="numberOfNeighbors" <see cref="byte" Number of Neighbors
-        /// <param name="neighborsInformation" <see cref="List<NeighborInformation>" Neighbors Information
+        /// <param name="reportingAddress"><see cref="IeeeAddress"/> Reporting Address</param>
+        /// <param name="numberOfNeighbors"><see cref="byte"/> Number of Neighbors</param>
+        /// <param name="neighborsInformation"><see cref="List<NeighborInformation>"/> Neighbors Information</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ReportRSSIMeasurementsCommand(IeeeAddress reportingAddress, byte numberOfNeighbors, List<NeighborInformation> neighborsInformation)
@@ -1275,7 +1275,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Request Own Location Command
         ///
-        /// <param name="requestingAddress" <see cref="IeeeAddress" Requesting Address
+        /// <param name="requestingAddress"><see cref="IeeeAddress"/> Requesting Address</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> RequestOwnLocationCommand(IeeeAddress requestingAddress)

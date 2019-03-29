@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
     /// <summary>
     /// Initiate Normal Operation Mode Command value object class.
     /// <para>
-    /// Cluster: IAS Zone. Command is sentTO the server.
+    /// Cluster: IAS Zone. Command is sent TO the server.
     /// This command is a specific command used for the IAS Zone cluster.
     ///
     /// Used to tell the IAS Zone server to commence normal operation mode.

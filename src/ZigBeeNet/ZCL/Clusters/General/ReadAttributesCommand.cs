@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /// <summary>
     /// Read Attributes Command value object class.
     /// <para>
-    /// Cluster: General. Command is sentTO the server.
+    /// Cluster: General. Command is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
     /// The read attributes command is generated when a device wishes to determine the
@@ -57,7 +57,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append("ReadAttributesCommand [");
             builder.Append(base.ToString());
             builder.Append(", Identifiers=");
-            builder.Append(string.Join( ", ", Identifiers));
+            builder.Append(Identifiers);
             builder.Append(']');
 
             return builder.ToString();

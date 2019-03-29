@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
     /// <summary>
     /// Initiate Test Mode Command value object class.
     /// <para>
-    /// Cluster: IAS Zone. Command is sentTO the server.
+    /// Cluster: IAS Zone. Command is sent TO the server.
     /// This command is a specific command used for the IAS Zone cluster.
     ///
     /// Certain IAS Zone servers MAY have operational configurations that could be configured OTA or locally on the device. This command enables

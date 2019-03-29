@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Alarms
     /// <summary>
     /// Get Alarm Response value object class.
     /// <para>
-    /// Cluster: Alarms. Command is sentFROM the server.
+    /// Cluster: Alarms. Command is sent FROM the server.
     /// This command is a specific command used for the Alarms cluster.
     ///
     /// If there is at least one alarm record in the alarm table then the status field is set to SUCCESS.

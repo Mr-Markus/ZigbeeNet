@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
     /// <summary>
     /// Upgrade End Command value object class.
     /// <para>
-    /// Cluster: OTA Upgrade. Command is sentTO the server.
+    /// Cluster: OTA Upgrade. Command is sent TO the server.
     /// This command is a specific command used for the OTA Upgrade cluster.
     ///
     /// Upon reception all the image data, the client should verify the image to ensure its integrity and validity.

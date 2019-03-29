@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
     /// <summary>
     /// Query Specific File Command value object class.
     /// <para>
-    /// Cluster: OTA Upgrade. Command is sentTO the server.
+    /// Cluster: OTA Upgrade. Command is sent TO the server.
     /// This command is a specific command used for the OTA Upgrade cluster.
     ///
     /// Client devices shall send a Query Specific File Request command to the server to request for a file that

@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Arm Command value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentTO the server.
+    /// Cluster: IAS ACE. Command is sent TO the server.
     /// This command is a specific command used for the IAS ACE cluster.
     ///
     /// On receipt of this command, the receiving device sets its arm mode according to the value of the Arm Mode field. It

@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Basic
     /// <summary>
     /// Reset to Factory Defaults Command value object class.
     /// <para>
-    /// Cluster: Basic. Command is sentTO the server.
+    /// Cluster: Basic. Command is sent TO the server.
     /// This command is a specific command used for the Basic cluster.
     ///
     /// On receipt of this command, the device resets all the attributes of all its clusters

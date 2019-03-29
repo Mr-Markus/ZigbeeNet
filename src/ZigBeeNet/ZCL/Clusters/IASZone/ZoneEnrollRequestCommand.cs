@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
     /// <summary>
     /// Zone Enroll Request Command value object class.
     /// <para>
-    /// Cluster: IAS Zone. Command is sentFROM the server.
+    /// Cluster: IAS Zone. Command is sent FROM the server.
     /// This command is a specific command used for the IAS Zone cluster.
     ///
     /// The Zone Enroll Request command is generated when a device embodying the Zone server cluster wishes

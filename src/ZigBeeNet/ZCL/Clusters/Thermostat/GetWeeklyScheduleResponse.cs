@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
     /// <summary>
     /// Get Weekly Schedule Response value object class.
     /// <para>
-    /// Cluster: Thermostat. Command is sentFROM the server.
+    /// Cluster: Thermostat. Command is sent FROM the server.
     /// This command is a specific command used for the Thermostat cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

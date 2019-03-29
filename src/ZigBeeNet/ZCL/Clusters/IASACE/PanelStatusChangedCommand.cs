@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Panel Status Changed Command value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentFROM the server.
+    /// Cluster: IAS ACE. Command is sent FROM the server.
     /// This command is a specific command used for the IAS ACE cluster.
     ///
     /// This command updates ACE clients in the system of changes to panel status recorded by the ACE server (e.g., IAS CIE

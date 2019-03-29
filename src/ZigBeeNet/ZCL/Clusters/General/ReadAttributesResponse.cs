@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
     /// <summary>
     /// Read Attributes Response value object class.
     /// <para>
-    /// Cluster: General. Command is sentTO the server.
+    /// Cluster: General. Command is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
     /// The read attributes response command is generated in response to a read attributes
@@ -60,7 +60,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append("ReadAttributesResponse [");
             builder.Append(base.ToString());
             builder.Append(", Records=");
-            builder.Append(string.Join(", ", Records));
+            builder.Append(Records);
             builder.Append(']');
 
             return builder.ToString();

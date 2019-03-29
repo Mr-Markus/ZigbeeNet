@@ -269,8 +269,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// A Start Warning command shall always terminate the effect of any previous
         /// command that is still current.
         ///
-        /// <param name="header" <see cref="byte" Header
-        /// <param name="warningDuration" <see cref="ushort" Warning duration
+        /// <param name="header"><see cref="byte"/> Header</param>
+        /// <param name="warningDuration"><see cref="ushort"/> Warning duration</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> StartWarningCommand(byte header, ushort warningDuration)
@@ -287,7 +287,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Squawk Command
         ///
-        /// <param name="header" <see cref="byte" Header
+        /// <param name="header"><see cref="byte"/> Header</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SquawkCommand(byte header)

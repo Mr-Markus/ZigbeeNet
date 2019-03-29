@@ -131,8 +131,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Reset Alarm Command
         ///
-        /// <param name="alarmCode" <see cref="byte" Alarm code
-        /// <param name="clusterIdentifier" <see cref="ushort" Cluster identifier
+        /// <param name="alarmCode"><see cref="byte"/> Alarm code</param>
+        /// <param name="clusterIdentifier"><see cref="ushort"/> Cluster identifier</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> ResetAlarmCommand(byte alarmCode, ushort clusterIdentifier)
@@ -191,8 +191,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// condition, e.g., an attribute has taken on a value that is outside a ‘safe’ range. The details
         /// are given by individual cluster specifications.
         ///
-        /// <param name="alarmCode" <see cref="byte" Alarm code
-        /// <param name="clusterIdentifier" <see cref="ushort" Cluster identifier
+        /// <param name="alarmCode"><see cref="byte"/> Alarm code</param>
+        /// <param name="clusterIdentifier"><see cref="ushort"/> Cluster identifier</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> AlarmCommand(byte alarmCode, ushort clusterIdentifier)
@@ -215,10 +215,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// in the  alarm table  then the  status field is set  to NOT_FOUND  and the alarm code, cluster
         /// identifier and time stamp fields SHALL be omitted.
         ///
-        /// <param name="status" <see cref="byte" Status
-        /// <param name="alarmCode" <see cref="byte" Alarm code
-        /// <param name="clusterIdentifier" <see cref="ushort" Cluster identifier
-        /// <param name="timestamp" <see cref="uint" Timestamp
+        /// <param name="status"><see cref="byte"/> Status</param>
+        /// <param name="alarmCode"><see cref="byte"/> Alarm code</param>
+        /// <param name="clusterIdentifier"><see cref="ushort"/> Cluster identifier</param>
+        /// <param name="timestamp"><see cref="uint"/> Timestamp</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> GetAlarmResponse(byte status, byte alarmCode, ushort clusterIdentifier, uint timestamp)

@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.RSSILocation
     /// <summary>
     /// Device Configuration Response value object class.
     /// <para>
-    /// Cluster: RSSI Location. Command is sentFROM the server.
+    /// Cluster: RSSI Location. Command is sent FROM the server.
     /// This command is a specific command used for the RSSI Location cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

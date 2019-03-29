@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
     /// <summary>
     /// Step Color Command value object class.
     /// <para>
-    /// Cluster: Color Control. Command is sentTO the server.
+    /// Cluster: Color Control. Command is sent TO the server.
     /// This command is a specific command used for the Color Control cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

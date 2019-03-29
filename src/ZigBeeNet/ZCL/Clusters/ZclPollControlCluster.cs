@@ -606,8 +606,8 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <br>
         /// In all of the above cases, the Server SHALL respond with a Default Response not equal to ZCL_SUCCESS.
         ///
-        /// <param name="startFastPolling" <see cref="bool" Start Fast Polling
-        /// <param name="fastPollTimeout" <see cref="ushort" Fast Poll Timeout
+        /// <param name="startFastPolling"><see cref="bool"/> Start Fast Polling</param>
+        /// <param name="fastPollTimeout"><see cref="ushort"/> Fast Poll Timeout</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> CheckInResponse(bool startFastPolling, ushort fastPollTimeout)
@@ -655,7 +655,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// LongPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE and
         /// the LongPollInterval attribute value is not updated.
         ///
-        /// <param name="newLongPollInterval" <see cref="ushort" New Long Poll Interval
+        /// <param name="newLongPollInterval"><see cref="ushort"/> New Long Poll Interval</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetLongPollIntervalCommand(ushort newLongPollInterval)
@@ -678,7 +678,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// ShortPollInterval attribute. If the new value is not acceptable, the Poll Control Server SHALL send a default response of INVALID_VALUE
         /// and the ShortPollInterval attribute value is not updated.
         ///
-        /// <param name="newShortPollInterval" <see cref="ushort" New Short Poll Interval
+        /// <param name="newShortPollInterval"><see cref="ushort"/> New Short Poll Interval</param>
         /// <returns>The Task<CommandResult> command result Task</returns>
         /// </summary>
         public Task<CommandResult> SetShortPollIntervalCommand(ushort newShortPollInterval)

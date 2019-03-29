@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
     /// <summary>
     /// Query Next Image Response value object class.
     /// <para>
-    /// Cluster: OTA Upgrade. Command is sentFROM the server.
+    /// Cluster: OTA Upgrade. Command is sent FROM the server.
     /// This command is a specific command used for the OTA Upgrade cluster.
     ///
     /// The upgrade server sends a Query Next Image Response with one of the following status: SUCCESS,

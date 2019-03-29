@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
     /// <summary>
     /// Remove Group Command value object class.
     /// <para>
-    /// Cluster: Groups. Command is sentTO the server.
+    /// Cluster: Groups. Command is sent TO the server.
     /// This command is a specific command used for the Groups cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

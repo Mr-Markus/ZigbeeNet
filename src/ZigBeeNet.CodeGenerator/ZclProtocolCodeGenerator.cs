@@ -787,7 +787,7 @@ namespace ZigBeeNet.CodeGenerator
                         
                         foreach (Field field in fields)
                         {
-                            code.AppendLine("        /// <param name=\"" + field.NameLowerCamelCase + "\" <see cref=\"" + field.DataTypeClass + "\" " + field.FieldLabel);
+                            code.AppendLine("        /// <param name=\"" + field.NameLowerCamelCase + "\"><see cref=\"" + field.DataTypeClass + "\"/> " + field.FieldLabel + "</param>");
                         }
 
                         code.AppendLine("        /// <returns>The Task<CommandResult> command result Task</returns>");

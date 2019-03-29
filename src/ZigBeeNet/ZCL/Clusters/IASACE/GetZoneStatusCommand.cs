@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
     /// <summary>
     /// Get Zone Status Command value object class.
     /// <para>
-    /// Cluster: IAS ACE. Command is sentTO the server.
+    /// Cluster: IAS ACE. Command is sent TO the server.
     /// This command is a specific command used for the IAS ACE cluster.
     ///
     /// This command is used by ACE clients to request an update of the status of the IAS Zone devices managed by the ACE server

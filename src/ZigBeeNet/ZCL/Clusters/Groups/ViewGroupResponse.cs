@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
     /// <summary>
     /// View Group Response value object class.
     /// <para>
-    /// Cluster: Groups. Command is sentFROM the server.
+    /// Cluster: Groups. Command is sent FROM the server.
     /// This command is a specific command used for the Groups cluster.
     /// </para>
     /// Code is auto-generated. Modifications may be overwritten!

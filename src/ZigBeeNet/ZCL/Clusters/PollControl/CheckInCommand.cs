@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL.Clusters.PollControl
     /// <summary>
     /// Check In Command value object class.
     /// <para>
-    /// Cluster: Poll Control. Command is sentFROM the server.
+    /// Cluster: Poll Control. Command is sent FROM the server.
     /// This command is a specific command used for the Poll Control cluster.
     ///
     /// The Poll Control Cluster server sends out a Check-in command to the devices to which it is paired based on the server’s Check-inInterval
