@@ -43,30 +43,27 @@ namespace ZigBeeNet.Internal
              * so either we have to lock the instantiation of the List or the enumeration
              */
 
-            /*
+            var tmp = new List<IZigBeeCommandListener>(0);
             lock (_lock)
             {
-                var tmp = new List<IZigBeeCommandListener>(_commandListeners);
+                tmp = new List<IZigBeeCommandListener>(_commandListeners);
             }
-            */
 
             // TODO: Consider using a .net build in Concurrent Collection
-            lock (_lock)
+            // TODO: Consider removing Tas.Run()
+            foreach (IZigBeeCommandListener commandListener in tmp)
             {
-                foreach (IZigBeeCommandListener commandListener in _commandListeners)
+                Task.Run(() =>
                 {
-                    Task.Run(() =>
+                    try
                     {
-                        try
-                        {
-                            commandListener.CommandReceived(command);
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.ErrorException("Error during the notification of commandListeners.", ex);
-                        }
-                    });
-                }
+                        commandListener.CommandReceived(command);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.ErrorException("Error during the notification of commandListeners.", ex);
+                    }
+                });
             }
         }
     }

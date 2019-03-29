@@ -21,7 +21,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
         private readonly ILog _logger = LogProvider.For<ZigBeeDongleTiCc2531>();
 
         private NetworkManager _networkManager;
-        private IZigBeeTransportReceive _ZigBeeNetworkReceive;
+        private IZigBeeTransportReceive _zigBeeNetworkReceive;
 
         private readonly Dictionary<ushort, byte> _sender2Endpoint = new Dictionary<ushort, byte>();
         private readonly Dictionary<byte, ushort> _Endpoint2Profile = new Dictionary<byte, ushort>();
@@ -113,7 +113,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             apsFrame.ApsCounter = msg.TransSeqNumber;
             apsFrame.Payload = msg.Data;
 
-            _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
+            _zigBeeNetworkReceive.ReceiveCommand(apsFrame);
 
             return true;
         }
@@ -170,7 +170,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
             if(apsFrame != null)
             {
-                _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
+                _zigBeeNetworkReceive.ReceiveCommand(apsFrame);
                 return;
             }
         }
@@ -340,7 +340,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive)
         {
-            _ZigBeeNetworkReceive = zigBeeTransportReceive;
+            _zigBeeNetworkReceive = zigBeeTransportReceive;
         }
 
         public void UpdateTransportConfig(TransportConfig configuration)

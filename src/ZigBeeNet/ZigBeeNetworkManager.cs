@@ -471,7 +471,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Starts up ZigBee manager components.
         /// 
-        /// <param name="reinitialize">true if the provider is to reinitialise the network with the parameters configured since the <see cref="Initialize"/> method was called.</param>
+        /// <param name="reinitialize">true if the provider is to reinitialise the network with the parameters configured since the <see cref="Initialize()"/> method was called.</param>
         ///            
         /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
         /// </summary>
@@ -529,7 +529,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
         ///
-        /// <param name="runnableTask">the <see cref="Runnable"/> to execute</param>
+        /// <param name="runnableTask">the <see cref="Task"/> to execute</param>
         /// <param name="delay">the delay in milliseconds before the task will be executed</param>
         /// <returns>the <see cref="Task"/> for the scheduled task</returns>
         /// </summary>
@@ -592,6 +592,7 @@ namespace ZigBeeNet
             }
 
             ZclFieldSerializer fieldSerializer;
+
             try
             {
                 Serializer = new DefaultSerializer();
@@ -642,6 +643,7 @@ namespace ZigBeeNet
 
                 _logger.Debug("TX ZCL: {ZclHeader}", zclHeader);
             }
+
             _logger.Debug("TX APS: {ApsFrame}", apsFrame);
 
             Transport.SendCommand(apsFrame);
@@ -653,7 +655,6 @@ namespace ZigBeeNet
         {
             _commandNotifier.AddCommandListener(commandListener);
         }
-
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
