@@ -34,7 +34,8 @@ namespace ZigBeeNet.App
         public void CommandReceived(ZigBeeCommand command)
         {
             // If we have local servers matching the request, then we need to respond
-            if (command is MatchDescriptorRequest matchRequest) {
+            if (command is MatchDescriptorRequest matchRequest)
+            {
                 _logger.Debug("{ExtPanId}: ClusterMatcher received request {Match}", _networkManager.ZigBeeExtendedPanId, matchRequest);
                 if (matchRequest.ProfileId != 0x104)
                 {

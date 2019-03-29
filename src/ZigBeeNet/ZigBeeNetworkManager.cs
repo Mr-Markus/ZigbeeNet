@@ -48,21 +48,9 @@ namespace ZigBeeNet
     /// Set the network configuration (see below).
     /// Call the {@link #startup} method to start using the configured ZigBee network. Configuration methods may not be
     /// used.
-    /// Call the <see cref="shutdown"> method to close the network
+    /// Call the <see cref="Shutdown()"> method to close the network
     /// 
-    /// Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
-    /// includes -:
-    /// 
-    /// {@link #getZigBeeChannel}
-    /// {@link #setZigBeeChannel(ZigBeeChannel)}
-    /// {@link #getZigBeePanId}
-    /// {@link #setZigBeePanId(int)}
-    /// {@link #getZigBeeExtendedPanId}
-    /// {@link #setZigBeeExtendedPanId(ExtendedPanId)}
-    /// {@link #getZigBeeNetworkKey()}
-    /// {@link #setZigBeeNetworkKey(ZigBeeKey)}
-    /// {@link #getZigBeeLinkKey()}
-    /// {@link #setZigBeeLinkKey(ZigBeeKey)}
+    /// Following a call to <see cref="Initialize()"/> configuration calls can be made to configure the transport layer. This
     /// 
     /// Once all transport initialization is complete, {@link #startup} must be called.
     /// </summary>
@@ -296,20 +284,11 @@ namespace ZigBeeNet
         /// Initializes ZigBee manager components and initializes the transport layer.
         /// 
         /// If a network state was previously serialized, it will be deserialized here if the serializer is set with the
-        /// {@link #setNetworkStateSerializer} method.
+        /// <see cref="NetworkStateSerializer"/> method.
         /// 
-        /// Following a call to {@link #initialize} configuration calls can be made to configure the transport layer. This
-        /// includes -:
+        /// Following a call to <see cref="Initialize()"/> configuration calls can be made to configure the transport layer. This
         /// 
-        /// {@link #getZigBeeChannel}
-        /// {@link #setZigBeeChannel}
-        /// {@link #getZigBeePanId}
-        /// {@link #setZigBeePanId}
-        /// {@link #getZigBeeExtendedPanId}
-        /// {@link #setZigBeeExtendedPanId}
-        /// 
-        /// 
-        /// Once all transport initialization is complete, {@link #startup} must be called.
+        /// Once all transport initialization is complete, <see cref="Startup(bool)"/> must be called.
         /// </summary>
         /// <returns>Status</returns>
         public ZigBeeStatus Initialize()
@@ -354,8 +333,11 @@ namespace ZigBeeNet
                 if (node == null)
                 {
                     _logger.Debug("{IeeeAddress}: Adding local node to network, NWK={NetworkAddress}", ieeeAddress, nwkAddress);
-                    node = new ZigBeeNode(this, ieeeAddress);
-                    node.NetworkAddress = nwkAddress;
+
+                    node = new ZigBeeNode(this, ieeeAddress)
+                    {
+                        NetworkAddress = nwkAddress
+                    };
 
                     AddNode(node);
                 }
@@ -367,7 +349,7 @@ namespace ZigBeeNet
         /// implementation may allow any value it supports.
         /// 
         /// Note that this method may only be called following the 
-        /// {@link #initialize} call, and before the {@link #startup}
+        /// <see cref="Initialize()"/> call, and before the <see cref="Startup(bool)"/>
         /// call.
         /// </summary>
         /// <param name="channel">Defining the channel to use</param>
@@ -386,7 +368,7 @@ namespace ZigBeeNet
         /// call.
         ///
         /// <param name="panId">the new PAN ID</param>
-        /// <returns><see cref="ZigBeeStatus"> with the status of function</returns>
+        /// <returns><see cref="ZigBeeStatus"/> with the status of function</returns>
         /// </summary>
         public ZigBeeStatus SetZigBeePanId(ushort panId)
         {
@@ -413,7 +395,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Sets the ZigBee Extended PAN ID to the specified value
         /// 
-        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// Note that this method may only be called following the <see cref="Initialize()"/> call, and before the <see cref="Startup(bool)"/>
         /// call.
         ///
         /// <param name="panId">the new <see cref="ExtendedPanId"/></param>
@@ -427,7 +409,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Set the current network key in use by the system.
         /// 
-        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// Note that this method may only be called following the <see cref="Initialize()"/> call, and before the <see cref="Startup(bool)"/>
         /// call.
         ///
         /// <param name="key">the new network key as <see cref="ZigBeeKey"/></param>
@@ -454,7 +436,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Set the current link key in use by the system.
         /// 
-        /// Note that this method may only be called following the {@link #initialize} call, and before the {@link #startup}
+        /// Note that this method may only be called following the <see cref="Initialize()"/> call, and before the <see cref="Startup(bool)"/>
         /// call.
         ///
         /// <param name="key">the new link key as <see cref="ZigBeeKey"/></param>
@@ -1170,6 +1152,7 @@ namespace ZigBeeNet
             {
                 return;
             }
+
             lock (_nodeListeners)
             {
                 _nodeListeners.Add(networkNodeListener);
@@ -1197,7 +1180,6 @@ namespace ZigBeeNet
         /// </summary>
         public void RediscoverNode(IeeeAddress address)
         {
-
             ZigBeeDiscoveryExtension networkDiscoverer = (ZigBeeDiscoveryExtension)GetExtension(typeof(ZigBeeDiscoveryExtension));
             if (networkDiscoverer == null)
             {
@@ -1235,8 +1217,7 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeNode GetNode(IeeeAddress ieeeAddress)
         {
-            ZigBeeNode node = null;
-            bool result = _networkNodes.TryGetValue(ieeeAddress, out node);
+            bool result = _networkNodes.TryGetValue(ieeeAddress, out ZigBeeNode node);
 
             return node;
         }

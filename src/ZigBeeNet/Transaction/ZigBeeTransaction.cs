@@ -10,15 +10,15 @@ using ZigBeeNet.ZCL;
 namespace ZigBeeNet.Transaction
 {
     /// <summary>
-     /// Transaction class to handle the sending of commands and timeout in the event there is no response.
-     ///
-     /// </summary>
+    /// Transaction class to handle the sending of commands and timeout in the event there is no response.
+    ///
+    /// </summary>
     public class ZigBeeTransaction : IZigBeeCommandListener
     {
 
         /// <summary>
-         /// The logger.
-         /// </summary>
+        /// The logger.
+        /// </summary>
         private ILog _logger = LogProvider.For<ZigBeeTransaction>();
 
         private ZigBeeNetworkManager _networkManager;
@@ -26,28 +26,29 @@ namespace ZigBeeNet.Transaction
         private ZigBeeCommand _command;
         private CommandResult _result;
         private DateTime _timeout;
+        private TaskCompletionSource<CommandResult> _sendTransactionTask;
 
         private const int DEFAULT_TIMEOUT_MILLISECONDS = 8000;
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
 
         /// <summary>
-         /// Transaction constructor
-         /// 
-         /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> to which the transaction is being sent</param>
-         /// </summary>
+        /// Transaction constructor
+        /// 
+        /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> to which the transaction is being sent</param>
+        /// </summary>
         public ZigBeeTransaction(ZigBeeNetworkManager networkManager)
         {
             this._networkManager = networkManager;
         }
 
         /// <summary>
-         /// Sends ZigBeeCommand command and uses the ZigBeeTransactionMatcher to match the response.
-         /// The task will be timed out if there is no response.
-         ///
-         /// <param name="command">the ZigBeeCommand</param>
-         /// <param name="responseMatcher">the ZigBeeTransactionMatcher</param>
-         /// </summary>
+        /// Sends ZigBeeCommand command and uses the ZigBeeTransactionMatcher to match the response.
+        /// The task will be timed out if there is no response.
+        ///
+        /// <param name="command">the ZigBeeCommand</param>
+        /// <param name="responseMatcher">the ZigBeeTransactionMatcher</param>
+        /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
             _command = command;
@@ -66,6 +67,30 @@ namespace ZigBeeNet.Transaction
                     cmd.TransactionId = (byte)transactionId;
                 }
             }
+
+            _sendTransactionTask = new TaskCompletionSource<CommandResult>();
+            var t = _sendTransactionTask.Task;
+            var timeoutTask = Task.Delay(DEFAULT_TIMEOUT_MILLISECONDS);
+            var cancel = new CancellationTokenSource();
+
+            if (t == await Task.WhenAny(t, timeoutTask).ConfigureAwait(false))
+            {
+                cancel.Cancel(); //Cancel the timeout task
+                return t.Result;
+            }
+            else
+            {
+                /* Timeout */
+                _logger.Debug("Transaction timeout: {Command}", _command);
+
+                lock (_command)
+                {
+                    _networkManager.RemoveCommandListener(this);
+                    return new CommandResult();
+                }
+            }
+
+            /* !!! OLD CODE WITHOUT COMPLETION SOURCE - DO NOT DELET IT YET !!!
 
             return await Task.Run(() =>
             {
@@ -89,6 +114,8 @@ namespace ZigBeeNet.Transaction
                     }
                 }
             });
+
+            */
         }
 
         public bool IsTransactionMatch = false;
@@ -102,11 +129,19 @@ namespace ZigBeeNet.Transaction
                 {
                     if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                     {
+                        if (_result != null)
+                        {
+                            // THIS CASE SOHOULD NEVER HAPPEN BUT IT DOES - SEEMS TO BE A BUG
+                            return;
+                        }
+
+                        _networkManager.RemoveCommandListener(this);
+
                         _result = new CommandResult(receivedCommand);
 
                         IsTransactionMatch = true;
 
-                        _networkManager.RemoveCommandListener(this);
+                        _sendTransactionTask.SetResult(_result);
 
                         _logger.Debug("Transaction complete: {Command}", _command);
                     }
