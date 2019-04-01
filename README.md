@@ -39,7 +39,8 @@ This library is still under development. Breaking changes are possible at all ti
 
 ## Usage
 
-For a detailed description about how to use ZigbeeNet see our [wiki page](https://github.com/Mr-Markus/ZigbeeNet/wiki).
+For a detailed description about how to use ZigBeeNet see our [wiki page](https://github.com/Mr-Markus/ZigbeeNet/wiki) or
+have a look at our [PlayGround App](https://github.com/zigbeenet/ZigbeeNet/blob/master/Samples/core2.2/ZigBeeNet.PlayGround/Program.cs).
 
 A basic example here:
 
