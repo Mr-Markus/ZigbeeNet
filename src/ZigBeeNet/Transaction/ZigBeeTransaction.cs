@@ -4,8 +4,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet;
-using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
+using Serilog;
 
 namespace ZigBeeNet.Transaction
 {
@@ -15,12 +15,6 @@ namespace ZigBeeNet.Transaction
     /// </summary>
     public class ZigBeeTransaction : IZigBeeCommandListener
     {
-
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private ILog _logger = LogProvider.For<ZigBeeTransaction>();
-
         private ZigBeeNetworkManager _networkManager;
         private IZigBeeTransactionMatcher _responseMatcher;
         private ZigBeeCommand _command;
@@ -78,7 +72,7 @@ namespace ZigBeeNet.Transaction
             else
             {
                 /* Timeout */
-                _logger.Debug("Transaction timeout: {Command}", _command);
+                Log.Debug("Transaction timeout: {Command}", _command);
 
                 _networkManager.RemoveCommandListener(this);
 
@@ -100,7 +94,7 @@ namespace ZigBeeNet.Transaction
                     }
                     else
                     {
-                        _logger.Debug("Transaction timeout: {Command}", _command);
+                        Log.Debug("Transaction timeout: {Command}", _command);
                         lock (_command)
                         {
                             _networkManager.RemoveCommandListener(this);
@@ -129,7 +123,7 @@ namespace ZigBeeNet.Transaction
 
                         _sendTransactionTask.SetResult(result);
 
-                        _logger.Debug("Transaction complete: {Command}", _command);
+                        Log.Debug("Transaction complete: {Command}", _command);
                     }
                 }
             }

@@ -211,7 +211,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         protected object ReadSync(ZclAttribute attribute)
         {
-            // _logger.Debug("readSync request: {Attribute}", attribute);
+            // Log.Debug("readSync request: {Attribute}", attribute);
             CommandResult result;
             try
             {
@@ -220,12 +220,12 @@ namespace ZigBeeNet.ZCL
             }
             catch (TaskCanceledException e) // TODO: Check if this is the right exception to catch here
             {
-                // _logger.Debug("readSync interrupted");
+                // Log.Debug("readSync interrupted");
                 return null;
             }
             catch (Exception e)
             {
-                // _logger.Debug("readSync exception ", e);
+                // Log.Debug("readSync exception ", e);
                 return null;
             }
 

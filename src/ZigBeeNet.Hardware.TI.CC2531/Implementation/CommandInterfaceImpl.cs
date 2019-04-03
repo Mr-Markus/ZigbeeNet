@@ -5,10 +5,10 @@ using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Network;
 using ZigBeeNet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
-using ZigBeeNet.Logging;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
 using System.Threading;
+using Serilog;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
 {
@@ -17,10 +17,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
     /// </summary>
     public class CommandInterfaceImpl : IZToolPacketHandler, ICommandInterface
     {
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILog _logger = LogProvider.For<CommandInterfaceImpl>();
 
         /// <summary>
         /// The port interface.
@@ -106,11 +102,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         {
             if (th is IOException)
             {
-                _logger.ErrorException("IO exception in packet parsing: ", th);
+                Log.Error("IO exception in packet parsing: ", th);
             }
             else
             {
-                _logger.ErrorException("Unexpected exception in packet parsing: ", th);
+                Log.Error("Unexpected exception in packet parsing: ", th);
             }
         }
 
@@ -126,18 +122,18 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             {
                 // Received incoming message which can be either message from dongle or remote device.
                 case 0x40:
-                    _logger.Debug("<-- Async incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
+                    Log.Debug("<-- Async incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
                     NotifyAsynchronousCommand(packet);
                     break;
 
                 // Received synchronous command response.
                 case 0x60:
-                    _logger.Debug("<-- Sync incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
+                    Log.Debug("<-- Sync incomming {Type} ({Packet})", packet.GetType().Name, ByteUtils.ToBase16(packet.Packet));
                     NotifySynchronousCommand(packet);
                     break;
 
                 default:
-                    _logger.Error("Received unknown packet. {Type}", packet.GetType().Name);
+                    Log.Error("Received unknown packet. {Type}", packet.GetType().Name);
                     break;
             }
         }
@@ -147,7 +143,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         /// </summary>
         public void SendPacket(ZToolPacket packet)
         {
-            _logger.Debug("-->  {Type} ({Packet}) ", packet.GetType().Name, packet);
+            Log.Debug("-->  {Type} ({Packet}) ", packet.GetType().Name, packet);
             byte[] pck = packet.Packet;
             SendRaw(pck);
         }
@@ -219,7 +215,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                     {
                         try
                         {
-                            _logger.Trace("Waiting for other request {Command} to complete", id);
+                            Log.Verbose("Waiting for other request {Command} to complete", id);
                             _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
@@ -239,7 +235,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                     {
                         try
                         {
-                            _logger.Trace("Waiting for other request to complete");
+                            Log.Verbose("Waiting for other request to complete");
                             _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
@@ -247,11 +243,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                         {
                         }
                     }
-                    _logger.Trace("Put synchronousCommandListeners listener for {Command} command", id);
+                    Log.Verbose("Put synchronousCommandListeners listener for {Command} command", id);
                     _synchronousCommandListeners[id] = listener;
                 }
             }
-            _logger.Trace("Sending SynchronousCommand {Packet} ", packet);
+            Log.Verbose("Sending SynchronousCommand {Packet} ", packet);
             SendPacket(packet);
         }
 
@@ -320,7 +316,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                         }
                         catch (Exception e)
                         {
-                            _logger.Error("Error in incoming asynchronous message processing: {Error}", e);
+                            Log.Error("Error in incoming asynchronous message processing: {Error}", e);
                         }
                     }
                 }
@@ -377,7 +373,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                 listeners = _asynchrounsCommandListeners.ToArray();
             }
 
-            _logger.Debug("Received Async Cmd: {Packet}", packet);
+            Log.Debug("Received Async Cmd: {Packet}", packet);
 
             foreach (IAsynchronousCommandListener listener in listeners)
             {
@@ -387,7 +383,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                 }
                 catch (Exception e)
                 {
-                    _logger.Error("Error in incoming asynchronous message processing: {Error}", e);
+                    Log.Error("Error in incoming asynchronous message processing: {Error}", e);
                 }
             }
         }

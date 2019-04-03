@@ -8,19 +8,13 @@ using System.Threading.Tasks;
 using ZigBeeNet;
 using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
-using ZigBeeNet.Logging;
 using ZigBeeNet.ZDO.Command;
+using Serilog;
 
 namespace ZigBeeNet.App.Discovery
 {
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {
-        /// <summary>
-        /// The _logger.
-        /// </summary>
-        private readonly ILog _logger = LogProvider.For<ZigBeeNetworkManager>();
-
-
         /// <summary>
         /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is
         /// responsible for monitoring the network for new devices and the initial
@@ -54,7 +48,7 @@ namespace ZigBeeNet.App.Discovery
 
         public ZigBeeStatus ExtensionStartup(ZigBeeNetworkManager networkManager)
         {
-            _logger.Debug("DISCOVERY Extension: Startup");
+            Log.Debug("DISCOVERY Extension: Startup");
 
             _networkManager = networkManager;
 
@@ -87,7 +81,7 @@ namespace ZigBeeNet.App.Discovery
             {
                 _cancellationTokenSource.Cancel();
             }
-            _logger.Debug("DISCOVERY Extension: Shutdown");
+            Log.Debug("DISCOVERY Extension: Shutdown");
         }
 
         /// <summary>
@@ -105,7 +99,7 @@ namespace ZigBeeNet.App.Discovery
                 return;
             }
 
-            _logger.Debug("DISCOVERY Extension: Set mesh update interval to {UpdatePeriod} seconds", updatePeriod);
+            Log.Debug("DISCOVERY Extension: Set mesh update interval to {UpdatePeriod} seconds", updatePeriod);
 
             if (updatePeriod == 0)
             {
@@ -134,7 +128,7 @@ namespace ZigBeeNet.App.Discovery
         /// </summary>
         public void Refresh()
         {
-            _logger.Debug("DISCOVERY Extension: Start mesh update task with interval of {UpdatePeriod} seconds", _updatePeriod);
+            Log.Debug("DISCOVERY Extension: Start mesh update task with interval of {UpdatePeriod} seconds", _updatePeriod);
 
             // Delay the start slightly to allow any further processing to complete.
             // Also allows successive responses to filter through without retriggering an update.
@@ -148,7 +142,7 @@ namespace ZigBeeNet.App.Discovery
                 return;
             }
 
-            _logger.Debug("DISCOVERY Extension: Adding discoverer for {IeeeAddress}", node.IeeeAddress);
+            Log.Debug("DISCOVERY Extension: Adding discoverer for {IeeeAddress}", node.IeeeAddress);
 
             ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
             nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
@@ -162,7 +156,7 @@ namespace ZigBeeNet.App.Discovery
 
         public void NodeRemoved(ZigBeeNode node)
         {
-            _logger.Debug("DISCOVERY Extension: Removing discoverer for {IeeeAddress}", node.IeeeAddress);
+            Log.Debug("DISCOVERY Extension: Removing discoverer for {IeeeAddress}", node.IeeeAddress);
 
             nodeDiscovery.TryRemove(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer ignored);
         }
@@ -172,7 +166,7 @@ namespace ZigBeeNet.App.Discovery
             // Listen for specific commands that may indicate that the mesh has changed
             if (command is ManagementLeaveResponse || command is DeviceAnnounce)
             {
-                _logger.Debug("DISCOVERY Extension: Mesh related command received. Triggering mesh update.");
+                Log.Debug("DISCOVERY Extension: Mesh related command received. Triggering mesh update.");
                 Refresh();
             }
         }
@@ -215,10 +209,10 @@ namespace ZigBeeNet.App.Discovery
 
             _futureTask = Task.Run(() =>
             {
-                _logger.Debug("DISCOVERY Extension: Starting mesh update");
+                Log.Debug("DISCOVERY Extension: Starting mesh update");
                 foreach (ZigBeeNodeServiceDiscoverer node in nodeDiscovery.Values)
                 {
-                    _logger.Debug("DISCOVERY Extension: Starting mesh update for {IeeeAddress}", node.Node.IeeeAddress);
+                    Log.Debug("DISCOVERY Extension: Starting mesh update for {IeeeAddress}", node.Node.IeeeAddress);
                     node.UpdateMesh();
                 }
             }, _cancellationTokenSource.Token);

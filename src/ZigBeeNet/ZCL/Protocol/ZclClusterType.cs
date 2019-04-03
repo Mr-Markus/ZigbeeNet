@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet;
 
@@ -89,8 +88,6 @@ namespace ZigBeeNet.ZCL.Protocol
 
     public class ZclClusterType
     {
-        private ILog _logger = LogProvider.For<ZclClusterType>();
-
         private static readonly Dictionary<ushort, ZclClusterType> _idValueMap;
 
         public ClusterType Type { get; private set; }

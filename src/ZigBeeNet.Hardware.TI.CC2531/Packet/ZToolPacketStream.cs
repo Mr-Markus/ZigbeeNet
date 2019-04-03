@@ -10,7 +10,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Packet.AF;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SYS;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO;
-using ZigBeeNet.Logging;
+using Serilog;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL;
 using ZigBeeNet.Hardware.TI.CC2531.Extensions;
@@ -19,8 +19,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 {
     public class ZToolPacketStream : IByteArrayInputStream
     {
-        private static readonly ILog _logger = LogProvider.For<ZToolPacketStream>();
-
         private int _length;
 
         private bool _generic = false;
@@ -58,7 +56,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 // generic = true;
                 if (_generic)
                 {
-                    // log.info("Parsing data as generic");
+                    // Log.Information("Parsing data as generic");
                     int i = 0;
                     frameData = new byte[_length];
                     // Read all data bytes without parsing
@@ -92,7 +90,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
             catch (Exception e)
             {
-                _logger.Error("Packet parsing failed due to exception.", e);
+                Log.Error("Packet parsing failed due to exception.", e);
                 exception = e;
             }
             ZToolPacket exceptionResponse = new ErrorPacket();
@@ -283,7 +281,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 case ZToolCMD.UTIL_LED_CONTROL_RESPONSE:
                     return new UTIL_LED_CONTROL_RESPONSE(payload);
                 default:
-                    _logger.Warn("Unknown command ID: {Command}", cmd);
+                    Log.Warning("Unknown command ID: {Command}", cmd);
                     return new ZToolPacket(cmd, payload);
             }
         }
@@ -291,7 +289,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         public byte Read(string context)
         {
             byte b = Read();
-            _logger.Trace("Read {Context}  byte, val is {Byte}", context, b);
+            Log.Verbose("Read {Context}  byte, val is {Byte}", context, b);
             return b;
         }
 

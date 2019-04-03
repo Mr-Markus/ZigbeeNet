@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.Logging;
+using Serilog;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Util
 {
     public class ByteUtils
     {
-
-        private readonly ILog _logger = LogProvider.For<ByteUtils>();
-
-
         private ByteUtils()
         {
         }

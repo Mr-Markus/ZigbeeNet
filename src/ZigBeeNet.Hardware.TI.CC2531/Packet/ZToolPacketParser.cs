@@ -5,18 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
-using ZigBeeNet.Logging;
+using Serilog;
 using ZigBeeNet.Transport;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 {
     public class ZToolPacketParser
     {
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILog _logger = LogProvider.For<ZToolPacketParser>();
-
         /// <summary>
         /// The packet handler.
         /// </summary>
@@ -43,7 +38,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         /// </summary>
         public ZToolPacketParser(IZigBeePort port, IZToolPacketHandler packetHandler)
         {
-            _logger.Trace("Creating ZToolPacketParser");
+            Log.Verbose("Creating ZToolPacketParser");
 
             _port = port;
             _cancellationToken = new CancellationTokenSource();
@@ -58,7 +53,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         /// </summary>
         public void Run()
         {
-            _logger.Trace("ZToolPacketParser parserThread started");
+            Log.Verbose("ZToolPacketParser parserThread started");
             while (!_cancellationToken.IsCancellationRequested)
             {
                 try
@@ -70,10 +65,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                         ZToolPacketStream packetStream = new ZToolPacketStream(_port);
                         ZToolPacket response = packetStream.ParsePacket();
 
-                        _logger.Trace("Response is {Type} -> {Response}", response.GetType().Name, response);
+                        Log.Verbose("Response is {Type} -> {Response}", response.GetType().Name, response);
                         if (response.Error)
                         {
-                            _logger.Debug("Received a BAD PACKET {Response}", response.ToString());
+                            Log.Debug("Received a BAD PACKET {Response}", response.ToString());
                             // inputStream.reset();
                             continue;
                         }
@@ -83,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                     else if (val != null)
                     {
                         // Log if not end of stream.
-                        _logger.Debug("Discarded stream: expected start byte but received {Value}", val);
+                        Log.Debug("Discarded stream: expected start byte but received {Value}", val);
                     }
                 }
                 catch (IOException e)
@@ -95,7 +90,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                     }
                 }
             }
-            _logger.Debug("ZToolPacketParser parserThread exited.");
+            Log.Debug("ZToolPacketParser parserThread exited.");
         }
 
         /// <summary>

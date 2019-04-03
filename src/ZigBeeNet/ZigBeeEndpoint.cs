@@ -6,19 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.App;
 using ZigBeeNet.DAO;
-using ZigBeeNet.Logging;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Protocol;
+using Serilog;
 
 namespace ZigBeeNet
 {
     public class ZigBeeEndpoint
     {
-        private ILog _logger = LogProvider.For<ZigBeeEndpoint>();
-
         ///// <summary>
         // /// The <see cref="ZigBeeNetworkManager"> that manages this endpoint
         // /// </summary>
@@ -136,7 +134,7 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            _logger.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }
@@ -182,7 +180,7 @@ namespace ZigBeeNet
         {
             this._outputClusters.Clear();
 
-            _logger.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_outputClusters, outputClusterIds, false);
         }
@@ -218,7 +216,7 @@ namespace ZigBeeNet
             if (clusterType == null)
             {
                 // Unsupported cluster
-                _logger.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
+                Log.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
                 return null;
             }
 
@@ -250,7 +248,7 @@ namespace ZigBeeNet
             // Remove clusters no longer in use
             foreach (int id in removeIds)
             {
-                _logger.Debug("{Endpoint}: Removing cluster {Cluster}", GetEndpointAddress(), id);
+                Log.Debug("{Endpoint}: Removing cluster {Cluster}", GetEndpointAddress(), id);
                 clusters.TryRemove(id, out ZclCluster not_used);
             }
 
@@ -268,12 +266,12 @@ namespace ZigBeeNet
 
                     if (isInput)
                     {
-                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetServer();
                     }
                     else
                     {
-                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetClient();
                     }
 
@@ -344,7 +342,7 @@ namespace ZigBeeNet
             ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.CommandDirection);
             if (cluster == null)
             {
-                _logger.Debug("{EndpointAdress}: Cluster {Cluster} not found for attribute response", GetEndpointAddress(), command.ClusterId);
+                Log.Debug("{EndpointAdress}: Cluster {Cluster} not found for attribute response", GetEndpointAddress(), command.ClusterId);
                 return;
             }
 
