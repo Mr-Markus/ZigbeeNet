@@ -60,9 +60,10 @@ namespace ZigBeeNet.PlayGround
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
-                networkManager.AddSupportedCluster(0x06);
-                networkManager.AddSupportedCluster(0x08);
-                networkManager.AddSupportedCluster(0x0300);
+                networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
+                //networkManager.AddSupportedCluster(0x08);
+                networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
+                networkManager.AddSupportedCluster(ZclTouchlinkCluster.CLUSTER_ID);
 
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
