@@ -48,5 +48,16 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             this._networkKey = networkKey;
         }
+        
+        /// <summary>
+        /// Method for serializing the command fields
+        ///
+        /// </summary>
+        public int[] Serialize()
+        {
+            this.SerializeCommand(8);
+            this.SerializeATCOMMAND("\"NK\"");
+            return this.GetPayload();
+        }
     }
 }

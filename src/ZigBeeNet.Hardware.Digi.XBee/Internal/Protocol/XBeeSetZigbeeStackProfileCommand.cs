@@ -48,5 +48,16 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             this._stackProfile = stackProfile;
         }
+        
+        /// <summary>
+        /// Method for serializing the command fields
+        ///
+        /// </summary>
+        public int[] Serialize()
+        {
+            this.SerializeCommand(8);
+            this.SerializeATCOMMAND("\"ZS\"");
+            return this.GetPayload();
+        }
     }
 }

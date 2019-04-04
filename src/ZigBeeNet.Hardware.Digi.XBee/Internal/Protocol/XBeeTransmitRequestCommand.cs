@@ -125,5 +125,15 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             this._data = data;
         }
+        
+        /// <summary>
+        /// Method for serializing the command fields
+        ///
+        /// </summary>
+        public int[] Serialize()
+        {
+            this.SerializeCommand(16);
+            return this.GetPayload();
+        }
     }
 }

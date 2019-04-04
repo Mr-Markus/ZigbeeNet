@@ -63,5 +63,16 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             this._encryptionOptions.AddRange(encryptionOptions);
         }
+        
+        /// <summary>
+        /// Method for serializing the command fields
+        ///
+        /// </summary>
+        public int[] Serialize()
+        {
+            this.SerializeCommand(8);
+            this.SerializeATCOMMAND("\"EO\"");
+            return this.GetPayload();
+        }
     }
 }

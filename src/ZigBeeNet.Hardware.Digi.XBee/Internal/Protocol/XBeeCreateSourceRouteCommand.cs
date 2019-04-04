@@ -83,5 +83,17 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             this._addressList = addressList;
         }
+        
+        /// <summary>
+        /// Method for serializing the command fields
+        ///
+        /// </summary>
+        public int[] Serialize()
+        {
+            this.SerializeCommand(33);
+            this.SerializeInt8(0);
+            this.SerializeInt8(_addressList.Length);
+            return this.GetPayload();
+        }
     }
 }

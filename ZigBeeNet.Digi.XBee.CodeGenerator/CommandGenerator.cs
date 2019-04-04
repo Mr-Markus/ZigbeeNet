@@ -240,10 +240,81 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateParameterGetter(responseParameterGroup, codeNamespace, protocolClass);
 
+            // CreateSerializerMethods
             if (commandParameterGroup != null && commandParameterGroup.Count != 0)
             {
-                // TODO: Go on with line 270 CommndGenerator.java
+                CodeMemberMethod serializerMethod = CreateMethod("Serialize", null, new CodeTypeReference(typeof(int[])), null);
+                AddCodeComment(serializerMethod, new StringBuilder().AppendLine("Method for serializing the command fields"));
+
+                CodeConditionStatement codeConditionStatement = null;
+                foreach (ParameterGroup group in commandParameterGroup)
+                {
+                    // TODO: Check if the command id is really needed as hex representation. Int is used for now.
+                    CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "SerializeCommand", new CodePrimitiveExpression(command.Id /*+ command.Id.ToString("X2")*/));
+                    serializerMethod.Statements.Add(invokeExpression);
+
+                    foreach (Parameter parameter in group.Parameters)
+                    {
+                        string valueName = parameter.Name.ToLowerCamelCase();
+                        if (parameter.Optional)
+                        {
+                            codeConditionStatement = new CodeConditionStatement(new CodeSnippetExpression($"{parameter.Name.ToLowerCamelCase()} != null"));
+                            serializerMethod.Statements.Add(codeConditionStatement);
+                        }
+
+                        if (!string.IsNullOrEmpty(parameter.Value))
+                        {
+                            var result = int.TryParse(parameter.Value, out int parameterValue);
+                            CodePrimitiveExpression codePrimitiveExpression;
+                            if (result)
+                            {
+                                codePrimitiveExpression = new CodePrimitiveExpression(parameterValue);
+                            }
+                            else
+                            {
+                                codePrimitiveExpression = new CodePrimitiveExpression(parameter.Value);
+                            }
+
+                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", codePrimitiveExpression);
+                            serializerMethod.Statements.Add(invokeSerializeExpression);
+                            continue;
+                        }
+
+                        if (parameter.Multiple)
+                        {
+                            CodeAssignStatement codeAssign = new CodeAssignStatement(new CodeVariableReferenceExpression("first"), new CodePrimitiveExpression(true));
+                            serializerMethod.Statements.Add(codeAssign);
+
+                            CodeAssignStatement enumeratorAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression("System.Collections.IEnumerator enumerator"), new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"), "GetEnumerator"));
+                            serializerMethod.Statements.Add(enumeratorAssignStatement);
+
+                            // Creates a for loop that sets testInt to 0 and continues incrementing testInt by 1 each loop until testInt is not less than 10.
+                            CodeIterationStatement forLoop = new CodeIterationStatement(
+                                // initStatement parameter for pre-loop initialization.
+                                new CodeSnippetStatement(""),
+                                // testExpression parameter to test for continuation condition.
+                                new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("enumerator"), "MoveNext"),
+                                // incrementStatement parameter indicates statement to execute after each iteration.
+                                new CodeSnippetStatement(""),
+                                // statements parameter contains the statements to execute during each interation of the loop.
+                                new CodeStatement[] { new CodeAssignStatement(new CodeVariableReferenceExpression($"first{parameter.Name.ToUpperCamelCase()}"), new CodePrimitiveExpression(false)) });
+                            serializerMethod.Statements.Add(forLoop);
+                            valueName = "value";
+                        }
+                        else if (parameter.AutoSize != null)
+                        {
+                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{parameter.AutoSize.ToLowerCamelCase()}.Length"));
+                            serializerMethod.Statements.Add(invokeSerializeExpression);
+                            continue;
+                        }
+                    }
+                }
+                CodeMethodReturnStatement codeMethodReturnStatement = new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "GetPayload"));
+                serializerMethod.Statements.Add(codeMethodReturnStatement);
+                protocolClass.Members.Add(serializerMethod);
             }
+
+            // Go on with line 316
 
             GenerateCode(compileUnit, className);
         }
@@ -262,7 +333,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     protocolClass.Members.Add(memberMethod);
                     continue;
                 }
-                // TODO: Go on with line 512 CommndGenerator.java
                 foreach (Parameter parameter in group.Parameters)
                 {
                     if (parameter.AutoSize != null)
@@ -384,6 +454,12 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             }
         }
 
+        /// <summary>
+        /// Method for creating a if-condition statement.
+        /// </summary>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         private CodeConditionStatement CreateConditionStatement(Parameter parameter, string message)
         {
             return new CodeConditionStatement(
@@ -422,6 +498,13 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             }
         }
 
+        /// <summary>
+        /// Method for creating a parameter definition.
+        /// </summary>
+        /// <param name="codeNamespace">The code namespace.</param>
+        /// <param name="codeTypeDeclaration">The code type declaration.</param>
+        /// <param name="codeComment">The code comment.</param>
+        /// <param name="parameter">The parameter.</param>
         private void CreateParameterDefinition(CodeNamespace codeNamespace, CodeTypeDeclaration codeTypeDeclaration, StringBuilder codeComment, Parameter parameter)
         {
             CodeMemberField codeMemberField;
@@ -446,6 +529,15 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             codeTypeDeclaration.Members.Add(codeMemberField);
         }
 
+        /// <summary>
+        /// Method for creating a property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <param name="propertyComments">The property comments.</param>
+        /// <param name="hasGet">if set to <c>true</c> [has get].</param>
+        /// <param name="hasSet">if set to <c>true</c> [has set].</param>
+        /// <returns></returns>
         private CodeMemberProperty CreateProperty(string propertyName, CodeTypeReference propertyType, StringBuilder propertyComments, bool hasGet, bool hasSet)
         {
             CodeMemberProperty codeMemberProperty = new CodeMemberProperty
@@ -460,6 +552,14 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             return codeMemberProperty;
         }
 
+        /// <summary>
+        /// Method for creating a method.
+        /// </summary>
+        /// <param name="methodName">Name of the method.</param>
+        /// <param name="declarationExpressionCollection">The declaration expression collection.</param>
+        /// <param name="returnType">Type of the return.</param>
+        /// <param name="returnStatement">The return statement.</param>
+        /// <returns></returns>
         private CodeMemberMethod CreateMethod(string methodName, CodeParameterDeclarationExpressionCollection declarationExpressionCollection, CodeTypeReference returnType, CodeMethodReturnStatement returnStatement)
         {
             CodeMemberMethod codeMemberMethod = new CodeMemberMethod
@@ -492,6 +592,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             compileUnit.Namespaces.Add(codeNamespace);
         }
 
+        /// <summary>
+        /// Method for adding a comment to a code type member.
+        /// </summary>
+        /// <param name="codeTypeMember">The code type member.</param>
+        /// <param name="stringBuilder">The string builder.</param>
         private static void AddCodeComment(CodeTypeMember codeTypeMember, StringBuilder stringBuilder)
         {
             codeTypeMember.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -499,6 +604,14 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             codeTypeMember.Comments.Add(new CodeCommentStatement("</summary>", true));
         }
 
+        /// <summary>
+        /// Method for creating a member variable.
+        /// </summary>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="typeString">The type string.</param>
+        /// <param name="memberAttributes">The member attributes.</param>
+        /// <param name="initializeMember">if set to <c>true</c> [initialize member].</param>
+        /// <returns></returns>
         private static CodeMemberField CreateCodeMemberField(string memberName, string typeString, MemberAttributes memberAttributes, bool initializeMember)
         {
             CodeMemberField codeMemberField = new CodeMemberField
@@ -622,6 +735,24 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         //AddNamespaceImport(codeNamespace, ($"{_enumPackage}.{dataType}"));
                         return new CodeTypeReference(dataType);
                     }
+            }
+        }
+
+        private string GetTypeSerializer(string dataType)
+        {
+            switch (dataType)
+            {
+                case "uint8[]":
+                case "Data":
+                    return "Data";
+                case "uint16[]":
+                    return "Int16Array";
+                case "uint8":
+                    return "Int8";
+                case "uint16":
+                    return "Int16";
+                default:
+                    return dataType.ToUpper();
             }
         }
 
