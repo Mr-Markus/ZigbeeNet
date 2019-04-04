@@ -8,6 +8,7 @@ using Serilog;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
+using ZigBeeNet.Tranport.SerialPort;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Util;

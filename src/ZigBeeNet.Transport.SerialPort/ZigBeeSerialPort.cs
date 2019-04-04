@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.Ports;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.Transport;
 using Serilog;
 
-namespace ZigBeeNet.PlayGround
+namespace ZigBeeNet.Tranport.SerialPort
 {
     public class ZigBeeSerialPort : IZigBeePort
     {
-        private SerialPort _serialPort;
+        private System.IO.Ports.SerialPort _serialPort;
 
         private Task _reader;
 
@@ -56,7 +53,7 @@ namespace ZigBeeNet.PlayGround
             PortName = portName;
             Baudrate = baudrate;
 
-            _serialPort = new SerialPort(portName, baudrate);
+            _serialPort = new System.IO.Ports.SerialPort(portName, baudrate);
             _cancellationToken = new CancellationTokenSource();
             //_readResetEvent = new ManualResetEventSlim(false);
         }
@@ -102,7 +99,7 @@ namespace ZigBeeNet.PlayGround
 
             Log.Debug("Opening port {Port} at {Baudrate} baud.", PortName, baudrate);
 
-            _serialPort = new SerialPort(PortName, baudrate);
+            _serialPort = new System.IO.Ports.SerialPort(PortName, baudrate);
 
             try
             {
