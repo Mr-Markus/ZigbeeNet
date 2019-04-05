@@ -4,20 +4,12 @@ ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standar
 
 With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.
 
-## What is Zigbee?
+## Free beer !!
+No. Sorry. But now that I have your attention .. we need your help! Since it is hardly possible to test all devices, let us know with which devices you have already successfully tested ZigBeeNet or where you encountered problems. Just open an Issue.
 
-Zigbee is a worldwide standard for low power, self-healing, mesh networks offering a complete and interoperable IoT solution for home and building automation:
-- The industry-proven worldwide standard for robust mesh networking
-- Capable of supporting hundreds of nodes
-- Interoperability across certified Zigbee devices
-- Enhanced security
-
-<img src="http://www.ti.com/content/dam/ticom/images/products/ic/wireless-connectivity/diagram/zigbee-network-topology.png" width="800px">
-
-Further information here: [https://www.zigbee.org/zigbee-for-developers/zigbee-3-0/](https://www.zigbee.org/zigbee-for-developers/zigbee-3-0/)
+Many thanks!
 
 ### Smart Home
-
 With Zigbee 3.0 you can also build your own Smart Home solution and control Zigbee devices from different manufactures like Philips with Philips Hue and IKEA with Tradfri at the same time in the same network. So you are very flexible and the components are very cheap.
 
 ## Zigbee Stacks
