@@ -8,7 +8,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Network;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.AF;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
-using ZigBeeNet.Logging;
+using Serilog;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL;
@@ -18,10 +18,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 {
     public class ZigBeeDongleTiCc2531 : IZigBeeTransportTransmit, IApplicationFrameworkMessageListener, IAsynchronousCommandListener
     {
-        private readonly ILog _logger = LogProvider.For<ZigBeeDongleTiCc2531>();
-
         private NetworkManager _networkManager;
-        private IZigBeeTransportReceive _ZigBeeNetworkReceive;
+        private IZigBeeTransportReceive _zigBeeNetworkReceive;
 
         private readonly Dictionary<ushort, byte> _sender2Endpoint = new Dictionary<ushort, byte>();
         private readonly Dictionary<byte, ushort> _Endpoint2Profile = new Dictionary<byte, ushort>();
@@ -88,7 +86,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public ZigBeeStatus Initialize()
         {
-            _logger.Debug("CC2531 transport initialize");
+            Log.Debug("CC2531 transport initialize");
 
             // This basically just initialises the hardware so we can communicate with the 2531
             VersionString = _networkManager.Startup();
@@ -113,7 +111,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             apsFrame.ApsCounter = msg.TransSeqNumber;
             apsFrame.Payload = msg.Data;
 
-            _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
+            _zigBeeNetworkReceive.ReceiveCommand(apsFrame);
 
             return true;
         }
@@ -164,13 +162,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                     apsFrame = ZdoManagementLeave.Create(packet);
                     break;
                 default:
-                    //_logger.Debug($"Unhandled SerialPacket type {packet.CMD}");
+                    //Log.Debug($"Unhandled SerialPacket type {packet.CMD}");
                     break;
             }
 
             if(apsFrame != null)
             {
-                _ZigBeeNetworkReceive.ReceiveCommand(apsFrame);
+                _zigBeeNetworkReceive.ReceiveCommand(apsFrame);
                 return;
             }
         }
@@ -219,7 +217,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public ZigBeeStatus Startup(bool reinitialize)
         {
-            _logger.Debug("CC2531 transport startup");
+            Log.Debug("CC2531 transport startup");
 
             // Add listeners for ZCL and ZDO received messages
             _networkManager.AddAFMessageListener(this);
@@ -263,7 +261,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                     return _sender2Endpoint[profileId];
                 } else
                 {
-                    _logger.Info($"No endpoint registered for profileId={profileId}");
+                    Log.Information($"No endpoint registered for profileId={profileId}");
                     return byte.MaxValue;
                 }
             }
@@ -278,7 +276,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                     return _Endpoint2Profile[endpointId];
                 } else
                 {
-                    _logger.Info("No endpoint {Endpoint} registered", endpointId);
+                    Log.Information("No endpoint {Endpoint} registered", endpointId);
                     return ushort.MaxValue;
                 }
             }
@@ -286,7 +284,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         private byte CreateEndpoint(byte endpointId, ushort profileId)
         {
-            _logger.Trace("Registering a new endpoint {Endpoint} for profile {Profile}", endpointId, profileId);
+            Log.Verbose("Registering a new endpoint {Endpoint} for profile {Profile}", endpointId, profileId);
 
             AF_REGISTER_SRSP result;
             result = _networkManager.SendAFRegister(new AF_REGISTER(endpointId, profileId, 0, 0,
@@ -302,7 +300,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             _sender2Endpoint[profileId] = endpointId;
             _Endpoint2Profile[endpointId] = profileId;
 
-            _logger.Debug("Registered endpoint {Endpoint} with profile: {Profile}", endpointId, profileId);
+            Log.Debug("Registered endpoint {Endpoint} with profile: {Profile}", endpointId, profileId);
 
             return endpointId;
         }
@@ -340,7 +338,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public void SetZigBeeTransportReceive(IZigBeeTransportReceive zigBeeTransportReceive)
         {
-            _ZigBeeNetworkReceive = zigBeeTransportReceive;
+            _zigBeeNetworkReceive = zigBeeTransportReceive;
         }
 
         public void UpdateTransportConfig(TransportConfig configuration)
@@ -361,7 +359,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
                         default:
                             configuration.SetResult(option, ZigBeeStatus.UNSUPPORTED);
-                            _logger.Debug("Unsupported configuration option \"{Option}\" in CC2531 dongle", option);
+                            Log.Debug("Unsupported configuration option \"{Option}\" in CC2531 dongle", option);
                             break;
                     }
                 }

@@ -31,9 +31,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link IeeeAddress} from a {@link BigInteger}
+         /// Create an <see cref="IeeeAddress"> from a <see cref="BigInteger">
          ///
-         /// @param address the address as a {@link BigInteger}
+         /// <param name="address">the address as a <see cref="BigInteger"></param>
          /// </summary>
         public IeeeAddress(BigInteger address) : this()
         {
@@ -41,9 +41,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link IeeeAddress} from a {@link String}
+         /// Create an <see cref="IeeeAddress"> from a <see cref="String">
          ///
-         /// @param address the address as a {@link String}
+         /// <param name="address">the address as a <see cref="String"></param>
          /// </summary>
         public IeeeAddress(string address) : this()
         {
@@ -58,9 +58,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an {@link IeeeAddress} from an int array
+         /// Create an <see cref="IeeeAddress"> from an int array
          ///
-         /// @param address the address as an int array. Array length must be 8.
+         /// <param name="address">the address as an int array. Array length must be 8.</param>
          /// @throws IllegalArgumentException
          /// </summary>
         public IeeeAddress(byte[] address)

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.AF;
-using ZigBeeNet.Logging;
+using Serilog;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Network
 {
     internal class AFMessageListenerFilter : IAsynchronousCommandListener
     {
-        private readonly ILog _logger = LogProvider.For<AFMessageListenerFilter>();
-
         private List<IApplicationFrameworkMessageListener> _listeners;
 
         public AFMessageListenerFilter(List<IApplicationFrameworkMessageListener> list)
@@ -29,10 +27,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             {
                 if(_listeners.Count == 0)
                 {
-                    _logger.Warn($"Received AF_INCOMING_MSG but no listeners. Message was from {msg.SrcAddr} and cluster {msg.ClusterId} to endpoint {msg.DstEndpoint}. Data: {msg}");
+                    Log.Warning($"Received AF_INCOMING_MSG but no listeners. Message was from {msg.SrcAddr} and cluster {msg.ClusterId} to endpoint {msg.DstEndpoint}. Data: {msg}");
                 } else
                 {
-                    _logger.Trace($"Received AF_INCOMING_MSG from {msg.SrcAddr} and cluster {msg.ClusterId} to endpoint {msg.DstEndpoint}. Data: {msg}");
+                    Log.Verbose($"Received AF_INCOMING_MSG from {msg.SrcAddr} and cluster {msg.ClusterId} to endpoint {msg.DstEndpoint}. Data: {msg}");
                 }
                 List<IApplicationFrameworkMessageListener> localCopy;
                 lock(_listeners)
@@ -48,7 +46,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                         listener.Notify(msg);
                     } catch (Exception e)
                     {
-                        _logger.Error(e, "Error AF message listener notify");
+                        Log.Error(e, "Error AF message listener notify");
                     }
                 }
             }
@@ -57,7 +55,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         public void ReceivedUnclaimedSynchronousCommandResponse(ZToolPacket packet)
         {
             // No need to handle unclaimed responses here
-            throw new NotImplementedException();
         }
     }
 }

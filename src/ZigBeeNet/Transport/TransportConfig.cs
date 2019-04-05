@@ -28,10 +28,10 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Adds a {@link TransportConfigOption} and its value. The same option can't be added to the configuration twice.
+         /// Adds a <see cref="TransportConfigOption"> and its value. The same option can't be added to the configuration twice.
          ///
-         /// @param option the {@link TransportConfigOption} to set
-         /// @return true if the option was added, false if the option already existed
+         /// <param name="option">the <see cref="TransportConfigOption"> to set</param>
+         /// <returns>true if the option was added, false if the option already existed</returns>
          /// </summary>
         public bool AddOption(TransportConfigOption option, object value)
         {
@@ -44,10 +44,10 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Gets the a {@link TransportConfigOption} if it is configured
+         /// Gets the a <see cref="TransportConfigOption"> if it is configured
          ///
-         /// @param option the {@link TransportConfigOption} to retrieve
-         /// @return the requested {@link TransportConfigOption} value or null if it is not set
+         /// <param name="option">the <see cref="TransportConfigOption"> to retrieve</param>
+         /// <returns>the requested <see cref="TransportConfigOption"> value or null if it is not set</returns>
          /// </summary>
         public object GetOption(TransportConfigOption option)
         {
@@ -55,9 +55,9 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Gets the {@link Set} of {@link TransportConfigOption}s
+         /// Gets the <see cref="Set"> of <see cref="TransportConfigOption">s
          ///
-         /// @return the {@link Set} of {@link TransportConfigOption}s
+         /// <returns>the <see cref="Set"> of <see cref="TransportConfigOption">s</returns>
          /// </summary>
         public List<TransportConfigOption> GetOptions()
         {
@@ -65,10 +65,10 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Gets a value for the specified {@link TransportConfigOption}
+         /// Gets a value for the specified <see cref="TransportConfigOption">
          ///
-         /// @param option the {@link TransportConfigOption} to retrieve
-         /// @return the {@link Object}
+         /// <param name="option">the <see cref="TransportConfigOption"> to retrieve</param>
+         /// <returns>the <see cref="Object"></returns>
          /// </summary>
         public object GetValue(TransportConfigOption option)
         {
@@ -76,11 +76,11 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Sets the {@link ZigBeeStatus} for a configuration setting
+         /// Sets the <see cref="ZigBeeStatus"> for a configuration setting
          ///
-         /// @param option the {@link TransportConfigOption} to set the result
-         /// @param value the {@link ZigBeeStatus}
-         /// @return true if the result was set, false if the option did not exist or the result was already set
+         /// <param name="option">the <see cref="TransportConfigOption"> to set the result</param>
+         /// <param name="value">the <see cref="ZigBeeStatus"></param>
+         /// <returns>true if the result was set, false if the option did not exist or the result was already set</returns>
          /// </summary>
         public bool SetResult(TransportConfigOption option, ZigBeeStatus value)
         {
@@ -94,10 +94,10 @@ namespace ZigBeeNet.Transport
         }
 
         /// <summary>
-         /// Gets the the {@link TransportConfigResult} for a {@link TransportConfigOption} if it is configured
+         /// Gets the the <see cref="TransportConfigResult"> for a <see cref="TransportConfigOption"> if it is configured
          ///
-         /// @param option the {@link TransportConfigOption} to retrieve the result
-         /// @return the result {@link ZigBeeStatus} for the requested {@link TransportConfigOption}
+         /// <param name="option">the <see cref="TransportConfigOption"> to retrieve the result</param>
+         /// <returns>the result <see cref="ZigBeeStatus"> for the requested <see cref="TransportConfigOption"></returns>
          /// </summary>
         public ZigBeeStatus GetResult(TransportConfigOption option)
         {

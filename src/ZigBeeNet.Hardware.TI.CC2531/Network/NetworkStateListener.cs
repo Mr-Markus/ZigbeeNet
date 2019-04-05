@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO;
-using ZigBeeNet.Logging;
+using Serilog;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Network
 {
     internal class NetworkStateListener : IAsynchronousCommandListener
     {
-        private readonly ILog _logger = LogProvider.For<NetworkStateListener>();
-
         public event EventHandler<DriverStatus> OnStateChanged;
         
         public void ReceivedAsynchronousCommand(ZToolPacket packet)
@@ -20,7 +18,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                 switch(stateInd.Status)
                 {
                     case DeviceState.Started_as_ZigBee_Coordinator:
-                        _logger.Debug("Started as Zigbee Coordinator");
+                        Log.Debug("Started as Zigbee Coordinator");
                         OnStateChanged?.Invoke(this, DriverStatus.NETWORK_READY);
                         break;
                     default:
@@ -32,7 +30,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
         public void ReceivedUnclaimedSynchronousCommandResponse(ZToolPacket packet)
         {
             // Processing not requiered
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO: Realy throwing an exception ?
         }
     }
 }

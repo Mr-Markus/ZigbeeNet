@@ -27,7 +27,7 @@ namespace ZigBeeNet.Security
         }
 
         /// <summary>
-         /// Create an {@link ZigBeeKey} from a {@link String}. The string must contain 32 hexadecimal numbers
+         /// Create an <see cref="ZigBeeKey"> from a <see cref="String">. The string must contain 32 hexadecimal numbers
          /// to make up a 16 byte key. Numbers can be formatted in various ways -:
          /// <ul>
          /// <li>1234ABCD ...
@@ -39,7 +39,7 @@ namespace ZigBeeNet.Security
          /// <li>0x12:0x34:0xAB:0xCD ...
          /// </ul>
          ///
-         /// @param key the key as a {@link String}
+         /// <param name="key">the key as a <see cref="String"></param>
          /// @throws IllegalArgumentException
          /// </summary>
         public ZigBeeKey(string keyString)
@@ -69,9 +69,9 @@ namespace ZigBeeNet.Security
         }
 
         /// <summary>
-         /// Create a {@link ZigBeeKey} from an int array
+         /// Create a <see cref="ZigBeeKey"> from an int array
          ///
-         /// @param key the key as an int array. Array length must be 16.
+         /// <param name="key">the key as an int array. Array length must be 16.</param>
          /// @throws IllegalArgumentException
          /// </summary>
         public ZigBeeKey(byte[] key)
@@ -89,7 +89,7 @@ namespace ZigBeeNet.Security
         /// <summary>
          /// Returns true if this key has an address associated with it
          ///
-         /// @return true if this key has an address associated with it
+         /// <returns>true if this key has an address associated with it</returns>
          /// </summary>
         public bool HasAddress()
         {
@@ -100,7 +100,7 @@ namespace ZigBeeNet.Security
          /// Check if the NetworkKey is valid. This checks the length of the ID, and checks
          /// it is not 00000000000000000000000000000000.
          ///
-         /// @return true if the key is valid
+         /// <returns>true if the key is valid</returns>
          /// </summary>
         public bool IsValid()
         {
@@ -156,9 +156,9 @@ namespace ZigBeeNet.Security
         }
 
         /// <summary>
-         /// Create a {@link ZigBeeKey} with a random key
+         /// Create a <see cref="ZigBeeKey"> with a random key
          ///
-         /// @return {@link ZigBeeKey} containing a random 128 bit key
+         /// <returns><see cref="ZigBeeKey"> containing a random 128 bit key</returns>
          /// </summary>
         public static ZigBeeKey CreateRandom()
         {

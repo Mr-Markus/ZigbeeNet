@@ -15,6 +15,7 @@ namespace ZigBeeNet.ZCL.Protocol
         DATA_8_BIT = 0x08,
         ENUMERATION_16_BIT = 0x31,
         ENUMERATION_8_BIT = 0x30,
+        FLOAT_32_BIT = 0x39,
         IEEE_ADDRESS = 0xF0,
         N_X_ATTRIBUTE_IDENTIFIER = 0x81,
         N_X_ATTRIBUTE_INFORMATION = 0x82,

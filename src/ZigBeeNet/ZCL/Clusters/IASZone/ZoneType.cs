@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of IASZone attribute ZoneType options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.IASZone
 {
+   /// <summary>
+   /// Enumeration of IASZone attribute ZoneType options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum ZoneType
    {
        STANDARD_CIE = 0x0000,

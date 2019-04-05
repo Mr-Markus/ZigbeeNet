@@ -5,14 +5,14 @@ using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    /**
- * This command is provided to allow updating of network configuration parameters or
- * to request information from devices on network conditions in the local operating
- * environment. Upon receipt, the remote device shall determine from the contents of
- * the ScanDuration parameter whether this request is an update to the ChannelMask and
- * NwkManagerAddr parameters, a channel change command, or a request to scan channels
- * and report the results.
- */
+    /// <summary>
+ /// This command is provided to allow updating of network configuration parameters or
+ /// to request information from devices on network conditions in the local operating
+ /// environment. Upon receipt, the remote device shall determine from the contents of
+ /// the ScanDuration parameter whether this request is an update to the ChannelMask and
+ /// NwkManagerAddr parameters, a channel change command, or a request to scan channels
+ /// and report the results.
+ /// </summary>
     public class ZDO_MGMT_NWK_UPDATE_REQ : ZToolPacket
     {
         public ushort DestinationAddress { get; private set; }

@@ -16,11 +16,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             Value = 0;
         }
 
-        /**
-         * Don't add Checksum byte when computing checksum!!
-         *
-         * @param val
-         */
+        /// <summary>
+        /// Don't add Checksum byte when computing checksum!!
+        ///
+        /// <param name="val"></param>
+        /// </summary>
         public void AddByte(byte val)
         {
             // checksum+= val;

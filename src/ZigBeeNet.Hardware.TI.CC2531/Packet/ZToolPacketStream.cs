@@ -10,7 +10,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Packet.AF;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.SYS;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO;
-using ZigBeeNet.Logging;
+using Serilog;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL;
 using ZigBeeNet.Hardware.TI.CC2531.Extensions;
@@ -19,11 +19,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 {
     public class ZToolPacketStream : IByteArrayInputStream
     {
-        private static readonly ILog _logger = LogProvider.For<ZToolPacketStream>();
-
         private int _length;
 
-        private bool generic = false;
+        private bool _generic = false;
 
         private IZigBeePort _port;
 
@@ -56,9 +54,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 DoubleByte apiId = new DoubleByte(apiIdMSB, apiIdLSB);
                 // TODO Remove generic never used
                 // generic = true;
-                if (generic)
+                if (_generic)
                 {
-                    // log.info("Parsing data as generic");
+                    // Log.Information("Parsing data as generic");
                     int i = 0;
                     frameData = new byte[_length];
                     // Read all data bytes without parsing
@@ -92,7 +90,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
             catch (Exception e)
             {
-                _logger.Error("Packet parsing failed due to exception.", e);
+                Log.Error("Packet parsing failed due to exception.", e);
                 exception = e;
             }
             ZToolPacket exceptionResponse = new ErrorPacket();
@@ -283,7 +281,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 case ZToolCMD.UTIL_LED_CONTROL_RESPONSE:
                     return new UTIL_LED_CONTROL_RESPONSE(payload);
                 default:
-                    _logger.Warn("Unknown command ID: {Command}", cmd);
+                    Log.Warning("Unknown command ID: {Command}", cmd);
                     return new ZToolPacket(cmd, payload);
             }
         }
@@ -291,16 +289,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         public byte Read(string context)
         {
             byte b = Read();
-            _logger.Trace("Read {Context}  byte, val is {Byte}", context, b);
+            Log.Verbose("Read {Context}  byte, val is {Byte}", context, b);
             return b;
         }
 
-        /**
-         * TODO implement as class that extends inputstream?
-         * <p/>
-         * This method reads bytes from the underlying input stream and performs the following tasks: keeps track of how
-         * many bytes we've read, un-escapes bytes if necessary and verifies the checksum.
-         */
+        /// <summary>
+        /// TODO implement as class that extends inputstream?
+        /// 
+        /// This method reads bytes from the underlying input stream and performs the following tasks: keeps track of how
+        /// many bytes we've read, un-escapes bytes if necessary and verifies the checksum.
+        /// </summary>
         public byte Read()
         {
 
@@ -326,10 +324,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 Done = true;
 
                 // log.debug("Checksum byte is " + b);
-                /*
-                 * if (!checksum.verify()) {/////////////Maybe expected in ZTool is 0x00, not FF//////////////////// throw
-                 * new ZToolParseException("Checksum is incorrect.  Expected 0xff, but got " + checksum.getChecksum()); }
-                 */
+                ////
+                /// if (!checksum.verify()) {/////////////Maybe expected in ZTool is 0x00, not FF//////////////////// throw
+                /// new ZToolParseException("Checksum is incorrect.  Expected 0xff, but got " + checksum.getChecksum()); }
+                /// </summary>
             }
 
             return b.Value;
@@ -349,22 +347,22 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             return value;
         }
 
-        /**
-         * Returns number of bytes remaining, relative to the stated packet length (not including checksum).
-         *
-         * @return number of bytes remaining to be read excluding checksum
-         */
+        /// <summary>
+        /// Returns number of bytes remaining, relative to the stated packet length (not including checksum).
+        ///
+        /// <returns>number of bytes remaining to be read excluding checksum</returns>
+        /// </summary>
         public int GetFrameDataBytesRead()
         {
             // subtract out the 1 length bytes and API PROFILE_ID_HOME_AUTOMATION 2 bytes
             return BytesRead - 3;
         }
 
-        /**
-         * Number of bytes remaining to be read, including the checksum
-         *
-         * @return number of bytes remaining to be read including checksum
-         */
+        /// <summary>
+        /// Number of bytes remaining to be read, including the checksum
+        ///
+        /// <returns>number of bytes remaining to be read including checksum</returns>
+        /// </summary>
         public int GetRemainingBytes()
         {
             // add one for checksum byte (not included) in packet length

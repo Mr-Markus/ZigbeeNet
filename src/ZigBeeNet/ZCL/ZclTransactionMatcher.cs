@@ -10,7 +10,7 @@ namespace ZigBeeNet.ZCL
     /// <summary>
      /// The ZCL transaction response matcher.
      /// 
-     /// Implements {@link ZigBeeTransactionMatcher} to check if a ZCL transaction matches a request.
+     /// Implements <see cref="ZigBeeTransactionMatcher"> to check if a ZCL transaction matches a request.
      /// The matcher will return true if the request and response transaction IDs match and the request destination address,
      /// and response source address match.
      /// </summary>

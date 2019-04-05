@@ -7,76 +7,75 @@ using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Clusters.Scenes;
 
-/// <summary>
- /// Remove Scene Response value object class.
- ///
- /// Cluster: Scenes. Command is sentFROM the server.
- /// This command is a specific command used for the Scenes cluster.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
-       public class RemoveSceneResponse : ZclCommand
-       {
-           /// <summary>
-           /// Status command message field.
-           /// </summary>
-           public byte Status { get; set; }
+    /// <summary>
+    /// Remove Scene Response value object class.
+    /// <para>
+    /// Cluster: Scenes. Command is sent FROM the server.
+    /// This command is a specific command used for the Scenes cluster.
+    /// </para>
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class RemoveSceneResponse : ZclCommand
+    {
+        /// <summary>
+        /// Status command message field.
+        /// </summary>
+        public byte Status { get; set; }
 
-           /// <summary>
-           /// Group ID command message field.
-           /// </summary>
-           public ushort GroupID { get; set; }
+        /// <summary>
+        /// Group ID command message field.
+        /// </summary>
+        public ushort GroupID { get; set; }
 
-           /// <summary>
-           /// Scene ID command message field.
-           /// </summary>
-           public byte SceneID { get; set; }
+        /// <summary>
+        /// Scene ID command message field.
+        /// </summary>
+        public byte SceneID { get; set; }
 
 
-           /// <summary>
-           /// Default constructor.
-           /// </summary>
-           public RemoveSceneResponse()
-           {
-               GenericCommand = false;
-               ClusterId = 5;
-               CommandId = 2;
-               CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
-           }
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public RemoveSceneResponse()
+        {
+            GenericCommand = false;
+            ClusterId = 5;
+            CommandId = 2;
+            CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
+        }
 
-           public override void Serialize(ZclFieldSerializer serializer)
-           {
+        public override void Serialize(ZclFieldSerializer serializer)
+        {
             serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(GroupID, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(SceneID, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        }
 
-           public override void Deserialize(ZclFieldDeserializer deserializer)
-           {
-               Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-               GroupID = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-               SceneID = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-           }
+        public override void Deserialize(ZclFieldDeserializer deserializer)
+        {
+            Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            GroupID = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SceneID = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+        }
 
-           public override string ToString()
-           {
-               var builder = new StringBuilder();
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
 
-               builder.Append("RemoveSceneResponse [");
-               builder.Append(base.ToString());
-               builder.Append(", Status=");
-               builder.Append(Status);
-               builder.Append(", GroupID=");
-               builder.Append(GroupID);
-               builder.Append(", SceneID=");
-               builder.Append(SceneID);
-               builder.Append(']');
+            builder.Append("RemoveSceneResponse [");
+            builder.Append(base.ToString());
+            builder.Append(", Status=");
+            builder.Append(Status);
+            builder.Append(", GroupID=");
+            builder.Append(GroupID);
+            builder.Append(", SceneID=");
+            builder.Append(SceneID);
+            builder.Append(']');
 
-               return builder.ToString();
-           }
-
-       }
+            return builder.ToString();
+        }
+    }
 }

@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of ElectricalMeasurement attribute MeasurementType options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.ElectricalMeasurement
 {
+   /// <summary>
+   /// Enumeration of ElectricalMeasurement attribute MeasurementType options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum MeasurementType
    {
        AC_ACTIVE_MEASUREMENT = 0x0000,

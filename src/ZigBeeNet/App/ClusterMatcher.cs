@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.Logging;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Command;
+using Serilog;
 
 namespace ZigBeeNet.App
 {
     public class ClusterMatcher : IZigBeeCommandListener
     {
-        private readonly ILog _logger = LogProvider.For<ClusterMatcher>();
-
         private ZigBeeNetworkManager _networkManager;
 
         private List<ushort> _clusters = new List<ushort>();
 
         public ClusterMatcher(ZigBeeNetworkManager networkManager)
         {
-            _logger.Debug("ClusterMatcher starting");
+            Log.Debug("ClusterMatcher starting");
             _networkManager = networkManager;
 
             _networkManager.AddCommandListener(this);
@@ -27,15 +25,16 @@ namespace ZigBeeNet.App
 
         public void AddCluster(ushort cluster)
         {
-            _logger.Debug($"ClusterMatcher adding cluster {cluster}");
+            Log.Debug($"ClusterMatcher adding cluster {cluster}");
             _clusters.Add(cluster);
         }
 
         public void CommandReceived(ZigBeeCommand command)
         {
             // If we have local servers matching the request, then we need to respond
-            if (command is MatchDescriptorRequest matchRequest) {
-                _logger.Debug("{ExtPanId}: ClusterMatcher received request {Match}", _networkManager.ZigBeeExtendedPanId, matchRequest);
+            if (command is MatchDescriptorRequest matchRequest)
+            {
+                Log.Debug("{ExtPanId}: ClusterMatcher received request {Match}", _networkManager.ZigBeeExtendedPanId, matchRequest);
                 if (matchRequest.ProfileId != 0x104)
                 {
                     // TODO: Do we need to restrict the profile? Remove this check?
@@ -47,7 +46,7 @@ namespace ZigBeeNet.App
                 if (matchRequest.InClusterList.Intersect(_clusters).Count() == 0
                         && matchRequest.OutClusterList.Intersect(_clusters).Count() == 0)
                 {
-                    _logger.Debug("{ExtPanId}: ClusterMatcher no match", _networkManager.ZigBeeExtendedPanId);
+                    Log.Debug("{ExtPanId}: ClusterMatcher no match", _networkManager.ZigBeeExtendedPanId);
                     return;
                 }
 
@@ -59,7 +58,7 @@ namespace ZigBeeNet.App
 
                 matchResponse.DestinationAddress = command.SourceAddress;
                 matchResponse.NwkAddrOfInterest = matchRequest.NwkAddrOfInterest;
-                _logger.Debug("{ExtPanId}: ClusterMatcher sending match {Response}", _networkManager.ZigBeeExtendedPanId, matchResponse);
+                Log.Debug("{ExtPanId}: ClusterMatcher sending match {Response}", _networkManager.ZigBeeExtendedPanId, matchResponse);
                 _networkManager.SendCommand(matchResponse);
             }
         }

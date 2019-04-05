@@ -6,26 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.App;
 using ZigBeeNet.DAO;
-using ZigBeeNet.Logging;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Protocol;
+using Serilog;
 
 namespace ZigBeeNet
 {
     public class ZigBeeEndpoint
     {
-        private ILog _logger = LogProvider.For<ZigBeeEndpoint>();
-
         ///// <summary>
-        // /// The {@link ZigBeeNetworkManager} that manages this endpoint
+        // /// The <see cref="ZigBeeNetworkManager"> that manages this endpoint
         // /// </summary>
         //private readonly ZigBeeNetworkManager _networkManager;
 
         /// <summary>
-         /// Link to the parent {@link ZigBeeNode} to which this endpoint belongs
+         /// Link to the parent <see cref="ZigBeeNode"> to which this endpoint belongs
          /// </summary>
         public ZigBeeNode Node { get; private set; }
 
@@ -62,7 +60,7 @@ namespace ZigBeeNet
         private readonly ConcurrentDictionary<int, ZclCluster> _outputClusters = new ConcurrentDictionary<int, ZclCluster>();
 
         /// <summary>
-         /// Map of {@link ZigBeeApplication}s that are available to this endpoint. Applications are added
+         /// Map of <see cref="ZigBeeApplication">s that are available to this endpoint. Applications are added
          /// with the {@link #addApplication(ZigBeeApplication application)} method and can be retrieved with the
          /// {@link #getApplication(int clusterId)} method.
          /// </summary>
@@ -71,9 +69,9 @@ namespace ZigBeeNet
         /// <summary>
          /// Constructor
          ///
-         /// @param networkManager the {@link ZigBeeNetworkManager} to which the endpoint belongs
-         /// @param node the parent {@link ZigBeeNode}
-         /// @param endpoint the endpoint number within the {@link ZigBeeNode}
+         /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"> to which the endpoint belongs</param>
+         /// <param name="node">the parent <see cref="ZigBeeNode"></param>
+         /// <param name="endpoint">the endpoint number within the <see cref="ZigBeeNode"></param>
          /// </summary>
         public ZigBeeEndpoint(ZigBeeNode node, byte endpoint)
         {
@@ -86,7 +84,7 @@ namespace ZigBeeNet
          /// Gets input cluster IDs. This lists the IDs of all clusters the device
          /// supports as a server.
          ///
-         /// @return the {@link Collection} of input cluster IDs
+         /// <returns>the <see cref="Collection"> of input cluster IDs</returns>
          /// </summary>
         public IEnumerable<int> GetInputClusterIds()
         {
@@ -99,14 +97,14 @@ namespace ZigBeeNet
          /// @deprecated Use {@link #getInputCluster}
          /// @param clusterId
          ///            the cluster number
-         /// @return the cluster or null if cluster is not found
+         /// <returns>the cluster or null if cluster is not found</returns>
          /// </summary>
 
         /// <summary>
          /// Gets an input cluster
          ///
-         /// @param clusterId the cluster number
-         /// @return the {@link ZclCluster} or null if cluster is not found
+         /// <param name="clusterId">the cluster number</param>
+         /// <returns>the <see cref="ZclCluster"> or null if cluster is not found</returns>
          /// </summary>
         public ZclCluster GetInputCluster(int clusterId)
         {
@@ -117,8 +115,8 @@ namespace ZigBeeNet
         /// <summary>
          /// Gets an output cluster
          ///
-         /// @param clusterId the cluster number
-         /// @return the {@link ZclCluster} or null if cluster is not found
+         /// <param name="clusterId">the cluster number</param>
+         /// <returns>the <see cref="ZclCluster"> or null if cluster is not found</returns>
          /// </summary>
         public ZclCluster GetOutputCluster(int clusterId)
         {
@@ -136,15 +134,15 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            _logger.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }
 
         /// <summary>
-         /// Gets the {@link IeeeAddress} for this endpoint from it's parent {@link ZigBeeNode}
+         /// Gets the <see cref="IeeeAddress"> for this endpoint from it's parent <see cref="ZigBeeNode">
          ///
-         /// @return the node {@link IeeeAddress}
+         /// <returns>the node <see cref="IeeeAddress"></returns>
          /// </summary>
         public IeeeAddress GetIeeeAddress()
         {
@@ -154,7 +152,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Gets the endpoint address
          ///
-         /// @return the {@link ZigBeeEndpointAddress}
+         /// <returns>the <see cref="ZigBeeEndpointAddress"></returns>
          /// </summary>
         public ZigBeeEndpointAddress GetEndpointAddress()
         {
@@ -165,7 +163,7 @@ namespace ZigBeeNet
          /// Gets output cluster IDs. This provides the IDs of all clusters the endpoint
          /// supports as a client.
          ///
-         /// @return the {@link Collection} of output cluster IDs
+         /// <returns>the <see cref="Collection"> of output cluster IDs</returns>
          /// </summary>
         public IEnumerable<int> GetOutputClusterIds()
         {
@@ -182,13 +180,13 @@ namespace ZigBeeNet
         {
             this._outputClusters.Clear();
 
-            _logger.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
 
             UpdateClusters(_outputClusters, outputClusterIds, false);
         }
 
         /// <summary>
-         /// Gets a cluster from the input or output cluster list depending on the command {@link ZclCommandDirection} for a
+         /// Gets a cluster from the input or output cluster list depending on the command <see cref="ZclCommandDirection"> for a
          /// received command.
          /// 
          /// If commandDirection is {@link ZclCommandDirection#CLIENT_TO_SERVER} then the cluster comes from the output
@@ -196,9 +194,9 @@ namespace ZigBeeNet
          /// If commandDirection is {@link ZclCommandDirection#SERVER_TO_CLIENT} then the cluster comes from the input
          /// cluster list.
          ///
-         /// @param clusterId the cluster ID to get
-         /// @param direction the {@link ZclCommandDirection}
-         /// @return the {@link ZclCluster} or null if the cluster is not known
+         /// <param name="clusterId">the cluster ID to get</param>
+         /// <param name="direction">the <see cref="ZclCommandDirection"></param>
+         /// <returns>the <see cref="ZclCluster"> or null if the cluster is not known</returns>
          /// </summary>
         private ZclCluster GetReceiveCluster(int clusterId, ZclCommandDirection direction)
         {
@@ -218,7 +216,7 @@ namespace ZigBeeNet
             if (clusterType == null)
             {
                 // Unsupported cluster
-                _logger.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
+                Log.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
                 return null;
             }
 
@@ -250,7 +248,7 @@ namespace ZigBeeNet
             // Remove clusters no longer in use
             foreach (int id in removeIds)
             {
-                _logger.Debug("{Endpoint}: Removing cluster {Cluster}", GetEndpointAddress(), id);
+                Log.Debug("{Endpoint}: Removing cluster {Cluster}", GetEndpointAddress(), id);
                 clusters.TryRemove(id, out ZclCluster not_used);
             }
 
@@ -268,12 +266,12 @@ namespace ZigBeeNet
 
                     if (isInput)
                     {
-                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetServer();
                     }
                     else
                     {
-                        _logger.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
                         clusterClass.SetClient();
                     }
 
@@ -289,7 +287,7 @@ namespace ZigBeeNet
          /// The cluster used by the server must be in the output clusters list and this will be passed to the
          /// {@link ZclApplication#serverStartup()) method to start the application.
          ///
-         /// @param application the new {@link ZigBeeApplication}
+         /// <param name="application">the new <see cref="ZigBeeApplication"></param>
          /// </summary>
         public void AddApplication(IZigBeeApplication application)
         {
@@ -309,7 +307,7 @@ namespace ZigBeeNet
          /// cluster
          ///
          /// @param clusterId
-         /// @return the {@link ZigBeeApplication}
+         /// <returns>the <see cref="ZigBeeApplication"></returns>
          /// </summary>
         public IZigBeeApplication GetApplication(int clusterId)
         {
@@ -322,7 +320,7 @@ namespace ZigBeeNet
          /// Incoming command handler. The endpoint will process any commands addressed to this endpoint ID and pass o
          /// clusters and applications
          ///
-         /// @param command the {@link ZclCommand} received
+         /// <param name="command">the <see cref="ZclCommand"> received</param>
          /// </summary>
         public void CommandReceived(ZclCommand command)
         {
@@ -344,7 +342,7 @@ namespace ZigBeeNet
             ZclCluster cluster = GetReceiveCluster(command.ClusterId, command.CommandDirection);
             if (cluster == null)
             {
-                _logger.Debug("{EndpointAdress}: Cluster {Cluster} not found for attribute response", GetEndpointAddress(), command.ClusterId);
+                Log.Debug("{EndpointAdress}: Cluster {Cluster} not found for attribute response", GetEndpointAddress(), command.ClusterId);
                 return;
             }
 
@@ -370,9 +368,9 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Gets a {@link ZigBeeEndpointDao} used for serialisation of the {@link ZigBeeEndpoint}
+         /// Gets a <see cref="ZigBeeEndpointDao"> used for serialisation of the <see cref="ZigBeeEndpoint">
          ///
-         /// @return the {@link ZigBeeEndpointDao}
+         /// <returns>the <see cref="ZigBeeEndpointDao"></returns>
          /// </summary>
         public ZigBeeEndpointDao GetDao()
         {
@@ -435,7 +433,7 @@ namespace ZigBeeNet
         /// <summary>
          /// Sends ZigBee command without waiting for response.
          ///
-         /// @param command the {@link ZigBeeCommand} to send
+         /// <param name="command">the <see cref="ZigBeeCommand"> to send</param>
         /// </summary>
         public void SendTransaction(ZigBeeCommand command)
         {
@@ -443,11 +441,11 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Sends {@link ZigBeeCommand} command and uses the {@link ZigBeeTransactionMatcher} to match the response.
+         /// Sends <see cref="ZigBeeCommand"> command and uses the <see cref="ZigBeeTransactionMatcher"> to match the response.
          ///
-         /// @param command the {@link ZigBeeCommand} to send
-         /// @param responseMatcher the {@link ZigBeeTransactionMatcher} used to match the response to the request
-         /// @return the {@link CommandResult} future.
+         /// <param name="command">the <see cref="ZigBeeCommand"> to send</param>
+         /// <param name="responseMatcher">the <see cref="ZigBeeTransactionMatcher"> used to match the response to the request</param>
+         /// <returns>the <see cref="CommandResult"> future.</returns>
          /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {

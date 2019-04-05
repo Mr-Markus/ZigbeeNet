@@ -94,7 +94,7 @@ namespace ZigBeeNet.ZDO.Command
                    .Append(", startIndex=")
                    .Append(StartIndex)
                    .Append(", neighborTableList=")
-                   .Append(NeighborTableList)
+                   .Append(string.Join(", ", NeighborTableList))
                    .Append(']');
 
             return builder.ToString();

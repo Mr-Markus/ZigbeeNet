@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Serilog;
-using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
-using ZigBeeNet.Serial;
+using ZigBeeNet.Tranport.SerialPort;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Util;
@@ -24,7 +24,7 @@ namespace ZigBeeNet.PlayGround
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
@@ -60,9 +60,10 @@ namespace ZigBeeNet.PlayGround
                 networkManager.AddCommandListener(new ConsoleCommandListener());
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
-                networkManager.AddSupportedCluster(0x06);
-                networkManager.AddSupportedCluster(0x08);
-                networkManager.AddSupportedCluster(0x0300);
+                networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
+                //networkManager.AddSupportedCluster(0x08);
+                networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
+                networkManager.AddSupportedCluster(ZclTouchlinkCluster.CLUSTER_ID);
 
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
@@ -81,16 +82,15 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNode coord = networkManager.GetNode(0);
 
-
                 Console.WriteLine("Joining enabled...");
 
-                string cmd = Console.ReadLine();
-
+                string cmd = string.Empty;
+                
                 while (cmd != "exit")
                 {
-                    Console.WriteLine(networkManager.Nodes.Count + " node(s)");
+                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
 
-                    if(cmd == "join")
+                    if (cmd == "join")
                     {
                         coord.PermitJoin(true);
                     }
@@ -100,7 +100,10 @@ namespace ZigBeeNet.PlayGround
                     }
                     else if (!string.IsNullOrEmpty(cmd))
                     {
-                        Console.WriteLine("Destination Address: ");
+                        var tmp = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("Destination Address: ");
+                        Console.ForegroundColor = tmp;
                         string nwkAddr = Console.ReadLine();
 
                         if (ushort.TryParse(nwkAddr, out ushort addr))
@@ -126,7 +129,7 @@ namespace ZigBeeNet.PlayGround
                                 {
                                     if (cmd == "toggle")
                                     {
-                                        networkManager.Send(endpointAddress, new ToggleCommand()).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, new ToggleCommand());
                                     }
                                     else if (cmd == "level")
                                     {
@@ -142,34 +145,51 @@ namespace ZigBeeNet.PlayGround
                                             TransitionTime = ushort.Parse(time)
                                         };
 
-                                        networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, command);
                                     }
                                     else if (cmd == "move")
                                     {
-                                        networkManager.Send(endpointAddress, new MoveCommand() { MoveMode = 1, Rate = 100 }).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, new MoveCommand() { MoveMode = 1, Rate = 100 });
                                     }
                                     else if (cmd == "on")
                                     {
-                                        networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, new OnCommand());
                                     }
                                     else if (cmd == "off")
                                     {
-                                        networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, new OffCommand());
                                     }
                                     else if (cmd == "effect")
                                     {
-                                        networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                        await networkManager.Send(endpointAddress, new OffCommand());
 
                                         bool state = false;
                                         for (int i = 0; i < 10; i++)
                                         {
                                             if (state)
-                                                networkManager.Send(endpointAddress, new OffCommand()).GetAwaiter().GetResult();
+                                                await networkManager.Send(endpointAddress, new OffCommand());
                                             else
-                                                networkManager.Send(endpointAddress, new OnCommand()).GetAwaiter().GetResult();
+                                                await networkManager.Send(endpointAddress, new OnCommand());
 
                                             state = !state;
-                                            System.Threading.Thread.Sleep(1000);
+                                            await Task.Delay(1000);
+                                        }
+                                    }
+                                    else if (cmd == "stress")
+                                    {
+                                        await networkManager.Send(endpointAddress, new OffCommand());
+
+                                        bool state = false;
+                                        for (int i = 0; i < 100; i++)
+                                        {
+                                            if (state)
+                                                await networkManager.Send(endpointAddress, new OffCommand());
+                                            else
+                                                await networkManager.Send(endpointAddress, new OnCommand());
+
+                                            state = !state;
+
+                                            await Task.Delay(1);
                                         }
                                     }
                                     else if (cmd == "desc")
@@ -179,6 +199,7 @@ namespace ZigBeeNet.PlayGround
                                             DestinationAddress = endpointAddress,
                                             NwkAddrOfInterest = addr
                                         };
+
                                         networkManager.SendTransaction(nodeDescriptorRequest);
                                     }
                                     else if (cmd == "color")
@@ -203,7 +224,7 @@ namespace ZigBeeNet.PlayGround
                                                 TransitionTime = 10
                                             };
 
-                                            networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
+                                            await networkManager.Send(endpointAddress, command);
                                         }
                                     }
                                     else if (cmd == "hue")
@@ -220,14 +241,12 @@ namespace ZigBeeNet.PlayGround
                                                 TransitionTime = 10
                                             };
 
-                                            networkManager.Send(endpointAddress, command).GetAwaiter().GetResult();
+                                            await networkManager.Send(endpointAddress, command);
                                         }
                                     }
                                     else if (cmd == "read")
                                     {
-                                        //var value = ((ZclOnOffCluster)endpoint.GetInputCluster(6)).GetAttribute(ZclOnOffCluster.ATTR_ONOFF);
-
-                                        var result = ((ZclColorControlCluster)endpoint.GetInputCluster(ZclColorControlCluster.CLUSTER_ID)).Read(ZclColorControlCluster.ATTR_CURRENTY).Result;
+                                        var result = await ((ZclElectricalMeasurementCluster)endpoint.GetInputCluster(ZclElectricalMeasurementCluster.CLUSTER_ID)).Read(ZclElectricalMeasurementCluster.ATTR_MEASUREMENTTYPE);
 
                                         if (result.IsSuccess())
                                         {
@@ -241,7 +260,7 @@ namespace ZigBeeNet.PlayGround
                                             ZclStatus statusCode = response.Records[0].Status;
                                             if (statusCode == ZclStatus.SUCCESS)
                                             {
-                                                Console.WriteLine("Cluster " + string.Format("%04X", response.ClusterId) + ", Attribute "
+                                                Console.WriteLine("Cluster " + response.ClusterId.ToString("X4") + ", Attribute "
                                                         + response.Records[0].AttributeIdentifier + ", type "
                                                         + response.Records[0].AttributeDataType + ", value: "
                                                         + response.Records[0].AttributeValue);
@@ -265,6 +284,10 @@ namespace ZigBeeNet.PlayGround
                         }
                     }
 
+                    var currentForeGroundColor = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write("cmd> ");
+                    Console.ForegroundColor = currentForeGroundColor;
                     cmd = Console.ReadLine();
                 }
             }
@@ -272,27 +295,6 @@ namespace ZigBeeNet.PlayGround
             {
                 Console.WriteLine(ex.ToString());
             }
-        }
-
-        public static double[] RGBtoxyY(double r, double g, double b)
-        {
-            var red = (r > 0.04045) ? Math.Pow((r + 0.055) / (1.0 + 0.055), 2.4) : (r / 12.92);
-            var green = (g > 0.04045) ? Math.Pow((g + 0.055) / (1.0 + 0.055), 2.4) : (g / 12.92);
-            var blue = (b > 0.04045) ? Math.Pow((b + 0.055) / (1.0 + 0.055), 2.4) : (b / 12.92);
-
-            //RGB values to XYZ using the Wide RGB D65 conversion formula 
-            var X = red * 0.664511 + green * 0.154324 + blue * 0.162028;
-            var Y = red * 0.283881 + green * 0.668433 + blue * 0.047685;
-            var Z = red * 0.000088 + green * 0.072310 + blue * 0.986039;
-
-            //Calculate the xy values from the XYZ values 
-            var x = (X / (X + Y + Z)); //.toFixed(4);
-            var y = (Y / (X + Y + Z)); //.toFixed(4);
-
-            //if (isNaN(x)) x = 0;
-            //if (isNaN(y)) y = 0;
-
-            return new double[] { x, y };
         }
     }
 

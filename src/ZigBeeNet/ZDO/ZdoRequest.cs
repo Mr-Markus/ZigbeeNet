@@ -17,7 +17,7 @@ namespace ZigBeeNet.ZDO
         /// <summary>
          /// Gets destination address.
          ///
-         /// @return the destination address
+         /// <returns>the destination address</returns>
          /// </summary>
         // public int getDestinationAddress() {
         // return destinationAddress;
@@ -26,7 +26,7 @@ namespace ZigBeeNet.ZDO
         /// <summary>
          /// Set the destination address
          ///
-         /// @param destinationAddress the destination address as {@link int}
+         /// <param name="destinationAddress">the destination address as <see cref="int"></param>
          /// </summary>
         // public void setDestinationAddress(int destinationAddress) {
         // this.destinationAddress = destinationAddress;

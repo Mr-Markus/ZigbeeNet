@@ -40,7 +40,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Gets DeviceAddress.
         ///
-        /// @return the DeviceAddress
+        /// <returns>the DeviceAddress</returns>
 /// </summary>
         public IeeeAddress getDeviceAddress()
         {
@@ -50,7 +50,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Sets DeviceAddress.
         ///
-        /// @param deviceAddress the DeviceAddress
+        /// <param name="deviceAddress">the DeviceAddress</param>
 /// </summary>
         public void setDeviceAddress(IeeeAddress deviceAddress)
         {
@@ -60,7 +60,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Gets CapabilityInformation.
         ///
-        /// @return the CapabilityInformation
+        /// <returns>the CapabilityInformation</returns>
 /// </summary>
         public int getCapabilityInformation()
         {
@@ -70,7 +70,7 @@ namespace ZigBeeNet.ZDO.Command
         /// <summary>
         /// Sets CapabilityInformation.
         ///
-        /// @param capabilityInformation the CapabilityInformation
+        /// <param name="capabilityInformation">the CapabilityInformation</param>
 /// </summary>
         public void SetCapabilityInformation(byte capabilityInformation)
         {

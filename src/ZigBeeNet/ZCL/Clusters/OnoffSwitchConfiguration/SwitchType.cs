@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-/// <summary>
- /// Enumeration of OnoffSwitchConfiguration attribute SwitchType options.
- ///
- /// Code is auto-generated. Modifications may be overwritten!
- ///
- /// </summary>
 
 namespace ZigBeeNet.ZCL.Clusters.OnoffSwitchConfiguration
 {
+   /// <summary>
+   /// Enumeration of OnoffSwitchConfiguration attribute SwitchType options.
+   ///
+   /// Code is auto-generated. Modifications may be overwritten!
+   ///
+   /// </summary>
    public enum SwitchType
    {
        TOGGLE = 0x0000,

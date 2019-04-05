@@ -2,13 +2,13 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ZigBeeNet.Logging;
+using Serilog;
 
 namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
-        private readonly ILog _logger = LogProvider.For<ZigBeeCommandNotifier>();
+        private readonly object _lock = new object();
 
         private List<IZigBeeCommandListener> _commandListeners;
 
@@ -19,7 +19,7 @@ namespace ZigBeeNet.Internal
 
         public void AddCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (commandListener)
+            lock (_lock)
             {
                 _commandListeners.Add(commandListener);
             }
@@ -27,7 +27,7 @@ namespace ZigBeeNet.Internal
 
         public void RemoveCommandListener(IZigBeeCommandListener commandListener)
         {
-            lock (commandListener)
+            lock (_lock)
             {
                 _commandListeners.Remove(commandListener);
             }
@@ -35,8 +35,22 @@ namespace ZigBeeNet.Internal
 
         public void NotifyCommandListeners(ZigBeeCommand command)
         {
-            // Enumeration is thread-safe in ConcurrentBag http://dotnetpattern.com/csharp-concurrentbag
-            foreach (IZigBeeCommandListener commandListener in _commandListeners)
+            /*
+             * https://stackoverflow.com/questions/24172232/is-list-copy-thread-safe
+             * 
+             * List() with the following ctor calls internally CopyTo() which is not threadsafe
+             * so either we have to lock the instantiation of the List or the enumeration
+             */
+
+            var tmp = new List<IZigBeeCommandListener>(0);
+            lock (_lock)
+            {
+                tmp = new List<IZigBeeCommandListener>(_commandListeners);
+            }
+
+            // TODO: Consider using a .net build in Concurrent Collection
+            // TODO: Consider removing Tas.Run()
+            foreach (IZigBeeCommandListener commandListener in tmp)
             {
                 Task.Run(() =>
                 {
@@ -44,11 +58,10 @@ namespace ZigBeeNet.Internal
                     {
                         commandListener.CommandReceived(command);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        _logger.ErrorException("Error during the notification of commandListeners.", ex);
+                        Log.Error("Error during the notification of commandListeners.", ex);
                     }
-                    
                 });
             }
         }

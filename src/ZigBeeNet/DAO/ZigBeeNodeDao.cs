@@ -7,12 +7,12 @@ using ZigBeeNet.ZDO.Field;
 namespace ZigBeeNet.DAO
 {
     /// <summary>
- /// This class provides a clean class to hold a data object for serialisation of a {@link ZigBeeNode}
+ /// This class provides a clean class to hold a data object for serialisation of a <see cref="ZigBeeNode">
  /// </summary>
     public class ZigBeeNodeDao
     {
         /// <summary>
-         /// The extended {@link IeeeAddress} for the node
+         /// The extended <see cref="IeeeAddress"> for the node
          /// </summary>
         public string IeeeAddress { get; set; }
 
@@ -22,12 +22,12 @@ namespace ZigBeeNet.DAO
         public ushort NetworkAddress { get; set; }
 
         /// <summary>
-         /// The {@link NodeDescriptor} for the node
+         /// The <see cref="NodeDescriptor"> for the node
          /// </summary>
         public NodeDescriptor NodeDescriptor { get; set; }
 
         /// <summary>
-         /// The {@link PowerDescriptor} for the node
+         /// The <see cref="PowerDescriptor"> for the node
          /// </summary>
         public PowerDescriptor PowerDescriptor { get; set; }
 

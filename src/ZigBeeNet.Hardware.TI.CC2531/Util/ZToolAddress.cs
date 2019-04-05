@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Util
 {
-    /**
-     * Represents a double byte XBeeApi Address.
-     */
+    /// <summary>
+     /// Represents a double byte XBeeApi Address.
+     /// </summary>
     public abstract class ZToolAddress
     {
         public abstract byte[] Address { get; protected set; }

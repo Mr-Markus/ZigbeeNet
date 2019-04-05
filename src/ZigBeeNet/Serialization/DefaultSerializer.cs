@@ -204,6 +204,15 @@ namespace ZigBeeNet.Serialization
                 case DataType.ZIGBEE_DATA_TYPE:
                     _buffer[_length++] = (byte)((ZclDataType)data).Id;
                     break;
+                case DataType.FLOAT_32_BIT:
+                    float float32 = (float)data;
+                    byte[] floatBytes = BitConverter.GetBytes(float32);
+                    int float32Value = BitConverter.ToInt32(floatBytes, 0);
+                    _buffer[_length++] = (byte)(float32Value & 0xFF);
+                    _buffer[_length++] = (byte)((float32Value >> 8) & 0xFF);
+                    _buffer[_length++] = (byte)((float32Value >> 16) & 0xFF);
+                    _buffer[_length++] = (byte)((float32Value >> 24) & 0xFF);
+                    break;
                 default:
                     throw new ArgumentException("No writer defined in " + this.GetType().Name
                             + " for " + type.ToString() + " (" + (byte)type + ")");

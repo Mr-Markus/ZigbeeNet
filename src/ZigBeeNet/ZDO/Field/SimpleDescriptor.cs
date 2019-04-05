@@ -29,7 +29,7 @@ namespace ZigBeeNet.ZDO.Field
         /// <summary>
          /// Deserialise the contents of the structure.
          ///
-         /// @param deserializer the {@link ZigBeeDeserializer} used to deserialize
+         /// <param name="deserializer">the <see cref="ZigBeeDeserializer"> used to deserialize</param>
          /// </summary>
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
@@ -109,9 +109,9 @@ namespace ZigBeeNet.ZDO.Field
 
         public override string ToString()
         {
-            return "SimpleDescriptor [endpoint=" + Endpoint + ", profileId=" + string.Format("%04X", ProfileId)
+            return "SimpleDescriptor [endpoint=" + Endpoint + ", profileId=" + ProfileId.ToString("X4")
                     + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion + ", inputClusterList="
-                    + InputClusterList + ", outputClusterList=" + OutputClusterList + "]";
+                    + string.Join(", ", InputClusterList) + ", outputClusterList=" + string.Join(", ", OutputClusterList) + "]";
         }
 
     }

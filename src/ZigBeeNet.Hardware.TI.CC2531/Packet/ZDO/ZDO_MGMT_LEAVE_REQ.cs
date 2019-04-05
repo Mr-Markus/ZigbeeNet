@@ -5,10 +5,10 @@ using ZigBeeNet.Hardware.TI.CC2531.Util;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
-    /**
- * This command is generated to request a Management Leave Request for the target device and is used to remove
- * devices from the network.
- */
+    /// <summary>
+    /// This command is generated to request a Management Leave Request for the target device and is used to remove
+    /// devices from the network.
+    /// </summary>
     public class ZDO_MGMT_LEAVE_REQ : ZToolPacket
     {
         /// <name>TI.ZPI1.ZDO_MGMT_LEAVE_REQ.DeviceAddress</name>

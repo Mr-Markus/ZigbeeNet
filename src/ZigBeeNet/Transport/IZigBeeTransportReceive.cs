@@ -23,7 +23,7 @@ namespace ZigBeeNet.Transport
     public interface IZigBeeTransportReceive
     {
         /// <summary>
-        /// A callback called by the {@link ZigBeeTransportTransmit}
+        /// A callback called by the <see cref="ZigBeeTransportTransmit">
         /// when a ZigBee Cluster Library command is received.
         /// 
         /// The method allows the transport layer to specify the NWK(Network) header, the APS(Application Support Sublayer)
@@ -38,7 +38,7 @@ namespace ZigBeeNet.Transport
         /// <summary>
         /// Set the network state.
         /// 
-        /// This is a callback from the {@link ZigBeeTransportTransmit} when the state of the transport changes
+        /// This is a callback from the <see cref="ZigBeeTransportTransmit"> when the state of the transport changes
         /// </summary>
         /// <param name="state"></param>
         void SetNetworkState(ZigBeeTransportState state);
