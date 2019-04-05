@@ -41,7 +41,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// characters are present, it queries the register. 
         ///
         /// </summary>
-        private int _parameterValue;
+        private int[] _parameterValue;
         
         /// <summary>
         /// The frameId to set as <see cref="uint8"/>
@@ -62,7 +62,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <summary>
         /// The parameterValue to set as <see cref="Data"/>
         /// </summary>
-        public void SetParameterValue(int parameterValue)
+        public void SetParameterValue(int[] parameterValue)
         {
             this._parameterValue = parameterValue;
         }

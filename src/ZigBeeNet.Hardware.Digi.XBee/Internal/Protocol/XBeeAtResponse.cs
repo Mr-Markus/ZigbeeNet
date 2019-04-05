@@ -48,7 +48,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// this field. 
         ///
         /// </summary>
-        private int _commandData;
+        private int[] _commandData;
         
         /// <summary>
         /// Return the frameId as <see cref="System.Int32"/>

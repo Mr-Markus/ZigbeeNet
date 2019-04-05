@@ -10,7 +10,6 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.IeeeAddress;
     
     
     /// <summary>
@@ -50,7 +49,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <summary>
         /// 
         /// </summary>
-        private int _addressList;
+        private int[] _addressList;
         
         /// <summary>
         /// The frameId to set as <see cref="uint8"/>
@@ -79,7 +78,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <summary>
         /// The addressList to set as <see cref="uint16[]"/>
         /// </summary>
-        public void SetAddressList(int addressList)
+        public void SetAddressList(int[] addressList)
         {
             this._addressList = addressList;
         }

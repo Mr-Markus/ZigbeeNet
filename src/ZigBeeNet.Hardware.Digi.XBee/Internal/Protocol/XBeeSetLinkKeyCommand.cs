@@ -10,7 +10,7 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.Security.ZigBeeKey;
+    using ZigBeeNet.Security;
     
     
     /// <summary>

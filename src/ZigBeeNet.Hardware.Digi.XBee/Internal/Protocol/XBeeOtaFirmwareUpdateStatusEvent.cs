@@ -10,7 +10,6 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.IeeeAddress;
     
     
     /// <summary>

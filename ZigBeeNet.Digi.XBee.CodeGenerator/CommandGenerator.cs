@@ -429,7 +429,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     {
                         CodeMemberMethod setMethod = CreateMethod($"Set{parameter.Name.ToUpperCamelCase()}", new CodeParameterDeclarationExpressionCollection
                         {
-                            new CodeParameterDeclarationExpression(new CodeTypeReference(new CodeTypeParameter($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}")), $"{parameter.Name.ToLowerCamelCase()}"),
+                            new CodeParameterDeclarationExpression(GetTypeClass(parameter.DataType, codeNamespace), $"{parameter.Name.ToLowerCamelCase()}"),
                         }, null, null);
                         AddCodeComment(setMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to set as <see cref=\"{parameter.DataType}\"/>"));
                         setMethod.Statements.Add(new CodeAssignStatement(parameterReference, new CodeArgumentReferenceExpression($"{parameter.Name.ToLowerCamelCase()}")));
@@ -512,11 +512,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             if (parameter.Multiple || parameter.Bitfield)
             {
                 AddNamespaceImport(codeNamespace, "System.Collections.Generic");
-                codeMemberField = CreateCodeMemberField(parameter.Name, $"List<{parameterType.BaseType}>", MemberAttributes.Private, true);
+                codeMemberField = CreateCodeMemberField(parameter.Name, new CodeTypeReference($"List<{parameterType.BaseType}>"), MemberAttributes.Private, true);
             }
             else
             {
-                codeMemberField = CreateCodeMemberField(parameter.Name, parameterType.BaseType, MemberAttributes.Private, false);
+                codeMemberField = CreateCodeMemberField(parameter.Name, parameterType, MemberAttributes.Private, false);
 
                 // Todo: Test if the assignment works
                 if (!string.IsNullOrEmpty(parameter.DefaultValue))
@@ -608,21 +608,21 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
         /// Method for creating a member variable.
         /// </summary>
         /// <param name="memberName">Name of the member.</param>
-        /// <param name="typeString">The type string.</param>
+        /// <param name="codeTypeReference">The type string.</param>
         /// <param name="memberAttributes">The member attributes.</param>
         /// <param name="initializeMember">if set to <c>true</c> [initialize member].</param>
         /// <returns></returns>
-        private static CodeMemberField CreateCodeMemberField(string memberName, string typeString, MemberAttributes memberAttributes, bool initializeMember)
+        private static CodeMemberField CreateCodeMemberField(string memberName, CodeTypeReference codeTypeReference, MemberAttributes memberAttributes, bool initializeMember)
         {
             CodeMemberField codeMemberField = new CodeMemberField
             {
                 Name = $"_{memberName.ToLowerCamelCase()}",
-                Type = new CodeTypeReference(new CodeTypeParameter(typeString))
+                Type = codeTypeReference
             };
 
             if (initializeMember)
             {
-                codeMemberField.InitExpression = new CodeObjectCreateExpression(typeString, new CodeExpression[] { });
+                codeMemberField.InitExpression = new CodeObjectCreateExpression(codeTypeReference, new CodeExpression[] { });
             }
             codeMemberField.Attributes = MemberAttributes.Private;
 
@@ -694,40 +694,24 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     {
                         if (codeNamespace != null)
                         {
-                            AddNamespaceImport(codeNamespace, ($"{_zigbeeSecurityPackage}.ZigBeeKey"));
+                            AddNamespaceImport(codeNamespace, ($"{_zigbeeSecurityPackage}"));
                         }
                         return new CodeTypeReference("ZigBeeKey");
                     }
                 case "IeeeAddress":
                     {
-                        if (codeNamespace != null)
-                        {
-                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.IeeeAddress"));
-                        }
                         return new CodeTypeReference("IeeeAddress");
                     }
                 case "ExtendedPanId":
                     {
-                        if (codeNamespace != null)
-                        {
-                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ExtendedPanId"));
-                        }
                         return new CodeTypeReference("ExtendedPanId");
                     }
                 case "ZigBeeDeviceAddress":
                     {
-                        if (codeNamespace != null)
-                        {
-                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeDeviceAddress"));
-                        }
                         return new CodeTypeReference("ZigBeeDeviceAddress");
                     }
                 case "ZigBeeGroupAddress":
                     {
-                        if (codeNamespace != null)
-                        {
-                            AddNamespaceImport(codeNamespace, ($"{_zigbeePackage}.ZigBeeGroupAddress"));
-                        }
                         return new CodeTypeReference("ZigBeeGroupAddress");
                     }
                 default:

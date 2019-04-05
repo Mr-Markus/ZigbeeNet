@@ -10,7 +10,6 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.IeeeAddress;
     
     
     /// <summary>
@@ -87,7 +86,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// The RF data that the device receives.
         ///
         /// </summary>
-        private int _data;
+        private int[] _data;
         
         /// <summary>
         /// Return the ieeeAddress as <see cref="IeeeAddress"/>

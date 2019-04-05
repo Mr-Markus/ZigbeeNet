@@ -10,7 +10,6 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.IeeeAddress;
     
     
     /// <summary>
@@ -49,7 +48,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// The number of addresses in the source route (excluding source and destination). 
         ///
         /// </summary>
-        private int _addressList;
+        private int[] _addressList;
         
         /// <summary>
         /// Return the ieeeAddress as <see cref="IeeeAddress"/>

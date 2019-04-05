@@ -10,7 +10,6 @@
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 {
-    using ZigBeeNet.IeeeAddress;
     using System.Collections.Generic;
     
     
@@ -68,7 +67,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  Data sent to the destination device.
         ///
         /// </summary>
-        private int _data;
+        private int[] _data;
         
         /// <summary>
         /// The frameId to set as <see cref="uint8"/>
@@ -121,7 +120,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <summary>
         /// The data to set as <see cref="uint8[]"/>
         /// </summary>
-        public void SetData(int data)
+        public void SetData(int[] data)
         {
             this._data = data;
         }

@@ -37,7 +37,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Response field
         ///
         /// </summary>
-        private int _firmwareVersion;
+        private int[] _firmwareVersion;
         
         /// <summary>
         /// Return the frameId as <see cref="System.Int32"/>
