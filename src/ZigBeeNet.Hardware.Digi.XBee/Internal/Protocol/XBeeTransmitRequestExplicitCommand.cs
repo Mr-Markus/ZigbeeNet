@@ -208,6 +208,16 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(17);
+            this.SerializeInt8(_frameId);
+            this.SerializeIeeeAddress(_ieeeAddress);
+            this.SerializeInt16(_networkAddress);
+            this.SerializeInt8(_sourceEndpoint);
+            this.SerializeInt8(_destinationEndpoint);
+            this.SerializeInt16(_cluster);
+            this.SerializeInt16(_profileId);
+            this.SerializeInt8(_broadcastRadius);
+            this.SerializeTransmitOptions(_options);
+            this.SerializeData(_data);
             return this.GetPayload();
         }
     }

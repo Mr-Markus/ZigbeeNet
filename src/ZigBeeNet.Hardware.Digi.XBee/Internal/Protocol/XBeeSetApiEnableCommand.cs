@@ -55,7 +55,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(8);
-            this.SerializeATCOMMAND("\"AP\"");
+            this.SerializeInt8(_frameId);
+            this.SerializeAtCommand("AP");
+            this.SerializeInt8(_mode);
             return this.GetPayload();
         }
     }

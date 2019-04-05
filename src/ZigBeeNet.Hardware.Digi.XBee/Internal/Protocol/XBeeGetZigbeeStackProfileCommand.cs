@@ -43,7 +43,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(8);
-            this.SerializeATCOMMAND("\"ZS\"");
+            this.SerializeInt8(_frameId);
+            this.SerializeAtCommand("ZS");
             return this.GetPayload();
         }
     }

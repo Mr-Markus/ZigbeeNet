@@ -41,7 +41,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(8);
-            this.SerializeATCOMMAND("\"VR\"");
+            this.SerializeInt8(_frameId);
+            this.SerializeAtCommand("VR");
             return this.GetPayload();
         }
     }

@@ -90,8 +90,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(33);
+            this.SerializeInt8(_frameId);
+            this.SerializeIeeeAddress(_ieeeAddress);
+            this.SerializeInt16(_networkAddress);
             this.SerializeInt8(0);
             this.SerializeInt8(_addressList.Length);
+            this.SerializeInt16Array(_addressList);
             return this.GetPayload();
         }
     }

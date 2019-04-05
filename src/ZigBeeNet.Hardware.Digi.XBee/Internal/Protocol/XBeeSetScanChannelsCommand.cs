@@ -57,7 +57,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(8);
-            this.SerializeATCOMMAND("\"SC\"");
+            this.SerializeInt8(_frameId);
+            this.SerializeAtCommand("SC");
+            this.SerializeInt16(_channels);
             return this.GetPayload();
         }
     }

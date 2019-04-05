@@ -49,7 +49,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 {
                     Name = "AT Parameter",
                     DataType = "AtCommand",
-                    Value = '"' + atCommand.CommandProperty + '"'
+                    Value = atCommand.CommandProperty
                 };
 
                 string description = "AT Command <b>" + atCommand.CommandProperty + "</b></p>" + atCommand.Description;
@@ -240,7 +240,19 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateParameterGetter(responseParameterGroup, codeNamespace, protocolClass);
 
-            // CreateSerializerMethods
+            CreateSerializerMethods(commandParameterGroup, command, protocolClass);
+
+            // Go on with line 316
+            if (responseParameterGroup != null && responseParameterGroup.Count != 0)
+            {
+
+            }
+
+            GenerateCode(compileUnit, className);
+        }
+
+        private void CreateSerializerMethods(List<ParameterGroup> commandParameterGroup, Command command, CodeTypeDeclaration protocolClass)
+        {
             if (commandParameterGroup != null && commandParameterGroup.Count != 0)
             {
                 CodeMemberMethod serializerMethod = CreateMethod("Serialize", null, new CodeTypeReference(typeof(int[])), null);
@@ -307,16 +319,14 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                             serializerMethod.Statements.Add(invokeSerializeExpression);
                             continue;
                         }
+                        CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{valueName}"));
+                        serializerMethod.Statements.Add(codeMethodInvokeExpression);
                     }
                 }
                 CodeMethodReturnStatement codeMethodReturnStatement = new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "GetPayload"));
                 serializerMethod.Statements.Add(codeMethodReturnStatement);
                 protocolClass.Members.Add(serializerMethod);
             }
-
-            // Go on with line 316
-
-            GenerateCode(compileUnit, className);
         }
 
         private void CreateParameterGetter(List<ParameterGroup> responseParameterGroup, CodeNamespace codeNamespace, CodeTypeDeclaration protocolClass)
@@ -736,7 +746,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 case "uint16":
                     return "Int16";
                 default:
-                    return dataType.ToUpper();
+                    return dataType;
             }
         }
 

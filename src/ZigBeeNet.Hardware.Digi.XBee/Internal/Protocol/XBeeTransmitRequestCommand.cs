@@ -132,6 +132,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(16);
+            this.SerializeInt8(_frameId);
+            this.SerializeIeeeAddress(_ieeeAddress);
+            this.SerializeInt16(_networkAddress);
+            this.SerializeTransmitOptions(_options);
+            this.SerializeData(_data);
             return this.GetPayload();
         }
     }

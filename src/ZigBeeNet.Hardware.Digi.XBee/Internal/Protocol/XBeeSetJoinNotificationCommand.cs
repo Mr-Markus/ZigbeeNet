@@ -58,7 +58,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public int[] Serialize()
         {
             this.SerializeCommand(8);
-            this.SerializeATCOMMAND("\"JN\"");
+            this.SerializeInt8(_frameId);
+            this.SerializeAtCommand("JN");
+            this.SerializeBoolean(_enableNotification);
             return this.GetPayload();
         }
     }
