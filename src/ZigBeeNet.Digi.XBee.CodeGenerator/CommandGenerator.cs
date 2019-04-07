@@ -243,12 +243,130 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             CreateSerializerMethods(commandParameterGroup, command, protocolClass);
 
             // Go on with line 316
+            // CreateDeserializerMethods(responseParameterGroup, protoClass)
             if (responseParameterGroup != null && responseParameterGroup.Count != 0)
             {
+                CodeMemberMethod deserializerMethod = CreateMethod("Deserialize", new CodeParameterDeclarationExpressionCollection { new CodeParameterDeclarationExpression(typeof(int[]), "incomingData") }, null, null);
+                AddCodeComment(deserializerMethod, new StringBuilder().AppendLine("Method for deserializing the fields for the response"));
 
+                CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "InitializeDeserializer", new CodeVariableReferenceExpression("incomingData"));
+                deserializerMethod.Statements.Add(invokeExpression);
+
+                foreach (var group in responseParameterGroup)
+                {
+                    if (group.Parameters.Count == 0 && group.Required == false && group.Complete == false)
+                    {
+                        continue;
+                    }
+
+                    if (!group.Multiple && group.Parameters != null && group.Parameters.Count > 0)
+                    {
+                        // TODO: Ported from java code. Don't know if this is needed in the future...
+                    }
+
+                    if (group.Multiple)
+                    {
+                        CodeMethodInvokeExpression invokeExpressionIfIsMultiple = new CodeMethodInvokeExpression(null, $"{group.Name.ToLowerCamelCase()}s.Add", new CodeObjectCreateExpression(group.Name.ToUpperCamelCase(), new CodeVariableReferenceExpression("incomingData")));
+                        deserializerMethod.Statements.Add(invokeExpressionIfIsMultiple);
+                    }
+                    else
+                    {
+                        CreateDeserializer(group, deserializerMethod);
+                    }
+                }
+
+                protocolClass.Members.Add(deserializerMethod);
             }
 
             GenerateCode(compileUnit, className);
+        }
+
+        private void CreateDeserializer(ParameterGroup group, CodeMemberMethod deserializerMethod)
+        {
+            IDictionary<string, string> autoSizers = new Dictionary<string, string>();
+            string conditional = null;
+
+            int cnt = 0;
+            foreach (var parameter in group.Parameters)
+            {
+                // Constant ...
+                if (!string.IsNullOrEmpty(parameter.Value))
+                {
+                    CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(null, $"Deserialize{GetTypeSerializer(parameter.DataType)}");
+                    deserializerMethod.Statements.Add(codeMethodInvokeExpression);
+                    continue;
+                }
+
+                CodeConditionStatement codeConditionStatement = null;
+                if (!string.IsNullOrEmpty(parameter.Conditional))
+                {
+                    if (conditional == null)
+                    {
+                        codeConditionStatement = new CodeConditionStatement(new CodeSnippetExpression($"{parameter.Conditional}"));
+                        conditional = parameter.Conditional;
+                    }
+                    else
+                    {
+                        if (!parameter.Conditional.Equals(conditional))
+                        {
+                            // New condition
+                            codeConditionStatement?.TrueStatements.Add(new CodeConditionStatement(new CodeSnippetExpression($"{parameter.Conditional}")));
+                            conditional = parameter.Conditional;
+                        }
+                    }
+                }
+                else if (conditional != null)
+                {
+                    conditional = null;
+                    deserializerMethod.Statements.Add(codeConditionStatement);
+                }
+
+                cnt++;
+                // TODO: Check where to add the comment below
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append($"Deserialize field \"{parameter.Name}\"");
+                if (parameter.Optional == true)
+                {
+                    stringBuilder.Append("[optional]");
+                }
+
+                CodeMethodInvokeExpression deserializeInvokeExpression = new CodeMethodInvokeExpression();
+                if (parameter.AutoSize != null)
+                {
+                    // Go on with line 688
+                }
+                if (autoSizers.TryGetValue(parameter.Name, out string temp))
+                {
+
+                }
+                if (parameter.DataType.Contains("[") && parameter.DataType.Contains("]") && !parameter.DataType.Contains("[]"))
+                {
+
+                }
+                if (parameter.Multiple)
+                {
+
+                }
+                else
+                {
+
+                }
+                if (GetTypeSerializer(parameter.DataType).Equals("CommandStatus") && !(group.Parameters.IndexOf(parameter) == (group.Parameters.Count - 1)))
+                {
+
+                }
+                if (cnt < group.Parameters.Count)
+                {
+                    if (parameter.Optional)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
         }
 
         private void CreateSerializerMethods(List<ParameterGroup> commandParameterGroup, Command command, CodeTypeDeclaration protocolClass)
@@ -262,7 +380,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 foreach (ParameterGroup group in commandParameterGroup)
                 {
                     // TODO: Check if the command id is really needed as hex representation. Int is used for now.
-                    CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "SerializeCommand", new CodePrimitiveExpression(command.Id /*+ command.Id.ToString("X2")*/));
+                    CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "SerializeCommand", new CodePrimitiveExpression(command.Id));
                     serializerMethod.Statements.Add(invokeExpression);
 
                     foreach (Parameter parameter in group.Parameters)

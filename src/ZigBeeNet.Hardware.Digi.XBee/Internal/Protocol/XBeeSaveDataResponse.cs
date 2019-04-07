@@ -49,5 +49,14 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             return _commandStatus;
         }
+        
+        /// <summary>
+        /// Method for deserializing the fields for the response
+        ///
+        /// </summary>
+        public void Deserialize(int[] incomingData)
+        {
+            this.InitializeDeserializer(incomingData);
+        }
     }
 }
