@@ -13,64 +13,75 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Coordinator Enable ".
+    ///Class to implement the XBee command " Coordinator Enable ".
     /// AT Command <b>CE</b></p>Sets or displays whether the device is a coordinator. (SM must be 0
     /// to set CE to 1). 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeCoordinatorEnableResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private bool _enable;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Return the enable as <see cref="System.Boolean"/>
-        /// </summary>
+        ///Return the enable as <see cref="System.Boolean"/>
+        ///
+        ///</summary>
+        ///
         public bool GetEnable()
         {
             return _enable;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

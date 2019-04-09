@@ -13,64 +13,75 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Extended PAN ID ".
+    ///Class to implement the XBee command " Extended PAN ID ".
     /// AT Command <b>OP</b></p>Read the 64-bit extended PAN ID. The OP value reflects the
     /// operating extended PAN ID where the device is running. If ID > 0, OP equals ID 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeExtendedPanIdResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private ExtendedPanId _extendedPanId;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Return the extendedPanId as <see cref="ExtendedPanId"/>
-        /// </summary>
+        ///Return the extendedPanId as <see cref="ExtendedPanId"/>
+        ///
+        ///</summary>
+        ///
         public ExtendedPanId GetExtendedPanId()
         {
             return _extendedPanId;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

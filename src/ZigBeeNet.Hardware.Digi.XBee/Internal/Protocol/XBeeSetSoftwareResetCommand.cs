@@ -13,33 +13,41 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set Software Reset ".
+    ///Class to implement the XBee command " Set Software Reset ".
     /// AT Command <b>FR</b></p>Resets the device. The device responds immediately with an OK and
     /// performs a reset 100 ms later. If you issue FR while the device is in Command Mode, the reset
     /// effectively exits Command mode. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetSoftwareResetCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

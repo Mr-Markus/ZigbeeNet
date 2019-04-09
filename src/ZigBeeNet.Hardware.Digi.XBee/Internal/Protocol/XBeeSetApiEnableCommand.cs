@@ -13,45 +13,60 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set API Enable ".
+    ///Class to implement the XBee command " Set API Enable ".
     /// AT Command <b>AP</b></p>Enables API Mode. The device ignores this command when using SPI.
     /// API mode 1 is always used. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetApiEnableCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _mode;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// The mode to set as <see cref="uint8"/>
-        /// </summary>
+        ///The mode to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetMode(int mode)
         {
             this._mode = mode;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

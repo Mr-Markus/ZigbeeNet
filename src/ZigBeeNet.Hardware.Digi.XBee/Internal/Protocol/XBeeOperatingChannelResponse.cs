@@ -13,65 +13,76 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Operating Channel ".
+    ///Class to implement the XBee command " Operating Channel ".
     /// AT Command <b>CH</b></p>Read the channel number used to transmit and receive data between
     /// RF devices and uses 802.15.4 channel numbers. A value of 0 means the device has not joined a PAN
     /// and is not operating on any channel. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeOperatingChannelResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _channel;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Return the channel as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the channel as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetChannel()
         {
             return _channel;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

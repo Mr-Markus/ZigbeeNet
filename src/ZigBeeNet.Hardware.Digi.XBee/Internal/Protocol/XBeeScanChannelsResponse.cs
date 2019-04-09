@@ -13,66 +13,77 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Scan Channels ".
+    ///Class to implement the XBee command " Scan Channels ".
     /// AT Command <b>SC</b></p>Set or read the list of channels to scan. Coordinator - Bit field
     /// list of channels to choose from prior to starting network. Router/End Device - Bit field list
     /// of channels scanned to find a Coordinator/Router to join. Write changes to SC using the WR
     /// command to preserve the SC setting if a power cycle occurs. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeScanChannelsResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _channels;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Return the channels as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the channels as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetChannels()
         {
             return _channels;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

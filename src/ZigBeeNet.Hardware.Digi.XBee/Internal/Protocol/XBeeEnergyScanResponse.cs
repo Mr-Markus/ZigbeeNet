@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Energy Scan ".
+    ///Class to implement the XBee command " Energy Scan ".
     /// AT Command <b>ED</b></p>Start an Energy Detect scan. This command accepts an argument to
     /// specify the time in milliseconds to scan IEEE 802.15.4 channels 11 through 26. The device
     /// loops through all 16 channels until the time elapses and returns the maximal energy on each
@@ -22,45 +22,53 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// Convert an ED response of 49, 3A, and so on, to decimal to become -73 dBm, -58 dBm, and so on. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeEnergyScanResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

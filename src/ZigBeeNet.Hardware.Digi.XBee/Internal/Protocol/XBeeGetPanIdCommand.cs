@@ -13,32 +13,40 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Get PAN ID ".
+    ///Class to implement the XBee command " Get PAN ID ".
     /// AT Command <b>OI</b></p>Read the 16-bit PAN ID. The OI value reflects the actual 16-bit PAN
     /// ID where the device is running. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeGetPanIdCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

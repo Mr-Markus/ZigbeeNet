@@ -13,31 +13,39 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Get Firmware Version ".
+    ///Class to implement the XBee command " Get Firmware Version ".
     /// AT Command <b>VR</b></p>Reads the firmware version on a device as a 4-digit hex number. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeGetFirmwareVersionCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

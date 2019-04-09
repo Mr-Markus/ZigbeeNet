@@ -14,45 +14,60 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set Network Key ".
+    ///Class to implement the XBee command " Set Network Key ".
     /// AT Command <b>NK</b></p>Set the 128-bit AES network encryption key. This command is
     /// write-only and cannot be read. If set to 0 (default), the device selects a random network key. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetNetworkKeyCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private ZigBeeKey _networkKey;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// The networkKey to set as <see cref="ZigBeeKey"/>
-        /// </summary>
+        ///The networkKey to set as
+        ///</summary>
+        ///
+        /// <see cref="ZigBeeKey"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetNetworkKey(ZigBeeKey networkKey)
         {
             this._networkKey = networkKey;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

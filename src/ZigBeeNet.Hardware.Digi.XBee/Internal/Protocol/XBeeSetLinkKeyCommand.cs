@@ -14,47 +14,62 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set Link Key ".
+    ///Class to implement the XBee command " Set Link Key ".
     /// AT Command <b>KY</b></p>Sets the 128-bit AES link key value that the device uses for
     /// encryption and decryption. This command is write-only and cannot be read. If you set KY to 0
     /// the coordinator transmits the network key in the clear to joining devices, and joining
     /// devices acquire the network key in the clear when joining. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetLinkKeyCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private ZigBeeKey _linkKey;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// The linkKey to set as <see cref="ZigBeeKey"/>
-        /// </summary>
+        ///The linkKey to set as
+        ///</summary>
+        ///
+        /// <see cref="ZigBeeKey"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetLinkKey(ZigBeeKey linkKey)
         {
             this._linkKey = linkKey;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

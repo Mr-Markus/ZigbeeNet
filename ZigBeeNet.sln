@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "src\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeNet.Digi.XBee.CodeGenerator.Test", "src\ZigBeeNet.Digi.XBee.CodeGenerator.Test\ZigBeeNet.Digi.XBee.CodeGenerator.Test.csproj", "{9476F644-EFD3-4821-ABD2-C367AB3B53E5}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\ZigBeeNet\ZigbeeNet.projitems*{6bca5435-c030-4c96-a3e2-406815abe131}*SharedItemsImports = 13
@@ -76,6 +78,10 @@ Global
 		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9476F644-EFD3-4821-ABD2-C367AB3B53E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9476F644-EFD3-4821-ABD2-C367AB3B53E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9476F644-EFD3-4821-ABD2-C367AB3B53E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9476F644-EFD3-4821-ABD2-C367AB3B53E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
 		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{515C2B3A-3A21-4EC9-9103-B3F841490B1B} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
+		{9476F644-EFD3-4821-ABD2-C367AB3B53E5} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}

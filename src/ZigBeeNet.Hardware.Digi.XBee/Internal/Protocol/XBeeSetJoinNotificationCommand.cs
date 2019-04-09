@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set Join Notification ".
+    ///Class to implement the XBee command " Set Join Notification ".
     /// AT Command <b>JN</b></p>Set or read the join notification setting. If enabled, the device
     /// transmits a broadcast node identification packet on power up and when joining. This action
     /// blinks the Associate LED rapidly on all devices that receive the transmission, and sends an
@@ -21,40 +21,55 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// large networks to prevent excessive broadcasts. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetJoinNotificationCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private bool _enableNotification;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// The enableNotification to set as <see cref="Boolean"/>
-        /// </summary>
+        ///The enableNotification to set as
+        ///</summary>
+        ///
+        /// <see cref="Boolean"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetEnableNotification(bool enableNotification)
         {
             this._enableNotification = enableNotification;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

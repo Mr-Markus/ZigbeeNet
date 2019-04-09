@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Join Notification ".
+    ///Class to implement the XBee command " Join Notification ".
     /// AT Command <b>JN</b></p>Set or read the join notification setting. If enabled, the device
     /// transmits a broadcast node identification packet on power up and when joining. This action
     /// blinks the Associate LED rapidly on all devices that receive the transmission, and sends an
@@ -21,59 +21,70 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// large networks to prevent excessive broadcasts. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeJoinNotificationResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private CommandStatus _commandStatus;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private bool _enableNotification;
         
         /// <summary>
-        /// Return the frameId as <see cref="System.Int32"/>
-        /// </summary>
+        ///Return the frameId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// Return the commandStatus as <see cref="CommandStatus"/>
-        /// </summary>
+        ///Return the commandStatus as <see cref="CommandStatus"/>
+        ///
+        ///</summary>
+        ///
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        /// Return the enableNotification as <see cref="System.Boolean"/>
-        /// </summary>
+        ///Return the enableNotification as <see cref="System.Boolean"/>
+        ///
+        ///</summary>
+        ///
         public bool GetEnableNotification()
         {
             return _enableNotification;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            DeserializeAtCommand();
         }
     }
 }

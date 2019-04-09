@@ -4,7 +4,10 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ZigBeeNet.Digi.XBee.CodeGenerator.Entities;
+using ZigBeeNet.Digi.XBee.CodeGenerator.Enumerations;
 using ZigBeeNet.Digi.XBee.CodeGenerator.Extensions;
+using ZigBeeNet.Digi.XBee.CodeGenerator.Helper;
 using ZigBeeNet.Digi.XBee.CodeGenerator.Xml;
 
 namespace ZigBeeNet.Digi.XBee.CodeGenerator
@@ -204,7 +207,13 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 OutputWithLineBreak(descriptionStringBuilder, "", command.Description);
             }
             descriptionStringBuilder.AppendLine("This class provides methods for processing XBee API commands.");
-            AddCodeComment(protocolClass, descriptionStringBuilder);
+            ICodeCommentEntity descriptionCodeCommentEntity = new CodeCommentEntity
+            {
+                Tag = CodeCommentTag.Summary,
+                DocumentationText = descriptionStringBuilder.ToString()
+            };
+            CodeCommentStatement descriptionCodeComment = CodeCommentHelper.BuildCodeCommentStatement(descriptionCodeCommentEntity, true);
+            protocolClass.Comments.Add(descriptionCodeComment);
 
             protocolClass.BaseTypes.Add("XBeeFrame");
 
@@ -247,7 +256,16 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             if (responseParameterGroup != null && responseParameterGroup.Count != 0)
             {
                 CodeMemberMethod deserializerMethod = CreateMethod("Deserialize", new CodeParameterDeclarationExpressionCollection { new CodeParameterDeclarationExpression(typeof(int[]), "incomingData") }, null, null);
-                AddCodeComment(deserializerMethod, new StringBuilder().AppendLine("Method for deserializing the fields for the response"));
+
+                IEnumerable<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = "Method for deserializing the fields for the response"
+                    }
+                };
+                AddCodeComment(deserializerMethod, codeComment, true);
 
                 CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "InitializeDeserializer", new CodeVariableReferenceExpression("incomingData"));
                 deserializerMethod.Statements.Add(invokeExpression);
@@ -333,19 +351,30 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 CodeMethodInvokeExpression deserializeInvokeExpression = new CodeMethodInvokeExpression();
                 if (parameter.AutoSize != null)
                 {
-                    // Go on with line 688
+                    string deserilizerType = GetTypeSerializer(parameter.DataType);
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"int {parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}"));
+                    autoSizers.Add(parameter.AutoSize, parameter.Name.ToLowerCamelCase());
+                    deserializerMethod.Statements.Add(codeAssignStatement);
+                    continue;
                 }
                 if (autoSizers.TryGetValue(parameter.Name, out string temp))
                 {
-
+                    string deserilizerType = GetTypeSerializer(parameter.DataType);
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}", new CodeTypeReferenceExpression($"{autoSizers[parameter.Name]}")));
+                    deserializerMethod.Statements.Add(codeAssignStatement);
+                    continue;
                 }
                 if (parameter.DataType.Contains("[") && parameter.DataType.Contains("]") && !parameter.DataType.Contains("[]"))
                 {
-
+                    int length = Convert.ToInt32(parameter.DataType.Substring(parameter.DataType.IndexOf("[") + 1, parameter.DataType.IndexOf("]")));
+                    string deserilizerType = GetTypeSerializer(parameter.DataType);
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}", new CodePrimitiveExpression(length)));
+                    deserializerMethod.Statements.Add(codeAssignStatement);
+                    continue;
                 }
                 if (parameter.Multiple)
                 {
-
+                    // Go on with line 709
                 }
                 else
                 {
@@ -374,7 +403,16 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             if (commandParameterGroup != null && commandParameterGroup.Count != 0)
             {
                 CodeMemberMethod serializerMethod = CreateMethod("Serialize", null, new CodeTypeReference(typeof(int[])), null);
-                AddCodeComment(serializerMethod, new StringBuilder().AppendLine("Method for serializing the command fields"));
+
+                IEnumerable<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = "Method for serializing the command fields"
+                    }
+                };
+                AddCodeComment(serializerMethod, codeComment, true);
 
                 CodeConditionStatement codeConditionStatement = null;
                 foreach (ParameterGroup group in commandParameterGroup)
@@ -480,14 +518,14 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         OutputWithLineBreak(stringBuilder, "    ", parameter.Description);
                     }
 
-                    stringBuilder.Clear();
+                    //stringBuilder.Clear();
                     if (parameter.Multiple)
                     {
-                        stringBuilder.Append($"Return the {parameter.Name.ToLowerCamelCase()} as a list of <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                        stringBuilder.AppendLine($"Return the {parameter.Name.ToLowerCamelCase()} as a list of <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
                     }
                     else
                     {
-                        stringBuilder.Append($"Return the {parameter.Name.ToLowerCamelCase()} as <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                        stringBuilder.AppendLine($"Return the {parameter.Name.ToLowerCamelCase()} as <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
                     }
 
                     CodeMemberMethod getMethod;
@@ -497,12 +535,22 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     }
                     else
                     {
-                        getMethod = CreateMethod($"Get{parameter.Name.ToUpperCamelCase()}", null, new CodeTypeReference($"{GetTypeClass(parameter.DataType, codeNamespace).BaseType}"), null);
+                        getMethod = CreateMethod($"Get{parameter.Name.ToUpperCamelCase()}", null, GetTypeClass(parameter.DataType, codeNamespace), null);
                     }
 
                     // TODO: Test if this is appropriate. Especially if the return type is a list.
                     getMethod.Statements.Add(new CodeMethodReturnStatement(new CodeArgumentReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}")));
-                    AddCodeComment(getMethod, stringBuilder);
+
+                    IEnumerable<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                    {
+                        new CodeCommentEntity
+                        {
+                            Tag = CodeCommentTag.Summary,
+                            DocumentationText = stringBuilder.ToString()
+                        }
+                    };
+                    AddCodeComment(getMethod, codeComment, true);
+
                     protocolClass.Members.Add(getMethod);
                 }
             }
@@ -549,7 +597,24 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                             }, null, null);
                             CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(parameterReference, $"{methodString[3]}", new CodeTypeReferenceExpression($"{parameter.Name.ToLowerCamelCase()}"));
                             memberMethod.Statements.Add(invokeExpression);
-                            AddCodeComment(memberMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to {methodString[0].ToLower()} to the set as <see cref=\"{parameter.DataType}\"/>"));
+
+                            IList<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                            {
+                                new CodeCommentEntity
+                                {
+                                    Tag = CodeCommentTag.Summary,
+                                    DocumentationText = $"The {parameter.Name.ToLowerCamelCase()} to {methodString[0].ToLower()} to the set as"
+                                }
+                            };
+
+                            ICodeCommentEntity temp = new CodeCommentEntity
+                            {
+                                Tag = CodeCommentTag.See,
+                            };
+                            temp.Attributes.Add(CodeCommentAttribute.Cref, parameter.DataType);
+                            codeComment.Add(temp);
+                            AddCodeComment(memberMethod, codeComment, true);
+
                             protocolClass.Members.Add(memberMethod);
                         }
                     }
@@ -559,7 +624,25 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         {
                             new CodeParameterDeclarationExpression(GetTypeClass(parameter.DataType, codeNamespace), $"{parameter.Name.ToLowerCamelCase()}"),
                         }, null, null);
-                        AddCodeComment(setMethod, new StringBuilder($"The {parameter.Name.ToLowerCamelCase()} to set as <see cref=\"{parameter.DataType}\"/>"));
+
+                        IList<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                            {
+                                new CodeCommentEntity
+                                {
+                                    Tag = CodeCommentTag.Summary,
+                                    DocumentationText = $"The {parameter.Name.ToLowerCamelCase()} to set as",
+                                }
+                            };
+
+                        ICodeCommentEntity temp = new CodeCommentEntity
+                        {
+                            Tag = CodeCommentTag.See,
+                        };
+                        temp.Attributes.Add(CodeCommentAttribute.Cref, parameter.DataType);
+                        codeComment.Add(temp);
+                        AddCodeComment(setMethod, codeComment, true);
+
+
                         setMethod.Statements.Add(new CodeAssignStatement(parameterReference, new CodeArgumentReferenceExpression($"{parameter.Name.ToLowerCamelCase()}")));
 
                         if (parameter.Minimum != null && parameter.Maximum != null)
@@ -652,7 +735,16 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     CodeAssignStatement assignStatement = CreateCodeAssignStatement(parameter.Name, parameter.DefaultValue);
                 }
             }
-            AddCodeComment(codeMemberField, codeComment);
+
+            IEnumerable<ICodeCommentEntity> codeCommentEntity = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = codeComment.ToString(),
+                    }
+                };
+            AddCodeComment(codeMemberField, codeCommentEntity, true);
 
             codeTypeDeclaration.Members.Add(codeMemberField);
         }
@@ -676,7 +768,17 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 HasSet = hasSet,
                 Type = propertyType,
             };
-            AddCodeComment(codeMemberProperty, propertyComments);
+
+            IEnumerable<ICodeCommentEntity> codeCommentEntity = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = propertyComments.ToString(),
+                    }
+                };
+            AddCodeComment(codeMemberProperty, codeCommentEntity, true);
+
             return codeMemberProperty;
         }
 
@@ -720,17 +822,55 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             compileUnit.Namespaces.Add(codeNamespace);
         }
 
-        /// <summary>
-        /// Method for adding a comment to a code type member.
-        /// </summary>
-        /// <param name="codeTypeMember">The code type member.</param>
-        /// <param name="stringBuilder">The string builder.</param>
-        private static void AddCodeComment(CodeTypeMember codeTypeMember, StringBuilder stringBuilder)
+        private void AddCodeComment(CodeTypeMember codeTypeMember, IEnumerable<ICodeCommentEntity> codeComments, bool isDocComment)
         {
-            codeTypeMember.Comments.Add(new CodeCommentStatement("<summary>", true));
-            codeTypeMember.Comments.Add(new CodeCommentStatement(stringBuilder.ToString(), true));
-            codeTypeMember.Comments.Add(new CodeCommentStatement("</summary>", true));
+            if (isDocComment)
+            {
+                CodeCommentStatementCollection descriptionCodeComment = CodeCommentHelper.BuildCodeCommentStatementCollection(codeComments);
+                codeTypeMember.Comments.AddRange(descriptionCodeComment);
+            }
+            else
+            {
+                foreach (var codeComment in codeComments)
+                {
+                    CodeCommentStatement descriptionCodeComment = CodeCommentHelper.BuildCodeCommentStatement(codeComment, isDocComment);
+                    codeTypeMember.Comments.Add(descriptionCodeComment);
+                }
+            }
         }
+
+        //private void AddDocComment(CodeTypeMember codeTypeMember, ICodeCommentEntity codeComment)
+        //{
+        //    StringBuilder paramStringBuilder = new StringBuilder();
+        //    if (codeComment.Attributes != null)
+        //    {
+        //        foreach (var codeCommentParameter in codeComment.Attributes)
+        //        {
+        //            paramStringBuilder.Append($" {codeCommentParameter.Key}=\"{codeCommentParameter.Value}\"");
+        //        }
+        //    }
+
+        //    switch (codeComment.Tag)
+        //    {
+        //        case CodeCommentTag.Summary:
+        //        case CodeCommentTag.Returns:
+        //        case CodeCommentTag.Param:
+        //            {
+        //                codeTypeMember.Comments.Add(new CodeCommentStatement($"<{codeComment.Tag}{paramStringBuilder.ToString()}>", true));
+        //                codeTypeMember.Comments.Add(new CodeCommentStatement(codeComment.DocumentationText, true));
+        //            }
+        //            break;
+        //        case CodeCommentTag.See:
+        //            {
+        //                codeTypeMember.Comments.Add(new CodeCommentStatement($"<{codeComment.Tag}>", true));
+        //                codeTypeMember.Comments.Add(new CodeCommentStatement("codeComment.Description{ paramStringBuilder.ToString() }", true));
+        //            }
+        //            break;
+        //        default:
+        //            throw new NotImplementedException();
+        //    }
+        //    codeTypeMember.Comments.Add(new CodeCommentStatement($"</{codeComment.Tag}>", true));
+        //}
 
         /// <summary>
         /// Method for creating a member variable.
@@ -768,11 +908,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             if (provider.FileExtension[0] == '.')
             {
-                sourceFile = $@"..\..\..\..\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}{provider.FileExtension}";
             }
             else
             {
-                sourceFile = $@"..\..\..\..\src\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}.{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}.{provider.FileExtension}";
             }
 
             var codeGeneratorOptions = new CodeGeneratorOptions

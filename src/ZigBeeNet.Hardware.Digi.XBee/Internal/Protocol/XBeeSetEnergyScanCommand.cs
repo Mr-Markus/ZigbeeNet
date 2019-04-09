@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Set Energy Scan ".
+    ///Class to implement the XBee command " Set Energy Scan ".
     /// AT Command <b>ED</b></p>Start an Energy Detect scan. This command accepts an argument to
     /// specify the time in milliseconds to scan IEEE 802.15.4 channels 11 through 26. The device
     /// loops through all 16 channels until the time elapses and returns the maximal energy on each
@@ -22,40 +22,55 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// Convert an ED response of 49, 3A, and so on, to decimal to become -73 dBm, -58 dBm, and so on. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeSetEnergyScanCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _frameId;
         
         /// <summary>
-        /// 
-        /// </summary>
+        ///
+        ///</summary>
+        ///
         private int _scanTime;
         
         /// <summary>
-        /// The frameId to set as <see cref="uint8"/>
-        /// </summary>
+        ///The frameId to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        /// The scanTime to set as <see cref="uint8"/>
-        /// </summary>
+        ///The scanTime to set as
+        ///</summary>
+        ///
+        /// <see cref="uint8"
+        ///>
+        ///
+        ///</see>
+        ///
         public void SetScanTime(int scanTime)
         {
             this._scanTime = scanTime;
         }
         
         /// <summary>
-        /// Method for serializing the command fields
+        ///Method for serializing the command fields
+        ///</summary>
         ///
-        /// </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

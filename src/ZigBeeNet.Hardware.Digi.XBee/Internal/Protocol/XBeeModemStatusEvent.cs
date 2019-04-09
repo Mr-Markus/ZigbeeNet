@@ -13,32 +13,36 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Modem Status ".
+    ///Class to implement the XBee command " Modem Status ".
     /// Devices send the status messages in this frame in response to specific conditions. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeModemStatusEvent : XBeeFrame, IXBeeEvent
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private ModemStatus _status;
         
         /// <summary>
-        /// Return the status as <see cref="ModemStatus"/>
-        /// </summary>
+        ///Return the status as <see cref="ModemStatus"/>
+        ///
+        ///</summary>
+        ///
         public ModemStatus GetStatus()
         {
             return _status;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);

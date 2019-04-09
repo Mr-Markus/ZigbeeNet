@@ -13,149 +13,191 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    /// Class to implement the XBee command " Receive Packet Explicit ".
+    ///Class to implement the XBee command " Receive Packet Explicit ".
     /// When a device configured with explicit API Rx Indicator (AO = 1) receives an RF packet, it
     /// sends it out the serial interface using this message type. The Cluster ID and endpoints must
     /// be used to identify the type of transaction that occurred. 
     ///This class provides methods for processing XBee API commands.
     ///
-    /// </summary>
+    ///</summary>
+    ///
     public class XBeeReceivePacketExplicitEvent : XBeeFrame, IXBeeEvent
     {
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// MSB first, LSB last. The sender's 64-bit address. Set to 0xFFFFFFFFFFFFFFFF (unknown
         /// 64-bit address) if the sender's 64-bit address is unknown. 
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private IeeeAddress _ieeeAddress;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// The sender's 16-bit address.
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _networkAddress;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// Endpoint of the source that initiates transmission. The default value is shown when
         /// Transmit Request frame - 0x10 is used to send data from the source. Non-defaults are shown if
         /// Explicit Addressing Command frame - 0x11 is used to send data from the source, or if a
         /// non-default value was used, otherwise the default value remains. 
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _sourceEndpoint;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// Endpoint of the destination that the message is addressed to. The default value is shown when
         /// Transmit Request frame - 0x10 is used to send data from the source. Non-defaults are shown if
         /// Explicit Addressing Command frame - 0x11 is used to send data from the source, or if a
         /// non-default value was used, otherwise the default value remains. 
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _destinationEndpoint;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// The Cluster ID that the frame is addressed to. The default value is shown when Transmit
         /// Request frame - 0x10 is used to send data from the source. Non-defaults are shown if Explicit
         /// Addressing Command frame - 0x11 is used to send data from the source, or if a non-default value
         /// was used, otherwise the default value remains. 
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _clusterId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// The Profile ID that the fame is addressed to. 
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int _profileId;
         
         /// <summary>
-        /// Response field
+        ///Response field
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private ReceiveOptions _receiveOptions;
         
         /// <summary>
-        /// Response field
+        ///Response field
         /// The RF data that the device receives.
         ///
-        /// </summary>
+        ///</summary>
+        ///
         private int[] _data;
         
         /// <summary>
-        /// Return the ieeeAddress as <see cref="IeeeAddress"/>
-        /// </summary>
+        /// MSB first, LSB last. The sender's 64-bit address. Set to 0xFFFFFFFFFFFFFFFF (unknown
+        /// 64-bit address) if the sender's 64-bit address is unknown. 
+        ///Return the ieeeAddress as <see cref="IeeeAddress"/>
+        ///
+        ///</summary>
+        ///
         public IeeeAddress GetIeeeAddress()
         {
             return _ieeeAddress;
         }
         
         /// <summary>
-        /// Return the networkAddress as <see cref="System.Int32"/>
-        /// </summary>
+        /// The sender's 16-bit address.
+        ///Return the networkAddress as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetNetworkAddress()
         {
             return _networkAddress;
         }
         
         /// <summary>
-        /// Return the sourceEndpoint as <see cref="System.Int32"/>
-        /// </summary>
+        /// Endpoint of the source that initiates transmission. The default value is shown when
+        /// Transmit Request frame - 0x10 is used to send data from the source. Non-defaults are shown if
+        /// Explicit Addressing Command frame - 0x11 is used to send data from the source, or if a
+        /// non-default value was used, otherwise the default value remains. 
+        ///Return the sourceEndpoint as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetSourceEndpoint()
         {
             return _sourceEndpoint;
         }
         
         /// <summary>
-        /// Return the destinationEndpoint as <see cref="System.Int32"/>
-        /// </summary>
+        /// Endpoint of the destination that the message is addressed to. The default value is shown when
+        /// Transmit Request frame - 0x10 is used to send data from the source. Non-defaults are shown if
+        /// Explicit Addressing Command frame - 0x11 is used to send data from the source, or if a
+        /// non-default value was used, otherwise the default value remains. 
+        ///Return the destinationEndpoint as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetDestinationEndpoint()
         {
             return _destinationEndpoint;
         }
         
         /// <summary>
-        /// Return the clusterId as <see cref="System.Int32"/>
-        /// </summary>
+        /// The Cluster ID that the frame is addressed to. The default value is shown when Transmit
+        /// Request frame - 0x10 is used to send data from the source. Non-defaults are shown if Explicit
+        /// Addressing Command frame - 0x11 is used to send data from the source, or if a non-default value
+        /// was used, otherwise the default value remains. 
+        ///Return the clusterId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetClusterId()
         {
             return _clusterId;
         }
         
         /// <summary>
-        /// Return the profileId as <see cref="System.Int32"/>
-        /// </summary>
+        /// The Profile ID that the fame is addressed to. 
+        ///Return the profileId as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
         public int GetProfileId()
         {
             return _profileId;
         }
         
         /// <summary>
-        /// Return the receiveOptions as <see cref="ReceiveOptions"/>
-        /// </summary>
+        ///Return the receiveOptions as <see cref="ReceiveOptions"/>
+        ///
+        ///</summary>
+        ///
         public ReceiveOptions GetReceiveOptions()
         {
             return _receiveOptions;
         }
         
         /// <summary>
-        /// Return the data as <see cref="System.Int32"/>
-        /// </summary>
-        public int GetData()
+        /// The RF data that the device receives.
+        ///Return the data as <see cref="System.Int32"/>
+        ///
+        ///</summary>
+        ///
+        public int[] GetData()
         {
             return _data;
         }
         
         /// <summary>
-        /// Method for deserializing the fields for the response
+        ///Method for deserializing the fields for the response
+        ///</summary>
         ///
-        /// </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
