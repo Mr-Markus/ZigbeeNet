@@ -13,109 +13,81 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Create Source Route ".
+    /// Class to implement the XBee command " Create Source Route ".
     /// This frame creates a source route in the device. A source route specifies the complete route a
     /// packet traverses to get from source to destination. For best results, use source routing
     /// with many-to-one routing. There is no response frame for this frame type. Take care when
     /// generating source routes. An incorrectly formatted frame will be silently rejected by the
     /// radio or cause unexpected results. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeCreateSourceRouteCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// The frame Id 
-        ///
-        ///</summary>
-        ///
+        ///  The frame Id 
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        /// 64-bit destination address. MSB first, LSB last. Set to the 64-bit address of the
+        ///  64-bit destination address. MSB first, LSB last. Set to the 64-bit address of the
         /// destination device. Reserved 64-bit address for the coordinator = 0x0000000000000000
         /// Broadcast = 0x000000000000FFFF. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private IeeeAddress _ieeeAddress;
         
         /// <summary>
-        /// 16-bit destination network address. Set to the 16-bit address of the destination device, if
+        ///  16-bit destination network address. Set to the 16-bit address of the destination device, if
         /// known. If the address is unknown or if sending a broadcast, set to 0xFFFE. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _networkAddress;
         
         /// <summary>
-        ///
-        ///</summary>
-        ///
+        ///  </summary>
         private int[] _addressList;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///The ieeeAddress to set as
-        ///</summary>
-        ///
-        /// <see cref="IeeeAddress"
+        /// The ieeeAddress to set as </summary>
+        /// <seecref="IeeeAddress"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
             this._ieeeAddress = ieeeAddress;
         }
         
         /// <summary>
-        ///The networkAddress to set as
-        ///</summary>
-        ///
-        /// <see cref="uint16"
+        /// The networkAddress to set as </summary>
+        /// <seecref="uint16"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetNetworkAddress(int networkAddress)
         {
             this._networkAddress = networkAddress;
         }
         
         /// <summary>
-        ///The addressList to set as
-        ///</summary>
-        ///
-        /// <see cref="uint16[]"
+        /// The addressList to set as </summary>
+        /// <seecref="uint16[]"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetAddressList(int[] addressList)
         {
             this._addressList = addressList;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(33);

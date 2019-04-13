@@ -13,88 +13,66 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " AT Queue Parameter ".
+    /// Class to implement the XBee command " AT Queue Parameter ".
     /// This frame allows you to query or set device parameters. In contrast to the AT Command (0x08)
     /// frame, this frame queues new parameter values and does not apply them until you issue either:
     /// n The AT Command (0x08) frame (for API type) n The AC command When querying parameter values,
     /// the 0x09 frame behaves identically to the 0x08 frame. The device returns register queries
     /// immediately and not does not queue them. The response for this command is also an AT Command
     /// Response frame (0x88). 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeAtQueueParameterCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// The frame Id 
-        ///
-        ///</summary>
-        ///
+        ///  The frame Id 
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        /// Command name: two ASCII characters that identify the AT command. 
-        ///
-        ///</summary>
-        ///
+        ///  Command name: two ASCII characters that identify the AT command. 
+        /// </summary>
         private string _atCommand;
         
         /// <summary>
-        /// If present, indicates the requested parameter value to set the given register. If no
+        ///  If present, indicates the requested parameter value to set the given register. If no
         /// characters are present, it queries the register. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int[] _parameterValue;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///The atCommand to set as
-        ///</summary>
-        ///
-        /// <see cref="AtCommand"
+        /// The atCommand to set as </summary>
+        /// <seecref="AtCommand"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetAtCommand(string atCommand)
         {
             this._atCommand = atCommand;
         }
         
         /// <summary>
-        ///The parameterValue to set as
-        ///</summary>
-        ///
-        /// <see cref="Data"
+        /// The parameterValue to set as </summary>
+        /// <seecref="Data"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetParameterValue(int[] parameterValue)
         {
             this._parameterValue = parameterValue;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(9);

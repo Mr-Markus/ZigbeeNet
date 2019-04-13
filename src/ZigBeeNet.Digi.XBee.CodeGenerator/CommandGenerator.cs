@@ -206,7 +206,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             {
                 OutputWithLineBreak(descriptionStringBuilder, "", command.Description);
             }
-            descriptionStringBuilder.AppendLine("This class provides methods for processing XBee API commands.");
+            descriptionStringBuilder.AppendLine(" This class provides methods for processing XBee API commands.");
             ICodeCommentEntity descriptionCodeCommentEntity = new CodeCommentEntity
             {
                 Tag = CodeCommentTag.Summary,
@@ -251,8 +251,16 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateSerializerMethods(commandParameterGroup, command, protocolClass);
 
-            // Go on with line 316
-            // CreateDeserializerMethods(responseParameterGroup, protoClass)
+            CreateDeserializerMethods(responseParameterGroup, protocolClass);
+
+            // Go on with line 351
+            CreateToStringOverride();
+
+            GenerateCode(compileUnit, className);
+        }
+
+        private void CreateDeserializerMethods(List<ParameterGroup> responseParameterGroup, CodeTypeDeclaration protocolClass)
+        {
             if (responseParameterGroup != null && responseParameterGroup.Count != 0)
             {
                 CodeMemberMethod deserializerMethod = CreateMethod("Deserialize", new CodeParameterDeclarationExpressionCollection { new CodeParameterDeclarationExpression(typeof(int[]), "incomingData") }, null, null);
@@ -295,8 +303,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
                 protocolClass.Members.Add(deserializerMethod);
             }
-
-            GenerateCode(compileUnit, className);
         }
 
         private void CreateDeserializer(ParameterGroup group, CodeMemberMethod deserializerMethod)
@@ -374,15 +380,31 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 }
                 if (parameter.Multiple)
                 {
-                    // Go on with line 709
+                    CodeIterationStatement endlessForLoop = new CodeIterationStatement(
+                        new CodeSnippetStatement(""),
+                        new CodeSnippetExpression(""),
+                        new CodeSnippetStatement(""),
+                        new CodeStatement[]
+                        {
+                            new CodeAssignStatement(new CodeVariableReferenceExpression($"{GetTypeClass(parameter.DataType, null).BaseType}tmp{parameter.Name.ToUpperCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{GetTypeSerializer(parameter.DataType)}")),
+                            new CodeConditionStatement(
+                                new CodeSnippetExpression($"tmp{parameter.Name.ToUpperCamelCase()} == null"),
+                                new CodeStatement[] { new CodeSnippetStatement($"                    break;") }),
+                            new CodeExpressionStatement( new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeThisReferenceExpression(), $"_{parameter.Name.ToLowerCamelCase()}.Add"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"tmp{parameter.Name.ToUpperCamelCase()}") }))
+                        });
+                    deserializerMethod.Statements.Add(endlessForLoop);
                 }
                 else
                 {
-
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"this._{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{GetTypeSerializer(parameter.DataType)}"));
+                    deserializerMethod.Statements.Add(codeAssignStatement);
                 }
                 if (GetTypeSerializer(parameter.DataType).Equals("CommandStatus") && !(group.Parameters.IndexOf(parameter) == (group.Parameters.Count - 1)))
                 {
-
+                    CodeConditionStatement commandStatusCodeConditionStatement = new CodeConditionStatement(
+                        new CodeSnippetExpression($"_commandStatus != CommandStatus.OK || IsComplete()"),
+                        new CodeStatement[] { new CodeSnippetStatement($"                    return;") });
+                    deserializerMethod.Statements.Add(commandStatusCodeConditionStatement);
                 }
                 if (cnt < group.Parameters.Count)
                 {
@@ -521,11 +543,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     //stringBuilder.Clear();
                     if (parameter.Multiple)
                     {
-                        stringBuilder.AppendLine($"Return the {parameter.Name.ToLowerCamelCase()} as a list of <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                        stringBuilder.AppendLine($" Return the {parameter.Name.ToLowerCamelCase()} as a list of <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
                     }
                     else
                     {
-                        stringBuilder.AppendLine($"Return the {parameter.Name.ToLowerCamelCase()} as <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
+                        stringBuilder.AppendLine($" Return the {parameter.Name.ToLowerCamelCase()} as <see cref=\"{GetTypeClass(parameter.DataType, null).BaseType}\"/>");
                     }
 
                     CodeMemberMethod getMethod;

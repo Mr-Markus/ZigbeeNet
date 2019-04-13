@@ -19,13 +19,13 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Helper
 
             foreach (var item in codeCommentEntity.Attributes)
             {
-                stringBuilder.AppendLine($" {item.Key.ToString().ToLower()}=\"{item.Value}\"");
+                stringBuilder.AppendLine($"{item.Key.ToString().ToLower()}=\"{item.Value}\"");
             }
             stringBuilder.AppendLine(">");
 
-            stringBuilder.AppendLine(codeCommentEntity.DocumentationText);
+            stringBuilder.Append($" {codeCommentEntity.DocumentationText}");
 
-            stringBuilder.AppendLine($"</{codeCommentEntity.Tag.ToString().ToLower()}>");
+            stringBuilder.Append($" </{codeCommentEntity.Tag.ToString().ToLower()}>");
 
             return new CodeCommentStatement(stringBuilder.ToString(), isDocComment);
         }

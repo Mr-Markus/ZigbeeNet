@@ -13,64 +13,48 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Set Network Reset ".
+    /// Class to implement the XBee command " Set Network Reset ".
     /// AT Command <b>NR</b></p>Resets network layer parameters on one or more modules within a
     /// PAN. Responds immediately with an OK then causes a network restart. The device loses all
     /// network configuration and routing information. If NR = 0: Resets network layer parameters
     /// on the node issuing the command. If NR = 1: Sends broadcast transmission to reset network
     /// layer parameters on all nodes in the PAN. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeSetNetworkResetCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        ///
-        ///</summary>
-        ///
+        ///  </summary>
         private int _frameId;
         
         /// <summary>
-        /// Sends broadcast transmission to reset network layer parameters on all nodes in the PAN. 
-        ///
-        ///</summary>
-        ///
+        ///  Sends broadcast transmission to reset network layer parameters on all nodes in the PAN. 
+        /// </summary>
         private bool _resetRemoteDevices;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///The resetRemoteDevices to set as
-        ///</summary>
-        ///
-        /// <see cref="Boolean"
+        /// The resetRemoteDevices to set as </summary>
+        /// <seecref="Boolean"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetResetRemoteDevices(bool resetRemoteDevices)
         {
             this._resetRemoteDevices = resetRemoteDevices;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

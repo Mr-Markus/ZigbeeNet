@@ -13,61 +13,51 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Many-to-One Route Request ".
+    /// Class to implement the XBee command " Many-to-One Route Request ".
     /// The many-to-one route request indicator frame is sent out the serial port when a many-to-one
     /// route request is received. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeManyToOneRouteRequestEvent : XBeeFrame, IXBeeEvent
     {
         
         /// <summary>
-        ///Response field
+        /// Response field
         /// MSB first, LSB last. The 64-bit address of the device that initiated the route record. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private IeeeAddress _ieeeAddress;
         
         /// <summary>
-        ///Response field
+        /// Response field
         /// The sender's 16-bit address.
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _networkAddress;
         
         /// <summary>
-        /// MSB first, LSB last. The 64-bit address of the device that initiated the route record. 
-        ///Return the ieeeAddress as <see cref="IeeeAddress"/>
-        ///
-        ///</summary>
-        ///
+        ///  MSB first, LSB last. The 64-bit address of the device that initiated the route record. 
+        /// Return the ieeeAddress as <see cref="IeeeAddress"/>
+        /// </summary>
         public IeeeAddress GetIeeeAddress()
         {
             return _ieeeAddress;
         }
         
         /// <summary>
-        /// The sender's 16-bit address.
-        ///Return the networkAddress as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  The sender's 16-bit address.
+        /// Return the networkAddress as <see cref="System.Int32"/>
+        /// </summary>
         public int GetNetworkAddress()
         {
             return _networkAddress;
         }
         
         /// <summary>
-        ///Method for deserializing the fields for the response
-        ///</summary>
-        ///
+        /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            this._ieeeAddress = this.DeserializeIeeeAddress();
+            this._networkAddress = this.DeserializeInt16();
             DeserializeInt8();
         }
     }

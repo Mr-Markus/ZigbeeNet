@@ -13,117 +13,98 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Transmit Status ".
+    /// Class to implement the XBee command " Transmit Status ".
     /// When a Transmit Request (0x10, 0x11) completes, the device sends a Transmit Status message
     /// out of the serial interface. This message indicates if the Transmit Request was successful
     /// or if it failed. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeTransmitStatusResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        ///Response field
+        /// Response field
         /// The frame Id 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        ///Response field
+        /// Response field
         /// The 16-bit Network Address where the packet was delivered (if successful). If not
         /// successful, this address is 0xFFFD (destination address 6 unknown). 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _networkAddress;
         
         /// <summary>
-        ///Response field
+        /// Response field
         /// The number of application transmission retries that occur. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _transmitRetryCount;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private DeliveryStatus _deliveryStatus;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private DiscoveryStatus _discoveryStatus;
         
         /// <summary>
-        /// The frame Id 
-        ///Return the frameId as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  The frame Id 
+        /// Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        /// The 16-bit Network Address where the packet was delivered (if successful). If not
+        ///  The 16-bit Network Address where the packet was delivered (if successful). If not
         /// successful, this address is 0xFFFD (destination address 6 unknown). 
-        ///Return the networkAddress as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        /// Return the networkAddress as <see cref="System.Int32"/>
+        /// </summary>
         public int GetNetworkAddress()
         {
             return _networkAddress;
         }
         
         /// <summary>
-        /// The number of application transmission retries that occur. 
-        ///Return the transmitRetryCount as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  The number of application transmission retries that occur. 
+        /// Return the transmitRetryCount as <see cref="System.Int32"/>
+        /// </summary>
         public int GetTransmitRetryCount()
         {
             return _transmitRetryCount;
         }
         
         /// <summary>
-        ///Return the deliveryStatus as <see cref="DeliveryStatus"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the deliveryStatus as <see cref="DeliveryStatus"/>
+        /// </summary>
         public DeliveryStatus GetDeliveryStatus()
         {
             return _deliveryStatus;
         }
         
         /// <summary>
-        ///Return the discoveryStatus as <see cref="DiscoveryStatus"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the discoveryStatus as <see cref="DiscoveryStatus"/>
+        /// </summary>
         public DiscoveryStatus GetDiscoveryStatus()
         {
             return _discoveryStatus;
         }
         
         /// <summary>
-        ///Method for deserializing the fields for the response
-        ///</summary>
-        ///
+        /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            this._frameId = this.DeserializeInt8();
+            this._networkAddress = this.DeserializeInt16();
+            this._transmitRetryCount = this.DeserializeInt8();
+            this._deliveryStatus = this.DeserializeDeliveryStatus();
+            this._discoveryStatus = this.DeserializeDiscoveryStatus();
         }
     }
 }

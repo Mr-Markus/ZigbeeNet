@@ -13,40 +13,30 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Get Active Scan ".
+    /// Class to implement the XBee command " Get Active Scan ".
     /// AT Command <b>AS</b></p>Scans the neighborhood for beacon responses. The AS command is
     /// only valid as a local command. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeGetActiveScanCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        ///
-        ///</summary>
-        ///
+        ///  </summary>
         private int _frameId;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

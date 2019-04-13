@@ -13,40 +13,30 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Get Ieee Address Low ".
+    /// Class to implement the XBee command " Get Ieee Address Low ".
     /// AT Command <b>SL</b></p>DisplaLs the lower 32 bits of the unique IEEE 64-bit extended
     /// address assigned to the XBee in the factory. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeGetIeeeAddressLowCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        ///
-        ///</summary>
-        ///
+        ///  </summary>
         private int _frameId;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

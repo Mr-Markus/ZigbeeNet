@@ -13,41 +13,31 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Get Operating Channel ".
+    /// Class to implement the XBee command " Get Operating Channel ".
     /// AT Command <b>CH</b></p>Read the channel number used to transmit and receive data between
     /// RF devices and uses 802.15.4 channel numbers. A value of 0 means the device has not joined a PAN
     /// and is not operating on any channel. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeGetOperatingChannelCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        ///
-        ///</summary>
-        ///
+        ///  </summary>
         private int _frameId;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(8);

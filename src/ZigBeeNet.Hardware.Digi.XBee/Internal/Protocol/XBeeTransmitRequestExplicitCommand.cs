@@ -14,7 +14,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Transmit Request Explicit ".
+    /// Class to implement the XBee command " Transmit Request Explicit ".
     /// This frame is similar to Transmit Request (0x10), but it also requires you to specify the
     /// application layer addressing fields: endpoints, cluster ID, and profile ID. This frame
     /// causes the device to send payload data as an RF packet to a specific destination, using
@@ -29,265 +29,193 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     /// broadcast radius from 0 up to NH to 0xFF. If set to 0, the value of NH specifies the broadcast
     /// radius (recommended). This parameter is only used for broadcast transmissions. You can
     /// read the maximum number of payload bytes with the NP command. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeTransmitRequestExplicitCommand : XBeeFrame, IXBeeCommand 
     {
         
         /// <summary>
-        /// The frame Id 
-        ///
-        ///</summary>
-        ///
+        ///  The frame Id 
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        /// 64-bit destination address. MSB first, LSB last. Set to the 64-bit address of the
+        ///  64-bit destination address. MSB first, LSB last. Set to the 64-bit address of the
         /// destination device. Reserved 64-bit address for the coordinator = 0x0000000000000000
         /// Broadcast = 0x000000000000FFFF. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private IeeeAddress _ieeeAddress;
         
         /// <summary>
-        /// 16-bit destination network address. Set to the 16-bit address of the destination device, if
+        ///  16-bit destination network address. Set to the 16-bit address of the destination device, if
         /// known. If the address is unknown or if sending a broadcast, set to 0xFFFE. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _networkAddress;
         
         /// <summary>
-        /// Source Endpoint for the transmission
-        ///
-        ///</summary>
-        ///
+        ///  Source Endpoint for the transmission
+        /// </summary>
         private int _sourceEndpoint;
         
         /// <summary>
-        /// Destination Endpoint for the transmission. 
-        ///
-        ///</summary>
-        ///
+        ///  Destination Endpoint for the transmission. 
+        /// </summary>
         private int _destinationEndpoint;
         
         /// <summary>
-        /// Cluster ID used in the transmission.
-        ///
-        ///</summary>
-        ///
+        ///  Cluster ID used in the transmission.
+        /// </summary>
         private int _cluster;
         
         /// <summary>
-        /// Profile ID used in the transmission.
-        ///
-        ///</summary>
-        ///
+        ///  Profile ID used in the transmission.
+        /// </summary>
         private int _profileId;
         
         /// <summary>
-        /// Sets the maximum number of hops a broadcast transmission can traverse. If set to 0, the device
+        ///  Sets the maximum number of hops a broadcast transmission can traverse. If set to 0, the device
         /// sets the transmission radius to the network maximum hops value. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private int _broadcastRadius;
         
         /// <summary>
-        /// Bitfield of supported transmission options. Supported values include the following: 0x01
+        ///  Bitfield of supported transmission options. Supported values include the following: 0x01
         /// - Disable retries 0x04- Indirect Addressing 0x08- Multicast Addressing 0x20 - Enable APS
         /// encryption (if EE = 1) 0x40 - Use the extended transmission timeout for this destination
         /// Enabling APS encryption decreases the maximum number of RF payload bytes by 4 (below the
         /// value reported by NP). Setting the extended timeout bit causes the stack to set the extended
         /// transmission timeout for the destination address. See Transmission, addressing, and
         /// routing. All unused and unsupported bits must be set to 0. 
-        ///
-        ///</summary>
-        ///
+        /// </summary>
         private List<TransmitOptions> _options = new List<TransmitOptions>();
         
         /// <summary>
-        /// Data sent to the destination device.
-        ///
-        ///</summary>
-        ///
+        ///  Data sent to the destination device.
+        /// </summary>
         private int[] _data;
         
         /// <summary>
-        ///The frameId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The frameId to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetFrameId(int frameId)
         {
             this._frameId = frameId;
         }
         
         /// <summary>
-        ///The ieeeAddress to set as
-        ///</summary>
-        ///
-        /// <see cref="IeeeAddress"
+        /// The ieeeAddress to set as </summary>
+        /// <seecref="IeeeAddress"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
             this._ieeeAddress = ieeeAddress;
         }
         
         /// <summary>
-        ///The networkAddress to set as
-        ///</summary>
-        ///
-        /// <see cref="uint16"
+        /// The networkAddress to set as </summary>
+        /// <seecref="uint16"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetNetworkAddress(int networkAddress)
         {
             this._networkAddress = networkAddress;
         }
         
         /// <summary>
-        ///The sourceEndpoint to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The sourceEndpoint to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetSourceEndpoint(int sourceEndpoint)
         {
             this._sourceEndpoint = sourceEndpoint;
         }
         
         /// <summary>
-        ///The destinationEndpoint to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The destinationEndpoint to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetDestinationEndpoint(int destinationEndpoint)
         {
             this._destinationEndpoint = destinationEndpoint;
         }
         
         /// <summary>
-        ///The cluster to set as
-        ///</summary>
-        ///
-        /// <see cref="uint16"
+        /// The cluster to set as </summary>
+        /// <seecref="uint16"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetCluster(int cluster)
         {
             this._cluster = cluster;
         }
         
         /// <summary>
-        ///The profileId to set as
-        ///</summary>
-        ///
-        /// <see cref="uint16"
+        /// The profileId to set as </summary>
+        /// <seecref="uint16"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetProfileId(int profileId)
         {
             this._profileId = profileId;
         }
         
         /// <summary>
-        ///The broadcastRadius to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8"
+        /// The broadcastRadius to set as </summary>
+        /// <seecref="uint8"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetBroadcastRadius(int broadcastRadius)
         {
             this._broadcastRadius = broadcastRadius;
         }
         
         /// <summary>
-        ///The options to add to the set as
-        ///</summary>
-        ///
-        /// <see cref="TransmitOptions"
+        /// The options to add to the set as </summary>
+        /// <seecref="TransmitOptions"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void AddOptions(TransmitOptions options)
         {
             this._options.Add(options);
         }
         
         /// <summary>
-        ///The options to remove to the set as
-        ///</summary>
-        ///
-        /// <see cref="TransmitOptions"
+        /// The options to remove to the set as </summary>
+        /// <seecref="TransmitOptions"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void RemoveOptions(TransmitOptions options)
         {
             this._options.Remove(options);
         }
         
         /// <summary>
-        ///The options to set to the set as
-        ///</summary>
-        ///
-        /// <see cref="TransmitOptions"
+        /// The options to set to the set as </summary>
+        /// <seecref="TransmitOptions"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetOptions(IEnumerable<TransmitOptions> options)
         {
             this._options.AddRange(options);
         }
         
         /// <summary>
-        ///The data to set as
-        ///</summary>
-        ///
-        /// <see cref="uint8[]"
+        /// The data to set as </summary>
+        /// <seecref="uint8[]"
         ///>
-        ///
-        ///</see>
-        ///
+        ///  </see>
         public void SetData(int[] data)
         {
             this._data = data;
         }
         
         /// <summary>
-        ///Method for serializing the command fields
-        ///</summary>
-        ///
+        /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
             this.SerializeCommand(17);

@@ -13,77 +13,68 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Scan Channels ".
+    /// Class to implement the XBee command " Scan Channels ".
     /// AT Command <b>SC</b></p>Set or read the list of channels to scan. Coordinator - Bit field
     /// list of channels to choose from prior to starting network. Router/End Device - Bit field list
     /// of channels scanned to find a Coordinator/Router to join. Write changes to SC using the WR
     /// command to preserve the SC setting if a power cycle occurs. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeScanChannelsResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private CommandStatus _commandStatus;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private int _channels;
         
         /// <summary>
-        ///Return the frameId as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        ///Return the commandStatus as <see cref="CommandStatus"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        ///Return the channels as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the channels as <see cref="System.Int32"/>
+        /// </summary>
         public int GetChannels()
         {
             return _channels;
         }
         
         /// <summary>
-        ///Method for deserializing the fields for the response
-        ///</summary>
-        ///
+        /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            this._frameId = this.DeserializeInt8();
             DeserializeAtCommand();
+            this._commandStatus = this.DeserializeCommandStatus();
+            if (_commandStatus != CommandStatus.OK || IsComplete())
+            {
+                    return;
+            }
+            this._channels = this.DeserializeInt16();
         }
     }
 }

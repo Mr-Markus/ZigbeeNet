@@ -13,57 +13,47 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " Encryption Options ".
+    /// Class to implement the XBee command " Encryption Options ".
     /// AT Command <b>EO</b></p>Set or read the encryption enable setting.
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeEncryptionOptionsResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private CommandStatus _commandStatus;
         
         /// <summary>
-        ///Return the frameId as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        ///Return the commandStatus as <see cref="CommandStatus"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        ///Method for deserializing the fields for the response
-        ///</summary>
-        ///
+        /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            this._frameId = this.DeserializeInt8();
             DeserializeAtCommand();
+            this._commandStatus = this.DeserializeCommandStatus();
         }
     }
 }

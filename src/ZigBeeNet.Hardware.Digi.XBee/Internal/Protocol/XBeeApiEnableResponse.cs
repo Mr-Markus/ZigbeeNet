@@ -13,75 +13,66 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
     
     
     /// <summary>
-    ///Class to implement the XBee command " API Enable ".
+    /// Class to implement the XBee command " API Enable ".
     /// AT Command <b>AP</b></p>Enables API Mode. The device ignores this command when using SPI.
     /// API mode 1 is always used. 
-    ///This class provides methods for processing XBee API commands.
-    ///
-    ///</summary>
-    ///
+    /// This class provides methods for processing XBee API commands.
+    /// </summary>
     public class XBeeApiEnableResponse : XBeeFrame, IXBeeResponse 
     {
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private int _frameId;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private CommandStatus _commandStatus;
         
         /// <summary>
-        ///Response field
-        ///
-        ///</summary>
-        ///
+        /// Response field
+        /// </summary>
         private int _mode;
         
         /// <summary>
-        ///Return the frameId as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the frameId as <see cref="System.Int32"/>
+        /// </summary>
         public int GetFrameId()
         {
             return _frameId;
         }
         
         /// <summary>
-        ///Return the commandStatus as <see cref="CommandStatus"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the commandStatus as <see cref="CommandStatus"/>
+        /// </summary>
         public CommandStatus GetCommandStatus()
         {
             return _commandStatus;
         }
         
         /// <summary>
-        ///Return the mode as <see cref="System.Int32"/>
-        ///
-        ///</summary>
-        ///
+        ///  Return the mode as <see cref="System.Int32"/>
+        /// </summary>
         public int GetMode()
         {
             return _mode;
         }
         
         /// <summary>
-        ///Method for deserializing the fields for the response
-        ///</summary>
-        ///
+        /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
             this.InitializeDeserializer(incomingData);
+            this._frameId = this.DeserializeInt8();
             DeserializeAtCommand();
+            this._commandStatus = this.DeserializeCommandStatus();
+            if (_commandStatus != CommandStatus.OK || IsComplete())
+            {
+                    return;
+            }
+            this._mode = this.DeserializeInt8();
         }
     }
 }
