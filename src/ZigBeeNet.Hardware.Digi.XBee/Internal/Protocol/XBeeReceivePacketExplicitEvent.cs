@@ -174,5 +174,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this._receiveOptions = this.DeserializeReceiveOptions();
             this._data = this.DeserializeData();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(840);
+        }
     }
 }

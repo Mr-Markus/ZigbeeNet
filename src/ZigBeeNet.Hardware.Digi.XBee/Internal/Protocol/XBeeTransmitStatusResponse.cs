@@ -106,5 +106,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this._deliveryStatus = this.DeserializeDeliveryStatus();
             this._discoveryStatus = this.DeserializeDiscoveryStatus();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(566);
+        }
     }
 }

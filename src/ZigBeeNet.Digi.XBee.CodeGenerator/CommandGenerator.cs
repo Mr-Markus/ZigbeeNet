@@ -253,10 +253,112 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateDeserializerMethods(responseParameterGroup, protocolClass);
 
-            // Go on with line 351
-            CreateToStringOverride();
+            // Go on with line 351 to line 412
+            CreateToStringOverride(className, commandParameterGroup, responseParameterGroup, protocolClass);
 
             GenerateCode(compileUnit, className);
+        }
+
+        private void CreateToStringOverride(string className, List<ParameterGroup> commandParameterGroup, List<ParameterGroup> responseParameterGroup, CodeTypeDeclaration protocolClass)
+        {
+            CodeMemberMethod codeMemberMethod = CreateMethodOverride("ToString", null, new CodeTypeReference(typeof(string)), null);
+
+            int parameterCount = 0;
+            foreach (ParameterGroup group in commandParameterGroup)
+            {
+                if (group.Parameters != null)
+                {
+                    parameterCount += group.Parameters.Count;
+                }
+            }
+
+            foreach (ParameterGroup group in responseParameterGroup)
+            {
+                if (group.Parameters != null)
+                {
+                    parameterCount += group.Parameters.Count;
+                }
+            }
+
+            if (parameterCount == 0 && !className.EndsWith("Command"))
+            {
+                codeMemberMethod.Statements.Add(new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeBaseReferenceExpression(), "ToString")));
+            }
+            else
+            {
+                CodeObjectCreateExpression codeObjectCreateExpression = new CodeObjectCreateExpression(new CodeTypeReference(typeof(StringBuilder)));
+                codeObjectCreateExpression.Parameters.Add(new CodeSnippetExpression($"{className.Length + 3 * ((parameterCount + 1) * 30)}"));
+                CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression("System.Text.StringBuilder builder"), codeObjectCreateExpression);
+                codeMemberMethod.Statements.Add(codeAssignStatement);
+
+                bool first = true;
+                if (className.EndsWith("Command")
+                    && commandParameterGroup != null
+                    && commandParameterGroup.Count > 0
+                    && commandParameterGroup[0].Parameters != null
+                    && commandParameterGroup[0].Parameters.Count != 0)
+                {
+                    foreach (ParameterGroup group in commandParameterGroup)
+                    {
+                        CreateToString(codeMemberMethod, first, className, group);
+                        first = false;
+                    }
+                }
+
+                foreach (ParameterGroup group in responseParameterGroup)
+                {
+                    if (group == null || group.Parameters == null || group.Parameters.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    if (group.Multiple)
+                    {
+                        if (first)
+                        {
+                            CodeMethodInvokeExpression firstCodeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                            firstCodeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"\"{className} [{group.Name.ToLowerCamelCase()}s=\""));
+                            codeMemberMethod.Statements.Add(firstCodeMethodInvokeExpression);
+                        }
+                        else
+                        {
+                            CodeMethodInvokeExpression NotFistCodeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                            NotFistCodeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"\", {group.Name.ToLowerCamelCase()}s=\""));
+                            codeMemberMethod.Statements.Add(NotFistCodeMethodInvokeExpression);
+                        }
+                        CodeMethodInvokeExpression methodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                        methodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"{group.Name.ToLowerCamelCase()}s"));
+                        codeMemberMethod.Statements.Add(methodInvokeExpression);
+                        first = false;
+                        continue;
+                    }
+                    CreateToString(codeMemberMethod, first, className, group);
+                    first = false;
+                }
+
+                if (className.EndsWith("Command"))
+                {
+                    if (first)
+                    {
+                        CodeMethodInvokeExpression firstCommandCodeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                        firstCommandCodeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"\"{className} [\""));
+                        codeMemberMethod.Statements.Add(firstCommandCodeMethodInvokeExpression);
+                    }
+                }
+                CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                codeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression("]"));
+                codeMemberMethod.Statements.Add(codeMethodInvokeExpression);
+
+                codeMemberMethod.Statements.Add(new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append")));
+            }
+
+            protocolClass.Members.Add(codeMemberMethod);
+        }
+
+        private void CreateToString(CodeMemberMethod codeMemberMethod, bool first, string className, ParameterGroup group)
+        {
+            // Go on with line 747
+            throw new NotImplementedException();
         }
 
         private void CreateDeserializerMethods(List<ParameterGroup> responseParameterGroup, CodeTypeDeclaration protocolClass)
@@ -834,6 +936,13 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             {
                 codeMemberMethod.Statements.Add(returnStatement);
             }
+            return codeMemberMethod;
+        }
+
+        private CodeMemberMethod CreateMethodOverride(string methodName, CodeParameterDeclarationExpressionCollection declarationExpressionCollection, CodeTypeReference returnType, CodeMethodReturnStatement returnStatement)
+        {
+            CodeMemberMethod codeMemberMethod = CreateMethod(methodName, declarationExpressionCollection, returnType, returnStatement);
+            codeMemberMethod.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             return codeMemberMethod;
         }
 

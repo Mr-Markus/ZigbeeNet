@@ -60,5 +60,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this._networkAddress = this.DeserializeInt16();
             DeserializeInt8();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(390);
+        }
     }
 }

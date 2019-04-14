@@ -40,5 +40,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this.InitializeDeserializer(incomingData);
             this._status = this.DeserializeModemStatus();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(200);
+        }
     }
 }

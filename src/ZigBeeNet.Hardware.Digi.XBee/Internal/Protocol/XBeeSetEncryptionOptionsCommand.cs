@@ -79,5 +79,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this.SerializeEncryptionOptions(_encryptionOptions);
             return this.GetPayload();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(391);
+        }
     }
 }

@@ -79,10 +79,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this.SerializeData(_parameterValue);
             return this.GetPayload();
         }
-
+        
         public override string ToString()
         {
-            return base.ToString();
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(373);
         }
     }
 }

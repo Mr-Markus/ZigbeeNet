@@ -56,5 +56,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             DeserializeAtCommand();
             this._commandStatus = this.DeserializeCommandStatus();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(380);
+        }
     }
 }

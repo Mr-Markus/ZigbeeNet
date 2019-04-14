@@ -45,5 +45,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this.SerializeAtCommand("CH");
             return this.GetPayload();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(300);
+        }
     }
 }

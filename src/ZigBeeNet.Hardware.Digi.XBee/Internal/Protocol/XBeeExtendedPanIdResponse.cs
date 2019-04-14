@@ -74,5 +74,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             }
             this._extendedPanId = this.DeserializeExtendedPanId();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(475);
+        }
     }
 }

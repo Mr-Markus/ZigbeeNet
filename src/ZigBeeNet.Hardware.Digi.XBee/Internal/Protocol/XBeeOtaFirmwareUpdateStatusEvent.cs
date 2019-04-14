@@ -109,5 +109,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             this._blockNumber = this.DeserializeInt8();
             this._targetAddress = this.DeserializeIeeeAddress();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(662);
+        }
     }
 }

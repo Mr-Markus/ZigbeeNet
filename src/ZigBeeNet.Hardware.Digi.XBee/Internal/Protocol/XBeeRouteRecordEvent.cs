@@ -91,5 +91,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             int numberOfAddresses = this.DeserializeInt8();
             _addressList = this.DeserializeInt16Array(numberOfAddresses);
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(560);
+        }
     }
 }

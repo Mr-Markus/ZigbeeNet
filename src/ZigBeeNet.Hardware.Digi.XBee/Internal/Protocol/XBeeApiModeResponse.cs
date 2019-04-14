@@ -78,5 +78,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             }
             this._mode = this.DeserializeInt8();
         }
+        
+        public override string ToString()
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(469);
+        }
     }
 }
