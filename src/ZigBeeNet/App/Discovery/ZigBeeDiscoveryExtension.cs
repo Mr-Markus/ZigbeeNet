@@ -46,11 +46,9 @@ namespace ZigBeeNet.App.Discovery
             return ZigBeeStatus.SUCCESS;
         }
 
-        public ZigBeeStatus ExtensionStartup(ZigBeeNetworkManager networkManager)
+        public ZigBeeStatus ExtensionStartup()
         {
             Log.Debug("DISCOVERY Extension: Startup");
-
-            _networkManager = networkManager;
 
             _networkManager.AddNetworkNodeListener(this);
             _networkManager.AddCommandListener(this);
