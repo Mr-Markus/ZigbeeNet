@@ -904,7 +904,7 @@ namespace ZigBeeNet
                     // Start the extensions
                     foreach (IZigBeeNetworkExtension extension in _extensions)
                     {
-                        extension.ExtensionStartup(this);
+                        extension.ExtensionStartup();
                     }
 
                     foreach (ZigBeeNode node in _networkNodes.Values)
@@ -1418,7 +1418,7 @@ namespace ZigBeeNet
                 // If the network is online, start the extension
                 if (NetworkState == ZigBeeTransportState.ONLINE)
                 {
-                    extension.ExtensionStartup(this);
+                    extension.ExtensionStartup();
                 }
             }
         }

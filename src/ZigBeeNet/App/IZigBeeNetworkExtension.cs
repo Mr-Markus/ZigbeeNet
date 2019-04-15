@@ -36,7 +36,7 @@ namespace ZigBeeNet.App
         /// </summary>
         /// <param name="ZigBeeNetworkManager"/>The ZigBeeNetworkManager of the network</param>
         /// <returns> true if the extension started successfully</returns>
-        ZigBeeStatus ExtensionStartup(ZigBeeNetworkManager networkManager);
+        ZigBeeStatus ExtensionStartup();
 
         /// <summary>
         /// Shuts down an extension. The extension should perform any shutdown and cleanup as required.

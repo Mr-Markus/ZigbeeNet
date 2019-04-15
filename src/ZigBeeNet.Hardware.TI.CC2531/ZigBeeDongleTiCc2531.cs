@@ -49,7 +49,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                 return _networkManager.GetCurrentPanId();
             }
         }
-        
+
         public ExtendedPanId ExtendedPanId
         {
             get
@@ -118,7 +118,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public void ReceivedAsynchronousCommand(ZToolPacket packet)
         {
-            switch(packet.Subsystem)
+            switch (packet.Subsystem)
             {
                 case ZToolPacket.CommandSubsystem.AF:
                     return;
@@ -129,7 +129,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             }
 
             ZigBeeApsFrame apsFrame = null;
-            switch((ZToolCMD)packet.CMD.Value)
+            switch ((ZToolCMD)packet.CMD.Value)
             {
                 case ZToolCMD.ZDO_MSG_CB_INCOMING:
                     apsFrame = ZdoCallbackIncoming.Create(packet);
@@ -166,7 +166,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                     break;
             }
 
-            if(apsFrame != null)
+            if (apsFrame != null)
             {
                 _zigBeeNetworkReceive.ReceiveCommand(apsFrame);
                 return;
@@ -175,7 +175,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public void ReceivedUnclaimedSynchronousCommandResponse(ZToolPacket packet)
         {
-            if(packet is ZToolPacket srsp)
+            if (packet is ZToolPacket srsp)
             {
                 throw new NotImplementedException();
             }
@@ -183,7 +183,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         public void SendCommand(ZigBeeApsFrame apsFrame)
         {
-            lock(_networkManager) {
+            lock (_networkManager)
+            {
                 byte sender;
                 if (apsFrame.Profile == 0)
                 {
@@ -228,6 +229,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                 return ZigBeeStatus.INVALID_STATE;
             }
 
+            // TODO: ugly ugly ugly
+            // See: https://github.com/zigbeenet/ZigbeeNet/issues/46
             while (true)
             {
                 if (_networkManager.GetDriverStatus() == DriverStatus.NETWORK_READY)
@@ -238,28 +241,24 @@ namespace ZigBeeNet.Hardware.TI.CC2531
                 {
                     return ZigBeeStatus.BAD_RESPONSE;
                 }
-                try
-                {
-                    Thread.Sleep(50);
-                }
-                catch (Exception e) {
-                    return ZigBeeStatus.BAD_RESPONSE;
-                }
-                }
 
-                CreateEndpoint(1, 0x104);
-
-                return ZigBeeStatus.SUCCESS;
+                Thread.Sleep(50);
             }
+
+            CreateEndpoint(1, 0x104);
+
+            return ZigBeeStatus.SUCCESS;
+        }
 
         private byte GetSendingEndpoint(ushort profileId)
         {
-            lock(_sender2Endpoint)
+            lock (_sender2Endpoint)
             {
-                if(_sender2Endpoint.ContainsKey(profileId))
+                if (_sender2Endpoint.ContainsKey(profileId))
                 {
                     return _sender2Endpoint[profileId];
-                } else
+                }
+                else
                 {
                     Log.Information($"No endpoint registered for profileId={profileId}");
                     return byte.MaxValue;
@@ -269,12 +268,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531
 
         private ushort GetEndpointProfile(byte endpointId)
         {
-            lock(_Endpoint2Profile)
+            lock (_Endpoint2Profile)
             {
-                if(_Endpoint2Profile.ContainsKey(endpointId))
+                if (_Endpoint2Profile.ContainsKey(endpointId))
                 {
                     return _Endpoint2Profile[endpointId];
-                } else
+                }
+                else
                 {
                     Log.Information("No endpoint {Endpoint} registered", endpointId);
                     return ushort.MaxValue;
