@@ -72,8 +72,8 @@ namespace ZigBeeNet.App.Basic
         ///<summary>
         ///Sets an attribute value in the basic server.
         ///
-        ///<param>attributeId the attribute identifier to set</param> 
-        ///<param>attributeValue the value related to the attribute ID</param> 
+        ///<param name="attributeId">the attribute identifier to set</param> 
+        ///<param name="attributeValue">the value related to the attribute ID</param> 
         ///<returns>true if the attribute was set</returns> 
         ///</summary>
         public bool SetAttribute(ushort attributeId, object attributeValue)

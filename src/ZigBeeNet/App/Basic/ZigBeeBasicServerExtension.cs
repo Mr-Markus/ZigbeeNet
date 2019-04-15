@@ -28,13 +28,13 @@ namespace ZigBeeNet.App.Basic
             _basicServer.Shutdown();
         }
 
-        /**
-         * Sets an attribute value in the basic server.
-         *
-         * @param attributeId the attribute identifier to set
-         * @param attributeValue the value related to the attribute ID
-         * @return true if the attribute was set
-         */
+        ///<summary>
+        ///Sets an attribute value in the basic server.
+        ///
+        ///<param name="attributeId">the attribute identifier to set</param>
+        ///<param name="attributeValue"/>the value related to the attribute ID
+        ///<returns>true if the attribute was set</returns> 
+        ///</summary>
         public bool SetAttribute(ushort attributeId, object attributeValue)
         {
             return _basicServer.SetAttribute(attributeId, attributeValue);
