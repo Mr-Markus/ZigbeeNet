@@ -7,7 +7,7 @@ using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Command;
 using Serilog;
 
-namespace ZigBeeNet.App
+namespace ZigBeeNet.Internal
 {
     public class ClusterMatcher : IZigBeeCommandListener
     {
