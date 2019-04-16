@@ -44,6 +44,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(200);
+            builder.Append("XBeeModemStatusEvent [status=");
+            builder.Append(this._status);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

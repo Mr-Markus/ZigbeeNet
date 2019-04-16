@@ -81,6 +81,13 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(478);
+            builder.Append("XBeeJoinNotificationResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", commandStatus=");
+            builder.Append(this._commandStatus);
+            builder.Append(this._enableNotification);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

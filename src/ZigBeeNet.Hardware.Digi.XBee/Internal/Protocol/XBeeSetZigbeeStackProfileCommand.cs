@@ -64,6 +64,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(392);
+            builder.Append("XBeeSetZigbeeStackProfileCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", stackProfile=");
+            builder.Append(this._stackProfile);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

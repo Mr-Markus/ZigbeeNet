@@ -253,8 +253,9 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             CreateDeserializerMethods(responseParameterGroup, protocolClass);
 
-            // Go on with line 351 to line 412
             CreateToStringOverride(className, commandParameterGroup, responseParameterGroup, protocolClass);
+
+            // Go on with line 414
 
             GenerateCode(compileUnit, className);
         }
@@ -346,10 +347,10 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     }
                 }
                 CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
-                codeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression("]"));
+                codeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression("']'"));
                 codeMemberMethod.Statements.Add(codeMethodInvokeExpression);
 
-                codeMemberMethod.Statements.Add(new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append")));
+                codeMemberMethod.Statements.Add(new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "ToString")));
             }
 
             protocolClass.Members.Add(codeMemberMethod);
@@ -357,8 +358,110 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
         private void CreateToString(CodeMemberMethod codeMemberMethod, bool first, string className, ParameterGroup group)
         {
-            // Go on with line 747
-            throw new NotImplementedException();
+            CodeConditionStatement CommandCodeConditionStatement = null;
+            CodeExpressionStatement CommandCodeExpressionStatement = null;
+            bool isCommandStatusParameter = false;
+            foreach (var parameter in group.Parameters)
+            {
+                if (parameter.AutoSize != null)
+                {
+                    continue;
+                }
+
+                // Constant...
+                if (!string.IsNullOrEmpty(parameter.Value))
+                {
+                    continue;
+                }
+
+                if (first)
+                {
+                    CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                    codeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"\"{className} [{parameter.Name.ToLowerCamelCase()}=\""));
+                    codeMemberMethod.Statements.Add(codeMethodInvokeExpression);
+                }
+                else
+                {
+                    if (!isCommandStatusParameter)
+                    {
+                        CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"builder"), "Append");
+                        codeMethodInvokeExpression.Parameters.Add(new CodeSnippetExpression($"\", {parameter.Name.ToLowerCamelCase()}=\""));
+                        codeMemberMethod.Statements.Add(codeMethodInvokeExpression);
+                    }
+                }
+
+                first = false;
+                string sizer = "2";
+                CodeConditionStatement codeConditionStatement = null;
+                CodeExpressionStatement codeExpressionStatement = null;
+                if (parameter.DataType.Contains("[]") || parameter.DataType.Equals("Data"))
+                {
+                    if (parameter.DataType.Contains("16"))
+                    {
+                        sizer = "4";
+                    }
+                    if (!isCommandStatusParameter)
+                    {
+                        codeConditionStatement = new CodeConditionStatement(
+                            new CodeSnippetExpression($"this._{parameter.Name.ToLowerCamelCase()} == null"),
+                            new CodeStatement[] { new CodeSnippetStatement($"                builder.Append(\"null\");") },
+                            new CodeStatement[] { new CodeIterationStatement(
+                            new CodeSnippetStatement("int cnt = 0"),
+                            new CodeSnippetExpression($"cnt < _{parameter.Name.ToLowerCamelCase()}.Length"),
+                            new CodeSnippetStatement("cnt++"),
+                            new CodeStatement[]
+                            {
+                                new CodeConditionStatement(
+                                    new CodeSnippetExpression($"cnt > 0"),
+                                    new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"string.Format(\"%0{sizer}X\", this._{FormatParameterString(parameter)}[cnt])") }))
+                            })
+                            });
+                        codeMemberMethod.Statements.Add(codeConditionStatement);
+                    }
+                    else
+                    {
+                        CommandCodeConditionStatement.TrueStatements.Add(new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"\", {parameter.Name.ToLowerCamelCase()}=\"") })));
+                        CommandCodeConditionStatement.TrueStatements.Add(new CodeConditionStatement(
+                            new CodeSnippetExpression($"this._{parameter.Name.ToLowerCamelCase()} == null"),
+                            new CodeStatement[] { new CodeSnippetStatement($"                builder.Append(\"null\");") },
+                            new CodeStatement[] { new CodeIterationStatement(
+                            new CodeSnippetStatement("int cnt = 0"),
+                            new CodeSnippetExpression($"cnt < _{parameter.Name.ToLowerCamelCase()}.Length"),
+                            new CodeSnippetStatement("cnt++"),
+                            new CodeStatement[]
+                            {
+                                new CodeConditionStatement(
+                                    new CodeSnippetExpression($"cnt > 0"),
+                                    new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"string.Format(\"%0{sizer}X\", this._{FormatParameterString(parameter)}[cnt])") }))
+                            })
+                            }));
+                        codeMemberMethod.Statements.Add(CommandCodeConditionStatement);
+                        codeMemberMethod.Statements.Add(CommandCodeExpressionStatement);
+                    }
+                }
+                else
+                {
+                    codeExpressionStatement = new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"this._{FormatParameterString(parameter)}") }));
+                }
+
+                if (GetTypeSerializer(parameter.DataType).Equals("CommandStatus")
+                    && !(group.Parameters.IndexOf(parameter) == (group.Parameters.Count - 1)))
+                {
+                    CommandCodeConditionStatement = new CodeConditionStatement(
+                    new CodeSnippetExpression("this._commandStatus == CommandStatus.OK"),
+                    new CodeStatement[] { });
+
+                    CommandCodeExpressionStatement = codeExpressionStatement;
+                    isCommandStatusParameter = true;
+                }
+
+                if (codeExpressionStatement != null)
+                {
+                    codeMemberMethod.Statements.Add(codeExpressionStatement);
+                }
+            }
         }
 
         private void CreateDeserializerMethods(List<ParameterGroup> responseParameterGroup, CodeTypeDeclaration protocolClass)

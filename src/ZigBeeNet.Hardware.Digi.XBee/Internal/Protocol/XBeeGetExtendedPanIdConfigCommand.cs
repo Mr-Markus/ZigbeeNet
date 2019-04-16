@@ -48,6 +48,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(303);
+            builder.Append("XBeeGetExtendedPanIdConfigCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

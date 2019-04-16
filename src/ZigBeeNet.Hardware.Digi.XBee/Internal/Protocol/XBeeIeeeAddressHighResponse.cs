@@ -78,6 +78,34 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(477);
+            builder.Append("XBeeIeeeAddressHighResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", commandStatus=");
+            builder.Append(this._commandStatus);
+            if (this._commandStatus == CommandStatus.OK)
+            {
+                builder.Append(", ieeeAddress=");
+                if (this._ieeeAddress == null)
+                {
+                builder.Append("null");
+                }
+                else
+                {
+                    for (int cnt = 0
+                    ; cnt < _ieeeAddress.Length; cnt++
+                    )
+                    {
+                        if (cnt > 0)
+                        {
+                        builder.Append(' ');
+                        }
+                        builder.Append(string.Format("%02X", this._ieeeAddress[cnt]));
+                    }
+                }
+            }
+            builder.Append(this._commandStatus);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

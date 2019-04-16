@@ -52,6 +52,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(291);
+            builder.Append("XBeeGetApiModeCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

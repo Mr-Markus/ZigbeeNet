@@ -48,6 +48,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(292);
+            builder.Append("XBeeSetSaveDataCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

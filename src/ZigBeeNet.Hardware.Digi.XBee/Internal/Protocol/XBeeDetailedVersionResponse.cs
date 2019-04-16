@@ -78,6 +78,34 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(477);
+            builder.Append("XBeeDetailedVersionResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", commandStatus=");
+            builder.Append(this._commandStatus);
+            if (this._commandStatus == CommandStatus.OK)
+            {
+                builder.Append(", versionInfo=");
+                if (this._versionInfo == null)
+                {
+                builder.Append("null");
+                }
+                else
+                {
+                    for (int cnt = 0
+                    ; cnt < _versionInfo.Length; cnt++
+                    )
+                    {
+                        if (cnt > 0)
+                        {
+                        builder.Append(' ');
+                        }
+                        builder.Append(string.Format("%02X", this._versionInfo[cnt]));
+                    }
+                }
+            }
+            builder.Append(this._commandStatus);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

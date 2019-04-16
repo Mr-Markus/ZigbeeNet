@@ -64,6 +64,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(384);
+            builder.Append("XBeeSetNetworkKeyCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", networkKey=");
+            builder.Append(this._networkKey);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

@@ -162,6 +162,19 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(1012);
+            builder.Append("XBeeActiveScanResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", commandStatus=");
+            builder.Append(this._commandStatus);
+            builder.Append(this._asType);
+            builder.Append(this._channel);
+            builder.Append(this._extendedPanId);
+            builder.Append(this._allowJoin);
+            builder.Append(this._stackProfile);
+            builder.Append(this._lqi);
+            builder.Append(this._rssi);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

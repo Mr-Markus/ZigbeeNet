@@ -62,6 +62,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(390);
+            builder.Append("XBeeSetEncryptionEnableCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", enableEncryption=");
+            builder.Append(this._enableEncryption);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

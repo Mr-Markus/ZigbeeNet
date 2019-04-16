@@ -93,6 +93,32 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(472);
+            builder.Append("XBeeReceivePacketEvent [ieeeAddress=");
+            builder.Append(this._ieeeAddress);
+            builder.Append(", networkAddress=");
+            builder.Append(this._networkAddress);
+            builder.Append(", receiveOptions=");
+            builder.Append(this._receiveOptions);
+            builder.Append(", data=");
+            if (this._data == null)
+            {
+                builder.Append("null");
+            }
+            else
+            {
+                for (int cnt = 0
+                ; cnt < _data.Length; cnt++
+                )
+                {
+                    if (cnt > 0)
+                    {
+                        builder.Append(' ');
+                    }
+                    builder.Append(string.Format("%02X", this._data[cnt]));
+                }
+            }
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

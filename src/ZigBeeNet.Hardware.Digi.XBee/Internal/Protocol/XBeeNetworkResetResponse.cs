@@ -83,6 +83,13 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(474);
+            builder.Append("XBeeNetworkResetResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", commandStatus=");
+            builder.Append(this._commandStatus);
+            builder.Append(this._resetRemoteDevices);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

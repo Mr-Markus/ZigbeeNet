@@ -2,7 +2,7 @@
 using ZigBeeNet.Hardware.Digi.XBee.Internal;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
 using ZigBeeNet.Hardware.Digi.XBee.Network;
-using ZigBeeNet.Logging;
+using Serilog;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 
@@ -10,7 +10,6 @@ namespace ZigBeeNet.Hardware.DIGI.XB24C
 {
     public class ZigBeeDongleDigiXBee : IZigBeeTransportTransmit, IXBeeEventListener
     {
-        private readonly ILog _logger = LogProvider.For<ZigBeeDongleDigiXBee>();
         private readonly IZigBeePort _serialPort;
         private XBeeFrameHandler _frameHandler;
         private readonly IZigBeeTransportReceive _zigBeeTransportReceive;
@@ -47,108 +46,108 @@ namespace ZigBeeNet.Hardware.DIGI.XB24C
 
         public ZigBeeStatus Initialize()
         {
-            _logger.Debug("XBee device initialize.");
+            Log.Debug("XBee device initialize.");
 
             if (!_serialPort.Open())
             {
-                _logger.Error("Unable to open XBee serial port");
+                Log.Error("Unable to open XBee serial port");
                 return ZigBeeStatus.COMMUNICATION_ERROR;
             }
 
             _frameHandler = new XBeeFrameHandler();
             _frameHandler.Start(_serialPort);
-            _frameHandler.AddEventListener(this);
+            //_frameHandler.AddEventListener(this);
 
             int resetCount = 0;
-            do
-            {
-                if (resetCount >= MAX_RESET_RETRIES)
-                {
-                    _logger.Info($"XBee device reset failed after {++resetCount}");
-                    return ZigBeeStatus.NO_RESPONSE;
-                }
-                _logger.Debug($"XBee device reset {++resetCount}");
-                XBeeSetSoftwareResetCommand resetCommand = new XBeeSetSoftwareResetCommand();
-                _frameHandler.SendRequest(resetCommand);
-            } while (_frameHandler.EventWait(XBeeModemStatusEvent) == null);
+            //do
+            //{
+            //    if (resetCount >= MAX_RESET_RETRIES)
+            //    {
+            //        Log.Information($"XBee device reset failed after {++resetCount}");
+            //        return ZigBeeStatus.NO_RESPONSE;
+            //    }
+            //    Log.Debug($"XBee device reset {++resetCount}");
+            //    XBeeSetSoftwareResetCommand resetCommand = new XBeeSetSoftwareResetCommand();
+            //    _frameHandler.SendRequest(resetCommand);
+            //} while (_frameHandler.EventWait(XBeeModemStatusEvent) == null);
 
 
             XBeeSetApiEnableCommand apiEnableCommand = new XBeeSetApiEnableCommand();
-            apiEnableCommand.setMode(2);
-            _frameHandler.sendRequest(apiEnableCommand);
+            //apiEnableCommand.setMode(2);
+            //_frameHandler.sendRequest(apiEnableCommand);
 
             XBeeSetApiModeCommand apiModeCommand = new XBeeSetApiModeCommand();
-            apiModeCommand.SetMode(3);
-            _frameHandler.SendRequest(apiModeCommand);
+            //apiModeCommand.SetMode(3);
+            //_frameHandler.SendRequest(apiModeCommand);
 
             XBeeGetHardwareVersionCommand hwVersionCommand = new XBeeGetHardwareVersionCommand();
-            _frameHandler.SendRequest(hwVersionCommand);
+            //_frameHandler.SendRequest(hwVersionCommand);
 
-            xBeeGetFirmwareVersionCommand fwVersionCommand = new xBeeGetFirmwareVersionCommand();
-            _frameHandler.SendRequest(fwVersionCommand);
+            //xBeeGetFirmwareVersionCommand fwVersionCommand = new xBeeGetFirmwareVersionCommand();
+            //_frameHandler.SendRequest(fwVersionCommand);
 
             XBeeGetDetailedVersionCommand versionCommand = new XBeeGetDetailedVersionCommand();
-            _frameHandler.SendRequest(versionCommand);
+            //_frameHandler.SendRequest(versionCommand);
 
             XBeeGetIeeeAddressHighCommand ieeeHighCommand = new XBeeGetIeeeAddressHighCommand();
-            XBeeIeeeAddressHighResponse ieeeHighResponse = (XBeeIeeeAddressHighResponse)_frameHandler.SendRequest(ieeeHighCommand);
+            //XBeeIeeeAddressHighResponse ieeeHighResponse = (XBeeIeeeAddressHighResponse)_frameHandler.SendRequest(ieeeHighCommand);
 
             XBeeGetIeeeLowCommand ieeeLowCommand = new XBeeGetIeeeLowCommand();
-            XBeeIeeeAddressLowCommand ieeeLowResponse = (XBeeIeeeAddressLowCommand)_frameHandler.SendRequest(ieeeLowCommand);
+            //XBeeIeeeAddressLowCommand ieeeLowResponse = (XBeeIeeeAddressLowCommand)_frameHandler.SendRequest(ieeeLowCommand);
 
-            if (ieeeHighResponse == null || ieeeLowCommand == null)
-            {
-                _logger.Error("Unable to get XBee IEEE address");
-                return ZigBeeStatus.BAD_RESPONSE;
-            }
+            //if (ieeeHighResponse == null || ieeeLowCommand == null)
+            //{
+            //    Log.Error("Unable to get XBee IEEE address");
+            //    return ZigBeeStatus.BAD_RESPONSE;
+            //}
 
-            byte[] tmpAddress = new byte[8];
-            tmpAddress[0] = ieeeLowResponse.GetIeeeAddress()[3];
-            tmpAddress[1] = ieeeLowResponse.GetIeeeAddress()[2];
-            tmpAddress[2] = ieeeLowResponse.GetIeeeAddress()[1];
-            tmpAddress[3] = ieeeLowResponse.GetIeeeAddress()[0];
-            tmpAddress[4] = ieeeHighResponse.GetIeeeAddress()[3];
-            tmpAddress[5] = ieeeHighResponse.GetIeeeAddress()[2];
-            tmpAddress[6] = ieeeHighResponse.GetIeeeAddress()[1];
-            tmpAddress[7] = ieeeHighResponse.GetIeeeAddress()[0];
-            IeeeAddress = new IeeeAddress(tmpAddress);
+            //byte[] tmpAddress = new byte[8];
+            //tmpAddress[0] = ieeeLowResponse.GetIeeeAddress()[3];
+            //tmpAddress[1] = ieeeLowResponse.GetIeeeAddress()[2];
+            //tmpAddress[2] = ieeeLowResponse.GetIeeeAddress()[1];
+            //tmpAddress[3] = ieeeLowResponse.GetIeeeAddress()[0];
+            //tmpAddress[4] = ieeeHighResponse.GetIeeeAddress()[3];
+            //tmpAddress[5] = ieeeHighResponse.GetIeeeAddress()[2];
+            //tmpAddress[6] = ieeeHighResponse.GetIeeeAddress()[1];
+            //tmpAddress[7] = ieeeHighResponse.GetIeeeAddress()[0];
+            //IeeeAddress = new IeeeAddress(tmpAddress);
 
-            _logger.Debug($"XBee IeeeAddress={IeeeAddress}");
+            //Log.Debug($"XBee IeeeAddress={IeeeAddress}");
 
-            XBeeSetZigbeeStackProfileCommand stackProfile = new XBeeSetZigbeeStackProfileCommand();
-            stackProfile.SetStackProfile(2);
-            _frameHandler.SendRequest(stackProfile);
+            //XBeeSetZigbeeStackProfileCommand stackProfile = new XBeeSetZigbeeStackProfileCommand();
+            //stackProfile.SetStackProfile(2);
+            //_frameHandler.SendRequest(stackProfile);
 
-            XBeeSetEncryptionEnableCommand enableEncryption = new XBeeSetEncryptionEnableCommand();
-            enableEncryption.SetEnableEncryption(true);
-            _frameHandler.SendRequest(enableEncryption);
+            //XBeeSetEncryptionEnableCommand enableEncryption = new XBeeSetEncryptionEnableCommand();
+            //enableEncryption.SetEnableEncryption(true);
+            //_frameHandler.SendRequest(enableEncryption);
 
-            XBeeSetEncryptionOptionsCommand encryptionOptions = new XBeeSetEncryptionOptionsCommand();
-            encryptionOptions.AddEncryptionOptions(EncryptionOptions.ENABLE_TRUST_CENTRE);
-            _frameHandler.SendRequest(encryptionOptions);
+            //XBeeSetEncryptionOptionsCommand encryptionOptions = new XBeeSetEncryptionOptionsCommand();
+            //encryptionOptions.AddEncryptionOptions(EncryptionOptions.ENABLE_TRUST_CENTRE);
+            //_frameHandler.SendRequest(encryptionOptions);
 
-            XBeeSetCoordinatorEnableCommand coordinatorEnable = new XBeeSetCoordinatorEnableCommand();
-            coordinatorEnable.SetEnable(true);
-            _frameHandler.SendRequest(coordinatorEnable);
+            //XBeeSetCoordinatorEnableCommand coordinatorEnable = new XBeeSetCoordinatorEnableCommand();
+            //coordinatorEnable.SetEnable(true);
+            //_frameHandler.SendRequest(coordinatorEnable);
 
-            XBeeSetNetworkKeyCommand networkKey = new XBeeSetNetworkKeyCommand();
-            networkKey.SetNetworkKey(new ZigBeeKey());
-            _frameHandler.SendRequest(networkKey);
+            //XBeeSetNetworkKeyCommand networkKey = new XBeeSetNetworkKeyCommand();
+            //networkKey.SetNetworkKey(new ZigBeeKey());
+            //_frameHandler.SendRequest(networkKey);
 
-            XBeeSetLinkKeyCommand setLinkKey = new XBeeSetLinkKeyCommand();
-            setLinkKey.SetLinkKey(_linkKey);
-            _frameHandler.SendRequest(setLinkKey);
+            //XBeeSetLinkKeyCommand setLinkKey = new XBeeSetLinkKeyCommand();
+            //setLinkKey.SetLinkKey(_linkKey);
+            //_frameHandler.SendRequest(setLinkKey);
 
-            XBeeSetSaveDataCommand saveData = new XBeeSetSaveDataCommand();
-            _frameHandler.SendRequest(saveData);
+            //XBeeSetSaveDataCommand saveData = new XBeeSetSaveDataCommand();
+            //_frameHandler.SendRequest(saveData);
 
-            XBeeGetPanIdCommand getPanId = new XBeeGetPanIdCommand();
-            XBeePanIdResponse panIdResponse = (XBeePanIdResponse)_frameHandler.SendRequest(getPanId);
-            PanID = panIdResponse.GetPanId();
+            //XBeeGetPanIdCommand getPanId = new XBeeGetPanIdCommand();
+            //XBeePanIdResponse panIdResponse = (XBeePanIdResponse)_frameHandler.SendRequest(getPanId);
+            //PanID = panIdResponse.GetPanId();
 
-            XBeeGetExtendedPanIdCommand getEPanId = new XBeeGetExtendedPanIdCommand();
-            XBeeExtendedPanIdResponse epanIdResponse = (XBeeExtendedPanIdResponse)_frameHandler.SendRequest(getEPanId);
-            ExtendedPanId = epanIdResponse.GetExtendedPanId();
+            //XBeeGetExtendedPanIdCommand getEPanId = new XBeeGetExtendedPanIdCommand();
+            //XBeeExtendedPanIdResponse epanIdResponse = (XBeeExtendedPanIdResponse)_frameHandler.SendRequest(getEPanId);
+            //ExtendedPanId = epanIdResponse.GetExtendedPanId();
 
             return ZigBeeStatus.SUCCESS;
 

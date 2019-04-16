@@ -110,6 +110,18 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(566);
+            builder.Append("XBeeTransmitStatusResponse [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", networkAddress=");
+            builder.Append(this._networkAddress);
+            builder.Append(", transmitRetryCount=");
+            builder.Append(this._transmitRetryCount);
+            builder.Append(", deliveryStatus=");
+            builder.Append(this._deliveryStatus);
+            builder.Append(", discoveryStatus=");
+            builder.Append(this._discoveryStatus);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

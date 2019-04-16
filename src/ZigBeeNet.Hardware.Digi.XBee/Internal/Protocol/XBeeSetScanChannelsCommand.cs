@@ -65,6 +65,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(386);
+            builder.Append("XBeeSetScanChannelsCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", channels=");
+            builder.Append(this._channels);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

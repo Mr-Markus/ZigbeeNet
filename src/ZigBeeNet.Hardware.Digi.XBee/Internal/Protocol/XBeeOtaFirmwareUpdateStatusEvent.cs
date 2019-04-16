@@ -113,6 +113,18 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(662);
+            builder.Append("XBeeOtaFirmwareUpdateStatusEvent [ieeeAddress=");
+            builder.Append(this._ieeeAddress);
+            builder.Append(", networkAddress=");
+            builder.Append(this._networkAddress);
+            builder.Append(", receiveOptions=");
+            builder.Append(this._receiveOptions);
+            builder.Append(", blockNumber=");
+            builder.Append(this._blockNumber);
+            builder.Append(", targetAddress=");
+            builder.Append(this._targetAddress);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

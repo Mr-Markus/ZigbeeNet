@@ -63,6 +63,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(391);
+            builder.Append("XBeeSetCoordinatorEnableCommand [frameId=");
+            builder.Append(this._frameId);
+            builder.Append(", enable=");
+            builder.Append(this._enable);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

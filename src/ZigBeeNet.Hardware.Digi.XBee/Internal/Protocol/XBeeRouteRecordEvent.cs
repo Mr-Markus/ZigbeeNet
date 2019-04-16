@@ -95,6 +95,32 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(560);
+            builder.Append("XBeeRouteRecordEvent [ieeeAddress=");
+            builder.Append(this._ieeeAddress);
+            builder.Append(", networkAddress=");
+            builder.Append(this._networkAddress);
+            builder.Append(", receiveOptions=");
+            builder.Append(this._receiveOptions);
+            builder.Append(", addressList=");
+            if (this._addressList == null)
+            {
+                builder.Append("null");
+            }
+            else
+            {
+                for (int cnt = 0
+                ; cnt < _addressList.Length; cnt++
+                )
+                {
+                    if (cnt > 0)
+                    {
+                        builder.Append(' ');
+                    }
+                    builder.Append(string.Format("%04X", this._addressList[cnt]));
+                }
+            }
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }

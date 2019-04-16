@@ -64,6 +64,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(390);
+            builder.Append("XBeeManyToOneRouteRequestEvent [ieeeAddress=");
+            builder.Append(this._ieeeAddress);
+            builder.Append(", networkAddress=");
+            builder.Append(this._networkAddress);
+            builder.Append(']');
+            return builder.ToString();
         }
     }
 }
