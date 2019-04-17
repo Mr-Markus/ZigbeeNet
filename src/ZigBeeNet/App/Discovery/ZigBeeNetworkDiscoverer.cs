@@ -10,7 +10,7 @@ using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Command;
 using Serilog;
 
-namespace ZigBeeNet.App
+namespace ZigBeeNet.App.Discovery
 {
     /// <summary>
     /// <see cref="ZigBeeNetworkDiscoverer"/> is used to discover devices in the network.

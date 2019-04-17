@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Serilog;
+using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
@@ -54,16 +55,20 @@ namespace ZigBeeNet.PlayGround
                 // Initialise the network
                 networkManager.Initialize();
 
+                /* Network (de)serialization */
                 //networkManager.AddCommandListener(new ZigBeeNetworkDiscoverer(networkManager));
                 //networkManager.AddCommandListener(new ZigBeeNodeServiceDiscoverer(networkManager));
+
                 networkManager.AddCommandListener(new ZigBeeTransaction(networkManager));
                 networkManager.AddCommandListener(new ConsoleCommandListener());
+
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
                 networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
-                //networkManager.AddSupportedCluster(0x08);
                 networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
                 networkManager.AddSupportedCluster(ZclTouchlinkCluster.CLUSTER_ID);
+
+                networkManager.AddExtension(new ZigBeeBasicServerExtension());
 
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
                 ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
