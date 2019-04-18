@@ -4,6 +4,20 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Extensions
 {
     public static class StringExtension
     {
+        public static string ToConstant(this string value)
+        {
+            Regex regex = new Regex("\\(.*?\\) ?");
+            value = regex.Replace(value, "");
+            value = value.Trim();
+            value = value.Replace("+", "_Plus");
+            value = value.Replace(" ", "_");
+            value = value.Replace("-", "_");
+            value = value.Replace(".", "_");
+            value = value.Replace("/", "_");
+            value = value.Replace("_+", "_");
+            return value.ToUpper();
+        }
+
         public static string ToCamelCase(this string value)
         {
             Regex regex = new Regex("\\(.*?\\) ?");

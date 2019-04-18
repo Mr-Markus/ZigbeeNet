@@ -124,7 +124,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("%04X", this._addressList[cnt]));
+                    builder.Append(string.Format("0x{0:X4}", this._addressList[cnt]));
                 }
             }
             builder.Append(']');

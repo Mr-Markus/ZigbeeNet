@@ -11,6 +11,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Xml
         public string Description;
 
         [XmlElement("enum_value")]
-        public int EnumValue;
+        public int? EnumValue;
     }
 }

@@ -99,7 +99,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                         {
                         builder.Append(' ');
                         }
-                        builder.Append(string.Format("%02X", this._versionInfo[cnt]));
+                        builder.Append(string.Format("0x{0:X2}", this._versionInfo[cnt]));
                     }
                 }
             }

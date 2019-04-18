@@ -166,12 +166,101 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
         private void CreateEventFactory(string v, Protocol protocol)
         {
+            // Go on with line 962
             throw new NotImplementedException();
         }
 
         private void CreateEnumClass(Enumeration enumeration)
         {
-            throw new NotImplementedException();
+            string className = enumeration.Name.UpperCaseFirstCharacter();
+            Console.WriteLine($"Processing enum class {enumeration.Name} [{className}()]");
+
+            CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, "ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol");
+            CodeTypeDeclaration protocolClass = new CodeTypeDeclaration(className)
+            {
+                IsEnum = true,
+                TypeAttributes = System.Reflection.TypeAttributes.Public
+            };
+            codeNamespace.Types.Add(protocolClass);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Class to implement the XBee Enumeration <b>{enumeration.Name}</b>");
+            if (enumeration.Description != null && enumeration.Description.Trim().Length > 0)
+            {
+                sb.AppendLine("<p>");
+                OutputWithLineBreak(sb, "", enumeration.Description);
+                sb.Append("</p>");
+            }
+            IList<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = sb.ToString()
+                    }
+                };
+            AddCodeComment(protocolClass, codeComment, true);
+
+            bool hasValues = false;
+            foreach (var value in enumeration.Values)
+            {
+                if (value.EnumValue != null)
+                {
+                    hasValues = true;
+                    break;
+                }
+            }
+
+            sb.Clear();
+            codeComment.Clear();
+            sb.AppendLine("Default unknown value");
+            codeComment.Add(
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = sb.ToString()
+                    }
+                );
+            if (hasValues)
+            {
+                CodeMemberField codeMemberField = new CodeMemberField(className, "UNKNOWN = -1");
+                AddCodeComment(codeMemberField, codeComment, true);
+                protocolClass.Members.Add(codeMemberField);
+            }
+            else
+            {
+                CodeMemberField codeMemberField = new CodeMemberField(className, "UNKNOWN");
+                AddCodeComment(codeMemberField, codeComment, true);
+                protocolClass.Members.Add(codeMemberField);
+            }
+
+            foreach (var value in enumeration.Values)
+            {
+                sb.Clear();
+                codeComment.Clear();
+                CodeMemberField codeMemberField;
+                if (hasValues)
+                {
+                    OutputWithLineBreak(sb, "    ", $"[{value.EnumValue}] {value.Description}");
+                    codeMemberField = new CodeMemberField(className, $"{value.Name.ToConstant()} = {string.Format("0x{0:X4}", value.EnumValue)}");
+                }
+                else
+                {
+                    OutputWithLineBreak(sb, "    ", value.Description);
+                    codeMemberField = new CodeMemberField(className, $"{value.Name.ToConstant()}");
+                }
+
+                codeComment.Add(
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = sb.ToString()
+                    });
+                AddCodeComment(codeMemberField, codeComment, true);
+                protocolClass.Members.Add(codeMemberField);
+            }
+
+            GenerateCode(compileUnit, className);
         }
 
         private void CreateCommandClass(string packageName, string className, Command command, List<ParameterGroup> commandParameterGroup, List<ParameterGroup> responseParameterGroup)
@@ -256,6 +345,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             CreateToStringOverride(className, commandParameterGroup, responseParameterGroup, protocolClass);
 
             // Go on with line 414
+            // Todo: Check if needed. Code is never hit in java solution
 
             GenerateCode(compileUnit, className);
         }
@@ -414,7 +504,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                                 new CodeConditionStatement(
                                     new CodeSnippetExpression($"cnt > 0"),
                                     new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
-                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"string.Format(\"%0{sizer}X\", this._{FormatParameterString(parameter)}[cnt])") }))
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", this._" + FormatParameterString(parameter) + "[cnt])" ) }))
                             })
                             });
                         codeMemberMethod.Statements.Add(codeConditionStatement);
@@ -434,7 +524,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                                 new CodeConditionStatement(
                                     new CodeSnippetExpression($"cnt > 0"),
                                     new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
-                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"string.Format(\"%0{sizer}X\", this._{FormatParameterString(parameter)}[cnt])") }))
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", this._"+FormatParameterString(parameter)+"[cnt])") }))
                             })
                             }));
                         codeMemberMethod.Statements.Add(CommandCodeConditionStatement);

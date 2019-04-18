@@ -14,20 +14,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
         readonly string _sourceRootPath = "ZigBeeNet.Libraries.ZigBeeNet.Hardware.Digi.XBee";
         readonly List<string> _importList = new List<string>();
 
-        protected string StringToConstant(string value)
-        {
-            Regex regex = new Regex("\\(.*?\\) ?");
-            value = regex.Replace(value, "");
-            value = value.Trim();
-            value = value.Replace("+", "_Plus");
-            value = value.Replace(" ", "_");
-            value = value.Replace("-", "_");
-            value = value.Replace(".", "_");
-            value = value.Replace("/", "_");
-            value = value.Replace("_+", "_");
-            return value.ToUpper();
-        }
-
         protected StringBuilder GetClassOut(FileInfo packageFile, string className)
         {
             string classFileName = Path.Combine(packageFile.FullName, className + ".cs");
