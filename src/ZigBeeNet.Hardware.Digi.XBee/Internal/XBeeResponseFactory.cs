@@ -58,7 +58,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             _atCommands.Add(0x5A53, typeof(XBeeZigbeeStackProfileResponse));
         }
         
-        public static IXBeeResponse getXBeeFrame(int[] data)
+        public static IXBeeResponse GetXBeeFrame(int[] data)
         {
             Type xbeeClass = null;
             if (data[2] == 0x88)

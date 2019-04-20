@@ -276,7 +276,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             {
                 new CodeParameterDeclarationExpression(typeof(int[]), "data")
             };
-            CodeMemberMethod getXBeeFrameMethod = CreateMethod("getXBeeFrame", getXBeeFrameMethodParameters, new CodeTypeReference($"IXBee{className}"), null);
+            CodeMemberMethod getXBeeFrameMethod = CreateMethod("GetXBeeFrame", getXBeeFrameMethodParameters, new CodeTypeReference($"IXBee{className}"), null);
             getXBeeFrameMethod.Attributes = MemberAttributes.Static | MemberAttributes.Public;
 
             if (className.Equals("Response"))

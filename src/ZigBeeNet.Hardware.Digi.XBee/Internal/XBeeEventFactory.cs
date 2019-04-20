@@ -34,7 +34,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             _events.Add(0xA3, typeof(XBeeManyToOneRouteRequestEvent));
         }
         
-        public static IXBeeEvent getXBeeFrame(int[] data)
+        public static IXBeeEvent GetXBeeFrame(int[] data)
         {
             Type xbeeClass = _events[data[2]];
             if (xbeeClass == null)

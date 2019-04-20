@@ -266,8 +266,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <returns>The ReceiveOptions <seealso cref="ReceiveOptions"/></returns>
         protected ReceiveOptions DeserializeReceiveOptions()
         {
-            throw new NotImplementedException();
-            //return ReceiveOptions.getReceiveOptions(deserializeInt8());
+            int value = DeserializeInt8();
+            //return ReceiveOptions.GetReceiveOptions();
+            return (ReceiveOptions)value;
         }
 
         protected List<EncryptionOptions> DeserializeEncryptionOptions()
