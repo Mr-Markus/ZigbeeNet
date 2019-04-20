@@ -164,10 +164,162 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             CreateEventFactory("Response", protocol);
         }
 
-        private void CreateEventFactory(string v, Protocol protocol)
+        private void CreateEventFactory(string className, Protocol protocol)
         {
-            // Go on with line 962
-            throw new NotImplementedException();
+            Console.WriteLine($"Processing factory class [XBee{className}()]");
+
+            CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, "ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol");
+            CodeTypeDeclaration protocolClass = new CodeTypeDeclaration($"XBee{className}Factory")
+            {
+                IsClass = true,
+                TypeAttributes = System.Reflection.TypeAttributes.Public
+            };
+            codeNamespace.Imports.Add(new CodeNamespaceImport("Serilog"));
+            codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
+            codeNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Concurrent"));
+            codeNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
+
+            codeNamespace.Types.Add(protocolClass);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Helper factory class to create <see cref=\"XBee{className}Factory\"/> classes.");
+            IList<ICodeCommentEntity> codeComment = new List<ICodeCommentEntity>
+                {
+                    new CodeCommentEntity
+                    {
+                        Tag = CodeCommentTag.Summary,
+                        DocumentationText = sb.ToString()
+                    }
+                };
+            AddCodeComment(protocolClass, codeComment, true);
+
+            CodeMemberField eventsMember = new CodeMemberField
+            {
+                Name = "_events",
+                Attributes = MemberAttributes.Private | MemberAttributes.Static,
+                Type = new CodeTypeReference("IDictionary<int?, Type>"),
+                InitExpression = new CodeObjectCreateExpression("ConcurrentDictionary<int?, Type>")
+            };
+            protocolClass.Members.Add(eventsMember);
+
+            if (className.Equals("Response"))
+            {
+                CodeMemberField atCommands = new CodeMemberField
+                {
+                    Name = "_atCommands",
+                    Attributes = MemberAttributes.Private | MemberAttributes.Static,
+                    Type = new CodeTypeReference("IDictionary<int?, Type>"),
+                    InitExpression = new CodeObjectCreateExpression("ConcurrentDictionary<int?, Type>")
+                };
+                protocolClass.Members.Add(atCommands);
+            }
+
+            IDictionary<int, string> sortedEvents = new Dictionary<int, string>();
+            foreach (Command command in protocol.Commands)
+            {
+                if (command.CommandParameters.Count > 0)
+                {
+                    continue;
+                }
+                string responseType = "Event";
+                foreach (Parameter parameter in command.ResponseParameters[0].Parameters)
+                {
+                    if (parameter.Name.ToUpper().Equals("FRAME ID"))
+                    {
+                        responseType = "Response";
+                        break;
+                    }
+                }
+                if (className != responseType)
+                {
+                    continue;
+                }
+
+                if (sortedEvents.TryGetValue(command.Id, out string value))
+                {
+                    continue;
+                }
+
+                string eventClassName = $"XBee{command.Name.ToUpperCamelCase()}{responseType}";
+                sortedEvents.Add(command.Id, eventClassName);
+            }
+
+            CodeTypeConstructor codeTypeConstructor = new CodeTypeConstructor();
+            foreach (KeyValuePair<int, string> sortedEvent in sortedEvents)
+            {
+                CodeMethodInvokeExpression addDictionaryItem = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"_events"), "Add");
+                addDictionaryItem.Parameters.Add(new CodeSnippetExpression($"{string.Format("0x{0:X2}", sortedEvent.Key)}, typeof({sortedEvent.Value})"));
+                codeTypeConstructor.Statements.Add(addDictionaryItem);
+            }
+            protocolClass.Members.Add(codeTypeConstructor);
+
+            if (className.Equals("Response"))
+            {
+                IDictionary<string, string> sortedAt = new SortedDictionary<string, string>();
+                foreach (Command atCommand in protocol.AT_Commands)
+                {
+                    sortedAt.Add(atCommand.CommandProperty, atCommand.Name);
+                }
+
+                foreach (string cmd in sortedAt.Keys)
+                {
+                    char[] cmdChars = cmd.ToCharArray();
+                    int cmdInt = Convert.ToInt32(cmdChars[1] + (cmdChars[0] << 8));
+
+                    CodeMethodInvokeExpression addDictionaryItem = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"_atCommands"), "Add");
+                    addDictionaryItem.Parameters.Add(new CodeSnippetExpression($"{string.Format("0x{0:X4}", cmdInt)}, typeof(XBee{sortedAt[cmd].ToUpperCamelCase()}Response)"));
+                    codeTypeConstructor.Statements.Add(addDictionaryItem);
+                }
+            }
+
+            CodeParameterDeclarationExpressionCollection getXBeeFrameMethodParameters = new CodeParameterDeclarationExpressionCollection
+            {
+                new CodeParameterDeclarationExpression(typeof(int[]), "data")
+            };
+            CodeMemberMethod getXBeeFrameMethod = CreateMethod("getXBeeFrame", getXBeeFrameMethodParameters, new CodeTypeReference($"IXBee{className}"), null);
+            getXBeeFrameMethod.Attributes = MemberAttributes.Static | MemberAttributes.Public;
+
+            if (className.Equals("Response"))
+            {
+                CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeSnippetExpression("Type xbeeClass"), new CodeSnippetExpression("null"));
+                getXBeeFrameMethod.Statements.Add(codeAssignStatement);
+
+                CodeConditionStatement atCommandCorrelationCondition = new CodeConditionStatement(
+                    new CodeSnippetExpression($"data[2] == 0x88"),
+                    new CodeStatement[] { new CodeSnippetStatement($"                xbeeClass = _atCommands[(data[4] << 8) + data[5]];") });
+                getXBeeFrameMethod.Statements.Add(atCommandCorrelationCondition);
+
+                CodeConditionStatement apiCommandCorrelationCondition = new CodeConditionStatement(
+                    new CodeSnippetExpression($"xbeeClass == null"),
+                    new CodeStatement[] { new CodeSnippetStatement($"                xbeeClass = _events[data[2]];") });
+                getXBeeFrameMethod.Statements.Add(apiCommandCorrelationCondition);
+            }
+            else
+            {
+                CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeSnippetExpression("Type xbeeClass"), new CodeSnippetExpression("_events[data[2]]"));
+                getXBeeFrameMethod.Statements.Add(codeAssignStatement);
+            }
+
+            CodeConditionStatement noHandlerFoundCondition = new CodeConditionStatement(
+                new CodeSnippetExpression($"xbeeClass == null"),
+                new CodeStatement[] { new CodeSnippetStatement($"                return null;") });
+            getXBeeFrameMethod.Statements.Add(noHandlerFoundCondition);
+
+            CodeTryCatchFinallyStatement codeTryStatement = new CodeTryCatchFinallyStatement();
+            codeTryStatement.TryStatements.Add(new CodeAssignStatement(new CodeSnippetExpression($"IXBee{className} xbeeFrame"), new CodeSnippetExpression($"Activator.CreateInstance(xbeeClass) as IXBee{className}")));
+            codeTryStatement.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"xbeeFrame"), "Deserialize", new CodeVariableReferenceExpression("data")));
+            codeTryStatement.TryStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("xbeeFrame")));
+
+            CodeCatchClause catchClause = new CodeCatchClause("ex", new CodeTypeReference("Exception"));
+            catchClause.Statements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"Log"), "Debug", new CodeVariableReferenceExpression($"\"Error creating instance of IXBeeResponse\", ex")));
+
+            codeTryStatement.CatchClauses.Add(catchClause);
+            getXBeeFrameMethod.Statements.Add(codeTryStatement);
+
+            getXBeeFrameMethod.Statements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
+            protocolClass.Members.Add(getXBeeFrameMethod);
+
+            GenerateCode(compileUnit, $"XBee{className}Factory", false);
         }
 
         private void CreateEnumClass(Enumeration enumeration)
@@ -260,7 +412,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 protocolClass.Members.Add(codeMemberField);
             }
 
-            GenerateCode(compileUnit, className);
+            GenerateCode(compileUnit, className, true);
         }
 
         private void CreateCommandClass(string packageName, string className, Command command, List<ParameterGroup> commandParameterGroup, List<ParameterGroup> responseParameterGroup)
@@ -280,7 +432,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 // Nothing todo here
             }
 
-            Console.WriteLine("Processing command class " + command.Name + "  [" + className + "()]");
+            Console.WriteLine($"Processing command class {command.Name}  [{className}()]");
 
             CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, "ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol");
             CodeTypeDeclaration protocolClass = new CodeTypeDeclaration(className)
@@ -347,7 +499,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             // Go on with line 414
             // Todo: Check if needed. Code is never hit in java solution
 
-            GenerateCode(compileUnit, className);
+            GenerateCode(compileUnit, className, true);
         }
 
         private void CreateToStringOverride(string className, List<ParameterGroup> commandParameterGroup, List<ParameterGroup> responseParameterGroup, CodeTypeDeclaration protocolClass)
@@ -1142,7 +1294,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
         private static void CreateCompileUnit(out CodeCompileUnit compileUnit, out CodeNamespace codeNamespace, string namespaceString)
         {
             compileUnit = new CodeCompileUnit();
-            codeNamespace = new CodeNamespace("ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol");
+            codeNamespace = new CodeNamespace(namespaceString);
             compileUnit.Namespaces.Add(codeNamespace);
         }
 
@@ -1226,17 +1378,24 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             return new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameterName.ToLowerCamelCase()}"), new CodePrimitiveExpression(parameterValue));
         }
 
-        private static void GenerateCode(CodeCompileUnit codeCompileUnit, string sourceFile)
+        private static void GenerateCode(CodeCompileUnit codeCompileUnit, string sourceFile, bool isProtocolClass)
         {
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
 
+            string protocolFolder = string.Empty;
+            if (isProtocolClass)
+            {
+                protocolFolder = @"Protocol\";
+            }
+
+
             if (provider.FileExtension[0] == '.')
             {
-                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}{provider.FileExtension}";
             }
             else
             {
-                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\Protocol\{sourceFile}.{provider.FileExtension}";
+                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}.{provider.FileExtension}";
             }
 
             var codeGeneratorOptions = new CodeGeneratorOptions
