@@ -1,12 +1,11 @@
 ﻿using System;
 using ZigBeeNet.Hardware.Digi.XBee.Internal;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
-using ZigBeeNet.Hardware.Digi.XBee.Network;
 using Serilog;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 
-namespace ZigBeeNet.Hardware.DIGI.XB24C
+namespace ZigBeeNet.Hardware.Digi.XBee
 {
     public class ZigBeeDongleDigiXBee : IZigBeeTransportTransmit, IXBeeEventListener
     {
@@ -203,6 +202,11 @@ namespace ZigBeeNet.Hardware.DIGI.XB24C
         }
 
         public void UpdateTransportConfig(TransportConfig configuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void XbeeEventReceived(IXBeeEvent xbeeEvent)
         {
             throw new NotImplementedException();
         }

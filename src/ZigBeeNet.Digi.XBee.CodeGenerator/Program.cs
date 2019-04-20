@@ -42,8 +42,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 Console.WriteLine(e.StackTrace);
                 Console.WriteLine(e.Message);
             }
-
-            throw new NotImplementedException("Go on to port the java code at line 58 (XBeeAutocoder.java)");
         }
 
         private static object ProcessNode(XmlNode node)
