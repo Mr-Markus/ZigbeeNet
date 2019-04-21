@@ -40,7 +40,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -50,27 +50,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetResetRemoteDevices(bool resetRemoteDevices)
         {
-            this._resetRemoteDevices = resetRemoteDevices;
+            _resetRemoteDevices = resetRemoteDevices;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("NR");
-            this.SerializeBoolean(_resetRemoteDevices);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("NR");
+            SerializeBoolean(_resetRemoteDevices);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(386);
             builder.Append("XBeeSetNetworkResetCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", resetRemoteDevices=");
-            builder.Append(this._resetRemoteDevices);
+            builder.Append(_resetRemoteDevices);
             builder.Append(']');
             return builder.ToString();
         }

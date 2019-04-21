@@ -66,25 +66,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._frameId = this.DeserializeInt8();
+            InitializeDeserializer(incomingData);
+            _frameId = DeserializeInt8();
             DeserializeAtCommand();
-            this._commandStatus = this.DeserializeCommandStatus();
+            _commandStatus = DeserializeCommandStatus();
             if (_commandStatus != CommandStatus.OK || IsComplete())
             {
                     return;
             }
-            this._channels = this.DeserializeInt16();
+            _channels = DeserializeInt16();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(474);
             builder.Append("XBeeScanChannelsResponse [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", commandStatus=");
-            builder.Append(this._commandStatus);
-            builder.Append(this._channels);
+            builder.Append(_commandStatus);
+            builder.Append(_channels);
             builder.Append(']');
             return builder.ToString();
         }

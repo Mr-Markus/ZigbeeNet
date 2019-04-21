@@ -31,24 +31,24 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("ND");
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("ND");
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(297);
             builder.Append("XBeeSetNodeDiscoveryCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(']');
             return builder.ToString();
         }

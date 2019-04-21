@@ -36,7 +36,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -46,7 +46,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void AddEncryptionOptions(EncryptionOptions encryptionOptions)
         {
-            this._encryptionOptions.Add(encryptionOptions);
+            _encryptionOptions.Add(encryptionOptions);
         }
         
         /// <summary>
@@ -56,7 +56,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void RemoveEncryptionOptions(EncryptionOptions encryptionOptions)
         {
-            this._encryptionOptions.Remove(encryptionOptions);
+            _encryptionOptions.Remove(encryptionOptions);
         }
         
         /// <summary>
@@ -66,27 +66,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetEncryptionOptions(IEnumerable<EncryptionOptions> encryptionOptions)
         {
-            this._encryptionOptions.AddRange(encryptionOptions);
+            _encryptionOptions.AddRange(encryptionOptions);
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("EO");
-            this.SerializeEncryptionOptions(_encryptionOptions);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("EO");
+            SerializeEncryptionOptions(_encryptionOptions);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(391);
             builder.Append("XBeeSetEncryptionOptionsCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", encryptionOptions=");
-            builder.Append(this._encryptionOptions);
+            builder.Append(_encryptionOptions);
             builder.Append(']');
             return builder.ToString();
         }

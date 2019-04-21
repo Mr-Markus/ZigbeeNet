@@ -38,7 +38,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -48,27 +48,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetChannels(int channels)
         {
-            this._channels = channels;
+            _channels = channels;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("SC");
-            this.SerializeInt16(_channels);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("SC");
+            SerializeInt16(_channels);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(386);
             builder.Append("XBeeSetScanChannelsCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", channels=");
-            builder.Append(this._channels);
+            builder.Append(_channels);
             builder.Append(']');
             return builder.ToString();
         }

@@ -101,7 +101,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -111,7 +111,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
-            this._ieeeAddress = ieeeAddress;
+            _ieeeAddress = ieeeAddress;
         }
         
         /// <summary>
@@ -121,7 +121,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetNetworkAddress(int networkAddress)
         {
-            this._networkAddress = networkAddress;
+            _networkAddress = networkAddress;
         }
         
         /// <summary>
@@ -131,7 +131,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetSourceEndpoint(int sourceEndpoint)
         {
-            this._sourceEndpoint = sourceEndpoint;
+            _sourceEndpoint = sourceEndpoint;
         }
         
         /// <summary>
@@ -141,7 +141,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetDestinationEndpoint(int destinationEndpoint)
         {
-            this._destinationEndpoint = destinationEndpoint;
+            _destinationEndpoint = destinationEndpoint;
         }
         
         /// <summary>
@@ -151,7 +151,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetCluster(int cluster)
         {
-            this._cluster = cluster;
+            _cluster = cluster;
         }
         
         /// <summary>
@@ -161,7 +161,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetProfileId(int profileId)
         {
-            this._profileId = profileId;
+            _profileId = profileId;
         }
         
         /// <summary>
@@ -171,7 +171,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetBroadcastRadius(int broadcastRadius)
         {
-            this._broadcastRadius = broadcastRadius;
+            _broadcastRadius = broadcastRadius;
         }
         
         /// <summary>
@@ -181,7 +181,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void AddOptions(TransmitOptions options)
         {
-            this._options.Add(options);
+            _options.Add(options);
         }
         
         /// <summary>
@@ -191,7 +191,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void RemoveOptions(TransmitOptions options)
         {
-            this._options.Remove(options);
+            _options.Remove(options);
         }
         
         /// <summary>
@@ -201,7 +201,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetOptions(IEnumerable<TransmitOptions> options)
         {
-            this._options.AddRange(options);
+            _options.AddRange(options);
         }
         
         /// <summary>
@@ -211,50 +211,50 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetData(int[] data)
         {
-            this._data = data;
+            _data = data;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(17);
-            this.SerializeInt8(_frameId);
-            this.SerializeIeeeAddress(_ieeeAddress);
-            this.SerializeInt16(_networkAddress);
-            this.SerializeInt8(_sourceEndpoint);
-            this.SerializeInt8(_destinationEndpoint);
-            this.SerializeInt16(_cluster);
-            this.SerializeInt16(_profileId);
-            this.SerializeInt8(_broadcastRadius);
-            this.SerializeTransmitOptions(_options);
-            this.SerializeData(_data);
-            return this.GetPayload();
+            SerializeCommand(17);
+            SerializeInt8(_frameId);
+            SerializeIeeeAddress(_ieeeAddress);
+            SerializeInt16(_networkAddress);
+            SerializeInt8(_sourceEndpoint);
+            SerializeInt8(_destinationEndpoint);
+            SerializeInt16(_cluster);
+            SerializeInt16(_profileId);
+            SerializeInt8(_broadcastRadius);
+            SerializeTransmitOptions(_options);
+            SerializeData(_data);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(1024);
             builder.Append("XBeeTransmitRequestExplicitCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", sourceEndpoint=");
-            builder.Append(this._sourceEndpoint);
+            builder.Append(_sourceEndpoint);
             builder.Append(", destinationEndpoint=");
-            builder.Append(this._destinationEndpoint);
+            builder.Append(_destinationEndpoint);
             builder.Append(", cluster=");
-            builder.Append(this._cluster);
+            builder.Append(_cluster);
             builder.Append(", profileId=");
-            builder.Append(this._profileId);
+            builder.Append(_profileId);
             builder.Append(", broadcastRadius=");
-            builder.Append(this._broadcastRadius);
+            builder.Append(_broadcastRadius);
             builder.Append(", options=");
-            builder.Append(this._options);
+            builder.Append(_options);
             builder.Append(", data=");
-            if (this._data == null)
+            if (_data == null)
             {
                 builder.Append("null");
             }
@@ -268,7 +268,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("0x{0:X2}", this._data[cnt]));
+                    builder.Append(string.Format("0x{0:X2}", _data[cnt]));
                 }
             }
             builder.Append(']');

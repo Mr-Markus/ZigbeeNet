@@ -142,37 +142,37 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._frameId = this.DeserializeInt8();
+            InitializeDeserializer(incomingData);
+            _frameId = DeserializeInt8();
             DeserializeAtCommand();
-            this._commandStatus = this.DeserializeCommandStatus();
+            _commandStatus = DeserializeCommandStatus();
             if (_commandStatus != CommandStatus.OK || IsComplete())
             {
                     return;
             }
-            this._asType = this.DeserializeInt8();
-            this._channel = this.DeserializeInt8();
-            this._extendedPanId = this.DeserializeExtendedPanId();
-            this._allowJoin = this.DeserializeBoolean();
-            this._stackProfile = this.DeserializeInt8();
-            this._lqi = this.DeserializeInt8();
-            this._rssi = this.DeserializeInt8();
+            _asType = DeserializeInt8();
+            _channel = DeserializeInt8();
+            _extendedPanId = DeserializeExtendedPanId();
+            _allowJoin = DeserializeBoolean();
+            _stackProfile = DeserializeInt8();
+            _lqi = DeserializeInt8();
+            _rssi = DeserializeInt8();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(1012);
             builder.Append("XBeeActiveScanResponse [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", commandStatus=");
-            builder.Append(this._commandStatus);
-            builder.Append(this._asType);
-            builder.Append(this._channel);
-            builder.Append(this._extendedPanId);
-            builder.Append(this._allowJoin);
-            builder.Append(this._stackProfile);
-            builder.Append(this._lqi);
-            builder.Append(this._rssi);
+            builder.Append(_commandStatus);
+            builder.Append(_asType);
+            builder.Append(_channel);
+            builder.Append(_extendedPanId);
+            builder.Append(_allowJoin);
+            builder.Append(_stackProfile);
+            builder.Append(_lqi);
+            builder.Append(_rssi);
             builder.Append(']');
             return builder.ToString();
         }

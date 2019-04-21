@@ -53,7 +53,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -63,7 +63,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
-            this._ieeeAddress = ieeeAddress;
+            _ieeeAddress = ieeeAddress;
         }
         
         /// <summary>
@@ -73,7 +73,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetNetworkAddress(int networkAddress)
         {
-            this._networkAddress = networkAddress;
+            _networkAddress = networkAddress;
         }
         
         /// <summary>
@@ -83,34 +83,34 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetAddressList(int[] addressList)
         {
-            this._addressList = addressList;
+            _addressList = addressList;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(33);
-            this.SerializeInt8(_frameId);
-            this.SerializeIeeeAddress(_ieeeAddress);
-            this.SerializeInt16(_networkAddress);
-            this.SerializeInt8(0);
-            this.SerializeInt8(_addressList.Length);
-            this.SerializeInt16Array(_addressList);
-            return this.GetPayload();
+            SerializeCommand(33);
+            SerializeInt8(_frameId);
+            SerializeIeeeAddress(_ieeeAddress);
+            SerializeInt16(_networkAddress);
+            SerializeInt8(0);
+            SerializeInt8(_addressList.Length);
+            SerializeInt16Array(_addressList);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(658);
             builder.Append("XBeeCreateSourceRouteCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", addressList=");
-            if (this._addressList == null)
+            if (_addressList == null)
             {
                 builder.Append("null");
             }
@@ -124,7 +124,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("0x{0:X4}", this._addressList[cnt]));
+                    builder.Append(string.Format("0x{0:X4}", _addressList[cnt]));
                 }
             }
             builder.Append(']');

@@ -48,7 +48,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -58,7 +58,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetAtCommand(string atCommand)
         {
-            this._atCommand = atCommand;
+            _atCommand = atCommand;
         }
         
         /// <summary>
@@ -68,29 +68,29 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetParameterValue(int[] parameterValue)
         {
-            this._parameterValue = parameterValue;
+            _parameterValue = parameterValue;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(9);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand(_atCommand);
-            this.SerializeData(_parameterValue);
-            return this.GetPayload();
+            SerializeCommand(9);
+            SerializeInt8(_frameId);
+            SerializeAtCommand(_atCommand);
+            SerializeData(_parameterValue);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(387);
             builder.Append("XBeeAtQueueParameterCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", atCommand=");
-            builder.Append(this._atCommand);
+            builder.Append(_atCommand);
             builder.Append(", parameterValue=");
-            if (this._parameterValue == null)
+            if (_parameterValue == null)
             {
                 builder.Append("null");
             }
@@ -104,7 +104,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("0x{0:X2}", this._parameterValue[cnt]));
+                    builder.Append(string.Format("0x{0:X2}", _parameterValue[cnt]));
                 }
             }
             builder.Append(']');

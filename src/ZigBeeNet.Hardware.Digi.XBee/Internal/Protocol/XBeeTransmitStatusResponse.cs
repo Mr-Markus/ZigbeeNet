@@ -99,27 +99,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._frameId = this.DeserializeInt8();
-            this._networkAddress = this.DeserializeInt16();
-            this._transmitRetryCount = this.DeserializeInt8();
-            this._deliveryStatus = this.DeserializeDeliveryStatus();
-            this._discoveryStatus = this.DeserializeDiscoveryStatus();
+            InitializeDeserializer(incomingData);
+            _frameId = DeserializeInt8();
+            _networkAddress = DeserializeInt16();
+            _transmitRetryCount = DeserializeInt8();
+            _deliveryStatus = DeserializeDeliveryStatus();
+            _discoveryStatus = DeserializeDiscoveryStatus();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(566);
             builder.Append("XBeeTransmitStatusResponse [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", transmitRetryCount=");
-            builder.Append(this._transmitRetryCount);
+            builder.Append(_transmitRetryCount);
             builder.Append(", deliveryStatus=");
-            builder.Append(this._deliveryStatus);
+            builder.Append(_deliveryStatus);
             builder.Append(", discoveryStatus=");
-            builder.Append(this._discoveryStatus);
+            builder.Append(_discoveryStatus);
             builder.Append(']');
             return builder.ToString();
         }

@@ -40,7 +40,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -50,27 +50,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetMode(int mode)
         {
-            this._mode = mode;
+            _mode = mode;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("AO");
-            this.SerializeInt8(_mode);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("AO");
+            SerializeInt8(_mode);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(381);
             builder.Append("XBeeSetApiModeCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", mode=");
-            builder.Append(this._mode);
+            builder.Append(_mode);
             builder.Append(']');
             return builder.ToString();
         }

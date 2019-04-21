@@ -85,30 +85,30 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._frameId = this.DeserializeInt8();
-            this._atCommand = this.DeserializeAtCommand();
-            this._commandStatus = this.DeserializeCommandStatus();
+            InitializeDeserializer(incomingData);
+            _frameId = DeserializeInt8();
+            _atCommand = DeserializeAtCommand();
+            _commandStatus = DeserializeCommandStatus();
             if (_commandStatus != CommandStatus.OK || IsComplete())
             {
                     return;
             }
-            this._commandData = this.DeserializeData();
+            _commandData = DeserializeData();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(464);
             builder.Append("XBeeAtResponse [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", atCommand=");
-            builder.Append(this._atCommand);
+            builder.Append(_atCommand);
             builder.Append(", commandStatus=");
-            builder.Append(this._commandStatus);
-            if (this._commandStatus == CommandStatus.OK)
+            builder.Append(_commandStatus);
+            if (_commandStatus == CommandStatus.OK)
             {
                 builder.Append(", commandData=");
-                if (this._commandData == null)
+                if (_commandData == null)
                 {
                 builder.Append("null");
                 }
@@ -122,11 +122,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                         {
                         builder.Append(' ');
                         }
-                        builder.Append(string.Format("0x{0:X2}", this._commandData[cnt]));
+                        builder.Append(string.Format("0x{0:X2}", _commandData[cnt]));
                     }
                 }
             }
-            builder.Append(this._commandStatus);
+            builder.Append(_commandStatus);
             builder.Append(']');
             return builder.ToString();
         }

@@ -55,9 +55,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._ieeeAddress = this.DeserializeIeeeAddress();
-            this._networkAddress = this.DeserializeInt16();
+            InitializeDeserializer(incomingData);
+            _ieeeAddress = DeserializeIeeeAddress();
+            _networkAddress = DeserializeInt16();
             DeserializeInt8();
         }
         
@@ -65,9 +65,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(390);
             builder.Append("XBeeManyToOneRouteRequestEvent [ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(']');
             return builder.ToString();
         }

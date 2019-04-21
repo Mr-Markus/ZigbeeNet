@@ -8,11 +8,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
 {
     public class XBeeEventFactoryTest
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
         public XBeeEventFactoryTest(ITestOutputHelper output)
         {
-            this.output = output;
+            _output = output;
         }
 
 
@@ -23,7 +23,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
             IXBeeEvent frame = XBeeEventFactory.GetXBeeFrame(data);
             Assert.True(frame is XBeeOtaFirmwareUpdateStatusEvent);
 
-            output.WriteLine(frame.ToString());
+            _output.WriteLine(frame.ToString());
 
             XBeeOtaFirmwareUpdateStatusEvent xbeeEvent = (XBeeOtaFirmwareUpdateStatusEvent)frame;
             Assert.Equal(0, xbeeEvent.GetBlockNumber());
@@ -37,7 +37,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
             int[] data = GetPacketData("00 1A 91 00 17 88 01 02 13 65 36 F7 7B 02 01 00 01 01 04 41 18 7C 01 21 00 00 20 C8 C4");
             IXBeeEvent frame = XBeeEventFactory.GetXBeeFrame(data);
             Assert.True(frame is XBeeReceivePacketExplicitEvent);
-            output.WriteLine(frame.ToString());
+            _output.WriteLine(frame.ToString());
 
             XBeeReceivePacketExplicitEvent xbeeEvent = (XBeeReceivePacketExplicitEvent)frame;
             Assert.Equal(1, xbeeEvent.GetClusterId());

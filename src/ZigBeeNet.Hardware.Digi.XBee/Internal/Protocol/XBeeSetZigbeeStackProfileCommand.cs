@@ -37,7 +37,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -47,27 +47,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetStackProfile(int stackProfile)
         {
-            this._stackProfile = stackProfile;
+            _stackProfile = stackProfile;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("ZS");
-            this.SerializeInt8(_stackProfile);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("ZS");
+            SerializeInt8(_stackProfile);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(392);
             builder.Append("XBeeSetZigbeeStackProfileCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", stackProfile=");
-            builder.Append(this._stackProfile);
+            builder.Append(_stackProfile);
             builder.Append(']');
             return builder.ToString();
         }

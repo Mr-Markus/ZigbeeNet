@@ -15,7 +15,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator.Entities
         /// </summary>
         public CodeCommentEntity()
         {
-            this.Attributes = new Dictionary<CodeCommentAttribute, string>();
+            Attributes = new Dictionary<CodeCommentAttribute, string>();
         }
 
         #endregion constructor

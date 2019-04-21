@@ -101,28 +101,28 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._ieeeAddress = this.DeserializeIeeeAddress();
-            this._networkAddress = this.DeserializeInt16();
-            this._receiveOptions = this.DeserializeReceiveOptions();
-            int bootloaderMessageType = this.DeserializeInt8();
-            this._blockNumber = this.DeserializeInt8();
-            this._targetAddress = this.DeserializeIeeeAddress();
+            InitializeDeserializer(incomingData);
+            _ieeeAddress = DeserializeIeeeAddress();
+            _networkAddress = DeserializeInt16();
+            _receiveOptions = DeserializeReceiveOptions();
+            int bootloaderMessageType = DeserializeInt8();
+            _blockNumber = DeserializeInt8();
+            _targetAddress = DeserializeIeeeAddress();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(662);
             builder.Append("XBeeOtaFirmwareUpdateStatusEvent [ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", receiveOptions=");
-            builder.Append(this._receiveOptions);
+            builder.Append(_receiveOptions);
             builder.Append(", blockNumber=");
-            builder.Append(this._blockNumber);
+            builder.Append(_blockNumber);
             builder.Append(", targetAddress=");
-            builder.Append(this._targetAddress);
+            builder.Append(_targetAddress);
             builder.Append(']');
             return builder.ToString();
         }

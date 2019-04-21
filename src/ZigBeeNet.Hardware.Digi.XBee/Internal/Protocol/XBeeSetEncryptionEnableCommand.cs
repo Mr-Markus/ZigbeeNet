@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -45,27 +45,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetEnableEncryption(bool enableEncryption)
         {
-            this._enableEncryption = enableEncryption;
+            _enableEncryption = enableEncryption;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("EE");
-            this.SerializeBoolean(_enableEncryption);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("EE");
+            SerializeBoolean(_enableEncryption);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(390);
             builder.Append("XBeeSetEncryptionEnableCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", enableEncryption=");
-            builder.Append(this._enableEncryption);
+            builder.Append(_enableEncryption);
             builder.Append(']');
             return builder.ToString();
         }

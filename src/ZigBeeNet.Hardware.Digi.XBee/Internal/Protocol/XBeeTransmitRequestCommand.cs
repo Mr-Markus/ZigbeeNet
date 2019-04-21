@@ -70,7 +70,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -80,7 +80,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetIeeeAddress(IeeeAddress ieeeAddress)
         {
-            this._ieeeAddress = ieeeAddress;
+            _ieeeAddress = ieeeAddress;
         }
         
         /// <summary>
@@ -90,7 +90,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetNetworkAddress(int networkAddress)
         {
-            this._networkAddress = networkAddress;
+            _networkAddress = networkAddress;
         }
         
         /// <summary>
@@ -100,7 +100,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void AddOptions(TransmitOptions options)
         {
-            this._options.Add(options);
+            _options.Add(options);
         }
         
         /// <summary>
@@ -110,7 +110,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void RemoveOptions(TransmitOptions options)
         {
-            this._options.Remove(options);
+            _options.Remove(options);
         }
         
         /// <summary>
@@ -120,7 +120,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetOptions(IEnumerable<TransmitOptions> options)
         {
-            this._options.AddRange(options);
+            _options.AddRange(options);
         }
         
         /// <summary>
@@ -130,35 +130,35 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetData(int[] data)
         {
-            this._data = data;
+            _data = data;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(16);
-            this.SerializeInt8(_frameId);
-            this.SerializeIeeeAddress(_ieeeAddress);
-            this.SerializeInt16(_networkAddress);
-            this.SerializeTransmitOptions(_options);
-            this.SerializeData(_data);
-            return this.GetPayload();
+            SerializeCommand(16);
+            SerializeInt8(_frameId);
+            SerializeIeeeAddress(_ieeeAddress);
+            SerializeInt16(_networkAddress);
+            SerializeTransmitOptions(_options);
+            SerializeData(_data);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(566);
             builder.Append("XBeeTransmitRequestCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", options=");
-            builder.Append(this._options);
+            builder.Append(_options);
             builder.Append(", data=");
-            if (this._data == null)
+            if (_data == null)
             {
                 builder.Append("null");
             }
@@ -172,7 +172,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("0x{0:X2}", this._data[cnt]));
+                    builder.Append(string.Format("0x{0:X2}", _data[cnt]));
                 }
             }
             builder.Append(']');

@@ -37,15 +37,15 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._status = this.DeserializeModemStatus();
+            InitializeDeserializer(incomingData);
+            _status = DeserializeModemStatus();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(200);
             builder.Append("XBeeModemStatusEvent [status=");
-            builder.Append(this._status);
+            builder.Append(_status);
             builder.Append(']');
             return builder.ToString();
         }

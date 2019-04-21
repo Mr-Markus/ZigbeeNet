@@ -645,7 +645,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     if (!isCommandStatusParameter)
                     {
                         codeConditionStatement = new CodeConditionStatement(
-                            new CodeSnippetExpression($"this._{parameter.Name.ToLowerCamelCase()} == null"),
+                            new CodeSnippetExpression($"_{parameter.Name.ToLowerCamelCase()} == null"),
                             new CodeStatement[] { new CodeSnippetStatement($"                builder.Append(\"null\");") },
                             new CodeStatement[] { new CodeIterationStatement(
                             new CodeSnippetStatement("int cnt = 0"),
@@ -656,7 +656,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                                 new CodeConditionStatement(
                                     new CodeSnippetExpression($"cnt > 0"),
                                     new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
-                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", this._" + FormatParameterString(parameter) + "[cnt])" ) }))
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", _" + FormatParameterString(parameter) + "[cnt])" ) }))
                             })
                             });
                         codeMemberMethod.Statements.Add(codeConditionStatement);
@@ -665,7 +665,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                     {
                         CommandCodeConditionStatement.TrueStatements.Add(new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"\", {parameter.Name.ToLowerCamelCase()}=\"") })));
                         CommandCodeConditionStatement.TrueStatements.Add(new CodeConditionStatement(
-                            new CodeSnippetExpression($"this._{parameter.Name.ToLowerCamelCase()} == null"),
+                            new CodeSnippetExpression($"_{parameter.Name.ToLowerCamelCase()} == null"),
                             new CodeStatement[] { new CodeSnippetStatement($"                builder.Append(\"null\");") },
                             new CodeStatement[] { new CodeIterationStatement(
                             new CodeSnippetStatement("int cnt = 0"),
@@ -676,7 +676,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                                 new CodeConditionStatement(
                                     new CodeSnippetExpression($"cnt > 0"),
                                     new CodeStatement[] { new CodeSnippetStatement($"                        builder.Append(' ');") }),
-                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", this._"+FormatParameterString(parameter)+"[cnt])") }))
+                                new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, "string.Format(\"0x{0:X" + sizer + "}\", _"+FormatParameterString(parameter)+"[cnt])") }))
                             })
                             }));
                         codeMemberMethod.Statements.Add(CommandCodeConditionStatement);
@@ -685,14 +685,14 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 }
                 else
                 {
-                    codeExpressionStatement = new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"this._{FormatParameterString(parameter)}") }));
+                    codeExpressionStatement = new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "builder.Append"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"_{FormatParameterString(parameter)}") }));
                 }
 
                 if (GetTypeSerializer(parameter.DataType).Equals("CommandStatus")
                     && !(group.Parameters.IndexOf(parameter) == (group.Parameters.Count - 1)))
                 {
                     CommandCodeConditionStatement = new CodeConditionStatement(
-                    new CodeSnippetExpression("this._commandStatus == CommandStatus.OK"),
+                    new CodeSnippetExpression("_commandStatus == CommandStatus.OK"),
                     new CodeStatement[] { });
 
                     CommandCodeExpressionStatement = codeExpressionStatement;
@@ -722,7 +722,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 };
                 AddCodeComment(deserializerMethod, codeComment, true);
 
-                CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "InitializeDeserializer", new CodeVariableReferenceExpression("incomingData"));
+                CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(null, "InitializeDeserializer", new CodeVariableReferenceExpression("incomingData"));
                 deserializerMethod.Statements.Add(invokeExpression);
 
                 foreach (var group in responseParameterGroup)
@@ -805,7 +805,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 if (parameter.AutoSize != null)
                 {
                     string deserilizerType = GetTypeSerializer(parameter.DataType);
-                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"int {parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}"));
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"int {parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(null, $"Deserialize{deserilizerType}"));
                     autoSizers.Add(parameter.AutoSize, parameter.Name.ToLowerCamelCase());
                     deserializerMethod.Statements.Add(codeAssignStatement);
                     continue;
@@ -813,7 +813,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 if (autoSizers.TryGetValue(parameter.Name, out string temp))
                 {
                     string deserilizerType = GetTypeSerializer(parameter.DataType);
-                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}", new CodeTypeReferenceExpression($"{autoSizers[parameter.Name]}")));
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(null, $"Deserialize{deserilizerType}", new CodeTypeReferenceExpression($"{autoSizers[parameter.Name]}")));
                     deserializerMethod.Statements.Add(codeAssignStatement);
                     continue;
                 }
@@ -821,7 +821,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 {
                     int length = Convert.ToInt32(parameter.DataType.Substring(parameter.DataType.IndexOf("[") + 1, parameter.DataType.IndexOf("]")));
                     string deserilizerType = GetTypeSerializer(parameter.DataType);
-                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{deserilizerType}", new CodePrimitiveExpression(length)));
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(null, $"Deserialize{deserilizerType}", new CodePrimitiveExpression(length)));
                     deserializerMethod.Statements.Add(codeAssignStatement);
                     continue;
                 }
@@ -833,17 +833,17 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         new CodeSnippetStatement(""),
                         new CodeStatement[]
                         {
-                            new CodeAssignStatement(new CodeVariableReferenceExpression($"{GetTypeClass(parameter.DataType, null).BaseType}tmp{parameter.Name.ToUpperCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{GetTypeSerializer(parameter.DataType)}")),
+                            new CodeAssignStatement(new CodeVariableReferenceExpression($"{GetTypeClass(parameter.DataType, null).BaseType}tmp{parameter.Name.ToUpperCamelCase()}"), new CodeMethodInvokeExpression(null, $"Deserialize{GetTypeSerializer(parameter.DataType)}")),
                             new CodeConditionStatement(
                                 new CodeSnippetExpression($"tmp{parameter.Name.ToUpperCamelCase()} == null"),
                                 new CodeStatement[] { new CodeSnippetStatement($"                    break;") }),
-                            new CodeExpressionStatement( new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(new CodeThisReferenceExpression(), $"_{parameter.Name.ToLowerCamelCase()}.Add"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"tmp{parameter.Name.ToUpperCamelCase()}") }))
+                            new CodeExpressionStatement( new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, $"_{parameter.Name.ToLowerCamelCase()}.Add"), new CodeExpression[] { new CodeFieldReferenceExpression(null, $"tmp{parameter.Name.ToUpperCamelCase()}") }))
                         });
                     deserializerMethod.Statements.Add(endlessForLoop);
                 }
                 else
                 {
-                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"this._{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Deserialize{GetTypeSerializer(parameter.DataType)}"));
+                    CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeVariableReferenceExpression($"_{parameter.Name.ToLowerCamelCase()}"), new CodeMethodInvokeExpression(null, $"Deserialize{GetTypeSerializer(parameter.DataType)}"));
                     deserializerMethod.Statements.Add(codeAssignStatement);
                 }
                 if (GetTypeSerializer(parameter.DataType).Equals("CommandStatus") && !(group.Parameters.IndexOf(parameter) == (group.Parameters.Count - 1)))
@@ -887,7 +887,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 foreach (ParameterGroup group in commandParameterGroup)
                 {
                     // TODO: Check if the command id is really needed as hex representation. Int is used for now.
-                    CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "SerializeCommand", new CodePrimitiveExpression(command.Id));
+                    CodeMethodInvokeExpression invokeExpression = new CodeMethodInvokeExpression(null, "SerializeCommand", new CodePrimitiveExpression(command.Id));
                     serializerMethod.Statements.Add(invokeExpression);
 
                     foreach (Parameter parameter in group.Parameters)
@@ -912,7 +912,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                                 codePrimitiveExpression = new CodePrimitiveExpression(parameter.Value);
                             }
 
-                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", codePrimitiveExpression);
+                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(null, $"Serialize{GetTypeSerializer(parameter.DataType)}", codePrimitiveExpression);
                             serializerMethod.Statements.Add(invokeSerializeExpression);
                             continue;
                         }
@@ -940,15 +940,15 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         }
                         else if (parameter.AutoSize != null)
                         {
-                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{parameter.AutoSize.ToLowerCamelCase()}.Length"));
+                            CodeMethodInvokeExpression invokeSerializeExpression = new CodeMethodInvokeExpression(null, $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{parameter.AutoSize.ToLowerCamelCase()}.Length"));
                             serializerMethod.Statements.Add(invokeSerializeExpression);
                             continue;
                         }
-                        CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{valueName}"));
+                        CodeMethodInvokeExpression codeMethodInvokeExpression = new CodeMethodInvokeExpression(null, $"Serialize{GetTypeSerializer(parameter.DataType)}", new CodeTypeReferenceExpression($"_{valueName}"));
                         serializerMethod.Statements.Add(codeMethodInvokeExpression);
                     }
                 }
-                CodeMethodReturnStatement codeMethodReturnStatement = new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "GetPayload"));
+                CodeMethodReturnStatement codeMethodReturnStatement = new CodeMethodReturnStatement(new CodeMethodInvokeExpression(null, "GetPayload"));
                 serializerMethod.Statements.Add(codeMethodReturnStatement);
                 protocolClass.Members.Add(serializerMethod);
             }
@@ -1048,7 +1048,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                         OutputWithLineBreak(stringBuilder, "    ", parameter.Description);
                     }
 
-                    CodeFieldReferenceExpression parameterReference = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), $"_{parameter.Name.ToLowerCamelCase()}");
+                    CodeFieldReferenceExpression parameterReference = new CodeFieldReferenceExpression(null, $"_{parameter.Name.ToLowerCamelCase()}");
                     if (parameter.Multiple || parameter.Bitfield)
                     {
                         IList<string[]> methodStrings = new List<string[]>

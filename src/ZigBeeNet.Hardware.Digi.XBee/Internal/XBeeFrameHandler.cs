@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ZigBeeNet.Hardware.Digi.XBee.Enums;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
-using Serilog;
 using ZigBeeNet.Transport;
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal
@@ -17,8 +18,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         // TODO af: find the equivalent in C# --> maybe ThreadPool-Class is the right one
         //private readonly ExecutorService _executor = Executors.NewCachedThreadPool();
 
-        //private readonly IList<XBeeListener> _transactionListeners = new List<XBeeListener>();
-        //private readonly IList<XBeeEventListener> _eventListeners = new List<XBeeEventListener>();
+        private readonly IList<IXBeeListener> _transactionListeners = new List<IXBeeListener>();
+        private readonly IList<IXBeeEventListener> _eventListeners = new List<IXBeeEventListener>();
         private IZigBeePort _serialPort;
         private Task _parserThread = null;
         private readonly object _commandLock = new object();
@@ -122,17 +123,111 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             _parserThread.Start();
         }
 
+        private int[] GetPacket()
+        {
+            int?[] inputBuffer = new int?[180];
+            int inputBufferLength = 0;
+            RxStateMachine rxState = RxStateMachine.WAITING;
+            int? length = 0;
+            int cnt = 0;
+            int? checksum = 0;
+            bool escaped = false;
+
+            Log.Information("XBEE: Get Packet");
+
+            while (!_closeHandler)
+            {
+                int? val = _serialPort.Read();
+                if (val == null)
+                {
+                    // Timeout
+                    continue;
+                }
+
+                if (inputBufferLength >= inputBuffer.Length)
+                {
+                    // If we overrun the buffer, reset and go to WAITING mode
+                    inputBufferLength = 0;
+                    rxState = RxStateMachine.WAITING;
+                    Log.Debug("XBEE RX buffer overrun - resetting!");
+                }
+
+                Log.Information($"RX XBEE: {{{string.Format("0x{0:X2} {1:C}", val, val)}}}");
+
+                if (escaped)
+                {
+                    escaped = false;
+                    val = val ^ XBEE_XOR;
+                }
+                else if (val == XBEE_ESCAPE)
+                {
+                    escaped = true;
+                    continue;
+                }
+
+                switch (rxState)
+                {
+                    case RxStateMachine.WAITING:
+                        {
+                            if (val == XBEE_FLAG)
+                            {
+                                rxState = RxStateMachine.RECEIVE_LEN1;
+                            }
+                        }
+                        continue;
+                    case RxStateMachine.RECEIVE_LEN1:
+                        {
+                            inputBuffer[cnt++] = val;
+                            rxState = RxStateMachine.RECEIVE_LEN2;
+                            length += val << 8;
+                        }
+                        break;
+                    case RxStateMachine.RECEIVE_LEN2:
+                        {
+                            inputBuffer[cnt++] = val;
+                            rxState = RxStateMachine.RECEIVE_DATA;
+                            length += val + 3;
+                            if (length > inputBuffer.Length)
+                            {
+                                // Return null and let the system resync by searching for the next FLAG
+                                Log.Debug($"XBEE RX length too long ({length}) - ignoring!");
+                                return null;
+                            }
+                        }
+                        break;
+                    case RxStateMachine.RECEIVE_DATA:
+                        {
+                            checksum += val;
+                            inputBuffer[cnt++] = val;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (cnt == length)
+                {
+                    if ((checksum & 0xff) == 255)
+                    {
+                        int?[] tempArray = new int?[180];
+                        Array.Copy(inputBuffer, tempArray, length != null ? length.Value : 0);
+                        return tempArray.Where(value => value != null).Select(value => value.Value).ToArray();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            return null;
+        }
+
         private void SendNextFrame()
         {
             throw new NotImplementedException();
         }
 
         private void EmptyRxBuffer()
-        {
-            throw new NotImplementedException();
-        }
-
-        public XBeeFrameHandler()
         {
             throw new NotImplementedException();
         }

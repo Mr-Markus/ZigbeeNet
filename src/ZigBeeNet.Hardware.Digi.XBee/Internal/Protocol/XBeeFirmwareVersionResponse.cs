@@ -63,28 +63,28 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._frameId = this.DeserializeInt8();
+            InitializeDeserializer(incomingData);
+            _frameId = DeserializeInt8();
             DeserializeAtCommand();
-            this._commandStatus = this.DeserializeCommandStatus();
+            _commandStatus = DeserializeCommandStatus();
             if (_commandStatus != CommandStatus.OK || IsComplete())
             {
                     return;
             }
-            this._firmwareVersion = this.DeserializeData();
+            _firmwareVersion = DeserializeData();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(477);
             builder.Append("XBeeFirmwareVersionResponse [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", commandStatus=");
-            builder.Append(this._commandStatus);
-            if (this._commandStatus == CommandStatus.OK)
+            builder.Append(_commandStatus);
+            if (_commandStatus == CommandStatus.OK)
             {
                 builder.Append(", firmwareVersion=");
-                if (this._firmwareVersion == null)
+                if (_firmwareVersion == null)
                 {
                 builder.Append("null");
                 }
@@ -98,11 +98,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                         {
                         builder.Append(' ');
                         }
-                        builder.Append(string.Format("0x{0:X2}", this._firmwareVersion[cnt]));
+                        builder.Append(string.Format("0x{0:X2}", _firmwareVersion[cnt]));
                     }
                 }
             }
-            builder.Append(this._commandStatus);
+            builder.Append(_commandStatus);
             builder.Append(']');
             return builder.ToString();
         }

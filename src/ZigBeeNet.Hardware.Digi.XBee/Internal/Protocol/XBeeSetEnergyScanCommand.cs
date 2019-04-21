@@ -40,7 +40,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -50,27 +50,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetScanTime(int scanTime)
         {
-            this._scanTime = scanTime;
+            _scanTime = scanTime;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("ED");
-            this.SerializeInt8(_scanTime);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("ED");
+            SerializeInt8(_scanTime);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(384);
             builder.Append("XBeeSetEnergyScanCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", scanTime=");
-            builder.Append(this._scanTime);
+            builder.Append(_scanTime);
             builder.Append(']');
             return builder.ToString();
         }

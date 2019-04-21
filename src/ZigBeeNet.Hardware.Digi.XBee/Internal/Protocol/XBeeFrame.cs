@@ -362,7 +362,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
 
         public void SetFrameType(int frameType)
         {
-            this._frameType = frameType;
+            _frameType = frameType;
         }
 
         public int GetFrameType()

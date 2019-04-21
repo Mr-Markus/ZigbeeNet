@@ -9,3 +9,8 @@ before_build:
 build:
   verbosity: minimal
   project: ZigBeeNet.sln
+
+test:
+  # only assemblies to test
+  assemblies:
+    - '**\*.test.dll'

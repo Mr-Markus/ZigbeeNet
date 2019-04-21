@@ -83,24 +83,24 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// Method for deserializing the fields for the response </summary>
         public void Deserialize(int[] incomingData)
         {
-            this.InitializeDeserializer(incomingData);
-            this._ieeeAddress = this.DeserializeIeeeAddress();
-            this._networkAddress = this.DeserializeInt16();
-            this._receiveOptions = this.DeserializeReceiveOptions();
-            this._data = this.DeserializeData();
+            InitializeDeserializer(incomingData);
+            _ieeeAddress = DeserializeIeeeAddress();
+            _networkAddress = DeserializeInt16();
+            _receiveOptions = DeserializeReceiveOptions();
+            _data = DeserializeData();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(472);
             builder.Append("XBeeReceivePacketEvent [ieeeAddress=");
-            builder.Append(this._ieeeAddress);
+            builder.Append(_ieeeAddress);
             builder.Append(", networkAddress=");
-            builder.Append(this._networkAddress);
+            builder.Append(_networkAddress);
             builder.Append(", receiveOptions=");
-            builder.Append(this._receiveOptions);
+            builder.Append(_receiveOptions);
             builder.Append(", data=");
-            if (this._data == null)
+            if (_data == null)
             {
                 builder.Append("null");
             }
@@ -114,7 +114,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
                     {
                         builder.Append(' ');
                     }
-                    builder.Append(string.Format("0x{0:X2}", this._data[cnt]));
+                    builder.Append(string.Format("0x{0:X2}", _data[cnt]));
                 }
             }
             builder.Append(']');

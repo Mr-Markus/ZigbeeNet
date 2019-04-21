@@ -39,7 +39,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetFrameId(int frameId)
         {
-            this._frameId = frameId;
+            _frameId = frameId;
         }
         
         /// <summary>
@@ -49,27 +49,27 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         ///  </see>
         public void SetLinkKey(ZigBeeKey linkKey)
         {
-            this._linkKey = linkKey;
+            _linkKey = linkKey;
         }
         
         /// <summary>
         /// Method for serializing the command fields </summary>
         public int[] Serialize()
         {
-            this.SerializeCommand(8);
-            this.SerializeInt8(_frameId);
-            this.SerializeAtCommand("KY");
-            this.SerializeZigBeeKey(_linkKey);
-            return this.GetPayload();
+            SerializeCommand(8);
+            SerializeInt8(_frameId);
+            SerializeAtCommand("KY");
+            SerializeZigBeeKey(_linkKey);
+            return GetPayload();
         }
         
         public override string ToString()
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder(381);
             builder.Append("XBeeSetLinkKeyCommand [frameId=");
-            builder.Append(this._frameId);
+            builder.Append(_frameId);
             builder.Append(", linkKey=");
-            builder.Append(this._linkKey);
+            builder.Append(_linkKey);
             builder.Append(']');
             return builder.ToString();
         }
