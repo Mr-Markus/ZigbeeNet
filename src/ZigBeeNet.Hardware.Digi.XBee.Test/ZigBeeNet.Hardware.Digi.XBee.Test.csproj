@@ -16,8 +16,4 @@
     <ProjectReference Include="..\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Internal\Protocol\" />
-  </ItemGroup>
-
 </Project>

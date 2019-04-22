@@ -391,7 +391,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             _buffer[_length++] = 0xff - (checksum & 0xff);
 
 
-            Array payLoad = Array.CreateInstance(typeof(int), 131);
+            Array payLoad = Array.CreateInstance(typeof(int), _length);
             Array.Copy(_buffer, payLoad, _length);
             return (int[])payLoad;
         }
