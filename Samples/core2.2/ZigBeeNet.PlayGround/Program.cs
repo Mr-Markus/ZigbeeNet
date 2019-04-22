@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Serilog;
-using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
 using ZigBeeNet.Hardware.TI.CC2531;
@@ -20,6 +19,7 @@ using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZDO.Command;
+using ZigBeeNet.App.Basic;
 
 namespace ZigBeeNet.PlayGround
 {
