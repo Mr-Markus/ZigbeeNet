@@ -300,15 +300,14 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             _buffer[_length++] = value;
         }
 
-        /**
-         * Deserializes a {link ModemStatus}
-         *
-         * @return the {@link ModemStatus}
-         */
+        /// <summary>
+        /// Deserializes the modem status <seealso cref="ModemStatus"/>.
+        /// </summary>
+        /// <returns>The ModemStatus <seealso cref="ModemStatus"/></returns>
         protected ModemStatus DeserializeModemStatus()
         {
-            throw new NotImplementedException();
-            //return ModemStatus.getModemStatus(deserializeInt8());
+            int value = DeserializeInt8();
+            return (ModemStatus)value;
         }
 
         /// <summary>
@@ -317,8 +316,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <returns>The DiscoveryStatus <seealso cref="DiscoveryStatus"/></returns>
         protected DiscoveryStatus DeserializeDiscoveryStatus()
         {
-            throw new NotImplementedException();
-            //return DiscoveryStatus.getDiscoveryStatus(deserializeInt8());
+            int value = DeserializeInt8();
+            return (DiscoveryStatus)value;
         }
 
         /// <summary>
@@ -327,8 +326,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <returns>The CommandStatus <seealso cref="CommandStatus"/></returns>
         protected CommandStatus DeserializeCommandStatus()
         {
-            throw new NotImplementedException();
-            //return CommandStatus.getCommandStatus(deserializeInt8());
+            int value = DeserializeInt8();
+
+            return (CommandStatus)value;
         }
 
         /// <summary>
@@ -337,8 +337,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <returns>The DeliveryStatus <seealso cref="DeliveryStatus"/></returns>
         protected DeliveryStatus DeserializeDeliveryStatus()
         {
-            throw new NotImplementedException();
-            //return DeliveryStatus.getDeliveryStatus(deserializeInt8());
+            int value = DeserializeInt8();
+            return (DeliveryStatus)value;
         }
 
         protected void SerializeInt16Array(int[] array)
