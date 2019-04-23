@@ -901,6 +901,11 @@ namespace ZigBeeNet
                     // Globally update the state
                     NetworkState = state;
 
+                    // Disable JOIN mode.
+                    // This should be disabled by default (at least in ZigBee 3.0) but some older stacks may
+                    // have join enabled permanently by default.
+                    PermitJoin(0);
+
                     // Start the extensions
                     foreach (IZigBeeNetworkExtension extension in _extensions)
                     {
