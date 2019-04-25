@@ -11,8 +11,10 @@ using ZigBeeNet.Transport;
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal
 {
-    public class XBeeFrameHandler
+    public class XBeeFrameHandler : IXBeeFrameHandler
     {
+        #region fields
+
         private readonly ConcurrentQueue<IXBeeCommand> _sendQueue = new ConcurrentQueue<IXBeeCommand>();
 
         // TODO af: find the equivalent in C# --> maybe ThreadPool-Class is the right one
@@ -53,6 +55,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             XBEE_XON,
             XBEE_XOFF
         };
+
+        #endregion fields
+
+        #region methods
 
         public void Start(IZigBeePort serialPort)
         {
@@ -121,6 +127,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                 Log.Debug("XBeeFrameHandler thread exited.");
             });
             _parserThread.Start();
+        }
+
+        private void EmptyRxBuffer()
+        {
+            throw new NotImplementedException();
         }
 
         private int[] GetPacket()
@@ -222,14 +233,101 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             return null;
         }
 
+        public void SetClosing()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsAlive()
+        {
+            throw new NotImplementedException();
+        }
+
         private void SendNextFrame()
         {
             throw new NotImplementedException();
         }
 
-        private void EmptyRxBuffer()
+        private void QueueFrame()
         {
             throw new NotImplementedException();
         }
+
+        private bool NotifyResponseReceived()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCommandTimeout(int commandTimeOut)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetTransactionTimeout(int transactionTimeOut)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddTransactionListener(IXBeeListener listener)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RemoveTransactionListener(IXBeeListener listener)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NotifyEventReceived(IXBeeEvent xBeeEvent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddEventListener(IXBeeEventListener listener)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveEventListener(IXBeeEventListener listener)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IXBeeResponse> SendRequestAsync(IXBeeCommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IXBeeResponse SendRequest(IXBeeCommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task<IXBeeEvent> WaitEventAsync<T>(T eventClass)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IXBeeEvent EventWait<T>(T eventClass)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void StartTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void StopTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion methods
     }
 }

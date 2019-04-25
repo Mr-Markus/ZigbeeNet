@@ -1315,39 +1315,6 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             }
         }
 
-        //private void AddDocComment(CodeTypeMember codeTypeMember, ICodeCommentEntity codeComment)
-        //{
-        //    StringBuilder paramStringBuilder = new StringBuilder();
-        //    if (codeComment.Attributes != null)
-        //    {
-        //        foreach (var codeCommentParameter in codeComment.Attributes)
-        //        {
-        //            paramStringBuilder.Append($" {codeCommentParameter.Key}=\"{codeCommentParameter.Value}\"");
-        //        }
-        //    }
-
-        //    switch (codeComment.Tag)
-        //    {
-        //        case CodeCommentTag.Summary:
-        //        case CodeCommentTag.Returns:
-        //        case CodeCommentTag.Param:
-        //            {
-        //                codeTypeMember.Comments.Add(new CodeCommentStatement($"<{codeComment.Tag}{paramStringBuilder.ToString()}>", true));
-        //                codeTypeMember.Comments.Add(new CodeCommentStatement(codeComment.DocumentationText, true));
-        //            }
-        //            break;
-        //        case CodeCommentTag.See:
-        //            {
-        //                codeTypeMember.Comments.Add(new CodeCommentStatement($"<{codeComment.Tag}>", true));
-        //                codeTypeMember.Comments.Add(new CodeCommentStatement("codeComment.Description{ paramStringBuilder.ToString() }", true));
-        //            }
-        //            break;
-        //        default:
-        //            throw new NotImplementedException();
-        //    }
-        //    codeTypeMember.Comments.Add(new CodeCommentStatement($"</{codeComment.Tag}>", true));
-        //}
-
         /// <summary>
         /// Method for creating a member variable.
         /// </summary>

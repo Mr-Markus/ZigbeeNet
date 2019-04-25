@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Serilog;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Numerics;
 using ZigBeeNet.Hardware.Digi.XBee.Internal;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
-using Serilog;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 
 namespace ZigBeeNet.Hardware.Digi.XBee
 {
-    public class ZigBeeDongleDigiXBee : IZigBeeTransportTransmit, IXBeeEventListener
+    public class ZigBeeDongleXBee : IZigBeeTransportTransmit, IXBeeEventListener
     {
         private readonly IZigBeePort _serialPort;
-        private XBeeFrameHandler _frameHandler;
+        private IXBeeFrameHandler _frameHandler;
         private readonly IZigBeeTransportReceive _zigBeeTransportReceive;
         private readonly ZigBeeKey _linkKey = new ZigBeeKey(new byte[] { 0x5A, 0x69, 0x67, 0x42, 0x65, 0x65, 0x41, 0x6C, 0x6C, 0x69, 0x61, 0x6E, 0x63, 0x65, 0x30, 0x39 });
         private readonly ZigBeeKey _networkKey = new ZigBeeKey();
@@ -19,12 +22,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         private readonly bool _coordinatorStarted;
         private readonly bool _initialisationComplete;
 
-        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress("000000000000FFFE");
-        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress("000000000000FFFF");
+        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFE", System.Globalization.NumberStyles.HexNumber));
+        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFF", System.Globalization.NumberStyles.HexNumber));
 
         private const int MAX_RESET_RETRIES = 3;
 
-        public ZigBeeDongleDigiXBee(IZigBeePort serialPort)
+        public ZigBeeDongleXBee(IZigBeePort serialPort)
         {
             _serialPort = serialPort;
         }
@@ -158,7 +161,45 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
         public void SendCommand(ZigBeeApsFrame apsFrame)
         {
-            throw new NotImplementedException();
+            if (_frameHandler == null)
+            {
+                Log.Debug("XBee frame handler not set for send.");
+                return;
+            }
+
+            XBeeTransmitRequestExplicitCommand command = new XBeeTransmitRequestExplicitCommand();
+            command.SetNetworkAddress(apsFrame.DestinationAddress);
+            command.SetDestinationEndpoint(apsFrame.DestinationEndpoint);
+            command.SetSourceEndpoint(apsFrame.SourceEndpoint);
+            command.SetProfileId(apsFrame.Profile);
+            command.SetCluster(apsFrame.Cluster);
+            command.SetBroadcastRadius(0);
+
+            if (apsFrame.DestinationAddress > 0xFFF8)
+            {
+                command.SetIeeeAddress(_broadcastIeeeAddress);
+            }
+            else if (apsFrame.DestinationIeeeAddress == null)
+            {
+                if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Group)
+                {
+                    command.SetIeeeAddress(_groupIeeeAddress);
+                }
+                command.SetIeeeAddress(new IeeeAddress(BigInteger.Parse("FFFFFFFFFFFFFFFF", NumberStyles.HexNumber)));
+            }
+            else
+            {
+                command.SetIeeeAddress(apsFrame.DestinationIeeeAddress);
+            }
+
+            if (apsFrame.SecurityEnabled)
+            {
+                command.AddOptions(TransmitOptions.ENABLE_APS_ENCRYPTION);
+            }
+            command.SetData(apsFrame.Payload.Select(item => (int)item).ToArray());
+
+            Log.Debug($"XBee send: {{{command.ToString()}}}");
+            _frameHandler.SendRequestAsync(command);
         }
 
         public ZigBeeStatus SetTcLinkKey(ZigBeeKey key)
