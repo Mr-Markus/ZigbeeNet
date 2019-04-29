@@ -767,11 +767,16 @@ namespace ZigBeeNet
         /// Add a <see cref="IZigBeeAnnounceListener"/> that will be notified whenever a new device is detected
         /// on the network.
         ///
-        /// <param name="statusListener">the new <see cref="IZigBeeAnnounceListener"/> to add</param>
+        /// <param name="announceListener">the new <see cref="IZigBeeAnnounceListener"/> to add</param>
         /// </summary>
-        public void AddAnnounceListener(IZigBeeAnnounceListener statusListener)
+        public void AddAnnounceListener(IZigBeeAnnounceListener announceListener)
         {
-            _announceListeners.Add(statusListener);
+            if (_announceListeners.Contains(announceListener))
+            {
+                return;
+            }
+
+            _announceListeners.Add(announceListener);
         }
 
         /// <summary>
@@ -819,14 +824,13 @@ namespace ZigBeeNet
             }
 
             // Notify the listeners
-            lock (_announceListeners)
+            lock (_announceListeners) // TODO: Consider using a concurrent list/collection
             {
                 foreach (IZigBeeAnnounceListener announceListener in _announceListeners)
                 {
                     Task.Run(() =>
                     {
                         announceListener.DeviceStatusUpdate(deviceStatus, networkAddress, ieeeAddress);
-
                     });
                 }
             }
