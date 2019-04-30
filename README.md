@@ -7,9 +7,9 @@ With ZigBeeNet you can develop your own .NET application which communicates with
 ## Free beer !!
 No. Sorry. But now that I have your attention .. we need your help! Since it is hardly possible to test all devices, let us know with which devices you have already successfully tested ZigBeeNet or where you encountered problems. Just open an Issue.
 
-See also:
+See also:  
 
-[Related Issue](https://github.com/zigbeenet/ZigbeeNet/issues/47)
+[Related Issue](https://github.com/zigbeenet/ZigbeeNet/issues/47)  
 [Wiki](https://github.com/zigbeenet/ZigbeeNet/wiki/Supported-devices)
 
 Many thanks!

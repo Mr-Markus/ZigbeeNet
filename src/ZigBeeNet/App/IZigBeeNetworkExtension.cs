@@ -26,7 +26,9 @@ namespace ZigBeeNet.App
         /// not attempt to communicate on the network until after {@link #extensionStartup()} is called.
         ///
         /// <param name="networkManager">The <see cref="ZigBeeNetworkManager"/> of the network</param>
-        /// <returns><see cref="ZigBeeStatus.SUCCESS"/> if the extension initialized successfully</returns>
+        /// <returns>
+        /// <see cref="ZigBeeStatus.SUCCESS"/> if the extension initialized successfully
+        /// </returns>
         /// </summary>
         ZigBeeStatus ExtensionInitialize(ZigBeeNetworkManager networkManager);
 
@@ -35,7 +37,10 @@ namespace ZigBeeNet.App
         /// the extension is registered.
         /// </summary>
         /// <param name="ZigBeeNetworkManager"/>The ZigBeeNetworkManager of the network</param>
-        /// <returns> true if the extension started successfully</returns>
+        /// <returns>
+        /// <see cref="ZigBeeStatus.SUCCESS"/> if the extension initialized successfully, <see cref="ZigBeeStatus.INVALID_STATE"/>
+        /// if the extension was already started.
+        /// </returns>
         ZigBeeStatus ExtensionStartup();
 
         /// <summary>

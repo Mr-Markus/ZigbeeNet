@@ -48,6 +48,12 @@ namespace ZigBeeNet.App.Discovery
 
         public ZigBeeStatus ExtensionStartup()
         {
+            if (extensionStarted)
+            {
+                Log.Debug("DISCOVERY Extension: Already started");
+                return ZigBeeStatus.INVALID_STATE;
+            }
+
             Log.Debug("DISCOVERY Extension: Startup");
 
             _networkManager.AddNetworkNodeListener(this);
