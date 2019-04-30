@@ -105,7 +105,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 XBeeSetSoftwareResetCommand resetCommand = new XBeeSetSoftwareResetCommand();
                 _frameHandler.SendRequest(resetCommand);
             } while (_frameHandler.EventWait(typeof(XBeeModemStatusEvent)) == null);
-
+            
 
             // Enable the API with escaping
             XBeeSetApiEnableCommand apiEnableCommand = new XBeeSetApiEnableCommand();
@@ -317,7 +317,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             // Handle dongle status messages
             if (xbeeEvent is XBeeModemStatusEvent modemStatus)
             {
-                switch (modemStatus.GetStatus())
+                ModemStatus modemCurrentStatus = modemStatus.GetStatus();
+                switch (modemCurrentStatus)
                 {
                     case ModemStatus.COORDINATOR_STARTED:
                         {

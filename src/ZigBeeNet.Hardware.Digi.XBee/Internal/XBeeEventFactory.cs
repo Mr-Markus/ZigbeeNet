@@ -36,7 +36,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         
         public static IXBeeEvent GetXBeeFrame(int[] data)
         {
-            Type xbeeClass = _events[data[2]];
+            _events.TryGetValue(data[2], out Type xbeeClass);
             if (xbeeClass == null)
             {
                 return null;

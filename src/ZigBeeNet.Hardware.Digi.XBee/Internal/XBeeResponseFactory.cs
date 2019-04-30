@@ -67,7 +67,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             }
             if (xbeeClass == null)
             {
-                xbeeClass = _events[data[2]];
+                _events.TryGetValue(data[2], out xbeeClass);
             }
             if (xbeeClass == null)
             {

@@ -13,6 +13,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         /// <summary>
         /// Listeners are called when a new <see cref="IXBeeEvent"/> is received
         /// </summary>
+        /// <typeparam name="T">Expected type of xbee event</typeparam>
         /// <param name="xbeeEvent">The received <see cref="IXBeeEvent"/>.</param>
         void XbeeEventReceived(IXBeeEvent xbeeEvent);
     }

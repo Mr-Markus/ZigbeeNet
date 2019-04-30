@@ -114,9 +114,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <param name="value">The string to serialize.</param>
         protected void SerializeAtCommand(string value)
         {
+            char[] valueChars = value.ToCharArray();
             for (int cnt = 0; cnt < value.Length; cnt++)
             {
-                char[] valueChars = value.ToCharArray();
                 _buffer[_length++] = valueChars[cnt];
             }
         }
@@ -389,7 +389,6 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
             }
 
             _buffer[_length++] = 0xff - (checksum & 0xff);
-
 
             Array payLoad = Array.CreateInstance(typeof(int), _length);
             Array.Copy(_buffer, payLoad, _length);
