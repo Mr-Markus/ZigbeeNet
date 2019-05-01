@@ -121,6 +121,7 @@ namespace ZigBeeNet.PlayGround
                 else
                 {
                     Log.Logger.Information("ZigBee console starting up ... [FAIL]");
+                    Log.Logger.Information("Press any key to exit...");
                     Console.ReadKey();
                     return;
                 }
