@@ -15,7 +15,7 @@ namespace ZigBeeNet.ZDO
 
         public override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            //deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
     }
 }

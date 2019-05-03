@@ -20,8 +20,6 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private static readonly CancellationToken _cancellationToken = _cancellationTokenSource.Token;
 
-        // TODO af: find the equivalent in C# --> maybe ThreadPool-Class is the right one
-        //private readonly TaskScheduler _executor = TaskScheduler. Executors.NewCachedThreadPool();
         private readonly TaskFactory _taskFactory = new TaskFactory(_cancellationToken);
 
         private readonly IList<IXBeeListener> _transactionListeners = new List<IXBeeListener>();
@@ -32,14 +30,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private readonly object _frameIdLock = new object();
         private IXBeeCommand _sentCommand = null;
         private bool _closeHandler = false;
-
-        // TODO af: find the equivalent in C#
         private Timer _timeoutTimer;
-        //private readonly ScheduledExecutorService _timeoutScheduler;
-        //private readonly ScheduledFuture<?> _timeoutTimer = null;
-
-        // TODO af: find the equivalent in C# --> maybe Interlocked is the right fit here.
-        // https://docs.microsoft.com/en-us/dotnet/api/system.threading.interlocked.increment?view=netframework-4.7.2
         private static int _frameId = 0;
 
         private const int DEFAULT_TRANSACTION_TIMEOUT = 500;
