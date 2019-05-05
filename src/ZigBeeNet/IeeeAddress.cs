@@ -72,6 +72,15 @@ namespace ZigBeeNet
             _address = address;//Arrays.copyOf(address, 8);
         }
 
+        /// <summary>
+        /// Gets the address.
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetAddress()
+        {
+            return _address;
+        }
+
         public override int GetHashCode()
         {
             return Hash.CalcHashCode(_address);

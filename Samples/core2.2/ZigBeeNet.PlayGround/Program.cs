@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Mono.Options;
+using Newtonsoft.Json;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Serilog;
+using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.DAO;
+using ZigBeeNet.Hardware.Digi.XBee;
 using ZigBeeNet.Hardware.TI.CC2531;
 using ZigBeeNet.Tranport.SerialPort;
 using ZigBeeNet.Transaction;
@@ -19,7 +22,6 @@ using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZDO.Command;
-using ZigBeeNet.App.Basic;
 
 namespace ZigBeeNet.PlayGround
 {
@@ -33,15 +35,49 @@ namespace ZigBeeNet.PlayGround
                .WriteTo.Console()
                .CreateLogger();
 
+            bool showHelp = false;
+            ZigBeeDongle zigBeeDongle = ZigBeeDongle.TiCc2531;
+
+            OptionSet options = new OptionSet
+            {
+                { "h|help", "show this message and exit", h => showHelp = h != null },
+                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee", (ZigBeeDongle zbd) => zigBeeDongle = zbd }
+            };
+
             try
             {
+                IList<string> extraArgs = options.Parse(args);
+                foreach (string extraArg in extraArgs)
+                {
+                    Console.WriteLine($"Error: Unknown option: {extraArg}");
+                    showHelp = true;
+                }
+
                 Console.Write("Enter COM Port: ");
 
                 string port = Console.ReadLine();
 
                 ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort(port);
 
-                IZigBeeTransportTransmit dongle = new ZigBeeDongleTiCc2531(zigbeePort);
+                IZigBeeTransportTransmit dongle;
+                switch (zigBeeDongle)
+                {
+                    case ZigBeeDongle.TiCc2531:
+                        {
+                            dongle = new ZigBeeDongleTiCc2531(zigbeePort);
+                        }
+                        break;
+                    case ZigBeeDongle.DigiXbee:
+                        {
+                            dongle = new ZigBeeDongleXBee(zigbeePort);
+                        }
+                        break;
+                    default:
+                        {
+                            dongle = new ZigBeeDongleTiCc2531(zigbeePort);
+                        }
+                        break;
+                }
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
@@ -70,8 +106,11 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddExtension(new ZigBeeBasicServerExtension());
 
-                ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
-                ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
+                if (zigBeeDongle == ZigBeeDongle.TiCc2531)
+                {
+                    ((ZigBeeDongleTiCc2531)dongle).SetLedMode(1, false); // green led
+                    ((ZigBeeDongleTiCc2531)dongle).SetLedMode(2, false); // red led
+                }
 
                 ZigBeeStatus startupSucceded = networkManager.Startup(false);
 
@@ -82,6 +121,8 @@ namespace ZigBeeNet.PlayGround
                 else
                 {
                     Log.Logger.Information("ZigBee console starting up ... [FAIL]");
+                    Log.Logger.Information("Press any key to exit...");
+                    Console.ReadKey();
                     return;
                 }
 
@@ -90,7 +131,7 @@ namespace ZigBeeNet.PlayGround
                 Console.WriteLine("Joining enabled...");
 
                 string cmd = string.Empty;
-                
+
                 while (cmd != "exit")
                 {
                     Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
@@ -121,7 +162,9 @@ namespace ZigBeeNet.PlayGround
                                 var endpoint = node.Endpoints.Values.FirstOrDefault();
 
                                 if (endpoint != null)
+                                {
                                     endpointAddress = endpoint.GetEndpointAddress();
+                                }
 
                                 if (endpointAddress == null)
                                 {
@@ -172,9 +215,13 @@ namespace ZigBeeNet.PlayGround
                                         for (int i = 0; i < 10; i++)
                                         {
                                             if (state)
+                                            {
                                                 await networkManager.Send(endpointAddress, new OffCommand());
+                                            }
                                             else
+                                            {
                                                 await networkManager.Send(endpointAddress, new OnCommand());
+                                            }
 
                                             state = !state;
                                             await Task.Delay(1000);
@@ -188,9 +235,13 @@ namespace ZigBeeNet.PlayGround
                                         for (int i = 0; i < 100; i++)
                                         {
                                             if (state)
+                                            {
                                                 await networkManager.Send(endpointAddress, new OffCommand());
+                                            }
                                             else
+                                            {
                                                 await networkManager.Send(endpointAddress, new OnCommand());
+                                            }
 
                                             state = !state;
 
@@ -296,12 +347,25 @@ namespace ZigBeeNet.PlayGround
                     cmd = Console.ReadLine();
                 }
             }
+            catch (OptionException e)
+            {
+                Console.WriteLine(e.Message);
+                showHelp = true;
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+
+            if (showHelp)
+            {
+                Console.WriteLine("Options:");
+                options.WriteOptionDescriptions(Console.Out);
+                return;
+            }
+
         }
-    }
+}
 
     public class ConsoleCommandListener : IZigBeeCommandListener
     {
@@ -334,7 +398,7 @@ namespace ZigBeeNet.PlayGround
 
     public class JsonNetworkSerializer : IZigBeeNetworkStateSerializer
     {
-        private string _filename;
+        private readonly string _filename;
 
         public JsonNetworkSerializer(string filename)
         {
@@ -344,12 +408,16 @@ namespace ZigBeeNet.PlayGround
         public void Deserialize(ZigBeeNetworkManager networkManager)
         {
             if (File.Exists(_filename) == false)
+            {
                 return;
+            }
 
             List<ZigBeeNodeDao> nodes = JsonConvert.DeserializeObject<List<ZigBeeNodeDao>>(File.ReadAllText(_filename));
 
             if (nodes == null)
+            {
                 return;
+            }
 
             foreach (var nodeDao in nodes)
             {

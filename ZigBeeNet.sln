@@ -26,7 +26,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutoCode", "AutoCode", "{69
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "src\ZigBeeNet.CodeGenerator\ZigBeeNet.CodeGenerator.csproj", "{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeNet.Transport.SerialPort", "src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Transport.SerialPort", "src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "src\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{603D29D9-83CE-4B81-BD59-A77F529E4494}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee.Test", "src\ZigBeeNet.Hardware.Digi.XBee.Test\ZigBeeNet.Hardware.Digi.XBee.Test.csproj", "{BE87AA32-91C2-47EF-93F2-097526A900AB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -58,6 +66,18 @@ Global
 		{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515C2B3A-3A21-4EC9-9103-B3F841490B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE87AA32-91C2-47EF-93F2-097526A900AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE87AA32-91C2-47EF-93F2-097526A900AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE87AA32-91C2-47EF-93F2-097526A900AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE87AA32-91C2-47EF-93F2-097526A900AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,7 +88,9 @@ Global
 		{8D086719-5BFD-4AC3-812A-93543AF2CE34} = {40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}
 		{B7975147-A7E4-4959-85D3-C5CA0ADDAA17} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
-		{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{F33FA6E6-8D2E-42E7-8538-3437D1E996CA} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{515C2B3A-3A21-4EC9-9103-B3F841490B1B} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
+		{BE87AA32-91C2-47EF-93F2-097526A900AB} = {603D29D9-83CE-4B81-BD59-A77F529E4494}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
