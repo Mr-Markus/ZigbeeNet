@@ -109,9 +109,12 @@ namespace ZigBeeNet.ZDO.Field
 
         public override string ToString()
         {
+            string input = InputClusterList != null ? string.Join(", ", InputClusterList) : "";
+            string output = OutputClusterList != null ? string.Join(", ", OutputClusterList) : "";
+
             return "SimpleDescriptor [endpoint=" + Endpoint + ", profileId=" + ProfileId.ToString("X4")
                     + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion + ", inputClusterList="
-                    + string.Join(", ", InputClusterList) + ", outputClusterList=" + string.Join(", ", OutputClusterList) + "]";
+                    + input + ", outputClusterList=" + output + "]";
         }
 
     }

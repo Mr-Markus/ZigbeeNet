@@ -49,7 +49,7 @@ namespace ZigBeeNet
         {
             try
             {
-                SetAddress(ulong.Parse(address));
+                SetAddress(Convert.ToUInt64(address, 16));
             }
             catch (FormatException e)
             {

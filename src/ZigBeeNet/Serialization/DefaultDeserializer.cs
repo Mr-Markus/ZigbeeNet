@@ -151,15 +151,21 @@ namespace ZigBeeNet.Serialization
                     value[0] = records;
                     break;
                 case DataType.N_X_UNSIGNED_16_BIT_INTEGER:
-                    int cntN16 = (byte)(payload[index++] & 0xFF);
-                    List<ushort> arrayN16 = new List<ushort>(cntN16);
-                    for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex++)
+                    try
                     {
-                        arrayN16.Add(BitConverter.ToUInt16(payload, index));
+                        int cntN16 = (byte)(payload[index++] & 0xFF);
+                        List<ushort> arrayN16 = new List<ushort>(cntN16);
+                        for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex+=2)
+                        {
+                            arrayN16.Add(BitConverter.ToUInt16(payload, index));
 
-                        index += 2;
+                            index += 2;
+                        }
+                        value[0] = arrayN16;
+                    } catch (Exception ex)
+                    {
+                        string sTest = ex.Message;
                     }
-                    value[0] = arrayN16;
                     break;
                 case DataType.N_X_UNSIGNED_8_BIT_INTEGER:
                     int cntN8 = (byte)(payload[index++] & 0xFF);
