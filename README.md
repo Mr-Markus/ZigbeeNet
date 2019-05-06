@@ -20,9 +20,9 @@ With Zigbee 3.0 you can also build your own Smart Home solution and control Zigb
 ## Zigbee Stacks
 Because Zigbee is just a specification you need a stack of a manufacturer that implements it. ZigBeeNet is developed with a strict seperation of the Zigbee Cluster Library (ZCL) and the various manufacturer stacks. Because of that it is possible to use different hardware for your Zigbee solution 
 
-### Texas Instruments ( Z-Stack )
-The first stack that is implemented in ZigBeeNet is Z-Stack 3.0 from Texas Instruments
+If there is a manufacturer solution missing, feel free to open an issue or take part of it's implementation
 
+### Texas Instruments ( Z-Stack )
 Z-Stack 3.0.x is TI's Zigbee 3.0 compliant protocol suite for the CC2530, CC2531, and CC2538 Wireless MCU.
 Z-Stack comunicates through TI's Unified Network Processor Interface (NPI) which is used for establishing a serial data link between a TI SoC and external MCUs or PCs. UNPI is also implemented in this project and is also implemented for different plattforms.
 
@@ -30,6 +30,12 @@ The easiest solution is the CC2531 USB Stick with the Znp (Zigbee Network Proces
 
 Source: [http://www.ti.com/tool/z-stack](http://www.ti.com/tool/z-stack)
 
+### Digi XBee
+Digi XBee is the brand name of a family of form factor compatible radio modules from Digi International.
+
+Source: [https://en.wikipedia.org/wiki/XBee](https://en.wikipedia.org/wiki/XBee)
+
+We have tested it with the XBee ZigBee S2C chip 
 ## Important
 
 This library is still under development. Breaking changes are possible at all time. A wiki will be comming ASAP
@@ -101,6 +107,8 @@ ZigBeeNet is provided under [The MIT License](https://github.com/Mr-Markus/ZigBe
 
 ## Contributor
 
- [@Mr-Markus](https://github.com/Mr-Markus)
+ [@Mr-Markus](https://github.com/Mr-Markus) (ZigBeeNet, CC2531)
  
- [@nicolaiw](https://github.com/nicolaiw)
+ [@nicolaiw](https://github.com/nicolaiw) (ZigBeeNet, CC2531)
+ 
+ [@andreasfedermann](https://github.com/andreasfedermann) (XBee)

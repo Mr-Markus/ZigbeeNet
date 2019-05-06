@@ -674,8 +674,11 @@ namespace ZigBeeNet.App.Discovery
 
             List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
-            // Always request the network address - in case it's changed
-            //tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
+            // Always request the network address unless this is our local node - in case it's changed
+            if (!NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress))
+            {
+                tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
+            }
 
             if (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN)
             {
