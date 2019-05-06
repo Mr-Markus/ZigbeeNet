@@ -105,7 +105,7 @@ namespace ZigBeeNet
                 return 0;
             }
 
-            if (thatAddr.Endpoint == Endpoint)
+            if (thatAddr.Address == Address)
             {
                 return Endpoint - thatAddr.Endpoint;
             }
