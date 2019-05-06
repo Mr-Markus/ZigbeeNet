@@ -28,9 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Transport.SerialPort", "src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Tests", "test\ZigBeeNet.Tests\ZigBeeNet.Tests.csproj", "{C355C1F4-2466-47F6-A060-17347A151009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigBeeNet.Tests\ZigBeeNet.Test.csproj", "{C355C1F4-2466-47F6-A060-17347A151009}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Tests", "test\ZigBeeNet.Hardware.TI.CC2531.Tests\ZigBeeNet.Hardware.TI.CC2531.Tests.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Tests\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
 EndProject

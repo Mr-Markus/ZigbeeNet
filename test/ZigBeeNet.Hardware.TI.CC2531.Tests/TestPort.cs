@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using ZigBeeNet.Transport;
 
-namespace ZigBeeNet.Hardware.TI.CC2531.Tests
+namespace ZigBeeNet.Hardware.TI.CC2531.Test
 {
     public class TestPort : IZigBeePort
     {

@@ -7,19 +7,19 @@ using ZigBeeNet.Hardware.TI.CC2531.Packet;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Test
 {
-    public class ZDO_END_DEVICE_ANNCE_IND_Test : Cc2351TestPacket
+    public class ZDO_MGMT_RTG_RSP_Test : Cc2351TestPacket
     {
         [Fact]
         public void TestReceive()
         {
-            ZToolPacket data = GetPacket("FE 0D 45 C1 2A 2F 2A 2F F9 41 F6 02 00 4B 12 00 00 9C");
+            ZToolPacket data = GetPacket("FE 0B 45 B2 00 00 00 01 00 01 2A 2F 00 35 38 F4");
 
-            ZigBeeApsFrame apsFrame = ZdoEndDeviceAnnounce.Create(data);
+            ZigBeeApsFrame apsFrame = ZdoManagementRouting.Create(data);
 
-            Assert.Equal(0x2f2a, apsFrame.SourceAddress);
+            Assert.Equal(0x0000, apsFrame.SourceAddress);
             Assert.Equal(0, apsFrame.Profile);
             Assert.Equal(0, apsFrame.DestinationEndpoint);
-            Assert.Equal(GetPacketData("2F 2A 2F F9 41 F6 02 00 4B 12 00 00"), apsFrame.Payload);
+            Assert.Equal(GetPacketData("00 00 01 00 01 2A 2F 00 35 38"), apsFrame.Payload);
         }
     }
 }

@@ -6,7 +6,7 @@ using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
 using ZigBeeNet.Transport;
 
-namespace ZigBeeNet.Hardware.TI.CC2531.Tests
+namespace ZigBeeNet.Hardware.TI.CC2531.Test
 {
     public class Cc2351TestPacket
     {
