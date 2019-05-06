@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace ZigBeeNet.Tests
+namespace ZigBeeNet.Test
 {
     public class IeeeAddressTest
     {
