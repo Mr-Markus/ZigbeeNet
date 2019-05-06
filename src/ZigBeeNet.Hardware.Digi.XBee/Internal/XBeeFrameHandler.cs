@@ -75,6 +75,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             EmptyRxBuffer();
 
             // TODO af: find a more elegant way to solve this --> maybe async/await
+            // This might be resolved with a TaskCompletionSource
+            // See the refactored while loop in ZigBeeTransaction.cs line 84
             _parserThread = _taskFactory.StartNew(() =>
             {
                 Log.Debug("XBeeFrameHandler task started.");
