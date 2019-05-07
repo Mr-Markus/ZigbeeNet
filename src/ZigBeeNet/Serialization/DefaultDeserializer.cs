@@ -155,7 +155,7 @@ namespace ZigBeeNet.Serialization
                     {
                         int cntN16 = (byte)(payload[index++] & 0xFF);
                         List<ushort> arrayN16 = new List<ushort>(cntN16);
-                        for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex+=2)
+                        for (int arrayIndex = 0; arrayIndex < cntN16; arrayIndex++)
                         {
                             arrayN16.Add(BitConverter.ToUInt16(payload, index));
 
