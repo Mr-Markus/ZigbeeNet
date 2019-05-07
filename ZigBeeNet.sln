@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{603D29D9-83CE-4B81-BD59-A77F529E4494}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee.Test", "src\ZigBeeNet.Hardware.Digi.XBee.Test\ZigBeeNet.Hardware.Digi.XBee.Test.csproj", "{BE87AA32-91C2-47EF-93F2-097526A900AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee.Test", "test\ZigBeeNet.Hardware.Digi.XBee.Test\ZigBeeNet.Hardware.Digi.XBee.Test.csproj", "{BE87AA32-91C2-47EF-93F2-097526A900AB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
