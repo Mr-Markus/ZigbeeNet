@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.2", "core2.2", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "samples\core2.2\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "Samples\core2.2\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.TI.CC2531", "src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj", "{B7975147-A7E4-4959-85D3-C5CA0ADDAA17}"
 EndProject
