@@ -158,7 +158,7 @@ namespace ZigBeeNet.ZCL
         }
 
 
-        public string SoString()
+        public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
