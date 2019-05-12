@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "ZigBeeNet.PlayGround": {
-      "commandName": "Project",
-      "commandLineArgs": "--zbd 2"
-    }
-  }
-}
