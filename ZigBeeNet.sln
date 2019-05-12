@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet", "src\ZigBeeNet\ZigBeeNet.csproj", "{6BCA5435-C030-4C96-A3E2-406815ABE131}"
 EndProject
@@ -17,9 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-6
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core2.2", "core2.2", "{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "samples\core2.2\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "samples\ZigBeeNet.PlayGround\ZigBeeNet.PlayGround.csproj", "{8D086719-5BFD-4AC3-812A-93543AF2CE34}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.TI.CC2531", "src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj", "{B7975147-A7E4-4959-85D3-C5CA0ADDAA17}"
 EndProject
@@ -29,9 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Transport.SerialPort", "src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigBeeNet.Tests\ZigBeeNet.Test.csproj", "{C355C1F4-2466-47F6-A060-17347A151009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigBeeNet.Test\ZigBeeNet.Test.csproj", "{C355C1F4-2466-47F6-A060-17347A151009}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Tests\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Test\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
 EndProject
@@ -97,8 +95,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6BCA5435-C030-4C96-A3E2-406815ABE131} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
-		{40BEC49D-5BDE-452F-8A54-59E7B95AC1D0} = {B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}
-		{8D086719-5BFD-4AC3-812A-93543AF2CE34} = {40BEC49D-5BDE-452F-8A54-59E7B95AC1D0}
+		{8D086719-5BFD-4AC3-812A-93543AF2CE34} = {B668AD02-69CA-43EA-ACDD-AE0DD4D2C598}
 		{B7975147-A7E4-4959-85D3-C5CA0ADDAA17} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{C78C7D47-C11F-40CF-93D7-3D763A56FD0F} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
 		{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
