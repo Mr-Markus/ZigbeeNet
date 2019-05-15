@@ -660,7 +660,7 @@ namespace ZigBeeNet
         {
             lock (_networkStateSync)
             {
-                if (networkState != ZigBeeNetworkState.ONLINE)
+                if (NetworkState != ZigBeeTransportState.ONLINE)
                 {
                     return;
                 }
