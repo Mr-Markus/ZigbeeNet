@@ -658,6 +658,14 @@ namespace ZigBeeNet
 
         public void ReceiveCommand(ZigBeeApsFrame apsFrame)
         {
+            lock (_networkStateSync)
+            {
+                if (networkState != ZigBeeNetworkState.ONLINE)
+                {
+                    return;
+                }
+            }
+
             Log.Debug("RX APS: {ApsFrame}", apsFrame);
 
             // Create the deserialiser
