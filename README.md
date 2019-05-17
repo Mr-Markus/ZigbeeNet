@@ -49,7 +49,7 @@ have a look at our [PlayGround App](https://github.com/zigbeenet/ZigbeeNet/blob/
 
 A basic example here:
 
-```
+```cs
 using System;
 
 namespace ZigBeeNet.PlayGround
