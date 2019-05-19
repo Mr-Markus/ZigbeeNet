@@ -276,7 +276,7 @@ namespace ZigBeeNet
         ///
         /// <returns><see cref="Future"> returning a <see cref="Boolean"></returns>
         /// </summary>
-        public async Task<bool> UpdateBindingTable()
+        public async Task<ZigBeeStatus> UpdateBindingTable()
         {
             byte index = 0;
             int tableSize = 0;
@@ -290,9 +290,9 @@ namespace ZigBeeNet
 
                 CommandResult result = await _network.SendTransaction(bindingRequest, new ManagementBindRequest());
 
-                if (result.IsError())
+                if (result.IsTimeout())
                 {
-                    return false;
+                    return ZigBeeStatus.FAILURE;
                 }
 
                 ManagementBindResponse response = (ManagementBindResponse)result.GetResponse();
@@ -305,7 +305,7 @@ namespace ZigBeeNet
             } while (index < tableSize);
 
             SetBindingTable(bindingTable);
-            return true;
+            return ZigBeeStatus.SUCCESS;
         }
 
         /// <summary>
