@@ -17,34 +17,7 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         private CancellationTokenSource _cancellationToken;
 
-        // private ManualResetEventSlim _readResetEvent;
-
-        /// <summary>
-        /// The circular fifo queue for receive data
-        /// </summary>
-        //private byte[] _buffer = new byte[512];
-
         private BlockingCollection<byte> _fifoBuffer = new BlockingCollection<byte>(new ConcurrentQueue<byte>());
-
-        ///// <summary>
-        ///// The receive buffer end pointer (where we put the newly received data)
-        ///// </summary>
-        //private int _end = 0;
-
-        ///// <summary>
-        ///// The receive buffer start pointer (where we take the data to pass to the application)
-        ///// </summary>
-        //private int _start = 0;
-
-        ///// <summary>
-        ///// The length of the receive buffer
-        ///// </summary>
-        //private int _maxLength = 512;
-
-        /// <summary>
-        /// Synchronisation object for buffer queue manipulation
-        /// </summary>
-        private object _bufferSynchronisationObject = new object();
 
         public string PortName { get; set; }
 
@@ -59,7 +32,6 @@ namespace ZigBeeNet.Tranport.SerialPort
 
             _serialPort = new System.IO.Ports.SerialPort(portName, baudrate);
             _cancellationToken = new CancellationTokenSource();
-            //_readResetEvent = new ManualResetEventSlim(false);
         }
 
         public void Close()
@@ -68,6 +40,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             {
                 _cancellationToken.Cancel();
             }
+
             if (_serialPort != null)
             {
                 if (_serialPort.IsOpen)
@@ -77,9 +50,6 @@ namespace ZigBeeNet.Tranport.SerialPort
                 _serialPort.Dispose();
                 _serialPort = null;
             }
-
-            //_readResetEvent.Set();
-            //_readResetEvent.Dispose();
         }
 
         public bool Open()
@@ -127,14 +97,12 @@ namespace ZigBeeNet.Tranport.SerialPort
 
             if (_serialPort.IsOpen)
             {
-                // serialPort.DataReceived event for receiving data is not working under Linux/Mono
-
                 // Start Reader Task
                 _reader = new Task(ReaderTask, _cancellationToken.Token);
 
                 _reader.Start();
 
-                //TODO: ConnectionStatusChanged event
+                // TODO: ConnectionStatusChanged event
             }
 
             return success;
@@ -142,8 +110,10 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public void PurgeRxBuffer()
         {
-            //_start = 0;
-            //_end = 0;
+            while (_fifoBuffer.Count > 0)
+            {
+                _fifoBuffer.TryTake(out byte item);
+            }
         }
 
         public byte? Read()
@@ -153,8 +123,6 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public byte? Read(int timeout)
         {
-            //long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
-
             try
             {
                 /* This blocks until data available (Producer Consumer pattern) */
@@ -168,37 +136,6 @@ namespace ZigBeeNet.Tranport.SerialPort
                 {
                     return null; ;
                 }
-
-                //while (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() < endTime)
-                //{
-                //lock (_bufferSynchronisationObject)
-                //{
-                //    if (_start != _end)
-                //    {
-                //        byte value = _buffer[_start++];
-
-                //        if (_start >= _maxLength)
-                //        {
-                //            _start = 0;
-                //        }
-
-                //        return value;
-                //    }
-                //}
-
-
-                //lock (_serialPort)
-                //{
-                //    if (_serialPort == null)
-                //    {
-                //        return null;
-                //    }
-
-                //    //_readResetEvent.Wait(TimeSpan.FromMilliseconds(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
-                //    //Task.Delay(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                //}
-                //}
-                //return null;
             }
             catch (Exception e)
             {
@@ -234,12 +171,12 @@ namespace ZigBeeNet.Tranport.SerialPort
                 try
                 {
                     /* This will block until at least one byte is available */
-                    byte b = Convert.ToByte(_serialPort.ReadByte());
+                    byte incByte = Convert.ToByte(_serialPort.ReadByte());
 
-                    /* Read the rest of the data but do not forget the byte above while fill the buffer */
+                    /* Read the rest of the data but do not forget the byte above while writing to the buffer */
                     int length = _serialPort.BytesToRead;
                     var message = new byte[length + 1];
-                    message[0] = b;
+                    message[0] = incByte;
                     var bytesRead = 0;
                     var bytesToRead = length;
 
@@ -252,25 +189,11 @@ namespace ZigBeeNet.Tranport.SerialPort
                     } while (bytesToRead > 0);
 
 
-                    //lock (_bufferSynchronisationObject)
-                    //{
-                    //Array.Copy(message, _buffer, message.Length);
                     foreach (byte recv in message)
                     {
-                        //_buffer[_end++] = recv;
-                        //if (_end >= _maxLength)
-                        //{
-                        //    _end = 0;
-                        //}
                         _fifoBuffer.Add(recv);
                     }
-                    //}
 
-                    //lock (_serialPort)
-                    //{
-                    //    _readResetEvent.Set();
-                    //}
-                    //}
                 }
                 catch (Exception e)
                 {
