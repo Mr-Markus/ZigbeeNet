@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.Transport;
 using Serilog;
+using System.Collections.Generic;
 
 namespace ZigBeeNet.Tranport.SerialPort
 {
@@ -15,7 +16,7 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         private CancellationTokenSource _cancellationToken;
 
-       // private ManualResetEventSlim _readResetEvent;
+        // private ManualResetEventSlim _readResetEvent;
 
         /// <summary>
         /// The circular fifo queue for receive data
@@ -28,18 +29,18 @@ namespace ZigBeeNet.Tranport.SerialPort
         private int _end = 0;
 
         /// <summary>
-         /// The receive buffer start pointer (where we take the data to pass to the application)
-         /// </summary>
+        /// The receive buffer start pointer (where we take the data to pass to the application)
+        /// </summary>
         private int _start = 0;
 
         /// <summary>
-         /// The length of the receive buffer
-         /// </summary>
+        /// The length of the receive buffer
+        /// </summary>
         private int _maxLength = 512;
 
         /// <summary>
-         /// Synchronisation object for buffer queue manipulation
-         /// </summary>
+        /// Synchronisation object for buffer queue manipulation
+        /// </summary>
         private object _bufferSynchronisationObject = new object();
 
         public string PortName { get; set; }
@@ -214,43 +215,45 @@ namespace ZigBeeNet.Tranport.SerialPort
         {
             while (IsOpen && _cancellationToken.IsCancellationRequested == false)
             {
-                int length = _serialPort.BytesToRead;
-
-                var message = new byte[length];
-                var bytesRead = 0;
-                var bytesToRead = length;
-
                 try
                 {
-                    if (length > 0)
+                    /* This will block until at least one byte is available */
+                    byte b = Convert.ToByte(_serialPort.ReadByte());
+
+                    /* Read the rest of the data but do not forget the byte above while fill the buffer */
+                    int length = _serialPort.BytesToRead;
+                    var message = new byte[length + 1];
+                    message[0] = b;
+                    var bytesRead = 0;
+                    var bytesToRead = length;
+
+                    do
                     {
+                        var n = _serialPort.Read(message, bytesRead + 1, length - bytesRead); // read may return anything from 0 - length , 0 = end of stream
+                        if (n == 0) break;
+                        bytesRead += n;
+                        bytesToRead -= n;
+                    } while (bytesToRead > 0);
 
-                        do
-                        {
-                            var n = _serialPort.Read(message, bytesRead, length - bytesRead); // read may return anything from 0 - length , 0 = end of stream
-                            if (n == 0) break;
-                            bytesRead += n;
-                            bytesToRead -= n;
-                        } while (bytesToRead > 0);
 
-                        lock (_bufferSynchronisationObject)
+                    lock (_bufferSynchronisationObject)
+                    {
+                        //Array.Copy(message, _buffer, message.Length);
+                        foreach (byte recv in message)
                         {
-                            //Array.Copy(message, _buffer, message.Length);
-                            foreach (byte recv in message)
+                            _buffer[_end++] = recv;
+                            if (_end >= _maxLength)
                             {
-                                _buffer[_end++] = recv;
-                                if (_end >= _maxLength)
-                                {
-                                    _end = 0;
-                                }
+                                _end = 0;
                             }
                         }
-
-                        //lock (_serialPort)
-                        //{
-                        //    _readResetEvent.Set();
-                        //}
                     }
+
+                    //lock (_serialPort)
+                    //{
+                    //    _readResetEvent.Set();
+                    //}
+                    //}
                 }
                 catch (Exception e)
                 {
