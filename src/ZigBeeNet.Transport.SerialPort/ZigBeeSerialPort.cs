@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ZigBeeNet.Transport;
 using Serilog;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace ZigBeeNet.Tranport.SerialPort
 {
@@ -21,22 +22,24 @@ namespace ZigBeeNet.Tranport.SerialPort
         /// <summary>
         /// The circular fifo queue for receive data
         /// </summary>
-        private byte[] _buffer = new byte[512];
+        //private byte[] _buffer = new byte[512];
 
-        /// <summary>
-        /// The receive buffer end pointer (where we put the newly received data)
-        /// </summary>
-        private int _end = 0;
+        private BlockingCollection<byte> _fifoBuffer = new BlockingCollection<byte>(new ConcurrentQueue<byte>());
 
-        /// <summary>
-        /// The receive buffer start pointer (where we take the data to pass to the application)
-        /// </summary>
-        private int _start = 0;
+        ///// <summary>
+        ///// The receive buffer end pointer (where we put the newly received data)
+        ///// </summary>
+        //private int _end = 0;
 
-        /// <summary>
-        /// The length of the receive buffer
-        /// </summary>
-        private int _maxLength = 512;
+        ///// <summary>
+        ///// The receive buffer start pointer (where we take the data to pass to the application)
+        ///// </summary>
+        //private int _start = 0;
+
+        ///// <summary>
+        ///// The length of the receive buffer
+        ///// </summary>
+        //private int _maxLength = 512;
 
         /// <summary>
         /// Synchronisation object for buffer queue manipulation
@@ -139,8 +142,8 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public void PurgeRxBuffer()
         {
-            _start = 0;
-            _end = 0;
+            //_start = 0;
+            //_end = 0;
         }
 
         public byte? Read()
@@ -150,39 +153,52 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public byte? Read(int timeout)
         {
-            long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
+            //long endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + timeout;
 
             try
             {
-                while (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() < endTime)
+                /* This blocks until data available (Producer Consumer pattern) */
+                var notTimeOut = _fifoBuffer.TryTake(out byte value, timeout);
+
+                if (notTimeOut)
                 {
-                    lock (_bufferSynchronisationObject)
-                    {
-                        if (_start != _end)
-                        {
-                            byte value = _buffer[_start++];
-
-                            if (_start >= _maxLength)
-                            {
-                                _start = 0;
-                            }
-
-                            return value;
-                        }
-                    }
-
-                    lock (_serialPort)
-                    {
-                        if (_serialPort == null)
-                        {
-                            return null;
-                        }
-
-                        //_readResetEvent.Wait(TimeSpan.FromMilliseconds(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
-                        //Task.Delay(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                    }
+                    return value;
                 }
-                return null;
+                else
+                {
+                    return null; ;
+                }
+
+                //while (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() < endTime)
+                //{
+                //lock (_bufferSynchronisationObject)
+                //{
+                //    if (_start != _end)
+                //    {
+                //        byte value = _buffer[_start++];
+
+                //        if (_start >= _maxLength)
+                //        {
+                //            _start = 0;
+                //        }
+
+                //        return value;
+                //    }
+                //}
+
+
+                //lock (_serialPort)
+                //{
+                //    if (_serialPort == null)
+                //    {
+                //        return null;
+                //    }
+
+                //    //_readResetEvent.Wait(TimeSpan.FromMilliseconds(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
+                //    //Task.Delay(endTime - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                //}
+                //}
+                //return null;
             }
             catch (Exception e)
             {
@@ -236,18 +252,19 @@ namespace ZigBeeNet.Tranport.SerialPort
                     } while (bytesToRead > 0);
 
 
-                    lock (_bufferSynchronisationObject)
+                    //lock (_bufferSynchronisationObject)
+                    //{
+                    //Array.Copy(message, _buffer, message.Length);
+                    foreach (byte recv in message)
                     {
-                        //Array.Copy(message, _buffer, message.Length);
-                        foreach (byte recv in message)
-                        {
-                            _buffer[_end++] = recv;
-                            if (_end >= _maxLength)
-                            {
-                                _end = 0;
-                            }
-                        }
+                        //_buffer[_end++] = recv;
+                        //if (_end >= _maxLength)
+                        //{
+                        //    _end = 0;
+                        //}
+                        _fifoBuffer.Add(recv);
                     }
+                    //}
 
                     //lock (_serialPort)
                     //{
