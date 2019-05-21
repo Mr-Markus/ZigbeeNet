@@ -126,9 +126,9 @@ namespace ZigBeeNet.Tranport.SerialPort
             try
             {
                 /* This blocks until data available (Producer Consumer pattern) */
-                var notTimeOut = _fifoBuffer.TryTake(out byte value, timeout);
+                var notTimedOut = _fifoBuffer.TryTake(out byte value, timeout);
 
-                if (notTimeOut)
+                if (notTimedOut)
                 {
                     return value;
                 }
