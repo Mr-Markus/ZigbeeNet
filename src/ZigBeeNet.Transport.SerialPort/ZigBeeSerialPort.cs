@@ -110,6 +110,11 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public void PurgeRxBuffer()
         {
+            /*
+             *  The enumeration represents a moment-in-time snapshot of the contents of the queue. It does not reflect any updates to the collection after GetEnumerator was called.
+             *  The enumerator is safe to use concurrently with reads from and writes to the queue.
+             *  https://docs.microsoft.com/en-us/dotnet/api/system.collections.concurrent.concurrentqueue-1.getenumerator?view=netframework-4.8
+             */
             while (_fifoBuffer.Count > 0)
             {
                 _fifoBuffer.TryTake(out byte item);
@@ -126,9 +131,9 @@ namespace ZigBeeNet.Tranport.SerialPort
             try
             {
                 /* This blocks until data available (Producer Consumer pattern) */
-                var notTimeOut = _fifoBuffer.TryTake(out byte value, timeout);
+            var notTimedOut = _fifoBuffer.TryTake(out byte value, timeout);
 
-                if (notTimeOut)
+                if (notTimedOut)
                 {
                     return value;
                 }
