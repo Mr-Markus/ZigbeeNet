@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 using ZigBeeNet.Util;
 
 namespace ZigBeeNet
@@ -27,7 +25,7 @@ namespace ZigBeeNet
         /// </summary>
         public IeeeAddress()
         {
-            this._address = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            this._address = new byte[8];
         }
 
         /// <summary>
@@ -49,9 +47,9 @@ namespace ZigBeeNet
         {
             try
             {
-              _address = BitConverter.GetBytes(Convert.ToUInt64(address, 16));
+                _address = BitConverter.GetBytes(Convert.ToUInt64(address, 16));
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 throw new ArgumentException("IeeeAddress string must contain valid hexadecimal value");
             }
@@ -61,15 +59,14 @@ namespace ZigBeeNet
         /// Create an <see cref="IeeeAddress"> from an int array
         ///
         /// <param name="address">the address as an int array. Array length must be 8.</param>
-        /// @throws IllegalArgumentException
+        /// @throws ArgumentOutOfRangeException
         /// </summary>
         public IeeeAddress(byte[] address)
         {
             if (address.Length != 8)
-            {
-                throw new ArgumentNullException("IeeeAddress array length must be 8");
-            }
-            _address = address;//Arrays.copyOf(address, 8);
+                throw new ArgumentOutOfRangeException("IeeeAddress array length must be 8");
+
+            _address = address;
         }
 
         /// <summary>
@@ -89,23 +86,23 @@ namespace ZigBeeNet
         public override bool Equals(object obj)
         {
             if (obj == null)
-            {
                 return false;
-            }
-
-            if (!typeof(IeeeAddress).IsAssignableFrom(obj.GetType()))
+            
+            if (obj is IeeeAddress other)
             {
-                return false;
-            }
-
-            IeeeAddress other = (IeeeAddress)obj;
-            for (int cnt = 0; cnt < 8; cnt++)
-            {
-                if (other._address[cnt] != _address[cnt])
+                for (int cnt = 0; cnt < 8; cnt++)
                 {
-                    return false;
+                    if (other._address[cnt] != _address[cnt])
+                    {
+                        return false;
+                    }
                 }
             }
+            else
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -117,14 +114,7 @@ namespace ZigBeeNet
         public int CompareTo(IeeeAddress other)
         {
             if (other == null)
-            {
                 return -1;
-            }
-
-            if (!typeof(IeeeAddress).IsAssignableFrom(other.GetType()))
-            {
-                return -1;
-            }
 
             for (int cnt = 0; cnt < 8; cnt++)
             {
@@ -135,6 +125,7 @@ namespace ZigBeeNet
 
                 return other._address[cnt] < _address[cnt] ? 1 : -1;
             }
+
             return 0;
         }
     }
