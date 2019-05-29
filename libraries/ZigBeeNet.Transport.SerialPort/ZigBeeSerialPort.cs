@@ -131,7 +131,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             try
             {
                 /* This blocks until data available (Producer Consumer pattern) */
-            var notTimedOut = _fifoBuffer.TryTake(out byte value, timeout);
+                var notTimedOut = _fifoBuffer.TryTake(out byte value, timeout);
 
                 if (notTimedOut)
                 {
@@ -171,34 +171,19 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         private void ReaderTask()
         {
+            var message = new byte[512];
+
             while (IsOpen && _cancellationToken.IsCancellationRequested == false)
             {
                 try
                 {
-                    /* This will block until at least one byte is available */
-                    byte incByte = Convert.ToByte(_serialPort.ReadByte());
+                    var n = _serialPort.Read(message, 0, message.Length); // read may return anything from 0 - length , 0 = end of stream
+                    if (n == 0) break;
 
-                    /* Read the rest of the data but do not forget the byte above while writing to the buffer */
-                    int length = _serialPort.BytesToRead;
-                    var message = new byte[length + 1];
-                    message[0] = incByte;
-                    var bytesRead = 0;
-                    var bytesToRead = length;
-
-                    do
+                    for (int i = 0; i < n; i++)
                     {
-                        var n = _serialPort.Read(message, bytesRead + 1, length - bytesRead); // read may return anything from 0 - length , 0 = end of stream
-                        if (n == 0) break;
-                        bytesRead += n;
-                        bytesToRead -= n;
-                    } while (bytesToRead > 0);
-
-
-                    foreach (byte recv in message)
-                    {
-                        _fifoBuffer.Add(recv);
+                        _fifoBuffer.Add(message[i]);
                     }
-
                 }
                 catch (Exception e)
                 {

@@ -33,7 +33,10 @@ namespace ZigBeeNet.ZCL.Field
         public void Deserialize(IZigBeeDeserializer deserializer)
         {
             AttributeIdentifier = deserializer.ReadZigBeeType<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
-            AttributeDataType = ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER);
+
+            byte dataType = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+
+            AttributeDataType = ZclDataType.Get((DataType)dataType);
             AttributeValue = deserializer.ReadZigBeeType<object>(AttributeDataType.DataType);
         }
 

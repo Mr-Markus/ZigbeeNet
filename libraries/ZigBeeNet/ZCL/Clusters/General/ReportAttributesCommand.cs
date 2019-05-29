@@ -58,7 +58,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append("ReportAttributesCommand [");
             builder.Append(base.ToString());
             builder.Append(", Reports=");
-            builder.Append(Reports);
+            builder.Append(string.Join(", ", Reports));
             builder.Append(']');
 
             return builder.ToString();
