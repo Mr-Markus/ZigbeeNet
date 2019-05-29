@@ -47,11 +47,11 @@ namespace ZigBeeNet
         {
             try
             {
-                _address = BitConverter.GetBytes(Convert.ToUInt64(address));
+                _address = BitConverter.GetBytes(Convert.ToUInt64(address, 16));
             }
             catch (FormatException)
             {
-                throw new ArgumentException("IeeeAddress string must contain valid UInt64 value");
+                throw new ArgumentException("IeeeAddress string must contain valid hexadecimal value");
             }
         }
 
@@ -108,7 +108,7 @@ namespace ZigBeeNet
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Value.ToString("X");
         }
 
         public int CompareTo(IeeeAddress other)
