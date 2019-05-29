@@ -104,7 +104,7 @@ Feel free to open an issue if you have any idea or enhancement. If you want to i
 
 For a cleaner code we have some coding guidelines. you can find them [here](https://github.com/Mr-Markus/ZigbeeNet/blob/master/docs/coding-guidelines).
 
-## License
+## License and Copyright
 ZigBeeNet is licensed under the [Eclipse Public License](https://www.eclipse.org/legal/epl-v10.html). Refer to the [license file](LICENSE) for further information.
 
 Some parts of this project are converted in c# from [com.zsmartsystems.zigbee](https://github.com/zsmartsystems/com.zsmartsystems.zigbee). 
