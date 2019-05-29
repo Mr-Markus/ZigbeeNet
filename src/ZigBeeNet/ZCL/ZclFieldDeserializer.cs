@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.Serialization;
 using ZigBeeNet.ZCL.Protocol;
@@ -32,28 +33,35 @@ namespace ZigBeeNet.ZCL
 
         public T Deserialize<T>(ZclDataType dataType)
         {
-            if(dataType.DataClass.IsAssignableFrom(typeof(IZclListItemField)))
+            if (typeof(IZclListItemField).IsAssignableFrom(dataType.DataClass))
             {
-                //List<IZclListItemField> list = new List<IZclListItemField>();
-                //try
-                //{
-                //    while (Deserializer.GetSize() - Deserializer.GetPosition() > 0)
-                //    {
+                List<object> list = new List<object>();
+                try
+                {
+                    while (Deserializer.GetSize() - Deserializer.GetPosition() > 0)
+                    {
                         var item = (IZclListItemField)Activator.CreateInstance(dataType.DataClass);
 
                         item.Deserialize(Deserializer);
 
-                return (T)item;
+                        list.Add(item);
+                    }
 
-                        //list.Add(item);
-                //    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    // Eat the exception - this terminates the list!
+                }
 
-                //}
-                //catch (IndexOutOfRangeException)
-                //{
-                //    // Eat the exception - this terminates the list!
-                //}
-                //return list;
+                var listType = typeof(List<>);
+                var constructedListType = listType.MakeGenericType(dataType.DataClass);
+                var instance = (System.Collections.IList)Activator.CreateInstance(constructedListType);
+
+                foreach (var item in list)
+                {
+                    instance.Add(item);
+                }
+                return (T)instance;
             }
 
             return Deserializer.ReadZigBeeType<T>(dataType.DataType);
