@@ -18,38 +18,38 @@ namespace ZigBeeNet
             }
             set
             {
-                SetAddress(value);
+                _address = BitConverter.GetBytes(value);
             }
         }
 
         /// <summary>
-         /// Default constructor. Creates an address 0
-         /// </summary>
+        /// Default constructor. Creates an address 0
+        /// </summary>
         public IeeeAddress()
         {
             this._address = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
         /// <summary>
-         /// Create an <see cref="IeeeAddress"> from a <see cref="BigInteger">
-         ///
-         /// <param name="address">the address as a <see cref="BigInteger"></param>
-         /// </summary>
+        /// Create an <see cref="IeeeAddress"> from a <see cref="BigInteger">
+        ///
+        /// <param name="address">the address as a <see cref="BigInteger"></param>
+        /// </summary>
         public IeeeAddress(BigInteger address) : this()
         {
-            SetAddress((ulong)address);
+            _address = BitConverter.GetBytes((ulong)address);
         }
 
         /// <summary>
-         /// Create an <see cref="IeeeAddress"> from a <see cref="String">
-         ///
-         /// <param name="address">the address as a <see cref="String"></param>
-         /// </summary>
+        /// Create an <see cref="IeeeAddress"> from a <see cref="String">
+        ///
+        /// <param name="address">the address as a <see cref="String"></param>
+        /// </summary>
         public IeeeAddress(string address) : this()
         {
             try
             {
-                SetAddress(Convert.ToUInt64(address, 16));
+              _address = BitConverter.GetBytes(Convert.ToUInt64(address, 16));
             }
             catch (FormatException e)
             {
@@ -58,11 +58,11 @@ namespace ZigBeeNet
         }
 
         /// <summary>
-         /// Create an <see cref="IeeeAddress"> from an int array
-         ///
-         /// <param name="address">the address as an int array. Array length must be 8.</param>
-         /// @throws IllegalArgumentException
-         /// </summary>
+        /// Create an <see cref="IeeeAddress"> from an int array
+        ///
+        /// <param name="address">the address as an int array. Array length must be 8.</param>
+        /// @throws IllegalArgumentException
+        /// </summary>
         public IeeeAddress(byte[] address)
         {
             if (address.Length != 8)
@@ -110,7 +110,7 @@ namespace ZigBeeNet
         }
 
         public override string ToString()
-        {             
+        {
             return Value.ToString();
         }
 
@@ -137,19 +137,5 @@ namespace ZigBeeNet
             }
             return 0;
         }
-
-        private void SetAddress(ulong longVal)
-        {
-            this._address[0] = (byte)(longVal & 0xff);
-            this._address[1] = (byte)((longVal >> 8) & 0xff);
-            this._address[2] = (byte)((longVal >> 16) & 0xff);
-            this._address[3] = (byte)((longVal >> 24) & 0xff);
-            this._address[4] = (byte)((longVal >> 32) & 0xff);
-            this._address[5] = (byte)((longVal >> 40) & 0xff);
-            this._address[6] = (byte)((longVal >> 48) & 0xff);
-            this._address[7] = (byte)((longVal >> 56) & 0xff);
-
-        }
-
     }
 }
