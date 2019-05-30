@@ -77,7 +77,7 @@ namespace ZigBeeNet.ZDO.Command
             this.RemoveChildrenRejoin = removeChildrenRejoin;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
@@ -85,7 +85,7 @@ namespace ZigBeeNet.ZDO.Command
             serializer.Serialize(RemoveChildrenRejoin, ZclDataType.Get(DataType.BOOLEAN));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

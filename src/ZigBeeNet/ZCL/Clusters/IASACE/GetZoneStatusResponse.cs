@@ -68,7 +68,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(ZoneStatusComplete, ZclDataType.Get(DataType.BOOLEAN));
             serializer.Serialize(NumberOfZones, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
@@ -77,7 +77,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             serializer.Serialize(ZoneStatus, ZclDataType.Get(DataType.BITMAP_16_BIT));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             ZoneStatusComplete = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
             NumberOfZones = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));

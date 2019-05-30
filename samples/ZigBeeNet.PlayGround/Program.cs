@@ -252,7 +252,7 @@ namespace ZigBeeNet.PlayGround
                                     {
                                         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
                                         {
-                                            DestinationAddress = endpointAddress,
+                                            Destination = endpointAddress,
                                             NwkAddrOfInterest = addr
                                         };
 
@@ -316,7 +316,7 @@ namespace ZigBeeNet.PlayGround
                                             ZclStatus statusCode = response.Records[0].Status;
                                             if (statusCode == ZclStatus.SUCCESS)
                                             {
-                                                Console.WriteLine("Cluster " + response.ClusterId.ToString("X4") + ", Attribute "
+                                                Console.WriteLine("Cluster " + response + ", Attribute "
                                                         + response.Records[0].AttributeIdentifier + ", type "
                                                         + response.Records[0].AttributeDataType + ", value: "
                                                         + response.Records[0].AttributeValue);

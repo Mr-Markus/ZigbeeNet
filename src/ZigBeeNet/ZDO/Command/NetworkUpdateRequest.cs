@@ -50,7 +50,7 @@ namespace ZigBeeNet.ZDO.Command
             ClusterId = 0x0038;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
@@ -61,7 +61,7 @@ namespace ZigBeeNet.ZDO.Command
             serializer.Serialize(NwkManagerAddr, ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

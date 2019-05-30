@@ -36,7 +36,7 @@ namespace ZigBeeNet.ZDO.Command
         }
 
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
