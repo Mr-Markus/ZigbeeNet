@@ -42,13 +42,13 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(MoveMode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(Rate, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             MoveMode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             Rate = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));

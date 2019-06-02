@@ -47,14 +47,14 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(ColorX, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(ColorY, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             ColorX = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             ColorY = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));

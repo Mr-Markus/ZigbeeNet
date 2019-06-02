@@ -46,13 +46,13 @@ namespace ZigBeeNet.ZCL.Clusters.IASZone
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(ZoneType, ZclDataType.Get(DataType.ENUMERATION_16_BIT));
             serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             ZoneType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.ENUMERATION_16_BIT));
             ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));

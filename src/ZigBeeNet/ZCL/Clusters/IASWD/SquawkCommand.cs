@@ -37,12 +37,12 @@ namespace ZigBeeNet.ZCL.Clusters.IASWD
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Header, ZclDataType.Get(DataType.DATA_8_BIT));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             Header = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.DATA_8_BIT));
         }

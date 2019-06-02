@@ -44,13 +44,13 @@ namespace ZigBeeNet.ZCL.Clusters.General
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(DiscoveryComplete, ZclDataType.Get(DataType.BOOLEAN));
             serializer.Serialize(CommandIdentifiers, ZclDataType.Get(DataType.X_UNSIGNED_8_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             DiscoveryComplete = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
             CommandIdentifiers = deserializer.Deserialize<List<byte>>(ZclDataType.Get(DataType.X_UNSIGNED_8_BIT_INTEGER));

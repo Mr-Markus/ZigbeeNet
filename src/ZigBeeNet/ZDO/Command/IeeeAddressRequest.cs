@@ -32,7 +32,7 @@ namespace ZigBeeNet.ZDO.Command
             ClusterId = 0x0001;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
@@ -41,7 +41,7 @@ namespace ZigBeeNet.ZDO.Command
             serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

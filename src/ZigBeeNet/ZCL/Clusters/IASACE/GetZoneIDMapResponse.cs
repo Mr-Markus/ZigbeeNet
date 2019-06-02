@@ -115,7 +115,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(ZoneIDMapSection0, ZclDataType.Get(DataType.BITMAP_16_BIT));
             serializer.Serialize(ZoneIDMapSection1, ZclDataType.Get(DataType.BITMAP_16_BIT));
@@ -135,7 +135,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             serializer.Serialize(ZoneIDMapSection15, ZclDataType.Get(DataType.BITMAP_16_BIT));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             ZoneIDMapSection0 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
             ZoneIDMapSection1 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));

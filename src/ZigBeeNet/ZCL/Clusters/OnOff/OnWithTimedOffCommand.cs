@@ -53,14 +53,14 @@ namespace ZigBeeNet.ZCL.Clusters.OnOff
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(OnOffControl, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(OnTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(OffWaitTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             OnOffControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             OnTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));

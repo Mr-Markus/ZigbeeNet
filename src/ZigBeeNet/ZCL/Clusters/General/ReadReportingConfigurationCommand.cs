@@ -39,12 +39,12 @@ namespace ZigBeeNet.ZCL.Clusters.General
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Records, ZclDataType.Get(DataType.N_X_ATTRIBUTE_RECORD));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             Records = deserializer.Deserialize<List<AttributeRecord>>(ZclDataType.Get(DataType.N_X_ATTRIBUTE_RECORD));
         }

@@ -54,7 +54,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             if (Status == ZclStatus.SUCCESS)
             {
@@ -64,7 +64,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             serializer.Serialize(Records, ZclDataType.Get(DataType.N_X_ATTRIBUTE_STATUS_RECORD));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             if (deserializer.RemainingLength == 1)
             {

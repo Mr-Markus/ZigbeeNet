@@ -62,7 +62,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(TimeOfDay, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(RelayStatus, ZclDataType.Get(DataType.BITMAP_8_BIT));
@@ -72,7 +72,7 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
             serializer.Serialize(UnreadEntries, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             TimeOfDay = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             RelayStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));

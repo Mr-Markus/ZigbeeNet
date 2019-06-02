@@ -58,7 +58,7 @@ namespace ZigBeeNet.ZCL.Clusters.Alarms
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(AlarmCode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
@@ -66,7 +66,7 @@ namespace ZigBeeNet.ZCL.Clusters.Alarms
             serializer.Serialize(Timestamp, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             AlarmCode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));

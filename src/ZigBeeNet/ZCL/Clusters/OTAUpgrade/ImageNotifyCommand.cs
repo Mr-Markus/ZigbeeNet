@@ -72,7 +72,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(PayloadType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
 
@@ -97,7 +97,7 @@ namespace ZigBeeNet.ZCL.Clusters.OTAUpgrade
             }
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             PayloadType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
 

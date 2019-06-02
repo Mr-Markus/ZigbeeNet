@@ -47,14 +47,14 @@ namespace ZigBeeNet.ZCL.Clusters.RSSILocation
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(ReportingAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
             serializer.Serialize(NumberOfNeighbors, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(NeighborsInformation, ZclDataType.Get(DataType.N_X_NEIGHBORS_INFORMATION));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             ReportingAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
             NumberOfNeighbors = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
