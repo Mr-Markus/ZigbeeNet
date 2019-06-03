@@ -25,14 +25,14 @@ namespace ZigBeeNet.ZDO.Command
             ClusterId = 0x8035;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
             serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

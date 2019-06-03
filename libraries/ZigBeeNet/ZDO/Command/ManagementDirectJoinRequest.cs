@@ -77,7 +77,7 @@ namespace ZigBeeNet.ZDO.Command
             this.CapabilityInformation = capabilityInformation;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
@@ -85,7 +85,7 @@ namespace ZigBeeNet.ZDO.Command
             serializer.Serialize(CapabilityInformation, ZclDataType.Get(DataType.BITMAP_8_BIT));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

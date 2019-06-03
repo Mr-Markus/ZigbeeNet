@@ -259,7 +259,7 @@ namespace ZigBeeNet.CodeGenerator
                         if (fields.Count > 0)
                         {
                             code.AppendLine();
-                            code.AppendLine("        public override void Serialize(ZclFieldSerializer serializer)");
+                            code.AppendLine("        internal override void Serialize(ZclFieldSerializer serializer)");
                             code.AppendLine("        {");
                             foreach (Field field in fields)
                             {
@@ -313,7 +313,7 @@ namespace ZigBeeNet.CodeGenerator
                             code.AppendLine("        }");
 
                             code.AppendLine();
-                            code.AppendLine("        public override void Deserialize(ZclFieldDeserializer deserializer)");
+                            code.AppendLine("        internal override void Deserialize(ZclFieldDeserializer deserializer)");
                             code.AppendLine("        {");
 
                             foreach (Field field in fields)

@@ -57,7 +57,7 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(UpdateFlags, ZclDataType.Get(DataType.BITMAP_8_BIT));
             serializer.Serialize(Action, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
@@ -66,7 +66,7 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
             serializer.Serialize(StartHue, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             UpdateFlags = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
             Action = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));

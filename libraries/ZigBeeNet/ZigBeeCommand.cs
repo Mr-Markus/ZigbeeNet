@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using ZigBeeNet.ZCL;
 
+[assembly: InternalsVisibleTo("ZigBeeNet.Test"),
+    InternalsVisibleTo("ZigBeeNet.Hardware.TI.CC2531.Test"),
+    InternalsVisibleTo("ZigBeeNet.Hardware.Digi.XBee.Test")]
 namespace ZigBeeNet
 {
     public class ZigBeeCommand
     {
-        public IZigBeeAddress SourceAddress { get; set; }
+        internal IZigBeeAddress SourceAddress { get; set; }
 
-        public IZigBeeAddress DestinationAddress { get; set; }
+        internal IZigBeeAddress DestinationAddress { get; set; }
 
-        public ushort ClusterId { get; set; }
+        internal ushort ClusterId { get; set; }
 
-        public byte? TransactionId { get; set; }
+        internal byte? TransactionId { get; set; }
 
-        public bool ApsSecurity { get; set; }
+        internal bool ApsSecurity { get; set; }
 
-        public virtual void Serialize(ZclFieldSerializer serializer)
+        internal virtual void Serialize(ZclFieldSerializer serializer)
         {
             // Default implementation does nothing - overridden by each class
         }
 
-        public virtual void Deserialize(ZclFieldDeserializer deserializer)
+        internal virtual void Deserialize(ZclFieldDeserializer deserializer)
         {
             // Default implementation does nothing - overridden by each class
         }

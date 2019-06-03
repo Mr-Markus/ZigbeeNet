@@ -8,38 +8,47 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
-     /// Node Descriptor Request value object class.
-     /// 
-     /// The Node_Desc_req command is generated from a local device wishing to inquire
-     /// as to the node descriptor of a remote device. This command shall be unicast either
-     /// to the remote device itself or to an alternative device that contains the discovery
-     /// information of the remote device.
-     /// 
-     /// Code is auto-generated. Modifications may be overwritten!
-     /// </summary>
+    /// Node Descriptor Request value object class.
+    /// 
+    /// The Node_Desc_req command is generated from a local device wishing to inquire
+    /// as to the node descriptor of a remote device. This command shall be unicast either
+    /// to the remote device itself or to an alternative device that contains the discovery
+    /// information of the remote device.
+    /// 
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
     public class NodeDescriptorRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
         /// <summary>
-         /// NWKAddrOfInterest command message field.
-         /// </summary>
+        /// DestinationAddress command message field.
+        /// </summary>
+        public IZigBeeAddress Destination
+        {
+            get => base.DestinationAddress;
+            set => base.DestinationAddress = value;
+        }
+
+        /// <summary>
+        /// NWKAddrOfInterest command message field.
+        /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
         /// <summary>
-         /// Default constructor.
-         /// </summary>
+        /// Default constructor.
+        /// </summary>
         public NodeDescriptorRequest()
         {
             ClusterId = 0x0002;
         }
 
-        public override void Serialize(ZclFieldSerializer serializer)
+        internal override void Serialize(ZclFieldSerializer serializer)
         {
             base.Serialize(serializer);
 
             serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
-        public override void Deserialize(ZclFieldDeserializer deserializer)
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 

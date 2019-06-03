@@ -262,11 +262,11 @@ namespace ZigBeeNet
 
             Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>> transitions = new Dictionary<ZigBeeTransportState, List<ZigBeeTransportState>>();
 
-            //transitions.put(null, new HashSet<>(Arrays.asList(ZigBeeTransportState.UNINITIALISED)));
             transitions[ZigBeeTransportState.UNINITIALISED] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.INITIALISING, ZigBeeTransportState.OFFLINE });
             transitions[ZigBeeTransportState.INITIALISING] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.ONLINE, ZigBeeTransportState.OFFLINE });
             transitions[ZigBeeTransportState.ONLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.OFFLINE });
             transitions[ZigBeeTransportState.OFFLINE] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.ONLINE });
+            transitions[ZigBeeTransportState.SHUTDOWN] = new List<ZigBeeTransportState>(new[] { ZigBeeTransportState.OFFLINE });
 
             _validStateTransitions = transitions;
 
@@ -498,7 +498,7 @@ namespace ZigBeeNet
         /// </summary>
         public void Shutdown()
         {
-            //executorService.shutdownNow();
+            NetworkState = ZigBeeTransportState.SHUTDOWN;
 
             lock (_networkNodes)
             {
