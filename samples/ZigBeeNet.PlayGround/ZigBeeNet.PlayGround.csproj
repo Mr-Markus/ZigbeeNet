@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj" />
-    <ProjectReference Include="..\..\src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj" />
-    <ProjectReference Include="..\..\src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj" />
-    <ProjectReference Include="..\..\src\ZigBeeNet\ZigBeeNet.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet\ZigBeeNet.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj" />
   </ItemGroup>
 
 </Project>
