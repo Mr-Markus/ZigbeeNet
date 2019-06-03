@@ -21,6 +21,10 @@ namespace ZigBeeNet.Transport
         /// <summary>
         /// Network is offline and not able to be used
         /// </summary>
-        OFFLINE
+        OFFLINE,
+        /// <summary>
+        /// The network has been closed and may not be restarted
+        /// </summary>
+        SHUTDOWN
     }
 }
