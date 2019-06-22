@@ -11,9 +11,9 @@ build:
   project: ZigBeeNet.sln
 
 deploy:
-  provider: NuGet
+- provider: NuGet
   api_key:
-    secure: tb0vUAnhJVroRFR8vY3YofSxf4F4oym55blGXnTzxzb2HQLaX5BJ79nvL9+z4vMs
+    secure: itVeOMKqDgUEiVaSkfpSZFe3fymDY2D5evHEYUxf5rCcSw5jRy6yHEDJD5RrtwJZ
   skip_symbols: false
   artifact: /.*\.nupkg/
 
