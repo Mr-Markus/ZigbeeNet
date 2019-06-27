@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>ZigBeeNet Contributors</Authors>
+    <Version>1.0.0-preview1</Version>
+    <Company>ZigBeeNet</Company>
+    <Description>ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard, .NET Core and more .NET platforms.
+
+With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.
+
+This package contains a SerialPort implementation for connecting, reading and sending packages with the ZigBee Hardware dongles</Description>
+    <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/zigbeenet/ZigbeeNet</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/zigbeenet/ZigbeeNet/blob/master/icon.png?raw=true</PackageIconUrl>
+    <RepositoryUrl>https://github.com/zigbeenet/ZigbeeNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>SerialPort;zigbee;netstandard;smart home;cc2531;XBee;philips hue;ikea tradfri;innr</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZigBeeNet\ZigBeeNet.csproj" />
+  </ItemGroup>
+
+</Project>

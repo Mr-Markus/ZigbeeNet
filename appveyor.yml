@@ -1,14 +1,22 @@
 version: 1.0.{build}
 image:
-  - Visual Studio 2017
+  - Visual Studio 2019
   - Ubuntu1804
 install:
   
 before_build:
   - nuget restore ZigBeeNet.sln
 build:
+  publish_nuget: true
   verbosity: minimal
   project: ZigBeeNet.sln
+
+deploy:
+- provider: NuGet
+  api_key:
+    secure: itVeOMKqDgUEiVaSkfpSZFe3fymDY2D5evHEYUxf5rCcSw5jRy6yHEDJD5RrtwJZ
+  skip_symbols: false
+  artifact: /.*\.nupkg/
 
 test:
   # only assemblies to test

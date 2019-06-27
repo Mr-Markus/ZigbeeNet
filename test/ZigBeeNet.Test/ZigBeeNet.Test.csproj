@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZigBeeNet\ZigBeeNet.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet\ZigBeeNet.csproj" />
   </ItemGroup>
 
 </Project>

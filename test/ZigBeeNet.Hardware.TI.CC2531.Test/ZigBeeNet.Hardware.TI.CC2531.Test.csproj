@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B668
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{ABCECF51-68A9-44EE-B8BA-73969C9B3895}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		appveyor.yml = appveyor.yml
 		icon.png = icon.png
 		LICENSE = LICENSE
@@ -19,25 +20,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.PlayGround", "sam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutoCode", "AutoCode", "{695B6CC9-6267-41E3-A086-3C6B9A180A34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "src\ZigBeeNet.CodeGenerator\ZigBeeNet.CodeGenerator.csproj", "{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.CodeGenerator", "autocode\ZigBeeNet.CodeGenerator\ZigBeeNet.CodeGenerator.csproj", "{C78C7D47-C11F-40CF-93D7-3D763A56FD0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Transport.SerialPort", "src\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Transport.SerialPort", "libraries\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj", "{A6ACF46E-AC48-4B80-829D-C9ABCEAE94A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigBeeNet.Test\ZigBeeNet.Test.csproj", "{C355C1F4-2466-47F6-A060-17347A151009}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Test\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "src\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "src\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "autocode\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{603D29D9-83CE-4B81-BD59-A77F529E4494}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee.Test", "test\ZigBeeNet.Hardware.Digi.XBee.Test\ZigBeeNet.Hardware.Digi.XBee.Test.csproj", "{BE87AA32-91C2-47EF-93F2-097526A900AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531", "src\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj", "{EB0EAFB9-264C-4A54-99AA-CBA21E4AC3EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531", "libraries\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj", "{EB0EAFB9-264C-4A54-99AA-CBA21E4AC3EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet", "src\ZigBeeNet\ZigBeeNet.csproj", "{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet", "libraries\ZigBeeNet\ZigBeeNet.csproj", "{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

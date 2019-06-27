@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-preview1</Version>
+    <Authors>ZigBeeNet Contributors</Authors>
+    <Company>ZigBeeNet</Company>
+    <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/zigbeenet/ZigbeeNet</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/zigbeenet/ZigbeeNet/blob/master/icon.png?raw=true</PackageIconUrl>
+    <RepositoryUrl>https://github.com/zigbeenet/ZigbeeNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>zigbee;netstandard;smart home;cc2531;philips hue;ikea tradfri;innr</PackageTags>
+    <Description>ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard, .NET Core and more .NET platforms.
+
+With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.
+
+This package can be used in combination with the ZigBeeNet package and is the dongle implementation for a Digi XBee hardware dongle</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.8.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZigBeeNet\ZigBeeNet.csproj" />
+  </ItemGroup>
+</Project>
