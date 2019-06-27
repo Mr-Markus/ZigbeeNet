@@ -98,7 +98,7 @@ This project is highly inspired by https://github.com/zsmartsystems/com.zsmartsy
 
 ## Contributing
 
-Feel free to open an issue if you have any idea or enhancement. If you want to implement on code create a fork and open a pull request
+Feel free to open an issue if you have any idea or enhancement. If you want to implement on code create a fork and open a pull request.
 
 ## Coding guidelines
 
@@ -107,7 +107,7 @@ For a cleaner code we have some coding guidelines. you can find them [here](http
 ## License and Copyright
 ZigBeeNet is licensed under the [Eclipse Public License](https://www.eclipse.org/legal/epl-v10.html). Refer to the [license file](LICENSE) for further information.
 
-Some parts of this project are converted in c# from [com.zsmartsystems.zigbee](https://github.com/zsmartsystems/com.zsmartsystems.zigbee). 
+Some parts of this project are converted to c# from [com.zsmartsystems.zigbee](https://github.com/zsmartsystems/com.zsmartsystems.zigbee). 
 
 [com.zsmartsystems.zigbee](https://github.com/zsmartsystems/com.zsmartsystems.zigbee) use code from [zigbee4java](https://github.com/tlaukkan/zigbee4java) which in turn is derived from [ZB4O](http://zb4osgi.aaloa.org/) projects which are licensed under the [Apache-2 license](https://www.apache.org/licenses/LICENSE-2.0).
 
@@ -131,6 +131,6 @@ Some documentation used to implement dongle drivers is copywrite to the respecti
 
  [@Mr-Markus](https://github.com/Mr-Markus) (ZigBeeNet, CC2531)
  
- [@nicolaiw](https://github.com/nicolaiw) (ZigBeeNet, CC2531)
+ [@nicolaiw](https://github.com/nicolaiw) (ZigBeeNet)
  
  [@andreasfedermann](https://github.com/andreasfedermann) (XBee)
