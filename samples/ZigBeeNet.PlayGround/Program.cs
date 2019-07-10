@@ -302,28 +302,32 @@ namespace ZigBeeNet.PlayGround
                                     }
                                     else if (cmd == "read")
                                     {
-                                        var result = await ((ZclElectricalMeasurementCluster)endpoint.GetInputCluster(ZclElectricalMeasurementCluster.CLUSTER_ID)).Read(ZclElectricalMeasurementCluster.ATTR_MEASUREMENTTYPE);
-
-                                        if (result.IsSuccess())
+                                        var cluster = endpoint.GetInputCluster(ZclBasicCluster.CLUSTER_ID);
+                                        if (cluster != null)
                                         {
-                                            ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
-                                            if (response.Records.Count == 0)
-                                            {
-                                                Console.WriteLine("No records returned");
-                                                continue;
-                                            }
+                                            var result = await ((ZclBasicCluster)cluster).GetManufacturerNameAsync();
 
-                                            ZclStatus statusCode = response.Records[0].Status;
-                                            if (statusCode == ZclStatus.SUCCESS)
+                                            if (result.IsSuccess())
                                             {
-                                                Console.WriteLine("Cluster " + response + ", Attribute "
-                                                        + response.Records[0].AttributeIdentifier + ", type "
-                                                        + response.Records[0].AttributeDataType + ", value: "
-                                                        + response.Records[0].AttributeValue);
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine("Attribute value read error: " + statusCode);
+                                                ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
+                                                if (response.Records.Count == 0)
+                                                {
+                                                    Console.WriteLine("No records returned");
+                                                    continue;
+                                                }
+
+                                                ZclStatus statusCode = response.Records[0].Status;
+                                                if (statusCode == ZclStatus.SUCCESS)
+                                                {
+                                                    Console.WriteLine("Cluster " + response + ", Attribute "
+                                                            + response.Records[0].AttributeIdentifier + ", type "
+                                                            + response.Records[0].AttributeDataType + ", value: "
+                                                            + response.Records[0].AttributeValue);
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("Attribute value read error: " + statusCode);
+                                                }
                                             }
                                         }
                                     }
@@ -365,7 +369,7 @@ namespace ZigBeeNet.PlayGround
             }
 
         }
-}
+    }
 
     public class ConsoleCommandListener : IZigBeeCommandListener
     {
