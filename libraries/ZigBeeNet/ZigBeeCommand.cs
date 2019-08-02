@@ -11,11 +11,11 @@ namespace ZigBeeNet
 {
     public class ZigBeeCommand
     {
-        internal IZigBeeAddress SourceAddress { get; set; }
+        public IZigBeeAddress SourceAddress { get; set; }
 
-        internal IZigBeeAddress DestinationAddress { get; set; }
+        public IZigBeeAddress DestinationAddress { get; set; }
 
-        internal ushort ClusterId { get; set; }
+        public ushort ClusterId { get; set; }
 
         internal byte? TransactionId { get; set; }
 
