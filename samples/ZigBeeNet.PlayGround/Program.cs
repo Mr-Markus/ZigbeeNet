@@ -144,6 +144,23 @@ namespace ZigBeeNet.PlayGround
                     {
                         coord.PermitJoin(false);
                     }
+                    else if (cmd == "add")
+                    {
+                        var tmp = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("Destination Address: ");
+                        Console.ForegroundColor = tmp;
+                        string nwkAddr = Console.ReadLine();
+
+                        if (ushort.TryParse(nwkAddr, out ushort addr))
+                        {
+                            Console.Write("IeeeAddress: ");
+                            Console.ForegroundColor = tmp;
+                            string ieeeAddr = Console.ReadLine();
+
+                            networkManager.AddNode(new ZigBeeNode() { NetworkAddress = addr, IeeeAddress = new IeeeAddress(ieeeAddr) });
+                        }
+                    }
                     else if (!string.IsNullOrEmpty(cmd))
                     {
                         var tmp = Console.ForegroundColor;
