@@ -680,12 +680,12 @@ namespace ZigBeeNet.App.Discovery
                 tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
             }
 
-            if (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN)
+            if (Node.NodeDescriptor == null || Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN)
             {
                 tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
             }
 
-            if (Node.PowerDescriptor.CurrentPowerMode == PowerDescriptor.CurrentPowerModeType.UNKNOWN)
+            if (Node.PowerDescriptor == null || Node.PowerDescriptor.CurrentPowerMode == PowerDescriptor.CurrentPowerModeType.UNKNOWN)
             {
                 tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
             }

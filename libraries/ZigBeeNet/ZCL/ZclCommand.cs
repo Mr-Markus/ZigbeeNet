@@ -13,7 +13,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// The command ID
         /// </summary>
-        internal byte CommandId { get; set; }
+        public byte CommandId { get; set; }
 
         /// <summary>
         /// The command direction for this command.
