@@ -287,6 +287,7 @@ namespace ZigBeeNet.App.Discovery
                         NetworkAddressResponse nwkAddressResponse = response.GetResponse<NetworkAddressResponse>();
                         if (nwkAddressResponse != null && nwkAddressResponse.Status == ZdoStatus.SUCCESS)
                         {
+                            AddNode(nwkAddressResponse.IeeeAddrRemoteDev, nwkAddressResponse.NwkAddrRemoteDev);
                             StartNodeDiscovery(nwkAddressResponse.NwkAddrRemoteDev);
                             break;
                         }
