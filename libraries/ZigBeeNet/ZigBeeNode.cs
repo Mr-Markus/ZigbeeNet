@@ -592,7 +592,18 @@ namespace ZigBeeNet
                 }
             }
 
-            // TODO: How to deal with endpoints
+            // Endpoints are only copied over if they don't exist in the node
+            // The assumption here is that endpoints are only set once, and not changed.
+            // This should be valid as they are set through the SimpleDescriptor.
+            foreach (var endpoint in node.Endpoints)
+            {
+                if (Endpoints.ContainsKey(endpoint.Key))
+                {
+                    continue;
+                }
+                updated = true;
+                Endpoints[endpoint.Key] = endpoint.Value;
+            }
 
             return updated;
         }
