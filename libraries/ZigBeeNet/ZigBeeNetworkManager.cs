@@ -474,7 +474,7 @@ namespace ZigBeeNet
         {
             lock (_networkStateSync)
             {
-                if(NetworkState == ZigBeeTransportState.UNINITIALISED)
+                if (NetworkState == ZigBeeTransportState.UNINITIALISED)
                 {
                     return ZigBeeStatus.INVALID_STATE;
                 }
@@ -1337,11 +1337,57 @@ namespace ZigBeeNet
         }
 
         /// <summary>
+        ///
+        /// Adds or updates a <see cref="ZigBeeNode"> to the network.
+        /// 
+        /// If the node is already known on the network (as uniquely identified by the {@link IeeeAddress} then registered
+        /// <see cref="ZigBeeNetworkNodeListener"> listeners will receive the
+        /// <see cref="ZigBeeNetworkNodeListener.nodeUpdated(ZigBeeNode)"> notification, otherwise the
+        /// <see cref="ZigBeeNetworkNodeListener.nodeAdded(ZigBeeNode)"> notification will be received.
+        ///
+        /// <param name = "node" > the < see cref="ZigBeeNode"/> to add or update</param>
+        /// </summary>
+        public void UpdateNode(ZigBeeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            Log.Debug("{}: Updating node NWK={}", node.IeeeAddress, node.NetworkAddress);
+
+            lock (_networkNodes)
+            {
+                // Don't add if the node is already known
+                // We especially don't want to notify listeners
+                if (_networkNodes.ContainsKey(node.IeeeAddress))
+                {
+                    RefreshNode(node);
+                    return;
+                }
+                _networkNodes[node.IeeeAddress] = node;
+            }
+
+            lock (_networkStateSync)
+            {
+                if (NetworkState != ZigBeeTransportState.ONLINE)
+                {
+                    return;
+                }
+            }
+
+            foreach (var listener in _nodeListeners)
+            {
+                listener.NodeAdded(node);
+            }
+        }
+
+        /// <summary>
         /// Update a <see cref="ZigBeeNode"/> within the network
         ///
         /// <param name="node">the <see cref="ZigBeeNode"/> to update</param>
         /// </summary>
-        public void UpdateNode(ZigBeeNode node)
+        public void RefreshNode(ZigBeeNode node)
         {
             if (node == null)
             {
