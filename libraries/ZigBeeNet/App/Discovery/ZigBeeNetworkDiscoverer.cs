@@ -202,7 +202,7 @@ namespace ZigBeeNet.App.Discovery
                     {
                         // Request basic response, start index for associated list is 0
                         IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
-                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
+                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
                         ieeeAddressRequest.RequestType = 0;
                         ieeeAddressRequest.StartIndex = 0;
                         ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
@@ -343,7 +343,7 @@ namespace ZigBeeNet.App.Discovery
                 {
                     Log.Debug("{NetworkAddress}: NWK Discovery starting node discovery", nodeNetworkAddress);
                     int retries = 0;
-                    bool success;
+                    bool success = true;
 
                     do
                     {
@@ -352,34 +352,26 @@ namespace ZigBeeNet.App.Discovery
                             break;
                         }
 
-                        success = await GetIeeeAddress(nodeNetworkAddress);
+
+                        if (!success)
+                        {
+                            // We failed with the last request. Wait a bit then retry.
+                            await Task.Delay(_retryPeriod);
+                        }
+
+                        // If we don't know the node yet, then try to find the IEEE address
+                        // before requesting the associated nodes.
+                        if (_networkManager.GetNode(nodeNetworkAddress) == null)
+                        {
+                            success = await GetIeeeAddress(nodeNetworkAddress);
+                            continue;
+                        }
+
+                        success = await GetAssociatedNodes(nodeNetworkAddress);
 
                         if (success)
                         {
                             break;
-                        }
-
-                        try
-                        {
-                            // We failed with the last request. Wait a bit then retry
-                            await Task.Delay(_retryPeriod);
-                        }
-                        catch (Exception)
-                        {
-                            // If we don't know the node yet, then try to find the IEEE address
-                            // before requesting the associated nodes.
-                            if (_networkManager.GetNode(nodeNetworkAddress) == null)
-                            {
-                                success = await GetIeeeAddress(nodeNetworkAddress);
-                                continue;
-                            }
-
-                            success = await GetAssociatedNodes(nodeNetworkAddress);
-
-                            if (success)
-                            {
-                                break;
-                            }
                         }
 
                     } while (retries++ < _retryCount);
