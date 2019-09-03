@@ -1,4 +1,4 @@
-<img src="https://github.com/zigbeenet/ZigbeeNet/blob/master/icon.png" width="150px" />
+<img src="https://github.com/Mr-Markus/ZigbeeNet/blob/master/icon.png" width="150px" />
 
 # ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/o2x3lg7eo46jl2j5/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet-mlw5f/branch/master) [![NuGet Status](https://img.shields.io/nuget/v/ZigBeeNet.svg?style=flat)](https://www.nuget.org/packages/ZigBeeNet) [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
 
@@ -12,12 +12,12 @@ With Zigbee 3.0 you can also build your own Smart Home solution and control Zigb
 
 For a detailed description about how to use ZigBeeNet see our [wiki page](https://github.com/Mr-Markus/ZigbeeNet/wiki):
 
-- [Getting Started](https://github.com/zigbeenet/ZigbeeNet/wiki/Getting-started)
-- [Get node and endpoint address](https://github.com/zigbeenet/ZigbeeNet/wiki/Get-node-and-endpoint-address)
-- [Read attributes](https://github.com/zigbeenet/ZigbeeNet/wiki/Read-attributes)
-- [How to control devices](https://github.com/zigbeenet/ZigbeeNet/wiki/How-to-control-devices)
+- [Getting Started](https://github.com/Mr-Markus/ZigbeeNet/wiki/Getting-started)
+- [Get node and endpoint address](https://github.com/Mr-Markus/ZigbeeNet/wiki/Get-node-and-endpoint-address)
+- [Read attributes](https://github.com/Mr-Markus/ZigbeeNet/wiki/Read-attributes)
+- [How to control devices](https://github.com/Mr-Markus/ZigbeeNet/wiki/How-to-control-devices)
 
-You can also take a look at the [Playground Demo project](https://github.com/zigbeenet/ZigbeeNet/blob/develop/samples/ZigBeeNet.PlayGround/Program.cs)
+You can also take a look at the [Playground Demo project](https://github.com/Mr-Markus/ZigbeeNet/blob/develop/samples/ZigBeeNet.PlayGround/Program.cs)
 
 If you need further information we will help you whenever you need it. Just open an new issue for it.
 
@@ -97,8 +97,8 @@ No. Sorry. But now that I have your attention .. we need your help! Since it is 
 
 See also:
 
-[Related Issue](https://github.com/zigbeenet/ZigbeeNet/issues/47)  
-[Wiki](https://github.com/zigbeenet/ZigbeeNet/wiki/Supported-devices)
+[Related Issue](https://github.com/Mr-Markus/ZigbeeNet/issues/47)  
+[Wiki](https://github.com/zigbeenet/Mr-Markus/wiki/Supported-devices)
 
 Many thanks!
 
