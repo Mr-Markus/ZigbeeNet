@@ -154,19 +154,6 @@ namespace ZigBeeNet.App.Discovery
 
         public void CommandReceived(ZigBeeCommand command)
         {
-            // ZCL command received from remote node. Perform discovery if it is not yet known.
-            if (command is ZclCommand zclCommand)
-            {
-                if (_networkManager.GetNode(zclCommand.SourceAddress.Address) == null)
-                {
-                    // TODO: Protect against group address?
-                    ZigBeeEndpointAddress address = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
-                    StartNodeDiscovery(address.Address);
-                }
-
-                return;
-            }
-
             // Node has been announced.
             if (command is DeviceAnnounce)
             {
@@ -484,6 +471,7 @@ namespace ZigBeeNet.App.Discovery
                 {
                     Log.Debug("{IeeeAddress}: Network address updated to {NetworkAddress}", ieeeAddress, networkAddress);
                 }
+                node.SetNodeState(ZigBeeNodeState.ONLINE);
                 node.NetworkAddress = networkAddress;
                 _networkManager.UpdateNode(node);
                 return;

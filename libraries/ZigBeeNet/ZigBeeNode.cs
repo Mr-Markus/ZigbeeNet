@@ -22,6 +22,17 @@ namespace ZigBeeNet
     public class ZigBeeNode : IZigBeeCommandListener
     {
         /// <summary>
+        /// Gets the current state for the node
+        /// </summary>
+        public ZigBeeNodeState NodeState
+        {
+            get
+            {
+                return _nodeState;
+            }
+        }
+
+        /// <summary>
         /// The <see cref="Logger">.
         /// </summary>
         //private Logger logger = LoggerFactory.getLogger(ZigBeeNode.class);
@@ -83,6 +94,8 @@ namespace ZigBeeNet
         /// Neighbors
         /// </summary>
         private ZigBeeNodeServiceDiscoverer _serviceDiscoverer;
+
+        private ZigBeeNodeState _nodeState = ZigBeeNodeState.UNKNOWN;
 
         /// <summary>
         /// The endpoint listeners of the ZigBee network. Registered listeners will be
@@ -443,65 +456,11 @@ namespace ZigBeeNet
             ZclCommand zclCommand = (ZclCommand)command;
             ZigBeeEndpointAddress endpointAddress = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
 
-            if (endpointAddress.Endpoint == BROADCAST_ENDPOINT)
-            {
-                foreach (ZigBeeEndpoint endpoint in Endpoints.Values)
-                {
-                    endpoint.CommandReceived(zclCommand);
-                }
-            }
-            else if (Endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
+            if (Endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
             {
                 endpoint.CommandReceived(zclCommand);
             }
         }
-
-        /// <summary>
-        /// Starts service discovery for the node.
-        /// </summary>
-        //public void StartDiscovery()
-        //{
-        //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
-
-        //    // Always request the network address - in case it's changed
-        //    tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
-
-        //    if (NodeDescriptor.LogicalNodeType == LogicalType.UNKNOWN)
-        //    {
-        //        tasks.Add(NodeDiscoveryTask.NODE_DESCRIPTOR);
-        //    }
-
-        //    if (PowerDescriptor.CurrentPowerMode == CurrentPowerModeType.UNKNOWN)
-        //    {
-        //        tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
-        //    }
-
-        //    if (Endpoints.Count == 0 && NetworkAddress != 0)
-        //    {
-        //        tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
-        //    }
-
-        //    tasks.Add(NodeDiscoveryTask.NEIGHBORS);
-
-        //    _serviceDiscoverer.StartDiscovery(tasks);
-        //}
-
-        /// <summary>
-        /// Starts service discovery for the node in order to update the mesh
-        /// </summary>
-        //public void UpdateMesh()
-        //{
-        //    List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
-
-        //    tasks.Add(NodeDiscoveryTask.NEIGHBORS);
-
-        //    if (NodeDescriptor.LogicalNodeType != LogicalType.END_DEVICE)
-        //    {
-        //        tasks.Add(NodeDiscoveryTask.ROUTES);
-        //    }
-
-        //    _serviceDiscoverer.StartDiscovery(tasks);
-        //}
 
         /// <summary>
         /// Checks if basic device discovery is complete.
@@ -670,10 +629,22 @@ namespace ZigBeeNet
         {
             if (NodeDescriptor == null)
             {
-                return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=0x" + NetworkAddress.ToString("X4") + "]";
+                return "ZigBeeNode [state=" + NodeState + ", IEEE=" + IeeeAddress + ", NWK=0x" + NetworkAddress.ToString("X4") + "]";
             }
 
             return "ZigBeeNode [IEEE=" + IeeeAddress + ", NWK=0x" + NetworkAddress.ToString("X4") + ", Type=" + NodeDescriptor.LogicalNodeType + "]";
+        }
+
+        public bool SetNodeState(ZigBeeNodeState state)
+        {
+            if (_nodeState.Equals(state))
+            {
+                return false;
+            }
+            Log.Debug("{IeeeAddress}: Node state updated from {oldState} to {newState}", IeeeAddress, _nodeState, state);
+
+            _nodeState = state;
+            return true;
         }
     }
 }
