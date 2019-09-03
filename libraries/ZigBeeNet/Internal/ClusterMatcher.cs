@@ -41,6 +41,12 @@ namespace ZigBeeNet.Internal
                     return;
                 }
 
+                if (matchRequest.NwkAddrOfInterest != _networkManager.LocalNwkAddress
+                    && !ZigBeeBroadcastDestination.IsBroadcast(matchRequest.NwkAddrOfInterest))
+                {
+                    return;
+                }
+
                 // We want to match any of our local servers (ie our input clusters) with any
                 // requested clusters in the requests cluster list
                 if (matchRequest.InClusterList.Intersect(_clusters).Count() == 0
@@ -57,7 +63,7 @@ namespace ZigBeeNet.Internal
                 matchResponse.MatchList = matchList;
 
                 matchResponse.DestinationAddress = command.SourceAddress;
-                matchResponse.NwkAddrOfInterest = matchRequest.NwkAddrOfInterest;
+                matchResponse.NwkAddrOfInterest = _networkManager.LocalNwkAddress;
                 Log.Debug("{ExtPanId}: ClusterMatcher sending match {Response}", _networkManager.ZigBeeExtendedPanId, matchResponse);
                 _networkManager.SendCommand(matchResponse);
             }
