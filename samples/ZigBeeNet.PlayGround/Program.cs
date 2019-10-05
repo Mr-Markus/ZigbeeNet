@@ -37,11 +37,16 @@ namespace ZigBeeNet.PlayGround
 
             bool showHelp = false;
             ZigBeeDongle zigBeeDongle = ZigBeeDongle.TiCc2531;
+            string port = "";
+            int baudrate = 115200;
 
             OptionSet options = new OptionSet
             {
                 { "h|help", "show this message and exit", h => showHelp = h != null },
-                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee", (ZigBeeDongle zbd) => zigBeeDongle = zbd }
+                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee", (ZigBeeDongle zbd) => zigBeeDongle = zbd },
+                { "p|port=", "the COM port to use", p =>  port = p},
+                { "b|baud=", $"the port baud rate to use. default is {baudrate}", b => int.TryParse(b, out baudrate)},
+
             };
 
             try
@@ -52,12 +57,19 @@ namespace ZigBeeNet.PlayGround
                     Console.WriteLine($"Error: Unknown option: {extraArg}");
                     showHelp = true;
                 }
+                if(showHelp)
+                {
+                    ShowHelp(options);
+                    return;
+                }
 
-                Console.Write("Enter COM Port: ");
+                if (string.IsNullOrEmpty(port))
+                {
+                    Console.Write("Enter COM Port: ");
+                    port = Console.ReadLine();
+                }
 
-                string port = Console.ReadLine();
-
-                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort(port);
+                ZigBeeSerialPort zigbeePort = new ZigBeeSerialPort(port, baudrate);
 
                 IZigBeeTransportTransmit dongle;
                 switch (zigBeeDongle)
@@ -371,20 +383,19 @@ namespace ZigBeeNet.PlayGround
             catch (OptionException e)
             {
                 Console.WriteLine(e.Message);
-                showHelp = true;
+                ShowHelp(options);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
 
-            if (showHelp)
-            {
-                Console.WriteLine("Options:");
-                options.WriteOptionDescriptions(Console.Out);
-                return;
-            }
+        }
 
+        static void ShowHelp(OptionSet options)
+        {
+            Console.WriteLine("Options:");
+            options.WriteOptionDescriptions(Console.Out);
         }
     }
 
