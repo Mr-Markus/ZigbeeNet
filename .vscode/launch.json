@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/samples/ZigBeeNet.PlayGround/bin/Debug/netcoreapp2.2/ZigBeeNet.PlayGround.dll",
+      "program": "${workspaceFolder}/samples/ZigBeeNet.PlayGround/bin/Debug/netcoreapp3.0/ZigBeeNet.PlayGround.dll",
       "args": [],
       "cwd": "${workspaceFolder}/samples/ZigBeeNet.PlayGround",
       "console": "integratedTerminal",
