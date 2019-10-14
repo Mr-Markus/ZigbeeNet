@@ -4,6 +4,8 @@
 
 ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard.
 
+It is fully implemented in Netstandard 2.0 and NET Core 3.0 so that it runs on multiple platform
+
 ## Smart Home
 
 With Zigbee 3.0 you can also build your own Smart Home solution and control Zigbee devices from different manufactures like Philips with Philips Hue and IKEA with Tradfri at the same time in the same network. So you are very flexible and the components are very cheap.
