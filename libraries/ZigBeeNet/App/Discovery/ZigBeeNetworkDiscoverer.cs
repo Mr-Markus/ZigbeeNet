@@ -154,19 +154,6 @@ namespace ZigBeeNet.App.Discovery
 
         public void CommandReceived(ZigBeeCommand command)
         {
-            // ZCL command received from remote node. Perform discovery if it is not yet known.
-            if (command is ZclCommand zclCommand)
-            {
-                if (_networkManager.GetNode(zclCommand.SourceAddress.Address) == null)
-                {
-                    // TODO: Protect against group address?
-                    ZigBeeEndpointAddress address = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
-                    StartNodeDiscovery(address.Address);
-                }
-
-                return;
-            }
-
             // Node has been announced.
             if (command is DeviceAnnounce)
             {
@@ -202,7 +189,7 @@ namespace ZigBeeNet.App.Discovery
                     {
                         // Request basic response, start index for associated list is 0
                         IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
-                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(networkAddress);
+                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
                         ieeeAddressRequest.RequestType = 0;
                         ieeeAddressRequest.StartIndex = 0;
                         ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
@@ -287,6 +274,7 @@ namespace ZigBeeNet.App.Discovery
                         NetworkAddressResponse nwkAddressResponse = response.GetResponse<NetworkAddressResponse>();
                         if (nwkAddressResponse != null && nwkAddressResponse.Status == ZdoStatus.SUCCESS)
                         {
+                            AddNode(nwkAddressResponse.IeeeAddrRemoteDev, nwkAddressResponse.NwkAddrRemoteDev);
                             StartNodeDiscovery(nwkAddressResponse.NwkAddrRemoteDev);
                             break;
                         }
@@ -342,7 +330,7 @@ namespace ZigBeeNet.App.Discovery
                 {
                     Log.Debug("{NetworkAddress}: NWK Discovery starting node discovery", nodeNetworkAddress);
                     int retries = 0;
-                    bool success;
+                    bool success = true;
 
                     do
                     {
@@ -351,34 +339,26 @@ namespace ZigBeeNet.App.Discovery
                             break;
                         }
 
-                        success = await GetIeeeAddress(nodeNetworkAddress);
+
+                        if (!success)
+                        {
+                            // We failed with the last request. Wait a bit then retry.
+                            await Task.Delay(_retryPeriod);
+                        }
+
+                        // If we don't know the node yet, then try to find the IEEE address
+                        // before requesting the associated nodes.
+                        if (_networkManager.GetNode(nodeNetworkAddress) == null)
+                        {
+                            success = await GetIeeeAddress(nodeNetworkAddress);
+                            continue;
+                        }
+
+                        success = await GetAssociatedNodes(nodeNetworkAddress);
 
                         if (success)
                         {
                             break;
-                        }
-
-                        try
-                        {
-                            // We failed with the last request. Wait a bit then retry
-                            await Task.Delay(_retryPeriod);
-                        }
-                        catch (Exception)
-                        {
-                            // If we don't know the node yet, then try to find the IEEE address
-                            // before requesting the associated nodes.
-                            if (_networkManager.GetNode(nodeNetworkAddress) == null)
-                            {
-                                success = await GetIeeeAddress(nodeNetworkAddress);
-                                continue;
-                            }
-
-                            success = await GetAssociatedNodes(nodeNetworkAddress);
-
-                            if (success)
-                            {
-                                break;
-                            }
                         }
 
                     } while (retries++ < _retryCount);
@@ -491,6 +471,7 @@ namespace ZigBeeNet.App.Discovery
                 {
                     Log.Debug("{IeeeAddress}: Network address updated to {NetworkAddress}", ieeeAddress, networkAddress);
                 }
+                node.SetNodeState(ZigBeeNodeState.ONLINE);
                 node.NetworkAddress = networkAddress;
                 _networkManager.UpdateNode(node);
                 return;

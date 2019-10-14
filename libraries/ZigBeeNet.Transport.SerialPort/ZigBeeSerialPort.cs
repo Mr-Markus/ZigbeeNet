@@ -30,7 +30,6 @@ namespace ZigBeeNet.Tranport.SerialPort
             PortName = portName;
             Baudrate = baudrate;
 
-            _serialPort = new System.IO.Ports.SerialPort(portName, baudrate);
             _cancellationToken = new CancellationTokenSource();
         }
 
@@ -56,7 +55,7 @@ namespace ZigBeeNet.Tranport.SerialPort
         {
             try
             {
-                return Open(115200);
+                return Open(Baudrate);
             }
             catch (Exception e)
             {

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>ZigBeeNet Contributors</Authors>
     <Company>ZigBeeNet</Company>
     <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>

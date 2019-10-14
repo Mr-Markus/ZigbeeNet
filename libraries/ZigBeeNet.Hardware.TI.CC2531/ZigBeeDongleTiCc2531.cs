@@ -108,7 +108,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             apsFrame.SourceEndpoint = msg.SrcEndpoint;
             apsFrame.Profile = GetEndpointProfile(msg.DstEndpoint);
             apsFrame.SourceAddress = msg.SrcAddr.Value;
-            apsFrame.ApsCounter = msg.TransSeqNumber;
             apsFrame.Payload = msg.Data;
 
             _zigBeeNetworkReceive.ReceiveCommand(apsFrame);

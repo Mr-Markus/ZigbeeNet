@@ -474,7 +474,7 @@ namespace ZigBeeNet
         {
             lock (_networkStateSync)
             {
-                if(NetworkState == ZigBeeTransportState.UNINITIALISED)
+                if (NetworkState == ZigBeeTransportState.UNINITIALISED)
                 {
                     return ZigBeeStatus.INVALID_STATE;
                 }
@@ -804,20 +804,29 @@ namespace ZigBeeNet
 
             // This method should only be called when the transport layer has authoritative information about
             // a devices status. Therefore, we should update the network manager view of a device as appropriate.
+            // A coordinator/router may ask a device to leave the network and rejoin. In this case, we do not want
+            // to remove the node - otherwise we would have to perform the rediscovery of services etc.
+            // Instead, we mark the node status as OFFLINE, and leave it to the application to remove the node from
+            // the network manager.
             switch (deviceStatus)
             {
                 // Device has gone - lets remove it
                 case ZigBeeNodeStatus.DEVICE_LEFT:
                     // Find the node
-                    ZigBeeNode node = GetNode(networkAddress);
+                    ZigBeeNode node = GetNode(ieeeAddress);
+                    if (node == null)
+                    {
+                        node = GetNode(networkAddress);
+                    }
+
                     if (node == null)
                     {
                         Log.Debug("{NetworkAddress}: Node has left, but wasn't found in the network.", networkAddress);
                     }
                     else
                     {
-                        // Remove the node from the network
-                        RemoveNode(node);
+                        node.SetNodeState(ZigBeeNodeState.OFFLINE);
+                        UpdateNode(node);
                     }
                     break;
 
@@ -1211,15 +1220,8 @@ namespace ZigBeeNet
         {
             lock (_networkNodes)
             {
-                foreach (ZigBeeNode node in _networkNodes.Values)
-                {
-                    if (node.NetworkAddress.Equals(networkAddress))
-                    {
-                        return node;
-                    }
-                }
+                return _networkNodes.Values.FirstOrDefault(node => node.NetworkAddress == networkAddress);
             }
-            return null;
         }
 
         /// <summary>
@@ -1337,11 +1339,57 @@ namespace ZigBeeNet
         }
 
         /// <summary>
+        ///
+        /// Adds or updates a <see cref="ZigBeeNode"> to the network.
+        /// 
+        /// If the node is already known on the network (as uniquely identified by the <see cref="IeeeAddress"> then registered
+        /// <see cref="ZigBeeNetworkNodeListener"> listeners will receive the
+        /// <see cref="ZigBeeNetworkNodeListener.nodeUpdated(ZigBeeNode)"> notification, otherwise the
+        /// <see cref="ZigBeeNetworkNodeListener.nodeAdded(ZigBeeNode)"> notification will be received.
+        ///
+        /// <param name = "node" > the < see cref="ZigBeeNode"/> to add or update</param>
+        /// </summary>
+        public void UpdateNode(ZigBeeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            Log.Debug("{}: Updating node NWK={}", node.IeeeAddress, node.NetworkAddress);
+
+            lock (_networkNodes)
+            {
+                // Don't add if the node is already known
+                // We especially don't want to notify listeners
+                if (_networkNodes.ContainsKey(node.IeeeAddress))
+                {
+                    RefreshNode(node);
+                    return;
+                }
+                _networkNodes[node.IeeeAddress] = node;
+            }
+
+            lock (_networkStateSync)
+            {
+                if (NetworkState != ZigBeeTransportState.ONLINE)
+                {
+                    return;
+                }
+            }
+
+            foreach (var listener in _nodeListeners)
+            {
+                listener.NodeAdded(node);
+            }
+        }
+
+        /// <summary>
         /// Update a <see cref="ZigBeeNode"/> within the network
         ///
         /// <param name="node">the <see cref="ZigBeeNode"/> to update</param>
         /// </summary>
-        public void UpdateNode(ZigBeeNode node)
+        public void RefreshNode(ZigBeeNode node)
         {
             if (node == null)
             {

@@ -17,7 +17,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Frame
             apsFrame.SourceAddress = (ushort)(packet.Packet[4] | (packet.Packet[5] << 8));
             apsFrame.SourceEndpoint = 0;
             apsFrame.Profile = 0;
-            apsFrame.ApsCounter = packet.Packet[10];
 
             apsFrame.Payload = packet.Packet.Skip(12).ToArray();
             apsFrame.Payload = apsFrame.Payload.Take(apsFrame.Payload.Count() - 1).ToArray();

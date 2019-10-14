@@ -4,9 +4,21 @@ using System.Text;
 
 namespace ZigBeeNet
 {
-    public enum ZigbeeNodeState : byte
+    public enum ZigBeeNodeState : byte
     {
-        Disabled = 0x00,
-        Enabled = 0x01
+        ///
+        /// Node state is not currently known.
+        ///
+        UNKNOWN,
+
+        ///
+        ///The node is online and believed to be connected to the network.
+        ///
+        ONLINE,
+
+        ///
+        /// The node is offline - it has left the network.
+        ///
+        OFFLINE
     }
 }
