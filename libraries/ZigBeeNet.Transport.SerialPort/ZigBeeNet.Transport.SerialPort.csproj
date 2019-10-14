@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>ZigBeeNet Contributors</Authors>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Company>ZigBeeNet</Company>
     <Description>This package contains a SerialPort implementation for connecting, reading and sending packages with the ZigBee Hardware dongles</Description>
     <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>
