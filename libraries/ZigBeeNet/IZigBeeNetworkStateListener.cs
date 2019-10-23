@@ -7,6 +7,6 @@ namespace ZigBeeNet
 {
     public interface IZigBeeNetworkStateListener
     {
-        void NetworkStateUpdated(ZigBeeTransportState state);
+        void NetworkStateUpdated(ZigBeeNetworkState state);
     }
 }

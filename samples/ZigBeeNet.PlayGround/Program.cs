@@ -94,7 +94,7 @@ namespace ZigBeeNet.PlayGround
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
                 JsonNetworkSerializer deviceSerializer = new JsonNetworkSerializer("devices.json");
-                //networkManager.NetworkStateSerializer = deviceSerializer;
+                networkManager.NetworkStateSerializer = deviceSerializer;
 
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
                 discoveryExtension.SetUpdatePeriod(60);
@@ -170,7 +170,7 @@ namespace ZigBeeNet.PlayGround
                             Console.ForegroundColor = tmp;
                             string ieeeAddr = Console.ReadLine();
 
-                            networkManager.AddNode(new ZigBeeNode() { NetworkAddress = addr, IeeeAddress = new IeeeAddress(ieeeAddr) });
+                            networkManager.UpdateNode(new ZigBeeNode() { NetworkAddress = addr, IeeeAddress = new IeeeAddress(ieeeAddr) });
                         }
                     }
                     else if (!string.IsNullOrEmpty(cmd))
@@ -456,7 +456,7 @@ namespace ZigBeeNet.PlayGround
                 ZigBeeNode node = new ZigBeeNode(networkManager, new IeeeAddress(nodeDao.IeeeAddress));
                 node.SetDao(nodeDao);
 
-                networkManager.AddNode(node);
+                networkManager.UpdateNode(node);
             }
         }
 

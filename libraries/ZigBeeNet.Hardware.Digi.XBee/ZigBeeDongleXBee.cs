@@ -235,7 +235,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 return;
             }
             _frameHandler.SetClosing();
-            _zigBeeTransportReceive.SetNetworkState(ZigBeeTransportState.OFFLINE);
+            _zigBeeTransportReceive.SetTransportState(ZigBeeTransportState.OFFLINE);
 
             _serialPort.Close();
             _frameHandler.Close();
@@ -349,7 +349,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         {
             if (_initialisationComplete)
             {
-                _zigBeeTransportReceive.SetNetworkState(state);
+                _zigBeeTransportReceive.SetTransportState(state);
             }
         }
 

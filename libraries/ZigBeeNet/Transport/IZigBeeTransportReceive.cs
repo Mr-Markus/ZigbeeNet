@@ -41,7 +41,7 @@ namespace ZigBeeNet.Transport
         /// This is a callback from the <see cref="ZigBeeTransportTransmit"> when the state of the transport changes
         /// </summary>
         /// <param name="state"></param>
-        void SetNetworkState(ZigBeeTransportState state);
+        void SetTransportState(ZigBeeTransportState state);
 
         /// <summary>
         /// Announce a node has joined or left the network.
