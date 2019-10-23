@@ -464,24 +464,10 @@ namespace ZigBeeNet.App.Discovery
         /// </summary>
         private void AddNode(IeeeAddress ieeeAddress, ushort networkAddress)
         {
-            ZigBeeNode node = _networkManager.GetNode(ieeeAddress);
-            if (node != null)
-            {
-                if (node.NetworkAddress != networkAddress)
-                {
-                    Log.Debug("{IeeeAddress}: Network address updated to {NetworkAddress}", ieeeAddress, networkAddress);
-                }
-                node.SetNodeState(ZigBeeNodeState.ONLINE);
-                node.NetworkAddress = networkAddress;
-                _networkManager.UpdateNode(node);
-                return;
-            }
-
-            node = new ZigBeeNode(_networkManager, ieeeAddress);
-            node.NetworkAddress = networkAddress;
-
-            // Add the node to the network...
-            _networkManager.AddNode(node);
+            Log.Debug("{IeeeAddress}: NWK Discovery add node {NetworkAddress}", ieeeAddress, networkAddress);
+            ZigBeeNode node = new ZigBeeNode(_networkManager, ieeeAddress, networkAddress);
+            node.SetNodeState(ZigBeeNodeState.ONLINE);
+            _networkManager.UpdateNode(node);
         }
     }
 }

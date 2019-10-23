@@ -26,7 +26,7 @@ namespace ZigBeeNet.App.Discovery
     /// A random exponential backoff is used for retries to reduce congestion. If the device replies that a command is not
     /// supported, then this will not be issued again on subsequent requests.
     /// 
-    /// Once the discovery update is complete the ZigBeeNetworkManager#updateNode() is called to alert
+    /// Once the discovery update is complete the ZigBeeNetworkManager#addNode() is called to alert
     /// users.
     /// </summary>
     public class ZigBeeNodeServiceDiscoverer
@@ -42,9 +42,15 @@ namespace ZigBeeNet.App.Discovery
         public int MaxBackoff { get; set; } = DEFAULT_MAX_BACKOFF;
 
         /// <summary>
-        /// The <see cref="ZigBeeNode"/>.
+        /// The <see cref="ZigBeeNode"/>.This is a reference to the node in the  <see cref="ZigBeeNetworkManager"/>
         /// </summary>
         public ZigBeeNode Node { get; set; }
+
+        /// <summary>
+        /// The <see cref="ZigBeeNode"/> that we are updating. All changes are made here so that we are not changing the data in
+        /// the  <see cref="ZigBeeNetworkManager"/> directly. This ensures that change detection is working correctly.
+        /// </summary>
+        private ZigBeeNode _updatedNode;
 
         /// <summary>
         /// Default maximum number of retries to perform
@@ -147,15 +153,18 @@ namespace ZigBeeNet.App.Discovery
             // complete. When no tasks are left in the queue, the worker thread will exit.
             lock (DiscoveryTasks)
             {
+                Log.Debug("{IeeeAddress}: Node SVC Discovery: starting new tasks {NewTasks}", Node.IeeeAddress, newTasks);
+
                 // Remove any tasks that we know are not supported by this device
-                if ((!_supportsManagementLqi || Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN) && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
+                if ((!_supportsManagementLqi || Node.NodeDescriptor != null && Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN) 
+                    && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
                 {
                     newTasks.Remove(NodeDiscoveryTask.NEIGHBORS);
                 }
 
-                if ((!_supportsManagementRouting ||
-                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN ||
-                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.END_DEVICE)
+                if ((!_supportsManagementRouting || Node.NodeDescriptor != null &&
+                    (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN ||
+                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.END_DEVICE))
                     && newTasks.Contains(NodeDiscoveryTask.ROUTES))
                 {
                     newTasks.Remove(NodeDiscoveryTask.ROUTES);
@@ -164,11 +173,13 @@ namespace ZigBeeNet.App.Discovery
                 // Make sure there are still tasks to perform
                 if (newTasks.Count == 0)
                 {
-                    Log.Debug("{IeeeAddress}: Node SVC Discovery: has no tasks to perform", Node.IeeeAddress);
+                    Log.Debug("{IeeeAddress}: Node SVC Discovery: has no new tasks to perform", Node.IeeeAddress);
                     return;
                 }
 
-                bool startWorker = DiscoveryTasks.Count == 0;
+                // Check the current list of tasks to decide if we need to start the worker
+                // This prevents restarting if we didn't add new tasks, which might overload the system
+                bool startWorker = DiscoveryTasks.Count == 0; //||(_futureTask == null);
 
                 // Add new tasks, avoiding any duplication
                 foreach (NodeDiscoveryTask newTask in newTasks)
@@ -185,6 +196,9 @@ namespace ZigBeeNet.App.Discovery
                 }
                 else
                 {
+                    // Create a new node to store the data from this update.
+                    // We set the network address so that we can detect the change later if needed.
+                    _updatedNode = new ZigBeeNode(NetworkManager, Node.IeeeAddress, Node.NetworkAddress);
                     LastDiscoveryStarted = DateTime.UtcNow;
                 }
             }
@@ -216,7 +230,7 @@ namespace ZigBeeNet.App.Discovery
                 {
                     LastDiscoveryCompleted = DateTime.UtcNow;
                     Log.Debug("{IeeeAddress}: Node SVC Discovery: complete", Node.IeeeAddress);
-                    NetworkManager.UpdateNode(Node);
+                    NetworkManager.UpdateNode(_updatedNode);
                     return;
                 }
 
@@ -339,7 +353,7 @@ namespace ZigBeeNet.App.Discovery
             CommandResult response = await NetworkManager.SendTransaction(networkAddressRequest, networkAddressRequest);
             NetworkAddressResponse networkAddressResponse = response.GetResponse<NetworkAddressResponse>();
 
-            Log.Debug("{NetworkAddress}: Node SVC Discovery: NetworkAddressRequest returned {Response}", Node.NetworkAddress, networkAddressResponse);
+            Log.Debug("{IeeeAddress}: Node SVC Discovery: NetworkAddressRequest returned {Response}", Node.IeeeAddress, networkAddressResponse);
 
             if (networkAddressResponse == null)
             {
@@ -348,8 +362,11 @@ namespace ZigBeeNet.App.Discovery
 
             if (networkAddressResponse.Status == ZdoStatus.SUCCESS)
             {
-                Node.NetworkAddress = networkAddressResponse.NwkAddrRemoteDev;
-
+                if (Node.NetworkAddress != networkAddressResponse.NwkAddrRemoteDev)
+                {
+                    Node.NetworkAddress = networkAddressResponse.NwkAddrRemoteDev;
+                    NetworkManager.UpdateNode(_updatedNode);
+                }
                 return true;
             }
 
@@ -390,7 +407,7 @@ namespace ZigBeeNet.App.Discovery
                 }
             } while (startIndex < totalAssociatedDevices);
 
-            Node.AssociatedDevices = associatedDevices;
+            _updatedNode.AssociatedDevices = associatedDevices;
 
             return true;
         }
@@ -418,7 +435,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (nodeDescriptorResponse.Status == ZdoStatus.SUCCESS)
             {
-                Node.NodeDescriptor = nodeDescriptorResponse.NodeDescriptor;
+                _updatedNode.NodeDescriptor = nodeDescriptorResponse.NodeDescriptor;
 
                 return true;
             }
@@ -449,7 +466,7 @@ namespace ZigBeeNet.App.Discovery
 
             if (powerDescriptorResponse.Status == ZdoStatus.SUCCESS)
             {
-                Node.PowerDescriptor = powerDescriptorResponse.PowerDescriptor;
+                _updatedNode.PowerDescriptor = powerDescriptorResponse.PowerDescriptor;
 
                 return true;
             }
@@ -498,7 +515,7 @@ namespace ZigBeeNet.App.Discovery
             // All endpoints have been received, so add them to the node
             foreach (ZigBeeEndpoint endpoint in endpoints)
             {
-                Node.AddEndpoint(endpoint);
+                _updatedNode.AddEndpoint(endpoint);
             }
 
             return true;
@@ -561,7 +578,7 @@ namespace ZigBeeNet.App.Discovery
 
             Log.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} neighbors]", Node.IeeeAddress, neighbors.Count);
 
-            Node.Neighbors = neighbors;
+            _updatedNode.Neighbors = neighbors;
 
             return true;
         }
@@ -620,7 +637,7 @@ namespace ZigBeeNet.App.Discovery
 
             Log.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} routes]", Node.IeeeAddress, routes.Count);
 
-            Node.Routes = routes;
+            _updatedNode.Routes = routes;
 
             return true;
         }
@@ -711,7 +728,7 @@ namespace ZigBeeNet.App.Discovery
 
             tasks.Add(NodeDiscoveryTask.NEIGHBORS);
 
-            if (Node.NodeDescriptor.LogicalNodeType != NodeDescriptor.LogicalType.END_DEVICE)
+            if (Node.NodeDescriptor != null && Node.NodeDescriptor.LogicalNodeType != NodeDescriptor.LogicalType.END_DEVICE)
             {
                 tasks.Add(NodeDiscoveryTask.ROUTES);
             }

@@ -52,12 +52,12 @@ namespace ZigBeeNet
         /// <summary>
         /// The <see cref="NodeDescriptor"> for the node
         /// </summary>
-        public NodeDescriptor NodeDescriptor { get; set; } = new NodeDescriptor();
+        public NodeDescriptor NodeDescriptor { get; set; }
 
         /// <summary>
         /// The <see cref="PowerDescriptor"> for the node
         /// </summary>
-        public PowerDescriptor PowerDescriptor { get; set; } = new PowerDescriptor();
+        public PowerDescriptor PowerDescriptor { get; set; }
 
         /// <summary>
         /// The time the node information was last updated. This is set from the mesh update class when it the
@@ -121,9 +121,9 @@ namespace ZigBeeNet
         /// <summary>
         /// Constructor
         ///
-        /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"></param>
+        /// <param name="network">the <see cref="IZigBeeNetwork"></param>
         /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node</param>
-        /// @throws <see cref="IllegalArgumentException"> if ieeeAddress is null
+        /// @throws <see cref="ArgumentException"> if ieeeAddress is null
         /// </summary>
         public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress)
         {
@@ -132,6 +132,20 @@ namespace ZigBeeNet
             //this._serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
 
             network.AddCommandListener(this);
+        }
+
+        /// <summary>
+        /// Constructor
+        ///
+        /// <param name="networkr">the <see cref="IZigBeeNetwork"></param>
+        /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node</param>
+        /// <param name="networkAddress">the network address of the node</param>
+        /// @throws <see cref="ArgumentException"> if ieeeAddress is null
+        /// </summary>
+        public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress, ushort networkAddress)
+            : this(network, ieeeAddress)
+        {
+            NetworkAddress = networkAddress;
         }
 
         public void Shutdown()
@@ -260,7 +274,7 @@ namespace ZigBeeNet
         /// {@link LogicalType#COORDINATOR}
         /// {@link LogicalType#ROUTER}
         /// {@link LogicalType#END_DEVICE}
-        /// 
+        /// {@link LogicalType#UNKNOWN}
         ///
         /// <returns>the <see cref="LogicalType"> of the node</returns>
         /// </summary>
@@ -268,6 +282,8 @@ namespace ZigBeeNet
         {
             get
             {
+                if (NodeDescriptor == null)
+                    return LogicalType.UNKNOWN;
                 return NodeDescriptor.LogicalNodeType;
             }
         }
@@ -469,7 +485,7 @@ namespace ZigBeeNet
         /// </summary>
         public bool IsDiscovered()
         {
-            return NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
+            return NodeDescriptor != null && NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
         }
 
         public void UpdateNetworkManager(ZigBeeNetworkManager networkManager)
@@ -488,25 +504,29 @@ namespace ZigBeeNet
         {
             if (!node.IeeeAddress.Equals(IeeeAddress))
             {
+                Log.Debug("{IeeeAddress}: Ieee address inconsistent during update <>{NodeIeeeAddress}", IeeeAddress, node.IeeeAddress);
                 return false;
             }
 
             bool updated = false;
 
-            if (!NetworkAddress.Equals(node.NetworkAddress))
+            if (NetworkAddress != 0 && !NetworkAddress.Equals(node.NetworkAddress))
             {
+                Log.Debug("{IeeeAddress}: Network address updated from {NetworkAddress} to {NodeNetworkAddress}", IeeeAddress, NetworkAddress, node.NetworkAddress);
                 updated = true;
                 NetworkAddress = node.NetworkAddress;
             }
 
-            if (!NodeDescriptor.Equals(node.NodeDescriptor))
+            if (node.NodeDescriptor != null && (NodeDescriptor == null || !NodeDescriptor.Equals(node.NodeDescriptor)))
             {
+                Log.Debug("{IeeeAddress}: Node descriptor updated", IeeeAddress);
                 updated = true;
                 NodeDescriptor = node.NodeDescriptor;
             }
 
-            if (!PowerDescriptor.Equals(node.PowerDescriptor))
+            if (node.PowerDescriptor != null && (PowerDescriptor == null || !PowerDescriptor.Equals(node.PowerDescriptor)))
             {
+                Log.Debug("{IeeeAddress}: Power descriptor updated", IeeeAddress);
                 updated = true;
                 PowerDescriptor = node.PowerDescriptor;
             }
@@ -515,6 +535,7 @@ namespace ZigBeeNet
             {
                 if (!AssociatedDevices.Equals(node.AssociatedDevices))
                 {
+                    Log.Debug("{IeeeAddress}: Associated devices updated", IeeeAddress);
                     updated = true;
                     AssociatedDevices.Clear();
                     AssociatedDevices.AddRange(node.AssociatedDevices);
@@ -525,6 +546,7 @@ namespace ZigBeeNet
             {
                 if (!BindingTable.Equals(node.BindingTable))
                 {
+                    Log.Debug("{IeeeAddress}: Binding table updated", IeeeAddress);
                     updated = true;
                     BindingTable.Clear();
                     BindingTable.AddRange(node.BindingTable);
@@ -535,6 +557,7 @@ namespace ZigBeeNet
             {
                 if (!Neighbors.Equals(node.Neighbors))
                 {
+                    Log.Debug("{IeeeAddress}: Neighbors updated", IeeeAddress);
                     updated = true;
                     Neighbors.Clear();
                     Neighbors.AddRange(node.Neighbors);
@@ -545,6 +568,7 @@ namespace ZigBeeNet
             {
                 if (!Routes.Equals(node.Routes))
                 {
+                    Log.Debug("{IeeeAddress}: Routes updated", IeeeAddress);
                     updated = true;
                     Routes.Clear();
                     Routes.AddRange(node.Routes);
@@ -560,6 +584,7 @@ namespace ZigBeeNet
                 {
                     continue;
                 }
+                Log.Debug("{IeeeAddress}: Endpoint {EndpointId} added", IeeeAddress, endpoint.Key);
                 updated = true;
                 Endpoints[endpoint.Key] = endpoint.Value;
             }
