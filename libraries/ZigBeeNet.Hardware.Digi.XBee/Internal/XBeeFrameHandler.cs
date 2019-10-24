@@ -166,7 +166,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             int? checksum = 0;
             bool escaped = false;
 
-            Log.Information("XBEE: Get Packet");
+            Log.Debug("XBEE: Get Packet");
 
             while (!_closeHandler)
             {
@@ -185,7 +185,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     Log.Debug("XBEE RX buffer overrun - resetting!");
                 }
 
-                Log.Information($"RX XBEE: {{{string.Format("0x{0:X2} {1:C}", val, val)}}}");
+                //Log.Debug($"RX XBEE: {{{string.Format("0x{0:X2} {1:C}", val, val)}}}");
 
                 if (escaped)
                 {
@@ -290,14 +290,14 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             // Are we already processing a command?
             if (_sentCommand != null)
             {
-                Log.Information($"TX XBEE Frame outstanding: {_sentCommand}");
+                Log.Debug($"TX XBEE Frame outstanding: {_sentCommand}");
                 return;
             }
 
             bool isFrameDequeuedSuccsess = _sendQueue.TryDequeue(out IXBeeCommand nextFrame);
             if (isFrameDequeuedSuccsess == false)
             {
-                Log.Information("XBEE TX: Nothing to send");
+                Log.Debug("XBEE TX: Nothing to send");
                 // Nothing to send
                 StopTimer();
                 return;
@@ -329,7 +329,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             Log.Debug($"TX XBEE Data:{builder.ToString()}");
 
             // Start the timeout
-            Log.Information("XBEE Timer: Start");
+            Log.Debug("XBEE Timer: Start");
             _timeoutTimer.Change(_commandTimeout, _commandTimeout);
         }
 
@@ -592,7 +592,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private void StopTimer()
         {
             _timeoutTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            Log.Information("XBEE Timer: Stop");
+            Log.Debug("XBEE Timer: Stop");
         }
 
         #endregion methods

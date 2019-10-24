@@ -140,7 +140,7 @@ namespace ZigBeeNet.ZCL.Field
                     builder.Append(' ');
                 }
                 first = false;
-                builder.Append(string.Format("{0}2X", val & 0xFF));
+                builder.Append(string.Format("{0:X2}", val & 0xFF));
             }
             builder.Append(']');
 
