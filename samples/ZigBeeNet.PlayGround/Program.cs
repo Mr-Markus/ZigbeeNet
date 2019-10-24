@@ -146,8 +146,6 @@ namespace ZigBeeNet.PlayGround
 
                 while (cmd != "exit")
                 {
-                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
-
                     if (cmd == "join")
                     {
                         coord.PermitJoin(true);
@@ -373,6 +371,7 @@ namespace ZigBeeNet.PlayGround
                         }
                     }
 
+                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
                     var currentForeGroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write("cmd> ");

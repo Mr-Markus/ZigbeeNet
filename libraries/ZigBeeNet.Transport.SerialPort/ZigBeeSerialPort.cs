@@ -159,7 +159,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 {
                     _serialPort.Write(value, 0, value.Length);
 
-                    Log.Debug("Write data to serialport: {Data}", BitConverter.ToString(value));
+                    //Log.Debug("Write data to serialport: {Data}", BitConverter.ToString(value));
                 }
                 catch (Exception e)
                 {

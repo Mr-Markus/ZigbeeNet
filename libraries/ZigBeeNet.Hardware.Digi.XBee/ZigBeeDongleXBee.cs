@@ -134,7 +134,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             XBeeGetIeeeAddressLowCommand ieeeLowCommand = new XBeeGetIeeeAddressLowCommand();
             XBeeIeeeAddressLowResponse ieeeLowResponse = (XBeeIeeeAddressLowResponse)_frameHandler.SendRequest(ieeeLowCommand);
 
-            if (ieeeHighResponse == null || ieeeLowCommand == null)
+            if (ieeeHighResponse == null || ieeeLowResponse == null)
             {
                 Log.Error("Unable to get XBee IEEE address");
                 return ZigBeeStatus.BAD_RESPONSE;

@@ -456,7 +456,7 @@ namespace ZigBeeNet
         public override string ToString()
         {
             return "ZigBeeEndpoint [networkAddress=" + GetEndpointAddress().ToString() + ", profileId="
-                    + string.Format("{0}4X", ProfileId) + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion
+                    + string.Format("{0:X4}", ProfileId) + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion
                     + ", inputClusterIds=" + string.Join(",", GetInputClusterIds()) + ", outputClusterIds="
                     + string.Join(",", GetOutputClusterIds())+ "]";
         }
