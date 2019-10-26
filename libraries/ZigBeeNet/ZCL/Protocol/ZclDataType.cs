@@ -12,11 +12,11 @@ namespace ZigBeeNet.ZCL.Protocol
     {
         private static Dictionary<int, ZclDataType> _codeTypeMapping;
                
-        public string Label { get; private set; }
-        public Type DataClass { get; private set; }
-        public int Id { get; private set; }
-        public bool IsAnalog { get; private set; }
-        public DataType DataType { get; private set; }
+        public string Label { get; set; }
+        public Type DataClass { get; set; }
+        public int Id { get; set; }
+        public bool IsAnalog { get; set; }
+        public DataType DataType { get; set; }
 
         public ZclDataType()
         {

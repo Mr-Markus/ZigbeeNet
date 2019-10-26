@@ -22,9 +22,9 @@ namespace ZigBeeNet.ZCL
 
         public void Serialize(object value, ZclDataType dataType)
         {
-            if (value is IZclListItemField fieldValue)
+            if (typeof(IZclListItemField).IsAssignableFrom(dataType.DataClass))
             {
-                List<IZclListItemField> list = (List<IZclListItemField>)value;
+                IEnumerable<IZclListItemField> list = (IEnumerable<IZclListItemField>)value;
 
                 foreach (IZclListItemField item in list)
                 {

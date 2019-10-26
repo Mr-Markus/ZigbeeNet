@@ -89,7 +89,7 @@ namespace ZigBeeNet.ZDO.Command
                 }
             }
 
-            int? outClusterCount = (int?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? outClusterCount = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
 
             if (outClusterCount != null)
             {
