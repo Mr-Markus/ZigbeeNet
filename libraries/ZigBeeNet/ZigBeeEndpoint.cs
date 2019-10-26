@@ -438,6 +438,7 @@ namespace ZigBeeNet
         public void SendTransaction(ZigBeeCommand command)
         {
             command.DestinationAddress = GetEndpointAddress();
+            Node.SendTransaction(command);
         }
 
         /// <summary>
@@ -449,7 +450,7 @@ namespace ZigBeeNet
          /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            //command.DestinationAddress = GetEndpointAddress();
+            command.DestinationAddress = GetEndpointAddress();
             return await Node.SendTransaction(command, responseMatcher);
         }
 

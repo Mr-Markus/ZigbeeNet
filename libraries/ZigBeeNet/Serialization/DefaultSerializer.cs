@@ -43,7 +43,7 @@ namespace ZigBeeNet.Serialization
                 case DataType.UNSIGNED_16_BIT_INTEGER:
                 case DataType.ENUMERATION_16_BIT:
                 case DataType.CLUSTERID:
-                    ushort shortValue = ((ushort)data);
+                    ushort shortValue = Convert.ToUInt16(data);
                     _buffer[_length++] = (byte)(shortValue & 0xFF);
                     _buffer[_length++] = (byte)((shortValue >> 8) & 0xFF);
                     break;
@@ -53,7 +53,7 @@ namespace ZigBeeNet.Serialization
                 case DataType.SIGNED_8_BIT_INTEGER:
                 case DataType.UNSIGNED_8_BIT_INTEGER:
                 case DataType.ENUMERATION_8_BIT:
-                    byte byteValue = (byte)data;
+                    byte byteValue = Convert.ToByte(data);
                     _buffer[_length++] = (byte)(byteValue & 0xFF);
                     break;
                 case DataType.EXTENDED_PANID:
