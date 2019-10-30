@@ -137,12 +137,12 @@ namespace ZigBeeNet.ZCL
                 return false;
             }
 
-            long refreshTime = DateTime.UtcNow.Millisecond - allowedAge;
-            if (refreshTime < 0)
-            {
+            if (allowedAge > TimeSpan.MaxValue.TotalMilliseconds)
                 return true;
-            }
-            return LastReportTime.Millisecond > refreshTime;
+
+            DateTime refreshTime = DateTime.UtcNow.Subtract(TimeSpan.FromMilliseconds(allowedAge));
+
+            return LastReportTime > refreshTime;
         }
 
         /// <summary>
