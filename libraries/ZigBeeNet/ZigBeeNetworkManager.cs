@@ -1276,6 +1276,15 @@ namespace ZigBeeNet
                 }
                 ZigBeeNode removedNode = null;
                 _networkNodes.TryRemove(node.IeeeAddress, out removedNode);
+                RemoveCommandListener(node);
+            }
+
+            lock (_networkStateSync)
+            {
+                if (NetworkState != ZigBeeNetworkState.ONLINE)
+                {
+                    return;
+                }
             }
 
             lock (_nodeListeners)
@@ -1291,8 +1300,6 @@ namespace ZigBeeNet
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
-
-            node.Shutdown();
 
             if (NetworkStateSerializer != null)
             {
@@ -1327,6 +1334,7 @@ namespace ZigBeeNet
                     return;
                 }
                 _networkNodes[node.IeeeAddress] = node;
+                AddCommandListener(node);
             }
 
             lock (_networkStateSync)

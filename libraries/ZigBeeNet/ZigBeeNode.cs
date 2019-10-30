@@ -130,8 +130,6 @@ namespace ZigBeeNet
             this._network = network;
             this.IeeeAddress = ieeeAddress ?? throw new ArgumentException("IeeeAddress can't be null when creating ZigBeeNode");
             //this._serviceDiscoverer = new ZigBeeNodeServiceDiscoverer(networkManager, this);
-
-            network.AddCommandListener(this);
         }
 
         /// <summary>
