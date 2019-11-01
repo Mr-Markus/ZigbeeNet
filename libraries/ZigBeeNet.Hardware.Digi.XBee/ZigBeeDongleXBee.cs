@@ -286,7 +286,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             }
             command.SetData(apsFrame.Payload.Select(item => (int)item).ToArray());
 
-            Log.Debug($"XBee send: {{{command.ToString()}}}");
+            //Log.Debug($"XBee send: {{{command.ToString()}}}");
             _frameHandler.SendRequestAsync(command);
         }
 
