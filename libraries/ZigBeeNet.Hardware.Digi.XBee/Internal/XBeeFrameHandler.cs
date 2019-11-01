@@ -17,10 +17,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         #region fields
 
         private readonly ConcurrentQueue<IXBeeCommand> _sendQueue = new ConcurrentQueue<IXBeeCommand>();
-        private static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private static readonly CancellationToken _cancellationToken = _cancellationTokenSource.Token;
-
-        private readonly TaskFactory _taskFactory = new TaskFactory(_cancellationToken);
+        private readonly CancellationTokenSource _mainCancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationToken _mainCancellationToken;
+        private readonly TaskFactory _taskFactory;
 
         private readonly IList<IXBeeListener> _transactionListeners = new List<IXBeeListener>();
         private readonly IList<IXBeeEventListener> _eventListeners = new List<IXBeeEventListener>();
@@ -31,10 +30,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private IXBeeCommand _sentCommand = null;
         private bool _closeHandler = false;
         private Timer _timeoutTimer;
-        private static int _frameId = 0;
+        private int _frameId = 0;
 
-        private const int DEFAULT_TRANSACTION_TIMEOUT = 500;
-        private const int DEFAULT_COMMAND_TIMEOUT = 10000;
+        private const int DEFAULT_TRANSACTION_TIMEOUT = 8000;
+        private const int DEFAULT_COMMAND_TIMEOUT = 1000;
         private int _transactionTimeout = DEFAULT_TRANSACTION_TIMEOUT;
         private int _commandTimeout = DEFAULT_COMMAND_TIMEOUT;
 
@@ -57,6 +56,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
 
         #region methods
 
+        public XBeeFrameHandler()
+        {
+            _mainCancellationToken = _mainCancellationTokenSource.Token;
+            _taskFactory = new TaskFactory(_mainCancellationToken);
+        }
+
         /// <summary>
         /// Construct which sets input stream where the packet is read from the and
         /// handler which further processes the received packet.
@@ -67,7 +72,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             Interlocked.Exchange(ref _frameId, 1);
 
             _serialPort = serialPort;
-            _timeoutTimer = new Timer(new TimerCallback(StartTimer));
+            _timeoutTimer = new Timer(new TimerCallback(TimeoutCallback));
             // TODO af: find the equivalent in C# --> maybe ThreadPool-Class is the right one
             //timeoutScheduler = Executors.newSingleThreadScheduledExecutor();
 
@@ -108,7 +113,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                         {
                             builder.Append(string.Format(" 0x{0:X2}", value.ToString()));
                         }
-                        Log.Debug($"RX XBEE Data: {builder}");
+                        Log.Verbose($"RX XBEE Data: {builder}");
 
                         // Use the Event Factory to get an event
                         IXBeeEvent xBeeEvent = XBeeEventFactory.GetXBeeFrame(responseData);
@@ -133,7 +138,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     }
                 }
                 Log.Debug("XBeeFrameHandler thread exited.");
-            }, _cancellationToken);
+            });
         }
 
         /// <summary>
@@ -166,7 +171,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             int? checksum = 0;
             bool escaped = false;
 
-            Log.Debug("XBEE: Get Packet");
+            Log.Verbose("XBEE: Get Packet");
 
             while (!_closeHandler)
             {
@@ -270,7 +275,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         {
             SetClosing();
             StopTimer();
-            _cancellationTokenSource.Cancel();
+            _mainCancellationTokenSource.Cancel();
             Log.Debug("XBeeFrameHandler closed.");
         }
 
@@ -295,9 +300,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             }
 
             bool isFrameDequeuedSuccsess = _sendQueue.TryDequeue(out IXBeeCommand nextFrame);
-            if (isFrameDequeuedSuccsess == false)
+            if (!isFrameDequeuedSuccsess)
             {
-                Log.Debug("XBEE TX: Nothing to send");
+                Log.Verbose("XBEE TX: Nothing to send");
                 // Nothing to send
                 StopTimer();
                 return;
@@ -326,11 +331,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     _serialPort.Write(new byte[] { (byte)sendByte });
                 }
             }
-            Log.Debug($"TX XBEE Data:{builder.ToString()}");
+            Log.Verbose($"TX XBEE Data:{builder.ToString()}");
 
             // Start the timeout
-            Log.Debug("XBEE Timer: Start");
-            _timeoutTimer.Change(_commandTimeout, _commandTimeout);
+            Log.Verbose("XBEE Timer: Start");
+            _timeoutTimer.Change(_commandTimeout, Timeout.Infinite);
         }
 
         /// <summary>
@@ -342,7 +347,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         {
             _sendQueue.Enqueue(request);
 
-            Log.Debug($"TX XBEE queue: {_sendQueue.Count}: {request}");
+            Log.Verbose($"TX XBEE queue: {_sendQueue.Count}: {request}");
 
             SendNextFrame();
         }
@@ -465,37 +470,28 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             }
         }
 
-        /// <summary>
-        /// Sends a XBee request to the NCP without waiting for the response.
-        /// </summary>
-        /// <param name="command">Request <see cref="IXBeeCommand"/> to send.</param>
-        /// <returns></returns>
-        public async Task<IXBeeResponse> SendRequestAsync(IXBeeCommand command)
+        private async Task<IXBeeResponse> SendCommandAsync(IXBeeCommand command, CancellationToken cancellationToken)
         {
             IXBeeListener xbeeListener = new XBeeListener();
-
-            await _taskFactory.StartNew(() =>
+            AddTransactionListener(xbeeListener);
+            lock (_frameIdLock)
             {
-                AddTransactionListener(xbeeListener);
-                lock (_frameIdLock)
-                {
-                    xbeeListener.OurFrameId = Interlocked.Increment(ref _frameId);
-                    command.SetFrameId(xbeeListener.OurFrameId);
-                    Interlocked.CompareExchange(ref _frameId, 1, 256);
-                }
+                xbeeListener.OurFrameId = Interlocked.Increment(ref _frameId);
+                command.SetFrameId(xbeeListener.OurFrameId);
+                Interlocked.CompareExchange(ref _frameId, 1, 256);
+            }
 
-                // Send the transaction
-                QueueFrame(command);
+            // Send the transaction
+            QueueFrame(command);
 
-                lock (xbeeListener)
-                {
-                    while (!xbeeListener.Complete)
-                    {
-                        // wait until transaction is complete
-                    }
-                }
-                RemoveTransactionListener(xbeeListener);
-            });
+            while (!_mainCancellationToken.IsCancellationRequested &&
+                    !cancellationToken.IsCancellationRequested &&
+                    !xbeeListener.Complete)
+            {
+                // wait until transaction is complete
+                await Task.Delay(5);
+            }
+            RemoveTransactionListener(xbeeListener);
             return xbeeListener.CompletionResponse;
         }
 
@@ -510,45 +506,48 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-            Task<IXBeeResponse> sendRequestTask = SendRequestAsync(command);
-            bool taskResult = sendRequestTask.Wait(_transactionTimeout, cancellationToken);
+            Task<IXBeeResponse> sendCommandTask = SendCommandAsync(command, cancellationToken);
+            bool taskResult = sendCommandTask.Wait(_transactionTimeout);
             if (taskResult)
             {
-                return sendRequestTask.Result;
+                return sendCommandTask.Result;
             }
             else
             {
-                Log.Debug($"XBee interrupted in sendRequest{command}");
-                lock (_commandLock)
-                {
-                    _sentCommand = null;
-                }
+                Log.Debug($"XBee interrupted in SendRequest {command}");
                 cancellationTokenSource.Cancel();
                 return null;
             }
         }
 
-        private async Task<IXBeeEvent> WaitEventAsync(Type eventClass)
+        /// <summary>
+        /// Sends a XBee request to the NCP without waiting for the response.
+        /// </summary>
+        /// <param name="command">Request <see cref="IXBeeCommand"/> to send.</param>
+        /// <returns></returns>
+        public Task<IXBeeResponse> SendRequestAsync(IXBeeCommand command)
+        {
+            return _taskFactory.StartNew(() => SendRequest(command));
+        }
+
+        private async Task<IXBeeEvent> WaitEventAsync(Type eventClass, CancellationToken cancellationToken)
         {
             IXBeeEventListenerProperties xbeeEventListener = new XBeeEventListener(eventClass);
 
-            await _taskFactory.StartNew(() =>
+            // Register a listener
+            AddEventListener(xbeeEventListener);
+
+            // Wait for the event
+            while (!_mainCancellationToken.IsCancellationRequested &&
+                    !cancellationToken.IsCancellationRequested &&
+                    !xbeeEventListener.Complete)
             {
-                // Register a listener
-                AddEventListener(xbeeEventListener);
+                // wait until transaction is complete
+                await Task.Delay(5);
+            }
 
-                // Wait for the event
-                lock (xbeeEventListener)
-                {
-                    while (!xbeeEventListener.Complete)
-                    {
-                        // wait until transaction is complete
-                    }
-                }
-
-                // Remove the listener
-                RemoveEventListener(xbeeEventListener);
-            });
+            // Remove the listener
+            RemoveEventListener(xbeeEventListener);
             return xbeeEventListener.ReceivedEvent;
         }
 
@@ -557,25 +556,25 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-            Task<IXBeeEvent> eventWaitTask = WaitEventAsync(eventClass);
-            bool taskResult = eventWaitTask.Wait(_commandTimeout, cancellationToken);
+            Task<IXBeeEvent> eventWaitTask = WaitEventAsync(eventClass, cancellationToken);
+            bool taskResult = eventWaitTask.Wait(_transactionTimeout);
             if (taskResult)
             {
                 return eventWaitTask.Result;
             }
             else
             {
-                Log.Debug($"XBee interrupted in sendRequest{eventClass}");
+                Log.Debug($"XBee interrupted in EventWait {eventClass}");
                 cancellationTokenSource.Cancel();
                 return null;
             }
         }
 
         /// <summary>
-        /// Starts the transaction timeout. This will simply cancel the transaction and send the next frame from the queue if
-        /// the timer times out. We don't try and retry as this might cause other unwanted issues.
+        /// Cancel the transaction and send the next frame from the queue.
+        /// We don't try and retry as this might cause other unwanted issues.
         /// </summary>
-        private void StartTimer(object state)
+        private void TimeoutCallback(object state)
         {
             StopTimer();
             Log.Debug("XBEE Timer: Timeout");
@@ -592,7 +591,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private void StopTimer()
         {
             _timeoutTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            Log.Debug("XBEE Timer: Stop");
+            Log.Verbose("XBEE Timer: Stop");
         }
 
         #endregion methods

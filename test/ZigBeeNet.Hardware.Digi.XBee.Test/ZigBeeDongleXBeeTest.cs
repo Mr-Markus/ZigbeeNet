@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
         {
             IList<IXBeeCommand> sentCommands = new List<IXBeeCommand>();
             Mock<IXBeeFrameHandler> frameHandlerMock = new Mock<IXBeeFrameHandler>();
-            frameHandlerMock.Setup(frameHandler => frameHandler.SendRequestAsync(It.IsAny<IXBeeCommand>())).Callback<IXBeeCommand>(item => sentCommands.Add(item)).ReturnsAsync(() => null);
+            frameHandlerMock.Setup(frameHandler => frameHandler.SendRequestAsync(It.IsAny<IXBeeCommand>())).Callback<IXBeeCommand>(item => sentCommands.Add(item)).Returns(() => null);
 
             ZigBeeDongleXBee dongle = new ZigBeeDongleXBee(null);
 
