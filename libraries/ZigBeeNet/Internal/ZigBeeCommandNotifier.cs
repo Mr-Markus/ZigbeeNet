@@ -60,7 +60,7 @@ namespace ZigBeeNet.Internal
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("Error during the notification of commandListeners.", ex);
+                        Log.Error("Error during the notification of commandListeners. {Exception}", ex);
                     }
                 });
             }
