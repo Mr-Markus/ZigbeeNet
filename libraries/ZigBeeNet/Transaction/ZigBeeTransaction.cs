@@ -18,13 +18,11 @@ namespace ZigBeeNet.Transaction
         private ZigBeeNetworkManager _networkManager;
         private IZigBeeTransactionMatcher _responseMatcher;
         private ZigBeeCommand _command;
-        private DateTime _timeout;
         private TaskCompletionSource<CommandResult> _sendTransactionTask;
-
+        private readonly object _objLock = new object();
         private const int DEFAULT_TIMEOUT_MILLISECONDS = 8000;
 
         public int Timeout { get; set; } = DEFAULT_TIMEOUT_MILLISECONDS;
-        public bool IsTransactionMatch { get; private set; } = false;
 
         /// <summary>
         /// Transaction constructor
@@ -45,86 +43,59 @@ namespace ZigBeeNet.Transaction
         /// </summary>
         public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            _command = command;
-            _responseMatcher = responseMatcher;
-            _timeout = DateTime.Now.AddMilliseconds(DEFAULT_TIMEOUT_MILLISECONDS);
+            CommandResult commandResult;
 
-            _networkManager.AddCommandListener(this);
-
-            int transactionId = _networkManager.SendCommand(command);
-
-            if (command is ZclCommand cmd)
+            lock (_objLock)
             {
-                cmd.TransactionId = (byte)transactionId;
-            }
+                _command = command;
+                _responseMatcher = responseMatcher;
+                _networkManager.AddCommandListener(this);
 
-            _sendTransactionTask = new TaskCompletionSource<CommandResult>();
+                int transactionId = _networkManager.SendCommand(command);
+
+                if (command is ZclCommand cmd)
+                {
+                    cmd.TransactionId = (byte)transactionId;
+                }
+                //Without RunContinuationsAsynchronously, calling SetResult can block the calling thread, because the continuation is run synchronously
+                //see https://stackoverflow.com/a/37492081
+                _sendTransactionTask = new TaskCompletionSource<CommandResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+            }
+            
             var t = _sendTransactionTask.Task;
-            var timeoutTask = Task.Delay(DEFAULT_TIMEOUT_MILLISECONDS);
             var cancel = new CancellationTokenSource();
+            var timeoutTask = Task.Delay(Timeout, cancel.Token);
 
             if (t == await Task.WhenAny(t, timeoutTask).ConfigureAwait(false))
             {
                 cancel.Cancel(); //Cancel the timeout task
-                _networkManager.RemoveCommandListener(this);
-                return t.Result;
+                commandResult = t.Result;
             }
             else
             {
                 /* Timeout */
                 Log.Debug("Transaction timeout: {Command}", _command);
-
-                _networkManager.RemoveCommandListener(this);
-
-                return new CommandResult();
+                commandResult = new CommandResult();
             }
+            _networkManager.RemoveCommandListener(this);
 
-            /* !!! OLD CODE WITHOUT COMPLETION SOURCE - DO NOT DELET IT YET !!!
-
-            return await Task.Run(() =>
-            {
-                while (true)
-                {
-                    if (DateTime.Now < _timeout)
-                    {
-                        if (_result != null)
-                        {
-                            return _result;
-                        }
-                    }
-                    else
-                    {
-                        Log.Debug("Transaction timeout: {Command}", _command);
-                        lock (_command)
-                        {
-                            _networkManager.RemoveCommandListener(this);
-                            return new CommandResult();
-                        }
-                    }
-                }
-            });
-
-            */
+            return commandResult;
         }
 
         public void CommandReceived(ZigBeeCommand receivedCommand)
         {
-            if (DateTime.Now < _timeout)
+            // Ensure that received command is not processed before command is sent
+            // and hence transaction ID for the command set.
+            lock (_objLock)
             {
-                // Ensure that received command is not processed before command is sent
-                // and hence transaction ID for the command set.
-                lock (_command)
+                if (_sendTransactionTask == null || _sendTransactionTask.Task.IsCompleted)
+                    return;
+
+                if (_responseMatcher.IsTransactionMatch(_command, receivedCommand))
                 {
-                    if (!_sendTransactionTask?.Task.IsCompleted == true && _responseMatcher.IsTransactionMatch(_command, receivedCommand))
-                    {
-                        IsTransactionMatch = true;
+                    _sendTransactionTask.SetResult(new CommandResult(receivedCommand));
 
-                        var result = new CommandResult(receivedCommand);
-
-                        _sendTransactionTask.SetResult(result);
-
-                        Log.Debug("Transaction complete: {Command}", _command);
-                    }
+                    Log.Debug("Transaction complete: {Command}", _command);
                 }
             }
         }
