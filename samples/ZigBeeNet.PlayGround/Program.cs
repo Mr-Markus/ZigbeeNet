@@ -202,7 +202,11 @@ namespace ZigBeeNet.PlayGround
 
                                 try
                                 {
-                                    if (cmd == "toggle")
+                                    if (cmd == "leave")
+                                    {
+                                        await networkManager.Leave(node.NetworkAddress, node.IeeeAddress);
+                                    }
+                                    else if (cmd == "toggle")
                                     {
                                         await networkManager.Send(endpointAddress, new ToggleCommand());
                                     }
@@ -361,7 +365,7 @@ namespace ZigBeeNet.PlayGround
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.Logger.Error(ex, "{Error}");
+                                    Log.Logger.Error(ex, "Error while executing cmd {Command}", cmd);
                                 }
                             }
                             else
@@ -371,6 +375,7 @@ namespace ZigBeeNet.PlayGround
                         }
                     }
 
+                    await Task.Delay(100);
                     Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
                     var currentForeGroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -378,6 +383,7 @@ namespace ZigBeeNet.PlayGround
                     Console.ForegroundColor = currentForeGroundColor;
                     cmd = Console.ReadLine();
                 }
+                networkManager.Shutdown();
             }
             catch (OptionException e)
             {
@@ -388,7 +394,7 @@ namespace ZigBeeNet.PlayGround
             {
                 Console.WriteLine(ex.ToString());
             }
-
+            Console.ReadLine();
         }
 
         static void ShowHelp(OptionSet options)
@@ -413,6 +419,7 @@ namespace ZigBeeNet.PlayGround
             Console.WriteLine("Node " + node.IeeeAddress + " added " + node);
             if (node.NetworkAddress != 0)
             {
+
             }
         }
 
