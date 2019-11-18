@@ -1087,53 +1087,59 @@ namespace ZigBeeNet
         /// Sends a ZDO Leave Request to a device requesting that an end device leave the network.
         ///
         /// <param name="destinationAddress">the network address to send the request to - this is the device parent or the the device we want to leave.</param>
-        ///            
         /// <param name="leaveAddress">the <see cref="IeeeAddress"/> of the end device we want to leave the network</param>
         /// </summary>
-        public void Leave(ushort destinationAddress, IeeeAddress leaveAddress)
+        public async Task Leave(ushort destinationAddress, IeeeAddress leaveAddress)
         {
-            ManagementLeaveRequest command = new ManagementLeaveRequest();
+            await Leave(destinationAddress, leaveAddress, false);
+        }
 
-            command.setDeviceAddress(leaveAddress);
-            command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
-            command.SourceAddress = new ZigBeeEndpointAddress(0);
-            command.RemoveChildrenRejoin = false;
+        /// <summary>
+        /// Sends a ZDO Leave Request to a device requesting that an end device leave the network.
+        ///
+        /// <param name="destinationAddress">the network address to send the request to - this is the device parent or the the device we want to leave.</param>
+        /// <param name="leaveAddress">the <see cref="IeeeAddress"/> of the end device we want to leave the network</param>
+        /// <param name="forceNodeRemoval">If this flag is set, then the corresponding node is removed from the node list even if there was no success response to the leave command.</param>
+        /// </summary>
+        public async Task Leave(ushort destinationAddress, IeeeAddress leaveAddress, bool forceNodeRemoval)
+        {
+            try
+            {
+                ManagementLeaveRequest command = new ManagementLeaveRequest();
 
-            // Start a thread to wait for the response
-            // When we receive the response, if it's successful, we assume the device left.
-            //new Thread()
-            //{
+                command.setDeviceAddress(leaveAddress);
+                command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
+                command.SourceAddress = new ZigBeeEndpointAddress(0);
+                command.RemoveChildrenRejoin = false;
 
+                CommandResult response = await SendTransaction(command, command);
+                ZigBeeNode node = GetNode(leaveAddress);
 
-            //        public void run()
-            //        {
-            //            try
-            //            {
-            //                CommandResult response = sendTransaction(command, command).get();
-            //                if (response.getStatusCode() == 0)
-            //                {
-            //                    ZigBeeNode node = getNode(leaveAddress);
-            //                    if (node != null)
-            //                    {
-            //                        removeNode(node);
-            //                    }
-            //                    else
-            //                    {
-            //                        Log.Debug("{}: No node found after successful leave command", leaveAddress);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    Log.Debug("{}: No successful response received to leave command (status code {})",
-            //                            leaveAddress, response.getStatusCode());
-            //                }
-            //            }
-            //            catch (InterruptedException | ExecutionException e) {
-            //            Log.Debug("Error sending leave command.", e);
-            //        }
-            //    }
-            //}.start();
-            //}
+                if (node != null)
+                {
+                    if (response.GetStatusCode() == 0)
+                    {
+                        RemoveNode(node);
+                    }
+                    else
+                    {
+                        Log.Debug("{IeeeAddress}: No successful response received to leave command (status code {StatusCode})", leaveAddress, response.GetStatusCode());
+                        if (forceNodeRemoval)
+                        {
+                            Log.Debug("{IeeeAddress}: Force-removing node from the node list after unsuccessful leave request", leaveAddress);
+                            RemoveNode(node);
+                        }
+                    }
+                }
+                else
+                {
+                    Log.Debug("{IeeeAddress}: No node found after leave command", leaveAddress);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Debug("Error sending leave command {Exception}", ex);
+            }
         }
 
         public void AddGroup(ZigBeeGroupAddress group)
@@ -1513,10 +1519,10 @@ namespace ZigBeeNet
             SendCommand(command);
         }
 
-        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
             ZigBeeTransaction transaction = new ZigBeeTransaction(this);
-            return transaction.SendTransaction(command, responseMatcher);
+            return await transaction.SendTransaction(command, responseMatcher);
         }
     }
 }
