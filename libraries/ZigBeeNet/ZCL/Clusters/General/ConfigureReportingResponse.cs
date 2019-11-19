@@ -1,56 +1,60 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Configure Reporting Response value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x07 is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The Configure Reporting Response command is generated in response to a
-    /// Configure Reporting command.
-    /// </para>
+    /// The Configure Reporting Response command is generated in response to a Configure
+    /// Reporting command.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class ConfigureReportingResponse : ZclCommand
     {
         /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x07;
+
+        /// <summary>
         /// Status command message field.
-        ///
-        /// Status is only provided if the command was successful, and the
-        /// attribute status records are not included for successfully
-        /// written attributes, in order to save bandwidth.
+        /// 
+        /// Status is only provided if the command was successful, and the attribute status
+        /// records are not included for successfully written attributes, in order to save
+        /// bandwidth.
         /// </summary>
         public ZclStatus Status { get; set; }
 
         /// <summary>
         /// Records command message field.
-        ///
-        /// Note that attribute status records are not included for successfully
-        /// configured attributes in order to save bandwidth.  In the case of successful
-        /// configuration of all attributes, only a single attribute status record SHALL
-        /// be included in the command, with the status field set to SUCCESS and the direction and
-        /// attribute identifier fields omitted.
+        /// 
+        /// Note that attribute status records are not included for successfully configured
+        /// attributes in order to save bandwidth. In the case of successful configuration of
+        /// all attributes, only a single attribute status record shall be included in the
+        /// command, with the status field set to SUCCESS and the direction and attribute
+        /// identifier fields omitted.
         /// </summary>
         public List<AttributeStatusRecord> Records { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ConfigureReportingResponse()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 7;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

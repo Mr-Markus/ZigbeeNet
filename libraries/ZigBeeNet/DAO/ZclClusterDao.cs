@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ZigBeeNet.ZCL;
+﻿using System.Collections.Generic;
 
 namespace ZigBeeNet.DAO
 {
@@ -13,7 +10,7 @@ namespace ZigBeeNet.DAO
 
         public bool IsClient { get; set; }
 
-        public Dictionary<ushort, ZclAttribute> Attributes { get; set; }
+        public Dictionary<ushort, ZclAttributeDao> Attributes { get; set; }
 
         public List<byte> SupportedCommandsReceived { get; set; }
 

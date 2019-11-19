@@ -1,43 +1,47 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Write Attributes No Response value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x05 is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The write attributes no response command is generated when a device wishes to
-    /// change the value of one or more attributes located on another device but does not
-    /// require a response. Each write attribute record shall contain the identifier and the
-    /// actual value of the attribute to be written.
-    /// </para>
+    /// The write attributes no response command is generated when a device wishes to change the
+    /// value of one or more attributes located on another device but does not require a
+    /// response. Each write attribute record shall contain the identifier and the actual
+    /// value of the attribute to be written.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class WriteAttributesNoResponse : ZclCommand
     {
         /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x05;
+
+        /// <summary>
         /// Records command message field.
         /// </summary>
         public List<WriteAttributeRecord> Records { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public WriteAttributesNoResponse()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 5;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using ZigBeeNet.Security;
+using ZigBeeNet.ZCL.Clusters.Prepayment;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
+
+
+namespace ZigBeeNet.ZCL.Clusters.Prepayment
+{
+    /// <summary>
+    /// Emergency Credit Setup value object class.
+    ///
+    /// Cluster: Prepayment. Command ID 0x03 is sent TO the server.
+    /// This command is a specific command used for the Prepayment cluster.
+    ///
+    /// FIXME: This command is a method to set up the parameters for the emergency credit.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
+    public class EmergencyCreditSetup : ZclCommand
+    {
+        /// <summary>
+        /// The cluster ID to which this command belongs.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0705;
+
+        /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x03;
+
+        /// <summary>
+        /// Issuer Event ID command message field.
+        /// </summary>
+        public uint IssuerEventId { get; set; }
+
+        /// <summary>
+        /// Start Time command message field.
+        /// </summary>
+        public DateTime StartTime { get; set; }
+
+        /// <summary>
+        /// Emergency Credit Limit command message field.
+        /// </summary>
+        public uint EmergencyCreditLimit { get; set; }
+
+        /// <summary>
+        /// Emergency Credit Threshold command message field.
+        /// </summary>
+        public uint EmergencyCreditThreshold { get; set; }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public EmergencyCreditSetup()
+        {
+            ClusterId = CLUSTER_ID;
+            CommandId = COMMAND_ID;
+            GenericCommand = false;
+            CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
+        }
+
+        internal override void Serialize(ZclFieldSerializer serializer)
+        {
+            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
+            serializer.Serialize(EmergencyCreditLimit, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(EmergencyCreditThreshold, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+        }
+
+        internal override void Deserialize(ZclFieldDeserializer deserializer)
+        {
+            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
+            EmergencyCreditLimit = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            EmergencyCreditThreshold = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            builder.Append("EmergencyCreditSetup [");
+            builder.Append(base.ToString());
+            builder.Append(", IssuerEventId=");
+            builder.Append(IssuerEventId);
+            builder.Append(", StartTime=");
+            builder.Append(StartTime);
+            builder.Append(", EmergencyCreditLimit=");
+            builder.Append(EmergencyCreditLimit);
+            builder.Append(", EmergencyCreditThreshold=");
+            builder.Append(EmergencyCreditThreshold);
+            builder.Append(']');
+
+            return builder.ToString();
+        }
+    }
+}

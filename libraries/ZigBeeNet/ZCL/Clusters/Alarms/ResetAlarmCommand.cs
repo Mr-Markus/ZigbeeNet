@@ -1,44 +1,58 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.Alarms;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.Alarms
 {
     /// <summary>
     /// Reset Alarm Command value object class.
-    /// <para>
-    /// Cluster: Alarms. Command is sent TO the server.
+    ///
+    /// Cluster: Alarms. Command ID 0x00 is sent TO the server.
     /// This command is a specific command used for the Alarms cluster.
-    /// </para>
+    ///
+    /// This command resets a specific alarm. This is needed for some alarms that do not reset
+    /// automatically. If the alarm condition being reset was in fact still active then a new
+    /// notification will be generated and, where implemented, a new record added to the alarm
+    /// log.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class ResetAlarmCommand : ZclCommand
     {
         /// <summary>
-        /// Alarm code command message field.
+        /// The cluster ID to which this command belongs.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0009;
+
+        /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x00;
+
+        /// <summary>
+        /// Alarm Code command message field.
         /// </summary>
         public byte AlarmCode { get; set; }
 
         /// <summary>
-        /// Cluster identifier command message field.
+        /// Cluster Identifier command message field.
         /// </summary>
         public ushort ClusterIdentifier { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ResetAlarmCommand()
         {
+            ClusterId = CLUSTER_ID;
+            CommandId = COMMAND_ID;
             GenericCommand = false;
-            ClusterId = 9;
-            CommandId = 0;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

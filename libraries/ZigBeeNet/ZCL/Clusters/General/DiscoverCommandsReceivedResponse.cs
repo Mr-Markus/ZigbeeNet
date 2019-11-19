@@ -1,46 +1,50 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Discover Commands Received Response value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x12 is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The Discover Commands Received Response is generated in response to a Discover Commands Received
-    /// command.
-    /// </para>
+    /// The Discover Commands Received Response is generated in response to a Discover
+    /// Commands Received command.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class DiscoverCommandsReceivedResponse : ZclCommand
     {
         /// <summary>
-        /// Discovery complete command message field.
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x12;
+
+        /// <summary>
+        /// Discovery Complete command message field.
         /// </summary>
         public bool DiscoveryComplete { get; set; }
 
         /// <summary>
-        /// Command identifiers command message field.
+        /// Command Identifiers command message field.
         /// </summary>
         public List<byte> CommandIdentifiers { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public DiscoverCommandsReceivedResponse()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 18;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.DAO;
 using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL
@@ -8,9 +9,8 @@ namespace ZigBeeNet.ZCL
     public class ZclAttribute
     {
         /// <summary>
-        /// Defines a Cluster Library Attribute
         /// </summary>
-        private readonly ZclClusterType cluster;
+        private ZclCluster _cluster;
 
         /// <summary>
         /// The attribute identifier field is 16-bits in length and shall contain the
@@ -27,7 +27,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// Defines the ZigBee data type.
         /// </summary>
-        public ZclDataType ZclDataType { get; set; }
+        public ZclDataType DataType { get; set; }
 
         /// <summary>
         /// Returns true if the implementation of this attribute in the cluster is
@@ -52,7 +52,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// True if this attribute is writeable
         /// </summary>
-        public bool Writeable { get; set; }
+        public bool Writable { get; set; }
 
         /// <summary>
         /// True if this attribute is reportable
@@ -96,6 +96,11 @@ namespace ZigBeeNet.ZCL
         public int ReportingTimeout { get; set; }
 
         /// <summary>
+        /// The manufacturer code of this attribute. If null, the attribute is not manufacturer-specific.
+        /// </summary>
+        public int? ManufacturerCode { get; set; }
+
+        /// <summary>
         /// Records the last time a report was received
         /// </summary>
         public DateTime LastReportTime { get; set; }
@@ -106,21 +111,62 @@ namespace ZigBeeNet.ZCL
         public object LastValue { get; set; }
 
         /// <summary>
-        /// Constructor used to set the static information
+        /// Default ctor
         /// </summary>
-        public ZclAttribute(ZclClusterType cluster, ushort id, string name, ZclDataType dataType,
+        public ZclAttribute()
+        {
+        }
+
+        /// <summary>
+        /// Constructor used to set the static information (for non-manufacturer-specific attribute)
+        /// </summary>
+        public ZclAttribute(ZclCluster cluster, ushort id, string name, ZclDataType dataType,
                 bool mandatory, bool readable, bool writeable, bool reportable)
         {
-            this.cluster = cluster;
+            this._cluster = cluster;
             this.Id = id;
             this.Name = name;
-            this.ZclDataType = dataType;
+            this.DataType = dataType;
             this.Mandatory = mandatory;
             this.Readable = readable;
-            this.Writeable = writeable;
+            this.Writable = writeable;
             this.Reportable = reportable;
         }
 
+        ///<summary>
+        /// Constructor used to set the static information (for manufacturer-specific attribute)
+        ///
+        /// <para>cluster the <see cref="ZclCluster"/> to which the attribute belongs </para>
+        /// <para>id the attribute ID</para>
+        /// <para>name the human readable name</para>
+        /// <para>dataType the <see cref="Protocol.DataType"/> for this attribute</para>
+        /// <para>mandatory true if this is defined as mandatory in the ZCL specification</para>
+        /// <para>readable true if this is defined as readable in the ZCL specification</para>
+        /// <para>writable true if this is defined as writable in the ZCL specification</para>
+        /// <para>reportable true if this is defined as reportable in the ZCL specification</para>
+        /// <para>manufacturerCode the code for the manufacturer specific cluster, for ex. 0x1234</para>
+        ///</summary>
+        public ZclAttribute(ZclCluster cluster, ushort id, string name, ZclDataType dataType,
+                bool mandatory, bool readable, bool writable, bool reportable, int manufacturerCode)
+        {
+            this._cluster = cluster;
+            this.Id = id;
+            this.Name = name;
+            this.DataType = dataType;
+            this.Mandatory = mandatory;
+            this.Readable = readable;
+            this.Writable = writable;
+            this.Reportable = reportable;
+            this.ManufacturerCode = manufacturerCode;
+        }
+
+        /// <summary>
+        /// <returns>whether this is a manufacturer-specific attribute</returns> 
+        /// </summary>
+        public bool IsManufacturerSpecific()
+        {
+            return ManufacturerCode != null;
+        }
 
         /// <summary>
         /// Checks if the last value received for the attribute is still current.
@@ -163,13 +209,13 @@ namespace ZigBeeNet.ZCL
             StringBuilder builder = new StringBuilder();
 
             builder.Append("ZclAttribute [cluster=")
-                   .Append(cluster)
+                   .Append(_cluster)
                    .Append(", id=")
                    .Append(Id)
                    .Append(", name=")
                    .Append(Name)
                    .Append(", dataType=")
-                   .Append(ZclDataType)
+                   .Append(DataType)
                    .Append(", lastValue=")
                    .Append(LastValue);
 
@@ -182,6 +228,57 @@ namespace ZigBeeNet.ZCL
             builder.Append(']');
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        ///Sets the state of the attribute from a ZclAttributeDao which has been restored from a persisted state.
+        /// @param dao the ZclAttributeDao to restore
+        /// </summary>
+        public void SetDao(ZclCluster cluster, ZclAttributeDao dao)
+        {
+            this._cluster = cluster;
+            Id = dao.Id;
+            Name = dao.Name;
+            DataType = dao.DataType;
+            Mandatory = dao.Mandatory;
+            Implemented = dao.Implemented;
+            Writable = dao.Writable;
+            Readable = dao.Readable;
+            Reportable = dao.Reportable;
+            LastValue = dao.LastValue;
+            LastReportTime = dao.LastReportTime;
+            MinimumReportingPeriod = dao.MinimumReportingPeriod;
+            MaximumReportingPeriod = dao.MaximumReportingPeriod;
+            ReportingChange = dao.ReportingChange;
+            ReportingTimeout = dao.ReportingTimeout;
+        }
+
+        /// <summary>
+        ///Returns a Data Acquisition Object for this attribute. This is a clean class recording the state of the primary
+        ///fields of the attribute for persistence purposes.
+        ///
+        ///@return the {@link ZclAttributeDao} from this {@link ZclAttribute}
+        /// </summary>
+        public ZclAttributeDao GetDao()
+        {
+            ZclAttributeDao dao = new ZclAttributeDao();
+
+            dao.Id = Id;
+            dao.DataType = DataType;
+            dao.Name = Name;
+            dao.Mandatory = Mandatory;
+            dao.Implemented = Implemented;
+            dao.MinimumReportingPeriod = MinimumReportingPeriod;
+            dao.MaximumReportingPeriod = MaximumReportingPeriod;
+            dao.Readable = Readable;
+            dao.Writable = Writable;
+            dao.Reportable = Reportable;
+            dao.ReportingChange = ReportingChange;
+            dao.ReportingTimeout = ReportingTimeout;
+            dao.LastValue = LastValue;
+            dao.LastReportTime = LastReportTime;
+
+            return dao;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
@@ -155,12 +156,31 @@ namespace ZigBeeNet.Serialization
                         _buffer[_length++] = strByte;
                     }
                     break;
-                case DataType.UNSIGNED_24_BIT_INTEGER:
-                    byte[] uint24Value = (byte[])data;
-                    _buffer[_length++] = uint24Value[0]; //uint24Value & 0xFF;
-                    _buffer[_length++] = uint24Value[1]; //(uint24Value >> 8) & 0xFF;
-                    _buffer[_length++] = uint24Value[2]; //(uint24Value >> 16) & 0xFF;
+                case DataType.LONG_OCTET_STRING:
+                    ByteArray longArray = (ByteArray)data;
+                    _buffer[_length++] = ((byte)(longArray.Size() & 0xFF));
+                    _buffer[_length++] = (byte)((longArray.Size() >> 8) & 0xFF);
+                    foreach (byte arrayByte in longArray.Get())
+                    {
+                        _buffer[_length++] = arrayByte;
+                    }
                     break;
+                case DataType.SECURITY_KEY:
+                    ZigBeeKey securityKey = (ZigBeeKey)data;
+                    foreach (byte arrayByte in securityKey.Key)
+                    {
+                        _buffer[_length++] = arrayByte;
+                    }
+                    break;
+                case DataType.BITMAP_24_BIT:
+                case DataType.SIGNED_24_BIT_INTEGER:
+                case DataType.UNSIGNED_24_BIT_INTEGER:
+                    uint uint24Value = (uint)data;
+                    _buffer[_length++] = (byte)(uint24Value & 0xFF);
+                    _buffer[_length++] = (byte)((uint24Value >> 8) & 0xFF);
+                    _buffer[_length++] = (byte)((uint24Value >> 16) & 0xFF);
+                    break;
+                case DataType.ENUMERATION_32_BIT:
                 case DataType.SIGNED_32_BIT_INTEGER:
                     int intValue = (int)data;
                     _buffer[_length++] = (byte)(intValue & 0xFF);
@@ -170,14 +190,14 @@ namespace ZigBeeNet.Serialization
                     break;
                 case DataType.BITMAP_32_BIT:
                 case DataType.UNSIGNED_32_BIT_INTEGER:
-                    UInt32 uint32Value = (UInt32)data;
+                    uint uint32Value = (uint)data;
                     _buffer[_length++] = (byte)(uint32Value & 0xFF);
                     _buffer[_length++] = (byte)((uint32Value >> 8) & 0xFF);
                     _buffer[_length++] = (byte)((uint32Value >> 16) & 0xFF);
                     _buffer[_length++] = (byte)((uint32Value >> 24) & 0xFF);
                     break;
                 case DataType.UNSIGNED_48_BIT_INTEGER:
-                    long uint48Value = (long)data;
+                    ulong uint48Value = (ulong)data;
                     _buffer[_length++] = (byte)(uint48Value & 0xFF);
                     _buffer[_length++] = (byte)((uint48Value >> 8) & 0xFF);
                     _buffer[_length++] = (byte)((uint48Value >> 16) & 0xFF);

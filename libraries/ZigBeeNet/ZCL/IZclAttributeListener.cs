@@ -6,6 +6,6 @@ namespace ZigBeeNet.ZCL
 {
     public interface IZclAttributeListener
     {
-        void AttributeUpdated(ZclAttribute attribute);
+        void AttributeUpdated(ZclAttribute attribute, object value);
     }
 }

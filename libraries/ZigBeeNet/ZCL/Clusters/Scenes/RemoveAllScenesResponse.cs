@@ -1,25 +1,35 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.Scenes;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
     /// <summary>
     /// Remove All Scenes Response value object class.
-    /// <para>
-    /// Cluster: Scenes. Command is sent FROM the server.
+    ///
+    /// Cluster: Scenes. Command ID 0x03 is sent FROM the server.
     /// This command is a specific command used for the Scenes cluster.
-    /// </para>
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class RemoveAllScenesResponse : ZclCommand
     {
+        /// <summary>
+        /// The cluster ID to which this command belongs.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0005;
+
+        /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x03;
+
         /// <summary>
         /// Status command message field.
         /// </summary>
@@ -28,30 +38,29 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         /// <summary>
         /// Group ID command message field.
         /// </summary>
-        public ushort GroupID { get; set; }
-
+        public ushort GroupId { get; set; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public RemoveAllScenesResponse()
         {
+            ClusterId = CLUSTER_ID;
+            CommandId = COMMAND_ID;
             GenericCommand = false;
-            ClusterId = 5;
-            CommandId = 3;
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(GroupID, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            GroupID = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         public override string ToString()
@@ -62,8 +71,8 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
             builder.Append(base.ToString());
             builder.Append(", Status=");
             builder.Append(Status);
-            builder.Append(", GroupID=");
-            builder.Append(GroupID);
+            builder.Append(", GroupId=");
+            builder.Append(GroupId);
             builder.Append(']');
 
             return builder.ToString();
