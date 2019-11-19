@@ -1,46 +1,51 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Discover Commands Generated value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x13 is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The Discover Commands Generated command is generated when a remote device wishes to discover the
-    /// commands that a cluster may generate on the device to which this command is directed.
-    /// </para>
+    /// The Discover Commands Generated command is generated when a remote device wishes to
+    /// discover the commands that a cluster may generate on the device to which this command is
+    /// directed.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class DiscoverCommandsGenerated : ZclCommand
     {
         /// <summary>
-        /// Start command identifier command message field.
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x13;
+
+        /// <summary>
+        /// Start Command Identifier command message field.
         /// </summary>
         public byte StartCommandIdentifier { get; set; }
 
         /// <summary>
-        /// Maximum command identifiers command message field.
+        /// Maximum Command Identifiers command message field.
         /// </summary>
         public byte MaximumCommandIdentifiers { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public DiscoverCommandsGenerated()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 19;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

@@ -1,42 +1,46 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Read Attributes Command value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x00 is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The read attributes command is generated when a device wishes to determine the
-    /// values of one or more attributes located on another device. Each attribute
-    /// identifier field shall contain the identifier of the attribute to be read.
-    /// </para>
+    /// The read attributes command is generated when a device wishes to determine the values of
+    /// one or more attributes located on another device. Each attribute identifier field
+    /// shall contain the identifier of the attribute to be read.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class ReadAttributesCommand : ZclCommand
     {
         /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x00;
+
+        /// <summary>
         /// Identifiers command message field.
         /// </summary>
         public List<ushort> Identifiers { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ReadAttributesCommand()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 0;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
@@ -56,6 +57,11 @@ namespace ZigBeeNet.Serialization
                 case DataType.BOOLEAN:
                     value[0] = payload[index++] == 0 ? false : true;
                     break;
+                case DataType.RAW_OCTET:
+                    int rawSize = payload.Length - index;
+                    value[0] = new ByteArray(payload, index, index + rawSize);
+                    index += rawSize;
+                    break;
                 case DataType.OCTET_STRING:
                     int octetSize = payload[index++];
                     value[0] = new ByteArray(payload, index, index + octetSize);
@@ -97,6 +103,17 @@ namespace ZigBeeNet.Serialization
                         break;
                     }
                     index += stringSize;
+                    break;
+                case DataType.LONG_OCTET_STRING:
+                    int longOctetSize = (short)(payload[index++] + (payload[index++] << 8));
+                    value[0] = new ByteArray(payload, index, index + longOctetSize);
+                    index += longOctetSize;
+                    break;
+                case DataType.SECURITY_KEY:
+                    byte[] keyBytes = new byte[16];
+                    Array.Copy(payload, index, keyBytes, 0, 16);
+                    value[0] = new ZigBeeKey(keyBytes);
+                    index += 16;
                     break;
                 case DataType.ENDPOINT:
                 case DataType.BITMAP_8_BIT:
@@ -223,15 +240,23 @@ namespace ZigBeeNet.Serialization
 
                     value[0] = us;
                     break;
+                case DataType.BITMAP_24_BIT:
+                case DataType.SIGNED_24_BIT_INTEGER:
                 case DataType.UNSIGNED_24_BIT_INTEGER:
                     value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16);
                     break;
                 case DataType.BITMAP_32_BIT:
+                case DataType.ENUMERATION_32_BIT:
                 case DataType.SIGNED_32_BIT_INTEGER:
                 case DataType.UNSIGNED_32_BIT_INTEGER:
                     value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16)
                             + (payload[index++] << 24);
                     break;
+                case DataType.UNSIGNED_40_BIT_INTEGER:
+                    value[0] = (payload[index++]) + ((long)(payload[index++]) << 8) | ((long)(payload[index++]) << 16)
+                            + ((long)(payload[index++]) << 24) | ((long)(payload[index++]) << 32);
+                    break;
+
                 case DataType.UNSIGNED_48_BIT_INTEGER:
                     value[0] = (payload[index++]) + ((long)(payload[index++]) << 8) | ((long)(payload[index++]) << 16)
                             + ((long)(payload[index++]) << 24) | ((long)(payload[index++]) << 32)

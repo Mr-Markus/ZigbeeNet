@@ -617,6 +617,12 @@ namespace ZigBeeNet
                     Direction = zclCommand.CommandDirection
                 };
 
+                if (zclCommand.IsManufacturerSpecific())
+                {
+                    zclHeader.ManufacturerSpecific = true;
+                    zclHeader.ManufacturerCode = (ushort)zclCommand.ManufacturerCode.Value;
+                }
+
                 command.Serialize(fieldSerializer);
 
                 // Serialise the ZCL header and add the payload
@@ -698,6 +704,7 @@ namespace ZigBeeNet
 
             if (commandType == null)
             {
+                Log.Debug("Error instantiating ZDO command: Unknown cluster {Cluster}", apsFrame.Cluster.ToString("X4"));
                 return null;
             }
 
@@ -709,7 +716,7 @@ namespace ZigBeeNet
             }
             catch (Exception e)
             {
-                Log.Debug("Error instantiating ZDO command", e);
+                Log.Debug(e, "Error instantiating ZDO command");
                 return null;
             }
 
@@ -724,29 +731,44 @@ namespace ZigBeeNet
             ZclHeader zclHeader = new ZclHeader(fieldDeserializer);
             Log.Debug("RX ZCL: {ZclHeader}", zclHeader);
 
-            // Get the command type
-            ZclCommandType commandType = null;
-            if (zclHeader.FrameType == ZclFrameType.ENTIRE_PROFILE_COMMAND)
+            ZigBeeNode node = GetNode(apsFrame.SourceAddress);
+            if (node == null)
             {
-                commandType = ZclCommandType.GetGeneric(zclHeader.CommandId);
-            }
-            else
-            {
-                commandType = ZclCommandType.GetCommandType(apsFrame.Cluster, zclHeader.CommandId, zclHeader.Direction);
-            }
-
-            if (commandType == null)
-            {
-                Log.Debug("No command type found for {FrameType}, cluster={Cluster}, command={Command}, direction={Direction}", zclHeader.FrameType,
-                        apsFrame.Cluster, zclHeader.CommandId, zclHeader.Direction);
+                Log.Debug("Unknown node {SourceAddress}", apsFrame.SourceAddress);
                 return null;
             }
 
-            ZclCommand command = commandType.GetCommand();
+            ZigBeeEndpoint endpoint = node.GetEndpoint(apsFrame.SourceEndpoint);
+            if (endpoint == null)
+            {
+                Log.Debug("Unknown endpoint {SourceEndpoint}", apsFrame.SourceEndpoint);
+                return null;
+            }
+
+            ZclCommand command;
+            if (zclHeader.Direction == ZclCommandDirection.SERVER_TO_CLIENT)
+            {
+                ZclCluster cluster = endpoint.GetInputCluster(apsFrame.Cluster);
+                if (cluster == null)
+                {
+                    Log.Debug("Unknown input cluster {Cluster}", apsFrame.Cluster);
+                    return null;
+                }
+                command = cluster.GetResponseFromId(zclHeader.FrameType, zclHeader.CommandId);
+            }
+            else
+            {
+                ZclCluster cluster = endpoint.GetOutputCluster(apsFrame.Cluster);
+                if (cluster == null)
+                {
+                    Log.Debug("Unknown output cluster {Cluster}", apsFrame.Cluster);
+                    return null;
+                }
+                command = cluster.GetCommandFromId(zclHeader.FrameType, zclHeader.CommandId);
+            }
             if (command == null)
             {
-                Log.Debug("No command found for {FrameType}, cluster={Cluster}, command={Command}", zclHeader.FrameType,
-                        apsFrame.Cluster, zclHeader.CommandId);
+                Log.Debug("Unknown command {CommandId}", zclHeader.CommandId);
                 return null;
             }
 

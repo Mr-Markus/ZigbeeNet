@@ -7,41 +7,41 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Field
 {
     /// <summary>
-     /// Attribute Status Record field.
-     /// <p>
-     /// <b>minInterval</b>:
-     /// The minimum reporting interval field is 16 bits in length and shall contain the
-     /// minimum interval, in seconds, between issuing reports of the specified attribute.
-     /// If minInterval is set to 0x0000, then there is no minimum limit, unless one is
-     /// imposed by the specification of the cluster using this reporting mechanism or by
-     /// the applicable profile.
-     /// <p>
-     /// <b>maxInterval</b>:
-     /// The maximum reporting interval field is 16 bits in length and shall contain the
-     /// maximum interval, in seconds, between issuing reports of the specified attribute.
-     /// If maxInterval is set to 0xffff, then the device shall not issue reports for the specified
-     /// attribute, and the configuration information for that attribute need not be
-     /// maintained.
-     /// <p>
-     /// <b>reportableChange</b>:
-     /// The reportable change field shall contain the minimum change to the attribute that
-     /// will result in a report being issued. This field is of variable length. For attributes
-     /// with 'analog' data type the field has the same data type as the attribute. The sign (if any) of the reportable
-     /// change field is ignored.
-     /// <p>
-     /// <b>timeout</b>:
-     /// The timeout period field is 16 bits in length and shall contain the maximum
-     /// expected time, in seconds, between received reports for the attribute specified in
-     /// the attribute identifier field. If more time than this elapses between reports, this
-     /// may be an indication that there is a problem with reporting.
-     /// If timeout is set to 0x0000, reports of the attribute are not subject to timeout.
-     /// Note that, for a server/client connection to work properly using automatic
-     /// reporting, the timeout value set for attribute reports to be received by the client (or
-     /// server) cluster must be set somewhat higher than the maximum reporting interval
-     /// set for the attribute on the server (or client) cluster.
-     ///
-     ///
-     /// </summary>
+    /// Attribute Reporting Configuration Record field. This is reported in the {@link ConfigureReportingCommand} command
+    /// <p>
+    /// <b>minInterval</b>:
+    /// The minimum reporting interval field is 16 bits in length and shall contain the
+    /// minimum interval, in seconds, between issuing reports of the specified attribute.
+    /// If minInterval is set to 0x0000, then there is no minimum limit, unless one is
+    /// imposed by the specification of the cluster using this reporting mechanism or by
+    /// the applicable profile.
+    /// <p>
+    /// <b>maxInterval</b>:
+    /// The maximum reporting interval field is 16 bits in length and shall contain the
+    /// maximum interval, in seconds, between issuing reports of the specified attribute.
+    /// If maxInterval is set to 0xffff, then the device shall not issue reports for the specified
+    /// attribute, and the configuration information for that attribute need not be
+    /// maintained.
+    /// <p>
+    /// <b>reportableChange</b>:
+    /// The reportable change field shall contain the minimum change to the attribute that
+    /// will result in a report being issued. This field is of variable length. For attributes
+    /// with 'analog' data type the field has the same data type as the attribute. The sign (if any) of the reportable
+    /// change field is ignored.
+    /// <p>
+    /// <b>timeout</b>:
+    /// The timeout period field is 16 bits in length and shall contain the maximum
+    /// expected time, in seconds, between received reports for the attribute specified in
+    /// the attribute identifier field. If more time than this elapses between reports, this
+    /// may be an indication that there is a problem with reporting.
+    /// If timeout is set to 0x0000, reports of the attribute are not subject to timeout.
+    /// Note that, for a server/client connection to work properly using automatic
+    /// reporting, the timeout value set for attribute reports to be received by the client (or
+    /// server) cluster must be set somewhat higher than the maximum reporting interval
+    /// set for the attribute on the server (or client) cluster.
+    ///
+    ///
+    /// </summary>
     public class AttributeReportingConfigurationRecord : IZclListItemField
     {
         /// <summary>

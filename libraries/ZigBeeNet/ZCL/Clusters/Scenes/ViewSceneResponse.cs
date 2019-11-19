@@ -1,25 +1,35 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.Scenes;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.Scenes
 {
     /// <summary>
     /// View Scene Response value object class.
-    /// <para>
-    /// Cluster: Scenes. Command is sent FROM the server.
+    ///
+    /// Cluster: Scenes. Command ID 0x01 is sent FROM the server.
     /// This command is a specific command used for the Scenes cluster.
-    /// </para>
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class ViewSceneResponse : ZclCommand
     {
+        /// <summary>
+        /// The cluster ID to which this command belongs.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0005;
+
+        /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x01;
+
         /// <summary>
         /// Status command message field.
         /// </summary>
@@ -28,15 +38,15 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         /// <summary>
         /// Group ID command message field.
         /// </summary>
-        public ushort GroupID { get; set; }
+        public ushort GroupId { get; set; }
 
         /// <summary>
         /// Scene ID command message field.
         /// </summary>
-        public byte SceneID { get; set; }
+        public byte SceneId { get; set; }
 
         /// <summary>
-        /// Transition time command message field.
+        /// Transition Time command message field.
         /// </summary>
         public ushort TransitionTime { get; set; }
 
@@ -46,27 +56,26 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         public string SceneName { get; set; }
 
         /// <summary>
-        /// Extension field sets command message field.
+        /// Extension Field Sets command message field.
         /// </summary>
         public List<ExtensionFieldSet> ExtensionFieldSets { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ViewSceneResponse()
         {
+            ClusterId = CLUSTER_ID;
+            CommandId = COMMAND_ID;
             GenericCommand = false;
-            ClusterId = 5;
-            CommandId = 1;
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(GroupID, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneID, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(SceneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(SceneName, ZclDataType.Get(DataType.CHARACTER_STRING));
             serializer.Serialize(ExtensionFieldSets, ZclDataType.Get(DataType.N_X_EXTENSION_FIELD_SET));
@@ -75,8 +84,8 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            GroupID = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneID = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SceneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
             TransitionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             SceneName = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
             ExtensionFieldSets = deserializer.Deserialize<List<ExtensionFieldSet>>(ZclDataType.Get(DataType.N_X_EXTENSION_FIELD_SET));
@@ -90,10 +99,10 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
             builder.Append(base.ToString());
             builder.Append(", Status=");
             builder.Append(Status);
-            builder.Append(", GroupID=");
-            builder.Append(GroupID);
-            builder.Append(", SceneID=");
-            builder.Append(SceneID);
+            builder.Append(", GroupId=");
+            builder.Append(GroupId);
+            builder.Append(", SceneId=");
+            builder.Append(SceneId);
             builder.Append(", TransitionTime=");
             builder.Append(TransitionTime);
             builder.Append(", SceneName=");

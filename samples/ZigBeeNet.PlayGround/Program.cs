@@ -114,7 +114,6 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
                 networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
-                networkManager.AddSupportedCluster(ZclTouchlinkCluster.CLUSTER_ID);
 
                 networkManager.AddExtension(new ZigBeeBasicServerExtension());
 
@@ -336,7 +335,7 @@ namespace ZigBeeNet.PlayGround
                                         var cluster = endpoint.GetInputCluster(ZclBasicCluster.CLUSTER_ID);
                                         if (cluster != null)
                                         {
-                                            var result = await ((ZclBasicCluster)cluster).GetManufacturerNameAsync();
+                                            var result = await cluster.Read(ZclBasicCluster.ATTR_MANUFACTURERNAME);
 
                                             if (result.IsSuccess())
                                             {
