@@ -97,7 +97,7 @@ namespace ZigBeeNet.CodeGenerator
             @out.WriteLine("namespace ZigBeeNet.ZCL.Clusters");
             @out.WriteLine("{");
             @out.WriteLine("    /// <summary>");
-            @out.WriteLine("    /// " + cluster.Name + " cluster implementation (Cluster ID " + "0x" + cluster.Code.ToString("X4") + ".");
+            @out.WriteLine("    /// " + cluster.Name + " cluster implementation (Cluster ID " + "0x" + cluster.Code.ToString("X4") + ").");
             if (cluster.Description.Count != 0)
             {
                 @out.WriteLine("    ///");
