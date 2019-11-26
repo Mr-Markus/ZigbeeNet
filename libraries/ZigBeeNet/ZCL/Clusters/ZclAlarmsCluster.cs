@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Alarms cluster implementation (Cluster ID 0x0009.
+    /// Alarms cluster implementation (Cluster ID 0x0009).
     ///
     /// Attributes and commands for sending alarm notifications and configuring alarm
     /// functionality.

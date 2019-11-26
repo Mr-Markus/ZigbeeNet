@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using ZigBeeNet.CodeGenerator.Xml;
@@ -225,6 +226,13 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
+        private bool IsListType(ZigBeeXmlField field)
+        {
+            string dataType = GetDataTypeClass(field);
+
+            return dataType.StartsWith("List<");
+        }
+
         protected void GenerateToString(TextWriter @out, string className, List<ZigBeeXmlField> fields, List<string> reservedFields)
         {
             @out.WriteLine();
@@ -243,8 +251,17 @@ namespace ZigBeeNet.CodeGenerator
                 {
                     continue;
                 }
+
                 @out.WriteLine("            builder.Append(\", " + StringToUpperCamelCase(field.Name) + "=\");");
-                @out.WriteLine("            builder.Append(" + StringToUpperCamelCase(field.Name) + ");");
+
+                if (IsListType(field))
+                {
+                    @out.WriteLine("            builder.Append(string.Join(\", \", " + StringToUpperCamelCase(field.Name) + "));");
+                }
+                else
+                {
+                    @out.WriteLine("            builder.Append(" + StringToUpperCamelCase(field.Name) + ");");
+                }
             }
             @out.WriteLine("            builder.Append(\']\');");
             @out.WriteLine();

@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Scenes cluster implementation (Cluster ID 0x0005.
+    /// Scenes cluster implementation (Cluster ID 0x0005).
     ///
     /// The scenes cluster provides attributes and commands for setting up and recalling
     /// scenes. Each scene corresponds to a set of stored values of specified attributes for one

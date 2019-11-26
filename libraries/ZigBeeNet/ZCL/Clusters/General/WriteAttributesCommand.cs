@@ -61,7 +61,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append("WriteAttributesCommand [");
             builder.Append(base.ToString());
             builder.Append(", Records=");
-            builder.Append(Records);
+            builder.Append(string.Join(", ", Records));
             builder.Append(']');
 
             return builder.ToString();

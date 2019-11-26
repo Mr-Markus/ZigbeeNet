@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// On / Off Switch Configuration cluster implementation (Cluster ID 0x0007.
+    /// On / Off Switch Configuration cluster implementation (Cluster ID 0x0007).
     ///
     /// Attributes and commands for configuring On/Off switching devices
     ///

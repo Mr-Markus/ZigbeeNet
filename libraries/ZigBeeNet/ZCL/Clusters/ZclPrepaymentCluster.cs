@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Prepayment cluster implementation (Cluster ID 0x0705.
+    /// Prepayment cluster implementation (Cluster ID 0x0705).
     ///
     /// The Prepayment Cluster provides the facility to pass messages relating to the
     /// accounting functionality of a meter between devices on the HAN. It allows for the

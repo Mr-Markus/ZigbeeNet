@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Poll Control cluster implementation (Cluster ID 0x0020.
+    /// Poll Control cluster implementation (Cluster ID 0x0020).
     ///
     /// This cluster provides a mechanism for the management of an end device’s MAC Data Request
     /// rate. For the purposes of this cluster, the term “poll” always refers to the sending of a

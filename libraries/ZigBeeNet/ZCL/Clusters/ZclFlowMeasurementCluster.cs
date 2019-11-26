@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Flow Measurement cluster implementation (Cluster ID 0x0404.
+    /// Flow Measurement cluster implementation (Cluster ID 0x0404).
     ///
     /// The server cluster provides an interface to flow measurement functionality,
     /// including configuration and provision of notifications of flow measurements.

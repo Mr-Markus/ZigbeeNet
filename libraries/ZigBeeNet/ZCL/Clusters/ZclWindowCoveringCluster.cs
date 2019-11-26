@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Window Covering cluster implementation (Cluster ID 0x0102.
+    /// Window Covering cluster implementation (Cluster ID 0x0102).
     ///
     /// Provides an interface for controlling and adjusting automatic window coverings.
     ///

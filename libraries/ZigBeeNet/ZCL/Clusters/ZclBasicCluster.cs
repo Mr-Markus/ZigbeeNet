@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Basic cluster implementation (Cluster ID 0x0000.
+    /// Basic cluster implementation (Cluster ID 0x0000).
     ///
     /// This cluster supports an interface to the node or physical device. It provides
     /// attributes and commands for determining basic information, setting user information

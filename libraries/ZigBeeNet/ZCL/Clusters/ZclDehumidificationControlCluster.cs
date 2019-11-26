@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Dehumidification Control cluster implementation (Cluster ID 0x0203.
+    /// Dehumidification Control cluster implementation (Cluster ID 0x0203).
     ///
     /// This cluster provides an interface to dehumidification functionality.
     ///

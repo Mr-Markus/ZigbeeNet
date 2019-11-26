@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Relative Humidity Measurement cluster implementation (Cluster ID 0x0405.
+    /// Relative Humidity Measurement cluster implementation (Cluster ID 0x0405).
     ///
     /// The server cluster provides an interface to relative humidity measurement
     /// functionality, including configuration and provision of notifications of relative

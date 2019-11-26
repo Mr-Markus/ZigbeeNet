@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Multistate Value (Basic) cluster implementation (Cluster ID 0x0014.
+    /// Multistate Value (Basic) cluster implementation (Cluster ID 0x0014).
     ///
     /// The Multistate Value (Basic) cluster provides an interface for setting a multistate
     /// value, typically used as a control system parameter, and accessing characteristics of

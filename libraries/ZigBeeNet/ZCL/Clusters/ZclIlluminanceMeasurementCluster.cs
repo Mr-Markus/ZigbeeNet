@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Illuminance Measurement cluster implementation (Cluster ID 0x0400.
+    /// Illuminance Measurement cluster implementation (Cluster ID 0x0400).
     ///
     /// The cluster provides an interface to illuminance measurement functionality,
     /// including configuration and provision of notifications of illuminance

@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Messaging cluster implementation (Cluster ID 0x0703.
+    /// Messaging cluster implementation (Cluster ID 0x0703).
     ///
     /// This cluster provides an interface for passing text messages between ZigBee devices.
     /// Messages are expected to be delivered via the ESI and then unicast to all individually

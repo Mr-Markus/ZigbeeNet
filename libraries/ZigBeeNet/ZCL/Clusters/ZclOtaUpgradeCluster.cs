@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Ota Upgrade cluster implementation (Cluster ID 0x0019.
+    /// Ota Upgrade cluster implementation (Cluster ID 0x0019).
     ///
     /// The cluster provides a standard way to upgrade devices in the network via OTA messages.
     /// Thus the upgrade process may be performed between two devices from different

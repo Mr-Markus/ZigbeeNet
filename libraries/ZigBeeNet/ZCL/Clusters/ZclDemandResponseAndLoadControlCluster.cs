@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Demand Response And Load Control cluster implementation (Cluster ID 0x0701.
+    /// Demand Response And Load Control cluster implementation (Cluster ID 0x0701).
     ///
     /// This cluster provides an interface to the functionality of Smart Energy Demand
     /// Response and Load Control. Devices targeted by this cluster include thermostats and

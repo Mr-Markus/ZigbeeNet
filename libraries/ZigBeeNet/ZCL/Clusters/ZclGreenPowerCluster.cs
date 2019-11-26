@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Green Power cluster implementation (Cluster ID 0x0021.
+    /// Green Power cluster implementation (Cluster ID 0x0021).
     ///
     /// The Green Power cluster defines the format of the commands exchanged when handling
     /// GPDs.

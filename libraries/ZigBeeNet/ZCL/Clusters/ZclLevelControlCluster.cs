@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Level Control cluster implementation (Cluster ID 0x0008.
+    /// Level Control cluster implementation (Cluster ID 0x0008).
     ///
     /// This cluster provides an interface for controlling a characteristic of a device that
     /// can be set to a level, for example the brightness of a light, the degree of closure of a

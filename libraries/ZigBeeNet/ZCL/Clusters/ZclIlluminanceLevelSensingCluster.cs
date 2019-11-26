@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Illuminance Level Sensing cluster implementation (Cluster ID 0x0401.
+    /// Illuminance Level Sensing cluster implementation (Cluster ID 0x0401).
     ///
     /// The cluster provides an interface to illuminance level sensing functionality,
     /// including configuration and provision of notifications of whether the illuminance is

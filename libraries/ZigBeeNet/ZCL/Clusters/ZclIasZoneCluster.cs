@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// IAS Zone cluster implementation (Cluster ID 0x0500.
+    /// IAS Zone cluster implementation (Cluster ID 0x0500).
     ///
     /// The IAS Zone cluster defines an interface to the functionality of an IAS security zone
     /// device. IAS Zone supports up to two alarm types per zone, low battery reports and

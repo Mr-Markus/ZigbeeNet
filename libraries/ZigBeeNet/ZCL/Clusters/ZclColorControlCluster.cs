@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Color Control cluster implementation (Cluster ID 0x0300.
+    /// Color Control cluster implementation (Cluster ID 0x0300).
     ///
     /// This cluster provides an interface for changing the color of a light. Color is specified
     /// according to the Commission Internationale de l'Éclairage (CIE) specification CIE

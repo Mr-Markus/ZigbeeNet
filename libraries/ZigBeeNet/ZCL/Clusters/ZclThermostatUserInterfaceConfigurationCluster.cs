@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Thermostat User Interface Configuration cluster implementation (Cluster ID 0x0204.
+    /// Thermostat User Interface Configuration cluster implementation (Cluster ID 0x0204).
     ///
     /// This cluster provides an interface to allow configuration of the user interface for a
     /// thermostat, or a thermostat controller device, that supports a keypad and LCD screen.

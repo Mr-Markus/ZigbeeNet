@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Groups cluster implementation (Cluster ID 0x0004.
+    /// Groups cluster implementation (Cluster ID 0x0004).
     ///
     /// The ZigBee specification provides the capability for group addressing. That is, any
     /// endpoint on any device may be assigned to one or more groups, each labeled with a 16-bit

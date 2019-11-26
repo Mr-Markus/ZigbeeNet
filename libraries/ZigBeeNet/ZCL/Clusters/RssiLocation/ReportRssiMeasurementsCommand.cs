@@ -81,7 +81,7 @@ namespace ZigBeeNet.ZCL.Clusters.RSSILocation
             builder.Append(", NumberOfNeighbors=");
             builder.Append(NumberOfNeighbors);
             builder.Append(", NeighborsInformation=");
-            builder.Append(NeighborsInformation);
+            builder.Append(string.Join(", ", NeighborsInformation));
             builder.Append(']');
 
             return builder.ToString();

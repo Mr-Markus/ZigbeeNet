@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Identify cluster implementation (Cluster ID 0x0003.
+    /// Identify cluster implementation (Cluster ID 0x0003).
     ///
     /// Attributes and commands to put a device into an Identification mode (e.g. flashing a
     /// light), that indicates to an observer – e.g. an installer - which of several devices it

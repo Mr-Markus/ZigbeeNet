@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// IAS ACE cluster implementation (Cluster ID 0x0501.
+    /// IAS ACE cluster implementation (Cluster ID 0x0501).
     ///
     /// The IAS ACE cluster defines an interface to the functionality of any Ancillary Control
     /// Equipment of the IAS system. Using this cluster, a ZigBee enabled ACE device can access a
