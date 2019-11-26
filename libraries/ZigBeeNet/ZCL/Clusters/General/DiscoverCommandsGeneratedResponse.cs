@@ -69,7 +69,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append(", DiscoveryComplete=");
             builder.Append(DiscoveryComplete);
             builder.Append(", CommandIdentifiers=");
-            builder.Append(CommandIdentifiers);
+            builder.Append(string.Join(", ", CommandIdentifiers));
             builder.Append(']');
 
             return builder.ToString();

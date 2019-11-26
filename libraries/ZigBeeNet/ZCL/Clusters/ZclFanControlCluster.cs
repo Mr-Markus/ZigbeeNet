@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Fan Control cluster implementation (Cluster ID 0x0202.
+    /// Fan Control cluster implementation (Cluster ID 0x0202).
     ///
     /// This cluster specifies an interface to control the speed of a fan as part of a heating /
     /// cooling system.

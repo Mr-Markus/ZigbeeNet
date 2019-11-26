@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Metering cluster implementation (Cluster ID 0x0702.
+    /// Metering cluster implementation (Cluster ID 0x0702).
     ///
     /// The Metering Cluster provides a mechanism to retrieve usage information from
     /// Electric, Gas, Water, and potentially Thermal metering devices. These devices can

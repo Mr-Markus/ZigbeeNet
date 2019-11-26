@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Commissioning cluster implementation (Cluster ID 0x0015.
+    /// Commissioning cluster implementation (Cluster ID 0x0015).
     ///
     /// This cluster provides attributes and commands pertaining to the commissioning and
     /// management of ZigBee devices operating in a network.

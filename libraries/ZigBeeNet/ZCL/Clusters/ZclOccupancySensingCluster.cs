@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Occupancy Sensing cluster implementation (Cluster ID 0x0406.
+    /// Occupancy Sensing cluster implementation (Cluster ID 0x0406).
     ///
     /// The cluster provides an interface to occupancy sensing functionality, including
     /// configuration and provision of notifications of occupancy status.

@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Analog Input (Basic) cluster implementation (Cluster ID 0x000C.
+    /// Analog Input (Basic) cluster implementation (Cluster ID 0x000C).
     ///
     /// The Analog Input (Basic) cluster provides an interface for reading the value of an
     /// analog measurement and accessing various characteristics of that measurement. The

@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Time cluster implementation (Cluster ID 0x000A.
+    /// Time cluster implementation (Cluster ID 0x000A).
     ///
     /// This cluster provides a basic interface to a real-time clock. The clock time may be read
     /// and also written, in order to synchronize the clock (as close as practical) to a time

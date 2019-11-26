@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// IAS WD cluster implementation (Cluster ID 0x0502.
+    /// IAS WD cluster implementation (Cluster ID 0x0502).
     ///
     /// The IAS WD cluster provides an interface to the functionality of any Warning Device
     /// equipment of the IAS system. Using this cluster, a ZigBee enabled CIE device can access a

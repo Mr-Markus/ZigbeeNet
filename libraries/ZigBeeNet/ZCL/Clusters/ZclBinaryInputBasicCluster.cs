@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Binary Input (Basic) cluster implementation (Cluster ID 0x000F.
+    /// Binary Input (Basic) cluster implementation (Cluster ID 0x000F).
     ///
     /// The Binary Input (Basic) cluster provides an interface for reading the value of a binary
     /// measurement and accessing various characteristics of that measurement. The cluster

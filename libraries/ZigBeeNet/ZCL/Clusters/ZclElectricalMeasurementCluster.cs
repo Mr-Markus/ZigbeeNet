@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Electrical Measurement cluster implementation (Cluster ID 0x0B04.
+    /// Electrical Measurement cluster implementation (Cluster ID 0x0B04).
     ///
     /// This cluster provides a mechanism for querying data about the electrical properties as
     /// measured by the device. This cluster may be implemented on any device type and be

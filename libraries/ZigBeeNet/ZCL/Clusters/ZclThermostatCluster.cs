@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Thermostat cluster implementation (Cluster ID 0x0201.
+    /// Thermostat cluster implementation (Cluster ID 0x0201).
     ///
     /// This cluster provides an interface to the functionality of a thermostat.
     ///

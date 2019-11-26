@@ -101,7 +101,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
             builder.Append(", SceneName=");
             builder.Append(SceneName);
             builder.Append(", ExtensionFieldSets=");
-            builder.Append(ExtensionFieldSets);
+            builder.Append(string.Join(", ", ExtensionFieldSets));
             builder.Append(']');
 
             return builder.ToString();

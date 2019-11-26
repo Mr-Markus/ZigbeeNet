@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// RSSI Location cluster implementation (Cluster ID 0x000B.
+    /// RSSI Location cluster implementation (Cluster ID 0x000B).
     ///
     /// This cluster provides a means for exchanging Received Signal Strength Indication
     /// (RSSI) information among one hop devices as well as messages to report RSSI data to a

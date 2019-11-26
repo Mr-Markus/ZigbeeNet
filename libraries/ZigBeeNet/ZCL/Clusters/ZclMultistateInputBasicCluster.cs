@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Multistate Input (Basic) cluster implementation (Cluster ID 0x0012.
+    /// Multistate Input (Basic) cluster implementation (Cluster ID 0x0012).
     ///
     /// The Multistate Input (Basic) cluster provides an interface for reading the value of a
     /// multistate measurement and accessing various characteristics of that measurement.

@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Pressure Measurement cluster implementation (Cluster ID 0x0403.
+    /// Pressure Measurement cluster implementation (Cluster ID 0x0403).
     ///
     /// The cluster provides an interface to pressure measurement functionality, including
     /// configuration and provision of notifications of pressure measurements.

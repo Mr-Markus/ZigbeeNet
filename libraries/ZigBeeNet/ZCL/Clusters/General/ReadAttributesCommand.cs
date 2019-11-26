@@ -61,7 +61,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append("ReadAttributesCommand [");
             builder.Append(base.ToString());
             builder.Append(", Identifiers=");
-            builder.Append(Identifiers);
+            builder.Append(string.Join(", ", Identifiers));
             builder.Append(']');
 
             return builder.ToString();

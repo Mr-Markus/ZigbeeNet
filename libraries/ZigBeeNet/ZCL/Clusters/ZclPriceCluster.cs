@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Price cluster implementation (Cluster ID 0x0700.
+    /// Price cluster implementation (Cluster ID 0x0700).
     ///
     /// The Price Cluster provides the mechanism for communicating Gas, Energy, or Water
     /// pricing information within the premises. This pricing information is distributed to

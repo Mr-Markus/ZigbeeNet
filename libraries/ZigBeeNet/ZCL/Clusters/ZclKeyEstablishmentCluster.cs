@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Key Establishment cluster implementation (Cluster ID 0x0800.
+    /// Key Establishment cluster implementation (Cluster ID 0x0800).
     ///
     /// This cluster provides attributes and commands to perform mutual authentication and
     /// establish keys between two ZigBee devices.

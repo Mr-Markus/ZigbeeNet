@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Power Configuration cluster implementation (Cluster ID 0x0001.
+    /// Power Configuration cluster implementation (Cluster ID 0x0001).
     ///
     /// Attributes for determining detailed information about a device’s power source(s),
     /// and for configuring under/over voltage alarms.

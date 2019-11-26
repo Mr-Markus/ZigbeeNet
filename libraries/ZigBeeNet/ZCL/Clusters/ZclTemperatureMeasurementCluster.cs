@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Temperature Measurement cluster implementation (Cluster ID 0x0402.
+    /// Temperature Measurement cluster implementation (Cluster ID 0x0402).
     ///
     /// The server cluster provides an interface to temperature measurement functionality,
     /// including configuration and provision of notifications of temperature

@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Diagnostics cluster implementation (Cluster ID 0x0B05.
+    /// Diagnostics cluster implementation (Cluster ID 0x0B05).
     ///
     /// The diagnostics cluster provides access to information regarding the operation of the
     /// ZigBee stack over time. This information is useful to installers and other network

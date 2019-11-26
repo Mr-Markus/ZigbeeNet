@@ -15,7 +15,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Multistate Output (Basic) cluster implementation (Cluster ID 0x0013.
+    /// Multistate Output (Basic) cluster implementation (Cluster ID 0x0013).
     ///
     /// The Multistate Output (Basic) cluster provides an interface for setting the value of an
     /// output that can take one of a number of discrete values, and accessing characteristics

@@ -16,7 +16,7 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters
 {
     /// <summary>
-    /// Door Lock cluster implementation (Cluster ID 0x0101.
+    /// Door Lock cluster implementation (Cluster ID 0x0101).
     ///
     /// The door lock cluster provides an interface to a generic way to secure a door. The
     /// physical object that provides the locking functionality is abstracted from the
