@@ -1,44 +1,54 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
     /// Network Update Request value object class.
-    /// 
-    /// This command is provided to allow updating of network configuration parameters
-    /// or to request information from devices on network conditions in the local
-    /// operating environment. The destination addressing on this primitive shall be
-    /// unicast or broadcast to all devices for which macRxOnWhenIdle = TRUE.
-    /// 
+    ///
+    ///
+    /// This command is provided to allow updating of network configuration parameters or to
+    /// request information from devices on network conditions in the local operating
+    /// environment. The destination addressing on this primitive shall be unicast or
+    /// broadcast to all devices for which macRxOnWhenIdle = TRUE.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class NetworkUpdateRequest : ZdoRequest
     {
         /// <summary>
-        /// ScanChannels command message field.
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0038;
+
+        /// <summary>
+        /// Scan Channels command message field.
         /// </summary>
         public int ScanChannels { get; set; }
 
         /// <summary>
-        /// ScanDuration command message field.
+        /// Scan Duration command message field.
         /// </summary>
         public byte ScanDuration { get; set; }
 
         /// <summary>
-        /// ScanCount command message field.
+        /// Scan Count command message field.
         /// </summary>
         public byte ScanCount { get; set; }
 
         /// <summary>
-        /// nwkUpdateId command message field.
+        /// NWK Update ID command message field.
         /// </summary>
         public byte NwkUpdateId { get; set; }
 
         /// <summary>
-        /// nwkManagerAddr command message field.
+        /// NWK Manager Addr command message field.
         /// </summary>
         public ushort NwkManagerAddr { get; set; }
 
@@ -47,7 +57,7 @@ namespace ZigBeeNet.ZDO.Command
         /// </summary>
         public NetworkUpdateRequest()
         {
-            ClusterId = 0x0038;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -65,33 +75,32 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            ScanChannels = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            ScanDuration = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ScanCount = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkUpdateId = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkManagerAddr = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            ScanChannels = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            ScanDuration = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ScanCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkUpdateId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkManagerAddr = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("NetworkUpdateRequest [")
-                   .Append(base.ToString())
-                   .Append(", scanChannels=")
-                   .Append(ScanChannels)
-                   .Append(", scanDuration=")
-                   .Append(ScanDuration)
-                   .Append(", scanCount=")
-                   .Append(ScanCount)
-                   .Append(", nwkUpdateId=")
-                   .Append(NwkUpdateId)
-                   .Append(", nwkManagerAddr=")
-                   .Append(NwkManagerAddr)
-                   .Append(']');
+            builder.Append("NetworkUpdateRequest [");
+            builder.Append(base.ToString());
+            builder.Append(", ScanChannels=");
+            builder.Append(ScanChannels);
+            builder.Append(", ScanDuration=");
+            builder.Append(ScanDuration);
+            builder.Append(", ScanCount=");
+            builder.Append(ScanCount);
+            builder.Append(", NwkUpdateId=");
+            builder.Append(NwkUpdateId);
+            builder.Append(", NwkManagerAddr=");
+            builder.Append(NwkManagerAddr);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

@@ -48,35 +48,22 @@ namespace ZigBeeNet.CodeGenerator
                 ImportsAdd("System.Collections.Generic");
                 ImportsAdd("System.Linq");
                 ImportsAdd("System.Text");
-                ImportsAdd("ZigBeeNet.Security");
                 ImportsAdd("ZigBeeNet.ZCL.Protocol");
-                ImportsAdd("ZigBeeNet.ZCL.Field");
-                ImportsAdd("ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
 
-                OutputImports(@out);
-
-                //@out.WriteLine("package " + packageRoot + ";");
-                @out.WriteLine();
-                //ImportsAdd("javax.annotation.Generated");
-
-                //if (command.Response != null)
-                //{
-                //    ImportsAdd(packageRootPrefix + ".transaction.ZigBeeTransactionMatcher");
-                //    ImportsAdd(packageRootPrefix + ".ZigBeeCommand");
-
-                //    ImportsAdd(packageRoot + "." + command.Response.Command);
-                //}
 
                 string commandExtends = "";
                 if (packageRoot.Contains(".zcl.", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    //ImportsAdd(packageRootPrefix + packageZcl + ".ZclCommand");
-                    //ImportsAdd(packageRootPrefix + packageZclProtocol + ".ZclCommandDirection");
+                    ImportsAdd("ZigBeeNet.ZCL.Field");
+                    ImportsAdd("ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                    ImportsAdd("ZigBeeNet.Security");
                     commandExtends = "ZclCommand";
                     reservedFields.Add("ManufacturerCode");
                 }
                 else
                 {
+                    ImportsAdd("ZigBeeNet.ZCL");
+                    ImportsAdd("ZigBeeNet.ZDO.Field");
                     if (command.Name.Contains("Response"))
                     {
                         commandExtends = "ZdoResponse";
@@ -86,25 +73,23 @@ namespace ZigBeeNet.CodeGenerator
                     {
                         commandExtends = "ZdoRequest";
                     }
-                    //mportsAdd(packageRootPrefix + packageZdp + "." + commandExtends);
+                }
+                if (command.Response != null)
+                {
+                    ImportsAdd("ZigBeeNet.Transaction");
                 }
 
-                //if (command.Fields.Count > 0)
-                //{
-                //    ImportsAdd(packageRootPrefix + packageZcl + ".ZclFieldSerializer");
-                //    ImportsAdd(packageRootPrefix + packageZcl + ".ZclFieldDeserializer");
-                //    ImportsAdd(packageRootPrefix + packageZclProtocol + ".ZclDataType");
-                //}
+                OutputImports(@out);
+                @out.WriteLine();
 
-                //foreach (ZigBeeXmlField field in command.Fields)
-                //{
-                //    ImportsAddClass(field);
-                //}
-
-                //OutputImports(@out);
-
-                //@out.WriteLine();
-                @out.WriteLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                if (packageRoot.Contains(".zcl.", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    @out.WriteLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                }
+                else
+                {
+                    @out.WriteLine("namespace ZigBeeNet.ZDO.Command");
+                }
                 @out.WriteLine("{");
 
                 @out.WriteLine("    /// <summary>");
@@ -209,25 +194,24 @@ namespace ZigBeeNet.CodeGenerator
 
                 GenerateFields(@out, commandExtends, className, command.Fields, reservedFields);
 
-                /*
                 if (command.Response != null)
                 {
                     @out.WriteLine();
-                    //@out.WriteLine("    @Override");
-                    @out.WriteLine("    public override bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response) {");
+                    @out.WriteLine("        public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)");
+                    @out.WriteLine("        {");
                     if (command.Response.Matchers.Count == 0)
                     {
-                        @out.WriteLine("        return (response is " + command.Response.Command + ")");
-                        @out.WriteLine("                && ((ZdoRequest) request).GetDestinationAddress().Equals((("
-                                + command.Response.Command + ") response).GetSourceAddress());");
+                        @out.WriteLine("            return (response is " + command.Response.Command + ") && ((ZdoRequest) request).DestinationAddress.Equals(((" + 
+                            command.Response.Command + ") response).SourceAddress);");
                     }
                     else
                     {
-                        @out.WriteLine("        if (!(response is " + command.Response.Command + ")) {");
-                        @out.WriteLine("            return false;");
-                        @out.WriteLine("        }");
+                        @out.WriteLine("            if (!(response is " + command.Response.Command + "))");
+                        @out.WriteLine("            {");
+                        @out.WriteLine("                return false;");
+                        @out.WriteLine("            }");
                         @out.WriteLine();
-                        @out.Write("        return ");
+                        @out.Write("            return ");
 
                         bool first = true;
                         foreach (ZigBeeXmlMatcher matcher in command.Response.Matchers)
@@ -235,19 +219,16 @@ namespace ZigBeeNet.CodeGenerator
                             if (first == false)
                             {
                                 @out.WriteLine();
-                                @out.Write("                && ");
+                                @out.Write("                    && ");
                             }
                             first = false;
-                            @out.WriteLine("(((" + StringToUpperCamelCase(command.Name) + ") request).get"
-                                    + matcher.CommandField + "()");
-                            @out.Write("                .Equals(((" + command.Response.Command + ") response).get"
-                                    + matcher.ResponseField + "()))");
+                            @out.Write("(((" + StringToUpperCamelCase(command.Name) + ") request)." + matcher.CommandField);
+                            @out.Write(".Equals(((" + command.Response.Command + ") response)." + matcher.ResponseField + "))");
                         }
                         @out.WriteLine(";");
                     }
-                    @out.WriteLine("    }");
+                    @out.WriteLine("         }");
                 }
-                */
 
                 GenerateToString(@out, className, command.Fields, reservedFields);
 

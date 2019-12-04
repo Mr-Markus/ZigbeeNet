@@ -56,7 +56,7 @@ namespace ZigBeeNet.CodeGenerator
                     if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
                     {
                         ZigBeeXmlField sizedField = GetAutoSized(fields, StringToLowerCamelCase(field.Name));
-                        @out.WriteLine("        serializer.serialize(" + StringToUpperCamelCase(sizedField.Name) + ".Count, ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("            serializer.Serialize(" + StringToUpperCamelCase(sizedField.Name) + ".Count, ZclDataType.Get(DataType." + field.Type + "));");
                         continue;
                     }
 
@@ -64,7 +64,7 @@ namespace ZigBeeNet.CodeGenerator
                     {
                         @out.WriteLine("            for (int cnt = 0; cnt < " + StringToUpperCamelCase(field.Name) + ".Count; cnt++)");
                         @out.WriteLine("            {");
-                        @out.WriteLine("                serializer.serialize(" + StringToLowerCamelCase(field.Name) + ".Get(cnt), ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("                serializer.Serialize(" + StringToUpperCamelCase(field.Name) + "[cnt], ZclDataType.Get(DataType." + field.Type + "));");
                         @out.WriteLine("            }");
                     }
                     else if (field.Condition != null)
@@ -130,10 +130,10 @@ namespace ZigBeeNet.CodeGenerator
                     {
                         if (first)
                         {
-                            @out.WriteLine("        // Create lists");
+                            @out.WriteLine("            // Create lists");
                             first = false;
                         }
-                        @out.WriteLine("        " + StringToUpperCamelCase(field.Name) + " = new Array"+ GetDataTypeClass(field) + "();");
+                        @out.WriteLine("            " + StringToUpperCamelCase(field.Name) + " = new "+ GetDataTypeClass(field) + "();");
                     }
                 }
                 if (first == false)
@@ -148,14 +148,14 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (field.CompleteOnZero)
                     {
-                        @out.WriteLine("            if (deserializer.IsEndOfStream())");
+                        @out.WriteLine("            if (deserializer.IsEndOfStream)");
                         @out.WriteLine("            {");
                         @out.WriteLine("                return;");
                         @out.WriteLine("            }");
                     }
                     if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
                     {
-                        @out.WriteLine("            ushort " + StringToUpperCamelCase(field.Name) + " = (" + GetDataTypeClass(field) + ") deserializer.Deserialize(ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("            " + GetDataTypeClass(field) + "? " + StringToLowerCamelCase(field.Name) + " = (" + GetDataTypeClass(field) + "?) deserializer.Deserialize(ZclDataType.Get(DataType." + field.Type + "));");
                         continue;
                     }
 
@@ -215,7 +215,7 @@ namespace ZigBeeNet.CodeGenerator
 
                     if (field.Name.ToLower().Equals("status") && field.Type.Equals("ZDO_STATUS"))
                     {
-                        @out.WriteLine("            if (status != ZdoStatus.SUCCESS)");
+                        @out.WriteLine("            if (Status != ZdoStatus.SUCCESS)");
                         @out.WriteLine("            {");
                         @out.WriteLine("                // Don't read the full response if we have an error");
                         @out.WriteLine("                return;");
@@ -298,7 +298,7 @@ namespace ZigBeeNet.CodeGenerator
             {
                 if (field.Sizer != null)
                 {
-                    Console.WriteLine();
+                    //Console.WriteLine();
                 }
                 if (name.Equals(field.Sizer))
                 {

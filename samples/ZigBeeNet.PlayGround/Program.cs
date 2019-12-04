@@ -282,7 +282,6 @@ namespace ZigBeeNet.PlayGround
                                     {
                                         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
                                         {
-                                            Destination = endpointAddress,
                                             NwkAddrOfInterest = addr
                                         };
 

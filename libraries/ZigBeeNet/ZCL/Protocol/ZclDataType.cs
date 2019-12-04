@@ -120,7 +120,7 @@ namespace ZigBeeNet.ZCL.Protocol
             _codeTypeMapping[0x98] = new ZclDataType("Node Descriptor", typeof(NodeDescriptor), 0x00, false, DataType.NODE_DESCRIPTOR);
             _codeTypeMapping[0x99] = new ZclDataType("NWK address", typeof(ushort), 0x00, false, DataType.NWK_ADDRESS);
             _codeTypeMapping[0x9A] = new ZclDataType("N x Binding Table", typeof(BindingTable), 0x00, false, DataType.N_X_BINDING_TABLE);
-            _codeTypeMapping[0x9B] = new ZclDataType("N X IEEE Address", typeof(long), 0x00, false, DataType.N_X_IEEE_ADDRESS);
+            _codeTypeMapping[0x9B] = new ZclDataType("N X IEEE Address", typeof(ulong), 0x00, false, DataType.N_X_IEEE_ADDRESS);
             _codeTypeMapping[0x9C] = new ZclDataType("Power Descriptor", typeof(PowerDescriptor), 0x00, false, DataType.POWER_DESCRIPTOR);
             _codeTypeMapping[0x9D] = new ZclDataType("Routing Table", typeof(RoutingTable), 0x00, false, DataType.ROUTING_TABLE);
             _codeTypeMapping[0x9E] = new ZclDataType("Simple Descriptor", typeof(SimpleDescriptor), 0x00, false, DataType.SIMPLE_DESCRIPTOR);
