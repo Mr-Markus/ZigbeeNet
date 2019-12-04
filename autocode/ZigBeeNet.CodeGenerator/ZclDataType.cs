@@ -24,7 +24,7 @@ namespace ZigBeeNet.CodeGenerator
 				{ "NEIGHBOR_TABLE", new DataTypeMap("NeighborTable", 0, 0, false) },
 				{ "ROUTING_TABLE", new DataTypeMap("RoutingTable", 0, 0, false) },
 				{ "NWK_ADDRESS", new DataTypeMap("ushort", 0, 0, false, 0xffff) },
-				{ "N_X_IEEE_ADDRESS", new DataTypeMap("List<long>", 0, 0, false) },
+				{ "N_X_IEEE_ADDRESS", new DataTypeMap("List<ulong>", 0, 0, false) },
 				{ "N_X_NWK_ADDRESS", new DataTypeMap("List<ushort>", 0, 0, false) },
 				{ "CLUSTERID", new DataTypeMap("ushort", 0, 0, false) },
 				{ "N_X_CLUSTERID", new DataTypeMap("List<ushort>", 0, 0, false) },

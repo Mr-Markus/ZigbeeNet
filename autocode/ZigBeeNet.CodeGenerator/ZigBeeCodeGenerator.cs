@@ -71,16 +71,16 @@ namespace ZigBeeNet.CodeGenerator
 
             List<ZigBeeXmlCluster> zclClusters = zclParser.ParseClusterConfiguration();
 
-            //ZigBeeXmlParser zdoParser = new ZigBeeXmlParser();
-            //zdoParser.AddFile("./Resources/XXXX_ZigBeeDeviceObject.xml");
+            ZigBeeXmlParser zdoParser = new ZigBeeXmlParser();
+            zdoParser.AddFile("./Resources/XXXX_ZigBeeDeviceObject.xml");
 
-            //List<ZigBeeXmlCluster> zdoClusters = zdoParser.ParseClusterConfiguration();
+            List<ZigBeeXmlCluster> zdoClusters = zdoParser.ParseClusterConfiguration();
 
             // Process all enums, bitmaps and structures first so we have a consolidated list.
             // We use this later when generating the imports in the cluster and command classes.
             List<ZigBeeXmlCluster> allClusters = new List<ZigBeeXmlCluster>();
             allClusters.AddRange(zclClusters);
-            //allClusters.AddRange(zdoClusters);
+            allClusters.AddRange(zdoClusters);
             ZigBeeZclDependencyGenerator typeGenerator = new ZigBeeZclDependencyGenerator(outputPath, allClusters, generatedDate);
             Dictionary<string, string> zclTypes = typeGenerator.GetDependencyMap();
 
@@ -90,7 +90,7 @@ namespace ZigBeeNet.CodeGenerator
             new ZigBeeZclStructureGenerator(outputPath, zclClusters, generatedDate, zclTypes);
             new ZigBeeZclClusterTypeGenerator(outputPath, zclClusters, generatedDate, zclTypes);
 
-            //var zdoClusterGenerator = new ZigBeeZclCommandGenerator(zdoClusters, zclTypes);
+            new ZigBeeZclCommandGenerator(outputPath, zdoClusters, generatedDate, zclTypes);
 
             //zclParser = new ZigBeeXmlParser();
             //zclParser.AddFile("./Resources/zigbee_constants.xml");

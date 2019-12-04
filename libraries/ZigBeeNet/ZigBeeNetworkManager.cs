@@ -1129,7 +1129,7 @@ namespace ZigBeeNet
             {
                 ManagementLeaveRequest command = new ManagementLeaveRequest();
 
-                command.setDeviceAddress(leaveAddress);
+                command.DeviceAddress = leaveAddress;
                 command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
                 command.SourceAddress = new ZigBeeEndpointAddress(0);
                 command.RemoveChildrenRejoin = false;

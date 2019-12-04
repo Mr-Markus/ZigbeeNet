@@ -63,7 +63,7 @@ namespace ZigBeeNet.Internal
 
                 MatchDescriptorResponse matchResponse = new MatchDescriptorResponse();
                 matchResponse.Status = ZdoStatus.SUCCESS;
-                List<ushort> matchList = new List<ushort>();
+                List<byte> matchList = new List<byte>();
                 matchList.Add(1);
                 matchResponse.MatchList = matchList;
 

@@ -57,7 +57,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
                 Status = ZDO.ZdoStatus.SUCCESS,
                 TransactionId = 0x2A
             };
-            List<ushort> matchList = new List<ushort>
+            List<byte> matchList = new List<byte>
             {
                 1
             };

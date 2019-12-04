@@ -1,35 +1,35 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
     /// Node Descriptor Request value object class.
-    /// 
-    /// The Node_Desc_req command is generated from a local device wishing to inquire
-    /// as to the node descriptor of a remote device. This command shall be unicast either
-    /// to the remote device itself or to an alternative device that contains the discovery
-    /// information of the remote device.
-    /// 
+    ///
+    ///
+    /// The Node_Desc_req command is generated from a local device wishing to inquire as to the
+    /// node descriptor of a remote device. This command shall be unicast either to the remote
+    /// device itself or to an alternative device that contains the discovery information of
+    /// the remote device.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class NodeDescriptorRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
         /// <summary>
-        /// DestinationAddress command message field.
+        /// The ZDO cluster ID.
         /// </summary>
-        public IZigBeeAddress Destination
-        {
-            get => base.DestinationAddress;
-            set => base.DestinationAddress = value;
-        }
+        public const ushort CLUSTER_ID = 0x0002;
 
         /// <summary>
-        /// NWKAddrOfInterest command message field.
+        /// NWK Addr Of Interest command message field.
         /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
@@ -38,7 +38,7 @@ namespace ZigBeeNet.ZDO.Command
         /// </summary>
         public NodeDescriptorRequest()
         {
-            ClusterId = 0x0002;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -52,7 +52,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
@@ -62,21 +62,20 @@ namespace ZigBeeNet.ZDO.Command
                 return false;
             }
 
-            return ((NodeDescriptorRequest)request).NwkAddrOfInterest.Equals(((NodeDescriptorResponse)response).NwkAddrOfInterest);
-        }
+            return (((NodeDescriptorRequest) request).NwkAddrOfInterest.Equals(((NodeDescriptorResponse) response).NwkAddrOfInterest));
+         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("NodeDescriptorRequest [")
-                   .Append(base.ToString())
-                   .Append(", nwkAddrOfInterest=")
-                   .Append(NwkAddrOfInterest)
-                   .Append(']');
+            builder.Append("NodeDescriptorRequest [");
+            builder.Append(base.ToString());
+            builder.Append(", NwkAddrOfInterest=");
+            builder.Append(NwkAddrOfInterest);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }
