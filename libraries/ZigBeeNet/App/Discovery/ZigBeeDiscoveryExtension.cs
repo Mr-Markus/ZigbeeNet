@@ -13,17 +13,27 @@ using Serilog;
 
 namespace ZigBeeNet.App.Discovery
 {
+
+    /// <summary>
+    /// This class implements a <see cref="ZigBeeNetworkExtension"/> to perform network discovery and monitoring.
+    /// <p>
+    /// The periodic mesh update will periodically request information from the node so as to keep information updated. The
+    /// tasks may be specified from the list of <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask"/>s, and in general it may be expected to update the
+    /// routing information (with <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.ROUTES"/>) and the neighbour information (with
+    /// <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.NEIGHBORS"/>). In some networks, it may be advantageous not to update all information as it
+    /// may place a high load on the network.
+    ///
+    /// </summary>
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {
         /// <summary>
-        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is
-        /// responsible for monitoring the network for new devices and the initial
-        /// interrogation of their capabilities.
+        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is responsible for monitoring the network for 
+        /// new devices and the initial interrogation of their capabilities.
         /// </summary>
         private ZigBeeNetworkDiscoverer _networkDiscoverer;
 
         /// <summary>
-        ///
+        /// Map of <see cref="ZigBeeNetworkDiscoverer"/> for each node
         /// </summary>
         private ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> _nodeDiscovery = new ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
 
@@ -39,6 +49,13 @@ namespace ZigBeeNet.App.Discovery
         private ZigBeeNetworkManager _networkManager;
 
         private bool extensionStarted = false;
+
+        /// <summary>
+        /// List of tasks to be completed during a mesh update
+        /// </summary>
+        public List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask> MeshUpdateTasks { get; set; } = new List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask>() {
+            ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.NEIGHBORS, ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.ROUTES };
+
 
         public ZigBeeStatus ExtensionInitialize(ZigBeeNetworkManager networkManager)
         {
@@ -77,6 +94,7 @@ namespace ZigBeeNet.App.Discovery
             _networkManager.RemoveNetworkNodeListener(this);
             _networkManager.RemoveCommandListener(this);
 
+            StopScheduler();
             _networkDiscoverer?.Shutdown();
 
             lock (_nodeDiscovery)
@@ -88,10 +106,6 @@ namespace ZigBeeNet.App.Discovery
             }
             extensionStarted = false;
 
-            if (_futureTask != null)
-            {
-                _cancellationTokenSource.Cancel();
-            }
             Log.Debug("DISCOVERY Extension: Shutdown");
         }
 
@@ -134,8 +148,8 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
-        /// the timer is restarted from the time of calling this method.
+        /// Performs an immediate refresh of the network mesh information. Subsequent updates are performed at the current 
+        /// update rate, and the timer is restarted from the time of calling this method.
         /// </summary>
         public void Refresh()
         {
@@ -221,6 +235,7 @@ namespace ZigBeeNet.App.Discovery
             lock (_nodeDiscovery)
             {
                 ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
+                nodeDiscoverer.MeshUpdateTasks = MeshUpdateTasks;
                 _nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
                 nodeDiscoverer.StartDiscovery();
             }
@@ -256,6 +271,7 @@ namespace ZigBeeNet.App.Discovery
                     foreach (ZigBeeNodeServiceDiscoverer node in _nodeDiscovery.Values)
                     {
                         Log.Debug("{IeeeAddress}: DISCOVERY Extension: Starting mesh update", node.Node.IeeeAddress);
+                        node.MeshUpdateTasks = MeshUpdateTasks;
                         node.UpdateMesh();
                     }
                 }

@@ -9,6 +9,7 @@ using ZigBeeNet.ZDO;
 using ZigBeeNet.ZDO.Command;
 using ZigBeeNet.ZDO.Field;
 using Serilog;
+using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 
 namespace ZigBeeNet.App.Discovery
 {
@@ -102,6 +103,11 @@ namespace ZigBeeNet.App.Discovery
         public DateTime LastDiscoveryCompleted { get; private set; }
 
         /// <summary>
+        /// List of tasks to be completed during a mesh update
+        /// </summary>
+        public List<NodeDiscoveryTask> MeshUpdateTasks { get; set; } = new List<NodeDiscoveryTask>();
+
+        /// <summary>
         ///
         ///
         /// </summary>
@@ -155,17 +161,15 @@ namespace ZigBeeNet.App.Discovery
             {
                 Log.Debug("{IeeeAddress}: Node SVC Discovery: starting new tasks {NewTasks}", Node.IeeeAddress, newTasks);
 
-                // Remove any tasks that we know are not supported by this device
-                if ((!_supportsManagementLqi || Node.NodeDescriptor != null && Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN) 
-                    && newTasks.Contains(NodeDiscoveryTask.NEIGHBORS))
+                // Remove router/coordinator-only tasks if the device is possibly an end node.
+                bool isPossibleEndDevice = IsPossibleEndDevice();
+
+                if (!_supportsManagementLqi || isPossibleEndDevice)
                 {
                     newTasks.Remove(NodeDiscoveryTask.NEIGHBORS);
                 }
 
-                if ((!_supportsManagementRouting || Node.NodeDescriptor != null &&
-                    (Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.UNKNOWN ||
-                    Node.NodeDescriptor.LogicalNodeType == NodeDescriptor.LogicalType.END_DEVICE))
-                    && newTasks.Contains(NodeDiscoveryTask.ROUTES))
+                if (!_supportsManagementRouting || isPossibleEndDevice)
                 {
                     newTasks.Remove(NodeDiscoveryTask.ROUTES);
                 }
@@ -382,7 +386,7 @@ namespace ZigBeeNet.App.Discovery
         {
             byte startIndex = 0;
             int totalAssociatedDevices = 0;
-            List<ushort> associatedDevices = new List<ushort>();
+            HashSet<ushort> associatedDevices = new HashSet<ushort>();
 
             do
             {
@@ -400,7 +404,7 @@ namespace ZigBeeNet.App.Discovery
 
                 if (ieeeAddressResponse != null && ieeeAddressResponse.Status == ZdoStatus.SUCCESS)
                 {
-                    associatedDevices.AddRange(ieeeAddressResponse.NwkAddrAssocDevList);
+                    associatedDevices.UnionWith(ieeeAddressResponse.NwkAddrAssocDevList);
 
                     startIndex += (byte)ieeeAddressResponse.NwkAddrAssocDevList.Count;
                     totalAssociatedDevices = ieeeAddressResponse.NwkAddrAssocDevList.Count;
@@ -531,7 +535,7 @@ namespace ZigBeeNet.App.Discovery
             // Start index for the list is 0
             byte startIndex = 0;
             int totalNeighbors = 0;
-            List<NeighborTable> neighbors = new List<NeighborTable>();
+            HashSet<NeighborTable> neighbors = new HashSet<NeighborTable>();
             do
             {
                 ManagementLqiRequest neighborRequest = new ManagementLqiRequest();
@@ -568,7 +572,7 @@ namespace ZigBeeNet.App.Discovery
                 }
 
                 // Save the neighbors
-                neighbors.AddRange(neighborResponse.NeighborTableList);
+                neighbors.UnionWith(neighborResponse.NeighborTableList);
 
                 // Continue with next request
                 startIndex += (byte)neighborResponse.NeighborTableList.Count;
@@ -593,7 +597,7 @@ namespace ZigBeeNet.App.Discovery
             // Start index for the list is 0
             byte startIndex = 0;
             int totalRoutes = 0;
-            List<RoutingTable> routes = new List<RoutingTable>();
+            HashSet<RoutingTable> routes = new HashSet<RoutingTable>();
 
             do
             {
@@ -627,7 +631,7 @@ namespace ZigBeeNet.App.Discovery
                 }
 
                 // Save the routes
-                routes.AddRange(routingResponse.RoutingTableList);
+                routes.UnionWith(routingResponse.RoutingTableList);
 
                 // Continue with next request
                 startIndex += (byte)routingResponse.RoutingTableList.Count;
@@ -716,24 +720,36 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Starts service discovery for the node in order to update the mesh. This adds the
-        /// <see cref="NodeDiscoveryTask"></see> and <see cref="NodeDiscoveryTask></see> tasks to the task list. Note that
-        /// <see cref="NodeDiscoveryTask</see> is not added for end devices.
+        /// Starts service discovery to update the mesh. If the node is known to be a router or a coordinator, this adds the
+        /// <see cref="NodeDiscoveryTask.NEIGHBORS"></see> and <see cref="NodeDiscoveryTask.ROUTES></see> tasks to the task list. 
         /// </summary>
         public void UpdateMesh()
         {
-            Log.Debug("{IeeeAddress}: Node SVC Discovery: Update mesh", Node.IeeeAddress);
-
-            List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
-
-            tasks.Add(NodeDiscoveryTask.NEIGHBORS);
-
-            if (Node.NodeDescriptor != null && Node.NodeDescriptor.LogicalNodeType != NodeDescriptor.LogicalType.END_DEVICE)
+            if (IsPossibleEndDevice())
             {
-                tasks.Add(NodeDiscoveryTask.ROUTES);
+                Log.Debug("{IeeeAddress}: Node SVC Discovery: Update mesh not performed for possible end device", Node.IeeeAddress);
             }
+            else
+            {
+                Log.Debug("{IeeeAddress}: Node SVC Discovery: Update mesh", Node.IeeeAddress);
+                _ = StartDiscoveryAsync(MeshUpdateTasks);
+            }
+        }
 
-            _ = StartDiscoveryAsync(tasks);
+        /// <summary>
+        /// Is the node possibly an endNode?
+        ///
+        /// @return true if the device is not known to not be an end-device
+        /// </summary>
+        private bool IsPossibleEndDevice()
+        {
+            switch (Node.LogicalType)
+            {
+                case LogicalType.ROUTER:
+                case LogicalType.COORDINATOR:
+                    return false;
+            }
+            return true;
         }
 
     }

@@ -36,6 +36,6 @@ namespace ZigBeeNet.DAO
          /// </summary>
         public List<ZigBeeEndpointDao> Endpoints { get; set; }
 
-        public List<BindingTable> BindingTable { get; set; }
+        public HashSet<BindingTable> BindingTable { get; set; }
     }
 }

@@ -67,22 +67,22 @@ namespace ZigBeeNet
         /// <summary>
         /// List of associated devices for the node, specified in a <see cref="List"> <see cref="Integer">
         /// </summary>
-        public List<ushort> AssociatedDevices { get; set; } = new List<ushort>();
+        public HashSet<ushort> AssociatedDevices { get; set; } = new HashSet<ushort>();
 
         /// <summary>
         /// List of neighbors for the node, specified in a <see cref="NeighborTable">
         /// </summary>
-        public List<NeighborTable> Neighbors { get; set; } = new List<NeighborTable>();
+        public HashSet<NeighborTable> Neighbors { get; set; } = new HashSet<NeighborTable>();
 
         /// <summary>
         /// List of routes within the node, specified in a <see cref="RoutingTable">
         /// </summary>
-        public List<RoutingTable> Routes { get; set; } = new List<RoutingTable>();
+        public HashSet<RoutingTable> Routes { get; set; } = new HashSet<RoutingTable>();
 
         /// <summary>
         /// List of binding records
         /// </summary>
-        public List<BindingTable> BindingTable { get; set; } = new List<BindingTable>();
+        public HashSet<BindingTable> BindingTable { get; set; } = new HashSet<BindingTable>();
 
         /// <summary>
         /// List of endpoints this node exposes
@@ -286,12 +286,12 @@ namespace ZigBeeNet
             }
         }
 
-        private void SetBindingTable(List<BindingTable> bindingTable)
+        private void SetBindingTable(HashSet<BindingTable> bindingTable)
         {
             lock (BindingTable)
             {
                 BindingTable.Clear();
-                BindingTable.AddRange(bindingTable);
+                BindingTable.UnionWith(bindingTable);
                 Log.Debug("{Address}: Binding table updated: {BindingTable}", IeeeAddress, bindingTable);
             }
         }
@@ -307,7 +307,7 @@ namespace ZigBeeNet
         {
             byte index = 0;
             int tableSize = 0;
-            List<BindingTable> bindingTable = new List<BindingTable>();
+            HashSet<BindingTable> bindingTable = new HashSet<BindingTable>();
 
             do
             {
@@ -327,7 +327,7 @@ namespace ZigBeeNet
                 {
                     tableSize = response.BindingTableEntries;
                     index += (byte)response.BindingTableList.Count;
-                    bindingTable.AddRange(response.BindingTableList);
+                    bindingTable.UnionWith(response.BindingTableList);
                 }
             } while (index < tableSize);
 
@@ -531,45 +531,45 @@ namespace ZigBeeNet
 
             lock (AssociatedDevices)
             {
-                if (!AssociatedDevices.Equals(node.AssociatedDevices))
+                if (!AssociatedDevices.SetEquals(node.AssociatedDevices))
                 {
                     Log.Debug("{IeeeAddress}: Associated devices updated", IeeeAddress);
                     updated = true;
                     AssociatedDevices.Clear();
-                    AssociatedDevices.AddRange(node.AssociatedDevices);
+                    AssociatedDevices.UnionWith(node.AssociatedDevices);
                 }
             }
 
             lock (BindingTable)
             {
-                if (!BindingTable.Equals(node.BindingTable))
+                if (!BindingTable.SetEquals(node.BindingTable))
                 {
                     Log.Debug("{IeeeAddress}: Binding table updated", IeeeAddress);
                     updated = true;
                     BindingTable.Clear();
-                    BindingTable.AddRange(node.BindingTable);
+                    BindingTable.UnionWith(node.BindingTable);
                 }
             }
 
             lock (Neighbors)
             {
-                if (!Neighbors.Equals(node.Neighbors))
+                if (!Neighbors.SetEquals(node.Neighbors))
                 {
                     Log.Debug("{IeeeAddress}: Neighbors updated", IeeeAddress);
                     updated = true;
                     Neighbors.Clear();
-                    Neighbors.AddRange(node.Neighbors);
+                    Neighbors.UnionWith(node.Neighbors);
                 }
             }
 
             lock (Routes)
             {
-                if (!Routes.Equals(node.Routes))
+                if (!Routes.SetEquals(node.Routes))
                 {
                     Log.Debug("{IeeeAddress}: Routes updated", IeeeAddress);
                     updated = true;
                     Routes.Clear();
-                    Routes.AddRange(node.Routes);
+                    Routes.UnionWith(node.Routes);
                 }
             }
 
@@ -623,7 +623,7 @@ namespace ZigBeeNet
             PowerDescriptor = dao.PowerDescriptor;
             if (dao.BindingTable != null)
             {
-                BindingTable.AddRange(dao.BindingTable);
+                BindingTable.UnionWith(dao.BindingTable);
             }
 
             foreach (ZigBeeEndpointDao endpointDao in dao.Endpoints)
