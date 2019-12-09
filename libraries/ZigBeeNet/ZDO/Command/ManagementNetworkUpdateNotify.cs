@@ -123,7 +123,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", TransmissionFailures=");
             builder.Append(TransmissionFailures);
             builder.Append(", EnergyValues=");
-            builder.Append(string.Join(", ", EnergyValues));
+            builder.Append(EnergyValues == null? "" : string.Join(", ", EnergyValues));
             builder.Append(']');
 
             return builder.ToString();

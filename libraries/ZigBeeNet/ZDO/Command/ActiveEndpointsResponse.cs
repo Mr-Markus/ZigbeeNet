@@ -92,7 +92,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", NwkAddrOfInterest=");
             builder.Append(NwkAddrOfInterest);
             builder.Append(", ActiveEpList=");
-            builder.Append(string.Join(", ", ActiveEpList));
+            builder.Append(ActiveEpList == null? "" : string.Join(", ", ActiveEpList));
             builder.Append(']');
 
             return builder.ToString();

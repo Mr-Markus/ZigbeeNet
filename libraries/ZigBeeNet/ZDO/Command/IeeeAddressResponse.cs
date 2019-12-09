@@ -115,7 +115,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", StartIndex=");
             builder.Append(StartIndex);
             builder.Append(", NwkAddrAssocDevList=");
-            builder.Append(string.Join(", ", NwkAddrAssocDevList));
+            builder.Append(NwkAddrAssocDevList == null? "" : string.Join(", ", NwkAddrAssocDevList));
             builder.Append(']');
 
             return builder.ToString();

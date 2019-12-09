@@ -71,7 +71,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             builder.Append("BypassResponse [");
             builder.Append(base.ToString());
             builder.Append(", BypassResult=");
-            builder.Append(string.Join(", ", BypassResult));
+            builder.Append(BypassResult == null? "" : string.Join(", ", BypassResult));
             builder.Append(']');
 
             return builder.ToString();

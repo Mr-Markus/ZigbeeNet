@@ -94,7 +94,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             builder.Append(", NumberOfZones=");
             builder.Append(NumberOfZones);
             builder.Append(", ZoneIds=");
-            builder.Append(string.Join(", ", ZoneIds));
+            builder.Append(ZoneIds == null? "" : string.Join(", ", ZoneIds));
             builder.Append(", ArmDisarmCode=");
             builder.Append(ArmDisarmCode);
             builder.Append(']');

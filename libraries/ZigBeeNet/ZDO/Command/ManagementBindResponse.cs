@@ -102,7 +102,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", StartIndex=");
             builder.Append(StartIndex);
             builder.Append(", BindingTableList=");
-            builder.Append(string.Join(", ", BindingTableList));
+            builder.Append(BindingTableList == null? "" : string.Join(", ", BindingTableList));
             builder.Append(']');
 
             return builder.ToString();

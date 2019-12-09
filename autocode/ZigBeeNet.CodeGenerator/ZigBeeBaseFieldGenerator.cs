@@ -256,7 +256,7 @@ namespace ZigBeeNet.CodeGenerator
 
                 if (IsListType(field))
                 {
-                    @out.WriteLine("            builder.Append(string.Join(\", \", " + StringToUpperCamelCase(field.Name) + "));");
+                    @out.WriteLine("            builder.Append(" + StringToUpperCamelCase(field.Name) + " == null? \"\" : string.Join(\", \", " + StringToUpperCamelCase(field.Name) + "));");
                 }
                 else
                 {

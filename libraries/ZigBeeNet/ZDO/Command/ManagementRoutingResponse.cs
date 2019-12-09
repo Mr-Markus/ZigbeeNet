@@ -102,7 +102,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", StartIndex=");
             builder.Append(StartIndex);
             builder.Append(", RoutingTableList=");
-            builder.Append(string.Join(", ", RoutingTableList));
+            builder.Append(RoutingTableList == null? "" : string.Join(", ", RoutingTableList));
             builder.Append(']');
 
             return builder.ToString();

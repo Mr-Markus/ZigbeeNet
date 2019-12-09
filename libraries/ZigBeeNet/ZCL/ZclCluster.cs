@@ -1270,6 +1270,7 @@ namespace ZigBeeNet.ZCL
             ZclClusterDao dao = new ZclClusterDao
             {
                 ClusterId = _clusterId,
+                ClusterName = _clusterName,
                 IsClient = _isClient,
             };
 
@@ -1306,6 +1307,7 @@ namespace ZigBeeNet.ZCL
         public void SetDao(ZclClusterDao dao)
         {
             _clusterId = dao.ClusterId;
+            _clusterName = dao.ClusterName;
             _isClient = dao.IsClient;
             _supportedAttributesKnown = dao.SupportedAttributes != null;
 

@@ -87,7 +87,7 @@ namespace ZigBeeNet.ZCL.Clusters.General
             builder.Append(", Status=");
             builder.Append(Status);
             builder.Append(", Records=");
-            builder.Append(string.Join(", ", Records));
+            builder.Append(Records == null? "" : string.Join(", ", Records));
             builder.Append(']');
 
             return builder.ToString();

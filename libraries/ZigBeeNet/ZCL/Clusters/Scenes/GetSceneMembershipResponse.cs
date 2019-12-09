@@ -99,7 +99,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
             builder.Append(", SceneCount=");
             builder.Append(SceneCount);
             builder.Append(", SceneList=");
-            builder.Append(string.Join(", ", SceneList));
+            builder.Append(SceneList == null? "" : string.Join(", ", SceneList));
             builder.Append(']');
 
             return builder.ToString();

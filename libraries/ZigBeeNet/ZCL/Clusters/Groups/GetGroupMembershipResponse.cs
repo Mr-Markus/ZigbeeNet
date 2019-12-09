@@ -84,7 +84,7 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
             builder.Append(", GroupCount=");
             builder.Append(GroupCount);
             builder.Append(", GroupList=");
-            builder.Append(string.Join(", ", GroupList));
+            builder.Append(GroupList == null? "" : string.Join(", ", GroupList));
             builder.Append(']');
 
             return builder.ToString();
