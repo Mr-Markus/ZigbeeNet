@@ -72,7 +72,7 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
             builder.Append("SetBypassedZoneListCommand [");
             builder.Append(base.ToString());
             builder.Append(", ZoneId=");
-            builder.Append(string.Join(", ", ZoneId));
+            builder.Append(ZoneId == null? "" : string.Join(", ", ZoneId));
             builder.Append(']');
 
             return builder.ToString();

@@ -146,7 +146,7 @@ namespace ZigBeeNet
                 ZclStatus status = (ZclStatus)GetStatusCode();
 
                 builder.Append("ERROR (")
-                       .Append(status.ToString())
+                       //.Append(status.ToString())
                        .Append(string.Format(",0x{0}), ", ((int)status).ToString("X2")))
                        .Append(Response);
             }

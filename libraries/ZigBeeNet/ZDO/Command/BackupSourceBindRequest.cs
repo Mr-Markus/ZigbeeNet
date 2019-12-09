@@ -87,7 +87,7 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", SourceTableListCount=");
             builder.Append(SourceTableListCount);
             builder.Append(", SourceTableList=");
-            builder.Append(string.Join(", ", SourceTableList));
+            builder.Append(SourceTableList == null? "" : string.Join(", ", SourceTableList));
             builder.Append(']');
 
             return builder.ToString();

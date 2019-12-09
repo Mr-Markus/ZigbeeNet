@@ -377,7 +377,9 @@ namespace ZigBeeNet
             ZigBeeEndpointDao dao = new ZigBeeEndpointDao
             {
                 EndpointId = EndpointId,
-                ProfileId = ProfileId
+                ProfileId = ProfileId,
+                DeviceId = DeviceId,
+                DeviceVersion = DeviceVersion
             };
 
             List<ZclClusterDao> clusters;
@@ -403,13 +405,11 @@ namespace ZigBeeNet
         public void SetDao(ZigBeeEndpointDao dao)
         {
             EndpointId = dao.EndpointId;
-
-            //if (dao.ProfileId != null)
-            //{
             ProfileId = dao.ProfileId;
-            //}
+            DeviceId = dao.DeviceId;
+            DeviceVersion = dao.DeviceVersion;
 
-            if (dao.InputClusterIds != null)
+            if (dao.InputClusters != null)
             {
                 foreach (ZclClusterDao clusterDao in dao.InputClusters)
                 {
@@ -419,7 +419,7 @@ namespace ZigBeeNet
                 }
             }
 
-            if (dao.OutputClusterIds != null)
+            if (dao.OutputClusters != null)
             {
                 foreach (ZclClusterDao clusterDao in dao.OutputClusters)
                 {

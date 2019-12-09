@@ -4,7 +4,7 @@ namespace ZigBeeNet.DAO
 {
     public class ZclClusterDao
     {
-        public string Label { get; set; }
+        public string ClusterName { get; set; }
 
         public ushort ClusterId { get; set; }
 

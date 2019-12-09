@@ -113,9 +113,9 @@ namespace ZigBeeNet.ZDO.Command
             builder.Append(", ProfileId=");
             builder.Append(ProfileId);
             builder.Append(", InClusterList=");
-            builder.Append(string.Join(", ", InClusterList));
+            builder.Append(InClusterList == null? "" : string.Join(", ", InClusterList));
             builder.Append(", OutClusterList=");
-            builder.Append(string.Join(", ", OutClusterList));
+            builder.Append(OutClusterList == null? "" : string.Join(", ", OutClusterList));
             builder.Append(']');
 
             return builder.ToString();
