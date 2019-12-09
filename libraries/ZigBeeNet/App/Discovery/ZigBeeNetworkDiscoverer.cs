@@ -159,8 +159,7 @@ namespace ZigBeeNet.App.Discovery
             {
                 DeviceAnnounce announce = (DeviceAnnounce)command;
 
-                Log.Debug("{IeeeAddress}: Device announce received. NWK={NetworkAddress}", announce.IeeeAddr,
-                        announce.NwkAddrOfInterest);
+                Log.Debug("{IeeeAddress}: Device announce received. NWK={NetworkAddress}", announce.IeeeAddr, announce.NwkAddrOfInterest);
                 AddNode(announce.IeeeAddr, announce.NwkAddrOfInterest);
             }
         }
