@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.ZDO.Command;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.ZCL;
@@ -599,7 +599,7 @@ namespace ZigBeeNet
         {
             ZigBeeNodeDao dao = new ZigBeeNodeDao();
 
-            dao.IeeeAddress = IeeeAddress.ToString();
+            dao.IeeeAddress = IeeeAddress;
             dao.NetworkAddress = NetworkAddress;
             dao.NodeDescriptor = NodeDescriptor;
             dao.PowerDescriptor = PowerDescriptor;
@@ -617,7 +617,7 @@ namespace ZigBeeNet
 
         public void SetDao(ZigBeeNodeDao dao)
         {
-            IeeeAddress = new IeeeAddress(dao.IeeeAddress);
+            IeeeAddress = dao.IeeeAddress;
             NetworkAddress = dao.NetworkAddress;
             NodeDescriptor = dao.NodeDescriptor;
             PowerDescriptor = dao.PowerDescriptor;

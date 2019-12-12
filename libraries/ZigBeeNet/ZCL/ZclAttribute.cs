@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.ZCL.Protocol;
 
 namespace ZigBeeNet.ZCL

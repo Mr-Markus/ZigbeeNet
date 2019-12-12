@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigBeeNet.DAO;
 using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.DoorLock;
 using ZigBeeNet.ZCL.Field;

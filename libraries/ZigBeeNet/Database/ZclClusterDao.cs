@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ZigBeeNet.DAO
+namespace ZigBeeNet.Database
 {
     public class ZclClusterDao
     {

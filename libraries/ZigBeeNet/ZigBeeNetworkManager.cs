@@ -17,6 +17,7 @@ using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.App.Discovery;
 using Serilog;
+using ZigBeeNet.Database;
 
 namespace ZigBeeNet
 {
@@ -140,9 +141,9 @@ namespace ZigBeeNet
         private readonly object _networkStateSync = new object();
 
         /// <summary>
-        /// The network state serializer
+        /// The network database - used to save the state of the network and all its nodes
         /// </summary>
-        public IZigBeeNetworkStateSerializer NetworkStateSerializer { get; set; }
+        public ZigBeeNetworkDatabaseManager DatabaseManager { get; private set; }
 
         /// <summary>
         /// Executor service to execute update threads for discovery or mesh updates etc.
@@ -242,6 +243,7 @@ namespace ZigBeeNet
         /// <param name="transport">Transport the dongle</param>
         public ZigBeeNetworkManager(IZigBeeTransportTransmit transport)
         {
+            DatabaseManager = new ZigBeeNetworkDatabaseManager(this);
             List<IZigBeeNetworkStateListener> stateListeners = new List<IZigBeeNetworkStateListener>();
             _stateListeners = new List<IZigBeeNetworkStateListener>(stateListeners).AsReadOnly();
 
@@ -261,6 +263,18 @@ namespace ZigBeeNet
             Transport = transport;
 
             transport.SetZigBeeTransportReceive(this);
+        }
+
+        /// <summary>
+        /// Set a state IZigBeeNetworkDataStore. This will allow saving and restoring the network.
+        /// </summary>
+        /// <param name="dataStore"> the IZigBeeNetworkDataStore</param>
+        public void SetNetworkDataStore(IZigBeeNetworkDataStore dataStore)
+        {
+            lock (_networkStateSync)
+            {
+                DatabaseManager.DataStore = dataStore;
+            }
         }
 
         /// <summary>
@@ -284,12 +298,9 @@ namespace ZigBeeNet
                 }
 
                 SetNetworkState(ZigBeeNetworkState.INITIALISING);
-
-                if (NetworkStateSerializer != null)
-                {
-                    NetworkStateSerializer.Deserialize(this);
-                }
             }
+
+            DatabaseManager.Startup();
 
             ZigBeeStatus transportResponse = Transport.Initialize();
 
@@ -298,8 +309,6 @@ namespace ZigBeeNet
                 SetNetworkState(ZigBeeNetworkState.OFFLINE);
                 return transportResponse;
             }
-
-            SetNetworkState(ZigBeeNetworkState.INITIALISING);
 
             AddLocalNode();
 
@@ -492,15 +501,12 @@ namespace ZigBeeNet
                     node.Shutdown();
                 }
 
-                if (NetworkStateSerializer != null)
-                {
-                    NetworkStateSerializer.Serialize(this);
-                }
-
                 foreach (IZigBeeNetworkExtension extension in _extensions)
                 {
                     extension.ExtensionShutdown();
                 }
+
+                DatabaseManager.Shutdown();
             }
 
             Transport.Shutdown();
@@ -1328,11 +1334,6 @@ namespace ZigBeeNet
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
-
-            if (NetworkStateSerializer != null)
-            {
-                NetworkStateSerializer.Serialize(this);
-            }
         }
 
         /// <summary>
@@ -1386,11 +1387,6 @@ namespace ZigBeeNet
                         Log.Error(t.Exception, "Error");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
-            }
-
-            if (NetworkStateSerializer != null)
-            {
-                NetworkStateSerializer.Serialize(this);
             }
         }
 
@@ -1470,11 +1466,6 @@ namespace ZigBeeNet
                         Log.Error(t.Exception, "Here is the error additional text");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
-            }
-
-            if (NetworkStateSerializer != null)
-            {
-                NetworkStateSerializer.Serialize(this);
             }
         }
 

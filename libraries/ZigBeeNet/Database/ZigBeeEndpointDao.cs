@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZigBeeNet.DAO
+namespace ZigBeeNet.Database
 {
     public class ZigBeeEndpointDao
     {
