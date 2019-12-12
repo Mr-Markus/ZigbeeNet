@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.Extensions;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.General;
@@ -342,7 +342,7 @@ namespace ZigBeeNet.ZCL
         ///
         /// <param name="attribute">the ZclAttribute to read</param>
         /// </summary>
-        protected object ReadSync(ushort attribute)
+        public object ReadSync(ushort attribute)
         {
             // Log.Debug("readSync request: {Attribute}", attribute);
             CommandResult result;

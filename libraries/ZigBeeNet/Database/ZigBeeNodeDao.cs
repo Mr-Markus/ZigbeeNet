@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZigBeeNet.DAO;
 using ZigBeeNet.ZDO.Field;
 
-namespace ZigBeeNet.DAO
+namespace ZigBeeNet.Database
 {
     /// <summary>
  /// This class provides a clean class to hold a data object for serialisation of a <see cref="ZigBeeNode">
@@ -14,7 +13,7 @@ namespace ZigBeeNet.DAO
         /// <summary>
          /// The extended <see cref="IeeeAddress"> for the node
          /// </summary>
-        public string IeeeAddress { get; set; }
+        public IeeeAddress IeeeAddress { get; set; }
 
         /// <summary>
          /// The 16 bit network address for the node

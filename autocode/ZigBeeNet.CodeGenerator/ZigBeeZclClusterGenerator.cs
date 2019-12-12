@@ -82,7 +82,6 @@ namespace ZigBeeNet.CodeGenerator
             ImportsAdd("System.Text");
             ImportsAdd("System.Threading");
             ImportsAdd("System.Threading.Tasks");
-            ImportsAdd("ZigBeeNet.DAO");
             ImportsAdd("ZigBeeNet.Security");
             ImportsAdd("ZigBeeNet.ZCL.Protocol");
             ImportsAdd("ZigBeeNet.ZCL.Field");

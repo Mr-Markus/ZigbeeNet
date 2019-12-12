@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL.Protocol;
 
-namespace ZigBeeNet.DAO
+namespace ZigBeeNet.Database
 {
     /**
     * This class provides a clean class to hold a data object for serialisation of a {@link ZclAttribute}
