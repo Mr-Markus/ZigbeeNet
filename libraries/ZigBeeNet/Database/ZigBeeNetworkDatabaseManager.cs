@@ -160,8 +160,7 @@ namespace ZigBeeNet.Database
 
             //The consumer task that process the nodes produced by the elapsed timers
             //This ensure all write are done using a single thread.
-            Task writerTask = new Task(WriteNodeLoop, TaskCreationOptions.LongRunning);
-            writerTask.Start();
+            Task.Factory.StartNew(WriteNodeLoop, TaskCreationOptions.LongRunning);
 
             _networkManager.AddNetworkNodeListener(this);
         }

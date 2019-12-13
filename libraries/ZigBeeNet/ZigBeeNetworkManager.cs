@@ -1012,17 +1012,17 @@ namespace ZigBeeNet
         /// <param name="command">the <see cref="ZclCommand"/></param>
         /// <returns>the command result future</returns>
         /// </summary>
-        public async Task<CommandResult> Send(IZigBeeAddress destination, ZclCommand command)
+        public Task<CommandResult> Send(IZigBeeAddress destination, ZclCommand command)
         {
             command.DestinationAddress = destination;
             if (destination.IsGroup)
             {
-                return await Broadcast(command);
+                return Broadcast(command);
             }
             else
             {
                 IZigBeeTransactionMatcher responseMatcher = new ZclTransactionMatcher();
-                return await SendTransaction(command, responseMatcher);
+                return SendTransaction(command, responseMatcher);
             }
         }
 
@@ -1532,10 +1532,10 @@ namespace ZigBeeNet
             SendCommand(command);
         }
 
-        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
             ZigBeeTransaction transaction = new ZigBeeTransaction(this);
-            return await transaction.SendTransaction(command, responseMatcher);
+            return transaction.SendTransaction(command, responseMatcher);
         }
     }
 }

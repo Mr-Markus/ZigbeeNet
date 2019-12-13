@@ -643,9 +643,9 @@ namespace ZigBeeNet
             _network.SendTransaction(command);
         }
 
-        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            return await _network.SendTransaction(command, responseMatcher);
+            return _network.SendTransaction(command, responseMatcher);
         }
 
         public override string ToString()
