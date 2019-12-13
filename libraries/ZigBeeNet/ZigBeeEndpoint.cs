@@ -448,10 +448,10 @@ namespace ZigBeeNet
          /// <param name="responseMatcher">the <see cref="ZigBeeTransactionMatcher"> used to match the response to the request</param>
          /// <returns>the <see cref="CommandResult"> future.</returns>
          /// </summary>
-        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
             command.DestinationAddress = GetEndpointAddress();
-            return await Node.SendTransaction(command, responseMatcher);
+            return Node.SendTransaction(command, responseMatcher);
         }
 
         public override string ToString()
