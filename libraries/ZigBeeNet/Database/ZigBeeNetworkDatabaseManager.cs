@@ -2,11 +2,8 @@ using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using ZigBeeNet;
 
 namespace ZigBeeNet.Database
 {
@@ -70,7 +67,7 @@ namespace ZigBeeNet.Database
         private ConcurrentDictionary<IeeeAddress, DeferedWritetimer> _deferredWriteTimers = new ConcurrentDictionary<IeeeAddress, DeferedWritetimer>();
 
         /// <summary>
-        /// The list of nodes that need to be processed by the write node thread
+        /// The list of nodes that need to be processed by the writer task
         /// </summary>
         private BlockingCollection<ZigBeeNode> _nodesToSave;
 
@@ -161,11 +158,10 @@ namespace ZigBeeNet.Database
 
             _nodesToSave = new BlockingCollection<ZigBeeNode>();
 
-            //The consumer thread that process the nodes produced by the elapsed timers
+            //The consumer task that process the nodes produced by the elapsed timers
             //This ensure all write are done using a single thread.
-            Thread thread = new Thread(new ThreadStart(WriteNodeLoop));
-            thread.IsBackground = true;
-            thread.Start();
+            Task writerTask = new Task(WriteNodeLoop, TaskCreationOptions.LongRunning);
+            writerTask.Start();
 
             _networkManager.AddNetworkNodeListener(this);
         }
@@ -269,7 +265,7 @@ namespace ZigBeeNet.Database
         {
             try
             {
-                foreach (ZigBeeNode node in _nodesToSave.GetConsumingEnumerable(CancellationToken.None))
+                foreach (ZigBeeNode node in _nodesToSave.GetConsumingEnumerable())
                 {
                     try
                     {
