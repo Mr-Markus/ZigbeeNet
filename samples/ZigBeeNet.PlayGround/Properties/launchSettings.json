@@ -2,7 +2,7 @@
   "profiles": {
     "ZigBeeNet.PlayGround": {
       "commandName": "Project",
-      "commandLineArgs": "--zbd 1 --p COM5 --b 9600"
+      "commandLineArgs": "--zbd 2"
     }
   }
 } 
