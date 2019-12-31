@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Test\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee", "libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "autocode\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
 EndProject
