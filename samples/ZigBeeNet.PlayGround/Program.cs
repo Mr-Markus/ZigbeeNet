@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ZigbeeNet.Hardware.ConBee;
 using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.Database;
@@ -44,7 +45,7 @@ namespace ZigBeeNet.PlayGround
             OptionSet options = new OptionSet
             {
                 { "h|help", "show this message and exit", h => showHelp = h != null },
-                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee", (ZigBeeDongle zbd) => zigBeeDongle = zbd },
+                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee | 2 = Conbee", (ZigBeeDongle zbd) => zigBeeDongle = zbd },
                 { "p|port=", "the COM port to use", p =>  port = p},
                 { "b|baud=", $"the port baud rate to use. default is {baudrate}", b => int.TryParse(b, out baudrate)},
 
@@ -83,6 +84,11 @@ namespace ZigBeeNet.PlayGround
                     case ZigBeeDongle.DigiXbee:
                         {
                             dongle = new ZigBeeDongleXBee(zigbeePort);
+                        }
+                        break;
+                    case ZigBeeDongle.ConBee:
+                        {
+                            dongle = new ZigbeeDongleConBee(zigbeePort);
                         }
                         break;
                     default:

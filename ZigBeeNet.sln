@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC253
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet", "libraries\ZigBeeNet\ZigBeeNet.csproj", "{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigbeeNet.Hardware.ConBee", "libraries\ZigbeeNet.Hardware.ConBee\ZigbeeNet.Hardware.ConBee.csproj", "{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{BE87AA32-91C2-47EF-93F2-097526A900AB} = {603D29D9-83CE-4B81-BD59-A77F529E4494}
 		{EB0EAFB9-264C-4A54-99AA-CBA21E4AC3EA} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
