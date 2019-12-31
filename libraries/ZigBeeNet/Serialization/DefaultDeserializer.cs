@@ -241,14 +241,19 @@ namespace ZigBeeNet.Serialization
                     value[0] = us;
                     break;
                 case DataType.BITMAP_24_BIT:
-                case DataType.SIGNED_24_BIT_INTEGER:
                 case DataType.UNSIGNED_24_BIT_INTEGER:
+                    value[0] = (uint)(payload[index++] + (payload[index++] << 8) | (payload[index++] << 16));
+                    break;
+                case DataType.SIGNED_24_BIT_INTEGER:
                     value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16);
                     break;
                 case DataType.BITMAP_32_BIT:
-                case DataType.ENUMERATION_32_BIT:
-                case DataType.SIGNED_32_BIT_INTEGER:
                 case DataType.UNSIGNED_32_BIT_INTEGER:
+                case DataType.ENUMERATION_32_BIT:
+                    value[0] = (uint)(payload[index++] + (payload[index++] << 8) | (payload[index++] << 16)
+                            + (payload[index++] << 24));
+                    break;
+                case DataType.SIGNED_32_BIT_INTEGER:
                     value[0] = payload[index++] + (payload[index++] << 8) | (payload[index++] << 16)
                             + (payload[index++] << 24);
                     break;

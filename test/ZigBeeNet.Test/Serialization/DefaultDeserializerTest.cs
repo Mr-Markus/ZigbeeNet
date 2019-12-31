@@ -39,6 +39,14 @@ namespace ZigBeeNet.Test.Serialization
         }
 
         [Fact]
+        public void TestDeserialize_UNSIGNED_32_BIT_INTEGER()
+        {
+            byte[] valIn = { 0x97, 0x03, 0x12, 0x65 };
+            uint valOut = 1695679383;
+            TestDeserialize(valIn, valOut, DataType.UNSIGNED_32_BIT_INTEGER);
+        }
+
+        [Fact]
         public void TestDeserialize_IEEE_ADDRESS()
         {
             byte[] valIn = { 0x56, 0x34, 0x12, 0x90, 0x78, 0x56, 0x34, 0x12 };
@@ -65,7 +73,7 @@ namespace ZigBeeNet.Test.Serialization
         [Fact]
         public void TestDeserialize_CHARACTER_STRING()
         {
-            TestDeserialize(new byte[] { 0xFF }, null, DataType.CHARACTER_STRING);
+            TestDeserialize<string>(new byte[] { 0xFF }, null, DataType.CHARACTER_STRING);
             TestDeserialize(new byte[] { 0x00 }, "", DataType.CHARACTER_STRING);
             TestDeserialize(new byte[] { 0x01, 0x49 }, "I", DataType.CHARACTER_STRING);
             TestDeserialize(
@@ -79,11 +87,10 @@ namespace ZigBeeNet.Test.Serialization
                 0x00 }, "MaestroStat", DataType.CHARACTER_STRING);
         }
 
-        private void TestDeserialize(byte[] input, object objectIn, DataType type)
+        private void TestDeserialize<T>(byte[] input, T objectIn, DataType type)
         {
             DefaultDeserializer deserializer = new DefaultDeserializer(input);
-            var objectOut = deserializer.ReadZigBeeType<object>(type);
-
+            var objectOut = deserializer.ReadZigBeeType<T>(type);
             Assert.Equal(objectIn, objectOut);
         }
     }
