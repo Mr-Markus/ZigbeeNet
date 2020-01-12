@@ -100,7 +100,7 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
-                JsonNetworkDataStore dataStore = new JsonNetworkDataStore("devices.json");
+                JsonNetworkDataStore dataStore = new JsonNetworkDataStore("devices");
                 networkManager.SetNetworkDataStore(dataStore);
 
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
