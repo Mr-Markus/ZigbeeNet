@@ -119,6 +119,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
             return false;
         }
 
+        public bool Open(int baudrate, FlowControl flowControl)
+        {
+            return false;
+        }
+
         public void PurgeRxBuffer()
         {
         }
