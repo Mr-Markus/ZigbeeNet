@@ -50,7 +50,8 @@ namespace ZigBeeNet
 
         private ZigBeeProfileType(int key, ProfileType profileType)
         {
-            this.Key = key;
+            Key = key;
+            ProfileType = profileType;
         }
 
         static ZigBeeProfileType()

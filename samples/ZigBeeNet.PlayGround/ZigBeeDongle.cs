@@ -8,6 +8,7 @@ namespace ZigBeeNet.PlayGround
     {
         TiCc2531,
         DigiXbee,
-        ConBee
+        ConBee,
+        Ember
     }
 }

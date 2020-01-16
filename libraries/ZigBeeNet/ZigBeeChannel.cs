@@ -74,4 +74,72 @@ namespace ZigBeeNet
         CHANNEL_25 = 0x02000000,
         CHANNEL_26 = 0x04000000
     }
+
+    public static class ZigBeeChannelExtensions
+    {
+        public static int GetChannelNum(this ZigBeeChannel channel)
+        {
+            switch (channel)
+            {
+                case ZigBeeChannel.UNKNOWN:
+                    return -1;
+                case ZigBeeChannel.CHANNEL_00:
+                    return 0;
+                case ZigBeeChannel.CHANNEL_01:
+                    return 1;
+                case ZigBeeChannel.CHANNEL_02:
+                    return 2;
+                case ZigBeeChannel.CHANNEL_03:
+                    return 3;
+                case ZigBeeChannel.CHANNEL_04:
+                    return 4;
+                case ZigBeeChannel.CHANNEL_05:
+                    return 5;
+                case ZigBeeChannel.CHANNEL_06:
+                    return 6;
+                case ZigBeeChannel.CHANNEL_07:
+                    return 7;
+                case ZigBeeChannel.CHANNEL_08:
+                    return 8;
+                case ZigBeeChannel.CHANNEL_09:
+                    return 9;
+                case ZigBeeChannel.CHANNEL_10:
+                    return 10;
+                case ZigBeeChannel.CHANNEL_11:
+                    return 11;
+                case ZigBeeChannel.CHANNEL_12:
+                    return 12;
+                case ZigBeeChannel.CHANNEL_13:
+                    return 13;
+                case ZigBeeChannel.CHANNEL_14:
+                    return 14;
+                case ZigBeeChannel.CHANNEL_15:
+                    return 15;
+                case ZigBeeChannel.CHANNEL_16:
+                    return 16;
+                case ZigBeeChannel.CHANNEL_17:
+                    return 17;
+                case ZigBeeChannel.CHANNEL_18:
+                    return 18;
+                case ZigBeeChannel.CHANNEL_19:
+                    return 19;
+                case ZigBeeChannel.CHANNEL_20:
+                    return 20;
+                case ZigBeeChannel.CHANNEL_21:
+                    return 21;
+                case ZigBeeChannel.CHANNEL_22:
+                    return 22;
+                case ZigBeeChannel.CHANNEL_23:
+                    return 23;
+                case ZigBeeChannel.CHANNEL_24:
+                    return 24;
+                case ZigBeeChannel.CHANNEL_25:
+                    return 25;
+                case ZigBeeChannel.CHANNEL_26:
+                    return 26;
+                default:
+                    return -1;
+            }
+        }
+    }
 }

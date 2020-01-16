@@ -13,9 +13,9 @@ namespace ZigBeeNet.Security
     public class ZigBeeKey
     {
         public byte[] Key { get; set; }
-        public byte IncomingFrameCounter { get; set; }
-        public byte OutgoingFrameCounter { get; set; }
-        public byte SequenceNumber { get; set; }
+        public byte? IncomingFrameCounter { get; set; }
+        public byte? OutgoingFrameCounter { get; set; }
+        public byte? SequenceNumber { get; set; }
         public IeeeAddress address { get; set; }
 
         /// <summary>

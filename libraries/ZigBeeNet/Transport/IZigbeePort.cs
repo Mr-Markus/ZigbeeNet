@@ -27,6 +27,17 @@ namespace ZigBeeNet.Transport
         bool Open(int baudrate);
 
         /// <summary>
+        ///  Open the port with the specified baud rate and flow control.
+        /// 
+        /// This method allows the transport to override the baud rate if required - for example
+        /// when entering a bootloader that may operate at a different speed to the coordinator.
+        /// </summary>
+        /// <param name="baudRate">the speed to use when opening the port</param>
+        /// <param name="flowControl">the FlowControl to use when opening the port</param>
+        /// <returns>true if port was opened successfully</returns>
+        bool Open(int baudRate, FlowControl flowControl);
+
+        /// <summary>
         /// Close the port. Closing the port should abort any read and write operations to allow a clean closure of the port.
         /// </summary>
         void Close();

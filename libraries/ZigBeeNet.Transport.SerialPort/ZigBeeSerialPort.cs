@@ -19,16 +19,20 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         private BlockingCollection<byte> _fifoBuffer = new BlockingCollection<byte>(new ConcurrentQueue<byte>());
 
-        public string PortName { get; set; }
+        public string PortName { get; private set; }
 
-        public int Baudrate { get; set; }
+        public int Baudrate { get; private set; }
+
+        public FlowControl FlowControl { get; private set; }
+
 
         public bool IsOpen { get => _serialPort != null && _serialPort.IsOpen ? true : false; }
 
-        public ZigBeeSerialPort(string portName, int baudrate = 115200)
+        public ZigBeeSerialPort(string portName, int baudrate = 115200, FlowControl flowControl = FlowControl.FLOWCONTROL_OUT_NONE)
         {
             PortName = portName;
             Baudrate = baudrate;
+            FlowControl = flowControl;
 
             _cancellationToken = new CancellationTokenSource();
         }
@@ -53,53 +57,58 @@ namespace ZigBeeNet.Tranport.SerialPort
 
         public bool Open()
         {
-            try
-            {
-                return Open(Baudrate);
-            }
-            catch (Exception e)
-            {
-                Log.Warning("Unable to open serial port: " + e.Message);
-                return false;
-            }
+            return Open(Baudrate);
         }
 
         public bool Open(int baudrate)
         {
-            Baudrate = baudrate;
+            return Open(baudrate, FlowControl);
+        }
 
+        public bool Open(int baudrate, FlowControl flowControl)
+        {
             bool success = false;
-
-            Log.Debug("Opening port {Port} at {Baudrate} baud.", PortName, baudrate);
-
-            _serialPort = new System.IO.Ports.SerialPort(PortName, baudrate);
-
             try
             {
-                bool tryOpen = true;
+                Baudrate = baudrate;
+                FlowControl = flowControl;
 
-                if (Environment.OSVersion.Platform.ToString().StartsWith("Win") == false)
+                Log.Debug("Opening port {Port} at {Baudrate} baud with {FlowControl}", PortName, Baudrate, FlowControl);
+
+                _serialPort = new System.IO.Ports.SerialPort(PortName, baudrate);
+                //_serialPort.Handshake = System.IO.Ports.Handshake.XOnXOff;
+
+                try
                 {
-                    tryOpen = (tryOpen && File.Exists(PortName));
+                    bool tryOpen = true;
+
+                    if (!Environment.OSVersion.Platform.ToString().StartsWith("Win"))
+                    {
+                        tryOpen = (tryOpen && File.Exists(PortName));
+                    }
+                    if (tryOpen)
+                    {
+                        _serialPort.Open();
+
+                        success = true;
+                    }
                 }
-                if (tryOpen)
+                catch (Exception ex)
                 {
-                    _serialPort.Open();
+                    Log.Debug("{Exception} - Error opening port {Port}\n{Port}", ex.GetType().Name, PortName, ex.Message);
+                }
 
-                    success = true;
+                if (_serialPort.IsOpen)
+                {
+                    // Start Reader Task
+                    _reader = Task.Factory.StartNew(ReaderTask, _cancellationToken.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+
+                    // TODO: ConnectionStatusChanged event
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Log.Debug("{Exception} - Error opening port {Port}\n{Port}", ex.GetType().Name, PortName, ex.Message);
-            }
-
-            if (_serialPort.IsOpen)
-            {
-                // Start Reader Task
-                Task.Factory.StartNew(ReaderTask, _cancellationToken.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-
-                // TODO: ConnectionStatusChanged event
+                Log.Warning("Unable to open serial port: " + e.Message);
             }
 
             return success;
