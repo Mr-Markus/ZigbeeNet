@@ -10,12 +10,15 @@ namespace ZigBeeNet.ZDO
     {
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize((byte)0, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            if(TransactionId == null) {
+                TransactionId = 0;
+            }
+            serializer.Serialize(TransactionId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TransactionId = (byte?)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
     }
 }
