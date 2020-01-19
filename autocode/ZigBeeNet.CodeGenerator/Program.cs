@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ZigBeeNet.CodeGenerator.Zcl;
 
 namespace ZigBeeNet.CodeGenerator
 {
@@ -19,7 +18,7 @@ namespace ZigBeeNet.CodeGenerator
             IConfigurationRoot configuration = builder.Build();
             var section = configuration.GetSection("Settings");
 
-            ZclProtocolCodeGenerator.Generate(new string[] { section.GetValue<string>("outputPath") });
+            ZigBeeCodeGenerator.Generate(section.GetValue<string>("outputPath"));
 
             Console.WriteLine("Code generation done. Press any key to close this window ...");
             Console.ReadLine();

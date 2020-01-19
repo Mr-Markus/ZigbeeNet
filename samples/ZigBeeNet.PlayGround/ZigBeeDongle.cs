@@ -7,6 +7,7 @@ namespace ZigBeeNet.PlayGround
     public enum ZigBeeDongle
     {
         TiCc2531,
-        DigiXbee
+        DigiXbee,
+        ConBee
     }
 }

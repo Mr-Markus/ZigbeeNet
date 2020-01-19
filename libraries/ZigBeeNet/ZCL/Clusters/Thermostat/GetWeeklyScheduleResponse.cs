@@ -1,32 +1,42 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.Thermostat;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.Thermostat
 {
     /// <summary>
     /// Get Weekly Schedule Response value object class.
-    /// <para>
-    /// Cluster: Thermostat. Command is sent FROM the server.
+    ///
+    /// Cluster: Thermostat. Command ID 0x00 is sent FROM the server.
     /// This command is a specific command used for the Thermostat cluster.
-    /// </para>
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class GetWeeklyScheduleResponse : ZclCommand
     {
         /// <summary>
-        /// Number of Transitions command message field.
+        /// The cluster ID to which this command belongs.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0201;
+
+        /// <summary>
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x00;
+
+        /// <summary>
+        /// Number Of Transitions command message field.
         /// </summary>
         public byte NumberOfTransitions { get; set; }
 
         /// <summary>
-        /// Day of Week command message field.
+        /// Day Of Week command message field.
         /// </summary>
         public byte DayOfWeek { get; set; }
 
@@ -43,22 +53,21 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
         /// <summary>
         /// Heat Set command message field.
         /// </summary>
-        public ushort HeatSet { get; set; }
+        public short HeatSet { get; set; }
 
         /// <summary>
         /// Cool Set command message field.
         /// </summary>
-        public ushort CoolSet { get; set; }
-
+        public short CoolSet { get; set; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public GetWeeklyScheduleResponse()
         {
+            ClusterId = CLUSTER_ID;
+            CommandId = COMMAND_ID;
             GenericCommand = false;
-            ClusterId = 513;
-            CommandId = 0;
             CommandDirection = ZclCommandDirection.SERVER_TO_CLIENT;
         }
 
@@ -68,8 +77,8 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
             serializer.Serialize(DayOfWeek, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(Mode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             serializer.Serialize(Transition, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(HeatSet, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(CoolSet, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(HeatSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            serializer.Serialize(CoolSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
@@ -78,8 +87,8 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
             DayOfWeek = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
             Transition = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            HeatSet = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            CoolSet = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            HeatSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            CoolSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
         }
 
         public override string ToString()

@@ -1,33 +1,42 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZDO;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
-     /// Management Permit Joining Response value object class.
-     /// 
-     /// The Mgmt_Permit_Joining_rsp is generated in response to a unicast
-     /// Mgmt_Permit_Joining_req. In the description which follows, note that no
-     /// response shall be sent if the Mgmt_Permit_Joining_req was received as a
-     /// broadcast to all routers. If this management command is not permitted by the
-     /// requesting device, a status of INVALID_REQUEST shall be returned. Upon
-     /// receipt and after support for Mgmt_Permit_Joining_req has been verified, the
-     /// Remote Device shall execute the NLME-PERMIT-JOINING.request. The
-     /// Mgmt_Permit-Joining_rsp shall contain the same status that was contained in the
-     /// NLME-PERMIT-JOINING.confirm primitive.
-     /// </summary>
+    /// Management Permit Joining Response value object class.
+    ///
+    ///
+    /// The Mgmt_Permit_Joining_rsp is generated in response to a unicast
+    /// Mgmt_Permit_Joining_req. In the description which follows, note that no response
+    /// shall be sent if the Mgmt_Permit_Joining_req was received as a broadcast to all
+    /// routers. If this management command is not permitted by the requesting device, a status
+    /// of INVALID_REQUEST shall be returned. Upon receipt and after support for
+    /// Mgmt_Permit_Joining_req has been verified, the Remote Device shall execute the
+    /// NLME-PERMIT-JOINING.request. The Mgmt_Permit-Joining_rsp shall contain the same
+    /// status that was contained in the NLME-PERMIT-JOINING.confirm primitive.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
     public class ManagementPermitJoiningResponse : ZdoResponse
     {
         /// <summary>
-         /// Default constructor.
-         /// </summary>
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x8036;
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ManagementPermitJoiningResponse()
         {
-            ClusterId = 0x8036;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -41,8 +50,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            Status = (ZdoStatus)deserializer.Deserialize(ZclDataType.Get(DataType.ZDO_STATUS));
-
+            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
@@ -52,16 +60,15 @@ namespace ZigBeeNet.ZDO.Command
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("ManagementPermitJoiningResponse [")
-                   .Append(base.ToString())
-                   .Append(", status=")
-                   .Append(Status)
-                   .Append(']');
+            builder.Append("ManagementPermitJoiningResponse [");
+            builder.Append(base.ToString());
+            builder.Append(", Status=");
+            builder.Append(Status);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

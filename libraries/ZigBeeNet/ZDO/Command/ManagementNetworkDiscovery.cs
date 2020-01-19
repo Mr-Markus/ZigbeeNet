@@ -1,33 +1,43 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
     /// Management Network Discovery value object class.
-    /// 
-    /// The Mgmt_NWK_Disc_req is generated from a Local Device requesting that the
-    /// Remote Device execute a Scan to report back networks in the vicinity of the Local
-    /// Device. The destination addressing on this command shall be unicast.
-    /// 
+    ///
+    ///
+    /// The Mgmt_NWK_Disc_req is generated from a Local Device requesting that the Remote
+    /// Device execute a Scan to report back networks in the vicinity of the Local Device. The
+    /// destination addressing on this command shall be unicast.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
-    public class ManagementNetworkDiscovery : ZdoResponse
+    public class ManagementNetworkDiscovery : ZdoRequest
     {
         /// <summary>
-        /// ScanChannels command message field.
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0030;
+
+        /// <summary>
+        /// Scan Channels command message field.
         /// </summary>
         public int ScanChannels { get; set; }
 
         /// <summary>
-        /// ScanDuration command message field.
+        /// Scan Duration command message field.
         /// </summary>
         public byte ScanDuration { get; set; }
 
         /// <summary>
-        /// StartIndex command message field.
+        /// Start Index command message field.
         /// </summary>
         public byte StartIndex { get; set; }
 
@@ -36,7 +46,7 @@ namespace ZigBeeNet.ZDO.Command
         /// </summary>
         public ManagementNetworkDiscovery()
         {
-            ClusterId = 0x0030;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -52,27 +62,26 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            ScanChannels = (int)deserializer.Deserialize(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            ScanDuration = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ScanChannels = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            ScanDuration = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("ManagementNetworkDiscovery [")
-                   .Append(base.ToString())
-                   .Append(", scanChannels=")
-                   .Append(ScanChannels)
-                   .Append(", scanDuration=")
-                   .Append(ScanDuration)
-                   .Append(", startIndex=")
-                   .Append(StartIndex)
-                   .Append(']');
+            builder.Append("ManagementNetworkDiscovery [");
+            builder.Append(base.ToString());
+            builder.Append(", ScanChannels=");
+            builder.Append(ScanChannels);
+            builder.Append(", ScanDuration=");
+            builder.Append(ScanDuration);
+            builder.Append(", StartIndex=");
+            builder.Append(StartIndex);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

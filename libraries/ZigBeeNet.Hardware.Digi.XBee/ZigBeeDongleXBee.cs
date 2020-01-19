@@ -134,7 +134,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             XBeeGetIeeeAddressLowCommand ieeeLowCommand = new XBeeGetIeeeAddressLowCommand();
             XBeeIeeeAddressLowResponse ieeeLowResponse = (XBeeIeeeAddressLowResponse)_frameHandler.SendRequest(ieeeLowCommand);
 
-            if (ieeeHighResponse == null || ieeeLowCommand == null)
+            if (ieeeHighResponse == null || ieeeLowResponse == null)
             {
                 Log.Error("Unable to get XBee IEEE address");
                 return ZigBeeStatus.BAD_RESPONSE;
@@ -235,7 +235,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 return;
             }
             _frameHandler.SetClosing();
-            _zigBeeTransportReceive.SetNetworkState(ZigBeeTransportState.OFFLINE);
+            _zigBeeTransportReceive.SetTransportState(ZigBeeTransportState.OFFLINE);
 
             _serialPort.Close();
             _frameHandler.Close();
@@ -286,7 +286,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             }
             command.SetData(apsFrame.Payload.Select(item => (int)item).ToArray());
 
-            Log.Debug($"XBee send: {{{command.ToString()}}}");
+            //Log.Debug($"XBee send: {{{command.ToString()}}}");
             _frameHandler.SendRequestAsync(command);
         }
 
@@ -349,7 +349,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         {
             if (_initialisationComplete)
             {
-                _zigBeeTransportReceive.SetNetworkState(state);
+                _zigBeeTransportReceive.SetTransportState(state);
             }
         }
 

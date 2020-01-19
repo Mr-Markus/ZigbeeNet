@@ -1,48 +1,57 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
-     /// Network Address Request value object class.
-     /// <p>
-     /// The NWK_addr_req is generated from a Local Device wishing to inquire as to the
-     /// 16-bit address of the Remote Device based on its known IEEE address. The
-     /// destination addressing on this command shall be unicast or broadcast to all
-     /// devices for which macRxOnWhenIdle = TRUE.
-     /// </summary>
+    /// Network Address Request value object class.
+    ///
+    ///
+    /// The NWK_addr_req is generated from a Local Device wishing to inquire as to the 16-bit
+    /// address of the Remote Device based on its known IEEE address. The destination
+    /// addressing on this command shall be unicast or broadcast to all devices for which
+    /// macRxOnWhenIdle = TRUE.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
     public class NetworkAddressRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
         /// <summary>
-         /// IEEEAddr command message field.
-         /// </summary>
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0000;
+
+        /// <summary>
+        /// IEEE Addr command message field.
+        /// </summary>
         public IeeeAddress IeeeAddr { get; set; }
 
         /// <summary>
-         /// RequestType command message field.
-         /// 
-         /// Request type for this command:
-         /// 0x00 – Single device response
-         /// 0x01 – Extended response
-         /// 0x02-0xFF – reserved
-         /// </summary>
+        /// Request Type command message field.
+        /// 
+        /// Request type for this command: 0x00 – Single device response 0x01 – Extended
+        /// response 0x02-0xFF – reserved
+        /// </summary>
         public byte RequestType { get; set; }
 
         /// <summary>
-         /// StartIndex command message field.
-         /// </summary>
+        /// Start Index command message field.
+        /// </summary>
         public byte StartIndex { get; set; }
 
         /// <summary>
-         /// Default constructor.
-         /// </summary>
+        /// Default constructor.
+        /// </summary>
         public NetworkAddressRequest()
         {
-            ClusterId = 0x0000;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -58,36 +67,36 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            IeeeAddr = (IeeeAddress)deserializer.Deserialize(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            RequestType = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            IeeeAddr = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
+            RequestType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
         {
-            if (!(response is NetworkAddressResponse)) {
+            if (!(response is NetworkAddressResponse))
+            {
                 return false;
             }
 
-            return ((NetworkAddressRequest)request).IeeeAddr.Equals(((NetworkAddressResponse)response).IeeeAddrRemoteDev);
-        }
+            return (((NetworkAddressRequest) request).IeeeAddr.Equals(((NetworkAddressResponse) response).IeeeAddrRemoteDev));
+         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("NetworkAddressRequest [")
-                   .Append(base.ToString())
-                   .Append(", ieeeAddr=")
-                   .Append(IeeeAddr)
-                   .Append(", requestType=")
-                   .Append(RequestType)
-                   .Append(", startIndex=")
-                   .Append(StartIndex)
-                   .Append(']');
+            builder.Append("NetworkAddressRequest [");
+            builder.Append(base.ToString());
+            builder.Append(", IeeeAddr=");
+            builder.Append(IeeeAddr);
+            builder.Append(", RequestType=");
+            builder.Append(RequestType);
+            builder.Append(", StartIndex=");
+            builder.Append(StartIndex);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

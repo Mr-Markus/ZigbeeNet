@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.App;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters;
@@ -377,7 +377,9 @@ namespace ZigBeeNet
             ZigBeeEndpointDao dao = new ZigBeeEndpointDao
             {
                 EndpointId = EndpointId,
-                ProfileId = ProfileId
+                ProfileId = ProfileId,
+                DeviceId = DeviceId,
+                DeviceVersion = DeviceVersion
             };
 
             List<ZclClusterDao> clusters;
@@ -403,13 +405,11 @@ namespace ZigBeeNet
         public void SetDao(ZigBeeEndpointDao dao)
         {
             EndpointId = dao.EndpointId;
-
-            //if (dao.ProfileId != null)
-            //{
             ProfileId = dao.ProfileId;
-            //}
+            DeviceId = dao.DeviceId;
+            DeviceVersion = dao.DeviceVersion;
 
-            if (dao.InputClusterIds != null)
+            if (dao.InputClusters != null)
             {
                 foreach (ZclClusterDao clusterDao in dao.InputClusters)
                 {
@@ -419,7 +419,7 @@ namespace ZigBeeNet
                 }
             }
 
-            if (dao.OutputClusterIds != null)
+            if (dao.OutputClusters != null)
             {
                 foreach (ZclClusterDao clusterDao in dao.OutputClusters)
                 {
@@ -438,6 +438,7 @@ namespace ZigBeeNet
         public void SendTransaction(ZigBeeCommand command)
         {
             command.DestinationAddress = GetEndpointAddress();
+            Node.SendTransaction(command);
         }
 
         /// <summary>
@@ -447,16 +448,16 @@ namespace ZigBeeNet
          /// <param name="responseMatcher">the <see cref="ZigBeeTransactionMatcher"> used to match the response to the request</param>
          /// <returns>the <see cref="CommandResult"> future.</returns>
          /// </summary>
-        public async Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
+        public Task<CommandResult> SendTransaction(ZigBeeCommand command, IZigBeeTransactionMatcher responseMatcher)
         {
-            //command.DestinationAddress = GetEndpointAddress();
-            return await Node.SendTransaction(command, responseMatcher);
+            command.DestinationAddress = GetEndpointAddress();
+            return Node.SendTransaction(command, responseMatcher);
         }
 
         public override string ToString()
         {
             return "ZigBeeEndpoint [networkAddress=" + GetEndpointAddress().ToString() + ", profileId="
-                    + string.Format("{0}4X", ProfileId) + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion
+                    + string.Format("{0:X4}", ProfileId) + ", deviceId=" + DeviceId + ", deviceVersion=" + DeviceVersion
                     + ", inputClusterIds=" + string.Join(",", GetInputClusterIds()) + ", outputClusterIds="
                     + string.Join(",", GetOutputClusterIds())+ "]";
         }

@@ -13,17 +13,27 @@ using Serilog;
 
 namespace ZigBeeNet.App.Discovery
 {
+
+    /// <summary>
+    /// This class implements a <see cref="ZigBeeNetworkExtension"/> to perform network discovery and monitoring.
+    /// <p>
+    /// The periodic mesh update will periodically request information from the node so as to keep information updated. The
+    /// tasks may be specified from the list of <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask"/>s, and in general it may be expected to update the
+    /// routing information (with <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.ROUTES"/>) and the neighbour information (with
+    /// <see cref="ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.NEIGHBORS"/>). In some networks, it may be advantageous not to update all information as it
+    /// may place a high load on the network.
+    ///
+    /// </summary>
     public class ZigBeeDiscoveryExtension : IZigBeeNetworkExtension, IZigBeeNetworkNodeListener, IZigBeeCommandListener
     {
         /// <summary>
-        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is
-        /// responsible for monitoring the network for new devices and the initial
-        /// interrogation of their capabilities.
+        /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is responsible for monitoring the network for 
+        /// new devices and the initial interrogation of their capabilities.
         /// </summary>
         private ZigBeeNetworkDiscoverer _networkDiscoverer;
 
         /// <summary>
-        ///
+        /// Map of <see cref="ZigBeeNetworkDiscoverer"/> for each node
         /// </summary>
         private ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer> _nodeDiscovery = new ConcurrentDictionary<IeeeAddress, ZigBeeNodeServiceDiscoverer>();
 
@@ -39,6 +49,13 @@ namespace ZigBeeNet.App.Discovery
         private ZigBeeNetworkManager _networkManager;
 
         private bool extensionStarted = false;
+
+        /// <summary>
+        /// List of tasks to be completed during a mesh update
+        /// </summary>
+        public List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask> MeshUpdateTasks { get; set; } = new List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask>() {
+            ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.NEIGHBORS, ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask.ROUTES };
+
 
         public ZigBeeStatus ExtensionInitialize(ZigBeeNetworkManager networkManager)
         {
@@ -77,19 +94,18 @@ namespace ZigBeeNet.App.Discovery
             _networkManager.RemoveNetworkNodeListener(this);
             _networkManager.RemoveCommandListener(this);
 
+            StopScheduler();
             _networkDiscoverer?.Shutdown();
 
-            foreach (var nodeDiscoverer in _nodeDiscovery.Values)
+            lock (_nodeDiscovery)
             {
-                nodeDiscoverer.StopDiscovery();
+                foreach (var nodeDiscoverer in _nodeDiscovery.Values)
+                {
+                    nodeDiscoverer.StopDiscovery();
+                }
             }
-
             extensionStarted = false;
 
-            if (_futureTask != null)
-            {
-                _cancellationTokenSource.Cancel();
-            }
             Log.Debug("DISCOVERY Extension: Shutdown");
         }
 
@@ -132,8 +148,8 @@ namespace ZigBeeNet.App.Discovery
         }
 
         /// <summary>
-        /// Performs an immediate refresh of the network. Subsequent updates are performed at the current update rate, and
-        /// the timer is restarted from the time of calling this method.
+        /// Performs an immediate refresh of the network mesh information. Subsequent updates are performed at the current 
+        /// update rate, and the timer is restarted from the time of calling this method.
         /// </summary>
         public void Refresh()
         {
@@ -146,38 +162,41 @@ namespace ZigBeeNet.App.Discovery
 
         public void NodeAdded(ZigBeeNode node)
         {
-            if (_nodeDiscovery.ContainsKey(node.IeeeAddress))
+            lock (_nodeDiscovery)
             {
-                return;
+                if (_nodeDiscovery.ContainsKey(node.IeeeAddress))
+                {
+                    return;
+                }
+
+                Log.Debug("{IeeeAddress}: DISCOVERY Extension: Adding discoverer for added node", node.IeeeAddress);
+
+                StartDiscovery(node);
             }
-
-            Log.Debug("DISCOVERY Extension: Adding discoverer for {IeeeAddress}", node.IeeeAddress);
-
-            StartDiscovery(node);
         }
 
         public void NodeUpdated(ZigBeeNode node)
         {
-            if (node.NodeState == ZigBeeNodeState.ONLINE && !_nodeDiscovery.ContainsKey(node.IeeeAddress))
+            lock (_nodeDiscovery)
             {
-                // If the state is ONLINE, then ensure discovery is running
-                StartDiscovery(node);
-            }
-            else if (node.NodeState != ZigBeeNodeState.ONLINE && _nodeDiscovery.ContainsKey(node.IeeeAddress))
-            {
-                // If state is not ONLINE, then stop discovery
-                StopDiscovery(node);
+                if (node.NodeState == ZigBeeNodeState.ONLINE && !_nodeDiscovery.ContainsKey(node.IeeeAddress))
+                {
+                    Log.Debug("{IeeeAddress}: DISCOVERY Extension: Adding discoverer for updated node", node.IeeeAddress);
+                    // If the state is ONLINE, then ensure discovery is running
+                    StartDiscovery(node);
+                }
+                else if (node.NodeState != ZigBeeNodeState.ONLINE && _nodeDiscovery.ContainsKey(node.IeeeAddress))
+                {
+                    // If state is not ONLINE, then stop discovery
+                    StopDiscovery(node);
+                }
             }
         }
 
         public void NodeRemoved(ZigBeeNode node)
         {
-            Log.Debug("DISCOVERY Extension: Removing discoverer for {IeeeAddress}", node.IeeeAddress);
-
-            if (_nodeDiscovery.TryRemove(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer discoverer))
-            {
-                StopDiscovery(node);
-            }
+            Log.Debug("{IeeeAddress}: DISCOVERY Extension: Removing discoverer", node.IeeeAddress);
+            StopDiscovery(node);
         }
 
         public void CommandReceived(ZigBeeCommand command)
@@ -213,9 +232,13 @@ namespace ZigBeeNet.App.Discovery
 
         protected void StartDiscovery(ZigBeeNode node)
         {
-            ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
-            _nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
-            nodeDiscoverer.StartDiscovery();
+            lock (_nodeDiscovery)
+            {
+                ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
+                nodeDiscoverer.MeshUpdateTasks = MeshUpdateTasks;
+                _nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
+                nodeDiscoverer.StartDiscovery();
+            }
         }
 
         protected void StopDiscovery(ZigBeeNode node)
@@ -242,18 +265,25 @@ namespace ZigBeeNet.App.Discovery
 
             _futureTask = Task.Run(() =>
             {
-                Log.Debug("DISCOVERY Extension: Starting mesh update");
-                foreach (ZigBeeNodeServiceDiscoverer node in _nodeDiscovery.Values)
+                lock (_nodeDiscovery)
                 {
-                    Log.Debug("DISCOVERY Extension: Starting mesh update for {IeeeAddress}", node.Node.IeeeAddress);
-                    node.UpdateMesh();
+                    Log.Debug("DISCOVERY Extension: Starting mesh update");
+                    foreach (ZigBeeNodeServiceDiscoverer node in _nodeDiscovery.Values)
+                    {
+                        Log.Debug("{IeeeAddress}: DISCOVERY Extension: Starting mesh update", node.Node.IeeeAddress);
+                        node.MeshUpdateTasks = MeshUpdateTasks;
+                        node.UpdateMesh();
+                    }
                 }
             }, _cancellationTokenSource.Token);
         }
 
         public List<ZigBeeNodeServiceDiscoverer> GetNodeDiscoverers()
         {
-            return _nodeDiscovery.Values.ToList();
+            lock (_nodeDiscovery)
+            {
+                return _nodeDiscovery.Values.ToList();
+            }
         }
     }
 }

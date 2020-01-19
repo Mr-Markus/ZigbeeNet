@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.Extensions;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.General;
@@ -52,7 +53,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// The list of supported attributes in the remote device for this cluster.
         /// After initialisation, the list will contain an empty list. Once a successful call to
-        /// {@link #discoverAttributes()} has been made, the list will reflect the attributes supported by the remote device.
+        /// DiscoverAttributes() has been made, the list will reflect the attributes supported by the remote device.
         /// </summary>
         private ConcurrentBag<ushort> _supportedAttributes = new ConcurrentBag<ushort>();
 
@@ -77,11 +78,36 @@ namespace ZigBeeNet.ZCL
         private readonly List<IZclCommandListener> _commandListeners = new List<IZclCommandListener>();
 
         /// <summary>
-        /// Map of attributes supported by the cluster. This contains all attributes, even if they are not supported by the
-        /// remote device. To check what attributes are supported by the remove device, us the {@link #discoverAttributes()}
-        /// method followed by the {@link #getSupportedAttributes()} method.
+        /// Map of client attributes supported by the cluster. This contains all attributes, even if they are not supported by the
+        /// remote device. To check what attributes are supported by the remote device, us the DiscoverAttributes()
+        /// method followed by the GetSupportedAttributes() method.
         /// </summary>
-        protected Dictionary<ushort, ZclAttribute> _attributes;
+        protected Dictionary<ushort, ZclAttribute> _clientAttributes;
+
+        /// <summary>
+        /// Map of server attributes supported by the cluster. This contains all attributes, even if they are not supported by the
+        /// remote device. To check what attributes are supported by the remote device, us the DiscoverAttributes()
+        /// method followed by the GetSupportedAttributes() method.
+        /// </summary>
+        protected Dictionary<ushort, ZclAttribute> _serverAttributes;
+
+
+        /// <summary>
+        /// Map of server side commands supported by the cluster.This contains all server commands, even if they are not
+        /// supported by the remote device.
+        /// </summary>
+        protected Dictionary<ushort, Func<ZclCommand>> _serverCommands;// = InitializeServerCommands();
+
+        /// <summary>
+        /// Map of client side commands supported by the cluster.This contains all client commands, even if they are not
+        /// supported by the remote device.
+        /// </summary>
+        protected Dictionary<ushort, Func<ZclCommand>> _clientCommands;// = initializeClientCommands();
+
+        /// <summary>
+        /// Map of the generic commands as implemented by all clusters
+        /// </summary>
+        protected static Dictionary<ushort, Func<ZclCommand>> _genericCommands = new Dictionary<ushort, Func<ZclCommand>>();
 
         /// <summary>
         /// The <see cref="ZclAttributeNormalizer"> is used to normalize attribute data types to ensure that data types are
@@ -94,19 +120,85 @@ namespace ZigBeeNet.ZCL
         /// If this cluster requires all frames to have APS security applied, then this will be true. Any frames not secured
         /// with the link key will be rejected and all frames sent will use APS encryption.
         /// </summary>
-        private bool apsSecurityRequired = false;
+        private bool _apsSecurityRequired = false;
 
-        /// <summary>
-        /// Abstract method called when the cluster starts to initialise the list of attributes defined in this cluster by
-        /// the cluster library
-        ///
-        /// <returns>a <see cref="Dictionary{TKey, TValue}"> of all attributes this cluster is known to support</returns>
-        /// </summary>
-        protected abstract Dictionary<ushort, ZclAttribute> InitializeAttributes();
+        /**
+        * A boolean used to record if the list of supported attributes has been recovered from the remote device. This is
+        * used to record the validity of supported attributes
+        */
+        private bool _supportedAttributesKnown;
+
+        /**
+        * Abstract method called when the cluster starts to initialise the list of client attributes defined in this
+        * cluster by the cluster library
+        *
+        * @return a {@link Map} of all attributes this cluster is known to support
+        */
+        protected abstract Dictionary<ushort, ZclAttribute> InitializeClientAttributes();
+
+        /**
+         * Abstract method called when the cluster starts to initialise the list of server attributes defined in this
+         * cluster by the cluster library
+         *
+         * @return a {@link Map} of all attributes this cluster is known to support
+         */
+        protected abstract Dictionary<ushort, ZclAttribute> InitializeServerAttributes();
+
+        /**
+         * Abstract method called when the cluster starts to initialise the list of server side commands defined in this
+         * cluster by the cluster library
+         *
+         * @return a {@link Map} of all server side commands this cluster is known to support
+         */
+        protected virtual Dictionary<ushort, Func<ZclCommand>> InitializeServerCommands()
+        {
+            return new Dictionary<ushort, Func<ZclCommand>>();
+        }
+
+        /**
+         * Abstract method called when the cluster starts to initialise the list of client side commands defined in this
+         * cluster by the cluster library
+         *
+         * @return a {@link Map} of all client side commands this cluster is known to support
+         */
+        protected virtual Dictionary<ushort, Func<ZclCommand>> InitializeClientCommands()
+        {
+            return new Dictionary<ushort, Func<ZclCommand>>();
+        }
+
+        static ZclCluster()
+        {
+            _genericCommands.Add(0x0000, () => new ReadAttributesCommand());
+            _genericCommands.Add(0x0001, () => new ReadAttributesResponse());
+            _genericCommands.Add(0x0002, () => new WriteAttributesCommand());
+            _genericCommands.Add(0x0003, () => new WriteAttributesUndividedCommand());
+            _genericCommands.Add(0x0004, () => new WriteAttributesResponse());
+            _genericCommands.Add(0x0005, () => new WriteAttributesNoResponse());
+            _genericCommands.Add(0x0006, () => new ConfigureReportingCommand());
+            _genericCommands.Add(0x0007, () => new ConfigureReportingResponse());
+            _genericCommands.Add(0x0008, () => new ReadReportingConfigurationCommand());
+            _genericCommands.Add(0x0009, () => new ReadReportingConfigurationResponse());
+            _genericCommands.Add(0x000A, () => new ReportAttributesCommand());
+            _genericCommands.Add(0x000B, () => new DefaultResponse());
+            _genericCommands.Add(0x000C, () => new DiscoverAttributesCommand());
+            _genericCommands.Add(0x000D, () => new DiscoverAttributesResponse());
+            _genericCommands.Add(0x000E, () => new ReadAttributesStructuredCommand());
+            _genericCommands.Add(0x000F, () => new WriteAttributesStructuredCommand());
+            _genericCommands.Add(0x0010, () => new WriteAttributesStructuredResponse());
+            _genericCommands.Add(0x0011, () => new DiscoverCommandsReceived());
+            _genericCommands.Add(0x0012, () => new DiscoverCommandsReceivedResponse());
+            _genericCommands.Add(0x0013, () => new DiscoverCommandsGenerated());
+            _genericCommands.Add(0x0014, () => new DiscoverCommandsGeneratedResponse());
+            _genericCommands.Add(0x0015, () => new DiscoverAttributesExtended());
+            _genericCommands.Add(0x0016, () => new DiscoverAttributesExtendedResponse());
+        }
 
         public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
         {
-            _attributes = InitializeAttributes();
+            _clientAttributes = InitializeClientAttributes();
+            _serverAttributes = InitializeServerAttributes();
+            _clientCommands = InitializeClientCommands();
+            _serverCommands = InitializeServerCommands();
 
             this._zigbeeEndpoint = zigbeeEndpoint;
             this._clusterId = clusterId;
@@ -151,6 +243,15 @@ namespace ZigBeeNet.ZCL
             command.Identifiers = attributes;
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
 
+            if (attributes.Count > 0 && IsManufacturerSpecific())
+            {
+                command.ManufacturerCode = GetManufacturerCode();
+            }
+            else if (AreAttributesManufacturerSpecific(attributes))
+            {
+                command.ManufacturerCode = GetAttribute(attributes[0]).ManufacturerCode;
+            }
+
             return Send(command);
         }
 
@@ -177,17 +278,49 @@ namespace ZigBeeNet.ZCL
         {
             //logger.debug("{}: Writing cluster {}, attribute {}, value {}, as dataType {}", zigbeeEndpoint.getIeeeAddress(),
             //        clusterId, attribute, value, dataType);
-
-            WriteAttributesCommand command = new WriteAttributesCommand();
-
-            command.ClusterId = _clusterId;
             WriteAttributeRecord attributeIdentifier = new WriteAttributeRecord();
             attributeIdentifier.AttributeIdentifier = attribute;
             attributeIdentifier.AttributeDataType = dataType;
             attributeIdentifier.AttributeValue = value;
 
-            command.Records = new List<WriteAttributeRecord>(new[] { attributeIdentifier });
+            return Write(new List<WriteAttributeRecord> { attributeIdentifier });
+        }
+
+        /// <summary>
+        /// Writes a number of attributes in a single command
+        ///
+        /// <para name="attributes"/>attributes a List of <see cref="WriteAttributeRecord"/>s with the attribute ID, type and value<para>
+        /// <returns>command future <see cref="CommandResult"/></returns> 
+        /// </summary>
+        public Task<CommandResult> Write(List<WriteAttributeRecord> attributes)
+        {
+            WriteAttributesCommand command = new WriteAttributesCommand();
+            command.ClusterId = _clusterId;
+            command.Records = attributes;
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
+
+            ZclAttribute manufacturerSpecificAttribute = null;
+            foreach (WriteAttributeRecord attributeRecord in attributes)
+            {
+                ZclAttribute attribute = GetAttribute(attributeRecord.AttributeIdentifier);
+                if (attribute != null)
+                {
+                    if (attribute.IsManufacturerSpecific())
+                    {
+                        manufacturerSpecificAttribute = attribute;
+                        break;
+                    }
+                }
+            }
+
+            if (IsManufacturerSpecific())
+            {
+                command.ManufacturerCode = GetManufacturerCode();
+            }
+            else if (manufacturerSpecificAttribute != null)
+            {
+                command.ManufacturerCode = manufacturerSpecificAttribute.ManufacturerCode;
+            }
 
             return Send(command);
         }
@@ -201,7 +334,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public Task<CommandResult> Write(ZclAttribute attribute, object value)
         {
-            return Write(attribute.Id, attribute.ZclDataType, value);
+            return Write(attribute.Id, attribute.DataType, value);
         }
 
         /// <summary>
@@ -209,14 +342,14 @@ namespace ZigBeeNet.ZCL
         ///
         /// <param name="attribute">the ZclAttribute to read</param>
         /// </summary>
-        protected object ReadSync(ZclAttribute attribute)
+        public object ReadSync(ushort attribute)
         {
             // Log.Debug("readSync request: {Attribute}", attribute);
             CommandResult result;
             try
             {
                 // TODO: Consider removing the call to .Result and use async/await all the way. (GodeGenerator and calls must be adjusted)
-                result = Read(attribute).Result; 
+                result = Read(attribute).Result;
             }
             catch (TaskCanceledException e) // TODO: Check if this is the right exception to catch here
             {
@@ -234,14 +367,19 @@ namespace ZigBeeNet.ZCL
                 return null;
             }
 
-            ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
-            if (response.Records != null && response.Records[0].Status == ZclStatus.SUCCESS)
+            ReadAttributesResponse response = result.Response as ReadAttributesResponse;
+            if (response.Records[0].Status != ZclStatus.SUCCESS)
             {
-                ReadAttributeStatusRecord attributeRecord = response.Records[0];
-                return _normalizer.NormalizeZclData(attribute.ZclDataType, attributeRecord.AttributeValue);
+                return null;
             }
 
-            return null;
+            // If we don't know this attribute, then just return the received data
+            if (GetAttribute(attribute) == null)
+            {
+                return response.Records[0].AttributeValue;
+            }
+
+            return _normalizer.NormalizeZclData(GetAttribute(attribute).DataType, response.Records[0].AttributeValue);
         }
 
         /// <summary>
@@ -281,7 +419,7 @@ namespace ZigBeeNet.ZCL
             AttributeReportingConfigurationRecord record = new AttributeReportingConfigurationRecord();
             record.Direction = 0;
             record.AttributeIdentifier = attribute.Id;
-            record.AttributeDataType = attribute.ZclDataType;
+            record.AttributeDataType = attribute.DataType;
             record.MinimumReportingInterval = minInterval;
             record.MaximumReportingInterval = maxInterval;
             record.ReportableChange = reportableChange;
@@ -290,6 +428,18 @@ namespace ZigBeeNet.ZCL
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
 
             return Send(command);
+        }
+
+        // TODO: comment
+        public Task<CommandResult> SetReporting(ushort attributeId, ushort minInterval, ushort maxInterval, object reportableChange)
+        {
+            return SetReporting(GetAttribute(attributeId), minInterval, maxInterval, reportableChange);
+        }
+
+        // TODO: comment
+        public Task<CommandResult> SetReporting(ushort attributeId, ushort minInterval, ushort maxInterval)
+        {
+            return SetReporting(GetAttribute(attributeId), minInterval, maxInterval, null);
         }
 
         /// <summary>
@@ -321,19 +471,35 @@ namespace ZigBeeNet.ZCL
 
         /// <summary>
         /// Gets the reporting configuration for an attribute
-        ///
-        /// <param name="attribute">the ZclAttribute on which to enable reporting</param>
-        /// <returns>command Task CommandResult</returns>
+        /// 
+        /// <param name="attributeId"> the attribute on which to get the reporting configuration</param>
+        /// <return>command Task <see cref="CommandResult"/></return>
         /// </summary>
-        public Task<CommandResult> GetReporting(ZclAttribute attribute)
+        public Task<CommandResult> GetReporting(ushort attributeId)
         {
             ReadReportingConfigurationCommand command = new ReadReportingConfigurationCommand();
             command.ClusterId = _clusterId;
             AttributeRecord record = new AttributeRecord();
-            record.AttributeIdentifier = attribute.Id;
+            record.AttributeIdentifier = attributeId;
             record.Direction = 0;
-            command.Records = new List<AttributeRecord>(new[] { record });
+            command.Records = new List<AttributeRecord> { record };
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
+
+            if (IsManufacturerSpecific())
+            {
+                command.ManufacturerCode = GetManufacturerCode();
+            }
+            else
+            {
+                var attribute = GetAttribute(attributeId);
+                if (attribute != null)
+                {
+                    if (attribute.IsManufacturerSpecific())
+                    {
+                        command.ManufacturerCode = GetAttribute(attributeId).ManufacturerCode;
+                    }
+                }
+            }
 
             return Send(command);
         }
@@ -347,8 +513,14 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public IEnumerable<ZclAttribute> GetAttributes()
         {
-            IEnumerable<ZclAttribute> attr = new List<ZclAttribute>(_attributes.Values);
-            return attr;
+            if (IsClient())
+            {
+                return _clientAttributes.Values;
+            }
+            else
+            {
+                return _serverAttributes.Values;
+            }
         }
 
         /// <summary>
@@ -360,7 +532,27 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public ZclAttribute GetAttribute(ushort id)
         {
-            return _attributes[id];
+            if (IsClient())
+            {
+                ZclAttribute clientAttribute = null;
+
+                if (!_clientAttributes.TryGetValue(id, out clientAttribute))
+                {
+                    Log.Information("Unkown client attribute with id {AttributeId} reported for cluster {Cluster}", id, this._clusterId);
+                }
+                return clientAttribute;
+            }
+            else
+            {
+                ZclAttribute serverAttribute = null;
+
+                // It can be that device reports unknown id
+                if (!_serverAttributes.TryGetValue(id, out serverAttribute))
+                {
+                    Log.Information("Unkown server attribute with id {AttributeId} reported by device for cluster {Cluster}", id, this._clusterId);
+                }
+                return serverAttribute;
+            }
         }
 
         /// <summary>
@@ -442,7 +634,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public void GetApsSecurityRequired(bool requireApsSecurity)
         {
-            this.apsSecurityRequired = requireApsSecurity;
+            this._apsSecurityRequired = requireApsSecurity;
         }
 
         /// <summary>
@@ -453,7 +645,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public bool GetApsSecurityRequired()
         {
-            return apsSecurityRequired;
+            return _apsSecurityRequired;
         }
 
         /// <summary>
@@ -463,17 +655,18 @@ namespace ZigBeeNet.ZCL
         /// <param name="endpointId">the destination endpoint ID</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> Bind(IeeeAddress address, ushort networkAddress, byte endpointId)
+        public Task<CommandResult> Bind(IeeeAddress address, byte endpointId)
         {
             BindRequest command = new BindRequest();
+            command.DestinationAddress = new ZigBeeEndpointAddress(_zigbeeEndpoint.GetEndpointAddress().Address);
             command.SrcAddress = _zigbeeEndpoint.GetIeeeAddress();
             command.SrcEndpoint = _zigbeeEndpoint.EndpointId;
             command.BindCluster = _clusterId;
             command.DstAddrMode = 3; // 64 bit addressing
             command.DstAddress = address;
-            command.DestinationAddress = new ZigBeeEndpointAddress(networkAddress, endpointId);
             command.DstEndpoint = endpointId;
-            return _zigbeeEndpoint.SendTransaction(command, new BindRequest());
+            // The transaction is not sent to the Endpoint of this cluster, but to the ZDO endpoint 0 directly.
+            return _zigbeeEndpoint.Node.SendTransaction(command, command);
         }
 
         /// <summary>
@@ -493,7 +686,8 @@ namespace ZigBeeNet.ZCL
             command.DstAddrMode = 3; // 64 bit addressing
             command.DstAddress = address;
             command.DstEndpoint = endpointId;
-            return _zigbeeEndpoint.SendTransaction(command, new UnbindRequest());
+            // The transaction is not sent to the Endpoint of this cluster, but to the ZDO endpoint 0 directly.
+            return _zigbeeEndpoint.Node.SendTransaction(command, command);
         }
 
         /// <summary>
@@ -502,17 +696,37 @@ namespace ZigBeeNet.ZCL
         /// <param name="transactionId">the transaction ID to use in the response</param>
         /// <param name="commandIdentifier">the command identifier to which this is a response</param>
         /// <param name="status">the ZclStatus to send in the response</param>
+        /// <param name="manufacturerCode">
+        /// manufacturerCode the manufacturer code to set in the response (or null, if the command is not
+        /// manufacturer-specific, or if the cluster is itself manufacturer-specific)
+        /// </param>
         /// </summary>
-        public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status)
+        public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status, int? manufacturerCode)
         {
-            DefaultResponse defaultResponse = new DefaultResponse();
-            defaultResponse.TransactionId = transactionId;
-            defaultResponse.CommandIdentifier = commandIdentifier;
-            defaultResponse.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
-            defaultResponse.ClusterId = _clusterId;
-            defaultResponse.StatusCode = status;
+            DefaultResponse defaultResponse = new DefaultResponse
+            {
+                TransactionId = transactionId,
+                CommandIdentifier = commandIdentifier,
+                DestinationAddress = _zigbeeEndpoint.GetEndpointAddress(),
+                ClusterId = _clusterId,
+                StatusCode = status
+            };
+
+            if (IsManufacturerSpecific())
+            {
+                defaultResponse.ManufacturerCode = GetManufacturerCode();
+            }
+            else if (manufacturerCode != null)
+            {
+                defaultResponse.ManufacturerCode = manufacturerCode;
+            }
 
             _zigbeeEndpoint.SendTransaction(defaultResponse);
+        }
+
+        public void SendDefaultResponse(byte transactionId, byte commandIdentifier, ZclStatus status)
+        {
+            SendDefaultResponse(transactionId, commandIdentifier, status, null);
         }
 
         /// <summary>
@@ -527,9 +741,16 @@ namespace ZigBeeNet.ZCL
         {
             lock (_supportedAttributes)
             {
-                if (_supportedAttributes.Count == 0)
+                if (!_supportedAttributesKnown)
                 {
-                    return new List<ushort>(_attributes.Keys);
+                    if (_isClient)
+                    {
+                        return _clientAttributes.Keys;
+                    }
+                    else
+                    {
+                        return _serverAttributes.Keys;
+                    }
                 }
 
                 return _supportedAttributes;
@@ -563,7 +784,7 @@ namespace ZigBeeNet.ZCL
         /// <param name="rediscover">true to perform a discovery even if it was previously completed</param>
         /// <returns>Task returning a bool</returns>
         /// </summary>
-        public async Task<bool> DiscoverAttributes(bool rediscover)
+        public async Task<bool> DiscoverAttributes(bool rediscover, int? manufacturerCode)
         {
             //return Task.Run(() => {
             // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
@@ -581,11 +802,22 @@ namespace ZigBeeNet.ZCL
 
             do
             {
-                DiscoverAttributesCommand command = new DiscoverAttributesCommand();
-                command.ClusterId = _clusterId;
-                command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
-                command.StartAttributeIdentifier = index;
-                command.MaximumAttributeIdentifiers = 10;
+                DiscoverAttributesCommand command = new DiscoverAttributesCommand
+                {
+                    ClusterId = _clusterId,
+                    DestinationAddress = _zigbeeEndpoint.GetEndpointAddress(),
+                    StartAttributeIdentifier = index,
+                    MaximumAttributeIdentifiers = 10
+                };
+
+                if (IsManufacturerSpecific())
+                {
+                    command.ManufacturerCode = GetManufacturerCode();
+                }
+                else if (manufacturerCode != null)
+                {
+                    command.ManufacturerCode = manufacturerCode;
+                }
 
                 CommandResult result = await Send(command);
                 if (result.IsError())
@@ -595,7 +827,7 @@ namespace ZigBeeNet.ZCL
 
                 DiscoverAttributesResponse response = (DiscoverAttributesResponse)result.GetResponse();
                 complete = response.DiscoveryComplete;
-                if (response.AttributeInformation != null)
+                if (response.AttributeInformation != null && response.AttributeInformation.Count > 0)
                 {
                     attributes.AddRange(response.AttributeInformation);
                     index = (ushort)(attributes.Max().Identifier + 1);
@@ -608,7 +840,13 @@ namespace ZigBeeNet.ZCL
             {
                 _supportedAttributes.Add(attribute.Identifier);
             }
+            _supportedAttributesKnown = true;
+
             return true;
+        }
+        public Task<bool> DiscoverAttributes(bool rediscover)
+        {
+            return DiscoverAttributes(rediscover, null);
         }
 
         /// <summary>
@@ -650,13 +888,13 @@ namespace ZigBeeNet.ZCL
         /// <param name="rediscover">true to perform a discovery even if it was previously completed</param>
         /// <returns>Command future bool with the success of the discovery</returns>
         /// </summary>
-        public async Task<bool> DiscoverCommandsReceived(bool rediscover)
+        public async Task<bool> DiscoverCommandsReceived(bool rediscover, int? manufacturerCode)
         {
 
             // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
             // cluster which would cause errors consolidating the responses
             // If we don't want to rediscover, and we already have the list of attributes, then return
-            if (!rediscover && !(_supportedCommandsReceived == null || _supportedCommandsReceived.Count == 0))
+            if (!rediscover && _supportedCommandsReceived?.Count > 0)
             {
                 return true;
             }
@@ -667,11 +905,22 @@ namespace ZigBeeNet.ZCL
 
             do
             {
-                DiscoverCommandsReceived command = new DiscoverCommandsReceived();
-                command.ClusterId = _clusterId;
-                command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
-                command.StartCommandIdentifier = index;
-                command.MaximumCommandIdentifiers = 20;
+                DiscoverCommandsReceived command = new DiscoverCommandsReceived
+                {
+                    ClusterId = _clusterId,
+                    DestinationAddress = _zigbeeEndpoint.GetEndpointAddress(),
+                    StartCommandIdentifier = index,
+                    MaximumCommandIdentifiers = 20
+                };
+
+                if (IsManufacturerSpecific())
+                {
+                    command.ManufacturerCode = GetManufacturerCode();
+                }
+                else if (manufacturerCode != null)
+                {
+                    command.ManufacturerCode = manufacturerCode;
+                }
 
                 CommandResult result = await Send(command);
                 if (result.IsError())
@@ -689,8 +938,13 @@ namespace ZigBeeNet.ZCL
             } while (!complete);
 
             _supportedCommandsReceived.Clear();
+            _supportedCommandsReceived.AddRange(commands);
 
             return true;
+        }
+        public Task<bool> DiscoverCommandsReceived(bool rediscover)
+        {
+            return DiscoverCommandsReceived(rediscover, null);
         }
 
         /// <summary>
@@ -732,12 +986,12 @@ namespace ZigBeeNet.ZCL
         /// <param name="rediscover">true to perform a discovery even if it was previously completed</param>
         /// <returns>Command future bool with the success of the discovery</returns>
         /// </summary>
-        public async Task<bool> DiscoverCommandsGenerated(bool rediscover)
+        public async Task<bool> DiscoverCommandsGenerated(bool rediscover, int? manufacturerCode)
         {
             // Synchronise the request to avoid multiple simultaneous requests to this update the list on this
             // cluster which would cause errors consolidating the responses
             // If we don't want to rediscover, and we already have the list of attributes, then return
-            if (!rediscover && !(_supportedCommandsGenerated == null | _supportedCommandsGenerated.Count == 0))
+            if (!rediscover && _supportedCommandsGenerated?.Count > 0)
             {
                 return true;
             }
@@ -747,11 +1001,22 @@ namespace ZigBeeNet.ZCL
 
             do
             {
-                DiscoverCommandsGenerated command = new DiscoverCommandsGenerated();
-                command.ClusterId = _clusterId;
-                command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
-                command.StartCommandIdentifier = index;
-                command.MaximumCommandIdentifiers = 20;
+                DiscoverCommandsGenerated command = new DiscoverCommandsGenerated
+                {
+                    ClusterId = _clusterId,
+                    DestinationAddress = _zigbeeEndpoint.GetEndpointAddress(),
+                    StartCommandIdentifier = index,
+                    MaximumCommandIdentifiers = 20
+                };
+
+                if (IsManufacturerSpecific())
+                {
+                    command.ManufacturerCode = GetManufacturerCode();
+                }
+                else if (manufacturerCode != null)
+                {
+                    command.ManufacturerCode = manufacturerCode;
+                }
 
                 CommandResult result = await Send(command);
 
@@ -770,8 +1035,14 @@ namespace ZigBeeNet.ZCL
             } while (!complete);
 
             _supportedCommandsGenerated.Clear();
+            _supportedCommandsGenerated.AddRange(commands);
 
             return true;
+        }
+
+        public Task<bool> DiscoverCommandsGenerated(bool rediscover)
+        {
+            return DiscoverCommandsGenerated(rediscover, null);
         }
 
         /// <summary>
@@ -809,8 +1080,9 @@ namespace ZigBeeNet.ZCL
         /// Notify attribute listeners of an updated ZclAttribute.
         ///
         /// <param name="attribute">the ZclAttribute to notify</param>
+        /// <param name="value">the current value of the attribute</param> 
         /// </summary>
-        private void NotifyAttributeListener(ZclAttribute attribute)
+        private void NotifyAttributeListener(ZclAttribute attribute, object value)
         {
             foreach (IZclAttributeListener listener in _attributeListeners)
             {
@@ -823,7 +1095,7 @@ namespace ZigBeeNet.ZCL
                 //});
 
                 // TODO: async ?
-                listener.AttributeUpdated(attribute);
+                listener.AttributeUpdated(attribute, value);
             }
         }
 
@@ -883,17 +1155,22 @@ namespace ZigBeeNet.ZCL
         {
             foreach (AttributeReport report in reports)
             {
-                ZclAttribute attribute = _attributes[report.AttributeIdentifier];
-                if (attribute == null)
-                {
-                    //logger.debug("{}: Unknown attribute {} in cluster {}", zigbeeEndpoint.getEndpointAddress(),
-                    //        report.getAttributeIdentifier(), clusterId);
-                }
-                else
-                {
-                    attribute.UpdateValue(_normalizer.NormalizeZclData(attribute.ZclDataType, report.AttributeValue));
-                    NotifyAttributeListener(attribute);
-                }
+                UpdateAttribute(report.AttributeIdentifier, report.AttributeValue);
+            }
+        }
+
+        private void UpdateAttribute(ushort attributeId, object attributeValue)
+        {
+            ZclAttribute attribute = GetAttribute(attributeId);
+            if (attribute == null)
+            {
+                Log.Debug("{EndPoint}: Unknown {IsClient} attribute in {AttributeId} cluster {ClusterId}", _zigbeeEndpoint.GetEndpointAddress(), (_isClient ? "Client" : "Server"), attributeId, _clusterId);
+            }
+            else
+            {
+                object value = _normalizer.NormalizeZclData(attribute.DataType, attributeValue);
+                attribute.UpdateValue(value);
+                NotifyAttributeListener(attribute, value);
             }
         }
 
@@ -908,25 +1185,11 @@ namespace ZigBeeNet.ZCL
             {
                 if (record.Status != ZclStatus.SUCCESS)
                 {
-                    //logger.debug("{}: Error reading attribute {} in cluster {} - {}", zigbeeEndpoint.getEndpointAddress(),
-                    //        record.getAttributeIdentifier(), clusterId, record.getStatus());
+                    Log.Debug("{EndpointAddress}: Error reading attribute {AttributeIdentifier} in cluster {clusterId} - {Status}", _zigbeeEndpoint.GetEndpointAddress(), record.AttributeIdentifier, _clusterId, record.Status);
                     continue;
                 }
 
-                ZclAttribute attribute = null;
-                if (_attributes.TryGetValue(record.AttributeIdentifier, out attribute) == true)
-                {
-                    if (attribute == null)
-                    {
-                        //logger.debug("{}: Unknown attribute {} in cluster {}", zigbeeEndpoint.getEndpointAddress(),
-                        //        record.getAttributeIdentifier(), clusterId);
-                    }
-                    else
-                    {
-                        attribute.UpdateValue(_normalizer.NormalizeZclData(attribute.ZclDataType, record.AttributeValue));
-                        NotifyAttributeListener(attribute);
-                    }
-                }
+                UpdateAttribute(record.AttributeIdentifier, record.AttributeValue);
             }
         }
 
@@ -945,24 +1208,81 @@ namespace ZigBeeNet.ZCL
         /// Gets a command from the command ID (ie a command from client to server). If no command with the requested id is
         /// found, null is returned.
         ///
+        /// <param name="zclFrametype">the ZclFrametype of the command</param>
         /// <param name="commandId">the command ID</param>
         /// <returns>the ZclCommand or null if no command found.</returns>
         /// </summary>
-        public virtual ZclCommand GetCommandFromId(int commandId)
+        public ZclCommand GetCommandFromId(ZclFrameType zclFrameType, ushort commandId)
         {
-            throw new NotImplementedException();
+            if (zclFrameType == ZclFrameType.CLUSTER_SPECIFIC_COMMAND)
+            {
+                return GetCommand(commandId, _clientCommands);
+            }
+            else
+            {
+                return GetCommand(commandId, _genericCommands);
+            }
         }
 
         /// <summary>
         /// Gets a response from the command ID (ie a command from server to client). If no command with the requested id is
         /// found, null is returned.
         ///
+        /// <param name="zclFrametype">the ZclFrametype of the command</param>
         /// <param name="commandId">the command ID</param>
         /// <returns>the ZclCommand or null if no command found.</returns>
         /// </summary>
-        public ZclCommand GetResponseFromId(int commandId)
+        public ZclCommand GetResponseFromId(ZclFrameType zclFrameType, ushort commandId)
         {
+            if (zclFrameType == ZclFrameType.CLUSTER_SPECIFIC_COMMAND)
+            {
+                return GetCommand(commandId, _serverCommands);
+            }
+            else
+            {
+                return GetCommand(commandId, _genericCommands);
+            }
+        }
+
+        private ZclCommand GetCommand(ushort commandId, Dictionary<ushort, Func<ZclCommand>> commands)
+        {
+            if (!commands.ContainsKey(commandId))
+            {
+                return null;
+            }
+
+            try
+            {
+                return commands[commandId]();
+            }
+            catch (Exception e)
+            {
+                Log.Debug(e, "Error instantiating cluster command {ClusterName}, id={CommandId}", _clusterName, commandId);
+            }
             return null;
+        }
+
+        /// <summary>
+        /// Indicates whether this is a manufacturer-specific attribute. Default is not manufacturer-specific.
+        /// </summary>
+        public bool IsManufacturerSpecific()
+        {
+            return GetManufacturerCode() != null;
+        }
+
+        /// <summary>
+        /// Returns the manufacturer code; must be non-null for manufacturer-specific clusters.
+        /// </summary>
+        public virtual int? GetManufacturerCode()
+        {
+            // TODO: see https://github.com/zsmartsystems/com.zsmartsystems.zigbee/blob/master/com.zsmartsystems.zigbee/src/main/java/com/zsmartsystems/zigbee/zcl/ZclCluster.java#L1469
+            return null;
+        }
+
+        private bool AreAttributesManufacturerSpecific(List<ushort> attributeIds)
+        {
+            return attributeIds.Select(attributeId => GetAttribute(attributeId))
+                    .All(attribute => attribute != null && attribute.IsManufacturerSpecific());
         }
 
         public ZclClusterDao GetDao()
@@ -970,12 +1290,36 @@ namespace ZigBeeNet.ZCL
             ZclClusterDao dao = new ZclClusterDao
             {
                 ClusterId = _clusterId,
+                ClusterName = _clusterName,
                 IsClient = _isClient,
-                SupportedAttributes = _supportedAttributes.ToList(),
-                SupportedCommandsGenerated = _supportedCommandsGenerated.ToList(),
-                SupportedCommandsReceived = _supportedCommandsReceived.ToList(),
-                Attributes = _attributes
             };
+
+            if (_supportedAttributesKnown)
+            {
+                dao.SupportedAttributes = _supportedAttributes.ToList();
+            }
+
+            dao.SupportedCommandsGenerated = _supportedCommandsGenerated.ToList();
+            dao.SupportedCommandsReceived = _supportedCommandsReceived.ToList();
+
+            List<ZclAttribute> daoZclAttributes;
+            if (_isClient)
+            {
+                daoZclAttributes = _clientAttributes.Values.ToList();
+            }
+            else
+            {
+                daoZclAttributes = _serverAttributes.Values.ToList();
+            }
+
+            Dictionary<ushort, ZclAttributeDao> daoAttributes = new Dictionary<ushort, ZclAttributeDao>();
+
+            foreach (ZclAttribute attribute in daoZclAttributes)
+            {
+                daoAttributes.Add(attribute.Id, attribute.GetDao());
+            }
+
+            dao.Attributes = daoAttributes;
 
             return dao;
         }
@@ -983,11 +1327,34 @@ namespace ZigBeeNet.ZCL
         public void SetDao(ZclClusterDao dao)
         {
             _clusterId = dao.ClusterId;
+            _clusterName = dao.ClusterName;
             _isClient = dao.IsClient;
-            _supportedAttributes.AddRange(dao.SupportedAttributes);
+            _supportedAttributesKnown = dao.SupportedAttributes != null;
+
+            if (_supportedAttributesKnown)
+            {
+                _supportedAttributes.AddRange(dao.SupportedAttributes);
+            }
+
             _supportedCommandsGenerated.AddRange(dao.SupportedCommandsGenerated);
             _supportedCommandsReceived.AddRange(dao.SupportedCommandsReceived);
-            _attributes = dao.Attributes;
+
+            Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
+            foreach (ZclAttributeDao daoAttribute in dao.Attributes.Values)
+            {
+                ZclAttribute attribute = new ZclAttribute();
+                attribute.SetDao(this, daoAttribute);
+                daoZclAttributes.Add(daoAttribute.Id, attribute);
+            }
+
+            if (_isClient)
+            {
+                _clientAttributes = daoZclAttributes;
+            }
+            else
+            {
+                _serverAttributes = daoZclAttributes;
+            }
         }
     }
 }

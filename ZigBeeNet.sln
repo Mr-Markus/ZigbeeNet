@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Test", "test\ZigB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531.Test", "test\ZigBeeNet.Hardware.TI.CC2531.Test\ZigBeeNet.Hardware.TI.CC2531.Test.csproj", "{FC480F2E-ACBC-467F-B6D4-6DF7156691B8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ZigBeeNet.Hardware.Digi.XBee", "libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.Digi.XBee", "libraries\ZigBeeNet.Hardware.Digi.XBee\ZigBeeNet.Hardware.Digi.XBee.csproj", "{F33FA6E6-8D2E-42E7-8538-3437D1E996CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Digi.XBee.CodeGenerator", "autocode\ZigBeeNet.Digi.XBee.CodeGenerator\ZigBeeNet.Digi.XBee.CodeGenerator.csproj", "{515C2B3A-3A21-4EC9-9103-B3F841490B1B}"
 EndProject
@@ -39,6 +39,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Hardware.TI.CC2531", "libraries\ZigBeeNet.Hardware.TI.CC2531\ZigBeeNet.Hardware.TI.CC2531.csproj", "{EB0EAFB9-264C-4A54-99AA-CBA21E4AC3EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet", "libraries\ZigBeeNet\ZigBeeNet.csproj", "{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigbeeNet.Hardware.ConBee", "libraries\ZigbeeNet.Hardware.ConBee\ZigbeeNet.Hardware.ConBee.csproj", "{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +88,10 @@ Global
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{BE87AA32-91C2-47EF-93F2-097526A900AB} = {603D29D9-83CE-4B81-BD59-A77F529E4494}
 		{EB0EAFB9-264C-4A54-99AA-CBA21E4AC3EA} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{EF96A94B-BCB9-40ED-BB61-E131D2FBB380} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{0C478F1E-0096-4150-9BC6-8DB29AE33BB4} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}

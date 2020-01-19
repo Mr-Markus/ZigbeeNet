@@ -97,9 +97,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             if (_serialPort.IsOpen)
             {
                 // Start Reader Task
-                _reader = new Task(ReaderTask, _cancellationToken.Token);
-
-                _reader.Start();
+                Task.Factory.StartNew(ReaderTask, _cancellationToken.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 
                 // TODO: ConnectionStatusChanged event
             }
@@ -159,7 +157,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 {
                     _serialPort.Write(value, 0, value.Length);
 
-                    Log.Debug("Write data to serialport: {Data}", BitConverter.ToString(value));
+                    //Log.Debug("Write data to serialport: {Data}", BitConverter.ToString(value));
                 }
                 catch (Exception e)
                 {
@@ -172,7 +170,7 @@ namespace ZigBeeNet.Tranport.SerialPort
         {
             var message = new byte[512];
 
-            while (IsOpen && _cancellationToken.IsCancellationRequested == false)
+            while (IsOpen && !_cancellationToken.IsCancellationRequested)
             {
                 try
                 {
@@ -186,8 +184,11 @@ namespace ZigBeeNet.Tranport.SerialPort
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "Error while reading from serial port");
-                    Thread.Sleep(1000);
+                    if (!_cancellationToken.IsCancellationRequested)
+                    {
+                        Log.Error(e, "Error while reading from serial port");
+                        Thread.Sleep(1000);
+                    }
                 }
             }
         }

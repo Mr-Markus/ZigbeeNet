@@ -1,46 +1,56 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
     /// Extended Simple Descriptor Request value object class.
-    /// 
-    /// The Extended_Simple_Desc_req command is generated from a local device
-    /// wishing to inquire as to the simple descriptor of a remote device on a specified
-    /// endpoint. This command shall be unicast either to the remote device itself or to an
-    /// alternative device that contains the discovery information of the remote device.
-    /// The Extended_Simple_Desc_req is intended for use with devices which employ a
-    /// larger number of application input or output clusters than can be described by the
+    ///
+    ///
+    /// The Extended_Simple_Desc_req command is generated from a local device wishing to
+    /// inquire as to the simple descriptor of a remote device on a specified endpoint. This
+    /// command shall be unicast either to the remote device itself or to an alternative device
+    /// that contains the discovery information of the remote device. The
+    /// Extended_Simple_Desc_req is intended for use with devices which employ a larger
+    /// number of application input or output clusters than can be described by the
     /// Simple_Desc_req.
-    /// 
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class ExtendedSimpleDescriptorRequest : ZdoRequest
     {
         /// <summary>
-        /// NWKAddrOfInterest command message field.
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x001D;
+
+        /// <summary>
+        /// NWK Addr Of Interest command message field.
         /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
         /// <summary>
         /// Endpoint command message field.
-/// </summary>
+        /// </summary>
         public byte Endpoint { get; set; }
 
         /// <summary>
-        /// StartIndex command message field.
-/// </summary>
+        /// Start Index command message field.
+        /// </summary>
         public byte StartIndex { get; set; }
 
         /// <summary>
         /// Default constructor.
-/// </summary>
+        /// </summary>
         public ExtendedSimpleDescriptorRequest()
         {
-            ClusterId = 0x001D;
+            ClusterId = CLUSTER_ID;
         }
 
         internal override void Serialize(ZclFieldSerializer serializer)
@@ -56,27 +66,26 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
-            Endpoint = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = (byte)deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
+            Endpoint = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("ExtendedSimpleDescriptorRequest [")
-                   .Append(base.ToString())
-                   .Append(", nwkAddrOfInterest=")
-                   .Append(NwkAddrOfInterest)
-                   .Append(", endpoint=")
-                   .Append(Endpoint)
-                   .Append(", startIndex=")
-                   .Append(StartIndex)
-                   .Append(']');
+            builder.Append("ExtendedSimpleDescriptorRequest [");
+            builder.Append(base.ToString());
+            builder.Append(", NwkAddrOfInterest=");
+            builder.Append(NwkAddrOfInterest);
+            builder.Append(", Endpoint=");
+            builder.Append(Endpoint);
+            builder.Append(", StartIndex=");
+            builder.Append(StartIndex);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

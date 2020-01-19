@@ -108,7 +108,7 @@ namespace ZigBeeNet
 
         public override string ToString()
         {
-            return Value.ToString("X");
+            return Value.ToString("X16");
         }
 
         public int CompareTo(IeeeAddress other)

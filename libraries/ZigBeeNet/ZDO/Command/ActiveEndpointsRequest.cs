@@ -1,35 +1,45 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZigBeeNet.Transaction;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.ZDO.Field;
+
 
 namespace ZigBeeNet.ZDO.Command
 {
     /// <summary>
-     /// Active Endpoints Request value object class.
-     /// 
-     /// The Active_EP_req command is generated from a local device wishing to acquire
-     /// the list of endpoints on a remote device with simple descriptors. This command
-     /// shall be unicast either to the remote device itself or to an alternative device that
-     /// contains the discovery information of the remote device.
-     /// </summary>
+    /// Active Endpoints Request value object class.
+    ///
+    ///
+    /// The Active_EP_req command is generated from a local device wishing to acquire the list
+    /// of endpoints on a remote device with simple descriptors. This command shall be unicast
+    /// either to the remote device itself or to an alternative device that contains the
+    /// discovery information of the remote device.
+    ///
+    /// Code is auto-generated. Modifications may be overwritten!
+    /// </summary>
     public class ActiveEndpointsRequest : ZdoRequest, IZigBeeTransactionMatcher
     {
         /// <summary>
-         /// NWKAddrOfInterest command message field.
-         /// </summary>
+        /// The ZDO cluster ID.
+        /// </summary>
+        public const ushort CLUSTER_ID = 0x0005;
+
+        /// <summary>
+        /// NWK Addr Of Interest command message field.
+        /// </summary>
         public ushort NwkAddrOfInterest { get; set; }
 
         /// <summary>
-         /// Default constructor.
-         /// </summary>
+        /// Default constructor.
+        /// </summary>
         public ActiveEndpointsRequest()
         {
-            ClusterId = 0x0005;
+            ClusterId = CLUSTER_ID;
         }
-
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
@@ -42,7 +52,7 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = (ushort)deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)
@@ -52,22 +62,20 @@ namespace ZigBeeNet.ZDO.Command
                 return false;
             }
 
-            return ((ActiveEndpointsRequest)request).NwkAddrOfInterest.Equals(((ActiveEndpointsResponse)response).NwkAddrOfInterest);
-        }
-
+            return (((ActiveEndpointsRequest) request).NwkAddrOfInterest.Equals(((ActiveEndpointsResponse) response).NwkAddrOfInterest));
+         }
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            builder.Append("ActiveEndpointsRequest [")
-                   .Append(base.ToString())
-                   .Append(", nwkAddrOfInterest=")
-                   .Append(NwkAddrOfInterest)
-                   .Append(']');
+            builder.Append("ActiveEndpointsRequest [");
+            builder.Append(base.ToString());
+            builder.Append(", NwkAddrOfInterest=");
+            builder.Append(NwkAddrOfInterest);
+            builder.Append(']');
 
             return builder.ToString();
         }
-
     }
 }

@@ -5,13 +5,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Core Launch (console)",
+      "name": "Launch PlayGround",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/samples/ZigBeeNet.PlayGround/bin/Debug/netcoreapp3.0/ZigBeeNet.PlayGround.dll",
       "args": [],
       "cwd": "${workspaceFolder}/samples/ZigBeeNet.PlayGround",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Launch Autocode",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/autocode/ZigBeeNet.CodeGenerator/bin/Debug/netcoreapp3.0/ZigBeeNet.CodeGenerator.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/autocode/ZigBeeNet.CodeGenerator",
       "console": "integratedTerminal",
       "stopAtEntry": false
     },

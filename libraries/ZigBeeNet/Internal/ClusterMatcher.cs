@@ -9,6 +9,11 @@ using Serilog;
 
 namespace ZigBeeNet.Internal
 {
+    /**
+     * Class to respond to the <see cref="MatchDescriptorRequest"/>.
+     *
+     * Note that this class currently only supports clusters that are not manufacturer-specific.
+     */
     public class ClusterMatcher : IZigBeeCommandListener
     {
         private ZigBeeNetworkManager _networkManager;
@@ -58,7 +63,7 @@ namespace ZigBeeNet.Internal
 
                 MatchDescriptorResponse matchResponse = new MatchDescriptorResponse();
                 matchResponse.Status = ZdoStatus.SUCCESS;
-                List<ushort> matchList = new List<ushort>();
+                List<byte> matchList = new List<byte>();
                 matchList.Add(1);
                 matchResponse.MatchList = matchList;
 

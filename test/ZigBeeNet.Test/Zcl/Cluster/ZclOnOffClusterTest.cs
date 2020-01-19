@@ -32,19 +32,19 @@ namespace ZigBeeNet.Test.Zcl.Cluster
         [Fact]
         public void GetOffCommandFromId()
         {
-            Assert.IsType<OffCommand>(_cluster.GetCommandFromId(new OffCommand().CommandId));
+            Assert.IsType<OffCommand>(_cluster.GetCommandFromId(ZclFrameType.CLUSTER_SPECIFIC_COMMAND, new OffCommand().CommandId));
         }
 
         [Fact]
         public void GetOnCommandFromId()
         {
-            Assert.IsType<OnCommand>(_cluster.GetCommandFromId(new OnCommand().CommandId));
+            Assert.IsType<OnCommand>(_cluster.GetCommandFromId(ZclFrameType.CLUSTER_SPECIFIC_COMMAND, new OnCommand().CommandId));
         }
 
         [Fact]
         public void GetToggleCommandFromId()
         {
-            Assert.IsType<ToggleCommand>(_cluster.GetCommandFromId(new ToggleCommand().CommandId));
+            Assert.IsType<ToggleCommand>(_cluster.GetCommandFromId(ZclFrameType.CLUSTER_SPECIFIC_COMMAND, new ToggleCommand().CommandId));
         }
     }
 }

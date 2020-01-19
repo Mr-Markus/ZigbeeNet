@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ZigbeeNet.Hardware.ConBee;
 using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
-using ZigBeeNet.DAO;
+using ZigBeeNet.Database;
 using ZigBeeNet.Hardware.Digi.XBee;
 using ZigBeeNet.Hardware.TI.CC2531;
 using ZigBeeNet.Tranport.SerialPort;
@@ -22,6 +23,7 @@ using ZigBeeNet.ZCL.Clusters.General;
 using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZDO.Command;
+using ZigBeeNet.ZDO.Field;
 
 namespace ZigBeeNet.PlayGround
 {
@@ -43,7 +45,7 @@ namespace ZigBeeNet.PlayGround
             OptionSet options = new OptionSet
             {
                 { "h|help", "show this message and exit", h => showHelp = h != null },
-                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee", (ZigBeeDongle zbd) => zigBeeDongle = zbd },
+                { "zbd|zigbeeDongle=", "the zigbee dongle to use. 0 = TiCc2531 | 1 = DigiXBee | 2 = Conbee", (ZigBeeDongle zbd) => zigBeeDongle = zbd },
                 { "p|port=", "the COM port to use", p =>  port = p},
                 { "b|baud=", $"the port baud rate to use. default is {baudrate}", b => int.TryParse(b, out baudrate)},
 
@@ -84,6 +86,11 @@ namespace ZigBeeNet.PlayGround
                             dongle = new ZigBeeDongleXBee(zigbeePort);
                         }
                         break;
+                    case ZigBeeDongle.ConBee:
+                        {
+                            dongle = new ZigbeeDongleConBee(zigbeePort);
+                        }
+                        break;
                     default:
                         {
                             dongle = new ZigBeeDongleTiCc2531(zigbeePort);
@@ -93,8 +100,8 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
-                JsonNetworkSerializer deviceSerializer = new JsonNetworkSerializer("devices.json");
-                //networkManager.NetworkStateSerializer = deviceSerializer;
+                JsonNetworkDataStore dataStore = new JsonNetworkDataStore("devices");
+                networkManager.SetNetworkDataStore(dataStore);
 
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
                 discoveryExtension.SetUpdatePeriod(60);
@@ -114,7 +121,6 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
                 networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
-                networkManager.AddSupportedCluster(ZclTouchlinkCluster.CLUSTER_ID);
 
                 networkManager.AddExtension(new ZigBeeBasicServerExtension());
 
@@ -146,8 +152,6 @@ namespace ZigBeeNet.PlayGround
 
                 while (cmd != "exit")
                 {
-                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
-
                     if (cmd == "join")
                     {
                         coord.PermitJoin(true);
@@ -170,7 +174,7 @@ namespace ZigBeeNet.PlayGround
                             Console.ForegroundColor = tmp;
                             string ieeeAddr = Console.ReadLine();
 
-                            networkManager.AddNode(new ZigBeeNode() { NetworkAddress = addr, IeeeAddress = new IeeeAddress(ieeeAddr) });
+                            networkManager.UpdateNode(new ZigBeeNode() { NetworkAddress = addr, IeeeAddress = new IeeeAddress(ieeeAddr) });
                         }
                     }
                     else if (!string.IsNullOrEmpty(cmd))
@@ -204,7 +208,11 @@ namespace ZigBeeNet.PlayGround
 
                                 try
                                 {
-                                    if (cmd == "toggle")
+                                    if (cmd == "leave")
+                                    {
+                                        await networkManager.Leave(node.NetworkAddress, node.IeeeAddress);
+                                    }
+                                    else if (cmd == "toggle")
                                     {
                                         await networkManager.Send(endpointAddress, new ToggleCommand());
                                     }
@@ -281,7 +289,7 @@ namespace ZigBeeNet.PlayGround
                                     {
                                         NodeDescriptorRequest nodeDescriptorRequest = new NodeDescriptorRequest()
                                         {
-                                            Destination = endpointAddress,
+                                            DestinationAddress = endpointAddress,
                                             NwkAddrOfInterest = addr
                                         };
 
@@ -334,7 +342,7 @@ namespace ZigBeeNet.PlayGround
                                         var cluster = endpoint.GetInputCluster(ZclBasicCluster.CLUSTER_ID);
                                         if (cluster != null)
                                         {
-                                            var result = await ((ZclBasicCluster)cluster).GetManufacturerNameAsync();
+                                            var result = await cluster.Read(ZclBasicCluster.ATTR_MANUFACTURERNAME);
 
                                             if (result.IsSuccess())
                                             {
@@ -360,10 +368,28 @@ namespace ZigBeeNet.PlayGround
                                             }
                                         }
                                     }
+                                    else if (cmd == "discover attributes")
+                                    {
+                                        foreach (int clusterId in endpoint.GetInputClusterIds())
+                                        {
+                                            ZclCluster cluster = endpoint.GetInputCluster(clusterId);
+                                            if (!await cluster.DiscoverAttributes(true))
+                                                Console.WriteLine("Error while discovering attributes for cluster {0}", cluster.GetClusterName());
+                                        }
+                                    }
+                                    else if (cmd == "update binding table")
+                                    {
+                                        ZigBeeStatus statusCode = await node.UpdateBindingTable();
+
+                                        if(statusCode != ZigBeeStatus.SUCCESS)
+                                        {
+                                            Console.WriteLine("Error while reading binding table: " + statusCode);
+                                        }
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.Logger.Error(ex, "{Error}");
+                                    Log.Logger.Error(ex, "Error while executing cmd {Command}", cmd);
                                 }
                             }
                             else
@@ -373,12 +399,15 @@ namespace ZigBeeNet.PlayGround
                         }
                     }
 
+                    await Task.Delay(100);
+                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
                     var currentForeGroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write("cmd> ");
                     Console.ForegroundColor = currentForeGroundColor;
                     cmd = Console.ReadLine();
                 }
+                networkManager.Shutdown();
             }
             catch (OptionException e)
             {
@@ -389,7 +418,7 @@ namespace ZigBeeNet.PlayGround
             {
                 Console.WriteLine(ex.ToString());
             }
-
+            Console.ReadLine();
         }
 
         static void ShowHelp(OptionSet options)
@@ -414,6 +443,7 @@ namespace ZigBeeNet.PlayGround
             Console.WriteLine("Node " + node.IeeeAddress + " added " + node);
             if (node.NetworkAddress != 0)
             {
+
             }
         }
 
@@ -428,60 +458,111 @@ namespace ZigBeeNet.PlayGround
         }
     }
 
-    public class JsonNetworkSerializer : IZigBeeNetworkStateSerializer
+    public class JsonNetworkDataStore : IZigBeeNetworkDataStore
     {
-        private readonly string _filename;
+        private readonly string _dirname;
 
-        public JsonNetworkSerializer(string filename)
+        public JsonNetworkDataStore(string dirname)
         {
-            _filename = filename;
+            _dirname = dirname;
+            
+            if (!Directory.Exists(_dirname))
+                Directory.CreateDirectory(_dirname);
         }
 
-        public void Deserialize(ZigBeeNetworkManager networkManager)
+        private string GetFileName(IeeeAddress address)
         {
-            if (File.Exists(_filename) == false)
-            {
-                return;
-            }
-
-            List<ZigBeeNodeDao> nodes = JsonConvert.DeserializeObject<List<ZigBeeNodeDao>>(File.ReadAllText(_filename));
-
-            if (nodes == null)
-            {
-                return;
-            }
-
-            foreach (var nodeDao in nodes)
-            {
-                ZigBeeNode node = new ZigBeeNode(networkManager, new IeeeAddress(nodeDao.IeeeAddress));
-                node.SetDao(nodeDao);
-
-                networkManager.AddNode(node);
-            }
+            return _dirname + "/" + address.ToString() + ".json";
         }
 
-        public void Serialize(ZigBeeNetworkManager networkManager)
+        public ISet<IeeeAddress> ReadNetworkNodes()
         {
+            ISet<IeeeAddress> nodes = new HashSet<IeeeAddress>();
 
-            List<ZigBeeNodeDao> nodes = new List<ZigBeeNodeDao>();
-
-            foreach (var node in networkManager.Nodes)
+            try
             {
-                if (node.NetworkAddress != 0)
+                if (Directory.Exists(_dirname))
                 {
-                    ZigBeeNodeDao nodeDao = node.GetDao();
-                    nodes.Add(nodeDao);
+                    var jsonFiles = Directory.EnumerateFiles(_dirname, "*.json");
+
+                    foreach(string file in jsonFiles)
+                    {
+                        try
+                        {
+                            IeeeAddress address = new IeeeAddress(file.Substring(file.Length - (16 + 5), 16));
+                            nodes.Add(address);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                    }
                 }
             }
-
-            var settings = new JsonSerializerSettings()
+            catch (Exception ex)
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
+                Console.WriteLine(ex.ToString());
+            }
+            return nodes;
+        }
 
-            string json = JsonConvert.SerializeObject(nodes, Formatting.Indented, settings);
 
-            File.WriteAllText(_filename, json);
+        public ZigBeeNodeDao ReadNode(IeeeAddress address)
+        {
+            ZigBeeNodeDao node = null;
+
+            try
+            {
+                string filename = GetFileName(address);
+
+                if (File.Exists(filename))
+                {
+                    node = JsonConvert.DeserializeObject<ZigBeeNodeDao>(File.ReadAllText(filename));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return node;
+        }
+
+        public void RemoveNode(IeeeAddress address)
+        {
+            try
+            {
+                string filename = GetFileName(address);
+
+                if (File.Exists(filename))
+                {
+                    File.Delete(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        public void WriteNode(ZigBeeNodeDao node)
+        {
+            try
+            {
+                string filename = GetFileName(node.IeeeAddress);
+
+                var settings = new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+
+                string json = JsonConvert.SerializeObject(node, Formatting.Indented, settings);
+
+                File.WriteAllText(filename, json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

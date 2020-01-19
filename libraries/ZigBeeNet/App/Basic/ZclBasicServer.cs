@@ -98,7 +98,7 @@ namespace ZigBeeNet.App.Basic
             if (attribute != null)
             {
                 record.Status = ZclStatus.SUCCESS;
-                record.AttributeDataType = attribute.ZclDataType;
+                record.AttributeDataType = attribute.DataType;
                 record.AttributeValue = attribute.LastValue;
             }
             else

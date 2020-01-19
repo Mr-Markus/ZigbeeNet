@@ -1,48 +1,51 @@
-﻿// License text here
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZigBeeNet.ZCL.Protocol;
-using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.Security;
 using ZigBeeNet.ZCL.Clusters.General;
+using ZigBeeNet.ZCL.Field;
+using ZigBeeNet.ZCL.Protocol;
 
 
 namespace ZigBeeNet.ZCL.Clusters.General
 {
     /// <summary>
     /// Default Response value object class.
-    /// <para>
-    /// Cluster: General. Command is sent TO the server.
+    ///
+    /// Cluster: General. Command ID 0x0B is sent TO the server.
     /// This command is a generic command used across the profile.
     ///
-    /// The default response command is generated when a device receives a unicast
-    /// command, there is no other relevant response specified for the command, and
-    /// either an error results or the Disable default response bit of its Frame control field
-    /// is set to 0.
-    /// </para>
+    /// The default response command is generated when a device receives a unicast command,
+    /// there is no other relevant response specified for the command, and either an error
+    /// results or the Disable default response bit of its Frame control field is set to 0.
+    ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
     public class DefaultResponse : ZclCommand
     {
         /// <summary>
-        /// Command identifier command message field.
+        /// The command ID.
+        /// </summary>
+        public const byte COMMAND_ID = 0x0B;
+
+        /// <summary>
+        /// Command Identifier command message field.
         /// </summary>
         public byte CommandIdentifier { get; set; }
 
         /// <summary>
-        /// Status code command message field.
+        /// Status Code command message field.
         /// </summary>
         public ZclStatus StatusCode { get; set; }
-
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public DefaultResponse()
         {
+            CommandId = COMMAND_ID;
             GenericCommand = true;
-            CommandId = 11;
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 

@@ -45,7 +45,7 @@ namespace ZigBeeNet.ZCL.Field
 
             foreach (int value in Data)
             {
-                builder.Append(string.Format("{0}2X ", value));
+                builder.Append(string.Format("{0:X2} ", value));
             }
 
             builder.Append(']');

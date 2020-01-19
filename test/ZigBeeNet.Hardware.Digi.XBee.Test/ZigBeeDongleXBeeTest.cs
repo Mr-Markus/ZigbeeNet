@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
         {
             IList<IXBeeCommand> sentCommands = new List<IXBeeCommand>();
             Mock<IXBeeFrameHandler> frameHandlerMock = new Mock<IXBeeFrameHandler>();
-            frameHandlerMock.Setup(frameHandler => frameHandler.SendRequestAsync(It.IsAny<IXBeeCommand>())).Callback<IXBeeCommand>(item => sentCommands.Add(item)).ReturnsAsync(() => null);
+            frameHandlerMock.Setup(frameHandler => frameHandler.SendRequestAsync(It.IsAny<IXBeeCommand>())).Callback<IXBeeCommand>(item => sentCommands.Add(item)).Returns(() => null);
 
             ZigBeeDongleXBee dongle = new ZigBeeDongleXBee(null);
 
@@ -57,7 +57,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
                 Status = ZDO.ZdoStatus.SUCCESS,
                 TransactionId = 0x2A
             };
-            List<ushort> matchList = new List<ushort>
+            List<byte> matchList = new List<byte>
             {
                 1
             };
