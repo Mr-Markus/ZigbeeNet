@@ -349,7 +349,7 @@ namespace ZigBeeNet.ZCL
             try
             {
                 // TODO: Consider removing the call to .Result and use async/await all the way. (GodeGenerator and calls must be adjusted)
-                result = Read(attribute).Result; 
+                result = Read(attribute).Result;
             }
             catch (TaskCanceledException e) // TODO: Check if this is the right exception to catch here
             {
@@ -489,9 +489,16 @@ namespace ZigBeeNet.ZCL
             {
                 command.ManufacturerCode = GetManufacturerCode();
             }
-            else if (GetAttribute(attributeId).IsManufacturerSpecific())
+            else
             {
-                command.ManufacturerCode = GetAttribute(attributeId).ManufacturerCode;
+                var attribute = GetAttribute(attributeId);
+                if (attribute != null)
+                {
+                    if (attribute.IsManufacturerSpecific())
+                    {
+                        command.ManufacturerCode = GetAttribute(attributeId).ManufacturerCode;
+                    }
+                }
             }
 
             return Send(command);
@@ -527,11 +534,24 @@ namespace ZigBeeNet.ZCL
         {
             if (IsClient())
             {
-                return _clientAttributes[id];
+                ZclAttribute clientAttribute = null;
+
+                if (!_clientAttributes.TryGetValue(id, out clientAttribute))
+                {
+                    Log.Information("Unkown client attribute with id {AttributeId} reported for cluster {Cluster}", id, this._clusterId);
+                }
+                return clientAttribute;
             }
             else
             {
-                return _serverAttributes[id];
+                ZclAttribute serverAttribute = null;
+
+                // It can be that device reports unknown id
+                if (!_serverAttributes.TryGetValue(id, out serverAttribute))
+                {
+                    Log.Information("Unkown server attribute with id {AttributeId} reported by device for cluster {Cluster}", id, this._clusterId);
+                }
+                return serverAttribute;
             }
         }
 
