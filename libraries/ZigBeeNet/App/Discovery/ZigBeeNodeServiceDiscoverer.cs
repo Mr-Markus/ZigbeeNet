@@ -293,6 +293,12 @@ namespace ZigBeeNet.App.Discovery
                         DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
+                    if(discoveryTask.Value == NodeDiscoveryTask.NWK_ADDRESS) {
+                        Node.SetNodeState(ZigBeeNodeState.OFFLINE);
+                        StopDiscovery();
+                        return;
+                    }
+
                     retryCnt = 0;
                 }
                 else
@@ -350,7 +356,7 @@ namespace ZigBeeNet.App.Discovery
         {
             NetworkAddressRequest networkAddressRequest = new NetworkAddressRequest();
             networkAddressRequest.IeeeAddr = Node.IeeeAddress;
-            networkAddressRequest.RequestType = 0;
+            networkAddressRequest.RequestType = 0x00;
             networkAddressRequest.StartIndex = 0;
             networkAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ALL_DEVICES).Key);
 
