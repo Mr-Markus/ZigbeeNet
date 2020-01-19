@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Authors>ZigBeeNet Contributors</Authors>
+    <Company>ZigBeeNet</Company>
+    <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/zigbeenet/ZigbeeNet</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/zigbeenet/ZigbeeNet/blob/master/icon.png?raw=true</PackageIconUrl>
+    <RepositoryUrl>https://github.com/zigbeenet/ZigbeeNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>zigbee;netstandard;smart home;conbee;philips hue;ikea tradfri;innr;DresdenElektronik</PackageTags>
+    <Description>This package can be used in combination with the ZigBeeNet package and is the dongle implementation for a Conbee hardware dongle</Description>
+
   </PropertyGroup>
 
   <ItemGroup>
