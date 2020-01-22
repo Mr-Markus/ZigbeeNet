@@ -1,6 +1,6 @@
 <img src="https://github.com/Mr-Markus/ZigbeeNet/blob/master/icon.png" width="150px" />
 
-# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/o2x3lg7eo46jl2j5/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet-mlw5f/branch/master) [![NuGet Status](https://img.shields.io/nuget/v/ZigBeeNet.svg?style=flat)](https://www.nuget.org/packages/ZigBeeNet) [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
+# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/master) [![NuGet Status](https://img.shields.io/nuget/v/ZigBeeNet.svg?style=flat)](https://www.nuget.org/packages/ZigBeeNet) [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
 
 ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard.
 
@@ -93,6 +93,14 @@ Source: [https://en.wikipedia.org/wiki/XBee](https://en.wikipedia.org/wiki/XBee)
 
 We have tested it with the XBee ZigBee S2C chip
 
+### ConBee
+
+ConBee is a hardware dongle from Dresden Elektronik
+
+Source: [https://www.phoscon.de/en/conbee2](https://www.phoscon.de/en/conbee2)
+
+We have tested it with the ConBee 2
+
 ## Free beer !!
 
 No. Sorry. But now that I have your attention .. we need your help! Since it is hardly possible to test all devices, let us know with which devices you have already successfully tested ZigBeeNet or where you encountered problems. Just open an Issue.
@@ -157,3 +165,5 @@ Some documentation used to implement dongle drivers is copywrite to the respecti
 [@TheBlubb14](https://github.com/TheBlubb14)
 
 [@maksim789456](https://github.com/maksim789456)
+
+[@DavidKarlas](https://github.com/DavidKarlas)
