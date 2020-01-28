@@ -160,6 +160,57 @@ namespace ZigBeeNet.PlayGround
                     {
                         coord.PermitJoin(false);
                     }
+                    else if(cmd == "endpoints")
+                    {
+                        var tmp = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write("Destination Address: ");
+                        Console.ForegroundColor = tmp;
+                        string nwkAddr = Console.ReadLine();
+
+                        if (ushort.TryParse(nwkAddr, out ushort addr))
+                        {
+                            var node = networkManager.Nodes.FirstOrDefault(n => n.NetworkAddress == addr);
+
+                            if(node != null) 
+                            {
+                                Console.WriteLine(new string('-', 20));
+
+                                foreach (var endpoint in node.Endpoints.Values)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine("Input Cluster:" + Environment.NewLine);
+                                    Console.ForegroundColor = tmp;
+
+                                    foreach (var inputClusterId in endpoint.GetInputClusterIds())
+                                    {
+                                        var cluster = endpoint.GetInputCluster(inputClusterId);
+                                        var clusterName = cluster.GetClusterName();
+                                        Console.WriteLine($"{clusterName}");
+                                    }
+                                }
+
+                                Console.WriteLine();
+
+                                foreach (var endpoint in node.Endpoints.Values)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine("Output Cluster:" + Environment.NewLine);
+                                    Console.ForegroundColor = tmp;
+
+                                    foreach (var outputClusterIds in endpoint.GetOutputClusterIds())
+                                    {
+                                        var cluster = endpoint.GetOutputCluster(outputClusterIds);
+                                        var clusterName = cluster.GetClusterName();
+                                        Console.WriteLine($"{clusterName}");
+                                    }
+                                }
+
+                                Console.WriteLine(new string('-', 20));
+                            }
+                        }
+                      
+                    }
                     else if (cmd == "add")
                     {
                         var tmp = Console.ForegroundColor;
@@ -401,7 +452,7 @@ namespace ZigBeeNet.PlayGround
 
                     await Task.Delay(100);
 
-                    Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
+                    Console.WriteLine(Environment.NewLine + networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
 
                     for (int i = 0; i < networkManager.Nodes.Count; i++)
                     {
