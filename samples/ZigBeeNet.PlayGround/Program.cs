@@ -400,7 +400,16 @@ namespace ZigBeeNet.PlayGround
                     }
 
                     await Task.Delay(100);
+
                     Console.WriteLine(networkManager.Nodes.Count + " node(s)" + Environment.NewLine);
+
+                    for (int i = 0; i < networkManager.Nodes.Count; i++)
+                    {
+                        var node = networkManager.Nodes[i];
+                        Console.WriteLine($"{i}. {node.LogicalType}: {node.NetworkAddress}");
+                    }
+
+                    Console.WriteLine();
                     var currentForeGroundColor = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write("cmd> ");
