@@ -70,7 +70,7 @@ namespace ZigBeeNet.PlayGround
 }
 ```
 
-## Zigbee Stacks
+## Zigbee Stacks / Supported Dongles
 
 Because Zigbee is just a specification you need a stack of a manufacturer that implements it. ZigBeeNet is developed with a strict seperation of the Zigbee Cluster Library (ZCL) and the various manufacturer stacks. Because of that it is possible to use different hardware for your Zigbee solution
 
