@@ -468,5 +468,10 @@ namespace ZigBeeNet.App.Discovery
             node.SetNodeState(ZigBeeNodeState.ONLINE);
             _networkManager.UpdateNode(node);
         }
+
+        public void AnnounceUnknownDevice(ushort networkAddress)
+        {
+            StartNodeDiscovery(networkAddress);
+        }
     }
 }

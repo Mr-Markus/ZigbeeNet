@@ -654,6 +654,7 @@ namespace ZigBeeNet
             _commandNotifier.RemoveCommandListener(commandListener);
         }
 
+
         public void ReceiveCommand(ZigBeeApsFrame apsFrame)
         {
             lock (_networkStateSync)
@@ -666,6 +667,22 @@ namespace ZigBeeNet
             }
 
             Log.Debug("RX APS: {ApsFrame}", apsFrame);
+
+            if (apsFrame == null)
+            {
+                return;
+            }
+
+            if (GetNode(apsFrame.SourceAddress) == null)
+            {
+                Log.Debug("Incoming message from unknown node {0}: Notifying announce listeners", apsFrame.SourceAddress.ToString("X4"));
+
+                // Notify the listeners that we have heard a command that was unknown to us
+                foreach (IZigBeeAnnounceListener announceListener in _announceListeners)
+                {
+                    announceListener.AnnounceUnknownDevice(apsFrame.SourceAddress);
+                }
+            }
 
             // Create the deserialiser
             Deserializer = new DefaultDeserializer(apsFrame.Payload);
@@ -1038,12 +1055,12 @@ namespace ZigBeeNet
             {
                 lock (command)
                 {
-                    //ZigBeeTransactionFuture transactionFuture = new ZigBeeTransactionFuture();
+            //ZigBeeTransactionFuture transactionFuture = new ZigBeeTransactionFuture();
 
-                    SendCommand(command);
-                    //transactionFuture.set(new CommandResult(new BroadcastResponse()));
+            SendCommand(command);
+            //transactionFuture.set(new CommandResult(new BroadcastResponse()));
 
-                    return new CommandResult(new BroadcastResponse());
+            return new CommandResult(new BroadcastResponse());
                 }
             });
         }
@@ -1164,7 +1181,7 @@ namespace ZigBeeNet
                     Log.Debug("{IeeeAddress}: No node found after leave command", leaveAddress);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Debug("Error sending leave command {Exception}", ex);
             }
