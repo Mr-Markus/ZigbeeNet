@@ -1,10 +1,28 @@
 <img src="https://github.com/Mr-Markus/ZigbeeNet/blob/master/icon.png" width="150px" />
 
-# ZigBeeNet [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/master) [![NuGet Status](https://img.shields.io/nuget/v/ZigBeeNet.svg?style=flat)](https://www.nuget.org/packages/ZigBeeNet) [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
+# ZigBeeNet [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
 
 ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard.
 
 It is fully implemented in Netstandard 2.0 and NET Core 3.0 so that it runs on multiple platform
+
+## Build Status ##
+
+Name               | Package name
+-----------------------|----------------------
+master | [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/master)
+develop | [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/develop?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/develop)
+
+## Packages ##
+
+Name               | Package name                              | NuGet      | Description
+-----------------------|-------------------------------------------|-----------------------------|------------------------- 
+ZigBeeNet             | `ZigBeeNet` | [![NuGet](https://img.shields.io/nuget/v/ZigBeeNet.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigBeeNet/) | Core library
+SerialPort            | `ZigBeeNet.Transport.SerialPort` | [![NuGet](https://img.shields.io/nuget/v/ZigBeeNet.Transport.SerialPort.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigBeeNet.Transport.SerialPort/) | Platform indipendent SerialPort implementation
+Texas Instruments CC25XX (ZNP)             | `ZigBeeNet.Hardware.TI.CC2531` | [![NuGet](https://img.shields.io/nuget/v/ZigBeeNet.Hardware.TI.CC2531.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigBeeNet.Hardware.TI.CC2531/) | Texas Instruments CC25XX dongle implementation
+Digi XBee             | `ZigBeeNet.Hardware.Digi.XBee` | [![NuGet](https://img.shields.io/nuget/v/ZigBeeNet.Hardware.Digi.XBee.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigBeeNet.Hardware.Digi.XBee/) | Digi XBee dongle implementation
+Dresden Elektronik ConBee             | `ZigbeeNet.Hardware.ConBee` | [![NuGet](https://img.shields.io/nuget/v/ZigbeeNet.Hardware.ConBee.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigbeeNet.Hardware.ConBee/) | Dresden Elektronik ConBee dongle implementation
+Silicon Labs Ember             | `ZigbeeNet.Hardware.Ember` | [![NuGet](https://img.shields.io/nuget/v/ZigbeeNet.Hardware.Ember.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/ZigbeeNet.Hardware.Ember/) | Silicon Labs ember dongle implementation
 
 ## Smart Home
 
@@ -70,7 +88,7 @@ namespace ZigBeeNet.PlayGround
 }
 ```
 
-## Zigbee Stacks / Supported Dongles
+## Supported Dongles and Chipsets / Zigbee Stacks
 
 Because Zigbee is just a specification you need a stack of a manufacturer that implements it. ZigBeeNet is developed with a strict seperation of the Zigbee Cluster Library (ZCL) and the various manufacturer stacks. Because of that it is possible to use different hardware for your Zigbee solution
 
@@ -81,7 +99,7 @@ If there is a manufacturer solution missing, feel free to open an issue or take 
 Z-Stack 3.0.x is TI's Zigbee 3.0 compliant protocol suite for the CC2530, CC2531, and CC2538 Wireless MCU.
 Z-Stack comunicates through TI's Unified Network Processor Interface (NPI) which is used for establishing a serial data link between a TI SoC and external MCUs or PCs. UNPI is also implemented in this project and is also implemented for different plattforms.
 
-The easiest solution is the CC2531 USB Stick with the Znp (Zigbee Network Processor) Image, so that it works as an Zigbee gateway via serial port
+The easiest solution is the CC2531 USB Stick with the ZNP (Zigbee Network Processor) Image, so that it works as an Zigbee gateway via serial port
 
 Source: [http://www.ti.com/tool/z-stack](http://www.ti.com/tool/z-stack)
 
@@ -100,6 +118,14 @@ ConBee is a hardware dongle from Dresden Elektronik
 Source: [https://www.phoscon.de/en/conbee2](https://www.phoscon.de/en/conbee2)
 
 We have tested it with the ConBee 2
+
+### Silicon Labs Ember EM35x / EFR32
+
+The library supports the Silicon Labs EZSP protocol using ASH or SPI protocols over a serial interface. The implementation of the SPI protocol assumes that the SPI provides a TTY-like software interface to the application, or is otherwise abstracted via the ZigBeePort interface.
+
+It is worth noting that EM3588 devices that have an embedded USB core will likely work with any baud rate, where dongles using external USB interface (eg CP2102 used with an EM3581) will likely require a specific baud rate.
+
+Currently there are two main NCP images - one that supports hardware flow control with a baud rate of 115200, and one that supports software flow control with a rate of 57600.
 
 ## Free beer !!
 
