@@ -1,4 +1,4 @@
-<img src="https://github.com/Mr-Markus/ZigbeeNet/blob/master/icon.png" width="150px" />
+<img src="https://github.com/Mr-Markus/ZigbeeNet/blob/develop/icon.png" width="150px" />
 
 # ZigBeeNet
 [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
