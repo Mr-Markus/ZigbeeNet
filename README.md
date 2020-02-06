@@ -1,6 +1,7 @@
 <img src="https://github.com/Mr-Markus/ZigbeeNet/blob/master/icon.png" width="150px" />
 
-# ZigBeeNet [![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
+# ZigBeeNet
+[![Twitter Follow](https://img.shields.io/twitter/follow/Zigbee_Net.svg?style=social)](https://twitter.com/Zigbee_Net)
 
 ZigBeeNet is a implementation of the Zigbee 3.0 Cluster Library for .NET Standard.
 
@@ -8,7 +9,7 @@ It is fully implemented in Netstandard 2.0 and NET Core 3.0 so that it runs on m
 
 ## Build Status ##
 
-Name               | Package name
+Name               | Status
 -----------------------|----------------------
 master | [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/master?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/master)
 develop | [![Build status](https://ci.appveyor.com/api/projects/status/2c0c15ta3ow8pfib/branch/develop?svg=true)](https://ci.appveyor.com/project/Mr-Markus/zigbeenet/branch/develop)
