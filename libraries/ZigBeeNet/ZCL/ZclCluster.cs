@@ -26,7 +26,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// The <see cref="ZigBeeNetworkManager"> to which this device belongs
         /// </summary>
-        private ZigBeeNetworkManager _zigbeeManager;
+        //private ZigBeeNetworkManager _zigbeeManager;
 
         /// <summary>
         /// The <see cref="ZigBeeEndpoint"> to which this cluster belongs
@@ -335,51 +335,6 @@ namespace ZigBeeNet.ZCL
         public Task<CommandResult> Write(ZclAttribute attribute, object value)
         {
             return Write(attribute.Id, attribute.DataType, value);
-        }
-
-        /// <summary>
-        /// Read an attribute
-        ///
-        /// <param name="attribute">the ZclAttribute to read</param>
-        /// </summary>
-        public object ReadSync(ushort attribute)
-        {
-            // Log.Debug("readSync request: {Attribute}", attribute);
-            CommandResult result;
-            try
-            {
-                // TODO: Consider removing the call to .Result and use async/await all the way. (GodeGenerator and calls must be adjusted)
-                result = Read(attribute).Result;
-            }
-            catch (TaskCanceledException e) // TODO: Check if this is the right exception to catch here
-            {
-                // Log.Debug("readSync interrupted");
-                return null;
-            }
-            catch (Exception e)
-            {
-                // Log.Debug("readSync exception ", e);
-                return null;
-            }
-
-            if (!result.IsSuccess())
-            {
-                return null;
-            }
-
-            ReadAttributesResponse response = result.Response as ReadAttributesResponse;
-            if (response.Records[0].Status != ZclStatus.SUCCESS)
-            {
-                return null;
-            }
-
-            // If we don't know this attribute, then just return the received data
-            if (GetAttribute(attribute) == null)
-            {
-                return response.Records[0].AttributeValue;
-            }
-
-            return _normalizer.NormalizeZclData(GetAttribute(attribute).DataType, response.Records[0].AttributeValue);
         }
 
         /// <summary>
