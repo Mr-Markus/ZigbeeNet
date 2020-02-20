@@ -836,10 +836,6 @@ namespace ZigBeeNet
 
             // This method should only be called when the transport layer has authoritative information about
             // a devices status. Therefore, we should update the network manager view of a device as appropriate.
-            // A coordinator/router may ask a device to leave the network and rejoin. In this case, we do not want
-            // to remove the node - otherwise we would have to perform the rediscovery of services etc.
-            // Instead, we mark the node status as OFFLINE, and leave it to the application to remove the node from
-            // the network manager.
             switch (deviceStatus)
             {
                 // Device has gone - lets remove it
@@ -858,7 +854,7 @@ namespace ZigBeeNet
                     else
                     {
                         node.SetNodeState(ZigBeeNodeState.OFFLINE);
-                        UpdateNode(node);
+                        RemoveNode(node);
                     }
                     break;
 
@@ -1368,7 +1364,7 @@ namespace ZigBeeNet
                 return;
             }
 
-            Log.Debug("{IeeeAddress}: Node {NetworkAddress} added to the network", node.IeeeAddress, node.NetworkAddress);
+            Log.Debug("{IeeeAddress}: Updating Node {NetworkAddress}", node.IeeeAddress, node.NetworkAddress);
 
             lock (_networkNodes)
             {
