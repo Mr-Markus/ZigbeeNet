@@ -163,9 +163,11 @@ namespace ZigBeeNet.Security
         public static ZigBeeKey CreateRandom()
         {
             byte[] key = new byte[16];
+            Random rnd = new Random();
+
             for (int cnt = 0; cnt < 16; cnt++)
             {
-                key[cnt] = (byte)Math.Floor((new Random().NextDouble() * 255));
+                key[cnt] = (byte)Math.Floor(rnd.NextDouble() * 255);
             }
 
             return new ZigBeeKey(key);
