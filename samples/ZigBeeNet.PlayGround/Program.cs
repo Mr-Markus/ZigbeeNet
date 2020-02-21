@@ -465,30 +465,11 @@ namespace ZigBeeNet.PlayGround
                                         var cluster = endpoint.GetInputCluster(ZclBasicCluster.CLUSTER_ID);
                                         if (cluster != null)
                                         {
-                                            var result = await cluster.Read(ZclBasicCluster.ATTR_MANUFACTURERNAME);
+                                            string manufacturerName = (string)(await cluster.ReadAttributeValue(ZclBasicCluster.ATTR_MANUFACTURERNAME));
+                                            string model = (string)(await cluster.ReadAttributeValue(ZclBasicCluster.ATTR_MODELIDENTIFIER));
 
-                                            if (result.IsSuccess())
-                                            {
-                                                ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
-                                                if (response.Records.Count == 0)
-                                                {
-                                                    Console.WriteLine("No records returned");
-                                                    continue;
-                                                }
-
-                                                ZclStatus statusCode = response.Records[0].Status;
-                                                if (statusCode == ZclStatus.SUCCESS)
-                                                {
-                                                    Console.WriteLine("Cluster " + response + ", Attribute "
-                                                            + response.Records[0].AttributeIdentifier + ", type "
-                                                            + response.Records[0].AttributeDataType + ", value: "
-                                                            + response.Records[0].AttributeValue);
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Attribute value read error: " + statusCode);
-                                                }
-                                            }
+                                            Console.WriteLine($"Manufacturer Name = {manufacturerName}");
+                                            Console.WriteLine($"Model identifier = {model}");
                                         }
                                     }
                                     else if (cmd == "discover attributes")
