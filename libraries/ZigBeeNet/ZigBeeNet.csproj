@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageIconUrl>https://github.com/zigbeenet/ZigbeeNet/blob/master/icon.png?raw=true</PackageIconUrl>
@@ -14,9 +13,7 @@
     <Company>ZigBeeNet</Company>
     <Description>With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.</Description>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog" Version="2.9.0"/>
   </ItemGroup>
-
 </Project>

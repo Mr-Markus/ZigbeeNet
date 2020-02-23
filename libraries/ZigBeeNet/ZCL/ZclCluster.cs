@@ -1297,11 +1297,11 @@ namespace ZigBeeNet.ZCL
                 daoZclAttributes = _serverAttributes.Values.ToList();
             }
 
-            Dictionary<ushort, ZclAttributeDao> daoAttributes = new Dictionary<ushort, ZclAttributeDao>();
+            List<ZclAttributeDao> daoAttributes = new List<ZclAttributeDao>();
 
             foreach (ZclAttribute attribute in daoZclAttributes)
             {
-                daoAttributes.Add(attribute.Id, attribute.GetDao());
+                daoAttributes.Add(attribute.GetDao());
             }
 
             dao.Attributes = daoAttributes;
@@ -1325,7 +1325,7 @@ namespace ZigBeeNet.ZCL
             _supportedCommandsReceived.AddRange(dao.SupportedCommandsReceived);
 
             Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
-            foreach (ZclAttributeDao daoAttribute in dao.Attributes.Values)
+            foreach (ZclAttributeDao daoAttribute in dao.Attributes)
             {
                 ZclAttribute attribute = new ZclAttribute();
                 attribute.SetDao(this, daoAttribute);
