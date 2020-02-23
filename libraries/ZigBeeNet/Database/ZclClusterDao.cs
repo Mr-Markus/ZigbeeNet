@@ -10,7 +10,7 @@ namespace ZigBeeNet.Database
 
         public bool IsClient { get; set; }
 
-        public Dictionary<ushort, ZclAttributeDao> Attributes { get; set; }
+        public List<ZclAttributeDao> Attributes { get; set; }
 
         public List<byte> SupportedCommandsReceived { get; set; }
 

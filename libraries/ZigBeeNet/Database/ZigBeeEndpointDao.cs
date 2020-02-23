@@ -11,9 +11,9 @@ namespace ZigBeeNet.Database
         public ushort DeviceId { get; set; }
         public int DeviceVersion { get; set; }
 
-        public List<ZclClusterDao> InputClusters { get; } = new List<ZclClusterDao>();
+        public List<ZclClusterDao> InputClusters { get; set; }
 
-        public List<ZclClusterDao> OutputClusters { get; } = new List<ZclClusterDao>();
+        public List<ZclClusterDao> OutputClusters { get; set; }
 
 
         public void SetInputClusters(List<ZclClusterDao> clusters)
@@ -24,6 +24,12 @@ namespace ZigBeeNet.Database
         public void SetOutputClusters(List<ZclClusterDao> clusters)
         {
             OutputClusters.AddRange(clusters);
+        }
+
+        public ZigBeeEndpointDao()
+        {
+            InputClusters = new List<ZclClusterDao>();
+            OutputClusters = new List<ZclClusterDao>();
         }
     }
 }
