@@ -48,6 +48,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZigBeeNet.Ember.CodeGenerat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeNet.DataStore.MongoDb", "libraries\ZigBeeNet.DataStore.MongoDb\ZigBeeNet.DataStore.MongoDb.csproj", "{8B2D0796-6399-4EAB-8815-4F1D0EDEFDAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigBeeNet.DataStore.Json", "libraries\ZigBeeNet.DataStore.Json\ZigBeeNet.DataStore.Json.csproj", "{823FDC82-431B-4C40-825D-30C9D0F09F64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{8B2D0796-6399-4EAB-8815-4F1D0EDEFDAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B2D0796-6399-4EAB-8815-4F1D0EDEFDAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B2D0796-6399-4EAB-8815-4F1D0EDEFDAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823FDC82-431B-4C40-825D-30C9D0F09F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823FDC82-431B-4C40-825D-30C9D0F09F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823FDC82-431B-4C40-825D-30C9D0F09F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823FDC82-431B-4C40-825D-30C9D0F09F64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{FCA80B4F-A08C-4E1E-8CFC-AD47FFD3162C} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 		{88264B38-F01F-4143-86F8-F7C4778AE5B1} = {695B6CC9-6267-41E3-A086-3C6B9A180A34}
 		{8B2D0796-6399-4EAB-8815-4F1D0EDEFDAB} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
+		{823FDC82-431B-4C40-825D-30C9D0F09F64} = {7FF7F314-871A-4B42-ABCB-9D2FB5D14188}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080E7EAE-7559-464B-9A8F-F5218D35AB8A}
