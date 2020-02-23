@@ -21,7 +21,7 @@
     <ProjectReference Include="..\..\libraries\ZigBeeNet.Transport.SerialPort\ZigBeeNet.Transport.SerialPort.csproj" />
     <ProjectReference Include="..\..\libraries\ZigBeeNet\ZigBeeNet.csproj" />
     <ProjectReference Include="..\..\libraries\ZigbeeNet.Hardware.ConBee\ZigbeeNet.Hardware.ConBee.csproj" />
-    <ProjectReference Include="..\..\libraries\ZigBeeNet.DataStore.MongoDb\ZigbeeNet.DataStore.MongoDb.csproj" />
+    <ProjectReference Include="..\..\libraries\ZigBeeNet.DataStore.MongoDb\ZigBeeNet.DataStore.MongoDb.csproj" />
     <ProjectReference Include="..\..\libraries\ZigBeeNet.DataStore.Json\ZigBeeNet.DataStore.Json.csproj" />
 
   </ItemGroup>
