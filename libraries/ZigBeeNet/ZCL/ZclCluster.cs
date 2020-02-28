@@ -216,7 +216,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public Task<CommandResult> ReadAttribute(ushort attributeId)
         {
-            return ReadAttribute(new List<ushort>(new[] { attributeId }));
+            return ReadAttributes(new List<ushort>(new[] { attributeId }));
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace ZigBeeNet.ZCL
         /// <param name="attributeIds">List of attribute identifiers to read</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> ReadAttribute(List<ushort> attributeIds)
+        public Task<CommandResult> ReadAttributes(List<ushort> attributeIds)
         {
             ReadAttributesCommand command = new ReadAttributesCommand();
 
