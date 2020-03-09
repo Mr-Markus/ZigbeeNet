@@ -717,7 +717,7 @@ namespace ZigBeeNet.App.Discovery
                 tasks.Add(NodeDiscoveryTask.POWER_DESCRIPTOR);
             }
 
-            if (Node.Endpoints.Count == 0 && !NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress))
+            if (Node.GetEndpoints().Count == 0 && !NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress))
             {
                 tasks.Add(NodeDiscoveryTask.ACTIVE_ENDPOINTS);
             }
