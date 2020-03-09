@@ -273,7 +273,7 @@ namespace ZigBeeNet.PlayGround
                             {
                                 Console.WriteLine(new string('-', 20));
 
-                                foreach (var endpoint in node.Endpoints.Values)
+                                foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Input Cluster:" + Environment.NewLine);
@@ -289,7 +289,7 @@ namespace ZigBeeNet.PlayGround
 
                                 Console.WriteLine();
 
-                                foreach (var endpoint in node.Endpoints.Values)
+                                foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Output Cluster:" + Environment.NewLine);
@@ -340,7 +340,7 @@ namespace ZigBeeNet.PlayGround
                             if (node != null)
                             {
                                 ZigBeeEndpointAddress endpointAddress = null;
-                                var endpoint = node.Endpoints.Values.FirstOrDefault();
+                                var endpoint = node.GetEndpoints().FirstOrDefault();
 
                                 if (endpoint != null)
                                 {

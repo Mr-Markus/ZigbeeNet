@@ -10,6 +10,7 @@ using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO.Field;
 using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 using ZigBeeNet.Transaction;
+using System.Linq;
 using Serilog;
 
 namespace ZigBeeNet
@@ -76,8 +77,8 @@ namespace ZigBeeNet
         /// <summary>
         /// List of endpoints this node exposes
         /// </summary>
-        public ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; private set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
-        private object _endpointsLock = new object();
+        private ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
+        private readonly object _endpointsLock = new object();
 
         /// <summary>
         /// The endpoint listeners of the ZigBee network. Registered listeners will be
@@ -97,7 +98,6 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Constructor
-        ///
         /// <param name="network">the <see cref="IZigBeeNetwork"></param>
         /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node</param>
         /// </summary>
@@ -327,6 +327,15 @@ namespace ZigBeeNet
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Gets all endpoint.
+        /// <returns>A <see cref="IReadOnlyCollection{ZigBeeEndpoint}"/> of <see cref="ZigBeeEndpoint">s</returns>
+        /// </summary>
+        public IReadOnlyCollection<ZigBeeEndpoint> GetEndpoints()
+        {
+            return new ReadOnlyCollection<ZigBeeEndpoint>(Endpoints.Values.ToList());
         }
 
         /// <summary>
