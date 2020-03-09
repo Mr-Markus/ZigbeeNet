@@ -19,6 +19,11 @@ namespace ZigBeeNet.ZCL
     public abstract class ZclCluster
     {
         /// <summary>
+        /// The <see cref="ZigBeeNetworkManager"> to which this device belongs
+        /// </summary>
+        //private ZigBeeNetworkManager _zigbeeManager;
+
+        /// <summary>
         /// The <see cref="ZigBeeEndpoint"> to which this cluster belongs
         /// </summary>
         private ZigBeeEndpoint _zigbeeEndpoint;
