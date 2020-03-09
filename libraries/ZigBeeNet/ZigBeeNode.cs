@@ -77,7 +77,7 @@ namespace ZigBeeNet
         /// <summary>
         /// List of endpoints this node exposes
         /// </summary>
-        private ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
+        private readonly ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
         private readonly object _endpointsLock = new object();
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeEndpoint GetEndpoint(byte endpointId)
         {
-            if (Endpoints.TryGetValue(endpointId, out ZigBeeEndpoint endpoint))
+            if (_endpoints.TryGetValue(endpointId, out ZigBeeEndpoint endpoint))
             {
                 lock (_endpointsLock)
                 {
@@ -335,7 +335,7 @@ namespace ZigBeeNet
         /// </summary>
         public IReadOnlyCollection<ZigBeeEndpoint> GetEndpoints()
         {
-            return new ReadOnlyCollection<ZigBeeEndpoint>(Endpoints.Values.ToList());
+            return new ReadOnlyCollection<ZigBeeEndpoint>(_endpoints.Values.ToList());
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace ZigBeeNet
         {
             //lock (Endpoints)
             //{
-            Endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, (_, __) => endpoint);
+            _endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, (_, __) => endpoint);
             //}
 
             lock (_endpointListeners)
@@ -373,7 +373,7 @@ namespace ZigBeeNet
         public void UpdateEndpoint(ZigBeeEndpoint endpoint)
         {
 
-            Endpoints[endpoint.EndpointId] = endpoint;
+            _endpoints[endpoint.EndpointId] = endpoint;
 
             lock (_endpointListeners)
             {
@@ -397,7 +397,7 @@ namespace ZigBeeNet
         /// </summary>
         public void RemoveEndpoint(byte endpointId)
         {
-            Endpoints.TryRemove(endpointId, out ZigBeeEndpoint endpoint);
+            _endpoints.TryRemove(endpointId, out ZigBeeEndpoint endpoint);
 
             lock (_endpointListeners)
             {
@@ -455,7 +455,7 @@ namespace ZigBeeNet
             ZclCommand zclCommand = (ZclCommand)command;
             ZigBeeEndpointAddress endpointAddress = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
 
-            if (Endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
+            if (_endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
             {
                 lock (_endpointsLock)
                 {
@@ -471,7 +471,7 @@ namespace ZigBeeNet
         /// </summary>
         public bool IsDiscovered()
         {
-            return NodeDescriptor != null && NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
+            return NodeDescriptor != null && NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && _endpoints.Count != 0;
         }
 
         public void UpdateNetworkManager(ZigBeeNetworkManager networkManager)
@@ -564,15 +564,15 @@ namespace ZigBeeNet
             // Endpoints are only copied over if they don't exist in the node
             // The assumption here is that endpoints are only set once, and not changed.
             // This should be valid as they are set through the SimpleDescriptor.
-            foreach (var endpoint in node.Endpoints)
+            foreach (var endpoint in node._endpoints)
             {
-                if (Endpoints.ContainsKey(endpoint.Key))
+                if (_endpoints.ContainsKey(endpoint.Key))
                 {
                     continue;
                 }
                 Log.Debug("{IeeeAddress}: Endpoint {EndpointId} added", IeeeAddress, endpoint.Key);
                 updated = true;
-                Endpoints[endpoint.Key] = endpoint.Value;
+                _endpoints[endpoint.Key] = endpoint.Value;
             }
 
             return updated;
@@ -594,7 +594,7 @@ namespace ZigBeeNet
             dao.BindingTable = BindingTable;
 
             List<ZigBeeEndpointDao> endpointDaoList = new List<ZigBeeEndpointDao>();
-            foreach (ZigBeeEndpoint endpoint in Endpoints.Values)
+            foreach (ZigBeeEndpoint endpoint in _endpoints.Values)
             {
                 endpointDaoList.Add(endpoint.GetDao());
             }
@@ -618,7 +618,7 @@ namespace ZigBeeNet
             {
                 ZigBeeEndpoint endpoint = new ZigBeeEndpoint(this, endpointDao.EndpointId);
                 endpoint.SetDao(endpointDao);
-                Endpoints[endpoint.EndpointId] = endpoint;
+                _endpoints[endpoint.EndpointId] = endpoint;
             }
         }
 
