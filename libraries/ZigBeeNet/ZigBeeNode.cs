@@ -345,7 +345,12 @@ namespace ZigBeeNet
         {
             lock (Endpoints)
             {
-                return Endpoints[endpointId];
+                ZigBeeEndpoint endpoint = null;
+                if (Endpoints.TryGetValue(endpointId, out endpoint))
+                {
+                    return endpoint;
+                }
+                return null;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL.Protocol;
@@ -14,11 +15,6 @@ namespace ZigBeeNet.ZCL
     public class ZclAttributeNormalizer
     {
         /// <summary>
-         /// The logger
-         /// </summary>
-        //private Logger logger = LoggerFactory.getLogger(ZclAttributeNormalizer.class);
-
-        /// <summary>
          /// Normalize ZCL data
          ///
          /// <param name="dataType">The <see cref="ZclDataType"> used for the normalised output</param>
@@ -32,7 +28,7 @@ namespace ZigBeeNet.ZCL
                 case DataType.BOOLEAN:
                     if (data is int intValue)
                     {
-                        //logger.debug("Normalizing data Integer {} to BOOLEAN", data);
+                        Log.Debug("Normalizing data Integer {Data} to BOOLEAN", data);
 
                         return !(intValue == 0);
                     }
@@ -40,7 +36,7 @@ namespace ZigBeeNet.ZCL
                 case DataType.UNSIGNED_8_BIT_INTEGER:
                     if (data is string stringValue)
                     {
-                        //logger.debug("Normalizing data String {} to UNSIGNED_8_BIT_INTEGER", data);
+                        Log.Debug("Normalizing data String {Data} to UNSIGNED_8_BIT_INTEGER", data);
 
                         return int.Parse(stringValue);
                     }

@@ -18,11 +18,6 @@ namespace ZigBeeNet.ZCL
 {
     public abstract class ZclCluster
     {
-        ///// <summary>
-        // /// The logger
-        // /// </summary>
-        //private Logger logger = LoggerFactory.getLogger(ZclCluster.class);
-
         /// <summary>
         /// The <see cref="ZigBeeNetworkManager"> to which this device belongs
         /// </summary>
@@ -96,13 +91,13 @@ namespace ZigBeeNet.ZCL
         /// Map of server side commands supported by the cluster.This contains all server commands, even if they are not
         /// supported by the remote device.
         /// </summary>
-        protected Dictionary<ushort, Func<ZclCommand>> _serverCommands;// = InitializeServerCommands();
+        protected Dictionary<ushort, Func<ZclCommand>> _serverCommands;
 
         /// <summary>
         /// Map of client side commands supported by the cluster.This contains all client commands, even if they are not
         /// supported by the remote device.
         /// </summary>
-        protected Dictionary<ushort, Func<ZclCommand>> _clientCommands;// = initializeClientCommands();
+        protected Dictionary<ushort, Func<ZclCommand>> _clientCommands;
 
         /// <summary>
         /// Map of the generic commands as implemented by all clusters
@@ -218,38 +213,39 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Read an attribute
+        /// Read an attribute given the attribute ID. This method will always send a {@link ReadAttributesCommand} to the
+        /// remote device.
         ///
         /// <param name="attribute">the attribute to read</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> Read(ushort attribute)
+        public Task<CommandResult> ReadAttribute(ushort attributeId)
         {
-            return Read(new List<ushort>(new[] { attribute }));
+            return ReadAttributes(new List<ushort>(new[] { attributeId }));
         }
 
         /// <summary>
         /// Read a number of attributes given a list of attribute IDs. Care must be taken not to request too many attributes
         /// so as to exceed the allowable frame length
         ///
-        /// <param name="attributes">List of attribute identifiers to read</param>
+        /// <param name="attributeIds">List of attribute identifiers to read</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> Read(List<ushort> attributes)
+        public Task<CommandResult> ReadAttributes(List<ushort> attributeIds)
         {
             ReadAttributesCommand command = new ReadAttributesCommand();
 
             command.ClusterId = _clusterId;
-            command.Identifiers = attributes;
+            command.Identifiers = attributeIds;
             command.DestinationAddress = _zigbeeEndpoint.GetEndpointAddress();
 
-            if (attributes.Count > 0 && IsManufacturerSpecific())
+            if (attributeIds.Count > 0 && IsManufacturerSpecific())
             {
                 command.ManufacturerCode = GetManufacturerCode();
             }
-            else if (AreAttributesManufacturerSpecific(attributes))
+            else if (AreAttributesManufacturerSpecific(attributeIds))
             {
-                command.ManufacturerCode = GetAttribute(attributes[0]).ManufacturerCode;
+                command.ManufacturerCode = GetAttribute(attributeIds[0]).ManufacturerCode;
             }
 
             return Send(command);
@@ -261,9 +257,48 @@ namespace ZigBeeNet.ZCL
         /// <param name="attribute">the <see cref="ZclAttribute"> to read</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> Read(ZclAttribute attribute)
+        public Task<CommandResult> ReadAttribute(ZclAttribute attribute)
         {
-            return Read(attribute.Id);
+            return ReadAttribute(attribute.Id);
+        }
+
+        /// <summary>
+        /// Read an attribute from the remote cluster
+        /// </summary>
+        /// <param name="attributeId">attributeId the attribute id to read</param>
+        /// <returns>an object containing the value, or null</returns>
+        public async Task<object> ReadAttributeValue(ushort attributeId)
+        {
+            Log.Debug("ReadAttributeValue request attribute {AttributeId}", attributeId);
+            CommandResult result;
+            try
+            {
+                result = await ReadAttribute(attributeId);
+            }
+            catch (Exception e)
+            {
+                Log.Debug(e, "ReadAttributeValue exception");
+                return null;
+            }
+
+            if (!result.IsSuccess())
+            {
+                return null;
+            }
+
+            ReadAttributesResponse response = result.GetResponse<ReadAttributesResponse>();
+            if (response.Records.Count == 0 || response.Records[0].Status != ZclStatus.SUCCESS)
+            {
+                return null;
+            }
+
+            // If we don't know this attribute, then just return the received data
+            if (GetAttribute(attributeId) == null)
+            {
+                return response.Records[0].AttributeValue;
+            }
+
+            return _normalizer.NormalizeZclData(GetAttribute(attributeId).DataType, response.Records[0].AttributeValue);
         }
 
         /// <summary>
@@ -1267,11 +1302,11 @@ namespace ZigBeeNet.ZCL
                 daoZclAttributes = _serverAttributes.Values.ToList();
             }
 
-            Dictionary<ushort, ZclAttributeDao> daoAttributes = new Dictionary<ushort, ZclAttributeDao>();
+            List<ZclAttributeDao> daoAttributes = new List<ZclAttributeDao>();
 
             foreach (ZclAttribute attribute in daoZclAttributes)
             {
-                daoAttributes.Add(attribute.Id, attribute.GetDao());
+                daoAttributes.Add(attribute.GetDao());
             }
 
             dao.Attributes = daoAttributes;
@@ -1295,7 +1330,7 @@ namespace ZigBeeNet.ZCL
             _supportedCommandsReceived.AddRange(dao.SupportedCommandsReceived);
 
             Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
-            foreach (ZclAttributeDao daoAttribute in dao.Attributes.Values)
+            foreach (ZclAttributeDao daoAttribute in dao.Attributes)
             {
                 ZclAttribute attribute = new ZclAttribute();
                 attribute.SetDao(this, daoAttribute);

@@ -262,3 +262,6 @@ __pycache__/
 
 #ZigBeeNet
 devices/
+
+# vscode
+*.code-workspace

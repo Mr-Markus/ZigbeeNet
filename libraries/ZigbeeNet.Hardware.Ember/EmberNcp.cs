@@ -670,7 +670,7 @@ namespace ZigBeeNet.Hardware.Ember
                 if (response is EzspNetworkFoundHandler) 
                 {
                     EzspNetworkFoundHandler network = (EzspNetworkFoundHandler) response;
-                    networksFound.Add(network.GetNetworkFound().GetExtendedPanId(), network);
+                    networksFound[network.GetNetworkFound().GetExtendedPanId()] = network;
                 }
             }
 
