@@ -78,7 +78,6 @@ namespace ZigBeeNet
         /// List of endpoints this node exposes
         /// </summary>
         private readonly ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
-        private readonly object _endpointsLock = new object();
 
         public ReadOnlyDictionary<int, ZigBeeEndpoint> Endpoints
         {
@@ -328,10 +327,7 @@ namespace ZigBeeNet
         {
             if (_endpoints.TryGetValue(endpointId, out ZigBeeEndpoint endpoint))
             {
-                lock (_endpointsLock)
-                {
-                    return endpoint;
-                }
+                return endpoint;
             }
 
             return null;
@@ -465,10 +461,7 @@ namespace ZigBeeNet
 
             if (_endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
             {
-                lock (_endpointsLock)
-                {
-                    endpoint.CommandReceived(zclCommand);
-                }
+                endpoint.CommandReceived(zclCommand);
             }
         }
 
