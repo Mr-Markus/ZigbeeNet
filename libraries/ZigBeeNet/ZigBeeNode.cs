@@ -80,6 +80,14 @@ namespace ZigBeeNet
         private readonly ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
         private readonly object _endpointsLock = new object();
 
+        public ReadOnlyDictionary<int, ZigBeeEndpoint> Endpoints
+        {
+            get
+            {
+                return new ReadOnlyDictionary<int, ZigBeeEndpoint>(_endpoints);
+            }
+        }
+
         /// <summary>
         /// The endpoint listeners of the ZigBee network. Registered listeners will be
         /// notified of additions, deletions and changes to <see cref="ZigBeeEndpoint">s.
