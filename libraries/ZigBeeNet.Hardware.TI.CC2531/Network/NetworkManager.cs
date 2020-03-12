@@ -610,7 +610,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("Error in 3 way conversation.", ex);
+                        Log.Error("Error in 3 way conversation: {Exception}", ex);
                     }
                 }
                 _conversation3Way[clz] = Thread.CurrentThread;
@@ -655,7 +655,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
             catch (IOException e)
             {
-                Log.Error("Failed to send bootloader magic byte", e);
+                Log.Error("Failed to send bootloader magic byte: {Exception}", e);
             }
 
             SYS_RESET_RESPONSE response = (SYS_RESET_RESPONSE)waiter.GetCommand(ResetTimeout);
@@ -703,7 +703,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
             catch (IOException e)
             {
-                Log.Error("Failed to send SYS_RESET", e);
+                Log.Error("Failed to send SYS_RESET: {Exception}", e);
                 return false;
             }
 
@@ -913,12 +913,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                     }
                     catch (IOException e)
                     {
-                        Log.Error("Synchronous command send failed due to IO exception. ", e);
+                        Log.Error("Synchronous command send failed due to IO exception: {Exception}", e);
                         break;
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("Synchronous command send failed due to unexpected exception.", ex);
+                        Log.Error("Synchronous command send failed due to unexpected exception: {Exception}", ex);
                     }
 
                     Log.Verbose("{Request} sent (synchronous command, attempt {Count}).", request.GetType().Name, sending);
@@ -1275,7 +1275,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
             else
             {
-                Log.Error("Error reading zigbee network key: " + response.Status);
+                Log.Error("Error reading zigbee network key: {Status}" + response.Status);
                 return null;
             }
         }
@@ -1359,7 +1359,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
             }
             catch (Exception e)
             {
-                Log.Error("Error in device register.", e);
+                Log.Error("Error in device register: {Exception}", e);
             }
 
             return false;

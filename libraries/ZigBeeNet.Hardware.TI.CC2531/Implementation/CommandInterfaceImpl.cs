@@ -102,11 +102,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         {
             if (th is IOException)
             {
-                Log.Error("IO exception in packet parsing: ", th);
+                Log.Error("IO exception in packet parsing: {Exception}", th);
             }
             else
             {
-                Log.Error("Unexpected exception in packet parsing: ", th);
+                Log.Error("Unexpected exception in packet parsing: {Exception}", th);
             }
         }
 
@@ -316,7 +316,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                         }
                         catch (Exception e)
                         {
-                            Log.Error("Error in incoming asynchronous message processing: {Error}", e);
+                            Log.Error("Error in incoming asynchronous message processing: {Exception}", e);
                         }
                     }
                 }
@@ -383,7 +383,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Error in incoming asynchronous message processing: {Error}", e);
+                    Log.Error("Error in incoming asynchronous message processing: {Exception}", e);
                 }
             }
         }

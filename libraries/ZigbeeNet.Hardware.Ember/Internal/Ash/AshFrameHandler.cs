@@ -243,7 +243,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
                     if (exceptionCnt++ > 10) 
                     {
-                        Log.Error("AshFrameHandler exception count exceeded");
+                        Log.Error("AshFrameHandler exception count exceeded: {Exception}");
                         _parserCancellationToken.Cancel();
                     }
                 }
@@ -322,7 +322,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 } 
                 catch (Exception e) 
                 {
-                    Log.Error(e, "AshFrameHandler Exception processing EZSP frame: ");
+                    Log.Error(e, "AshFrameHandler Exception processing EZSP frame: {Exception}");
                 }
             }
         }
