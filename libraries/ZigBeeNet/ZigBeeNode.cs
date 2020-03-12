@@ -363,7 +363,7 @@ namespace ZigBeeNet
                         listener.DeviceAdded(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -388,7 +388,7 @@ namespace ZigBeeNet
                         listener.DeviceUpdated(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -414,7 +414,7 @@ namespace ZigBeeNet
                             listener.DeviceRemoved(endpoint);
                         }).ContinueWith((t) =>
                         {
-                            Log.Error(t.Exception, "Error");
+                            Log.Error(t.Exception, "Error: {Exception}");
                         }, TaskContinuationOptions.OnlyOnFaulted);
                     }
                 }
