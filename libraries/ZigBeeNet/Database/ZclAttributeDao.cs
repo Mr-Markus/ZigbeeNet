@@ -90,6 +90,12 @@ namespace ZigBeeNet.Database
         public int ReportingTimeout { get; set; }
 
         /**
+         * The manufacturer code of the attribute, in case the attribute is 
+         * manufacturer-specific. Otherwise, this field is null.
+         */
+        public int? ManufacturerCode { get; set; }
+
+        /**
          * Records the last time a report was received
          */
         public DateTime LastReportTime { get; set; }
