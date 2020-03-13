@@ -417,7 +417,7 @@ namespace ZigBeeNet.App.Discovery
                 }
             } while (startIndex < totalAssociatedDevices);
 
-            _updatedNode.AssociatedDevices = associatedDevices;
+            _updatedNode.SetAssociatedDevices(associatedDevices);
 
             return true;
         }
@@ -588,7 +588,7 @@ namespace ZigBeeNet.App.Discovery
 
             Log.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} neighbors]", Node.IeeeAddress, neighbors.Count);
 
-            _updatedNode.Neighbors = neighbors;
+            _updatedNode.SetNeighbors(neighbors);
 
             return true;
         }
@@ -647,7 +647,7 @@ namespace ZigBeeNet.App.Discovery
 
             Log.Debug("{IeeeAddress}: Node SVC Discovery: ManagementLqiRequest complete [{Count} routes]", Node.IeeeAddress, routes.Count);
 
-            _updatedNode.Routes = routes;
+            _updatedNode.SetRoutes(routes);
 
             return true;
         }
