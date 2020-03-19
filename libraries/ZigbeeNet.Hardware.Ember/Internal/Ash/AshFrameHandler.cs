@@ -472,10 +472,13 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             Log.Debug("--> TX ASH frame: {Frame}", ashFrame);
 
             // Send the data
-            foreach (int outByte in ashFrame.GetOutputBuffer()) 
+            int[] data = ashFrame.GetOutputBuffer();
+            byte[] bytes = new byte[data.Length];
+            for(int i = 0; i < data.Length; i++) 
             {
-                _port.Write(new byte[] { (byte)outByte });
+                bytes[i] = (byte)data[i];
             }
+            _port.Write(bytes);
 
             // Only start the timer for data and reset frames
             if (ashFrame is AshFrameData || ashFrame is AshFrameRst) 
@@ -599,15 +602,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 if (_stateConnected && _sentQueue.IsEmpty)
                     return;
 
-                // If we're not connected, then try again
-                if (!_stateConnected) 
-                {
-                    StopTimer();
-                    Reconnect();
-                    return;
-                }
-
-                if (_retries++ > ACK_TIMEOUTS) 
+                if (++_retries > ACK_TIMEOUTS) 
                 {
                     Log.Debug("ASH: Error number of retries exceeded [{Retries}].", _retries);
 
@@ -620,7 +615,8 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 // If we're not connected, then try the reset again
                 if (!_stateConnected) 
                 {
-                    SendFrame(new AshFrameRst());
+                    StopTimer();
+                    Reconnect();
                     return;
                 }
 

@@ -467,8 +467,9 @@ namespace ZigBeeNet
             Log.Debug("ZigBeeNetworkManager startup: reinitialize={Reinitialize}, networkState={NetworkState}", reinitialize, NetworkState);
             lock (_networkStateSync)
             {
-                if (NetworkState == ZigBeeNetworkState.UNINITIALISED)
+                if (NetworkState != ZigBeeNetworkState.INITIALISING)
                 {
+                    Log.Error("ZigBeeNetworkManager startup: Can't be called when NetworkState={NetworkState}", NetworkState);
                     return ZigBeeStatus.INVALID_STATE;
                 }
             }

@@ -951,7 +951,7 @@ namespace ZigBeeNet.Hardware.Ember
 
         public ZigBeeChannel ZigBeeChannel
         {
-            get { return (ZigBeeChannel)_networkParameters.GetRadioChannel(); } 
+            get { return (ZigBeeChannel)(1 << _networkParameters.GetRadioChannel()); } 
         }
 
         public ZigBeeStatus SetZigBeeChannel(ZigBeeChannel channel) 
