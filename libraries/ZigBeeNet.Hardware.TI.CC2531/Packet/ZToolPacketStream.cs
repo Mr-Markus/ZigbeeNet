@@ -90,7 +90,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
             catch (Exception e)
             {
-                Log.Error("Packet parsing failed due to exception: {Exception}", e);
+                Log.Error("Packet parsing failed due to exception: {Exception}", e.Message);
                 exception = e;
             }
             ZToolPacket exceptionResponse = new ErrorPacket();

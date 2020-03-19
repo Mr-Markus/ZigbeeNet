@@ -328,7 +328,7 @@ namespace ZigBeeNet.App.Discovery
             }
             catch (Exception e)
             {
-                Log.Error("{IeeeAddress}: Node SVC Discovery: exception: {Exception}", Node.IeeeAddress, e);
+                Log.Error("{IeeeAddress}: Node SVC Discovery: exception: {Exception}", Node.IeeeAddress, e.Message);
             }
         }
 

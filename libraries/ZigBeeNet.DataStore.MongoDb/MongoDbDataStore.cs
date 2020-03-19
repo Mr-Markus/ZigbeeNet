@@ -47,13 +47,13 @@ namespace ZigBeeNet.DataStore.MongoDb
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "Error: {Exception}");
+                        Log.Error(ex, "Error: {Exception}", ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error: {Exception}");
+                Log.Error(ex, "Error: {Exception}", ex.Message);
             }
 
             return ieeeAddresses;

@@ -366,7 +366,7 @@ namespace ZigBeeNet.App.Discovery
                 }
                 catch (Exception e)
                 {
-                    Log.Error("{NetworkAddress}: NWK Discovery error during node discovery: {Error}", nodeNetworkAddress, e);
+                    Log.Error("{NetworkAddress}: NWK Discovery error during node discovery: {Error}", nodeNetworkAddress, e.Message);
                 }
             });
         }

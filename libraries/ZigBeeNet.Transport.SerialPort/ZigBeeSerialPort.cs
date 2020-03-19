@@ -150,7 +150,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error while reading byte from serial port: {Exception}");
+                Log.Error(e, "Error while reading byte from serial port: {Exception}", e.Message);
             }
             return null;
         }
@@ -170,7 +170,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "Error while writing to serial port: {Exception}");
+                    Log.Error(e, "Error while writing to serial port: {Exception}", e.Message);
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 {
                     if (!_cancellationToken.IsCancellationRequested)
                     {
-                        Log.Error(e, "Error while reading from serial port: {Exception}");
+                        Log.Error(e, "Error while reading from serial port: {Exception}", e.Message);
                         Thread.Sleep(1000);
                     }
                 }

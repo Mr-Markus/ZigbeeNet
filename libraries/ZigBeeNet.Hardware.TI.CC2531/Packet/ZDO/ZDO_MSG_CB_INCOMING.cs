@@ -184,7 +184,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             }
             catch (Exception e)
             {
-                Log.Error("Error constructing response packet {Exception}", e);
+                Log.Error("Error constructing response packet {Exception}", e.Message);
                 return this;
             }
 

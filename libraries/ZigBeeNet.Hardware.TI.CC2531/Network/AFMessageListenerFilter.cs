@@ -46,7 +46,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                         listener.Notify(msg);
                     } catch (Exception e)
                     {
-                        Log.Error(e, "Error AF message listener notify: {Exception}");
+                        Log.Error(e, "Error AF message listener notify: {Exception}", e.Message);
                     }
                 }
             }

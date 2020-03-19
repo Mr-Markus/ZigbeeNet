@@ -239,7 +239,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 } 
                 catch (Exception e) 
                 {
-                    Log.Error(e, "AshFrameHandler Exception: ", e);
+                    Log.Error(e, "AshFrameHandler Exception: ", e.Message);
 
                     if (exceptionCnt++ > 10) 
                     {
@@ -322,7 +322,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 } 
                 catch (Exception e) 
                 {
-                    Log.Error(e, "AshFrameHandler Exception processing EZSP frame: {Exception}");
+                    Log.Error(e, "AshFrameHandler Exception processing EZSP frame: {Exception}", e.Message);
                 }
             }
         }
