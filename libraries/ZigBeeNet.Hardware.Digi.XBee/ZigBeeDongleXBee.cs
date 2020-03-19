@@ -18,8 +18,6 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         private readonly IZigBeePort _serialPort;
         private IXBeeFrameHandler _frameHandler;
         private IZigBeeTransportReceive _zigBeeTransportReceive;
-        private readonly ZigBeeChannel _radioChannel;
-        private readonly ExtendedPanId _extendedPanId;
         private bool _coordinatorStarted;
         private bool _initialisationComplete;
 
@@ -44,8 +42,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         public string VersionString { get; set; } = "Unknown";
         public IeeeAddress IeeeAddress { get; set; }
         public ushort NwkAddress { get; set; }
-        public ZigBeeKey LinkKey { get; private set; } = new ZigBeeKey(new byte[] { 0x5A, 0x69, 0x67, 0x42, 0x65, 0x65, 0x41, 0x6C, 0x6C, 0x69, 0x61, 0x6E, 0x63, 0x65, 0x30, 0x39 });
-        public ZigBeeKey NetworkKey { get; private set; } = new ZigBeeKey();
+        public ZigBeeKey TcLinkKey { get; private set; } = new ZigBeeKey(new byte[] { 0x5A, 0x69, 0x67, 0x42, 0x65, 0x65, 0x41, 0x6C, 0x6C, 0x69, 0x61, 0x6E, 0x63, 0x65, 0x30, 0x39 });
+        public ZigBeeKey ZigBeeNetworkKey { get; private set; } = new ZigBeeKey();
 
         public ZigBeeChannel ZigBeeChannel
         {
@@ -58,17 +56,13 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 XBeeGetOperatingChannelCommand request = new XBeeGetOperatingChannelCommand();
                 XBeeOperatingChannelResponse response = (XBeeOperatingChannelResponse)_frameHandler.SendRequest(request);
 
-                return (ZigBeeChannel)response.GetChannel();
+                return (ZigBeeChannel)(1 << response.GetChannel());
             }
         }
 
         public ushort PanID { get; private set; }
 
         public ExtendedPanId ExtendedPanId { get; private set; }
-
-        public ZigBeeKey ZigBeeNetworkKey { get; private set; }
-
-        public ZigBeeKey TcLinkKey { get; private set; }
 
         #endregion properties
 
@@ -174,12 +168,12 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
             // Set the network key
             XBeeSetNetworkKeyCommand networkKey = new XBeeSetNetworkKeyCommand();
-            networkKey.SetNetworkKey(new ZigBeeKey());
+            networkKey.SetNetworkKey(ZigBeeNetworkKey);
             _frameHandler.SendRequest(networkKey);
 
             // Set the link key
             XBeeSetLinkKeyCommand setLinkKey = new XBeeSetLinkKeyCommand();
-            setLinkKey.SetLinkKey(LinkKey);
+            setLinkKey.SetLinkKey(TcLinkKey);
             _frameHandler.SendRequest(setLinkKey);
 
             // Save the configuration in the XBee
@@ -376,13 +370,13 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
         public ZigBeeStatus SetZigBeeNetworkKey(ZigBeeKey key)
         {
-            NetworkKey = key;
+            ZigBeeNetworkKey = key;
             return ZigBeeStatus.SUCCESS;
         }
 
         public ZigBeeStatus SetTcLinkKey(ZigBeeKey key)
         {
-            LinkKey = key;
+            TcLinkKey = key;
             return ZigBeeStatus.SUCCESS;
         }
 
