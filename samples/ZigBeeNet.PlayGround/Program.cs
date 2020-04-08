@@ -10,6 +10,8 @@ using ZigbeeNet.Hardware.ConBee;
 using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.Database;
+using ZigBeeNet.DataStore.Json;
+using ZigBeeNet.DataStore.MongoDb;
 using ZigBeeNet.Hardware.Digi.XBee;
 using ZigBeeNet.Hardware.Ember;
 using ZigBeeNet.Hardware.TI.CC2531;
@@ -46,6 +48,10 @@ namespace ZigBeeNet.PlayGround
             string flow = "";
             FlowControl flowControl = FlowControl.FLOWCONTROL_OUT_NONE;
             bool resetNetwork = false;
+            string store = "json";
+            string database = "devices";
+            string connection = "";
+            string collection = "";
 
             OptionSet options = new OptionSet
             {
@@ -55,6 +61,10 @@ namespace ZigBeeNet.PlayGround
                 { "b|baud=", $"the port baud rate to use. default is {baudrate}", b => int.TryParse(b, out baudrate)},
                 { "f|flow=", $"the flow control (none | hardware | software)", f => flow = f },
                 { "r|reset", $"Reset the Zigbee network", r => resetNetwork = r != null },
+                { "s|store=", $"The store for network state", s => store = s },
+                { "c|connection=", $"The mongoDb connection string", c => connection = c },
+                { "d|database=", $"The mongoDb database or json directory", d => database = d },
+                { "mc|mongoCollection=", $"The mongoDb collection", mc => collection = mc },
             };
 
             try
@@ -65,7 +75,7 @@ namespace ZigBeeNet.PlayGround
                     Console.WriteLine($"Error: Unknown option: {extraArg}");
                     showHelp = true;
                 }
-                if(showHelp)
+                if (showHelp)
                 {
                     ShowHelp(options);
                     return;
@@ -77,7 +87,7 @@ namespace ZigBeeNet.PlayGround
                     port = Console.ReadLine();
                 }
 
-                if(string.IsNullOrEmpty(flow))
+                if (string.IsNullOrEmpty(flow))
                 {
                     // Default the flow control based on the dongle
                     switch (zigBeeDongle)
@@ -92,7 +102,7 @@ namespace ZigBeeNet.PlayGround
                 }
                 else
                 {
-                    switch(flow)
+                    switch (flow)
                     {
                         case "software":
                             flowControl = FlowControl.FLOWCONTROL_OUT_XONOFF;
@@ -144,8 +154,23 @@ namespace ZigBeeNet.PlayGround
 
                 ZigBeeNetworkManager networkManager = new ZigBeeNetworkManager(dongle);
 
-                JsonNetworkDataStore dataStore = new JsonNetworkDataStore("devices");
-                networkManager.SetNetworkDataStore(dataStore);
+                if (store == "json")
+                {
+                    JsonNetworkDataStore dataStore = new JsonNetworkDataStore(database);
+                    networkManager.SetNetworkDataStore(dataStore);
+                }
+                else if (store == "mongo")
+                {
+                    MongoDbDatabaseSettings settings = new MongoDbDatabaseSettings()
+                    {
+                        ConnectionString = connection,
+                        DatabaseName = database,
+                        NodesCollectionName = collection
+                    };
+
+                    MongoDbDataStore mongoStore = new MongoDbDataStore(settings);
+                    networkManager.SetNetworkDataStore(mongoStore);
+                }
 
                 ZigBeeDiscoveryExtension discoveryExtension = new ZigBeeDiscoveryExtension();
                 discoveryExtension.SetUpdatePeriod(60);
@@ -232,7 +257,7 @@ namespace ZigBeeNet.PlayGround
                     {
                         coord.PermitJoin(false);
                     }
-                    else if(cmd == "endpoints")
+                    else if (cmd == "endpoints")
                     {
                         var tmp = Console.ForegroundColor;
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -244,11 +269,11 @@ namespace ZigBeeNet.PlayGround
                         {
                             var node = networkManager.Nodes.FirstOrDefault(n => n.NetworkAddress == addr);
 
-                            if(node != null) 
+                            if (node != null)
                             {
                                 Console.WriteLine(new string('-', 20));
 
-                                foreach (var endpoint in node.Endpoints.Values)
+                                foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Input Cluster:" + Environment.NewLine);
@@ -264,7 +289,7 @@ namespace ZigBeeNet.PlayGround
 
                                 Console.WriteLine();
 
-                                foreach (var endpoint in node.Endpoints.Values)
+                                foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Output Cluster:" + Environment.NewLine);
@@ -281,7 +306,7 @@ namespace ZigBeeNet.PlayGround
                                 Console.WriteLine(new string('-', 20));
                             }
                         }
-                      
+
                     }
                     else if (cmd == "add")
                     {
@@ -315,7 +340,7 @@ namespace ZigBeeNet.PlayGround
                             if (node != null)
                             {
                                 ZigBeeEndpointAddress endpointAddress = null;
-                                var endpoint = node.Endpoints.Values.FirstOrDefault();
+                                var endpoint = node.GetEndpoints().FirstOrDefault();
 
                                 if (endpoint != null)
                                 {
@@ -485,7 +510,7 @@ namespace ZigBeeNet.PlayGround
                                     {
                                         ZigBeeStatus statusCode = await node.UpdateBindingTable();
 
-                                        if(statusCode != ZigBeeStatus.SUCCESS)
+                                        if (statusCode != ZigBeeStatus.SUCCESS)
                                         {
                                             Console.WriteLine("Error while reading binding table: " + statusCode);
                                         }
@@ -568,114 +593,6 @@ namespace ZigBeeNet.PlayGround
         public void NodeUpdated(ZigBeeNode node)
         {
             Console.WriteLine("Node updated " + node);
-        }
-    }
-
-    public class JsonNetworkDataStore : IZigBeeNetworkDataStore
-    {
-        private readonly string _dirname;
-
-        public JsonNetworkDataStore(string dirname)
-        {
-            _dirname = dirname;
-            
-            if (!Directory.Exists(_dirname))
-                Directory.CreateDirectory(_dirname);
-        }
-
-        private string GetFileName(IeeeAddress address)
-        {
-            return _dirname + "/" + address.ToString() + ".json";
-        }
-
-        public ISet<IeeeAddress> ReadNetworkNodes()
-        {
-            ISet<IeeeAddress> nodes = new HashSet<IeeeAddress>();
-
-            try
-            {
-                if (Directory.Exists(_dirname))
-                {
-                    var jsonFiles = Directory.EnumerateFiles(_dirname, "*.json");
-
-                    foreach(string file in jsonFiles)
-                    {
-                        try
-                        {
-                            IeeeAddress address = new IeeeAddress(file.Substring(file.Length - (16 + 5), 16));
-                            nodes.Add(address);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            return nodes;
-        }
-
-
-        public ZigBeeNodeDao ReadNode(IeeeAddress address)
-        {
-            ZigBeeNodeDao node = null;
-
-            try
-            {
-                string filename = GetFileName(address);
-
-                if (File.Exists(filename))
-                {
-                    node = JsonConvert.DeserializeObject<ZigBeeNodeDao>(File.ReadAllText(filename));
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            return node;
-        }
-
-        public void RemoveNode(IeeeAddress address)
-        {
-            try
-            {
-                string filename = GetFileName(address);
-
-                if (File.Exists(filename))
-                {
-                    File.Delete(filename);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
-        public void WriteNode(ZigBeeNodeDao node)
-        {
-            try
-            {
-                string filename = GetFileName(node.IeeeAddress);
-
-                var settings = new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-
-                string json = JsonConvert.SerializeObject(node, Formatting.Indented, settings);
-
-                File.WriteAllText(filename, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
         }
     }
 }

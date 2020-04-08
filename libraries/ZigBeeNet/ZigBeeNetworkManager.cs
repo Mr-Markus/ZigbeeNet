@@ -467,8 +467,9 @@ namespace ZigBeeNet
             Log.Debug("ZigBeeNetworkManager startup: reinitialize={Reinitialize}, networkState={NetworkState}", reinitialize, NetworkState);
             lock (_networkStateSync)
             {
-                if (NetworkState == ZigBeeNetworkState.UNINITIALISED)
+                if (NetworkState != ZigBeeNetworkState.INITIALISING)
                 {
+                    Log.Error("ZigBeeNetworkManager startup: Can't be called when NetworkState={NetworkState}", NetworkState);
                     return ZigBeeStatus.INVALID_STATE;
                 }
             }
@@ -947,7 +948,7 @@ namespace ZigBeeNet
                     SetNetworkStateOnline();
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error");
+                    Log.Error(t.Exception, "Error: {Exception}");
                 }, TaskContinuationOptions.OnlyOnFaulted);
                 return;
             }
@@ -959,7 +960,7 @@ namespace ZigBeeNet
                     stateListener.NetworkStateUpdated(state);
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error");
+                    Log.Error(t.Exception, "Error: {Exception}");
                 }, TaskContinuationOptions.OnlyOnFaulted);
             }
         }
@@ -999,7 +1000,7 @@ namespace ZigBeeNet
 
                         }).ContinueWith((t) =>
                         {
-                            Log.Error(t.Exception, "Error");
+                            Log.Error(t.Exception, "Error: {Exception}");
                         }, TaskContinuationOptions.OnlyOnFaulted);
                     }
                 }
@@ -1013,7 +1014,7 @@ namespace ZigBeeNet
                     stateListener.NetworkStateUpdated(ZigBeeNetworkState.ONLINE);
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error");
+                    Log.Error(t.Exception, "Error: {Exception}");
                 }, TaskContinuationOptions.OnlyOnFaulted);
             }
         }
@@ -1343,7 +1344,7 @@ namespace ZigBeeNet
                         listener.NodeRemoved(node);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1397,7 +1398,7 @@ namespace ZigBeeNet
                         listener.NodeAdded(node);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1476,7 +1477,7 @@ namespace ZigBeeNet
                         }
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Here is the error additional text");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }

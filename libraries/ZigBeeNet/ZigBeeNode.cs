@@ -10,6 +10,7 @@ using ZigBeeNet.ZCL;
 using ZigBeeNet.ZDO.Field;
 using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 using ZigBeeNet.Transaction;
+using System.Linq;
 using Serilog;
 
 namespace ZigBeeNet
@@ -24,13 +25,7 @@ namespace ZigBeeNet
         /// <summary>
         /// Gets the current state for the node
         /// </summary>
-        public ZigBeeNodeState NodeState
-        {
-            get
-            {
-                return _nodeState;
-            }
-        }
+        public ZigBeeNodeState NodeState { get; private set; } = ZigBeeNodeState.UNKNOWN;
 
         /// <summary>
         /// The <see cref="Logger">.
@@ -59,43 +54,65 @@ namespace ZigBeeNet
         /// </summary>
         public PowerDescriptor PowerDescriptor { get; set; }
 
-        /// <summary>
-        /// The time the node information was last updated. This is set from the mesh update class when it the
-        /// updates neighbor table, routing table etc.
-        /// </summary>
-
+        private HashSet<ushort> _associatedDevices = new HashSet<ushort>();
         /// <summary>
         /// List of associated devices for the node, specified in a <see cref="List"> <see cref="Integer">
         /// </summary>
-        public HashSet<ushort> AssociatedDevices { get; set; } = new HashSet<ushort>();
+        public ReadOnlyCollection<ushort> AssociatedDevices
+        {
+            get
+            {
+                return new ReadOnlyCollection<ushort>(_associatedDevices.ToList());
+            }
+        }
 
+        private HashSet<NeighborTable> _neighbors = new HashSet<NeighborTable>();
         /// <summary>
         /// List of neighbors for the node, specified in a <see cref="NeighborTable">
         /// </summary>
-        public HashSet<NeighborTable> Neighbors { get; set; } = new HashSet<NeighborTable>();
+        public ReadOnlyCollection<NeighborTable> Neighbors
+        {
+            get
+            {
+                return new ReadOnlyCollection<NeighborTable>(_neighbors.ToList());
+            }
+        }
 
+        private HashSet<RoutingTable> _routes = new HashSet<RoutingTable>();
         /// <summary>
         /// List of routes within the node, specified in a <see cref="RoutingTable">
         /// </summary>
-        public HashSet<RoutingTable> Routes { get; set; } = new HashSet<RoutingTable>();
+        public ReadOnlyCollection<RoutingTable> Routes
+        {
+            get
+            {
+                return new ReadOnlyCollection<RoutingTable>(_routes.ToList());
+            }
+        }
 
+        private readonly HashSet<BindingTable> _bindingTable = new HashSet<BindingTable>();
         /// <summary>
         /// List of binding records
         /// </summary>
-        public HashSet<BindingTable> BindingTable { get; set; } = new HashSet<BindingTable>();
+        public ReadOnlyCollection<BindingTable> BidndingTable
+        {
+            get
+            {
+                return new ReadOnlyCollection<BindingTable>(_bindingTable.ToList());
+            }
+        }
 
+        private readonly ConcurrentDictionary<int, ZigBeeEndpoint> _endpoints = new ConcurrentDictionary<int, ZigBeeEndpoint>();
         /// <summary>
         /// List of endpoints this node exposes
         /// </summary>
-        public ConcurrentDictionary<int, ZigBeeEndpoint> Endpoints { get; private set; } = new ConcurrentDictionary<int, ZigBeeEndpoint>();
-
-        /// <summary>
-        /// The node service discoverer that is responsible for the discovery of services, and periodic update or routes and
-        /// Neighbors
-        /// </summary>
-        private ZigBeeNodeServiceDiscoverer _serviceDiscoverer;
-
-        private ZigBeeNodeState _nodeState = ZigBeeNodeState.UNKNOWN;
+        public ReadOnlyDictionary<int, ZigBeeEndpoint> Endpoints
+        {
+            get
+            {
+                return new ReadOnlyDictionary<int, ZigBeeEndpoint>(_endpoints);
+            }
+        }
 
         /// <summary>
         /// The endpoint listeners of the ZigBee network. Registered listeners will be
@@ -108,11 +125,6 @@ namespace ZigBeeNet
         /// </summary>
         private IZigBeeNetwork _network;
 
-        /// <summary>
-        /// Broadcast endpoint definition
-        /// </summary>
-        private const int BROADCAST_ENDPOINT = 0xFF;
-
         public ZigBeeNode()
         {
 
@@ -120,10 +132,8 @@ namespace ZigBeeNet
 
         /// <summary>
         /// Constructor
-        ///
         /// <param name="network">the <see cref="IZigBeeNetwork"></param>
         /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node</param>
-        /// @throws <see cref="ArgumentException"> if ieeeAddress is null
         /// </summary>
         public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress)
         {
@@ -138,7 +148,6 @@ namespace ZigBeeNet
         /// <param name="networkr">the <see cref="IZigBeeNetwork"></param>
         /// <param name="ieeeAddress">the <see cref="IeeeAddress"> of the node</param>
         /// <param name="networkAddress">the network address of the node</param>
-        /// @throws <see cref="ArgumentException"> if ieeeAddress is null
         /// </summary>
         public ZigBeeNode(IZigBeeNetwork network, IeeeAddress ieeeAddress, ushort networkAddress)
             : this(network, ieeeAddress)
@@ -288,10 +297,10 @@ namespace ZigBeeNet
 
         private void SetBindingTable(HashSet<BindingTable> bindingTable)
         {
-            lock (BindingTable)
+            lock (_bindingTable)
             {
-                BindingTable.Clear();
-                BindingTable.UnionWith(bindingTable);
+                _bindingTable.Clear();
+                _bindingTable.UnionWith(bindingTable);
                 Log.Debug("{Address}: Binding table updated: {BindingTable}", IeeeAddress, bindingTable);
             }
         }
@@ -343,10 +352,21 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeEndpoint GetEndpoint(byte endpointId)
         {
-            lock (Endpoints)
+            if (_endpoints.TryGetValue(endpointId, out ZigBeeEndpoint endpoint))
             {
-                return Endpoints[endpointId];
+                return endpoint;
             }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets all endpoint.
+        /// <returns>A <see cref="IReadOnlyCollection{ZigBeeEndpoint}"/> of <see cref="ZigBeeEndpoint">s</returns>
+        /// </summary>
+        public IReadOnlyCollection<ZigBeeEndpoint> GetEndpoints()
+        {
+            return new ReadOnlyCollection<ZigBeeEndpoint>(_endpoints.Values.ToList());
         }
 
         /// <summary>
@@ -358,7 +378,7 @@ namespace ZigBeeNet
         {
             //lock (Endpoints)
             //{
-            Endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, (_, __) => endpoint);
+            _endpoints.AddOrUpdate(endpoint.EndpointId, endpoint, (_, __) => endpoint);
             //}
 
             lock (_endpointListeners)
@@ -370,7 +390,7 @@ namespace ZigBeeNet
                         listener.DeviceAdded(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -383,10 +403,9 @@ namespace ZigBeeNet
         /// </summary>
         public void UpdateEndpoint(ZigBeeEndpoint endpoint)
         {
-            lock (Endpoints)
-            {
-                Endpoints[endpoint.EndpointId] = endpoint;
-            }
+
+            _endpoints[endpoint.EndpointId] = endpoint;
+
             lock (_endpointListeners)
             {
                 foreach (IZigBeeNetworkEndpointListener listener in _endpointListeners)
@@ -396,7 +415,7 @@ namespace ZigBeeNet
                         listener.DeviceUpdated(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error");
+                        Log.Error(t.Exception, "Error: {Exception}");
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -409,11 +428,8 @@ namespace ZigBeeNet
         /// </summary>
         public void RemoveEndpoint(byte endpointId)
         {
-            ZigBeeEndpoint endpoint;
-            lock (Endpoints)
-            {
-                Endpoints.TryRemove(endpointId, out endpoint);
-            }
+            _endpoints.TryRemove(endpointId, out ZigBeeEndpoint endpoint);
+
             lock (_endpointListeners)
             {
                 if (endpoint != null)
@@ -425,7 +441,7 @@ namespace ZigBeeNet
                             listener.DeviceRemoved(endpoint);
                         }).ContinueWith((t) =>
                         {
-                            Log.Error(t.Exception, "Error");
+                            Log.Error(t.Exception, "Error: {Exception}");
                         }, TaskContinuationOptions.OnlyOnFaulted);
                     }
                 }
@@ -470,11 +486,13 @@ namespace ZigBeeNet
             ZclCommand zclCommand = (ZclCommand)command;
             ZigBeeEndpointAddress endpointAddress = (ZigBeeEndpointAddress)zclCommand.SourceAddress;
 
-            if (Endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
+            if (_endpoints.TryGetValue(endpointAddress.Endpoint, out ZigBeeEndpoint endpoint))
             {
                 endpoint.CommandReceived(zclCommand);
             }
         }
+
+       
 
         /// <summary>
         /// Checks if basic device discovery is complete.
@@ -483,7 +501,7 @@ namespace ZigBeeNet
         /// </summary>
         public bool IsDiscovered()
         {
-            return NodeDescriptor != null && NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && Endpoints.Count != 0;
+            return NodeDescriptor != null && NodeDescriptor.LogicalNodeType != LogicalType.UNKNOWN && _endpoints.Count != 0;
         }
 
         public void UpdateNetworkManager(ZigBeeNetworkManager networkManager)
@@ -529,62 +547,62 @@ namespace ZigBeeNet
                 PowerDescriptor = node.PowerDescriptor;
             }
 
-            lock (AssociatedDevices)
+            lock (_associatedDevices)
             {
-                if (!AssociatedDevices.SetEquals(node.AssociatedDevices))
+                if (!_associatedDevices.SetEquals(node._associatedDevices))
                 {
                     Log.Debug("{IeeeAddress}: Associated devices updated", IeeeAddress);
                     updated = true;
-                    AssociatedDevices.Clear();
-                    AssociatedDevices.UnionWith(node.AssociatedDevices);
+                    _associatedDevices.Clear();
+                    _associatedDevices.UnionWith(node._associatedDevices);
                 }
             }
 
-            lock (BindingTable)
+            lock (_bindingTable)
             {
-                if (!BindingTable.SetEquals(node.BindingTable))
+                if (!_bindingTable.SetEquals(node._bindingTable))
                 {
                     Log.Debug("{IeeeAddress}: Binding table updated", IeeeAddress);
                     updated = true;
-                    BindingTable.Clear();
-                    BindingTable.UnionWith(node.BindingTable);
+                    _bindingTable.Clear();
+                    _bindingTable.UnionWith(node._bindingTable);
                 }
             }
 
-            lock (Neighbors)
+            lock (_neighbors)
             {
-                if (!Neighbors.SetEquals(node.Neighbors))
+                if (!_neighbors.SetEquals(node._neighbors))
                 {
                     Log.Debug("{IeeeAddress}: Neighbors updated", IeeeAddress);
                     updated = true;
-                    Neighbors.Clear();
-                    Neighbors.UnionWith(node.Neighbors);
+                    _neighbors.Clear();
+                    _neighbors.UnionWith(node._neighbors);
                 }
             }
 
-            lock (Routes)
+            lock (_routes)
             {
-                if (!Routes.SetEquals(node.Routes))
+                if (!_routes.SetEquals(node._routes))
                 {
                     Log.Debug("{IeeeAddress}: Routes updated", IeeeAddress);
                     updated = true;
-                    Routes.Clear();
-                    Routes.UnionWith(node.Routes);
+                    _routes.Clear();
+                    _routes.UnionWith(node._routes);
                 }
             }
 
             // Endpoints are only copied over if they don't exist in the node
             // The assumption here is that endpoints are only set once, and not changed.
             // This should be valid as they are set through the SimpleDescriptor.
-            foreach (var endpoint in node.Endpoints)
+            foreach (var endpoint in node._endpoints)
             {
-                if (Endpoints.ContainsKey(endpoint.Key))
+                if (_endpoints.ContainsKey(endpoint.Key))
                 {
                     continue;
                 }
                 Log.Debug("{IeeeAddress}: Endpoint {EndpointId} added", IeeeAddress, endpoint.Key);
                 updated = true;
-                Endpoints[endpoint.Key] = endpoint.Value;
+                _endpoints[endpoint.Key] = endpoint.Value;
             }
 
             return updated;
@@ -603,10 +621,10 @@ namespace ZigBeeNet
             dao.NetworkAddress = NetworkAddress;
             dao.NodeDescriptor = NodeDescriptor;
             dao.PowerDescriptor = PowerDescriptor;
-            dao.BindingTable = BindingTable;
+            dao.BindingTable = _bindingTable;
 
             List<ZigBeeEndpointDao> endpointDaoList = new List<ZigBeeEndpointDao>();
-            foreach (ZigBeeEndpoint endpoint in Endpoints.Values)
+            foreach (ZigBeeEndpoint endpoint in _endpoints.Values)
             {
                 endpointDaoList.Add(endpoint.GetDao());
             }
@@ -623,14 +641,14 @@ namespace ZigBeeNet
             PowerDescriptor = dao.PowerDescriptor;
             if (dao.BindingTable != null)
             {
-                BindingTable.UnionWith(dao.BindingTable);
+                _bindingTable.UnionWith(dao.BindingTable);
             }
 
             foreach (ZigBeeEndpointDao endpointDao in dao.Endpoints)
             {
                 ZigBeeEndpoint endpoint = new ZigBeeEndpoint(this, endpointDao.EndpointId);
                 endpoint.SetDao(endpointDao);
-                Endpoints[endpoint.EndpointId] = endpoint;
+                _endpoints[endpoint.EndpointId] = endpoint;
             }
         }
 
@@ -660,14 +678,30 @@ namespace ZigBeeNet
 
         public bool SetNodeState(ZigBeeNodeState state)
         {
-            if (_nodeState.Equals(state))
+            if (NodeState.Equals(state))
             {
                 return false;
             }
-            Log.Debug("{IeeeAddress}: Node state updated from {oldState} to {newState}", IeeeAddress, _nodeState, state);
+            Log.Debug("{IeeeAddress}: Node state updated from {oldState} to {newState}", IeeeAddress, NodeState, state);
 
-            _nodeState = state;
+            NodeState = state;
             return true;
         }
+
+        internal void SetAssociatedDevices(HashSet<ushort> associatedDevices)
+        {
+            _associatedDevices = associatedDevices;
+        }
+
+        internal void SetNeighbors(HashSet<NeighborTable> neighbors)
+        {
+            _neighbors = neighbors;
+        }
+
+        internal void SetRoutes(HashSet<RoutingTable> routes)
+        {
+            _routes = routes;
+        }
+
     }
 }

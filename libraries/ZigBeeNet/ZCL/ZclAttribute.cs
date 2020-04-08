@@ -251,6 +251,7 @@ namespace ZigBeeNet.ZCL
             MaximumReportingPeriod = dao.MaximumReportingPeriod;
             ReportingChange = dao.ReportingChange;
             ReportingTimeout = dao.ReportingTimeout;
+            ManufacturerCode = dao.ManufacturerCode;
         }
 
         /// <summary>
@@ -277,6 +278,7 @@ namespace ZigBeeNet.ZCL
             dao.ReportingTimeout = ReportingTimeout;
             dao.LastValue = LastValue;
             dao.LastReportTime = LastReportTime;
+            dao.ManufacturerCode = ManufacturerCode;
 
             return dao;
         }

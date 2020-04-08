@@ -84,7 +84,7 @@ namespace ZigbeeNet.Hardware.ConBee
             }
             catch(Exception ex)
             {
-                Log.Error(ex, "Exception while Process");
+                Log.Error(ex, "Exception while Process: {Exception}");
             }
             finally
             {

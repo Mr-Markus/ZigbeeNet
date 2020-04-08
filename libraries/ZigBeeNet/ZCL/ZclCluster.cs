@@ -19,6 +19,11 @@ namespace ZigBeeNet.ZCL
     public abstract class ZclCluster
     {
         /// <summary>
+        /// The <see cref="ZigBeeNetworkManager"> to which this device belongs
+        /// </summary>
+        //private ZigBeeNetworkManager _zigbeeManager;
+
+        /// <summary>
         /// The <see cref="ZigBeeEndpoint"> to which this cluster belongs
         /// </summary>
         private ZigBeeEndpoint _zigbeeEndpoint;
@@ -216,7 +221,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public Task<CommandResult> ReadAttribute(ushort attributeId)
         {
-            return ReadAttribute(new List<ushort>(new[] { attributeId }));
+            return ReadAttributes(new List<ushort>(new[] { attributeId }));
         }
 
         /// <summary>
@@ -226,7 +231,7 @@ namespace ZigBeeNet.ZCL
         /// <param name="attributeIds">List of attribute identifiers to read</param>
         /// <returns>command Task</returns>
         /// </summary>
-        public Task<CommandResult> ReadAttribute(List<ushort> attributeIds)
+        public Task<CommandResult> ReadAttributes(List<ushort> attributeIds)
         {
             ReadAttributesCommand command = new ReadAttributesCommand();
 
@@ -1297,11 +1302,11 @@ namespace ZigBeeNet.ZCL
                 daoZclAttributes = _serverAttributes.Values.ToList();
             }
 
-            Dictionary<ushort, ZclAttributeDao> daoAttributes = new Dictionary<ushort, ZclAttributeDao>();
+            List<ZclAttributeDao> daoAttributes = new List<ZclAttributeDao>();
 
             foreach (ZclAttribute attribute in daoZclAttributes)
             {
-                daoAttributes.Add(attribute.Id, attribute.GetDao());
+                daoAttributes.Add(attribute.GetDao());
             }
 
             dao.Attributes = daoAttributes;
@@ -1325,7 +1330,7 @@ namespace ZigBeeNet.ZCL
             _supportedCommandsReceived.AddRange(dao.SupportedCommandsReceived);
 
             Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
-            foreach (ZclAttributeDao daoAttribute in dao.Attributes.Values)
+            foreach (ZclAttributeDao daoAttribute in dao.Attributes)
             {
                 ZclAttribute attribute = new ZclAttribute();
                 attribute.SetDao(this, daoAttribute);
