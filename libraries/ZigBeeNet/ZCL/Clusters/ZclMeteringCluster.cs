@@ -55,7 +55,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS2 = 0x0003;
+        public const ushort ATTR_NOTIFICATIONFLAGS2 = 0x0001;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -64,7 +64,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS3 = 0x0004;
+        public const ushort ATTR_NOTIFICATIONFLAGS3 = 0x0002;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -73,7 +73,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS4 = 0x0005;
+        public const ushort ATTR_NOTIFICATIONFLAGS4 = 0x0003;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -82,7 +82,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS5 = 0x0006;
+        public const ushort ATTR_NOTIFICATIONFLAGS5 = 0x0004;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -91,7 +91,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS6 = 0x0007;
+        public const ushort ATTR_NOTIFICATIONFLAGS6 = 0x0005;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -100,7 +100,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS7 = 0x0008;
+        public const ushort ATTR_NOTIFICATIONFLAGS7 = 0x0006;
 
         /// <summary>
         /// NotificationFlags2 to NotificationFlags8 are 32-bit bitmaps that each
@@ -109,7 +109,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// The format of these attributes is dictated by the scheme that is currently in
         /// operation.
      /// </summary>
-        public const ushort ATTR_NOTIFICATIONFLAGS8 = 0x0009;
+        public const ushort ATTR_NOTIFICATIONFLAGS8 = 0x0007;
 
         /// <summary>
         /// CurrentSummationDelivered represents the most recent summed value of Energy,
@@ -395,7 +395,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER1SUMMATIONDELIVERED = 0x0101;
+        public const ushort ATTR_CURRENTTIER1SUMMATIONDELIVERED = 0x0100;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -406,7 +406,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER3SUMMATIONDELIVERED = 0x0103;
+        public const ushort ATTR_CURRENTTIER2SUMMATIONDELIVERED = 0x0102;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -417,7 +417,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER5SUMMATIONDELIVERED = 0x0105;
+        public const ushort ATTR_CURRENTTIER3SUMMATIONDELIVERED = 0x0104;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -428,7 +428,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER7SUMMATIONDELIVERED = 0x0107;
+        public const ushort ATTR_CURRENTTIER4SUMMATIONDELIVERED = 0x0106;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -439,7 +439,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER9SUMMATIONDELIVERED = 0x0109;
+        public const ushort ATTR_CURRENTTIER5SUMMATIONDELIVERED = 0x0108;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -450,7 +450,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER11SUMMATIONDELIVERED = 0x010B;
+        public const ushort ATTR_CURRENTTIER6SUMMATIONDELIVERED = 0x010A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -461,7 +461,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER13SUMMATIONDELIVERED = 0x010D;
+        public const ushort ATTR_CURRENTTIER7SUMMATIONDELIVERED = 0x010C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -472,7 +472,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER15SUMMATIONDELIVERED = 0x010F;
+        public const ushort ATTR_CURRENTTIER8SUMMATIONDELIVERED = 0x010E;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -483,7 +483,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER17SUMMATIONDELIVERED = 0x0111;
+        public const ushort ATTR_CURRENTTIER9SUMMATIONDELIVERED = 0x0110;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -494,7 +494,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER19SUMMATIONDELIVERED = 0x0113;
+        public const ushort ATTR_CURRENTTIER10SUMMATIONDELIVERED = 0x0112;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -505,7 +505,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER21SUMMATIONDELIVERED = 0x0115;
+        public const ushort ATTR_CURRENTTIER11SUMMATIONDELIVERED = 0x0114;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -516,7 +516,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER23SUMMATIONDELIVERED = 0x0117;
+        public const ushort ATTR_CURRENTTIER12SUMMATIONDELIVERED = 0x0116;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -527,7 +527,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER25SUMMATIONDELIVERED = 0x0119;
+        public const ushort ATTR_CURRENTTIER13SUMMATIONDELIVERED = 0x0118;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -538,7 +538,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER27SUMMATIONDELIVERED = 0x011B;
+        public const ushort ATTR_CURRENTTIER14SUMMATIONDELIVERED = 0x011A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -549,7 +549,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER29SUMMATIONDELIVERED = 0x011D;
+        public const ushort ATTR_CURRENTTIER15SUMMATIONDELIVERED = 0x011C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -560,7 +560,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER31SUMMATIONDELIVERED = 0x011F;
+        public const ushort ATTR_CURRENTTIER16SUMMATIONDELIVERED = 0x011E;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -571,7 +571,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER33SUMMATIONDELIVERED = 0x0121;
+        public const ushort ATTR_CURRENTTIER17SUMMATIONDELIVERED = 0x0120;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -582,7 +582,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER35SUMMATIONDELIVERED = 0x0123;
+        public const ushort ATTR_CURRENTTIER18SUMMATIONDELIVERED = 0x0122;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -593,7 +593,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER37SUMMATIONDELIVERED = 0x0125;
+        public const ushort ATTR_CURRENTTIER19SUMMATIONDELIVERED = 0x0124;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -604,7 +604,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER39SUMMATIONDELIVERED = 0x0127;
+        public const ushort ATTR_CURRENTTIER20SUMMATIONDELIVERED = 0x0126;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -615,7 +615,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER41SUMMATIONDELIVERED = 0x0129;
+        public const ushort ATTR_CURRENTTIER21SUMMATIONDELIVERED = 0x0128;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -626,7 +626,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER43SUMMATIONDELIVERED = 0x012B;
+        public const ushort ATTR_CURRENTTIER22SUMMATIONDELIVERED = 0x012A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -637,7 +637,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER45SUMMATIONDELIVERED = 0x012D;
+        public const ushort ATTR_CURRENTTIER23SUMMATIONDELIVERED = 0x012C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -648,7 +648,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER47SUMMATIONDELIVERED = 0x012F;
+        public const ushort ATTR_CURRENTTIER24SUMMATIONDELIVERED = 0x012E;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -659,7 +659,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER49SUMMATIONDELIVERED = 0x0131;
+        public const ushort ATTR_CURRENTTIER25SUMMATIONDELIVERED = 0x0130;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -670,7 +670,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER51SUMMATIONDELIVERED = 0x0133;
+        public const ushort ATTR_CURRENTTIER26SUMMATIONDELIVERED = 0x0132;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -681,7 +681,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER53SUMMATIONDELIVERED = 0x0135;
+        public const ushort ATTR_CURRENTTIER27SUMMATIONDELIVERED = 0x0134;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -692,7 +692,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER55SUMMATIONDELIVERED = 0x0137;
+        public const ushort ATTR_CURRENTTIER28SUMMATIONDELIVERED = 0x0136;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -703,7 +703,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER57SUMMATIONDELIVERED = 0x0139;
+        public const ushort ATTR_CURRENTTIER29SUMMATIONDELIVERED = 0x0138;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -714,7 +714,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER59SUMMATIONDELIVERED = 0x013B;
+        public const ushort ATTR_CURRENTTIER30SUMMATIONDELIVERED = 0x013A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -725,7 +725,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER61SUMMATIONDELIVERED = 0x013D;
+        public const ushort ATTR_CURRENTTIER31SUMMATIONDELIVERED = 0x013C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -736,7 +736,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER63SUMMATIONDELIVERED = 0x013F;
+        public const ushort ATTR_CURRENTTIER32SUMMATIONDELIVERED = 0x013E;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -747,7 +747,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER65SUMMATIONDELIVERED = 0x0141;
+        public const ushort ATTR_CURRENTTIER33SUMMATIONDELIVERED = 0x0140;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -758,7 +758,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER67SUMMATIONDELIVERED = 0x0143;
+        public const ushort ATTR_CURRENTTIER34SUMMATIONDELIVERED = 0x0142;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -769,7 +769,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER69SUMMATIONDELIVERED = 0x0145;
+        public const ushort ATTR_CURRENTTIER35SUMMATIONDELIVERED = 0x0144;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -780,7 +780,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER71SUMMATIONDELIVERED = 0x0147;
+        public const ushort ATTR_CURRENTTIER36SUMMATIONDELIVERED = 0x0146;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -791,7 +791,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER73SUMMATIONDELIVERED = 0x0149;
+        public const ushort ATTR_CURRENTTIER37SUMMATIONDELIVERED = 0x0148;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -802,7 +802,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER75SUMMATIONDELIVERED = 0x014B;
+        public const ushort ATTR_CURRENTTIER38SUMMATIONDELIVERED = 0x014A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -813,7 +813,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER77SUMMATIONDELIVERED = 0x014D;
+        public const ushort ATTR_CURRENTTIER39SUMMATIONDELIVERED = 0x014C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -824,7 +824,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER79SUMMATIONDELIVERED = 0x014F;
+        public const ushort ATTR_CURRENTTIER40SUMMATIONDELIVERED = 0x014E;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -835,7 +835,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER81SUMMATIONDELIVERED = 0x0151;
+        public const ushort ATTR_CURRENTTIER41SUMMATIONDELIVERED = 0x0150;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -846,7 +846,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER83SUMMATIONDELIVERED = 0x0153;
+        public const ushort ATTR_CURRENTTIER42SUMMATIONDELIVERED = 0x0152;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -857,7 +857,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER85SUMMATIONDELIVERED = 0x0155;
+        public const ushort ATTR_CURRENTTIER43SUMMATIONDELIVERED = 0x0154;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -868,7 +868,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER87SUMMATIONDELIVERED = 0x0157;
+        public const ushort ATTR_CURRENTTIER44SUMMATIONDELIVERED = 0x0156;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -879,7 +879,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER89SUMMATIONDELIVERED = 0x0159;
+        public const ushort ATTR_CURRENTTIER45SUMMATIONDELIVERED = 0x0158;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -890,7 +890,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER91SUMMATIONDELIVERED = 0x015B;
+        public const ushort ATTR_CURRENTTIER46SUMMATIONDELIVERED = 0x015A;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -901,7 +901,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER93SUMMATIONDELIVERED = 0x015D;
+        public const ushort ATTR_CURRENTTIER47SUMMATIONDELIVERED = 0x015C;
 
         /// <summary>
         /// Attributes CurrentTier1SummationDelivered through
@@ -912,55 +912,55 @@ namespace ZigBeeNet.ZCL.Clusters
         /// CurrentTier1SummationDelivered through CurrentTierNSummationDelivered are
         /// updated continuously as new measurements are made.
      /// </summary>
-        public const ushort ATTR_CURRENTTIER95SUMMATIONDELIVERED = 0x015F;
-        public const ushort ATTR_CURRENTTIER1SUMMATIONRECEIVED = 0x0102;
-        public const ushort ATTR_CURRENTTIER3SUMMATIONRECEIVED = 0x0104;
-        public const ushort ATTR_CURRENTTIER5SUMMATIONRECEIVED = 0x0106;
-        public const ushort ATTR_CURRENTTIER7SUMMATIONRECEIVED = 0x0108;
-        public const ushort ATTR_CURRENTTIER9SUMMATIONRECEIVED = 0x010A;
-        public const ushort ATTR_CURRENTTIER11SUMMATIONRECEIVED = 0x010C;
-        public const ushort ATTR_CURRENTTIER13SUMMATIONRECEIVED = 0x010E;
-        public const ushort ATTR_CURRENTTIER15SUMMATIONRECEIVED = 0x0110;
-        public const ushort ATTR_CURRENTTIER17SUMMATIONRECEIVED = 0x0112;
-        public const ushort ATTR_CURRENTTIER19SUMMATIONRECEIVED = 0x0114;
-        public const ushort ATTR_CURRENTTIER21SUMMATIONRECEIVED = 0x0116;
-        public const ushort ATTR_CURRENTTIER23SUMMATIONRECEIVED = 0x0118;
-        public const ushort ATTR_CURRENTTIER25SUMMATIONRECEIVED = 0x011A;
-        public const ushort ATTR_CURRENTTIER27SUMMATIONRECEIVED = 0x011C;
-        public const ushort ATTR_CURRENTTIER29SUMMATIONRECEIVED = 0x011E;
-        public const ushort ATTR_CURRENTTIER31SUMMATIONRECEIVED = 0x0120;
-        public const ushort ATTR_CURRENTTIER33SUMMATIONRECEIVED = 0x0122;
-        public const ushort ATTR_CURRENTTIER35SUMMATIONRECEIVED = 0x0124;
-        public const ushort ATTR_CURRENTTIER37SUMMATIONRECEIVED = 0x0126;
-        public const ushort ATTR_CURRENTTIER39SUMMATIONRECEIVED = 0x0128;
-        public const ushort ATTR_CURRENTTIER41SUMMATIONRECEIVED = 0x012A;
-        public const ushort ATTR_CURRENTTIER43SUMMATIONRECEIVED = 0x012C;
-        public const ushort ATTR_CURRENTTIER45SUMMATIONRECEIVED = 0x012E;
-        public const ushort ATTR_CURRENTTIER47SUMMATIONRECEIVED = 0x0130;
-        public const ushort ATTR_CURRENTTIER49SUMMATIONRECEIVED = 0x0132;
-        public const ushort ATTR_CURRENTTIER51SUMMATIONRECEIVED = 0x0134;
-        public const ushort ATTR_CURRENTTIER53SUMMATIONRECEIVED = 0x0136;
-        public const ushort ATTR_CURRENTTIER55SUMMATIONRECEIVED = 0x0138;
-        public const ushort ATTR_CURRENTTIER57SUMMATIONRECEIVED = 0x013A;
-        public const ushort ATTR_CURRENTTIER59SUMMATIONRECEIVED = 0x013C;
-        public const ushort ATTR_CURRENTTIER61SUMMATIONRECEIVED = 0x013E;
-        public const ushort ATTR_CURRENTTIER63SUMMATIONRECEIVED = 0x0140;
-        public const ushort ATTR_CURRENTTIER65SUMMATIONRECEIVED = 0x0142;
-        public const ushort ATTR_CURRENTTIER67SUMMATIONRECEIVED = 0x0144;
-        public const ushort ATTR_CURRENTTIER69SUMMATIONRECEIVED = 0x0146;
-        public const ushort ATTR_CURRENTTIER71SUMMATIONRECEIVED = 0x0148;
-        public const ushort ATTR_CURRENTTIER73SUMMATIONRECEIVED = 0x014A;
-        public const ushort ATTR_CURRENTTIER75SUMMATIONRECEIVED = 0x014C;
-        public const ushort ATTR_CURRENTTIER77SUMMATIONRECEIVED = 0x014E;
-        public const ushort ATTR_CURRENTTIER79SUMMATIONRECEIVED = 0x0150;
-        public const ushort ATTR_CURRENTTIER81SUMMATIONRECEIVED = 0x0152;
-        public const ushort ATTR_CURRENTTIER83SUMMATIONRECEIVED = 0x0154;
-        public const ushort ATTR_CURRENTTIER85SUMMATIONRECEIVED = 0x0156;
-        public const ushort ATTR_CURRENTTIER87SUMMATIONRECEIVED = 0x0158;
-        public const ushort ATTR_CURRENTTIER89SUMMATIONRECEIVED = 0x015A;
-        public const ushort ATTR_CURRENTTIER91SUMMATIONRECEIVED = 0x015C;
-        public const ushort ATTR_CURRENTTIER93SUMMATIONRECEIVED = 0x015E;
-        public const ushort ATTR_CURRENTTIER95SUMMATIONRECEIVED = 0x0160;
+        public const ushort ATTR_CURRENTTIER48SUMMATIONDELIVERED = 0x015E;
+        public const ushort ATTR_CURRENTTIER1SUMMATIONRECEIVED = 0x0101;
+        public const ushort ATTR_CURRENTTIER2SUMMATIONRECEIVED = 0x0103;
+        public const ushort ATTR_CURRENTTIER3SUMMATIONRECEIVED = 0x0105;
+        public const ushort ATTR_CURRENTTIER4SUMMATIONRECEIVED = 0x0107;
+        public const ushort ATTR_CURRENTTIER5SUMMATIONRECEIVED = 0x0109;
+        public const ushort ATTR_CURRENTTIER6SUMMATIONRECEIVED = 0x010B;
+        public const ushort ATTR_CURRENTTIER7SUMMATIONRECEIVED = 0x010D;
+        public const ushort ATTR_CURRENTTIER8SUMMATIONRECEIVED = 0x010F;
+        public const ushort ATTR_CURRENTTIER9SUMMATIONRECEIVED = 0x0111;
+        public const ushort ATTR_CURRENTTIER10SUMMATIONRECEIVED = 0x0113;
+        public const ushort ATTR_CURRENTTIER11SUMMATIONRECEIVED = 0x0115;
+        public const ushort ATTR_CURRENTTIER12SUMMATIONRECEIVED = 0x0117;
+        public const ushort ATTR_CURRENTTIER13SUMMATIONRECEIVED = 0x0119;
+        public const ushort ATTR_CURRENTTIER14SUMMATIONRECEIVED = 0x011B;
+        public const ushort ATTR_CURRENTTIER15SUMMATIONRECEIVED = 0x011D;
+        public const ushort ATTR_CURRENTTIER16SUMMATIONRECEIVED = 0x011F;
+        public const ushort ATTR_CURRENTTIER17SUMMATIONRECEIVED = 0x0121;
+        public const ushort ATTR_CURRENTTIER18SUMMATIONRECEIVED = 0x0123;
+        public const ushort ATTR_CURRENTTIER19SUMMATIONRECEIVED = 0x0125;
+        public const ushort ATTR_CURRENTTIER20SUMMATIONRECEIVED = 0x0127;
+        public const ushort ATTR_CURRENTTIER21SUMMATIONRECEIVED = 0x0129;
+        public const ushort ATTR_CURRENTTIER22SUMMATIONRECEIVED = 0x012B;
+        public const ushort ATTR_CURRENTTIER23SUMMATIONRECEIVED = 0x012D;
+        public const ushort ATTR_CURRENTTIER24SUMMATIONRECEIVED = 0x012F;
+        public const ushort ATTR_CURRENTTIER25SUMMATIONRECEIVED = 0x0131;
+        public const ushort ATTR_CURRENTTIER26SUMMATIONRECEIVED = 0x0133;
+        public const ushort ATTR_CURRENTTIER27SUMMATIONRECEIVED = 0x0135;
+        public const ushort ATTR_CURRENTTIER28SUMMATIONRECEIVED = 0x0137;
+        public const ushort ATTR_CURRENTTIER29SUMMATIONRECEIVED = 0x0139;
+        public const ushort ATTR_CURRENTTIER30SUMMATIONRECEIVED = 0x013B;
+        public const ushort ATTR_CURRENTTIER31SUMMATIONRECEIVED = 0x013D;
+        public const ushort ATTR_CURRENTTIER32SUMMATIONRECEIVED = 0x013F;
+        public const ushort ATTR_CURRENTTIER33SUMMATIONRECEIVED = 0x0141;
+        public const ushort ATTR_CURRENTTIER34SUMMATIONRECEIVED = 0x0143;
+        public const ushort ATTR_CURRENTTIER35SUMMATIONRECEIVED = 0x0145;
+        public const ushort ATTR_CURRENTTIER36SUMMATIONRECEIVED = 0x0147;
+        public const ushort ATTR_CURRENTTIER37SUMMATIONRECEIVED = 0x0149;
+        public const ushort ATTR_CURRENTTIER38SUMMATIONRECEIVED = 0x014B;
+        public const ushort ATTR_CURRENTTIER39SUMMATIONRECEIVED = 0x014D;
+        public const ushort ATTR_CURRENTTIER40SUMMATIONRECEIVED = 0x014F;
+        public const ushort ATTR_CURRENTTIER41SUMMATIONRECEIVED = 0x0151;
+        public const ushort ATTR_CURRENTTIER42SUMMATIONRECEIVED = 0x0153;
+        public const ushort ATTR_CURRENTTIER43SUMMATIONRECEIVED = 0x0155;
+        public const ushort ATTR_CURRENTTIER44SUMMATIONRECEIVED = 0x0157;
+        public const ushort ATTR_CURRENTTIER45SUMMATIONRECEIVED = 0x0159;
+        public const ushort ATTR_CURRENTTIER46SUMMATIONRECEIVED = 0x015B;
+        public const ushort ATTR_CURRENTTIER47SUMMATIONRECEIVED = 0x015D;
+        public const ushort ATTR_CURRENTTIER48SUMMATIONRECEIVED = 0x015F;
 
         /// <summary>
         /// CPP1SummationDelivered represents the most recent summed value of Energy, Gas,
@@ -1359,7 +1359,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY2CONSUMPTIONDELIVERED = 0x0422;
+        public const ushort ATTR_PREVIOUSDAY2CONSUMPTIONDELIVERED = 0x0420;
+
+        /// <summary>
+        /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
+        /// or Water delivered to the premises within the previous 24 hour period starting at
+        /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
+        /// default to midnight local time.
+     /// </summary>
+        public const ushort ATTR_PREVIOUSDAY3CONSUMPTIONDELIVERED = 0x0422;
 
         /// <summary>
         /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1375,7 +1383,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY6CONSUMPTIONDELIVERED = 0x0426;
+        public const ushort ATTR_PREVIOUSDAY5CONSUMPTIONDELIVERED = 0x0426;
 
         /// <summary>
         /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1383,7 +1391,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY8CONSUMPTIONDELIVERED = 0x0428;
+        public const ushort ATTR_PREVIOUSDAY6CONSUMPTIONDELIVERED = 0x0428;
 
         /// <summary>
         /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1391,7 +1399,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY10CONSUMPTIONDELIVERED = 0x042A;
+        public const ushort ATTR_PREVIOUSDAY7CONSUMPTIONDELIVERED = 0x042A;
 
         /// <summary>
         /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1399,7 +1407,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY12CONSUMPTIONDELIVERED = 0x042C;
+        public const ushort ATTR_PREVIOUSDAY8CONSUMPTIONDELIVERED = 0x042C;
 
         /// <summary>
         /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1407,15 +1415,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY14CONSUMPTIONDELIVERED = 0x042E;
-
-        /// <summary>
-        /// PreviousDayNConsumptionDelivered represents the summed value of Energy, Gas,
-        /// or Water delivered to the premises within the previous 24 hour period starting at
-        /// the Historical Freeze Time (HFT). If the optional HFT attribute is not available,
-        /// default to midnight local time.
-     /// </summary>
-        public const ushort ATTR_PREVIOUSDAY16CONSUMPTIONDELIVERED = 0x0430;
+        public const ushort ATTR_PREVIOUSDAY9CONSUMPTIONDELIVERED = 0x042E;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1423,7 +1423,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY2CONSUMPTIONRECEIVED = 0x0423;
+        public const ushort ATTR_PREVIOUSDAY2CONSUMPTIONRECEIVED = 0x0421;
+
+        /// <summary>
+        /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
+        /// Water received from the premises within the previous 24 hour period starting at the
+        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
+        /// default to midnight local time.
+     /// </summary>
+        public const ushort ATTR_PREVIOUSDAY3CONSUMPTIONRECEIVED = 0x0423;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1439,7 +1447,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY6CONSUMPTIONRECEIVED = 0x0427;
+        public const ushort ATTR_PREVIOUSDAY5CONSUMPTIONRECEIVED = 0x0427;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1447,7 +1455,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY8CONSUMPTIONRECEIVED = 0x0429;
+        public const ushort ATTR_PREVIOUSDAY6CONSUMPTIONRECEIVED = 0x0429;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1455,7 +1463,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY10CONSUMPTIONRECEIVED = 0x042B;
+        public const ushort ATTR_PREVIOUSDAY7CONSUMPTIONRECEIVED = 0x042B;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1463,7 +1471,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY12CONSUMPTIONRECEIVED = 0x042D;
+        public const ushort ATTR_PREVIOUSDAY8CONSUMPTIONRECEIVED = 0x042D;
 
         /// <summary>
         /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
@@ -1471,15 +1479,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY14CONSUMPTIONRECEIVED = 0x042F;
-
-        /// <summary>
-        /// PreviousDayNConsumptionReceived represents the summed value of Energy, Gas, or
-        /// Water received from the premises within the previous 24 hour period starting at the
-        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
-        /// default to midnight local time.
-     /// </summary>
-        public const ushort ATTR_PREVIOUSDAY16CONSUMPTIONRECEIVED = 0x0431;
+        public const ushort ATTR_PREVIOUSDAY9CONSUMPTIONRECEIVED = 0x042F;
 
         /// <summary>
         /// CurrentWeekConsumptionDelivered represents the summed value of Energy, Gas, or
@@ -1505,7 +1505,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK1CONSUMPTIONDELIVERED = 0x0433;
+        public const ushort ATTR_PREVIOUSWEEK1CONSUMPTIONDELIVERED = 0x0432;
 
         /// <summary>
         /// PreviousWeekNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1513,7 +1513,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK3CONSUMPTIONDELIVERED = 0x0435;
+        public const ushort ATTR_PREVIOUSWEEK2CONSUMPTIONDELIVERED = 0x0434;
 
         /// <summary>
         /// PreviousWeekNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1521,7 +1521,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK5CONSUMPTIONDELIVERED = 0x0437;
+        public const ushort ATTR_PREVIOUSWEEK3CONSUMPTIONDELIVERED = 0x0436;
 
         /// <summary>
         /// PreviousWeekNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1529,7 +1529,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK7CONSUMPTIONDELIVERED = 0x0439;
+        public const ushort ATTR_PREVIOUSWEEK4CONSUMPTIONDELIVERED = 0x0438;
 
         /// <summary>
         /// PreviousWeekNConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1537,7 +1537,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK9CONSUMPTIONDELIVERED = 0x043B;
+        public const ushort ATTR_PREVIOUSWEEK5CONSUMPTIONDELIVERED = 0x043A;
 
         /// <summary>
         /// PreviousWeekNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1545,7 +1545,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK1CONSUMPTIONRECEIVED = 0x0434;
+        public const ushort ATTR_PREVIOUSWEEK1CONSUMPTIONRECEIVED = 0x0433;
 
         /// <summary>
         /// PreviousWeekNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1553,7 +1553,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK3CONSUMPTIONRECEIVED = 0x0436;
+        public const ushort ATTR_PREVIOUSWEEK2CONSUMPTIONRECEIVED = 0x0435;
 
         /// <summary>
         /// PreviousWeekNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1561,7 +1561,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK5CONSUMPTIONRECEIVED = 0x0438;
+        public const ushort ATTR_PREVIOUSWEEK3CONSUMPTIONRECEIVED = 0x0437;
 
         /// <summary>
         /// PreviousWeekNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1569,7 +1569,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK7CONSUMPTIONRECEIVED = 0x043A;
+        public const ushort ATTR_PREVIOUSWEEK4CONSUMPTIONRECEIVED = 0x0439;
 
         /// <summary>
         /// PreviousWeekNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1577,7 +1577,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK9CONSUMPTIONRECEIVED = 0x043C;
+        public const ushort ATTR_PREVIOUSWEEK5CONSUMPTIONRECEIVED = 0x043B;
 
         /// <summary>
         /// CurrentMonthConsumptionDelivered represents the summed value of Energy, Gas,
@@ -1606,7 +1606,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH1CONSUMPTIONDELIVERED = 0x0443;
+        public const ushort ATTR_PREVIOUSMONTH1CONSUMPTIONDELIVERED = 0x0442;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1615,7 +1615,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH3CONSUMPTIONDELIVERED = 0x0445;
+        public const ushort ATTR_PREVIOUSMONTH2CONSUMPTIONDELIVERED = 0x0444;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1624,7 +1624,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH5CONSUMPTIONDELIVERED = 0x0447;
+        public const ushort ATTR_PREVIOUSMONTH3CONSUMPTIONDELIVERED = 0x0446;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1633,7 +1633,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH7CONSUMPTIONDELIVERED = 0x0449;
+        public const ushort ATTR_PREVIOUSMONTH4CONSUMPTIONDELIVERED = 0x0448;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1642,7 +1642,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH9CONSUMPTIONDELIVERED = 0x044B;
+        public const ushort ATTR_PREVIOUSMONTH5CONSUMPTIONDELIVERED = 0x044A;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1651,7 +1651,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH11CONSUMPTIONDELIVERED = 0x044D;
+        public const ushort ATTR_PREVIOUSMONTH6CONSUMPTIONDELIVERED = 0x044C;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1660,7 +1660,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH13CONSUMPTIONDELIVERED = 0x044F;
+        public const ushort ATTR_PREVIOUSMONTH7CONSUMPTIONDELIVERED = 0x044E;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1669,7 +1669,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH15CONSUMPTIONDELIVERED = 0x0451;
+        public const ushort ATTR_PREVIOUSMONTH8CONSUMPTIONDELIVERED = 0x0450;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1678,7 +1678,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH17CONSUMPTIONDELIVERED = 0x0453;
+        public const ushort ATTR_PREVIOUSMONTH9CONSUMPTIONDELIVERED = 0x0452;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1687,7 +1687,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH19CONSUMPTIONDELIVERED = 0x0455;
+        public const ushort ATTR_PREVIOUSMONTH10CONSUMPTIONDELIVERED = 0x0454;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1696,7 +1696,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH21CONSUMPTIONDELIVERED = 0x0457;
+        public const ushort ATTR_PREVIOUSMONTH11CONSUMPTIONDELIVERED = 0x0456;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1705,7 +1705,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH23CONSUMPTIONDELIVERED = 0x0459;
+        public const ushort ATTR_PREVIOUSMONTH12CONSUMPTIONDELIVERED = 0x0458;
 
         /// <summary>
         /// PreviousMonthNConsumptionDelivered represents the summed value of Energy,
@@ -1714,7 +1714,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// month. If the optional HFT attribute is not available, default to midnight local
         /// time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH25CONSUMPTIONDELIVERED = 0x045B;
+        public const ushort ATTR_PREVIOUSMONTH13CONSUMPTIONDELIVERED = 0x045A;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1722,7 +1722,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH1CONSUMPTIONRECEIVED = 0x0444;
+        public const ushort ATTR_PREVIOUSMONTH1CONSUMPTIONRECEIVED = 0x0443;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1730,7 +1730,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH3CONSUMPTIONRECEIVED = 0x0446;
+        public const ushort ATTR_PREVIOUSMONTH2CONSUMPTIONRECEIVED = 0x0445;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1738,7 +1738,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH5CONSUMPTIONRECEIVED = 0x0448;
+        public const ushort ATTR_PREVIOUSMONTH3CONSUMPTIONRECEIVED = 0x0447;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1746,7 +1746,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH7CONSUMPTIONRECEIVED = 0x044A;
+        public const ushort ATTR_PREVIOUSMONTH4CONSUMPTIONRECEIVED = 0x0449;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1754,7 +1754,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH9CONSUMPTIONRECEIVED = 0x044C;
+        public const ushort ATTR_PREVIOUSMONTH5CONSUMPTIONRECEIVED = 0x044B;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1762,7 +1762,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH11CONSUMPTIONRECEIVED = 0x044E;
+        public const ushort ATTR_PREVIOUSMONTH6CONSUMPTIONRECEIVED = 0x044D;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1770,7 +1770,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH13CONSUMPTIONRECEIVED = 0x0450;
+        public const ushort ATTR_PREVIOUSMONTH7CONSUMPTIONRECEIVED = 0x044F;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1778,7 +1778,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH15CONSUMPTIONRECEIVED = 0x0452;
+        public const ushort ATTR_PREVIOUSMONTH8CONSUMPTIONRECEIVED = 0x0451;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1786,7 +1786,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH17CONSUMPTIONRECEIVED = 0x0454;
+        public const ushort ATTR_PREVIOUSMONTH9CONSUMPTIONRECEIVED = 0x0453;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1794,7 +1794,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH19CONSUMPTIONRECEIVED = 0x0456;
+        public const ushort ATTR_PREVIOUSMONTH10CONSUMPTIONRECEIVED = 0x0455;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1802,7 +1802,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH21CONSUMPTIONRECEIVED = 0x0458;
+        public const ushort ATTR_PREVIOUSMONTH11CONSUMPTIONRECEIVED = 0x0457;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1810,7 +1810,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH23CONSUMPTIONRECEIVED = 0x045A;
+        public const ushort ATTR_PREVIOUSMONTH12CONSUMPTIONRECEIVED = 0x0459;
 
         /// <summary>
         /// PreviousMonthNConsumptionReceived represents the summed value of Energy, Gas,
@@ -1818,7 +1818,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// the Historical Freeze Time (HFT) on the 1st of the month to the last day of the month.
         /// If the optional HFT attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSMONTH25CONSUMPTIONRECEIVED = 0x045C;
+        public const ushort ATTR_PREVIOUSMONTH13CONSUMPTIONRECEIVED = 0x045B;
 
         /// <summary>
         /// HistoricalFreezeTime (HFT) represents the time of day, in Local Time, when
@@ -1906,262 +1906,262 @@ namespace ZigBeeNet.ZCL.Clusters
         /// following detection of an uncontrolled flow event within the metering device.
         /// </summary>
         public const ushort ATTR_SUPPLYUNCONTROLLEDFLOWSTATE = 0x0609;
-        public const ushort ATTR_CURRENTNOTIERBLOCK1SUMMATIONDELIVERED = 0x0701;
-        public const ushort ATTR_CURRENTNOTIERBLOCK2SUMMATIONDELIVERED = 0x0702;
-        public const ushort ATTR_CURRENTNOTIERBLOCK3SUMMATIONDELIVERED = 0x0703;
-        public const ushort ATTR_CURRENTNOTIERBLOCK4SUMMATIONDELIVERED = 0x0704;
-        public const ushort ATTR_CURRENTNOTIERBLOCK5SUMMATIONDELIVERED = 0x0705;
-        public const ushort ATTR_CURRENTNOTIERBLOCK6SUMMATIONDELIVERED = 0x0706;
-        public const ushort ATTR_CURRENTNOTIERBLOCK7SUMMATIONDELIVERED = 0x0707;
-        public const ushort ATTR_CURRENTNOTIERBLOCK8SUMMATIONDELIVERED = 0x0708;
-        public const ushort ATTR_CURRENTNOTIERBLOCK9SUMMATIONDELIVERED = 0x0709;
-        public const ushort ATTR_CURRENTNOTIERBLOCK10SUMMATIONDELIVERED = 0x070A;
-        public const ushort ATTR_CURRENTNOTIERBLOCK11SUMMATIONDELIVERED = 0x070B;
-        public const ushort ATTR_CURRENTNOTIERBLOCK12SUMMATIONDELIVERED = 0x070C;
-        public const ushort ATTR_CURRENTNOTIERBLOCK13SUMMATIONDELIVERED = 0x070D;
-        public const ushort ATTR_CURRENTNOTIERBLOCK14SUMMATIONDELIVERED = 0x070E;
-        public const ushort ATTR_CURRENTNOTIERBLOCK15SUMMATIONDELIVERED = 0x070F;
-        public const ushort ATTR_CURRENTNOTIERBLOCK16SUMMATIONDELIVERED = 0x0710;
-        public const ushort ATTR_CURRENTTIER1BLOCK1SUMMATIONDELIVERED = 0x0711;
-        public const ushort ATTR_CURRENTTIER1BLOCK2SUMMATIONDELIVERED = 0x0712;
-        public const ushort ATTR_CURRENTTIER1BLOCK3SUMMATIONDELIVERED = 0x0713;
-        public const ushort ATTR_CURRENTTIER1BLOCK4SUMMATIONDELIVERED = 0x0714;
-        public const ushort ATTR_CURRENTTIER1BLOCK5SUMMATIONDELIVERED = 0x0715;
-        public const ushort ATTR_CURRENTTIER1BLOCK6SUMMATIONDELIVERED = 0x0716;
-        public const ushort ATTR_CURRENTTIER1BLOCK7SUMMATIONDELIVERED = 0x0717;
-        public const ushort ATTR_CURRENTTIER1BLOCK8SUMMATIONDELIVERED = 0x0718;
-        public const ushort ATTR_CURRENTTIER1BLOCK9SUMMATIONDELIVERED = 0x0719;
-        public const ushort ATTR_CURRENTTIER1BLOCK10SUMMATIONDELIVERED = 0x071A;
-        public const ushort ATTR_CURRENTTIER1BLOCK11SUMMATIONDELIVERED = 0x071B;
-        public const ushort ATTR_CURRENTTIER1BLOCK12SUMMATIONDELIVERED = 0x071C;
-        public const ushort ATTR_CURRENTTIER1BLOCK13SUMMATIONDELIVERED = 0x071D;
-        public const ushort ATTR_CURRENTTIER1BLOCK14SUMMATIONDELIVERED = 0x071E;
-        public const ushort ATTR_CURRENTTIER1BLOCK15SUMMATIONDELIVERED = 0x071F;
-        public const ushort ATTR_CURRENTTIER1BLOCK16SUMMATIONDELIVERED = 0x0720;
-        public const ushort ATTR_CURRENTTIER2BLOCK1SUMMATIONDELIVERED = 0x0721;
-        public const ushort ATTR_CURRENTTIER2BLOCK2SUMMATIONDELIVERED = 0x0722;
-        public const ushort ATTR_CURRENTTIER2BLOCK3SUMMATIONDELIVERED = 0x0723;
-        public const ushort ATTR_CURRENTTIER2BLOCK4SUMMATIONDELIVERED = 0x0724;
-        public const ushort ATTR_CURRENTTIER2BLOCK5SUMMATIONDELIVERED = 0x0725;
-        public const ushort ATTR_CURRENTTIER2BLOCK6SUMMATIONDELIVERED = 0x0726;
-        public const ushort ATTR_CURRENTTIER2BLOCK7SUMMATIONDELIVERED = 0x0727;
-        public const ushort ATTR_CURRENTTIER2BLOCK8SUMMATIONDELIVERED = 0x0728;
-        public const ushort ATTR_CURRENTTIER2BLOCK9SUMMATIONDELIVERED = 0x0729;
-        public const ushort ATTR_CURRENTTIER2BLOCK10SUMMATIONDELIVERED = 0x072A;
-        public const ushort ATTR_CURRENTTIER2BLOCK11SUMMATIONDELIVERED = 0x072B;
-        public const ushort ATTR_CURRENTTIER2BLOCK12SUMMATIONDELIVERED = 0x072C;
-        public const ushort ATTR_CURRENTTIER2BLOCK13SUMMATIONDELIVERED = 0x072D;
-        public const ushort ATTR_CURRENTTIER2BLOCK14SUMMATIONDELIVERED = 0x072E;
-        public const ushort ATTR_CURRENTTIER2BLOCK15SUMMATIONDELIVERED = 0x072F;
-        public const ushort ATTR_CURRENTTIER2BLOCK16SUMMATIONDELIVERED = 0x0730;
-        public const ushort ATTR_CURRENTTIER3BLOCK1SUMMATIONDELIVERED = 0x0731;
-        public const ushort ATTR_CURRENTTIER3BLOCK2SUMMATIONDELIVERED = 0x0732;
-        public const ushort ATTR_CURRENTTIER3BLOCK3SUMMATIONDELIVERED = 0x0733;
-        public const ushort ATTR_CURRENTTIER3BLOCK4SUMMATIONDELIVERED = 0x0734;
-        public const ushort ATTR_CURRENTTIER3BLOCK5SUMMATIONDELIVERED = 0x0735;
-        public const ushort ATTR_CURRENTTIER3BLOCK6SUMMATIONDELIVERED = 0x0736;
-        public const ushort ATTR_CURRENTTIER3BLOCK7SUMMATIONDELIVERED = 0x0737;
-        public const ushort ATTR_CURRENTTIER3BLOCK8SUMMATIONDELIVERED = 0x0738;
-        public const ushort ATTR_CURRENTTIER3BLOCK9SUMMATIONDELIVERED = 0x0739;
-        public const ushort ATTR_CURRENTTIER3BLOCK10SUMMATIONDELIVERED = 0x073A;
-        public const ushort ATTR_CURRENTTIER3BLOCK11SUMMATIONDELIVERED = 0x073B;
-        public const ushort ATTR_CURRENTTIER3BLOCK12SUMMATIONDELIVERED = 0x073C;
-        public const ushort ATTR_CURRENTTIER3BLOCK13SUMMATIONDELIVERED = 0x073D;
-        public const ushort ATTR_CURRENTTIER3BLOCK14SUMMATIONDELIVERED = 0x073E;
-        public const ushort ATTR_CURRENTTIER3BLOCK15SUMMATIONDELIVERED = 0x073F;
-        public const ushort ATTR_CURRENTTIER3BLOCK16SUMMATIONDELIVERED = 0x0740;
-        public const ushort ATTR_CURRENTTIER4BLOCK1SUMMATIONDELIVERED = 0x0741;
-        public const ushort ATTR_CURRENTTIER4BLOCK2SUMMATIONDELIVERED = 0x0742;
-        public const ushort ATTR_CURRENTTIER4BLOCK3SUMMATIONDELIVERED = 0x0743;
-        public const ushort ATTR_CURRENTTIER4BLOCK4SUMMATIONDELIVERED = 0x0744;
-        public const ushort ATTR_CURRENTTIER4BLOCK5SUMMATIONDELIVERED = 0x0745;
-        public const ushort ATTR_CURRENTTIER4BLOCK6SUMMATIONDELIVERED = 0x0746;
-        public const ushort ATTR_CURRENTTIER4BLOCK7SUMMATIONDELIVERED = 0x0747;
-        public const ushort ATTR_CURRENTTIER4BLOCK8SUMMATIONDELIVERED = 0x0748;
-        public const ushort ATTR_CURRENTTIER4BLOCK9SUMMATIONDELIVERED = 0x0749;
-        public const ushort ATTR_CURRENTTIER4BLOCK10SUMMATIONDELIVERED = 0x074A;
-        public const ushort ATTR_CURRENTTIER4BLOCK11SUMMATIONDELIVERED = 0x074B;
-        public const ushort ATTR_CURRENTTIER4BLOCK12SUMMATIONDELIVERED = 0x074C;
-        public const ushort ATTR_CURRENTTIER4BLOCK13SUMMATIONDELIVERED = 0x074D;
-        public const ushort ATTR_CURRENTTIER4BLOCK14SUMMATIONDELIVERED = 0x074E;
-        public const ushort ATTR_CURRENTTIER4BLOCK15SUMMATIONDELIVERED = 0x074F;
-        public const ushort ATTR_CURRENTTIER4BLOCK16SUMMATIONDELIVERED = 0x0750;
-        public const ushort ATTR_CURRENTTIER5BLOCK1SUMMATIONDELIVERED = 0x0751;
-        public const ushort ATTR_CURRENTTIER5BLOCK2SUMMATIONDELIVERED = 0x0752;
-        public const ushort ATTR_CURRENTTIER5BLOCK3SUMMATIONDELIVERED = 0x0753;
-        public const ushort ATTR_CURRENTTIER5BLOCK4SUMMATIONDELIVERED = 0x0754;
-        public const ushort ATTR_CURRENTTIER5BLOCK5SUMMATIONDELIVERED = 0x0755;
-        public const ushort ATTR_CURRENTTIER5BLOCK6SUMMATIONDELIVERED = 0x0756;
-        public const ushort ATTR_CURRENTTIER5BLOCK7SUMMATIONDELIVERED = 0x0757;
-        public const ushort ATTR_CURRENTTIER5BLOCK8SUMMATIONDELIVERED = 0x0758;
-        public const ushort ATTR_CURRENTTIER5BLOCK9SUMMATIONDELIVERED = 0x0759;
-        public const ushort ATTR_CURRENTTIER5BLOCK10SUMMATIONDELIVERED = 0x075A;
-        public const ushort ATTR_CURRENTTIER5BLOCK11SUMMATIONDELIVERED = 0x075B;
-        public const ushort ATTR_CURRENTTIER5BLOCK12SUMMATIONDELIVERED = 0x075C;
-        public const ushort ATTR_CURRENTTIER5BLOCK13SUMMATIONDELIVERED = 0x075D;
-        public const ushort ATTR_CURRENTTIER5BLOCK14SUMMATIONDELIVERED = 0x075E;
-        public const ushort ATTR_CURRENTTIER5BLOCK15SUMMATIONDELIVERED = 0x075F;
-        public const ushort ATTR_CURRENTTIER5BLOCK16SUMMATIONDELIVERED = 0x0760;
-        public const ushort ATTR_CURRENTTIER6BLOCK1SUMMATIONDELIVERED = 0x0761;
-        public const ushort ATTR_CURRENTTIER6BLOCK2SUMMATIONDELIVERED = 0x0762;
-        public const ushort ATTR_CURRENTTIER6BLOCK3SUMMATIONDELIVERED = 0x0763;
-        public const ushort ATTR_CURRENTTIER6BLOCK4SUMMATIONDELIVERED = 0x0764;
-        public const ushort ATTR_CURRENTTIER6BLOCK5SUMMATIONDELIVERED = 0x0765;
-        public const ushort ATTR_CURRENTTIER6BLOCK6SUMMATIONDELIVERED = 0x0766;
-        public const ushort ATTR_CURRENTTIER6BLOCK7SUMMATIONDELIVERED = 0x0767;
-        public const ushort ATTR_CURRENTTIER6BLOCK8SUMMATIONDELIVERED = 0x0768;
-        public const ushort ATTR_CURRENTTIER6BLOCK9SUMMATIONDELIVERED = 0x0769;
-        public const ushort ATTR_CURRENTTIER6BLOCK10SUMMATIONDELIVERED = 0x076A;
-        public const ushort ATTR_CURRENTTIER6BLOCK11SUMMATIONDELIVERED = 0x076B;
-        public const ushort ATTR_CURRENTTIER6BLOCK12SUMMATIONDELIVERED = 0x076C;
-        public const ushort ATTR_CURRENTTIER6BLOCK13SUMMATIONDELIVERED = 0x076D;
-        public const ushort ATTR_CURRENTTIER6BLOCK14SUMMATIONDELIVERED = 0x076E;
-        public const ushort ATTR_CURRENTTIER6BLOCK15SUMMATIONDELIVERED = 0x076F;
-        public const ushort ATTR_CURRENTTIER6BLOCK16SUMMATIONDELIVERED = 0x0770;
-        public const ushort ATTR_CURRENTTIER7BLOCK1SUMMATIONDELIVERED = 0x0771;
-        public const ushort ATTR_CURRENTTIER7BLOCK2SUMMATIONDELIVERED = 0x0772;
-        public const ushort ATTR_CURRENTTIER7BLOCK3SUMMATIONDELIVERED = 0x0773;
-        public const ushort ATTR_CURRENTTIER7BLOCK4SUMMATIONDELIVERED = 0x0774;
-        public const ushort ATTR_CURRENTTIER7BLOCK5SUMMATIONDELIVERED = 0x0775;
-        public const ushort ATTR_CURRENTTIER7BLOCK6SUMMATIONDELIVERED = 0x0776;
-        public const ushort ATTR_CURRENTTIER7BLOCK7SUMMATIONDELIVERED = 0x0777;
-        public const ushort ATTR_CURRENTTIER7BLOCK8SUMMATIONDELIVERED = 0x0778;
-        public const ushort ATTR_CURRENTTIER7BLOCK9SUMMATIONDELIVERED = 0x0779;
-        public const ushort ATTR_CURRENTTIER7BLOCK10SUMMATIONDELIVERED = 0x077A;
-        public const ushort ATTR_CURRENTTIER7BLOCK11SUMMATIONDELIVERED = 0x077B;
-        public const ushort ATTR_CURRENTTIER7BLOCK12SUMMATIONDELIVERED = 0x077C;
-        public const ushort ATTR_CURRENTTIER7BLOCK13SUMMATIONDELIVERED = 0x077D;
-        public const ushort ATTR_CURRENTTIER7BLOCK14SUMMATIONDELIVERED = 0x077E;
-        public const ushort ATTR_CURRENTTIER7BLOCK15SUMMATIONDELIVERED = 0x077F;
-        public const ushort ATTR_CURRENTTIER7BLOCK16SUMMATIONDELIVERED = 0x0780;
-        public const ushort ATTR_CURRENTTIER8BLOCK1SUMMATIONDELIVERED = 0x0781;
-        public const ushort ATTR_CURRENTTIER8BLOCK2SUMMATIONDELIVERED = 0x0782;
-        public const ushort ATTR_CURRENTTIER8BLOCK3SUMMATIONDELIVERED = 0x0783;
-        public const ushort ATTR_CURRENTTIER8BLOCK4SUMMATIONDELIVERED = 0x0784;
-        public const ushort ATTR_CURRENTTIER8BLOCK5SUMMATIONDELIVERED = 0x0785;
-        public const ushort ATTR_CURRENTTIER8BLOCK6SUMMATIONDELIVERED = 0x0786;
-        public const ushort ATTR_CURRENTTIER8BLOCK7SUMMATIONDELIVERED = 0x0787;
-        public const ushort ATTR_CURRENTTIER8BLOCK8SUMMATIONDELIVERED = 0x0788;
-        public const ushort ATTR_CURRENTTIER8BLOCK9SUMMATIONDELIVERED = 0x0789;
-        public const ushort ATTR_CURRENTTIER8BLOCK10SUMMATIONDELIVERED = 0x078A;
-        public const ushort ATTR_CURRENTTIER8BLOCK11SUMMATIONDELIVERED = 0x078B;
-        public const ushort ATTR_CURRENTTIER8BLOCK12SUMMATIONDELIVERED = 0x078C;
-        public const ushort ATTR_CURRENTTIER8BLOCK13SUMMATIONDELIVERED = 0x078D;
-        public const ushort ATTR_CURRENTTIER8BLOCK14SUMMATIONDELIVERED = 0x078E;
-        public const ushort ATTR_CURRENTTIER8BLOCK15SUMMATIONDELIVERED = 0x078F;
-        public const ushort ATTR_CURRENTTIER8BLOCK16SUMMATIONDELIVERED = 0x0790;
-        public const ushort ATTR_CURRENTTIER9BLOCK1SUMMATIONDELIVERED = 0x0791;
-        public const ushort ATTR_CURRENTTIER9BLOCK2SUMMATIONDELIVERED = 0x0792;
-        public const ushort ATTR_CURRENTTIER9BLOCK3SUMMATIONDELIVERED = 0x0793;
-        public const ushort ATTR_CURRENTTIER9BLOCK4SUMMATIONDELIVERED = 0x0794;
-        public const ushort ATTR_CURRENTTIER9BLOCK5SUMMATIONDELIVERED = 0x0795;
-        public const ushort ATTR_CURRENTTIER9BLOCK6SUMMATIONDELIVERED = 0x0796;
-        public const ushort ATTR_CURRENTTIER9BLOCK7SUMMATIONDELIVERED = 0x0797;
-        public const ushort ATTR_CURRENTTIER9BLOCK8SUMMATIONDELIVERED = 0x0798;
-        public const ushort ATTR_CURRENTTIER9BLOCK9SUMMATIONDELIVERED = 0x0799;
-        public const ushort ATTR_CURRENTTIER9BLOCK10SUMMATIONDELIVERED = 0x079A;
-        public const ushort ATTR_CURRENTTIER9BLOCK11SUMMATIONDELIVERED = 0x079B;
-        public const ushort ATTR_CURRENTTIER9BLOCK12SUMMATIONDELIVERED = 0x079C;
-        public const ushort ATTR_CURRENTTIER9BLOCK13SUMMATIONDELIVERED = 0x079D;
-        public const ushort ATTR_CURRENTTIER9BLOCK14SUMMATIONDELIVERED = 0x079E;
-        public const ushort ATTR_CURRENTTIER9BLOCK15SUMMATIONDELIVERED = 0x079F;
-        public const ushort ATTR_CURRENTTIER9BLOCK16SUMMATIONDELIVERED = 0x07A0;
-        public const ushort ATTR_CURRENTTIER10BLOCK1SUMMATIONDELIVERED = 0x07A1;
-        public const ushort ATTR_CURRENTTIER10BLOCK2SUMMATIONDELIVERED = 0x07A2;
-        public const ushort ATTR_CURRENTTIER10BLOCK3SUMMATIONDELIVERED = 0x07A3;
-        public const ushort ATTR_CURRENTTIER10BLOCK4SUMMATIONDELIVERED = 0x07A4;
-        public const ushort ATTR_CURRENTTIER10BLOCK5SUMMATIONDELIVERED = 0x07A5;
-        public const ushort ATTR_CURRENTTIER10BLOCK6SUMMATIONDELIVERED = 0x07A6;
-        public const ushort ATTR_CURRENTTIER10BLOCK7SUMMATIONDELIVERED = 0x07A7;
-        public const ushort ATTR_CURRENTTIER10BLOCK8SUMMATIONDELIVERED = 0x07A8;
-        public const ushort ATTR_CURRENTTIER10BLOCK9SUMMATIONDELIVERED = 0x07A9;
-        public const ushort ATTR_CURRENTTIER10BLOCK10SUMMATIONDELIVERED = 0x07AA;
-        public const ushort ATTR_CURRENTTIER10BLOCK11SUMMATIONDELIVERED = 0x07AB;
-        public const ushort ATTR_CURRENTTIER10BLOCK12SUMMATIONDELIVERED = 0x07AC;
-        public const ushort ATTR_CURRENTTIER10BLOCK13SUMMATIONDELIVERED = 0x07AD;
-        public const ushort ATTR_CURRENTTIER10BLOCK14SUMMATIONDELIVERED = 0x07AE;
-        public const ushort ATTR_CURRENTTIER10BLOCK15SUMMATIONDELIVERED = 0x07AF;
-        public const ushort ATTR_CURRENTTIER10BLOCK16SUMMATIONDELIVERED = 0x07B0;
-        public const ushort ATTR_CURRENTTIER11BLOCK1SUMMATIONDELIVERED = 0x07B1;
-        public const ushort ATTR_CURRENTTIER11BLOCK2SUMMATIONDELIVERED = 0x07B2;
-        public const ushort ATTR_CURRENTTIER11BLOCK3SUMMATIONDELIVERED = 0x07B3;
-        public const ushort ATTR_CURRENTTIER11BLOCK4SUMMATIONDELIVERED = 0x07B4;
-        public const ushort ATTR_CURRENTTIER11BLOCK5SUMMATIONDELIVERED = 0x07B5;
-        public const ushort ATTR_CURRENTTIER11BLOCK6SUMMATIONDELIVERED = 0x07B6;
-        public const ushort ATTR_CURRENTTIER11BLOCK7SUMMATIONDELIVERED = 0x07B7;
-        public const ushort ATTR_CURRENTTIER11BLOCK8SUMMATIONDELIVERED = 0x07B8;
-        public const ushort ATTR_CURRENTTIER11BLOCK9SUMMATIONDELIVERED = 0x07B9;
-        public const ushort ATTR_CURRENTTIER11BLOCK10SUMMATIONDELIVERED = 0x07BA;
-        public const ushort ATTR_CURRENTTIER11BLOCK11SUMMATIONDELIVERED = 0x07BB;
-        public const ushort ATTR_CURRENTTIER11BLOCK12SUMMATIONDELIVERED = 0x07BC;
-        public const ushort ATTR_CURRENTTIER11BLOCK13SUMMATIONDELIVERED = 0x07BD;
-        public const ushort ATTR_CURRENTTIER11BLOCK14SUMMATIONDELIVERED = 0x07BE;
-        public const ushort ATTR_CURRENTTIER11BLOCK15SUMMATIONDELIVERED = 0x07BF;
-        public const ushort ATTR_CURRENTTIER11BLOCK16SUMMATIONDELIVERED = 0x07C0;
-        public const ushort ATTR_CURRENTTIER12BLOCK1SUMMATIONDELIVERED = 0x07C1;
-        public const ushort ATTR_CURRENTTIER12BLOCK2SUMMATIONDELIVERED = 0x07C2;
-        public const ushort ATTR_CURRENTTIER12BLOCK3SUMMATIONDELIVERED = 0x07C3;
-        public const ushort ATTR_CURRENTTIER12BLOCK4SUMMATIONDELIVERED = 0x07C4;
-        public const ushort ATTR_CURRENTTIER12BLOCK5SUMMATIONDELIVERED = 0x07C5;
-        public const ushort ATTR_CURRENTTIER12BLOCK6SUMMATIONDELIVERED = 0x07C6;
-        public const ushort ATTR_CURRENTTIER12BLOCK7SUMMATIONDELIVERED = 0x07C7;
-        public const ushort ATTR_CURRENTTIER12BLOCK8SUMMATIONDELIVERED = 0x07C8;
-        public const ushort ATTR_CURRENTTIER12BLOCK9SUMMATIONDELIVERED = 0x07C9;
-        public const ushort ATTR_CURRENTTIER12BLOCK10SUMMATIONDELIVERED = 0x07CA;
-        public const ushort ATTR_CURRENTTIER12BLOCK11SUMMATIONDELIVERED = 0x07CB;
-        public const ushort ATTR_CURRENTTIER12BLOCK12SUMMATIONDELIVERED = 0x07CC;
-        public const ushort ATTR_CURRENTTIER12BLOCK13SUMMATIONDELIVERED = 0x07CD;
-        public const ushort ATTR_CURRENTTIER12BLOCK14SUMMATIONDELIVERED = 0x07CE;
-        public const ushort ATTR_CURRENTTIER12BLOCK15SUMMATIONDELIVERED = 0x07CF;
-        public const ushort ATTR_CURRENTTIER12BLOCK16SUMMATIONDELIVERED = 0x07D0;
-        public const ushort ATTR_CURRENTTIER13BLOCK1SUMMATIONDELIVERED = 0x07D1;
-        public const ushort ATTR_CURRENTTIER13BLOCK2SUMMATIONDELIVERED = 0x07D2;
-        public const ushort ATTR_CURRENTTIER13BLOCK3SUMMATIONDELIVERED = 0x07D3;
-        public const ushort ATTR_CURRENTTIER13BLOCK4SUMMATIONDELIVERED = 0x07D4;
-        public const ushort ATTR_CURRENTTIER13BLOCK5SUMMATIONDELIVERED = 0x07D5;
-        public const ushort ATTR_CURRENTTIER13BLOCK6SUMMATIONDELIVERED = 0x07D6;
-        public const ushort ATTR_CURRENTTIER13BLOCK7SUMMATIONDELIVERED = 0x07D7;
-        public const ushort ATTR_CURRENTTIER13BLOCK8SUMMATIONDELIVERED = 0x07D8;
-        public const ushort ATTR_CURRENTTIER13BLOCK9SUMMATIONDELIVERED = 0x07D9;
-        public const ushort ATTR_CURRENTTIER13BLOCK10SUMMATIONDELIVERED = 0x07DA;
-        public const ushort ATTR_CURRENTTIER13BLOCK11SUMMATIONDELIVERED = 0x07DB;
-        public const ushort ATTR_CURRENTTIER13BLOCK12SUMMATIONDELIVERED = 0x07DC;
-        public const ushort ATTR_CURRENTTIER13BLOCK13SUMMATIONDELIVERED = 0x07DD;
-        public const ushort ATTR_CURRENTTIER13BLOCK14SUMMATIONDELIVERED = 0x07DE;
-        public const ushort ATTR_CURRENTTIER13BLOCK15SUMMATIONDELIVERED = 0x07DF;
-        public const ushort ATTR_CURRENTTIER13BLOCK16SUMMATIONDELIVERED = 0x07E0;
-        public const ushort ATTR_CURRENTTIER14BLOCK1SUMMATIONDELIVERED = 0x07E1;
-        public const ushort ATTR_CURRENTTIER14BLOCK2SUMMATIONDELIVERED = 0x07E2;
-        public const ushort ATTR_CURRENTTIER14BLOCK3SUMMATIONDELIVERED = 0x07E3;
-        public const ushort ATTR_CURRENTTIER14BLOCK4SUMMATIONDELIVERED = 0x07E4;
-        public const ushort ATTR_CURRENTTIER14BLOCK5SUMMATIONDELIVERED = 0x07E5;
-        public const ushort ATTR_CURRENTTIER14BLOCK6SUMMATIONDELIVERED = 0x07E6;
-        public const ushort ATTR_CURRENTTIER14BLOCK7SUMMATIONDELIVERED = 0x07E7;
-        public const ushort ATTR_CURRENTTIER14BLOCK8SUMMATIONDELIVERED = 0x07E8;
-        public const ushort ATTR_CURRENTTIER14BLOCK9SUMMATIONDELIVERED = 0x07E9;
-        public const ushort ATTR_CURRENTTIER14BLOCK10SUMMATIONDELIVERED = 0x07EA;
-        public const ushort ATTR_CURRENTTIER14BLOCK11SUMMATIONDELIVERED = 0x07EB;
-        public const ushort ATTR_CURRENTTIER14BLOCK12SUMMATIONDELIVERED = 0x07EC;
-        public const ushort ATTR_CURRENTTIER14BLOCK13SUMMATIONDELIVERED = 0x07ED;
-        public const ushort ATTR_CURRENTTIER14BLOCK14SUMMATIONDELIVERED = 0x07EE;
-        public const ushort ATTR_CURRENTTIER14BLOCK15SUMMATIONDELIVERED = 0x07EF;
-        public const ushort ATTR_CURRENTTIER14BLOCK16SUMMATIONDELIVERED = 0x07F0;
-        public const ushort ATTR_CURRENTTIER15BLOCK1SUMMATIONDELIVERED = 0x07F1;
-        public const ushort ATTR_CURRENTTIER15BLOCK2SUMMATIONDELIVERED = 0x07F2;
-        public const ushort ATTR_CURRENTTIER15BLOCK3SUMMATIONDELIVERED = 0x07F3;
-        public const ushort ATTR_CURRENTTIER15BLOCK4SUMMATIONDELIVERED = 0x07F4;
-        public const ushort ATTR_CURRENTTIER15BLOCK5SUMMATIONDELIVERED = 0x07F5;
-        public const ushort ATTR_CURRENTTIER15BLOCK6SUMMATIONDELIVERED = 0x07F6;
-        public const ushort ATTR_CURRENTTIER15BLOCK7SUMMATIONDELIVERED = 0x07F7;
-        public const ushort ATTR_CURRENTTIER15BLOCK8SUMMATIONDELIVERED = 0x07F8;
-        public const ushort ATTR_CURRENTTIER15BLOCK9SUMMATIONDELIVERED = 0x07F9;
-        public const ushort ATTR_CURRENTTIER15BLOCK10SUMMATIONDELIVERED = 0x07FA;
-        public const ushort ATTR_CURRENTTIER15BLOCK11SUMMATIONDELIVERED = 0x07FB;
-        public const ushort ATTR_CURRENTTIER15BLOCK12SUMMATIONDELIVERED = 0x07FC;
-        public const ushort ATTR_CURRENTTIER15BLOCK13SUMMATIONDELIVERED = 0x07FD;
-        public const ushort ATTR_CURRENTTIER15BLOCK14SUMMATIONDELIVERED = 0x07FE;
-        public const ushort ATTR_CURRENTTIER15BLOCK15SUMMATIONDELIVERED = 0x07FF;
-        public const ushort ATTR_CURRENTTIER15BLOCK16SUMMATIONDELIVERED = 0x0800;
+        public const ushort ATTR_CURRENTNOTIERBLOCK1SUMMATIONDELIVERED = 0x0700;
+        public const ushort ATTR_CURRENTNOTIERBLOCK2SUMMATIONDELIVERED = 0x0701;
+        public const ushort ATTR_CURRENTNOTIERBLOCK3SUMMATIONDELIVERED = 0x0702;
+        public const ushort ATTR_CURRENTNOTIERBLOCK4SUMMATIONDELIVERED = 0x0703;
+        public const ushort ATTR_CURRENTNOTIERBLOCK5SUMMATIONDELIVERED = 0x0704;
+        public const ushort ATTR_CURRENTNOTIERBLOCK6SUMMATIONDELIVERED = 0x0705;
+        public const ushort ATTR_CURRENTNOTIERBLOCK7SUMMATIONDELIVERED = 0x0706;
+        public const ushort ATTR_CURRENTNOTIERBLOCK8SUMMATIONDELIVERED = 0x0707;
+        public const ushort ATTR_CURRENTNOTIERBLOCK9SUMMATIONDELIVERED = 0x0708;
+        public const ushort ATTR_CURRENTNOTIERBLOCK10SUMMATIONDELIVERED = 0x0709;
+        public const ushort ATTR_CURRENTNOTIERBLOCK11SUMMATIONDELIVERED = 0x070A;
+        public const ushort ATTR_CURRENTNOTIERBLOCK12SUMMATIONDELIVERED = 0x070B;
+        public const ushort ATTR_CURRENTNOTIERBLOCK13SUMMATIONDELIVERED = 0x070C;
+        public const ushort ATTR_CURRENTNOTIERBLOCK14SUMMATIONDELIVERED = 0x070D;
+        public const ushort ATTR_CURRENTNOTIERBLOCK15SUMMATIONDELIVERED = 0x070E;
+        public const ushort ATTR_CURRENTNOTIERBLOCK16SUMMATIONDELIVERED = 0x070F;
+        public const ushort ATTR_CURRENTTIER1BLOCK1SUMMATIONDELIVERED = 0x0710;
+        public const ushort ATTR_CURRENTTIER1BLOCK2SUMMATIONDELIVERED = 0x0711;
+        public const ushort ATTR_CURRENTTIER1BLOCK3SUMMATIONDELIVERED = 0x0712;
+        public const ushort ATTR_CURRENTTIER1BLOCK4SUMMATIONDELIVERED = 0x0713;
+        public const ushort ATTR_CURRENTTIER1BLOCK5SUMMATIONDELIVERED = 0x0714;
+        public const ushort ATTR_CURRENTTIER1BLOCK6SUMMATIONDELIVERED = 0x0715;
+        public const ushort ATTR_CURRENTTIER1BLOCK7SUMMATIONDELIVERED = 0x0716;
+        public const ushort ATTR_CURRENTTIER1BLOCK8SUMMATIONDELIVERED = 0x0717;
+        public const ushort ATTR_CURRENTTIER1BLOCK9SUMMATIONDELIVERED = 0x0718;
+        public const ushort ATTR_CURRENTTIER1BLOCK10SUMMATIONDELIVERED = 0x0719;
+        public const ushort ATTR_CURRENTTIER1BLOCK11SUMMATIONDELIVERED = 0x071A;
+        public const ushort ATTR_CURRENTTIER1BLOCK12SUMMATIONDELIVERED = 0x071B;
+        public const ushort ATTR_CURRENTTIER1BLOCK13SUMMATIONDELIVERED = 0x071C;
+        public const ushort ATTR_CURRENTTIER1BLOCK14SUMMATIONDELIVERED = 0x071D;
+        public const ushort ATTR_CURRENTTIER1BLOCK15SUMMATIONDELIVERED = 0x071E;
+        public const ushort ATTR_CURRENTTIER1BLOCK16SUMMATIONDELIVERED = 0x071F;
+        public const ushort ATTR_CURRENTTIER2BLOCK1SUMMATIONDELIVERED = 0x0720;
+        public const ushort ATTR_CURRENTTIER2BLOCK2SUMMATIONDELIVERED = 0x0721;
+        public const ushort ATTR_CURRENTTIER2BLOCK3SUMMATIONDELIVERED = 0x0722;
+        public const ushort ATTR_CURRENTTIER2BLOCK4SUMMATIONDELIVERED = 0x0723;
+        public const ushort ATTR_CURRENTTIER2BLOCK5SUMMATIONDELIVERED = 0x0724;
+        public const ushort ATTR_CURRENTTIER2BLOCK6SUMMATIONDELIVERED = 0x0725;
+        public const ushort ATTR_CURRENTTIER2BLOCK7SUMMATIONDELIVERED = 0x0726;
+        public const ushort ATTR_CURRENTTIER2BLOCK8SUMMATIONDELIVERED = 0x0727;
+        public const ushort ATTR_CURRENTTIER2BLOCK9SUMMATIONDELIVERED = 0x0728;
+        public const ushort ATTR_CURRENTTIER2BLOCK10SUMMATIONDELIVERED = 0x0729;
+        public const ushort ATTR_CURRENTTIER2BLOCK11SUMMATIONDELIVERED = 0x072A;
+        public const ushort ATTR_CURRENTTIER2BLOCK12SUMMATIONDELIVERED = 0x072B;
+        public const ushort ATTR_CURRENTTIER2BLOCK13SUMMATIONDELIVERED = 0x072C;
+        public const ushort ATTR_CURRENTTIER2BLOCK14SUMMATIONDELIVERED = 0x072D;
+        public const ushort ATTR_CURRENTTIER2BLOCK15SUMMATIONDELIVERED = 0x072E;
+        public const ushort ATTR_CURRENTTIER2BLOCK16SUMMATIONDELIVERED = 0x072F;
+        public const ushort ATTR_CURRENTTIER3BLOCK1SUMMATIONDELIVERED = 0x0730;
+        public const ushort ATTR_CURRENTTIER3BLOCK2SUMMATIONDELIVERED = 0x0731;
+        public const ushort ATTR_CURRENTTIER3BLOCK3SUMMATIONDELIVERED = 0x0732;
+        public const ushort ATTR_CURRENTTIER3BLOCK4SUMMATIONDELIVERED = 0x0733;
+        public const ushort ATTR_CURRENTTIER3BLOCK5SUMMATIONDELIVERED = 0x0734;
+        public const ushort ATTR_CURRENTTIER3BLOCK6SUMMATIONDELIVERED = 0x0735;
+        public const ushort ATTR_CURRENTTIER3BLOCK7SUMMATIONDELIVERED = 0x0736;
+        public const ushort ATTR_CURRENTTIER3BLOCK8SUMMATIONDELIVERED = 0x0737;
+        public const ushort ATTR_CURRENTTIER3BLOCK9SUMMATIONDELIVERED = 0x0738;
+        public const ushort ATTR_CURRENTTIER3BLOCK10SUMMATIONDELIVERED = 0x0739;
+        public const ushort ATTR_CURRENTTIER3BLOCK11SUMMATIONDELIVERED = 0x073A;
+        public const ushort ATTR_CURRENTTIER3BLOCK12SUMMATIONDELIVERED = 0x073B;
+        public const ushort ATTR_CURRENTTIER3BLOCK13SUMMATIONDELIVERED = 0x073C;
+        public const ushort ATTR_CURRENTTIER3BLOCK14SUMMATIONDELIVERED = 0x073D;
+        public const ushort ATTR_CURRENTTIER3BLOCK15SUMMATIONDELIVERED = 0x073E;
+        public const ushort ATTR_CURRENTTIER3BLOCK16SUMMATIONDELIVERED = 0x073F;
+        public const ushort ATTR_CURRENTTIER4BLOCK1SUMMATIONDELIVERED = 0x0740;
+        public const ushort ATTR_CURRENTTIER4BLOCK2SUMMATIONDELIVERED = 0x0741;
+        public const ushort ATTR_CURRENTTIER4BLOCK3SUMMATIONDELIVERED = 0x0742;
+        public const ushort ATTR_CURRENTTIER4BLOCK4SUMMATIONDELIVERED = 0x0743;
+        public const ushort ATTR_CURRENTTIER4BLOCK5SUMMATIONDELIVERED = 0x0744;
+        public const ushort ATTR_CURRENTTIER4BLOCK6SUMMATIONDELIVERED = 0x0745;
+        public const ushort ATTR_CURRENTTIER4BLOCK7SUMMATIONDELIVERED = 0x0746;
+        public const ushort ATTR_CURRENTTIER4BLOCK8SUMMATIONDELIVERED = 0x0747;
+        public const ushort ATTR_CURRENTTIER4BLOCK9SUMMATIONDELIVERED = 0x0748;
+        public const ushort ATTR_CURRENTTIER4BLOCK10SUMMATIONDELIVERED = 0x0749;
+        public const ushort ATTR_CURRENTTIER4BLOCK11SUMMATIONDELIVERED = 0x074A;
+        public const ushort ATTR_CURRENTTIER4BLOCK12SUMMATIONDELIVERED = 0x074B;
+        public const ushort ATTR_CURRENTTIER4BLOCK13SUMMATIONDELIVERED = 0x074C;
+        public const ushort ATTR_CURRENTTIER4BLOCK14SUMMATIONDELIVERED = 0x074D;
+        public const ushort ATTR_CURRENTTIER4BLOCK15SUMMATIONDELIVERED = 0x074E;
+        public const ushort ATTR_CURRENTTIER4BLOCK16SUMMATIONDELIVERED = 0x074F;
+        public const ushort ATTR_CURRENTTIER5BLOCK1SUMMATIONDELIVERED = 0x0750;
+        public const ushort ATTR_CURRENTTIER5BLOCK2SUMMATIONDELIVERED = 0x0751;
+        public const ushort ATTR_CURRENTTIER5BLOCK3SUMMATIONDELIVERED = 0x0752;
+        public const ushort ATTR_CURRENTTIER5BLOCK4SUMMATIONDELIVERED = 0x0753;
+        public const ushort ATTR_CURRENTTIER5BLOCK5SUMMATIONDELIVERED = 0x0754;
+        public const ushort ATTR_CURRENTTIER5BLOCK6SUMMATIONDELIVERED = 0x0755;
+        public const ushort ATTR_CURRENTTIER5BLOCK7SUMMATIONDELIVERED = 0x0756;
+        public const ushort ATTR_CURRENTTIER5BLOCK8SUMMATIONDELIVERED = 0x0757;
+        public const ushort ATTR_CURRENTTIER5BLOCK9SUMMATIONDELIVERED = 0x0758;
+        public const ushort ATTR_CURRENTTIER5BLOCK10SUMMATIONDELIVERED = 0x0759;
+        public const ushort ATTR_CURRENTTIER5BLOCK11SUMMATIONDELIVERED = 0x075A;
+        public const ushort ATTR_CURRENTTIER5BLOCK12SUMMATIONDELIVERED = 0x075B;
+        public const ushort ATTR_CURRENTTIER5BLOCK13SUMMATIONDELIVERED = 0x075C;
+        public const ushort ATTR_CURRENTTIER5BLOCK14SUMMATIONDELIVERED = 0x075D;
+        public const ushort ATTR_CURRENTTIER5BLOCK15SUMMATIONDELIVERED = 0x075E;
+        public const ushort ATTR_CURRENTTIER5BLOCK16SUMMATIONDELIVERED = 0x075F;
+        public const ushort ATTR_CURRENTTIER6BLOCK1SUMMATIONDELIVERED = 0x0760;
+        public const ushort ATTR_CURRENTTIER6BLOCK2SUMMATIONDELIVERED = 0x0761;
+        public const ushort ATTR_CURRENTTIER6BLOCK3SUMMATIONDELIVERED = 0x0762;
+        public const ushort ATTR_CURRENTTIER6BLOCK4SUMMATIONDELIVERED = 0x0763;
+        public const ushort ATTR_CURRENTTIER6BLOCK5SUMMATIONDELIVERED = 0x0764;
+        public const ushort ATTR_CURRENTTIER6BLOCK6SUMMATIONDELIVERED = 0x0765;
+        public const ushort ATTR_CURRENTTIER6BLOCK7SUMMATIONDELIVERED = 0x0766;
+        public const ushort ATTR_CURRENTTIER6BLOCK8SUMMATIONDELIVERED = 0x0767;
+        public const ushort ATTR_CURRENTTIER6BLOCK9SUMMATIONDELIVERED = 0x0768;
+        public const ushort ATTR_CURRENTTIER6BLOCK10SUMMATIONDELIVERED = 0x0769;
+        public const ushort ATTR_CURRENTTIER6BLOCK11SUMMATIONDELIVERED = 0x076A;
+        public const ushort ATTR_CURRENTTIER6BLOCK12SUMMATIONDELIVERED = 0x076B;
+        public const ushort ATTR_CURRENTTIER6BLOCK13SUMMATIONDELIVERED = 0x076C;
+        public const ushort ATTR_CURRENTTIER6BLOCK14SUMMATIONDELIVERED = 0x076D;
+        public const ushort ATTR_CURRENTTIER6BLOCK15SUMMATIONDELIVERED = 0x076E;
+        public const ushort ATTR_CURRENTTIER6BLOCK16SUMMATIONDELIVERED = 0x076F;
+        public const ushort ATTR_CURRENTTIER7BLOCK1SUMMATIONDELIVERED = 0x0770;
+        public const ushort ATTR_CURRENTTIER7BLOCK2SUMMATIONDELIVERED = 0x0771;
+        public const ushort ATTR_CURRENTTIER7BLOCK3SUMMATIONDELIVERED = 0x0772;
+        public const ushort ATTR_CURRENTTIER7BLOCK4SUMMATIONDELIVERED = 0x0773;
+        public const ushort ATTR_CURRENTTIER7BLOCK5SUMMATIONDELIVERED = 0x0774;
+        public const ushort ATTR_CURRENTTIER7BLOCK6SUMMATIONDELIVERED = 0x0775;
+        public const ushort ATTR_CURRENTTIER7BLOCK7SUMMATIONDELIVERED = 0x0776;
+        public const ushort ATTR_CURRENTTIER7BLOCK8SUMMATIONDELIVERED = 0x0777;
+        public const ushort ATTR_CURRENTTIER7BLOCK9SUMMATIONDELIVERED = 0x0778;
+        public const ushort ATTR_CURRENTTIER7BLOCK10SUMMATIONDELIVERED = 0x0779;
+        public const ushort ATTR_CURRENTTIER7BLOCK11SUMMATIONDELIVERED = 0x077A;
+        public const ushort ATTR_CURRENTTIER7BLOCK12SUMMATIONDELIVERED = 0x077B;
+        public const ushort ATTR_CURRENTTIER7BLOCK13SUMMATIONDELIVERED = 0x077C;
+        public const ushort ATTR_CURRENTTIER7BLOCK14SUMMATIONDELIVERED = 0x077D;
+        public const ushort ATTR_CURRENTTIER7BLOCK15SUMMATIONDELIVERED = 0x077E;
+        public const ushort ATTR_CURRENTTIER7BLOCK16SUMMATIONDELIVERED = 0x077F;
+        public const ushort ATTR_CURRENTTIER8BLOCK1SUMMATIONDELIVERED = 0x0780;
+        public const ushort ATTR_CURRENTTIER8BLOCK2SUMMATIONDELIVERED = 0x0781;
+        public const ushort ATTR_CURRENTTIER8BLOCK3SUMMATIONDELIVERED = 0x0782;
+        public const ushort ATTR_CURRENTTIER8BLOCK4SUMMATIONDELIVERED = 0x0783;
+        public const ushort ATTR_CURRENTTIER8BLOCK5SUMMATIONDELIVERED = 0x0784;
+        public const ushort ATTR_CURRENTTIER8BLOCK6SUMMATIONDELIVERED = 0x0785;
+        public const ushort ATTR_CURRENTTIER8BLOCK7SUMMATIONDELIVERED = 0x0786;
+        public const ushort ATTR_CURRENTTIER8BLOCK8SUMMATIONDELIVERED = 0x0787;
+        public const ushort ATTR_CURRENTTIER8BLOCK9SUMMATIONDELIVERED = 0x0788;
+        public const ushort ATTR_CURRENTTIER8BLOCK10SUMMATIONDELIVERED = 0x0789;
+        public const ushort ATTR_CURRENTTIER8BLOCK11SUMMATIONDELIVERED = 0x078A;
+        public const ushort ATTR_CURRENTTIER8BLOCK12SUMMATIONDELIVERED = 0x078B;
+        public const ushort ATTR_CURRENTTIER8BLOCK13SUMMATIONDELIVERED = 0x078C;
+        public const ushort ATTR_CURRENTTIER8BLOCK14SUMMATIONDELIVERED = 0x078D;
+        public const ushort ATTR_CURRENTTIER8BLOCK15SUMMATIONDELIVERED = 0x078E;
+        public const ushort ATTR_CURRENTTIER8BLOCK16SUMMATIONDELIVERED = 0x078F;
+        public const ushort ATTR_CURRENTTIER9BLOCK1SUMMATIONDELIVERED = 0x0790;
+        public const ushort ATTR_CURRENTTIER9BLOCK2SUMMATIONDELIVERED = 0x0791;
+        public const ushort ATTR_CURRENTTIER9BLOCK3SUMMATIONDELIVERED = 0x0792;
+        public const ushort ATTR_CURRENTTIER9BLOCK4SUMMATIONDELIVERED = 0x0793;
+        public const ushort ATTR_CURRENTTIER9BLOCK5SUMMATIONDELIVERED = 0x0794;
+        public const ushort ATTR_CURRENTTIER9BLOCK6SUMMATIONDELIVERED = 0x0795;
+        public const ushort ATTR_CURRENTTIER9BLOCK7SUMMATIONDELIVERED = 0x0796;
+        public const ushort ATTR_CURRENTTIER9BLOCK8SUMMATIONDELIVERED = 0x0797;
+        public const ushort ATTR_CURRENTTIER9BLOCK9SUMMATIONDELIVERED = 0x0798;
+        public const ushort ATTR_CURRENTTIER9BLOCK10SUMMATIONDELIVERED = 0x0799;
+        public const ushort ATTR_CURRENTTIER9BLOCK11SUMMATIONDELIVERED = 0x079A;
+        public const ushort ATTR_CURRENTTIER9BLOCK12SUMMATIONDELIVERED = 0x079B;
+        public const ushort ATTR_CURRENTTIER9BLOCK13SUMMATIONDELIVERED = 0x079C;
+        public const ushort ATTR_CURRENTTIER9BLOCK14SUMMATIONDELIVERED = 0x079D;
+        public const ushort ATTR_CURRENTTIER9BLOCK15SUMMATIONDELIVERED = 0x079E;
+        public const ushort ATTR_CURRENTTIER9BLOCK16SUMMATIONDELIVERED = 0x079F;
+        public const ushort ATTR_CURRENTTIER10BLOCK1SUMMATIONDELIVERED = 0x07A0;
+        public const ushort ATTR_CURRENTTIER10BLOCK2SUMMATIONDELIVERED = 0x07A1;
+        public const ushort ATTR_CURRENTTIER10BLOCK3SUMMATIONDELIVERED = 0x07A2;
+        public const ushort ATTR_CURRENTTIER10BLOCK4SUMMATIONDELIVERED = 0x07A3;
+        public const ushort ATTR_CURRENTTIER10BLOCK5SUMMATIONDELIVERED = 0x07A4;
+        public const ushort ATTR_CURRENTTIER10BLOCK6SUMMATIONDELIVERED = 0x07A5;
+        public const ushort ATTR_CURRENTTIER10BLOCK7SUMMATIONDELIVERED = 0x07A6;
+        public const ushort ATTR_CURRENTTIER10BLOCK8SUMMATIONDELIVERED = 0x07A7;
+        public const ushort ATTR_CURRENTTIER10BLOCK9SUMMATIONDELIVERED = 0x07A8;
+        public const ushort ATTR_CURRENTTIER10BLOCK10SUMMATIONDELIVERED = 0x07A9;
+        public const ushort ATTR_CURRENTTIER10BLOCK11SUMMATIONDELIVERED = 0x07AA;
+        public const ushort ATTR_CURRENTTIER10BLOCK12SUMMATIONDELIVERED = 0x07AB;
+        public const ushort ATTR_CURRENTTIER10BLOCK13SUMMATIONDELIVERED = 0x07AC;
+        public const ushort ATTR_CURRENTTIER10BLOCK14SUMMATIONDELIVERED = 0x07AD;
+        public const ushort ATTR_CURRENTTIER10BLOCK15SUMMATIONDELIVERED = 0x07AE;
+        public const ushort ATTR_CURRENTTIER10BLOCK16SUMMATIONDELIVERED = 0x07AF;
+        public const ushort ATTR_CURRENTTIER11BLOCK1SUMMATIONDELIVERED = 0x07B0;
+        public const ushort ATTR_CURRENTTIER11BLOCK2SUMMATIONDELIVERED = 0x07B1;
+        public const ushort ATTR_CURRENTTIER11BLOCK3SUMMATIONDELIVERED = 0x07B2;
+        public const ushort ATTR_CURRENTTIER11BLOCK4SUMMATIONDELIVERED = 0x07B3;
+        public const ushort ATTR_CURRENTTIER11BLOCK5SUMMATIONDELIVERED = 0x07B4;
+        public const ushort ATTR_CURRENTTIER11BLOCK6SUMMATIONDELIVERED = 0x07B5;
+        public const ushort ATTR_CURRENTTIER11BLOCK7SUMMATIONDELIVERED = 0x07B6;
+        public const ushort ATTR_CURRENTTIER11BLOCK8SUMMATIONDELIVERED = 0x07B7;
+        public const ushort ATTR_CURRENTTIER11BLOCK9SUMMATIONDELIVERED = 0x07B8;
+        public const ushort ATTR_CURRENTTIER11BLOCK10SUMMATIONDELIVERED = 0x07B9;
+        public const ushort ATTR_CURRENTTIER11BLOCK11SUMMATIONDELIVERED = 0x07BA;
+        public const ushort ATTR_CURRENTTIER11BLOCK12SUMMATIONDELIVERED = 0x07BB;
+        public const ushort ATTR_CURRENTTIER11BLOCK13SUMMATIONDELIVERED = 0x07BC;
+        public const ushort ATTR_CURRENTTIER11BLOCK14SUMMATIONDELIVERED = 0x07BD;
+        public const ushort ATTR_CURRENTTIER11BLOCK15SUMMATIONDELIVERED = 0x07BE;
+        public const ushort ATTR_CURRENTTIER11BLOCK16SUMMATIONDELIVERED = 0x07BF;
+        public const ushort ATTR_CURRENTTIER12BLOCK1SUMMATIONDELIVERED = 0x07C0;
+        public const ushort ATTR_CURRENTTIER12BLOCK2SUMMATIONDELIVERED = 0x07C1;
+        public const ushort ATTR_CURRENTTIER12BLOCK3SUMMATIONDELIVERED = 0x07C2;
+        public const ushort ATTR_CURRENTTIER12BLOCK4SUMMATIONDELIVERED = 0x07C3;
+        public const ushort ATTR_CURRENTTIER12BLOCK5SUMMATIONDELIVERED = 0x07C4;
+        public const ushort ATTR_CURRENTTIER12BLOCK6SUMMATIONDELIVERED = 0x07C5;
+        public const ushort ATTR_CURRENTTIER12BLOCK7SUMMATIONDELIVERED = 0x07C6;
+        public const ushort ATTR_CURRENTTIER12BLOCK8SUMMATIONDELIVERED = 0x07C7;
+        public const ushort ATTR_CURRENTTIER12BLOCK9SUMMATIONDELIVERED = 0x07C8;
+        public const ushort ATTR_CURRENTTIER12BLOCK10SUMMATIONDELIVERED = 0x07C9;
+        public const ushort ATTR_CURRENTTIER12BLOCK11SUMMATIONDELIVERED = 0x07CA;
+        public const ushort ATTR_CURRENTTIER12BLOCK12SUMMATIONDELIVERED = 0x07CB;
+        public const ushort ATTR_CURRENTTIER12BLOCK13SUMMATIONDELIVERED = 0x07CC;
+        public const ushort ATTR_CURRENTTIER12BLOCK14SUMMATIONDELIVERED = 0x07CD;
+        public const ushort ATTR_CURRENTTIER12BLOCK15SUMMATIONDELIVERED = 0x07CE;
+        public const ushort ATTR_CURRENTTIER12BLOCK16SUMMATIONDELIVERED = 0x07CF;
+        public const ushort ATTR_CURRENTTIER13BLOCK1SUMMATIONDELIVERED = 0x07D0;
+        public const ushort ATTR_CURRENTTIER13BLOCK2SUMMATIONDELIVERED = 0x07D1;
+        public const ushort ATTR_CURRENTTIER13BLOCK3SUMMATIONDELIVERED = 0x07D2;
+        public const ushort ATTR_CURRENTTIER13BLOCK4SUMMATIONDELIVERED = 0x07D3;
+        public const ushort ATTR_CURRENTTIER13BLOCK5SUMMATIONDELIVERED = 0x07D4;
+        public const ushort ATTR_CURRENTTIER13BLOCK6SUMMATIONDELIVERED = 0x07D5;
+        public const ushort ATTR_CURRENTTIER13BLOCK7SUMMATIONDELIVERED = 0x07D6;
+        public const ushort ATTR_CURRENTTIER13BLOCK8SUMMATIONDELIVERED = 0x07D7;
+        public const ushort ATTR_CURRENTTIER13BLOCK9SUMMATIONDELIVERED = 0x07D8;
+        public const ushort ATTR_CURRENTTIER13BLOCK10SUMMATIONDELIVERED = 0x07D9;
+        public const ushort ATTR_CURRENTTIER13BLOCK11SUMMATIONDELIVERED = 0x07DA;
+        public const ushort ATTR_CURRENTTIER13BLOCK12SUMMATIONDELIVERED = 0x07DB;
+        public const ushort ATTR_CURRENTTIER13BLOCK13SUMMATIONDELIVERED = 0x07DC;
+        public const ushort ATTR_CURRENTTIER13BLOCK14SUMMATIONDELIVERED = 0x07DD;
+        public const ushort ATTR_CURRENTTIER13BLOCK15SUMMATIONDELIVERED = 0x07DE;
+        public const ushort ATTR_CURRENTTIER13BLOCK16SUMMATIONDELIVERED = 0x07DF;
+        public const ushort ATTR_CURRENTTIER14BLOCK1SUMMATIONDELIVERED = 0x07E0;
+        public const ushort ATTR_CURRENTTIER14BLOCK2SUMMATIONDELIVERED = 0x07E1;
+        public const ushort ATTR_CURRENTTIER14BLOCK3SUMMATIONDELIVERED = 0x07E2;
+        public const ushort ATTR_CURRENTTIER14BLOCK4SUMMATIONDELIVERED = 0x07E3;
+        public const ushort ATTR_CURRENTTIER14BLOCK5SUMMATIONDELIVERED = 0x07E4;
+        public const ushort ATTR_CURRENTTIER14BLOCK6SUMMATIONDELIVERED = 0x07E5;
+        public const ushort ATTR_CURRENTTIER14BLOCK7SUMMATIONDELIVERED = 0x07E6;
+        public const ushort ATTR_CURRENTTIER14BLOCK8SUMMATIONDELIVERED = 0x07E7;
+        public const ushort ATTR_CURRENTTIER14BLOCK9SUMMATIONDELIVERED = 0x07E8;
+        public const ushort ATTR_CURRENTTIER14BLOCK10SUMMATIONDELIVERED = 0x07E9;
+        public const ushort ATTR_CURRENTTIER14BLOCK11SUMMATIONDELIVERED = 0x07EA;
+        public const ushort ATTR_CURRENTTIER14BLOCK12SUMMATIONDELIVERED = 0x07EB;
+        public const ushort ATTR_CURRENTTIER14BLOCK13SUMMATIONDELIVERED = 0x07EC;
+        public const ushort ATTR_CURRENTTIER14BLOCK14SUMMATIONDELIVERED = 0x07ED;
+        public const ushort ATTR_CURRENTTIER14BLOCK15SUMMATIONDELIVERED = 0x07EE;
+        public const ushort ATTR_CURRENTTIER14BLOCK16SUMMATIONDELIVERED = 0x07EF;
+        public const ushort ATTR_CURRENTTIER15BLOCK1SUMMATIONDELIVERED = 0x07F0;
+        public const ushort ATTR_CURRENTTIER15BLOCK2SUMMATIONDELIVERED = 0x07F1;
+        public const ushort ATTR_CURRENTTIER15BLOCK3SUMMATIONDELIVERED = 0x07F2;
+        public const ushort ATTR_CURRENTTIER15BLOCK4SUMMATIONDELIVERED = 0x07F3;
+        public const ushort ATTR_CURRENTTIER15BLOCK5SUMMATIONDELIVERED = 0x07F4;
+        public const ushort ATTR_CURRENTTIER15BLOCK6SUMMATIONDELIVERED = 0x07F5;
+        public const ushort ATTR_CURRENTTIER15BLOCK7SUMMATIONDELIVERED = 0x07F6;
+        public const ushort ATTR_CURRENTTIER15BLOCK8SUMMATIONDELIVERED = 0x07F7;
+        public const ushort ATTR_CURRENTTIER15BLOCK9SUMMATIONDELIVERED = 0x07F8;
+        public const ushort ATTR_CURRENTTIER15BLOCK10SUMMATIONDELIVERED = 0x07F9;
+        public const ushort ATTR_CURRENTTIER15BLOCK11SUMMATIONDELIVERED = 0x07FA;
+        public const ushort ATTR_CURRENTTIER15BLOCK12SUMMATIONDELIVERED = 0x07FB;
+        public const ushort ATTR_CURRENTTIER15BLOCK13SUMMATIONDELIVERED = 0x07FC;
+        public const ushort ATTR_CURRENTTIER15BLOCK14SUMMATIONDELIVERED = 0x07FD;
+        public const ushort ATTR_CURRENTTIER15BLOCK15SUMMATIONDELIVERED = 0x07FE;
+        public const ushort ATTR_CURRENTTIER15BLOCK16SUMMATIONDELIVERED = 0x07FF;
         public const ushort ATTR_GENERICALARMMASK = 0x0800;
         public const ushort ATTR_ELECTRICITYALARMMASK = 0x0801;
         public const ushort ATTR_GENERICFLOWPRESSUREALARMMASK = 0x0802;
@@ -2170,262 +2170,262 @@ namespace ZigBeeNet.ZCL.Clusters
         public const ushort ATTR_GASSPECIFICALARMMASK = 0x0805;
         public const ushort ATTR_EXTENDEDGENERICALARMMASK = 0x0806;
         public const ushort ATTR_MANUFACTUREALARMMASK = 0x0807;
-        public const ushort ATTR_CURRENTNOTIERBLOCK1SUMMATIONRECEIVED = 0x0901;
-        public const ushort ATTR_CURRENTNOTIERBLOCK2SUMMATIONRECEIVED = 0x0902;
-        public const ushort ATTR_CURRENTNOTIERBLOCK3SUMMATIONRECEIVED = 0x0903;
-        public const ushort ATTR_CURRENTNOTIERBLOCK4SUMMATIONRECEIVED = 0x0904;
-        public const ushort ATTR_CURRENTNOTIERBLOCK5SUMMATIONRECEIVED = 0x0905;
-        public const ushort ATTR_CURRENTNOTIERBLOCK6SUMMATIONRECEIVED = 0x0906;
-        public const ushort ATTR_CURRENTNOTIERBLOCK7SUMMATIONRECEIVED = 0x0907;
-        public const ushort ATTR_CURRENTNOTIERBLOCK8SUMMATIONRECEIVED = 0x0908;
-        public const ushort ATTR_CURRENTNOTIERBLOCK9SUMMATIONRECEIVED = 0x0909;
-        public const ushort ATTR_CURRENTNOTIERBLOCK10SUMMATIONRECEIVED = 0x090A;
-        public const ushort ATTR_CURRENTNOTIERBLOCK11SUMMATIONRECEIVED = 0x090B;
-        public const ushort ATTR_CURRENTNOTIERBLOCK12SUMMATIONRECEIVED = 0x090C;
-        public const ushort ATTR_CURRENTNOTIERBLOCK13SUMMATIONRECEIVED = 0x090D;
-        public const ushort ATTR_CURRENTNOTIERBLOCK14SUMMATIONRECEIVED = 0x090E;
-        public const ushort ATTR_CURRENTNOTIERBLOCK15SUMMATIONRECEIVED = 0x090F;
-        public const ushort ATTR_CURRENTNOTIERBLOCK16SUMMATIONRECEIVED = 0x0910;
-        public const ushort ATTR_CURRENTTIER1BLOCK1SUMMATIONRECEIVED = 0x0911;
-        public const ushort ATTR_CURRENTTIER1BLOCK2SUMMATIONRECEIVED = 0x0912;
-        public const ushort ATTR_CURRENTTIER1BLOCK3SUMMATIONRECEIVED = 0x0913;
-        public const ushort ATTR_CURRENTTIER1BLOCK4SUMMATIONRECEIVED = 0x0914;
-        public const ushort ATTR_CURRENTTIER1BLOCK5SUMMATIONRECEIVED = 0x0915;
-        public const ushort ATTR_CURRENTTIER1BLOCK6SUMMATIONRECEIVED = 0x0916;
-        public const ushort ATTR_CURRENTTIER1BLOCK7SUMMATIONRECEIVED = 0x0917;
-        public const ushort ATTR_CURRENTTIER1BLOCK8SUMMATIONRECEIVED = 0x0918;
-        public const ushort ATTR_CURRENTTIER1BLOCK9SUMMATIONRECEIVED = 0x0919;
-        public const ushort ATTR_CURRENTTIER1BLOCK10SUMMATIONRECEIVED = 0x091A;
-        public const ushort ATTR_CURRENTTIER1BLOCK11SUMMATIONRECEIVED = 0x091B;
-        public const ushort ATTR_CURRENTTIER1BLOCK12SUMMATIONRECEIVED = 0x091C;
-        public const ushort ATTR_CURRENTTIER1BLOCK13SUMMATIONRECEIVED = 0x091D;
-        public const ushort ATTR_CURRENTTIER1BLOCK14SUMMATIONRECEIVED = 0x091E;
-        public const ushort ATTR_CURRENTTIER1BLOCK15SUMMATIONRECEIVED = 0x091F;
-        public const ushort ATTR_CURRENTTIER1BLOCK16SUMMATIONRECEIVED = 0x0920;
-        public const ushort ATTR_CURRENTTIER2BLOCK1SUMMATIONRECEIVED = 0x0921;
-        public const ushort ATTR_CURRENTTIER2BLOCK2SUMMATIONRECEIVED = 0x0922;
-        public const ushort ATTR_CURRENTTIER2BLOCK3SUMMATIONRECEIVED = 0x0923;
-        public const ushort ATTR_CURRENTTIER2BLOCK4SUMMATIONRECEIVED = 0x0924;
-        public const ushort ATTR_CURRENTTIER2BLOCK5SUMMATIONRECEIVED = 0x0925;
-        public const ushort ATTR_CURRENTTIER2BLOCK6SUMMATIONRECEIVED = 0x0926;
-        public const ushort ATTR_CURRENTTIER2BLOCK7SUMMATIONRECEIVED = 0x0927;
-        public const ushort ATTR_CURRENTTIER2BLOCK8SUMMATIONRECEIVED = 0x0928;
-        public const ushort ATTR_CURRENTTIER2BLOCK9SUMMATIONRECEIVED = 0x0929;
-        public const ushort ATTR_CURRENTTIER2BLOCK10SUMMATIONRECEIVED = 0x092A;
-        public const ushort ATTR_CURRENTTIER2BLOCK11SUMMATIONRECEIVED = 0x092B;
-        public const ushort ATTR_CURRENTTIER2BLOCK12SUMMATIONRECEIVED = 0x092C;
-        public const ushort ATTR_CURRENTTIER2BLOCK13SUMMATIONRECEIVED = 0x092D;
-        public const ushort ATTR_CURRENTTIER2BLOCK14SUMMATIONRECEIVED = 0x092E;
-        public const ushort ATTR_CURRENTTIER2BLOCK15SUMMATIONRECEIVED = 0x092F;
-        public const ushort ATTR_CURRENTTIER2BLOCK16SUMMATIONRECEIVED = 0x0930;
-        public const ushort ATTR_CURRENTTIER3BLOCK1SUMMATIONRECEIVED = 0x0931;
-        public const ushort ATTR_CURRENTTIER3BLOCK2SUMMATIONRECEIVED = 0x0932;
-        public const ushort ATTR_CURRENTTIER3BLOCK3SUMMATIONRECEIVED = 0x0933;
-        public const ushort ATTR_CURRENTTIER3BLOCK4SUMMATIONRECEIVED = 0x0934;
-        public const ushort ATTR_CURRENTTIER3BLOCK5SUMMATIONRECEIVED = 0x0935;
-        public const ushort ATTR_CURRENTTIER3BLOCK6SUMMATIONRECEIVED = 0x0936;
-        public const ushort ATTR_CURRENTTIER3BLOCK7SUMMATIONRECEIVED = 0x0937;
-        public const ushort ATTR_CURRENTTIER3BLOCK8SUMMATIONRECEIVED = 0x0938;
-        public const ushort ATTR_CURRENTTIER3BLOCK9SUMMATIONRECEIVED = 0x0939;
-        public const ushort ATTR_CURRENTTIER3BLOCK10SUMMATIONRECEIVED = 0x093A;
-        public const ushort ATTR_CURRENTTIER3BLOCK11SUMMATIONRECEIVED = 0x093B;
-        public const ushort ATTR_CURRENTTIER3BLOCK12SUMMATIONRECEIVED = 0x093C;
-        public const ushort ATTR_CURRENTTIER3BLOCK13SUMMATIONRECEIVED = 0x093D;
-        public const ushort ATTR_CURRENTTIER3BLOCK14SUMMATIONRECEIVED = 0x093E;
-        public const ushort ATTR_CURRENTTIER3BLOCK15SUMMATIONRECEIVED = 0x093F;
-        public const ushort ATTR_CURRENTTIER3BLOCK16SUMMATIONRECEIVED = 0x0940;
-        public const ushort ATTR_CURRENTTIER4BLOCK1SUMMATIONRECEIVED = 0x0941;
-        public const ushort ATTR_CURRENTTIER4BLOCK2SUMMATIONRECEIVED = 0x0942;
-        public const ushort ATTR_CURRENTTIER4BLOCK3SUMMATIONRECEIVED = 0x0943;
-        public const ushort ATTR_CURRENTTIER4BLOCK4SUMMATIONRECEIVED = 0x0944;
-        public const ushort ATTR_CURRENTTIER4BLOCK5SUMMATIONRECEIVED = 0x0945;
-        public const ushort ATTR_CURRENTTIER4BLOCK6SUMMATIONRECEIVED = 0x0946;
-        public const ushort ATTR_CURRENTTIER4BLOCK7SUMMATIONRECEIVED = 0x0947;
-        public const ushort ATTR_CURRENTTIER4BLOCK8SUMMATIONRECEIVED = 0x0948;
-        public const ushort ATTR_CURRENTTIER4BLOCK9SUMMATIONRECEIVED = 0x0949;
-        public const ushort ATTR_CURRENTTIER4BLOCK10SUMMATIONRECEIVED = 0x094A;
-        public const ushort ATTR_CURRENTTIER4BLOCK11SUMMATIONRECEIVED = 0x094B;
-        public const ushort ATTR_CURRENTTIER4BLOCK12SUMMATIONRECEIVED = 0x094C;
-        public const ushort ATTR_CURRENTTIER4BLOCK13SUMMATIONRECEIVED = 0x094D;
-        public const ushort ATTR_CURRENTTIER4BLOCK14SUMMATIONRECEIVED = 0x094E;
-        public const ushort ATTR_CURRENTTIER4BLOCK15SUMMATIONRECEIVED = 0x094F;
-        public const ushort ATTR_CURRENTTIER4BLOCK16SUMMATIONRECEIVED = 0x0950;
-        public const ushort ATTR_CURRENTTIER5BLOCK1SUMMATIONRECEIVED = 0x0951;
-        public const ushort ATTR_CURRENTTIER5BLOCK2SUMMATIONRECEIVED = 0x0952;
-        public const ushort ATTR_CURRENTTIER5BLOCK3SUMMATIONRECEIVED = 0x0953;
-        public const ushort ATTR_CURRENTTIER5BLOCK4SUMMATIONRECEIVED = 0x0954;
-        public const ushort ATTR_CURRENTTIER5BLOCK5SUMMATIONRECEIVED = 0x0955;
-        public const ushort ATTR_CURRENTTIER5BLOCK6SUMMATIONRECEIVED = 0x0956;
-        public const ushort ATTR_CURRENTTIER5BLOCK7SUMMATIONRECEIVED = 0x0957;
-        public const ushort ATTR_CURRENTTIER5BLOCK8SUMMATIONRECEIVED = 0x0958;
-        public const ushort ATTR_CURRENTTIER5BLOCK9SUMMATIONRECEIVED = 0x0959;
-        public const ushort ATTR_CURRENTTIER5BLOCK10SUMMATIONRECEIVED = 0x095A;
-        public const ushort ATTR_CURRENTTIER5BLOCK11SUMMATIONRECEIVED = 0x095B;
-        public const ushort ATTR_CURRENTTIER5BLOCK12SUMMATIONRECEIVED = 0x095C;
-        public const ushort ATTR_CURRENTTIER5BLOCK13SUMMATIONRECEIVED = 0x095D;
-        public const ushort ATTR_CURRENTTIER5BLOCK14SUMMATIONRECEIVED = 0x095E;
-        public const ushort ATTR_CURRENTTIER5BLOCK15SUMMATIONRECEIVED = 0x095F;
-        public const ushort ATTR_CURRENTTIER5BLOCK16SUMMATIONRECEIVED = 0x0960;
-        public const ushort ATTR_CURRENTTIER6BLOCK1SUMMATIONRECEIVED = 0x0961;
-        public const ushort ATTR_CURRENTTIER6BLOCK2SUMMATIONRECEIVED = 0x0962;
-        public const ushort ATTR_CURRENTTIER6BLOCK3SUMMATIONRECEIVED = 0x0963;
-        public const ushort ATTR_CURRENTTIER6BLOCK4SUMMATIONRECEIVED = 0x0964;
-        public const ushort ATTR_CURRENTTIER6BLOCK5SUMMATIONRECEIVED = 0x0965;
-        public const ushort ATTR_CURRENTTIER6BLOCK6SUMMATIONRECEIVED = 0x0966;
-        public const ushort ATTR_CURRENTTIER6BLOCK7SUMMATIONRECEIVED = 0x0967;
-        public const ushort ATTR_CURRENTTIER6BLOCK8SUMMATIONRECEIVED = 0x0968;
-        public const ushort ATTR_CURRENTTIER6BLOCK9SUMMATIONRECEIVED = 0x0969;
-        public const ushort ATTR_CURRENTTIER6BLOCK10SUMMATIONRECEIVED = 0x096A;
-        public const ushort ATTR_CURRENTTIER6BLOCK11SUMMATIONRECEIVED = 0x096B;
-        public const ushort ATTR_CURRENTTIER6BLOCK12SUMMATIONRECEIVED = 0x096C;
-        public const ushort ATTR_CURRENTTIER6BLOCK13SUMMATIONRECEIVED = 0x096D;
-        public const ushort ATTR_CURRENTTIER6BLOCK14SUMMATIONRECEIVED = 0x096E;
-        public const ushort ATTR_CURRENTTIER6BLOCK15SUMMATIONRECEIVED = 0x096F;
-        public const ushort ATTR_CURRENTTIER6BLOCK16SUMMATIONRECEIVED = 0x0970;
-        public const ushort ATTR_CURRENTTIER7BLOCK1SUMMATIONRECEIVED = 0x0971;
-        public const ushort ATTR_CURRENTTIER7BLOCK2SUMMATIONRECEIVED = 0x0972;
-        public const ushort ATTR_CURRENTTIER7BLOCK3SUMMATIONRECEIVED = 0x0973;
-        public const ushort ATTR_CURRENTTIER7BLOCK4SUMMATIONRECEIVED = 0x0974;
-        public const ushort ATTR_CURRENTTIER7BLOCK5SUMMATIONRECEIVED = 0x0975;
-        public const ushort ATTR_CURRENTTIER7BLOCK6SUMMATIONRECEIVED = 0x0976;
-        public const ushort ATTR_CURRENTTIER7BLOCK7SUMMATIONRECEIVED = 0x0977;
-        public const ushort ATTR_CURRENTTIER7BLOCK8SUMMATIONRECEIVED = 0x0978;
-        public const ushort ATTR_CURRENTTIER7BLOCK9SUMMATIONRECEIVED = 0x0979;
-        public const ushort ATTR_CURRENTTIER7BLOCK10SUMMATIONRECEIVED = 0x097A;
-        public const ushort ATTR_CURRENTTIER7BLOCK11SUMMATIONRECEIVED = 0x097B;
-        public const ushort ATTR_CURRENTTIER7BLOCK12SUMMATIONRECEIVED = 0x097C;
-        public const ushort ATTR_CURRENTTIER7BLOCK13SUMMATIONRECEIVED = 0x097D;
-        public const ushort ATTR_CURRENTTIER7BLOCK14SUMMATIONRECEIVED = 0x097E;
-        public const ushort ATTR_CURRENTTIER7BLOCK15SUMMATIONRECEIVED = 0x097F;
-        public const ushort ATTR_CURRENTTIER7BLOCK16SUMMATIONRECEIVED = 0x0980;
-        public const ushort ATTR_CURRENTTIER8BLOCK1SUMMATIONRECEIVED = 0x0981;
-        public const ushort ATTR_CURRENTTIER8BLOCK2SUMMATIONRECEIVED = 0x0982;
-        public const ushort ATTR_CURRENTTIER8BLOCK3SUMMATIONRECEIVED = 0x0983;
-        public const ushort ATTR_CURRENTTIER8BLOCK4SUMMATIONRECEIVED = 0x0984;
-        public const ushort ATTR_CURRENTTIER8BLOCK5SUMMATIONRECEIVED = 0x0985;
-        public const ushort ATTR_CURRENTTIER8BLOCK6SUMMATIONRECEIVED = 0x0986;
-        public const ushort ATTR_CURRENTTIER8BLOCK7SUMMATIONRECEIVED = 0x0987;
-        public const ushort ATTR_CURRENTTIER8BLOCK8SUMMATIONRECEIVED = 0x0988;
-        public const ushort ATTR_CURRENTTIER8BLOCK9SUMMATIONRECEIVED = 0x0989;
-        public const ushort ATTR_CURRENTTIER8BLOCK10SUMMATIONRECEIVED = 0x098A;
-        public const ushort ATTR_CURRENTTIER8BLOCK11SUMMATIONRECEIVED = 0x098B;
-        public const ushort ATTR_CURRENTTIER8BLOCK12SUMMATIONRECEIVED = 0x098C;
-        public const ushort ATTR_CURRENTTIER8BLOCK13SUMMATIONRECEIVED = 0x098D;
-        public const ushort ATTR_CURRENTTIER8BLOCK14SUMMATIONRECEIVED = 0x098E;
-        public const ushort ATTR_CURRENTTIER8BLOCK15SUMMATIONRECEIVED = 0x098F;
-        public const ushort ATTR_CURRENTTIER8BLOCK16SUMMATIONRECEIVED = 0x0990;
-        public const ushort ATTR_CURRENTTIER9BLOCK1SUMMATIONRECEIVED = 0x0991;
-        public const ushort ATTR_CURRENTTIER9BLOCK2SUMMATIONRECEIVED = 0x0992;
-        public const ushort ATTR_CURRENTTIER9BLOCK3SUMMATIONRECEIVED = 0x0993;
-        public const ushort ATTR_CURRENTTIER9BLOCK4SUMMATIONRECEIVED = 0x0994;
-        public const ushort ATTR_CURRENTTIER9BLOCK5SUMMATIONRECEIVED = 0x0995;
-        public const ushort ATTR_CURRENTTIER9BLOCK6SUMMATIONRECEIVED = 0x0996;
-        public const ushort ATTR_CURRENTTIER9BLOCK7SUMMATIONRECEIVED = 0x0997;
-        public const ushort ATTR_CURRENTTIER9BLOCK8SUMMATIONRECEIVED = 0x0998;
-        public const ushort ATTR_CURRENTTIER9BLOCK9SUMMATIONRECEIVED = 0x0999;
-        public const ushort ATTR_CURRENTTIER9BLOCK10SUMMATIONRECEIVED = 0x099A;
-        public const ushort ATTR_CURRENTTIER9BLOCK11SUMMATIONRECEIVED = 0x099B;
-        public const ushort ATTR_CURRENTTIER9BLOCK12SUMMATIONRECEIVED = 0x099C;
-        public const ushort ATTR_CURRENTTIER9BLOCK13SUMMATIONRECEIVED = 0x099D;
-        public const ushort ATTR_CURRENTTIER9BLOCK14SUMMATIONRECEIVED = 0x099E;
-        public const ushort ATTR_CURRENTTIER9BLOCK15SUMMATIONRECEIVED = 0x099F;
-        public const ushort ATTR_CURRENTTIER9BLOCK16SUMMATIONRECEIVED = 0x09A0;
-        public const ushort ATTR_CURRENTTIER10BLOCK1SUMMATIONRECEIVED = 0x09A1;
-        public const ushort ATTR_CURRENTTIER10BLOCK2SUMMATIONRECEIVED = 0x09A2;
-        public const ushort ATTR_CURRENTTIER10BLOCK3SUMMATIONRECEIVED = 0x09A3;
-        public const ushort ATTR_CURRENTTIER10BLOCK4SUMMATIONRECEIVED = 0x09A4;
-        public const ushort ATTR_CURRENTTIER10BLOCK5SUMMATIONRECEIVED = 0x09A5;
-        public const ushort ATTR_CURRENTTIER10BLOCK6SUMMATIONRECEIVED = 0x09A6;
-        public const ushort ATTR_CURRENTTIER10BLOCK7SUMMATIONRECEIVED = 0x09A7;
-        public const ushort ATTR_CURRENTTIER10BLOCK8SUMMATIONRECEIVED = 0x09A8;
-        public const ushort ATTR_CURRENTTIER10BLOCK9SUMMATIONRECEIVED = 0x09A9;
-        public const ushort ATTR_CURRENTTIER10BLOCK10SUMMATIONRECEIVED = 0x09AA;
-        public const ushort ATTR_CURRENTTIER10BLOCK11SUMMATIONRECEIVED = 0x09AB;
-        public const ushort ATTR_CURRENTTIER10BLOCK12SUMMATIONRECEIVED = 0x09AC;
-        public const ushort ATTR_CURRENTTIER10BLOCK13SUMMATIONRECEIVED = 0x09AD;
-        public const ushort ATTR_CURRENTTIER10BLOCK14SUMMATIONRECEIVED = 0x09AE;
-        public const ushort ATTR_CURRENTTIER10BLOCK15SUMMATIONRECEIVED = 0x09AF;
-        public const ushort ATTR_CURRENTTIER10BLOCK16SUMMATIONRECEIVED = 0x09B0;
-        public const ushort ATTR_CURRENTTIER11BLOCK1SUMMATIONRECEIVED = 0x09B1;
-        public const ushort ATTR_CURRENTTIER11BLOCK2SUMMATIONRECEIVED = 0x09B2;
-        public const ushort ATTR_CURRENTTIER11BLOCK3SUMMATIONRECEIVED = 0x09B3;
-        public const ushort ATTR_CURRENTTIER11BLOCK4SUMMATIONRECEIVED = 0x09B4;
-        public const ushort ATTR_CURRENTTIER11BLOCK5SUMMATIONRECEIVED = 0x09B5;
-        public const ushort ATTR_CURRENTTIER11BLOCK6SUMMATIONRECEIVED = 0x09B6;
-        public const ushort ATTR_CURRENTTIER11BLOCK7SUMMATIONRECEIVED = 0x09B7;
-        public const ushort ATTR_CURRENTTIER11BLOCK8SUMMATIONRECEIVED = 0x09B8;
-        public const ushort ATTR_CURRENTTIER11BLOCK9SUMMATIONRECEIVED = 0x09B9;
-        public const ushort ATTR_CURRENTTIER11BLOCK10SUMMATIONRECEIVED = 0x09BA;
-        public const ushort ATTR_CURRENTTIER11BLOCK11SUMMATIONRECEIVED = 0x09BB;
-        public const ushort ATTR_CURRENTTIER11BLOCK12SUMMATIONRECEIVED = 0x09BC;
-        public const ushort ATTR_CURRENTTIER11BLOCK13SUMMATIONRECEIVED = 0x09BD;
-        public const ushort ATTR_CURRENTTIER11BLOCK14SUMMATIONRECEIVED = 0x09BE;
-        public const ushort ATTR_CURRENTTIER11BLOCK15SUMMATIONRECEIVED = 0x09BF;
-        public const ushort ATTR_CURRENTTIER11BLOCK16SUMMATIONRECEIVED = 0x09C0;
-        public const ushort ATTR_CURRENTTIER12BLOCK1SUMMATIONRECEIVED = 0x09C1;
-        public const ushort ATTR_CURRENTTIER12BLOCK2SUMMATIONRECEIVED = 0x09C2;
-        public const ushort ATTR_CURRENTTIER12BLOCK3SUMMATIONRECEIVED = 0x09C3;
-        public const ushort ATTR_CURRENTTIER12BLOCK4SUMMATIONRECEIVED = 0x09C4;
-        public const ushort ATTR_CURRENTTIER12BLOCK5SUMMATIONRECEIVED = 0x09C5;
-        public const ushort ATTR_CURRENTTIER12BLOCK6SUMMATIONRECEIVED = 0x09C6;
-        public const ushort ATTR_CURRENTTIER12BLOCK7SUMMATIONRECEIVED = 0x09C7;
-        public const ushort ATTR_CURRENTTIER12BLOCK8SUMMATIONRECEIVED = 0x09C8;
-        public const ushort ATTR_CURRENTTIER12BLOCK9SUMMATIONRECEIVED = 0x09C9;
-        public const ushort ATTR_CURRENTTIER12BLOCK10SUMMATIONRECEIVED = 0x09CA;
-        public const ushort ATTR_CURRENTTIER12BLOCK11SUMMATIONRECEIVED = 0x09CB;
-        public const ushort ATTR_CURRENTTIER12BLOCK12SUMMATIONRECEIVED = 0x09CC;
-        public const ushort ATTR_CURRENTTIER12BLOCK13SUMMATIONRECEIVED = 0x09CD;
-        public const ushort ATTR_CURRENTTIER12BLOCK14SUMMATIONRECEIVED = 0x09CE;
-        public const ushort ATTR_CURRENTTIER12BLOCK15SUMMATIONRECEIVED = 0x09CF;
-        public const ushort ATTR_CURRENTTIER12BLOCK16SUMMATIONRECEIVED = 0x09D0;
-        public const ushort ATTR_CURRENTTIER13BLOCK1SUMMATIONRECEIVED = 0x09D1;
-        public const ushort ATTR_CURRENTTIER13BLOCK2SUMMATIONRECEIVED = 0x09D2;
-        public const ushort ATTR_CURRENTTIER13BLOCK3SUMMATIONRECEIVED = 0x09D3;
-        public const ushort ATTR_CURRENTTIER13BLOCK4SUMMATIONRECEIVED = 0x09D4;
-        public const ushort ATTR_CURRENTTIER13BLOCK5SUMMATIONRECEIVED = 0x09D5;
-        public const ushort ATTR_CURRENTTIER13BLOCK6SUMMATIONRECEIVED = 0x09D6;
-        public const ushort ATTR_CURRENTTIER13BLOCK7SUMMATIONRECEIVED = 0x09D7;
-        public const ushort ATTR_CURRENTTIER13BLOCK8SUMMATIONRECEIVED = 0x09D8;
-        public const ushort ATTR_CURRENTTIER13BLOCK9SUMMATIONRECEIVED = 0x09D9;
-        public const ushort ATTR_CURRENTTIER13BLOCK10SUMMATIONRECEIVED = 0x09DA;
-        public const ushort ATTR_CURRENTTIER13BLOCK11SUMMATIONRECEIVED = 0x09DB;
-        public const ushort ATTR_CURRENTTIER13BLOCK12SUMMATIONRECEIVED = 0x09DC;
-        public const ushort ATTR_CURRENTTIER13BLOCK13SUMMATIONRECEIVED = 0x09DD;
-        public const ushort ATTR_CURRENTTIER13BLOCK14SUMMATIONRECEIVED = 0x09DE;
-        public const ushort ATTR_CURRENTTIER13BLOCK15SUMMATIONRECEIVED = 0x09DF;
-        public const ushort ATTR_CURRENTTIER13BLOCK16SUMMATIONRECEIVED = 0x09E0;
-        public const ushort ATTR_CURRENTTIER14BLOCK1SUMMATIONRECEIVED = 0x09E1;
-        public const ushort ATTR_CURRENTTIER14BLOCK2SUMMATIONRECEIVED = 0x09E2;
-        public const ushort ATTR_CURRENTTIER14BLOCK3SUMMATIONRECEIVED = 0x09E3;
-        public const ushort ATTR_CURRENTTIER14BLOCK4SUMMATIONRECEIVED = 0x09E4;
-        public const ushort ATTR_CURRENTTIER14BLOCK5SUMMATIONRECEIVED = 0x09E5;
-        public const ushort ATTR_CURRENTTIER14BLOCK6SUMMATIONRECEIVED = 0x09E6;
-        public const ushort ATTR_CURRENTTIER14BLOCK7SUMMATIONRECEIVED = 0x09E7;
-        public const ushort ATTR_CURRENTTIER14BLOCK8SUMMATIONRECEIVED = 0x09E8;
-        public const ushort ATTR_CURRENTTIER14BLOCK9SUMMATIONRECEIVED = 0x09E9;
-        public const ushort ATTR_CURRENTTIER14BLOCK10SUMMATIONRECEIVED = 0x09EA;
-        public const ushort ATTR_CURRENTTIER14BLOCK11SUMMATIONRECEIVED = 0x09EB;
-        public const ushort ATTR_CURRENTTIER14BLOCK12SUMMATIONRECEIVED = 0x09EC;
-        public const ushort ATTR_CURRENTTIER14BLOCK13SUMMATIONRECEIVED = 0x09ED;
-        public const ushort ATTR_CURRENTTIER14BLOCK14SUMMATIONRECEIVED = 0x09EE;
-        public const ushort ATTR_CURRENTTIER14BLOCK15SUMMATIONRECEIVED = 0x09EF;
-        public const ushort ATTR_CURRENTTIER14BLOCK16SUMMATIONRECEIVED = 0x09F0;
-        public const ushort ATTR_CURRENTTIER15BLOCK1SUMMATIONRECEIVED = 0x09F1;
-        public const ushort ATTR_CURRENTTIER15BLOCK2SUMMATIONRECEIVED = 0x09F2;
-        public const ushort ATTR_CURRENTTIER15BLOCK3SUMMATIONRECEIVED = 0x09F3;
-        public const ushort ATTR_CURRENTTIER15BLOCK4SUMMATIONRECEIVED = 0x09F4;
-        public const ushort ATTR_CURRENTTIER15BLOCK5SUMMATIONRECEIVED = 0x09F5;
-        public const ushort ATTR_CURRENTTIER15BLOCK6SUMMATIONRECEIVED = 0x09F6;
-        public const ushort ATTR_CURRENTTIER15BLOCK7SUMMATIONRECEIVED = 0x09F7;
-        public const ushort ATTR_CURRENTTIER15BLOCK8SUMMATIONRECEIVED = 0x09F8;
-        public const ushort ATTR_CURRENTTIER15BLOCK9SUMMATIONRECEIVED = 0x09F9;
-        public const ushort ATTR_CURRENTTIER15BLOCK10SUMMATIONRECEIVED = 0x09FA;
-        public const ushort ATTR_CURRENTTIER15BLOCK11SUMMATIONRECEIVED = 0x09FB;
-        public const ushort ATTR_CURRENTTIER15BLOCK12SUMMATIONRECEIVED = 0x09FC;
-        public const ushort ATTR_CURRENTTIER15BLOCK13SUMMATIONRECEIVED = 0x09FD;
-        public const ushort ATTR_CURRENTTIER15BLOCK14SUMMATIONRECEIVED = 0x09FE;
-        public const ushort ATTR_CURRENTTIER15BLOCK15SUMMATIONRECEIVED = 0x09FF;
-        public const ushort ATTR_CURRENTTIER15BLOCK16SUMMATIONRECEIVED = 0x0A00;
+        public const ushort ATTR_CURRENTNOTIERBLOCK1SUMMATIONRECEIVED = 0x0900;
+        public const ushort ATTR_CURRENTNOTIERBLOCK2SUMMATIONRECEIVED = 0x0901;
+        public const ushort ATTR_CURRENTNOTIERBLOCK3SUMMATIONRECEIVED = 0x0902;
+        public const ushort ATTR_CURRENTNOTIERBLOCK4SUMMATIONRECEIVED = 0x0903;
+        public const ushort ATTR_CURRENTNOTIERBLOCK5SUMMATIONRECEIVED = 0x0904;
+        public const ushort ATTR_CURRENTNOTIERBLOCK6SUMMATIONRECEIVED = 0x0905;
+        public const ushort ATTR_CURRENTNOTIERBLOCK7SUMMATIONRECEIVED = 0x0906;
+        public const ushort ATTR_CURRENTNOTIERBLOCK8SUMMATIONRECEIVED = 0x0907;
+        public const ushort ATTR_CURRENTNOTIERBLOCK9SUMMATIONRECEIVED = 0x0908;
+        public const ushort ATTR_CURRENTNOTIERBLOCK10SUMMATIONRECEIVED = 0x0909;
+        public const ushort ATTR_CURRENTNOTIERBLOCK11SUMMATIONRECEIVED = 0x090A;
+        public const ushort ATTR_CURRENTNOTIERBLOCK12SUMMATIONRECEIVED = 0x090B;
+        public const ushort ATTR_CURRENTNOTIERBLOCK13SUMMATIONRECEIVED = 0x090C;
+        public const ushort ATTR_CURRENTNOTIERBLOCK14SUMMATIONRECEIVED = 0x090D;
+        public const ushort ATTR_CURRENTNOTIERBLOCK15SUMMATIONRECEIVED = 0x090E;
+        public const ushort ATTR_CURRENTNOTIERBLOCK16SUMMATIONRECEIVED = 0x090F;
+        public const ushort ATTR_CURRENTTIER1BLOCK1SUMMATIONRECEIVED = 0x0910;
+        public const ushort ATTR_CURRENTTIER1BLOCK2SUMMATIONRECEIVED = 0x0911;
+        public const ushort ATTR_CURRENTTIER1BLOCK3SUMMATIONRECEIVED = 0x0912;
+        public const ushort ATTR_CURRENTTIER1BLOCK4SUMMATIONRECEIVED = 0x0913;
+        public const ushort ATTR_CURRENTTIER1BLOCK5SUMMATIONRECEIVED = 0x0914;
+        public const ushort ATTR_CURRENTTIER1BLOCK6SUMMATIONRECEIVED = 0x0915;
+        public const ushort ATTR_CURRENTTIER1BLOCK7SUMMATIONRECEIVED = 0x0916;
+        public const ushort ATTR_CURRENTTIER1BLOCK8SUMMATIONRECEIVED = 0x0917;
+        public const ushort ATTR_CURRENTTIER1BLOCK9SUMMATIONRECEIVED = 0x0918;
+        public const ushort ATTR_CURRENTTIER1BLOCK10SUMMATIONRECEIVED = 0x0919;
+        public const ushort ATTR_CURRENTTIER1BLOCK11SUMMATIONRECEIVED = 0x091A;
+        public const ushort ATTR_CURRENTTIER1BLOCK12SUMMATIONRECEIVED = 0x091B;
+        public const ushort ATTR_CURRENTTIER1BLOCK13SUMMATIONRECEIVED = 0x091C;
+        public const ushort ATTR_CURRENTTIER1BLOCK14SUMMATIONRECEIVED = 0x091D;
+        public const ushort ATTR_CURRENTTIER1BLOCK15SUMMATIONRECEIVED = 0x091E;
+        public const ushort ATTR_CURRENTTIER1BLOCK16SUMMATIONRECEIVED = 0x091F;
+        public const ushort ATTR_CURRENTTIER2BLOCK1SUMMATIONRECEIVED = 0x0920;
+        public const ushort ATTR_CURRENTTIER2BLOCK2SUMMATIONRECEIVED = 0x0921;
+        public const ushort ATTR_CURRENTTIER2BLOCK3SUMMATIONRECEIVED = 0x0922;
+        public const ushort ATTR_CURRENTTIER2BLOCK4SUMMATIONRECEIVED = 0x0923;
+        public const ushort ATTR_CURRENTTIER2BLOCK5SUMMATIONRECEIVED = 0x0924;
+        public const ushort ATTR_CURRENTTIER2BLOCK6SUMMATIONRECEIVED = 0x0925;
+        public const ushort ATTR_CURRENTTIER2BLOCK7SUMMATIONRECEIVED = 0x0926;
+        public const ushort ATTR_CURRENTTIER2BLOCK8SUMMATIONRECEIVED = 0x0927;
+        public const ushort ATTR_CURRENTTIER2BLOCK9SUMMATIONRECEIVED = 0x0928;
+        public const ushort ATTR_CURRENTTIER2BLOCK10SUMMATIONRECEIVED = 0x0929;
+        public const ushort ATTR_CURRENTTIER2BLOCK11SUMMATIONRECEIVED = 0x092A;
+        public const ushort ATTR_CURRENTTIER2BLOCK12SUMMATIONRECEIVED = 0x092B;
+        public const ushort ATTR_CURRENTTIER2BLOCK13SUMMATIONRECEIVED = 0x092C;
+        public const ushort ATTR_CURRENTTIER2BLOCK14SUMMATIONRECEIVED = 0x092D;
+        public const ushort ATTR_CURRENTTIER2BLOCK15SUMMATIONRECEIVED = 0x092E;
+        public const ushort ATTR_CURRENTTIER2BLOCK16SUMMATIONRECEIVED = 0x092F;
+        public const ushort ATTR_CURRENTTIER3BLOCK1SUMMATIONRECEIVED = 0x0930;
+        public const ushort ATTR_CURRENTTIER3BLOCK2SUMMATIONRECEIVED = 0x0931;
+        public const ushort ATTR_CURRENTTIER3BLOCK3SUMMATIONRECEIVED = 0x0932;
+        public const ushort ATTR_CURRENTTIER3BLOCK4SUMMATIONRECEIVED = 0x0933;
+        public const ushort ATTR_CURRENTTIER3BLOCK5SUMMATIONRECEIVED = 0x0934;
+        public const ushort ATTR_CURRENTTIER3BLOCK6SUMMATIONRECEIVED = 0x0935;
+        public const ushort ATTR_CURRENTTIER3BLOCK7SUMMATIONRECEIVED = 0x0936;
+        public const ushort ATTR_CURRENTTIER3BLOCK8SUMMATIONRECEIVED = 0x0937;
+        public const ushort ATTR_CURRENTTIER3BLOCK9SUMMATIONRECEIVED = 0x0938;
+        public const ushort ATTR_CURRENTTIER3BLOCK10SUMMATIONRECEIVED = 0x0939;
+        public const ushort ATTR_CURRENTTIER3BLOCK11SUMMATIONRECEIVED = 0x093A;
+        public const ushort ATTR_CURRENTTIER3BLOCK12SUMMATIONRECEIVED = 0x093B;
+        public const ushort ATTR_CURRENTTIER3BLOCK13SUMMATIONRECEIVED = 0x093C;
+        public const ushort ATTR_CURRENTTIER3BLOCK14SUMMATIONRECEIVED = 0x093D;
+        public const ushort ATTR_CURRENTTIER3BLOCK15SUMMATIONRECEIVED = 0x093E;
+        public const ushort ATTR_CURRENTTIER3BLOCK16SUMMATIONRECEIVED = 0x093F;
+        public const ushort ATTR_CURRENTTIER4BLOCK1SUMMATIONRECEIVED = 0x0940;
+        public const ushort ATTR_CURRENTTIER4BLOCK2SUMMATIONRECEIVED = 0x0941;
+        public const ushort ATTR_CURRENTTIER4BLOCK3SUMMATIONRECEIVED = 0x0942;
+        public const ushort ATTR_CURRENTTIER4BLOCK4SUMMATIONRECEIVED = 0x0943;
+        public const ushort ATTR_CURRENTTIER4BLOCK5SUMMATIONRECEIVED = 0x0944;
+        public const ushort ATTR_CURRENTTIER4BLOCK6SUMMATIONRECEIVED = 0x0945;
+        public const ushort ATTR_CURRENTTIER4BLOCK7SUMMATIONRECEIVED = 0x0946;
+        public const ushort ATTR_CURRENTTIER4BLOCK8SUMMATIONRECEIVED = 0x0947;
+        public const ushort ATTR_CURRENTTIER4BLOCK9SUMMATIONRECEIVED = 0x0948;
+        public const ushort ATTR_CURRENTTIER4BLOCK10SUMMATIONRECEIVED = 0x0949;
+        public const ushort ATTR_CURRENTTIER4BLOCK11SUMMATIONRECEIVED = 0x094A;
+        public const ushort ATTR_CURRENTTIER4BLOCK12SUMMATIONRECEIVED = 0x094B;
+        public const ushort ATTR_CURRENTTIER4BLOCK13SUMMATIONRECEIVED = 0x094C;
+        public const ushort ATTR_CURRENTTIER4BLOCK14SUMMATIONRECEIVED = 0x094D;
+        public const ushort ATTR_CURRENTTIER4BLOCK15SUMMATIONRECEIVED = 0x094E;
+        public const ushort ATTR_CURRENTTIER4BLOCK16SUMMATIONRECEIVED = 0x094F;
+        public const ushort ATTR_CURRENTTIER5BLOCK1SUMMATIONRECEIVED = 0x0950;
+        public const ushort ATTR_CURRENTTIER5BLOCK2SUMMATIONRECEIVED = 0x0951;
+        public const ushort ATTR_CURRENTTIER5BLOCK3SUMMATIONRECEIVED = 0x0952;
+        public const ushort ATTR_CURRENTTIER5BLOCK4SUMMATIONRECEIVED = 0x0953;
+        public const ushort ATTR_CURRENTTIER5BLOCK5SUMMATIONRECEIVED = 0x0954;
+        public const ushort ATTR_CURRENTTIER5BLOCK6SUMMATIONRECEIVED = 0x0955;
+        public const ushort ATTR_CURRENTTIER5BLOCK7SUMMATIONRECEIVED = 0x0956;
+        public const ushort ATTR_CURRENTTIER5BLOCK8SUMMATIONRECEIVED = 0x0957;
+        public const ushort ATTR_CURRENTTIER5BLOCK9SUMMATIONRECEIVED = 0x0958;
+        public const ushort ATTR_CURRENTTIER5BLOCK10SUMMATIONRECEIVED = 0x0959;
+        public const ushort ATTR_CURRENTTIER5BLOCK11SUMMATIONRECEIVED = 0x095A;
+        public const ushort ATTR_CURRENTTIER5BLOCK12SUMMATIONRECEIVED = 0x095B;
+        public const ushort ATTR_CURRENTTIER5BLOCK13SUMMATIONRECEIVED = 0x095C;
+        public const ushort ATTR_CURRENTTIER5BLOCK14SUMMATIONRECEIVED = 0x095D;
+        public const ushort ATTR_CURRENTTIER5BLOCK15SUMMATIONRECEIVED = 0x095E;
+        public const ushort ATTR_CURRENTTIER5BLOCK16SUMMATIONRECEIVED = 0x095F;
+        public const ushort ATTR_CURRENTTIER6BLOCK1SUMMATIONRECEIVED = 0x0960;
+        public const ushort ATTR_CURRENTTIER6BLOCK2SUMMATIONRECEIVED = 0x0961;
+        public const ushort ATTR_CURRENTTIER6BLOCK3SUMMATIONRECEIVED = 0x0962;
+        public const ushort ATTR_CURRENTTIER6BLOCK4SUMMATIONRECEIVED = 0x0963;
+        public const ushort ATTR_CURRENTTIER6BLOCK5SUMMATIONRECEIVED = 0x0964;
+        public const ushort ATTR_CURRENTTIER6BLOCK6SUMMATIONRECEIVED = 0x0965;
+        public const ushort ATTR_CURRENTTIER6BLOCK7SUMMATIONRECEIVED = 0x0966;
+        public const ushort ATTR_CURRENTTIER6BLOCK8SUMMATIONRECEIVED = 0x0967;
+        public const ushort ATTR_CURRENTTIER6BLOCK9SUMMATIONRECEIVED = 0x0968;
+        public const ushort ATTR_CURRENTTIER6BLOCK10SUMMATIONRECEIVED = 0x0969;
+        public const ushort ATTR_CURRENTTIER6BLOCK11SUMMATIONRECEIVED = 0x096A;
+        public const ushort ATTR_CURRENTTIER6BLOCK12SUMMATIONRECEIVED = 0x096B;
+        public const ushort ATTR_CURRENTTIER6BLOCK13SUMMATIONRECEIVED = 0x096C;
+        public const ushort ATTR_CURRENTTIER6BLOCK14SUMMATIONRECEIVED = 0x096D;
+        public const ushort ATTR_CURRENTTIER6BLOCK15SUMMATIONRECEIVED = 0x096E;
+        public const ushort ATTR_CURRENTTIER6BLOCK16SUMMATIONRECEIVED = 0x096F;
+        public const ushort ATTR_CURRENTTIER7BLOCK1SUMMATIONRECEIVED = 0x0970;
+        public const ushort ATTR_CURRENTTIER7BLOCK2SUMMATIONRECEIVED = 0x0971;
+        public const ushort ATTR_CURRENTTIER7BLOCK3SUMMATIONRECEIVED = 0x0972;
+        public const ushort ATTR_CURRENTTIER7BLOCK4SUMMATIONRECEIVED = 0x0973;
+        public const ushort ATTR_CURRENTTIER7BLOCK5SUMMATIONRECEIVED = 0x0974;
+        public const ushort ATTR_CURRENTTIER7BLOCK6SUMMATIONRECEIVED = 0x0975;
+        public const ushort ATTR_CURRENTTIER7BLOCK7SUMMATIONRECEIVED = 0x0976;
+        public const ushort ATTR_CURRENTTIER7BLOCK8SUMMATIONRECEIVED = 0x0977;
+        public const ushort ATTR_CURRENTTIER7BLOCK9SUMMATIONRECEIVED = 0x0978;
+        public const ushort ATTR_CURRENTTIER7BLOCK10SUMMATIONRECEIVED = 0x0979;
+        public const ushort ATTR_CURRENTTIER7BLOCK11SUMMATIONRECEIVED = 0x097A;
+        public const ushort ATTR_CURRENTTIER7BLOCK12SUMMATIONRECEIVED = 0x097B;
+        public const ushort ATTR_CURRENTTIER7BLOCK13SUMMATIONRECEIVED = 0x097C;
+        public const ushort ATTR_CURRENTTIER7BLOCK14SUMMATIONRECEIVED = 0x097D;
+        public const ushort ATTR_CURRENTTIER7BLOCK15SUMMATIONRECEIVED = 0x097E;
+        public const ushort ATTR_CURRENTTIER7BLOCK16SUMMATIONRECEIVED = 0x097F;
+        public const ushort ATTR_CURRENTTIER8BLOCK1SUMMATIONRECEIVED = 0x0980;
+        public const ushort ATTR_CURRENTTIER8BLOCK2SUMMATIONRECEIVED = 0x0981;
+        public const ushort ATTR_CURRENTTIER8BLOCK3SUMMATIONRECEIVED = 0x0982;
+        public const ushort ATTR_CURRENTTIER8BLOCK4SUMMATIONRECEIVED = 0x0983;
+        public const ushort ATTR_CURRENTTIER8BLOCK5SUMMATIONRECEIVED = 0x0984;
+        public const ushort ATTR_CURRENTTIER8BLOCK6SUMMATIONRECEIVED = 0x0985;
+        public const ushort ATTR_CURRENTTIER8BLOCK7SUMMATIONRECEIVED = 0x0986;
+        public const ushort ATTR_CURRENTTIER8BLOCK8SUMMATIONRECEIVED = 0x0987;
+        public const ushort ATTR_CURRENTTIER8BLOCK9SUMMATIONRECEIVED = 0x0988;
+        public const ushort ATTR_CURRENTTIER8BLOCK10SUMMATIONRECEIVED = 0x0989;
+        public const ushort ATTR_CURRENTTIER8BLOCK11SUMMATIONRECEIVED = 0x098A;
+        public const ushort ATTR_CURRENTTIER8BLOCK12SUMMATIONRECEIVED = 0x098B;
+        public const ushort ATTR_CURRENTTIER8BLOCK13SUMMATIONRECEIVED = 0x098C;
+        public const ushort ATTR_CURRENTTIER8BLOCK14SUMMATIONRECEIVED = 0x098D;
+        public const ushort ATTR_CURRENTTIER8BLOCK15SUMMATIONRECEIVED = 0x098E;
+        public const ushort ATTR_CURRENTTIER8BLOCK16SUMMATIONRECEIVED = 0x098F;
+        public const ushort ATTR_CURRENTTIER9BLOCK1SUMMATIONRECEIVED = 0x0990;
+        public const ushort ATTR_CURRENTTIER9BLOCK2SUMMATIONRECEIVED = 0x0991;
+        public const ushort ATTR_CURRENTTIER9BLOCK3SUMMATIONRECEIVED = 0x0992;
+        public const ushort ATTR_CURRENTTIER9BLOCK4SUMMATIONRECEIVED = 0x0993;
+        public const ushort ATTR_CURRENTTIER9BLOCK5SUMMATIONRECEIVED = 0x0994;
+        public const ushort ATTR_CURRENTTIER9BLOCK6SUMMATIONRECEIVED = 0x0995;
+        public const ushort ATTR_CURRENTTIER9BLOCK7SUMMATIONRECEIVED = 0x0996;
+        public const ushort ATTR_CURRENTTIER9BLOCK8SUMMATIONRECEIVED = 0x0997;
+        public const ushort ATTR_CURRENTTIER9BLOCK9SUMMATIONRECEIVED = 0x0998;
+        public const ushort ATTR_CURRENTTIER9BLOCK10SUMMATIONRECEIVED = 0x0999;
+        public const ushort ATTR_CURRENTTIER9BLOCK11SUMMATIONRECEIVED = 0x099A;
+        public const ushort ATTR_CURRENTTIER9BLOCK12SUMMATIONRECEIVED = 0x099B;
+        public const ushort ATTR_CURRENTTIER9BLOCK13SUMMATIONRECEIVED = 0x099C;
+        public const ushort ATTR_CURRENTTIER9BLOCK14SUMMATIONRECEIVED = 0x099D;
+        public const ushort ATTR_CURRENTTIER9BLOCK15SUMMATIONRECEIVED = 0x099E;
+        public const ushort ATTR_CURRENTTIER9BLOCK16SUMMATIONRECEIVED = 0x099F;
+        public const ushort ATTR_CURRENTTIER10BLOCK1SUMMATIONRECEIVED = 0x09A0;
+        public const ushort ATTR_CURRENTTIER10BLOCK2SUMMATIONRECEIVED = 0x09A1;
+        public const ushort ATTR_CURRENTTIER10BLOCK3SUMMATIONRECEIVED = 0x09A2;
+        public const ushort ATTR_CURRENTTIER10BLOCK4SUMMATIONRECEIVED = 0x09A3;
+        public const ushort ATTR_CURRENTTIER10BLOCK5SUMMATIONRECEIVED = 0x09A4;
+        public const ushort ATTR_CURRENTTIER10BLOCK6SUMMATIONRECEIVED = 0x09A5;
+        public const ushort ATTR_CURRENTTIER10BLOCK7SUMMATIONRECEIVED = 0x09A6;
+        public const ushort ATTR_CURRENTTIER10BLOCK8SUMMATIONRECEIVED = 0x09A7;
+        public const ushort ATTR_CURRENTTIER10BLOCK9SUMMATIONRECEIVED = 0x09A8;
+        public const ushort ATTR_CURRENTTIER10BLOCK10SUMMATIONRECEIVED = 0x09A9;
+        public const ushort ATTR_CURRENTTIER10BLOCK11SUMMATIONRECEIVED = 0x09AA;
+        public const ushort ATTR_CURRENTTIER10BLOCK12SUMMATIONRECEIVED = 0x09AB;
+        public const ushort ATTR_CURRENTTIER10BLOCK13SUMMATIONRECEIVED = 0x09AC;
+        public const ushort ATTR_CURRENTTIER10BLOCK14SUMMATIONRECEIVED = 0x09AD;
+        public const ushort ATTR_CURRENTTIER10BLOCK15SUMMATIONRECEIVED = 0x09AE;
+        public const ushort ATTR_CURRENTTIER10BLOCK16SUMMATIONRECEIVED = 0x09AF;
+        public const ushort ATTR_CURRENTTIER11BLOCK1SUMMATIONRECEIVED = 0x09B0;
+        public const ushort ATTR_CURRENTTIER11BLOCK2SUMMATIONRECEIVED = 0x09B1;
+        public const ushort ATTR_CURRENTTIER11BLOCK3SUMMATIONRECEIVED = 0x09B2;
+        public const ushort ATTR_CURRENTTIER11BLOCK4SUMMATIONRECEIVED = 0x09B3;
+        public const ushort ATTR_CURRENTTIER11BLOCK5SUMMATIONRECEIVED = 0x09B4;
+        public const ushort ATTR_CURRENTTIER11BLOCK6SUMMATIONRECEIVED = 0x09B5;
+        public const ushort ATTR_CURRENTTIER11BLOCK7SUMMATIONRECEIVED = 0x09B6;
+        public const ushort ATTR_CURRENTTIER11BLOCK8SUMMATIONRECEIVED = 0x09B7;
+        public const ushort ATTR_CURRENTTIER11BLOCK9SUMMATIONRECEIVED = 0x09B8;
+        public const ushort ATTR_CURRENTTIER11BLOCK10SUMMATIONRECEIVED = 0x09B9;
+        public const ushort ATTR_CURRENTTIER11BLOCK11SUMMATIONRECEIVED = 0x09BA;
+        public const ushort ATTR_CURRENTTIER11BLOCK12SUMMATIONRECEIVED = 0x09BB;
+        public const ushort ATTR_CURRENTTIER11BLOCK13SUMMATIONRECEIVED = 0x09BC;
+        public const ushort ATTR_CURRENTTIER11BLOCK14SUMMATIONRECEIVED = 0x09BD;
+        public const ushort ATTR_CURRENTTIER11BLOCK15SUMMATIONRECEIVED = 0x09BE;
+        public const ushort ATTR_CURRENTTIER11BLOCK16SUMMATIONRECEIVED = 0x09BF;
+        public const ushort ATTR_CURRENTTIER12BLOCK1SUMMATIONRECEIVED = 0x09C0;
+        public const ushort ATTR_CURRENTTIER12BLOCK2SUMMATIONRECEIVED = 0x09C1;
+        public const ushort ATTR_CURRENTTIER12BLOCK3SUMMATIONRECEIVED = 0x09C2;
+        public const ushort ATTR_CURRENTTIER12BLOCK4SUMMATIONRECEIVED = 0x09C3;
+        public const ushort ATTR_CURRENTTIER12BLOCK5SUMMATIONRECEIVED = 0x09C4;
+        public const ushort ATTR_CURRENTTIER12BLOCK6SUMMATIONRECEIVED = 0x09C5;
+        public const ushort ATTR_CURRENTTIER12BLOCK7SUMMATIONRECEIVED = 0x09C6;
+        public const ushort ATTR_CURRENTTIER12BLOCK8SUMMATIONRECEIVED = 0x09C7;
+        public const ushort ATTR_CURRENTTIER12BLOCK9SUMMATIONRECEIVED = 0x09C8;
+        public const ushort ATTR_CURRENTTIER12BLOCK10SUMMATIONRECEIVED = 0x09C9;
+        public const ushort ATTR_CURRENTTIER12BLOCK11SUMMATIONRECEIVED = 0x09CA;
+        public const ushort ATTR_CURRENTTIER12BLOCK12SUMMATIONRECEIVED = 0x09CB;
+        public const ushort ATTR_CURRENTTIER12BLOCK13SUMMATIONRECEIVED = 0x09CC;
+        public const ushort ATTR_CURRENTTIER12BLOCK14SUMMATIONRECEIVED = 0x09CD;
+        public const ushort ATTR_CURRENTTIER12BLOCK15SUMMATIONRECEIVED = 0x09CE;
+        public const ushort ATTR_CURRENTTIER12BLOCK16SUMMATIONRECEIVED = 0x09CF;
+        public const ushort ATTR_CURRENTTIER13BLOCK1SUMMATIONRECEIVED = 0x09D0;
+        public const ushort ATTR_CURRENTTIER13BLOCK2SUMMATIONRECEIVED = 0x09D1;
+        public const ushort ATTR_CURRENTTIER13BLOCK3SUMMATIONRECEIVED = 0x09D2;
+        public const ushort ATTR_CURRENTTIER13BLOCK4SUMMATIONRECEIVED = 0x09D3;
+        public const ushort ATTR_CURRENTTIER13BLOCK5SUMMATIONRECEIVED = 0x09D4;
+        public const ushort ATTR_CURRENTTIER13BLOCK6SUMMATIONRECEIVED = 0x09D5;
+        public const ushort ATTR_CURRENTTIER13BLOCK7SUMMATIONRECEIVED = 0x09D6;
+        public const ushort ATTR_CURRENTTIER13BLOCK8SUMMATIONRECEIVED = 0x09D7;
+        public const ushort ATTR_CURRENTTIER13BLOCK9SUMMATIONRECEIVED = 0x09D8;
+        public const ushort ATTR_CURRENTTIER13BLOCK10SUMMATIONRECEIVED = 0x09D9;
+        public const ushort ATTR_CURRENTTIER13BLOCK11SUMMATIONRECEIVED = 0x09DA;
+        public const ushort ATTR_CURRENTTIER13BLOCK12SUMMATIONRECEIVED = 0x09DB;
+        public const ushort ATTR_CURRENTTIER13BLOCK13SUMMATIONRECEIVED = 0x09DC;
+        public const ushort ATTR_CURRENTTIER13BLOCK14SUMMATIONRECEIVED = 0x09DD;
+        public const ushort ATTR_CURRENTTIER13BLOCK15SUMMATIONRECEIVED = 0x09DE;
+        public const ushort ATTR_CURRENTTIER13BLOCK16SUMMATIONRECEIVED = 0x09DF;
+        public const ushort ATTR_CURRENTTIER14BLOCK1SUMMATIONRECEIVED = 0x09E0;
+        public const ushort ATTR_CURRENTTIER14BLOCK2SUMMATIONRECEIVED = 0x09E1;
+        public const ushort ATTR_CURRENTTIER14BLOCK3SUMMATIONRECEIVED = 0x09E2;
+        public const ushort ATTR_CURRENTTIER14BLOCK4SUMMATIONRECEIVED = 0x09E3;
+        public const ushort ATTR_CURRENTTIER14BLOCK5SUMMATIONRECEIVED = 0x09E4;
+        public const ushort ATTR_CURRENTTIER14BLOCK6SUMMATIONRECEIVED = 0x09E5;
+        public const ushort ATTR_CURRENTTIER14BLOCK7SUMMATIONRECEIVED = 0x09E6;
+        public const ushort ATTR_CURRENTTIER14BLOCK8SUMMATIONRECEIVED = 0x09E7;
+        public const ushort ATTR_CURRENTTIER14BLOCK9SUMMATIONRECEIVED = 0x09E8;
+        public const ushort ATTR_CURRENTTIER14BLOCK10SUMMATIONRECEIVED = 0x09E9;
+        public const ushort ATTR_CURRENTTIER14BLOCK11SUMMATIONRECEIVED = 0x09EA;
+        public const ushort ATTR_CURRENTTIER14BLOCK12SUMMATIONRECEIVED = 0x09EB;
+        public const ushort ATTR_CURRENTTIER14BLOCK13SUMMATIONRECEIVED = 0x09EC;
+        public const ushort ATTR_CURRENTTIER14BLOCK14SUMMATIONRECEIVED = 0x09ED;
+        public const ushort ATTR_CURRENTTIER14BLOCK15SUMMATIONRECEIVED = 0x09EE;
+        public const ushort ATTR_CURRENTTIER14BLOCK16SUMMATIONRECEIVED = 0x09EF;
+        public const ushort ATTR_CURRENTTIER15BLOCK1SUMMATIONRECEIVED = 0x09F0;
+        public const ushort ATTR_CURRENTTIER15BLOCK2SUMMATIONRECEIVED = 0x09F1;
+        public const ushort ATTR_CURRENTTIER15BLOCK3SUMMATIONRECEIVED = 0x09F2;
+        public const ushort ATTR_CURRENTTIER15BLOCK4SUMMATIONRECEIVED = 0x09F3;
+        public const ushort ATTR_CURRENTTIER15BLOCK5SUMMATIONRECEIVED = 0x09F4;
+        public const ushort ATTR_CURRENTTIER15BLOCK6SUMMATIONRECEIVED = 0x09F5;
+        public const ushort ATTR_CURRENTTIER15BLOCK7SUMMATIONRECEIVED = 0x09F6;
+        public const ushort ATTR_CURRENTTIER15BLOCK8SUMMATIONRECEIVED = 0x09F7;
+        public const ushort ATTR_CURRENTTIER15BLOCK9SUMMATIONRECEIVED = 0x09F8;
+        public const ushort ATTR_CURRENTTIER15BLOCK10SUMMATIONRECEIVED = 0x09F9;
+        public const ushort ATTR_CURRENTTIER15BLOCK11SUMMATIONRECEIVED = 0x09FA;
+        public const ushort ATTR_CURRENTTIER15BLOCK12SUMMATIONRECEIVED = 0x09FB;
+        public const ushort ATTR_CURRENTTIER15BLOCK13SUMMATIONRECEIVED = 0x09FC;
+        public const ushort ATTR_CURRENTTIER15BLOCK14SUMMATIONRECEIVED = 0x09FD;
+        public const ushort ATTR_CURRENTTIER15BLOCK15SUMMATIONRECEIVED = 0x09FE;
+        public const ushort ATTR_CURRENTTIER15BLOCK16SUMMATIONRECEIVED = 0x09FF;
 
         /// <summary>
         /// BillToDateDelivered provides a value for the costs in the current billing period.
@@ -2682,7 +2682,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONDELIVERED = 0x0C22;
+        public const ushort ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONDELIVERED = 0x0C20;
+
+        /// <summary>
+        /// PreviousDayNAlternativeConsumptionDelivered represents the summed value
+        /// delivered to the premises within the previous 24 hour period starting at the
+        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
+        /// default to midnight local time.
+     /// </summary>
+        public const ushort ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONDELIVERED = 0x0C22;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionDelivered represents the summed value
@@ -2698,7 +2706,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONDELIVERED = 0x0C26;
+        public const ushort ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONDELIVERED = 0x0C26;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionDelivered represents the summed value
@@ -2706,7 +2714,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONDELIVERED = 0x0C28;
+        public const ushort ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONDELIVERED = 0x0C28;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionDelivered represents the summed value
@@ -2714,15 +2722,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONDELIVERED = 0x0C2A;
-
-        /// <summary>
-        /// PreviousDayNAlternativeConsumptionDelivered represents the summed value
-        /// delivered to the premises within the previous 24 hour period starting at the
-        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
-        /// default to midnight local time.
-     /// </summary>
-        public const ushort ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONDELIVERED = 0x0C2C;
+        public const ushort ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONDELIVERED = 0x0C2A;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionReceived represents the summed value
@@ -2730,7 +2730,15 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONRECEIVED = 0x0C23;
+        public const ushort ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONRECEIVED = 0x0C21;
+
+        /// <summary>
+        /// PreviousDayNAlternativeConsumptionReceived represents the summed value
+        /// received from the premises within the previous 24 hour period starting at the
+        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
+        /// default to midnight local time.
+     /// </summary>
+        public const ushort ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONRECEIVED = 0x0C23;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionReceived represents the summed value
@@ -2746,7 +2754,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONRECEIVED = 0x0C27;
+        public const ushort ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONRECEIVED = 0x0C27;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionReceived represents the summed value
@@ -2754,7 +2762,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONRECEIVED = 0x0C29;
+        public const ushort ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONRECEIVED = 0x0C29;
 
         /// <summary>
         /// PreviousDayNAlternativeConsumptionReceived represents the summed value
@@ -2762,15 +2770,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
         /// default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONRECEIVED = 0x0C2B;
-
-        /// <summary>
-        /// PreviousDayNAlternativeConsumptionReceived represents the summed value
-        /// received from the premises within the previous 24 hour period starting at the
-        /// Historical Freeze Time (HFT). If the optional HFT attribute is not available,
-        /// default to midnight local time.
-     /// </summary>
-        public const ushort ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONRECEIVED = 0x0C2D;
+        public const ushort ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONRECEIVED = 0x0C2B;
 
         /// <summary>
         /// CurrentWeekAlternativeConsumptionDelivered represents the summed value
@@ -2798,7 +2798,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONDELIVERED = 0x0C33;
+        public const ushort ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONDELIVERED = 0x0C32;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionDelivered represents the summed value
@@ -2806,7 +2806,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONDELIVERED = 0x0C35;
+        public const ushort ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONDELIVERED = 0x0C34;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionDelivered represents the summed value
@@ -2814,7 +2814,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONDELIVERED = 0x0C37;
+        public const ushort ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONDELIVERED = 0x0C36;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionDelivered represents the summed value
@@ -2822,7 +2822,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONDELIVERED = 0x0C39;
+        public const ushort ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONDELIVERED = 0x0C38;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionDelivered represents the summed value
@@ -2830,7 +2830,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONDELIVERED = 0x0C3B;
+        public const ushort ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONDELIVERED = 0x0C3A;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionReceived represents the summed value
@@ -2838,7 +2838,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONRECEIVED = 0x0C34;
+        public const ushort ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONRECEIVED = 0x0C33;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionReceived represents the summed value
@@ -2846,7 +2846,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONRECEIVED = 0x0C36;
+        public const ushort ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONRECEIVED = 0x0C35;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionReceived represents the summed value
@@ -2854,7 +2854,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONRECEIVED = 0x0C38;
+        public const ushort ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONRECEIVED = 0x0C37;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionReceived represents the summed value
@@ -2862,7 +2862,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONRECEIVED = 0x0C3A;
+        public const ushort ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONRECEIVED = 0x0C39;
 
         /// <summary>
         /// PreviousWeekNAlternativeConsumptionReceived represents the summed value
@@ -2870,7 +2870,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// Historical Freeze Time (HFT) on the Monday to the Sunday. If the optional HFT
         /// attribute is not available, default to midnight local time.
      /// </summary>
-        public const ushort ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONRECEIVED = 0x0C3C;
+        public const ushort ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONRECEIVED = 0x0C3B;
 
         /// <summary>
         /// CurrentMonthAlternativeConsumptionDelivered represents the summed value
@@ -2891,32 +2891,32 @@ namespace ZigBeeNet.ZCL.Clusters
         /// midnight local time.
         /// </summary>
         public const ushort ATTR_CURRENTMONTHALTERNATIVECONSUMPTIONRECEIVED = 0x0C41;
-        public const ushort ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONDELIVERED = 0x0C43;
-        public const ushort ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONDELIVERED = 0x0C45;
-        public const ushort ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONDELIVERED = 0x0C47;
-        public const ushort ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONDELIVERED = 0x0C49;
-        public const ushort ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4B;
-        public const ushort ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4D;
-        public const ushort ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4F;
-        public const ushort ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONDELIVERED = 0x0C51;
-        public const ushort ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONDELIVERED = 0x0C53;
-        public const ushort ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONDELIVERED = 0x0C55;
-        public const ushort ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONDELIVERED = 0x0C57;
-        public const ushort ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONDELIVERED = 0x0C59;
-        public const ushort ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONDELIVERED = 0x0C5B;
-        public const ushort ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONRECEIVED = 0x0C44;
-        public const ushort ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONRECEIVED = 0x0C46;
-        public const ushort ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONRECEIVED = 0x0C48;
-        public const ushort ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4A;
-        public const ushort ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4C;
-        public const ushort ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4E;
-        public const ushort ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONRECEIVED = 0x0C50;
-        public const ushort ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONRECEIVED = 0x0C52;
-        public const ushort ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONRECEIVED = 0x0C54;
-        public const ushort ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONRECEIVED = 0x0C56;
-        public const ushort ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONRECEIVED = 0x0C58;
-        public const ushort ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONRECEIVED = 0x0C5A;
-        public const ushort ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONRECEIVED = 0x0C5C;
+        public const ushort ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONDELIVERED = 0x0C42;
+        public const ushort ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONDELIVERED = 0x0C44;
+        public const ushort ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONDELIVERED = 0x0C46;
+        public const ushort ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONDELIVERED = 0x0C48;
+        public const ushort ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4A;
+        public const ushort ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4C;
+        public const ushort ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONDELIVERED = 0x0C4E;
+        public const ushort ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONDELIVERED = 0x0C50;
+        public const ushort ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONDELIVERED = 0x0C52;
+        public const ushort ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONDELIVERED = 0x0C54;
+        public const ushort ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONDELIVERED = 0x0C56;
+        public const ushort ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONDELIVERED = 0x0C58;
+        public const ushort ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONDELIVERED = 0x0C5A;
+        public const ushort ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONRECEIVED = 0x0C43;
+        public const ushort ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONRECEIVED = 0x0C45;
+        public const ushort ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONRECEIVED = 0x0C47;
+        public const ushort ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONRECEIVED = 0x0C49;
+        public const ushort ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4B;
+        public const ushort ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4D;
+        public const ushort ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONRECEIVED = 0x0C4F;
+        public const ushort ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONRECEIVED = 0x0C51;
+        public const ushort ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONRECEIVED = 0x0C53;
+        public const ushort ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONRECEIVED = 0x0C55;
+        public const ushort ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONRECEIVED = 0x0C57;
+        public const ushort ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONRECEIVED = 0x0C59;
+        public const ushort ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONRECEIVED = 0x0C5B;
 
         protected override Dictionary<ushort, ZclAttribute> InitializeClientAttributes()
         {
@@ -2974,101 +2974,101 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_ACTIVEREGISTERTIERRECEIVED, new ZclAttribute(this, ATTR_ACTIVEREGISTERTIERRECEIVED, "Active Register Tier Received", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
             attributeMap.Add(ATTR_LASTBLOCKSWITCHTIME, new ZclAttribute(this, ATTR_LASTBLOCKSWITCHTIME, "Last Block Switch Time", ZclDataType.Get(DataType.UTCTIME), false, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER1SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER1SUMMATIONDELIVERED, "Current Tier 1 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER2SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER2SUMMATIONDELIVERED, "Current Tier 2 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER3SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER3SUMMATIONDELIVERED, "Current Tier 3 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER4SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER4SUMMATIONDELIVERED, "Current Tier 4 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER5SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER5SUMMATIONDELIVERED, "Current Tier 5 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER6SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER6SUMMATIONDELIVERED, "Current Tier 6 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER7SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER7SUMMATIONDELIVERED, "Current Tier 7 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER8SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER8SUMMATIONDELIVERED, "Current Tier 8 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER9SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER9SUMMATIONDELIVERED, "Current Tier 9 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER10SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER10SUMMATIONDELIVERED, "Current Tier 10 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER11SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER11SUMMATIONDELIVERED, "Current Tier 11 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER12SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER12SUMMATIONDELIVERED, "Current Tier 12 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER13SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER13SUMMATIONDELIVERED, "Current Tier 13 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER14SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER14SUMMATIONDELIVERED, "Current Tier 14 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER15SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER15SUMMATIONDELIVERED, "Current Tier 15 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER16SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER16SUMMATIONDELIVERED, "Current Tier 16 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER17SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER17SUMMATIONDELIVERED, "Current Tier 17 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER18SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER18SUMMATIONDELIVERED, "Current Tier 18 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER19SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER19SUMMATIONDELIVERED, "Current Tier 19 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER20SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER20SUMMATIONDELIVERED, "Current Tier 20 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER21SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER21SUMMATIONDELIVERED, "Current Tier 21 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER22SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER22SUMMATIONDELIVERED, "Current Tier 22 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER23SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER23SUMMATIONDELIVERED, "Current Tier 23 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER24SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER24SUMMATIONDELIVERED, "Current Tier 24 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER25SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER25SUMMATIONDELIVERED, "Current Tier 25 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER26SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER26SUMMATIONDELIVERED, "Current Tier 26 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER27SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER27SUMMATIONDELIVERED, "Current Tier 27 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER28SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER28SUMMATIONDELIVERED, "Current Tier 28 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER29SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER29SUMMATIONDELIVERED, "Current Tier 29 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER30SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER30SUMMATIONDELIVERED, "Current Tier 30 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER31SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER31SUMMATIONDELIVERED, "Current Tier 31 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER32SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER32SUMMATIONDELIVERED, "Current Tier 32 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER33SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER33SUMMATIONDELIVERED, "Current Tier 33 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER34SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER34SUMMATIONDELIVERED, "Current Tier 34 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER35SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER35SUMMATIONDELIVERED, "Current Tier 35 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER36SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER36SUMMATIONDELIVERED, "Current Tier 36 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER37SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER37SUMMATIONDELIVERED, "Current Tier 37 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER38SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER38SUMMATIONDELIVERED, "Current Tier 38 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER39SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER39SUMMATIONDELIVERED, "Current Tier 39 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER40SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER40SUMMATIONDELIVERED, "Current Tier 40 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER41SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER41SUMMATIONDELIVERED, "Current Tier 41 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER42SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER42SUMMATIONDELIVERED, "Current Tier 42 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER43SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER43SUMMATIONDELIVERED, "Current Tier 43 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER44SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER44SUMMATIONDELIVERED, "Current Tier 44 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER45SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER45SUMMATIONDELIVERED, "Current Tier 45 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER46SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER46SUMMATIONDELIVERED, "Current Tier 46 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER47SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER47SUMMATIONDELIVERED, "Current Tier 47 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER49SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER49SUMMATIONDELIVERED, "Current Tier 49 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER51SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER51SUMMATIONDELIVERED, "Current Tier 51 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER53SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER53SUMMATIONDELIVERED, "Current Tier 53 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER55SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER55SUMMATIONDELIVERED, "Current Tier 55 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER57SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER57SUMMATIONDELIVERED, "Current Tier 57 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER59SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER59SUMMATIONDELIVERED, "Current Tier 59 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER61SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER61SUMMATIONDELIVERED, "Current Tier 61 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER63SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER63SUMMATIONDELIVERED, "Current Tier 63 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER65SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER65SUMMATIONDELIVERED, "Current Tier 65 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER67SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER67SUMMATIONDELIVERED, "Current Tier 67 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER69SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER69SUMMATIONDELIVERED, "Current Tier 69 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER71SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER71SUMMATIONDELIVERED, "Current Tier 71 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER73SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER73SUMMATIONDELIVERED, "Current Tier 73 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER75SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER75SUMMATIONDELIVERED, "Current Tier 75 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER77SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER77SUMMATIONDELIVERED, "Current Tier 77 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER79SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER79SUMMATIONDELIVERED, "Current Tier 79 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER81SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER81SUMMATIONDELIVERED, "Current Tier 81 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER83SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER83SUMMATIONDELIVERED, "Current Tier 83 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER85SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER85SUMMATIONDELIVERED, "Current Tier 85 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER87SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER87SUMMATIONDELIVERED, "Current Tier 87 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER89SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER89SUMMATIONDELIVERED, "Current Tier 89 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER91SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER91SUMMATIONDELIVERED, "Current Tier 91 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER93SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER93SUMMATIONDELIVERED, "Current Tier 93 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER95SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER95SUMMATIONDELIVERED, "Current Tier 95 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER48SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTTIER48SUMMATIONDELIVERED, "Current Tier 48 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER1SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER1SUMMATIONRECEIVED, "Current Tier 1 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER2SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER2SUMMATIONRECEIVED, "Current Tier 2 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER3SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER3SUMMATIONRECEIVED, "Current Tier 3 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER4SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER4SUMMATIONRECEIVED, "Current Tier 4 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER5SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER5SUMMATIONRECEIVED, "Current Tier 5 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER6SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER6SUMMATIONRECEIVED, "Current Tier 6 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER7SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER7SUMMATIONRECEIVED, "Current Tier 7 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER8SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER8SUMMATIONRECEIVED, "Current Tier 8 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER9SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER9SUMMATIONRECEIVED, "Current Tier 9 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER10SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER10SUMMATIONRECEIVED, "Current Tier 10 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER11SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER11SUMMATIONRECEIVED, "Current Tier 11 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER12SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER12SUMMATIONRECEIVED, "Current Tier 12 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER13SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER13SUMMATIONRECEIVED, "Current Tier 13 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER14SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER14SUMMATIONRECEIVED, "Current Tier 14 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER15SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER15SUMMATIONRECEIVED, "Current Tier 15 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER16SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER16SUMMATIONRECEIVED, "Current Tier 16 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER17SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER17SUMMATIONRECEIVED, "Current Tier 17 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER18SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER18SUMMATIONRECEIVED, "Current Tier 18 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER19SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER19SUMMATIONRECEIVED, "Current Tier 19 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER20SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER20SUMMATIONRECEIVED, "Current Tier 20 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER21SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER21SUMMATIONRECEIVED, "Current Tier 21 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER22SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER22SUMMATIONRECEIVED, "Current Tier 22 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER23SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER23SUMMATIONRECEIVED, "Current Tier 23 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER24SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER24SUMMATIONRECEIVED, "Current Tier 24 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER25SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER25SUMMATIONRECEIVED, "Current Tier 25 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER26SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER26SUMMATIONRECEIVED, "Current Tier 26 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER27SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER27SUMMATIONRECEIVED, "Current Tier 27 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER28SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER28SUMMATIONRECEIVED, "Current Tier 28 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER29SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER29SUMMATIONRECEIVED, "Current Tier 29 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER30SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER30SUMMATIONRECEIVED, "Current Tier 30 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER31SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER31SUMMATIONRECEIVED, "Current Tier 31 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER32SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER32SUMMATIONRECEIVED, "Current Tier 32 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER33SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER33SUMMATIONRECEIVED, "Current Tier 33 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER34SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER34SUMMATIONRECEIVED, "Current Tier 34 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER35SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER35SUMMATIONRECEIVED, "Current Tier 35 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER36SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER36SUMMATIONRECEIVED, "Current Tier 36 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER37SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER37SUMMATIONRECEIVED, "Current Tier 37 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER38SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER38SUMMATIONRECEIVED, "Current Tier 38 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER39SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER39SUMMATIONRECEIVED, "Current Tier 39 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER40SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER40SUMMATIONRECEIVED, "Current Tier 40 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER41SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER41SUMMATIONRECEIVED, "Current Tier 41 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER42SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER42SUMMATIONRECEIVED, "Current Tier 42 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER43SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER43SUMMATIONRECEIVED, "Current Tier 43 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER44SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER44SUMMATIONRECEIVED, "Current Tier 44 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER45SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER45SUMMATIONRECEIVED, "Current Tier 45 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER46SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER46SUMMATIONRECEIVED, "Current Tier 46 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTTIER47SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER47SUMMATIONRECEIVED, "Current Tier 47 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER49SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER49SUMMATIONRECEIVED, "Current Tier 49 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER51SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER51SUMMATIONRECEIVED, "Current Tier 51 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER53SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER53SUMMATIONRECEIVED, "Current Tier 53 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER55SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER55SUMMATIONRECEIVED, "Current Tier 55 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER57SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER57SUMMATIONRECEIVED, "Current Tier 57 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER59SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER59SUMMATIONRECEIVED, "Current Tier 59 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER61SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER61SUMMATIONRECEIVED, "Current Tier 61 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER63SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER63SUMMATIONRECEIVED, "Current Tier 63 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER65SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER65SUMMATIONRECEIVED, "Current Tier 65 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER67SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER67SUMMATIONRECEIVED, "Current Tier 67 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER69SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER69SUMMATIONRECEIVED, "Current Tier 69 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER71SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER71SUMMATIONRECEIVED, "Current Tier 71 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER73SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER73SUMMATIONRECEIVED, "Current Tier 73 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER75SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER75SUMMATIONRECEIVED, "Current Tier 75 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER77SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER77SUMMATIONRECEIVED, "Current Tier 77 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER79SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER79SUMMATIONRECEIVED, "Current Tier 79 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER81SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER81SUMMATIONRECEIVED, "Current Tier 81 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER83SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER83SUMMATIONRECEIVED, "Current Tier 83 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER85SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER85SUMMATIONRECEIVED, "Current Tier 85 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER87SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER87SUMMATIONRECEIVED, "Current Tier 87 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER89SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER89SUMMATIONRECEIVED, "Current Tier 89 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER91SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER91SUMMATIONRECEIVED, "Current Tier 91 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER93SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER93SUMMATIONRECEIVED, "Current Tier 93 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTTIER95SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER95SUMMATIONRECEIVED, "Current Tier 95 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTTIER48SUMMATIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTTIER48SUMMATIONRECEIVED, "Current Tier 48 Summation Received", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CPP1SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CPP1SUMMATIONDELIVERED, "CPP 1 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CPP2SUMMATIONDELIVERED, new ZclAttribute(this, ATTR_CPP2SUMMATIONDELIVERED, "CPP 2 Summation Delivered", ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_STATUS, new ZclAttribute(this, ATTR_STATUS, "Status", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, false));
@@ -3124,61 +3124,61 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_CURRENTYEARMAXENERGYCARRIERDEMAND, new ZclAttribute(this, ATTR_CURRENTYEARMAXENERGYCARRIERDEMAND, "Current Year Max Energy Carrier Demand", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTYEARMINENERGYCARRIERDEMAND, new ZclAttribute(this, ATTR_CURRENTYEARMINENERGYCARRIERDEMAND, "Current Year Min Energy Carrier Demand", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY2CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY2CONSUMPTIONDELIVERED, "Previous Day 2 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY3CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY3CONSUMPTIONDELIVERED, "Previous Day 3 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY4CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY4CONSUMPTIONDELIVERED, "Previous Day 4 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY5CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY5CONSUMPTIONDELIVERED, "Previous Day 5 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY6CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY6CONSUMPTIONDELIVERED, "Previous Day 6 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY7CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY7CONSUMPTIONDELIVERED, "Previous Day 7 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY8CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY8CONSUMPTIONDELIVERED, "Previous Day 8 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY10CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY10CONSUMPTIONDELIVERED, "Previous Day 10 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY12CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY12CONSUMPTIONDELIVERED, "Previous Day 12 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY14CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY14CONSUMPTIONDELIVERED, "Previous Day 14 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY16CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY16CONSUMPTIONDELIVERED, "Previous Day 16 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY9CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY9CONSUMPTIONDELIVERED, "Previous Day 9 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY2CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY2CONSUMPTIONRECEIVED, "Previous Day 2 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY3CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY3CONSUMPTIONRECEIVED, "Previous Day 3 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY4CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY4CONSUMPTIONRECEIVED, "Previous Day 4 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY5CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY5CONSUMPTIONRECEIVED, "Previous Day 5 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY6CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY6CONSUMPTIONRECEIVED, "Previous Day 6 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY7CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY7CONSUMPTIONRECEIVED, "Previous Day 7 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY8CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY8CONSUMPTIONRECEIVED, "Previous Day 8 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY10CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY10CONSUMPTIONRECEIVED, "Previous Day 10 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY12CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY12CONSUMPTIONRECEIVED, "Previous Day 12 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY14CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY14CONSUMPTIONRECEIVED, "Previous Day 14 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY16CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY16CONSUMPTIONRECEIVED, "Previous Day 16 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY9CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY9CONSUMPTIONRECEIVED, "Previous Day 9 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTWEEKCONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTWEEKCONSUMPTIONDELIVERED, "Current Week Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTWEEKCONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTWEEKCONSUMPTIONRECEIVED, "Current Week Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK1CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK1CONSUMPTIONDELIVERED, "Previous Week 1 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK2CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK2CONSUMPTIONDELIVERED, "Previous Week 2 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK3CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK3CONSUMPTIONDELIVERED, "Previous Week 3 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK4CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK4CONSUMPTIONDELIVERED, "Previous Week 4 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK5CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK5CONSUMPTIONDELIVERED, "Previous Week 5 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK7CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK7CONSUMPTIONDELIVERED, "Previous Week 7 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK9CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK9CONSUMPTIONDELIVERED, "Previous Week 9 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK1CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK1CONSUMPTIONRECEIVED, "Previous Week 1 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK2CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK2CONSUMPTIONRECEIVED, "Previous Week 2 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK3CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK3CONSUMPTIONRECEIVED, "Previous Week 3 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK4CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK4CONSUMPTIONRECEIVED, "Previous Week 4 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK5CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK5CONSUMPTIONRECEIVED, "Previous Week 5 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK7CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK7CONSUMPTIONRECEIVED, "Previous Week 7 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK9CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK9CONSUMPTIONRECEIVED, "Previous Week 9 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTMONTHCONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTMONTHCONSUMPTIONDELIVERED, "Current Month Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTMONTHCONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTMONTHCONSUMPTIONRECEIVED, "Current Month Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH1CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH1CONSUMPTIONDELIVERED, "Previous Month 1 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH2CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH2CONSUMPTIONDELIVERED, "Previous Month 2 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH3CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH3CONSUMPTIONDELIVERED, "Previous Month 3 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH4CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH4CONSUMPTIONDELIVERED, "Previous Month 4 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH5CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH5CONSUMPTIONDELIVERED, "Previous Month 5 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH6CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH6CONSUMPTIONDELIVERED, "Previous Month 6 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH7CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH7CONSUMPTIONDELIVERED, "Previous Month 7 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH8CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH8CONSUMPTIONDELIVERED, "Previous Month 8 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH9CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH9CONSUMPTIONDELIVERED, "Previous Month 9 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH10CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH10CONSUMPTIONDELIVERED, "Previous Month 10 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH11CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH11CONSUMPTIONDELIVERED, "Previous Month 11 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH12CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH12CONSUMPTIONDELIVERED, "Previous Month 12 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH13CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH13CONSUMPTIONDELIVERED, "Previous Month 13 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH15CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH15CONSUMPTIONDELIVERED, "Previous Month 15 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH17CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH17CONSUMPTIONDELIVERED, "Previous Month 17 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH19CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH19CONSUMPTIONDELIVERED, "Previous Month 19 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH21CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH21CONSUMPTIONDELIVERED, "Previous Month 21 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH23CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH23CONSUMPTIONDELIVERED, "Previous Month 23 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH25CONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH25CONSUMPTIONDELIVERED, "Previous Month 25 Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH1CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH1CONSUMPTIONRECEIVED, "Previous Month 1 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH2CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH2CONSUMPTIONRECEIVED, "Previous Month 2 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH3CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH3CONSUMPTIONRECEIVED, "Previous Month 3 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH4CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH4CONSUMPTIONRECEIVED, "Previous Month 4 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH5CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH5CONSUMPTIONRECEIVED, "Previous Month 5 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH6CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH6CONSUMPTIONRECEIVED, "Previous Month 6 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH7CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH7CONSUMPTIONRECEIVED, "Previous Month 7 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH8CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH8CONSUMPTIONRECEIVED, "Previous Month 8 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH9CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH9CONSUMPTIONRECEIVED, "Previous Month 9 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH10CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH10CONSUMPTIONRECEIVED, "Previous Month 10 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH11CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH11CONSUMPTIONRECEIVED, "Previous Month 11 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH12CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH12CONSUMPTIONRECEIVED, "Previous Month 12 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH13CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH13CONSUMPTIONRECEIVED, "Previous Month 13 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH15CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH15CONSUMPTIONRECEIVED, "Previous Month 15 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH17CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH17CONSUMPTIONRECEIVED, "Previous Month 17 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH19CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH19CONSUMPTIONRECEIVED, "Previous Month 19 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH21CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH21CONSUMPTIONRECEIVED, "Previous Month 21 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH23CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH23CONSUMPTIONRECEIVED, "Previous Month 23 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH25CONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH25CONSUMPTIONRECEIVED, "Previous Month 25 Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_HISTORICALFREEZETIME, new ZclAttribute(this, ATTR_HISTORICALFREEZETIME, "Historical Freeze Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_MAXNUMBEROFPERIODSDELIVERED, new ZclAttribute(this, ATTR_MAXNUMBEROFPERIODSDELIVERED, "Max Number Of Periods Delivered", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTDEMANDDELIVERED, new ZclAttribute(this, ATTR_CURRENTDEMANDDELIVERED, "Current Demand Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
@@ -3747,57 +3747,57 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_CURRENTMONTHALTERNATIVEMAXDEMAND, new ZclAttribute(this, ATTR_CURRENTMONTHALTERNATIVEMAXDEMAND, "Current Month Alternative Max Demand", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTYEARALTERNATIVEMAXDEMAND, new ZclAttribute(this, ATTR_CURRENTYEARALTERNATIVEMAXDEMAND, "Current Year Alternative Max Demand", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 2 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 3 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY4ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY4ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 4 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 5 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 6 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 8 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 10 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 12 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONDELIVERED, "Previous Day 7 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY2ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 2 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY3ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 3 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY4ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY4ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 4 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY5ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 5 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY6ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 6 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY8ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 8 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY10ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 10 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY12ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 12 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSDAY7ALTERNATIVECONSUMPTIONRECEIVED, "Previous Day 7 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTWEEKALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTWEEKALTERNATIVECONSUMPTIONDELIVERED, "Current Week Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTWEEKALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTWEEKALTERNATIVECONSUMPTIONRECEIVED, "Current Week Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 1 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 2 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 3 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 4 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 5 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 7 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONDELIVERED, "Previous Week 9 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK1ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 1 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK2ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 2 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK3ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 3 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK4ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 4 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK5ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 5 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK7ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 7 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSWEEK9ALTERNATIVECONSUMPTIONRECEIVED, "Previous Week 9 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTMONTHALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_CURRENTMONTHALTERNATIVECONSUMPTIONDELIVERED, "Current Month Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_CURRENTMONTHALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_CURRENTMONTHALTERNATIVECONSUMPTIONRECEIVED, "Current Month Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 1 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 2 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 3 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 4 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 5 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 6 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 7 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 8 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 9 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 10 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 11 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 12 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 13 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 15 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 17 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 19 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 21 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 23 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONDELIVERED, new ZclAttribute(this, ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONDELIVERED, "Previous Month 25 Alternative Consumption Delivered", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH1ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 1 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH2ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 2 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH3ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 3 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH4ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 4 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH5ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 5 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH6ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 6 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH7ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 7 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH8ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 8 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH9ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 9 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH10ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 10 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH11ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 11 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH12ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 12 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH13ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 13 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH15ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 15 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH17ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 17 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH19ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 19 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH21ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 21 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH23ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 23 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONRECEIVED, new ZclAttribute(this, ATTR_PREVIOUSMONTH25ALTERNATIVECONSUMPTIONRECEIVED, "Previous Month 25 Alternative Consumption Received", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
 
             return attributeMap;
         }
