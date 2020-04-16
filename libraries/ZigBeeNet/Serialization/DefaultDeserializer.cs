@@ -97,7 +97,7 @@ namespace ZigBeeNet.Serialization
 
                         value[0] = Encoding.Default.GetString(dest);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         value[0] = null;
                         break;

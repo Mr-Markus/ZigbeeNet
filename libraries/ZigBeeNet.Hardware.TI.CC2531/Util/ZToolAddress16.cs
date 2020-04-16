@@ -91,7 +91,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
 
                     return (this.Lsb == addr.Lsb && this.Msb == addr.Msb);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return false;
                 }

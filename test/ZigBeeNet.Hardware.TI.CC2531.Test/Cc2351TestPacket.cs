@@ -41,7 +41,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Test
 
                 return ztoolPacket;
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 return null;
             }

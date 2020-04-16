@@ -402,7 +402,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                             break;
                     }
                 }
-                catch (InvalidCastException e)
+                catch (InvalidCastException)
                 {
                     configuration.SetResult(option, ZigBeeStatus.INVALID_ARGUMENTS);
                 }

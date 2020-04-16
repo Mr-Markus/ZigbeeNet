@@ -134,7 +134,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
             {
                 return Convert.ToByte(_memoryStream.ReadByte());
             }
-            catch (IOException ex)
+            catch (IOException)
             {
                 return null;
             }
