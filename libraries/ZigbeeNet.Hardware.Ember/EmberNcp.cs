@@ -612,7 +612,6 @@ namespace ZigBeeNet.Hardware.Ember
         {
             EzspSetPowerDescriptorRequest request = new EzspSetPowerDescriptorRequest();
             request.SetDescriptor(descriptor);
-            _protocolHandler.QueueFrame(request);
             _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspSetPowerDescriptorResponse)));
         }
 
@@ -626,7 +625,6 @@ namespace ZigBeeNet.Hardware.Ember
         {
             EzspSetManufacturerCodeRequest request = new EzspSetManufacturerCodeRequest();
             request.SetCode(code);
-            _protocolHandler.QueueFrame(request);
             _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspSetManufacturerCodeResponse)));
         }
 
