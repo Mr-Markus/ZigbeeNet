@@ -128,8 +128,8 @@ namespace ZigBeeNet.CodeGenerator
                 {
                     if (attribute.ArrayStart != null && attribute.ArrayCount != null && attribute.ArrayCount > 0)
                     {
-                        int? arrayCount = attribute.ArrayStart;
-                        int? arrayStep = attribute.ArrayStep == null ? 1 : attribute.ArrayStep;
+                        int arrayCount = attribute.ArrayStart.Value;
+                        int arrayStep = attribute.ArrayStep == null ? 1 : attribute.ArrayStep.Value;
                         for (int count = 0; count < attribute.ArrayCount; count++)
                         {
                             if (attribute.Description.Count != 0)
@@ -140,9 +140,9 @@ namespace ZigBeeNet.CodeGenerator
                                 @out.WriteLine("     /// </summary>");
                             }
 
-                            String name = Regex.Replace(attribute.Name, "\\{\\{count\\}\\}", arrayCount.ToString()); //attribute.Name.replaceAll("\\{\\{count\\}\\}", arrayCount));
-                            @out.WriteLine("        public const ushort " + GetEnum(name) + " = 0x" + (attribute.Code + arrayCount).Value.ToString("X4") + ";");
-                            arrayCount += arrayStep;
+                            String name = Regex.Replace(attribute.Name, "\\{\\{count\\}\\}", arrayCount.ToString());
+                            @out.WriteLine("        public const ushort " + GetEnum(name) + " = 0x" + (attribute.Code + (arrayCount - attribute.ArrayStart) * arrayStep).Value.ToString("X4") + ";");
+                            arrayCount++;
                         }
                     }
                     else
@@ -294,14 +294,13 @@ namespace ZigBeeNet.CodeGenerator
                 {
                     if (attribute.ArrayStart != null && attribute.ArrayCount != null && attribute.ArrayCount > 0)
                     {
-                        int? ArrayCount = attribute.ArrayStart;
-                        int? arrayStep = attribute.ArrayStep == null ? 1 : attribute.ArrayStep;
+                        int arrayCount = attribute.ArrayStart.Value;
+                        
                         for (int count = 0; count < attribute.ArrayCount; count++)
                         {
-                            string name = Regex.Replace(attribute.Name, "\\{\\{count\\}\\}", ArrayCount.ToString());
-                            //String name = attribute.Name,"\\{\\{count\\}\\}", Integer.toString(ArrayCount));
+                            string name = Regex.Replace(attribute.Name, "\\{\\{count\\}\\}", arrayCount.ToString());
                             @out.WriteLine("            attributeMap.Add(" + GetEnum(name) + ", " + DefineAttribute(attribute, clusterName, name, 0) + ");");
-                            ArrayCount += arrayStep;
+                            arrayCount++;
                         }
                     }
                     else

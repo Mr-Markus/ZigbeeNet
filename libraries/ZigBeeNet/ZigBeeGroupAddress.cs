@@ -58,7 +58,7 @@ namespace ZigBeeNet
         public ZigBeeGroupAddress(ushort groupId, string label)
         {
             GroupId = groupId;
-            Label = Label;
+            Label = label;
         }
 
         public bool IsGroup

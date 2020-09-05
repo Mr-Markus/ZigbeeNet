@@ -209,7 +209,7 @@ namespace ZigBeeNet.ZCL
             StringBuilder builder = new StringBuilder();
 
             builder.Append("ZclAttribute [cluster=")
-                   .Append(_cluster)
+                   .Append(_cluster.GetClusterName())
                    .Append(", id=")
                    .Append(Id)
                    .Append(", name=")

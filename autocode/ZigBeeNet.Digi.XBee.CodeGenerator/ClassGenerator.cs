@@ -11,7 +11,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
     public abstract class ClassGenerator
     {
         readonly int _lineLen = 80;
-        readonly string _sourceRootPath = "ZigBeeNet.Libraries.ZigBeeNet.Hardware.Digi.XBee";
+        //readonly string _sourceRootPath = "ZigBeeNet.Libraries.ZigBeeNet.Hardware.Digi.XBee";
         readonly List<string> _importList = new List<string>();
 
         protected StringBuilder GetClassOut(FileInfo packageFile, string className)

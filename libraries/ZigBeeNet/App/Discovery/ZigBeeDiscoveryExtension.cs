@@ -237,7 +237,7 @@ namespace ZigBeeNet.App.Discovery
                 ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
                 nodeDiscoverer.MeshUpdateTasks = MeshUpdateTasks;
                 _nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
-                nodeDiscoverer.StartDiscovery();
+                _ = nodeDiscoverer.StartDiscovery();
             }
         }
 

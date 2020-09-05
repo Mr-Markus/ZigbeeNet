@@ -179,12 +179,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             }
         }
 
-        public ushort CommandId
+        public ushort GetCommandId()
         {
-            get
-            {
-                return ByteHelper.ShortFromBytes(Packet, 2, 3);
-            }
+            return ByteHelper.ShortFromBytes(Packet, 2, 3);
         }
 
         public override string ToString()
