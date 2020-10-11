@@ -128,6 +128,11 @@ namespace ZigBeeNet.App.Discovery
         public Queue<NodeDiscoveryTask> DiscoveryTasks { get; private set; } = new Queue<NodeDiscoveryTask>();
 
         /// <summary>
+        /// Gives ability to skip checking for NetworkAddressRequest response, useful for Deconz driver.
+        /// </summary>
+        public bool SkipNetworkAddressRequestCheck { get; set; }
+
+        /// <summary>
         /// Creates the discovery class
         ///
         /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"/> for the network</param>
@@ -293,7 +298,7 @@ namespace ZigBeeNet.App.Discovery
                         DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
-                    if(discoveryTask.Value == NodeDiscoveryTask.NWK_ADDRESS) {
+                    if(discoveryTask.Value == NodeDiscoveryTask.NWK_ADDRESS || SkipNetworkAddressRequestCheck) {
                         Node.SetNodeState(ZigBeeNodeState.OFFLINE);
                         StopDiscovery();
                         return;
@@ -702,7 +707,7 @@ namespace ZigBeeNet.App.Discovery
             List<NodeDiscoveryTask> tasks = new List<NodeDiscoveryTask>();
 
             // Always request the network address unless this is our local node - in case it's changed
-            if (!NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress))
+            if (!NetworkManager.LocalNwkAddress.Equals(Node.NetworkAddress) && !SkipNetworkAddressRequestCheck)
             {
                 tasks.Add(NodeDiscoveryTask.NWK_ADDRESS);
             }
