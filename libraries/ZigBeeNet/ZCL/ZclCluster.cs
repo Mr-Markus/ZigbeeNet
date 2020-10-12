@@ -1309,6 +1309,8 @@ namespace ZigBeeNet.ZCL
             Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
             foreach (ZclAttributeDao daoAttribute in dao.Attributes)
             {
+                // Normalize the data to protect against the users serialisation system restoring incorrect data classes
+                daoAttribute.LastValue = _normalizer.NormalizeZclData(daoAttribute.DataType, daoAttribute.LastValue);
                 ZclAttribute attribute = new ZclAttribute();
                 attribute.SetDao(this, daoAttribute);
                 daoZclAttributes.Add(daoAttribute.Id, attribute);
