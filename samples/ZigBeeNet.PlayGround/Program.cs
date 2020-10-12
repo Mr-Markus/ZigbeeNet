@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ZigbeeNet.Hardware.ConBee;
 using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
+using ZigBeeNet.App.IasClient;
 using ZigBeeNet.Database;
 using ZigBeeNet.DataStore.Json;
 using ZigBeeNet.DataStore.MongoDb;
@@ -192,10 +193,11 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
-                networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
-                networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
+                networkManager.AddSupportedClientCluster(ZclOnOffCluster.CLUSTER_ID);
+                networkManager.AddSupportedClientCluster(ZclColorControlCluster.CLUSTER_ID);
 
                 networkManager.AddExtension(new ZigBeeBasicServerExtension());
+                networkManager.AddExtension(new ZigBeeIasCieExtension());
 
                 if (zigBeeDongle == ZigBeeDongle.TiCc2531)
                 {

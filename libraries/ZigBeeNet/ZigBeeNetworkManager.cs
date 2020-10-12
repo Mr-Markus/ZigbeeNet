@@ -51,12 +51,22 @@ namespace ZigBeeNet
     /// used.
     /// Call the <see cref="Shutdown()"> method to close the network
     /// 
-    /// Following a call to <see cref="Initialize()"/> configuration calls can be made to configure the transport layer. This
+    /// Following a call to <see cref="Initialize()"/> configuration calls can be made to configure the transport layer.
     /// 
     /// Once all transport initialization is complete, {@link #startup} must be called.
     /// </summary>
     public class ZigBeeNetworkManager : IZigBeeNetwork, IZigBeeTransportReceive
     {
+        /// <summary>
+        /// The local endpoint ID used for all ZCL commands
+        /// </summary>
+        private const byte LOCAL_ENDPOINT_ID = 1;
+
+        /// <summary>
+        /// The broadcast endpoint
+        /// </summary>
+        private const byte BROADCAST_ENDPOINT_ID = 255;
+
         /// <summary>
         /// The nodes in the ZigBee network - maps IeeeAddress to ZigBeeNode
         /// </summary>
@@ -173,6 +183,11 @@ namespace ZigBeeNet
         /// Our local <see cref="IeeeAddress">
         /// </summary>
         public IeeeAddress LocalIeeeAddress { get; set; }
+
+        /// <summary>
+        /// The default ProfileID to use
+        /// </summary>
+        private int _defaultProfileId = ZigBeeProfileType.Get(ProfileType.ZIGBEE_HOME_AUTOMATION).Key;
 
         public ZigBeeChannel ZigbeeChannel
         {
@@ -495,6 +510,11 @@ namespace ZigBeeNet
             Log.Debug("ZigBeeNetworkManager shutdown: networkState={NetworkState}", NetworkState);
             SetNetworkState(ZigBeeNetworkState.SHUTDOWN);
 
+            if(_clusterMatcher != null)
+            {
+                _clusterMatcher.Shutdown();
+            }
+
             lock (_networkNodes)
             {
                 foreach (ZigBeeNode node in _networkNodes.Values)
@@ -612,8 +632,8 @@ namespace ZigBeeNet
             {
                 apsFrame.SourceEndpoint = 1;
 
-                // TODO set the profile properly
-                apsFrame.Profile = 0x104;
+                // Set the profile
+                apsFrame.Profile = (ushort)_defaultProfileId;
 
                 // Create the cluster library header
                 ZclHeader zclHeader = new ZclHeader
@@ -751,6 +771,12 @@ namespace ZigBeeNet
 
         private ZigBeeCommand ReceiveZclCommand(ZclFieldDeserializer fieldDeserializer, ZigBeeApsFrame apsFrame)
         {
+            if (apsFrame.DestinationEndpoint != LOCAL_ENDPOINT_ID && apsFrame.DestinationEndpoint != BROADCAST_ENDPOINT_ID)
+            {
+                Log.Debug("Unknown local endpoint for APS frame {Frame}", apsFrame);
+                return null;
+            }
+
             // Process the ZCL header
             ZclHeader zclHeader = new ZclHeader(fieldDeserializer);
             Log.Debug("RX ZCL: {ZclHeader}", zclHeader);
@@ -1490,15 +1516,59 @@ namespace ZigBeeNet
         ///
         /// <param name="cluster">the supported cluster ID</param>
         /// </summary>
+        [Obsolete("This will be removed in a future release. Use AddSupportedClientCluster instead", false)]
         public void AddSupportedCluster(ushort cluster)
         {
             Log.Debug("Adding supported cluster {Cluster}", cluster);
-            if (_clusterMatcher == null)
+            AddSupportedClientCluster(cluster);
+        }
+
+        /// <summary>
+        /// Adds a client cluster to the list of clusters we support.
+        /// We will respond to with the <see cref="MatchDescriptorRequest"/> and process any received client commands received.
+        /// This method is only valid when the network state is <see cref="ZigBeeNetworkState.INITIALISING"/>
+        /// </summary>
+        /// <param name="cluster">the supported client cluster ID</param>
+        /// <returns>the <see cref="ZigBeeStatus"/> showing <see cref="ZigBeeStatus.SUCCESS"/> or reason for failure</returns>
+        public ZigBeeStatus AddSupportedClientCluster(ushort cluster)
+        {
+            if (NetworkState != ZigBeeNetworkState.INITIALISING)
             {
-                _clusterMatcher = new ClusterMatcher(this);
+                Log.Error("Cannot add supported client cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
+                return ZigBeeStatus.INVALID_STATE;
             }
 
-            _clusterMatcher.AddCluster(cluster);
+            Log.Debug("Adding supported client cluster {Cluster}", cluster);
+            if (_clusterMatcher == null)
+            {
+                _clusterMatcher = new ClusterMatcher(this, LOCAL_ENDPOINT_ID, _defaultProfileId);
+            }
+            _clusterMatcher.AddClientCluster(cluster);
+            return ZigBeeStatus.SUCCESS;
+        }
+
+        /// <summary>
+        /// Adds a server cluster to the list of clusters we support.
+        /// We will respond to with the <see cref="MatchDescriptorRequest"/> and process any received server commands received.
+        /// This method is only valid when the network state is <see cref="ZigBeeNetworkState.INITIALISING"/>
+        /// </summary>
+        /// <param name="cluster">the supported server cluster ID</param>
+        /// <returns>the <see cref="ZigBeeStatus"/> showing <see cref="ZigBeeStatus.SUCCESS"/> or reason for failure</returns>
+        public ZigBeeStatus AddSupportedServerCluster(ushort cluster)
+        {
+            if (NetworkState != ZigBeeNetworkState.INITIALISING)
+            {
+                Log.Error("Cannot add supported server cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
+                return ZigBeeStatus.INVALID_STATE;
+            }
+
+            Log.Debug("Adding supported server cluster {Cluster}", cluster);
+            if (_clusterMatcher == null)
+            {
+                _clusterMatcher = new ClusterMatcher(this, LOCAL_ENDPOINT_ID, _defaultProfileId);
+            }
+            _clusterMatcher.AddServerCluster(cluster);
+            return ZigBeeStatus.SUCCESS;
         }
 
         /// <summary>

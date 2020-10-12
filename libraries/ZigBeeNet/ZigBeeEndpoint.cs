@@ -283,32 +283,40 @@ namespace ZigBeeNet
 
 
         /// <summary>
-         /// Adds an application and makes it available to this endpoint.
-         /// The cluster used by the server must be in the output clusters list and this will be passed to the
-         /// {@link ZclApplication#serverStartup()) method to start the application.
-         ///
-         /// <param name="application">the new <see cref="ZigBeeApplication"></param>
-         /// </summary>
-        public void AddApplication(IZigBeeApplication application)
+        /// Adds an application and makes it available to this endpoint.
+        /// The cluster used by the server must be in the output clusters list and this will be passed to the
+        /// {@link ZclApplication#serverStartup()) method to start the application.
+        ///
+        /// <param name="application">the new <see cref="ZigBeeApplication"></param>
+        /// <returns> the <see cref="ZigBeeStatus"/> of the call. <see cref="ZigBeeStatus.SUCCESS"/> if the application was registered and 
+        /// started, and <see cref="ZigBeeStatus.INVALID_STATE"/> if an application is already registered to the cluster </returns>
+        /// </summary>
+        public ZigBeeStatus AddApplication(IZigBeeApplication application)
         {
-            _applications.TryAdd(application.GetClusterId(), application);
-            _outputClusters.TryGetValue(application.GetClusterId(), out ZclCluster cluster);
-
-            if (cluster == null)
+            if (_applications.TryAdd(application.GetClusterId(), application))
             {
-                _inputClusters.TryGetValue(application.GetClusterId(), out cluster);
-            }
+                _outputClusters.TryGetValue(application.GetClusterId(), out ZclCluster cluster);
 
-            application.AppStartup(cluster);
+                if (cluster == null)
+                {
+                    _inputClusters.TryGetValue(application.GetClusterId(), out cluster);
+                }
+
+                return application.AppStartup(cluster);
+            }
+            else
+            {
+                return ZigBeeStatus.INVALID_STATE;
+            }
         }
 
         /// <summary>
-         /// Gets the application associated with the clusterId. Returns null if there is no server linked to the requested
-         /// cluster
-         ///
-         /// @param clusterId
-         /// <returns>the <see cref="ZigBeeApplication"></returns>
-         /// </summary>
+        /// Gets the application associated with the clusterId. Returns null if there is no server linked to the requested
+        /// cluster
+        ///
+        /// <param name="clusterId"> the cluster ID of the application to retrieve </param>
+        /// <returns>the <see cref="ZigBeeApplication"/> registered to the clusterId or null if no application is registered</returns>
+        /// </summary>
         public IZigBeeApplication GetApplication(int clusterId)
         {
             _applications.TryGetValue(clusterId, out IZigBeeApplication app);
