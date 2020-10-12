@@ -252,17 +252,6 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Read an attribute
-        ///
-        /// <param name="attribute">the <see cref="ZclAttribute"> to read</param>
-        /// <returns>command Task</returns>
-        /// </summary>
-        public Task<CommandResult> ReadAttribute(ZclAttribute attribute)
-        {
-            return ReadAttribute(attribute.Id);
-        }
-
-        /// <summary>
         /// Read an attribute from the remote cluster
         /// </summary>
         /// <param name="attributeId">attributeId the attribute id to read</param>
@@ -309,7 +298,7 @@ namespace ZigBeeNet.ZCL
         /// <param name="value">the value to set (as Object)</param>
         /// <returns>command Task CommandResult</returns>
         /// </summary>
-        public Task<CommandResult> Write(ushort attribute, ZclDataType dataType, object value)
+        public Task<CommandResult> WriteAttribute(ushort attribute, ZclDataType dataType, object value)
         {
             //logger.debug("{}: Writing cluster {}, attribute {}, value {}, as dataType {}", zigbeeEndpoint.getIeeeAddress(),
             //        clusterId, attribute, value, dataType);
@@ -318,7 +307,7 @@ namespace ZigBeeNet.ZCL
             attributeIdentifier.AttributeDataType = dataType;
             attributeIdentifier.AttributeValue = value;
 
-            return Write(new List<WriteAttributeRecord> { attributeIdentifier });
+            return WriteAttributes(new List<WriteAttributeRecord> { attributeIdentifier });
         }
 
         /// <summary>
@@ -327,7 +316,7 @@ namespace ZigBeeNet.ZCL
         /// <para name="attributes"/>attributes a List of <see cref="WriteAttributeRecord"/>s with the attribute ID, type and value<para>
         /// <returns>command future <see cref="CommandResult"/></returns> 
         /// </summary>
-        public Task<CommandResult> Write(List<WriteAttributeRecord> attributes)
+        public Task<CommandResult> WriteAttributes(List<WriteAttributeRecord> attributes)
         {
             WriteAttributesCommand command = new WriteAttributesCommand();
             command.ClusterId = _clusterId;
@@ -358,18 +347,6 @@ namespace ZigBeeNet.ZCL
             }
 
             return Send(command);
-        }
-
-        /// <summary>
-        /// Write an attribute
-        ///
-        /// <param name="attribute">the ZclAttribute to write</param>
-        /// <param name="value">the value to set (as Object)</param>
-        /// <returns>command Task CommandResult</returns>
-        /// </summary>
-        public Task<CommandResult> Write(ZclAttribute attribute, object value)
-        {
-            return Write(attribute.Id, attribute.DataType, value);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ZigBeeNet.Database;
 using ZigBeeNet.ZCL.Protocol;
 
@@ -168,6 +169,29 @@ namespace ZigBeeNet.ZCL
             return ManufacturerCode != null;
         }
 
+
+        /// <summary>
+        /// Returns the value of the attribute from the remote attribute. If the current value is newer than refreshPeriod
+        /// (in milliseconds) then the current value will be returned, otherwise the value will be requested from the remote device.
+        /// </summary>
+        /// <param name="refreshPeriod">the number of milliseconds to consider the value current</param>
+        /// <returns>an Object with the attribute value, or null on error</returns>
+        public async Task<object> ReadValue(long refreshPeriod)
+        {
+            if (IsLastValueCurrent(refreshPeriod))
+            {
+                return LastValue;
+            }
+
+            return await _cluster.ReadAttributeValue(Id);
+        }
+
+
+        public Task<CommandResult> WriteValue(object value)
+        {
+            return _cluster.WriteAttribute(Id, DataType, value);
+        }
+
         /// <summary>
         /// Checks if the last value received for the attribute is still current.
         /// If the last update time is more recent than the allowedAge then this will return true. allowedAge is defined in
@@ -178,7 +202,7 @@ namespace ZigBeeNet.ZCL
         /// </summary>
         public bool IsLastValueCurrent(long allowedAge)
         {
-            if (LastReportTime == null)
+            if (LastReportTime == default(DateTime))
             {
                 return false;
             }
@@ -219,7 +243,7 @@ namespace ZigBeeNet.ZCL
                    .Append(", lastValue=")
                    .Append(LastValue);
 
-            if (LastReportTime != null)
+            if (LastReportTime != default(DateTime))
             {
                 builder.Append(", lastReportTime=")
                        .Append(LastReportTime.ToLongTimeString());
