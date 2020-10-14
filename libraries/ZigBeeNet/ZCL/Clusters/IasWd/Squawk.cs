@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZigBeeNet.Security;
-using ZigBeeNet.ZCL.Clusters.IASWD;
+using ZigBeeNet.ZCL.Clusters.IasWd;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 
-namespace ZigBeeNet.ZCL.Clusters.IASWD
+namespace ZigBeeNet.ZCL.Clusters.IasWd
 {
     /// <summary>
     /// Squawk value object class.

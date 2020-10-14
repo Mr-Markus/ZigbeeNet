@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZigBeeNet.Security;
-using ZigBeeNet.ZCL.Clusters.IASACE;
+using ZigBeeNet.ZCL.Clusters.IasAce;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 
-namespace ZigBeeNet.ZCL.Clusters.IASACE
+namespace ZigBeeNet.ZCL.Clusters.IasAce
 {
     /// <summary>
     /// Get Zone ID Map Response value object class.

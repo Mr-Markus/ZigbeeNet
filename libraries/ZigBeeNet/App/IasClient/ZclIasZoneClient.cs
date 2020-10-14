@@ -13,7 +13,6 @@ using Serilog;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.IasZone;
-using ZigBeeNet.ZCL.Clusters.IASZone;
 
 namespace ZigBeeNet.App.IasClient
 {

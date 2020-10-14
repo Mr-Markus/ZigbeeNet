@@ -35,6 +35,7 @@ namespace ZigBeeNet.CodeGenerator
 
         private void GenerateZclClusterClasses(ZigBeeXmlCluster cluster)
         {
+            string packageRoot = GetZclClusterCommandPackage(cluster);
             string packagePath = GetPackagePath(_sourceRootPath, packageZclCluster);
             String className = "Zcl" + StringToUpperCamelCase(cluster.Name) + "Cluster";
             TextWriter @out = GetClassOut(packagePath, className);
@@ -87,7 +88,7 @@ namespace ZigBeeNet.CodeGenerator
             ImportsAdd("ZigBeeNet.ZCL.Field");
             if (commandsClient > 0)
             {
-                ImportsAdd("ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                ImportsAdd("ZigBeeNet" + packageRoot);
             }
 
             OutputImports(@out);
