@@ -37,7 +37,7 @@ namespace ZigbeeNet.Hardware.ConBee
         private Slip slip;
         private Thread thread;
         private int sequenceNumber;
-        private ConcurrentDictionary<byte, TaskCompletionSource<byte[]>> responses = new ConcurrentDictionary<byte, TaskCompletionSource<byte[]>>();
+        private ConcurrentDictionary<byte, TaskCompletionSource<(StatusCodes status, byte[] data)>> responses = new ConcurrentDictionary<byte, TaskCompletionSource<(StatusCodes status, byte[] data)>>();
         private bool exit;
 
         public ConBeeInterface(IZigBeePort serialPort)
@@ -62,7 +62,7 @@ namespace ZigbeeNet.Hardware.ConBee
             thread.Start();
         }
 
-        public Task<byte[]> SendAsync(Commands command, params byte[] payload)
+        public async Task<byte[]> SendAsync(Commands command, params byte[] payload)
         {
             var packetLength = payload.Length + 5;
             var packetLengthWithCrc = packetLength + 2;
@@ -75,11 +75,21 @@ namespace ZigbeeNet.Hardware.ConBee
             arr[4] = (byte)(packetLength >> 8);
             Buffer.BlockCopy(payload, 0, arr, 5, payload.Length);
             Crc(arr, packetLength);
-            var taskSource = new TaskCompletionSource<byte[]>();
+            var taskSource = new TaskCompletionSource<(StatusCodes status, byte[] data)>();
             responses[seq] = taskSource;
             slip.slip_send_message(arr, packetLengthWithCrc);
             Log.Debug("Slip Send:" + BitConverter.ToString(arr, 0, packetLengthWithCrc));
-            return taskSource.Task;
+            var (status, data) = await taskSource.Task;
+            if (status == StatusCodes.BUSY)
+            {
+                Log.Debug("Dongle is busy, resending");
+                return await SendAsync(command, payload);
+            }
+            if (status == StatusCodes.SUCCESS)
+            {
+                return data;
+            }
+            throw new Exception(status.ToString());
         }
 
         private void ReadLoop()
@@ -142,9 +152,13 @@ namespace ZigbeeNet.Hardware.ConBee
                 {
                     var status = (StatusCodes)data[2];
                     if (status == StatusCodes.SUCCESS)
-                        taskSource.SetResult(data.Take(len).ToArray());
+                    {
+                        taskSource.SetResult((status, data.Take(len).ToArray()));
+                    }
                     else
-                        taskSource.SetException(new Exception(status.ToString()));
+                    {
+                        taskSource.SetResult((status, data.Take(len).ToArray()));
+                    }
                 }
             }
             PacketRecieved?.Invoke();
