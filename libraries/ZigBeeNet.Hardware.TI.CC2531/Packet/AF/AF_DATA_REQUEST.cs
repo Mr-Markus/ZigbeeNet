@@ -53,7 +53,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
         /// bit 2: Use NWK key
         /// bit 4: turns on/off ‘APS ACK’; 
         /// bit 5 sets ‘discover route’; 
-        /// bit 6 sets ‘APS security’; bit 7 sets ‘skip routing’. 
+        /// bit 6 sets ‘APS security’;
+        /// bit 7 sets ‘skip routing’. 
         /// </summary>
         public byte Options { get; private set; }
 
