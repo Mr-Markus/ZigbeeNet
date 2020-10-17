@@ -203,9 +203,11 @@ namespace ZigBeeNet.PlayGround
                 Console.WriteLine($"PAN ID           = {networkManager.ZigBeePanId}");
                 Console.WriteLine($"Extended PAN ID  = {networkManager.ZigBeeExtendedPanId}");
                 Console.WriteLine($"Channel          = {networkManager.ZigbeeChannel}");
-                Console.WriteLine($"Network Key      = {networkManager.ZigBeeNetworkKey}");
-                Console.WriteLine($"Link Key         = {networkManager.ZigBeeLinkKey}");
-
+                if (zigBeeDongle != ZigBeeDongle.ConBee)
+                {
+                    Console.WriteLine($"Network Key      = {networkManager.ZigBeeNetworkKey}");
+                    Console.WriteLine($"Link Key         = {networkManager.ZigBeeLinkKey}");
+                }
                 if (resetNetwork)
                 {
                     //TODO: make the network parameters configurable
