@@ -51,11 +51,6 @@ namespace ZigBeeNet.App.Discovery
         private bool extensionStarted = false;
 
         /// <summary>
-        /// Gives ability to skip checking for NetworkAddressRequest response, useful for Deconz driver.
-        /// </summary>
-        public bool SkipNetworkAddressRequestCheck { get; set; }
-
-        /// <summary>
         /// List of tasks to be completed during a mesh update
         /// </summary>
         public List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask> MeshUpdateTasks { get; set; } = new List<ZigBeeNodeServiceDiscoverer.NodeDiscoveryTask>() {
@@ -239,10 +234,7 @@ namespace ZigBeeNet.App.Discovery
         {
             lock (_nodeDiscovery)
             {
-                ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node)
-                {
-                    SkipNetworkAddressRequestCheck = SkipNetworkAddressRequestCheck
-                };
+                ZigBeeNodeServiceDiscoverer nodeDiscoverer = new ZigBeeNodeServiceDiscoverer(_networkManager, node);
                 nodeDiscoverer.MeshUpdateTasks = MeshUpdateTasks;
                 _nodeDiscovery[node.IeeeAddress] = nodeDiscoverer;
                 _ = nodeDiscoverer.StartDiscovery();
