@@ -164,14 +164,7 @@ namespace ZigBeeNet.App.Discovery
         {
             lock (_nodeDiscovery)
             {
-                if (_nodeDiscovery.ContainsKey(node.IeeeAddress))
-                {
-                    return;
-                }
-
-                Log.Debug("{IeeeAddress}: DISCOVERY Extension: Adding discoverer for added node", node.IeeeAddress);
-
-                StartDiscovery(node);
+                StartDiscoveryIfNecessary(node);
             }
         }
 
@@ -179,9 +172,8 @@ namespace ZigBeeNet.App.Discovery
         {
             lock (_nodeDiscovery)
             {
-                if (node.NodeState == ZigBeeNodeState.ONLINE && !_nodeDiscovery.ContainsKey(node.IeeeAddress))
+                if (node.NodeState == ZigBeeNodeState.ONLINE)
                 {
-                    Log.Debug("{IeeeAddress}: DISCOVERY Extension: Adding discoverer for updated node", node.IeeeAddress);
                     // If the state is ONLINE, then ensure discovery is running
                     StartDiscovery(node);
                 }
@@ -190,6 +182,25 @@ namespace ZigBeeNet.App.Discovery
                     // If state is not ONLINE, then stop discovery
                     StopDiscovery(node);
                 }
+            }
+        }
+
+        private void StartDiscoveryIfNecessary(ZigBeeNode node)
+        {
+            _nodeDiscovery.TryGetValue(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer nodeDiscoverer);
+
+            // either there is no node discoverer or it has finished its tasks unsuccessfully
+            if (nodeDiscoverer == null || (nodeDiscoverer.IsFinished && !nodeDiscoverer.IsSuccessful))
+            {
+                Log.Debug("{IeeeAddress}: DISCOVERY Extension: Adding discoverer for node", node.IeeeAddress);
+                StartDiscovery(node);
+            }
+            else if (!nodeDiscoverer.IsFinished)
+            {
+                // kill old node discoverer and create a new one
+                Log.Debug("{IeeeAddress}: DISCOVERY Extension: Creating new discoverer for node", node.IeeeAddress);
+                StopDiscovery(node);
+                StartDiscovery(node);
             }
         }
 
@@ -243,9 +254,9 @@ namespace ZigBeeNet.App.Discovery
 
         protected void StopDiscovery(ZigBeeNode node)
         {
-            if (_nodeDiscovery.TryRemove(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer discoverer))
+            if (_nodeDiscovery.TryRemove(node.IeeeAddress, out ZigBeeNodeServiceDiscoverer nodeDiscoverer))
             {
-                discoverer.StopDiscovery();
+                nodeDiscoverer.StopDiscovery();
             }
         }
         void StopScheduler()

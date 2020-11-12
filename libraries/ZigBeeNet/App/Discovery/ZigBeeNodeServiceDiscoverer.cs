@@ -128,6 +128,20 @@ namespace ZigBeeNet.App.Discovery
         public Queue<NodeDiscoveryTask> DiscoveryTasks { get; private set; } = new Queue<NodeDiscoveryTask>();
 
         /// <summary>
+        ///  Indicates whether this node discovery instance has finished its work, meaning either all queued tasks are done,
+        ///  or the network address discovery task failed and thus other queued tasks will also not succeed.
+        /// </summary>
+        public bool IsFinished { get; private set; } = false;
+
+        private List<NodeDiscoveryTask> _failedDiscoveryTasks = new List<NodeDiscoveryTask>();
+
+        /// <summary>
+        /// Indicates whether discovery task(s) went wrong or not
+        /// </summary>
+        public bool IsSuccessful => _failedDiscoveryTasks.Count == 0;
+
+
+        /// <summary>
         /// Creates the discovery class
         ///
         /// <param name="networkManager">the <see cref="ZigBeeNetworkManager"/> for the network</param>
@@ -235,6 +249,7 @@ namespace ZigBeeNet.App.Discovery
                     LastDiscoveryCompleted = DateTime.UtcNow;
                     Log.Debug("{IeeeAddress}: Node SVC Discovery: complete", Node.IeeeAddress);
                     NetworkManager.UpdateNode(_updatedNode);
+                    IsFinished = true;
                     return;
                 }
 
@@ -293,8 +308,12 @@ namespace ZigBeeNet.App.Discovery
                         DiscoveryTasks = new Queue<NodeDiscoveryTask>(DiscoveryTasks.Where(t => t != discoveryTask));
                     }
 
-                    if(discoveryTask.Value == NodeDiscoveryTask.NWK_ADDRESS) {
-                        Node.SetNodeState(ZigBeeNodeState.OFFLINE);
+                    _failedDiscoveryTasks.Add(discoveryTask.Value);
+
+                    // if the network address fails, nothing else will work and this node discoverer instance is finished
+                    if (discoveryTask.Value == NodeDiscoveryTask.NWK_ADDRESS && Node.NetworkAddress == 0) 
+                    {
+                        IsFinished = true;
                         StopDiscovery();
                         return;
                     }
@@ -342,8 +361,11 @@ namespace ZigBeeNet.App.Discovery
         /// </summary>
         public void StopDiscovery()
         {
+            lock (DiscoveryTasks)
+            {
+                DiscoveryTasks.Clear();
+            }
             _cancellationTokenSource.Cancel();
-
             Log.Debug("{IeeeAddress}: Node SVC Discovery: stopped", Node.IeeeAddress);
         }
 
