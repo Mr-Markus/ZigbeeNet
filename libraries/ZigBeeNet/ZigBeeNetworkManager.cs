@@ -1445,11 +1445,6 @@ namespace ZigBeeNet
                 _nodeDiscoveryComplete.Add(node.IeeeAddress);
                 sendNodeAdded = true;
             }
-            else if (!currentNode.IsDiscovered() && !currentNode.IeeeAddress.Equals(LocalIeeeAddress))
-            {
-                Log.Debug("{IeeeAddress}: Node {NetworkAddress} discovery is not complete - not sending nodeUpdated notification", node.IeeeAddress, node.NetworkAddress);
-                return;
-            }
             else
             {
                 sendNodeAdded = false;
