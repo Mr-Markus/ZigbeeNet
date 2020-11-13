@@ -687,7 +687,8 @@ namespace ZigBeeNet
                 return;
             }
 
-            if (GetNode(apsFrame.SourceAddress) == null)
+            ZigBeeNode currentNode = GetNode(apsFrame.SourceAddress);
+            if (currentNode == null)
             {
                 Log.Debug("Incoming message from unknown node {0}: Notifying announce listeners", apsFrame.SourceAddress.ToString("X4"));
 
@@ -696,6 +697,13 @@ namespace ZigBeeNet
                 {
                     announceListener.AnnounceUnknownDevice(apsFrame.SourceAddress);
                 }
+            }
+            else if(currentNode.NodeState != ZigBeeNodeState.ONLINE)
+            {
+                // If command is received from a known node which is not ONLINE, mark it as ONLINE
+                ZigBeeNode node = new ZigBeeNode(this, currentNode.IeeeAddress, currentNode.NetworkAddress);
+                node.SetNodeState(ZigBeeNodeState.ONLINE);
+                RefreshNode(node);
             }
 
             // Create the deserialiser
@@ -865,20 +873,17 @@ namespace ZigBeeNet
                 // Device has gone - lets remove it
                 case ZigBeeNodeStatus.DEVICE_LEFT:
                     // Find the node
-                    ZigBeeNode node = GetNode(ieeeAddress);
-                    if (node == null)
-                    {
-                        node = GetNode(networkAddress);
-                    }
+                    ZigBeeNode currentNode = GetNode(ieeeAddress);
 
-                    if (node == null)
+                    if (currentNode == null)
                     {
-                        Log.Debug("{NetworkAddress}: Node has left, but wasn't found in the network.", networkAddress);
+                        Log.Debug("{IeeeAddress}: Node has left, but wasn't found in the network.", ieeeAddress);
                     }
                     else
                     {
+                        ZigBeeNode node = new ZigBeeNode(this, ieeeAddress, networkAddress);
                         node.SetNodeState(ZigBeeNodeState.OFFLINE);
-                        UpdateNode(node);
+                        RefreshNode(node);
                     }
                     break;
 
@@ -1427,7 +1432,7 @@ namespace ZigBeeNet
             }
             Log.Debug("{IeeeAddress}: Node {NetworkAddress} update", node.IeeeAddress, node.NetworkAddress);
 
-            ZigBeeNode currentNode = _networkNodes[node.IeeeAddress];
+            ZigBeeNode currentNode = GetNode(node.IeeeAddress);
 
             // Return if we don't know this node
             if (currentNode == null)
