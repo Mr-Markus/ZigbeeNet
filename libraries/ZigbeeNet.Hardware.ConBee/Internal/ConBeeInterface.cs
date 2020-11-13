@@ -107,7 +107,7 @@ namespace ZigbeeNet.Hardware.ConBee
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Exception in ConBee interface ReadLoop: {Exception}");
+                Log.Error(ex, "Exception in ConBee interface ReadLoop: {Exception}", ex.Message);
             }
         }
 

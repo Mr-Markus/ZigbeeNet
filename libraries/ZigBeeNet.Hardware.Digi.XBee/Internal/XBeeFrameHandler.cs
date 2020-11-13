@@ -134,7 +134,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "XBeeFrameHandler exception");
+                        Log.Error(ex, "XBeeFrameHandler exception {Exception}", ex.Message);
                     }
                 }
                 Log.Debug("XBeeFrameHandler thread exited.");
