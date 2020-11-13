@@ -250,7 +250,7 @@ namespace ZigBeeNet.Hardware.Ember
          */
         public int? UpdateDefaultConfiguration(EzspConfigId configId, int? value) 
         {
-            int? previousValue = _stackConfiguration[configId];
+            int? previousValue = _stackConfiguration.ContainsKey(configId) ? (int?)_stackConfiguration[configId] : null;
             if (value == null)
                 _stackConfiguration.Remove(configId);
             else
@@ -272,7 +272,7 @@ namespace ZigBeeNet.Hardware.Ember
          */
         public EzspDecisionId? UpdateDefaultPolicy(EzspPolicyId policyId, EzspDecisionId? decisionId) 
         {
-            EzspDecisionId? previousValue = _stackPolicies[policyId];
+            EzspDecisionId? previousValue = _stackPolicies.ContainsKey(policyId) ? (EzspDecisionId?)_stackPolicies[policyId] : null;
 
             if (decisionId == null)
                 _stackPolicies.Remove(policyId);
