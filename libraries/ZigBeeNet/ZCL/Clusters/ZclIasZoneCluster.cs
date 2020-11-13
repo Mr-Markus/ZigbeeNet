@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.Security;
-using ZigBeeNet.ZCL.Clusters.IASZone;
+using ZigBeeNet.ZCL.Clusters.IasZone;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 

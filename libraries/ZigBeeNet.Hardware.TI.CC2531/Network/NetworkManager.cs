@@ -77,12 +77,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
 
         private static ManualResetEventSlim _hardwareSync = new ManualResetEventSlim(false);
 
+#pragma warning disable CS0649
         private byte[] _ep;
         private byte[] _prof;
         private byte[] _dev;
         private byte[] _ver;
         private ushort[][] _inp;
         private ushort[][] _out;
+#pragma warning restore CS0649
 
         private NetworkStateListener _announceListenerFilter = new NetworkStateListener();
 
@@ -439,7 +441,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                     {
                         _hardwareSync.Wait();
                     }
-                    catch (Exception ignored)
+                    catch (Exception)
                     {
                     }
                 }
@@ -469,7 +471,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                             timedOut = true;
                         }
                     }
-                    catch (Exception ignored)
+                    catch (Exception)
                     {
                     }
 

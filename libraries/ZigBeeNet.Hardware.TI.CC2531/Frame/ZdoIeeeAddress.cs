@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.ZDO;
-using System.Linq;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Frame
 {

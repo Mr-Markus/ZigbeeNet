@@ -526,6 +526,13 @@ namespace ZigBeeNet
 
             bool updated = false;
 
+            if (node.NodeState != ZigBeeNodeState.UNKNOWN && NodeState != node.NodeState)
+            {
+                Log.Debug("{IeeeAddress}: Node state updated from {NodeState} to {NewNodeState}", IeeeAddress, NodeState, node.NodeState);
+                NodeState = node.NodeState;
+                updated = true;
+            }
+
             if (NetworkAddress != 0 && !NetworkAddress.Equals(node.NetworkAddress))
             {
                 Log.Debug("{IeeeAddress}: Network address updated from {NetworkAddress} to {NodeNetworkAddress}", IeeeAddress, NetworkAddress, node.NetworkAddress);

@@ -219,7 +219,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                             _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
-                        catch (Exception ignored)
+                        catch (Exception)
                         {
                         }
                     }
@@ -239,7 +239,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                             _commandListenerSync.Wait(500);
                             CleanExpiredSynchronousCommandListeners();
                         }
-                        catch (Exception ignored)
+                        catch (Exception)
                         {
                         }
                     }

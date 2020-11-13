@@ -87,54 +87,54 @@ namespace ZigBeeNet.ZCL.Clusters
         /// MeteringDeviceType attribute enumerations.
         /// </summary>
         public const ushort ATTR_COMMODITYTYPECLIENT = 0x0002;
-        public const ushort ATTR_TIER1PRICELABEL = 0x0001;
-        public const ushort ATTR_TIER2PRICELABEL = 0x0002;
-        public const ushort ATTR_TIER3PRICELABEL = 0x0003;
-        public const ushort ATTR_TIER4PRICELABEL = 0x0004;
-        public const ushort ATTR_TIER5PRICELABEL = 0x0005;
-        public const ushort ATTR_TIER6PRICELABEL = 0x0006;
-        public const ushort ATTR_TIER7PRICELABEL = 0x0007;
-        public const ushort ATTR_TIER8PRICELABEL = 0x0008;
-        public const ushort ATTR_TIER9PRICELABEL = 0x0009;
-        public const ushort ATTR_TIER10PRICELABEL = 0x000A;
-        public const ushort ATTR_TIER11PRICELABEL = 0x000B;
-        public const ushort ATTR_TIER12PRICELABEL = 0x000C;
-        public const ushort ATTR_TIER13PRICELABEL = 0x000D;
-        public const ushort ATTR_TIER14PRICELABEL = 0x000E;
-        public const ushort ATTR_TIER15PRICELABEL = 0x000F;
-        public const ushort ATTR_TIER16PRICELABEL = 0x0010;
-        public const ushort ATTR_TIER17PRICELABEL = 0x0011;
-        public const ushort ATTR_TIER18PRICELABEL = 0x0012;
-        public const ushort ATTR_TIER19PRICELABEL = 0x0013;
-        public const ushort ATTR_TIER20PRICELABEL = 0x0014;
-        public const ushort ATTR_TIER21PRICELABEL = 0x0015;
-        public const ushort ATTR_TIER22PRICELABEL = 0x0016;
-        public const ushort ATTR_TIER23PRICELABEL = 0x0017;
-        public const ushort ATTR_TIER24PRICELABEL = 0x0018;
-        public const ushort ATTR_TIER25PRICELABEL = 0x0019;
-        public const ushort ATTR_TIER26PRICELABEL = 0x001A;
-        public const ushort ATTR_TIER27PRICELABEL = 0x001B;
-        public const ushort ATTR_TIER28PRICELABEL = 0x001C;
-        public const ushort ATTR_TIER29PRICELABEL = 0x001D;
-        public const ushort ATTR_TIER30PRICELABEL = 0x001E;
-        public const ushort ATTR_TIER31PRICELABEL = 0x001F;
-        public const ushort ATTR_TIER32PRICELABEL = 0x0020;
-        public const ushort ATTR_TIER33PRICELABEL = 0x0021;
-        public const ushort ATTR_TIER34PRICELABEL = 0x0022;
-        public const ushort ATTR_TIER35PRICELABEL = 0x0023;
-        public const ushort ATTR_TIER36PRICELABEL = 0x0024;
-        public const ushort ATTR_TIER37PRICELABEL = 0x0025;
-        public const ushort ATTR_TIER38PRICELABEL = 0x0026;
-        public const ushort ATTR_TIER39PRICELABEL = 0x0027;
-        public const ushort ATTR_TIER40PRICELABEL = 0x0028;
-        public const ushort ATTR_TIER41PRICELABEL = 0x0029;
-        public const ushort ATTR_TIER42PRICELABEL = 0x002A;
-        public const ushort ATTR_TIER43PRICELABEL = 0x002B;
-        public const ushort ATTR_TIER44PRICELABEL = 0x002C;
-        public const ushort ATTR_TIER45PRICELABEL = 0x002D;
-        public const ushort ATTR_TIER46PRICELABEL = 0x002E;
-        public const ushort ATTR_TIER47PRICELABEL = 0x002F;
-        public const ushort ATTR_TIER48PRICELABEL = 0x0030;
+        public const ushort ATTR_TIER1PRICELABEL = 0x0000;
+        public const ushort ATTR_TIER2PRICELABEL = 0x0001;
+        public const ushort ATTR_TIER3PRICELABEL = 0x0002;
+        public const ushort ATTR_TIER4PRICELABEL = 0x0003;
+        public const ushort ATTR_TIER5PRICELABEL = 0x0004;
+        public const ushort ATTR_TIER6PRICELABEL = 0x0005;
+        public const ushort ATTR_TIER7PRICELABEL = 0x0006;
+        public const ushort ATTR_TIER8PRICELABEL = 0x0007;
+        public const ushort ATTR_TIER9PRICELABEL = 0x0008;
+        public const ushort ATTR_TIER10PRICELABEL = 0x0009;
+        public const ushort ATTR_TIER11PRICELABEL = 0x000A;
+        public const ushort ATTR_TIER12PRICELABEL = 0x000B;
+        public const ushort ATTR_TIER13PRICELABEL = 0x000C;
+        public const ushort ATTR_TIER14PRICELABEL = 0x000D;
+        public const ushort ATTR_TIER15PRICELABEL = 0x000E;
+        public const ushort ATTR_TIER16PRICELABEL = 0x000F;
+        public const ushort ATTR_TIER17PRICELABEL = 0x0010;
+        public const ushort ATTR_TIER18PRICELABEL = 0x0011;
+        public const ushort ATTR_TIER19PRICELABEL = 0x0012;
+        public const ushort ATTR_TIER20PRICELABEL = 0x0013;
+        public const ushort ATTR_TIER21PRICELABEL = 0x0014;
+        public const ushort ATTR_TIER22PRICELABEL = 0x0015;
+        public const ushort ATTR_TIER23PRICELABEL = 0x0016;
+        public const ushort ATTR_TIER24PRICELABEL = 0x0017;
+        public const ushort ATTR_TIER25PRICELABEL = 0x0018;
+        public const ushort ATTR_TIER26PRICELABEL = 0x0019;
+        public const ushort ATTR_TIER27PRICELABEL = 0x001A;
+        public const ushort ATTR_TIER28PRICELABEL = 0x001B;
+        public const ushort ATTR_TIER29PRICELABEL = 0x001C;
+        public const ushort ATTR_TIER30PRICELABEL = 0x001D;
+        public const ushort ATTR_TIER31PRICELABEL = 0x001E;
+        public const ushort ATTR_TIER32PRICELABEL = 0x001F;
+        public const ushort ATTR_TIER33PRICELABEL = 0x0020;
+        public const ushort ATTR_TIER34PRICELABEL = 0x0021;
+        public const ushort ATTR_TIER35PRICELABEL = 0x0022;
+        public const ushort ATTR_TIER36PRICELABEL = 0x0023;
+        public const ushort ATTR_TIER37PRICELABEL = 0x0024;
+        public const ushort ATTR_TIER38PRICELABEL = 0x0025;
+        public const ushort ATTR_TIER39PRICELABEL = 0x0026;
+        public const ushort ATTR_TIER40PRICELABEL = 0x0027;
+        public const ushort ATTR_TIER41PRICELABEL = 0x0028;
+        public const ushort ATTR_TIER42PRICELABEL = 0x0029;
+        public const ushort ATTR_TIER43PRICELABEL = 0x002A;
+        public const ushort ATTR_TIER44PRICELABEL = 0x002B;
+        public const ushort ATTR_TIER45PRICELABEL = 0x002C;
+        public const ushort ATTR_TIER46PRICELABEL = 0x002D;
+        public const ushort ATTR_TIER47PRICELABEL = 0x002E;
+        public const ushort ATTR_TIER48PRICELABEL = 0x002F;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -146,7 +146,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK1THRESHOLD = 0x0101;
+        public const ushort ATTR_BLOCK1THRESHOLD = 0x0100;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -158,7 +158,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK2THRESHOLD = 0x0102;
+        public const ushort ATTR_BLOCK2THRESHOLD = 0x0101;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -170,7 +170,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK3THRESHOLD = 0x0103;
+        public const ushort ATTR_BLOCK3THRESHOLD = 0x0102;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -182,7 +182,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK4THRESHOLD = 0x0104;
+        public const ushort ATTR_BLOCK4THRESHOLD = 0x0103;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -194,7 +194,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK5THRESHOLD = 0x0105;
+        public const ushort ATTR_BLOCK5THRESHOLD = 0x0104;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -206,7 +206,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK6THRESHOLD = 0x0106;
+        public const ushort ATTR_BLOCK6THRESHOLD = 0x0105;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -218,7 +218,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK7THRESHOLD = 0x0107;
+        public const ushort ATTR_BLOCK7THRESHOLD = 0x0106;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -230,7 +230,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK8THRESHOLD = 0x0108;
+        public const ushort ATTR_BLOCK8THRESHOLD = 0x0107;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -242,7 +242,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK9THRESHOLD = 0x0109;
+        public const ushort ATTR_BLOCK9THRESHOLD = 0x0108;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -254,7 +254,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK10THRESHOLD = 0x010A;
+        public const ushort ATTR_BLOCK10THRESHOLD = 0x0109;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -266,7 +266,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK11THRESHOLD = 0x010B;
+        public const ushort ATTR_BLOCK11THRESHOLD = 0x010A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -278,7 +278,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK12THRESHOLD = 0x010C;
+        public const ushort ATTR_BLOCK12THRESHOLD = 0x010B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -290,7 +290,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK13THRESHOLD = 0x010D;
+        public const ushort ATTR_BLOCK13THRESHOLD = 0x010C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -302,7 +302,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK14THRESHOLD = 0x010E;
+        public const ushort ATTR_BLOCK14THRESHOLD = 0x010D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -314,7 +314,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_BLOCK15THRESHOLD = 0x010F;
+        public const ushort ATTR_BLOCK15THRESHOLD = 0x010E;
 
         /// <summary>
         /// Where a single set of thresholds is used, the BlockThresholdCount attribute
@@ -334,7 +334,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK1THRESHOLD = 0x0111;
+        public const ushort ATTR_TIER1BLOCK1THRESHOLD = 0x0110;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -346,7 +346,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK2THRESHOLD = 0x0112;
+        public const ushort ATTR_TIER1BLOCK2THRESHOLD = 0x0111;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -358,7 +358,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK3THRESHOLD = 0x0113;
+        public const ushort ATTR_TIER1BLOCK3THRESHOLD = 0x0112;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -370,7 +370,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK4THRESHOLD = 0x0114;
+        public const ushort ATTR_TIER1BLOCK4THRESHOLD = 0x0113;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -382,7 +382,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK5THRESHOLD = 0x0115;
+        public const ushort ATTR_TIER1BLOCK5THRESHOLD = 0x0114;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -394,7 +394,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK6THRESHOLD = 0x0116;
+        public const ushort ATTR_TIER1BLOCK6THRESHOLD = 0x0115;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -406,7 +406,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK7THRESHOLD = 0x0117;
+        public const ushort ATTR_TIER1BLOCK7THRESHOLD = 0x0116;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -418,7 +418,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK8THRESHOLD = 0x0118;
+        public const ushort ATTR_TIER1BLOCK8THRESHOLD = 0x0117;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -430,7 +430,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK9THRESHOLD = 0x0119;
+        public const ushort ATTR_TIER1BLOCK9THRESHOLD = 0x0118;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -442,7 +442,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK10THRESHOLD = 0x011A;
+        public const ushort ATTR_TIER1BLOCK10THRESHOLD = 0x0119;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -454,7 +454,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK11THRESHOLD = 0x011B;
+        public const ushort ATTR_TIER1BLOCK11THRESHOLD = 0x011A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -466,7 +466,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK12THRESHOLD = 0x011C;
+        public const ushort ATTR_TIER1BLOCK12THRESHOLD = 0x011B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -478,7 +478,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK13THRESHOLD = 0x011D;
+        public const ushort ATTR_TIER1BLOCK13THRESHOLD = 0x011C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -490,7 +490,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK14THRESHOLD = 0x011E;
+        public const ushort ATTR_TIER1BLOCK14THRESHOLD = 0x011D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -502,7 +502,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER1BLOCK15THRESHOLD = 0x011F;
+        public const ushort ATTR_TIER1BLOCK15THRESHOLD = 0x011E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -522,7 +522,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK1THRESHOLD = 0x0121;
+        public const ushort ATTR_TIER2BLOCK1THRESHOLD = 0x0120;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -534,7 +534,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK2THRESHOLD = 0x0122;
+        public const ushort ATTR_TIER2BLOCK2THRESHOLD = 0x0121;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -546,7 +546,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK3THRESHOLD = 0x0123;
+        public const ushort ATTR_TIER2BLOCK3THRESHOLD = 0x0122;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -558,7 +558,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK4THRESHOLD = 0x0124;
+        public const ushort ATTR_TIER2BLOCK4THRESHOLD = 0x0123;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -570,7 +570,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK5THRESHOLD = 0x0125;
+        public const ushort ATTR_TIER2BLOCK5THRESHOLD = 0x0124;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -582,7 +582,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK6THRESHOLD = 0x0126;
+        public const ushort ATTR_TIER2BLOCK6THRESHOLD = 0x0125;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -594,7 +594,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK7THRESHOLD = 0x0127;
+        public const ushort ATTR_TIER2BLOCK7THRESHOLD = 0x0126;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -606,7 +606,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK8THRESHOLD = 0x0128;
+        public const ushort ATTR_TIER2BLOCK8THRESHOLD = 0x0127;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -618,7 +618,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK9THRESHOLD = 0x0129;
+        public const ushort ATTR_TIER2BLOCK9THRESHOLD = 0x0128;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -630,7 +630,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK10THRESHOLD = 0x012A;
+        public const ushort ATTR_TIER2BLOCK10THRESHOLD = 0x0129;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -642,7 +642,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK11THRESHOLD = 0x012B;
+        public const ushort ATTR_TIER2BLOCK11THRESHOLD = 0x012A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -654,7 +654,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK12THRESHOLD = 0x012C;
+        public const ushort ATTR_TIER2BLOCK12THRESHOLD = 0x012B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -666,7 +666,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK13THRESHOLD = 0x012D;
+        public const ushort ATTR_TIER2BLOCK13THRESHOLD = 0x012C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -678,7 +678,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK14THRESHOLD = 0x012E;
+        public const ushort ATTR_TIER2BLOCK14THRESHOLD = 0x012D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -690,7 +690,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER2BLOCK15THRESHOLD = 0x012F;
+        public const ushort ATTR_TIER2BLOCK15THRESHOLD = 0x012E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -710,7 +710,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK1THRESHOLD = 0x0131;
+        public const ushort ATTR_TIER3BLOCK1THRESHOLD = 0x0130;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -722,7 +722,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK2THRESHOLD = 0x0132;
+        public const ushort ATTR_TIER3BLOCK2THRESHOLD = 0x0131;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -734,7 +734,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK3THRESHOLD = 0x0133;
+        public const ushort ATTR_TIER3BLOCK3THRESHOLD = 0x0132;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -746,7 +746,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK4THRESHOLD = 0x0134;
+        public const ushort ATTR_TIER3BLOCK4THRESHOLD = 0x0133;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -758,7 +758,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK5THRESHOLD = 0x0135;
+        public const ushort ATTR_TIER3BLOCK5THRESHOLD = 0x0134;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -770,7 +770,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK6THRESHOLD = 0x0136;
+        public const ushort ATTR_TIER3BLOCK6THRESHOLD = 0x0135;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -782,7 +782,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK7THRESHOLD = 0x0137;
+        public const ushort ATTR_TIER3BLOCK7THRESHOLD = 0x0136;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -794,7 +794,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK8THRESHOLD = 0x0138;
+        public const ushort ATTR_TIER3BLOCK8THRESHOLD = 0x0137;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -806,7 +806,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK9THRESHOLD = 0x0139;
+        public const ushort ATTR_TIER3BLOCK9THRESHOLD = 0x0138;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -818,7 +818,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK10THRESHOLD = 0x013A;
+        public const ushort ATTR_TIER3BLOCK10THRESHOLD = 0x0139;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -830,7 +830,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK11THRESHOLD = 0x013B;
+        public const ushort ATTR_TIER3BLOCK11THRESHOLD = 0x013A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -842,7 +842,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK12THRESHOLD = 0x013C;
+        public const ushort ATTR_TIER3BLOCK12THRESHOLD = 0x013B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -854,7 +854,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK13THRESHOLD = 0x013D;
+        public const ushort ATTR_TIER3BLOCK13THRESHOLD = 0x013C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -866,7 +866,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK14THRESHOLD = 0x013E;
+        public const ushort ATTR_TIER3BLOCK14THRESHOLD = 0x013D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -878,7 +878,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER3BLOCK15THRESHOLD = 0x013F;
+        public const ushort ATTR_TIER3BLOCK15THRESHOLD = 0x013E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -898,7 +898,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK1THRESHOLD = 0x0141;
+        public const ushort ATTR_TIER4BLOCK1THRESHOLD = 0x0140;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -910,7 +910,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK2THRESHOLD = 0x0142;
+        public const ushort ATTR_TIER4BLOCK2THRESHOLD = 0x0141;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -922,7 +922,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK3THRESHOLD = 0x0143;
+        public const ushort ATTR_TIER4BLOCK3THRESHOLD = 0x0142;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -934,7 +934,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK4THRESHOLD = 0x0144;
+        public const ushort ATTR_TIER4BLOCK4THRESHOLD = 0x0143;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -946,7 +946,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK5THRESHOLD = 0x0145;
+        public const ushort ATTR_TIER4BLOCK5THRESHOLD = 0x0144;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -958,7 +958,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK6THRESHOLD = 0x0146;
+        public const ushort ATTR_TIER4BLOCK6THRESHOLD = 0x0145;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -970,7 +970,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK7THRESHOLD = 0x0147;
+        public const ushort ATTR_TIER4BLOCK7THRESHOLD = 0x0146;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -982,7 +982,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK8THRESHOLD = 0x0148;
+        public const ushort ATTR_TIER4BLOCK8THRESHOLD = 0x0147;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -994,7 +994,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK9THRESHOLD = 0x0149;
+        public const ushort ATTR_TIER4BLOCK9THRESHOLD = 0x0148;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1006,7 +1006,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK10THRESHOLD = 0x014A;
+        public const ushort ATTR_TIER4BLOCK10THRESHOLD = 0x0149;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1018,7 +1018,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK11THRESHOLD = 0x014B;
+        public const ushort ATTR_TIER4BLOCK11THRESHOLD = 0x014A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1030,7 +1030,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK12THRESHOLD = 0x014C;
+        public const ushort ATTR_TIER4BLOCK12THRESHOLD = 0x014B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1042,7 +1042,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK13THRESHOLD = 0x014D;
+        public const ushort ATTR_TIER4BLOCK13THRESHOLD = 0x014C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1054,7 +1054,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK14THRESHOLD = 0x014E;
+        public const ushort ATTR_TIER4BLOCK14THRESHOLD = 0x014D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1066,7 +1066,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER4BLOCK15THRESHOLD = 0x014F;
+        public const ushort ATTR_TIER4BLOCK15THRESHOLD = 0x014E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -1086,7 +1086,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK1THRESHOLD = 0x0151;
+        public const ushort ATTR_TIER5BLOCK1THRESHOLD = 0x0150;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1098,7 +1098,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK2THRESHOLD = 0x0152;
+        public const ushort ATTR_TIER5BLOCK2THRESHOLD = 0x0151;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1110,7 +1110,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK3THRESHOLD = 0x0153;
+        public const ushort ATTR_TIER5BLOCK3THRESHOLD = 0x0152;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1122,7 +1122,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK4THRESHOLD = 0x0154;
+        public const ushort ATTR_TIER5BLOCK4THRESHOLD = 0x0153;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1134,7 +1134,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK5THRESHOLD = 0x0155;
+        public const ushort ATTR_TIER5BLOCK5THRESHOLD = 0x0154;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1146,7 +1146,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK6THRESHOLD = 0x0156;
+        public const ushort ATTR_TIER5BLOCK6THRESHOLD = 0x0155;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1158,7 +1158,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK7THRESHOLD = 0x0157;
+        public const ushort ATTR_TIER5BLOCK7THRESHOLD = 0x0156;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1170,7 +1170,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK8THRESHOLD = 0x0158;
+        public const ushort ATTR_TIER5BLOCK8THRESHOLD = 0x0157;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1182,7 +1182,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK9THRESHOLD = 0x0159;
+        public const ushort ATTR_TIER5BLOCK9THRESHOLD = 0x0158;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1194,7 +1194,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK10THRESHOLD = 0x015A;
+        public const ushort ATTR_TIER5BLOCK10THRESHOLD = 0x0159;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1206,7 +1206,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK11THRESHOLD = 0x015B;
+        public const ushort ATTR_TIER5BLOCK11THRESHOLD = 0x015A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1218,7 +1218,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK12THRESHOLD = 0x015C;
+        public const ushort ATTR_TIER5BLOCK12THRESHOLD = 0x015B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1230,7 +1230,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK13THRESHOLD = 0x015D;
+        public const ushort ATTR_TIER5BLOCK13THRESHOLD = 0x015C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1242,7 +1242,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK14THRESHOLD = 0x015E;
+        public const ushort ATTR_TIER5BLOCK14THRESHOLD = 0x015D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1254,7 +1254,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER5BLOCK15THRESHOLD = 0x015F;
+        public const ushort ATTR_TIER5BLOCK15THRESHOLD = 0x015E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -1274,7 +1274,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK1THRESHOLD = 0x0161;
+        public const ushort ATTR_TIER6BLOCK1THRESHOLD = 0x0160;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1286,7 +1286,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK2THRESHOLD = 0x0162;
+        public const ushort ATTR_TIER6BLOCK2THRESHOLD = 0x0161;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1298,7 +1298,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK3THRESHOLD = 0x0163;
+        public const ushort ATTR_TIER6BLOCK3THRESHOLD = 0x0162;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1310,7 +1310,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK4THRESHOLD = 0x0164;
+        public const ushort ATTR_TIER6BLOCK4THRESHOLD = 0x0163;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1322,7 +1322,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK5THRESHOLD = 0x0165;
+        public const ushort ATTR_TIER6BLOCK5THRESHOLD = 0x0164;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1334,7 +1334,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK6THRESHOLD = 0x0166;
+        public const ushort ATTR_TIER6BLOCK6THRESHOLD = 0x0165;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1346,7 +1346,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK7THRESHOLD = 0x0167;
+        public const ushort ATTR_TIER6BLOCK7THRESHOLD = 0x0166;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1358,7 +1358,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK8THRESHOLD = 0x0168;
+        public const ushort ATTR_TIER6BLOCK8THRESHOLD = 0x0167;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1370,7 +1370,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK9THRESHOLD = 0x0169;
+        public const ushort ATTR_TIER6BLOCK9THRESHOLD = 0x0168;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1382,7 +1382,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK10THRESHOLD = 0x016A;
+        public const ushort ATTR_TIER6BLOCK10THRESHOLD = 0x0169;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1394,7 +1394,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK11THRESHOLD = 0x016B;
+        public const ushort ATTR_TIER6BLOCK11THRESHOLD = 0x016A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1406,7 +1406,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK12THRESHOLD = 0x016C;
+        public const ushort ATTR_TIER6BLOCK12THRESHOLD = 0x016B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1418,7 +1418,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK13THRESHOLD = 0x016D;
+        public const ushort ATTR_TIER6BLOCK13THRESHOLD = 0x016C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1430,7 +1430,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK14THRESHOLD = 0x016E;
+        public const ushort ATTR_TIER6BLOCK14THRESHOLD = 0x016D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1442,7 +1442,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER6BLOCK15THRESHOLD = 0x016F;
+        public const ushort ATTR_TIER6BLOCK15THRESHOLD = 0x016E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -1462,7 +1462,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK1THRESHOLD = 0x0171;
+        public const ushort ATTR_TIER7BLOCK1THRESHOLD = 0x0170;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1474,7 +1474,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK2THRESHOLD = 0x0172;
+        public const ushort ATTR_TIER7BLOCK2THRESHOLD = 0x0171;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1486,7 +1486,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK3THRESHOLD = 0x0173;
+        public const ushort ATTR_TIER7BLOCK3THRESHOLD = 0x0172;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1498,7 +1498,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK4THRESHOLD = 0x0174;
+        public const ushort ATTR_TIER7BLOCK4THRESHOLD = 0x0173;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1510,7 +1510,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK5THRESHOLD = 0x0175;
+        public const ushort ATTR_TIER7BLOCK5THRESHOLD = 0x0174;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1522,7 +1522,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK6THRESHOLD = 0x0176;
+        public const ushort ATTR_TIER7BLOCK6THRESHOLD = 0x0175;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1534,7 +1534,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK7THRESHOLD = 0x0177;
+        public const ushort ATTR_TIER7BLOCK7THRESHOLD = 0x0176;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1546,7 +1546,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK8THRESHOLD = 0x0178;
+        public const ushort ATTR_TIER7BLOCK8THRESHOLD = 0x0177;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1558,7 +1558,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK9THRESHOLD = 0x0179;
+        public const ushort ATTR_TIER7BLOCK9THRESHOLD = 0x0178;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1570,7 +1570,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK10THRESHOLD = 0x017A;
+        public const ushort ATTR_TIER7BLOCK10THRESHOLD = 0x0179;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1582,7 +1582,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK11THRESHOLD = 0x017B;
+        public const ushort ATTR_TIER7BLOCK11THRESHOLD = 0x017A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1594,7 +1594,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK12THRESHOLD = 0x017C;
+        public const ushort ATTR_TIER7BLOCK12THRESHOLD = 0x017B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1606,7 +1606,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK13THRESHOLD = 0x017D;
+        public const ushort ATTR_TIER7BLOCK13THRESHOLD = 0x017C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1618,7 +1618,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK14THRESHOLD = 0x017E;
+        public const ushort ATTR_TIER7BLOCK14THRESHOLD = 0x017D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1630,7 +1630,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER7BLOCK15THRESHOLD = 0x017F;
+        public const ushort ATTR_TIER7BLOCK15THRESHOLD = 0x017E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -1650,7 +1650,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK1THRESHOLD = 0x0181;
+        public const ushort ATTR_TIER8BLOCK1THRESHOLD = 0x0180;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1662,7 +1662,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK2THRESHOLD = 0x0182;
+        public const ushort ATTR_TIER8BLOCK2THRESHOLD = 0x0181;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1674,7 +1674,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK3THRESHOLD = 0x0183;
+        public const ushort ATTR_TIER8BLOCK3THRESHOLD = 0x0182;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1686,7 +1686,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK4THRESHOLD = 0x0184;
+        public const ushort ATTR_TIER8BLOCK4THRESHOLD = 0x0183;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1698,7 +1698,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK5THRESHOLD = 0x0185;
+        public const ushort ATTR_TIER8BLOCK5THRESHOLD = 0x0184;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1710,7 +1710,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK6THRESHOLD = 0x0186;
+        public const ushort ATTR_TIER8BLOCK6THRESHOLD = 0x0185;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1722,7 +1722,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK7THRESHOLD = 0x0187;
+        public const ushort ATTR_TIER8BLOCK7THRESHOLD = 0x0186;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1734,7 +1734,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK8THRESHOLD = 0x0188;
+        public const ushort ATTR_TIER8BLOCK8THRESHOLD = 0x0187;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1746,7 +1746,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK9THRESHOLD = 0x0189;
+        public const ushort ATTR_TIER8BLOCK9THRESHOLD = 0x0188;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1758,7 +1758,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK10THRESHOLD = 0x018A;
+        public const ushort ATTR_TIER8BLOCK10THRESHOLD = 0x0189;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1770,7 +1770,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK11THRESHOLD = 0x018B;
+        public const ushort ATTR_TIER8BLOCK11THRESHOLD = 0x018A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1782,7 +1782,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK12THRESHOLD = 0x018C;
+        public const ushort ATTR_TIER8BLOCK12THRESHOLD = 0x018B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1794,7 +1794,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK13THRESHOLD = 0x018D;
+        public const ushort ATTR_TIER8BLOCK13THRESHOLD = 0x018C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1806,7 +1806,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK14THRESHOLD = 0x018E;
+        public const ushort ATTR_TIER8BLOCK14THRESHOLD = 0x018D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1818,7 +1818,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER8BLOCK15THRESHOLD = 0x018F;
+        public const ushort ATTR_TIER8BLOCK15THRESHOLD = 0x018E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -1838,7 +1838,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK1THRESHOLD = 0x0191;
+        public const ushort ATTR_TIER9BLOCK1THRESHOLD = 0x0190;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1850,7 +1850,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK2THRESHOLD = 0x0192;
+        public const ushort ATTR_TIER9BLOCK2THRESHOLD = 0x0191;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1862,7 +1862,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK3THRESHOLD = 0x0193;
+        public const ushort ATTR_TIER9BLOCK3THRESHOLD = 0x0192;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1874,7 +1874,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK4THRESHOLD = 0x0194;
+        public const ushort ATTR_TIER9BLOCK4THRESHOLD = 0x0193;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1886,7 +1886,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK5THRESHOLD = 0x0195;
+        public const ushort ATTR_TIER9BLOCK5THRESHOLD = 0x0194;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1898,7 +1898,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK6THRESHOLD = 0x0196;
+        public const ushort ATTR_TIER9BLOCK6THRESHOLD = 0x0195;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1910,7 +1910,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK7THRESHOLD = 0x0197;
+        public const ushort ATTR_TIER9BLOCK7THRESHOLD = 0x0196;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1922,7 +1922,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK8THRESHOLD = 0x0198;
+        public const ushort ATTR_TIER9BLOCK8THRESHOLD = 0x0197;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1934,7 +1934,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK9THRESHOLD = 0x0199;
+        public const ushort ATTR_TIER9BLOCK9THRESHOLD = 0x0198;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1946,7 +1946,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK10THRESHOLD = 0x019A;
+        public const ushort ATTR_TIER9BLOCK10THRESHOLD = 0x0199;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1958,7 +1958,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK11THRESHOLD = 0x019B;
+        public const ushort ATTR_TIER9BLOCK11THRESHOLD = 0x019A;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1970,7 +1970,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK12THRESHOLD = 0x019C;
+        public const ushort ATTR_TIER9BLOCK12THRESHOLD = 0x019B;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1982,7 +1982,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK13THRESHOLD = 0x019D;
+        public const ushort ATTR_TIER9BLOCK13THRESHOLD = 0x019C;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -1994,7 +1994,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK14THRESHOLD = 0x019E;
+        public const ushort ATTR_TIER9BLOCK14THRESHOLD = 0x019D;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2006,7 +2006,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER9BLOCK15THRESHOLD = 0x019F;
+        public const ushort ATTR_TIER9BLOCK15THRESHOLD = 0x019E;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2026,7 +2026,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK1THRESHOLD = 0x01A1;
+        public const ushort ATTR_TIER10BLOCK1THRESHOLD = 0x01A0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2038,7 +2038,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK2THRESHOLD = 0x01A2;
+        public const ushort ATTR_TIER10BLOCK2THRESHOLD = 0x01A1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2050,7 +2050,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK3THRESHOLD = 0x01A3;
+        public const ushort ATTR_TIER10BLOCK3THRESHOLD = 0x01A2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2062,7 +2062,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK4THRESHOLD = 0x01A4;
+        public const ushort ATTR_TIER10BLOCK4THRESHOLD = 0x01A3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2074,7 +2074,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK5THRESHOLD = 0x01A5;
+        public const ushort ATTR_TIER10BLOCK5THRESHOLD = 0x01A4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2086,7 +2086,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK6THRESHOLD = 0x01A6;
+        public const ushort ATTR_TIER10BLOCK6THRESHOLD = 0x01A5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2098,7 +2098,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK7THRESHOLD = 0x01A7;
+        public const ushort ATTR_TIER10BLOCK7THRESHOLD = 0x01A6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2110,7 +2110,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK8THRESHOLD = 0x01A8;
+        public const ushort ATTR_TIER10BLOCK8THRESHOLD = 0x01A7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2122,7 +2122,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK9THRESHOLD = 0x01A9;
+        public const ushort ATTR_TIER10BLOCK9THRESHOLD = 0x01A8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2134,7 +2134,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK10THRESHOLD = 0x01AA;
+        public const ushort ATTR_TIER10BLOCK10THRESHOLD = 0x01A9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2146,7 +2146,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK11THRESHOLD = 0x01AB;
+        public const ushort ATTR_TIER10BLOCK11THRESHOLD = 0x01AA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2158,7 +2158,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK12THRESHOLD = 0x01AC;
+        public const ushort ATTR_TIER10BLOCK12THRESHOLD = 0x01AB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2170,7 +2170,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK13THRESHOLD = 0x01AD;
+        public const ushort ATTR_TIER10BLOCK13THRESHOLD = 0x01AC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2182,7 +2182,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK14THRESHOLD = 0x01AE;
+        public const ushort ATTR_TIER10BLOCK14THRESHOLD = 0x01AD;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2194,7 +2194,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER10BLOCK15THRESHOLD = 0x01AF;
+        public const ushort ATTR_TIER10BLOCK15THRESHOLD = 0x01AE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2214,7 +2214,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK1THRESHOLD = 0x01B1;
+        public const ushort ATTR_TIER11BLOCK1THRESHOLD = 0x01B0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2226,7 +2226,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK2THRESHOLD = 0x01B2;
+        public const ushort ATTR_TIER11BLOCK2THRESHOLD = 0x01B1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2238,7 +2238,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK3THRESHOLD = 0x01B3;
+        public const ushort ATTR_TIER11BLOCK3THRESHOLD = 0x01B2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2250,7 +2250,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK4THRESHOLD = 0x01B4;
+        public const ushort ATTR_TIER11BLOCK4THRESHOLD = 0x01B3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2262,7 +2262,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK5THRESHOLD = 0x01B5;
+        public const ushort ATTR_TIER11BLOCK5THRESHOLD = 0x01B4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2274,7 +2274,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK6THRESHOLD = 0x01B6;
+        public const ushort ATTR_TIER11BLOCK6THRESHOLD = 0x01B5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2286,7 +2286,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK7THRESHOLD = 0x01B7;
+        public const ushort ATTR_TIER11BLOCK7THRESHOLD = 0x01B6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2298,7 +2298,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK8THRESHOLD = 0x01B8;
+        public const ushort ATTR_TIER11BLOCK8THRESHOLD = 0x01B7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2310,7 +2310,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK9THRESHOLD = 0x01B9;
+        public const ushort ATTR_TIER11BLOCK9THRESHOLD = 0x01B8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2322,7 +2322,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK10THRESHOLD = 0x01BA;
+        public const ushort ATTR_TIER11BLOCK10THRESHOLD = 0x01B9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2334,7 +2334,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK11THRESHOLD = 0x01BB;
+        public const ushort ATTR_TIER11BLOCK11THRESHOLD = 0x01BA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2346,7 +2346,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK12THRESHOLD = 0x01BC;
+        public const ushort ATTR_TIER11BLOCK12THRESHOLD = 0x01BB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2358,7 +2358,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK13THRESHOLD = 0x01BD;
+        public const ushort ATTR_TIER11BLOCK13THRESHOLD = 0x01BC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2370,7 +2370,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK14THRESHOLD = 0x01BE;
+        public const ushort ATTR_TIER11BLOCK14THRESHOLD = 0x01BD;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2382,7 +2382,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER11BLOCK15THRESHOLD = 0x01BF;
+        public const ushort ATTR_TIER11BLOCK15THRESHOLD = 0x01BE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2402,7 +2402,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK1THRESHOLD = 0x01C1;
+        public const ushort ATTR_TIER12BLOCK1THRESHOLD = 0x01C0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2414,7 +2414,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK2THRESHOLD = 0x01C2;
+        public const ushort ATTR_TIER12BLOCK2THRESHOLD = 0x01C1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2426,7 +2426,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK3THRESHOLD = 0x01C3;
+        public const ushort ATTR_TIER12BLOCK3THRESHOLD = 0x01C2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2438,7 +2438,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK4THRESHOLD = 0x01C4;
+        public const ushort ATTR_TIER12BLOCK4THRESHOLD = 0x01C3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2450,7 +2450,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK5THRESHOLD = 0x01C5;
+        public const ushort ATTR_TIER12BLOCK5THRESHOLD = 0x01C4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2462,7 +2462,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK6THRESHOLD = 0x01C6;
+        public const ushort ATTR_TIER12BLOCK6THRESHOLD = 0x01C5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2474,7 +2474,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK7THRESHOLD = 0x01C7;
+        public const ushort ATTR_TIER12BLOCK7THRESHOLD = 0x01C6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2486,7 +2486,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK8THRESHOLD = 0x01C8;
+        public const ushort ATTR_TIER12BLOCK8THRESHOLD = 0x01C7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2498,7 +2498,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK9THRESHOLD = 0x01C9;
+        public const ushort ATTR_TIER12BLOCK9THRESHOLD = 0x01C8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2510,7 +2510,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK10THRESHOLD = 0x01CA;
+        public const ushort ATTR_TIER12BLOCK10THRESHOLD = 0x01C9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2522,7 +2522,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK11THRESHOLD = 0x01CB;
+        public const ushort ATTR_TIER12BLOCK11THRESHOLD = 0x01CA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2534,7 +2534,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK12THRESHOLD = 0x01CC;
+        public const ushort ATTR_TIER12BLOCK12THRESHOLD = 0x01CB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2546,7 +2546,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK13THRESHOLD = 0x01CD;
+        public const ushort ATTR_TIER12BLOCK13THRESHOLD = 0x01CC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2558,7 +2558,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK14THRESHOLD = 0x01CE;
+        public const ushort ATTR_TIER12BLOCK14THRESHOLD = 0x01CD;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2570,7 +2570,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER12BLOCK15THRESHOLD = 0x01CF;
+        public const ushort ATTR_TIER12BLOCK15THRESHOLD = 0x01CE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2590,7 +2590,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK1THRESHOLD = 0x01D1;
+        public const ushort ATTR_TIER13BLOCK1THRESHOLD = 0x01D0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2602,7 +2602,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK2THRESHOLD = 0x01D2;
+        public const ushort ATTR_TIER13BLOCK2THRESHOLD = 0x01D1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2614,7 +2614,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK3THRESHOLD = 0x01D3;
+        public const ushort ATTR_TIER13BLOCK3THRESHOLD = 0x01D2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2626,7 +2626,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK4THRESHOLD = 0x01D4;
+        public const ushort ATTR_TIER13BLOCK4THRESHOLD = 0x01D3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2638,7 +2638,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK5THRESHOLD = 0x01D5;
+        public const ushort ATTR_TIER13BLOCK5THRESHOLD = 0x01D4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2650,7 +2650,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK6THRESHOLD = 0x01D6;
+        public const ushort ATTR_TIER13BLOCK6THRESHOLD = 0x01D5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2662,7 +2662,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK7THRESHOLD = 0x01D7;
+        public const ushort ATTR_TIER13BLOCK7THRESHOLD = 0x01D6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2674,7 +2674,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK8THRESHOLD = 0x01D8;
+        public const ushort ATTR_TIER13BLOCK8THRESHOLD = 0x01D7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2686,7 +2686,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK9THRESHOLD = 0x01D9;
+        public const ushort ATTR_TIER13BLOCK9THRESHOLD = 0x01D8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2698,7 +2698,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK10THRESHOLD = 0x01DA;
+        public const ushort ATTR_TIER13BLOCK10THRESHOLD = 0x01D9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2710,7 +2710,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK11THRESHOLD = 0x01DB;
+        public const ushort ATTR_TIER13BLOCK11THRESHOLD = 0x01DA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2722,7 +2722,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK12THRESHOLD = 0x01DC;
+        public const ushort ATTR_TIER13BLOCK12THRESHOLD = 0x01DB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2734,7 +2734,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK13THRESHOLD = 0x01DD;
+        public const ushort ATTR_TIER13BLOCK13THRESHOLD = 0x01DC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2746,7 +2746,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK14THRESHOLD = 0x01DE;
+        public const ushort ATTR_TIER13BLOCK14THRESHOLD = 0x01DD;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2758,7 +2758,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER13BLOCK15THRESHOLD = 0x01DF;
+        public const ushort ATTR_TIER13BLOCK15THRESHOLD = 0x01DE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2778,7 +2778,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK1THRESHOLD = 0x01E1;
+        public const ushort ATTR_TIER14BLOCK1THRESHOLD = 0x01E0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2790,7 +2790,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK2THRESHOLD = 0x01E2;
+        public const ushort ATTR_TIER14BLOCK2THRESHOLD = 0x01E1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2802,7 +2802,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK3THRESHOLD = 0x01E3;
+        public const ushort ATTR_TIER14BLOCK3THRESHOLD = 0x01E2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2814,7 +2814,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK4THRESHOLD = 0x01E4;
+        public const ushort ATTR_TIER14BLOCK4THRESHOLD = 0x01E3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2826,7 +2826,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK5THRESHOLD = 0x01E5;
+        public const ushort ATTR_TIER14BLOCK5THRESHOLD = 0x01E4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2838,7 +2838,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK6THRESHOLD = 0x01E6;
+        public const ushort ATTR_TIER14BLOCK6THRESHOLD = 0x01E5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2850,7 +2850,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK7THRESHOLD = 0x01E7;
+        public const ushort ATTR_TIER14BLOCK7THRESHOLD = 0x01E6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2862,7 +2862,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK8THRESHOLD = 0x01E8;
+        public const ushort ATTR_TIER14BLOCK8THRESHOLD = 0x01E7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2874,7 +2874,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK9THRESHOLD = 0x01E9;
+        public const ushort ATTR_TIER14BLOCK9THRESHOLD = 0x01E8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2886,7 +2886,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK10THRESHOLD = 0x01EA;
+        public const ushort ATTR_TIER14BLOCK10THRESHOLD = 0x01E9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2898,7 +2898,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK11THRESHOLD = 0x01EB;
+        public const ushort ATTR_TIER14BLOCK11THRESHOLD = 0x01EA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2910,7 +2910,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK12THRESHOLD = 0x01EC;
+        public const ushort ATTR_TIER14BLOCK12THRESHOLD = 0x01EB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2922,7 +2922,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK13THRESHOLD = 0x01ED;
+        public const ushort ATTR_TIER14BLOCK13THRESHOLD = 0x01EC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2934,7 +2934,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK14THRESHOLD = 0x01EE;
+        public const ushort ATTR_TIER14BLOCK14THRESHOLD = 0x01ED;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2946,7 +2946,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER14BLOCK15THRESHOLD = 0x01EF;
+        public const ushort ATTR_TIER14BLOCK15THRESHOLD = 0x01EE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -2966,7 +2966,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK1THRESHOLD = 0x01F1;
+        public const ushort ATTR_TIER15BLOCK1THRESHOLD = 0x01F0;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2978,7 +2978,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK2THRESHOLD = 0x01F2;
+        public const ushort ATTR_TIER15BLOCK2THRESHOLD = 0x01F1;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -2990,7 +2990,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK3THRESHOLD = 0x01F3;
+        public const ushort ATTR_TIER15BLOCK3THRESHOLD = 0x01F2;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3002,7 +3002,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK4THRESHOLD = 0x01F4;
+        public const ushort ATTR_TIER15BLOCK4THRESHOLD = 0x01F3;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3014,7 +3014,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK5THRESHOLD = 0x01F5;
+        public const ushort ATTR_TIER15BLOCK5THRESHOLD = 0x01F4;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3026,7 +3026,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK6THRESHOLD = 0x01F6;
+        public const ushort ATTR_TIER15BLOCK6THRESHOLD = 0x01F5;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3038,7 +3038,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK7THRESHOLD = 0x01F7;
+        public const ushort ATTR_TIER15BLOCK7THRESHOLD = 0x01F6;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3050,7 +3050,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK8THRESHOLD = 0x01F8;
+        public const ushort ATTR_TIER15BLOCK8THRESHOLD = 0x01F7;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3062,7 +3062,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK9THRESHOLD = 0x01F9;
+        public const ushort ATTR_TIER15BLOCK9THRESHOLD = 0x01F8;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3074,7 +3074,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK10THRESHOLD = 0x01FA;
+        public const ushort ATTR_TIER15BLOCK10THRESHOLD = 0x01F9;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3086,7 +3086,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK11THRESHOLD = 0x01FB;
+        public const ushort ATTR_TIER15BLOCK11THRESHOLD = 0x01FA;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3098,7 +3098,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK12THRESHOLD = 0x01FC;
+        public const ushort ATTR_TIER15BLOCK12THRESHOLD = 0x01FB;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3110,7 +3110,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK13THRESHOLD = 0x01FD;
+        public const ushort ATTR_TIER15BLOCK13THRESHOLD = 0x01FC;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3122,7 +3122,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK14THRESHOLD = 0x01FE;
+        public const ushort ATTR_TIER15BLOCK14THRESHOLD = 0x01FD;
 
         /// <summary>
         /// Attributes Block1Threshold through Block15Threshold represent the block
@@ -3134,7 +3134,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// values represent the threshold at the end of a block. The Unit of Measure will be
         /// based on the
      /// </summary>
-        public const ushort ATTR_TIER15BLOCK15THRESHOLD = 0x01FF;
+        public const ushort ATTR_TIER15BLOCK15THRESHOLD = 0x01FE;
 
         /// <summary>
         /// The TierNBlockThresholdCount attributes hold the number of block thresholds
@@ -3206,486 +3206,486 @@ namespace ZigBeeNet.ZCL.Clusters
         public const ushort ATTR_CALORIFICVALUE = 0x0304;
         public const ushort ATTR_CALORIFICVALUEUNIT = 0x0305;
         public const ushort ATTR_CALORIFICVALUETRAILINGDIGIT = 0x0306;
-        public const ushort ATTR_NOTIERBLOCK1PRICE = 0x0401;
-        public const ushort ATTR_NOTIERBLOCK2PRICE = 0x0402;
-        public const ushort ATTR_NOTIERBLOCK3PRICE = 0x0403;
-        public const ushort ATTR_NOTIERBLOCK4PRICE = 0x0404;
-        public const ushort ATTR_NOTIERBLOCK5PRICE = 0x0405;
-        public const ushort ATTR_NOTIERBLOCK6PRICE = 0x0406;
-        public const ushort ATTR_NOTIERBLOCK7PRICE = 0x0407;
-        public const ushort ATTR_NOTIERBLOCK8PRICE = 0x0408;
-        public const ushort ATTR_NOTIERBLOCK9PRICE = 0x0409;
-        public const ushort ATTR_NOTIERBLOCK10PRICE = 0x040A;
-        public const ushort ATTR_NOTIERBLOCK11PRICE = 0x040B;
-        public const ushort ATTR_NOTIERBLOCK12PRICE = 0x040C;
-        public const ushort ATTR_NOTIERBLOCK13PRICE = 0x040D;
-        public const ushort ATTR_NOTIERBLOCK14PRICE = 0x040E;
-        public const ushort ATTR_NOTIERBLOCK15PRICE = 0x040F;
-        public const ushort ATTR_NOTIERBLOCK16PRICE = 0x0410;
-        public const ushort ATTR_TIER1BLOCK1PRICE = 0x0411;
-        public const ushort ATTR_TIER1BLOCK2PRICE = 0x0412;
-        public const ushort ATTR_TIER1BLOCK3PRICE = 0x0413;
-        public const ushort ATTR_TIER1BLOCK4PRICE = 0x0414;
-        public const ushort ATTR_TIER1BLOCK5PRICE = 0x0415;
-        public const ushort ATTR_TIER1BLOCK6PRICE = 0x0416;
-        public const ushort ATTR_TIER1BLOCK7PRICE = 0x0417;
-        public const ushort ATTR_TIER1BLOCK8PRICE = 0x0418;
-        public const ushort ATTR_TIER1BLOCK9PRICE = 0x0419;
-        public const ushort ATTR_TIER1BLOCK10PRICE = 0x041A;
-        public const ushort ATTR_TIER1BLOCK11PRICE = 0x041B;
-        public const ushort ATTR_TIER1BLOCK12PRICE = 0x041C;
-        public const ushort ATTR_TIER1BLOCK13PRICE = 0x041D;
-        public const ushort ATTR_TIER1BLOCK14PRICE = 0x041E;
-        public const ushort ATTR_TIER1BLOCK15PRICE = 0x041F;
-        public const ushort ATTR_TIER1BLOCK16PRICE = 0x0420;
-        public const ushort ATTR_TIER2BLOCK1PRICE = 0x0421;
-        public const ushort ATTR_TIER2BLOCK2PRICE = 0x0422;
-        public const ushort ATTR_TIER2BLOCK3PRICE = 0x0423;
-        public const ushort ATTR_TIER2BLOCK4PRICE = 0x0424;
-        public const ushort ATTR_TIER2BLOCK5PRICE = 0x0425;
-        public const ushort ATTR_TIER2BLOCK6PRICE = 0x0426;
-        public const ushort ATTR_TIER2BLOCK7PRICE = 0x0427;
-        public const ushort ATTR_TIER2BLOCK8PRICE = 0x0428;
-        public const ushort ATTR_TIER2BLOCK9PRICE = 0x0429;
-        public const ushort ATTR_TIER2BLOCK10PRICE = 0x042A;
-        public const ushort ATTR_TIER2BLOCK11PRICE = 0x042B;
-        public const ushort ATTR_TIER2BLOCK12PRICE = 0x042C;
-        public const ushort ATTR_TIER2BLOCK13PRICE = 0x042D;
-        public const ushort ATTR_TIER2BLOCK14PRICE = 0x042E;
-        public const ushort ATTR_TIER2BLOCK15PRICE = 0x042F;
-        public const ushort ATTR_TIER2BLOCK16PRICE = 0x0430;
-        public const ushort ATTR_TIER3BLOCK1PRICE = 0x0431;
-        public const ushort ATTR_TIER3BLOCK2PRICE = 0x0432;
-        public const ushort ATTR_TIER3BLOCK3PRICE = 0x0433;
-        public const ushort ATTR_TIER3BLOCK4PRICE = 0x0434;
-        public const ushort ATTR_TIER3BLOCK5PRICE = 0x0435;
-        public const ushort ATTR_TIER3BLOCK6PRICE = 0x0436;
-        public const ushort ATTR_TIER3BLOCK7PRICE = 0x0437;
-        public const ushort ATTR_TIER3BLOCK8PRICE = 0x0438;
-        public const ushort ATTR_TIER3BLOCK9PRICE = 0x0439;
-        public const ushort ATTR_TIER3BLOCK10PRICE = 0x043A;
-        public const ushort ATTR_TIER3BLOCK11PRICE = 0x043B;
-        public const ushort ATTR_TIER3BLOCK12PRICE = 0x043C;
-        public const ushort ATTR_TIER3BLOCK13PRICE = 0x043D;
-        public const ushort ATTR_TIER3BLOCK14PRICE = 0x043E;
-        public const ushort ATTR_TIER3BLOCK15PRICE = 0x043F;
-        public const ushort ATTR_TIER3BLOCK16PRICE = 0x0440;
-        public const ushort ATTR_TIER4BLOCK1PRICE = 0x0441;
-        public const ushort ATTR_TIER4BLOCK2PRICE = 0x0442;
-        public const ushort ATTR_TIER4BLOCK3PRICE = 0x0443;
-        public const ushort ATTR_TIER4BLOCK4PRICE = 0x0444;
-        public const ushort ATTR_TIER4BLOCK5PRICE = 0x0445;
-        public const ushort ATTR_TIER4BLOCK6PRICE = 0x0446;
-        public const ushort ATTR_TIER4BLOCK7PRICE = 0x0447;
-        public const ushort ATTR_TIER4BLOCK8PRICE = 0x0448;
-        public const ushort ATTR_TIER4BLOCK9PRICE = 0x0449;
-        public const ushort ATTR_TIER4BLOCK10PRICE = 0x044A;
-        public const ushort ATTR_TIER4BLOCK11PRICE = 0x044B;
-        public const ushort ATTR_TIER4BLOCK12PRICE = 0x044C;
-        public const ushort ATTR_TIER4BLOCK13PRICE = 0x044D;
-        public const ushort ATTR_TIER4BLOCK14PRICE = 0x044E;
-        public const ushort ATTR_TIER4BLOCK15PRICE = 0x044F;
-        public const ushort ATTR_TIER4BLOCK16PRICE = 0x0450;
-        public const ushort ATTR_TIER5BLOCK1PRICE = 0x0451;
-        public const ushort ATTR_TIER5BLOCK2PRICE = 0x0452;
-        public const ushort ATTR_TIER5BLOCK3PRICE = 0x0453;
-        public const ushort ATTR_TIER5BLOCK4PRICE = 0x0454;
-        public const ushort ATTR_TIER5BLOCK5PRICE = 0x0455;
-        public const ushort ATTR_TIER5BLOCK6PRICE = 0x0456;
-        public const ushort ATTR_TIER5BLOCK7PRICE = 0x0457;
-        public const ushort ATTR_TIER5BLOCK8PRICE = 0x0458;
-        public const ushort ATTR_TIER5BLOCK9PRICE = 0x0459;
-        public const ushort ATTR_TIER5BLOCK10PRICE = 0x045A;
-        public const ushort ATTR_TIER5BLOCK11PRICE = 0x045B;
-        public const ushort ATTR_TIER5BLOCK12PRICE = 0x045C;
-        public const ushort ATTR_TIER5BLOCK13PRICE = 0x045D;
-        public const ushort ATTR_TIER5BLOCK14PRICE = 0x045E;
-        public const ushort ATTR_TIER5BLOCK15PRICE = 0x045F;
-        public const ushort ATTR_TIER5BLOCK16PRICE = 0x0460;
-        public const ushort ATTR_TIER6BLOCK1PRICE = 0x0461;
-        public const ushort ATTR_TIER6BLOCK2PRICE = 0x0462;
-        public const ushort ATTR_TIER6BLOCK3PRICE = 0x0463;
-        public const ushort ATTR_TIER6BLOCK4PRICE = 0x0464;
-        public const ushort ATTR_TIER6BLOCK5PRICE = 0x0465;
-        public const ushort ATTR_TIER6BLOCK6PRICE = 0x0466;
-        public const ushort ATTR_TIER6BLOCK7PRICE = 0x0467;
-        public const ushort ATTR_TIER6BLOCK8PRICE = 0x0468;
-        public const ushort ATTR_TIER6BLOCK9PRICE = 0x0469;
-        public const ushort ATTR_TIER6BLOCK10PRICE = 0x046A;
-        public const ushort ATTR_TIER6BLOCK11PRICE = 0x046B;
-        public const ushort ATTR_TIER6BLOCK12PRICE = 0x046C;
-        public const ushort ATTR_TIER6BLOCK13PRICE = 0x046D;
-        public const ushort ATTR_TIER6BLOCK14PRICE = 0x046E;
-        public const ushort ATTR_TIER6BLOCK15PRICE = 0x046F;
-        public const ushort ATTR_TIER6BLOCK16PRICE = 0x0470;
-        public const ushort ATTR_TIER7BLOCK1PRICE = 0x0471;
-        public const ushort ATTR_TIER7BLOCK2PRICE = 0x0472;
-        public const ushort ATTR_TIER7BLOCK3PRICE = 0x0473;
-        public const ushort ATTR_TIER7BLOCK4PRICE = 0x0474;
-        public const ushort ATTR_TIER7BLOCK5PRICE = 0x0475;
-        public const ushort ATTR_TIER7BLOCK6PRICE = 0x0476;
-        public const ushort ATTR_TIER7BLOCK7PRICE = 0x0477;
-        public const ushort ATTR_TIER7BLOCK8PRICE = 0x0478;
-        public const ushort ATTR_TIER7BLOCK9PRICE = 0x0479;
-        public const ushort ATTR_TIER7BLOCK10PRICE = 0x047A;
-        public const ushort ATTR_TIER7BLOCK11PRICE = 0x047B;
-        public const ushort ATTR_TIER7BLOCK12PRICE = 0x047C;
-        public const ushort ATTR_TIER7BLOCK13PRICE = 0x047D;
-        public const ushort ATTR_TIER7BLOCK14PRICE = 0x047E;
-        public const ushort ATTR_TIER7BLOCK15PRICE = 0x047F;
-        public const ushort ATTR_TIER7BLOCK16PRICE = 0x0480;
-        public const ushort ATTR_TIER8BLOCK1PRICE = 0x0481;
-        public const ushort ATTR_TIER8BLOCK2PRICE = 0x0482;
-        public const ushort ATTR_TIER8BLOCK3PRICE = 0x0483;
-        public const ushort ATTR_TIER8BLOCK4PRICE = 0x0484;
-        public const ushort ATTR_TIER8BLOCK5PRICE = 0x0485;
-        public const ushort ATTR_TIER8BLOCK6PRICE = 0x0486;
-        public const ushort ATTR_TIER8BLOCK7PRICE = 0x0487;
-        public const ushort ATTR_TIER8BLOCK8PRICE = 0x0488;
-        public const ushort ATTR_TIER8BLOCK9PRICE = 0x0489;
-        public const ushort ATTR_TIER8BLOCK10PRICE = 0x048A;
-        public const ushort ATTR_TIER8BLOCK11PRICE = 0x048B;
-        public const ushort ATTR_TIER8BLOCK12PRICE = 0x048C;
-        public const ushort ATTR_TIER8BLOCK13PRICE = 0x048D;
-        public const ushort ATTR_TIER8BLOCK14PRICE = 0x048E;
-        public const ushort ATTR_TIER8BLOCK15PRICE = 0x048F;
-        public const ushort ATTR_TIER8BLOCK16PRICE = 0x0490;
-        public const ushort ATTR_TIER9BLOCK1PRICE = 0x0491;
-        public const ushort ATTR_TIER9BLOCK2PRICE = 0x0492;
-        public const ushort ATTR_TIER9BLOCK3PRICE = 0x0493;
-        public const ushort ATTR_TIER9BLOCK4PRICE = 0x0494;
-        public const ushort ATTR_TIER9BLOCK5PRICE = 0x0495;
-        public const ushort ATTR_TIER9BLOCK6PRICE = 0x0496;
-        public const ushort ATTR_TIER9BLOCK7PRICE = 0x0497;
-        public const ushort ATTR_TIER9BLOCK8PRICE = 0x0498;
-        public const ushort ATTR_TIER9BLOCK9PRICE = 0x0499;
-        public const ushort ATTR_TIER9BLOCK10PRICE = 0x049A;
-        public const ushort ATTR_TIER9BLOCK11PRICE = 0x049B;
-        public const ushort ATTR_TIER9BLOCK12PRICE = 0x049C;
-        public const ushort ATTR_TIER9BLOCK13PRICE = 0x049D;
-        public const ushort ATTR_TIER9BLOCK14PRICE = 0x049E;
-        public const ushort ATTR_TIER9BLOCK15PRICE = 0x049F;
-        public const ushort ATTR_TIER9BLOCK16PRICE = 0x04A0;
-        public const ushort ATTR_TIER10BLOCK1PRICE = 0x04A1;
-        public const ushort ATTR_TIER10BLOCK2PRICE = 0x04A2;
-        public const ushort ATTR_TIER10BLOCK3PRICE = 0x04A3;
-        public const ushort ATTR_TIER10BLOCK4PRICE = 0x04A4;
-        public const ushort ATTR_TIER10BLOCK5PRICE = 0x04A5;
-        public const ushort ATTR_TIER10BLOCK6PRICE = 0x04A6;
-        public const ushort ATTR_TIER10BLOCK7PRICE = 0x04A7;
-        public const ushort ATTR_TIER10BLOCK8PRICE = 0x04A8;
-        public const ushort ATTR_TIER10BLOCK9PRICE = 0x04A9;
-        public const ushort ATTR_TIER10BLOCK10PRICE = 0x04AA;
-        public const ushort ATTR_TIER10BLOCK11PRICE = 0x04AB;
-        public const ushort ATTR_TIER10BLOCK12PRICE = 0x04AC;
-        public const ushort ATTR_TIER10BLOCK13PRICE = 0x04AD;
-        public const ushort ATTR_TIER10BLOCK14PRICE = 0x04AE;
-        public const ushort ATTR_TIER10BLOCK15PRICE = 0x04AF;
-        public const ushort ATTR_TIER10BLOCK16PRICE = 0x04B0;
-        public const ushort ATTR_TIER11BLOCK1PRICE = 0x04B1;
-        public const ushort ATTR_TIER11BLOCK2PRICE = 0x04B2;
-        public const ushort ATTR_TIER11BLOCK3PRICE = 0x04B3;
-        public const ushort ATTR_TIER11BLOCK4PRICE = 0x04B4;
-        public const ushort ATTR_TIER11BLOCK5PRICE = 0x04B5;
-        public const ushort ATTR_TIER11BLOCK6PRICE = 0x04B6;
-        public const ushort ATTR_TIER11BLOCK7PRICE = 0x04B7;
-        public const ushort ATTR_TIER11BLOCK8PRICE = 0x04B8;
-        public const ushort ATTR_TIER11BLOCK9PRICE = 0x04B9;
-        public const ushort ATTR_TIER11BLOCK10PRICE = 0x04BA;
-        public const ushort ATTR_TIER11BLOCK11PRICE = 0x04BB;
-        public const ushort ATTR_TIER11BLOCK12PRICE = 0x04BC;
-        public const ushort ATTR_TIER11BLOCK13PRICE = 0x04BD;
-        public const ushort ATTR_TIER11BLOCK14PRICE = 0x04BE;
-        public const ushort ATTR_TIER11BLOCK15PRICE = 0x04BF;
-        public const ushort ATTR_TIER11BLOCK16PRICE = 0x04C0;
-        public const ushort ATTR_TIER12BLOCK1PRICE = 0x04C1;
-        public const ushort ATTR_TIER12BLOCK2PRICE = 0x04C2;
-        public const ushort ATTR_TIER12BLOCK3PRICE = 0x04C3;
-        public const ushort ATTR_TIER12BLOCK4PRICE = 0x04C4;
-        public const ushort ATTR_TIER12BLOCK5PRICE = 0x04C5;
-        public const ushort ATTR_TIER12BLOCK6PRICE = 0x04C6;
-        public const ushort ATTR_TIER12BLOCK7PRICE = 0x04C7;
-        public const ushort ATTR_TIER12BLOCK8PRICE = 0x04C8;
-        public const ushort ATTR_TIER12BLOCK9PRICE = 0x04C9;
-        public const ushort ATTR_TIER12BLOCK10PRICE = 0x04CA;
-        public const ushort ATTR_TIER12BLOCK11PRICE = 0x04CB;
-        public const ushort ATTR_TIER12BLOCK12PRICE = 0x04CC;
-        public const ushort ATTR_TIER12BLOCK13PRICE = 0x04CD;
-        public const ushort ATTR_TIER12BLOCK14PRICE = 0x04CE;
-        public const ushort ATTR_TIER12BLOCK15PRICE = 0x04CF;
-        public const ushort ATTR_TIER12BLOCK16PRICE = 0x04D0;
-        public const ushort ATTR_TIER13BLOCK1PRICE = 0x04D1;
-        public const ushort ATTR_TIER13BLOCK2PRICE = 0x04D2;
-        public const ushort ATTR_TIER13BLOCK3PRICE = 0x04D3;
-        public const ushort ATTR_TIER13BLOCK4PRICE = 0x04D4;
-        public const ushort ATTR_TIER13BLOCK5PRICE = 0x04D5;
-        public const ushort ATTR_TIER13BLOCK6PRICE = 0x04D6;
-        public const ushort ATTR_TIER13BLOCK7PRICE = 0x04D7;
-        public const ushort ATTR_TIER13BLOCK8PRICE = 0x04D8;
-        public const ushort ATTR_TIER13BLOCK9PRICE = 0x04D9;
-        public const ushort ATTR_TIER13BLOCK10PRICE = 0x04DA;
-        public const ushort ATTR_TIER13BLOCK11PRICE = 0x04DB;
-        public const ushort ATTR_TIER13BLOCK12PRICE = 0x04DC;
-        public const ushort ATTR_TIER13BLOCK13PRICE = 0x04DD;
-        public const ushort ATTR_TIER13BLOCK14PRICE = 0x04DE;
-        public const ushort ATTR_TIER13BLOCK15PRICE = 0x04DF;
-        public const ushort ATTR_TIER13BLOCK16PRICE = 0x04E0;
-        public const ushort ATTR_TIER14BLOCK1PRICE = 0x04E1;
-        public const ushort ATTR_TIER14BLOCK2PRICE = 0x04E2;
-        public const ushort ATTR_TIER14BLOCK3PRICE = 0x04E3;
-        public const ushort ATTR_TIER14BLOCK4PRICE = 0x04E4;
-        public const ushort ATTR_TIER14BLOCK5PRICE = 0x04E5;
-        public const ushort ATTR_TIER14BLOCK6PRICE = 0x04E6;
-        public const ushort ATTR_TIER14BLOCK7PRICE = 0x04E7;
-        public const ushort ATTR_TIER14BLOCK8PRICE = 0x04E8;
-        public const ushort ATTR_TIER14BLOCK9PRICE = 0x04E9;
-        public const ushort ATTR_TIER14BLOCK10PRICE = 0x04EA;
-        public const ushort ATTR_TIER14BLOCK11PRICE = 0x04EB;
-        public const ushort ATTR_TIER14BLOCK12PRICE = 0x04EC;
-        public const ushort ATTR_TIER14BLOCK13PRICE = 0x04ED;
-        public const ushort ATTR_TIER14BLOCK14PRICE = 0x04EE;
-        public const ushort ATTR_TIER14BLOCK15PRICE = 0x04EF;
-        public const ushort ATTR_TIER14BLOCK16PRICE = 0x04F0;
-        public const ushort ATTR_TIER15BLOCK1PRICE = 0x04F1;
-        public const ushort ATTR_TIER15BLOCK2PRICE = 0x04F2;
-        public const ushort ATTR_TIER15BLOCK3PRICE = 0x04F3;
-        public const ushort ATTR_TIER15BLOCK4PRICE = 0x04F4;
-        public const ushort ATTR_TIER15BLOCK5PRICE = 0x04F5;
-        public const ushort ATTR_TIER15BLOCK6PRICE = 0x04F6;
-        public const ushort ATTR_TIER15BLOCK7PRICE = 0x04F7;
-        public const ushort ATTR_TIER15BLOCK8PRICE = 0x04F8;
-        public const ushort ATTR_TIER15BLOCK9PRICE = 0x04F9;
-        public const ushort ATTR_TIER15BLOCK10PRICE = 0x04FA;
-        public const ushort ATTR_TIER15BLOCK11PRICE = 0x04FB;
-        public const ushort ATTR_TIER15BLOCK12PRICE = 0x04FC;
-        public const ushort ATTR_TIER15BLOCK13PRICE = 0x04FD;
-        public const ushort ATTR_TIER15BLOCK14PRICE = 0x04FE;
-        public const ushort ATTR_TIER15BLOCK15PRICE = 0x04FF;
-        public const ushort ATTR_TIER15BLOCK16PRICE = 0x0500;
+        public const ushort ATTR_NOTIERBLOCK1PRICE = 0x0400;
+        public const ushort ATTR_NOTIERBLOCK2PRICE = 0x0401;
+        public const ushort ATTR_NOTIERBLOCK3PRICE = 0x0402;
+        public const ushort ATTR_NOTIERBLOCK4PRICE = 0x0403;
+        public const ushort ATTR_NOTIERBLOCK5PRICE = 0x0404;
+        public const ushort ATTR_NOTIERBLOCK6PRICE = 0x0405;
+        public const ushort ATTR_NOTIERBLOCK7PRICE = 0x0406;
+        public const ushort ATTR_NOTIERBLOCK8PRICE = 0x0407;
+        public const ushort ATTR_NOTIERBLOCK9PRICE = 0x0408;
+        public const ushort ATTR_NOTIERBLOCK10PRICE = 0x0409;
+        public const ushort ATTR_NOTIERBLOCK11PRICE = 0x040A;
+        public const ushort ATTR_NOTIERBLOCK12PRICE = 0x040B;
+        public const ushort ATTR_NOTIERBLOCK13PRICE = 0x040C;
+        public const ushort ATTR_NOTIERBLOCK14PRICE = 0x040D;
+        public const ushort ATTR_NOTIERBLOCK15PRICE = 0x040E;
+        public const ushort ATTR_NOTIERBLOCK16PRICE = 0x040F;
+        public const ushort ATTR_TIER1BLOCK1PRICE = 0x0410;
+        public const ushort ATTR_TIER1BLOCK2PRICE = 0x0411;
+        public const ushort ATTR_TIER1BLOCK3PRICE = 0x0412;
+        public const ushort ATTR_TIER1BLOCK4PRICE = 0x0413;
+        public const ushort ATTR_TIER1BLOCK5PRICE = 0x0414;
+        public const ushort ATTR_TIER1BLOCK6PRICE = 0x0415;
+        public const ushort ATTR_TIER1BLOCK7PRICE = 0x0416;
+        public const ushort ATTR_TIER1BLOCK8PRICE = 0x0417;
+        public const ushort ATTR_TIER1BLOCK9PRICE = 0x0418;
+        public const ushort ATTR_TIER1BLOCK10PRICE = 0x0419;
+        public const ushort ATTR_TIER1BLOCK11PRICE = 0x041A;
+        public const ushort ATTR_TIER1BLOCK12PRICE = 0x041B;
+        public const ushort ATTR_TIER1BLOCK13PRICE = 0x041C;
+        public const ushort ATTR_TIER1BLOCK14PRICE = 0x041D;
+        public const ushort ATTR_TIER1BLOCK15PRICE = 0x041E;
+        public const ushort ATTR_TIER1BLOCK16PRICE = 0x041F;
+        public const ushort ATTR_TIER2BLOCK1PRICE = 0x0420;
+        public const ushort ATTR_TIER2BLOCK2PRICE = 0x0421;
+        public const ushort ATTR_TIER2BLOCK3PRICE = 0x0422;
+        public const ushort ATTR_TIER2BLOCK4PRICE = 0x0423;
+        public const ushort ATTR_TIER2BLOCK5PRICE = 0x0424;
+        public const ushort ATTR_TIER2BLOCK6PRICE = 0x0425;
+        public const ushort ATTR_TIER2BLOCK7PRICE = 0x0426;
+        public const ushort ATTR_TIER2BLOCK8PRICE = 0x0427;
+        public const ushort ATTR_TIER2BLOCK9PRICE = 0x0428;
+        public const ushort ATTR_TIER2BLOCK10PRICE = 0x0429;
+        public const ushort ATTR_TIER2BLOCK11PRICE = 0x042A;
+        public const ushort ATTR_TIER2BLOCK12PRICE = 0x042B;
+        public const ushort ATTR_TIER2BLOCK13PRICE = 0x042C;
+        public const ushort ATTR_TIER2BLOCK14PRICE = 0x042D;
+        public const ushort ATTR_TIER2BLOCK15PRICE = 0x042E;
+        public const ushort ATTR_TIER2BLOCK16PRICE = 0x042F;
+        public const ushort ATTR_TIER3BLOCK1PRICE = 0x0430;
+        public const ushort ATTR_TIER3BLOCK2PRICE = 0x0431;
+        public const ushort ATTR_TIER3BLOCK3PRICE = 0x0432;
+        public const ushort ATTR_TIER3BLOCK4PRICE = 0x0433;
+        public const ushort ATTR_TIER3BLOCK5PRICE = 0x0434;
+        public const ushort ATTR_TIER3BLOCK6PRICE = 0x0435;
+        public const ushort ATTR_TIER3BLOCK7PRICE = 0x0436;
+        public const ushort ATTR_TIER3BLOCK8PRICE = 0x0437;
+        public const ushort ATTR_TIER3BLOCK9PRICE = 0x0438;
+        public const ushort ATTR_TIER3BLOCK10PRICE = 0x0439;
+        public const ushort ATTR_TIER3BLOCK11PRICE = 0x043A;
+        public const ushort ATTR_TIER3BLOCK12PRICE = 0x043B;
+        public const ushort ATTR_TIER3BLOCK13PRICE = 0x043C;
+        public const ushort ATTR_TIER3BLOCK14PRICE = 0x043D;
+        public const ushort ATTR_TIER3BLOCK15PRICE = 0x043E;
+        public const ushort ATTR_TIER3BLOCK16PRICE = 0x043F;
+        public const ushort ATTR_TIER4BLOCK1PRICE = 0x0440;
+        public const ushort ATTR_TIER4BLOCK2PRICE = 0x0441;
+        public const ushort ATTR_TIER4BLOCK3PRICE = 0x0442;
+        public const ushort ATTR_TIER4BLOCK4PRICE = 0x0443;
+        public const ushort ATTR_TIER4BLOCK5PRICE = 0x0444;
+        public const ushort ATTR_TIER4BLOCK6PRICE = 0x0445;
+        public const ushort ATTR_TIER4BLOCK7PRICE = 0x0446;
+        public const ushort ATTR_TIER4BLOCK8PRICE = 0x0447;
+        public const ushort ATTR_TIER4BLOCK9PRICE = 0x0448;
+        public const ushort ATTR_TIER4BLOCK10PRICE = 0x0449;
+        public const ushort ATTR_TIER4BLOCK11PRICE = 0x044A;
+        public const ushort ATTR_TIER4BLOCK12PRICE = 0x044B;
+        public const ushort ATTR_TIER4BLOCK13PRICE = 0x044C;
+        public const ushort ATTR_TIER4BLOCK14PRICE = 0x044D;
+        public const ushort ATTR_TIER4BLOCK15PRICE = 0x044E;
+        public const ushort ATTR_TIER4BLOCK16PRICE = 0x044F;
+        public const ushort ATTR_TIER5BLOCK1PRICE = 0x0450;
+        public const ushort ATTR_TIER5BLOCK2PRICE = 0x0451;
+        public const ushort ATTR_TIER5BLOCK3PRICE = 0x0452;
+        public const ushort ATTR_TIER5BLOCK4PRICE = 0x0453;
+        public const ushort ATTR_TIER5BLOCK5PRICE = 0x0454;
+        public const ushort ATTR_TIER5BLOCK6PRICE = 0x0455;
+        public const ushort ATTR_TIER5BLOCK7PRICE = 0x0456;
+        public const ushort ATTR_TIER5BLOCK8PRICE = 0x0457;
+        public const ushort ATTR_TIER5BLOCK9PRICE = 0x0458;
+        public const ushort ATTR_TIER5BLOCK10PRICE = 0x0459;
+        public const ushort ATTR_TIER5BLOCK11PRICE = 0x045A;
+        public const ushort ATTR_TIER5BLOCK12PRICE = 0x045B;
+        public const ushort ATTR_TIER5BLOCK13PRICE = 0x045C;
+        public const ushort ATTR_TIER5BLOCK14PRICE = 0x045D;
+        public const ushort ATTR_TIER5BLOCK15PRICE = 0x045E;
+        public const ushort ATTR_TIER5BLOCK16PRICE = 0x045F;
+        public const ushort ATTR_TIER6BLOCK1PRICE = 0x0460;
+        public const ushort ATTR_TIER6BLOCK2PRICE = 0x0461;
+        public const ushort ATTR_TIER6BLOCK3PRICE = 0x0462;
+        public const ushort ATTR_TIER6BLOCK4PRICE = 0x0463;
+        public const ushort ATTR_TIER6BLOCK5PRICE = 0x0464;
+        public const ushort ATTR_TIER6BLOCK6PRICE = 0x0465;
+        public const ushort ATTR_TIER6BLOCK7PRICE = 0x0466;
+        public const ushort ATTR_TIER6BLOCK8PRICE = 0x0467;
+        public const ushort ATTR_TIER6BLOCK9PRICE = 0x0468;
+        public const ushort ATTR_TIER6BLOCK10PRICE = 0x0469;
+        public const ushort ATTR_TIER6BLOCK11PRICE = 0x046A;
+        public const ushort ATTR_TIER6BLOCK12PRICE = 0x046B;
+        public const ushort ATTR_TIER6BLOCK13PRICE = 0x046C;
+        public const ushort ATTR_TIER6BLOCK14PRICE = 0x046D;
+        public const ushort ATTR_TIER6BLOCK15PRICE = 0x046E;
+        public const ushort ATTR_TIER6BLOCK16PRICE = 0x046F;
+        public const ushort ATTR_TIER7BLOCK1PRICE = 0x0470;
+        public const ushort ATTR_TIER7BLOCK2PRICE = 0x0471;
+        public const ushort ATTR_TIER7BLOCK3PRICE = 0x0472;
+        public const ushort ATTR_TIER7BLOCK4PRICE = 0x0473;
+        public const ushort ATTR_TIER7BLOCK5PRICE = 0x0474;
+        public const ushort ATTR_TIER7BLOCK6PRICE = 0x0475;
+        public const ushort ATTR_TIER7BLOCK7PRICE = 0x0476;
+        public const ushort ATTR_TIER7BLOCK8PRICE = 0x0477;
+        public const ushort ATTR_TIER7BLOCK9PRICE = 0x0478;
+        public const ushort ATTR_TIER7BLOCK10PRICE = 0x0479;
+        public const ushort ATTR_TIER7BLOCK11PRICE = 0x047A;
+        public const ushort ATTR_TIER7BLOCK12PRICE = 0x047B;
+        public const ushort ATTR_TIER7BLOCK13PRICE = 0x047C;
+        public const ushort ATTR_TIER7BLOCK14PRICE = 0x047D;
+        public const ushort ATTR_TIER7BLOCK15PRICE = 0x047E;
+        public const ushort ATTR_TIER7BLOCK16PRICE = 0x047F;
+        public const ushort ATTR_TIER8BLOCK1PRICE = 0x0480;
+        public const ushort ATTR_TIER8BLOCK2PRICE = 0x0481;
+        public const ushort ATTR_TIER8BLOCK3PRICE = 0x0482;
+        public const ushort ATTR_TIER8BLOCK4PRICE = 0x0483;
+        public const ushort ATTR_TIER8BLOCK5PRICE = 0x0484;
+        public const ushort ATTR_TIER8BLOCK6PRICE = 0x0485;
+        public const ushort ATTR_TIER8BLOCK7PRICE = 0x0486;
+        public const ushort ATTR_TIER8BLOCK8PRICE = 0x0487;
+        public const ushort ATTR_TIER8BLOCK9PRICE = 0x0488;
+        public const ushort ATTR_TIER8BLOCK10PRICE = 0x0489;
+        public const ushort ATTR_TIER8BLOCK11PRICE = 0x048A;
+        public const ushort ATTR_TIER8BLOCK12PRICE = 0x048B;
+        public const ushort ATTR_TIER8BLOCK13PRICE = 0x048C;
+        public const ushort ATTR_TIER8BLOCK14PRICE = 0x048D;
+        public const ushort ATTR_TIER8BLOCK15PRICE = 0x048E;
+        public const ushort ATTR_TIER8BLOCK16PRICE = 0x048F;
+        public const ushort ATTR_TIER9BLOCK1PRICE = 0x0490;
+        public const ushort ATTR_TIER9BLOCK2PRICE = 0x0491;
+        public const ushort ATTR_TIER9BLOCK3PRICE = 0x0492;
+        public const ushort ATTR_TIER9BLOCK4PRICE = 0x0493;
+        public const ushort ATTR_TIER9BLOCK5PRICE = 0x0494;
+        public const ushort ATTR_TIER9BLOCK6PRICE = 0x0495;
+        public const ushort ATTR_TIER9BLOCK7PRICE = 0x0496;
+        public const ushort ATTR_TIER9BLOCK8PRICE = 0x0497;
+        public const ushort ATTR_TIER9BLOCK9PRICE = 0x0498;
+        public const ushort ATTR_TIER9BLOCK10PRICE = 0x0499;
+        public const ushort ATTR_TIER9BLOCK11PRICE = 0x049A;
+        public const ushort ATTR_TIER9BLOCK12PRICE = 0x049B;
+        public const ushort ATTR_TIER9BLOCK13PRICE = 0x049C;
+        public const ushort ATTR_TIER9BLOCK14PRICE = 0x049D;
+        public const ushort ATTR_TIER9BLOCK15PRICE = 0x049E;
+        public const ushort ATTR_TIER9BLOCK16PRICE = 0x049F;
+        public const ushort ATTR_TIER10BLOCK1PRICE = 0x04A0;
+        public const ushort ATTR_TIER10BLOCK2PRICE = 0x04A1;
+        public const ushort ATTR_TIER10BLOCK3PRICE = 0x04A2;
+        public const ushort ATTR_TIER10BLOCK4PRICE = 0x04A3;
+        public const ushort ATTR_TIER10BLOCK5PRICE = 0x04A4;
+        public const ushort ATTR_TIER10BLOCK6PRICE = 0x04A5;
+        public const ushort ATTR_TIER10BLOCK7PRICE = 0x04A6;
+        public const ushort ATTR_TIER10BLOCK8PRICE = 0x04A7;
+        public const ushort ATTR_TIER10BLOCK9PRICE = 0x04A8;
+        public const ushort ATTR_TIER10BLOCK10PRICE = 0x04A9;
+        public const ushort ATTR_TIER10BLOCK11PRICE = 0x04AA;
+        public const ushort ATTR_TIER10BLOCK12PRICE = 0x04AB;
+        public const ushort ATTR_TIER10BLOCK13PRICE = 0x04AC;
+        public const ushort ATTR_TIER10BLOCK14PRICE = 0x04AD;
+        public const ushort ATTR_TIER10BLOCK15PRICE = 0x04AE;
+        public const ushort ATTR_TIER10BLOCK16PRICE = 0x04AF;
+        public const ushort ATTR_TIER11BLOCK1PRICE = 0x04B0;
+        public const ushort ATTR_TIER11BLOCK2PRICE = 0x04B1;
+        public const ushort ATTR_TIER11BLOCK3PRICE = 0x04B2;
+        public const ushort ATTR_TIER11BLOCK4PRICE = 0x04B3;
+        public const ushort ATTR_TIER11BLOCK5PRICE = 0x04B4;
+        public const ushort ATTR_TIER11BLOCK6PRICE = 0x04B5;
+        public const ushort ATTR_TIER11BLOCK7PRICE = 0x04B6;
+        public const ushort ATTR_TIER11BLOCK8PRICE = 0x04B7;
+        public const ushort ATTR_TIER11BLOCK9PRICE = 0x04B8;
+        public const ushort ATTR_TIER11BLOCK10PRICE = 0x04B9;
+        public const ushort ATTR_TIER11BLOCK11PRICE = 0x04BA;
+        public const ushort ATTR_TIER11BLOCK12PRICE = 0x04BB;
+        public const ushort ATTR_TIER11BLOCK13PRICE = 0x04BC;
+        public const ushort ATTR_TIER11BLOCK14PRICE = 0x04BD;
+        public const ushort ATTR_TIER11BLOCK15PRICE = 0x04BE;
+        public const ushort ATTR_TIER11BLOCK16PRICE = 0x04BF;
+        public const ushort ATTR_TIER12BLOCK1PRICE = 0x04C0;
+        public const ushort ATTR_TIER12BLOCK2PRICE = 0x04C1;
+        public const ushort ATTR_TIER12BLOCK3PRICE = 0x04C2;
+        public const ushort ATTR_TIER12BLOCK4PRICE = 0x04C3;
+        public const ushort ATTR_TIER12BLOCK5PRICE = 0x04C4;
+        public const ushort ATTR_TIER12BLOCK6PRICE = 0x04C5;
+        public const ushort ATTR_TIER12BLOCK7PRICE = 0x04C6;
+        public const ushort ATTR_TIER12BLOCK8PRICE = 0x04C7;
+        public const ushort ATTR_TIER12BLOCK9PRICE = 0x04C8;
+        public const ushort ATTR_TIER12BLOCK10PRICE = 0x04C9;
+        public const ushort ATTR_TIER12BLOCK11PRICE = 0x04CA;
+        public const ushort ATTR_TIER12BLOCK12PRICE = 0x04CB;
+        public const ushort ATTR_TIER12BLOCK13PRICE = 0x04CC;
+        public const ushort ATTR_TIER12BLOCK14PRICE = 0x04CD;
+        public const ushort ATTR_TIER12BLOCK15PRICE = 0x04CE;
+        public const ushort ATTR_TIER12BLOCK16PRICE = 0x04CF;
+        public const ushort ATTR_TIER13BLOCK1PRICE = 0x04D0;
+        public const ushort ATTR_TIER13BLOCK2PRICE = 0x04D1;
+        public const ushort ATTR_TIER13BLOCK3PRICE = 0x04D2;
+        public const ushort ATTR_TIER13BLOCK4PRICE = 0x04D3;
+        public const ushort ATTR_TIER13BLOCK5PRICE = 0x04D4;
+        public const ushort ATTR_TIER13BLOCK6PRICE = 0x04D5;
+        public const ushort ATTR_TIER13BLOCK7PRICE = 0x04D6;
+        public const ushort ATTR_TIER13BLOCK8PRICE = 0x04D7;
+        public const ushort ATTR_TIER13BLOCK9PRICE = 0x04D8;
+        public const ushort ATTR_TIER13BLOCK10PRICE = 0x04D9;
+        public const ushort ATTR_TIER13BLOCK11PRICE = 0x04DA;
+        public const ushort ATTR_TIER13BLOCK12PRICE = 0x04DB;
+        public const ushort ATTR_TIER13BLOCK13PRICE = 0x04DC;
+        public const ushort ATTR_TIER13BLOCK14PRICE = 0x04DD;
+        public const ushort ATTR_TIER13BLOCK15PRICE = 0x04DE;
+        public const ushort ATTR_TIER13BLOCK16PRICE = 0x04DF;
+        public const ushort ATTR_TIER14BLOCK1PRICE = 0x04E0;
+        public const ushort ATTR_TIER14BLOCK2PRICE = 0x04E1;
+        public const ushort ATTR_TIER14BLOCK3PRICE = 0x04E2;
+        public const ushort ATTR_TIER14BLOCK4PRICE = 0x04E3;
+        public const ushort ATTR_TIER14BLOCK5PRICE = 0x04E4;
+        public const ushort ATTR_TIER14BLOCK6PRICE = 0x04E5;
+        public const ushort ATTR_TIER14BLOCK7PRICE = 0x04E6;
+        public const ushort ATTR_TIER14BLOCK8PRICE = 0x04E7;
+        public const ushort ATTR_TIER14BLOCK9PRICE = 0x04E8;
+        public const ushort ATTR_TIER14BLOCK10PRICE = 0x04E9;
+        public const ushort ATTR_TIER14BLOCK11PRICE = 0x04EA;
+        public const ushort ATTR_TIER14BLOCK12PRICE = 0x04EB;
+        public const ushort ATTR_TIER14BLOCK13PRICE = 0x04EC;
+        public const ushort ATTR_TIER14BLOCK14PRICE = 0x04ED;
+        public const ushort ATTR_TIER14BLOCK15PRICE = 0x04EE;
+        public const ushort ATTR_TIER14BLOCK16PRICE = 0x04EF;
+        public const ushort ATTR_TIER15BLOCK1PRICE = 0x04F0;
+        public const ushort ATTR_TIER15BLOCK2PRICE = 0x04F1;
+        public const ushort ATTR_TIER15BLOCK3PRICE = 0x04F2;
+        public const ushort ATTR_TIER15BLOCK4PRICE = 0x04F3;
+        public const ushort ATTR_TIER15BLOCK5PRICE = 0x04F4;
+        public const ushort ATTR_TIER15BLOCK6PRICE = 0x04F5;
+        public const ushort ATTR_TIER15BLOCK7PRICE = 0x04F6;
+        public const ushort ATTR_TIER15BLOCK8PRICE = 0x04F7;
+        public const ushort ATTR_TIER15BLOCK9PRICE = 0x04F8;
+        public const ushort ATTR_TIER15BLOCK10PRICE = 0x04F9;
+        public const ushort ATTR_TIER15BLOCK11PRICE = 0x04FA;
+        public const ushort ATTR_TIER15BLOCK12PRICE = 0x04FB;
+        public const ushort ATTR_TIER15BLOCK13PRICE = 0x04FC;
+        public const ushort ATTR_TIER15BLOCK14PRICE = 0x04FD;
+        public const ushort ATTR_TIER15BLOCK15PRICE = 0x04FE;
+        public const ushort ATTR_TIER15BLOCK16PRICE = 0x04FF;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER16 = 0x051F;
+        public const ushort ATTR_PRICETIER16 = 0x050F;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER17 = 0x0520;
+        public const ushort ATTR_PRICETIER17 = 0x0510;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER18 = 0x0521;
+        public const ushort ATTR_PRICETIER18 = 0x0511;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER19 = 0x0522;
+        public const ushort ATTR_PRICETIER19 = 0x0512;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER20 = 0x0523;
+        public const ushort ATTR_PRICETIER20 = 0x0513;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER21 = 0x0524;
+        public const ushort ATTR_PRICETIER21 = 0x0514;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER22 = 0x0525;
+        public const ushort ATTR_PRICETIER22 = 0x0515;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER23 = 0x0526;
+        public const ushort ATTR_PRICETIER23 = 0x0516;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER24 = 0x0527;
+        public const ushort ATTR_PRICETIER24 = 0x0517;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER25 = 0x0528;
+        public const ushort ATTR_PRICETIER25 = 0x0518;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER26 = 0x0529;
+        public const ushort ATTR_PRICETIER26 = 0x0519;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER27 = 0x052A;
+        public const ushort ATTR_PRICETIER27 = 0x051A;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER28 = 0x052B;
+        public const ushort ATTR_PRICETIER28 = 0x051B;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER29 = 0x052C;
+        public const ushort ATTR_PRICETIER29 = 0x051C;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER30 = 0x052D;
+        public const ushort ATTR_PRICETIER30 = 0x051D;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER31 = 0x052E;
+        public const ushort ATTR_PRICETIER31 = 0x051E;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER32 = 0x052F;
+        public const ushort ATTR_PRICETIER32 = 0x051F;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER33 = 0x0530;
+        public const ushort ATTR_PRICETIER33 = 0x0520;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER34 = 0x0531;
+        public const ushort ATTR_PRICETIER34 = 0x0521;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER35 = 0x0532;
+        public const ushort ATTR_PRICETIER35 = 0x0522;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER36 = 0x0533;
+        public const ushort ATTR_PRICETIER36 = 0x0523;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER37 = 0x0534;
+        public const ushort ATTR_PRICETIER37 = 0x0524;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER38 = 0x0535;
+        public const ushort ATTR_PRICETIER38 = 0x0525;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER39 = 0x0536;
+        public const ushort ATTR_PRICETIER39 = 0x0526;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER40 = 0x0537;
+        public const ushort ATTR_PRICETIER40 = 0x0527;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER41 = 0x0538;
+        public const ushort ATTR_PRICETIER41 = 0x0528;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER42 = 0x0539;
+        public const ushort ATTR_PRICETIER42 = 0x0529;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER43 = 0x053A;
+        public const ushort ATTR_PRICETIER43 = 0x052A;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER44 = 0x053B;
+        public const ushort ATTR_PRICETIER44 = 0x052B;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER45 = 0x053C;
+        public const ushort ATTR_PRICETIER45 = 0x052C;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER46 = 0x053D;
+        public const ushort ATTR_PRICETIER46 = 0x052D;
 
         /// <summary>
         /// Attributes PriceTier16 through PriceTier48 represent the price of Energy, Gas,
         /// or Water delivered to the premises (i.e. delivered to the customer from the
         /// utility) at a specific price tier.
      /// </summary>
-        public const ushort ATTR_PRICETIER47 = 0x053E;
+        public const ushort ATTR_PRICETIER47 = 0x052E;
 
         /// <summary>
         /// Attribute CPP1 Price represents the price of Energy, Gas, or Water delivered to the
@@ -3806,378 +3806,378 @@ namespace ZigBeeNet.ZCL.Clusters
         public const ushort ATTR_CREDITCARDPAYMENT5 = 0x0850;
         public const ushort ATTR_CREDITCARDPAYMENTDATE5 = 0x0851;
         public const ushort ATTR_CREDITCARDPAYMENTREF5 = 0x0852;
-        public const ushort ATTR_RECEIVEDTIER1PRICELABEL = 0x8001;
-        public const ushort ATTR_RECEIVEDTIER2PRICELABEL = 0x8002;
-        public const ushort ATTR_RECEIVEDTIER3PRICELABEL = 0x8003;
-        public const ushort ATTR_RECEIVEDTIER4PRICELABEL = 0x8004;
-        public const ushort ATTR_RECEIVEDTIER5PRICELABEL = 0x8005;
-        public const ushort ATTR_RECEIVEDTIER6PRICELABEL = 0x8006;
-        public const ushort ATTR_RECEIVEDTIER7PRICELABEL = 0x8007;
-        public const ushort ATTR_RECEIVEDTIER8PRICELABEL = 0x8008;
-        public const ushort ATTR_RECEIVEDTIER9PRICELABEL = 0x8009;
-        public const ushort ATTR_RECEIVEDTIER10PRICELABEL = 0x800A;
-        public const ushort ATTR_RECEIVEDTIER11PRICELABEL = 0x800B;
-        public const ushort ATTR_RECEIVEDTIER12PRICELABEL = 0x800C;
-        public const ushort ATTR_RECEIVEDTIER13PRICELABEL = 0x800D;
-        public const ushort ATTR_RECEIVEDTIER14PRICELABEL = 0x800E;
-        public const ushort ATTR_RECEIVEDTIER15PRICELABEL = 0x800F;
-        public const ushort ATTR_RECEIVEDTIER16PRICELABEL = 0x8010;
-        public const ushort ATTR_RECEIVEDTIER17PRICELABEL = 0x8011;
-        public const ushort ATTR_RECEIVEDTIER18PRICELABEL = 0x8012;
-        public const ushort ATTR_RECEIVEDTIER19PRICELABEL = 0x8013;
-        public const ushort ATTR_RECEIVEDTIER20PRICELABEL = 0x8014;
-        public const ushort ATTR_RECEIVEDTIER21PRICELABEL = 0x8015;
-        public const ushort ATTR_RECEIVEDTIER22PRICELABEL = 0x8016;
-        public const ushort ATTR_RECEIVEDTIER23PRICELABEL = 0x8017;
-        public const ushort ATTR_RECEIVEDTIER24PRICELABEL = 0x8018;
-        public const ushort ATTR_RECEIVEDTIER25PRICELABEL = 0x8019;
-        public const ushort ATTR_RECEIVEDTIER26PRICELABEL = 0x801A;
-        public const ushort ATTR_RECEIVEDTIER27PRICELABEL = 0x801B;
-        public const ushort ATTR_RECEIVEDTIER28PRICELABEL = 0x801C;
-        public const ushort ATTR_RECEIVEDTIER29PRICELABEL = 0x801D;
-        public const ushort ATTR_RECEIVEDTIER30PRICELABEL = 0x801E;
-        public const ushort ATTR_RECEIVEDTIER31PRICELABEL = 0x801F;
-        public const ushort ATTR_RECEIVEDTIER32PRICELABEL = 0x8020;
-        public const ushort ATTR_RECEIVEDTIER33PRICELABEL = 0x8021;
-        public const ushort ATTR_RECEIVEDTIER34PRICELABEL = 0x8022;
-        public const ushort ATTR_RECEIVEDTIER35PRICELABEL = 0x8023;
-        public const ushort ATTR_RECEIVEDTIER36PRICELABEL = 0x8024;
-        public const ushort ATTR_RECEIVEDTIER37PRICELABEL = 0x8025;
-        public const ushort ATTR_RECEIVEDTIER38PRICELABEL = 0x8026;
-        public const ushort ATTR_RECEIVEDTIER39PRICELABEL = 0x8027;
-        public const ushort ATTR_RECEIVEDTIER40PRICELABEL = 0x8028;
-        public const ushort ATTR_RECEIVEDTIER41PRICELABEL = 0x8029;
-        public const ushort ATTR_RECEIVEDTIER42PRICELABEL = 0x802A;
-        public const ushort ATTR_RECEIVEDTIER43PRICELABEL = 0x802B;
-        public const ushort ATTR_RECEIVEDTIER44PRICELABEL = 0x802C;
-        public const ushort ATTR_RECEIVEDTIER45PRICELABEL = 0x802D;
-        public const ushort ATTR_RECEIVEDTIER46PRICELABEL = 0x802E;
-        public const ushort ATTR_RECEIVEDTIER47PRICELABEL = 0x802F;
-        public const ushort ATTR_RECEIVEDTIER48PRICELABEL = 0x8030;
-        public const ushort ATTR_RECEIVEDBLOCK1THRESHOLD = 0x8101;
-        public const ushort ATTR_RECEIVEDBLOCK2THRESHOLD = 0x8102;
-        public const ushort ATTR_RECEIVEDBLOCK3THRESHOLD = 0x8103;
-        public const ushort ATTR_RECEIVEDBLOCK4THRESHOLD = 0x8104;
-        public const ushort ATTR_RECEIVEDBLOCK5THRESHOLD = 0x8105;
-        public const ushort ATTR_RECEIVEDBLOCK6THRESHOLD = 0x8106;
-        public const ushort ATTR_RECEIVEDBLOCK7THRESHOLD = 0x8107;
-        public const ushort ATTR_RECEIVEDBLOCK8THRESHOLD = 0x8108;
-        public const ushort ATTR_RECEIVEDBLOCK9THRESHOLD = 0x8109;
-        public const ushort ATTR_RECEIVEDBLOCK10THRESHOLD = 0x810A;
-        public const ushort ATTR_RECEIVEDBLOCK11THRESHOLD = 0x810B;
-        public const ushort ATTR_RECEIVEDBLOCK12THRESHOLD = 0x810C;
-        public const ushort ATTR_RECEIVEDBLOCK13THRESHOLD = 0x810D;
-        public const ushort ATTR_RECEIVEDBLOCK14THRESHOLD = 0x810E;
-        public const ushort ATTR_RECEIVEDBLOCK15THRESHOLD = 0x810F;
-        public const ushort ATTR_RECEIVEDBLOCK16THRESHOLD = 0x8110;
+        public const ushort ATTR_RECEIVEDTIER1PRICELABEL = 0x8000;
+        public const ushort ATTR_RECEIVEDTIER2PRICELABEL = 0x8001;
+        public const ushort ATTR_RECEIVEDTIER3PRICELABEL = 0x8002;
+        public const ushort ATTR_RECEIVEDTIER4PRICELABEL = 0x8003;
+        public const ushort ATTR_RECEIVEDTIER5PRICELABEL = 0x8004;
+        public const ushort ATTR_RECEIVEDTIER6PRICELABEL = 0x8005;
+        public const ushort ATTR_RECEIVEDTIER7PRICELABEL = 0x8006;
+        public const ushort ATTR_RECEIVEDTIER8PRICELABEL = 0x8007;
+        public const ushort ATTR_RECEIVEDTIER9PRICELABEL = 0x8008;
+        public const ushort ATTR_RECEIVEDTIER10PRICELABEL = 0x8009;
+        public const ushort ATTR_RECEIVEDTIER11PRICELABEL = 0x800A;
+        public const ushort ATTR_RECEIVEDTIER12PRICELABEL = 0x800B;
+        public const ushort ATTR_RECEIVEDTIER13PRICELABEL = 0x800C;
+        public const ushort ATTR_RECEIVEDTIER14PRICELABEL = 0x800D;
+        public const ushort ATTR_RECEIVEDTIER15PRICELABEL = 0x800E;
+        public const ushort ATTR_RECEIVEDTIER16PRICELABEL = 0x800F;
+        public const ushort ATTR_RECEIVEDTIER17PRICELABEL = 0x8010;
+        public const ushort ATTR_RECEIVEDTIER18PRICELABEL = 0x8011;
+        public const ushort ATTR_RECEIVEDTIER19PRICELABEL = 0x8012;
+        public const ushort ATTR_RECEIVEDTIER20PRICELABEL = 0x8013;
+        public const ushort ATTR_RECEIVEDTIER21PRICELABEL = 0x8014;
+        public const ushort ATTR_RECEIVEDTIER22PRICELABEL = 0x8015;
+        public const ushort ATTR_RECEIVEDTIER23PRICELABEL = 0x8016;
+        public const ushort ATTR_RECEIVEDTIER24PRICELABEL = 0x8017;
+        public const ushort ATTR_RECEIVEDTIER25PRICELABEL = 0x8018;
+        public const ushort ATTR_RECEIVEDTIER26PRICELABEL = 0x8019;
+        public const ushort ATTR_RECEIVEDTIER27PRICELABEL = 0x801A;
+        public const ushort ATTR_RECEIVEDTIER28PRICELABEL = 0x801B;
+        public const ushort ATTR_RECEIVEDTIER29PRICELABEL = 0x801C;
+        public const ushort ATTR_RECEIVEDTIER30PRICELABEL = 0x801D;
+        public const ushort ATTR_RECEIVEDTIER31PRICELABEL = 0x801E;
+        public const ushort ATTR_RECEIVEDTIER32PRICELABEL = 0x801F;
+        public const ushort ATTR_RECEIVEDTIER33PRICELABEL = 0x8020;
+        public const ushort ATTR_RECEIVEDTIER34PRICELABEL = 0x8021;
+        public const ushort ATTR_RECEIVEDTIER35PRICELABEL = 0x8022;
+        public const ushort ATTR_RECEIVEDTIER36PRICELABEL = 0x8023;
+        public const ushort ATTR_RECEIVEDTIER37PRICELABEL = 0x8024;
+        public const ushort ATTR_RECEIVEDTIER38PRICELABEL = 0x8025;
+        public const ushort ATTR_RECEIVEDTIER39PRICELABEL = 0x8026;
+        public const ushort ATTR_RECEIVEDTIER40PRICELABEL = 0x8027;
+        public const ushort ATTR_RECEIVEDTIER41PRICELABEL = 0x8028;
+        public const ushort ATTR_RECEIVEDTIER42PRICELABEL = 0x8029;
+        public const ushort ATTR_RECEIVEDTIER43PRICELABEL = 0x802A;
+        public const ushort ATTR_RECEIVEDTIER44PRICELABEL = 0x802B;
+        public const ushort ATTR_RECEIVEDTIER45PRICELABEL = 0x802C;
+        public const ushort ATTR_RECEIVEDTIER46PRICELABEL = 0x802D;
+        public const ushort ATTR_RECEIVEDTIER47PRICELABEL = 0x802E;
+        public const ushort ATTR_RECEIVEDTIER48PRICELABEL = 0x802F;
+        public const ushort ATTR_RECEIVEDBLOCK1THRESHOLD = 0x8100;
+        public const ushort ATTR_RECEIVEDBLOCK2THRESHOLD = 0x8101;
+        public const ushort ATTR_RECEIVEDBLOCK3THRESHOLD = 0x8102;
+        public const ushort ATTR_RECEIVEDBLOCK4THRESHOLD = 0x8103;
+        public const ushort ATTR_RECEIVEDBLOCK5THRESHOLD = 0x8104;
+        public const ushort ATTR_RECEIVEDBLOCK6THRESHOLD = 0x8105;
+        public const ushort ATTR_RECEIVEDBLOCK7THRESHOLD = 0x8106;
+        public const ushort ATTR_RECEIVEDBLOCK8THRESHOLD = 0x8107;
+        public const ushort ATTR_RECEIVEDBLOCK9THRESHOLD = 0x8108;
+        public const ushort ATTR_RECEIVEDBLOCK10THRESHOLD = 0x8109;
+        public const ushort ATTR_RECEIVEDBLOCK11THRESHOLD = 0x810A;
+        public const ushort ATTR_RECEIVEDBLOCK12THRESHOLD = 0x810B;
+        public const ushort ATTR_RECEIVEDBLOCK13THRESHOLD = 0x810C;
+        public const ushort ATTR_RECEIVEDBLOCK14THRESHOLD = 0x810D;
+        public const ushort ATTR_RECEIVEDBLOCK15THRESHOLD = 0x810E;
+        public const ushort ATTR_RECEIVEDBLOCK16THRESHOLD = 0x810F;
         public const ushort ATTR_RECEIVEDSTARTOFBLOCKPERIOD = 0x8200;
         public const ushort ATTR_RECEIVEDBLOCKPERIODDURATION = 0x8201;
         public const ushort ATTR_RECEIVEDTHRESHOLDMULTIPLIER = 0x8202;
         public const ushort ATTR_RECEIVEDTHRESHOLDDIVISOR = 0x8203;
-        public const ushort ATTR_RXNOTIERBLOCK1PRICE = 0x8401;
-        public const ushort ATTR_RXNOTIERBLOCK2PRICE = 0x8402;
-        public const ushort ATTR_RXNOTIERBLOCK3PRICE = 0x8403;
-        public const ushort ATTR_RXNOTIERBLOCK4PRICE = 0x8404;
-        public const ushort ATTR_RXNOTIERBLOCK5PRICE = 0x8405;
-        public const ushort ATTR_RXNOTIERBLOCK6PRICE = 0x8406;
-        public const ushort ATTR_RXNOTIERBLOCK7PRICE = 0x8407;
-        public const ushort ATTR_RXNOTIERBLOCK8PRICE = 0x8408;
-        public const ushort ATTR_RXNOTIERBLOCK9PRICE = 0x8409;
-        public const ushort ATTR_RXNOTIERBLOCK10PRICE = 0x840A;
-        public const ushort ATTR_RXNOTIERBLOCK11PRICE = 0x840B;
-        public const ushort ATTR_RXNOTIERBLOCK12PRICE = 0x840C;
-        public const ushort ATTR_RXNOTIERBLOCK13PRICE = 0x840D;
-        public const ushort ATTR_RXNOTIERBLOCK14PRICE = 0x840E;
-        public const ushort ATTR_RXNOTIERBLOCK15PRICE = 0x840F;
-        public const ushort ATTR_RXNOTIERBLOCK16PRICE = 0x8410;
-        public const ushort ATTR_RXTIER1BLOCK1PRICE = 0x8411;
-        public const ushort ATTR_RXTIER1BLOCK2PRICE = 0x8412;
-        public const ushort ATTR_RXTIER1BLOCK3PRICE = 0x8413;
-        public const ushort ATTR_RXTIER1BLOCK4PRICE = 0x8414;
-        public const ushort ATTR_RXTIER1BLOCK5PRICE = 0x8415;
-        public const ushort ATTR_RXTIER1BLOCK6PRICE = 0x8416;
-        public const ushort ATTR_RXTIER1BLOCK7PRICE = 0x8417;
-        public const ushort ATTR_RXTIER1BLOCK8PRICE = 0x8418;
-        public const ushort ATTR_RXTIER1BLOCK9PRICE = 0x8419;
-        public const ushort ATTR_RXTIER1BLOCK10PRICE = 0x841A;
-        public const ushort ATTR_RXTIER1BLOCK11PRICE = 0x841B;
-        public const ushort ATTR_RXTIER1BLOCK12PRICE = 0x841C;
-        public const ushort ATTR_RXTIER1BLOCK13PRICE = 0x841D;
-        public const ushort ATTR_RXTIER1BLOCK14PRICE = 0x841E;
-        public const ushort ATTR_RXTIER1BLOCK15PRICE = 0x841F;
-        public const ushort ATTR_RXTIER1BLOCK16PRICE = 0x8420;
-        public const ushort ATTR_RXTIER2BLOCK1PRICE = 0x8421;
-        public const ushort ATTR_RXTIER2BLOCK2PRICE = 0x8422;
-        public const ushort ATTR_RXTIER2BLOCK3PRICE = 0x8423;
-        public const ushort ATTR_RXTIER2BLOCK4PRICE = 0x8424;
-        public const ushort ATTR_RXTIER2BLOCK5PRICE = 0x8425;
-        public const ushort ATTR_RXTIER2BLOCK6PRICE = 0x8426;
-        public const ushort ATTR_RXTIER2BLOCK7PRICE = 0x8427;
-        public const ushort ATTR_RXTIER2BLOCK8PRICE = 0x8428;
-        public const ushort ATTR_RXTIER2BLOCK9PRICE = 0x8429;
-        public const ushort ATTR_RXTIER2BLOCK10PRICE = 0x842A;
-        public const ushort ATTR_RXTIER2BLOCK11PRICE = 0x842B;
-        public const ushort ATTR_RXTIER2BLOCK12PRICE = 0x842C;
-        public const ushort ATTR_RXTIER2BLOCK13PRICE = 0x842D;
-        public const ushort ATTR_RXTIER2BLOCK14PRICE = 0x842E;
-        public const ushort ATTR_RXTIER2BLOCK15PRICE = 0x842F;
-        public const ushort ATTR_RXTIER2BLOCK16PRICE = 0x8430;
-        public const ushort ATTR_RXTIER3BLOCK1PRICE = 0x8431;
-        public const ushort ATTR_RXTIER3BLOCK2PRICE = 0x8432;
-        public const ushort ATTR_RXTIER3BLOCK3PRICE = 0x8433;
-        public const ushort ATTR_RXTIER3BLOCK4PRICE = 0x8434;
-        public const ushort ATTR_RXTIER3BLOCK5PRICE = 0x8435;
-        public const ushort ATTR_RXTIER3BLOCK6PRICE = 0x8436;
-        public const ushort ATTR_RXTIER3BLOCK7PRICE = 0x8437;
-        public const ushort ATTR_RXTIER3BLOCK8PRICE = 0x8438;
-        public const ushort ATTR_RXTIER3BLOCK9PRICE = 0x8439;
-        public const ushort ATTR_RXTIER3BLOCK10PRICE = 0x843A;
-        public const ushort ATTR_RXTIER3BLOCK11PRICE = 0x843B;
-        public const ushort ATTR_RXTIER3BLOCK12PRICE = 0x843C;
-        public const ushort ATTR_RXTIER3BLOCK13PRICE = 0x843D;
-        public const ushort ATTR_RXTIER3BLOCK14PRICE = 0x843E;
-        public const ushort ATTR_RXTIER3BLOCK15PRICE = 0x843F;
-        public const ushort ATTR_RXTIER3BLOCK16PRICE = 0x8440;
-        public const ushort ATTR_RXTIER4BLOCK1PRICE = 0x8441;
-        public const ushort ATTR_RXTIER4BLOCK2PRICE = 0x8442;
-        public const ushort ATTR_RXTIER4BLOCK3PRICE = 0x8443;
-        public const ushort ATTR_RXTIER4BLOCK4PRICE = 0x8444;
-        public const ushort ATTR_RXTIER4BLOCK5PRICE = 0x8445;
-        public const ushort ATTR_RXTIER4BLOCK6PRICE = 0x8446;
-        public const ushort ATTR_RXTIER4BLOCK7PRICE = 0x8447;
-        public const ushort ATTR_RXTIER4BLOCK8PRICE = 0x8448;
-        public const ushort ATTR_RXTIER4BLOCK9PRICE = 0x8449;
-        public const ushort ATTR_RXTIER4BLOCK10PRICE = 0x844A;
-        public const ushort ATTR_RXTIER4BLOCK11PRICE = 0x844B;
-        public const ushort ATTR_RXTIER4BLOCK12PRICE = 0x844C;
-        public const ushort ATTR_RXTIER4BLOCK13PRICE = 0x844D;
-        public const ushort ATTR_RXTIER4BLOCK14PRICE = 0x844E;
-        public const ushort ATTR_RXTIER4BLOCK15PRICE = 0x844F;
-        public const ushort ATTR_RXTIER4BLOCK16PRICE = 0x8450;
-        public const ushort ATTR_RXTIER5BLOCK1PRICE = 0x8451;
-        public const ushort ATTR_RXTIER5BLOCK2PRICE = 0x8452;
-        public const ushort ATTR_RXTIER5BLOCK3PRICE = 0x8453;
-        public const ushort ATTR_RXTIER5BLOCK4PRICE = 0x8454;
-        public const ushort ATTR_RXTIER5BLOCK5PRICE = 0x8455;
-        public const ushort ATTR_RXTIER5BLOCK6PRICE = 0x8456;
-        public const ushort ATTR_RXTIER5BLOCK7PRICE = 0x8457;
-        public const ushort ATTR_RXTIER5BLOCK8PRICE = 0x8458;
-        public const ushort ATTR_RXTIER5BLOCK9PRICE = 0x8459;
-        public const ushort ATTR_RXTIER5BLOCK10PRICE = 0x845A;
-        public const ushort ATTR_RXTIER5BLOCK11PRICE = 0x845B;
-        public const ushort ATTR_RXTIER5BLOCK12PRICE = 0x845C;
-        public const ushort ATTR_RXTIER5BLOCK13PRICE = 0x845D;
-        public const ushort ATTR_RXTIER5BLOCK14PRICE = 0x845E;
-        public const ushort ATTR_RXTIER5BLOCK15PRICE = 0x845F;
-        public const ushort ATTR_RXTIER5BLOCK16PRICE = 0x8460;
-        public const ushort ATTR_RXTIER6BLOCK1PRICE = 0x8461;
-        public const ushort ATTR_RXTIER6BLOCK2PRICE = 0x8462;
-        public const ushort ATTR_RXTIER6BLOCK3PRICE = 0x8463;
-        public const ushort ATTR_RXTIER6BLOCK4PRICE = 0x8464;
-        public const ushort ATTR_RXTIER6BLOCK5PRICE = 0x8465;
-        public const ushort ATTR_RXTIER6BLOCK6PRICE = 0x8466;
-        public const ushort ATTR_RXTIER6BLOCK7PRICE = 0x8467;
-        public const ushort ATTR_RXTIER6BLOCK8PRICE = 0x8468;
-        public const ushort ATTR_RXTIER6BLOCK9PRICE = 0x8469;
-        public const ushort ATTR_RXTIER6BLOCK10PRICE = 0x846A;
-        public const ushort ATTR_RXTIER6BLOCK11PRICE = 0x846B;
-        public const ushort ATTR_RXTIER6BLOCK12PRICE = 0x846C;
-        public const ushort ATTR_RXTIER6BLOCK13PRICE = 0x846D;
-        public const ushort ATTR_RXTIER6BLOCK14PRICE = 0x846E;
-        public const ushort ATTR_RXTIER6BLOCK15PRICE = 0x846F;
-        public const ushort ATTR_RXTIER6BLOCK16PRICE = 0x8470;
-        public const ushort ATTR_RXTIER7BLOCK1PRICE = 0x8471;
-        public const ushort ATTR_RXTIER7BLOCK2PRICE = 0x8472;
-        public const ushort ATTR_RXTIER7BLOCK3PRICE = 0x8473;
-        public const ushort ATTR_RXTIER7BLOCK4PRICE = 0x8474;
-        public const ushort ATTR_RXTIER7BLOCK5PRICE = 0x8475;
-        public const ushort ATTR_RXTIER7BLOCK6PRICE = 0x8476;
-        public const ushort ATTR_RXTIER7BLOCK7PRICE = 0x8477;
-        public const ushort ATTR_RXTIER7BLOCK8PRICE = 0x8478;
-        public const ushort ATTR_RXTIER7BLOCK9PRICE = 0x8479;
-        public const ushort ATTR_RXTIER7BLOCK10PRICE = 0x847A;
-        public const ushort ATTR_RXTIER7BLOCK11PRICE = 0x847B;
-        public const ushort ATTR_RXTIER7BLOCK12PRICE = 0x847C;
-        public const ushort ATTR_RXTIER7BLOCK13PRICE = 0x847D;
-        public const ushort ATTR_RXTIER7BLOCK14PRICE = 0x847E;
-        public const ushort ATTR_RXTIER7BLOCK15PRICE = 0x847F;
-        public const ushort ATTR_RXTIER7BLOCK16PRICE = 0x8480;
-        public const ushort ATTR_RXTIER8BLOCK1PRICE = 0x8481;
-        public const ushort ATTR_RXTIER8BLOCK2PRICE = 0x8482;
-        public const ushort ATTR_RXTIER8BLOCK3PRICE = 0x8483;
-        public const ushort ATTR_RXTIER8BLOCK4PRICE = 0x8484;
-        public const ushort ATTR_RXTIER8BLOCK5PRICE = 0x8485;
-        public const ushort ATTR_RXTIER8BLOCK6PRICE = 0x8486;
-        public const ushort ATTR_RXTIER8BLOCK7PRICE = 0x8487;
-        public const ushort ATTR_RXTIER8BLOCK8PRICE = 0x8488;
-        public const ushort ATTR_RXTIER8BLOCK9PRICE = 0x8489;
-        public const ushort ATTR_RXTIER8BLOCK10PRICE = 0x848A;
-        public const ushort ATTR_RXTIER8BLOCK11PRICE = 0x848B;
-        public const ushort ATTR_RXTIER8BLOCK12PRICE = 0x848C;
-        public const ushort ATTR_RXTIER8BLOCK13PRICE = 0x848D;
-        public const ushort ATTR_RXTIER8BLOCK14PRICE = 0x848E;
-        public const ushort ATTR_RXTIER8BLOCK15PRICE = 0x848F;
-        public const ushort ATTR_RXTIER8BLOCK16PRICE = 0x8490;
-        public const ushort ATTR_RXTIER9BLOCK1PRICE = 0x8491;
-        public const ushort ATTR_RXTIER9BLOCK2PRICE = 0x8492;
-        public const ushort ATTR_RXTIER9BLOCK3PRICE = 0x8493;
-        public const ushort ATTR_RXTIER9BLOCK4PRICE = 0x8494;
-        public const ushort ATTR_RXTIER9BLOCK5PRICE = 0x8495;
-        public const ushort ATTR_RXTIER9BLOCK6PRICE = 0x8496;
-        public const ushort ATTR_RXTIER9BLOCK7PRICE = 0x8497;
-        public const ushort ATTR_RXTIER9BLOCK8PRICE = 0x8498;
-        public const ushort ATTR_RXTIER9BLOCK9PRICE = 0x8499;
-        public const ushort ATTR_RXTIER9BLOCK10PRICE = 0x849A;
-        public const ushort ATTR_RXTIER9BLOCK11PRICE = 0x849B;
-        public const ushort ATTR_RXTIER9BLOCK12PRICE = 0x849C;
-        public const ushort ATTR_RXTIER9BLOCK13PRICE = 0x849D;
-        public const ushort ATTR_RXTIER9BLOCK14PRICE = 0x849E;
-        public const ushort ATTR_RXTIER9BLOCK15PRICE = 0x849F;
-        public const ushort ATTR_RXTIER9BLOCK16PRICE = 0x84A0;
-        public const ushort ATTR_RXTIER10BLOCK1PRICE = 0x84A1;
-        public const ushort ATTR_RXTIER10BLOCK2PRICE = 0x84A2;
-        public const ushort ATTR_RXTIER10BLOCK3PRICE = 0x84A3;
-        public const ushort ATTR_RXTIER10BLOCK4PRICE = 0x84A4;
-        public const ushort ATTR_RXTIER10BLOCK5PRICE = 0x84A5;
-        public const ushort ATTR_RXTIER10BLOCK6PRICE = 0x84A6;
-        public const ushort ATTR_RXTIER10BLOCK7PRICE = 0x84A7;
-        public const ushort ATTR_RXTIER10BLOCK8PRICE = 0x84A8;
-        public const ushort ATTR_RXTIER10BLOCK9PRICE = 0x84A9;
-        public const ushort ATTR_RXTIER10BLOCK10PRICE = 0x84AA;
-        public const ushort ATTR_RXTIER10BLOCK11PRICE = 0x84AB;
-        public const ushort ATTR_RXTIER10BLOCK12PRICE = 0x84AC;
-        public const ushort ATTR_RXTIER10BLOCK13PRICE = 0x84AD;
-        public const ushort ATTR_RXTIER10BLOCK14PRICE = 0x84AE;
-        public const ushort ATTR_RXTIER10BLOCK15PRICE = 0x84AF;
-        public const ushort ATTR_RXTIER10BLOCK16PRICE = 0x84B0;
-        public const ushort ATTR_RXTIER11BLOCK1PRICE = 0x84B1;
-        public const ushort ATTR_RXTIER11BLOCK2PRICE = 0x84B2;
-        public const ushort ATTR_RXTIER11BLOCK3PRICE = 0x84B3;
-        public const ushort ATTR_RXTIER11BLOCK4PRICE = 0x84B4;
-        public const ushort ATTR_RXTIER11BLOCK5PRICE = 0x84B5;
-        public const ushort ATTR_RXTIER11BLOCK6PRICE = 0x84B6;
-        public const ushort ATTR_RXTIER11BLOCK7PRICE = 0x84B7;
-        public const ushort ATTR_RXTIER11BLOCK8PRICE = 0x84B8;
-        public const ushort ATTR_RXTIER11BLOCK9PRICE = 0x84B9;
-        public const ushort ATTR_RXTIER11BLOCK10PRICE = 0x84BA;
-        public const ushort ATTR_RXTIER11BLOCK11PRICE = 0x84BB;
-        public const ushort ATTR_RXTIER11BLOCK12PRICE = 0x84BC;
-        public const ushort ATTR_RXTIER11BLOCK13PRICE = 0x84BD;
-        public const ushort ATTR_RXTIER11BLOCK14PRICE = 0x84BE;
-        public const ushort ATTR_RXTIER11BLOCK15PRICE = 0x84BF;
-        public const ushort ATTR_RXTIER11BLOCK16PRICE = 0x84C0;
-        public const ushort ATTR_RXTIER12BLOCK1PRICE = 0x84C1;
-        public const ushort ATTR_RXTIER12BLOCK2PRICE = 0x84C2;
-        public const ushort ATTR_RXTIER12BLOCK3PRICE = 0x84C3;
-        public const ushort ATTR_RXTIER12BLOCK4PRICE = 0x84C4;
-        public const ushort ATTR_RXTIER12BLOCK5PRICE = 0x84C5;
-        public const ushort ATTR_RXTIER12BLOCK6PRICE = 0x84C6;
-        public const ushort ATTR_RXTIER12BLOCK7PRICE = 0x84C7;
-        public const ushort ATTR_RXTIER12BLOCK8PRICE = 0x84C8;
-        public const ushort ATTR_RXTIER12BLOCK9PRICE = 0x84C9;
-        public const ushort ATTR_RXTIER12BLOCK10PRICE = 0x84CA;
-        public const ushort ATTR_RXTIER12BLOCK11PRICE = 0x84CB;
-        public const ushort ATTR_RXTIER12BLOCK12PRICE = 0x84CC;
-        public const ushort ATTR_RXTIER12BLOCK13PRICE = 0x84CD;
-        public const ushort ATTR_RXTIER12BLOCK14PRICE = 0x84CE;
-        public const ushort ATTR_RXTIER12BLOCK15PRICE = 0x84CF;
-        public const ushort ATTR_RXTIER12BLOCK16PRICE = 0x84D0;
-        public const ushort ATTR_RXTIER13BLOCK1PRICE = 0x84D1;
-        public const ushort ATTR_RXTIER13BLOCK2PRICE = 0x84D2;
-        public const ushort ATTR_RXTIER13BLOCK3PRICE = 0x84D3;
-        public const ushort ATTR_RXTIER13BLOCK4PRICE = 0x84D4;
-        public const ushort ATTR_RXTIER13BLOCK5PRICE = 0x84D5;
-        public const ushort ATTR_RXTIER13BLOCK6PRICE = 0x84D6;
-        public const ushort ATTR_RXTIER13BLOCK7PRICE = 0x84D7;
-        public const ushort ATTR_RXTIER13BLOCK8PRICE = 0x84D8;
-        public const ushort ATTR_RXTIER13BLOCK9PRICE = 0x84D9;
-        public const ushort ATTR_RXTIER13BLOCK10PRICE = 0x84DA;
-        public const ushort ATTR_RXTIER13BLOCK11PRICE = 0x84DB;
-        public const ushort ATTR_RXTIER13BLOCK12PRICE = 0x84DC;
-        public const ushort ATTR_RXTIER13BLOCK13PRICE = 0x84DD;
-        public const ushort ATTR_RXTIER13BLOCK14PRICE = 0x84DE;
-        public const ushort ATTR_RXTIER13BLOCK15PRICE = 0x84DF;
-        public const ushort ATTR_RXTIER13BLOCK16PRICE = 0x84E0;
-        public const ushort ATTR_RXTIER14BLOCK1PRICE = 0x84E1;
-        public const ushort ATTR_RXTIER14BLOCK2PRICE = 0x84E2;
-        public const ushort ATTR_RXTIER14BLOCK3PRICE = 0x84E3;
-        public const ushort ATTR_RXTIER14BLOCK4PRICE = 0x84E4;
-        public const ushort ATTR_RXTIER14BLOCK5PRICE = 0x84E5;
-        public const ushort ATTR_RXTIER14BLOCK6PRICE = 0x84E6;
-        public const ushort ATTR_RXTIER14BLOCK7PRICE = 0x84E7;
-        public const ushort ATTR_RXTIER14BLOCK8PRICE = 0x84E8;
-        public const ushort ATTR_RXTIER14BLOCK9PRICE = 0x84E9;
-        public const ushort ATTR_RXTIER14BLOCK10PRICE = 0x84EA;
-        public const ushort ATTR_RXTIER14BLOCK11PRICE = 0x84EB;
-        public const ushort ATTR_RXTIER14BLOCK12PRICE = 0x84EC;
-        public const ushort ATTR_RXTIER14BLOCK13PRICE = 0x84ED;
-        public const ushort ATTR_RXTIER14BLOCK14PRICE = 0x84EE;
-        public const ushort ATTR_RXTIER14BLOCK15PRICE = 0x84EF;
-        public const ushort ATTR_RXTIER14BLOCK16PRICE = 0x84F0;
-        public const ushort ATTR_RXTIER15BLOCK1PRICE = 0x84F1;
-        public const ushort ATTR_RXTIER15BLOCK2PRICE = 0x84F2;
-        public const ushort ATTR_RXTIER15BLOCK3PRICE = 0x84F3;
-        public const ushort ATTR_RXTIER15BLOCK4PRICE = 0x84F4;
-        public const ushort ATTR_RXTIER15BLOCK5PRICE = 0x84F5;
-        public const ushort ATTR_RXTIER15BLOCK6PRICE = 0x84F6;
-        public const ushort ATTR_RXTIER15BLOCK7PRICE = 0x84F7;
-        public const ushort ATTR_RXTIER15BLOCK8PRICE = 0x84F8;
-        public const ushort ATTR_RXTIER15BLOCK9PRICE = 0x84F9;
-        public const ushort ATTR_RXTIER15BLOCK10PRICE = 0x84FA;
-        public const ushort ATTR_RXTIER15BLOCK11PRICE = 0x84FB;
-        public const ushort ATTR_RXTIER15BLOCK12PRICE = 0x84FC;
-        public const ushort ATTR_RXTIER15BLOCK13PRICE = 0x84FD;
-        public const ushort ATTR_RXTIER15BLOCK14PRICE = 0x84FE;
-        public const ushort ATTR_RXTIER15BLOCK15PRICE = 0x84FF;
-        public const ushort ATTR_RXTIER15BLOCK16PRICE = 0x8500;
-        public const ushort ATTR_RECEIVEDPRICETIER16 = 0x851F;
-        public const ushort ATTR_RECEIVEDPRICETIER17 = 0x8520;
-        public const ushort ATTR_RECEIVEDPRICETIER18 = 0x8521;
-        public const ushort ATTR_RECEIVEDPRICETIER19 = 0x8522;
-        public const ushort ATTR_RECEIVEDPRICETIER20 = 0x8523;
-        public const ushort ATTR_RECEIVEDPRICETIER21 = 0x8524;
-        public const ushort ATTR_RECEIVEDPRICETIER22 = 0x8525;
-        public const ushort ATTR_RECEIVEDPRICETIER23 = 0x8526;
-        public const ushort ATTR_RECEIVEDPRICETIER24 = 0x8527;
-        public const ushort ATTR_RECEIVEDPRICETIER25 = 0x8528;
-        public const ushort ATTR_RECEIVEDPRICETIER26 = 0x8529;
-        public const ushort ATTR_RECEIVEDPRICETIER27 = 0x852A;
-        public const ushort ATTR_RECEIVEDPRICETIER28 = 0x852B;
-        public const ushort ATTR_RECEIVEDPRICETIER29 = 0x852C;
-        public const ushort ATTR_RECEIVEDPRICETIER30 = 0x852D;
-        public const ushort ATTR_RECEIVEDPRICETIER31 = 0x852E;
-        public const ushort ATTR_RECEIVEDPRICETIER32 = 0x852F;
-        public const ushort ATTR_RECEIVEDPRICETIER33 = 0x8530;
-        public const ushort ATTR_RECEIVEDPRICETIER34 = 0x8531;
-        public const ushort ATTR_RECEIVEDPRICETIER35 = 0x8532;
-        public const ushort ATTR_RECEIVEDPRICETIER36 = 0x8533;
-        public const ushort ATTR_RECEIVEDPRICETIER37 = 0x8534;
-        public const ushort ATTR_RECEIVEDPRICETIER38 = 0x8535;
-        public const ushort ATTR_RECEIVEDPRICETIER39 = 0x8536;
-        public const ushort ATTR_RECEIVEDPRICETIER40 = 0x8537;
-        public const ushort ATTR_RECEIVEDPRICETIER41 = 0x8538;
-        public const ushort ATTR_RECEIVEDPRICETIER42 = 0x8539;
-        public const ushort ATTR_RECEIVEDPRICETIER43 = 0x853A;
-        public const ushort ATTR_RECEIVEDPRICETIER44 = 0x853B;
-        public const ushort ATTR_RECEIVEDPRICETIER45 = 0x853C;
-        public const ushort ATTR_RECEIVEDPRICETIER46 = 0x853D;
-        public const ushort ATTR_RECEIVEDPRICETIER47 = 0x853E;
-        public const ushort ATTR_RECEIVEDPRICETIER48 = 0x853F;
-        public const ushort ATTR_RECEIVEDPRICETIER49 = 0x8540;
-        public const ushort ATTR_RECEIVEDPRICETIER50 = 0x8541;
-        public const ushort ATTR_RECEIVEDPRICETIER51 = 0x8542;
-        public const ushort ATTR_RECEIVEDPRICETIER52 = 0x8543;
-        public const ushort ATTR_RECEIVEDPRICETIER53 = 0x8544;
-        public const ushort ATTR_RECEIVEDPRICETIER54 = 0x8545;
-        public const ushort ATTR_RECEIVEDPRICETIER55 = 0x8546;
-        public const ushort ATTR_RECEIVEDPRICETIER56 = 0x8547;
-        public const ushort ATTR_RECEIVEDPRICETIER57 = 0x8548;
-        public const ushort ATTR_RECEIVEDPRICETIER58 = 0x8549;
-        public const ushort ATTR_RECEIVEDPRICETIER59 = 0x854A;
-        public const ushort ATTR_RECEIVEDPRICETIER60 = 0x854B;
-        public const ushort ATTR_RECEIVEDPRICETIER61 = 0x854C;
-        public const ushort ATTR_RECEIVEDPRICETIER62 = 0x854D;
-        public const ushort ATTR_RECEIVEDPRICETIER63 = 0x854E;
+        public const ushort ATTR_RXNOTIERBLOCK1PRICE = 0x8400;
+        public const ushort ATTR_RXNOTIERBLOCK2PRICE = 0x8401;
+        public const ushort ATTR_RXNOTIERBLOCK3PRICE = 0x8402;
+        public const ushort ATTR_RXNOTIERBLOCK4PRICE = 0x8403;
+        public const ushort ATTR_RXNOTIERBLOCK5PRICE = 0x8404;
+        public const ushort ATTR_RXNOTIERBLOCK6PRICE = 0x8405;
+        public const ushort ATTR_RXNOTIERBLOCK7PRICE = 0x8406;
+        public const ushort ATTR_RXNOTIERBLOCK8PRICE = 0x8407;
+        public const ushort ATTR_RXNOTIERBLOCK9PRICE = 0x8408;
+        public const ushort ATTR_RXNOTIERBLOCK10PRICE = 0x8409;
+        public const ushort ATTR_RXNOTIERBLOCK11PRICE = 0x840A;
+        public const ushort ATTR_RXNOTIERBLOCK12PRICE = 0x840B;
+        public const ushort ATTR_RXNOTIERBLOCK13PRICE = 0x840C;
+        public const ushort ATTR_RXNOTIERBLOCK14PRICE = 0x840D;
+        public const ushort ATTR_RXNOTIERBLOCK15PRICE = 0x840E;
+        public const ushort ATTR_RXNOTIERBLOCK16PRICE = 0x840F;
+        public const ushort ATTR_RXTIER1BLOCK1PRICE = 0x8410;
+        public const ushort ATTR_RXTIER1BLOCK2PRICE = 0x8411;
+        public const ushort ATTR_RXTIER1BLOCK3PRICE = 0x8412;
+        public const ushort ATTR_RXTIER1BLOCK4PRICE = 0x8413;
+        public const ushort ATTR_RXTIER1BLOCK5PRICE = 0x8414;
+        public const ushort ATTR_RXTIER1BLOCK6PRICE = 0x8415;
+        public const ushort ATTR_RXTIER1BLOCK7PRICE = 0x8416;
+        public const ushort ATTR_RXTIER1BLOCK8PRICE = 0x8417;
+        public const ushort ATTR_RXTIER1BLOCK9PRICE = 0x8418;
+        public const ushort ATTR_RXTIER1BLOCK10PRICE = 0x8419;
+        public const ushort ATTR_RXTIER1BLOCK11PRICE = 0x841A;
+        public const ushort ATTR_RXTIER1BLOCK12PRICE = 0x841B;
+        public const ushort ATTR_RXTIER1BLOCK13PRICE = 0x841C;
+        public const ushort ATTR_RXTIER1BLOCK14PRICE = 0x841D;
+        public const ushort ATTR_RXTIER1BLOCK15PRICE = 0x841E;
+        public const ushort ATTR_RXTIER1BLOCK16PRICE = 0x841F;
+        public const ushort ATTR_RXTIER2BLOCK1PRICE = 0x8420;
+        public const ushort ATTR_RXTIER2BLOCK2PRICE = 0x8421;
+        public const ushort ATTR_RXTIER2BLOCK3PRICE = 0x8422;
+        public const ushort ATTR_RXTIER2BLOCK4PRICE = 0x8423;
+        public const ushort ATTR_RXTIER2BLOCK5PRICE = 0x8424;
+        public const ushort ATTR_RXTIER2BLOCK6PRICE = 0x8425;
+        public const ushort ATTR_RXTIER2BLOCK7PRICE = 0x8426;
+        public const ushort ATTR_RXTIER2BLOCK8PRICE = 0x8427;
+        public const ushort ATTR_RXTIER2BLOCK9PRICE = 0x8428;
+        public const ushort ATTR_RXTIER2BLOCK10PRICE = 0x8429;
+        public const ushort ATTR_RXTIER2BLOCK11PRICE = 0x842A;
+        public const ushort ATTR_RXTIER2BLOCK12PRICE = 0x842B;
+        public const ushort ATTR_RXTIER2BLOCK13PRICE = 0x842C;
+        public const ushort ATTR_RXTIER2BLOCK14PRICE = 0x842D;
+        public const ushort ATTR_RXTIER2BLOCK15PRICE = 0x842E;
+        public const ushort ATTR_RXTIER2BLOCK16PRICE = 0x842F;
+        public const ushort ATTR_RXTIER3BLOCK1PRICE = 0x8430;
+        public const ushort ATTR_RXTIER3BLOCK2PRICE = 0x8431;
+        public const ushort ATTR_RXTIER3BLOCK3PRICE = 0x8432;
+        public const ushort ATTR_RXTIER3BLOCK4PRICE = 0x8433;
+        public const ushort ATTR_RXTIER3BLOCK5PRICE = 0x8434;
+        public const ushort ATTR_RXTIER3BLOCK6PRICE = 0x8435;
+        public const ushort ATTR_RXTIER3BLOCK7PRICE = 0x8436;
+        public const ushort ATTR_RXTIER3BLOCK8PRICE = 0x8437;
+        public const ushort ATTR_RXTIER3BLOCK9PRICE = 0x8438;
+        public const ushort ATTR_RXTIER3BLOCK10PRICE = 0x8439;
+        public const ushort ATTR_RXTIER3BLOCK11PRICE = 0x843A;
+        public const ushort ATTR_RXTIER3BLOCK12PRICE = 0x843B;
+        public const ushort ATTR_RXTIER3BLOCK13PRICE = 0x843C;
+        public const ushort ATTR_RXTIER3BLOCK14PRICE = 0x843D;
+        public const ushort ATTR_RXTIER3BLOCK15PRICE = 0x843E;
+        public const ushort ATTR_RXTIER3BLOCK16PRICE = 0x843F;
+        public const ushort ATTR_RXTIER4BLOCK1PRICE = 0x8440;
+        public const ushort ATTR_RXTIER4BLOCK2PRICE = 0x8441;
+        public const ushort ATTR_RXTIER4BLOCK3PRICE = 0x8442;
+        public const ushort ATTR_RXTIER4BLOCK4PRICE = 0x8443;
+        public const ushort ATTR_RXTIER4BLOCK5PRICE = 0x8444;
+        public const ushort ATTR_RXTIER4BLOCK6PRICE = 0x8445;
+        public const ushort ATTR_RXTIER4BLOCK7PRICE = 0x8446;
+        public const ushort ATTR_RXTIER4BLOCK8PRICE = 0x8447;
+        public const ushort ATTR_RXTIER4BLOCK9PRICE = 0x8448;
+        public const ushort ATTR_RXTIER4BLOCK10PRICE = 0x8449;
+        public const ushort ATTR_RXTIER4BLOCK11PRICE = 0x844A;
+        public const ushort ATTR_RXTIER4BLOCK12PRICE = 0x844B;
+        public const ushort ATTR_RXTIER4BLOCK13PRICE = 0x844C;
+        public const ushort ATTR_RXTIER4BLOCK14PRICE = 0x844D;
+        public const ushort ATTR_RXTIER4BLOCK15PRICE = 0x844E;
+        public const ushort ATTR_RXTIER4BLOCK16PRICE = 0x844F;
+        public const ushort ATTR_RXTIER5BLOCK1PRICE = 0x8450;
+        public const ushort ATTR_RXTIER5BLOCK2PRICE = 0x8451;
+        public const ushort ATTR_RXTIER5BLOCK3PRICE = 0x8452;
+        public const ushort ATTR_RXTIER5BLOCK4PRICE = 0x8453;
+        public const ushort ATTR_RXTIER5BLOCK5PRICE = 0x8454;
+        public const ushort ATTR_RXTIER5BLOCK6PRICE = 0x8455;
+        public const ushort ATTR_RXTIER5BLOCK7PRICE = 0x8456;
+        public const ushort ATTR_RXTIER5BLOCK8PRICE = 0x8457;
+        public const ushort ATTR_RXTIER5BLOCK9PRICE = 0x8458;
+        public const ushort ATTR_RXTIER5BLOCK10PRICE = 0x8459;
+        public const ushort ATTR_RXTIER5BLOCK11PRICE = 0x845A;
+        public const ushort ATTR_RXTIER5BLOCK12PRICE = 0x845B;
+        public const ushort ATTR_RXTIER5BLOCK13PRICE = 0x845C;
+        public const ushort ATTR_RXTIER5BLOCK14PRICE = 0x845D;
+        public const ushort ATTR_RXTIER5BLOCK15PRICE = 0x845E;
+        public const ushort ATTR_RXTIER5BLOCK16PRICE = 0x845F;
+        public const ushort ATTR_RXTIER6BLOCK1PRICE = 0x8460;
+        public const ushort ATTR_RXTIER6BLOCK2PRICE = 0x8461;
+        public const ushort ATTR_RXTIER6BLOCK3PRICE = 0x8462;
+        public const ushort ATTR_RXTIER6BLOCK4PRICE = 0x8463;
+        public const ushort ATTR_RXTIER6BLOCK5PRICE = 0x8464;
+        public const ushort ATTR_RXTIER6BLOCK6PRICE = 0x8465;
+        public const ushort ATTR_RXTIER6BLOCK7PRICE = 0x8466;
+        public const ushort ATTR_RXTIER6BLOCK8PRICE = 0x8467;
+        public const ushort ATTR_RXTIER6BLOCK9PRICE = 0x8468;
+        public const ushort ATTR_RXTIER6BLOCK10PRICE = 0x8469;
+        public const ushort ATTR_RXTIER6BLOCK11PRICE = 0x846A;
+        public const ushort ATTR_RXTIER6BLOCK12PRICE = 0x846B;
+        public const ushort ATTR_RXTIER6BLOCK13PRICE = 0x846C;
+        public const ushort ATTR_RXTIER6BLOCK14PRICE = 0x846D;
+        public const ushort ATTR_RXTIER6BLOCK15PRICE = 0x846E;
+        public const ushort ATTR_RXTIER6BLOCK16PRICE = 0x846F;
+        public const ushort ATTR_RXTIER7BLOCK1PRICE = 0x8470;
+        public const ushort ATTR_RXTIER7BLOCK2PRICE = 0x8471;
+        public const ushort ATTR_RXTIER7BLOCK3PRICE = 0x8472;
+        public const ushort ATTR_RXTIER7BLOCK4PRICE = 0x8473;
+        public const ushort ATTR_RXTIER7BLOCK5PRICE = 0x8474;
+        public const ushort ATTR_RXTIER7BLOCK6PRICE = 0x8475;
+        public const ushort ATTR_RXTIER7BLOCK7PRICE = 0x8476;
+        public const ushort ATTR_RXTIER7BLOCK8PRICE = 0x8477;
+        public const ushort ATTR_RXTIER7BLOCK9PRICE = 0x8478;
+        public const ushort ATTR_RXTIER7BLOCK10PRICE = 0x8479;
+        public const ushort ATTR_RXTIER7BLOCK11PRICE = 0x847A;
+        public const ushort ATTR_RXTIER7BLOCK12PRICE = 0x847B;
+        public const ushort ATTR_RXTIER7BLOCK13PRICE = 0x847C;
+        public const ushort ATTR_RXTIER7BLOCK14PRICE = 0x847D;
+        public const ushort ATTR_RXTIER7BLOCK15PRICE = 0x847E;
+        public const ushort ATTR_RXTIER7BLOCK16PRICE = 0x847F;
+        public const ushort ATTR_RXTIER8BLOCK1PRICE = 0x8480;
+        public const ushort ATTR_RXTIER8BLOCK2PRICE = 0x8481;
+        public const ushort ATTR_RXTIER8BLOCK3PRICE = 0x8482;
+        public const ushort ATTR_RXTIER8BLOCK4PRICE = 0x8483;
+        public const ushort ATTR_RXTIER8BLOCK5PRICE = 0x8484;
+        public const ushort ATTR_RXTIER8BLOCK6PRICE = 0x8485;
+        public const ushort ATTR_RXTIER8BLOCK7PRICE = 0x8486;
+        public const ushort ATTR_RXTIER8BLOCK8PRICE = 0x8487;
+        public const ushort ATTR_RXTIER8BLOCK9PRICE = 0x8488;
+        public const ushort ATTR_RXTIER8BLOCK10PRICE = 0x8489;
+        public const ushort ATTR_RXTIER8BLOCK11PRICE = 0x848A;
+        public const ushort ATTR_RXTIER8BLOCK12PRICE = 0x848B;
+        public const ushort ATTR_RXTIER8BLOCK13PRICE = 0x848C;
+        public const ushort ATTR_RXTIER8BLOCK14PRICE = 0x848D;
+        public const ushort ATTR_RXTIER8BLOCK15PRICE = 0x848E;
+        public const ushort ATTR_RXTIER8BLOCK16PRICE = 0x848F;
+        public const ushort ATTR_RXTIER9BLOCK1PRICE = 0x8490;
+        public const ushort ATTR_RXTIER9BLOCK2PRICE = 0x8491;
+        public const ushort ATTR_RXTIER9BLOCK3PRICE = 0x8492;
+        public const ushort ATTR_RXTIER9BLOCK4PRICE = 0x8493;
+        public const ushort ATTR_RXTIER9BLOCK5PRICE = 0x8494;
+        public const ushort ATTR_RXTIER9BLOCK6PRICE = 0x8495;
+        public const ushort ATTR_RXTIER9BLOCK7PRICE = 0x8496;
+        public const ushort ATTR_RXTIER9BLOCK8PRICE = 0x8497;
+        public const ushort ATTR_RXTIER9BLOCK9PRICE = 0x8498;
+        public const ushort ATTR_RXTIER9BLOCK10PRICE = 0x8499;
+        public const ushort ATTR_RXTIER9BLOCK11PRICE = 0x849A;
+        public const ushort ATTR_RXTIER9BLOCK12PRICE = 0x849B;
+        public const ushort ATTR_RXTIER9BLOCK13PRICE = 0x849C;
+        public const ushort ATTR_RXTIER9BLOCK14PRICE = 0x849D;
+        public const ushort ATTR_RXTIER9BLOCK15PRICE = 0x849E;
+        public const ushort ATTR_RXTIER9BLOCK16PRICE = 0x849F;
+        public const ushort ATTR_RXTIER10BLOCK1PRICE = 0x84A0;
+        public const ushort ATTR_RXTIER10BLOCK2PRICE = 0x84A1;
+        public const ushort ATTR_RXTIER10BLOCK3PRICE = 0x84A2;
+        public const ushort ATTR_RXTIER10BLOCK4PRICE = 0x84A3;
+        public const ushort ATTR_RXTIER10BLOCK5PRICE = 0x84A4;
+        public const ushort ATTR_RXTIER10BLOCK6PRICE = 0x84A5;
+        public const ushort ATTR_RXTIER10BLOCK7PRICE = 0x84A6;
+        public const ushort ATTR_RXTIER10BLOCK8PRICE = 0x84A7;
+        public const ushort ATTR_RXTIER10BLOCK9PRICE = 0x84A8;
+        public const ushort ATTR_RXTIER10BLOCK10PRICE = 0x84A9;
+        public const ushort ATTR_RXTIER10BLOCK11PRICE = 0x84AA;
+        public const ushort ATTR_RXTIER10BLOCK12PRICE = 0x84AB;
+        public const ushort ATTR_RXTIER10BLOCK13PRICE = 0x84AC;
+        public const ushort ATTR_RXTIER10BLOCK14PRICE = 0x84AD;
+        public const ushort ATTR_RXTIER10BLOCK15PRICE = 0x84AE;
+        public const ushort ATTR_RXTIER10BLOCK16PRICE = 0x84AF;
+        public const ushort ATTR_RXTIER11BLOCK1PRICE = 0x84B0;
+        public const ushort ATTR_RXTIER11BLOCK2PRICE = 0x84B1;
+        public const ushort ATTR_RXTIER11BLOCK3PRICE = 0x84B2;
+        public const ushort ATTR_RXTIER11BLOCK4PRICE = 0x84B3;
+        public const ushort ATTR_RXTIER11BLOCK5PRICE = 0x84B4;
+        public const ushort ATTR_RXTIER11BLOCK6PRICE = 0x84B5;
+        public const ushort ATTR_RXTIER11BLOCK7PRICE = 0x84B6;
+        public const ushort ATTR_RXTIER11BLOCK8PRICE = 0x84B7;
+        public const ushort ATTR_RXTIER11BLOCK9PRICE = 0x84B8;
+        public const ushort ATTR_RXTIER11BLOCK10PRICE = 0x84B9;
+        public const ushort ATTR_RXTIER11BLOCK11PRICE = 0x84BA;
+        public const ushort ATTR_RXTIER11BLOCK12PRICE = 0x84BB;
+        public const ushort ATTR_RXTIER11BLOCK13PRICE = 0x84BC;
+        public const ushort ATTR_RXTIER11BLOCK14PRICE = 0x84BD;
+        public const ushort ATTR_RXTIER11BLOCK15PRICE = 0x84BE;
+        public const ushort ATTR_RXTIER11BLOCK16PRICE = 0x84BF;
+        public const ushort ATTR_RXTIER12BLOCK1PRICE = 0x84C0;
+        public const ushort ATTR_RXTIER12BLOCK2PRICE = 0x84C1;
+        public const ushort ATTR_RXTIER12BLOCK3PRICE = 0x84C2;
+        public const ushort ATTR_RXTIER12BLOCK4PRICE = 0x84C3;
+        public const ushort ATTR_RXTIER12BLOCK5PRICE = 0x84C4;
+        public const ushort ATTR_RXTIER12BLOCK6PRICE = 0x84C5;
+        public const ushort ATTR_RXTIER12BLOCK7PRICE = 0x84C6;
+        public const ushort ATTR_RXTIER12BLOCK8PRICE = 0x84C7;
+        public const ushort ATTR_RXTIER12BLOCK9PRICE = 0x84C8;
+        public const ushort ATTR_RXTIER12BLOCK10PRICE = 0x84C9;
+        public const ushort ATTR_RXTIER12BLOCK11PRICE = 0x84CA;
+        public const ushort ATTR_RXTIER12BLOCK12PRICE = 0x84CB;
+        public const ushort ATTR_RXTIER12BLOCK13PRICE = 0x84CC;
+        public const ushort ATTR_RXTIER12BLOCK14PRICE = 0x84CD;
+        public const ushort ATTR_RXTIER12BLOCK15PRICE = 0x84CE;
+        public const ushort ATTR_RXTIER12BLOCK16PRICE = 0x84CF;
+        public const ushort ATTR_RXTIER13BLOCK1PRICE = 0x84D0;
+        public const ushort ATTR_RXTIER13BLOCK2PRICE = 0x84D1;
+        public const ushort ATTR_RXTIER13BLOCK3PRICE = 0x84D2;
+        public const ushort ATTR_RXTIER13BLOCK4PRICE = 0x84D3;
+        public const ushort ATTR_RXTIER13BLOCK5PRICE = 0x84D4;
+        public const ushort ATTR_RXTIER13BLOCK6PRICE = 0x84D5;
+        public const ushort ATTR_RXTIER13BLOCK7PRICE = 0x84D6;
+        public const ushort ATTR_RXTIER13BLOCK8PRICE = 0x84D7;
+        public const ushort ATTR_RXTIER13BLOCK9PRICE = 0x84D8;
+        public const ushort ATTR_RXTIER13BLOCK10PRICE = 0x84D9;
+        public const ushort ATTR_RXTIER13BLOCK11PRICE = 0x84DA;
+        public const ushort ATTR_RXTIER13BLOCK12PRICE = 0x84DB;
+        public const ushort ATTR_RXTIER13BLOCK13PRICE = 0x84DC;
+        public const ushort ATTR_RXTIER13BLOCK14PRICE = 0x84DD;
+        public const ushort ATTR_RXTIER13BLOCK15PRICE = 0x84DE;
+        public const ushort ATTR_RXTIER13BLOCK16PRICE = 0x84DF;
+        public const ushort ATTR_RXTIER14BLOCK1PRICE = 0x84E0;
+        public const ushort ATTR_RXTIER14BLOCK2PRICE = 0x84E1;
+        public const ushort ATTR_RXTIER14BLOCK3PRICE = 0x84E2;
+        public const ushort ATTR_RXTIER14BLOCK4PRICE = 0x84E3;
+        public const ushort ATTR_RXTIER14BLOCK5PRICE = 0x84E4;
+        public const ushort ATTR_RXTIER14BLOCK6PRICE = 0x84E5;
+        public const ushort ATTR_RXTIER14BLOCK7PRICE = 0x84E6;
+        public const ushort ATTR_RXTIER14BLOCK8PRICE = 0x84E7;
+        public const ushort ATTR_RXTIER14BLOCK9PRICE = 0x84E8;
+        public const ushort ATTR_RXTIER14BLOCK10PRICE = 0x84E9;
+        public const ushort ATTR_RXTIER14BLOCK11PRICE = 0x84EA;
+        public const ushort ATTR_RXTIER14BLOCK12PRICE = 0x84EB;
+        public const ushort ATTR_RXTIER14BLOCK13PRICE = 0x84EC;
+        public const ushort ATTR_RXTIER14BLOCK14PRICE = 0x84ED;
+        public const ushort ATTR_RXTIER14BLOCK15PRICE = 0x84EE;
+        public const ushort ATTR_RXTIER14BLOCK16PRICE = 0x84EF;
+        public const ushort ATTR_RXTIER15BLOCK1PRICE = 0x84F0;
+        public const ushort ATTR_RXTIER15BLOCK2PRICE = 0x84F1;
+        public const ushort ATTR_RXTIER15BLOCK3PRICE = 0x84F2;
+        public const ushort ATTR_RXTIER15BLOCK4PRICE = 0x84F3;
+        public const ushort ATTR_RXTIER15BLOCK5PRICE = 0x84F4;
+        public const ushort ATTR_RXTIER15BLOCK6PRICE = 0x84F5;
+        public const ushort ATTR_RXTIER15BLOCK7PRICE = 0x84F6;
+        public const ushort ATTR_RXTIER15BLOCK8PRICE = 0x84F7;
+        public const ushort ATTR_RXTIER15BLOCK9PRICE = 0x84F8;
+        public const ushort ATTR_RXTIER15BLOCK10PRICE = 0x84F9;
+        public const ushort ATTR_RXTIER15BLOCK11PRICE = 0x84FA;
+        public const ushort ATTR_RXTIER15BLOCK12PRICE = 0x84FB;
+        public const ushort ATTR_RXTIER15BLOCK13PRICE = 0x84FC;
+        public const ushort ATTR_RXTIER15BLOCK14PRICE = 0x84FD;
+        public const ushort ATTR_RXTIER15BLOCK15PRICE = 0x84FE;
+        public const ushort ATTR_RXTIER15BLOCK16PRICE = 0x84FF;
+        public const ushort ATTR_RECEIVEDPRICETIER16 = 0x850F;
+        public const ushort ATTR_RECEIVEDPRICETIER17 = 0x8510;
+        public const ushort ATTR_RECEIVEDPRICETIER18 = 0x8511;
+        public const ushort ATTR_RECEIVEDPRICETIER19 = 0x8512;
+        public const ushort ATTR_RECEIVEDPRICETIER20 = 0x8513;
+        public const ushort ATTR_RECEIVEDPRICETIER21 = 0x8514;
+        public const ushort ATTR_RECEIVEDPRICETIER22 = 0x8515;
+        public const ushort ATTR_RECEIVEDPRICETIER23 = 0x8516;
+        public const ushort ATTR_RECEIVEDPRICETIER24 = 0x8517;
+        public const ushort ATTR_RECEIVEDPRICETIER25 = 0x8518;
+        public const ushort ATTR_RECEIVEDPRICETIER26 = 0x8519;
+        public const ushort ATTR_RECEIVEDPRICETIER27 = 0x851A;
+        public const ushort ATTR_RECEIVEDPRICETIER28 = 0x851B;
+        public const ushort ATTR_RECEIVEDPRICETIER29 = 0x851C;
+        public const ushort ATTR_RECEIVEDPRICETIER30 = 0x851D;
+        public const ushort ATTR_RECEIVEDPRICETIER31 = 0x851E;
+        public const ushort ATTR_RECEIVEDPRICETIER32 = 0x851F;
+        public const ushort ATTR_RECEIVEDPRICETIER33 = 0x8520;
+        public const ushort ATTR_RECEIVEDPRICETIER34 = 0x8521;
+        public const ushort ATTR_RECEIVEDPRICETIER35 = 0x8522;
+        public const ushort ATTR_RECEIVEDPRICETIER36 = 0x8523;
+        public const ushort ATTR_RECEIVEDPRICETIER37 = 0x8524;
+        public const ushort ATTR_RECEIVEDPRICETIER38 = 0x8525;
+        public const ushort ATTR_RECEIVEDPRICETIER39 = 0x8526;
+        public const ushort ATTR_RECEIVEDPRICETIER40 = 0x8527;
+        public const ushort ATTR_RECEIVEDPRICETIER41 = 0x8528;
+        public const ushort ATTR_RECEIVEDPRICETIER42 = 0x8529;
+        public const ushort ATTR_RECEIVEDPRICETIER43 = 0x852A;
+        public const ushort ATTR_RECEIVEDPRICETIER44 = 0x852B;
+        public const ushort ATTR_RECEIVEDPRICETIER45 = 0x852C;
+        public const ushort ATTR_RECEIVEDPRICETIER46 = 0x852D;
+        public const ushort ATTR_RECEIVEDPRICETIER47 = 0x852E;
+        public const ushort ATTR_RECEIVEDPRICETIER48 = 0x852F;
+        public const ushort ATTR_RECEIVEDPRICETIER49 = 0x8530;
+        public const ushort ATTR_RECEIVEDPRICETIER50 = 0x8531;
+        public const ushort ATTR_RECEIVEDPRICETIER51 = 0x8532;
+        public const ushort ATTR_RECEIVEDPRICETIER52 = 0x8533;
+        public const ushort ATTR_RECEIVEDPRICETIER53 = 0x8534;
+        public const ushort ATTR_RECEIVEDPRICETIER54 = 0x8535;
+        public const ushort ATTR_RECEIVEDPRICETIER55 = 0x8536;
+        public const ushort ATTR_RECEIVEDPRICETIER56 = 0x8537;
+        public const ushort ATTR_RECEIVEDPRICETIER57 = 0x8538;
+        public const ushort ATTR_RECEIVEDPRICETIER58 = 0x8539;
+        public const ushort ATTR_RECEIVEDPRICETIER59 = 0x853A;
+        public const ushort ATTR_RECEIVEDPRICETIER60 = 0x853B;
+        public const ushort ATTR_RECEIVEDPRICETIER61 = 0x853C;
+        public const ushort ATTR_RECEIVEDPRICETIER62 = 0x853D;
+        public const ushort ATTR_RECEIVEDPRICETIER63 = 0x853E;
         public const ushort ATTR_RECEIVEDTARIFFLABEL = 0x8610;
         public const ushort ATTR_RECEIVEDNUMBEROFPRICETIERSINUSE = 0x8611;
         public const ushort ATTR_RECEIVEDNUMBEROFBLOCKTHRESHOLDSINUSE = 0x8612;

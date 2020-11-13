@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ZigbeeNet.Hardware.ConBee;
 using ZigBeeNet.App.Basic;
 using ZigBeeNet.App.Discovery;
+using ZigBeeNet.App.IasClient;
 using ZigBeeNet.Database;
 using ZigBeeNet.DataStore.Json;
 using ZigBeeNet.DataStore.MongoDb;
@@ -188,10 +189,11 @@ namespace ZigBeeNet.PlayGround
 
                 networkManager.AddNetworkNodeListener(new ConsoleNetworkNodeListener());
 
-                networkManager.AddSupportedCluster(ZclOnOffCluster.CLUSTER_ID);
-                networkManager.AddSupportedCluster(ZclColorControlCluster.CLUSTER_ID);
+                networkManager.AddSupportedClientCluster(ZclOnOffCluster.CLUSTER_ID);
+                networkManager.AddSupportedClientCluster(ZclColorControlCluster.CLUSTER_ID);
 
                 networkManager.AddExtension(new ZigBeeBasicServerExtension());
+                networkManager.AddExtension(new ZigBeeIasCieExtension());
 
                 if (zigBeeDongle == ZigBeeDongle.TiCc2531)
                 {
@@ -201,9 +203,11 @@ namespace ZigBeeNet.PlayGround
                 Console.WriteLine($"PAN ID           = {networkManager.ZigBeePanId}");
                 Console.WriteLine($"Extended PAN ID  = {networkManager.ZigBeeExtendedPanId}");
                 Console.WriteLine($"Channel          = {networkManager.ZigbeeChannel}");
-                Console.WriteLine($"Network Key      = {networkManager.ZigBeeNetworkKey}");
-                Console.WriteLine($"Link Key         = {networkManager.ZigBeeLinkKey}");
-
+                if (zigBeeDongle != ZigBeeDongle.ConBee)
+                {
+                    Console.WriteLine($"Network Key      = {networkManager.ZigBeeNetworkKey}");
+                    Console.WriteLine($"Link Key         = {networkManager.ZigBeeLinkKey}");
+                }
                 if (resetNetwork)
                 {
                     //TODO: make the network parameters configurable

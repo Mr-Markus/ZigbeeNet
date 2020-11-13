@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZigBeeNet.Security;
-using ZigBeeNet.ZCL.Clusters.IASZone;
+using ZigBeeNet.ZCL.Clusters.IasZone;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 
-namespace ZigBeeNet.ZCL.Clusters.IASZone
+namespace ZigBeeNet.ZCL.Clusters.IasZone
 {
     /// <summary>
     /// Zone Enroll Response value object class.

@@ -224,7 +224,7 @@ namespace ZigbeeNet.Hardware.ConBee
             Buffer.BlockCopy(apsFrame.Payload, 0, buffer, offset, apsFrame.Payload.Length);
             offset += apsFrame.Payload.Length;
 
-            buffer[offset++] = 0x04;
+            buffer[offset++] = 0x00;
 
             buffer[offset] = (byte)apsFrame.Radius;
 

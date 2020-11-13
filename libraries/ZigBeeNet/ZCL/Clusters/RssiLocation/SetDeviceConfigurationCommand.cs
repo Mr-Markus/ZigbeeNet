@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZigBeeNet.Security;
-using ZigBeeNet.ZCL.Clusters.RSSILocation;
+using ZigBeeNet.ZCL.Clusters.RssiLocation;
 using ZigBeeNet.ZCL.Field;
 using ZigBeeNet.ZCL.Protocol;
 
 
-namespace ZigBeeNet.ZCL.Clusters.RSSILocation
+namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 {
     /// <summary>
     /// Set Device Configuration Command value object class.

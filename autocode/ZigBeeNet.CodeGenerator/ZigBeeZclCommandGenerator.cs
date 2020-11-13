@@ -55,7 +55,7 @@ namespace ZigBeeNet.CodeGenerator
                 if (packageRoot.Contains(".zcl.", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ImportsAdd("ZigBeeNet.ZCL.Field");
-                    ImportsAdd("ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                    ImportsAdd("ZigBeeNet" + packageRoot);
                     ImportsAdd("ZigBeeNet.Security");
                     commandExtends = "ZclCommand";
                     reservedFields.Add("ManufacturerCode");
@@ -84,7 +84,7 @@ namespace ZigBeeNet.CodeGenerator
 
                 if (packageRoot.Contains(".zcl.", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    @out.WriteLine("namespace ZigBeeNet.ZCL.Clusters." + cluster.Name.Replace("/", "").Replace(" ", "").Replace("(", "").Replace(")", ""));
+                    @out.WriteLine("namespace ZigBeeNet" + packageRoot);
                 }
                 else
                 {

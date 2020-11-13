@@ -76,6 +76,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 Log.Debug("Opening port {Port} at {Baudrate} baud with {FlowControl}", PortName, Baudrate, FlowControl);
 
                 _serialPort = new System.IO.Ports.SerialPort(PortName, baudrate);
+                _serialPort.WriteTimeout = 3000;
                 //_serialPort.Handshake = System.IO.Ports.Handshake.XOnXOff;
 
                 try
@@ -89,26 +90,24 @@ namespace ZigBeeNet.Tranport.SerialPort
                     if (tryOpen)
                     {
                         _serialPort.Open();
-
-                        success = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("{Exception} - Error opening port {Port}\n{Port}", ex.GetType().Name, PortName, ex.Message);
+                    Log.Debug("Error opening port {Port}: {Exception}", PortName, ex.Message);
                 }
 
                 if (_serialPort.IsOpen)
                 {
                     // Start Reader Task
                     _reader = Task.Factory.StartNew(ReaderTask, _cancellationToken.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-
+                    success = true;
                     // TODO: ConnectionStatusChanged event
                 }
             }
             catch (Exception e)
             {
-                Log.Warning("Unable to open serial port: " + e.Message);
+                Log.Warning("Unable to open serial port: {Exception}", e.Message);
             }
 
             return success;

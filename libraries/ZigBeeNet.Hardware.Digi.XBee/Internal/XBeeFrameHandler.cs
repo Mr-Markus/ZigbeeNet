@@ -313,9 +313,9 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             // Remember the command we're processing
             _sentCommand = nextFrame;
 
-            _serialPort.Write(new byte[] { XBEE_FLAG });
-
             // Send the data
+            List<byte> bytes = new List<byte>();
+            bytes.Add(XBEE_FLAG);
             StringBuilder builder = new StringBuilder();
             int[] frames = nextFrame.Serialize();
             foreach (int sendByte in frames)
@@ -323,15 +323,16 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                 builder.Append(string.Format(" 0x{0:X2}", sendByte));
                 if (_escapeCodes.Contains((byte)sendByte))
                 {
-                    _serialPort.Write(new byte[] { XBEE_ESCAPE });
-                    _serialPort.Write(new byte[] { (byte)(sendByte ^ XBEE_XOR) });
+                    bytes.Add(XBEE_ESCAPE);
+                    bytes.Add((byte)(sendByte ^ XBEE_XOR));
                 }
                 else
                 {
-                    _serialPort.Write(new byte[] { (byte)sendByte });
+                    bytes.Add((byte)sendByte);
                 }
             }
             Log.Verbose($"TX XBEE Data:{builder.ToString()}");
+            _serialPort.Write(bytes.ToArray());
 
             // Start the timeout
             Log.Verbose("XBEE Timer: Start");

@@ -50,17 +50,17 @@ namespace ZigBeeNet.ZCL
         /// After initialisation, the list will contain an empty list. Once a successful call to
         /// DiscoverAttributes() has been made, the list will reflect the attributes supported by the remote device.
         /// </summary>
-        private ConcurrentBag<ushort> _supportedAttributes = new ConcurrentBag<ushort>();
+        private HashSet<ushort> _supportedAttributes = new HashSet<ushort>();
 
         /// <summary>
         /// The list of supported commands that the remote device can generate
         /// </summary>
-        private ConcurrentBag<byte> _supportedCommandsReceived = new ConcurrentBag<byte>();
+        private HashSet<byte> _supportedCommandsReceived = new HashSet<byte>();
 
         /// <summary>
         /// The list of supported commands that the remote device can receive
         /// </summary>
-        private ConcurrentBag<byte> _supportedCommandsGenerated = new ConcurrentBag<byte>();
+        private HashSet<byte> _supportedCommandsGenerated = new HashSet<byte>();
 
         /// <summary>
         /// Set of listeners to receive notifications when an attribute updates its value
@@ -252,17 +252,6 @@ namespace ZigBeeNet.ZCL
         }
 
         /// <summary>
-        /// Read an attribute
-        ///
-        /// <param name="attribute">the <see cref="ZclAttribute"> to read</param>
-        /// <returns>command Task</returns>
-        /// </summary>
-        public Task<CommandResult> ReadAttribute(ZclAttribute attribute)
-        {
-            return ReadAttribute(attribute.Id);
-        }
-
-        /// <summary>
         /// Read an attribute from the remote cluster
         /// </summary>
         /// <param name="attributeId">attributeId the attribute id to read</param>
@@ -309,7 +298,7 @@ namespace ZigBeeNet.ZCL
         /// <param name="value">the value to set (as Object)</param>
         /// <returns>command Task CommandResult</returns>
         /// </summary>
-        public Task<CommandResult> Write(ushort attribute, ZclDataType dataType, object value)
+        public Task<CommandResult> WriteAttribute(ushort attribute, ZclDataType dataType, object value)
         {
             //logger.debug("{}: Writing cluster {}, attribute {}, value {}, as dataType {}", zigbeeEndpoint.getIeeeAddress(),
             //        clusterId, attribute, value, dataType);
@@ -318,7 +307,7 @@ namespace ZigBeeNet.ZCL
             attributeIdentifier.AttributeDataType = dataType;
             attributeIdentifier.AttributeValue = value;
 
-            return Write(new List<WriteAttributeRecord> { attributeIdentifier });
+            return WriteAttributes(new List<WriteAttributeRecord> { attributeIdentifier });
         }
 
         /// <summary>
@@ -327,7 +316,7 @@ namespace ZigBeeNet.ZCL
         /// <para name="attributes"/>attributes a List of <see cref="WriteAttributeRecord"/>s with the attribute ID, type and value<para>
         /// <returns>command future <see cref="CommandResult"/></returns> 
         /// </summary>
-        public Task<CommandResult> Write(List<WriteAttributeRecord> attributes)
+        public Task<CommandResult> WriteAttributes(List<WriteAttributeRecord> attributes)
         {
             WriteAttributesCommand command = new WriteAttributesCommand();
             command.ClusterId = _clusterId;
@@ -358,18 +347,6 @@ namespace ZigBeeNet.ZCL
             }
 
             return Send(command);
-        }
-
-        /// <summary>
-        /// Write an attribute
-        ///
-        /// <param name="attribute">the ZclAttribute to write</param>
-        /// <param name="value">the value to set (as Object)</param>
-        /// <returns>command Task CommandResult</returns>
-        /// </summary>
-        public Task<CommandResult> Write(ZclAttribute attribute, object value)
-        {
-            return Write(attribute.Id, attribute.DataType, value);
         }
 
         /// <summary>
@@ -781,14 +758,14 @@ namespace ZigBeeNet.ZCL
             // cluster which would cause errors consolidating the responses
 
             // If we don't want to rediscover, and we already have the list of attributes, then return
-            if (!rediscover && !(_supportedAttributes == null || _supportedAttributes.Count == 0))
+            if (!rediscover && _supportedAttributesKnown)
             {
                 return true;
             }
 
             ushort index = 0;
             bool complete = false;
-            List<AttributeInformation> attributes = new List<AttributeInformation>();
+            HashSet<AttributeInformation> attributes = new HashSet<AttributeInformation>();
 
             do
             {
@@ -819,19 +796,21 @@ namespace ZigBeeNet.ZCL
                 complete = response.DiscoveryComplete;
                 if (response.AttributeInformation != null && response.AttributeInformation.Count > 0)
                 {
-                    attributes.AddRange(response.AttributeInformation);
+                    attributes.UnionWith(response.AttributeInformation);
                     index = (ushort)(attributes.Max().Identifier + 1);
                 }
             } while (!complete);
 
-            _supportedAttributes.Clear();
-
-            foreach (AttributeInformation attribute in attributes)
+            lock (_supportedAttributes)
             {
-                _supportedAttributes.Add(attribute.Identifier);
-            }
-            _supportedAttributesKnown = true;
+                _supportedAttributes.Clear();
 
+                foreach (AttributeInformation attribute in attributes)
+                {
+                    _supportedAttributes.Add(attribute.Identifier);
+                }
+                _supportedAttributesKnown = true;
+            }
             return true;
         }
         public Task<bool> DiscoverAttributes(bool rediscover)
@@ -891,7 +870,7 @@ namespace ZigBeeNet.ZCL
 
             byte index = 0;
             bool complete = false;
-            List<byte> commands = new List<byte>();
+            HashSet<byte> commands = new HashSet<byte>();
 
             do
             {
@@ -922,13 +901,16 @@ namespace ZigBeeNet.ZCL
                 complete = response.DiscoveryComplete;
                 if (response.CommandIdentifiers != null)
                 {
-                    commands.AddRange(response.CommandIdentifiers);
+                    commands.UnionWith(response.CommandIdentifiers);
                     index = (byte)(commands.Max() + 1);
                 }
             } while (!complete);
 
-            _supportedCommandsReceived.Clear();
-            _supportedCommandsReceived.AddRange(commands);
+            lock (_supportedCommandsReceived)
+            {
+                _supportedCommandsReceived.Clear();
+                _supportedCommandsReceived.UnionWith(commands);
+            }
 
             return true;
         }
@@ -987,7 +969,7 @@ namespace ZigBeeNet.ZCL
             }
             byte index = 0;
             bool complete = false;
-            List<byte> commands = new List<byte>();
+            HashSet<byte> commands = new HashSet<byte>();
 
             do
             {
@@ -1019,13 +1001,16 @@ namespace ZigBeeNet.ZCL
                 complete = response.DiscoveryComplete;
                 if (response.CommandIdentifiers != null)
                 {
-                    commands.AddRange(response.CommandIdentifiers);
+                    commands.UnionWith(response.CommandIdentifiers);
                     index = (byte)(commands.Max() + 1);
                 }
             } while (!complete);
 
-            _supportedCommandsGenerated.Clear();
-            _supportedCommandsGenerated.AddRange(commands);
+            lock (_supportedCommandsGenerated)
+            {
+                _supportedCommandsGenerated.Clear();
+                _supportedCommandsGenerated.UnionWith(commands);
+            }
 
             return true;
         }
@@ -1323,15 +1308,17 @@ namespace ZigBeeNet.ZCL
 
             if (_supportedAttributesKnown)
             {
-                _supportedAttributes.AddRange(dao.SupportedAttributes);
+                _supportedAttributes.UnionWith(dao.SupportedAttributes);
             }
 
-            _supportedCommandsGenerated.AddRange(dao.SupportedCommandsGenerated);
-            _supportedCommandsReceived.AddRange(dao.SupportedCommandsReceived);
+            _supportedCommandsGenerated.UnionWith(dao.SupportedCommandsGenerated);
+            _supportedCommandsReceived.UnionWith(dao.SupportedCommandsReceived);
 
             Dictionary<ushort, ZclAttribute> daoZclAttributes = new Dictionary<ushort, ZclAttribute>();
             foreach (ZclAttributeDao daoAttribute in dao.Attributes)
             {
+                // Normalize the data to protect against the users serialisation system restoring incorrect data classes
+                daoAttribute.LastValue = _normalizer.NormalizeZclData(daoAttribute.DataType, daoAttribute.LastValue);
                 ZclAttribute attribute = new ZclAttribute();
                 attribute.SetDao(this, daoAttribute);
                 daoZclAttributes.Add(daoAttribute.Id, attribute);
