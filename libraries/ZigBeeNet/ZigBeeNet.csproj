@@ -9,7 +9,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>EPL-1.0</PackageLicenseExpression>
     <Authors>ZigBeeNet Contributors</Authors>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <Company>ZigBeeNet</Company>
     <Description>With ZigBeeNet you can develop your own .NET application which communicates with zigbee devices.</Description>
   </PropertyGroup>
