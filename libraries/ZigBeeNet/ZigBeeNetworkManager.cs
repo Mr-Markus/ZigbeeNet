@@ -75,7 +75,7 @@ namespace ZigBeeNet
         /// <summary>
         /// The groups in the ZigBee network
         /// </summary>
-        private Dictionary<ushort, ZigBeeGroupAddress> _networkGroups = new Dictionary<ushort, ZigBeeGroupAddress>();
+        private ConcurrentDictionary<ushort, ZigBeeGroupAddress> _networkGroups = new ConcurrentDictionary<ushort, ZigBeeGroupAddress>();
 
         /// <summary>
         /// The node listeners of the ZigBee network. Registered listeners will be
@@ -507,7 +507,7 @@ namespace ZigBeeNet
             Log.Debug("ZigBeeNetworkManager shutdown: networkState={NetworkState}", NetworkState);
             SetNetworkState(ZigBeeNetworkState.SHUTDOWN);
 
-            if(_clusterMatcher != null)
+            if (_clusterMatcher != null)
             {
                 _clusterMatcher.Shutdown();
             }
@@ -698,7 +698,7 @@ namespace ZigBeeNet
                     announceListener.AnnounceUnknownDevice(apsFrame.SourceAddress);
                 }
             }
-            else if(currentNode.NodeState != ZigBeeNodeState.ONLINE)
+            else if (currentNode.NodeState != ZigBeeNodeState.ONLINE)
             {
                 // If command is received from a known node which is not ONLINE, mark it as ONLINE
                 ZigBeeNode node = new ZigBeeNode(this, currentNode.IeeeAddress, currentNode.NetworkAddress);
@@ -1075,12 +1075,12 @@ namespace ZigBeeNet
             {
                 lock (command)
                 {
-            //ZigBeeTransactionFuture transactionFuture = new ZigBeeTransactionFuture();
+                    //ZigBeeTransactionFuture transactionFuture = new ZigBeeTransactionFuture();
 
-            SendCommand(command);
-            //transactionFuture.set(new CommandResult(new BroadcastResponse()));
+                    SendCommand(command);
+                    //transactionFuture.set(new CommandResult(new BroadcastResponse()));
 
-            return new CommandResult(new BroadcastResponse());
+                    return new CommandResult(new BroadcastResponse());
                 }
             });
         }
@@ -1209,42 +1209,30 @@ namespace ZigBeeNet
 
         public void AddGroup(ZigBeeGroupAddress group)
         {
-            lock (_networkGroups)
-            {
-                _networkGroups[group.GroupId] = group;
-            }
+            // https://referencesource.microsoft.com/#mscorlib/system/Collections/Concurrent/ConcurrentDictionary.cs,968
+            _networkGroups[group.GroupId] = group;
         }
 
         public void UpdateGroup(ZigBeeGroupAddress group)
         {
-            lock (_networkGroups)
-            {
-                _networkGroups[group.GroupId] = group;
-            }
+            // https://referencesource.microsoft.com/#mscorlib/system/Collections/Concurrent/ConcurrentDictionary.cs,968
+            _networkGroups[group.GroupId] = group;
         }
 
         public ZigBeeGroupAddress GetGroup(ushort groupId)
         {
-            lock (_networkGroups)
-            {
-                return _networkGroups[groupId];
-            }
+            // https://referencesource.microsoft.com/#mscorlib/system/Collections/Concurrent/ConcurrentDictionary.cs,968
+            return _networkGroups[groupId];
         }
 
         public void RemoveGroup(ushort groupId)
         {
-            lock (_networkGroups)
-            {
-                _networkGroups.Remove(groupId);
-            }
+            _networkGroups.TryRemove(groupId, out _);
         }
 
-        public List<ZigBeeGroupAddress> GetGroups()
+        public IReadOnlyList<ZigBeeGroupAddress> GetGroups()
         {
-            lock (_networkGroups)
-            {
-                return _networkGroups.Values.ToList();
-            }
+            return _networkGroups.Values.ToList().AsReadOnly();
         }
 
         /// <summary>
@@ -1387,7 +1375,7 @@ namespace ZigBeeNet
 
             // If the node is already known, refresh and return
             // We especially don't want to notify listeners
-            if(!_networkNodes.TryAdd(node.IeeeAddress, node))
+            if (!_networkNodes.TryAdd(node.IeeeAddress, node))
             {
                 RefreshNode(node);
                 return;
