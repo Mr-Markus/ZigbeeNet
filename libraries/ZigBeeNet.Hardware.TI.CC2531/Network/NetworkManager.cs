@@ -265,7 +265,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
 
             Log.Verbose("Reset seq: Trying MSG_CB_REGISTER");
             ZDO_MSG_CB_REGISTER_SRSP responseCb = (ZDO_MSG_CB_REGISTER_SRSP)SendSynchronous(
-                    new ZDO_MSG_CB_REGISTER(new DoubleByte(ALL_CLUSTERS)));
+                    new ZDO_MSG_CB_REGISTER(ALL_CLUSTERS));
             if (responseCb == null)
             {
                 return false;
@@ -1337,7 +1337,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Network
                         }
                     }
 
-                    if (NewDevice(new AF_REGISTER(_ep[i], new DoubleByte(_prof[i]).Value, new DoubleByte(_dev[i]).Value, _ver[i], input, output)))
+                    if (NewDevice(new AF_REGISTER(_ep[i], _prof[i], _dev[i], _ver[i], input, output)))
                     {
                         Log.Debug("Custom device {Dev} registered at endpoint {Ep}", _dev[i], _ep[i]);
                     }

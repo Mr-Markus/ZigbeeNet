@@ -42,7 +42,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
             {
                 framedata[20 + i] = payload[i];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_REQUEST_EXT), framedata);
+            BuildPacket(((ushort)ZToolCMD.AF_DATA_REQUEST_EXT), framedata);
         }
     }
 }
