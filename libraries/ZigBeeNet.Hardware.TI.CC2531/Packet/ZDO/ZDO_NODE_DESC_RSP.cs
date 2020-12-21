@@ -102,10 +102,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                     APSFlags = (byte)(framedata[6] & (byte)0x0F);
                     FrequencyBand = (byte)(framedata[6] & (byte)0xF0 >> 4);
                     MacCapabilitiesFlags = (CapabilitiesFlags)framedata[10];
-                    ManufacturerCode = DoubleByte.Convert(framedata[11], framedata[12]);
+                    ManufacturerCode = ByteHelper.ShortFromBytes(framedata[11], framedata[12]);
                     MaxBufferSize = framedata[13];
-                    MaxInTransferSize = DoubleByte.Convert(framedata[14], framedata[15]);
-                    ServerMask = DoubleByte.Convert(framedata[16], framedata[17]);
+                    MaxInTransferSize = ByteHelper.ShortFromBytes(framedata[14], framedata[15]);
+                    ServerMask = ByteHelper.ShortFromBytes(framedata[16], framedata[17]);
                 }
             }
             BuildPacket(((ushort)ZToolCMD.ZDO_NODE_DESC_RSP), framedata);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
 using ZigBeeNet.ZCL;
+using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
@@ -77,8 +78,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             }
             framedata[10] = epSrc;
 
-            framedata[11] = DoubleByte.LSB(cluster);
-            framedata[12] = DoubleByte.MSB(cluster);
+            framedata[11] = cluster.GetLSB();
+            framedata[12] = cluster.GetMSB();
             framedata[13] = (byte)addressingMode;
             bytes = ieeeDst.Address;
             if (addressingMode == Address_Mode.ADDRESS_64_BIT)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using ZigBeeNet.Extensions;
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 {
     public class ZB_APP_REGISTER_REQUEST : ZToolPacket
@@ -64,23 +64,23 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 
             byte[] framedata = new byte[9 + this.InputCommandsList.Length * 2 + this.OutputCommandsList.Length * 2];
             framedata[0] = this.AppEndPoint;
-            framedata[1] = DoubleByte.LSB(this.AppProfileID);
-            framedata[2] = DoubleByte.MSB(this.AppProfileID);
-            framedata[3] = DoubleByte.LSB(this.DeviceId);
-            framedata[4] = DoubleByte.MSB(this.DeviceId);
+            framedata[1] = this.AppProfileID.GetLSB();
+            framedata[2] = this.AppProfileID.GetMSB();
+            framedata[3] = this.DeviceId.GetLSB();
+            framedata[4] = this.DeviceId.GetMSB();
             framedata[5] = this.DeviceVersion;
             framedata[6] = this.Unused;
             framedata[7] = this.InputCommandsNum;
             for (int i = 0; i < this.InputCommandsList.Length; i++)
             {
-                framedata[(i * 2) + 8] = DoubleByte.LSB(this.InputCommandsList[i]);
-                framedata[(i * 2) + 9] = DoubleByte.MSB(this.InputCommandsList[i]);
+                framedata[(i * 2) + 8] = this.InputCommandsList[i].GetLSB();
+                framedata[(i * 2) + 9] = this.InputCommandsList[i].GetMSB();
             }
             framedata[((this.InputCommandsList.Length) * 2) + 8] = this.OutputCommandsNum;
             for (int i = 0; i < this.OutputCommandsList.Length; i++)
             {
-                framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 9] = DoubleByte.LSB(this.OutputCommandsList[i]);
-                framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 10] = DoubleByte.MSB(this.OutputCommandsList[i]);
+                framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 9] = this.OutputCommandsList[i].GetLSB();
+                framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 10] = this.OutputCommandsList[i].GetMSB();
             }
             BuildPacket(((ushort)ZToolCMD.ZB_APP_REGISTER_REQUEST), framedata);
 

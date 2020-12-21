@@ -7,6 +7,7 @@ using ZigBeeNet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
+using ZigBeeNet.Extensions;
 using System.Threading;
 using Serilog;
 
@@ -118,7 +119,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         public void HandlePacket(ZToolPacket packet)
         {
             ushort cmdId = packet.CMD;
-            switch (DoubleByte.MSB(cmdId) & 0xE0)
+            switch (cmdId.GetMSB() & 0xE0)
             {
                 // Received incoming message which can be either message from dongle or remote device.
                 case 0x40:
@@ -197,7 +198,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             }
 
             ushort cmdId = packet.CMD;
-            int value = (DoubleByte.MSB(cmdId) & 0xE0);
+            int value = (cmdId.GetMSB() & 0xE0);
             if (value != 0x20)
             {
                 throw new ArgumentException("You are trying to send a non SREQ packet as synchronous command. " + "Evaluated " + value
@@ -259,7 +260,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         /// </summary>
         public void SendAsynchronousCommand(ZToolPacket packet)
         {
-            byte value = (byte)(DoubleByte.MSB(packet.CMD) & 0xE0);
+            byte value = (byte)(packet.CMD.GetMSB() & 0xE0);
             if (value != 0x40)
             {
                 throw new ArgumentException("You are trying to send a non AREQ packet. " + "Evaluated " + value

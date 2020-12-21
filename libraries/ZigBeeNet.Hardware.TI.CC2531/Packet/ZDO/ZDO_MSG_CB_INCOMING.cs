@@ -67,7 +67,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         {
             SrcAddr = new ZToolAddress16(framedata[1], framedata[0]);
             WasBroadcast = framedata[2];
-            ClusterId = DoubleByte.Convert(framedata[4], framedata[3]);
+            ClusterId = ByteHelper.ShortFromBytes(framedata[4], framedata[3]);
             SecurityUse = framedata[5];
             SeqNum = framedata[6];
             MacDstAddr = new ZToolAddress16(framedata[8], framedata[7]);

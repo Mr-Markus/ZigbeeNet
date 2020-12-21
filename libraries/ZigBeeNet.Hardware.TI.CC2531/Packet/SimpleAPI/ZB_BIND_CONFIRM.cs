@@ -23,7 +23,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         /// <summary>Constructor</summary>
         public ZB_BIND_CONFIRM(byte[] framedata)
         {
-            this.CommandId = DoubleByte.Convert(framedata[1],framedata[0]);
+            this.CommandId = ByteHelper.ShortFromBytes(framedata[1],framedata[0]);
             this.Status = framedata[2];
             BuildPacket(((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM), framedata);
         }

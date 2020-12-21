@@ -8,9 +8,12 @@ namespace ZigBeeNet
     {
         public static ushort ShortFromBytes(byte[] values, int msb, int lsb)
         {
-            int value = (values[msb] << 8) + values[lsb];
+            return ShortFromBytes(values[msb],values[lsb]);
+        }
 
-            return (ushort)value;
+        public static ushort ShortFromBytes(byte msb, byte lsb)
+        {
+            return (ushort)(msb<<8 | lsb);
         }
 
         public static long LongFromBytes(byte[] values, int msb, int lsb)

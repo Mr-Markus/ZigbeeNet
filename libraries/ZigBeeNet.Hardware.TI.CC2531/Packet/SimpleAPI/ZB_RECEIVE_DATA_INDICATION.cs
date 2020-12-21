@@ -33,8 +33,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         public ZB_RECEIVE_DATA_INDICATION(byte[] framedata)
         {
             Source = new ZToolAddress16(framedata[1], framedata[0]);
-            Command = DoubleByte.Convert(framedata[3], framedata[2]);
-            Len = DoubleByte.Convert(framedata[5], framedata[4]);
+            Command = ByteHelper.ShortFromBytes(framedata[3], framedata[2]);
+            Len = ByteHelper.ShortFromBytes(framedata[5], framedata[4]);
             Data = new byte[framedata.Length - 6];
 
             for (int i = 0; i < Data.Length; i++)

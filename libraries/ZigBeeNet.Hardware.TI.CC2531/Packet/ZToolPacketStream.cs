@@ -51,7 +51,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 byte[] frameData;
                 byte apiIdMSB = Read("API PROFILE_ID_HOME_AUTOMATION MSB");
                 byte apiIdLSB = Read("API PROFILE_ID_HOME_AUTOMATION LSB");
-                ushort apiId = DoubleByte.Convert(apiIdMSB, apiIdLSB);
+                ushort apiId = ByteHelper.ShortFromBytes(apiIdMSB, apiIdLSB);
                 // TODO Remove generic never used
                 // generic = true;
                 if (_generic)
@@ -127,7 +127,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
 
-                ushort cmd = DoubleByte.Convert(buffer[3], buffer[2]);
+                ushort cmd = ByteHelper.ShortFromBytes(buffer[3], buffer[2]);
 
                 return ParsePayload(cmd, buffer.Skip(4).Take(length).ToArray());
             }

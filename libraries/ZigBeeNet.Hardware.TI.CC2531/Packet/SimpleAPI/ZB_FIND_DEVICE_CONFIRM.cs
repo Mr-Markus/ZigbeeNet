@@ -27,7 +27,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         public ZB_FIND_DEVICE_CONFIRM(byte[] framedata)
         {
             SearchType = framedata[0];
-            SearchKey = DoubleByte.Convert(framedata[1], framedata[2]);
+            SearchKey = ByteHelper.ShortFromBytes(framedata[1], framedata[2]);
             Result = new byte[8];
 
             for (int i = 0; i < 8; i++)

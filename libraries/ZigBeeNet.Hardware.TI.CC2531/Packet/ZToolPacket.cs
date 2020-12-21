@@ -133,10 +133,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             Packet[1] = (byte)LEN;
             checksum.AddByte(Packet[1]);
             // msb Cmd0 -> Type & Subsystem
-            Packet[2] = DoubleByte.MSB(ApiId);
+            Packet[2] = ApiId.GetMSB();
             checksum.AddByte(Packet[2]);
             // lsb Cmd1 -> PROFILE_ID_HOME_AUTOMATION
-            Packet[3] = DoubleByte.LSB(ApiId);
+            Packet[3] = ApiId.GetLSB();
             checksum.AddByte(Packet[3]);
             CMD = ApiId;
             // data
@@ -193,9 +193,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                .Append(", length=")
                .Append(LEN)
                .Append(", apiId=")
-               .Append(ByteUtils.ToBase16(DoubleByte.MSB(CMD)))
+               .Append(ByteUtils.ToBase16(CMD.GetMSB()))
                .Append(" ")
-               .Append(ByteUtils.ToBase16(DoubleByte.LSB(CMD)))
+               .Append(ByteUtils.ToBase16(CMD.GetLSB()))
                .Append(", data=")
                .Append(ByteUtils.ToBase16(Packet))
                .Append(", checksum=")

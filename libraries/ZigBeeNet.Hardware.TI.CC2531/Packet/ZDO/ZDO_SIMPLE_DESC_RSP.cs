@@ -83,8 +83,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             if (Len >= MIN_DESC_LEN)
             {
                 Endpoint = framedata[6];
-                ProfileId = DoubleByte.Convert(framedata[8], framedata[7]);
-                DeviceId = DoubleByte.Convert(framedata[10], framedata[9]);
+                ProfileId = ByteHelper.ShortFromBytes(framedata[8], framedata[7]);
+                DeviceId = ByteHelper.ShortFromBytes(framedata[10], framedata[9]);
                 DeviceVersion = framedata[11];
 
                 NumInClusters = framedata[12];
@@ -92,7 +92,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
                 for (int i = 0; i < NumInClusters; i++)
                 {
-                    InClusterList[i] = DoubleByte.Convert(framedata[(i * 2) + 14], framedata[(i * 2) + 13]);
+                    InClusterList[i] = ByteHelper.ShortFromBytes(framedata[(i * 2) + 14], framedata[(i * 2) + 13]);
                 }
 
                 NumOutClusters = framedata[((NumInClusters) * 2) + 13];
@@ -100,7 +100,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
                 for (int i = 0; i < NumOutClusters; i++)
                 {
-                    OutClusterList[i] = DoubleByte.Convert(framedata[(i * 2) + ((NumInClusters) * 2) + 15],
+                    OutClusterList[i] = ByteHelper.ShortFromBytes(framedata[(i * 2) + ((NumInClusters) * 2) + 15],
                             framedata[(i * 2) + ((NumInClusters) * 2) + 14]);
                 }
 

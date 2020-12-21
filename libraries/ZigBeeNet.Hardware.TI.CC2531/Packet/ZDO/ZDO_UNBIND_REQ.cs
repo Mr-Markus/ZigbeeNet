@@ -29,8 +29,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[i + 2] = (byte)(bytes[7 - i] & 0xFF);
             }
             framedata[10] = epSrc;
-            framedata[11] = DoubleByte.LSB(cluster);
-            framedata[12] = DoubleByte.MSB(cluster);
+            framedata[11] = cluster.GetLSB();
+            framedata[12] = cluster.GetMSB();
             framedata[13] = addressingMode;
             bytes = ieeeDst.Address;
             if (addressingMode == 3)

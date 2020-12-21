@@ -56,7 +56,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
         AssocDevicesList = new ushort[this.NumAssocDevices];
         for (int i = 0; i < this.AssocDevicesList.Length; i++)
         {
-            AssocDevicesList[i] = DoubleByte.Convert(framedata[14 + (i * 2)], framedata[15 + (i * 2)]);
+            AssocDevicesList[i] = ByteHelper.ShortFromBytes(framedata[14 + (i * 2)], framedata[15 + (i * 2)]);
         }
 
         BuildPacket(((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE), framedata);

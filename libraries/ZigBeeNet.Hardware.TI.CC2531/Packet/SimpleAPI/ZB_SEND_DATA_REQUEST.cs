@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
+using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 {
@@ -70,8 +71,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             byte[] framedata = new byte[PayloadValue.Length + 8];
             framedata[0] = Destination.Lsb;
             framedata[1] = Destination.Msb;
-            framedata[2] = DoubleByte.LSB(CommandId);
-            framedata[3] = DoubleByte.MSB(CommandId);
+            framedata[2] = CommandId.GetLSB();
+            framedata[3] = CommandId.GetMSB();
             framedata[4] = (byte)Handle;
             framedata[5] = (byte)Ack;
             framedata[6] = (byte)Radius;

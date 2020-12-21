@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
 {
@@ -21,15 +22,15 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             this.Capabilities = capabilities1;
 
             byte[] framedata = new byte[2];
-            framedata[0] = DoubleByte.LSB(capabilities1);
-            framedata[1] = DoubleByte.MSB(capabilities1);
+            framedata[0] = capabilities1.GetLSB();
+            framedata[1] = capabilities1.GetMSB();
 
             BuildPacket(((ushort)ZToolCMD.SYS_PING_RESPONSE), framedata);
         }
 
         public SYS_PING_RESPONSE(byte[] framedata)
         {
-            this.Capabilities = DoubleByte.Convert(framedata[1], framedata[0]);
+            this.Capabilities = ByteHelper.ShortFromBytes(framedata[1], framedata[0]);
 
             BuildPacket(((ushort)ZToolCMD.SYS_PING_RESPONSE), framedata);
         }

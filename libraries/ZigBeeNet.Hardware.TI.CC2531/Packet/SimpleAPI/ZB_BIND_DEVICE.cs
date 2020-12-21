@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
-
+using ZigBeeNet.Extensions;
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 {
     /// <summary>
@@ -34,8 +34,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 
             byte[] framedata = new byte[11];
             framedata[0] = create ? (byte)0x01 : (byte)0x00;
-            framedata[1] = DoubleByte.LSB(commandId);
-            framedata[2] = DoubleByte.MSB(commandId);
+            framedata[1] = commandId.GetLSB();
+            framedata[2] = commandId.GetMSB();
 
             byte[] dst = destination.Address;
             for (int i = 3; i < 8; i++)

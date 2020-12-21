@@ -73,8 +73,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
 
         public AF_INCOMING_MSG(byte[] framedata)
         {
-            GroupId = DoubleByte.Convert(framedata[1], framedata[0]);
-            ClusterId = DoubleByte.Convert(framedata[3], framedata[2]);
+            GroupId = ByteHelper.ShortFromBytes(framedata[1], framedata[0]);
+            ClusterId = ByteHelper.ShortFromBytes(framedata[3], framedata[2]);
             SrcAddr = new ZToolAddress16(framedata[5], framedata[4]);
             SrcEndpoint = framedata[6];
             DstEndpoint = framedata[7];
