@@ -28,14 +28,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
         framedata[0] = this.PanID.GetLSB();
         framedata[1] = this.PanID.GetMSB();
 
-        BuildPacket(((ushort)ZToolCMD.UTIL_SET_PANID), framedata);
+        BuildPacket((ushort)ZToolCMD.UTIL_SET_PANID, framedata);
     }
 
     public UTIL_SET_PANID(byte[] framedata)
     {
         this.PanID = ByteHelper.ShortFromBytes(framedata[1], framedata[0]);
 
-        BuildPacket(((ushort)ZToolCMD.UTIL_SET_PANID), framedata);
+        BuildPacket((ushort)ZToolCMD.UTIL_SET_PANID, framedata);
     }
 }
 }

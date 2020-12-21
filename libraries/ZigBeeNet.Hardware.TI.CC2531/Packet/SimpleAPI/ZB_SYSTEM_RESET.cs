@@ -14,12 +14,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
     {
         public ZB_SYSTEM_RESET()
         {
-            BuildPacket(((ushort)ZToolCMD.ZB_SYSTEM_RESET), new byte[0]);
+            BuildPacket((ushort)ZToolCMD.ZB_SYSTEM_RESET, new byte[0]);
         }
 
         public ZB_SYSTEM_RESET(byte[] framedata)
         {
-            BuildPacket(((ushort)ZToolCMD.ZB_SYSTEM_RESET), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_SYSTEM_RESET, framedata);
         }
     }
 }

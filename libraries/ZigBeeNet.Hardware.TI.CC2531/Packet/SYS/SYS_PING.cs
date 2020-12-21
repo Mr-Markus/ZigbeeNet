@@ -8,7 +8,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
     {
         public SYS_PING()
         {
-            BuildPacket(((ushort)ZToolCMD.SYS_PING), new byte[0]);
+            BuildPacket((ushort)ZToolCMD.SYS_PING, new byte[0]);
         }
     }
 }

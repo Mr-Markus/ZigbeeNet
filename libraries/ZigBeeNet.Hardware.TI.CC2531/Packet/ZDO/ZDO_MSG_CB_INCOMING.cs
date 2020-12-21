@@ -78,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
             Data = framedata.Skip(9).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
 
-            BuildPacket(((ushort)ZToolCMD.ZDO_MSG_CB_INCOMING), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MSG_CB_INCOMING, framedata);
         }
 
         /// <summary>

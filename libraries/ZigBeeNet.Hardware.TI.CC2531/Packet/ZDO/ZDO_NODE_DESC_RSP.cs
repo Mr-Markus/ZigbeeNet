@@ -108,7 +108,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                     ServerMask = ByteHelper.ShortFromBytes(framedata[16], framedata[17]);
                 }
             }
-            BuildPacket(((ushort)ZToolCMD.ZDO_NODE_DESC_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_NODE_DESC_RSP, framedata);
         }
 
         public enum CapabilitiesFlags

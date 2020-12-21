@@ -57,7 +57,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 this.AssocDevList[i] = new ZToolAddress16(framedata[14 + (i * 2)], framedata[13 + (i * 2)]);
             }
-            BuildPacket(((ushort)ZToolCMD.ZDO_NWK_ADDR_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_NWK_ADDR_RSP, framedata);
         }
 
         public override string ToString()

@@ -25,7 +25,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         {
             this.CommandId = ByteHelper.ShortFromBytes(framedata[1],framedata[0]);
             this.Status = framedata[2];
-            BuildPacket(((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM, framedata);
         }
 
         public override string ToString()

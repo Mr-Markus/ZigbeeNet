@@ -104,7 +104,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                             framedata[(i * 2) + ((NumInClusters) * 2) + 14]);
                 }
 
-                BuildPacket(((ushort)ZToolCMD.ZDO_SIMPLE_DESC_RSP), framedata);
+                BuildPacket((ushort)ZToolCMD.ZDO_SIMPLE_DESC_RSP, framedata);
             }
         }
     }

@@ -25,14 +25,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             framedata[0] = capabilities1.GetLSB();
             framedata[1] = capabilities1.GetMSB();
 
-            BuildPacket(((ushort)ZToolCMD.SYS_PING_RESPONSE), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_PING_RESPONSE, framedata);
         }
 
         public SYS_PING_RESPONSE(byte[] framedata)
         {
             this.Capabilities = ByteHelper.ShortFromBytes(framedata[1], framedata[0]);
 
-            BuildPacket(((ushort)ZToolCMD.SYS_PING_RESPONSE), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_PING_RESPONSE, framedata);
         }
 
         /// <name>TI.ZPI1.SYS_PING_RESPONSE.CAPABILITIES</name>

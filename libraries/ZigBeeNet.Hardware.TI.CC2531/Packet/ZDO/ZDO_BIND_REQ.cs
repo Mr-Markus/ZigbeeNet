@@ -96,7 +96,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[15] = bytes[6];
             }
 
-            BuildPacket(((ushort)ZToolCMD.ZDO_BIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_BIND_REQ, framedata);
         }        
     }
 }

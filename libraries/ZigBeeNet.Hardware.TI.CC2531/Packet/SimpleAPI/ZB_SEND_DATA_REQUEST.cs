@@ -83,7 +83,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 framedata[i + 8] = this.PayloadValue[i];
             }
 
-            BuildPacket(((ushort)ZToolCMD.ZB_SEND_DATA_REQUEST), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_SEND_DATA_REQUEST, framedata);
         }
     }
 }

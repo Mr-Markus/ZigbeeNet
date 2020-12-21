@@ -82,7 +82,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 9] = this.OutputCommandsList[i].GetLSB();
                 framedata[(i * 2) + ((this.InputCommandsList.Length) * 2) + 10] = this.OutputCommandsList[i].GetMSB();
             }
-            BuildPacket(((ushort)ZToolCMD.ZB_APP_REGISTER_REQUEST), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_APP_REGISTER_REQUEST, framedata);
 
         }
     }

@@ -46,7 +46,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[14] = bytes[7];
                 framedata[15] = bytes[6];
             }
-            BuildPacket(((ushort)ZToolCMD.ZDO_UNBIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_UNBIND_REQ, framedata);
         }
 
         public ZDO_UNBIND_REQ(ushort nwkDstAdr, ushort clusterId, ulong bindSrcAdr, byte bindSrcEP, ulong bindDstAdr,
@@ -75,7 +75,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[i + 14] = bDstAddr[i];
             }
             framedata[22] = (byte)(bindDstEP & 0xFF); // TODO REMOVE?!??!
-            BuildPacket(((ushort)ZToolCMD.ZDO_UNBIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_UNBIND_REQ, framedata);
         }
 
         /// <name>TI.ZPI1.ZDO_UNBIND_REQ.ADDRESS_MODE</name>

@@ -95,7 +95,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
                 this.Data[i] = framedata[17 + i];
             }
 
-            BuildPacket(((ushort)ZToolCMD.AF_INCOMING_MSG), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_INCOMING_MSG, framedata);
         }
     }
 }

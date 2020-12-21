@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[0] = cluster.GetLSB();
             framedata[1] = cluster.GetMSB();
 
-            BuildPacket(((ushort)ZToolCMD.ZDO_MSG_CB_REGISTER), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MSG_CB_REGISTER, framedata);
         }
 }
 }

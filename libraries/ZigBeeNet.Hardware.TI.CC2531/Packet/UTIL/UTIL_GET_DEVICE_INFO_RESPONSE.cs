@@ -59,7 +59,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
             AssocDevicesList[i] = ByteHelper.ShortFromBytes(framedata[14 + (i * 2)], framedata[15 + (i * 2)]);
         }
 
-        BuildPacket(((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE), framedata);
+        BuildPacket((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE, framedata);
     }
 
     public override string ToString()

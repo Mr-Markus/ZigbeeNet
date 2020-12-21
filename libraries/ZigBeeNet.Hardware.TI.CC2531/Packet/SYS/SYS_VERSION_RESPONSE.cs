@@ -38,7 +38,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
         MinorRel = framedata[3];
         HwRev = framedata[4];
 
-        BuildPacket(((ushort)ZToolCMD.SYS_VERSION_RESPONSE), framedata);
+        BuildPacket((ushort)ZToolCMD.SYS_VERSION_RESPONSE, framedata);
     }
 }
 }

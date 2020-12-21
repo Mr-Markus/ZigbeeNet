@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 this.Result[i] = framedata[i + 3];
             }
 
-            BuildPacket(((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM, framedata);
         }
     }
 }
