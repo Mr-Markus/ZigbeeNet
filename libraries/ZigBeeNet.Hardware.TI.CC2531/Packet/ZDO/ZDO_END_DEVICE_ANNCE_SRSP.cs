@@ -19,7 +19,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         public ZDO_END_DEVICE_ANNCE_SRSP(byte[] framedata)
         {
             this.Status = framedata[0];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE_SRSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE_SRSP, framedata);
         }
 
         public override string ToString()

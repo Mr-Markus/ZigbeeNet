@@ -7,6 +7,7 @@ using ZigBeeNet;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
 using ZigBeeNet.Transport;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
+using ZigBeeNet.Extensions;
 using System.Threading;
 using Serilog;
 
@@ -117,8 +118,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         /// </summary>
         public void HandlePacket(ZToolPacket packet)
         {
-            DoubleByte cmdId = packet.CMD;
-            switch (cmdId.Msb & 0xE0)
+            ushort cmdId = packet.CMD;
+            switch (cmdId.GetMSB() & 0xE0)
             {
                 // Received incoming message which can be either message from dongle or remote device.
                 case 0x40:
@@ -196,8 +197,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                 _synchronousCommandListenerTimeouts[listener] = expirationTime;
             }
 
-            DoubleByte cmdId = packet.CMD;
-            int value = (cmdId.Msb & 0xE0);
+            ushort cmdId = packet.CMD;
+            int value = (cmdId.GetMSB() & 0xE0);
             if (value != 0x20)
             {
                 throw new ArgumentException("You are trying to send a non SREQ packet as synchronous command. " + "Evaluated " + value
@@ -210,8 +211,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             {
                 lock (_synchronousCommandListeners)
                 {
-                    ushort id = (ushort)(cmdId.Value & 0x1FFF);
-                    while (_synchronousCommandListeners.ContainsKey(cmdId.Value))
+                    ushort id = (ushort)(cmdId & 0x1FFF);
+                    while (_synchronousCommandListeners.ContainsKey(cmdId))
                     {
                         try
                         {
@@ -230,7 +231,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             {
                 lock (_synchronousCommandListeners)
                 {
-                    ushort id = (ushort)(cmdId.Value & 0x1FFF);
+                    ushort id = (ushort)(cmdId & 0x1FFF);
                     while (!(_synchronousCommandListeners.Count == 0))
                     {
                         try
@@ -259,7 +260,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         /// </summary>
         public void SendAsynchronousCommand(ZToolPacket packet)
         {
-            byte value = (byte)(packet.CMD.Msb & 0xE0);
+            byte value = (byte)(packet.CMD.GetMSB() & 0xE0);
             if (value != 0x40)
             {
                 throw new ArgumentException("You are trying to send a non AREQ packet. " + "Evaluated " + value
@@ -289,10 +290,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
         /// </summary>
         private void NotifySynchronousCommand(ZToolPacket packet)
         {
-            DoubleByte cmdId = packet.CMD;
+            ushort cmdId = packet.CMD;
             lock (_synchronousCommandListeners)
             {
-                ushort id = (ushort)(cmdId.Value & 0x1FFF);
+                ushort id = (ushort)(cmdId & 0x1FFF);
                 _synchronousCommandListeners.TryGetValue(id, out ISynchronousCommandListener listener);
                 if (listener != null)
                 {

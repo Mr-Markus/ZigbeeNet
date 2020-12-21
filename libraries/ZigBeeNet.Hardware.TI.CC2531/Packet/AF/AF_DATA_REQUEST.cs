@@ -15,7 +15,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
         /// <summary>
         /// Specifies the cluster ID 
         /// </summary>
-        public DoubleByte ClusterId { get; private set; }
+        public ushort ClusterId { get; private set; }
 
         /// <summary>
         /// 0-128 bytes data 
@@ -92,7 +92,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
                 framedata[10 + i] = data[i];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_REQUEST), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_DATA_REQUEST, framedata);
         }
     }
 }

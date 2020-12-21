@@ -25,14 +25,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
             byte[] framedata = new byte[1];
             framedata[0] = this.SecurityLevel;
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_SET_SECURITY_LEVEL), framedata);
+            BuildPacket((ushort)ZToolCMD.UTIL_SET_SECURITY_LEVEL, framedata);
         }
 
         public UTIL_SET_SECURITY_LEVEL(byte[] framedata)
         {
             this.SecurityLevel = framedata[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_SET_SECURITY_LEVEL), framedata);
+            BuildPacket((ushort)ZToolCMD.UTIL_SET_SECURITY_LEVEL, framedata);
         }
     }
 }

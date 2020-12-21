@@ -80,7 +80,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
 
         public int LEN { get; set; }
 
-        public DoubleByte CMD { get; set; }
+        public ushort CMD { get; set; }
 
         public bool Error { get; set; } = false;
 
@@ -114,12 +114,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
         }
 
         // PROTECTED?
-        public ZToolPacket(DoubleByte ApiId, byte[] frameData)
+        public ZToolPacket(ushort ApiId, byte[] frameData)
         {
             BuildPacket(ApiId, frameData);
         }
 
-        public void BuildPacket(DoubleByte ApiId, byte[] frameData)
+        public void BuildPacket(ushort ApiId, byte[] frameData)
         {
             // packet size is start byte + len byte + 2 cmd bytes + data + checksum byte
             Packet = new byte[frameData.Length + 5];
@@ -133,10 +133,10 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             Packet[1] = (byte)LEN;
             checksum.AddByte(Packet[1]);
             // msb Cmd0 -> Type & Subsystem
-            Packet[2] = ApiId.Msb;
+            Packet[2] = ApiId.GetMSB();
             checksum.AddByte(Packet[2]);
             // lsb Cmd1 -> PROFILE_ID_HOME_AUTOMATION
-            Packet[3] = ApiId.Lsb;
+            Packet[3] = ApiId.GetLSB();
             checksum.AddByte(Packet[3]);
             CMD = ApiId;
             // data
@@ -193,9 +193,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                .Append(", length=")
                .Append(LEN)
                .Append(", apiId=")
-               .Append(ByteUtils.ToBase16(CMD.Msb))
+               .Append(ByteUtils.ToBase16(CMD.GetMSB()))
                .Append(" ")
-               .Append(ByteUtils.ToBase16(CMD.Lsb))
+               .Append(ByteUtils.ToBase16(CMD.GetLSB()))
                .Append(", data=")
                .Append(ByteUtils.ToBase16(Packet))
                .Append(", checksum=")

@@ -20,7 +20,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 framedata[i + 2] = nvItemValue[i];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_WRITE_CONFIGURATION), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_WRITE_CONFIGURATION, framedata);
         }
 
         public enum CONFIG_ID : byte

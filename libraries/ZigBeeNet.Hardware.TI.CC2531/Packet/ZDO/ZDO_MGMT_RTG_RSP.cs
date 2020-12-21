@@ -43,7 +43,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
         public ZDO_MGMT_RTG_RSP(byte[] framedata)
         {
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_LQI_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_LQI_RSP, framedata);
         }
 
         /// <name>TI.ZPI1.ZDO_MGMT_LQI_RSP.NeighborLqiListItemClass</name>

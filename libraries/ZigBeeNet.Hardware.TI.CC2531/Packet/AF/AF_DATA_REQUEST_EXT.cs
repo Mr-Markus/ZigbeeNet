@@ -31,18 +31,18 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
             framedata[10] = 0x00; // Destination PAN ID
             framedata[11] = 0x00; // Destination PAN ID
             framedata[12] = (byte)(srcEndPoint & 0xFF);
-            framedata[13] = j.GetByte(0);
-            framedata[14] = j.GetByte(1);
+            framedata[13] = ((ushort)j).GetByte(0);
+            framedata[14] = ((ushort)j).GetByte(1);
             framedata[15] = (byte)(k & 0xFF);
             framedata[16] = (byte)(bitmapOpt & 0xFF);
             framedata[17] = (byte)(radius & 0xFF);
-            framedata[18] = payload.Length.GetByte(0);
-            framedata[19] = payload.Length.GetByte(1);
+            framedata[18] = ((ushort)payload.Length).GetByte(0);
+            framedata[19] = ((ushort)payload.Length).GetByte(1);
             for (int i = 0; i < payload.Length; i++)
             {
                 framedata[20 + i] = payload[i];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_REQUEST_EXT), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_DATA_REQUEST_EXT, framedata);
         }
     }
 }

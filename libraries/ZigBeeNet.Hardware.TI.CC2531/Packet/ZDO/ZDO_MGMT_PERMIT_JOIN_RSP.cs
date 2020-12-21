@@ -20,7 +20,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             SrcAddr = new ZToolAddress16(data[1], data[0]);
             Status = (PacketStatus)data[2];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_PERMIT_JOIN_RSP), data);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_PERMIT_JOIN_RSP, data);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
         public AF_DATA_SRSP_EXT(byte[] framedata)
         {
             Status = framedata[0];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_SRSP_EXT), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_DATA_SRSP_EXT, framedata);
         }
 
         public override string ToString()

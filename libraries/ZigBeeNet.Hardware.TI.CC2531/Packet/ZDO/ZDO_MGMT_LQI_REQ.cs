@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[0] = this.DstAddr.Lsb;
             framedata[1] = this.DstAddr.Msb;
             framedata[2] = this.StartIndex;
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_LQI_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_LQI_REQ, framedata);
         }
     }
 }

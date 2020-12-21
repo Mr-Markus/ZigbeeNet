@@ -18,12 +18,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         /// <summary>
         /// The command Id associated with the data
         /// </summary>
-        public DoubleByte Command { get; private set; }
+        public ushort Command { get; private set; }
 
         /// <summary>
         /// Specifies the number of bytes in the Data parameter
         /// </summary>
-        public DoubleByte Len { get; private set; }
+        public ushort Len { get; private set; }
 
         /// <summary>
         /// The data sent by the peer device
@@ -33,8 +33,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         public ZB_RECEIVE_DATA_INDICATION(byte[] framedata)
         {
             Source = new ZToolAddress16(framedata[1], framedata[0]);
-            Command = new DoubleByte(framedata[3], framedata[2]);
-            Len = new DoubleByte(framedata[5], framedata[4]);
+            Command = ByteHelper.ShortFromBytes(framedata[3], framedata[2]);
+            Len = ByteHelper.ShortFromBytes(framedata[5], framedata[4]);
             Data = new byte[framedata.Length - 6];
 
             for (int i = 0; i < Data.Length; i++)
@@ -42,7 +42,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 Data[i] = framedata[i + 6];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_RECEIVE_DATA_INDICATION), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_RECEIVE_DATA_INDICATION, framedata);
         }
     }
 }

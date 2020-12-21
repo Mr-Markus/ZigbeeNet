@@ -19,7 +19,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             Param = param;
             byte[] framedata = new byte[] { (byte)param };
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_GET_DEVICE_INFO), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_GET_DEVICE_INFO, framedata);
         }    
         
         public enum DEV_INFO_TYPE : byte

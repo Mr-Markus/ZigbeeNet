@@ -51,7 +51,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 this.DescLen = 0;
                 this.Descriptor = new byte[0];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_USER_DESC_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_USER_DESC_RSP, framedata);
         }
 
         public override string ToString()

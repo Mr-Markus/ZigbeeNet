@@ -17,7 +17,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         /// <summary>
         /// Value that the search was executed on
         /// </summary>
-        public DoubleByte SearchKey { get; private set; }
+        public ushort SearchKey { get; private set; }
 
         /// <summary>
         /// The result of the search
@@ -27,7 +27,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         public ZB_FIND_DEVICE_CONFIRM(byte[] framedata)
         {
             SearchType = framedata[0];
-            SearchKey = new DoubleByte(framedata[1], framedata[2]);
+            SearchKey = ByteHelper.ShortFromBytes(framedata[1], framedata[2]);
             Result = new byte[8];
 
             for (int i = 0; i < 8; i++)
@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 this.Result[i] = framedata[i + 3];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM, framedata);
         }
     }
 }

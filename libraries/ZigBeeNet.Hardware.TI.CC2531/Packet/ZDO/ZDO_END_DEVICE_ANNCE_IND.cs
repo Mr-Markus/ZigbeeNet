@@ -45,7 +45,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             IEEEAddr = new ZToolAddress64(BitConverter.ToInt64(framedata, 4));
             Capabilities = framedata[12];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE_IND), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE_IND, framedata);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         {
             this.SrcAddress = new ZToolAddress16(framedata[1], framedata[0]);
             this.Status = framedata[2];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_LEAVE_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_LEAVE_RSP, framedata);
         }
 
         public override string ToString()

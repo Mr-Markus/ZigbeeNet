@@ -12,7 +12,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         {
             Status = (PacketStatus)framedata[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_WRITE_CONFIGURATION_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_WRITE_CONFIGURATION_RSP, framedata);
         }
     }
 }

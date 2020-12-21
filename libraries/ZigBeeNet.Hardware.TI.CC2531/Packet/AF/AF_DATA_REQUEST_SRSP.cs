@@ -12,7 +12,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
         {
             Status = (PacketStatus)framedata[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_SRSP), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_DATA_SRSP, framedata);
         }
     }
 }

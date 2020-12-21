@@ -44,7 +44,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             data.Add(Duration);
             data.Add(TCSignificance);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_PERMIT_JOIN_REQ), data.ToArray());
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_PERMIT_JOIN_REQ, data.ToArray());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         {
             Status = data[0];
             
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_PERMIT_JOINING_REQUEST_RSP), data);
+            BuildPacket((ushort)ZToolCMD.ZB_PERMIT_JOINING_REQUEST_RSP, data);
         }
     }
 }

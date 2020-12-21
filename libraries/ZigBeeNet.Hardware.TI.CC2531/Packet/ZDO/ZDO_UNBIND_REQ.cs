@@ -9,7 +9,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
     public class ZDO_UNBIND_REQ : ZToolPacket
     {
 
-        public ZDO_UNBIND_REQ(ZToolAddress16 nwkDst, ZToolAddress64 ieeeSrc, byte epSrc, DoubleByte cluster,
+        public ZDO_UNBIND_REQ(ZToolAddress16 nwkDst, ZToolAddress64 ieeeSrc, byte epSrc, ushort cluster,
                 byte addressingMode, ZToolAddress64 ieeeDst, byte epDst)
         {
             byte[] framedata;
@@ -29,8 +29,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[i + 2] = (byte)(bytes[7 - i] & 0xFF);
             }
             framedata[10] = epSrc;
-            framedata[11] = cluster.Lsb;
-            framedata[12] = cluster.Msb;
+            framedata[11] = cluster.GetLSB();
+            framedata[12] = cluster.GetMSB();
             framedata[13] = addressingMode;
             bytes = ieeeDst.Address;
             if (addressingMode == 3)
@@ -46,7 +46,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[14] = bytes[7];
                 framedata[15] = bytes[6];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_UNBIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_UNBIND_REQ, framedata);
         }
 
         public ZDO_UNBIND_REQ(ushort nwkDstAdr, ushort clusterId, ulong bindSrcAdr, byte bindSrcEP, ulong bindDstAdr,
@@ -75,7 +75,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[i + 14] = bDstAddr[i];
             }
             framedata[22] = (byte)(bindDstEP & 0xFF); // TODO REMOVE?!??!
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_UNBIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_UNBIND_REQ, framedata);
         }
 
         /// <name>TI.ZPI1.ZDO_UNBIND_REQ.ADDRESS_MODE</name>

@@ -26,7 +26,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             byte[] framedata = new byte[1];
             framedata[0] = Timeout;
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_ALLOW_BIND), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_ALLOW_BIND, framedata);
         }
     }
 }

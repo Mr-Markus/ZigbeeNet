@@ -18,7 +18,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         {
             Status = (PacketStatus)framedata[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_START_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_START_CONFIRM, framedata);
         }
     }
 }

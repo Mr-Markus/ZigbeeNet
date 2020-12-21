@@ -51,7 +51,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 this.CurrentSource = (framedata[6] & (0x0F));
                 this.CurrentLevel = (framedata[6] & (0xF0)) >> 4;
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_POWER_DESC_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_POWER_DESC_RSP, framedata);
         }
 
         public override string ToString()

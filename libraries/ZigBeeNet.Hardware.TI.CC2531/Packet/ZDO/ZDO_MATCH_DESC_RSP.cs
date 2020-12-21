@@ -41,7 +41,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 this.MatchEndpointList[i] = framedata[i + 6];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MATCH_DESC_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MATCH_DESC_RSP, framedata);
         }
 
         public override string ToString()

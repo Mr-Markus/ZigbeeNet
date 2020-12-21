@@ -19,7 +19,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             this.TestData = buffer1;
             byte[] framedata = new byte[buffer1.Length];
             framedata = this.TestData;
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_TEST_LOOPBACK), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_TEST_LOOPBACK, framedata);
         }
     }
 }

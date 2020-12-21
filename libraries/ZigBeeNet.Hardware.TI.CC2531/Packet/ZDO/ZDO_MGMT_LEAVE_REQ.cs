@@ -43,7 +43,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[2 + i] = this.DeviceAddress.Address[7 - i];
             }
             framedata[10] = this.RemoveChildren_Rejoin;
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_LEAVE_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_LEAVE_REQ, framedata);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
         {
             this.TestData = new byte[framedata.Length];
             this.TestData = framedata;
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_TEST_LOOPBACK_SRSP), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_TEST_LOOPBACK_SRSP, framedata);
         }
     }
 }

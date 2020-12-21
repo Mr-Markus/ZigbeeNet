@@ -41,12 +41,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// The profile Id for this endpoint
         /// </summary>
-        public DoubleByte ProfileId { get; private set; }
+        public ushort ProfileId { get; private set; }
 
         /// <summary>
         /// The Device Description Id for this endpoint
         /// </summary>
-        public DoubleByte DeviceId { get; private set; }
+        public ushort DeviceId { get; private set; }
 
         /// <summary>
         /// Defined as the following format 0 – Version 1.00 0x01-0x0F – Reserve
@@ -61,7 +61,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// List of input cluster Id’s supported
         /// </summary>
-        public DoubleByte[] InClusterList { get; private set; }
+        public ushort[] InClusterList { get; private set; }
 
         /// <summary>
         /// The number of output clusters in the OutClusterLis
@@ -71,7 +71,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// List of output cluster Id’s supported
         /// </summary>
-        public DoubleByte[] OutClusterList { get; private set; }
+        public ushort[] OutClusterList { get; private set; }
 
         public ZDO_SIMPLE_DESC_RSP(byte[] framedata)
         {
@@ -83,28 +83,28 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             if (Len >= MIN_DESC_LEN)
             {
                 Endpoint = framedata[6];
-                ProfileId = new DoubleByte(framedata[8], framedata[7]);
-                DeviceId = new DoubleByte(framedata[10], framedata[9]);
+                ProfileId = ByteHelper.ShortFromBytes(framedata[8], framedata[7]);
+                DeviceId = ByteHelper.ShortFromBytes(framedata[10], framedata[9]);
                 DeviceVersion = framedata[11];
 
                 NumInClusters = framedata[12];
-                InClusterList = new DoubleByte[NumInClusters];
+                InClusterList = new ushort[NumInClusters];
 
                 for (int i = 0; i < NumInClusters; i++)
                 {
-                    InClusterList[i] = new DoubleByte(framedata[(i * 2) + 14], framedata[(i * 2) + 13]);
+                    InClusterList[i] = ByteHelper.ShortFromBytes(framedata[(i * 2) + 14], framedata[(i * 2) + 13]);
                 }
 
                 NumOutClusters = framedata[((NumInClusters) * 2) + 13];
-                OutClusterList = new DoubleByte[NumOutClusters];
+                OutClusterList = new ushort[NumOutClusters];
 
                 for (int i = 0; i < NumOutClusters; i++)
                 {
-                    OutClusterList[i] = new DoubleByte(framedata[(i * 2) + ((NumInClusters) * 2) + 15],
+                    OutClusterList[i] = ByteHelper.ShortFromBytes(framedata[(i * 2) + ((NumInClusters) * 2) + 15],
                             framedata[(i * 2) + ((NumInClusters) * 2) + 14]);
                 }
 
-                BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_SIMPLE_DESC_RSP), framedata);
+                BuildPacket((ushort)ZToolCMD.ZDO_SIMPLE_DESC_RSP, framedata);
             }
         }
     }

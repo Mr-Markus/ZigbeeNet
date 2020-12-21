@@ -37,7 +37,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 framedata[i + 2] = bytes[7 - i];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_END_DEVICE_ANNCE, framedata);
         }
 
         /// <name>TI.ZPI1.ZDO_END_DEVICE_ANNCE.CAPABILITY_INFO</name>

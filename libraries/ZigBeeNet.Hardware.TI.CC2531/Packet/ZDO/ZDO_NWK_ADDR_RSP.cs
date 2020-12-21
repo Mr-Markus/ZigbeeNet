@@ -57,12 +57,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 this.AssocDevList[i] = new ZToolAddress16(framedata[14 + (i * 2)], framedata[13 + (i * 2)]);
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_NWK_ADDR_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_NWK_ADDR_RSP, framedata);
         }
 
         public override string ToString()
         {
-            return "ZDO_NWK_ADDR_RSP{" + "AssocDevList=" + AssocDevList.ToString() + ", IEEEAddr=" + IEEEAddr
+            return "ZDO_NWK_ADDR_RSP{" + "AssocDevList=[" + string.Join<ZToolAddress16>(",",AssocDevList) + "], IEEEAddr=" + IEEEAddr
                     + ", NumAssocDev=" + NumAssocDev + ", nwkAddr=" + NwkAddr + ", SrcAddress=" + SrcAddress
                     + ", StartIndex=" + StartIndex + ", Status=" + Status + '}';
         }

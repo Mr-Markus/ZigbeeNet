@@ -30,7 +30,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
             Endpoint = framedata[1];
             TransId = framedata[2];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_DATA_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_DATA_CONFIRM, framedata);
         }
     }
 }

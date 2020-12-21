@@ -22,7 +22,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         {
             SearchKey = searchKey;
             byte[] framedata = ByteUtils.ConvertLongtoMultiByte(SearchKey);
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_FIND_DEVICE_REQUEST), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_FIND_DEVICE_REQUEST, framedata);
         }
     }
 }

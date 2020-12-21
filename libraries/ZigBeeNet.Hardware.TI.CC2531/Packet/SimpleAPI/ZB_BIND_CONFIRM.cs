@@ -8,7 +8,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
     {
         /// <name>TI.ZPI2.ZB_BIND_CONFIRM.CommandId</name>
         /// <summary>CommandId</summary>
-        public DoubleByte CommandId { get; set; }
+        public ushort CommandId { get; set; }
         /// <name>TI.ZPI2.ZB_BIND_CONFIRM.Status</name>
         /// <summary>The immediate return value from executing the RPC.</summary>
         public int Status { get; set; }
@@ -23,9 +23,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         /// <summary>Constructor</summary>
         public ZB_BIND_CONFIRM(byte[] framedata)
         {
-            this.CommandId = new DoubleByte(framedata[1], framedata[0]);
+            this.CommandId = ByteHelper.ShortFromBytes(framedata[1],framedata[0]);
             this.Status = framedata[2];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_FIND_DEVICE_CONFIRM, framedata);
         }
 
         public override string ToString()

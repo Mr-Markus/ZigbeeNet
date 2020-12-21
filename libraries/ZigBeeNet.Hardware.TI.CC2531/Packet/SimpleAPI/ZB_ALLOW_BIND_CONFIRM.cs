@@ -20,7 +20,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             Source = new ZToolAddress16(framedata[1], framedata[0]);
 
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_ALLOW_BIND_CONFIRM), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_ALLOW_BIND_CONFIRM, framedata);
         }
     }
 }

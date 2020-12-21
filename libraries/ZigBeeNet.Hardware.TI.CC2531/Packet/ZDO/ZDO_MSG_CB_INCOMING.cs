@@ -43,7 +43,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         public int WasBroadcast { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.ClusterId</name>
         /// <summary>The ZDO Cluster Id of this message.</summary>
-        public DoubleByte ClusterId { get; private set; }
+        public ushort ClusterId { get; private set; }
         /// <name>TI.ZPI2.ZDO_MSG_CB_INCOMING.SecurityUse</name>
         /// <summary>N/A - not used.</summary>
         public int SecurityUse { get; private set; }
@@ -67,7 +67,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         {
             SrcAddr = new ZToolAddress16(framedata[1], framedata[0]);
             WasBroadcast = framedata[2];
-            ClusterId = new DoubleByte(framedata[4], framedata[3]);
+            ClusterId = ByteHelper.ShortFromBytes(framedata[4], framedata[3]);
             SecurityUse = framedata[5];
             SeqNum = framedata[6];
             MacDstAddr = new ZToolAddress16(framedata[8], framedata[7]);
@@ -78,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
             Data = framedata.Skip(9).ToArray(); // Arrays.copyOfRange(framedata, 9, framedata.Length);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MSG_CB_INCOMING), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MSG_CB_INCOMING, framedata);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 
             Log.Verbose("Translating ZDO cluster callback {ClusterId}", ClusterId);
 
-            Type newPacketClass = ClusterToRSP[ClusterId.Value];
+            Type newPacketClass = ClusterToRSP[ClusterId];
 
             if (newPacketClass == null)
             {
@@ -130,7 +130,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             try
             {
                 //newPacket = Activator.CreateInstance(newPacketClass, frame);
-                switch (ClusterId.Value)
+                switch (ClusterId)
                 {
                     case 0x0013:
                         newPacket = new ZDO_END_DEVICE_ANNCE_IND(frame);

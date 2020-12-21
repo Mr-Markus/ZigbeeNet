@@ -99,7 +99,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
             //{
             //    return;
             //}
-            if ((ZToolCMD)packet.CMD.Value != _commandId)
+            if ((ZToolCMD)packet.CMD != _commandId)
             {
                 Log.Verbose("Received unexpected packet: " + packet.GetType().Name);
                 return;

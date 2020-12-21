@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
+using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 {
@@ -15,7 +16,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         /// The command Id to send with the message.
         /// If the ZB_BINDING_ADDR destination is used, this parameter also indicates the binding to use. 
         /// </summary>
-        public DoubleByte CommandId { get; private set; }
+        public ushort CommandId { get; private set; }
 
         /// <summary>
         /// The destination of the data.
@@ -56,7 +57,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             PayloadValue = new byte[0xff];
         }
 
-        public ZB_SEND_DATA_REQUEST(ZToolAddress16 destination, DoubleByte commandId, int handle, int ack, int radius, int payloadLength, byte[] payload)
+        public ZB_SEND_DATA_REQUEST(ZToolAddress16 destination, ushort commandId, int handle, int ack, int radius, int payloadLength, byte[] payload)
         {
             // TODO: check buffer length
             Destination = destination;
@@ -70,8 +71,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             byte[] framedata = new byte[PayloadValue.Length + 8];
             framedata[0] = Destination.Lsb;
             framedata[1] = Destination.Msb;
-            framedata[2] = CommandId.Lsb;
-            framedata[3] = CommandId.Msb;
+            framedata[2] = CommandId.GetLSB();
+            framedata[3] = CommandId.GetMSB();
             framedata[4] = (byte)Handle;
             framedata[5] = (byte)Ack;
             framedata[6] = (byte)Radius;
@@ -82,7 +83,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 framedata[i + 8] = this.PayloadValue[i];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_SEND_DATA_REQUEST), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_SEND_DATA_REQUEST, framedata);
         }
     }
 }
