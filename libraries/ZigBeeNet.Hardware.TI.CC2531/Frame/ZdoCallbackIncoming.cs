@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
-using System.Linq;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Frame
 {
@@ -18,8 +17,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Frame
             apsFrame.SourceEndpoint = 0;
             apsFrame.Profile = 0;
 
-            apsFrame.Payload = packet.Packet.Skip(12).ToArray();
-            apsFrame.Payload = apsFrame.Payload.Take(apsFrame.Payload.Count() - 1).ToArray();
+            apsFrame.Payload = packet.Packet.Slice(12,packet.Packet.Length-13);
+            // apsFrame.Payload = packet.Packet.Skip(12).ToArray();
+            // apsFrame.Payload = apsFrame.Payload.Take(apsFrame.Payload.Count() - 1).ToArray();
 
             return apsFrame;
         }
