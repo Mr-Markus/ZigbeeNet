@@ -50,7 +50,6 @@ namespace ZigBeeNet
                 throw new ArgumentException("Not enough data for the slice");
             byte[] range = new byte[len];
             Buffer.BlockCopy(data, offset, range, 0, len);
-            offset += len;
             return range;
         }
 
