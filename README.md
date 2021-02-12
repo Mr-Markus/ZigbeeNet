@@ -177,22 +177,3 @@ All Company, brand and product names may be trademarks that are the sole propert
 
 Some documentation used to implement dongle drivers is copywrite to the respective holders, including Silicon Labs, Texas Instruments, Dresden Electronics, Digi International.
 
-## Contributor
-
-[@Mr-Markus](https://github.com/Mr-Markus) (repository owner)
-
-[@nicolaiw](https://github.com/nicolaiw)
-
-[@andreasfedermann](https://github.com/andreasfedermann)
-
-[@spudwebb](https://github.com/spudwebb)
-
-[@Gallimathias](https://github.com/Gallimathias)
-
-[@thombrink](https://github.com/thombrink)
-
-[@TheBlubb14](https://github.com/TheBlubb14)
-
-[@maksim789456](https://github.com/maksim789456)
-
-[@DavidKarlas](https://github.com/DavidKarlas)
