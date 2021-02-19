@@ -134,7 +134,7 @@ namespace ZigBeeNet
         {
             this._inputClusters.Clear();
 
-            Log.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting input clusters {Clusters}", GetEndpointAddress(), inputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label ?? $"Cluster #{c}"));
 
             UpdateClusters(_inputClusters, inputClusterIds, true);
         }
@@ -180,7 +180,7 @@ namespace ZigBeeNet
         {
             this._outputClusters.Clear();
 
-            Log.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label));
+            Log.Debug("{Endpoint}: Setting output clusters {Clusters}", GetEndpointAddress(), outputClusterIds.Select(c => ZclClusterType.GetValueById(c)?.Label ?? $"Cluster #{c}"));
 
             UpdateClusters(_outputClusters, outputClusterIds, false);
         }
@@ -216,16 +216,11 @@ namespace ZigBeeNet
             if (clusterType == null)
             {
                 // Unsupported cluster
-                Log.Debug("{Endpoint}: Unsupported cluster {Cluster}", GetEndpointAddress(), clusterId);
-                return null;
+                Log.Debug("{Endpoint}: Unsupported cluster {Cluster} - using ZclCustomCluster", GetEndpointAddress(), clusterId);
+                return new ZclCustomCluster(this, clusterId);
             }
 
             // Create a cluster class
-            //if (clusterType.ClusterClass != null)
-            //    return (ZclCluster)Activator.CreateInstance(clusterType.ClusterClass, this);
-            //else
-            //    return null;
-
             return clusterType.ClusterFactory(this);
         }
 
@@ -261,17 +256,18 @@ namespace ZigBeeNet
                     ZclCluster clusterClass = GetClusterClass(id);
                     if (clusterClass == null)
                     {
+                        Log.Debug("{EndpointAddress}: Cluster {Cluster} not created", GetEndpointAddress(), id);
                         continue;
                     }
 
                     if (isInput)
                     {
-                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as server", GetEndpointAddress(), clusterClass.GetClusterName());
                         clusterClass.SetServer();
                     }
                     else
                     {
-                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), ZclClusterType.GetValueById(id));
+                        Log.Debug("{EndpointAddress}: Setting cluster {Cluster} as client", GetEndpointAddress(), clusterClass.GetClusterName());
                         clusterClass.SetClient();
                     }
 
