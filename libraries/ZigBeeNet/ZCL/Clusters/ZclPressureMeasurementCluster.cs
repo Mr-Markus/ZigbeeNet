@@ -116,7 +116,7 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_MINSCALEDVALUE, new ZclAttribute(this, ATTR_MINSCALEDVALUE, "Min Scaled Value", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_MAXSCALEDVALUE, new ZclAttribute(this, ATTR_MAXSCALEDVALUE, "Max Scaled Value", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_SCALEDTOLERANCE, new ZclAttribute(this, ATTR_SCALEDTOLERANCE, "Scaled Tolerance", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_SCALE, new ZclAttribute(this, ATTR_SCALE, "Scale", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_SCALE, new ZclAttribute(this, ATTR_SCALE, "Scale", ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER), false, true, false, false));
 
             return attributeMap;
         }
