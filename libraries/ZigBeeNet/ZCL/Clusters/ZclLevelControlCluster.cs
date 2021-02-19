@@ -62,6 +62,38 @@ namespace ZigBeeNet.ZCL.Clusters
         public const ushort ATTR_REMAININGTIME = 0x0001;
 
         /// <summary>
+        /// The MinLevel attribute indicates the minimum value of CurrentLevel that is
+        /// capable of being assigned.
+        /// </summary>
+        public const ushort ATTR_MINIMUMLEVEL = 0x0002;
+
+        /// <summary>
+        /// The MaxLevel attribute indicates the maximum value of CurrentLevel that is
+        /// capable of being assigned.
+        /// </summary>
+        public const ushort ATTR_MAXIMUMLEVEL = 0x0003;
+
+        /// <summary>
+        /// The CurrentFrequency attribute represents the frequency that the devices is at
+        /// CurrentLevel. A CurrentFrequency of 0 is unknown.
+        /// </summary>
+        public const ushort ATTR_CURRENTFREQUENCY = 0x0004;
+
+        /// <summary>
+        /// The MinFrequency attribute indicates the minimum value of CurrentFrequency that
+        /// is capable of being assigned. MinFrequency shall be less than or equal to
+        /// MaxFrequency. A value of 0 indicates undefined.
+        /// </summary>
+        public const ushort ATTR_MINIMUMFREQUENCY = 0x0005;
+
+        /// <summary>
+        /// The MaxFrequency attribute indicates the maximum value of CurrentFrequency that
+        /// is capable of being assigned. MaxFrequency shall be greater than or equal to
+        /// MinFrequency. A value of 0 indicates undefined.
+        /// </summary>
+        public const ushort ATTR_MAXIMUMFREQUENCY = 0x0006;
+
+        /// <summary>
         ///         /// </summary>
         public const ushort ATTR_OPTIONS = 0x000F;
 
@@ -119,10 +151,15 @@ namespace ZigBeeNet.ZCL.Clusters
 
         protected override Dictionary<ushort, ZclAttribute> InitializeServerAttributes()
         {
-            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(9);
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(14);
 
             attributeMap.Add(ATTR_CURRENTLEVEL, new ZclAttribute(this, ATTR_CURRENTLEVEL, "Current Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, true));
             attributeMap.Add(ATTR_REMAININGTIME, new ZclAttribute(this, ATTR_REMAININGTIME, "Remaining Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_MINIMUMLEVEL, new ZclAttribute(this, ATTR_MINIMUMLEVEL, "Minimum Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_MAXIMUMLEVEL, new ZclAttribute(this, ATTR_MAXIMUMLEVEL, "Maximum Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_CURRENTFREQUENCY, new ZclAttribute(this, ATTR_CURRENTFREQUENCY, "Current Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, true));
+            attributeMap.Add(ATTR_MINIMUMFREQUENCY, new ZclAttribute(this, ATTR_MINIMUMFREQUENCY, "Minimum Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_MAXIMUMFREQUENCY, new ZclAttribute(this, ATTR_MAXIMUMFREQUENCY, "Maximum Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_OPTIONS, new ZclAttribute(this, ATTR_OPTIONS, "Options", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, false, false));
             attributeMap.Add(ATTR_ONOFFTRANSITIONTIME, new ZclAttribute(this, ATTR_ONOFFTRANSITIONTIME, "On Off Transition Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
             attributeMap.Add(ATTR_ONLEVEL, new ZclAttribute(this, ATTR_ONLEVEL, "On Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
@@ -145,7 +182,7 @@ namespace ZigBeeNet.ZCL.Clusters
             commandMap.Add(0x0004, () => new MoveToLevelWithOnOffCommand());
             commandMap.Add(0x0005, () => new MoveWithOnOffCommand());
             commandMap.Add(0x0006, () => new StepWithOnOffCommand());
-            commandMap.Add(0x0007, () => new Stop2Command());
+            commandMap.Add(0x0007, () => new StopWithOnOffCommand());
 
             return commandMap;
         }
@@ -310,13 +347,13 @@ namespace ZigBeeNet.ZCL.Clusters
         }
 
         /// <summary>
-        /// The Stop 2 Command
+        /// The Stop (with On/Off) Command
         ///
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> Stop2Command()
+        public Task<CommandResult> StopWithOnOffCommand()
         {
-            return Send(new Stop2Command());
+            return Send(new StopWithOnOffCommand());
         }
     }
 }

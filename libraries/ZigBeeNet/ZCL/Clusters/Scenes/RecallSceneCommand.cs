@@ -43,6 +43,18 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         public byte SceneId { get; set; }
 
         /// <summary>
+        /// Transition Time command message field.
+        /// 
+        /// If the Transition Time field is present in the command payload and its value is not
+        /// equal to 0xFFFF, this field shall indicate the transition time in 1/10ths of a
+        /// second. In all other cases (command payload field not present or value equal to
+        /// 0xFFFF), The scene transition time field of the Scene Table entry shall indicate
+        /// the transition time. The transition time determines how long the transition takes
+        /// from the old cluster state to the new cluster state.
+        /// </summary>
+        public ushort TransitionTime { get; set; }
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public RecallSceneCommand()
@@ -57,12 +69,14 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         {
             serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(SceneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             SceneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TransitionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
         }
 
         public override string ToString()
@@ -75,6 +89,8 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
             builder.Append(GroupId);
             builder.Append(", SceneId=");
             builder.Append(SceneId);
+            builder.Append(", TransitionTime=");
+            builder.Append(TransitionTime);
             builder.Append(']');
 
             return builder.ToString();

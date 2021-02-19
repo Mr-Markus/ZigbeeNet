@@ -36,7 +36,7 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
         /// <summary>
         /// Status command message field.
         /// </summary>
-        public byte Status { get; set; }
+        public ZclStatus Status { get; set; }
 
         /// <summary>
         /// Group ID command message field.
@@ -61,14 +61,14 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
             serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(GroupName, ZclDataType.Get(DataType.CHARACTER_STRING));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
             GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             GroupName = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
         }

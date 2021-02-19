@@ -65,7 +65,8 @@ namespace ZigBeeNet.CodeGenerator
             //zclParser.AddFile("./Resources/0704_SmartEnergyTunneling.xml");
             zclParser.AddFile("./Resources/0705_Prepayment.xml");
             zclParser.AddFile("./Resources/0800_KeyEstablishment.xml");
-                            
+
+            zclParser.AddFile("./Resources/0B01_MeterIdentification.xml");
             zclParser.AddFile("./Resources/0B04_ElectricalMeasurement.xml");
             zclParser.AddFile("./Resources/0B05_Diagnostics.xml");
 
