@@ -36,6 +36,20 @@
       "problemMatcher": "$tsc"
     },
     {
+      "label": "publish_autocode_ubuntu",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/autocode/ZigBeeNet.CodeGenerator/ZigBeeNet.CodeGenerator.csproj",
+        "--self-contained",
+        "true",
+        "-r",
+        "ubuntu.20.04-x64"
+      ],
+      "problemMatcher": "$tsc"
+    },
+    {
       "label": "watch",
       "command": "dotnet",
       "type": "process",
