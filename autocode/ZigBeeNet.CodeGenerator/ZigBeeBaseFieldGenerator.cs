@@ -292,7 +292,7 @@ namespace ZigBeeNet.CodeGenerator
             }
         }
 
-        protected ZigBeeXmlField GetAutoSized(List<ZigBeeXmlField> fields, string name)
+        protected override ZigBeeXmlField GetAutoSized(List<ZigBeeXmlField> fields, string name)
         {
             foreach (ZigBeeXmlField field in fields)
             {

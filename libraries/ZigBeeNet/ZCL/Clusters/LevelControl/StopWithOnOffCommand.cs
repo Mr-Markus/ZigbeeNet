@@ -11,14 +11,14 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters.LevelControl
 {
     /// <summary>
-    /// Stop 2 Command value object class.
+    /// Stop (with On/Off) Command value object class.
     ///
     /// Cluster: Level Control. Command ID 0x07 is sent TO the server.
     /// This command is a specific command used for the Level Control cluster.
     ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
-    public class Stop2Command : ZclCommand
+    public class StopWithOnOffCommand : ZclCommand
     {
         /// <summary>
         /// The cluster ID to which this command belongs.
@@ -33,7 +33,7 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public Stop2Command()
+        public StopWithOnOffCommand()
         {
             ClusterId = CLUSTER_ID;
             CommandId = COMMAND_ID;
@@ -45,7 +45,7 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
         {
             var builder = new StringBuilder();
 
-            builder.Append("Stop2Command [");
+            builder.Append("StopWithOnOffCommand [");
             builder.Append(base.ToString());
             builder.Append(']');
 

@@ -234,9 +234,13 @@ namespace ZigBeeNet.CodeGenerator
                 }
                 @out.WriteLine("        ///");
 
-                LinkedList<ZigBeeXmlField> fields = new LinkedList<ZigBeeXmlField>(command.Fields);
+                List<ZigBeeXmlField> fields = new List<ZigBeeXmlField>(command.Fields);
                 foreach (ZigBeeXmlField field in fields)
                 {
+                    if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
+                    {
+                        continue;
+                    }
                     @out.WriteLine("        /// <param name=\"" + StringToLowerCamelCase(field.Name) + "\" <see cref=\"" + GetDataTypeClass(field) + "\"> " + field.Name + "</ param >");
                 }
 
@@ -247,6 +251,10 @@ namespace ZigBeeNet.CodeGenerator
                 bool first = true;
                 foreach (ZigBeeXmlField field in fields)
                 {
+                    if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
+                    {
+                        continue;
+                    }
                     if (first == false)
                     {
                         @out.Write(", ");
@@ -269,6 +277,10 @@ namespace ZigBeeNet.CodeGenerator
 
                     foreach (ZigBeeXmlField field in fields)
                     {
+                        if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
+                        {
+                            continue;
+                        }
                         @out.WriteLine("            command." + StringToUpperCamelCase(field.Name) + " = " + StringToLowerCamelCase(field.Name) + ";");
                     }
                     @out.WriteLine();

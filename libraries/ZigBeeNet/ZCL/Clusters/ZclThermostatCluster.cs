@@ -111,6 +111,31 @@ namespace ZigBeeNet.ZCL.Clusters
         public const ushort ATTR_SYSTEMMODE = 0x001C;
         public const ushort ATTR_ALARMMASK = 0x001D;
         public const ushort ATTR_THERMOSTATRUNNINGMODE = 0x001E;
+        public const ushort ATTR_STARTOFWEEK = 0x0020;
+        public const ushort ATTR_NUMEROFWEEKLYTRANSITIONS = 0x0021;
+        public const ushort ATTR_NUMEROFDAILYTRANSITIONS = 0x0022;
+        public const ushort ATTR_TEMPERATURESETPOINTHOLD = 0x0023;
+        public const ushort ATTR_TEMPERATURESETPOINTHOLDDURATION = 0x0024;
+        public const ushort ATTR_THERMOSTATPROGRAMMINGOPERATIONMODE = 0x0025;
+        public const ushort ATTR_THERMOSTATRUNNINGSTATE = 0x0029;
+        public const ushort ATTR_SETPOINTCHANGESOURCE = 0x0030;
+        public const ushort ATTR_SETPOINTCHANGEAMOUNT = 0x0031;
+        public const ushort ATTR_SETPOINTCHANGESOURCETIMESTAMP = 0x0032;
+        public const ushort ATTR_OCCUPIEDSETBACK = 0x0034;
+        public const ushort ATTR_OCCUPIEDSETBACKMIN = 0x0035;
+        public const ushort ATTR_OCCUPIEDSETBACKMAX = 0x0036;
+        public const ushort ATTR_UNOCCUPIEDSETBACK = 0x0037;
+        public const ushort ATTR_UNOCCUPIEDSETBACKMIN = 0x0038;
+        public const ushort ATTR_UNOCCUPIEDSETBACKMAX = 0x0039;
+        public const ushort ATTR_EMERGENCYHEATDELTA = 0x003A;
+        public const ushort ATTR_ACTYPE = 0x0040;
+        public const ushort ATTR_ACCAPACITY = 0x0041;
+        public const ushort ATTR_ACREFRIGERANTTYPE = 0x0042;
+        public const ushort ATTR_ACCOMPRESSORTYPE = 0x0043;
+        public const ushort ATTR_ACERRORCODE = 0x0044;
+        public const ushort ATTR_ACLOUVERPOSITION = 0x0045;
+        public const ushort ATTR_ACCOILTEMPERATURE = 0x0046;
+        public const ushort ATTR_ACCAPACITYFORMAT = 0x0047;
 
         protected override Dictionary<ushort, ZclAttribute> InitializeClientAttributes()
         {
@@ -121,7 +146,7 @@ namespace ZigBeeNet.ZCL.Clusters
 
         protected override Dictionary<ushort, ZclAttribute> InitializeServerAttributes()
         {
-            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(25);
+            Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(50);
 
             attributeMap.Add(ATTR_LOCALTEMPERATURE, new ZclAttribute(this, ATTR_LOCALTEMPERATURE, "Local Temperature", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, false, true));
             attributeMap.Add(ATTR_OUTDOORTEMPERATURE, new ZclAttribute(this, ATTR_OUTDOORTEMPERATURE, "Outdoor Temperature", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
@@ -133,7 +158,7 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_PICOOLINGDEMAND, new ZclAttribute(this, ATTR_PICOOLINGDEMAND, "Pi Cooling Demand", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, true));
             attributeMap.Add(ATTR_PIHEATINGDEMAND, new ZclAttribute(this, ATTR_PIHEATINGDEMAND, "Pi Heating Demand", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, true));
             attributeMap.Add(ATTR_HVACSYSTEMTYPECONFIGURATION, new ZclAttribute(this, ATTR_HVACSYSTEMTYPECONFIGURATION, "Hvac System Type Configuration", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_LOCALTEMPERATURECALIBRATION, new ZclAttribute(this, ATTR_LOCALTEMPERATURECALIBRATION, "Local Temperature Calibration", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_LOCALTEMPERATURECALIBRATION, new ZclAttribute(this, ATTR_LOCALTEMPERATURECALIBRATION, "Local Temperature Calibration", ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_OCCUPIEDCOOLINGSETPOINT, new ZclAttribute(this, ATTR_OCCUPIEDCOOLINGSETPOINT, "Occupied Cooling Setpoint", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_OCCUPIEDHEATINGSETPOINT, new ZclAttribute(this, ATTR_OCCUPIEDHEATINGSETPOINT, "Occupied Heating Setpoint", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_UNOCCUPIEDCOOLINGSETPOINT, new ZclAttribute(this, ATTR_UNOCCUPIEDCOOLINGSETPOINT, "Unoccupied Cooling Setpoint", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
@@ -142,12 +167,37 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_MAXHEATSETPOINTLIMIT, new ZclAttribute(this, ATTR_MAXHEATSETPOINTLIMIT, "Max Heat Setpoint Limit", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_MINCOOLSETPOINTLIMIT, new ZclAttribute(this, ATTR_MINCOOLSETPOINTLIMIT, "Min Cool Setpoint Limit", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_MAXCOOLSETPOINTLIMIT, new ZclAttribute(this, ATTR_MAXCOOLSETPOINTLIMIT, "Max Cool Setpoint Limit", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MINSETPOINTDEADBAND, new ZclAttribute(this, ATTR_MINSETPOINTDEADBAND, "Min Setpoint Dead Band", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_MINSETPOINTDEADBAND, new ZclAttribute(this, ATTR_MINSETPOINTDEADBAND, "Min Setpoint Dead Band", ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER), false, true, false, false));
             attributeMap.Add(ATTR_REMOTESENSING, new ZclAttribute(this, ATTR_REMOTESENSING, "Remote Sensing", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, false, false));
             attributeMap.Add(ATTR_CONTROLSEQUENCEOFOPERATION, new ZclAttribute(this, ATTR_CONTROLSEQUENCEOFOPERATION, "Control Sequence Of Operation", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
             attributeMap.Add(ATTR_SYSTEMMODE, new ZclAttribute(this, ATTR_SYSTEMMODE, "System Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_ALARMMASK, new ZclAttribute(this, ATTR_ALARMMASK, "Alarm Mask", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_ALARMMASK, new ZclAttribute(this, ATTR_ALARMMASK, "Alarm Mask", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, false, false));
             attributeMap.Add(ATTR_THERMOSTATRUNNINGMODE, new ZclAttribute(this, ATTR_THERMOSTATRUNNINGMODE, "Thermostat Running Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_STARTOFWEEK, new ZclAttribute(this, ATTR_STARTOFWEEK, "Start Of Week", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_NUMEROFWEEKLYTRANSITIONS, new ZclAttribute(this, ATTR_NUMEROFWEEKLYTRANSITIONS, "Numer Of Weekly Transitions", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_NUMEROFDAILYTRANSITIONS, new ZclAttribute(this, ATTR_NUMEROFDAILYTRANSITIONS, "Numer Of Daily Transitions", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_TEMPERATURESETPOINTHOLD, new ZclAttribute(this, ATTR_TEMPERATURESETPOINTHOLD, "Temperature Setpoint Hold", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_TEMPERATURESETPOINTHOLDDURATION, new ZclAttribute(this, ATTR_TEMPERATURESETPOINTHOLDDURATION, "Temperature Setpoint Hold Duration", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_THERMOSTATPROGRAMMINGOPERATIONMODE, new ZclAttribute(this, ATTR_THERMOSTATPROGRAMMINGOPERATIONMODE, "Thermostat Programming Operation Mode", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_THERMOSTATRUNNINGSTATE, new ZclAttribute(this, ATTR_THERMOSTATRUNNINGSTATE, "Thermostat Running State", ZclDataType.Get(DataType.BITMAP_16_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_SETPOINTCHANGESOURCE, new ZclAttribute(this, ATTR_SETPOINTCHANGESOURCE, "Setpoint Change Source", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_SETPOINTCHANGEAMOUNT, new ZclAttribute(this, ATTR_SETPOINTCHANGEAMOUNT, "Setpoint Change Amount", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_SETPOINTCHANGESOURCETIMESTAMP, new ZclAttribute(this, ATTR_SETPOINTCHANGESOURCETIMESTAMP, "Setpoint Change Source Timestamp", ZclDataType.Get(DataType.UTCTIME), false, true, false, false));
+            attributeMap.Add(ATTR_OCCUPIEDSETBACK, new ZclAttribute(this, ATTR_OCCUPIEDSETBACK, "Occupied Setback", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_OCCUPIEDSETBACKMIN, new ZclAttribute(this, ATTR_OCCUPIEDSETBACKMIN, "Occupied Setback Min", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_OCCUPIEDSETBACKMAX, new ZclAttribute(this, ATTR_OCCUPIEDSETBACKMAX, "Occupied Setback Max", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_UNOCCUPIEDSETBACK, new ZclAttribute(this, ATTR_UNOCCUPIEDSETBACK, "Unoccupied Setback", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_UNOCCUPIEDSETBACKMIN, new ZclAttribute(this, ATTR_UNOCCUPIEDSETBACKMIN, "Unoccupied Setback Min", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_UNOCCUPIEDSETBACKMAX, new ZclAttribute(this, ATTR_UNOCCUPIEDSETBACKMAX, "Unoccupied Setback Max", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_EMERGENCYHEATDELTA, new ZclAttribute(this, ATTR_EMERGENCYHEATDELTA, "Emergency Heat Delta", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_ACTYPE, new ZclAttribute(this, ATTR_ACTYPE, "AC Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ACCAPACITY, new ZclAttribute(this, ATTR_ACCAPACITY, "AC Capacity", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_ACREFRIGERANTTYPE, new ZclAttribute(this, ATTR_ACREFRIGERANTTYPE, "AC Refrigerant Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ACCOMPRESSORTYPE, new ZclAttribute(this, ATTR_ACCOMPRESSORTYPE, "AC Compressor Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ACERRORCODE, new ZclAttribute(this, ATTR_ACERRORCODE, "AC Error Code", ZclDataType.Get(DataType.BITMAP_32_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ACLOUVERPOSITION, new ZclAttribute(this, ATTR_ACLOUVERPOSITION, "AC Louver Position", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ACCOILTEMPERATURE, new ZclAttribute(this, ATTR_ACCOILTEMPERATURE, "AC Coil Temperature", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_ACCAPACITYFORMAT, new ZclAttribute(this, ATTR_ACCAPACITYFORMAT, "AC Capacity Format", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
 
             return attributeMap;
         }
