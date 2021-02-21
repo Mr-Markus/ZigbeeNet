@@ -37,7 +37,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             data.Add((byte)ReqType);
             data.Add(StartIndex);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_IEEE_ADDR_REQ), data.ToArray());
+            BuildPacket((ushort)ZToolCMD.ZDO_IEEE_ADDR_REQ, data.ToArray());
         }
 
         public enum RequestType : byte

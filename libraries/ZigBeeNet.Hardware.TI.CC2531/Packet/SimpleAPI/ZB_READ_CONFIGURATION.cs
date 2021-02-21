@@ -20,7 +20,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
 
             byte[] framedata = new byte[] { (byte)configId };
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_READ_CONFIGURATION), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_READ_CONFIGURATION, framedata);
         }
     }
 }

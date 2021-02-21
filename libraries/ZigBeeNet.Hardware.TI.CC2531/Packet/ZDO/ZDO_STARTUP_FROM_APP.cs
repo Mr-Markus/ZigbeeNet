@@ -24,7 +24,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[0] = (byte)(start_delay & 0xff);
             framedata[1] = (byte)((start_delay & 0xff) >> 8);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_STARTUP_FROM_APP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_STARTUP_FROM_APP, framedata);
         }
     }
 }

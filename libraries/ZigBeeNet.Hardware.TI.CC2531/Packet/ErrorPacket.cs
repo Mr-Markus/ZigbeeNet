@@ -7,7 +7,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
     public class ErrorPacket : ZToolPacket
     {
         public ErrorPacket()
-            :base(new DoubleByte(), new byte[0])
+            :base(0, new byte[0])
         {
 
         }

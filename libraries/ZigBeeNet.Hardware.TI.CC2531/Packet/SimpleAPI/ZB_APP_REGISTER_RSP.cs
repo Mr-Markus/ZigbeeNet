@@ -19,7 +19,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
         public ZB_APP_REGISTER_RSP(byte[] framedata)
         {
             this.Status = framedata[0];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_APP_REGISTER_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_APP_REGISTER_RSP, framedata);
         }
 
         public override string ToString()

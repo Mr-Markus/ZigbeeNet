@@ -14,7 +14,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
     {
         this.Status = framedata[0];
 
-        BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_SET_CHANNELS_RESPONSE), framedata);
+        BuildPacket((ushort)ZToolCMD.UTIL_SET_CHANNELS_RESPONSE, framedata);
     }
 
     public override string ToString()

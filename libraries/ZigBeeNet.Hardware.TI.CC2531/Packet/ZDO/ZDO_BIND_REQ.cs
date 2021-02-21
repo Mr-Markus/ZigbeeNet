@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
 using ZigBeeNet.ZCL;
+using ZigBeeNet.Extensions;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
 {
@@ -29,7 +30,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// Specifies the cluster Id to match in message
         /// </summary>
-        public DoubleByte ClusterId { get; private set; }
+        public ushort ClusterId { get; private set; }
 
         /// <summary>
         /// Specifies destination address mode
@@ -55,7 +56,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             BROADCAST = 0xFF 
         }
 
-        public ZDO_BIND_REQ(ZToolAddress16 nwkDst, ZToolAddress64 ieeeSrc, byte epSrc, DoubleByte cluster,
+        public ZDO_BIND_REQ(ZToolAddress16 nwkDst, ZToolAddress64 ieeeSrc, byte epSrc, ushort cluster,
             Address_Mode addressingMode, ZToolAddress64 ieeeDst, byte epDst)
         {
 
@@ -77,8 +78,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             }
             framedata[10] = epSrc;
 
-            framedata[11] = cluster.Lsb;
-            framedata[12] = cluster.Msb;
+            framedata[11] = cluster.GetLSB();
+            framedata[12] = cluster.GetMSB();
             framedata[13] = (byte)addressingMode;
             bytes = ieeeDst.Address;
             if (addressingMode == Address_Mode.ADDRESS_64_BIT)
@@ -95,7 +96,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 framedata[15] = bytes[6];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_BIND_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_BIND_REQ, framedata);
         }        
     }
 }

@@ -9,7 +9,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
 
         public SYS_VERSION()
         {
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_VERSION), new byte[0]);
+            BuildPacket((ushort)ZToolCMD.SYS_VERSION, new byte[0]);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             IeeeAddr = new ZToolAddress64(bytes);
             NwkAddr = new ZToolAddress16(framedata[11], framedata[10]);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_TC_DEVICE_IND), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_TC_DEVICE_IND, framedata);
         }
     }
 }

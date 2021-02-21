@@ -42,7 +42,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
                 this.Value[i] = framedata[i + 3];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_READ_CONFIGURATION_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZB_READ_CONFIGURATION_RSP, framedata);
         }
     }
 }

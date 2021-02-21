@@ -91,7 +91,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
                 framedata[(i * 2) + ((AppInClusterList.Length) * 2) + 10] = AppOutClusterList[i].GetByte(1);
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_REGISTER), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_REGISTER, framedata);
         }
     }
 }

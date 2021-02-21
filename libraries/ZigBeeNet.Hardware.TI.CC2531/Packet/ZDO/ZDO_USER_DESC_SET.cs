@@ -53,7 +53,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 framedata[i + 5] = this.Descriptor[i];
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_USER_DESC_SET), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_USER_DESC_SET, framedata);
         }
     }
 }

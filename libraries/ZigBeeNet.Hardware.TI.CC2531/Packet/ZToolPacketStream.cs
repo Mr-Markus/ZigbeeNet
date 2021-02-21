@@ -51,7 +51,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 byte[] frameData;
                 byte apiIdMSB = Read("API PROFILE_ID_HOME_AUTOMATION MSB");
                 byte apiIdLSB = Read("API PROFILE_ID_HOME_AUTOMATION LSB");
-                DoubleByte apiId = new DoubleByte(apiIdMSB, apiIdLSB);
+                ushort apiId = ByteHelper.ShortFromBytes(apiIdMSB, apiIdLSB);
                 // TODO Remove generic never used
                 // generic = true;
                 if (_generic)
@@ -127,7 +127,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
 
-                DoubleByte cmd = new DoubleByte(buffer[3], buffer[2]);
+                ushort cmd = ByteHelper.ShortFromBytes(buffer[3], buffer[2]);
 
                 return ParsePayload(cmd, buffer.Skip(4).Take(length).ToArray());
             }
@@ -135,9 +135,9 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             throw new InvalidDataException("unable to decode packet");
         }
 
-        public static ZToolPacket ParsePayload(DoubleByte cmd, byte[] payload)
+        public static ZToolPacket ParsePayload(ushort cmd, byte[] payload)
         {
-            switch ((ZToolCMD)cmd.Value)
+            switch ((ZToolCMD)cmd)
             {
                 case ZToolCMD.SYS_RESET_RESPONSE:
                     return new SYS_RESET_RESPONSE(payload);
@@ -281,7 +281,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 case ZToolCMD.UTIL_LED_CONTROL_RESPONSE:
                     return new UTIL_LED_CONTROL_RESPONSE(payload);
                 default:
-                    Log.Warning("Unknown command ID: {Command}", cmd);
+                    Log.Warning($"Unknown command ID: {{Command}} [0x{cmd:X4}]", cmd);
                     return new ZToolPacket(cmd, payload);
             }
         }

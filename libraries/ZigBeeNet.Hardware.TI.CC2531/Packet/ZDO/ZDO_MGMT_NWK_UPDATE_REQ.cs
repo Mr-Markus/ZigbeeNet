@@ -70,7 +70,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[9] = this.NetworkManagerAddress.GetByte(0);
             framedata[10] = this.NetworkManagerAddress.GetByte(1);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_MGMT_NWK_UPDATE_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_MGMT_NWK_UPDATE_REQ, framedata);
         }
 
         public override string ToString()

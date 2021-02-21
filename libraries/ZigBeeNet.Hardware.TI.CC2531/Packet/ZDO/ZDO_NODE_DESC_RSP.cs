@@ -58,7 +58,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// Specifies a manufacturer code that is allocated by the ZigBee Alliance, relating to the manufacturer to the device
         /// </summary>
-        public DoubleByte ManufacturerCode { get; set; }
+        public ushort ManufacturerCode { get; set; }
 
         /// <summary>
         /// Indicates size of maximum NPDU. This field is used as a high level indication for management
@@ -68,7 +68,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         /// <summary>
         /// Indicates maximum size of Transfer up to 0x7fff (This field is reserved in version 1.0 and shall be set to zero). 
         /// </summary>
-        public DoubleByte MaxInTransferSize { get; private set; }
+        public ushort MaxInTransferSize { get; private set; }
 
         /// <summary>
         /// Bit 0 - Primary Trust Center       
@@ -78,7 +78,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         ///     4 - Primary Discovery Cache       
         ///     5 - Backup Discovery Cache 
         /// </summary>
-        public DoubleByte ServerMask { get; private set; }
+        public ushort ServerMask { get; private set; }
 
         /// <summary>
         /// Specifies the Descriptor capabilities 
@@ -102,13 +102,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                     APSFlags = (byte)(framedata[6] & (byte)0x0F);
                     FrequencyBand = (byte)(framedata[6] & (byte)0xF0 >> 4);
                     MacCapabilitiesFlags = (CapabilitiesFlags)framedata[10];
-                    ManufacturerCode = new DoubleByte(framedata[11], framedata[12]);
+                    ManufacturerCode = ByteHelper.ShortFromBytes(framedata[11], framedata[12]);
                     MaxBufferSize = framedata[13];
-                    MaxInTransferSize = new DoubleByte(framedata[14], framedata[15]);
-                    ServerMask = new DoubleByte(framedata[16], framedata[17]);
+                    MaxInTransferSize = ByteHelper.ShortFromBytes(framedata[14], framedata[15]);
+                    ServerMask = ByteHelper.ShortFromBytes(framedata[16], framedata[17]);
                 }
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_NODE_DESC_RSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_NODE_DESC_RSP, framedata);
         }
 
         public enum CapabilitiesFlags

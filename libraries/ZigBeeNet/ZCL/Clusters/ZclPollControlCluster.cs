@@ -126,7 +126,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// FastPollTimeout to avoid it being set to too high a value resulting in an
         /// inadvertent power drain on the device.
         /// </summary>
-        public const ushort ATTR_FASTPOLLTIMEOUTMIN = 0x0006;
+        public const ushort ATTR_FASTPOLLTIMEOUTMAX = 0x0006;
 
         protected override Dictionary<ushort, ZclAttribute> InitializeClientAttributes()
         {
@@ -145,7 +145,7 @@ namespace ZigBeeNet.ZCL.Clusters
             attributeMap.Add(ATTR_FASTPOLLTIMEOUT, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUT, "Fast Poll Timeout", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, true));
             attributeMap.Add(ATTR_CHECKININTERVALMIN, new ZclAttribute(this, ATTR_CHECKININTERVALMIN, "Checkin Interval Min", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
             attributeMap.Add(ATTR_LONGPOLLINTERVALMIN, new ZclAttribute(this, ATTR_LONGPOLLINTERVALMIN, "Long Poll Interval Min", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_FASTPOLLTIMEOUTMIN, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUTMIN, "Fast Poll Timeout Min", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_FASTPOLLTIMEOUTMAX, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUTMAX, "Fast Poll Timeout Max", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
 
             return attributeMap;
         }
@@ -248,10 +248,10 @@ namespace ZigBeeNet.ZCL.Clusters
         /// new value is not acceptable, the Poll Control Server shall send a default response
         /// of INVALID_VALUE and the LongPollInterval attribute value is not updated.
         ///
-        /// <param name="newLongPollInterval" <see cref="ushort"> New Long Poll Interval</ param >
+        /// <param name="newLongPollInterval" <see cref="uint"> New Long Poll Interval</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> SetLongPollIntervalCommand(ushort newLongPollInterval)
+        public Task<CommandResult> SetLongPollIntervalCommand(uint newLongPollInterval)
         {
             SetLongPollIntervalCommand command = new SetLongPollIntervalCommand();
 

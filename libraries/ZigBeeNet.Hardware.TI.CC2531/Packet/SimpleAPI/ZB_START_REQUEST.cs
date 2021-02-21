@@ -13,7 +13,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
     {
         public ZB_START_REQUEST()
         {
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_START_REQUEST), new byte[0]);
+            BuildPacket((ushort)ZToolCMD.ZB_START_REQUEST, new byte[0]);
         }
     }
 }

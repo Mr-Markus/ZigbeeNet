@@ -9,7 +9,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
     {
     /// <name>TI.ZPI1.SYS_GET_DEVICE_INFO_RESPONSE.AssocDevicesList</name>
     /// <summary>Dynamic array; Assoc Devices List</summary>
-    public DoubleByte[] AssocDevicesList { get; private set; }
+    public ushort[] AssocDevicesList { get; private set; }
     /// <name>TI.ZPI1.SYS_GET_DEVICE_INFO_RESPONSE.DeviceState</name>
     /// <summary>Device Type</summary>
     public byte DeviceState { get; private set; }
@@ -35,7 +35,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
     /// <summary>Constructor</summary>
     public UTIL_GET_DEVICE_INFO_RESPONSE()
     {
-        this.AssocDevicesList = new DoubleByte[0xff];
+        this.AssocDevicesList = new ushort[0xff];
     }
 
     public UTIL_GET_DEVICE_INFO_RESPONSE(byte[] framedata)
@@ -53,13 +53,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
         this.DeviceState = framedata[12];
         this.NumAssocDevices = framedata[13];
         // AssocDevicesList=new DoubleByte[(framedata.length-14)/2];//Actually more than NumAssocDevices
-        AssocDevicesList = new DoubleByte[this.NumAssocDevices];
+        AssocDevicesList = new ushort[this.NumAssocDevices];
         for (int i = 0; i < this.AssocDevicesList.Length; i++)
         {
-            AssocDevicesList[i] = new DoubleByte(framedata[14 + (i * 2)], framedata[15 + (i * 2)]);
+            AssocDevicesList[i] = ByteHelper.ShortFromBytes(framedata[14 + (i * 2)], framedata[15 + (i * 2)]);
         }
 
-        BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE), framedata);
+        BuildPacket((ushort)ZToolCMD.UTIL_GET_DEVICE_INFO_RESPONSE, framedata);
     }
 
     public override string ToString()

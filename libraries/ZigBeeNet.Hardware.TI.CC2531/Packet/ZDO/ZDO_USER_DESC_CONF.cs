@@ -33,7 +33,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             {
                 this.NwkAddr = new ZToolAddress16();
             }
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_USER_DESC_CONF), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_USER_DESC_CONF, framedata);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         {
             Status = (DeviceState)data[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_STATE_CHANGE_IND), data);
+            BuildPacket((ushort)ZToolCMD.ZDO_STATE_CHANGE_IND, data);
         }
     }
 }

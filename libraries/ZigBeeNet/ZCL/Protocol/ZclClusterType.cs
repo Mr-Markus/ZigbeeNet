@@ -55,6 +55,7 @@ namespace ZigBeeNet.ZCL.Protocol
         MESSAGING = 0x0703,
         PREPAYMENT = 0x0705,
         KEY_ESTABLISHMENT = 0x0800,
+        METER_IDENTIFICATION = 0x0B01,
         ELECTRICAL_MEASUREMENT = 0x0B04,
         DIAGNOSTICS = 0x0B05,
     }
@@ -131,6 +132,7 @@ namespace ZigBeeNet.ZCL.Protocol
                 { 0x0703, new ZclClusterType(0x0703, "Messaging", ClusterType.MESSAGING, (endpoint) => new ZclMessagingCluster(endpoint)) },
                 { 0x0705, new ZclClusterType(0x0705, "Prepayment", ClusterType.PREPAYMENT, (endpoint) => new ZclPrepaymentCluster(endpoint)) },
                 { 0x0800, new ZclClusterType(0x0800, "Key Establishment", ClusterType.KEY_ESTABLISHMENT, (endpoint) => new ZclKeyEstablishmentCluster(endpoint)) },
+                { 0x0B01, new ZclClusterType(0x0B01, "Meter Identification", ClusterType.METER_IDENTIFICATION, (endpoint) => new ZclMeterIdentificationCluster(endpoint)) },
                 { 0x0B04, new ZclClusterType(0x0B04, "Electrical Measurement", ClusterType.ELECTRICAL_MEASUREMENT, (endpoint) => new ZclElectricalMeasurementCluster(endpoint)) },
                 { 0x0B05, new ZclClusterType(0x0B05, "Diagnostics", ClusterType.DIAGNOSTICS, (endpoint) => new ZclDiagnosticsCluster(endpoint)) },
             };

@@ -11,7 +11,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             byte[] framedata = new byte[1];
             framedata[0] = resetType;
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_RESET), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_RESET, framedata);
         }
 
         /// <name>TI.ZPI1.SYS_RESET.RESET_TYPE</name>

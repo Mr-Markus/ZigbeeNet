@@ -39,11 +39,6 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
         public byte Capacity { get; set; }
 
         /// <summary>
-        /// Group Count command message field.
-        /// </summary>
-        public byte GroupCount { get; set; }
-
-        /// <summary>
         /// Group List command message field.
         /// </summary>
         public List<ushort> GroupList { get; set; }
@@ -62,15 +57,27 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
         internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(Capacity, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GroupCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GroupList, ZclDataType.Get(DataType.N_X_UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(GroupList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            for (int cnt = 0; cnt < GroupList.Count; cnt++)
+            {
+                serializer.Serialize(GroupList[cnt], ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            }
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
+            // Create lists
+            GroupList = new List<ushort>();
+
             Capacity = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GroupCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GroupList = deserializer.Deserialize<List<ushort>>(ZclDataType.Get(DataType.N_X_UNSIGNED_16_BIT_INTEGER));
+            byte? groupCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            if (groupCount != null)
+            {
+                for (int cnt = 0; cnt < groupCount; cnt++)
+                {
+                    GroupList.Add((ushort) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER)));
+                }
+            }
         }
 
         public override string ToString()
@@ -81,8 +88,6 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
             builder.Append(base.ToString());
             builder.Append(", Capacity=");
             builder.Append(Capacity);
-            builder.Append(", GroupCount=");
-            builder.Append(GroupCount);
             builder.Append(", GroupList=");
             builder.Append(GroupList == null? "" : string.Join(", ", GroupList));
             builder.Append(']');

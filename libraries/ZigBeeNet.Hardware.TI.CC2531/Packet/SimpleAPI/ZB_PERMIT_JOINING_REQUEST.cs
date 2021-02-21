@@ -28,7 +28,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SimpleAPI
             data.AddRange(Destination.GetBytes());
             data.Add(Timeout);
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZB_PERMIT_JOINING_REQUEST), data.ToArray());
+            BuildPacket((ushort)ZToolCMD.ZB_PERMIT_JOINING_REQUEST, data.ToArray());
         }
     }
 }

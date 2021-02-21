@@ -12,7 +12,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
         {
             Status = (PacketStatus)framedata[0];
 
-            base.BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_LED_CONTROL_RESPONSE), framedata);
+            base.BuildPacket((ushort)ZToolCMD.UTIL_LED_CONTROL_RESPONSE, framedata);
         }
     }
 }

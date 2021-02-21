@@ -12,7 +12,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.UTIL
             framedata[0] = led;
             framedata[1] = mode ? (byte)1 : (byte)0;
 
-            base.BuildPacket(new DoubleByte((ushort)ZToolCMD.UTIL_LED_CONTROL), framedata);
+            base.BuildPacket((ushort)ZToolCMD.UTIL_LED_CONTROL, framedata);
         }
     }
 }

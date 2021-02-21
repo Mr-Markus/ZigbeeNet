@@ -12,7 +12,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
         {
             Status = (PacketStatus)framedata[0];
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_ACTIVE_EP_REQ_SRSP), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_ACTIVE_EP_REQ_SRSP, framedata);
         }
     }
 }

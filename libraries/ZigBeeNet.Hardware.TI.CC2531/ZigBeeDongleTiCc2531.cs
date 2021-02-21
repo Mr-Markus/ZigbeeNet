@@ -103,7 +103,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
         public bool Notify(AF_INCOMING_MSG msg)
         {
             ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
-            apsFrame.Cluster = msg.ClusterId.Value;
+            apsFrame.Cluster = msg.ClusterId;
             apsFrame.DestinationEndpoint = msg.DstEndpoint;
             apsFrame.SourceEndpoint = msg.SrcEndpoint;
             apsFrame.Profile = GetEndpointProfile(msg.DstEndpoint);
@@ -128,7 +128,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531
             }
 
             ZigBeeApsFrame apsFrame = null;
-            switch ((ZToolCMD)packet.CMD.Value)
+            switch ((ZToolCMD)packet.CMD)
             {
                 case ZToolCMD.ZDO_MSG_CB_INCOMING:
                     apsFrame = ZdoCallbackIncoming.Create(packet);

@@ -15,7 +15,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
         public static readonly ZToolAddress16 ZNET_BROADCAST = new ZToolAddress16(0xFF, 0xFE);
         public static readonly ZToolAddress16 ZCZR_BROADCAST = new ZToolAddress16(0xFF, 0xFC);
 
-        private DoubleByte _doubleByte = new DoubleByte();
+        private ushort _doubleByte;// = new DoubleByte();
 
         /// <summary>
          /// Provide address as msb byte and lsb byte
@@ -25,14 +25,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
          /// </summary>
         public ZToolAddress16(byte msb, byte lsb)
         {
-            this._doubleByte.Msb = msb;
-            this._doubleByte.Lsb = lsb;
+            // this._doubleByte.Msb = msb;
+            // this._doubleByte.Lsb = lsb;
+            _doubleByte = (ushort)(msb<<8|lsb);
         }
 
-        public ZToolAddress16(byte[] arr)
+        public ZToolAddress16(byte[] arr) : this(arr[0],arr[1])
         {
-            this._doubleByte.Msb = arr[0];
-            this._doubleByte.Lsb = arr[1];
         }
 
         public ZToolAddress16()
@@ -44,34 +43,14 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
         {
             get
             {
-                return this._doubleByte.Value;
+                return _doubleByte; //this._doubleByte.Value;
             }
         }
 
-        public byte Msb
-        {
-            get
-            {
-                return this._doubleByte.Msb;
-            }
-            set
-            {
-                this._doubleByte.Msb = value;
-            }
-        }
+        public byte Msb => (byte)(_doubleByte>>8);
 
-        public byte Lsb
-        {
-            get
-            {
-                return this._doubleByte.Lsb;
-            }
-            set
-            {
-                this._doubleByte.Lsb = value;
-            }
-        }
-
+        public byte Lsb => unchecked((byte)(_doubleByte));
+        
         public override int GetHashCode()
         {
             return _doubleByte.GetHashCode();
@@ -102,11 +81,11 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Util
         {
             get
             {
-                return new byte[] { (byte)this._doubleByte.Msb, (byte)this._doubleByte.Lsb };
+                return new byte[] { Msb, Lsb };
             }
             protected set
             {
-                this._doubleByte = new DoubleByte(value[0], value[1]);
+                this._doubleByte = (ushort)(value[0]<<8 | value[1]);
             }
         }
     }

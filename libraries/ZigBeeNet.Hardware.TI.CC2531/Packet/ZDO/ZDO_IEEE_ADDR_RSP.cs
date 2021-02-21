@@ -61,7 +61,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
                 this.AssocDevList[i] = new ZToolAddress16(data[14 + (i * 2)], data[13 + (i * 2)]);
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_IEEE_ADDR_RSP), data);
+            BuildPacket((ushort)ZToolCMD.ZDO_IEEE_ADDR_RSP, data);
         }
     }
 }

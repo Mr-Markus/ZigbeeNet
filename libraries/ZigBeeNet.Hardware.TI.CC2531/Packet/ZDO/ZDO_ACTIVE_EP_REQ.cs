@@ -15,7 +15,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[2] = nwkAddrOfInterest.Lsb;
             framedata[3] = nwkAddrOfInterest.Msb;
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_ACTIVE_EP_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_ACTIVE_EP_REQ, framedata);
         }
     }
 }

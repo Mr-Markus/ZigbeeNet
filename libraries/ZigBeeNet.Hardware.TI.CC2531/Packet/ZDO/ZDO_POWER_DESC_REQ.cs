@@ -29,7 +29,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.ZDO
             framedata[1] = destination.GetByte(1);
             framedata[2] = framedata[0];
             framedata[3] = framedata[1];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.ZDO_POWER_DESC_REQ), framedata);
+            BuildPacket((ushort)ZToolCMD.ZDO_POWER_DESC_REQ, framedata);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             this.ErrCmd0 = num2;
             this.ErrCmd1 = num3;
             byte[] framedata = { num1, num2, num3 };
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_RPC_ERROR), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_RPC_ERROR, framedata);
         }
 
         public SYS_RPC_ERROR(byte[] framedata)
@@ -38,7 +38,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.SYS
             this.Status = framedata[0];
             this.ErrCmd0 = framedata[1];
             this.ErrCmd1 = framedata[3];
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.SYS_RPC_ERROR), framedata);
+            BuildPacket((ushort)ZToolCMD.SYS_RPC_ERROR, framedata);
         }
 
         public override string ToString()

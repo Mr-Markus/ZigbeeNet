@@ -13,12 +13,12 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
         /// <summary>
         /// Specifies the group ID of the device
         /// </summary>
-        public DoubleByte GroupId { get; private set; }
+        public ushort GroupId { get; private set; }
 
         /// <summary>
         /// Specifies the cluster Id (only the LSB is used in V1.0 networks.)
         /// </summary>
-        public DoubleByte ClusterId { get; private set; }
+        public ushort ClusterId { get; private set; }
 
         /// <summary>
         /// Specifies the ZigBee network address of the source device sending the message
@@ -73,8 +73,8 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
 
         public AF_INCOMING_MSG(byte[] framedata)
         {
-            GroupId = new DoubleByte(framedata[1], framedata[0]);
-            ClusterId = new DoubleByte(framedata[3], framedata[2]);
+            GroupId = ByteHelper.ShortFromBytes(framedata[1], framedata[0]);
+            ClusterId = ByteHelper.ShortFromBytes(framedata[3], framedata[2]);
             SrcAddr = new ZToolAddress16(framedata[5], framedata[4]);
             SrcEndpoint = framedata[6];
             DstEndpoint = framedata[7];
@@ -95,7 +95,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet.AF
                 this.Data[i] = framedata[17 + i];
             }
 
-            BuildPacket(new DoubleByte((ushort)ZToolCMD.AF_INCOMING_MSG), framedata);
+            BuildPacket((ushort)ZToolCMD.AF_INCOMING_MSG, framedata);
         }
     }
 }
