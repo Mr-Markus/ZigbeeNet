@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZigBeeNet.Hardware.TI.CC2531.Util;
@@ -104,7 +103,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             return exceptionResponse;
         }
 
-
+        // This function seems unused at this stage
         public static async Task<ZToolPacket> ReadAsync(Stream stream)
         {
             if (stream == null)
@@ -119,17 +118,16 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
                 var length = buffer[1];
                 await stream.ReadAsyncExact(buffer, 2, length + 3);
 
-                var type = (ZToolPacket.CommandType)(buffer[2] >> 5 & 0x07);
-                var subsystem = (ZToolPacket.CommandSubsystem)(buffer[2] & 0x1f);
-                var cmd1 = buffer[3];
-                var payload = buffer.Skip(4).Take(length).ToArray();
+                //var type = (ZToolPacket.CommandType)(buffer[2] >> 5 & 0x07);
+                //var subsystem = (ZToolPacket.CommandSubsystem)(buffer[2] & 0x1f);
+                //var cmd1 = buffer[3];
+                //var payload = buffer.Slice(4,length);
 
-                if (buffer.Skip(1).Take(length + 3).Aggregate((byte)0x00, (total, next) => (byte)(total ^ next)) != buffer[length + 4])
+                if (buffer.ComputeParityChecksum(1,length + 3) != buffer[length + 4])
                     throw new InvalidDataException("checksum error");
 
                 ushort cmd = ByteHelper.ShortFromBytes(buffer[3], buffer[2]);
-
-                return ParsePayload(cmd, buffer.Skip(4).Take(length).ToArray());
+                return ParsePayload(cmd, buffer.Slice(4,length));
             }
 
             throw new InvalidDataException("unable to decode packet");
