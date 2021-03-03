@@ -74,8 +74,8 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
         internal override void Serialize(ZclFieldSerializer serializer)
         {
             serializer.Serialize(NumberOfTransitions, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(DayOfWeek, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Mode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(DayOfWeek, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(Mode, ZclDataType.Get(DataType.BITMAP_8_BIT));
             serializer.Serialize(Transition, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(HeatSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
             serializer.Serialize(CoolSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
@@ -84,8 +84,8 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             NumberOfTransitions = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            DayOfWeek = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            DayOfWeek = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
             Transition = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             HeatSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
             CoolSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));

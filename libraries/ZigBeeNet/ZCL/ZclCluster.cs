@@ -188,7 +188,7 @@ namespace ZigBeeNet.ZCL
             _genericCommands.Add(0x0016, () => new DiscoverAttributesExtendedResponse());
         }
 
-        public ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
+        protected ZclCluster(ZigBeeEndpoint zigbeeEndpoint, ushort clusterId, string clusterName)
         {
             _clientAttributes = InitializeClientAttributes();
             _serverAttributes = InitializeServerAttributes();

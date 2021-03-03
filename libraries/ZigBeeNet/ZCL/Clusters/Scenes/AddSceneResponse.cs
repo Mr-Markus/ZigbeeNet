@@ -33,7 +33,7 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
         /// <summary>
         /// Status command message field.
         /// </summary>
-        public byte Status { get; set; }
+        public ZclStatus Status { get; set; }
 
         /// <summary>
         /// Group ID command message field.
@@ -58,14 +58,14 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
             serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             serializer.Serialize(SceneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
             GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
             SceneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
         }

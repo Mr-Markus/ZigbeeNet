@@ -145,7 +145,7 @@ namespace ZigBeeNet.ZCL.Clusters
 
         /// <summary>
         /// The ColorLoopActive attribute specifies the current active status of the color
-        /// loop. If this attribute has the value 0x00, the color loop SHALLnot be active. If
+        /// loop. If this attribute has the value 0x00, the color loop shall not be active. If
         /// this attribute has the value 0x01, the color loop shall be active. All other values
         /// (0x02 – 0xff) are reserved.
         /// </summary>

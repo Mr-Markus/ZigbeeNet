@@ -264,15 +264,17 @@ namespace ZigBeeNet.ZCL.Clusters
         ///
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
+        /// <param name="transitionTime" <see cref="ushort"> Transition Time</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> RecallSceneCommand(ushort groupId, byte sceneId)
+        public Task<CommandResult> RecallSceneCommand(ushort groupId, byte sceneId, ushort transitionTime)
         {
             RecallSceneCommand command = new RecallSceneCommand();
 
             // Set the fields
             command.GroupId = groupId;
             command.SceneId = sceneId;
+            command.TransitionTime = transitionTime;
 
             return Send(command);
         }
@@ -375,12 +377,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Add Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> AddSceneResponse(byte status, ushort groupId, byte sceneId)
+        public Task<CommandResult> AddSceneResponse(ZclStatus status, ushort groupId, byte sceneId)
         {
             AddSceneResponse command = new AddSceneResponse();
 
@@ -395,7 +397,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The View Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <param name="transitionTime" <see cref="ushort"> Transition Time</ param >
@@ -403,7 +405,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <param name="extensionFieldSets" <see cref="List<ExtensionFieldSet>"> Extension Field Sets</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> ViewSceneResponse(byte status, ushort groupId, byte sceneId, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
+        public Task<CommandResult> ViewSceneResponse(ZclStatus status, ushort groupId, byte sceneId, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
         {
             ViewSceneResponse command = new ViewSceneResponse();
 
@@ -421,12 +423,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> RemoveSceneResponse(byte status, ushort groupId, byte sceneId)
+        public Task<CommandResult> RemoveSceneResponse(ZclStatus status, ushort groupId, byte sceneId)
         {
             RemoveSceneResponse command = new RemoveSceneResponse();
 
@@ -441,11 +443,11 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Remove All Scenes Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> RemoveAllScenesResponse(byte status, ushort groupId)
+        public Task<CommandResult> RemoveAllScenesResponse(ZclStatus status, ushort groupId)
         {
             RemoveAllScenesResponse command = new RemoveAllScenesResponse();
 
@@ -459,12 +461,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Store Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> StoreSceneResponse(byte status, ushort groupId, byte sceneId)
+        public Task<CommandResult> StoreSceneResponse(ZclStatus status, ushort groupId, byte sceneId)
         {
             StoreSceneResponse command = new StoreSceneResponse();
 
@@ -479,14 +481,14 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Get Scene Membership Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="capacity" <see cref="byte"> Capacity</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneCount" <see cref="byte"> Scene Count</ param >
         /// <param name="sceneList" <see cref="List<byte>"> Scene List</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> GetSceneMembershipResponse(byte status, byte capacity, ushort groupId, byte sceneCount, List<byte> sceneList)
+        public Task<CommandResult> GetSceneMembershipResponse(ZclStatus status, byte capacity, ushort groupId, byte sceneCount, List<byte> sceneList)
         {
             GetSceneMembershipResponse command = new GetSceneMembershipResponse();
 
@@ -503,12 +505,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Enhanced Add Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> EnhancedAddSceneResponse(byte status, ushort groupId, byte sceneId)
+        public Task<CommandResult> EnhancedAddSceneResponse(ZclStatus status, ushort groupId, byte sceneId)
         {
             EnhancedAddSceneResponse command = new EnhancedAddSceneResponse();
 
@@ -523,7 +525,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Enhanced View Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <param name="transitionTime" <see cref="ushort"> Transition Time</ param >
@@ -531,7 +533,7 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <param name="extensionFieldSets" <see cref="List<ExtensionFieldSet>"> Extension Field Sets</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> EnhancedViewSceneResponse(byte status, ushort groupId, byte sceneId, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
+        public Task<CommandResult> EnhancedViewSceneResponse(ZclStatus status, ushort groupId, byte sceneId, ushort transitionTime, string sceneName, List<ExtensionFieldSet> extensionFieldSets)
         {
             EnhancedViewSceneResponse command = new EnhancedViewSceneResponse();
 
@@ -549,12 +551,12 @@ namespace ZigBeeNet.ZCL.Clusters
         /// <summary>
         /// The Copy Scene Response
         ///
-        /// <param name="status" <see cref="byte"> Status</ param >
+        /// <param name="status" <see cref="ZclStatus"> Status</ param >
         /// <param name="groupId" <see cref="ushort"> Group ID</ param >
         /// <param name="sceneId" <see cref="byte"> Scene ID</ param >
         /// <returns> the command result Task </returns>
         /// </summary>
-        public Task<CommandResult> CopySceneResponse(byte status, ushort groupId, byte sceneId)
+        public Task<CommandResult> CopySceneResponse(ZclStatus status, ushort groupId, byte sceneId)
         {
             CopySceneResponse command = new CopySceneResponse();
 

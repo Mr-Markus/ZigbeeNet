@@ -487,5 +487,21 @@ namespace ZigBeeNet.CodeGenerator
                 return packageRoot + packageZclProtocolCommand + "." + StringToUpperCamelCase(cluster.Name).Replace("_", "");
             }
         }
+
+        protected virtual ZigBeeXmlField GetAutoSized(List<ZigBeeXmlField> fields, string name)
+        {
+            foreach (ZigBeeXmlField field in fields)
+            {
+                if (field.Sizer != null)
+                {
+                    //Console.WriteLine();
+                }
+                if (name.Equals(field.Sizer))
+                {
+                    return field;
+                }
+            }
+            return null;
+        }
     }
 }
