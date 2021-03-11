@@ -73,7 +73,7 @@ namespace ZigBeeNet.ZCL.Protocol
             _codeTypeMapping[0x2F] = new ZclDataType("Signed 64-bit Integer", typeof(long), 0x2F, true, DataType.SIGNED_64_BIT_INTEGER);
             _codeTypeMapping[0x30] = new ZclDataType("8-bit Enumeration", typeof(byte), 0x30, false, DataType.ENUMERATION_8_BIT);
             _codeTypeMapping[0x31] = new ZclDataType("16-bit Enumeration", typeof(ushort), 0x31, false, DataType.ENUMERATION_16_BIT);
-            _codeTypeMapping[0x32] = new ZclDataType("32-bit Enumeration", typeof(uint), 0x32, false, DataType.ENUMERATION_32_BIT);
+            _codeTypeMapping[0x33] = new ZclDataType("32-bit Enumeration", typeof(uint), 0x33, false, DataType.ENUMERATION_32_BIT);
             _codeTypeMapping[0x38] = new ZclDataType("Semi precision float", typeof(float), 0x38, true, DataType.FLOAT_16_BIT);
             _codeTypeMapping[0x39] = new ZclDataType("Single precision float", typeof(float), 0x39, true, DataType.FLOAT_32_BIT);
             _codeTypeMapping[0x3A] = new ZclDataType("Double precision float", typeof(double), 0x3A, true, DataType.FLOAT_64_BIT);
@@ -139,7 +139,7 @@ namespace ZigBeeNet.ZCL.Protocol
 
         public static ZclDataType Get(DataType type)
         {
-            return _codeTypeMapping.Values.Single(dt => dt.DataType == type);
+            return _codeTypeMapping[(int)type];
         }
 
         public override string ToString()
