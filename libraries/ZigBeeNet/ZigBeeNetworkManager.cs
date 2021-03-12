@@ -187,7 +187,7 @@ namespace ZigBeeNet
         /// <summary>
         /// The default ProfileID to use
         /// </summary>
-        private int _defaultProfileId = ZigBeeProfileType.Get(ProfileType.ZIGBEE_HOME_AUTOMATION).Key;
+        private ushort _defaultProfileId = (ushort)ZigBeeProfileType.ZIGBEE_HOME_AUTOMATION;
 
         public ZigBeeChannel ZigbeeChannel
         {

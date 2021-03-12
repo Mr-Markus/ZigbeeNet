@@ -118,7 +118,7 @@ namespace ZigBeeNet.Hardware.Ember
         /**
          * The default ProfileID to use
          */
-        private int _defaultProfileId = ZigBeeProfileType.Get(ProfileType.ZIGBEE_HOME_AUTOMATION).Key;
+        private ushort _defaultProfileId = (ushort)ZigBeeProfileType.ZIGBEE_HOME_AUTOMATION;
 
         /**
          * The default DeviceID to use
@@ -302,7 +302,7 @@ namespace ZigBeeNet.Hardware.Ember
         }
         */
 
-        public void SetDefaultProfileId(int defaultProfileId) 
+        public void SetDefaultProfileId(ushort defaultProfileId) 
         {
             this._defaultProfileId = defaultProfileId;
         }
