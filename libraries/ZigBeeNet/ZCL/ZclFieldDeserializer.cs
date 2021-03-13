@@ -31,6 +31,8 @@ namespace ZigBeeNet.ZCL
             return Deserialize<object>(dataType);
         }
 
+        public object Deserialize(DataType dataType) => Deserialize(ZclDataType.Get(dataType));
+
         public T Deserialize<T>(ZclDataType dataType)
         {
             if (typeof(IZclListItemField).IsAssignableFrom(dataType.DataClass))
@@ -66,5 +68,8 @@ namespace ZigBeeNet.ZCL
 
             return Deserializer.ReadZigBeeType<T>(dataType.DataType);
         }
+
+        public T Deserialize<T>(DataType dataType) => Deserialize<T>(ZclDataType.Get(dataType));
+
     }
 }

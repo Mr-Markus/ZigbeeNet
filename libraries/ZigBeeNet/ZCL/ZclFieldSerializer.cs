@@ -35,5 +35,7 @@ namespace ZigBeeNet.ZCL
 
             Serializer.AppendZigBeeType(value, dataType.DataType);
         }
+
+        public void Serialize(object value, DataType dataType) => Serialize(value,ZclDataType.Get(dataType));
     }
 }

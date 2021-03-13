@@ -82,7 +82,7 @@ namespace ZigBeeNet.ZCL
 
         public ZclHeader(ZclFieldDeserializer fieldDeserializer)
         {
-            byte frameControl = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte frameControl = (byte)fieldDeserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
 
             switch (frameControl & MASK_FRAME_TYPE)
             {
@@ -104,10 +104,10 @@ namespace ZigBeeNet.ZCL
             // If manufacturerSpecific is set then get the manufacturer code
             if (ManufacturerSpecific)
             {
-                ManufacturerCode = (ushort)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                ManufacturerCode = (ushort)fieldDeserializer.Deserialize(DataType.UNSIGNED_16_BIT_INTEGER);
             }
-            SequenceNumber = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CommandId = (byte)fieldDeserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            SequenceNumber = (byte)fieldDeserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
+            CommandId = (byte)fieldDeserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public byte[] Serialize(ZclFieldSerializer fieldSerializer, byte[] payload)
