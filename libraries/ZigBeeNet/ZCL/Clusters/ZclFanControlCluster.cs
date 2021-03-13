@@ -57,8 +57,8 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(2);
 
-            attributeMap.Add(ATTR_FANMODE, new ZclAttribute(this, ATTR_FANMODE, "Fan Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_FANMODESEQUENCE, new ZclAttribute(this, ATTR_FANMODESEQUENCE, "Fan Mode Sequence", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
+            attributeMap.Add(ATTR_FANMODE, new ZclAttribute(this, ATTR_FANMODE, "Fan Mode", DataType.ENUMERATION_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_FANMODESEQUENCE, new ZclAttribute(this, ATTR_FANMODESEQUENCE, "Fan Mode Sequence", DataType.ENUMERATION_8_BIT, false, true, true, true));
 
             return attributeMap;
         }

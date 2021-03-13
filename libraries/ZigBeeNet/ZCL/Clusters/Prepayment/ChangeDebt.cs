@@ -96,30 +96,30 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(DebtLabel, ZclDataType.Get(DataType.OCTET_STRING));
-            serializer.Serialize(DebtAmount, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(DebtRecoveryMethod, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(DebtAmountType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(DebtRecoveryStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(DebtRecoveryCollectionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(DebtRecoveryFrequency, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(DebtRecoveryAmount, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(DebtRecoveryBalancePercentage, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(DebtLabel, DataType.OCTET_STRING);
+            serializer.Serialize(DebtAmount, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(DebtRecoveryMethod, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(DebtAmountType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(DebtRecoveryStartTime, DataType.UTCTIME);
+            serializer.Serialize(DebtRecoveryCollectionTime, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(DebtRecoveryFrequency, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(DebtRecoveryAmount, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(DebtRecoveryBalancePercentage, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            DebtLabel = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
-            DebtAmount = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            DebtRecoveryMethod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            DebtAmountType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            DebtRecoveryStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            DebtRecoveryCollectionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            DebtRecoveryFrequency = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            DebtRecoveryAmount = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            DebtRecoveryBalancePercentage = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            DebtLabel = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
+            DebtAmount = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            DebtRecoveryMethod = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            DebtAmountType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            DebtRecoveryStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            DebtRecoveryCollectionTime = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            DebtRecoveryFrequency = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            DebtRecoveryAmount = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            DebtRecoveryBalancePercentage = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

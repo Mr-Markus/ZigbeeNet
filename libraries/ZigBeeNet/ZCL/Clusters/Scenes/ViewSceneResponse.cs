@@ -73,22 +73,22 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
-            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneName, ZclDataType.Get(DataType.CHARACTER_STRING));
-            serializer.Serialize(ExtensionFieldSets, ZclDataType.Get(DataType.N_X_EXTENSION_FIELD_SET));
+            serializer.Serialize(Status, DataType.ZCL_STATUS);
+            serializer.Serialize(GroupId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SceneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TransitionTime, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SceneName, DataType.CHARACTER_STRING);
+            serializer.Serialize(ExtensionFieldSets, DataType.N_X_EXTENSION_FIELD_SET);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
-            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TransitionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneName = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
-            ExtensionFieldSets = deserializer.Deserialize<List<ExtensionFieldSet>>(ZclDataType.Get(DataType.N_X_EXTENSION_FIELD_SET));
+            Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
+            GroupId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SceneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TransitionTime = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SceneName = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
+            ExtensionFieldSets = deserializer.Deserialize<List<ExtensionFieldSet>>(DataType.N_X_EXTENSION_FIELD_SET);
         }
 
         public override string ToString()

@@ -134,6 +134,15 @@ namespace ZigBeeNet.ZCL
             this.Reportable = reportable;
         }
 
+        /// <summary>
+        /// Constructor used to set the static information (for non-manufacturer-specific attribute)
+        /// </summary>
+        public ZclAttribute(ZclCluster cluster, ushort id, string name, DataType dataType,
+                bool mandatory, bool readable, bool writeable, bool reportable) 
+                    :this(cluster,id,name,ZclDataType.Get(dataType),mandatory,readable,writeable,reportable)
+        {
+        }
+
         ///<summary>
         /// Constructor used to set the static information (for manufacturer-specific attribute)
         ///

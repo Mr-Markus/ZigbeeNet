@@ -48,23 +48,23 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(PowerDescriptor, ZclDataType.Get(DataType.POWER_DESCRIPTOR));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
+            serializer.Serialize(PowerDescriptor, DataType.POWER_DESCRIPTOR);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
-            PowerDescriptor = deserializer.Deserialize<PowerDescriptor>(ZclDataType.Get(DataType.POWER_DESCRIPTOR));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
+            PowerDescriptor = deserializer.Deserialize<PowerDescriptor>(DataType.POWER_DESCRIPTOR);
         }
 
         public override string ToString()

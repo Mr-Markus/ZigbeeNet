@@ -73,9 +73,9 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(3);
 
-            attributeMap.Add(ATTR_LEVELSTATUS, new ZclAttribute(this, ATTR_LEVELSTATUS, "Level Status", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, true));
-            attributeMap.Add(ATTR_LIGHTSENSORTYPE, new ZclAttribute(this, ATTR_LIGHTSENSORTYPE, "Light Sensor Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_ILLUMINANCETARGETLEVEL, new ZclAttribute(this, ATTR_ILLUMINANCETARGETLEVEL, "Illuminance Target Level", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_LEVELSTATUS, new ZclAttribute(this, ATTR_LEVELSTATUS, "Level Status", DataType.ENUMERATION_8_BIT, true, true, false, true));
+            attributeMap.Add(ATTR_LIGHTSENSORTYPE, new ZclAttribute(this, ATTR_LIGHTSENSORTYPE, "Light Sensor Type", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_ILLUMINANCETARGETLEVEL, new ZclAttribute(this, ATTR_ILLUMINANCETARGETLEVEL, "Illuminance Target Level", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
             return attributeMap;
         }

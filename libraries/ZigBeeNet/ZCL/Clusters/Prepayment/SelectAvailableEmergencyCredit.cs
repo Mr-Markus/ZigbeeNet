@@ -66,18 +66,18 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(CommandIssueDateTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(OriginatingDevice, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SiteId, ZclDataType.Get(DataType.OCTET_STRING));
-            serializer.Serialize(MeterSerialNumber, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(CommandIssueDateTime, DataType.UTCTIME);
+            serializer.Serialize(OriginatingDevice, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SiteId, DataType.OCTET_STRING);
+            serializer.Serialize(MeterSerialNumber, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            CommandIssueDateTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            OriginatingDevice = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SiteId = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
-            MeterSerialNumber = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            CommandIssueDateTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            OriginatingDevice = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SiteId = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
+            MeterSerialNumber = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

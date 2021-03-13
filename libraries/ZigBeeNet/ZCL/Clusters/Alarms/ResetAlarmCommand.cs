@@ -58,14 +58,14 @@ namespace ZigBeeNet.ZCL.Clusters.Alarms
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(AlarmCode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ClusterIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(AlarmCode, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ClusterIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            AlarmCode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ClusterIdentifier = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            AlarmCode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ClusterIdentifier = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

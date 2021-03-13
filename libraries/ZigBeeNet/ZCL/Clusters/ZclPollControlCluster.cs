@@ -139,13 +139,13 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(7);
 
-            attributeMap.Add(ATTR_CHECKININTERVAL, new ZclAttribute(this, ATTR_CHECKININTERVAL, "Checkin Interval", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, true, true));
-            attributeMap.Add(ATTR_LONGPOLLINTERVAL, new ZclAttribute(this, ATTR_LONGPOLLINTERVAL, "Long Poll Interval", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_SHORTPOLLINTERVAL, new ZclAttribute(this, ATTR_SHORTPOLLINTERVAL, "Short Poll Interval", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_FASTPOLLTIMEOUT, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUT, "Fast Poll Timeout", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_CHECKININTERVALMIN, new ZclAttribute(this, ATTR_CHECKININTERVALMIN, "Checkin Interval Min", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_LONGPOLLINTERVALMIN, new ZclAttribute(this, ATTR_LONGPOLLINTERVALMIN, "Long Poll Interval Min", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_FASTPOLLTIMEOUTMAX, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUTMAX, "Fast Poll Timeout Max", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_CHECKININTERVAL, new ZclAttribute(this, ATTR_CHECKININTERVAL, "Checkin Interval", DataType.UNSIGNED_32_BIT_INTEGER, true, true, true, true));
+            attributeMap.Add(ATTR_LONGPOLLINTERVAL, new ZclAttribute(this, ATTR_LONGPOLLINTERVAL, "Long Poll Interval", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_SHORTPOLLINTERVAL, new ZclAttribute(this, ATTR_SHORTPOLLINTERVAL, "Short Poll Interval", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_FASTPOLLTIMEOUT, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUT, "Fast Poll Timeout", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_CHECKININTERVALMIN, new ZclAttribute(this, ATTR_CHECKININTERVALMIN, "Checkin Interval Min", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_LONGPOLLINTERVALMIN, new ZclAttribute(this, ATTR_LONGPOLLINTERVALMIN, "Long Poll Interval Min", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_FASTPOLLTIMEOUTMAX, new ZclAttribute(this, ATTR_FASTPOLLTIMEOUTMAX, "Fast Poll Timeout Max", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
 
             return attributeMap;
         }

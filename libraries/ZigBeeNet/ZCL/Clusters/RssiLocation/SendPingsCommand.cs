@@ -58,16 +58,16 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TargetAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(NumberRssiMeasurements, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(CalculationPeriod, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(TargetAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(NumberRssiMeasurements, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(CalculationPeriod, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TargetAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            NumberRssiMeasurements = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CalculationPeriod = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            TargetAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            NumberRssiMeasurements = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            CalculationPeriod = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

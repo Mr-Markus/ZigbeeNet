@@ -62,20 +62,20 @@ namespace ZigBeeNet.ZCL.Clusters.General
         {
             if (Status == ZclStatus.SUCCESS)
             {
-                serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
+                serializer.Serialize(Status, DataType.ZCL_STATUS);
                 return;
             }
-            serializer.Serialize(Records, ZclDataType.Get(DataType.N_X_ATTRIBUTE_STATUS_RECORD));
+            serializer.Serialize(Records, DataType.N_X_ATTRIBUTE_STATUS_RECORD);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             if (deserializer.RemainingLength == 1)
             {
-                Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
+                Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
                 return;
             }
-            Records = deserializer.Deserialize<List<AttributeStatusRecord>>(ZclDataType.Get(DataType.N_X_ATTRIBUTE_STATUS_RECORD));
+            Records = deserializer.Deserialize<List<AttributeStatusRecord>>(DataType.N_X_ATTRIBUTE_STATUS_RECORD);
         }
 
         public override string ToString()

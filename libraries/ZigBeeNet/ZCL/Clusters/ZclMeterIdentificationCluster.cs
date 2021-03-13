@@ -111,18 +111,18 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(12);
 
-            attributeMap.Add(ATTR_COMPANYNAME, new ZclAttribute(this, ATTR_COMPANYNAME, "Company Name", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_METERTYPEID, new ZclAttribute(this, ATTR_METERTYPEID, "Meter Type ID", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_DATAQUALITYID, new ZclAttribute(this, ATTR_DATAQUALITYID, "Data Quality ID", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CUSTOMERNAME, new ZclAttribute(this, ATTR_CUSTOMERNAME, "Customer Name", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, true, false));
-            attributeMap.Add(ATTR_MODEL, new ZclAttribute(this, ATTR_MODEL, "Model", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_PARTNUMBER, new ZclAttribute(this, ATTR_PARTNUMBER, "Part Number", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_PRODUCTREVISION, new ZclAttribute(this, ATTR_PRODUCTREVISION, "Product Revision", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_SOFTWAREREVISION, new ZclAttribute(this, ATTR_SOFTWAREREVISION, "Software Revision", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_UTILITYNAME, new ZclAttribute(this, ATTR_UTILITYNAME, "Utility Name", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_POD, new ZclAttribute(this, ATTR_POD, "POD", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_AVAILABLEPOWER, new ZclAttribute(this, ATTR_AVAILABLEPOWER, "Available Power", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_POWERTHRESHOLD, new ZclAttribute(this, ATTR_POWERTHRESHOLD, "Power Threshold", ZclDataType.Get(DataType.SIGNED_24_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_COMPANYNAME, new ZclAttribute(this, ATTR_COMPANYNAME, "Company Name", DataType.CHARACTER_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_METERTYPEID, new ZclAttribute(this, ATTR_METERTYPEID, "Meter Type ID", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_DATAQUALITYID, new ZclAttribute(this, ATTR_DATAQUALITYID, "Data Quality ID", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CUSTOMERNAME, new ZclAttribute(this, ATTR_CUSTOMERNAME, "Customer Name", DataType.CHARACTER_STRING, false, true, true, false));
+            attributeMap.Add(ATTR_MODEL, new ZclAttribute(this, ATTR_MODEL, "Model", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_PARTNUMBER, new ZclAttribute(this, ATTR_PARTNUMBER, "Part Number", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_PRODUCTREVISION, new ZclAttribute(this, ATTR_PRODUCTREVISION, "Product Revision", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_SOFTWAREREVISION, new ZclAttribute(this, ATTR_SOFTWAREREVISION, "Software Revision", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_UTILITYNAME, new ZclAttribute(this, ATTR_UTILITYNAME, "Utility Name", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_POD, new ZclAttribute(this, ATTR_POD, "POD", DataType.CHARACTER_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_AVAILABLEPOWER, new ZclAttribute(this, ATTR_AVAILABLEPOWER, "Available Power", DataType.SIGNED_24_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_POWERTHRESHOLD, new ZclAttribute(this, ATTR_POWERTHRESHOLD, "Power Threshold", DataType.SIGNED_24_BIT_INTEGER, true, true, false, false));
 
             return attributeMap;
         }

@@ -71,14 +71,14 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(ScannedChannels, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(TotalTransmissions, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(TransmissionFailures, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(EnergyValues.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(ScannedChannels, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(TotalTransmissions, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(TransmissionFailures, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(EnergyValues.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < EnergyValues.Count; cnt++)
             {
-                serializer.Serialize(EnergyValues[cnt], ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+                serializer.Serialize(EnergyValues[cnt], DataType.UNSIGNED_8_BIT_INTEGER);
             }
         }
 
@@ -89,21 +89,21 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             EnergyValues = new List<byte>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            ScannedChannels = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            TotalTransmissions = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            TransmissionFailures = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            byte? scannedChannelsListCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ScannedChannels = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            TotalTransmissions = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            TransmissionFailures = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            byte? scannedChannelsListCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (scannedChannelsListCount != null)
             {
                 for (int cnt = 0; cnt < scannedChannelsListCount; cnt++)
                 {
-                    EnergyValues.Add((byte) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER)));
+                    EnergyValues.Add((byte) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER));
                 }
             }
         }

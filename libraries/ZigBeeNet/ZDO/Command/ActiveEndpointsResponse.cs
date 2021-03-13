@@ -48,12 +48,12 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(ActiveEpList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
+            serializer.Serialize(ActiveEpList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < ActiveEpList.Count; cnt++)
             {
-                serializer.Serialize(ActiveEpList[cnt], ZclDataType.Get(DataType.ENDPOINT));
+                serializer.Serialize(ActiveEpList[cnt], DataType.ENDPOINT);
             }
         }
 
@@ -64,19 +64,19 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             ActiveEpList = new List<byte>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
-            byte? activeEpCnt = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
+            byte? activeEpCnt = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (activeEpCnt != null)
             {
                 for (int cnt = 0; cnt < activeEpCnt; cnt++)
                 {
-                    ActiveEpList.Add((byte) deserializer.Deserialize(ZclDataType.Get(DataType.ENDPOINT)));
+                    ActiveEpList.Add((byte) deserializer.Deserialize(DataType.ENDPOINT));
                 }
             }
         }

@@ -77,18 +77,18 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneStatus, ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            serializer.Serialize(AudibleNotification, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ZoneLabel, ZclDataType.Get(DataType.CHARACTER_STRING));
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneStatus, DataType.ENUMERATION_16_BIT);
+            serializer.Serialize(AudibleNotification, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ZoneLabel, DataType.CHARACTER_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneStatus = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            AudibleNotification = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ZoneLabel = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneStatus = deserializer.Deserialize<ushort>(DataType.ENUMERATION_16_BIT);
+            AudibleNotification = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ZoneLabel = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
         }
 
         public override string ToString()

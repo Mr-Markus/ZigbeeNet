@@ -108,34 +108,34 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Options, ZclDataType.Get(DataType.BITMAP_24_BIT));
-            serializer.Serialize(GpdSrcId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GpdIeee, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(Endpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SinkIeeeAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(SinkNwkAddress, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SinkGroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(DeviceId, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(GpdSecurityFrameCounter, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GpdKey, ZclDataType.Get(DataType.SECURITY_KEY));
-            serializer.Serialize(AssignedAlias, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ForwardingRadius, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Options, DataType.BITMAP_24_BIT);
+            serializer.Serialize(GpdSrcId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GpdIeee, DataType.IEEE_ADDRESS);
+            serializer.Serialize(Endpoint, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SinkIeeeAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(SinkNwkAddress, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SinkGroupId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(DeviceId, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(GpdSecurityFrameCounter, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GpdKey, DataType.SECURITY_KEY);
+            serializer.Serialize(AssignedAlias, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ForwardingRadius, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Options = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_24_BIT));
-            GpdSrcId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GpdIeee = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Endpoint = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SinkIeeeAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            SinkNwkAddress = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SinkGroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            DeviceId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            GpdSecurityFrameCounter = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GpdKey = deserializer.Deserialize<ZigBeeKey>(ZclDataType.Get(DataType.SECURITY_KEY));
-            AssignedAlias = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ForwardingRadius = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Options = deserializer.Deserialize<int>(DataType.BITMAP_24_BIT);
+            GpdSrcId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GpdIeee = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Endpoint = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SinkIeeeAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            SinkNwkAddress = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SinkGroupId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            DeviceId = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            GpdSecurityFrameCounter = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GpdKey = deserializer.Deserialize<ZigBeeKey>(DataType.SECURITY_KEY);
+            AssignedAlias = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ForwardingRadius = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

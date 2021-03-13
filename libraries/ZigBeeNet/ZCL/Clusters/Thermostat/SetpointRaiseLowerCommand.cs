@@ -53,14 +53,14 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Mode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Amount, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Mode, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Amount, DataType.SIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Amount = deserializer.Deserialize<sbyte>(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
+            Mode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Amount = deserializer.Deserialize<sbyte>(DataType.SIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

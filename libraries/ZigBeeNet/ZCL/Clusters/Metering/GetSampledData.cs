@@ -83,18 +83,18 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SampleId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(EarliestSampleTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(SampleType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(NumberOfSamples, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(SampleId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(EarliestSampleTime, DataType.UTCTIME);
+            serializer.Serialize(SampleType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(NumberOfSamples, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SampleId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            EarliestSampleTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            SampleType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            NumberOfSamples = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SampleId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            EarliestSampleTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            SampleType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            NumberOfSamples = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

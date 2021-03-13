@@ -30,14 +30,14 @@ namespace ZigBeeNet.ZCL.Clusters.IASACE
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneStatus, ZclDataType.Get(DataType.BITMAP_16_BIT));
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneStatus, DataType.BITMAP_16_BIT);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneStatus = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneStatus = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
         }
 
         public override string ToString()

@@ -203,13 +203,13 @@ namespace ZigBeeNet.ZDO.Field
         public byte[] Serialize(ZclFieldSerializer serializer)
         {
             // Serialize the fields
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LogicalNodeType, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LogicalNodeType, DataType.SIGNED_8_BIT_INTEGER);
 
             return serializer.Payload;
         }

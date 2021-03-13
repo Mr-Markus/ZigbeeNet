@@ -60,15 +60,15 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(CommandIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TotalNumberOfCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(CommandIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TotalNumberOfCommands, DataType.UNSIGNED_8_BIT_INTEGER);
             DebtPayload.Serialize(serializer);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            CommandIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TotalNumberOfCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            CommandIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TotalNumberOfCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             DebtPayload = new DebtPayload();
             DebtPayload.Deserialize(deserializer);
         }

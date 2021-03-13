@@ -120,26 +120,26 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(OldCurrency, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NewCurrency, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ConversionFactor, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ConversionFactorTrailingDigit, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(CurrencyChangeControlFlags, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(OldCurrency, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NewCurrency, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ConversionFactor, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ConversionFactorTrailingDigit, DataType.BITMAP_8_BIT);
+            serializer.Serialize(CurrencyChangeControlFlags, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            OldCurrency = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NewCurrency = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ConversionFactor = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ConversionFactorTrailingDigit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            CurrencyChangeControlFlags = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            OldCurrency = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NewCurrency = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ConversionFactor = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ConversionFactorTrailingDigit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            CurrencyChangeControlFlags = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

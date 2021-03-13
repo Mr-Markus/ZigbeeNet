@@ -60,16 +60,16 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(LatestEndTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(NumberOfDebts, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(DebtType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(LatestEndTime, DataType.UTCTIME);
+            serializer.Serialize(NumberOfDebts, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(DebtType, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            LatestEndTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            NumberOfDebts = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            DebtType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            LatestEndTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            NumberOfDebts = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            DebtType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

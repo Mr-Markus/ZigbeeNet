@@ -154,26 +154,26 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(BlockPeriodStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(BlockPeriodDuration, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            serializer.Serialize(BlockPeriodControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(BlockPeriodDurationType, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(TariffResolutionPeriod, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(BlockPeriodStartTime, DataType.UTCTIME);
+            serializer.Serialize(BlockPeriodDuration, DataType.UNSIGNED_24_BIT_INTEGER);
+            serializer.Serialize(BlockPeriodControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(BlockPeriodDurationType, DataType.BITMAP_8_BIT);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
+            serializer.Serialize(TariffResolutionPeriod, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            BlockPeriodStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            BlockPeriodDuration = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            BlockPeriodControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            BlockPeriodDurationType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            TariffResolutionPeriod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            BlockPeriodStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            BlockPeriodDuration = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
+            BlockPeriodControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            BlockPeriodDurationType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            TariffResolutionPeriod = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

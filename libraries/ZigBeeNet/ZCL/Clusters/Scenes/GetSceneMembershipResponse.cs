@@ -68,20 +68,20 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
-            serializer.Serialize(Capacity, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SceneList, ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZCL_STATUS);
+            serializer.Serialize(Capacity, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GroupId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SceneCount, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SceneList, DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
-            Capacity = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SceneList = deserializer.Deserialize<List<byte>>(ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
+            Capacity = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GroupId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SceneCount = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SceneList = deserializer.Deserialize<List<byte>>(DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

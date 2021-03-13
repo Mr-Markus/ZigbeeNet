@@ -64,14 +64,14 @@ namespace ZigBeeNet.ZCL.Clusters.OnOff
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EffectIdentifier, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(EffectVariant, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(EffectIdentifier, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(EffectVariant, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EffectIdentifier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            EffectVariant = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            EffectIdentifier = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            EffectVariant = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

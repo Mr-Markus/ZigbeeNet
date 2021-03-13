@@ -85,18 +85,18 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(PanelStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SecondsRemaining, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(AudibleNotification, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(AlarmStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(PanelStatus, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SecondsRemaining, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(AudibleNotification, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(AlarmStatus, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            PanelStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SecondsRemaining = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            AudibleNotification = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            AlarmStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            PanelStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SecondsRemaining = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            AudibleNotification = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            AlarmStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

@@ -56,7 +56,7 @@ namespace ZigBeeNet.CodeGenerator
                     if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
                     {
                         ZigBeeXmlField sizedField = GetAutoSized(fields, StringToLowerCamelCase(field.Name));
-                        @out.WriteLine("            serializer.Serialize(" + StringToUpperCamelCase(sizedField.Name) + ".Count, ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("            serializer.Serialize(" + StringToUpperCamelCase(sizedField.Name) + ".Count, DataType." + field.Type + ");");
                         continue;
                     }
 
@@ -64,7 +64,7 @@ namespace ZigBeeNet.CodeGenerator
                     {
                         @out.WriteLine("            for (int cnt = 0; cnt < " + StringToUpperCamelCase(field.Name) + ".Count; cnt++)");
                         @out.WriteLine("            {");
-                        @out.WriteLine("                serializer.Serialize(" + StringToUpperCamelCase(field.Name) + "[cnt], ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("                serializer.Serialize(" + StringToUpperCamelCase(field.Name) + "[cnt], DataType." + field.Type + ");");
                         @out.WriteLine("            }");
                     }
                     else if (field.Condition != null)
@@ -75,7 +75,7 @@ namespace ZigBeeNet.CodeGenerator
                             // This checks for a single response
                             @out.WriteLine("            if (Status == ZclStatus.SUCCESS)");
                             @out.WriteLine("            {");
-                            @out.WriteLine("                serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));");
+                            @out.WriteLine("                serializer.Serialize(Status, DataType.ZCL_STATUS);");
                             @out.WriteLine("                return;");
                             @out.WriteLine("            }");
                             continue;
@@ -90,14 +90,14 @@ namespace ZigBeeNet.CodeGenerator
                             @out.WriteLine("            if (" + UpperCaseFirstCharacter(field.Condition.Field) + " " + GetOperator(field.Condition.Operator) + " " + field.Condition.Value + ")");
                             @out.WriteLine("            {");
                         }
-                        @out.WriteLine("                serializer.Serialize(" + StringToUpperCamelCase(field.Name)+ ", ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("                serializer.Serialize(" + StringToUpperCamelCase(field.Name)+ ", DataType." + field.Type + ");");
                         @out.WriteLine("            }");
                     }
                     else
                     {
                         if (field.Type != null && !string.IsNullOrEmpty(field.Type))
                         {
-                            @out.WriteLine("            serializer.Serialize(" + StringToUpperCamelCase(field.Name) + ", ZclDataType.Get(DataType." + field.Type + "));");
+                            @out.WriteLine("            serializer.Serialize(" + StringToUpperCamelCase(field.Name) + ", DataType." + field.Type + ");");
                         }
                         else
                         {
@@ -155,7 +155,7 @@ namespace ZigBeeNet.CodeGenerator
                     }
                     if (GetAutoSized(fields, StringToLowerCamelCase(field.Name)) != null)
                     {
-                        @out.WriteLine("            " + GetDataTypeClass(field) + "? " + StringToLowerCamelCase(field.Name) + " = (" + GetDataTypeClass(field) + "?) deserializer.Deserialize(ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("            " + GetDataTypeClass(field) + "? " + StringToLowerCamelCase(field.Name) + " = (" + GetDataTypeClass(field) + "?) deserializer.Deserialize(DataType." + field.Type + ");");
                         continue;
                     }
 
@@ -170,7 +170,7 @@ namespace ZigBeeNet.CodeGenerator
                         @out.WriteLine("            {");
                         @out.WriteLine("                for (int cnt = 0; cnt < " + field.Sizer + "; cnt++)");
                         @out.WriteLine("                {");
-                        @out.WriteLine("                    " + StringToUpperCamelCase(field.Name) + ".Add((" + dataType + ") deserializer.Deserialize(ZclDataType.Get(DataType." + field.Type + ")));");
+                        @out.WriteLine("                    " + StringToUpperCamelCase(field.Name) + ".Add((" + dataType + ") deserializer.Deserialize(DataType." + field.Type + "));");
                         @out.WriteLine("                }");
                         @out.WriteLine("            }");
                     }
@@ -182,7 +182,7 @@ namespace ZigBeeNet.CodeGenerator
                             // This checks for a single response
                             @out.WriteLine("            if (deserializer.RemainingLength == 1)");
                             @out.WriteLine("            {");
-                            @out.WriteLine("                Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));");
+                            @out.WriteLine("                Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);");
                             @out.WriteLine("                return;");
                             @out.WriteLine("            }");
                             continue;
@@ -197,14 +197,14 @@ namespace ZigBeeNet.CodeGenerator
                             @out.WriteLine("            if (" + UpperCaseFirstCharacter(field.Condition.Field) + " " + GetOperator(field.Condition.Operator) + " " + field.Condition.Value + ")");
                             @out.WriteLine("            {");
                         }
-                        @out.WriteLine("                " + StringToUpperCamelCase(field.Name) + " = deserializer.Deserialize<" + GetDataTypeClass(field) + ">(ZclDataType.Get(DataType." + field.Type + "));");
+                        @out.WriteLine("                " + StringToUpperCamelCase(field.Name) + " = deserializer.Deserialize<" + GetDataTypeClass(field) + ">(DataType." + field.Type + ");");
                         @out.WriteLine("            }");
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(field.Type))
                         {
-                            @out.WriteLine("            " + StringToUpperCamelCase(field.Name) + " = deserializer.Deserialize<" + GetDataTypeClass(field) + ">(ZclDataType.Get(DataType." + field.Type + "));");
+                            @out.WriteLine("            " + StringToUpperCamelCase(field.Name) + " = deserializer.Deserialize<" + GetDataTypeClass(field) + ">(DataType." + field.Type + ");");
                         }
                         else
                         {

@@ -66,18 +66,18 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(MoveMode, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(Rate, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ColorTemperatureMinimum, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ColorTemperatureMaximum, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(MoveMode, DataType.BITMAP_8_BIT);
+            serializer.Serialize(Rate, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ColorTemperatureMinimum, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ColorTemperatureMaximum, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            MoveMode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            Rate = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ColorTemperatureMinimum = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ColorTemperatureMaximum = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            MoveMode = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            Rate = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ColorTemperatureMinimum = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ColorTemperatureMaximum = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

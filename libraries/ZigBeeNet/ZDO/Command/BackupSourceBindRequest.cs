@@ -58,20 +58,20 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(SourceTableEntries, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SourceTableListCount, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SourceTableList, ZclDataType.Get(DataType.N_X_IEEE_ADDRESS));
+            serializer.Serialize(SourceTableEntries, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(StartIndex, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SourceTableListCount, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SourceTableList, DataType.N_X_IEEE_ADDRESS);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            SourceTableEntries = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            StartIndex = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SourceTableListCount = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SourceTableList = deserializer.Deserialize<List<ulong>>(ZclDataType.Get(DataType.N_X_IEEE_ADDRESS));
+            SourceTableEntries = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            StartIndex = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SourceTableListCount = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SourceTableList = deserializer.Deserialize<List<ulong>>(DataType.N_X_IEEE_ADDRESS);
         }
 
         public override string ToString()

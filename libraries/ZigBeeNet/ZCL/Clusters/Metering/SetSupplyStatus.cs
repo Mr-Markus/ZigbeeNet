@@ -91,20 +91,20 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(SupplyTamperState, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SupplyDepletionState, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SupplyUncontrolledFlowState, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(LoadLimitSupplyState, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(SupplyTamperState, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SupplyDepletionState, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SupplyUncontrolledFlowState, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(LoadLimitSupplyState, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            SupplyTamperState = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SupplyDepletionState = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SupplyUncontrolledFlowState = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            LoadLimitSupplyState = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            SupplyTamperState = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SupplyDepletionState = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SupplyUncontrolledFlowState = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            LoadLimitSupplyState = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

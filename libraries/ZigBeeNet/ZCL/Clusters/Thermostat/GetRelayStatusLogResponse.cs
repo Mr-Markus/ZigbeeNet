@@ -73,22 +73,22 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TimeOfDay, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(RelayStatus, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(LocalTemperature, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Humidity, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Setpoint, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(UnreadEntries, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(TimeOfDay, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(RelayStatus, DataType.BITMAP_8_BIT);
+            serializer.Serialize(LocalTemperature, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Humidity, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Setpoint, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(UnreadEntries, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TimeOfDay = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            RelayStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            LocalTemperature = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Humidity = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Setpoint = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            UnreadEntries = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            TimeOfDay = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            RelayStatus = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            LocalTemperature = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Humidity = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Setpoint = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            UnreadEntries = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

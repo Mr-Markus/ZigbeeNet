@@ -97,14 +97,14 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(8);
 
-            attributeMap.Add(ATTR_RELATIVEHUMIDITY, new ZclAttribute(this, ATTR_RELATIVEHUMIDITY, "Relative Humidity", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_DEHUMIDIFICATIONCOOLING, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONCOOLING, "Dehumidification Cooling", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_RHDEHUMIDIFICATIONSETPOINT, new ZclAttribute(this, ATTR_RHDEHUMIDIFICATIONSETPOINT, "Rh Dehumidification Setpoint", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_RELATIVEHUMIDITYMODE, new ZclAttribute(this, ATTR_RELATIVEHUMIDITYMODE, "Relative Humidity Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_DEHUMIDIFICATIONLOCKOUT, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONLOCKOUT, "Dehumidification Lockout", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_DEHUMIDIFICATIONHYSTERESIS, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONHYSTERESIS, "Dehumidification Hysteresis", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_DEHUMIDIFICATIONMAXCOOL, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONMAXCOOL, "Dehumidification Max Cool", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_RELATIVEHUMIDITYDISPLAY, new ZclAttribute(this, ATTR_RELATIVEHUMIDITYDISPLAY, "Relative Humidity Display", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
+            attributeMap.Add(ATTR_RELATIVEHUMIDITY, new ZclAttribute(this, ATTR_RELATIVEHUMIDITY, "Relative Humidity", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_DEHUMIDIFICATIONCOOLING, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONCOOLING, "Dehumidification Cooling", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_RHDEHUMIDIFICATIONSETPOINT, new ZclAttribute(this, ATTR_RHDEHUMIDIFICATIONSETPOINT, "Rh Dehumidification Setpoint", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_RELATIVEHUMIDITYMODE, new ZclAttribute(this, ATTR_RELATIVEHUMIDITYMODE, "Relative Humidity Mode", DataType.ENUMERATION_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_DEHUMIDIFICATIONLOCKOUT, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONLOCKOUT, "Dehumidification Lockout", DataType.ENUMERATION_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_DEHUMIDIFICATIONHYSTERESIS, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONHYSTERESIS, "Dehumidification Hysteresis", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_DEHUMIDIFICATIONMAXCOOL, new ZclAttribute(this, ATTR_DEHUMIDIFICATIONMAXCOOL, "Dehumidification Max Cool", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_RELATIVEHUMIDITYDISPLAY, new ZclAttribute(this, ATTR_RELATIVEHUMIDITYDISPLAY, "Relative Humidity Display", DataType.ENUMERATION_8_BIT, false, true, true, true));
 
             return attributeMap;
         }

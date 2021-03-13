@@ -57,14 +57,14 @@ namespace ZigBeeNet.ZCL.Clusters.IasWd
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Header, ZclDataType.Get(DataType.DATA_8_BIT));
-            serializer.Serialize(WarningDuration, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(Header, DataType.DATA_8_BIT);
+            serializer.Serialize(WarningDuration, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Header = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.DATA_8_BIT));
-            WarningDuration = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Header = deserializer.Deserialize<byte>(DataType.DATA_8_BIT);
+            WarningDuration = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

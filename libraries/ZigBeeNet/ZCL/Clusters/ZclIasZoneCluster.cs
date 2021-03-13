@@ -113,13 +113,13 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(7);
 
-            attributeMap.Add(ATTR_ZONESTATE, new ZclAttribute(this, ATTR_ZONESTATE, "Zone State", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_ZONETYPE, new ZclAttribute(this, ATTR_ZONETYPE, "Zone Type", ZclDataType.Get(DataType.ENUMERATION_16_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_ZONESTATUS, new ZclAttribute(this, ATTR_ZONESTATUS, "Zone Status", ZclDataType.Get(DataType.BITMAP_16_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_IASCIEADDRESS, new ZclAttribute(this, ATTR_IASCIEADDRESS, "IAS CIE Address", ZclDataType.Get(DataType.IEEE_ADDRESS), true, true, true, false));
-            attributeMap.Add(ATTR_ZONEID, new ZclAttribute(this, ATTR_ZONEID, "Zone ID", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, new ZclAttribute(this, ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, "Number Of Zone Sensitivity Levels Supported", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_CURRENTZONESENSITIVITYLEVEL, new ZclAttribute(this, ATTR_CURRENTZONESENSITIVITYLEVEL, "Current Zone Sensitivity Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_ZONESTATE, new ZclAttribute(this, ATTR_ZONESTATE, "Zone State", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_ZONETYPE, new ZclAttribute(this, ATTR_ZONETYPE, "Zone Type", DataType.ENUMERATION_16_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_ZONESTATUS, new ZclAttribute(this, ATTR_ZONESTATUS, "Zone Status", DataType.BITMAP_16_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_IASCIEADDRESS, new ZclAttribute(this, ATTR_IASCIEADDRESS, "IAS CIE Address", DataType.IEEE_ADDRESS, true, true, true, false));
+            attributeMap.Add(ATTR_ZONEID, new ZclAttribute(this, ATTR_ZONEID, "Zone ID", DataType.UNSIGNED_8_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, new ZclAttribute(this, ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, "Number Of Zone Sensitivity Levels Supported", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_CURRENTZONESENSITIVITYLEVEL, new ZclAttribute(this, ATTR_CURRENTZONESENSITIVITYLEVEL, "Current Zone Sensitivity Level", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
 
             return attributeMap;
         }

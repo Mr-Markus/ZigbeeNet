@@ -68,20 +68,20 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Coordinate1, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate2, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate3, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Power, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(PathLossExponent, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(Coordinate1, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate2, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate3, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Power, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(PathLossExponent, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Coordinate1 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate2 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate3 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Power = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            PathLossExponent = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Coordinate1 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate2 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate3 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Power = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            PathLossExponent = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

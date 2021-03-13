@@ -53,18 +53,18 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ClusterId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NumberOfCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(CommandIds, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(ClusterId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NumberOfCommands, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(CommandIds, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ClusterId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NumberOfCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CommandIds = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ClusterId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NumberOfCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            CommandIds = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

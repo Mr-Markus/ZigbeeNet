@@ -51,12 +51,12 @@ namespace ZigBeeNet.ZCL.Clusters.KeyEstablishment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EphemeralData, ZclDataType.Get(DataType.RAW_OCTET));
+            serializer.Serialize(EphemeralData, DataType.RAW_OCTET);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EphemeralData = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.RAW_OCTET));
+            EphemeralData = deserializer.Deserialize<ByteArray>(DataType.RAW_OCTET);
         }
 
         public override string ToString()

@@ -77,18 +77,18 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(ConversionFactor, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ConversionFactorTrailingDigit, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(ConversionFactor, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ConversionFactorTrailingDigit, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            ConversionFactor = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ConversionFactorTrailingDigit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            ConversionFactor = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ConversionFactorTrailingDigit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

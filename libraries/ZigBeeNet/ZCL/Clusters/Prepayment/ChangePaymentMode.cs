@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ImplementationDateTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(ProposedPaymentControlConfiguration, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(CutOffValue, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ImplementationDateTime, DataType.UTCTIME);
+            serializer.Serialize(ProposedPaymentControlConfiguration, DataType.BITMAP_16_BIT);
+            serializer.Serialize(CutOffValue, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ImplementationDateTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            ProposedPaymentControlConfiguration = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            CutOffValue = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ImplementationDateTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            ProposedPaymentControlConfiguration = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            CutOffValue = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

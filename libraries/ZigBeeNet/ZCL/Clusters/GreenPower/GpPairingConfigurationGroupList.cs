@@ -30,14 +30,14 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SinkGroup, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Alias, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(SinkGroup, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Alias, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SinkGroup = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Alias = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            SinkGroup = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Alias = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

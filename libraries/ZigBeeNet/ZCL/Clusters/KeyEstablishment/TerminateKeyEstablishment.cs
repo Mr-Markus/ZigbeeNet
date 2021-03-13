@@ -68,16 +68,16 @@ namespace ZigBeeNet.ZCL.Clusters.KeyEstablishment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(StatusCode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(WaitTime, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(KeyEstablishmentSuite, ZclDataType.Get(DataType.BITMAP_16_BIT));
+            serializer.Serialize(StatusCode, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(WaitTime, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(KeyEstablishmentSuite, DataType.BITMAP_16_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            StatusCode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            WaitTime = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            KeyEstablishmentSuite = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
+            StatusCode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            WaitTime = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            KeyEstablishmentSuite = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
         }
 
         public override string ToString()

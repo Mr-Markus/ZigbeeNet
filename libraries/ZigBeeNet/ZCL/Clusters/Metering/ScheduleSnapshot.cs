@@ -82,17 +82,17 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CommandIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TotalNumberOfCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CommandIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TotalNumberOfCommands, DataType.UNSIGNED_8_BIT_INTEGER);
             SnapshotSchedulePayload.Serialize(serializer);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CommandIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TotalNumberOfCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CommandIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TotalNumberOfCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             SnapshotSchedulePayload = new SnapshotSchedulePayload();
             SnapshotSchedulePayload.Deserialize(deserializer);
         }

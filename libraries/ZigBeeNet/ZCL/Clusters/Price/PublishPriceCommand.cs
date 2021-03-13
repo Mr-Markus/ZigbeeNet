@@ -278,58 +278,58 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(RateLabel, ZclDataType.Get(DataType.OCTET_STRING));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CurrentTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(UnitOfMeasure, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Currency, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(PriceTrailingDigitAndTier, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(NumberOfPriceTiers, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(Duration, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Price, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(PriceRatio, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GenerationPrice, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GenerationPriceRatio, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(AlternateCostDelivered, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(AlternateCostUnit, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(AlternateCostTrailingDigit, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(NumberOfBlockThresholds, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(PriceControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(NumberOfGenerationTiers, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GenerationTier, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ExtendedNumberOfPriceTiers, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ExtendedPriceTier, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ExtendedRegisterTier, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(RateLabel, DataType.OCTET_STRING);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CurrentTime, DataType.UTCTIME);
+            serializer.Serialize(UnitOfMeasure, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Currency, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(PriceTrailingDigitAndTier, DataType.BITMAP_8_BIT);
+            serializer.Serialize(NumberOfPriceTiers, DataType.BITMAP_8_BIT);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(Duration, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Price, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(PriceRatio, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GenerationPrice, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GenerationPriceRatio, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(AlternateCostDelivered, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(AlternateCostUnit, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(AlternateCostTrailingDigit, DataType.BITMAP_8_BIT);
+            serializer.Serialize(NumberOfBlockThresholds, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(PriceControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(NumberOfGenerationTiers, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GenerationTier, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ExtendedNumberOfPriceTiers, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ExtendedPriceTier, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ExtendedRegisterTier, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            RateLabel = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CurrentTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            UnitOfMeasure = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Currency = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            PriceTrailingDigitAndTier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            NumberOfPriceTiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            Duration = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Price = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            PriceRatio = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GenerationPrice = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GenerationPriceRatio = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            AlternateCostDelivered = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            AlternateCostUnit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            AlternateCostTrailingDigit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            NumberOfBlockThresholds = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            PriceControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            NumberOfGenerationTiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GenerationTier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ExtendedNumberOfPriceTiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ExtendedPriceTier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ExtendedRegisterTier = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            RateLabel = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CurrentTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            UnitOfMeasure = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Currency = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            PriceTrailingDigitAndTier = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            NumberOfPriceTiers = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            Duration = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Price = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            PriceRatio = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GenerationPrice = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GenerationPriceRatio = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            AlternateCostDelivered = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            AlternateCostUnit = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            AlternateCostTrailingDigit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            NumberOfBlockThresholds = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            PriceControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            NumberOfGenerationTiers = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GenerationTier = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ExtendedNumberOfPriceTiers = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ExtendedPriceTier = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ExtendedRegisterTier = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

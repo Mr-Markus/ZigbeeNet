@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZCL.Clusters.Scenes
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Mode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(GroupIdFrom, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneIdFrom, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GroupIdTo, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SceneIdTo, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Mode, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(GroupIdFrom, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SceneIdFrom, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GroupIdTo, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SceneIdTo, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            GroupIdFrom = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneIdFrom = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GroupIdTo = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SceneIdTo = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Mode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            GroupIdFrom = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SceneIdFrom = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GroupIdTo = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SceneIdTo = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()
