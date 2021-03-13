@@ -48,12 +48,12 @@ namespace ZigBeeNet.ZCL.Clusters.DemandResponseAndLoadControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(CancelControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(CancelControl, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            CancelControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            CancelControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

@@ -64,22 +64,22 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(ScanChannels, ZclDataType.Get(DataType.BITMAP_32_BIT));
-            serializer.Serialize(ScanDuration, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ScanCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NwkUpdateId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NwkManagerAddr, ZclDataType.Get(DataType.NWK_ADDRESS));
+            serializer.Serialize(ScanChannels, DataType.BITMAP_32_BIT);
+            serializer.Serialize(ScanDuration, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ScanCount, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NwkUpdateId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NwkManagerAddr, DataType.NWK_ADDRESS);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            ScanChannels = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            ScanDuration = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ScanCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkUpdateId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NwkManagerAddr = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
+            ScanChannels = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
+            ScanDuration = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ScanCount = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            NwkUpdateId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            NwkManagerAddr = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
         }
 
         public override string ToString()

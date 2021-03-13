@@ -58,18 +58,18 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(IeeeAddr, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(Capability, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
+            serializer.Serialize(IeeeAddr, DataType.IEEE_ADDRESS);
+            serializer.Serialize(Capability, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
-            IeeeAddr = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Capability = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
+            IeeeAddr = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Capability = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

@@ -157,24 +157,24 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(18);
 
-            attributeMap.Add(ATTR_ZCLVERSION, new ZclAttribute(this, ATTR_ZCLVERSION, "ZCL Version", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_APPLICATIONVERSION, new ZclAttribute(this, ATTR_APPLICATIONVERSION, "Application Version", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_STACKVERSION, new ZclAttribute(this, ATTR_STACKVERSION, "Stack Version", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_HWVERSION, new ZclAttribute(this, ATTR_HWVERSION, "HW Version", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_MANUFACTURERNAME, new ZclAttribute(this, ATTR_MANUFACTURERNAME, "Manufacturer Name", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_MODELIDENTIFIER, new ZclAttribute(this, ATTR_MODELIDENTIFIER, "Model Identifier", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_DATECODE, new ZclAttribute(this, ATTR_DATECODE, "Date Code", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_POWERSOURCE, new ZclAttribute(this, ATTR_POWERSOURCE, "Power Source", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_GENERICDEVICECLASS, new ZclAttribute(this, ATTR_GENERICDEVICECLASS, "Generic Device Class", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_GENERICDEVICETYPE, new ZclAttribute(this, ATTR_GENERICDEVICETYPE, "Generic Device Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_PRODUCTCODE, new ZclAttribute(this, ATTR_PRODUCTCODE, "Product Code", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_PRODUCTURL, new ZclAttribute(this, ATTR_PRODUCTURL, "Product URL", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_LOCATIONDESCRIPTION, new ZclAttribute(this, ATTR_LOCATIONDESCRIPTION, "Location Description", ZclDataType.Get(DataType.CHARACTER_STRING), true, true, true, false));
-            attributeMap.Add(ATTR_PHYSICALENVIRONMENT, new ZclAttribute(this, ATTR_PHYSICALENVIRONMENT, "Physical Environment", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, true, false));
-            attributeMap.Add(ATTR_DEVICEENABLED, new ZclAttribute(this, ATTR_DEVICEENABLED, "Device Enabled", ZclDataType.Get(DataType.BOOLEAN), true, true, true, false));
-            attributeMap.Add(ATTR_ALARMMASK, new ZclAttribute(this, ATTR_ALARMMASK, "Alarm Mask", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, true, false));
-            attributeMap.Add(ATTR_DISABLELOCALCONFIG, new ZclAttribute(this, ATTR_DISABLELOCALCONFIG, "Disable Local Config", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, true, false));
-            attributeMap.Add(ATTR_SWBUILDID, new ZclAttribute(this, ATTR_SWBUILDID, "SW Build ID", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
+            attributeMap.Add(ATTR_ZCLVERSION, new ZclAttribute(this, ATTR_ZCLVERSION, "ZCL Version", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_APPLICATIONVERSION, new ZclAttribute(this, ATTR_APPLICATIONVERSION, "Application Version", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_STACKVERSION, new ZclAttribute(this, ATTR_STACKVERSION, "Stack Version", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_HWVERSION, new ZclAttribute(this, ATTR_HWVERSION, "HW Version", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_MANUFACTURERNAME, new ZclAttribute(this, ATTR_MANUFACTURERNAME, "Manufacturer Name", DataType.CHARACTER_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_MODELIDENTIFIER, new ZclAttribute(this, ATTR_MODELIDENTIFIER, "Model Identifier", DataType.CHARACTER_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_DATECODE, new ZclAttribute(this, ATTR_DATECODE, "Date Code", DataType.CHARACTER_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_POWERSOURCE, new ZclAttribute(this, ATTR_POWERSOURCE, "Power Source", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_GENERICDEVICECLASS, new ZclAttribute(this, ATTR_GENERICDEVICECLASS, "Generic Device Class", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_GENERICDEVICETYPE, new ZclAttribute(this, ATTR_GENERICDEVICETYPE, "Generic Device Type", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_PRODUCTCODE, new ZclAttribute(this, ATTR_PRODUCTCODE, "Product Code", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_PRODUCTURL, new ZclAttribute(this, ATTR_PRODUCTURL, "Product URL", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_LOCATIONDESCRIPTION, new ZclAttribute(this, ATTR_LOCATIONDESCRIPTION, "Location Description", DataType.CHARACTER_STRING, true, true, true, false));
+            attributeMap.Add(ATTR_PHYSICALENVIRONMENT, new ZclAttribute(this, ATTR_PHYSICALENVIRONMENT, "Physical Environment", DataType.ENUMERATION_8_BIT, true, true, true, false));
+            attributeMap.Add(ATTR_DEVICEENABLED, new ZclAttribute(this, ATTR_DEVICEENABLED, "Device Enabled", DataType.BOOLEAN, true, true, true, false));
+            attributeMap.Add(ATTR_ALARMMASK, new ZclAttribute(this, ATTR_ALARMMASK, "Alarm Mask", DataType.BITMAP_8_BIT, true, true, true, false));
+            attributeMap.Add(ATTR_DISABLELOCALCONFIG, new ZclAttribute(this, ATTR_DISABLELOCALCONFIG, "Disable Local Config", DataType.BITMAP_8_BIT, true, true, true, false));
+            attributeMap.Add(ATTR_SWBUILDID, new ZclAttribute(this, ATTR_SWBUILDID, "SW Build ID", DataType.CHARACTER_STRING, false, true, false, false));
 
             return attributeMap;
         }

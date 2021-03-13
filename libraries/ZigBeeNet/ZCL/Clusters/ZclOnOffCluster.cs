@@ -91,11 +91,11 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(5);
 
-            attributeMap.Add(ATTR_ONOFF, new ZclAttribute(this, ATTR_ONOFF, "On Off", ZclDataType.Get(DataType.BOOLEAN), true, true, false, true));
-            attributeMap.Add(ATTR_GLOBALSCENECONTROL, new ZclAttribute(this, ATTR_GLOBALSCENECONTROL, "Global Scene Control", ZclDataType.Get(DataType.BOOLEAN), true, true, false, false));
-            attributeMap.Add(ATTR_ONTIME, new ZclAttribute(this, ATTR_ONTIME, "On Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_OFFWAITTIME, new ZclAttribute(this, ATTR_OFFWAITTIME, "Off Wait Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_STARTUPONOFF, new ZclAttribute(this, ATTR_STARTUPONOFF, "Start Up On Off", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
+            attributeMap.Add(ATTR_ONOFF, new ZclAttribute(this, ATTR_ONOFF, "On Off", DataType.BOOLEAN, true, true, false, true));
+            attributeMap.Add(ATTR_GLOBALSCENECONTROL, new ZclAttribute(this, ATTR_GLOBALSCENECONTROL, "Global Scene Control", DataType.BOOLEAN, true, true, false, false));
+            attributeMap.Add(ATTR_ONTIME, new ZclAttribute(this, ATTR_ONTIME, "On Time", DataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_OFFWAITTIME, new ZclAttribute(this, ATTR_OFFWAITTIME, "Off Wait Time", DataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_STARTUPONOFF, new ZclAttribute(this, ATTR_STARTUPONOFF, "Start Up On Off", DataType.ENUMERATION_8_BIT, false, true, true, false));
 
             return attributeMap;
         }

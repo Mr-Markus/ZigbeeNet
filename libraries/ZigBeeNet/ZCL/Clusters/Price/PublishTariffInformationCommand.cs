@@ -191,40 +191,40 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerTariffId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(TariffLabel, ZclDataType.Get(DataType.OCTET_STRING));
-            serializer.Serialize(NumberOfPriceTiers, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NumberOfBlockThresholds, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(UnitOfMeasure, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Currency, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(PriceTrailingDigit, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(StandingCharge, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(TierBlockMode, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(BlockThresholdMultiplier, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            serializer.Serialize(BlockThresholdDivisor, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerTariffId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
+            serializer.Serialize(TariffLabel, DataType.OCTET_STRING);
+            serializer.Serialize(NumberOfPriceTiers, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NumberOfBlockThresholds, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(UnitOfMeasure, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Currency, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(PriceTrailingDigit, DataType.BITMAP_8_BIT);
+            serializer.Serialize(StandingCharge, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(TierBlockMode, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(BlockThresholdMultiplier, DataType.UNSIGNED_24_BIT_INTEGER);
+            serializer.Serialize(BlockThresholdDivisor, DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerTariffId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            TariffLabel = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
-            NumberOfPriceTiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NumberOfBlockThresholds = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            UnitOfMeasure = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Currency = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            PriceTrailingDigit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            StandingCharge = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            TierBlockMode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            BlockThresholdMultiplier = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            BlockThresholdDivisor = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerTariffId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            TariffLabel = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
+            NumberOfPriceTiers = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            NumberOfBlockThresholds = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            UnitOfMeasure = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Currency = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            PriceTrailingDigit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            StandingCharge = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            TierBlockMode = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            BlockThresholdMultiplier = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
+            BlockThresholdDivisor = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -100,10 +100,10 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(4);
 
-            attributeMap.Add(ATTR_UTILITYENROLLMENTGROUP, new ZclAttribute(this, ATTR_UTILITYENROLLMENTGROUP, "Utility Enrollment Group", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_STARTRANDOMIZATIONMINUTES, new ZclAttribute(this, ATTR_STARTRANDOMIZATIONMINUTES, "Start Randomization Minutes", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_ENDRANDOMIZATIONMINUTES, new ZclAttribute(this, ATTR_ENDRANDOMIZATIONMINUTES, "End Randomization Minutes", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_DEVICECLASSVALUE, new ZclAttribute(this, ATTR_DEVICECLASSVALUE, "Device Class Value", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, true));
+            attributeMap.Add(ATTR_UTILITYENROLLMENTGROUP, new ZclAttribute(this, ATTR_UTILITYENROLLMENTGROUP, "Utility Enrollment Group", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_STARTRANDOMIZATIONMINUTES, new ZclAttribute(this, ATTR_STARTRANDOMIZATIONMINUTES, "Start Randomization Minutes", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_ENDRANDOMIZATIONMINUTES, new ZclAttribute(this, ATTR_ENDRANDOMIZATIONMINUTES, "End Randomization Minutes", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_DEVICECLASSVALUE, new ZclAttribute(this, ATTR_DEVICECLASSVALUE, "Device Class Value", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, true));
 
             return attributeMap;
         }

@@ -54,12 +54,12 @@ namespace ZigBeeNet.ZCL.Clusters.Messaging
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ImplementationDateTime, ZclDataType.Get(DataType.UTCTIME));
+            serializer.Serialize(ImplementationDateTime, DataType.UTCTIME);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ImplementationDateTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
+            ImplementationDateTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
         }
 
         public override string ToString()

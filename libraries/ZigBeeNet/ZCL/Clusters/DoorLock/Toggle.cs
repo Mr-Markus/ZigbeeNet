@@ -52,12 +52,12 @@ namespace ZigBeeNet.ZCL.Clusters.DoorLock
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Pin, ZclDataType.Get(DataType.CHARACTER_STRING));
+            serializer.Serialize(Pin, DataType.CHARACTER_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Pin = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
+            Pin = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
         }
 
         public override string ToString()

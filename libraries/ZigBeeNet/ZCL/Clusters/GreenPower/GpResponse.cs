@@ -86,26 +86,26 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Options, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(TempMasterShortAddress, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(TempMasterTxChannel, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(GpdSrcId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GpdIeee, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(Endpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GpdCommandId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GpdCommandPayload, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(Options, DataType.BITMAP_8_BIT);
+            serializer.Serialize(TempMasterShortAddress, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(TempMasterTxChannel, DataType.BITMAP_8_BIT);
+            serializer.Serialize(GpdSrcId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GpdIeee, DataType.IEEE_ADDRESS);
+            serializer.Serialize(Endpoint, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GpdCommandId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GpdCommandPayload, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Options = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            TempMasterShortAddress = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            TempMasterTxChannel = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            GpdSrcId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GpdIeee = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Endpoint = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GpdCommandId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GpdCommandPayload = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            Options = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            TempMasterShortAddress = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            TempMasterTxChannel = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            GpdSrcId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GpdIeee = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Endpoint = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GpdCommandId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GpdCommandPayload = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

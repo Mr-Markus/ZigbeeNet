@@ -64,13 +64,13 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
             SnapshotResponsePayload.Serialize(serializer);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
             SnapshotResponsePayload = new SnapshotResponsePayload();
             SnapshotResponsePayload.Deserialize(deserializer);
         }

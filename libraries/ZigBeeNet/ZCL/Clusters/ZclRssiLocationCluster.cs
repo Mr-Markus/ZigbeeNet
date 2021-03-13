@@ -155,19 +155,19 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(13);
 
-            attributeMap.Add(ATTR_LOCATIONTYPE, new ZclAttribute(this, ATTR_LOCATIONTYPE, "Location Type", ZclDataType.Get(DataType.DATA_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_LOCATIONMETHOD, new ZclAttribute(this, ATTR_LOCATIONMETHOD, "Location Method", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_LOCATIONAGE, new ZclAttribute(this, ATTR_LOCATIONAGE, "Location Age", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_QUALITYMEASURE, new ZclAttribute(this, ATTR_QUALITYMEASURE, "Quality Measure", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_NUMBEROFDEVICES, new ZclAttribute(this, ATTR_NUMBEROFDEVICES, "Number Of Devices", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COORDINATE1, new ZclAttribute(this, ATTR_COORDINATE1, "Coordinate 1", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_COORDINATE2, new ZclAttribute(this, ATTR_COORDINATE2, "Coordinate 2", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_COORDINATE3, new ZclAttribute(this, ATTR_COORDINATE3, "Coordinate 3", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_POWER, new ZclAttribute(this, ATTR_POWER, "Power", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_PATHLOSSEXPONENT, new ZclAttribute(this, ATTR_PATHLOSSEXPONENT, "Path Loss Exponent", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_REPORTINGPERIOD, new ZclAttribute(this, ATTR_REPORTINGPERIOD, "Reporting Period", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_CALCULATIONPERIOD, new ZclAttribute(this, ATTR_CALCULATIONPERIOD, "Calculation Period", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_NUMBERRSSIMEASUREMENTS, new ZclAttribute(this, ATTR_NUMBERRSSIMEASUREMENTS, "Number RSSI Measurements", ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_LOCATIONTYPE, new ZclAttribute(this, ATTR_LOCATIONTYPE, "Location Type", DataType.DATA_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_LOCATIONMETHOD, new ZclAttribute(this, ATTR_LOCATIONMETHOD, "Location Method", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_LOCATIONAGE, new ZclAttribute(this, ATTR_LOCATIONAGE, "Location Age", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_QUALITYMEASURE, new ZclAttribute(this, ATTR_QUALITYMEASURE, "Quality Measure", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_NUMBEROFDEVICES, new ZclAttribute(this, ATTR_NUMBEROFDEVICES, "Number Of Devices", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COORDINATE1, new ZclAttribute(this, ATTR_COORDINATE1, "Coordinate 1", DataType.SIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_COORDINATE2, new ZclAttribute(this, ATTR_COORDINATE2, "Coordinate 2", DataType.SIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_COORDINATE3, new ZclAttribute(this, ATTR_COORDINATE3, "Coordinate 3", DataType.SIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_POWER, new ZclAttribute(this, ATTR_POWER, "Power", DataType.SIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_PATHLOSSEXPONENT, new ZclAttribute(this, ATTR_PATHLOSSEXPONENT, "Path Loss Exponent", DataType.SIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_REPORTINGPERIOD, new ZclAttribute(this, ATTR_REPORTINGPERIOD, "Reporting Period", DataType.SIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_CALCULATIONPERIOD, new ZclAttribute(this, ATTR_CALCULATIONPERIOD, "Calculation Period", DataType.SIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_NUMBERRSSIMEASUREMENTS, new ZclAttribute(this, ATTR_NUMBERRSSIMEASUREMENTS, "Number RSSI Measurements", DataType.SIGNED_16_BIT_INTEGER, false, true, true, false));
 
             return attributeMap;
         }

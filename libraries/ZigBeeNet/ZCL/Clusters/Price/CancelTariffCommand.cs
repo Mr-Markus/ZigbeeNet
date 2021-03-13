@@ -77,16 +77,16 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerTariffId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerTariffId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerTariffId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerTariffId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

@@ -56,12 +56,12 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProposedSupplyStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(ProposedSupplyStatus, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProposedSupplyStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            ProposedSupplyStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

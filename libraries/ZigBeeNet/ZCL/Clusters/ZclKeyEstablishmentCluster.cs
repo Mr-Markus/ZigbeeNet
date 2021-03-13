@@ -80,7 +80,7 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(1);
 
-            attributeMap.Add(ATTR_CLIENTKEYESTABLISHMENTSUITE, new ZclAttribute(this, ATTR_CLIENTKEYESTABLISHMENTSUITE, "Client Key Establishment Suite", ZclDataType.Get(DataType.ENUMERATION_16_BIT), true, true, false, false));
+            attributeMap.Add(ATTR_CLIENTKEYESTABLISHMENTSUITE, new ZclAttribute(this, ATTR_CLIENTKEYESTABLISHMENTSUITE, "Client Key Establishment Suite", DataType.ENUMERATION_16_BIT, true, true, false, false));
 
             return attributeMap;
         }
@@ -89,7 +89,7 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(1);
 
-            attributeMap.Add(ATTR_SERVERKEYESTABLISHMENTSUITE, new ZclAttribute(this, ATTR_SERVERKEYESTABLISHMENTSUITE, "Server Key Establishment Suite", ZclDataType.Get(DataType.ENUMERATION_16_BIT), true, true, false, false));
+            attributeMap.Add(ATTR_SERVERKEYESTABLISHMENTSUITE, new ZclAttribute(this, ATTR_SERVERKEYESTABLISHMENTSUITE, "Server Key Establishment Suite", DataType.ENUMERATION_16_BIT, true, true, false, false));
 
             return attributeMap;
         }

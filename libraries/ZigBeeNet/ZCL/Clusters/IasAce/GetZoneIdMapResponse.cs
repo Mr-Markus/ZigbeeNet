@@ -127,42 +127,42 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneIdMapSection0, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection1, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection2, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection3, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection4, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection5, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection6, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection7, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection8, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection9, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection10, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection11, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection12, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection13, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection14, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(ZoneIdMapSection15, ZclDataType.Get(DataType.BITMAP_16_BIT));
+            serializer.Serialize(ZoneIdMapSection0, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection1, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection2, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection3, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection4, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection5, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection6, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection7, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection8, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection9, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection10, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection11, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection12, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection13, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection14, DataType.BITMAP_16_BIT);
+            serializer.Serialize(ZoneIdMapSection15, DataType.BITMAP_16_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneIdMapSection0 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection1 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection2 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection3 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection4 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection5 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection6 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection7 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection8 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection9 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection10 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection11 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection12 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection13 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection14 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            ZoneIdMapSection15 = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
+            ZoneIdMapSection0 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection1 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection2 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection3 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection4 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection5 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection6 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection7 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection8 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection9 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection10 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection11 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection12 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection13 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection14 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            ZoneIdMapSection15 = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
         }
 
         public override string ToString()

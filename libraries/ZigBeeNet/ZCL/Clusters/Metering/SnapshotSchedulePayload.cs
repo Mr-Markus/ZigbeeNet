@@ -45,20 +45,20 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SnapshotScheduleId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SnapshotStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(SnapshotSchedule, ZclDataType.Get(DataType.BITMAP_24_BIT));
-            serializer.Serialize(SnapshotPayloadType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SnapshotCause, ZclDataType.Get(DataType.BITMAP_32_BIT));
+            serializer.Serialize(SnapshotScheduleId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SnapshotStartTime, DataType.UTCTIME);
+            serializer.Serialize(SnapshotSchedule, DataType.BITMAP_24_BIT);
+            serializer.Serialize(SnapshotPayloadType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SnapshotCause, DataType.BITMAP_32_BIT);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SnapshotScheduleId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SnapshotStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            SnapshotSchedule = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_24_BIT));
-            SnapshotPayloadType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SnapshotCause = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            SnapshotScheduleId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SnapshotStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            SnapshotSchedule = deserializer.Deserialize<int>(DataType.BITMAP_24_BIT);
+            SnapshotPayloadType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SnapshotCause = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
         }
 
         public override string ToString()

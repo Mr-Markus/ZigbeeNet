@@ -72,16 +72,16 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(NotificationScheme, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NotificationFlagAttributeId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NotificationFlagsN, ZclDataType.Get(DataType.BITMAP_32_BIT));
+            serializer.Serialize(NotificationScheme, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NotificationFlagAttributeId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NotificationFlagsN, DataType.BITMAP_32_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            NotificationScheme = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NotificationFlagAttributeId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NotificationFlagsN = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            NotificationScheme = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            NotificationFlagAttributeId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NotificationFlagsN = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
         }
 
         public override string ToString()

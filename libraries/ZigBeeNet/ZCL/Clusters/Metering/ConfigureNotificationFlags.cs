@@ -79,17 +79,17 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(NotificationScheme, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NotificationFlagAttributeId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(NotificationScheme, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NotificationFlagAttributeId, DataType.UNSIGNED_16_BIT_INTEGER);
             SubPayload.Serialize(serializer);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            NotificationScheme = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            NotificationFlagAttributeId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            NotificationScheme = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            NotificationFlagAttributeId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             SubPayload = new NotificationCommandSubPayload();
             SubPayload.Deserialize(deserializer);
         }

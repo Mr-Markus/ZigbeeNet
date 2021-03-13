@@ -56,14 +56,14 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(OriginatingDevice, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(TopUpCode, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(OriginatingDevice, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(TopUpCode, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            OriginatingDevice = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            TopUpCode = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            OriginatingDevice = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            TopUpCode = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

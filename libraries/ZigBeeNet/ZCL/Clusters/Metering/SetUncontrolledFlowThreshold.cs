@@ -120,26 +120,26 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(UncontrolledFlowThreshold, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(UnitOfMeasure, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Multiplier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Divisor, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(StabilisationPeriod, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(MeasurementPeriod, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(UncontrolledFlowThreshold, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(UnitOfMeasure, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Multiplier, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Divisor, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(StabilisationPeriod, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(MeasurementPeriod, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            UncontrolledFlowThreshold = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            UnitOfMeasure = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Multiplier = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Divisor = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            StabilisationPeriod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            MeasurementPeriod = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            UncontrolledFlowThreshold = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            UnitOfMeasure = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Multiplier = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Divisor = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            StabilisationPeriod = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            MeasurementPeriod = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -74,7 +74,7 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(1);
 
-            attributeMap.Add(ATTR_NAMESUPPORT, new ZclAttribute(this, ATTR_NAMESUPPORT, "Name Support", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, false));
+            attributeMap.Add(ATTR_NAMESUPPORT, new ZclAttribute(this, ATTR_NAMESUPPORT, "Name Support", DataType.BITMAP_8_BIT, true, true, false, false));
 
             return attributeMap;
         }

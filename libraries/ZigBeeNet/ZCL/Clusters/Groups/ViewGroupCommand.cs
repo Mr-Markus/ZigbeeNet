@@ -52,12 +52,12 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(GroupId, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            GroupId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

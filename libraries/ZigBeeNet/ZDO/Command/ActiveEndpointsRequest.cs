@@ -45,14 +45,14 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

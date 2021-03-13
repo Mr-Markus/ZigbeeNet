@@ -57,12 +57,12 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(ZoneId, DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneId = deserializer.Deserialize<List<byte>>(ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            ZoneId = deserializer.Deserialize<List<byte>>(DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

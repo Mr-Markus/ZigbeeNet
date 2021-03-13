@@ -11,14 +11,14 @@ using ZigBeeNet.ZCL.Protocol;
 namespace ZigBeeNet.ZCL.Clusters.LevelControl
 {
     /// <summary>
-    /// Move Command value object class.
+    /// Stop 2 Command value object class.
     ///
-    /// Cluster: Level Control. Command ID 0x01 is sent TO the server.
+    /// Cluster: Level Control. Command ID 0x07 is sent TO the server.
     /// This command is a specific command used for the Level Control cluster.
     ///
     /// Code is auto-generated. Modifications may be overwritten!
     /// </summary>
-    public class MoveCommand : ZclCommand
+    public class Stop2Command : ZclCommand
     {
         /// <summary>
         /// The cluster ID to which this command belongs.
@@ -28,22 +28,12 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
         /// <summary>
         /// The command ID.
         /// </summary>
-        public const byte COMMAND_ID = 0x01;
-
-        /// <summary>
-        /// Move Mode command message field.
-        /// </summary>
-        public byte MoveMode { get; set; }
-
-        /// <summary>
-        /// Rate command message field.
-        /// </summary>
-        public byte Rate { get; set; }
+        public const byte COMMAND_ID = 0x07;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public MoveCommand()
+        public Stop2Command()
         {
             ClusterId = CLUSTER_ID;
             CommandId = COMMAND_ID;
@@ -51,28 +41,12 @@ namespace ZigBeeNet.ZCL.Clusters.LevelControl
             CommandDirection = ZclCommandDirection.CLIENT_TO_SERVER;
         }
 
-        internal override void Serialize(ZclFieldSerializer serializer)
-        {
-            serializer.Serialize(MoveMode, DataType.ENUMERATION_8_BIT);
-            serializer.Serialize(Rate, DataType.UNSIGNED_8_BIT_INTEGER);
-        }
-
-        internal override void Deserialize(ZclFieldDeserializer deserializer)
-        {
-            MoveMode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
-            Rate = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
-        }
-
         public override string ToString()
         {
             var builder = new StringBuilder();
 
-            builder.Append("MoveCommand [");
+            builder.Append("Stop2Command [");
             builder.Append(base.ToString());
-            builder.Append(", MoveMode=");
-            builder.Append(MoveMode);
-            builder.Append(", Rate=");
-            builder.Append(Rate);
             builder.Append(']');
 
             return builder.ToString();

@@ -73,22 +73,22 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ReplyingDevice, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(Coordinate1, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate2, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate3, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Rssi, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NumberRssiMeasurements, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(ReplyingDevice, DataType.IEEE_ADDRESS);
+            serializer.Serialize(Coordinate1, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate2, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate3, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Rssi, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NumberRssiMeasurements, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ReplyingDevice = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Coordinate1 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate2 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate3 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Rssi = deserializer.Deserialize<sbyte>(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            NumberRssiMeasurements = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            ReplyingDevice = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Coordinate1 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate2 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate3 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Rssi = deserializer.Deserialize<sbyte>(DataType.SIGNED_8_BIT_INTEGER);
+            NumberRssiMeasurements = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

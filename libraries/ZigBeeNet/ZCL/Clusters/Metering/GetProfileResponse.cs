@@ -92,20 +92,20 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EndTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ProfileIntervalPeriod, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(NumberOfPeriodsDelivered, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Intervals, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            serializer.Serialize(EndTime, DataType.UTCTIME);
+            serializer.Serialize(Status, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ProfileIntervalPeriod, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(NumberOfPeriodsDelivered, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Intervals, DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EndTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ProfileIntervalPeriod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            NumberOfPeriodsDelivered = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Intervals = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            EndTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            Status = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ProfileIntervalPeriod = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            NumberOfPeriodsDelivered = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Intervals = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -219,29 +219,29 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(23);
 
-            attributeMap.Add(ATTR_MAINSVOLTAGE, new ZclAttribute(this, ATTR_MAINSVOLTAGE, "Mains Voltage", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MAINSFREQUENCY, new ZclAttribute(this, ATTR_MAINSFREQUENCY, "Mains Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MAINSALARMMASK, new ZclAttribute(this, ATTR_MAINSALARMMASK, "Mains Alarm Mask", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_MAINSVOLTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_MAINSVOLTAGEMINTHRESHOLD, "Mains Voltage Min Threshold", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_MAINSVOLTAGEMAXTHRESHOLD, new ZclAttribute(this, ATTR_MAINSVOLTAGEMAXTHRESHOLD, "Mains Voltage Max Threshold", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_MAINSVOLTAGEDWELLTRIPPOINT, new ZclAttribute(this, ATTR_MAINSVOLTAGEDWELLTRIPPOINT, "Mains Voltage Dwell Trip Point", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYVOLTAGE, new ZclAttribute(this, ATTR_BATTERYVOLTAGE, "Battery Voltage", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_BATTERYPERCENTAGEREMAINING, new ZclAttribute(this, ATTR_BATTERYPERCENTAGEREMAINING, "Battery Percentage Remaining", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_BATTERYMANUFACTURER, new ZclAttribute(this, ATTR_BATTERYMANUFACTURER, "Battery Manufacturer", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYSIZE, new ZclAttribute(this, ATTR_BATTERYSIZE, "Battery Size", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYAHRRATING, new ZclAttribute(this, ATTR_BATTERYAHRRATING, "Battery A Hr Rating", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYQUANTITY, new ZclAttribute(this, ATTR_BATTERYQUANTITY, "Battery Quantity", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYRATEDVOLTAGE, new ZclAttribute(this, ATTR_BATTERYRATEDVOLTAGE, "Battery Rated Voltage", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYALARMMASK, new ZclAttribute(this, ATTR_BATTERYALARMMASK, "Battery Alarm Mask", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYVOLTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_BATTERYVOLTAGEMINTHRESHOLD, "Battery Voltage Min Threshold", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD1, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD1, "Battery Voltage Threshold 1", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD2, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD2, "Battery Voltage Threshold 2", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD3, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD3, "Battery Voltage Threshold 3", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYPERCENTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_BATTERYPERCENTAGEMINTHRESHOLD, "Battery Percentage Min Threshold", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD1, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD1, "Battery Percentage Threshold 1", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD2, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD2, "Battery Percentage Threshold 2", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD3, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD3, "Battery Percentage Threshold 3", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_BATTERYALARMSTATE, new ZclAttribute(this, ATTR_BATTERYALARMSTATE, "Battery Alarm State", ZclDataType.Get(DataType.BITMAP_32_BIT), false, true, false, false));
+            attributeMap.Add(ATTR_MAINSVOLTAGE, new ZclAttribute(this, ATTR_MAINSVOLTAGE, "Mains Voltage", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_MAINSFREQUENCY, new ZclAttribute(this, ATTR_MAINSFREQUENCY, "Mains Frequency", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_MAINSALARMMASK, new ZclAttribute(this, ATTR_MAINSALARMMASK, "Mains Alarm Mask", DataType.BITMAP_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_MAINSVOLTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_MAINSVOLTAGEMINTHRESHOLD, "Mains Voltage Min Threshold", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_MAINSVOLTAGEMAXTHRESHOLD, new ZclAttribute(this, ATTR_MAINSVOLTAGEMAXTHRESHOLD, "Mains Voltage Max Threshold", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_MAINSVOLTAGEDWELLTRIPPOINT, new ZclAttribute(this, ATTR_MAINSVOLTAGEDWELLTRIPPOINT, "Mains Voltage Dwell Trip Point", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYVOLTAGE, new ZclAttribute(this, ATTR_BATTERYVOLTAGE, "Battery Voltage", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_BATTERYPERCENTAGEREMAINING, new ZclAttribute(this, ATTR_BATTERYPERCENTAGEREMAINING, "Battery Percentage Remaining", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_BATTERYMANUFACTURER, new ZclAttribute(this, ATTR_BATTERYMANUFACTURER, "Battery Manufacturer", DataType.CHARACTER_STRING, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYSIZE, new ZclAttribute(this, ATTR_BATTERYSIZE, "Battery Size", DataType.ENUMERATION_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYAHRRATING, new ZclAttribute(this, ATTR_BATTERYAHRRATING, "Battery A Hr Rating", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYQUANTITY, new ZclAttribute(this, ATTR_BATTERYQUANTITY, "Battery Quantity", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYRATEDVOLTAGE, new ZclAttribute(this, ATTR_BATTERYRATEDVOLTAGE, "Battery Rated Voltage", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYALARMMASK, new ZclAttribute(this, ATTR_BATTERYALARMMASK, "Battery Alarm Mask", DataType.BITMAP_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYVOLTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_BATTERYVOLTAGEMINTHRESHOLD, "Battery Voltage Min Threshold", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD1, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD1, "Battery Voltage Threshold 1", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD2, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD2, "Battery Voltage Threshold 2", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYVOLTAGETHRESHOLD3, new ZclAttribute(this, ATTR_BATTERYVOLTAGETHRESHOLD3, "Battery Voltage Threshold 3", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYPERCENTAGEMINTHRESHOLD, new ZclAttribute(this, ATTR_BATTERYPERCENTAGEMINTHRESHOLD, "Battery Percentage Min Threshold", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD1, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD1, "Battery Percentage Threshold 1", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD2, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD2, "Battery Percentage Threshold 2", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYPERCENTAGETHRESHOLD3, new ZclAttribute(this, ATTR_BATTERYPERCENTAGETHRESHOLD3, "Battery Percentage Threshold 3", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_BATTERYALARMSTATE, new ZclAttribute(this, ATTR_BATTERYALARMSTATE, "Battery Alarm State", DataType.BITMAP_32_BIT, false, true, false, false));
 
             return attributeMap;
         }

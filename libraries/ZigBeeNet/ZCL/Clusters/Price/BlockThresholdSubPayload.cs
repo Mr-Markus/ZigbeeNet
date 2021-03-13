@@ -30,14 +30,14 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TierNumberOfBlockThresholds, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(BlockThreshold, ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER));
+            serializer.Serialize(TierNumberOfBlockThresholds, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(BlockThreshold, DataType.UNSIGNED_48_BIT_INTEGER);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TierNumberOfBlockThresholds = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            BlockThreshold = deserializer.Deserialize<ulong>(ZclDataType.Get(DataType.UNSIGNED_48_BIT_INTEGER));
+            TierNumberOfBlockThresholds = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            BlockThreshold = deserializer.Deserialize<ulong>(DataType.UNSIGNED_48_BIT_INTEGER);
         }
 
         public override string ToString()

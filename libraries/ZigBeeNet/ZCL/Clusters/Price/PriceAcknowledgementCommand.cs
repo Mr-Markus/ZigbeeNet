@@ -75,18 +75,18 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(PriceAckTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(Control, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(PriceAckTime, DataType.UTCTIME);
+            serializer.Serialize(Control, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            PriceAckTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            Control = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            PriceAckTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            Control = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

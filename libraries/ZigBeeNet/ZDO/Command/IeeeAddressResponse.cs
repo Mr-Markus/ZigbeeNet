@@ -59,14 +59,14 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(IeeeAddrRemoteDev, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(NwkAddrRemoteDev, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(NwkAddrAssocDevList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(IeeeAddrRemoteDev, DataType.IEEE_ADDRESS);
+            serializer.Serialize(NwkAddrRemoteDev, DataType.NWK_ADDRESS);
+            serializer.Serialize(NwkAddrAssocDevList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(StartIndex, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < NwkAddrAssocDevList.Count; cnt++)
             {
-                serializer.Serialize(NwkAddrAssocDevList[cnt], ZclDataType.Get(DataType.NWK_ADDRESS));
+                serializer.Serialize(NwkAddrAssocDevList[cnt], DataType.NWK_ADDRESS);
             }
         }
 
@@ -77,25 +77,25 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             NwkAddrAssocDevList = new List<ushort>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            IeeeAddrRemoteDev = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            NwkAddrRemoteDev = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
+            IeeeAddrRemoteDev = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            NwkAddrRemoteDev = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
             if (deserializer.IsEndOfStream)
             {
                 return;
             }
-            byte? numAssocDev = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? numAssocDev = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
+            StartIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             if (numAssocDev != null)
             {
                 for (int cnt = 0; cnt < numAssocDev; cnt++)
                 {
-                    NwkAddrAssocDevList.Add((ushort) deserializer.Deserialize(ZclDataType.Get(DataType.NWK_ADDRESS)));
+                    NwkAddrAssocDevList.Add((ushort) deserializer.Deserialize(DataType.NWK_ADDRESS));
                 }
             }
         }

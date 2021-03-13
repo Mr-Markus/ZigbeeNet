@@ -66,18 +66,18 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(CreditAdjustmentType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(CreditAdjustmentValue, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(CreditAdjustmentType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(CreditAdjustmentValue, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            CreditAdjustmentType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            CreditAdjustmentValue = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            CreditAdjustmentType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            CreditAdjustmentValue = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

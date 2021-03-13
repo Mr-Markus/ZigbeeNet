@@ -61,16 +61,16 @@ namespace ZigBeeNet.ZCL.Clusters.Groups
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
-            serializer.Serialize(GroupId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(GroupName, ZclDataType.Get(DataType.CHARACTER_STRING));
+            serializer.Serialize(Status, DataType.ZCL_STATUS);
+            serializer.Serialize(GroupId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(GroupName, DataType.CHARACTER_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
-            GroupId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            GroupName = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
+            Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
+            GroupId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            GroupName = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
         }
 
         public override string ToString()

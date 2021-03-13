@@ -53,25 +53,25 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(Length, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ComplexDescriptor, ZclDataType.Get(DataType.COMPLEX_DESCRIPTOR));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
+            serializer.Serialize(Length, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ComplexDescriptor, DataType.COMPLEX_DESCRIPTOR);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
-            Length = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ComplexDescriptor = deserializer.Deserialize<ComplexDescriptor>(ZclDataType.Get(DataType.COMPLEX_DESCRIPTOR));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
+            Length = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ComplexDescriptor = deserializer.Deserialize<ComplexDescriptor>(DataType.COMPLEX_DESCRIPTOR);
         }
 
         public override string ToString()

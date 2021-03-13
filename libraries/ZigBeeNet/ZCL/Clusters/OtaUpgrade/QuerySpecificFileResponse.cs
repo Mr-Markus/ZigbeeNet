@@ -73,43 +73,43 @@ namespace ZigBeeNet.ZCL.Clusters.OtaUpgrade
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
+            serializer.Serialize(Status, DataType.ZCL_STATUS);
             if (Status == ZclStatus.SUCCESS)
             {
-                serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                serializer.Serialize(ImageType, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.Serialize(ImageType, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                serializer.Serialize(FileVersion, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                serializer.Serialize(FileVersion, DataType.UNSIGNED_32_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                serializer.Serialize(ImageSize, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                serializer.Serialize(ImageSize, DataType.UNSIGNED_32_BIT_INTEGER);
             }
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
+            Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
             if (Status == ZclStatus.SUCCESS)
             {
-                ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                ImageType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                ImageType = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                FileVersion = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                FileVersion = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
             }
             if (Status == ZclStatus.SUCCESS)
             {
-                ImageSize = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                ImageSize = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
             }
         }
 

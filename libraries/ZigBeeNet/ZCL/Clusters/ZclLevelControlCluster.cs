@@ -153,20 +153,20 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(14);
 
-            attributeMap.Add(ATTR_CURRENTLEVEL, new ZclAttribute(this, ATTR_CURRENTLEVEL, "Current Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_REMAININGTIME, new ZclAttribute(this, ATTR_REMAININGTIME, "Remaining Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MINIMUMLEVEL, new ZclAttribute(this, ATTR_MINIMUMLEVEL, "Minimum Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MAXIMUMLEVEL, new ZclAttribute(this, ATTR_MAXIMUMLEVEL, "Maximum Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_CURRENTFREQUENCY, new ZclAttribute(this, ATTR_CURRENTFREQUENCY, "Current Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_MINIMUMFREQUENCY, new ZclAttribute(this, ATTR_MINIMUMFREQUENCY, "Minimum Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_MAXIMUMFREQUENCY, new ZclAttribute(this, ATTR_MAXIMUMFREQUENCY, "Maximum Frequency", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_OPTIONS, new ZclAttribute(this, ATTR_OPTIONS, "Options", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_ONOFFTRANSITIONTIME, new ZclAttribute(this, ATTR_ONOFFTRANSITIONTIME, "On Off Transition Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_ONLEVEL, new ZclAttribute(this, ATTR_ONLEVEL, "On Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_ONTRANSITIONTIME, new ZclAttribute(this, ATTR_ONTRANSITIONTIME, "On Transition Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_OFFTRANSITIONTIME, new ZclAttribute(this, ATTR_OFFTRANSITIONTIME, "Off Transition Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_DEFAULTMOVERATE, new ZclAttribute(this, ATTR_DEFAULTMOVERATE, "Default Move Rate", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_STARTUPCURRENTLEVEL, new ZclAttribute(this, ATTR_STARTUPCURRENTLEVEL, "Start Up Current Level", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_CURRENTLEVEL, new ZclAttribute(this, ATTR_CURRENTLEVEL, "Current Level", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_REMAININGTIME, new ZclAttribute(this, ATTR_REMAININGTIME, "Remaining Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_MINIMUMLEVEL, new ZclAttribute(this, ATTR_MINIMUMLEVEL, "Minimum Level", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_MAXIMUMLEVEL, new ZclAttribute(this, ATTR_MAXIMUMLEVEL, "Maximum Level", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_CURRENTFREQUENCY, new ZclAttribute(this, ATTR_CURRENTFREQUENCY, "Current Frequency", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_MINIMUMFREQUENCY, new ZclAttribute(this, ATTR_MINIMUMFREQUENCY, "Minimum Frequency", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_MAXIMUMFREQUENCY, new ZclAttribute(this, ATTR_MAXIMUMFREQUENCY, "Maximum Frequency", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_OPTIONS, new ZclAttribute(this, ATTR_OPTIONS, "Options", DataType.BITMAP_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_ONOFFTRANSITIONTIME, new ZclAttribute(this, ATTR_ONOFFTRANSITIONTIME, "On Off Transition Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_ONLEVEL, new ZclAttribute(this, ATTR_ONLEVEL, "On Level", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_ONTRANSITIONTIME, new ZclAttribute(this, ATTR_ONTRANSITIONTIME, "On Transition Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_OFFTRANSITIONTIME, new ZclAttribute(this, ATTR_OFFTRANSITIONTIME, "Off Transition Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_DEFAULTMOVERATE, new ZclAttribute(this, ATTR_DEFAULTMOVERATE, "Default Move Rate", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_STARTUPCURRENTLEVEL, new ZclAttribute(this, ATTR_STARTUPCURRENTLEVEL, "Start Up Current Level", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
 
             return attributeMap;
         }

@@ -65,18 +65,18 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ResultType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(TopUpValue, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(SourceOfTopUp, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(CreditRemaining, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(ResultType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(TopUpValue, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(SourceOfTopUp, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(CreditRemaining, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ResultType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            TopUpValue = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            SourceOfTopUp = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            CreditRemaining = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            ResultType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            TopUpValue = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            SourceOfTopUp = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            CreditRemaining = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

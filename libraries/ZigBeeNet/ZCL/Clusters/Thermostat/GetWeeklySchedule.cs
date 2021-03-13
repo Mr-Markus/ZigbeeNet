@@ -53,14 +53,14 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(DaysToReturn, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(ModeToReturn, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(DaysToReturn, DataType.BITMAP_8_BIT);
+            serializer.Serialize(ModeToReturn, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            DaysToReturn = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            ModeToReturn = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            DaysToReturn = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            ModeToReturn = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

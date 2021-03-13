@@ -61,16 +61,16 @@ namespace ZigBeeNet.ZCL.Clusters.ElectricalMeasurement
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(AttributeId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(NumberOfIntervals, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(AttributeId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(NumberOfIntervals, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            AttributeId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            NumberOfIntervals = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            AttributeId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            NumberOfIntervals = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

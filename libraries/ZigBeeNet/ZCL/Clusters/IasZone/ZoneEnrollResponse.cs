@@ -53,14 +53,14 @@ namespace ZigBeeNet.ZCL.Clusters.IasZone
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EnrollResponseCode, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(EnrollResponseCode, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EnrollResponseCode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            EnrollResponseCode = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -108,14 +108,14 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(8);
 
-            attributeMap.Add(ATTR_OCCUPANCY, new ZclAttribute(this, ATTR_OCCUPANCY, "Occupancy", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, true));
-            attributeMap.Add(ATTR_OCCUPANCYSENSORTYPE, new ZclAttribute(this, ATTR_OCCUPANCYSENSORTYPE, "Occupancy Sensor Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_PIROCCUPIEDTOUNOCCUPIEDDELAY, new ZclAttribute(this, ATTR_PIROCCUPIEDTOUNOCCUPIEDDELAY, "PIR Occupied To Unoccupied Delay", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_PIRUNOCCUPIEDTOOCCUPIEDDELAY, new ZclAttribute(this, ATTR_PIRUNOCCUPIEDTOOCCUPIEDDELAY, "PIR Unoccupied To Occupied Delay", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_PIRUNOCCUPIEDTOOCCUPIEDTHRESHOLD, new ZclAttribute(this, ATTR_PIRUNOCCUPIEDTOOCCUPIEDTHRESHOLD, "PIR Unoccupied To Occupied Threshold", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_ULTRASONICOCCUPIEDTOUNOCCUPIEDDELAY, new ZclAttribute(this, ATTR_ULTRASONICOCCUPIEDTOUNOCCUPIEDDELAY, "Ultra Sonic Occupied To Unoccupied Delay", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDDELAY, new ZclAttribute(this, ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDDELAY, "Ultra Sonic Unoccupied To Occupied Delay", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDTHRESHOLD, new ZclAttribute(this, ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDTHRESHOLD, "Ultrasonic Unoccupied To Occupied Threshold", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_OCCUPANCY, new ZclAttribute(this, ATTR_OCCUPANCY, "Occupancy", DataType.BITMAP_8_BIT, true, true, false, true));
+            attributeMap.Add(ATTR_OCCUPANCYSENSORTYPE, new ZclAttribute(this, ATTR_OCCUPANCYSENSORTYPE, "Occupancy Sensor Type", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_PIROCCUPIEDTOUNOCCUPIEDDELAY, new ZclAttribute(this, ATTR_PIROCCUPIEDTOUNOCCUPIEDDELAY, "PIR Occupied To Unoccupied Delay", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_PIRUNOCCUPIEDTOOCCUPIEDDELAY, new ZclAttribute(this, ATTR_PIRUNOCCUPIEDTOOCCUPIEDDELAY, "PIR Unoccupied To Occupied Delay", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_PIRUNOCCUPIEDTOOCCUPIEDTHRESHOLD, new ZclAttribute(this, ATTR_PIRUNOCCUPIEDTOOCCUPIEDTHRESHOLD, "PIR Unoccupied To Occupied Threshold", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_ULTRASONICOCCUPIEDTOUNOCCUPIEDDELAY, new ZclAttribute(this, ATTR_ULTRASONICOCCUPIEDTOUNOCCUPIEDDELAY, "Ultra Sonic Occupied To Unoccupied Delay", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDDELAY, new ZclAttribute(this, ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDDELAY, "Ultra Sonic Unoccupied To Occupied Delay", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDTHRESHOLD, new ZclAttribute(this, ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDTHRESHOLD, "Ultrasonic Unoccupied To Occupied Threshold", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
 
             return attributeMap;
         }

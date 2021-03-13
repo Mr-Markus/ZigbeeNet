@@ -58,16 +58,16 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ColorX, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ColorY, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(ColorX, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ColorY, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(TransitionTime, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ColorX = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ColorY = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            TransitionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ColorX = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ColorY = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            TransitionTime = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

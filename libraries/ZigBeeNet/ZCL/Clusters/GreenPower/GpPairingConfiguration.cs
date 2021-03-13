@@ -165,57 +165,57 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Actions, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(Options, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(GpdSrcId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GpdIeee, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(Endpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(DeviceId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GroupListCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Actions, DataType.BITMAP_8_BIT);
+            serializer.Serialize(Options, DataType.BITMAP_16_BIT);
+            serializer.Serialize(GpdSrcId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GpdIeee, DataType.IEEE_ADDRESS);
+            serializer.Serialize(Endpoint, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(DeviceId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GroupListCount, DataType.UNSIGNED_8_BIT_INTEGER);
             GroupList.Serialize(serializer);
-            serializer.Serialize(GpdAssignedAlias, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ForwardingRadius, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SecurityOptions, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GpdSecurityFrameCounter, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(GpdSecurityKey, ZclDataType.Get(DataType.SECURITY_KEY));
-            serializer.Serialize(NumberOfPairedEndpoints, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(PairedEndpoints, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ApplicationInformation, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(ManufacturerId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ModeId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NumberOfGpdCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GpdCommandIdList, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ClusterIdListCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ClusterListServer, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ClusterListClient, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(GpdAssignedAlias, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ForwardingRadius, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SecurityOptions, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GpdSecurityFrameCounter, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(GpdSecurityKey, DataType.SECURITY_KEY);
+            serializer.Serialize(NumberOfPairedEndpoints, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(PairedEndpoints, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ApplicationInformation, DataType.BITMAP_8_BIT);
+            serializer.Serialize(ManufacturerId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ModeId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NumberOfGpdCommands, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GpdCommandIdList, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ClusterIdListCount, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ClusterListServer, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ClusterListClient, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Actions = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            Options = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            GpdSrcId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GpdIeee = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            Endpoint = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            DeviceId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GroupListCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Actions = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            Options = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            GpdSrcId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GpdIeee = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            Endpoint = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            DeviceId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GroupListCount = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             GroupList = new GpPairingConfigurationGroupList();
             GroupList.Deserialize(deserializer);
-            GpdAssignedAlias = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ForwardingRadius = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SecurityOptions = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GpdSecurityFrameCounter = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            GpdSecurityKey = deserializer.Deserialize<ZigBeeKey>(ZclDataType.Get(DataType.SECURITY_KEY));
-            NumberOfPairedEndpoints = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            PairedEndpoints = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ApplicationInformation = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            ManufacturerId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ModeId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NumberOfGpdCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GpdCommandIdList = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ClusterIdListCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ClusterListServer = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ClusterListClient = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            GpdAssignedAlias = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ForwardingRadius = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SecurityOptions = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GpdSecurityFrameCounter = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            GpdSecurityKey = deserializer.Deserialize<ZigBeeKey>(DataType.SECURITY_KEY);
+            NumberOfPairedEndpoints = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            PairedEndpoints = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ApplicationInformation = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            ManufacturerId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ModeId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NumberOfGpdCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GpdCommandIdList = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ClusterIdListCount = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ClusterListServer = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ClusterListClient = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

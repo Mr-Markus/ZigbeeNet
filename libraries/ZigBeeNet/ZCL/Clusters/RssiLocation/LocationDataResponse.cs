@@ -93,30 +93,30 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(LocationType, ZclDataType.Get(DataType.DATA_8_BIT));
-            serializer.Serialize(Coordinate1, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate2, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Coordinate3, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Power, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(PathLossExponent, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(LocationMethod, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(QualityMeasure, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(LocationAge, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(LocationType, DataType.DATA_8_BIT);
+            serializer.Serialize(Coordinate1, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate2, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Coordinate3, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Power, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(PathLossExponent, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(LocationMethod, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(QualityMeasure, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(LocationAge, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            LocationType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.DATA_8_BIT));
-            Coordinate1 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate2 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Coordinate3 = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            Power = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            PathLossExponent = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            LocationMethod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            QualityMeasure = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            LocationAge = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Status = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            LocationType = deserializer.Deserialize<byte>(DataType.DATA_8_BIT);
+            Coordinate1 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate2 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Coordinate3 = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            Power = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            PathLossExponent = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            LocationMethod = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            QualityMeasure = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            LocationAge = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

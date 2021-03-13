@@ -88,18 +88,18 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EarliestStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(MinIssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(NumberOfCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(EarliestStartTime, DataType.UTCTIME);
+            serializer.Serialize(MinIssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(NumberOfCommands, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EarliestStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            MinIssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            NumberOfCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            EarliestStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            MinIssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            NumberOfCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

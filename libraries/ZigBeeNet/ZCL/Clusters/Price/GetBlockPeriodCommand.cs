@@ -78,16 +78,16 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(NumberOfEvents, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(NumberOfEvents, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            NumberOfEvents = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            NumberOfEvents = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

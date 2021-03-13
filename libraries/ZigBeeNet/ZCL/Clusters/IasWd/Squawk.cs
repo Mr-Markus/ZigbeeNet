@@ -52,12 +52,12 @@ namespace ZigBeeNet.ZCL.Clusters.IasWd
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SquawkInfo, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(SquawkInfo, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SquawkInfo = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            SquawkInfo = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

@@ -50,16 +50,16 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(DeviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(CapabilityInformation, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(DeviceAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(CapabilityInformation, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            DeviceAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            CapabilityInformation = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            DeviceAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            CapabilityInformation = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

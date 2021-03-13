@@ -156,17 +156,17 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(11);
 
-            attributeMap.Add(ATTR_UPGRADESERVERID, new ZclAttribute(this, ATTR_UPGRADESERVERID, "Upgrade Server ID", ZclDataType.Get(DataType.IEEE_ADDRESS), true, true, false, false));
-            attributeMap.Add(ATTR_FILEOFFSET, new ZclAttribute(this, ATTR_FILEOFFSET, "File Offset", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTFILEVERSION, new ZclAttribute(this, ATTR_CURRENTFILEVERSION, "Current File Version", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTZIGBEESTACKVERSION, new ZclAttribute(this, ATTR_CURRENTZIGBEESTACKVERSION, "Current ZigBee Stack Version", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_DOWNLOADEDFILEVERSION, new ZclAttribute(this, ATTR_DOWNLOADEDFILEVERSION, "Downloaded File Version", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_DOWNLOADEDZIGBEESTACKVERSION, new ZclAttribute(this, ATTR_DOWNLOADEDZIGBEESTACKVERSION, "Downloaded ZigBee Stack Version", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_IMAGEUPGRADESTATUS, new ZclAttribute(this, ATTR_IMAGEUPGRADESTATUS, "Image Upgrade Status", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_MANUFACTURERID, new ZclAttribute(this, ATTR_MANUFACTURERID, "Manufacturer ID", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_IMAGETYPEID, new ZclAttribute(this, ATTR_IMAGETYPEID, "Image Type ID", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_MINIMUMBLOCKREQUESTPERIOD, new ZclAttribute(this, ATTR_MINIMUMBLOCKREQUESTPERIOD, "Minimum Block Request Period", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_IMAGESTAMP, new ZclAttribute(this, ATTR_IMAGESTAMP, "Image Stamp", ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER), true, true, false, false));
+            attributeMap.Add(ATTR_UPGRADESERVERID, new ZclAttribute(this, ATTR_UPGRADESERVERID, "Upgrade Server ID", DataType.IEEE_ADDRESS, true, true, false, false));
+            attributeMap.Add(ATTR_FILEOFFSET, new ZclAttribute(this, ATTR_FILEOFFSET, "File Offset", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTFILEVERSION, new ZclAttribute(this, ATTR_CURRENTFILEVERSION, "Current File Version", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTZIGBEESTACKVERSION, new ZclAttribute(this, ATTR_CURRENTZIGBEESTACKVERSION, "Current ZigBee Stack Version", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_DOWNLOADEDFILEVERSION, new ZclAttribute(this, ATTR_DOWNLOADEDFILEVERSION, "Downloaded File Version", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_DOWNLOADEDZIGBEESTACKVERSION, new ZclAttribute(this, ATTR_DOWNLOADEDZIGBEESTACKVERSION, "Downloaded ZigBee Stack Version", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_IMAGEUPGRADESTATUS, new ZclAttribute(this, ATTR_IMAGEUPGRADESTATUS, "Image Upgrade Status", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_MANUFACTURERID, new ZclAttribute(this, ATTR_MANUFACTURERID, "Manufacturer ID", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_IMAGETYPEID, new ZclAttribute(this, ATTR_IMAGETYPEID, "Image Type ID", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_MINIMUMBLOCKREQUESTPERIOD, new ZclAttribute(this, ATTR_MINIMUMBLOCKREQUESTPERIOD, "Minimum Block Request Period", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_IMAGESTAMP, new ZclAttribute(this, ATTR_IMAGESTAMP, "Image Stamp", DataType.UNSIGNED_32_BIT_INTEGER, true, true, false, false));
 
             return attributeMap;
         }

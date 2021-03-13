@@ -79,18 +79,18 @@ namespace ZigBeeNet.ZCL.Clusters.IasZone
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneStatus, ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            serializer.Serialize(ExtendedStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Delay, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(ZoneStatus, DataType.ENUMERATION_16_BIT);
+            serializer.Serialize(ExtendedStatus, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Delay, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneStatus = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            ExtendedStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Delay = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ZoneStatus = deserializer.Deserialize<ushort>(DataType.ENUMERATION_16_BIT);
+            ExtendedStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Delay = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

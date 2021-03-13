@@ -199,17 +199,17 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(11);
 
-            attributeMap.Add(ATTR_GPPMAXPROXYTABLEENTRIES, new ZclAttribute(this, ATTR_GPPMAXPROXYTABLEENTRIES, "Gpp Max Proxy Table Entries", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PROXYTABLE, new ZclAttribute(this, ATTR_PROXYTABLE, "Proxy Table", ZclDataType.Get(DataType.LONG_OCTET_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_GPPNOTIFICATIONRETRYNUMBER, new ZclAttribute(this, ATTR_GPPNOTIFICATIONRETRYNUMBER, "Gpp Notification Retry Number", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_GPPNOTIFICATIONRETRYTIMER, new ZclAttribute(this, ATTR_GPPNOTIFICATIONRETRYTIMER, "Gpp Notification Retry Timer", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_GPPMAXSEARCHCOUNTER, new ZclAttribute(this, ATTR_GPPMAXSEARCHCOUNTER, "Gpp Max Search Counter", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_GPPBLOCKEDGPDID, new ZclAttribute(this, ATTR_GPPBLOCKEDGPDID, "Gpp Blocked Gpd ID", ZclDataType.Get(DataType.LONG_OCTET_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_GPPFUNCTIONALITY, new ZclAttribute(this, ATTR_GPPFUNCTIONALITY, "Gpp Functionality", ZclDataType.Get(DataType.BITMAP_24_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_GPPACTIVEFUNCTIONALITY, new ZclAttribute(this, ATTR_GPPACTIVEFUNCTIONALITY, "Gpp Active Functionality", ZclDataType.Get(DataType.BITMAP_24_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_GPCLIENTSHAREDSECURITYKEYTYPE, new ZclAttribute(this, ATTR_GPCLIENTSHAREDSECURITYKEYTYPE, "Gp Client Shared Security Key Type", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_GPCLIENTSHAREDSECURITYKEY, new ZclAttribute(this, ATTR_GPCLIENTSHAREDSECURITYKEY, "Gp Client Shared Security Key", ZclDataType.Get(DataType.SECURITY_KEY), false, true, true, true));
-            attributeMap.Add(ATTR_GPCLIENTLINKKEY, new ZclAttribute(this, ATTR_GPCLIENTLINKKEY, "Gp Client Link Key", ZclDataType.Get(DataType.SECURITY_KEY), false, true, true, true));
+            attributeMap.Add(ATTR_GPPMAXPROXYTABLEENTRIES, new ZclAttribute(this, ATTR_GPPMAXPROXYTABLEENTRIES, "Gpp Max Proxy Table Entries", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_PROXYTABLE, new ZclAttribute(this, ATTR_PROXYTABLE, "Proxy Table", DataType.LONG_OCTET_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_GPPNOTIFICATIONRETRYNUMBER, new ZclAttribute(this, ATTR_GPPNOTIFICATIONRETRYNUMBER, "Gpp Notification Retry Number", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_GPPNOTIFICATIONRETRYTIMER, new ZclAttribute(this, ATTR_GPPNOTIFICATIONRETRYTIMER, "Gpp Notification Retry Timer", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_GPPMAXSEARCHCOUNTER, new ZclAttribute(this, ATTR_GPPMAXSEARCHCOUNTER, "Gpp Max Search Counter", DataType.UNSIGNED_8_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_GPPBLOCKEDGPDID, new ZclAttribute(this, ATTR_GPPBLOCKEDGPDID, "Gpp Blocked Gpd ID", DataType.LONG_OCTET_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_GPPFUNCTIONALITY, new ZclAttribute(this, ATTR_GPPFUNCTIONALITY, "Gpp Functionality", DataType.BITMAP_24_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_GPPACTIVEFUNCTIONALITY, new ZclAttribute(this, ATTR_GPPACTIVEFUNCTIONALITY, "Gpp Active Functionality", DataType.BITMAP_24_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_GPCLIENTSHAREDSECURITYKEYTYPE, new ZclAttribute(this, ATTR_GPCLIENTSHAREDSECURITYKEYTYPE, "Gp Client Shared Security Key Type", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_GPCLIENTSHAREDSECURITYKEY, new ZclAttribute(this, ATTR_GPCLIENTSHAREDSECURITYKEY, "Gp Client Shared Security Key", DataType.SECURITY_KEY, false, true, true, true));
+            attributeMap.Add(ATTR_GPCLIENTLINKKEY, new ZclAttribute(this, ATTR_GPCLIENTLINKKEY, "Gp Client Link Key", DataType.SECURITY_KEY, false, true, true, true));
 
             return attributeMap;
         }
@@ -218,17 +218,17 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(11);
 
-            attributeMap.Add(ATTR_GPSMAXSINKTABLEENTRIES, new ZclAttribute(this, ATTR_GPSMAXSINKTABLEENTRIES, "Gps Max Sink Table Entries", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_SINKTABLE, new ZclAttribute(this, ATTR_SINKTABLE, "Sink Table", ZclDataType.Get(DataType.LONG_OCTET_STRING), true, true, false, false));
-            attributeMap.Add(ATTR_GPSCOMMUNICATIONMODE, new ZclAttribute(this, ATTR_GPSCOMMUNICATIONMODE, "Gps Communication Mode", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_GPSCOMMISSIONINGEXITMODE, new ZclAttribute(this, ATTR_GPSCOMMISSIONINGEXITMODE, "Gps Commissioning Exit Mode", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_GPSCOMMISSIONINGWINDOW, new ZclAttribute(this, ATTR_GPSCOMMISSIONINGWINDOW, "Gps Commissioning Window", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_GPSSECURITYLEVEL, new ZclAttribute(this, ATTR_GPSSECURITYLEVEL, "Gps Security Level", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_GPSFUNCTIONALITY, new ZclAttribute(this, ATTR_GPSFUNCTIONALITY, "Gps Functionality", ZclDataType.Get(DataType.BITMAP_24_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_GPSACTIVEFUNCTIONALITY, new ZclAttribute(this, ATTR_GPSACTIVEFUNCTIONALITY, "Gps Active Functionality", ZclDataType.Get(DataType.BITMAP_24_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_GPSERVERSHAREDSECURITYKEYTYPE, new ZclAttribute(this, ATTR_GPSERVERSHAREDSECURITYKEYTYPE, "Gp Server Shared Security Key Type", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_GPSERVERSHAREDSECURITYKEY, new ZclAttribute(this, ATTR_GPSERVERSHAREDSECURITYKEY, "Gp server Shared Security Key", ZclDataType.Get(DataType.SECURITY_KEY), false, true, true, true));
-            attributeMap.Add(ATTR_GPSERVERLINKKEY, new ZclAttribute(this, ATTR_GPSERVERLINKKEY, "Gp Server Link Key", ZclDataType.Get(DataType.SECURITY_KEY), false, true, true, true));
+            attributeMap.Add(ATTR_GPSMAXSINKTABLEENTRIES, new ZclAttribute(this, ATTR_GPSMAXSINKTABLEENTRIES, "Gps Max Sink Table Entries", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_SINKTABLE, new ZclAttribute(this, ATTR_SINKTABLE, "Sink Table", DataType.LONG_OCTET_STRING, true, true, false, false));
+            attributeMap.Add(ATTR_GPSCOMMUNICATIONMODE, new ZclAttribute(this, ATTR_GPSCOMMUNICATIONMODE, "Gps Communication Mode", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_GPSCOMMISSIONINGEXITMODE, new ZclAttribute(this, ATTR_GPSCOMMISSIONINGEXITMODE, "Gps Commissioning Exit Mode", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_GPSCOMMISSIONINGWINDOW, new ZclAttribute(this, ATTR_GPSCOMMISSIONINGWINDOW, "Gps Commissioning Window", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_GPSSECURITYLEVEL, new ZclAttribute(this, ATTR_GPSSECURITYLEVEL, "Gps Security Level", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_GPSFUNCTIONALITY, new ZclAttribute(this, ATTR_GPSFUNCTIONALITY, "Gps Functionality", DataType.BITMAP_24_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_GPSACTIVEFUNCTIONALITY, new ZclAttribute(this, ATTR_GPSACTIVEFUNCTIONALITY, "Gps Active Functionality", DataType.BITMAP_24_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_GPSERVERSHAREDSECURITYKEYTYPE, new ZclAttribute(this, ATTR_GPSERVERSHAREDSECURITYKEYTYPE, "Gp Server Shared Security Key Type", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_GPSERVERSHAREDSECURITYKEY, new ZclAttribute(this, ATTR_GPSERVERSHAREDSECURITYKEY, "Gp server Shared Security Key", DataType.SECURITY_KEY, false, true, true, true));
+            attributeMap.Add(ATTR_GPSERVERLINKKEY, new ZclAttribute(this, ATTR_GPSERVERLINKKEY, "Gp Server Link Key", DataType.SECURITY_KEY, false, true, true, true));
 
             return attributeMap;
         }

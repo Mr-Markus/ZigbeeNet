@@ -80,20 +80,20 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneStatusComplete, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.Serialize(NumberOfZones, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(IasAceZoneStatus, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneStatus, ZclDataType.Get(DataType.BITMAP_16_BIT));
+            serializer.Serialize(ZoneStatusComplete, DataType.BOOLEAN);
+            serializer.Serialize(NumberOfZones, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(IasAceZoneStatus, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneStatus, DataType.BITMAP_16_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneStatusComplete = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
-            NumberOfZones = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            IasAceZoneStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneStatus = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
+            ZoneStatusComplete = deserializer.Deserialize<bool>(DataType.BOOLEAN);
+            NumberOfZones = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            IasAceZoneStatus = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneStatus = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
         }
 
         public override string ToString()

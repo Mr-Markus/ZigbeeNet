@@ -30,14 +30,14 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SnapshotScheduleId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SnapshotScheduleConfirmation, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(SnapshotScheduleId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SnapshotScheduleConfirmation, DataType.ENUMERATION_8_BIT);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SnapshotScheduleId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SnapshotScheduleConfirmation = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            SnapshotScheduleId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SnapshotScheduleConfirmation = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

@@ -99,22 +99,22 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SampleId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(SampleStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(SampleType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SampleRequestInterval, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NumberOfSamples, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Samples, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            serializer.Serialize(SampleId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(SampleStartTime, DataType.UTCTIME);
+            serializer.Serialize(SampleType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SampleRequestInterval, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NumberOfSamples, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Samples, DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SampleId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            SampleStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            SampleType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SampleRequestInterval = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NumberOfSamples = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Samples = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
+            SampleId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            SampleStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            SampleType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SampleRequestInterval = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NumberOfSamples = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Samples = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
         }
 
         public override string ToString()

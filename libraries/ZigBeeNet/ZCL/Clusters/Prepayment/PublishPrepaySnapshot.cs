@@ -86,26 +86,26 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SnapshotId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(SnapshotTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(TotalSnapshotsFound, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(CommandIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TotalNumberOfCommands, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SnapshotCause, ZclDataType.Get(DataType.BITMAP_32_BIT));
-            serializer.Serialize(SnapshotPayloadType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SnapshotPayload, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(SnapshotId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(SnapshotTime, DataType.UTCTIME);
+            serializer.Serialize(TotalSnapshotsFound, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(CommandIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TotalNumberOfCommands, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SnapshotCause, DataType.BITMAP_32_BIT);
+            serializer.Serialize(SnapshotPayloadType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SnapshotPayload, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SnapshotId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            SnapshotTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            TotalSnapshotsFound = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CommandIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TotalNumberOfCommands = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SnapshotCause = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
-            SnapshotPayloadType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SnapshotPayload = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            SnapshotId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            SnapshotTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            TotalSnapshotsFound = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            CommandIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TotalNumberOfCommands = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SnapshotCause = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
+            SnapshotPayloadType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SnapshotPayload = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

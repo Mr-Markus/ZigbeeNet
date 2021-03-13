@@ -73,16 +73,16 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(NumberOfZones, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneIds, ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ArmDisarmCode, ZclDataType.Get(DataType.CHARACTER_STRING));
+            serializer.Serialize(NumberOfZones, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneIds, DataType.N_X_UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ArmDisarmCode, DataType.CHARACTER_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            NumberOfZones = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneIds = deserializer.Deserialize<List<byte>>(ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
-            ArmDisarmCode = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
+            NumberOfZones = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneIds = deserializer.Deserialize<List<byte>>(DataType.N_X_UNSIGNED_8_BIT_INTEGER);
+            ArmDisarmCode = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
         }
 
         public override string ToString()

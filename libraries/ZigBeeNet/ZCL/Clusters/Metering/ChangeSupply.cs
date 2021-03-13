@@ -103,22 +103,22 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(RequestDateTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(ImplementationDateTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(ProposedSupplyStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SupplyControlBits, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(RequestDateTime, DataType.UTCTIME);
+            serializer.Serialize(ImplementationDateTime, DataType.UTCTIME);
+            serializer.Serialize(ProposedSupplyStatus, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SupplyControlBits, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            RequestDateTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            ImplementationDateTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            ProposedSupplyStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SupplyControlBits = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            RequestDateTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            ImplementationDateTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            ProposedSupplyStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SupplyControlBits = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

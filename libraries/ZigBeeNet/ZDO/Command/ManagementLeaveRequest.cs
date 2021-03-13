@@ -51,16 +51,16 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(DeviceAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(RemoveChildrenRejoin, ZclDataType.Get(DataType.BOOLEAN));
+            serializer.Serialize(DeviceAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(RemoveChildrenRejoin, DataType.BOOLEAN);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            DeviceAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            RemoveChildrenRejoin = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
+            DeviceAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            RemoveChildrenRejoin = deserializer.Deserialize<bool>(DataType.BOOLEAN);
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

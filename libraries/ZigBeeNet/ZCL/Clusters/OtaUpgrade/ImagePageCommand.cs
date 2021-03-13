@@ -99,33 +99,33 @@ namespace ZigBeeNet.ZCL.Clusters.OtaUpgrade
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(FieldControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ImageType, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(FileVersion, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(FileOffset, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(MaximumDataSize, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(PageSize, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ResponseSpacing, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(FieldControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ImageType, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(FileVersion, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(FileOffset, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(MaximumDataSize, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(PageSize, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ResponseSpacing, DataType.UNSIGNED_16_BIT_INTEGER);
             if ((FieldControl & 0x01) != 0)
             {
-                serializer.Serialize(RequestNodeAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
+                serializer.Serialize(RequestNodeAddress, DataType.IEEE_ADDRESS);
             }
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            FieldControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ImageType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            FileVersion = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            FileOffset = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            MaximumDataSize = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            PageSize = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ResponseSpacing = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            FieldControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ImageType = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            FileVersion = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            FileOffset = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            MaximumDataSize = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            PageSize = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ResponseSpacing = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             if ((FieldControl & 0x01) != 0)
             {
-                RequestNodeAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
+                RequestNodeAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
             }
         }
 

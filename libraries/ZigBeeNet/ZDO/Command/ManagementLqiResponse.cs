@@ -54,13 +54,13 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(NeighborTableEntries, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(NeighborTableList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(NeighborTableEntries, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(StartIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(NeighborTableList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < NeighborTableList.Count; cnt++)
             {
-                serializer.Serialize(NeighborTableList[cnt], ZclDataType.Get(DataType.NEIGHBOR_TABLE));
+                serializer.Serialize(NeighborTableList[cnt], DataType.NEIGHBOR_TABLE);
             }
         }
 
@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             NeighborTableList = new List<NeighborTable>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            NeighborTableEntries = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            byte? neighborTableListCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NeighborTableEntries = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            StartIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            byte? neighborTableListCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (neighborTableListCount != null)
             {
                 for (int cnt = 0; cnt < neighborTableListCount; cnt++)
                 {
-                    NeighborTableList.Add((NeighborTable) deserializer.Deserialize(ZclDataType.Get(DataType.NEIGHBOR_TABLE)));
+                    NeighborTableList.Add((NeighborTable) deserializer.Deserialize(DataType.NEIGHBOR_TABLE));
                 }
             }
         }

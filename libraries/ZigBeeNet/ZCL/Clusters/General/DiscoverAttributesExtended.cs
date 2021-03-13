@@ -52,14 +52,14 @@ namespace ZigBeeNet.ZCL.Clusters.General
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(StartAttributeIdentifier, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(MaximumAttributeIdentifiers, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(StartAttributeIdentifier, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(MaximumAttributeIdentifiers, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            StartAttributeIdentifier = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            MaximumAttributeIdentifiers = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            StartAttributeIdentifier = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            MaximumAttributeIdentifiers = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

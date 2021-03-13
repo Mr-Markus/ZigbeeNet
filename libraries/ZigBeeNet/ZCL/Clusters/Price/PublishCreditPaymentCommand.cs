@@ -117,26 +117,26 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CreditPaymentDueDate, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(CreditPaymentOverdueAmount, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CreditPaymentStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(CreditPayment, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CreditPaymentDate, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(CreditPaymentRef, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CreditPaymentDueDate, DataType.UTCTIME);
+            serializer.Serialize(CreditPaymentOverdueAmount, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CreditPaymentStatus, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(CreditPayment, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CreditPaymentDate, DataType.UTCTIME);
+            serializer.Serialize(CreditPaymentRef, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CreditPaymentDueDate = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            CreditPaymentOverdueAmount = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CreditPaymentStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            CreditPayment = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CreditPaymentDate = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            CreditPaymentRef = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CreditPaymentDueDate = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            CreditPaymentOverdueAmount = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CreditPaymentStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            CreditPayment = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CreditPaymentDate = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            CreditPaymentRef = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

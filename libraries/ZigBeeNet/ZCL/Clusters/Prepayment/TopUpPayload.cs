@@ -35,16 +35,16 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TopUpCode, ZclDataType.Get(DataType.OCTET_STRING));
-            serializer.Serialize(TopUpAmount, ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER));
-            serializer.Serialize(TopUpTime, ZclDataType.Get(DataType.UTCTIME));
+            serializer.Serialize(TopUpCode, DataType.OCTET_STRING);
+            serializer.Serialize(TopUpAmount, DataType.SIGNED_32_BIT_INTEGER);
+            serializer.Serialize(TopUpTime, DataType.UTCTIME);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TopUpCode = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
-            TopUpAmount = deserializer.Deserialize<int>(ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER));
-            TopUpTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
+            TopUpCode = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
+            TopUpAmount = deserializer.Deserialize<int>(DataType.SIGNED_32_BIT_INTEGER);
+            TopUpTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
         }
 
         public override string ToString()

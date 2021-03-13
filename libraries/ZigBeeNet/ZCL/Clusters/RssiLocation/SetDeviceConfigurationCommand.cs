@@ -68,20 +68,20 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Power, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(PathLossExponent, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(CalculationPeriod, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(NumberRssiMeasurements, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ReportingPeriod, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(Power, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(PathLossExponent, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(CalculationPeriod, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(NumberRssiMeasurements, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ReportingPeriod, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Power = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            PathLossExponent = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            CalculationPeriod = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            NumberRssiMeasurements = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ReportingPeriod = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            Power = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            PathLossExponent = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            CalculationPeriod = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            NumberRssiMeasurements = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ReportingPeriod = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -45,12 +45,12 @@ namespace ZigBeeNet.ZCL.Clusters.General
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Records, ZclDataType.Get(DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD));
+            serializer.Serialize(Records, DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Records = deserializer.Deserialize<List<WriteAttributeStatusRecord>>(ZclDataType.Get(DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD));
+            Records = deserializer.Deserialize<List<WriteAttributeStatusRecord>>(DataType.N_X_WRITE_ATTRIBUTE_STATUS_RECORD);
         }
 
         public override string ToString()

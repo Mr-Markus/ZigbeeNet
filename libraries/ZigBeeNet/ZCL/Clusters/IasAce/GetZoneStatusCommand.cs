@@ -103,18 +103,18 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(StartingZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(MaxZoneIDs, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneStatusMaskFlag, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.Serialize(ZoneStatusMask, ZclDataType.Get(DataType.BITMAP_16_BIT));
+            serializer.Serialize(StartingZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(MaxZoneIDs, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneStatusMaskFlag, DataType.BOOLEAN);
+            serializer.Serialize(ZoneStatusMask, DataType.BITMAP_16_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            StartingZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            MaxZoneIDs = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneStatusMaskFlag = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
-            ZoneStatusMask = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
+            StartingZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            MaxZoneIDs = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneStatusMaskFlag = deserializer.Deserialize<bool>(DataType.BOOLEAN);
+            ZoneStatusMask = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
         }
 
         public override string ToString()

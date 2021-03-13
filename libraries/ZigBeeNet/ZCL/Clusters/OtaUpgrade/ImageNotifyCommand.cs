@@ -77,43 +77,43 @@ namespace ZigBeeNet.ZCL.Clusters.OtaUpgrade
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(PayloadType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(PayloadType, DataType.ENUMERATION_8_BIT);
             if (PayloadType >= 0)
             {
-                serializer.Serialize(QueryJitter, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+                serializer.Serialize(QueryJitter, DataType.UNSIGNED_8_BIT_INTEGER);
             }
             if (PayloadType >= 1)
             {
-                serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (PayloadType >= 2)
             {
-                serializer.Serialize(ImageType, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                serializer.Serialize(ImageType, DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (PayloadType >= 3)
             {
-                serializer.Serialize(NewFileVersion, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                serializer.Serialize(NewFileVersion, DataType.UNSIGNED_32_BIT_INTEGER);
             }
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            PayloadType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            PayloadType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
             if (PayloadType >= 0)
             {
-                QueryJitter = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+                QueryJitter = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             }
             if (PayloadType >= 1)
             {
-                ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (PayloadType >= 2)
             {
-                ImageType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+                ImageType = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
             }
             if (PayloadType >= 3)
             {
-                NewFileVersion = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+                NewFileVersion = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
             }
         }
 

@@ -54,13 +54,13 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(BindingTableEntries, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(BindingTableList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(BindingTableEntries, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(StartIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(BindingTableList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < BindingTableList.Count; cnt++)
             {
-                serializer.Serialize(BindingTableList[cnt], ZclDataType.Get(DataType.BINDING_TABLE));
+                serializer.Serialize(BindingTableList[cnt], DataType.BINDING_TABLE);
             }
         }
 
@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             BindingTableList = new List<BindingTable>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            BindingTableEntries = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            byte? bindingTableListCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            BindingTableEntries = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            StartIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            byte? bindingTableListCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (bindingTableListCount != null)
             {
                 for (int cnt = 0; cnt < bindingTableListCount; cnt++)
                 {
-                    BindingTableList.Add((BindingTable) deserializer.Deserialize(ZclDataType.Get(DataType.BINDING_TABLE)));
+                    BindingTableList.Add((BindingTable) deserializer.Deserialize(DataType.BINDING_TABLE));
                 }
             }
         }
