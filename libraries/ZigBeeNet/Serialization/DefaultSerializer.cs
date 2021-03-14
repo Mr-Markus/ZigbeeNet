@@ -38,9 +38,13 @@ namespace ZigBeeNet.Serialization
                 case DataType.BOOLEAN:
                     _buffer[_length++] = (bool)data ? (byte)0x01 : (byte)0x00;
                     break;
+                case DataType.SIGNED_16_BIT_INTEGER:
+                    short sshortValue = Convert.ToInt16(data);
+                    _buffer[_length++] = (byte)(sshortValue & 0xFF);
+                    _buffer[_length++] = (byte)((sshortValue >> 8) & 0xFF);
+                    break;
                 case DataType.NWK_ADDRESS:
                 case DataType.BITMAP_16_BIT:
-                case DataType.SIGNED_16_BIT_INTEGER:
                 case DataType.UNSIGNED_16_BIT_INTEGER:
                 case DataType.ENUMERATION_16_BIT:
                 case DataType.CLUSTERID:
@@ -48,10 +52,13 @@ namespace ZigBeeNet.Serialization
                     _buffer[_length++] = (byte)(shortValue & 0xFF);
                     _buffer[_length++] = (byte)((shortValue >> 8) & 0xFF);
                     break;
+                case DataType.SIGNED_8_BIT_INTEGER:
+                    sbyte sbyteValue = Convert.ToSByte(data);
+                    _buffer[_length++] = (byte)(sbyteValue & 0xFF);
+                    break;
                 case DataType.ENDPOINT:
                 case DataType.DATA_8_BIT:
                 case DataType.BITMAP_8_BIT:
-                case DataType.SIGNED_8_BIT_INTEGER:
                 case DataType.UNSIGNED_8_BIT_INTEGER:
                 case DataType.ENUMERATION_8_BIT:
                     byte byteValue = Convert.ToByte(data);
@@ -172,8 +179,13 @@ namespace ZigBeeNet.Serialization
                         _buffer[_length++] = arrayByte;
                     }
                     break;
-                case DataType.BITMAP_24_BIT:
                 case DataType.SIGNED_24_BIT_INTEGER:
+                    uint sint24Value = (uint)data;
+                    _buffer[_length++] = (byte)(sint24Value & 0xFF);
+                    _buffer[_length++] = (byte)((sint24Value >> 8) & 0xFF);
+                    _buffer[_length++] = (byte)((sint24Value >> 16) & 0xFF);
+                    break;
+                case DataType.BITMAP_24_BIT:
                 case DataType.UNSIGNED_24_BIT_INTEGER:
                     uint uint24Value = (uint)data;
                     _buffer[_length++] = (byte)(uint24Value & 0xFF);
