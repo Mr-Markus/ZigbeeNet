@@ -9,7 +9,8 @@ using ZigBeeNet;
 using ZigBeeNet.App;
 using ZigBeeNet.App.Discovery;
 using ZigBeeNet.ZDO.Command;
-using Serilog;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 using ZigBeeNet.ZCL.Clusters;
 using ZigBeeNet.ZCL;
 using ZigBeeNet.ZCL.Clusters.IasZone;
@@ -82,6 +83,11 @@ namespace ZigBeeNet.App.IasClient
     public class ZclIasZoneClient : IZigBeeApplication
     {
         /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZclIasZoneClient>();        ///// <summary>
+
+        /// <summary>
         /// The default number of milliseconds to wait for a <see cref="ZoneEnrollRequestCommand"/>
         /// before sending the <see cref="ZoneEnrollResponse"/>
         /// </summary>
@@ -89,7 +95,7 @@ namespace ZigBeeNet.App.IasClient
 
 
         /// <summary>
-        /// The <see cref="ZigBeeNetworkManager>
+        /// The <see cref="ZigBeeNetworkManager">
         /// </summary>
         private ZigBeeNetworkManager _networkManager;
 
@@ -165,21 +171,21 @@ namespace ZigBeeNet.App.IasClient
             if (currentState.HasValue) 
             {
                 ZoneStateEnum currentStateEnum = (ZoneStateEnum)currentState;
-                Log.Debug("{Address}: IAS CIE state is currently {StateEnum}[{State}]", _iasZoneCluster.GetZigBeeAddress(), currentStateEnum, currentState);
+                _logger.LogDebug("{Address}: IAS CIE state is currently {StateEnum}[{State}]", _iasZoneCluster.GetZigBeeAddress(), currentStateEnum, currentState);
                 if (currentStateEnum == ZoneStateEnum.ENROLLED) 
                 {
-                    Log.Debug("{Address}: IAS CIE is already enrolled", _iasZoneCluster.GetZigBeeAddress());
+                    _logger.LogDebug("{Address}: IAS CIE is already enrolled", _iasZoneCluster.GetZigBeeAddress());
                     return;
                 }
             } 
             else 
             {
-                Log.Debug("{Address}: IAS CIE failed to get state", _iasZoneCluster.GetZigBeeAddress());
+                _logger.LogDebug("{Address}: IAS CIE failed to get state", _iasZoneCluster.GetZigBeeAddress());
             }
 
             ZclAttribute cieAddressAttribute = _iasZoneCluster.GetAttribute(ZclIasZoneCluster.ATTR_IASCIEADDRESS);
             IeeeAddress currentIeeeAddress = (IeeeAddress) await cieAddressAttribute.ReadValue(0);
-            Log.Debug("{Address}: IAS CIE address is currently {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
+            _logger.LogDebug("{Address}: IAS CIE address is currently {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
 
             if (!_ieeeAddress.Equals(currentIeeeAddress)) 
             {
@@ -189,32 +195,32 @@ namespace ZigBeeNet.App.IasClient
                 currentIeeeAddress = (IeeeAddress) await cieAddressAttribute.ReadValue(0);
                 if (_ieeeAddress.Equals(currentIeeeAddress)) 
                 {
-                    Log.Debug("{Address}: IAS CIE address is confirmed {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
+                    _logger.LogDebug("{Address}: IAS CIE address is confirmed {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
                 } 
                 else 
                 {
-                    Log.Warning("{Address}: IAS CIE address is NOT confirmed {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
+                    _logger.LogWarning("{Address}: IAS CIE address is NOT confirmed {Address2}", _iasZoneCluster.GetZigBeeAddress(), currentIeeeAddress);
                 }
             }
 
             byte? currentZone = (byte?) await _iasZoneCluster.GetAttribute(ZclIasZoneCluster.ATTR_ZONEID).ReadValue(0);
             if (currentZone == null) 
             {
-                Log.Debug("{Address}: IAS CIE zone ID request failed", _iasZoneCluster.GetZigBeeAddress());
+                _logger.LogDebug("{Address}: IAS CIE zone ID request failed", _iasZoneCluster.GetZigBeeAddress());
             } 
             else 
             {
-                Log.Debug("{Address}: IAS CIE zone ID is currently {ZoneId}", _iasZoneCluster.GetZigBeeAddress(), currentZone);
+                _logger.LogDebug("{Address}: IAS CIE zone ID is currently {ZoneId}", _iasZoneCluster.GetZigBeeAddress(), currentZone);
             }
 
             ZoneType = (ushort?) await _iasZoneCluster.GetAttribute(ZclIasZoneCluster.ATTR_ZONETYPE).ReadValue(long.MaxValue);
             if (ZoneType == null) 
             {
-                Log.Debug("{Address}: IAS CIE zone type request failed", _iasZoneCluster.GetZigBeeAddress());
+                _logger.LogDebug("{Address}: IAS CIE zone type request failed", _iasZoneCluster.GetZigBeeAddress());
             } 
             else 
             {
-                Log.Debug("{Address}: IAS CIE zone type is {ZoneTypeEnum} ({ZoneTypeValue})", _iasZoneCluster.GetZigBeeAddress(), ((ZoneTypeEnum)ZoneType), ZoneType.Value.ToString("X2"));
+                _logger.LogDebug("{Address}: IAS CIE zone type is {ZoneTypeEnum} ({ZoneTypeValue})", _iasZoneCluster.GetZigBeeAddress(), ((ZoneTypeEnum)ZoneType), ZoneType.Value.ToString("X2"));
             }
 
             // Start the auto-enroll timer
@@ -235,7 +241,7 @@ namespace ZigBeeNet.App.IasClient
             }
             catch(Exception ex)
             {
-                Log.Warning("{Address}: IAS CIE Exception in RunAutoEnrollmentTask {Exception}", _iasZoneCluster.GetZigBeeAddress(), ex.Message);
+                _logger.LogWarning("{Address}: IAS CIE Exception in RunAutoEnrollmentTask {Exception}", _iasZoneCluster.GetZigBeeAddress(), ex.Message);
             }
         }
 
