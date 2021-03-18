@@ -29,6 +29,8 @@ using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZDO.Command;
 using ZigBeeNet.ZDO.Field;
+using Serilog.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.PlayGround
 {
@@ -42,6 +44,14 @@ namespace ZigBeeNet.PlayGround
                .WriteTo.Console()
                .CreateLogger();
 
+            ILoggerFactory _factory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .SetMinimumLevel(LogLevel.Debug)
+                    .AddSerilog();
+            });
+            LogManager.SetFactory(_factory);
+            
             bool showHelp = false;
             ZigBeeDongle zigBeeDongle = ZigBeeDongle.TiCc2531;
             string port = "";
@@ -280,7 +290,7 @@ namespace ZigBeeNet.PlayGround
                                 foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Input Cluster:" + Environment.NewLine);
+                                    Console.WriteLine("Input Cluster [{0:X}]:",endpoint.EndpointId);
                                     Console.ForegroundColor = tmp;
 
                                     foreach (var inputClusterId in endpoint.GetInputClusterIds())
@@ -289,6 +299,7 @@ namespace ZigBeeNet.PlayGround
                                         var clusterName = cluster.GetClusterName();
                                         Console.WriteLine($"{clusterName}");
                                     }
+                                    Console.WriteLine();
                                 }
 
                                 Console.WriteLine();
@@ -296,15 +307,15 @@ namespace ZigBeeNet.PlayGround
                                 foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Output Cluster:" + Environment.NewLine);
+                                    Console.WriteLine("Output Cluster [{0:X}]:",endpoint.EndpointId);
                                     Console.ForegroundColor = tmp;
-
                                     foreach (var outputClusterIds in endpoint.GetOutputClusterIds())
                                     {
                                         var cluster = endpoint.GetOutputCluster(outputClusterIds);
                                         var clusterName = cluster.GetClusterName();
                                         Console.WriteLine($"{clusterName}");
                                     }
+                                    Console.WriteLine();
                                 }
 
                                 Console.WriteLine(new string('-', 20));
