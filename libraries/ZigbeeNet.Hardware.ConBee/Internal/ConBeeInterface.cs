@@ -60,6 +60,26 @@ namespace ZigbeeNet.Hardware.ConBee
             thread.Name = "ConBee read loop";
             thread.IsBackground = true;
             thread.Start();
+            PingWatchdogLoop();
+        }
+
+        async void PingWatchdogLoop()
+        {
+            while (!exit)
+            {
+                try
+                {
+                    WatchdogTTL = 60/*minutes*/ * 60 /*seconds*/;
+                    await Task.Delay(TimeSpan.FromMinutes(55)).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Exception updating WatchdogTTL {ex}");
+                    // Keep retrying to set every 15 seconds, so log is updated
+                    // frequently enough to be visible, but not too often to spam
+                    await Task.Delay(TimeSpan.FromSeconds(15)).ConfigureAwait(false);
+                }
+            }
         }
 
         public async Task<byte[]> SendAsync(Commands command, params byte[] payload)
