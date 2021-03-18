@@ -4,7 +4,8 @@ using System.Text;
 using System.Threading;
 using ZigBeeNet.Hardware.TI.CC2531.Network;
 using ZigBeeNet.Hardware.TI.CC2531.Packet;
-using Serilog;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
 {
@@ -13,6 +14,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
     /// </summary>
     public class BlockingCommandReceiver : IAsynchronousCommandListener
     {
+        static private readonly ILogger _logger = LogManager.GetLog<BlockingCommandReceiver>();
 
         private object _getCommandLockObject;
 
@@ -44,7 +46,7 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
 
             _commandId = commandId;
             _commandInterface = commandInterface;
-            Log.Verbose("Waiting for asynchronous response message {}.", commandId);
+            _logger.LogTrace("Waiting for asynchronous response message {}.", commandId);
             _commandInterface.AddAsynchronousCommandListener(this);
         }
 
@@ -67,13 +69,13 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
                     }
                     catch (Exception e)
                     {
-                        Log.Verbose("Blocking command receive timed out.", e);
+                        _logger.LogTrace("Blocking command receive timed out.", e);
                     }
                 }
             }
             if (_commandPacket == null)
             {
-                Log.Verbose("Timeout {} expired and no packet with {} received", timeoutMillis, _commandId);
+                _logger.LogTrace("Timeout {} expired and no packet with {} received", timeoutMillis, _commandId);
             }
             Cleanup();
             return _commandPacket;
@@ -93,21 +95,21 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Implementation
 
         public void ReceivedAsynchronousCommand(ZToolPacket packet)
         {
-            Log.Verbose("Received a packet {} and waiting for {}", packet.CMD, _commandId);
-            Log.Verbose("received {} {}", packet.GetType(), packet.ToString());
+            _logger.LogTrace("Received a packet {} and waiting for {}", packet.CMD, _commandId);
+            _logger.LogTrace("received {} {}", packet.GetType(), packet.ToString());
             //if (packet.isError())
             //{
             //    return;
             //}
             if ((ZToolCMD)packet.CMD != _commandId)
             {
-                Log.Verbose("Received unexpected packet: " + packet.GetType().Name);
+                _logger.LogTrace("Received unexpected packet: " + packet.GetType().Name);
                 return;
             }
             lock (typeof(BlockingCommandReceiver))
             {
                 _commandPacket = packet;
-                Log.Verbose("Received expected response: {}", packet.GetType().Name);
+                _logger.LogTrace("Received expected response: {}", packet.GetType().Name);
                 Cleanup();
             }
         }

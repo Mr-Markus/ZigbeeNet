@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using Serilog;
 
 namespace ZigBeeNet.Hardware.TI.CC2531.Util
 {

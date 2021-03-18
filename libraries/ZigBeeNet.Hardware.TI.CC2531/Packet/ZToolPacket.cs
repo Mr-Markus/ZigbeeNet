@@ -142,10 +142,6 @@ namespace ZigBeeNet.Hardware.TI.CC2531.Packet
             // data
             for (int i = 0; i < frameData.Length; i++)
             {
-                if (!ByteUtils.IsByteValue(frameData[i]))
-                {
-                    throw new Exception("Value is greater than one byte: " + frameData[i] + " (" + string.Format("{0:X}", frameData[i]) + ")");
-                }
                 Packet[PAYLOAD_START_INDEX + i] = frameData[i];
                 checksum.AddByte(Packet[PAYLOAD_START_INDEX + i]);
             }
