@@ -391,7 +391,7 @@ namespace ZigbeeNet.Hardware.ConBee
 
         public async Task<string> GetVersionAsync()
         {
-            var response = await SendAsync(Commands.VERSION).ConfigureAwait(false);
+            var response = await SendAsync(Commands.VERSION, new byte[4]).ConfigureAwait(false);
             string result;
             switch (response[6])
             {
