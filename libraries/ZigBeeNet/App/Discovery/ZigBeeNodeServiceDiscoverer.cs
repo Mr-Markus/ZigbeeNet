@@ -36,7 +36,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeNodeServiceDiscoverer>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNodeServiceDiscoverer>();
 
         /// <summary>
         /// The <see cref="ZigBeeNetworkManager"/>.

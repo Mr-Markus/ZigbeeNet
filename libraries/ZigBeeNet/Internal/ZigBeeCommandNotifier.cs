@@ -12,7 +12,7 @@ namespace ZigBeeNet.Internal
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeCommandNotifier>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeCommandNotifier>();
 
         private readonly object _lock = new object();
 

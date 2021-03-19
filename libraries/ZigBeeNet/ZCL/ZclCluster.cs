@@ -22,7 +22,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZclCluster>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZclCluster>();
 
         /// <summary>
         /// The <see cref="ZigBeeNetworkManager"> to which this device belongs

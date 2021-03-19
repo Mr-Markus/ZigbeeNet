@@ -25,7 +25,7 @@ namespace ZigBeeNet.Database
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeNetworkDatabaseManager>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNetworkDatabaseManager>();
 
         /// <summary>
         ///The default time(in milliseconds) to defer writes.This will prevent multiple writes to a single node within this period.

@@ -27,7 +27,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeNetworkDiscoverer>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNetworkDiscoverer>();
 
         /// <summary>
         /// Default maximum number of retries to perform

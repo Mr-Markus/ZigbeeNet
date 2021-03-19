@@ -19,7 +19,7 @@ namespace ZigBeeNet.Transaction
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeTransaction>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeTransaction>();
 
         private ZigBeeNetworkManager _networkManager;
         private IZigBeeTransactionMatcher _responseMatcher;

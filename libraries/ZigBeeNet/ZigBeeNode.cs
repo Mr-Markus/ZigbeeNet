@@ -26,7 +26,7 @@ namespace ZigBeeNet
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeNode>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNode>();
 
         /// <summary>
         /// Gets the current state for the node

@@ -30,7 +30,7 @@ namespace ZigBeeNet.App.Discovery
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeDiscoveryExtension>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeDiscoveryExtension>();
         
         /// <summary>
         /// The ZigBee network <see cref="ZigBeeNetworkDiscoverer"/>. The discover is responsible for monitoring the network for 

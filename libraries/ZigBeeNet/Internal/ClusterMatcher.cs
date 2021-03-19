@@ -20,7 +20,7 @@ namespace ZigBeeNet.Internal
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ClusterMatcher>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ClusterMatcher>();
 
         private ZigBeeNetworkManager _networkManager;
         private byte _localEndpointId;

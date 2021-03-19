@@ -35,7 +35,7 @@ namespace ZigbeeNet.Hardware.ConBee
 {
     public class ZigbeeDongleConBee : IZigBeeTransportTransmit
     {
-        private static ILogger _logger = LogManager.GetLog<ZigbeeDongleConBee>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigbeeDongleConBee>();
         private ConBeeInterface _conbeeInterface;
         private IZigBeeTransportReceive _zigBeeTransportReceive;
 

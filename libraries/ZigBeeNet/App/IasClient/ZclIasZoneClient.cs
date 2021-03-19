@@ -85,7 +85,7 @@ namespace ZigBeeNet.App.IasClient
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZclIasZoneClient>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZclIasZoneClient>();
 
         /// <summary>
         /// The default number of milliseconds to wait for a <see cref="ZoneEnrollRequestCommand"/>

@@ -35,7 +35,7 @@ namespace ZigbeeNet.Hardware.ConBee
 {
     class ConBeeInterface : IDisposable
     {
-        private static ILogger _logger = LogManager.GetLog<ConBeeInterface>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ConBeeInterface>();
         private IZigBeePort serialPort;
         private Slip slip;
         private Thread thread;

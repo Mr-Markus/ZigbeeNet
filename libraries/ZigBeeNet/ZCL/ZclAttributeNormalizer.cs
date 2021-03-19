@@ -18,7 +18,7 @@ namespace ZigBeeNet.ZCL
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZclAttributeNormalizer>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZclAttributeNormalizer>();
 
         /// <summary>
          /// Normalize ZCL data

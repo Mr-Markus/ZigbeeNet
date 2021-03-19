@@ -21,7 +21,7 @@ namespace ZigBeeNet
         /// <summary>
         /// ILogger for logging events for this class
         /// </summary>
-        private static ILogger _logger = LogManager.GetLog<ZigBeeEndpoint>();        ///// <summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeEndpoint>();
         // /// The <see cref="ZigBeeNetworkManager"> that manages this endpoint
         // /// </summary>
         //private readonly ZigBeeNetworkManager _networkManager;
