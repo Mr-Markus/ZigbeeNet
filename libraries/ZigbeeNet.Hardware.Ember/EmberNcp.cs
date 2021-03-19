@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,6 +8,9 @@ using ZigBeeNet.Hardware.Ember.Ezsp.Structure;
 using ZigBeeNet.Hardware.Ember.Internal;
 using ZigBeeNet.Hardware.Ember.Transaction;
 using ZigBeeNet.Security;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
+
 
 namespace ZigBeeNet.Hardware.Ember
 {
@@ -17,6 +19,7 @@ namespace ZigBeeNet.Hardware.Ember
     /// </summary>
     public class EmberNcp
     {
+        static private readonly ILogger _logger = LogManager.GetLog<EmberNcp>();
 
         /**
          * The protocol handler used to send and receive EZSP packets
@@ -63,10 +66,10 @@ namespace ZigBeeNet.Hardware.Ember
             EzspVersionResponse response = (EzspVersionResponse)transaction.GetResponse();
             if (response == null)
             {
-                Log.Debug("No response from ezspVersion command");
+                _logger.LogDebug("No response from ezspVersion command");
                 return null;
             }
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = EmberStatus.UNKNOWN;
 
             return response;
@@ -84,7 +87,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspNetworkInitRequest request = new EzspNetworkInitRequest();
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspNetworkInitResponse)));
             EzspNetworkInitResponse response = (EzspNetworkInitResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
 
             return response.GetStatus();
         }
@@ -104,7 +107,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspLeaveNetworkRequest request = new EzspLeaveNetworkRequest();
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspLeaveNetworkResponse)));
             EzspLeaveNetworkResponse response = (EzspLeaveNetworkResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
 
             return response.GetStatus();
         }
@@ -119,7 +122,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspGetCurrentSecurityStateRequest request = new EzspGetCurrentSecurityStateRequest();
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetCurrentSecurityStateResponse)));
             EzspGetCurrentSecurityStateResponse response = (EzspGetCurrentSecurityStateResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = response.GetStatus();
             return response.GetState();
         }
@@ -178,7 +181,7 @@ namespace ZigBeeNet.Hardware.Ember
             request.SetIndex(childId);
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetChildDataResponse)));
             EzspGetChildDataResponse response = (EzspGetChildDataResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = response.GetStatus();
             if (_lastStatus != EmberStatus.EMBER_SUCCESS)
                 return null;
@@ -209,7 +212,7 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspAddEndpointResponse)));
             EzspAddEndpointResponse response = (EzspAddEndpointResponse)transaction.GetResponse();
 
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = EmberStatus.UNKNOWN;
 
             return response.GetStatus();
@@ -225,7 +228,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspReadCountersRequest request = new EzspReadCountersRequest();
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspReadCountersResponse)));
             EzspReadCountersResponse response = (EzspReadCountersResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = EmberStatus.UNKNOWN;
             return response.GetValues();
         }
@@ -240,7 +243,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspClearKeyTableRequest request = new EzspClearKeyTableRequest();
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspClearKeyTableResponse)));
             EzspClearKeyTableResponse response = (EzspClearKeyTableResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = response.GetStatus();
             return _lastStatus;
         }
@@ -257,7 +260,7 @@ namespace ZigBeeNet.Hardware.Ember
             request.SetKeyType(keyType);
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetKeyResponse)));
             EzspGetKeyResponse response = (EzspGetKeyResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = response.GetStatus();
             if (_lastStatus != EmberStatus.EMBER_SUCCESS)
                 return null;
@@ -277,7 +280,7 @@ namespace ZigBeeNet.Hardware.Ember
             request.SetIndex(index);
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetKeyTableEntryResponse)));
             EzspGetKeyTableEntryResponse response = (EzspGetKeyTableEntryResponse)transaction.GetResponse();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             _lastStatus = response.GetStatus();
             if (_lastStatus != EmberStatus.EMBER_SUCCESS)
                 return null;
@@ -298,7 +301,7 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetConfigurationValueResponse)));
             EzspGetConfigurationValueResponse response = (EzspGetConfigurationValueResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
 
             if (response.GetStatus() != EzspStatus.EZSP_SUCCESS)
                 return null;
@@ -318,12 +321,12 @@ namespace ZigBeeNet.Hardware.Ember
             EzspSetConfigurationValueRequest request = new EzspSetConfigurationValueRequest();
             request.SetConfigId(configId);
             request.SetValue(value);
-            Log.Debug(request.ToString());
+            _logger.LogDebug(request.ToString());
 
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspSetConfigurationValueResponse)));
             EzspSetConfigurationValueResponse response = (EzspSetConfigurationValueResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
 
             return response.GetStatus();
         }
@@ -343,10 +346,10 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(setPolicyRequest, typeof(EzspSetPolicyResponse)));
             EzspSetPolicyResponse setPolicyResponse = (EzspSetPolicyResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(setPolicyResponse.ToString());
+            _logger.LogDebug(setPolicyResponse.ToString());
             if (setPolicyResponse.GetStatus() != EzspStatus.EZSP_SUCCESS)
             {
-                Log.Debug("Error during setting policy: {}", setPolicyResponse);
+                _logger.LogDebug("Error during setting policy: {}", setPolicyResponse);
             }
 
             return setPolicyResponse.GetStatus();
@@ -366,10 +369,10 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(getPolicyRequest, typeof(EzspGetPolicyResponse)));
             EzspGetPolicyResponse getPolicyResponse = (EzspGetPolicyResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(getPolicyResponse.ToString());
+            _logger.LogDebug(getPolicyResponse.ToString());
             if (getPolicyResponse.GetStatus() != EzspStatus.EZSP_SUCCESS)
             {
-                Log.Debug("Error getting policy: {}", getPolicyResponse);
+                _logger.LogDebug("Error getting policy: {}", getPolicyResponse);
                 return EzspDecisionId.UNKNOWN;
             }
 
@@ -391,9 +394,9 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspSetValueResponse)));
             EzspSetValueResponse response = (EzspSetValueResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             if (response.GetStatus() != EzspStatus.EZSP_SUCCESS)
-                Log.Debug("Error setting value: {}", response);
+                _logger.LogDebug("Error setting value: {}", response);
 
             return response.GetStatus();
         }
@@ -411,10 +414,10 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspGetValueResponse)));
             EzspGetValueResponse response = (EzspGetValueResponse)transaction.GetResponse();
             _lastStatus = EmberStatus.UNKNOWN;
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             if (response.GetStatus() != EzspStatus.EZSP_SUCCESS)
             {
-                Log.Debug("Error getting value: {}", response);
+                _logger.LogDebug("Error getting value: {}", response);
                 return null;
             }
 
@@ -438,9 +441,9 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspAddTransientLinkKeyResponse)));
             EzspAddTransientLinkKeyResponse response = (EzspAddTransientLinkKeyResponse)transaction.GetResponse();
             _lastStatus = response.GetStatus();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             if (response.GetStatus() != EmberStatus.EMBER_SUCCESS)
-                Log.Debug("Error setting transient key: {}", response);
+                _logger.LogDebug("Error setting transient key: {}", response);
 
             return response.GetStatus();
         }
@@ -460,7 +463,7 @@ namespace ZigBeeNet.Hardware.Ember
             _lastStatus = response.GetStatus();
             if (response.GetStatus() != EmberStatus.EMBER_SUCCESS)
             {
-                Log.Debug("Error getting 163k1 certificate: {Response}", response);
+                _logger.LogDebug("Error getting 163k1 certificate: {Response}", response);
                 return null;
             }
 
@@ -480,7 +483,7 @@ namespace ZigBeeNet.Hardware.Ember
             _lastStatus = response.GetStatus();
             if (response.GetStatus() != EmberStatus.EMBER_SUCCESS)
             {
-                Log.Debug("Error getting 283k1 certificate: {}", response);
+                _logger.LogDebug("Error getting 283k1 certificate: {}", response);
                 return null;
             }
 
@@ -508,9 +511,9 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(request, typeof(EzspAesMmoHashResponse)));
             EzspAesMmoHashResponse response = (EzspAesMmoHashResponse)transaction.GetResponse();
             _lastStatus = response.GetStatus();
-            Log.Debug(response.ToString());
+            _logger.LogDebug(response.ToString());
             if (response.GetStatus() != EmberStatus.EMBER_SUCCESS)
-                Log.Debug("Error performing AES MMO hash: {}", response);
+                _logger.LogDebug("Error performing AES MMO hash: {}", response);
 
             return response.GetReturnContext();
         }
@@ -653,12 +656,12 @@ namespace ZigBeeNet.Hardware.Ember
             HashSet<Type> relatedResponses = new HashSet<Type>() { typeof(EzspStartScanResponse), typeof(EzspNetworkFoundHandler)};
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspMultiResponseTransaction(activeScan, typeof(EzspScanCompleteHandler), relatedResponses));
             EzspScanCompleteHandler activeScanCompleteResponse = (EzspScanCompleteHandler) transaction.GetResponse();
-            Log.Debug(activeScanCompleteResponse.ToString());
+            _logger.LogDebug(activeScanCompleteResponse.ToString());
 
             if (activeScanCompleteResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
                 _lastStatus = activeScanCompleteResponse.GetStatus();
-                Log.Debug("Error during active scan: {}", activeScanCompleteResponse);
+                _logger.LogDebug("Error during active scan: {}", activeScanCompleteResponse);
                 return null;
             }
 
@@ -695,7 +698,7 @@ namespace ZigBeeNet.Hardware.Ember
             IEzspTransaction transaction = _protocolHandler.SendEzspTransaction(new EzspMultiResponseTransaction(energyScan, typeof(EzspScanCompleteHandler), relatedResponses));
 
             EzspScanCompleteHandler scanCompleteResponse = (EzspScanCompleteHandler) transaction.GetResponse();
-            Log.Debug(scanCompleteResponse.ToString());
+            _logger.LogDebug(scanCompleteResponse.ToString());
 
             List<EzspEnergyScanResultHandler> channels = new List<EzspEnergyScanResultHandler>();
             foreach (EzspFrameResponse network in transaction.GetResponses()) 
