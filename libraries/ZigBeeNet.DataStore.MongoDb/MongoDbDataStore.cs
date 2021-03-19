@@ -6,13 +6,16 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Options;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using Serilog;
 using ZigBeeNet.Database;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.DataStore.MongoDb
 {
     public class MongoDbDataStore : IZigBeeNetworkDataStore
     {
+        static private readonly ILogger _logger = LogManager.GetLog<MongoDbDataStore>();
+
         private readonly IMongoCollection<ZigBeeNodeDao> _nodes;
 
         public MongoDbDataStore(MongoDbDatabaseSettings settings)
@@ -47,13 +50,13 @@ namespace ZigBeeNet.DataStore.MongoDb
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "Error: {Exception}", ex.Message);
+                        _logger.LogError(ex, "Error: {Exception}", ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error: {Exception}", ex.Message);
+                _logger.LogError(ex, "Error: {Exception}", ex.Message);
             }
 
             return ieeeAddresses;

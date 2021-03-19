@@ -21,6 +21,5 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>
 </Project>
