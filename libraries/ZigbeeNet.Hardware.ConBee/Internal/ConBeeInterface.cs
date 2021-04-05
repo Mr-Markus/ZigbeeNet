@@ -77,7 +77,7 @@ namespace ZigbeeNet.Hardware.ConBee
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"Exception updating WatchdogTTL {ex}");
+                    _logger.LogError($"Exception updating WatchdogTTL {ex}");
                     // Keep retrying to set every 15 seconds, so log is updated
                     // frequently enough to be visible, but not too often to spam
                     await Task.Delay(TimeSpan.FromSeconds(15)).ConfigureAwait(false);
