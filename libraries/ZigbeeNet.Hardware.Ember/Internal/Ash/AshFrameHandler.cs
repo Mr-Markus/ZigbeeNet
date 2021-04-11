@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,6 +10,8 @@ using ZigBeeNet.Hardware.Ember.Ezsp;
 using ZigBeeNet.Hardware.Ember.Ezsp.Command;
 using ZigBeeNet.Hardware.Ember.Transaction;
 using ZigBeeNet.Transport;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 {
@@ -30,6 +31,8 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
     /// </summary>
     public class AshFrameHandler : IEzspProtocolHandler 
     {
+        static protected readonly ILogger _logger = LogManager.GetLog<AshFrameHandler>();
+
         /**
          * The receive timeout settings - min/initial/max - defined in milliseconds
          */
@@ -131,7 +134,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
         private void ParserTaskLoop()
         {
-            Log.Debug("AshFrameHandler parser task started");
+            _logger.LogDebug("AshFrameHandler parser task started");
 
             int exceptionCnt = 0;
 
@@ -147,14 +150,14 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                     AshFrame responseFrame = null;
                     if (packet == null) 
                     {
-                        Log.Debug("<-- RX ASH error: BAD PACKET {Frame}", FrameToString(packetData));
+                        _logger.LogDebug("<-- RX ASH error: BAD PACKET {Frame}", FrameToString(packetData));
 
                         // Send a NAK
                         responseFrame = new AshFrameNak(_ackNum);
                     } 
                     else 
                     {
-                        Log.Debug("<-- RX ASH frame: {Frame}", packet.ToString());
+                        _logger.LogDebug("<-- RX ASH frame: {Frame}", packet.ToString());
 
                         // Reset the exception counter
                         exceptionCnt = 0;
@@ -179,10 +182,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
                                     // Get the EZSP frame
                                     EzspFrameResponse response = EzspFrame.CreateHandler(dataPacket.GetDataBuffer());
-                                    Log.Verbose("ASH RX EZSP: {Response}", response);
+                                    _logger.LogTrace("ASH RX EZSP: {Response}", response);
                                     if (response == null) 
                                     {
-                                        Log.Debug("ASH: No frame handler created for {Packet}", packet);
+                                        _logger.LogDebug("ASH: No frame handler created for {Packet}", packet);
                                     } 
                                     else 
                                     {
@@ -193,7 +196,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                                 else if (!dataPacket.GetReTx()) 
                                 {
                                     // Send a NAK - this is out of sequence and not a retransmission
-                                    Log.Debug("ASH: Frame out of sequence - expected {Expected}, received {Received}", _ackNum, packet.GetFrmNum());
+                                    _logger.LogDebug("ASH: Frame out of sequence - expected {Expected}, received {Received}", _ackNum, packet.GetFrmNum());
                                     responseFrame = new AshFrameNak(_ackNum);
                                 } 
                                 else 
@@ -239,16 +242,16 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 } 
                 catch (Exception e) 
                 {
-                    Log.Error(e, "AshFrameHandler Exception: ", e.Message);
+                    _logger.LogError(e, "AshFrameHandler Exception: ", e.Message);
 
                     if (exceptionCnt++ > 10) 
                     {
-                        Log.Error("AshFrameHandler exception count exceeded: {Exception}");
+                        _logger.LogError("AshFrameHandler exception count exceeded: {Exception}");
                         _parserCancellationToken.Cancel();
                     }
                 }
             }
-            Log.Debug("AshFrameHandler exited.");
+            _logger.LogDebug("AshFrameHandler exited.");
         }
 
         private int[] GetPacket()
@@ -263,7 +266,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 if (val == null)
                     continue;
                 
-                Log.Verbose("ASH RX: {Byte}", val.Value.ToString("X2"));
+                _logger.LogTrace("ASH RX: {Byte}", val.Value.ToString("X2"));
                 switch (val.Value) 
                 {
                     case ASH_CANCEL_BYTE:
@@ -322,7 +325,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 } 
                 catch (Exception e) 
                 {
-                    Log.Error(e, "AshFrameHandler Exception processing EZSP frame: {Exception}", e.Message);
+                    _logger.LogError(e, "AshFrameHandler Exception processing EZSP frame: {Exception}", e.Message);
                 }
             }
         }
@@ -332,7 +335,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             // If we are already connected, we need to reconnect
             if (_stateConnected) 
             {
-                Log.Debug("ASH: RESET received while connected. Disconnecting.");
+                _logger.LogDebug("ASH: RESET received while connected. Disconnecting.");
                 Disconnect();
                 return;
             }
@@ -346,16 +349,16 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             if (rstAck.GetVersion() == 2)
                 StartConnectTimer();
             else
-                Log.Debug("ASH: Invalid version");
+                _logger.LogDebug("ASH: Invalid version");
         }
 
         private void HandleError(AshFrameError packet) 
         {
-            Log.Debug("ASH: ERROR received (code {Code}).", packet.GetErrorCode());
+            _logger.LogDebug("ASH: ERROR received (code {Code}).", packet.GetErrorCode());
             _statsRxErrs++;
             if (_stateConnected) 
             {
-                Log.Warning("ASH: ERROR received (code {Code}). Disconnecting.", packet.GetErrorCode());
+                _logger.LogWarning("ASH: ERROR received (code {Code}). Disconnecting.", packet.GetErrorCode());
                 Disconnect();
             }
         }
@@ -367,7 +370,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
         public void Close() 
         {
-            Log.Debug("AshFrameHandler close.");
+            _logger.LogDebug("AshFrameHandler close.");
             SetClosing();
             StopTimer();
             _stateConnected = false;
@@ -380,7 +383,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             _frameHandler.HandleLinkStateChange(false);
 
             _parserTask.Wait(500);
-            Log.Debug("AshFrameHandler close complete.");
+            _logger.LogDebug("AshFrameHandler close complete.");
         }
 
         public bool IsAlive() 
@@ -415,7 +418,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             }
 
             // Encapsulate the EZSP frame into the ASH packet
-            Log.Verbose("TX ASH EZSP: {Frame}", nextFrame);
+            _logger.LogTrace("TX ASH EZSP: {Frame}", nextFrame);
             AshFrameData ashFrame = new AshFrameData(nextFrame);
 
             _retries = 0;
@@ -452,11 +455,11 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
         private void SendRetry() 
         {
-            Log.Debug("ASH: Retry Sent Queue Length {Count}", _sentQueue.Count);
+            _logger.LogDebug("ASH: Retry Sent Queue Length {Count}", _sentQueue.Count);
             AshFrameData ashFrame = null;
             if (!_sentQueue.TryPeek(out ashFrame) || ashFrame == null) 
             {
-                Log.Debug("ASH: Retry nothing to resend!");
+                _logger.LogDebug("ASH: Retry nothing to resend!");
                 return;
             }
 
@@ -469,7 +472,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         private void OutputFrame(AshFrame ashFrame) 
         {
             ashFrame.SetAckNum(_ackNum);
-            Log.Debug("--> TX ASH frame: {Frame}", ashFrame);
+            _logger.LogDebug("--> TX ASH frame: {Frame}", ashFrame);
 
             // Send the data
             int[] data = ashFrame.GetOutputBuffer();
@@ -492,12 +495,12 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         {
             if (_parserCancellationToken.IsCancellationRequested) 
             {
-                Log.Debug("ASH: Handler is closed");
+                _logger.LogDebug("ASH: Handler is closed");
                 return;
             }
             _sendQueue.Enqueue(request);
 
-            Log.Debug("ASH: TX EZSP queue size: {Count}", _sendQueue.Count);
+            _logger.LogDebug("ASH: TX EZSP queue size: {Count}", _sendQueue.Count);
 
             SendNextFrame();
         }
@@ -508,7 +511,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Connect() 
         {
-            Log.Debug("ASH: Connect");
+            _logger.LogDebug("ASH: Connect");
             _stateConnected = false;
 
             _sentQueue = new ConcurrentQueue<AshFrameData>();
@@ -520,7 +523,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Reconnect() 
         {
-            Log.Debug("ASH: Reconnect");
+            _logger.LogDebug("ASH: Reconnect");
             _ackNum = 0;
             _frmNum = 0;
             receiveTimeout = T_RX_ACK_INIT;
@@ -530,7 +533,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
         private void Disconnect() 
         {
-            Log.Debug("ASH: Disconnected!");
+            _logger.LogDebug("ASH: Disconnected!");
 
             Close();
         }
@@ -554,7 +557,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 else if (receiveTimeout > T_RX_ACK_MAX)
                     receiveTimeout = T_RX_ACK_MAX;
                 
-                Log.Verbose("ASH: RX Timer took {TimeSpent}ms, timer now {ReceiveTimeout}ms", (int)(DateTime.Now - _sentTime.Value).TotalMilliseconds, receiveTimeout);
+                _logger.LogTrace("ASH: RX Timer took {TimeSpent}ms, timer now {ReceiveTimeout}ms", (int)(DateTime.Now - _sentTime.Value).TotalMilliseconds, receiveTimeout);
                 _sentTime = null;
             }
 
@@ -562,7 +565,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             while (_sentQueue.TryPeek(out ackedFrame) && ackedFrame.GetFrmNum() != ackNum) 
             {
                 _sentQueue.TryDequeue(out ackedFrame);
-                Log.Debug("ASH: Frame acked and removed {Frame}", ackedFrame);
+                _logger.LogDebug("ASH: Frame acked and removed {Frame}", ackedFrame);
             }
         }
 
@@ -577,7 +580,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 _timer.Interval = receiveTimeout;
                 _timer.Elapsed += new ElapsedEventHandler(OnRetryTimerElapsedEvent);
                 _timer.Start();
-                Log.Verbose("ASH: Started retry timer");
+                _logger.LogTrace("ASH: Started retry timer");
             }
         }
 
@@ -604,7 +607,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 
                 if (++_retries > ACK_TIMEOUTS) 
                 {
-                    Log.Debug("ASH: Error number of retries exceeded [{Retries}].", _retries);
+                    _logger.LogDebug("ASH: Error number of retries exceeded [{Retries}].", _retries);
 
                     // Too many retries.
                     // We should alert the upper layer so they can reset the link?
@@ -632,7 +635,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             }
             catch (Exception ex)
             {
-                Log.Debug(ex, "Caught exception while attempting to retry message in OnRetryTimerElapsedEvent");
+                _logger.LogDebug(ex, "Caught exception while attempting to retry message in OnRetryTimerElapsedEvent");
             }
         }
 
@@ -647,7 +650,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 _timer.Interval = connectTimeout;
                 _timer.Elapsed += new ElapsedEventHandler(OnConnectTimerElapsedEvent);
                 _timer.Start();
-                Log.Verbose("ASH: Started connect timer");
+                _logger.LogTrace("ASH: Started connect timer");
             }
         }
 
@@ -655,7 +658,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         {
             try
             {
-                Log.Debug("ASH: Connected");
+                _logger.LogDebug("ASH: Connected");
                 StopTimer();
                 _stateConnected = true;
                 _ackNum = 0;
@@ -666,7 +669,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             }
             catch (Exception ex)
             {
-                Log.Debug(ex, "Caught exception in OnConnectTimerElapsedEvent");
+                _logger.LogDebug(ex, "Caught exception in OnConnectTimerElapsedEvent");
             }
         }
 
@@ -795,7 +798,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         {
             if (_parserCancellationToken.IsCancellationRequested) 
             {
-                Log.Debug("ASH: Handler is closed");
+                _logger.LogDebug("ASH: Handler is closed");
                 return null;
             }
 
@@ -806,19 +809,19 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         {
             try
             {
-                Log.Debug("TX EZSP: {Request}", ezspTransaction.GetRequest());
+                _logger.LogDebug("TX EZSP: {Request}", ezspTransaction.GetRequest());
 
                 Task transactionTask = SendEzspRequestAsync(ezspTransaction);
                 if (transactionTask == null) 
                 {
-                    Log.Debug("ASH: Error sending EZSP transaction task is null");
+                    _logger.LogDebug("ASH: Error sending EZSP transaction task is null");
                     return null;
                 }
                 transactionTask.Wait();
             }
             catch(Exception ex)
             {
-                Log.Debug(ex, "ASH: Error while sending EZSP transaction {Request}", ezspTransaction.GetRequest());
+                _logger.LogDebug(ex, "ASH: Error while sending EZSP transaction {Request}", ezspTransaction.GetRequest());
             }
 
 
@@ -908,13 +911,13 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
                 }
                 else
                 {
-                    Log.Debug($"ASH timed out in EventWait {eventClass}");
+                    _logger.LogDebug($"ASH timed out in EventWait {eventClass}");
                     return null;
                 }
             } 
             catch (Exception ex) 
             {
-                Log.Debug(ex, $"ASH interrupted in EventWait {eventClass}");
+                _logger.LogDebug(ex, $"ASH interrupted in EventWait {eventClass}");
                 return null;
             }
         }

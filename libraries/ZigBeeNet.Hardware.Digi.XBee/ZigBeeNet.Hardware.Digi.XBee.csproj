@@ -14,9 +14,6 @@
     <Description>This package can be used in combination with the ZigBeeNet package and is the dongle implementation for a Digi XBee hardware dongle</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.9.0" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ZigBeeNet\ZigBeeNet.csproj" />
   </ItemGroup>
 </Project>

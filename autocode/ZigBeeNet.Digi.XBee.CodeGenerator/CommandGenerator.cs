@@ -174,10 +174,10 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
                 IsClass = true,
                 TypeAttributes = System.Reflection.TypeAttributes.Public
             };
-            codeNamespace.Imports.Add(new CodeNamespaceImport("Serilog"));
             codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
             codeNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Concurrent"));
             codeNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
+            codeNamespace.Imports.Add(new CodeNamespaceImport("Microsoft.Extensions.Logging"));
 
             codeNamespace.Types.Add(protocolClass);
 
@@ -291,13 +291,12 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
                 CodeConditionStatement apiCommandCorrelationCondition = new CodeConditionStatement(
                     new CodeSnippetExpression($"xbeeClass == null"),
-                    new CodeStatement[] { new CodeSnippetStatement($"                xbeeClass = _events[data[2]];") });
+                    new CodeStatement[] { new CodeSnippetStatement($"                _events.TryGetValue(data[2], out xbeeClass);") });
                 getXBeeFrameMethod.Statements.Add(apiCommandCorrelationCondition);
             }
             else
             {
-                CodeAssignStatement codeAssignStatement = new CodeAssignStatement(new CodeSnippetExpression("Type xbeeClass"), new CodeSnippetExpression("_events[data[2]]"));
-                getXBeeFrameMethod.Statements.Add(codeAssignStatement);
+                getXBeeFrameMethod.Statements.Add(new CodeSnippetStatement($"            _events.TryGetValue(data[2], out Type xbeeClass);"));
             }
 
             CodeConditionStatement noHandlerFoundCondition = new CodeConditionStatement(
@@ -311,7 +310,7 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
             codeTryStatement.TryStatements.Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("xbeeFrame")));
 
             CodeCatchClause catchClause = new CodeCatchClause("ex", new CodeTypeReference("Exception"));
-            catchClause.Statements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"Log"), "Debug", new CodeVariableReferenceExpression($"\"Error creating instance of IXBeeResponse\", ex")));
+            catchClause.Statements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression($"ZigBeeDongleXBee.Logger"), "LogDebug", new CodeVariableReferenceExpression($"\"Error creating instance of IXBeeResponse\", ex")));
 
             codeTryStatement.CatchClauses.Add(catchClause);
             getXBeeFrameMethod.Statements.Add(codeTryStatement);
@@ -1358,11 +1357,11 @@ namespace ZigBeeNet.Digi.XBee.CodeGenerator
 
             if (provider.FileExtension[0] == '.')
             {
-                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}{provider.FileExtension}";
+                sourceFile = $@"..\..\libraries\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}{provider.FileExtension}";
             }
             else
             {
-                sourceFile = $@"..\..\..\..\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}.{provider.FileExtension}";
+                sourceFile = $@"..\..\libraries\ZigBeeNet.Hardware.Digi.XBee\Internal\{protocolFolder}{sourceFile}.{provider.FileExtension}";
             }
 
             var codeGeneratorOptions = new CodeGeneratorOptions

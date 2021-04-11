@@ -1,5 +1,6 @@
-using Serilog;
 using System;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Ember.Internal.Ash
 {
@@ -13,6 +14,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
     /// </summary>
     public class AshFrame
     {
+        static protected readonly ILogger _logger = LogManager.GetLog<AshFrame>();
 
         protected int _frmNum;
         protected int _ackNum;
@@ -42,12 +44,12 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
         {
             if (_frmNum > 7 || _frmNum < 0) 
             {
-                Log.Debug("Invalid frmNum {frmNum}. Assuming 0", _frmNum);
+                _logger.LogDebug("Invalid frmNum {frmNum}. Assuming 0", _frmNum);
                 _frmNum = 0;
             }
             if (_ackNum > 7 || _ackNum < 0) 
             {
-                Log.Debug("Invalid ackNum {ackNum}. Assuming 0", _ackNum);
+                _logger.LogDebug("Invalid ackNum {ackNum}. Assuming 0", _ackNum);
                 _ackNum = 0;
             }
 
@@ -191,7 +193,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Ash
             FrameType? frameType = GetFrameType(unstuffedData);
             if (frameType == null) 
             {
-                Log.Debug("Invalid ASH frame type {Type}", unstuffedData[0].ToString("X2"));
+                _logger.LogDebug("Invalid ASH frame type {Type}", unstuffedData[0].ToString("X2"));
                 return null;
             }
 

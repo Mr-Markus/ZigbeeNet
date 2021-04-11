@@ -1,5 +1,6 @@
-using Serilog;
 using System;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Ember.Ezsp
 {
@@ -29,7 +30,8 @@ namespace ZigBeeNet.Hardware.Ember.Ezsp
     /// </summary>
     public abstract partial class EzspFrame 
     {
-    
+        static private readonly ILogger _logger = LogManager.GetLog<EzspFrame>();
+
         /**
          * The minimum supported version of EZSP
          */
@@ -129,7 +131,7 @@ namespace ZigBeeNet.Hardware.Ember.Ezsp
             } 
             catch (Exception e) 
             {
-                Log.Debug(e, "Error detecting the EZSP frame type");
+                _logger.LogDebug(e, "Error detecting the EZSP frame type");
             }
 
             if (ezspClass == null) 
@@ -143,7 +145,7 @@ namespace ZigBeeNet.Hardware.Ember.Ezsp
             } 
             catch (Exception e) 
             {
-                Log.Debug(e, "Error creating instance of EzspFrame");
+                _logger.LogDebug(e, "Error creating instance of EzspFrame");
             }
 
             return ezspFrame;

@@ -1,8 +1,9 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using ZigBeeNet.ZCL.Protocol;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.ZCL
 {
@@ -14,6 +15,11 @@ namespace ZigBeeNet.ZCL
     /// </summary>
     public class ZclAttributeNormalizer
     {
+        /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZclAttributeNormalizer>();
+
         /// <summary>
          /// Normalize ZCL data
          ///
@@ -87,7 +93,7 @@ namespace ZigBeeNet.ZCL
             }
             catch(Exception ex)
             {
-                Log.Warning("Exception normalizing data: {Exception}", ex);
+                _logger.LogWarning("Exception normalizing data: {Exception}", ex);
             }
             return data;
         }

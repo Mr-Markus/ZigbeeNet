@@ -2,12 +2,18 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Serilog;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Internal
 {
     public class ZigBeeCommandNotifier
     {
+        /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeCommandNotifier>();
+
         private readonly object _lock = new object();
 
         private List<IZigBeeCommandListener> _commandListeners;
@@ -60,7 +66,7 @@ namespace ZigBeeNet.Internal
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("Error during the notification of commandListeners. {Exception}", ex.Message);
+                        _logger.LogError("Error during the notification of commandListeners. {Exception}", ex.Message);
                     }
                 });
             }

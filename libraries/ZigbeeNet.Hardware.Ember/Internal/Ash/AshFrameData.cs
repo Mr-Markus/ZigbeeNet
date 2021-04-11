@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 using System.Text;
 using ZigBeeNet.Hardware.Ember.Ezsp;

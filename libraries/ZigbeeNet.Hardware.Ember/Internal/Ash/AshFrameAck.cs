@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 
 namespace ZigBeeNet.Hardware.Ember.Internal.Ash

@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +8,14 @@ using System.Threading.Tasks;
 using ZigBeeNet.Hardware.Digi.XBee.Enums;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
 using ZigBeeNet.Transport;
+using Microsoft.Extensions.Logging;
+using ZigBeeNet.Util;
 
 namespace ZigBeeNet.Hardware.Digi.XBee.Internal
 {
     public class XBeeFrameHandler : IXBeeFrameHandler
     {
+        static private readonly ILogger _logger = LogManager.GetLog<XBeeFrameHandler>();
         #region fields
 
         private readonly ConcurrentQueue<IXBeeCommand> _sendQueue = new ConcurrentQueue<IXBeeCommand>();
@@ -84,7 +86,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             // See the refactored while loop in ZigBeeTransaction.cs line 84
             _parserThread = _taskFactory.StartNew(() =>
             {
-                Log.Debug("XBeeFrameHandler task started.");
+                _logger.LogDebug("XBeeFrameHandler task started.");
                 while (!_closeHandler)
                 {
                     try
@@ -113,7 +115,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                         {
                             builder.Append(string.Format(" 0x{0:X2}", value.ToString()));
                         }
-                        Log.Verbose($"RX XBEE Data: {builder}");
+                        _logger.LogTrace($"RX XBEE Data: {builder}");
 
                         // Use the Event Factory to get an event
                         IXBeeEvent xBeeEvent = XBeeEventFactory.GetXBeeFrame(responseData);
@@ -134,10 +136,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "XBeeFrameHandler exception {Exception}", ex.Message);
+                        _logger.LogError(ex, "XBeeFrameHandler exception {Exception}", ex.Message);
                     }
                 }
-                Log.Debug("XBeeFrameHandler thread exited.");
+                _logger.LogDebug("XBeeFrameHandler thread exited.");
             });
         }
 
@@ -148,7 +150,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         /// </summary>
         private void EmptyRxBuffer()
         {
-            Log.Debug("XBeeFrameHandler clearing receive buffer.");
+            _logger.LogDebug("XBeeFrameHandler clearing receive buffer.");
             while (true)
             {
                 byte? val = _serialPort.Read(100);
@@ -158,7 +160,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     break;
                 }
             }
-            Log.Debug("XBeeFrameHandler cleared receive buffer.");
+            _logger.LogDebug("XBeeFrameHandler cleared receive buffer.");
         }
 
         private int[] GetPacket()
@@ -171,7 +173,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             int? checksum = 0;
             bool escaped = false;
 
-            Log.Verbose("XBEE: Get Packet");
+            _logger.LogTrace("XBEE: Get Packet");
 
             while (!_closeHandler)
             {
@@ -187,10 +189,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     // If we overrun the buffer, reset and go to WAITING mode
                     inputBufferLength = 0;
                     rxState = RxStateMachine.WAITING;
-                    Log.Debug("XBEE RX buffer overrun - resetting!");
+                    _logger.LogDebug("XBEE RX buffer overrun - resetting!");
                 }
 
-                //Log.Debug($"RX XBEE: {{{string.Format("0x{0:X2} {1:C}", val, val)}}}");
+                //_logger.LogDebug($"RX XBEE: {{{string.Format("0x{0:X2} {1:C}", val, val)}}}");
 
                 if (escaped)
                 {
@@ -228,7 +230,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                             if (length > inputBuffer.Length)
                             {
                                 // Return null and let the system resync by searching for the next FLAG
-                                Log.Debug($"XBEE RX length too long ({length}) - ignoring!");
+                                _logger.LogDebug($"XBEE RX length too long ({length}) - ignoring!");
                                 return null;
                             }
                         }
@@ -276,7 +278,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             SetClosing();
             StopTimer();
             _mainCancellationTokenSource.Cancel();
-            Log.Debug("XBeeFrameHandler closed.");
+            _logger.LogDebug("XBeeFrameHandler closed.");
         }
 
         /// <summary>
@@ -295,20 +297,20 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             // Are we already processing a command?
             if (_sentCommand != null)
             {
-                Log.Debug($"TX XBEE Frame outstanding: {_sentCommand}");
+                _logger.LogDebug($"TX XBEE Frame outstanding: {_sentCommand}");
                 return;
             }
 
             bool isFrameDequeuedSuccsess = _sendQueue.TryDequeue(out IXBeeCommand nextFrame);
             if (!isFrameDequeuedSuccsess)
             {
-                Log.Verbose("XBEE TX: Nothing to send");
+                _logger.LogTrace("XBEE TX: Nothing to send");
                 // Nothing to send
                 StopTimer();
                 return;
             }
 
-            Log.Debug($"TX XBEE: {nextFrame}");
+            _logger.LogDebug($"TX XBEE: {nextFrame}");
 
             // Remember the command we're processing
             _sentCommand = nextFrame;
@@ -331,11 +333,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     bytes.Add((byte)sendByte);
                 }
             }
-            Log.Verbose($"TX XBEE Data:{builder.ToString()}");
+            _logger.LogTrace($"TX XBEE Data:{builder.ToString()}");
             _serialPort.Write(bytes.ToArray());
 
             // Start the timeout
-            Log.Verbose("XBEE Timer: Start");
+            _logger.LogTrace("XBEE Timer: Start");
             _timeoutTimer.Change(_commandTimeout, Timeout.Infinite);
         }
 
@@ -348,7 +350,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         {
             _sendQueue.Enqueue(request);
 
-            Log.Verbose($"TX XBEE queue: {_sendQueue.Count}: {request}");
+            _logger.LogTrace($"TX XBEE queue: {_sendQueue.Count}: {request}");
 
             SendNextFrame();
         }
@@ -362,7 +364,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         {
             bool processed = false;
 
-            Log.Debug($"RX XBEE: {response.ToString()}");
+            _logger.LogDebug($"RX XBEE: {response.ToString()}");
             lock (_transactionListeners)
             {
                 foreach (IXBeeListener listener in _transactionListeners)
@@ -376,7 +378,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     }
                     catch (Exception e)
                     {
-                        Log.Debug("Exception processing XBee frame: {}: ", response, e);
+                        _logger.LogDebug("Exception processing XBee frame: {}: ", response, e);
                     }
                 }
             }
@@ -433,7 +435,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         /// <param name="xBeeEvent">the <see cref="IXBeeEvent"/> received.</param>
         private void NotifyEventReceived(IXBeeEvent xBeeEvent)
         {
-            Log.Debug($"RX XBEE: {xBeeEvent.ToString()}");
+            _logger.LogDebug($"RX XBEE: {xBeeEvent.ToString()}");
             lock (_eventListeners)
             {
                 foreach (IXBeeEventListener listener in _eventListeners)
@@ -444,7 +446,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
                     }
                     catch (Exception e)
                     {
-                        Log.Debug($"Exception processing XBee frame: {xBeeEvent}: ", e);
+                        _logger.LogDebug($"Exception processing XBee frame: {xBeeEvent}: ", e);
                     }
                 }
             }
@@ -515,7 +517,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             }
             else
             {
-                Log.Debug($"XBee interrupted in SendRequest {command}");
+                _logger.LogDebug($"XBee interrupted in SendRequest {command}");
                 cancellationTokenSource.Cancel();
                 return null;
             }
@@ -565,7 +567,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
             }
             else
             {
-                Log.Debug($"XBee interrupted in EventWait {eventClass}");
+                _logger.LogDebug($"XBee interrupted in EventWait {eventClass}");
                 cancellationTokenSource.Cancel();
                 return null;
             }
@@ -578,7 +580,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private void TimeoutCallback(object state)
         {
             StopTimer();
-            Log.Debug("XBEE Timer: Timeout");
+            _logger.LogDebug("XBEE Timer: Timeout");
             lock (_commandLock)
             {
                 if (_sentCommand != null)
@@ -592,7 +594,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal
         private void StopTimer()
         {
             _timeoutTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            Log.Verbose("XBEE Timer: Stop");
+            _logger.LogTrace("XBEE Timer: Stop");
         }
 
         #endregion methods
