@@ -631,7 +631,7 @@ namespace ZigBeeNet.Hardware.Ember
                 emberApsFrame.AddOptions(EmberApsOption.EMBER_APS_OPTION_ENCRYPTION);
             }
 
-            if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && !ZigBeeBroadcastDestination.IsBroadcast(apsFrame.DestinationAddress)) 
+            if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && !ZigBeeBroadcastDestinationHelper.IsBroadcast(apsFrame.DestinationAddress)) 
             {
                 EzspSendUnicastRequest emberUnicast = new EzspSendUnicastRequest();
                 emberUnicast.SetIndexOrDestination(apsFrame.DestinationAddress);
@@ -659,7 +659,7 @@ namespace ZigBeeNet.Hardware.Ember
 
                 transaction = new EzspSingleResponseTransaction(emberUnicast, typeof(EzspSendUnicastResponse));
             } 
-            else if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && ZigBeeBroadcastDestination.IsBroadcast(apsFrame.DestinationAddress)) 
+            else if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && ZigBeeBroadcastDestinationHelper.IsBroadcast(apsFrame.DestinationAddress)) 
             {
                 EzspSendBroadcastRequest emberBroadcast = new EzspSendBroadcastRequest();
                 emberBroadcast.SetDestination(apsFrame.DestinationAddress);

@@ -6,16 +6,18 @@ using ZigBeeNet.Util;
 
 namespace ZigBeeNet
 {
-    public class ZigBeeEndpointAddress : IZigBeeAddress
+    public struct ZigBeeEndpointAddress : IZigBeeAddress,IComparable<ZigBeeEndpointAddress>
     {
-        public byte Endpoint { get; private set; }
+        public static ZigBeeEndpointAddress Zero {get;} = new ZigBeeEndpointAddress(0,0);
+        public static ZigBeeEndpointAddress BROADCAST_RX_ON {get;} = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_RX_ON);
+        public static ZigBeeEndpointAddress BROADCAST_ALL_DEVICES {get;} = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_ALL_DEVICES);
+        public static ZigBeeEndpointAddress BROADCAST_LOW_POWER_ROUTERS {get;} = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_LOW_POWER_ROUTERS);
+        public static ZigBeeEndpointAddress BROADCAST_ROUTERS_AND_COORD {get;} = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.BROADCAST_ROUTERS_AND_COORD);
 
-        public ushort Address { get; set; }
+        public ushort Address { get; }
+        public byte Endpoint { get; }
 
-        public bool IsGroup
-        {
-            get { return false; }
-        }
+        public bool IsGroup => false;
 
         /// <summary>
          /// Constructor for ZDO ZigBee devices where only the address is defined
@@ -26,8 +28,14 @@ namespace ZigBeeNet
          /// </summary>
         public ZigBeeEndpointAddress(ushort address)
         {
-            this.Address = address;
-            this.Endpoint = 0;
+            Address = address;
+            Endpoint = 0;
+        }
+
+        public ZigBeeEndpointAddress(ZigBeeBroadcastDestination address)
+        {
+            Address = (ushort)address;
+            Endpoint = 0;
         }
 
         /// <summary>
@@ -40,83 +48,50 @@ namespace ZigBeeNet
          /// </summary>
         public ZigBeeEndpointAddress(ushort address, byte endpoint)
         {
-            this.Address = address;
-            this.Endpoint = endpoint;
+            Address = address;
+            Endpoint = endpoint;
         }
 
         public ZigBeeEndpointAddress(string address)
         {
-            if (address.Contains("/"))
-            {
-                var splits = address.Split('/');
-                if (splits.Length > 2)
-                {
-                    throw new ArgumentException(nameof(address));
-                }
-                this.Address = ushort.Parse(splits[0]);
-                this.Endpoint = byte.Parse(splits[1]);
-            }
+            if (TryParse(address,out (ushort a,byte e) result))
+                (Address,Endpoint)=result;
             else
-            {
-                this.Address = ushort.Parse(address);
-                this.Endpoint = 0;
-            }
+                throw new ArgumentException(nameof(address));
         }
 
-        public override int GetHashCode()
+        private static bool TryParse(string address,out (ushort addr,byte endpt) result )
         {
-            byte[] hash = new byte[3];
-
-            hash[0] = Address.GetByte(0);
-            hash[1] = Address.GetByte(1);
-            hash[2] = Endpoint;
-
-            return Hash.CalcHashCode(hash);
+            result=(0,0);
+            if (string.IsNullOrWhiteSpace(address))
+                return false;
+            string[] splits = address.Split('/');
+            return (splits.Length==1 && ushort.TryParse(address,out result.addr))
+                   || (splits.Length==2 && ushort.TryParse(splits[0],out result.addr) && byte.TryParse(splits[1],out result.endpt));
         }
+
+        public static bool TryParse(string address,out ZigBeeEndpointAddress result)
+        {
+            if (TryParse(address,out (ushort addr,byte endpt) r))
+            {
+                result=new ZigBeeEndpointAddress(r.addr,r.endpt);
+                return true;
+            }
+            result=default;
+            return false;
+        }
+
+        public override int GetHashCode() => Endpoint<<16 | Address;
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!typeof(ZigBeeEndpointAddress).IsAssignableFrom(obj.GetType()))
-            {
-                return false;
-            }
-
-            ZigBeeEndpointAddress other = (ZigBeeEndpointAddress)obj;
-
-            return (other.Address == Address && other.Endpoint == Endpoint);
+            return  !(obj is null) 
+                && (obj is ZigBeeEndpointAddress objAddr) 
+                && objAddr.Address == Address && objAddr.Endpoint == Endpoint;
         }
 
-        public int CompareTo(IZigBeeAddress that)
-        {
-            if (this == that)
-            {
-                return 0;
-            }
+        public int CompareTo(ZigBeeEndpointAddress other) => (Address == other.Address) ? (int)Endpoint - (int)other.Endpoint: (int)Address - (int)other.Address;
 
-            ZigBeeEndpointAddress thatAddr = (ZigBeeEndpointAddress)that;
-
-            if (thatAddr.Address == Address && thatAddr.Endpoint == Endpoint)
-            {
-                return 0;
-            }
-
-            if (thatAddr.Address == Address)
-            {
-                return Endpoint - thatAddr.Endpoint;
-            }
-
-            return Address - thatAddr.Address;
-        }
-
-        public override string ToString()
-        {
-            return Address + "/" + Endpoint;
-        }
-
+        public override string ToString() =>Address + "/" + Endpoint;
     }
 }

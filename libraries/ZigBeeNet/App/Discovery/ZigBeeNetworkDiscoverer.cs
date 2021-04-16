@@ -194,7 +194,7 @@ namespace ZigBeeNet.App.Discovery
                     {
                         // Request basic response, start index for associated list is 0
                         IeeeAddressRequest ieeeAddressRequest = new IeeeAddressRequest();
-                        ieeeAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
+                        ieeeAddressRequest.DestinationAddress = ZigBeeEndpointAddress.BROADCAST_RX_ON;
                         ieeeAddressRequest.RequestType = 0;
                         ieeeAddressRequest.StartIndex = 0;
                         ieeeAddressRequest.NwkAddrOfInterest = networkAddress;
@@ -273,7 +273,7 @@ namespace ZigBeeNet.App.Discovery
                         request.IeeeAddr = ieeeAddress;
                         request.RequestType = 0;
                         request.StartIndex = 0;
-                        request.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
+                        request.DestinationAddress = ZigBeeEndpointAddress.BROADCAST_RX_ON;
                         CommandResult response = await _networkManager.SendTransaction(request, request);
 
                         NetworkAddressResponse nwkAddressResponse = response.GetResponse<NetworkAddressResponse>();
@@ -439,7 +439,7 @@ namespace ZigBeeNet.App.Discovery
             request.RequestType = 0;
             request.StartIndex = 0;
             request.NwkAddrOfInterest = networkAddress;
-            request.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_RX_ON).Key);
+            request.DestinationAddress = ZigBeeEndpointAddress.BROADCAST_RX_ON;
             CommandResult response = await _networkManager.SendTransaction(request, request);
 
             if (response.IsError())

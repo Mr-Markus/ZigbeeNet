@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -189,8 +189,8 @@ namespace ZigBeeNet
             }
 
             command.TcSignificance = true;
-            command.DestinationAddress = new ZigBeeEndpointAddress(0);
-            command.SourceAddress = new ZigBeeEndpointAddress(0);
+            command.DestinationAddress = ZigBeeEndpointAddress.Zero;
+            command.SourceAddress = ZigBeeEndpointAddress.Zero;
 
             _network.SendTransaction(command);
         }
