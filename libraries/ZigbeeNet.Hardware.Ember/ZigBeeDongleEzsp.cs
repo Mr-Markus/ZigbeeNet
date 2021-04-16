@@ -744,7 +744,7 @@ namespace ZigBeeNet.Hardware.Ember
             // Update the extendedTimeout flag in the address table.
             // Users should ensure the address table is large enough to hold all nodes on the network.
             _logger.LogDebug("{IeeeAddress}: NodeDescriptor passed to Ember NCP {NodeDescriptor}", ieeeAddress, nodeDescriptor);
-            if (!nodeDescriptor.MacCapabilities.Contains(NodeDescriptor.MacCapabilitiesType.RECEIVER_ON_WHEN_IDLE)) 
+            if ((nodeDescriptor.MacCapabilities&NodeDescriptor.MacCapabilitiesType.RECEIVER_ON_WHEN_IDLE)==0) 
             {
                 EmberNcp ncp = GetEmberNcp();
                 ncp.SetExtendedTimeout(ieeeAddress, true);

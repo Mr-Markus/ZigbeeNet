@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -224,14 +224,8 @@ namespace ZigBeeNet
         ///
         /// <returns>true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.</returns>
         /// </summary>
-        public bool IsFullFunctionDevice()
-        {
-            if (NodeDescriptor == null)
-            {
-                return false;
-            }
-            return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
-        }
+        public bool IsFullFunctionDevice => 
+            (NodeDescriptor?.MacCapabilities & MacCapabilitiesType.FULL_FUNCTION_DEVICE)==MacCapabilitiesType.FULL_FUNCTION_DEVICE;
 
         /// <summary>
         /// Returns true if the node is a Reduced Function Device. Returns false if not an RFD or logical type is unknown.
@@ -243,41 +237,11 @@ namespace ZigBeeNet
         ///
         /// <returns>true if the device is a Reduced Function Device</returns>
         /// </summary>
-        public bool IsReducedFuntionDevice
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
-            }
-        }
+        public bool IsReducedFuntionDevice => !(NodeDescriptor is null) && !IsFullFunctionDevice;
 
-        public bool IsSecurityCapable
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.SECURITY_CAPABLE);
-            }
-        }
+        public bool IsSecurityCapable => (NodeDescriptor?.MacCapabilities & MacCapabilitiesType.SECURITY_CAPABLE) == MacCapabilitiesType.SECURITY_CAPABLE;
 
-        public bool IsPrimaryTrustCenter
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.ServerCapabilities.Contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
-            }
-        }
+        public bool IsPrimaryTrustCenter => (NodeDescriptor?.ServerCapabilities & ServerCapabilitiesType.PRIMARY_TRUST_CENTER) == ServerCapabilitiesType.PRIMARY_TRUST_CENTER;
 
         /// <summary>
         /// Gets the <see cref="LogicalType"> of the node.
