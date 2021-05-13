@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.CompilerServices;
 namespace ZigBeeNet
 {
-    public static class ByteHelper
+    public static partial class ByteHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort ShortFromBytes(byte[] values, int msb, int lsb)
@@ -39,6 +39,7 @@ namespace ZigBeeNet
 
             return result;
         }
+
 
         public static byte[] Slice(this byte[] data, int offset, int len)
         {
