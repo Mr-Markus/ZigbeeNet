@@ -27,7 +27,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
 
             XBeeOtaFirmwareUpdateStatusEvent xbeeEvent = (XBeeOtaFirmwareUpdateStatusEvent)frame;
             Assert.Equal(0, xbeeEvent.GetBlockNumber());
-            Assert.Equal(new IeeeAddress(BigInteger.Parse("0013A2004162F61A", System.Globalization.NumberStyles.HexNumber)), xbeeEvent.GetIeeeAddress());
+/*  */            Assert.Equal(new IeeeAddress(0x0013A2004162F61Aul), xbeeEvent.GetIeeeAddress());
             Assert.Equal(0, xbeeEvent.GetNetworkAddress());
         }
 

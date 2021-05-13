@@ -23,8 +23,8 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         private bool _coordinatorStarted;
         private bool _initialisationComplete;
 
-        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFE", NumberStyles.HexNumber));
-        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFF", NumberStyles.HexNumber));
+        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress(0x0000_0000_0000_FFFEul);
+        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress(0x0000_0000_0000_FFFFul);
 
         private const int MAX_RESET_RETRIES = 3;
 
@@ -269,7 +269,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 {
                     command.SetIeeeAddress(_groupIeeeAddress);
                 }
-                command.SetIeeeAddress(new IeeeAddress(BigInteger.Parse("FFFFFFFFFFFFFFFF", NumberStyles.HexNumber)));
+                command.SetIeeeAddress(new IeeeAddress(0xFFFF_FFFF_FFFF_FFFFul));
             }
             else
             {

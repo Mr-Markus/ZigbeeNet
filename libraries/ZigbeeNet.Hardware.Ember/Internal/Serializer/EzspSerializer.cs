@@ -105,14 +105,15 @@ namespace ZigBeeNet.Hardware.Ember.Internal.Serializer
 
         public void SerializeEmberEui64(IeeeAddress address) 
         {
-            _buffer[_length++] = address.GetAddress()[0];
-            _buffer[_length++] = address.GetAddress()[1];
-            _buffer[_length++] = address.GetAddress()[2];
-            _buffer[_length++] = address.GetAddress()[3];
-            _buffer[_length++] = address.GetAddress()[4];
-            _buffer[_length++] = address.GetAddress()[5];
-            _buffer[_length++] = address.GetAddress()[6];
-            _buffer[_length++] = address.GetAddress()[7];
+            var addr=address.GetAddress();
+            _buffer[_length++] = addr[0];
+            _buffer[_length++] = addr[1];
+            _buffer[_length++] = addr[2];
+            _buffer[_length++] = addr[3];
+            _buffer[_length++] = addr[4];
+            _buffer[_length++] = addr[5];
+            _buffer[_length++] = addr[6];
+            _buffer[_length++] = addr[7];
         }
 
         public void SerializeEmberNetworkParameters(EmberNetworkParameters networkParameters) 
