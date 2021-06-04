@@ -386,7 +386,7 @@ namespace ZigBeeNet.App.Discovery
             networkAddressRequest.IeeeAddr = Node.IeeeAddress;
             networkAddressRequest.RequestType = 0x00;
             networkAddressRequest.StartIndex = 0;
-            networkAddressRequest.DestinationAddress = new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ALL_DEVICES).Key);
+            networkAddressRequest.DestinationAddress = ZigBeeEndpointAddress.BROADCAST_ALL_DEVICES;
 
             CommandResult response = await NetworkManager.SendTransaction(networkAddressRequest, networkAddressRequest);
             NetworkAddressResponse networkAddressResponse = response.GetResponse<NetworkAddressResponse>();

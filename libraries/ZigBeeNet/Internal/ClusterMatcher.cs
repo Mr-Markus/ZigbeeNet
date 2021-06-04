@@ -69,7 +69,7 @@ namespace ZigBeeNet.Internal
                 }
 
                 if (matchRequest.NwkAddrOfInterest != _networkManager.LocalNwkAddress
-                    && !ZigBeeBroadcastDestination.IsBroadcast(matchRequest.NwkAddrOfInterest))
+                    && !ZigBeeBroadcastDestinationHelper.IsBroadcast(matchRequest.NwkAddrOfInterest))
                 {
                     _logger.LogDebug("{ExtPanId}: ClusterMatcher no match to local address", _networkManager.ZigBeeExtendedPanId);
                     return;

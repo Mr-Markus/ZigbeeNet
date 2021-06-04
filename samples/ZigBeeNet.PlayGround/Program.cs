@@ -376,21 +376,13 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                ZigBeeEndpointAddress endpointAddress = null;
                                 var endpoint = node.GetEndpoints().FirstOrDefault();
-
-                                if (endpoint != null)
-                                {
-                                    endpointAddress = endpoint.GetEndpointAddress();
-                                }
-
-                                if (endpointAddress == null)
+                                if (endpoint is null)
                                 {
                                     Console.WriteLine("No endpoint found");
-
                                     continue;
                                 }
-
+                                ZigBeeEndpointAddress endpointAddress = endpoint.GetEndpointAddress();
                                 try
                                 {
                                     if (cmd == "leave")

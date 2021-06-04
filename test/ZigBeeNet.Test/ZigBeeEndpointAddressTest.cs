@@ -34,7 +34,7 @@ namespace ZigBeeNet.Test
         [Fact]
         public void TestStringConstructorError()
         {
-            Assert.Throws<FormatException>(() => new ZigBeeEndpointAddress(""));
+            Assert.Throws<ArgumentException>(() => new ZigBeeEndpointAddress(""));
             Assert.Throws<ArgumentException>(() => new ZigBeeEndpointAddress("111/22/33"));
         }
 

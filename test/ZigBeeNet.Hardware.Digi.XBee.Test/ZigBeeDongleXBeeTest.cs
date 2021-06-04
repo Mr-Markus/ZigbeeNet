@@ -67,7 +67,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test
             {
                 DestinationAddress = 46946,
                 DestinationEndpoint = 0,
-                DestinationIeeeAddress = new IeeeAddress(BigInteger.Parse("000D6F00057CF7C6", NumberStyles.HexNumber)),
+                DestinationIeeeAddress = new IeeeAddress(0x000D6F00057CF7C6ul),
                 Cluster = 32774,
                 AddressMode = ZigBeeNwkAddressMode.Device,
                 Radius = 31,

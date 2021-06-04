@@ -21,7 +21,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test.Internal.Protocol
             XBeeCreateSourceRouteCommand command = new XBeeCreateSourceRouteCommand();
 
             command.SetFrameId(0);
-            command.SetIeeeAddress(new IeeeAddress(BigInteger.Parse("0013A20040401122", System.Globalization.NumberStyles.HexNumber)));
+            command.SetIeeeAddress(new IeeeAddress(0x0013A20040401122ul));
             
             command.SetNetworkAddress(0x3344);
             command.SetAddressList(new int[] { 0xEEFF, 0xCCDD, 0xAABB });

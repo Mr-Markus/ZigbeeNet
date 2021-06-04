@@ -199,9 +199,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol
         /// <param name="address">The IeeeAddress <seealso cref="IeeeAddress"/></param>
         protected void SerializeIeeeAddress(IeeeAddress address)
         {
+            var a=address.GetAddress();
             for (int cnt = 7; cnt >= 0; cnt--)
             {
-                _buffer[_length++] = address.GetAddress()[cnt];
+                _buffer[_length++] = a[cnt];
             }
         }
 

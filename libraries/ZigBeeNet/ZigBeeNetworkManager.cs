@@ -1103,7 +1103,7 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeStatus PermitJoin(byte duration)
         {
-            return PermitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ROUTERS_AND_COORD).Key), duration);
+            return PermitJoin(ZigBeeEndpointAddress.BROADCAST_ROUTERS_AND_COORD, duration);
         }
 
         /// <summary>
@@ -1131,21 +1131,21 @@ namespace ZigBeeNet
                 PermitDuration = duration,
                 TcSignificance = true,
                 DestinationAddress = destination,
-                SourceAddress = new ZigBeeEndpointAddress(0)
+                SourceAddress = ZigBeeEndpointAddress.Zero
             };
 
             SendCommand(command);
 
             // If this is a broadcast, then we send it to our own address as well
             // This seems to be required for some stacks (eg ZNP)
-            if (ZigBeeBroadcastDestination.GetBroadcastDestination(destination.Address) != null)
+            if (ZigBeeBroadcastDestinationHelper.IsBroadcast(destination.Address))
             {
                 command = new ManagementPermitJoiningRequest
                 {
                     PermitDuration = duration,
                     TcSignificance = true,
-                    DestinationAddress = new ZigBeeEndpointAddress(0),
-                    SourceAddress = new ZigBeeEndpointAddress(0)
+                    DestinationAddress = ZigBeeEndpointAddress.Zero,
+                    SourceAddress = ZigBeeEndpointAddress.Zero
                 };
 
                 SendCommand(command);
@@ -1180,7 +1180,7 @@ namespace ZigBeeNet
 
                 command.DeviceAddress = leaveAddress;
                 command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
-                command.SourceAddress = new ZigBeeEndpointAddress(0);
+                command.SourceAddress = ZigBeeEndpointAddress.Zero;
                 command.RemoveChildrenRejoin = false;
 
                 CommandResult response = await SendTransaction(command, command);

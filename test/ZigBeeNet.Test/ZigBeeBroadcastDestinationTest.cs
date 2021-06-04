@@ -10,13 +10,10 @@ namespace ZigBeeNet.Test
         [Fact]
     public void GetDestination()
         {
-            ZigBeeBroadcastDestination destination = ZigBeeBroadcastDestination.GetBroadcastDestination(0xFFFC);
-            Assert.Equal(BroadcastDestination.BROADCAST_ROUTERS_AND_COORD, destination.Destination);
+            Assert.Equal(0xFFFC, (ushort)ZigBeeBroadcastDestination.BROADCAST_ROUTERS_AND_COORD);
 
-            destination = ZigBeeBroadcastDestination.GetBroadcastDestination(0xFFFB);
-            Assert.Equal(BroadcastDestination.BROADCAST_LOW_POWER_ROUTERS, destination.Destination);
-
-            Assert.Equal(0xFFFF, (ushort)BroadcastDestination.BROADCAST_ALL_DEVICES);
+            Assert.Equal(0xFFFB,(ushort)ZigBeeBroadcastDestination.BROADCAST_LOW_POWER_ROUTERS);
+            Assert.Equal(0xFFFF, (ushort)ZigBeeBroadcastDestination.BROADCAST_ALL_DEVICES);
         }
     }
 }

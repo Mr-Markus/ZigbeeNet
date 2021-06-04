@@ -14,79 +14,80 @@ namespace ZigBeeNet.ZDO.Field
     /// </summary>
     public class PowerDescriptor
     {
-        public enum PowerSourceType
+        [Flags]
+        public enum PowerSourceType : byte
         {
             /// <summary>
              /// Mains power - continuous
              /// </summary>
-            MAINS,
+            MAINS = 0x01,
             /// <summary>
              /// Rechargable battery
              /// </summary>
-            RECHARGABLE_BATTERY,
+            RECHARGABLE_BATTERY = 0x02,
             /// <summary>
              /// Disposable battery
              /// </summary>
-            DISPOSABLE_BATTERY,
+            DISPOSABLE_BATTERY = 0x04,
             /// <summary>
              /// Default for unknown
              /// </summary>
-            UNKNOWN
+            UNKNOWN = 0xff,
         }
 
-        public enum PowerLevelType
+        public enum PowerLevelType : byte
         {
             /// <summary>
              /// Power level is critical - battery should be changed immediately
              /// </summary>
-            CRITICAL,
+            CRITICAL = 0x0,
             /// <summary>
              /// Power is low (below 33%)
              /// </summary>
-            LOW,
+            LOW = 0x04,
             /// <summary>
              /// Power is medium (33% to 66%)
              /// </summary>
-            MEDIUM,
+            MEDIUM = 0x8,
             /// <summary>
              /// Power is full (above 66%)
              /// </summary>
-            FULL,
+            FULL = 0xc,
             /// <summary>
              /// Default for unknown
              /// </summary>
-            UNKNOWN
+            UNKNOWN = 0xff
         }
 
         /// <summary>
          /// The current power mode field of the node power descriptor is four bits in length
          /// and specifies the current sleep/power-saving mode of the node.
          /// </summary>
-        public enum CurrentPowerModeType
+        public enum CurrentPowerModeType : byte
         {
             /// <summary>
              /// Receiver synchronized with the receiver on when idle subfield
              /// of the node descriptor.
              /// </summary>
-            RECEIVER_ON_IDLE,
+            RECEIVER_ON_IDLE = 0x0,
             /// <summary>
              /// Receiver comes on periodically as defined by the node
              /// power descriptor.
              /// </summary>
-            RECEIVER_ON_PERIODICALLY,
+            RECEIVER_ON_PERIODICALLY = 0x1,
             /// <summary>
              /// Receiver comes on when stimulated, e.g. by a user pressing a
              /// button.
              /// </summary>
-            RECEIVER_ON_STIMULATED,
+            RECEIVER_ON_STIMULATED = 0x2,
             /// <summary>
              /// Default for unknown
              /// </summary>
-            UNKNOWN
+            UNKNOWN = 0xff
         }
 
         public CurrentPowerModeType CurrentPowerMode { get; private set; } = CurrentPowerModeType.UNKNOWN;
-        public List<PowerSourceType> AvailablePowerSources { get; private set; } = new List<PowerSourceType>();
+        public PowerSourceType AvailablePowerSources { get; private set; } = default;
         public PowerSourceType CurrentPowerSource { get; private set; } = PowerSourceType.UNKNOWN;
         public PowerLevelType PowerLevel { get; private set; } = PowerLevelType.UNKNOWN;
 
@@ -102,12 +103,12 @@ namespace ZigBeeNet.ZDO.Field
          /// <param name="currentPowerSource">{@linkPowerSourceType }</param>
          /// <param name="powerLevel"><see cref="PowerLevelType"></param>
          /// </summary>
-        public PowerDescriptor(CurrentPowerModeType currentPowerMode, List<PowerSourceType> availablePowerSources, PowerSourceType currentPowerSource, PowerLevelType powerLevel)
+        public PowerDescriptor(CurrentPowerModeType currentPowerMode, PowerSourceType availablePowerSources, PowerSourceType currentPowerSource, PowerLevelType powerLevel)
         {
-            this.CurrentPowerMode = currentPowerMode;
-            this.AvailablePowerSources = availablePowerSources;
-            this.CurrentPowerSource = currentPowerSource;
-            this.PowerLevel = powerLevel;
+            CurrentPowerMode = currentPowerMode;
+            AvailablePowerSources = availablePowerSources;
+            CurrentPowerSource = currentPowerSource;
+            PowerLevel = powerLevel;
         }
 
         /// <summary>
@@ -118,70 +119,36 @@ namespace ZigBeeNet.ZDO.Field
          /// @param currentPowerSource
          /// @param powerLevel
          /// </summary>
-        public PowerDescriptor(int currentPowerMode, int availablePowerSources, int currentPowerSource, int powerLevel)
+        public PowerDescriptor(byte currentPowerMode, byte availablePowerSources, byte currentPowerSource, byte powerLevel)
         {
-            setCurrentPowerMode(currentPowerMode);
+            SetCurrentPowerMode(currentPowerMode);
             SetAvailablePowerSources(availablePowerSources);
-            setCurrentPowerSource(currentPowerSource);
+            SetCurrentPowerSource(currentPowerSource);
             SetCurrentPowerLevel(powerLevel);
         }
 
-        public void setCurrentPowerSource(int currentPowerSource)
+        public void SetCurrentPowerSource(byte currentPowerSource) // 4bits used
         {
-            switch (currentPowerSource)
-            {
-                case 0x01:
-                    this.CurrentPowerSource = PowerSourceType.MAINS;
-                    break;
-                case 0x02:
-                    this.CurrentPowerSource = PowerSourceType.RECHARGABLE_BATTERY;
-                    break;
-                case 0x04:
-                    this.CurrentPowerSource = PowerSourceType.DISPOSABLE_BATTERY;
-                    break;
-                default:
-                    this.CurrentPowerSource = PowerSourceType.UNKNOWN;
-                    break;
-            }
+            CurrentPowerSource = (PowerSourceType)(currentPowerSource&0x0f);
+            if (CurrentPowerSource!=PowerSourceType.MAINS && 
+                CurrentPowerSource!=PowerSourceType.RECHARGABLE_BATTERY &&
+                CurrentPowerSource!=PowerSourceType.DISPOSABLE_BATTERY) 
+                CurrentPowerSource = PowerSourceType.UNKNOWN;
         }
 
-        public void SetAvailablePowerSources(int availablePowerSources)
+        public void SetAvailablePowerSources(byte availablePowerSources)
         {
-            this.AvailablePowerSources = new List<PowerSourceType>();
-            if ((availablePowerSources & 0x01) != 0)
-            {
-                this.AvailablePowerSources.Add(PowerSourceType.MAINS);
-            }
-            if ((availablePowerSources & 0x02) != 0)
-            {
-                this.AvailablePowerSources.Add(PowerSourceType.RECHARGABLE_BATTERY);
-            }
-            if ((availablePowerSources & 0x04) != 0)
-            {
-                this.AvailablePowerSources.Add(PowerSourceType.DISPOSABLE_BATTERY);
-            }
+            AvailablePowerSources = (PowerSourceType)(availablePowerSources & 0x0f);
         }
 
-        public void SetCurrentPowerLevel(int powerLevel)
+        public void SetCurrentPowerLevel(byte powerLevel)
         {
-            switch (powerLevel)
-            {
-                case 0xc:
-                    this.PowerLevel = PowerLevelType.FULL;
-                    break;
-                case 0x8:
-                    this.PowerLevel = PowerLevelType.MEDIUM;
-                    break;
-                case 0x4:
-                    this.PowerLevel = PowerLevelType.LOW;
-                    break;
-                case 0x0:
-                    this.PowerLevel = PowerLevelType.CRITICAL;
-                    break;
-                default:
-                    this.PowerLevel = PowerLevelType.UNKNOWN;
-                    break;
-            }
+            PowerLevel = (PowerLevelType)powerLevel;
+            if (PowerLevel != PowerLevelType.FULL &&
+                PowerLevel != PowerLevelType.MEDIUM &&
+                PowerLevel != PowerLevelType.LOW &&
+                PowerLevel != PowerLevelType.CRITICAL)
+                PowerLevel = PowerLevelType.UNKNOWN;
         }
 
         /// <summary>
@@ -189,23 +156,9 @@ namespace ZigBeeNet.ZDO.Field
          ///
          /// <param name="currentPowerMode">the <see cref="CurrentPowerModeType"></param>
          /// </summary>
-        public void setCurrentPowerMode(int currentPowerMode)
+        public void SetCurrentPowerMode(byte currentPowerMode)
         {
-            switch (currentPowerMode)
-            {
-                case 0x00:
-                    this.CurrentPowerMode = CurrentPowerModeType.RECEIVER_ON_IDLE;
-                    break;
-                case 0x01:
-                    this.CurrentPowerMode = CurrentPowerModeType.RECEIVER_ON_PERIODICALLY;
-                    break;
-                case 0x02:
-                    this.CurrentPowerMode = CurrentPowerModeType.RECEIVER_ON_STIMULATED;
-                    break;
-                default:
-                    this.CurrentPowerMode = CurrentPowerModeType.UNKNOWN;
-                    break;
-            }
+            CurrentPowerMode = currentPowerMode>0x02 ? CurrentPowerModeType.UNKNOWN : (CurrentPowerModeType)currentPowerMode;
         }
 
         /// <summary>
@@ -231,67 +184,37 @@ namespace ZigBeeNet.ZDO.Field
             byte byte1 = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
             byte byte2 = deserializer.ReadZigBeeType<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
 
-            setCurrentPowerMode(byte1 & 0x0f);
-            SetAvailablePowerSources(byte1 >> 4 & 0x0f);
-            setCurrentPowerSource(byte2 & 0x0f);
-            SetCurrentPowerLevel(byte2 >> 4 & 0x0f);
+            SetCurrentPowerMode((byte)(byte1 & 0x0f));
+            SetAvailablePowerSources((byte)(byte1 >> 4));
+            SetCurrentPowerSource((byte)(byte2 & 0x0f));
+            SetCurrentPowerLevel((byte)(byte2 >> 4));
         }
 
         public override int GetHashCode()
         {
-            int prime = 31;
+            const int prime = 31;
             int result = 1;
-            result = prime * result + ((AvailablePowerSources == null) ? 0 : AvailablePowerSources.GetHashCode());
-            result = prime * CurrentPowerMode.GetHashCode();
-            result = prime * CurrentPowerSource.GetHashCode();
-            result = prime * PowerLevel.GetHashCode();
+            result += prime * AvailablePowerSources.GetHashCode();
+            result += prime * CurrentPowerMode.GetHashCode();
+            result += prime * CurrentPowerSource.GetHashCode();
+            result += prime * PowerLevel.GetHashCode();
             return result;
         }
 
         public override bool Equals(object obj)
         {
-            if (this == obj)
-            {
-                return true;
-            }
-            if (obj == null)
-            {
-                return false;
-            }
-            if (this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            PowerDescriptor other = (PowerDescriptor)obj;
-            if (AvailablePowerSources == null)
-            {
-                if (other.AvailablePowerSources != null)
-                {
-                    return false;
-                }
-            }
-            else if (!AvailablePowerSources.Equals(other.AvailablePowerSources))
-            {
-                return false;
-            }
-            if (CurrentPowerMode != other.CurrentPowerMode)
-            {
-                return false;
-            }
-            if (CurrentPowerSource != other.CurrentPowerSource)
-            {
-                return false;
-            }
-            if (PowerLevel != other.PowerLevel)
-            {
-                return false;
-            }
-            return true;
+            return (this == obj)
+                || !(obj is null)
+                    && (obj is PowerDescriptor other)
+                    && AvailablePowerSources==other.AvailablePowerSources
+                    && CurrentPowerMode == other.CurrentPowerMode
+                    && CurrentPowerSource == other.CurrentPowerSource
+                    && PowerLevel == other.PowerLevel;
         }
 
         public override string ToString()
         {
-            return CurrentPowerMode + ", " + string.Join(", ", AvailablePowerSources) + ", " + CurrentPowerSource + ", " + PowerLevel;
+            return CurrentPowerMode + ", " +AvailablePowerSources + ", " + CurrentPowerSource + ", " + PowerLevel;
         }
     }
 }

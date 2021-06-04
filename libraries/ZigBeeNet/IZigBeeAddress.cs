@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ZigBeeNet
 {
-    public interface IZigBeeAddress : IComparable<IZigBeeAddress>
+    public interface IZigBeeAddress
     {
         /// <summary>
          /// The network address for this address.
          /// </summary>
-        ushort Address { get; set; }
+        ushort Address { get; }
 
         /// <summary>
          /// Check whether this address is ZigBee group.

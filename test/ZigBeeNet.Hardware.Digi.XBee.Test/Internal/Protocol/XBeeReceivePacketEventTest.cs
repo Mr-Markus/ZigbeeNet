@@ -25,7 +25,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test.Internal.Protocol
             Assert.Equal(0x90, responseEvent.GetFrameType());
             Assert.Equal(0x7D84, responseEvent.GetNetworkAddress());
             Assert.Equal(ReceiveOptions.PACKET_ACKNOWLEDGED, responseEvent.GetReceiveOptions());
-            Assert.Equal(new IeeeAddress(BigInteger.Parse("0013A20040522BAA", System.Globalization.NumberStyles.HexNumber)), responseEvent.GetIeeeAddress());
+            Assert.Equal(new IeeeAddress(0x0013A20040522BAAul), responseEvent.GetIeeeAddress());
 
             int[] arrayToTestAgainst = GetPacketData("52 78 44 61 74 61");
             int[] getDataResult = responseEvent.GetData();
