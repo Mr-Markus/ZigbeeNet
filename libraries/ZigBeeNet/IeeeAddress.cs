@@ -7,10 +7,7 @@ namespace ZigBeeNet
 {
     public class IeeeAddress : IComparable<IeeeAddress>
     {
-        //private byte[] _address;
-        private readonly ulong _address;
-
-        public ulong Value => _address;
+        public ulong Value {get;private set; }
         /// <summary>
         /// Default constructor. Creates an address 0
         /// </summary>
@@ -25,7 +22,7 @@ namespace ZigBeeNet
         /// </summary>
         public IeeeAddress(ulong address)
         {
-            _address = address;
+            Value = address;
         }
 
         /// <summary>
@@ -35,9 +32,10 @@ namespace ZigBeeNet
         /// </summary>
         public IeeeAddress(string address)
         {
-            if (!UInt64.TryParse(address,NumberStyles.HexNumber,CultureInfo.InvariantCulture,out _address))
+            if (!UInt64.TryParse(address,NumberStyles.HexNumber,CultureInfo.InvariantCulture,out ulong _address))
                 throw new ArgumentException("IeeeAddress string must contain valid hexadecimal value");
-            }
+            Value=_address;
+        }
 
         /// <summary>
         /// Create an <see cref="IeeeAddress"> from an int array
@@ -49,7 +47,7 @@ namespace ZigBeeNet
         {
             if (address.Length != 8)
                 throw new ArgumentOutOfRangeException("IeeeAddress array length must be 8");
-            _address = address.ToUInt64();
+            Value = address.ToUInt64();
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace ZigBeeNet
         /// <returns></returns>
         public byte[] GetAddress()
         {   
-            return ByteHelper.FromUInt64(_address);
+            return ByteHelper.FromUInt64(Value);
         }
 
         public override int GetHashCode()
@@ -75,10 +73,10 @@ namespace ZigBeeNet
 
         public override string ToString()
         {
-            return _address.ToString("X16");
+            return Value.ToString("X16");
         }
 
-        public int CompareTo(IeeeAddress other) => _address.CompareTo(other._address);
+        public int CompareTo(IeeeAddress other) => Value.CompareTo(other.Value);
 
     }
 }
