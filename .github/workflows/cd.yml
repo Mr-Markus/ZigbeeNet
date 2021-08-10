@@ -3,7 +3,8 @@ name: CD
 on:
   release:
     types:
-      - created
+      - edited
+      - released
 
 jobs:
   release:
@@ -20,11 +21,16 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --configuration Release
       
     - name: Create NuGet packages
-      run: dotnet pack
+      run: |
+        VERSION=$(echo "${{ github.event.release.tag_name }}" | cut -c2-)
+        echo $VERSION
+        dotnet pack --no-build --configuration Release -p:Version=$VERSION
     - name: Publish NuGet packages
-      run: dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.nuget-api-key }}
+      run: dotnet nuget push "**/*.nupkg" --api-key $NUGET_AUTH_TOKEN --source https://api.nuget.org/v3/index.json --skip-duplicate
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
