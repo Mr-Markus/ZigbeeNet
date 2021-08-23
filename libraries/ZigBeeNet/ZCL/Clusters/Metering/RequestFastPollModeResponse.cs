@@ -68,14 +68,14 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(AppliedUpdatePeriod, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(FastPollModeEndtime, ZclDataType.Get(DataType.UTCTIME));
+            serializer.Serialize(AppliedUpdatePeriod, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(FastPollModeEndtime, DataType.UTCTIME);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            AppliedUpdatePeriod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            FastPollModeEndtime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
+            AppliedUpdatePeriod = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            FastPollModeEndtime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
         }
 
         public override string ToString()

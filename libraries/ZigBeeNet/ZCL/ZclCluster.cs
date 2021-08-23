@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace ZigBeeNet.ZCL
 {
     public abstract class ZclCluster
     {
+        /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZclCluster>();
+
         /// <summary>
         /// The <see cref="ZigBeeNetworkManager"> to which this device belongs
         /// </summary>
@@ -258,7 +264,7 @@ namespace ZigBeeNet.ZCL
         /// <returns>an object containing the value, or null</returns>
         public async Task<object> ReadAttributeValue(ushort attributeId)
         {
-            Log.Debug("ReadAttributeValue request attribute {AttributeId}", attributeId);
+            _logger.LogDebug("ReadAttributeValue request attribute {AttributeId}", attributeId);
             CommandResult result;
             try
             {
@@ -266,7 +272,7 @@ namespace ZigBeeNet.ZCL
             }
             catch (Exception e)
             {
-                Log.Debug(e, "ReadAttributeValue exception");
+                _logger.LogDebug(e, "ReadAttributeValue exception");
                 return null;
             }
 
@@ -505,7 +511,7 @@ namespace ZigBeeNet.ZCL
 
                 if (!_clientAttributes.TryGetValue(id, out clientAttribute))
                 {
-                    Log.Information("Unkown client attribute with id {AttributeId} reported for cluster {Cluster}", id, this._clusterId);
+                    _logger.LogInformation("Unkown client attribute with id {AttributeId} reported for cluster {Cluster}", id, this._clusterId);
                 }
                 return clientAttribute;
             }
@@ -516,7 +522,7 @@ namespace ZigBeeNet.ZCL
                 // It can be that device reports unknown id
                 if (!_serverAttributes.TryGetValue(id, out serverAttribute))
                 {
-                    Log.Information("Unkown server attribute with id {AttributeId} reported by device for cluster {Cluster}", id, this._clusterId);
+                    _logger.LogInformation("Unkown server attribute with id {AttributeId} reported by device for cluster {Cluster}", id, this._clusterId);
                 }
                 return serverAttribute;
             }
@@ -1139,7 +1145,7 @@ namespace ZigBeeNet.ZCL
             ZclAttribute attribute = GetAttribute(attributeId);
             if (attribute == null)
             {
-                Log.Debug("{EndPoint}: Unknown {IsClient} attribute in {AttributeId} cluster {ClusterId}", _zigbeeEndpoint.GetEndpointAddress(), (_isClient ? "Client" : "Server"), attributeId, _clusterId);
+                _logger.LogDebug("{EndPoint}: Unknown {IsClient} attribute in {AttributeId} cluster {ClusterId}", _zigbeeEndpoint.GetEndpointAddress(), (_isClient ? "Client" : "Server"), attributeId, _clusterId);
             }
             else
             {
@@ -1160,7 +1166,7 @@ namespace ZigBeeNet.ZCL
             {
                 if (record.Status != ZclStatus.SUCCESS)
                 {
-                    Log.Debug("{EndpointAddress}: Error reading attribute {AttributeIdentifier} in cluster {clusterId} - {Status}", _zigbeeEndpoint.GetEndpointAddress(), record.AttributeIdentifier, _clusterId, record.Status);
+                    _logger.LogDebug("{EndpointAddress}: Error reading attribute {AttributeIdentifier} in cluster {clusterId} - {Status}", _zigbeeEndpoint.GetEndpointAddress(), record.AttributeIdentifier, _clusterId, record.Status);
                     continue;
                 }
 
@@ -1232,7 +1238,7 @@ namespace ZigBeeNet.ZCL
             }
             catch (Exception e)
             {
-                Log.Debug(e, "Error instantiating cluster command {ClusterName}, id={CommandId}", _clusterName, commandId);
+                _logger.LogDebug(e, "Error instantiating cluster command {ClusterName}, id={CommandId}", _clusterName, commandId);
             }
             return null;
         }

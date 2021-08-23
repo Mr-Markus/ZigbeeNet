@@ -62,16 +62,16 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Options, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(CommissioningWindow, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Channel, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Options, DataType.BITMAP_8_BIT);
+            serializer.Serialize(CommissioningWindow, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Channel, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Options = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            CommissioningWindow = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Channel = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            Options = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            CommissioningWindow = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Channel = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

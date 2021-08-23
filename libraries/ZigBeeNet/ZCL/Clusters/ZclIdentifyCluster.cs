@@ -63,7 +63,7 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(1);
 
-            attributeMap.Add(ATTR_IDENTIFYTIME, new ZclAttribute(this, ATTR_IDENTIFYTIME, "Identify Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, true, false));
+            attributeMap.Add(ATTR_IDENTIFYTIME, new ZclAttribute(this, ATTR_IDENTIFYTIME, "Identify Time", DataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
 
             return attributeMap;
         }

@@ -50,12 +50,12 @@ namespace ZigBeeNet.ZCL.Clusters.WindowCovering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TiltValue, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(TiltValue, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TiltValue = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            TiltValue = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

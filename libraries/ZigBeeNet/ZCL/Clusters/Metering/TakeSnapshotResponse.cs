@@ -63,14 +63,14 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SnapshotId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(SnapshotConfirmation, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            serializer.Serialize(SnapshotId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(SnapshotConfirmation, DataType.ENUMERATION_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SnapshotId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            SnapshotConfirmation = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
+            SnapshotId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            SnapshotConfirmation = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
         }
 
         public override string ToString()

@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(UpdateFlags, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(Action, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Direction, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(TransitionTime, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(StartHue, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(UpdateFlags, DataType.BITMAP_8_BIT);
+            serializer.Serialize(Action, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Direction, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(TransitionTime, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(StartHue, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            UpdateFlags = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            Action = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Direction = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            TransitionTime = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            StartHue = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            UpdateFlags = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            Action = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Direction = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            TransitionTime = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            StartHue = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

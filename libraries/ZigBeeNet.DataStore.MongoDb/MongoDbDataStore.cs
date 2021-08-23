@@ -6,13 +6,16 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Options;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using Serilog;
 using ZigBeeNet.Database;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.DataStore.MongoDb
 {
     public class MongoDbDataStore : IZigBeeNetworkDataStore
     {
+        static private readonly ILogger _logger = LogManager.GetLog<MongoDbDataStore>();
+
         private readonly IMongoCollection<ZigBeeNodeDao> _nodes;
 
         public MongoDbDataStore(MongoDbDatabaseSettings settings)
@@ -22,12 +25,19 @@ namespace ZigBeeNet.DataStore.MongoDb
                 cm.AutoMap();
                 // Do this so that id field from mongoDb does not going in conflict with existing class
                 cm.SetIgnoreExtraElements(true);
+                cm.MapMember( c => c.IeeeAddress).SetSerializer(new IeeAddressSerializer());
             });
 
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _nodes = database.GetCollection<ZigBeeNodeDao>(settings.NodesCollectionName);
+            // Create index on IeeeAddress
+            CreateIndexModel<ZigBeeNodeDao> model = new CreateIndexModel<ZigBeeNodeDao>(
+                                                            Builders<ZigBeeNodeDao>.IndexKeys.Ascending(n => n.IeeeAddress),
+                                                            new CreateIndexOptions { Unique = true }
+                                                        ); 
+            _nodes.Indexes.CreateOne( model );
 
         }
 
@@ -47,13 +57,13 @@ namespace ZigBeeNet.DataStore.MongoDb
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, "Error: {Exception}", ex.Message);
+                        _logger.LogError(ex, "Error: {Exception}", ex.Message);
                     }
                 });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error: {Exception}", ex.Message);
+                _logger.LogError(ex, "Error: {Exception}", ex.Message);
             }
 
             return ieeeAddresses;
@@ -82,5 +92,22 @@ namespace ZigBeeNet.DataStore.MongoDb
                 _nodes.InsertOne(node);
             }
         }
+    
+        private class IeeAddressSerializer : SerializerBase<IeeeAddress>
+        {
+            public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, IeeeAddress value)
+            {
+                context.Writer.WriteString(value.ToString());
+            }
+
+            public override IeeeAddress Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+            {
+                var type = context.Reader.GetCurrentBsonType();
+                if (type is BsonType.String)
+                    return new IeeeAddress(context.Reader.ReadString());
+                throw new NotSupportedException($"Cannot convert a {type} to IeeAddress");
+            }
+        }
     }
+
 }

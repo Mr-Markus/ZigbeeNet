@@ -69,14 +69,14 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(LatestEndTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(NumberOfRecords, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(LatestEndTime, DataType.UTCTIME);
+            serializer.Serialize(NumberOfRecords, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            LatestEndTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            NumberOfRecords = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            LatestEndTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            NumberOfRecords = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -135,16 +135,16 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(10);
 
-            attributeMap.Add(ATTR_TIME, new ZclAttribute(this, ATTR_TIME, "Time", ZclDataType.Get(DataType.UTCTIME), true, true, true, false));
-            attributeMap.Add(ATTR_TIMESTATUS, new ZclAttribute(this, ATTR_TIMESTATUS, "Time Status", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_TIMEZONE, new ZclAttribute(this, ATTR_TIMEZONE, "Time Zone", ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_DSTSTART, new ZclAttribute(this, ATTR_DSTSTART, "DST Start", ZclDataType.Get(DataType.UTCTIME), false, true, true, false));
-            attributeMap.Add(ATTR_DSTEND, new ZclAttribute(this, ATTR_DSTEND, "DST End", ZclDataType.Get(DataType.UTCTIME), false, true, true, false));
-            attributeMap.Add(ATTR_DSTSHIFT, new ZclAttribute(this, ATTR_DSTSHIFT, "DST Shift", ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_STANDARDTIME, new ZclAttribute(this, ATTR_STANDARDTIME, "Standard Time", ZclDataType.Get(DataType.UTCTIME), false, true, false, false));
-            attributeMap.Add(ATTR_LOCALTIME, new ZclAttribute(this, ATTR_LOCALTIME, "Local Time", ZclDataType.Get(DataType.UTCTIME), false, true, false, false));
-            attributeMap.Add(ATTR_LASTSETTIME, new ZclAttribute(this, ATTR_LASTSETTIME, "Last Set Time", ZclDataType.Get(DataType.UTCTIME), false, true, false, false));
-            attributeMap.Add(ATTR_VALIDUNTILTIME, new ZclAttribute(this, ATTR_VALIDUNTILTIME, "Valid Until Time", ZclDataType.Get(DataType.UTCTIME), false, true, true, false));
+            attributeMap.Add(ATTR_TIME, new ZclAttribute(this, ATTR_TIME, "Time", DataType.UTCTIME, true, true, true, false));
+            attributeMap.Add(ATTR_TIMESTATUS, new ZclAttribute(this, ATTR_TIMESTATUS, "Time Status", DataType.BITMAP_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_TIMEZONE, new ZclAttribute(this, ATTR_TIMEZONE, "Time Zone", DataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_DSTSTART, new ZclAttribute(this, ATTR_DSTSTART, "DST Start", DataType.UTCTIME, false, true, true, false));
+            attributeMap.Add(ATTR_DSTEND, new ZclAttribute(this, ATTR_DSTEND, "DST End", DataType.UTCTIME, false, true, true, false));
+            attributeMap.Add(ATTR_DSTSHIFT, new ZclAttribute(this, ATTR_DSTSHIFT, "DST Shift", DataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_STANDARDTIME, new ZclAttribute(this, ATTR_STANDARDTIME, "Standard Time", DataType.UTCTIME, false, true, false, false));
+            attributeMap.Add(ATTR_LOCALTIME, new ZclAttribute(this, ATTR_LOCALTIME, "Local Time", DataType.UTCTIME, false, true, false, false));
+            attributeMap.Add(ATTR_LASTSETTIME, new ZclAttribute(this, ATTR_LASTSETTIME, "Last Set Time", DataType.UTCTIME, false, true, false, false));
+            attributeMap.Add(ATTR_VALIDUNTILTIME, new ZclAttribute(this, ATTR_VALIDUNTILTIME, "Valid Until Time", DataType.UTCTIME, false, true, true, false));
 
             return attributeMap;
         }

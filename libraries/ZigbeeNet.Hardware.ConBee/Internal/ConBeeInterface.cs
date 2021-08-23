@@ -26,13 +26,16 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Serilog;
 using ZigBeeNet.Transport;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
+
 
 namespace ZigbeeNet.Hardware.ConBee
 {
     class ConBeeInterface : IDisposable
     {
+        private static ILogger _logger = LogManager.GetLog<ConBeeInterface>();
         private IZigBeePort serialPort;
         private Slip slip;
         private Thread thread;
@@ -60,6 +63,26 @@ namespace ZigbeeNet.Hardware.ConBee
             thread.Name = "ConBee read loop";
             thread.IsBackground = true;
             thread.Start();
+            PingWatchdogLoop();
+        }
+
+        async void PingWatchdogLoop()
+        {
+            while (!exit)
+            {
+                try
+                {
+                    WatchdogTTL = 60/*minutes*/ * 60 /*seconds*/;
+                    await Task.Delay(TimeSpan.FromMinutes(55)).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Exception updating WatchdogTTL {ex}");
+                    // Keep retrying to set every 15 seconds, so log is updated
+                    // frequently enough to be visible, but not too often to spam
+                    await Task.Delay(TimeSpan.FromSeconds(15)).ConfigureAwait(false);
+                }
+            }
         }
 
         public async Task<byte[]> SendAsync(Commands command, params byte[] payload)
@@ -78,11 +101,11 @@ namespace ZigbeeNet.Hardware.ConBee
             var taskSource = new TaskCompletionSource<(StatusCodes status, byte[] data)>();
             responses[seq] = taskSource;
             slip.slip_send_message(arr, packetLengthWithCrc);
-            Log.Debug("Slip Send:" + BitConverter.ToString(arr, 0, packetLengthWithCrc));
+            _logger.LogDebug("Slip Send:" + BitConverter.ToString(arr, 0, packetLengthWithCrc));
             var (status, data) = await taskSource.Task;
             if (status == StatusCodes.BUSY)
             {
-                Log.Debug("Dongle is busy, resending");
+                _logger.LogDebug("Dongle is busy, resending");
                 return await SendAsync(command, payload);
             }
             if (status == StatusCodes.SUCCESS)
@@ -100,14 +123,14 @@ namespace ZigbeeNet.Hardware.ConBee
                 {
                     var b = serialPort.Read();
                     if (b == null)
-                        Log.Warning("SerialPort returned null");
+                        _logger.LogWarning("SerialPort returned null");
                     slip.slip_read_byte(b.Value);
                 }
                 serialPort.Close();
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Exception in ConBee interface ReadLoop: {Exception}", ex.Message);
+                _logger.LogError(ex, "Exception in ConBee interface ReadLoop: {Exception}", ex.Message);
             }
         }
 
@@ -118,16 +141,16 @@ namespace ZigbeeNet.Hardware.ConBee
 
         private void SlipRecvMessage(byte[] data, int len)
         {
-            Log.Debug("Slip Recv:" + BitConverter.ToString(data, 0, len));
+            _logger.LogDebug("Slip Recv:" + BitConverter.ToString(data, 0, len));
 
             if (len < 7)
             {
-                Log.Error("Packet too small");
+                _logger.LogError("Packet too small");
                 return;
             }
             if (!CheckCrc(data, len - 2))
             {
-                Log.Warning("Wrong CRC");
+                _logger.LogWarning("Wrong CRC");
                 return;
             }
             var command = (Commands)data[0];
@@ -391,7 +414,7 @@ namespace ZigbeeNet.Hardware.ConBee
 
         public async Task<string> GetVersionAsync()
         {
-            var response = await SendAsync(Commands.VERSION).ConfigureAwait(false);
+            var response = await SendAsync(Commands.VERSION, new byte[4]).ConfigureAwait(false);
             string result;
             switch (response[6])
             {

@@ -79,18 +79,18 @@ namespace ZigBeeNet.ZCL.Clusters.Messaging
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(MessageId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ConfirmationTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(MessageConfirmationControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(MessageConfirmationResponse, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(MessageId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ConfirmationTime, DataType.UTCTIME);
+            serializer.Serialize(MessageConfirmationControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(MessageConfirmationResponse, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            MessageId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ConfirmationTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            MessageConfirmationControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            MessageConfirmationResponse = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            MessageId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ConfirmationTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            MessageConfirmationControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            MessageConfirmationResponse = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

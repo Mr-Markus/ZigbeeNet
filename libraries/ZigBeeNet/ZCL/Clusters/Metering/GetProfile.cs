@@ -77,16 +77,16 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IntervalChannel, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(EndTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(NumberOfPeriods, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(IntervalChannel, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(EndTime, DataType.UTCTIME);
+            serializer.Serialize(NumberOfPeriods, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IntervalChannel = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            EndTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            NumberOfPeriods = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            IntervalChannel = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            EndTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            NumberOfPeriods = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +10,8 @@ using ZigBeeNet.Hardware.Ember.Internal.Serializer;
 using ZigBeeNet.Hardware.Ember.Transaction;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Ember.Internal
 {
@@ -19,6 +20,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal
     /// </summary>
     public class EmberNetworkInitialisation 
     {
+        static private readonly ILogger _logger = LogManager.GetLog<EmberNetworkInitialisation>();
         /**
          * The frame handler used to send the EZSP frames to the NCP
          */
@@ -68,7 +70,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal
                 networkParameters.SetExtendedPanId(new ExtendedPanId());
             }
 
-            Log.Debug("Initialising Ember network with configuration {NetworkParameters}", networkParameters);
+            _logger.LogDebug("Initialising Ember network with configuration {NetworkParameters}", networkParameters);
 
             EmberNcp ncp = new EmberNcp(_protocolHandler);
 
@@ -82,7 +84,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal
 
             // Perform an energy scan to find a clear channel
             int? quietestChannel = DoEnergyScan(ncp, _scanDuration);
-            Log.Debug("Energy scan reports quietest channel is {QuietestChannel}", quietestChannel);
+            _logger.LogDebug("Energy scan reports quietest channel is {QuietestChannel}", quietestChannel);
 
             // Check if any current networks were found and avoid those channels, PAN ID and especially Extended PAN ID
             ncp.DoActiveScan(ZigBeeChannelMask.CHANNEL_MASK_2GHZ, _scanDuration);
@@ -96,13 +98,13 @@ namespace ZigBeeNet.Hardware.Ember.Internal
                 Random random = new Random();
                 int panId = random.Next(65535);
                 networkParameters.SetPanId(panId);
-                Log.Debug("Created random PAN ID: {PanId}", panId);
+                _logger.LogDebug("Created random PAN ID: {PanId}", panId);
 
                 byte[] extendedPanIdBytes = new byte[8];
                 random.NextBytes(extendedPanIdBytes);
                 ExtendedPanId extendedPanId = new ExtendedPanId(extendedPanIdBytes);
                 networkParameters.SetExtendedPanId(extendedPanId);
-                Log.Debug("Created random Extended PAN ID: {ExtendedPanId}", extendedPanId.ToString());
+                _logger.LogDebug("Created random Extended PAN ID: {ExtendedPanId}", extendedPanId.ToString());
             }
 
             if (networkParameters.GetRadioChannel() == 0 && quietestChannel.HasValue) 
@@ -131,7 +133,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal
          */
         public void JoinNetwork(EmberNetworkParameters networkParameters, ZigBeeKey linkKey) 
         {
-            Log.Debug("Joining Ember network with configuration {Parameters}", networkParameters);
+            _logger.LogDebug("Joining Ember network with configuration {Parameters}", networkParameters);
 
             // Leave the current network so we can initialise a new network
             EmberNcp ncp = new EmberNcp(_protocolHandler);
@@ -161,8 +163,8 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             EzspNetworkStateRequest networkStateRequest = new EzspNetworkStateRequest();
             IEzspTransaction networkStateTransaction = _protocolHandler.SendEzspTransaction(new EzspSingleResponseTransaction(networkStateRequest, typeof(EzspNetworkStateResponse)));
             EzspNetworkStateResponse networkStateResponse = (EzspNetworkStateResponse) networkStateTransaction.GetResponse();
-            Log.Debug(networkStateResponse.ToString());
-            Log.Debug("EZSP networkStateResponse {Status}", networkStateResponse.GetStatus());
+            _logger.LogDebug(networkStateResponse.ToString());
+            _logger.LogDebug("EZSP networkStateResponse {Status}", networkStateResponse.GetStatus());
 
             return networkStateResponse.GetStatus() == EmberNetworkStatus.EMBER_JOINED_NETWORK;
         }
@@ -179,7 +181,7 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             List<EzspEnergyScanResultHandler> channels = ncp.DoEnergyScan(ZigBeeChannelMask.CHANNEL_MASK_2GHZ, scanDuration);
 
             if (channels == null) {
-                Log.Debug("Error during energy scan: {Status}", ncp.GetLastStatus());
+                _logger.LogDebug("Error during energy scan: {Status}", ncp.GetLastStatus());
                 return null;
             }
 
@@ -207,10 +209,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             EzspSingleResponseTransaction transaction = new EzspSingleResponseTransaction(networkParms, typeof(EzspGetNetworkParametersResponse));
             _protocolHandler.SendEzspTransaction(transaction);
             EzspGetNetworkParametersResponse getNetworkParametersResponse = (EzspGetNetworkParametersResponse) transaction.GetResponse();
-            Log.Debug(getNetworkParametersResponse.ToString());
+            _logger.LogDebug(getNetworkParametersResponse.ToString());
             if (getNetworkParametersResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Error during retrieval of network parameters: {Response}", getNetworkParametersResponse);
+                _logger.LogDebug("Error during retrieval of network parameters: {Response}", getNetworkParametersResponse);
                 return null;
             }
             return getNetworkParametersResponse.GetParameters();
@@ -256,10 +258,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             EzspSingleResponseTransaction transaction = new EzspSingleResponseTransaction(securityState, typeof(EzspSetInitialSecurityStateResponse));
             _protocolHandler.SendEzspTransaction(transaction);
             EzspSetInitialSecurityStateResponse securityStateResponse = (EzspSetInitialSecurityStateResponse) transaction.GetResponse();
-            Log.Debug(securityStateResponse.ToString());
+            _logger.LogDebug(securityStateResponse.ToString());
             if (securityStateResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Error during retrieval of network parameters: {Response}", securityStateResponse);
+                _logger.LogDebug("Error during retrieval of network parameters: {Response}", securityStateResponse);
                 return false;
             }
 
@@ -297,10 +299,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             EzspSingleResponseTransaction transaction = new EzspSingleResponseTransaction(formNetwork, typeof(EzspFormNetworkResponse));
             _protocolHandler.SendEzspTransaction(transaction);
             EzspFormNetworkResponse formNetworkResponse = (EzspFormNetworkResponse) transaction.GetResponse();
-            Log.Debug(formNetworkResponse.ToString());
+            _logger.LogDebug(formNetworkResponse.ToString());
             if (formNetworkResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Error forming network: {Response}", formNetworkResponse);
+                _logger.LogDebug("Error forming network: {Response}", formNetworkResponse);
                 return false;
             }
 
@@ -324,10 +326,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             _protocolHandler.SendEzspTransaction(transaction);
 
             EzspJoinNetworkResponse joinNetworkResponse = (EzspJoinNetworkResponse) transaction.GetResponse();
-            Log.Debug(joinNetworkResponse.ToString());
+            _logger.LogDebug(joinNetworkResponse.ToString());
             if (joinNetworkResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Error joining network: {Response}", joinNetworkResponse);
+                _logger.LogDebug("Error joining network: {Response}", joinNetworkResponse);
                 return false;
             }
             return true;
@@ -349,10 +351,10 @@ namespace ZigBeeNet.Hardware.Ember.Internal
             _protocolHandler.SendEzspTransaction(transaction);
 
             EzspFindAndRejoinNetworkResponse rejoinNetworkResponse = (EzspFindAndRejoinNetworkResponse) transaction.GetResponse();
-            Log.Debug(rejoinNetworkResponse.ToString());
+            _logger.LogDebug(rejoinNetworkResponse.ToString());
             if (rejoinNetworkResponse.GetStatus() != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Error rejoining network: {Response}", rejoinNetworkResponse);
+                _logger.LogDebug("Error rejoining network: {Response}", rejoinNetworkResponse);
                 return false;
             }
 

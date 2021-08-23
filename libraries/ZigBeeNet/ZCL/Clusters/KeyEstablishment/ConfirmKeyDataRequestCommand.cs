@@ -53,12 +53,12 @@ namespace ZigBeeNet.ZCL.Clusters.KeyEstablishment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SecureMessageAuthenticationCode, ZclDataType.Get(DataType.RAW_OCTET));
+            serializer.Serialize(SecureMessageAuthenticationCode, DataType.RAW_OCTET);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SecureMessageAuthenticationCode = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.RAW_OCTET));
+            SecureMessageAuthenticationCode = deserializer.Deserialize<ByteArray>(DataType.RAW_OCTET);
         }
 
         public override string ToString()

@@ -1,31 +1,18 @@
 ﻿using System;
 using System.Numerics;
+using System.Globalization;
 using ZigBeeNet.Util;
 
 namespace ZigBeeNet
 {
     public class IeeeAddress : IComparable<IeeeAddress>
     {
-        private byte[] _address;
-
-        public ulong Value
-        {
-            get
-            {
-                return BitConverter.ToUInt64(_address, 0);
-            }
-            set
-            {
-                _address = BitConverter.GetBytes(value);
-            }
-        }
-
+        public ulong Value {get;private set; }
         /// <summary>
         /// Default constructor. Creates an address 0
         /// </summary>
         public IeeeAddress()
         {
-            this._address = new byte[8];
         }
 
         /// <summary>
@@ -33,9 +20,9 @@ namespace ZigBeeNet
         ///
         /// <param name="address">the address as a <see cref="BigInteger"></param>
         /// </summary>
-        public IeeeAddress(BigInteger address) : this()
+        public IeeeAddress(ulong address)
         {
-            _address = BitConverter.GetBytes((ulong)address);
+            Value = address;
         }
 
         /// <summary>
@@ -43,16 +30,11 @@ namespace ZigBeeNet
         ///
         /// <param name="address">the address as a <see cref="String"></param>
         /// </summary>
-        public IeeeAddress(string address) : this()
+        public IeeeAddress(string address)
         {
-            try
-            {
-                _address = BitConverter.GetBytes(Convert.ToUInt64(address, 16));
-            }
-            catch (FormatException)
-            {
+            if (!UInt64.TryParse(address,NumberStyles.HexNumber,CultureInfo.InvariantCulture,out ulong _address))
                 throw new ArgumentException("IeeeAddress string must contain valid hexadecimal value");
-            }
+            Value=_address;
         }
 
         /// <summary>
@@ -65,8 +47,7 @@ namespace ZigBeeNet
         {
             if (address.Length != 8)
                 throw new ArgumentOutOfRangeException("IeeeAddress array length must be 8");
-
-            _address = address;
+            Value = address.ToUInt64();
         }
 
         /// <summary>
@@ -74,36 +55,20 @@ namespace ZigBeeNet
         /// </summary>
         /// <returns></returns>
         public byte[] GetAddress()
-        {
-            return _address;
+        {   
+            return ByteHelper.FromUInt64(Value);
         }
 
         public override int GetHashCode()
         {
-            return Hash.CalcHashCode(_address);
+            return Value.GetHashCode();
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return false;
-            
-            if (obj is IeeeAddress other)
-            {
-                for (int cnt = 0; cnt < 8; cnt++)
-                {
-                    if (other._address[cnt] != _address[cnt])
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                return false;
-            }
-
-            return true;
+            return !(obj is null)
+                && (obj is IeeeAddress other)
+                && Value==other.Value;
         }
 
         public override string ToString()
@@ -111,22 +76,7 @@ namespace ZigBeeNet
             return Value.ToString("X16");
         }
 
-        public int CompareTo(IeeeAddress other)
-        {
-            if (other == null)
-                return -1;
+        public int CompareTo(IeeeAddress other) => Value.CompareTo(other.Value);
 
-            for (int cnt = 0; cnt < 8; cnt++)
-            {
-                if (other._address[cnt] == _address[cnt])
-                {
-                    continue;
-                }
-
-                return other._address[cnt] < _address[cnt] ? 1 : -1;
-            }
-
-            return 0;
-        }
     }
 }

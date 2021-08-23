@@ -26,15 +26,16 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using Serilog;
 using ZigBeeNet;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
-
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 namespace ZigbeeNet.Hardware.ConBee
 {
     public class ZigbeeDongleConBee : IZigBeeTransportTransmit
     {
+        private static ILogger _logger = LogManager.GetLog<ZigbeeDongleConBee>();
         private ConBeeInterface _conbeeInterface;
         private IZigBeeTransportReceive _zigBeeTransportReceive;
 
@@ -84,7 +85,7 @@ namespace ZigbeeNet.Hardware.ConBee
             }
             catch(Exception ex)
             {
-                Log.Error(ex, "Exception while Process: {Exception}", ex.Message);
+                _logger.LogError(ex, "Exception while Process: {Exception}", ex.Message);
             }
             finally
             {
@@ -145,12 +146,12 @@ namespace ZigbeeNet.Hardware.ConBee
 
         private void configurationChanged()
         {
-            Log.Debug("ConfigurationChanged");
+            _logger.LogDebug("ConfigurationChanged");
         }
 
         private void networkStateChanged()
         {
-            Log.Debug($"NetworkStateChanged:{_conbeeInterface.NetworkState}");
+            _logger.LogDebug($"NetworkStateChanged:{_conbeeInterface.NetworkState}");
         }
 
         ConcurrentQueue<byte[]> ApsRequestsQueue = new ConcurrentQueue<byte[]>();

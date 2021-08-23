@@ -98,12 +98,12 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(6);
 
-            attributeMap.Add(ATTR_SCENECOUNT, new ZclAttribute(this, ATTR_SCENECOUNT, "Scene Count", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTSCENE, new ZclAttribute(this, ATTR_CURRENTSCENE, "Current Scene", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTGROUP, new ZclAttribute(this, ATTR_CURRENTGROUP, "Current Group", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_SCENEVALID, new ZclAttribute(this, ATTR_SCENEVALID, "Scene Valid", ZclDataType.Get(DataType.BOOLEAN), true, true, false, false));
-            attributeMap.Add(ATTR_NAMESUPPORT, new ZclAttribute(this, ATTR_NAMESUPPORT, "Name Support", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_LASTCONFIGUREDBY, new ZclAttribute(this, ATTR_LASTCONFIGUREDBY, "Last Configured By", ZclDataType.Get(DataType.IEEE_ADDRESS), false, true, false, false));
+            attributeMap.Add(ATTR_SCENECOUNT, new ZclAttribute(this, ATTR_SCENECOUNT, "Scene Count", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTSCENE, new ZclAttribute(this, ATTR_CURRENTSCENE, "Current Scene", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTGROUP, new ZclAttribute(this, ATTR_CURRENTGROUP, "Current Group", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_SCENEVALID, new ZclAttribute(this, ATTR_SCENEVALID, "Scene Valid", DataType.BOOLEAN, true, true, false, false));
+            attributeMap.Add(ATTR_NAMESUPPORT, new ZclAttribute(this, ATTR_NAMESUPPORT, "Name Support", DataType.BITMAP_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_LASTCONFIGUREDBY, new ZclAttribute(this, ATTR_LASTCONFIGUREDBY, "Last Configured By", DataType.IEEE_ADDRESS, false, true, false, false));
 
             return attributeMap;
         }

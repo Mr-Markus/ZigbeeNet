@@ -90,14 +90,14 @@ namespace ZigBeeNet.ZCL.Clusters.PollControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(StartFastPolling, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.Serialize(FastPollTimeout, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(StartFastPolling, DataType.BOOLEAN);
+            serializer.Serialize(FastPollTimeout, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            StartFastPolling = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
-            FastPollTimeout = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            StartFastPolling = deserializer.Deserialize<bool>(DataType.BOOLEAN);
+            FastPollTimeout = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

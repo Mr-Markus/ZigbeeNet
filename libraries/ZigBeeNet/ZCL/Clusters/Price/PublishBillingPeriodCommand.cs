@@ -114,22 +114,22 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProviderId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(BillingPeriodStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(BillingPeriodDuration, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            serializer.Serialize(BillingPeriodDurationType, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TariffType, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(ProviderId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(BillingPeriodStartTime, DataType.UTCTIME);
+            serializer.Serialize(BillingPeriodDuration, DataType.UNSIGNED_24_BIT_INTEGER);
+            serializer.Serialize(BillingPeriodDurationType, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TariffType, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProviderId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            BillingPeriodStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            BillingPeriodDuration = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            BillingPeriodDurationType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TariffType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            ProviderId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            BillingPeriodStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            BillingPeriodDuration = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
+            BillingPeriodDurationType = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TariffType = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

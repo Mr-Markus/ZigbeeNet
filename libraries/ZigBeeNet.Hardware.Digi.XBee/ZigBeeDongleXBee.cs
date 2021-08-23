@@ -1,5 +1,4 @@
-﻿using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,21 +7,24 @@ using ZigBeeNet.Hardware.Digi.XBee.Internal;
 using ZigBeeNet.Hardware.Digi.XBee.Internal.Protocol;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Digi.XBee
 {
     public class ZigBeeDongleXBee : IZigBeeTransportTransmit, IXBeeEventListener
     {
-        #region private fields
+        static internal ILogger Logger = LogManager.GetLog<ZigBeeDongleXBee>();
 
+        #region private fields
         private readonly IZigBeePort _serialPort;
         private IXBeeFrameHandler _frameHandler;
         private IZigBeeTransportReceive _zigBeeTransportReceive;
         private bool _coordinatorStarted;
         private bool _initialisationComplete;
 
-        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFE", NumberStyles.HexNumber));
-        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress(BigInteger.Parse("000000000000FFFF", NumberStyles.HexNumber));
+        private readonly IeeeAddress _groupIeeeAddress = new IeeeAddress(0x0000_0000_0000_FFFEul);
+        private readonly IeeeAddress _broadcastIeeeAddress = new IeeeAddress(0x0000_0000_0000_FFFFul);
 
         private const int MAX_RESET_RETRIES = 3;
 
@@ -70,11 +72,11 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
         public ZigBeeStatus Initialize()
         {
-            Log.Debug("XBee device initialize.");
+            Logger.LogDebug("XBee device initialize.");
 
             if (!_serialPort.Open())
             {
-                Log.Error("Unable to open XBee serial port");
+                Logger.LogError("Unable to open XBee serial port");
                 return ZigBeeStatus.COMMUNICATION_ERROR;
             }
 
@@ -92,10 +94,10 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             {
                 if (resetCount >= MAX_RESET_RETRIES)
                 {
-                    Log.Information($"XBee device reset failed after {++resetCount}");
+                    Logger.LogInformation($"XBee device reset failed after {++resetCount}");
                     return ZigBeeStatus.NO_RESPONSE;
                 }
-                Log.Debug($"XBee device reset {++resetCount}");
+                Logger.LogDebug($"XBee device reset {++resetCount}");
                 XBeeSetSoftwareResetCommand resetCommand = new XBeeSetSoftwareResetCommand();
                 _frameHandler.SendRequest(resetCommand);
             } while (_frameHandler.EventWait(typeof(XBeeModemStatusEvent)) == null);
@@ -130,7 +132,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
             if (ieeeHighResponse == null || ieeeLowResponse == null)
             {
-                Log.Error("Unable to get XBee IEEE address");
+                Logger.LogError("Unable to get XBee IEEE address");
                 return ZigBeeStatus.BAD_RESPONSE;
             }
 
@@ -145,7 +147,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             tmpAddress[7] = (byte)ieeeHighResponse.GetIeeeAddress()[0];
             IeeeAddress = new IeeeAddress(tmpAddress);
 
-            Log.Debug($"XBee IeeeAddress={IeeeAddress}");
+            Logger.LogDebug($"XBee IeeeAddress={IeeeAddress}");
 
             // Set the ZigBee stack profile
             XBeeSetZigbeeStackProfileCommand stackProfile = new XBeeSetZigbeeStackProfileCommand();
@@ -195,19 +197,19 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
         public ZigBeeStatus Startup(bool reinitialize)
         {
-            Log.Debug("XBee dongle startup.");
+            Logger.LogDebug("XBee dongle startup.");
 
             // If frameHandler is null then the serial port didn't initialise
             if (_frameHandler == null)
             {
-                Log.Error("Initialising XBee Dongle but low level handler is not initialised.");
+                Logger.LogError("Initialising XBee Dongle but low level handler is not initialised.");
                 return ZigBeeStatus.INVALID_STATE;
             }
 
             // If we want to reinitialize the network, then go...
             if (reinitialize)
             {
-                Log.Debug("Reinitialising XBee dongle and forming network.");
+                Logger.LogDebug("Reinitialising XBee dongle and forming network.");
                 InitialiseNetwork();
             }
 
@@ -233,7 +235,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
 
             _serialPort.Close();
             _frameHandler.Close();
-            Log.Debug("XBee dongle shutdown.");
+            Logger.LogDebug("XBee dongle shutdown.");
         }
 
         private void InitialiseNetwork()
@@ -245,7 +247,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
         {
             if (_frameHandler == null)
             {
-                Log.Debug("XBee frame handler not set for send.");
+                Logger.LogDebug("XBee frame handler not set for send.");
                 return;
             }
 
@@ -267,7 +269,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 {
                     command.SetIeeeAddress(_groupIeeeAddress);
                 }
-                command.SetIeeeAddress(new IeeeAddress(BigInteger.Parse("FFFFFFFFFFFFFFFF", NumberStyles.HexNumber)));
+                command.SetIeeeAddress(new IeeeAddress(0xFFFF_FFFF_FFFF_FFFFul));
             }
             else
             {
@@ -280,7 +282,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
             }
             command.SetData(apsFrame.Payload.Select(item => (int)item).ToArray());
 
-            //Log.Debug($"XBee send: {{{command.ToString()}}}");
+            //Logger.LogDebug($"XBee send: {{{command.ToString()}}}");
             _frameHandler.SendRequestAsync(command);
         }
 
@@ -336,7 +338,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                 return;
             }
 
-            Log.Debug($"Unhandled XBee Frame: {xbeeEvent.ToString()}");
+            Logger.LogDebug($"Unhandled XBee Frame: {xbeeEvent.ToString()}");
         }
 
         private void SetNetworkState(ZigBeeTransportState state)
@@ -397,7 +399,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee
                         default:
                             {
                                 configuration.SetResult(option, ZigBeeStatus.UNSUPPORTED);
-                                Log.Debug($"Unsupported configuration option \"{option}\" in XBee dongle");
+                                Logger.LogDebug($"Unsupported configuration option \"{option}\" in XBee dongle");
                             }
                             break;
                     }

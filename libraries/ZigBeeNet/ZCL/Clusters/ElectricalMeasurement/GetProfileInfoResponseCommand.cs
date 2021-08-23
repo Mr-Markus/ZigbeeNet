@@ -67,18 +67,18 @@ namespace ZigBeeNet.ZCL.Clusters.ElectricalMeasurement
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ProfileCount, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ProfileIntervalPeriod, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(MaxNumberOfIntervals, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ListOfAttributes, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(ProfileCount, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ProfileIntervalPeriod, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(MaxNumberOfIntervals, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ListOfAttributes, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ProfileCount = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ProfileIntervalPeriod = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            MaxNumberOfIntervals = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ListOfAttributes = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            ProfileCount = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ProfileIntervalPeriod = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            MaxNumberOfIntervals = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ListOfAttributes = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

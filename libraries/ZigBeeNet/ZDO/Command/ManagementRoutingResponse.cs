@@ -54,13 +54,13 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZDO_STATUS));
-            serializer.Serialize(RoutingTableEntries, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(StartIndex, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(RoutingTableList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZDO_STATUS);
+            serializer.Serialize(RoutingTableEntries, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(StartIndex, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(RoutingTableList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < RoutingTableList.Count; cnt++)
             {
-                serializer.Serialize(RoutingTableList[cnt], ZclDataType.Get(DataType.ROUTING_TABLE));
+                serializer.Serialize(RoutingTableList[cnt], DataType.ROUTING_TABLE);
             }
         }
 
@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZDO.Command
             // Create lists
             RoutingTableList = new List<RoutingTable>();
 
-            Status = deserializer.Deserialize<ZdoStatus>(ZclDataType.Get(DataType.ZDO_STATUS));
+            Status = deserializer.Deserialize<ZdoStatus>(DataType.ZDO_STATUS);
             if (Status != ZdoStatus.SUCCESS)
             {
                 // Don't read the full response if we have an error
                 return;
             }
-            RoutingTableEntries = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            StartIndex = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            byte? routingTableListCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            RoutingTableEntries = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            StartIndex = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            byte? routingTableListCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (routingTableListCount != null)
             {
                 for (int cnt = 0; cnt < routingTableListCount; cnt++)
                 {
-                    RoutingTableList.Add((RoutingTable) deserializer.Deserialize(ZclDataType.Get(DataType.ROUTING_TABLE)));
+                    RoutingTableList.Add((RoutingTable) deserializer.Deserialize(DataType.ROUTING_TABLE));
                 }
             }
         }

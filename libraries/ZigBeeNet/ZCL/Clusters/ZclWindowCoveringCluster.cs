@@ -196,26 +196,26 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(20);
 
-            attributeMap.Add(ATTR_WINDOWCOVERINGTYPE, new ZclAttribute(this, ATTR_WINDOWCOVERINGTYPE, "Window Covering Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_PHYSICALCLOSEDLIMITLIFT, new ZclAttribute(this, ATTR_PHYSICALCLOSEDLIMITLIFT, "Physical Closed Limit - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_PHYSICALCLOSEDLIMITTILT, new ZclAttribute(this, ATTR_PHYSICALCLOSEDLIMITTILT, "Physical Closed Limit - Tilt", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTPOSITIONLIFT, new ZclAttribute(this, ATTR_CURRENTPOSITIONLIFT, "Current Position - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTPOSITIONTILT, new ZclAttribute(this, ATTR_CURRENTPOSITIONTILT, "Current Position - Tilt", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_NUMBEROFACTUATIONSLIFT, new ZclAttribute(this, ATTR_NUMBEROFACTUATIONSLIFT, "Number Of Actuations - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_NUMBEROFACTUATIONSTILT, new ZclAttribute(this, ATTR_NUMBEROFACTUATIONSTILT, "Number Of Actuations - Tilt", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CONFIGSTATUS, new ZclAttribute(this, ATTR_CONFIGSTATUS, "Config Status", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTPOSITIONLIFTPERCENTAGE, new ZclAttribute(this, ATTR_CURRENTPOSITIONLIFTPERCENTAGE, "Current Position Lift Percentage", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_CURRENTPOSITIONTILTPERCENTAGE, new ZclAttribute(this, ATTR_CURRENTPOSITIONTILTPERCENTAGE, "Current Position Tilt Percentage", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_INSTALLEDOPENLIMITLIFT, new ZclAttribute(this, ATTR_INSTALLEDOPENLIMITLIFT, "Installed Open Limit - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_INSTALLEDCLOSEDLIMITLIFT, new ZclAttribute(this, ATTR_INSTALLEDCLOSEDLIMITLIFT, "Installed Closed Limit - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_INSTALLEDOPENLIMITTILT, new ZclAttribute(this, ATTR_INSTALLEDOPENLIMITTILT, "Installed Open Limit - Tilt", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_INSTALLEDCLOSEDLIMITTILT, new ZclAttribute(this, ATTR_INSTALLEDCLOSEDLIMITTILT, "Installed Closed Limit - Tilt", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, false));
-            attributeMap.Add(ATTR_VELOCITYLIFT, new ZclAttribute(this, ATTR_VELOCITYLIFT, "Velocity - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_ACCELERATIONTIMELIFT, new ZclAttribute(this, ATTR_ACCELERATIONTIMELIFT, "Acceleration Time - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_DECELERATIONTIMELIFT, new ZclAttribute(this, ATTR_DECELERATIONTIMELIFT, "Deceleration Time - Lift", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, true));
-            attributeMap.Add(ATTR_MODE, new ZclAttribute(this, ATTR_MODE, "Mode", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_INTERMEDIATESETPOINTSLIFT, new ZclAttribute(this, ATTR_INTERMEDIATESETPOINTSLIFT, "Intermediate Setpoints - Lift", ZclDataType.Get(DataType.OCTET_STRING), false, true, true, true));
-            attributeMap.Add(ATTR_INTERMEDIATESETPOINTSTILT, new ZclAttribute(this, ATTR_INTERMEDIATESETPOINTSTILT, "Intermediate Setpoints - Tilt", ZclDataType.Get(DataType.OCTET_STRING), false, true, true, true));
+            attributeMap.Add(ATTR_WINDOWCOVERINGTYPE, new ZclAttribute(this, ATTR_WINDOWCOVERINGTYPE, "Window Covering Type", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_PHYSICALCLOSEDLIMITLIFT, new ZclAttribute(this, ATTR_PHYSICALCLOSEDLIMITLIFT, "Physical Closed Limit - Lift", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_PHYSICALCLOSEDLIMITTILT, new ZclAttribute(this, ATTR_PHYSICALCLOSEDLIMITTILT, "Physical Closed Limit - Tilt", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTPOSITIONLIFT, new ZclAttribute(this, ATTR_CURRENTPOSITIONLIFT, "Current Position - Lift", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTPOSITIONTILT, new ZclAttribute(this, ATTR_CURRENTPOSITIONTILT, "Current Position - Tilt", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_NUMBEROFACTUATIONSLIFT, new ZclAttribute(this, ATTR_NUMBEROFACTUATIONSLIFT, "Number Of Actuations - Lift", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_NUMBEROFACTUATIONSTILT, new ZclAttribute(this, ATTR_NUMBEROFACTUATIONSTILT, "Number Of Actuations - Tilt", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CONFIGSTATUS, new ZclAttribute(this, ATTR_CONFIGSTATUS, "Config Status", DataType.BITMAP_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTPOSITIONLIFTPERCENTAGE, new ZclAttribute(this, ATTR_CURRENTPOSITIONLIFTPERCENTAGE, "Current Position Lift Percentage", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_CURRENTPOSITIONTILTPERCENTAGE, new ZclAttribute(this, ATTR_CURRENTPOSITIONTILTPERCENTAGE, "Current Position Tilt Percentage", DataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_INSTALLEDOPENLIMITLIFT, new ZclAttribute(this, ATTR_INSTALLEDOPENLIMITLIFT, "Installed Open Limit - Lift", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_INSTALLEDCLOSEDLIMITLIFT, new ZclAttribute(this, ATTR_INSTALLEDCLOSEDLIMITLIFT, "Installed Closed Limit - Lift", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_INSTALLEDOPENLIMITTILT, new ZclAttribute(this, ATTR_INSTALLEDOPENLIMITTILT, "Installed Open Limit - Tilt", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_INSTALLEDCLOSEDLIMITTILT, new ZclAttribute(this, ATTR_INSTALLEDCLOSEDLIMITTILT, "Installed Closed Limit - Tilt", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+            attributeMap.Add(ATTR_VELOCITYLIFT, new ZclAttribute(this, ATTR_VELOCITYLIFT, "Velocity - Lift", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_ACCELERATIONTIMELIFT, new ZclAttribute(this, ATTR_ACCELERATIONTIMELIFT, "Acceleration Time - Lift", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_DECELERATIONTIMELIFT, new ZclAttribute(this, ATTR_DECELERATIONTIMELIFT, "Deceleration Time - Lift", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, true));
+            attributeMap.Add(ATTR_MODE, new ZclAttribute(this, ATTR_MODE, "Mode", DataType.BITMAP_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_INTERMEDIATESETPOINTSLIFT, new ZclAttribute(this, ATTR_INTERMEDIATESETPOINTSLIFT, "Intermediate Setpoints - Lift", DataType.OCTET_STRING, false, true, true, true));
+            attributeMap.Add(ATTR_INTERMEDIATESETPOINTSTILT, new ZclAttribute(this, ATTR_INTERMEDIATESETPOINTSTILT, "Intermediate Setpoints - Tilt", DataType.OCTET_STRING, false, true, true, true));
 
             return attributeMap;
         }

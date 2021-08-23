@@ -73,22 +73,22 @@ namespace ZigBeeNet.ZCL.Clusters.Thermostat
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(NumberOfTransitions, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(DayOfWeek, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(Mode, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(Transition, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(HeatSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(CoolSet, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            serializer.Serialize(NumberOfTransitions, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(DayOfWeek, DataType.BITMAP_8_BIT);
+            serializer.Serialize(Mode, DataType.BITMAP_8_BIT);
+            serializer.Serialize(Transition, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(HeatSet, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(CoolSet, DataType.SIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            NumberOfTransitions = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            DayOfWeek = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            Mode = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            Transition = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            HeatSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            CoolSet = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            NumberOfTransitions = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            DayOfWeek = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            Mode = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            Transition = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            HeatSet = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            CoolSet = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

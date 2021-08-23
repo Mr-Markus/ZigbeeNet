@@ -1,4 +1,3 @@
-using Serilog;
 using System;
 using System.Threading;
 using ZigBeeNet.Hardware.Ember.Internal.Serializer;

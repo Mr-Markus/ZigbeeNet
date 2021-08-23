@@ -11,7 +11,8 @@ using ZigBeeNet.ZDO.Field;
 using static ZigBeeNet.ZDO.Field.NodeDescriptor;
 using ZigBeeNet.Transaction;
 using System.Linq;
-using Serilog;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet
 {
@@ -22,6 +23,11 @@ namespace ZigBeeNet
     /// </summary>
     public class ZigBeeNode : IZigBeeCommandListener
     {
+        /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNode>();
+
         /// <summary>
         /// Gets the current state for the node
         /// </summary>
@@ -183,8 +189,8 @@ namespace ZigBeeNet
             }
 
             command.TcSignificance = true;
-            command.DestinationAddress = new ZigBeeEndpointAddress(0);
-            command.SourceAddress = new ZigBeeEndpointAddress(0);
+            command.DestinationAddress = ZigBeeEndpointAddress.Zero;
+            command.SourceAddress = ZigBeeEndpointAddress.Zero;
 
             _network.SendTransaction(command);
         }
@@ -218,14 +224,8 @@ namespace ZigBeeNet
         ///
         /// <returns>true if the device is a Full Function Device. Returns false if not an FFD or logical type is unknown.</returns>
         /// </summary>
-        public bool IsFullFunctionDevice()
-        {
-            if (NodeDescriptor == null)
-            {
-                return false;
-            }
-            return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.FULL_FUNCTION_DEVICE);
-        }
+        public bool IsFullFunctionDevice => 
+            (NodeDescriptor?.MacCapabilities & MacCapabilitiesType.FULL_FUNCTION_DEVICE)==MacCapabilitiesType.FULL_FUNCTION_DEVICE;
 
         /// <summary>
         /// Returns true if the node is a Reduced Function Device. Returns false if not an RFD or logical type is unknown.
@@ -237,41 +237,11 @@ namespace ZigBeeNet
         ///
         /// <returns>true if the device is a Reduced Function Device</returns>
         /// </summary>
-        public bool IsReducedFuntionDevice
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.REDUCED_FUNCTION_DEVICE);
-            }
-        }
+        public bool IsReducedFuntionDevice => !(NodeDescriptor is null) && !IsFullFunctionDevice;
 
-        public bool IsSecurityCapable
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.MacCapabilities.Contains(MacCapabilitiesType.SECURITY_CAPABLE);
-            }
-        }
+        public bool IsSecurityCapable => (NodeDescriptor?.MacCapabilities & MacCapabilitiesType.SECURITY_CAPABLE) == MacCapabilitiesType.SECURITY_CAPABLE;
 
-        public bool IsPrimaryTrustCenter
-        {
-            get
-            {
-                if (NodeDescriptor == null)
-                {
-                    return false;
-                }
-                return NodeDescriptor.ServerCapabilities.Contains(ServerCapabilitiesType.PRIMARY_TRUST_CENTER);
-            }
-        }
+        public bool IsPrimaryTrustCenter => (NodeDescriptor?.ServerCapabilities & ServerCapabilitiesType.PRIMARY_TRUST_CENTER) == ServerCapabilitiesType.PRIMARY_TRUST_CENTER;
 
         /// <summary>
         /// Gets the <see cref="LogicalType"> of the node.
@@ -301,7 +271,7 @@ namespace ZigBeeNet
             {
                 _bindingTable.Clear();
                 _bindingTable.UnionWith(bindingTable);
-                Log.Debug("{Address}: Binding table updated: {BindingTable}", IeeeAddress, bindingTable);
+                _logger.LogDebug("{Address}: Binding table updated: {BindingTable}", IeeeAddress, bindingTable);
             }
         }
 
@@ -390,7 +360,7 @@ namespace ZigBeeNet
                         listener.DeviceAdded(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -415,7 +385,7 @@ namespace ZigBeeNet
                         listener.DeviceUpdated(endpoint);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -441,7 +411,7 @@ namespace ZigBeeNet
                             listener.DeviceRemoved(endpoint);
                         }).ContinueWith((t) =>
                         {
-                            Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                            _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                         }, TaskContinuationOptions.OnlyOnFaulted);
                     }
                 }
@@ -520,7 +490,7 @@ namespace ZigBeeNet
         {
             if (!node.IeeeAddress.Equals(IeeeAddress))
             {
-                Log.Debug("{IeeeAddress}: Ieee address inconsistent during update <>{NodeIeeeAddress}", IeeeAddress, node.IeeeAddress);
+                _logger.LogDebug("{IeeeAddress}: Ieee address inconsistent during update <>{NodeIeeeAddress}", IeeeAddress, node.IeeeAddress);
                 return false;
             }
 
@@ -528,28 +498,28 @@ namespace ZigBeeNet
 
             if (node.NodeState != ZigBeeNodeState.UNKNOWN && NodeState != node.NodeState)
             {
-                Log.Debug("{IeeeAddress}: Node state updated from {NodeState} to {NewNodeState}", IeeeAddress, NodeState, node.NodeState);
+                _logger.LogDebug("{IeeeAddress}: Node state updated from {NodeState} to {NewNodeState}", IeeeAddress, NodeState, node.NodeState);
                 NodeState = node.NodeState;
                 updated = true;
             }
 
             if (NetworkAddress != 0 && !NetworkAddress.Equals(node.NetworkAddress))
             {
-                Log.Debug("{IeeeAddress}: Network address updated from {NetworkAddress} to {NodeNetworkAddress}", IeeeAddress, NetworkAddress, node.NetworkAddress);
+                _logger.LogDebug("{IeeeAddress}: Network address updated from {NetworkAddress} to {NodeNetworkAddress}", IeeeAddress, NetworkAddress, node.NetworkAddress);
                 updated = true;
                 NetworkAddress = node.NetworkAddress;
             }
 
             if (node.NodeDescriptor != null && (NodeDescriptor == null || !NodeDescriptor.Equals(node.NodeDescriptor)))
             {
-                Log.Debug("{IeeeAddress}: Node descriptor updated", IeeeAddress);
+                _logger.LogDebug("{IeeeAddress}: Node descriptor updated", IeeeAddress);
                 updated = true;
                 NodeDescriptor = node.NodeDescriptor;
             }
 
             if (node.PowerDescriptor != null && (PowerDescriptor == null || !PowerDescriptor.Equals(node.PowerDescriptor)))
             {
-                Log.Debug("{IeeeAddress}: Power descriptor updated", IeeeAddress);
+                _logger.LogDebug("{IeeeAddress}: Power descriptor updated", IeeeAddress);
                 updated = true;
                 PowerDescriptor = node.PowerDescriptor;
             }
@@ -558,7 +528,7 @@ namespace ZigBeeNet
             {
                 if (!_associatedDevices.SetEquals(node._associatedDevices))
                 {
-                    Log.Debug("{IeeeAddress}: Associated devices updated", IeeeAddress);
+                    _logger.LogDebug("{IeeeAddress}: Associated devices updated", IeeeAddress);
                     updated = true;
                     _associatedDevices.Clear();
                     _associatedDevices.UnionWith(node._associatedDevices);
@@ -569,7 +539,7 @@ namespace ZigBeeNet
             {
                 if (!_bindingTable.SetEquals(node._bindingTable))
                 {
-                    Log.Debug("{IeeeAddress}: Binding table updated", IeeeAddress);
+                    _logger.LogDebug("{IeeeAddress}: Binding table updated", IeeeAddress);
                     updated = true;
                     _bindingTable.Clear();
                     _bindingTable.UnionWith(node._bindingTable);
@@ -580,7 +550,7 @@ namespace ZigBeeNet
             {
                 if (!_neighbors.SetEquals(node._neighbors))
                 {
-                    Log.Debug("{IeeeAddress}: Neighbors updated", IeeeAddress);
+                    _logger.LogDebug("{IeeeAddress}: Neighbors updated", IeeeAddress);
                     updated = true;
                     _neighbors.Clear();
                     _neighbors.UnionWith(node._neighbors);
@@ -591,7 +561,7 @@ namespace ZigBeeNet
             {
                 if (!_routes.SetEquals(node._routes))
                 {
-                    Log.Debug("{IeeeAddress}: Routes updated", IeeeAddress);
+                    _logger.LogDebug("{IeeeAddress}: Routes updated", IeeeAddress);
                     updated = true;
                     _routes.Clear();
                     _routes.UnionWith(node._routes);
@@ -607,7 +577,7 @@ namespace ZigBeeNet
                 {
                     continue;
                 }
-                Log.Debug("{IeeeAddress}: Endpoint {EndpointId} added", IeeeAddress, endpoint.Key);
+                _logger.LogDebug("{IeeeAddress}: Endpoint {EndpointId} added", IeeeAddress, endpoint.Key);
                 updated = true;
                 _endpoints[endpoint.Key] = endpoint.Value;
             }
@@ -689,7 +659,7 @@ namespace ZigBeeNet
             {
                 return false;
             }
-            Log.Debug("{IeeeAddress}: Node state updated from {oldState} to {newState}", IeeeAddress, NodeState, state);
+            _logger.LogDebug("{IeeeAddress}: Node state updated from {oldState} to {newState}", IeeeAddress, NodeState, state);
 
             NodeState = state;
             return true;

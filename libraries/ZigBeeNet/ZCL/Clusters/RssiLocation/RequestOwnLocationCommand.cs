@@ -48,12 +48,12 @@ namespace ZigBeeNet.ZCL.Clusters.RssiLocation
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(RequestingAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
+            serializer.Serialize(RequestingAddress, DataType.IEEE_ADDRESS);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            RequestingAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
+            RequestingAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
         }
 
         public override string ToString()

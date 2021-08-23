@@ -81,14 +81,14 @@ namespace ZigBeeNet.ZCL.Clusters.IasZone
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(TestModeDuration, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(CurrentZoneSensitivityLevel, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(TestModeDuration, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(CurrentZoneSensitivityLevel, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            TestModeDuration = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CurrentZoneSensitivityLevel = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            TestModeDuration = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            CurrentZoneSensitivityLevel = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

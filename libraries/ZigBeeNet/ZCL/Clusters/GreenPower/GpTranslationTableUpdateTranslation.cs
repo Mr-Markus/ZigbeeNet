@@ -55,24 +55,24 @@ namespace ZigBeeNet.ZCL.Clusters.GreenPower
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Index, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(GpdCommandId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Endpoint, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Profile, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Cluster, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ZigbeeCommandId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZigbeeCommandPayload, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(Index, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(GpdCommandId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Endpoint, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Profile, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Cluster, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ZigbeeCommandId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZigbeeCommandPayload, DataType.OCTET_STRING);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Index = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            GpdCommandId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Endpoint = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Profile = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Cluster = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ZigbeeCommandId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZigbeeCommandPayload = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            Index = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            GpdCommandId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Endpoint = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Profile = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Cluster = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ZigbeeCommandId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZigbeeCommandPayload = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

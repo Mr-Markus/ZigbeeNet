@@ -71,20 +71,20 @@ namespace ZigBeeNet.ZCL.Clusters.OtaUpgrade
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(RequestNodeAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ImageType, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(FileVersion, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ZigbeeStackVersion, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(RequestNodeAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ImageType, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(FileVersion, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ZigbeeStackVersion, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            RequestNodeAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ImageType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            FileVersion = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ZigbeeStackVersion = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            RequestNodeAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ImageType = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            FileVersion = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ZigbeeStackVersion = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

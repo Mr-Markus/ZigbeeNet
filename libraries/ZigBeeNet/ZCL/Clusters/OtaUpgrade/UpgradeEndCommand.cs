@@ -76,18 +76,18 @@ namespace ZigBeeNet.ZCL.Clusters.OtaUpgrade
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(Status, ZclDataType.Get(DataType.ZCL_STATUS));
-            serializer.Serialize(ManufacturerCode, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(ImageType, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(FileVersion, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(Status, DataType.ZCL_STATUS);
+            serializer.Serialize(ManufacturerCode, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(ImageType, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(FileVersion, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            Status = deserializer.Deserialize<ZclStatus>(ZclDataType.Get(DataType.ZCL_STATUS));
-            ManufacturerCode = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            ImageType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            FileVersion = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            Status = deserializer.Deserialize<ZclStatus>(DataType.ZCL_STATUS);
+            ManufacturerCode = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            ImageType = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            FileVersion = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

@@ -50,14 +50,14 @@ namespace ZigBeeNet.ZCL.Clusters.General
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(DiscoveryComplete, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.Serialize(AttributeInformation, ZclDataType.Get(DataType.N_X_EXTENDED_ATTRIBUTE_INFORMATION));
+            serializer.Serialize(DiscoveryComplete, DataType.BOOLEAN);
+            serializer.Serialize(AttributeInformation, DataType.N_X_EXTENDED_ATTRIBUTE_INFORMATION);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            DiscoveryComplete = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
-            AttributeInformation = deserializer.Deserialize<List<ExtendedAttributeInformation>>(ZclDataType.Get(DataType.N_X_EXTENDED_ATTRIBUTE_INFORMATION));
+            DiscoveryComplete = deserializer.Deserialize<bool>(DataType.BOOLEAN);
+            AttributeInformation = deserializer.Deserialize<List<ExtendedAttributeInformation>>(DataType.N_X_EXTENDED_ATTRIBUTE_INFORMATION);
         }
 
         public override string ToString()

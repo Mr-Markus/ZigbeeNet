@@ -164,16 +164,16 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(10);
 
-            attributeMap.Add(ATTR_DESCRIPTION, new ZclAttribute(this, ATTR_DESCRIPTION, "Description", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, true, false));
-            attributeMap.Add(ATTR_MAXPRESENTVALUE, new ZclAttribute(this, ATTR_MAXPRESENTVALUE, "Max Present Value", ZclDataType.Get(DataType.FLOAT_32_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_MINPRESENTVALUE, new ZclAttribute(this, ATTR_MINPRESENTVALUE, "Min Present Value", ZclDataType.Get(DataType.FLOAT_32_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_OUTOFSERVICE, new ZclAttribute(this, ATTR_OUTOFSERVICE, "Out Of Service", ZclDataType.Get(DataType.BOOLEAN), false, true, true, false));
-            attributeMap.Add(ATTR_PRESENTVALUE, new ZclAttribute(this, ATTR_PRESENTVALUE, "Present Value", ZclDataType.Get(DataType.FLOAT_32_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_RELIABILITY, new ZclAttribute(this, ATTR_RELIABILITY, "Reliability", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_RESOLUTION, new ZclAttribute(this, ATTR_RESOLUTION, "Resolution", ZclDataType.Get(DataType.FLOAT_32_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_STATUSFLAGS, new ZclAttribute(this, ATTR_STATUSFLAGS, "Status Flags", ZclDataType.Get(DataType.BITMAP_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_ENGINEERINGUNITS, new ZclAttribute(this, ATTR_ENGINEERINGUNITS, "Engineering Units", ZclDataType.Get(DataType.ENUMERATION_32_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_APPLICATIONTYPE, new ZclAttribute(this, ATTR_APPLICATIONTYPE, "Application Type", ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER), false, true, true, false));
+            attributeMap.Add(ATTR_DESCRIPTION, new ZclAttribute(this, ATTR_DESCRIPTION, "Description", DataType.CHARACTER_STRING, false, true, true, false));
+            attributeMap.Add(ATTR_MAXPRESENTVALUE, new ZclAttribute(this, ATTR_MAXPRESENTVALUE, "Max Present Value", DataType.FLOAT_32_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_MINPRESENTVALUE, new ZclAttribute(this, ATTR_MINPRESENTVALUE, "Min Present Value", DataType.FLOAT_32_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_OUTOFSERVICE, new ZclAttribute(this, ATTR_OUTOFSERVICE, "Out Of Service", DataType.BOOLEAN, false, true, true, false));
+            attributeMap.Add(ATTR_PRESENTVALUE, new ZclAttribute(this, ATTR_PRESENTVALUE, "Present Value", DataType.FLOAT_32_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_RELIABILITY, new ZclAttribute(this, ATTR_RELIABILITY, "Reliability", DataType.ENUMERATION_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_RESOLUTION, new ZclAttribute(this, ATTR_RESOLUTION, "Resolution", DataType.FLOAT_32_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_STATUSFLAGS, new ZclAttribute(this, ATTR_STATUSFLAGS, "Status Flags", DataType.BITMAP_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_ENGINEERINGUNITS, new ZclAttribute(this, ATTR_ENGINEERINGUNITS, "Engineering Units", DataType.ENUMERATION_32_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_APPLICATIONTYPE, new ZclAttribute(this, ATTR_APPLICATIONTYPE, "Application Type", DataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
 
             return attributeMap;
         }

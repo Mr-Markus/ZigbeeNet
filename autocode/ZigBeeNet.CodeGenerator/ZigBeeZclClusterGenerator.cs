@@ -329,8 +329,8 @@ namespace ZigBeeNet.CodeGenerator
 
         private string DefineAttribute(ZigBeeXmlAttribute attribute, string clusterName, string attributeName, int count)
         {
-            return "new ZclAttribute(this, " + GetEnum(attributeName) + ", \"" + attributeName + "\", " + "ZclDataType.Get(DataType."
-                    + attribute.Type + "), " + (!attribute.Optional).ToString().ToLower() + ", " + true.ToString().ToLower() 
+            return "new ZclAttribute(this, " + GetEnum(attributeName) + ", \"" + attributeName + "\", " + "DataType."
+                    + attribute.Type + ", " + (!attribute.Optional).ToString().ToLower() + ", " + true.ToString().ToLower() 
                     + ", " + attribute.Writable.ToString().ToLower() + ", " + attribute.Reportable.ToString().ToLower() + ")";
         }
 

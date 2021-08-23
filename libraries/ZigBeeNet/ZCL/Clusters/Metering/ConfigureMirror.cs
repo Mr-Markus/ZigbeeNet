@@ -89,18 +89,18 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(ReportingInterval, ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            serializer.Serialize(MirrorNotificationReporting, ZclDataType.Get(DataType.BOOLEAN));
-            serializer.Serialize(NotificationScheme, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(ReportingInterval, DataType.UNSIGNED_24_BIT_INTEGER);
+            serializer.Serialize(MirrorNotificationReporting, DataType.BOOLEAN);
+            serializer.Serialize(NotificationScheme, DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            ReportingInterval = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_24_BIT_INTEGER));
-            MirrorNotificationReporting = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
-            NotificationScheme = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            ReportingInterval = deserializer.Deserialize<uint>(DataType.UNSIGNED_24_BIT_INTEGER);
+            MirrorNotificationReporting = deserializer.Deserialize<bool>(DataType.BOOLEAN);
+            NotificationScheme = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

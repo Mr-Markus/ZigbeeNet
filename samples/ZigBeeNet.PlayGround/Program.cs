@@ -1,6 +1,4 @@
 ﻿using Mono.Options;
-using Newtonsoft.Json;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,19 +27,53 @@ using ZigBeeNet.ZCL.Clusters.LevelControl;
 using ZigBeeNet.ZCL.Clusters.OnOff;
 using ZigBeeNet.ZDO.Command;
 using ZigBeeNet.ZDO.Field;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
+
+#if USE_SERILOG            
+    using Serilog;
+    using Serilog.Extensions.Logging;
+#else
+    using Microsoft.Extensions.Logging.Console;
+#endif
 
 namespace ZigBeeNet.PlayGround
 {
     class Program
     {
+        static Microsoft.Extensions.Logging.ILogger _logger;
         static async Task Main(string[] args)
         {
+#if USE_SERILOG            
             // Configure Serilog
-            Log.Logger = new LoggerConfiguration()
+            var seriLogger = new LoggerConfiguration()
                .MinimumLevel.Debug()
                .WriteTo.Console()
+               // if you want to get the SourceContext (name of the class in most case) replace above line by line below
+               //.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} [{SourceContext}]{NewLine}{Exception}" )
                .CreateLogger();
+#endif
 
+            ILoggerFactory _factory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .SetMinimumLevel(LogLevel.Debug)
+                    .AddDebug()
+#if USE_SERILOG            
+                    .AddSerilog(seriLogger)
+#else
+                    .AddSimpleConsole( c => 
+                    {
+                        c.ColorBehavior = LoggerColorBehavior.Enabled ;
+                        c.SingleLine=true;
+                        c.TimestampFormat ="[HH:mm:ss] ";
+                    })
+#endif
+                    ;
+            });
+            LogManager.SetFactory(_factory);
+            _logger=_factory.CreateLogger<Program>();
+            
             bool showHelp = false;
             ZigBeeDongle zigBeeDongle = ZigBeeDongle.TiCc2531;
             string port = "";
@@ -235,12 +267,12 @@ namespace ZigBeeNet.PlayGround
 
                 if (startupSucceded == ZigBeeStatus.SUCCESS)
                 {
-                    Log.Logger.Information("ZigBee console starting up ... [OK]");
+                    _logger.LogInformation("ZigBee console starting up ... [OK]");
                 }
                 else
                 {
-                    Log.Logger.Information("ZigBee console starting up ... [FAIL]");
-                    Log.Logger.Information("Press any key to exit...");
+                    _logger.LogInformation("ZigBee console starting up ... [FAIL]");
+                    _logger.LogInformation("Press any key to exit...");
                     Console.ReadKey();
                     return;
                 }
@@ -280,7 +312,7 @@ namespace ZigBeeNet.PlayGround
                                 foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Input Cluster:" + Environment.NewLine);
+                                    Console.WriteLine("Input Cluster [{0:X}]:",endpoint.EndpointId);
                                     Console.ForegroundColor = tmp;
 
                                     foreach (var inputClusterId in endpoint.GetInputClusterIds())
@@ -289,6 +321,7 @@ namespace ZigBeeNet.PlayGround
                                         var clusterName = cluster.GetClusterName();
                                         Console.WriteLine($"{clusterName}");
                                     }
+                                    Console.WriteLine();
                                 }
 
                                 Console.WriteLine();
@@ -296,15 +329,15 @@ namespace ZigBeeNet.PlayGround
                                 foreach (var endpoint in node.GetEndpoints())
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Output Cluster:" + Environment.NewLine);
+                                    Console.WriteLine("Output Cluster [{0:X}]:",endpoint.EndpointId);
                                     Console.ForegroundColor = tmp;
-
                                     foreach (var outputClusterIds in endpoint.GetOutputClusterIds())
                                     {
                                         var cluster = endpoint.GetOutputCluster(outputClusterIds);
                                         var clusterName = cluster.GetClusterName();
                                         Console.WriteLine($"{clusterName}");
                                     }
+                                    Console.WriteLine();
                                 }
 
                                 Console.WriteLine(new string('-', 20));
@@ -343,21 +376,13 @@ namespace ZigBeeNet.PlayGround
 
                             if (node != null)
                             {
-                                ZigBeeEndpointAddress endpointAddress = null;
                                 var endpoint = node.GetEndpoints().FirstOrDefault();
-
-                                if (endpoint != null)
-                                {
-                                    endpointAddress = endpoint.GetEndpointAddress();
-                                }
-
-                                if (endpointAddress == null)
+                                if (endpoint is null)
                                 {
                                     Console.WriteLine("No endpoint found");
-
                                     continue;
                                 }
-
+                                ZigBeeEndpointAddress endpointAddress = endpoint.GetEndpointAddress();
                                 try
                                 {
                                     if (cmd == "leave")
@@ -522,7 +547,7 @@ namespace ZigBeeNet.PlayGround
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log.Logger.Error(ex, "Error while executing cmd {Command}", cmd);
+                                    _logger.LogError(ex, "Error while executing cmd {Command}", cmd);
                                 }
                             }
                             else

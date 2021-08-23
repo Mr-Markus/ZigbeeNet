@@ -161,15 +161,15 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(9);
 
-            attributeMap.Add(ATTR_STATETEXT, new ZclAttribute(this, ATTR_STATETEXT, "State Text", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, true, false));
-            attributeMap.Add(ATTR_DESCRIPTION, new ZclAttribute(this, ATTR_DESCRIPTION, "Description", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, true, false));
-            attributeMap.Add(ATTR_NUMBEROFSTATES, new ZclAttribute(this, ATTR_NUMBEROFSTATES, "Number Of States", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_OUTOFSERVICE, new ZclAttribute(this, ATTR_OUTOFSERVICE, "Out Of Service", ZclDataType.Get(DataType.BOOLEAN), true, true, true, false));
-            attributeMap.Add(ATTR_PRESENTVALUE, new ZclAttribute(this, ATTR_PRESENTVALUE, "Present Value", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, true, false));
-            attributeMap.Add(ATTR_RELIABILITY, new ZclAttribute(this, ATTR_RELIABILITY, "Reliability", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, false));
-            attributeMap.Add(ATTR_RELINQUISHDEFAULT, new ZclAttribute(this, ATTR_RELINQUISHDEFAULT, "Relinquish Default", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, true, false));
-            attributeMap.Add(ATTR_STATUSFLAGS, new ZclAttribute(this, ATTR_STATUSFLAGS, "Status Flags", ZclDataType.Get(DataType.BITMAP_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_APPLICATIONTYPE, new ZclAttribute(this, ATTR_APPLICATIONTYPE, "Application Type", ZclDataType.Get(DataType.SIGNED_32_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_STATETEXT, new ZclAttribute(this, ATTR_STATETEXT, "State Text", DataType.CHARACTER_STRING, false, true, true, false));
+            attributeMap.Add(ATTR_DESCRIPTION, new ZclAttribute(this, ATTR_DESCRIPTION, "Description", DataType.CHARACTER_STRING, false, true, true, false));
+            attributeMap.Add(ATTR_NUMBEROFSTATES, new ZclAttribute(this, ATTR_NUMBEROFSTATES, "Number Of States", DataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_OUTOFSERVICE, new ZclAttribute(this, ATTR_OUTOFSERVICE, "Out Of Service", DataType.BOOLEAN, true, true, true, false));
+            attributeMap.Add(ATTR_PRESENTVALUE, new ZclAttribute(this, ATTR_PRESENTVALUE, "Present Value", DataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
+            attributeMap.Add(ATTR_RELIABILITY, new ZclAttribute(this, ATTR_RELIABILITY, "Reliability", DataType.ENUMERATION_8_BIT, false, true, true, false));
+            attributeMap.Add(ATTR_RELINQUISHDEFAULT, new ZclAttribute(this, ATTR_RELINQUISHDEFAULT, "Relinquish Default", DataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+            attributeMap.Add(ATTR_STATUSFLAGS, new ZclAttribute(this, ATTR_STATUSFLAGS, "Status Flags", DataType.BITMAP_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_APPLICATIONTYPE, new ZclAttribute(this, ATTR_APPLICATIONTYPE, "Application Type", DataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
 
             return attributeMap;
         }

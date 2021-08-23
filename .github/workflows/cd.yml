@@ -1,0 +1,36 @@
+name: CD
+
+on:
+  release:
+    types:
+      - edited
+      - released
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --configuration Release
+      
+    - name: Create NuGet packages
+      run: |
+        VERSION=$(echo "${{ github.event.release.tag_name }}" | cut -c2-)
+        echo $VERSION
+        dotnet pack --no-build --configuration Release -p:Version=$VERSION
+    - name: Publish NuGet packages
+      run: dotnet nuget push "**/*.nupkg" --api-key $NUGET_AUTH_TOKEN --source https://api.nuget.org/v3/index.json --skip-duplicate
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}

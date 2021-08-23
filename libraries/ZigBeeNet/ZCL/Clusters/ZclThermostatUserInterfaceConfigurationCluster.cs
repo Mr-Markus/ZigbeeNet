@@ -71,9 +71,9 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(3);
 
-            attributeMap.Add(ATTR_TEMPERATUREDISPLAYMODE, new ZclAttribute(this, ATTR_TEMPERATUREDISPLAYMODE, "Temperature Display Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_KEYPADLOCKOUT, new ZclAttribute(this, ATTR_KEYPADLOCKOUT, "Keypad Lockout", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
-            attributeMap.Add(ATTR_SCHEDULEPROGRAMMINGVISIBILITY, new ZclAttribute(this, ATTR_SCHEDULEPROGRAMMINGVISIBILITY, "Schedule Programming Visibility", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, true, true));
+            attributeMap.Add(ATTR_TEMPERATUREDISPLAYMODE, new ZclAttribute(this, ATTR_TEMPERATUREDISPLAYMODE, "Temperature Display Mode", DataType.ENUMERATION_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_KEYPADLOCKOUT, new ZclAttribute(this, ATTR_KEYPADLOCKOUT, "Keypad Lockout", DataType.ENUMERATION_8_BIT, false, true, true, true));
+            attributeMap.Add(ATTR_SCHEDULEPROGRAMMINGVISIBILITY, new ZclAttribute(this, ATTR_SCHEDULEPROGRAMMINGVISIBILITY, "Schedule Programming Visibility", DataType.ENUMERATION_8_BIT, false, true, true, true));
 
             return attributeMap;
         }

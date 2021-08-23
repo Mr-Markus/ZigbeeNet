@@ -57,8 +57,8 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(2);
 
-            attributeMap.Add(ATTR_SWITCHTYPE, new ZclAttribute(this, ATTR_SWITCHTYPE, "Switch Type", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, false, false));
-            attributeMap.Add(ATTR_SWITCHACTIONS, new ZclAttribute(this, ATTR_SWITCHACTIONS, "Switch Actions", ZclDataType.Get(DataType.ENUMERATION_8_BIT), true, true, true, false));
+            attributeMap.Add(ATTR_SWITCHTYPE, new ZclAttribute(this, ATTR_SWITCHTYPE, "Switch Type", DataType.ENUMERATION_8_BIT, true, true, false, false));
+            attributeMap.Add(ATTR_SWITCHACTIONS, new ZclAttribute(this, ATTR_SWITCHACTIONS, "Switch Actions", DataType.ENUMERATION_8_BIT, true, true, true, false));
 
             return attributeMap;
         }

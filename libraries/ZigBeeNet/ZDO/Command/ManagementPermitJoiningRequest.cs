@@ -54,16 +54,16 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(PermitDuration, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(TcSignificance, ZclDataType.Get(DataType.BOOLEAN));
+            serializer.Serialize(PermitDuration, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(TcSignificance, DataType.BOOLEAN);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
             base.Deserialize(deserializer);
 
-            PermitDuration = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            TcSignificance = deserializer.Deserialize<bool>(ZclDataType.Get(DataType.BOOLEAN));
+            PermitDuration = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            TcSignificance = deserializer.Deserialize<bool>(DataType.BOOLEAN);
         }
 
         public bool IsTransactionMatch(ZigBeeCommand request, ZigBeeCommand response)

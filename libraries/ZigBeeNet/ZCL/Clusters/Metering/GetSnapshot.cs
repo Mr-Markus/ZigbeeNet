@@ -82,18 +82,18 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(EarliestStartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(LatestEndTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(SnapshotOffset, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(SnapshotCause, ZclDataType.Get(DataType.BITMAP_32_BIT));
+            serializer.Serialize(EarliestStartTime, DataType.UTCTIME);
+            serializer.Serialize(LatestEndTime, DataType.UTCTIME);
+            serializer.Serialize(SnapshotOffset, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(SnapshotCause, DataType.BITMAP_32_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            EarliestStartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            LatestEndTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            SnapshotOffset = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            SnapshotCause = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            EarliestStartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            LatestEndTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            SnapshotOffset = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            SnapshotCause = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
         }
 
         public override string ToString()

@@ -23,7 +23,7 @@ namespace ZigBeeNet.Hardware.Digi.XBee.Test.Internal.Protocol
             Assert.Equal(0xA1, responseEvent.GetFrameType());
             Assert.Equal(0x3344, responseEvent.GetNetworkAddress());
             Assert.Equal(ReceiveOptions.PACKET_ACKNOWLEDGED, responseEvent.GetReceiveOptions());
-            Assert.Equal(new IeeeAddress(BigInteger.Parse("0013A20040401122", System.Globalization.NumberStyles.HexNumber)), responseEvent.GetIeeeAddress());
+            Assert.Equal(new IeeeAddress(0x0013A20040401122ul), responseEvent.GetIeeeAddress());
             Assert.Equal(3, responseEvent.GetAddressList().Length);
         }
     }

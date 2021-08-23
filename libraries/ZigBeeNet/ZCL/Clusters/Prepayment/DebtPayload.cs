@@ -40,18 +40,18 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         public void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(CollectionTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(AmountCollected, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(DebtType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(OutstandingDebt, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(CollectionTime, DataType.UTCTIME);
+            serializer.Serialize(AmountCollected, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(DebtType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(OutstandingDebt, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public void Deserialize(ZclFieldDeserializer deserializer)
         {
-            CollectionTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            AmountCollected = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            DebtType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            OutstandingDebt = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            CollectionTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            AmountCollected = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            DebtType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            OutstandingDebt = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

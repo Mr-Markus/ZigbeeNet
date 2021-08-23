@@ -95,18 +95,18 @@ namespace ZigBeeNet.ZCL.Clusters.KeyEstablishment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(KeyEstablishmentSuite, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(EphemeralDataGenerateTime, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ConfirmKeyGenerateTime, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(Identity, ZclDataType.Get(DataType.RAW_OCTET));
+            serializer.Serialize(KeyEstablishmentSuite, DataType.BITMAP_16_BIT);
+            serializer.Serialize(EphemeralDataGenerateTime, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ConfirmKeyGenerateTime, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(Identity, DataType.RAW_OCTET);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            KeyEstablishmentSuite = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            EphemeralDataGenerateTime = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ConfirmKeyGenerateTime = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            Identity = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.RAW_OCTET));
+            KeyEstablishmentSuite = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            EphemeralDataGenerateTime = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ConfirmKeyGenerateTime = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            Identity = deserializer.Deserialize<ByteArray>(DataType.RAW_OCTET);
         }
 
         public override string ToString()

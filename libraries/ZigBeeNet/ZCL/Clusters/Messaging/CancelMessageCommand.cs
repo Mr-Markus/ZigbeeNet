@@ -65,14 +65,14 @@ namespace ZigBeeNet.ZCL.Clusters.Messaging
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(MessageId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(MessageControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(MessageId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(MessageControl, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            MessageId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            MessageControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            MessageId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            MessageControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

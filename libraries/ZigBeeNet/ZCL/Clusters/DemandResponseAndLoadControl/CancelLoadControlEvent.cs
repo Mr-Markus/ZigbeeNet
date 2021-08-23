@@ -99,20 +99,20 @@ namespace ZigBeeNet.ZCL.Clusters.DemandResponseAndLoadControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(DeviceClass, ZclDataType.Get(DataType.BITMAP_16_BIT));
-            serializer.Serialize(UtilityEnrollmentGroup, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(CancelControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(EffectiveTime, ZclDataType.Get(DataType.UTCTIME));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(DeviceClass, DataType.BITMAP_16_BIT);
+            serializer.Serialize(UtilityEnrollmentGroup, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(CancelControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(EffectiveTime, DataType.UTCTIME);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            DeviceClass = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.BITMAP_16_BIT));
-            UtilityEnrollmentGroup = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            CancelControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            EffectiveTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            DeviceClass = deserializer.Deserialize<ushort>(DataType.BITMAP_16_BIT);
+            UtilityEnrollmentGroup = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            CancelControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            EffectiveTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
         }
 
         public override string ToString()

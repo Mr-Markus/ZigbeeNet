@@ -106,22 +106,22 @@ namespace ZigBeeNet.ZCL.Clusters.Messaging
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(MessageId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(MessageControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(DurationInMinutes, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(Message, ZclDataType.Get(DataType.CHARACTER_STRING));
-            serializer.Serialize(ExtendedMessageControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(MessageId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(MessageControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(DurationInMinutes, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(Message, DataType.CHARACTER_STRING);
+            serializer.Serialize(ExtendedMessageControl, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            MessageId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            MessageControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            DurationInMinutes = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            Message = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
-            ExtendedMessageControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            MessageId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            MessageControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            DurationInMinutes = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            Message = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
+            ExtendedMessageControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

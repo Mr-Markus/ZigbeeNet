@@ -65,18 +65,18 @@ namespace ZigBeeNet.ZCL.Clusters.Prepayment
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(FriendlyCredit, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(FriendlyCreditCalendarId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(EmergencyCreditLimit, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(EmergencyCreditThreshold, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            serializer.Serialize(FriendlyCredit, DataType.BITMAP_8_BIT);
+            serializer.Serialize(FriendlyCreditCalendarId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(EmergencyCreditLimit, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(EmergencyCreditThreshold, DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            FriendlyCredit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            FriendlyCreditCalendarId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            EmergencyCreditLimit = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            EmergencyCreditThreshold = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
+            FriendlyCredit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            FriendlyCreditCalendarId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            EmergencyCreditLimit = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            EmergencyCreditThreshold = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
         }
 
         public override string ToString()

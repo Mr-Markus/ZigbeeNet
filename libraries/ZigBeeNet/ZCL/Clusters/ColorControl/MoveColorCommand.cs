@@ -53,14 +53,14 @@ namespace ZigBeeNet.ZCL.Clusters.ColorControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(RateX, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            serializer.Serialize(RateY, ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            serializer.Serialize(RateX, DataType.SIGNED_16_BIT_INTEGER);
+            serializer.Serialize(RateY, DataType.SIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            RateX = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
-            RateY = deserializer.Deserialize<short>(ZclDataType.Get(DataType.SIGNED_16_BIT_INTEGER));
+            RateX = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
+            RateY = deserializer.Deserialize<short>(DataType.SIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

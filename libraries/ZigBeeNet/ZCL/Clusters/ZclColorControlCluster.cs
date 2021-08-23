@@ -216,25 +216,25 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(19);
 
-            attributeMap.Add(ATTR_CURRENTHUE, new ZclAttribute(this, ATTR_CURRENTHUE, "Current Hue", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_CURRENTSATURATION, new ZclAttribute(this, ATTR_CURRENTSATURATION, "Current Saturation", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_REMAININGTIME, new ZclAttribute(this, ATTR_REMAININGTIME, "Remaining Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_CURRENTX, new ZclAttribute(this, ATTR_CURRENTX, "Current X", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_CURRENTY, new ZclAttribute(this, ATTR_CURRENTY, "Current Y", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), true, true, false, true));
-            attributeMap.Add(ATTR_DRIFTCOMPENSATION, new ZclAttribute(this, ATTR_DRIFTCOMPENSATION, "Drift Compensation", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_COMPENSATIONTEXT, new ZclAttribute(this, ATTR_COMPENSATIONTEXT, "Compensation Text", ZclDataType.Get(DataType.CHARACTER_STRING), false, true, false, false));
-            attributeMap.Add(ATTR_COLORTEMPERATURE, new ZclAttribute(this, ATTR_COLORTEMPERATURE, "Color Temperature", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_COLORMODE, new ZclAttribute(this, ATTR_COLORMODE, "Color Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_ENHANCEDCURRENTHUE, new ZclAttribute(this, ATTR_ENHANCEDCURRENTHUE, "Enhanced Current Hue", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, true));
-            attributeMap.Add(ATTR_ENHANCEDCOLORMODE, new ZclAttribute(this, ATTR_ENHANCEDCOLORMODE, "Enhanced Color Mode", ZclDataType.Get(DataType.ENUMERATION_8_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_COLORLOOPACTIVE, new ZclAttribute(this, ATTR_COLORLOOPACTIVE, "Color Loop Active", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORLOOPDIRECTION, new ZclAttribute(this, ATTR_COLORLOOPDIRECTION, "Color Loop Direction", ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORLOOPTIME, new ZclAttribute(this, ATTR_COLORLOOPTIME, "Color Loop Time", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORLOOPSTARTHUE, new ZclAttribute(this, ATTR_COLORLOOPSTARTHUE, "Color Loop Start Hue", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORLOOPSTOREDHUE, new ZclAttribute(this, ATTR_COLORLOOPSTOREDHUE, "Color Loop Stored Hue", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORCAPABILITIES, new ZclAttribute(this, ATTR_COLORCAPABILITIES, "Color Capabilities", ZclDataType.Get(DataType.BITMAP_16_BIT), false, true, false, false));
-            attributeMap.Add(ATTR_COLORTEMPERATUREMIN, new ZclAttribute(this, ATTR_COLORTEMPERATUREMIN, "Color Temperature Min", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
-            attributeMap.Add(ATTR_COLORTEMPERATUREMAX, new ZclAttribute(this, ATTR_COLORTEMPERATUREMAX, "Color Temperature Max", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_CURRENTHUE, new ZclAttribute(this, ATTR_CURRENTHUE, "Current Hue", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_CURRENTSATURATION, new ZclAttribute(this, ATTR_CURRENTSATURATION, "Current Saturation", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_REMAININGTIME, new ZclAttribute(this, ATTR_REMAININGTIME, "Remaining Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_CURRENTX, new ZclAttribute(this, ATTR_CURRENTX, "Current X", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_CURRENTY, new ZclAttribute(this, ATTR_CURRENTY, "Current Y", DataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+            attributeMap.Add(ATTR_DRIFTCOMPENSATION, new ZclAttribute(this, ATTR_DRIFTCOMPENSATION, "Drift Compensation", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_COMPENSATIONTEXT, new ZclAttribute(this, ATTR_COMPENSATIONTEXT, "Compensation Text", DataType.CHARACTER_STRING, false, true, false, false));
+            attributeMap.Add(ATTR_COLORTEMPERATURE, new ZclAttribute(this, ATTR_COLORTEMPERATURE, "Color Temperature", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_COLORMODE, new ZclAttribute(this, ATTR_COLORMODE, "Color Mode", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_ENHANCEDCURRENTHUE, new ZclAttribute(this, ATTR_ENHANCEDCURRENTHUE, "Enhanced Current Hue", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
+            attributeMap.Add(ATTR_ENHANCEDCOLORMODE, new ZclAttribute(this, ATTR_ENHANCEDCOLORMODE, "Enhanced Color Mode", DataType.ENUMERATION_8_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_COLORLOOPACTIVE, new ZclAttribute(this, ATTR_COLORLOOPACTIVE, "Color Loop Active", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORLOOPDIRECTION, new ZclAttribute(this, ATTR_COLORLOOPDIRECTION, "Color Loop Direction", DataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORLOOPTIME, new ZclAttribute(this, ATTR_COLORLOOPTIME, "Color Loop Time", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORLOOPSTARTHUE, new ZclAttribute(this, ATTR_COLORLOOPSTARTHUE, "Color Loop Start Hue", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORLOOPSTOREDHUE, new ZclAttribute(this, ATTR_COLORLOOPSTOREDHUE, "Color Loop Stored Hue", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORCAPABILITIES, new ZclAttribute(this, ATTR_COLORCAPABILITIES, "Color Capabilities", DataType.BITMAP_16_BIT, false, true, false, false));
+            attributeMap.Add(ATTR_COLORTEMPERATUREMIN, new ZclAttribute(this, ATTR_COLORTEMPERATUREMIN, "Color Temperature Min", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+            attributeMap.Add(ATTR_COLORTEMPERATUREMAX, new ZclAttribute(this, ATTR_COLORTEMPERATUREMAX, "Color Temperature Max", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
             return attributeMap;
         }

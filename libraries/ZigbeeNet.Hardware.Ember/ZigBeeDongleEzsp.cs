@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using Serilog;
 using ZigBeeNet.Hardware.Ember.Ezsp;
 using ZigBeeNet.Hardware.Ember.Ezsp.Command;
 using ZigBeeNet.Hardware.Ember.Ezsp.Structure;
@@ -14,11 +13,14 @@ using ZigBeeNet.Hardware.Ember.Transaction;
 using ZigBeeNet.Security;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZDO.Field;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Hardware.Ember
 {
     public class ZigBeeDongleEzsp : IZigBeeTransportTransmit, IEzspFrameHandler
     {
+        static private readonly ILogger _logger = LogManager.GetLog<ZigBeeDongleEzsp>();
 
         private const int POLL_FRAME_ID = EzspNetworkStateRequest.FRAME_ID;
         private const int WAIT_FOR_ONLINE = 5000;
@@ -118,7 +120,7 @@ namespace ZigBeeNet.Hardware.Ember
         /**
          * The default ProfileID to use
          */
-        private int _defaultProfileId = ZigBeeProfileType.Get(ProfileType.ZIGBEE_HOME_AUTOMATION).Key;
+        private ushort _defaultProfileId = (ushort)ZigBeeProfileType.ZIGBEE_HOME_AUTOMATION;
 
         /**
          * The default DeviceID to use
@@ -302,7 +304,7 @@ namespace ZigBeeNet.Hardware.Ember
         }
         */
 
-        public void SetDefaultProfileId(int defaultProfileId) 
+        public void SetDefaultProfileId(ushort defaultProfileId) 
         {
             this._defaultProfileId = defaultProfileId;
         }
@@ -314,7 +316,7 @@ namespace ZigBeeNet.Hardware.Ember
 
         public ZigBeeStatus Initialize() 
         {
-            Log.Debug("EZSP Dongle: Initialize with protocol {Protocol}.", _protocol);
+            _logger.LogDebug("EZSP Dongle: Initialize with protocol {Protocol}.", _protocol);
             _zigbeeTransportReceive.SetTransportState(ZigBeeTransportState.INITIALISING);
 
             if (_protocol != EmberSerialProtocol.NONE && !InitialiseEzspProtocol()) 
@@ -326,69 +328,69 @@ namespace ZigBeeNet.Hardware.Ember
             Dictionary<EzspConfigId, int?> configuration = stackConfigurer.GetConfiguration(_stackConfiguration.Keys);
             foreach (var config in configuration) 
             {
-                Log.Debug("Configuration state {Key} = {Value}", config.Key, config.Value);
+                _logger.LogDebug("Configuration state {Key} = {Value}", config.Key, config.Value);
             }
 
             Dictionary<EzspPolicyId, EzspDecisionId> policies = stackConfigurer.GetPolicy(_stackPolicies.Keys);
             foreach (var policy in policies) 
             {
-                Log.Debug("Policy state {Key} = {Value}", policy.Key, policy.Value);
+                _logger.LogDebug("Policy state {Key} = {Value}", policy.Key, policy.Value);
             }
 
             stackConfigurer.SetConfiguration(_stackConfiguration);
             configuration = stackConfigurer.GetConfiguration(_stackConfiguration.Keys);
             foreach (var config in configuration)
             {
-                Log.Debug("Configuration state {Key} = {Value}", config.Key, config.Value);
+                _logger.LogDebug("Configuration state {Key} = {Value}", config.Key, config.Value);
             }
 
             stackConfigurer.SetPolicy(_stackPolicies);
             policies = stackConfigurer.GetPolicy(_stackPolicies.Keys);
             foreach (var policy in policies)
             {
-                Log.Debug("Policy state {Key} = {Value}", policy.Key, policy.Value);
+                _logger.LogDebug("Policy state {Key} = {Value}", policy.Key, policy.Value);
             }
 
             EmberNcp ncp = GetEmberNcp();
 
             // Get the current network parameters so that any configuration updates start from here
             _networkParameters = ncp.GetNetworkParameters().GetParameters();
-            Log.Debug("Ember initial network parameters are {NetworkParameters}", _networkParameters);
+            _logger.LogDebug("Ember initial network parameters are {NetworkParameters}", _networkParameters);
 
             IeeeAddress = ncp.GetIeeeAddress();
-            Log.Debug("Ember local IEEE Address is {IeeeAddress}", IeeeAddress);
+            _logger.LogDebug("Ember local IEEE Address is {IeeeAddress}", IeeeAddress);
 
             ncp.GetNetworkParameters();
 
-            Log.Debug("EZSP Dongle: initialize done");
+            _logger.LogDebug("EZSP Dongle: initialize done");
 
             return ZigBeeStatus.SUCCESS;
         }
 
         public ZigBeeStatus Startup(bool reinitialize) 
         {
-            Log.Debug("EZSP Dongle: Startup - reinitialize={Reinitialize}", reinitialize);
+            _logger.LogDebug("EZSP Dongle: Startup - reinitialize={Reinitialize}", reinitialize);
 
             // If frameHandler is null then the serial port didn't initialise or startup has not been called
             if (_frameHandler == null) 
             {
-                Log.Error("EZSP Dongle: Startup found low level handler is not initialised.");
+                _logger.LogError("EZSP Dongle: Startup found low level handler is not initialised.");
                 return ZigBeeStatus.INVALID_STATE;
             }
 
             EmberNcp ncp = GetEmberNcp();
 
             // Add the endpoint
-            Log.Debug("EZSP Adding Endpoint: ProfileID={ProfileID}, DeviceID={DeviceID}", _defaultProfileId.ToString("X4"), _defaultDeviceId.ToString("X4"));
-            Log.Debug("EZSP Adding Endpoint: Input Clusters   {InputClusters}", _inputClusters);
-            Log.Debug("EZSP Adding Endpoint: Output Clusters  {OutputClusters}", _outputClusters);
+            _logger.LogDebug("EZSP Adding Endpoint: ProfileID={ProfileID}, DeviceID={DeviceID}", _defaultProfileId.ToString("X4"), _defaultDeviceId.ToString("X4"));
+            _logger.LogDebug("EZSP Adding Endpoint: Input Clusters   {InputClusters}", _inputClusters);
+            _logger.LogDebug("EZSP Adding Endpoint: Output Clusters  {OutputClusters}", _outputClusters);
             ncp.AddEndpoint(1, _defaultDeviceId, _defaultProfileId, _inputClusters, _outputClusters);
 
             // Now initialise the network
             EmberStatus initResponse = ncp.NetworkInit();
             if (initResponse == EmberStatus.EMBER_NOT_JOINED) 
             {
-                Log.Debug("EZSP dongle initialize done - response {Response}", initResponse);
+                _logger.LogDebug("EZSP dongle initialize done - response {Response}", initResponse);
             }
 
             // Print current security state to debug logs
@@ -398,13 +400,13 @@ namespace ZigBeeNet.Hardware.Ember
 
             // Check if the network is initialised
             EmberNetworkStatus networkState = ncp.GetNetworkState();
-            Log.Debug("EZSP networkStateResponse {State}", networkState);
+            _logger.LogDebug("EZSP networkStateResponse {State}", networkState);
 
             // If we want to reinitialize the network, then go...
             EmberNetworkInitialisation netInitialiser = new EmberNetworkInitialisation(_frameHandler);
             if (reinitialize) 
             {
-                Log.Debug("Reinitialising Ember NCP network as {DeviceType}", _deviceType);
+                _logger.LogDebug("Reinitialising Ember NCP network as {DeviceType}", _deviceType);
                 if (_deviceType == DeviceType.COORDINATOR)
                     netInitialiser.FormNetwork(_networkParameters, _linkKey, _networkKey);
                 else
@@ -419,23 +421,23 @@ namespace ZigBeeNet.Hardware.Ember
 
             // Wait for the network to come up
             networkState = WaitNetworkStartup(ncp);
-            Log.Debug("EZSP networkState after online wait {NetworkState}", networkState);
+            _logger.LogDebug("EZSP networkState after online wait {NetworkState}", networkState);
 
             // Get the security state - mainly for information
             EmberCurrentSecurityState currentSecurityState = ncp.getCurrentSecurityState();
-            Log.Debug("EZSP Current Security State = {CurrentSecurityState}", currentSecurityState);
+            _logger.LogDebug("EZSP Current Security State = {CurrentSecurityState}", currentSecurityState);
 
             EmberStatus txPowerResponse = ncp.SetRadioPower(_networkParameters.GetRadioTxPower());
             if (txPowerResponse != EmberStatus.EMBER_SUCCESS) 
             {
-                Log.Debug("Setting TX Power to {TxPower} resulted in {Response}", _networkParameters.GetRadioTxPower(), txPowerResponse);
+                _logger.LogDebug("Setting TX Power to {TxPower} resulted in {Response}", _networkParameters.GetRadioTxPower(), txPowerResponse);
             }
 
             int address = ncp.GetNwkAddress();
             if (address != 0xFFFE)
                 NwkAddress = (ushort) address;
 
-            Log.Debug("EZSP Dongle: Startup complete. NWK Address = {NwkAddress}, State = {NetworkState}", NwkAddress.ToString("X4"), networkState);
+            _logger.LogDebug("EZSP Dongle: Startup complete. NWK Address = {NwkAddress}, State = {NetworkState}", NwkAddress.ToString("X4"), networkState);
 
             // At this stage, we will now take note of the EzspStackStatusHandler notifications
             bool joinedNetwork = (networkState == EmberNetworkStatus.EMBER_JOINED_NETWORK || networkState == EmberNetworkStatus.EMBER_JOINED_NETWORK_NO_PARENT);
@@ -528,7 +530,7 @@ namespace ZigBeeNet.Hardware.Ember
             }
             catch (Exception ex)
             {
-                Log.Debug(ex, "EZSP Dongle: error in poll timer elapsed event");
+                _logger.LogDebug(ex, "EZSP Dongle: error in poll timer elapsed event");
             }
         }
 
@@ -548,10 +550,10 @@ namespace ZigBeeNet.Hardware.Ember
 
         public void Shutdown() 
         {
-            Log.Debug("EZSP Dongle: Shutdown");
+            _logger.LogDebug("EZSP Dongle: Shutdown");
             if (_frameHandler == null) 
             {
-                Log.Debug("EZSP Dongle: Shutdown frameHandler is null");
+                _logger.LogDebug("EZSP Dongle: Shutdown frameHandler is null");
                 return;
             }
             _frameHandler.SetClosing();
@@ -629,7 +631,7 @@ namespace ZigBeeNet.Hardware.Ember
                 emberApsFrame.AddOptions(EmberApsOption.EMBER_APS_OPTION_ENCRYPTION);
             }
 
-            if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && !ZigBeeBroadcastDestination.IsBroadcast(apsFrame.DestinationAddress)) 
+            if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && !ZigBeeBroadcastDestinationHelper.IsBroadcast(apsFrame.DestinationAddress)) 
             {
                 EzspSendUnicastRequest emberUnicast = new EzspSendUnicastRequest();
                 emberUnicast.SetIndexOrDestination(apsFrame.DestinationAddress);
@@ -657,7 +659,7 @@ namespace ZigBeeNet.Hardware.Ember
 
                 transaction = new EzspSingleResponseTransaction(emberUnicast, typeof(EzspSendUnicastResponse));
             } 
-            else if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && ZigBeeBroadcastDestination.IsBroadcast(apsFrame.DestinationAddress)) 
+            else if (apsFrame.AddressMode == ZigBeeNwkAddressMode.Device && ZigBeeBroadcastDestinationHelper.IsBroadcast(apsFrame.DestinationAddress)) 
             {
                 EzspSendBroadcastRequest emberBroadcast = new EzspSendBroadcastRequest();
                 emberBroadcast.SetDestination(apsFrame.DestinationAddress);
@@ -684,7 +686,7 @@ namespace ZigBeeNet.Hardware.Ember
             } 
             else 
             {
-                Log.Debug("EZSP message not sent as unknown address mode: {ApsFrame}", apsFrame);
+                _logger.LogDebug("EZSP message not sent as unknown address mode: {ApsFrame}", apsFrame);
                 return;
             }
 
@@ -713,7 +715,7 @@ namespace ZigBeeNet.Hardware.Ember
                     }
                     else
                     {
-                        Log.Debug("Unable to get response from {Request} :: {Response}", transaction.GetRequest(), transaction.GetResponse());
+                        _logger.LogDebug("Unable to get response from {Request} :: {Response}", transaction.GetRequest(), transaction.GetResponse());
                         return;
                     }
 
@@ -727,7 +729,7 @@ namespace ZigBeeNet.Hardware.Ember
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug(ex, "EZSP Dongle: error in SendCommand");
+                    _logger.LogDebug(ex, "EZSP Dongle: error in SendCommand");
                 }
             });
         }
@@ -741,8 +743,8 @@ namespace ZigBeeNet.Hardware.Ember
         {
             // Update the extendedTimeout flag in the address table.
             // Users should ensure the address table is large enough to hold all nodes on the network.
-            Log.Debug("{IeeeAddress}: NodeDescriptor passed to Ember NCP {NodeDescriptor}", ieeeAddress, nodeDescriptor);
-            if (!nodeDescriptor.MacCapabilities.Contains(NodeDescriptor.MacCapabilitiesType.RECEIVER_ON_WHEN_IDLE)) 
+            _logger.LogDebug("{IeeeAddress}: NodeDescriptor passed to Ember NCP {NodeDescriptor}", ieeeAddress, nodeDescriptor);
+            if ((nodeDescriptor.MacCapabilities&NodeDescriptor.MacCapabilitiesType.RECEIVER_ON_WHEN_IDLE)==0) 
             {
                 EmberNcp ncp = GetEmberNcp();
                 ncp.SetExtendedTimeout(ieeeAddress, true);
@@ -752,13 +754,13 @@ namespace ZigBeeNet.Hardware.Ember
         public void HandlePacket(EzspFrame response) 
         {
             if (response.GetFrameId() != POLL_FRAME_ID) {
-                Log.Debug("RX EZSP: {Response}", response);
+                _logger.LogDebug("RX EZSP: {Response}", response);
             }
 
             if (response is EzspIncomingMessageHandler) 
             {
                 if (!_initialised) {
-                    Log.Debug("Ignoring received frame as stack is still initialising");
+                    _logger.LogDebug("Ignoring received frame as stack is still initialising");
                     return;
                 }
                 EzspIncomingMessageHandler incomingMessage = (EzspIncomingMessageHandler) response;
@@ -807,7 +809,7 @@ namespace ZigBeeNet.Hardware.Ember
                     case EmberIncomingMessageType.EMBER_INCOMING_MANY_TO_ONE_ROUTE_REQUEST:
                         return;
                     case EmberIncomingMessageType.UNKNOWN:
-                        Log.Information("Ignoring unknown EZSP incoming message type");
+                        _logger.LogInformation("Ignoring unknown EZSP incoming message type");
                         return;
                 }
 
@@ -890,7 +892,7 @@ namespace ZigBeeNet.Hardware.Ember
                         status = ZigBeeNodeStatus.DEVICE_LEFT;
                         break;
                     default:
-                        Log.Debug("Unknown state in trust centre join handler {Status}", joinHandler.GetStatus());
+                        _logger.LogDebug("Unknown state in trust centre join handler {Status}", joinHandler.GetStatus());
                         return;
                 }
 
@@ -921,13 +923,13 @@ namespace ZigBeeNet.Hardware.Ember
 
         public void HandleLinkStateChange(bool linkState) 
         {
-            Log.Debug("Ember: Link State change to {LinkState}, initialised={Initialised}, networkStateUp={NetworkStateUp}", linkState, _initialised, _networkStateUp);
+            _logger.LogDebug("Ember: Link State change to {LinkState}, initialised={Initialised}, networkStateUp={NetworkStateUp}", linkState, _initialised, _networkStateUp);
 
             // Only act on changes to OFFLINE once we have completed initialisation
             // changes to ONLINE have to work during init because they mark the end of the initialisation
             if (!_initialised || linkState == _networkStateUp) 
             {
-                Log.Debug("Ember: Link State change to {LinkState} ignored.", linkState);
+                _logger.LogDebug("Ember: Link State change to {LinkState} ignored.", linkState);
                 return;
             }
             _networkStateUp = linkState;
@@ -936,7 +938,7 @@ namespace ZigBeeNet.Hardware.Ember
             {
                 if (linkState)
                 {
-                    Log.Debug("Ember: Link State up running");
+                    _logger.LogDebug("Ember: Link State up running");
 
                     EmberNcp ncp = GetEmberNcp();
                     int addr = ncp.GetNwkAddress();
@@ -958,7 +960,7 @@ namespace ZigBeeNet.Hardware.Ember
         {
             if ((ZigBeeChannelMask.CHANNEL_MASK_2GHZ & (int)channel) == 0) 
             {
-                Log.Debug("Unable to set channel outside of 2.4GHz channels: {Channel}", channel);
+                _logger.LogDebug("Unable to set channel outside of 2.4GHz channels: {Channel}", channel);
                 return ZigBeeStatus.INVALID_ARGUMENTS;
             }
             _networkParameters.SetRadioChannel(channel.GetChannelNum());
@@ -1042,7 +1044,7 @@ namespace ZigBeeNet.Hardware.Ember
                             ZigBeeKey nodeKey = (ZigBeeKey) configuration.GetValue(option);
                             if (!nodeKey.HasAddress()) 
                             {
-                                Log.Debug("Attempt to set INSTALL_KEY without setting address");
+                                _logger.LogDebug("Attempt to set INSTALL_KEY without setting address");
                                 configuration.SetResult(option, ZigBeeStatus.FAILURE);
                                 break;
                             }
@@ -1079,13 +1081,13 @@ namespace ZigBeeNet.Hardware.Ember
 
                         default:
                             configuration.SetResult(option, ZigBeeStatus.UNSUPPORTED);
-                            Log.Debug("Unsupported configuration option \"{Option}\" in EZSP dongle", option);
+                            _logger.LogDebug("Unsupported configuration option \"{Option}\" in EZSP dongle", option);
                             break;
                     }
                 } 
                 catch (Exception ex) 
                 {
-                    Log.Debug(ex, "EZSP Dongle: error in UpdateTransportConfig");
+                    _logger.LogDebug(ex, "EZSP Dongle: error in UpdateTransportConfig");
                     configuration.SetResult(option, ZigBeeStatus.INVALID_ARGUMENTS);
                 }
             }
@@ -1144,12 +1146,12 @@ namespace ZigBeeNet.Hardware.Ember
         {
             if (_frameHandler != null) 
             {
-                Log.Error("EZSP Dongle: Attempt to initialise Ember dongle when already initialised");
+                _logger.LogError("EZSP Dongle: Attempt to initialise Ember dongle when already initialised");
                 return false;
             }
             if (!_serialPort.Open()) 
             {
-                Log.Error("EZSP Dongle: Unable to open serial port");
+                _logger.LogError("EZSP Dongle: Unable to open serial port");
                 return false;
             }
 
@@ -1166,7 +1168,7 @@ namespace ZigBeeNet.Hardware.Ember
                 case EmberSerialProtocol.NONE:
                     return true;
                 default:
-                    Log.Error("EZSP Dongle: Unknown serial protocol {Protocol}", _protocol);
+                    _logger.LogError("EZSP Dongle: Unknown serial protocol {Protocol}", _protocol);
                     return false;
             }
 
@@ -1189,7 +1191,7 @@ namespace ZigBeeNet.Hardware.Ember
             EzspVersionResponse version = ncp.GetVersion(4);
             if (version == null) 
             {
-                Log.Debug("EZSP Dongle: Version returned null. ASH/EZSP not initialised.");
+                _logger.LogDebug("EZSP Dongle: Version returned null. ASH/EZSP not initialised.");
                 return false;
             }
 
@@ -1198,13 +1200,13 @@ namespace ZigBeeNet.Hardware.Ember
                 // The device supports a different version that we current have set
                 if (!EzspFrame.SetEzspVersion(version.GetProtocolVersion())) 
                 {
-                    Log.Error("EZSP Dongle: NCP requires unsupported version of EZSP (required = V{RequiredVersion}, supported = V{SupportedVersion})",
+                    _logger.LogError("EZSP Dongle: NCP requires unsupported version of EZSP (required = V{RequiredVersion}, supported = V{SupportedVersion})",
                             version.GetProtocolVersion(), EzspFrame.GetEzspVersion());
                     return false;
                 }
 
                 version = ncp.GetVersion(EzspFrame.GetEzspVersion());
-                Log.Debug(version.ToString());
+                _logger.LogDebug(version.ToString());
             }
 
             StringBuilder builder = new StringBuilder();
@@ -1278,7 +1280,7 @@ namespace ZigBeeNet.Hardware.Ember
 
             IEzspTransaction concentratorTransaction = _frameHandler.SendEzspTransaction(new EzspSingleResponseTransaction(concentratorRequest, typeof(EzspSetConcentratorResponse)));
             EzspSetConcentratorResponse concentratorResponse = (EzspSetConcentratorResponse) concentratorTransaction.GetResponse();
-            Log.Debug(concentratorResponse.ToString());
+            _logger.LogDebug(concentratorResponse.ToString());
 
             if (concentratorResponse.GetStatus() == EzspStatus.EZSP_SUCCESS)
                 return ZigBeeStatus.SUCCESS;

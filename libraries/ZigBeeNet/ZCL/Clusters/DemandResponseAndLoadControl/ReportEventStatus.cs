@@ -135,32 +135,32 @@ namespace ZigBeeNet.ZCL.Clusters.DemandResponseAndLoadControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(EventStatus, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(EventStatusTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(CriticalityLevelApplied, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(CoolingTemperatureSetPointApplied, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(HeatingTemperatureSetPointApplied, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(AverageLoadAdjustmentPercentageApplied, ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            serializer.Serialize(DutyCycleApplied, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(EventControl, ZclDataType.Get(DataType.BITMAP_8_BIT));
-            serializer.Serialize(SignatureType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(Signature, ZclDataType.Get(DataType.OCTET_STRING));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(EventStatus, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(EventStatusTime, DataType.UTCTIME);
+            serializer.Serialize(CriticalityLevelApplied, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(CoolingTemperatureSetPointApplied, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(HeatingTemperatureSetPointApplied, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(AverageLoadAdjustmentPercentageApplied, DataType.SIGNED_8_BIT_INTEGER);
+            serializer.Serialize(DutyCycleApplied, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(EventControl, DataType.BITMAP_8_BIT);
+            serializer.Serialize(SignatureType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(Signature, DataType.OCTET_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            EventStatus = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            EventStatusTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            CriticalityLevelApplied = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            CoolingTemperatureSetPointApplied = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            HeatingTemperatureSetPointApplied = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            AverageLoadAdjustmentPercentageApplied = deserializer.Deserialize<sbyte>(ZclDataType.Get(DataType.SIGNED_8_BIT_INTEGER));
-            DutyCycleApplied = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            EventControl = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
-            SignatureType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            Signature = deserializer.Deserialize<ByteArray>(ZclDataType.Get(DataType.OCTET_STRING));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            EventStatus = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            EventStatusTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            CriticalityLevelApplied = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            CoolingTemperatureSetPointApplied = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            HeatingTemperatureSetPointApplied = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            AverageLoadAdjustmentPercentageApplied = deserializer.Deserialize<sbyte>(DataType.SIGNED_8_BIT_INTEGER);
+            DutyCycleApplied = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            EventControl = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
+            SignatureType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            Signature = deserializer.Deserialize<ByteArray>(DataType.OCTET_STRING);
         }
 
         public override string ToString()

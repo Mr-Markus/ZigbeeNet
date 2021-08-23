@@ -3,14 +3,16 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using ZigBeeNet.Transport;
-using Serilog;
+using ZigBeeNet.Util;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet.Tranport.SerialPort
 {
     public class ZigBeeSerialPort : IZigBeePort
     {
+        private static ILogger _logger = LogManager.GetLog<ZigBeeSerialPort>();
         private System.IO.Ports.SerialPort _serialPort;
 
         private Task _reader;
@@ -73,7 +75,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 Baudrate = baudrate;
                 FlowControl = flowControl;
 
-                Log.Debug("Opening port {Port} at {Baudrate} baud with {FlowControl}", PortName, Baudrate, FlowControl);
+                _logger.LogDebug("Opening port {Port} at {Baudrate} baud with {FlowControl}", PortName, Baudrate, FlowControl);
 
                 _serialPort = new System.IO.Ports.SerialPort(PortName, baudrate);
                 _serialPort.WriteTimeout = 3000;
@@ -94,7 +96,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("Error opening port {Port}: {Exception}", PortName, ex.Message);
+                    _logger.LogDebug("Error opening port {Port}: {Exception}", PortName, ex.Message);
                 }
 
                 if (_serialPort.IsOpen)
@@ -107,7 +109,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             }
             catch (Exception e)
             {
-                Log.Warning("Unable to open serial port: {Exception}", e.Message);
+                _logger.LogWarning("Unable to open serial port: {Exception}", e.Message);
             }
 
             return success;
@@ -149,7 +151,7 @@ namespace ZigBeeNet.Tranport.SerialPort
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error while reading byte from serial port: {Exception}", e.Message);
+                _logger.LogError(e, "Error while reading byte from serial port: {Exception}", e.Message);
             }
             return null;
         }
@@ -169,7 +171,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "Error while writing to serial port: {Exception}", e.Message);
+                    _logger.LogError(e, "Error while writing to serial port: {Exception}", e.Message);
                 }
             }
         }
@@ -194,7 +196,7 @@ namespace ZigBeeNet.Tranport.SerialPort
                 {
                     if (!_cancellationToken.IsCancellationRequested)
                     {
-                        Log.Error(e, "Error while reading from serial port: {Exception}", e.Message);
+                        _logger.LogError(e, "Error while reading from serial port: {Exception}", e.Message);
                         Thread.Sleep(1000);
                     }
                 }

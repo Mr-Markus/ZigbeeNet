@@ -95,20 +95,20 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartSamplingTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(SampleType, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(SampleRequestInterval, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(MaxNumberOfSamples, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartSamplingTime, DataType.UTCTIME);
+            serializer.Serialize(SampleType, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(SampleRequestInterval, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(MaxNumberOfSamples, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartSamplingTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            SampleType = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            SampleRequestInterval = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            MaxNumberOfSamples = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartSamplingTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            SampleType = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            SampleRequestInterval = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            MaxNumberOfSamples = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

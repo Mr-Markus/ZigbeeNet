@@ -56,12 +56,12 @@ namespace ZigBeeNet.ZCL.Clusters.PollControl
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(NewShortPollInterval, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            serializer.Serialize(NewShortPollInterval, DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            NewShortPollInterval = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
+            NewShortPollInterval = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
         }
 
         public override string ToString()

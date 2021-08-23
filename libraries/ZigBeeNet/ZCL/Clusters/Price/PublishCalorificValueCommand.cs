@@ -72,20 +72,20 @@ namespace ZigBeeNet.ZCL.Clusters.Price
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(IssuerEventId, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(StartTime, ZclDataType.Get(DataType.UTCTIME));
-            serializer.Serialize(CalorificValue, ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            serializer.Serialize(CalorificValueUnit, ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            serializer.Serialize(CalorificValueTrailingDigit, ZclDataType.Get(DataType.BITMAP_8_BIT));
+            serializer.Serialize(IssuerEventId, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(StartTime, DataType.UTCTIME);
+            serializer.Serialize(CalorificValue, DataType.UNSIGNED_32_BIT_INTEGER);
+            serializer.Serialize(CalorificValueUnit, DataType.ENUMERATION_8_BIT);
+            serializer.Serialize(CalorificValueTrailingDigit, DataType.BITMAP_8_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            IssuerEventId = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            StartTime = deserializer.Deserialize<DateTime>(ZclDataType.Get(DataType.UTCTIME));
-            CalorificValue = deserializer.Deserialize<uint>(ZclDataType.Get(DataType.UNSIGNED_32_BIT_INTEGER));
-            CalorificValueUnit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.ENUMERATION_8_BIT));
-            CalorificValueTrailingDigit = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.BITMAP_8_BIT));
+            IssuerEventId = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            StartTime = deserializer.Deserialize<DateTime>(DataType.UTCTIME);
+            CalorificValue = deserializer.Deserialize<uint>(DataType.UNSIGNED_32_BIT_INTEGER);
+            CalorificValueUnit = deserializer.Deserialize<byte>(DataType.ENUMERATION_8_BIT);
+            CalorificValueTrailingDigit = deserializer.Deserialize<byte>(DataType.BITMAP_8_BIT);
         }
 
         public override string ToString()

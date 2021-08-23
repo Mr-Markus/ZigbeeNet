@@ -56,12 +56,12 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(BypassResult, ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(BypassResult, DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            BypassResult = deserializer.Deserialize<List<byte>>(ZclDataType.Get(DataType.N_X_UNSIGNED_8_BIT_INTEGER));
+            BypassResult = deserializer.Deserialize<List<byte>>(DataType.N_X_UNSIGNED_8_BIT_INTEGER);
         }
 
         public override string ToString()

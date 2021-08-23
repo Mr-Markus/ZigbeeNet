@@ -54,12 +54,12 @@ namespace ZigBeeNet.ZCL.Clusters.Metering
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(SnapshotCause, ZclDataType.Get(DataType.BITMAP_32_BIT));
+            serializer.Serialize(SnapshotCause, DataType.BITMAP_32_BIT);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            SnapshotCause = deserializer.Deserialize<int>(ZclDataType.Get(DataType.BITMAP_32_BIT));
+            SnapshotCause = deserializer.Deserialize<int>(DataType.BITMAP_32_BIT);
         }
 
         public override string ToString()

@@ -63,7 +63,7 @@ namespace ZigBeeNet.ZCL.Clusters
         {
             Dictionary<ushort, ZclAttribute> attributeMap = new Dictionary<ushort, ZclAttribute>(1);
 
-            attributeMap.Add(ATTR_ALARMCOUNT, new ZclAttribute(this, ATTR_ALARMCOUNT, "Alarm Count", ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER), false, true, false, false));
+            attributeMap.Add(ATTR_ALARMCOUNT, new ZclAttribute(this, ATTR_ALARMCOUNT, "Alarm Count", DataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
             return attributeMap;
         }

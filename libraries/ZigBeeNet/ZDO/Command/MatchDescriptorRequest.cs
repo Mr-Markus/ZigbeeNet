@@ -60,17 +60,17 @@ namespace ZigBeeNet.ZDO.Command
         {
             base.Serialize(serializer);
 
-            serializer.Serialize(NwkAddrOfInterest, ZclDataType.Get(DataType.NWK_ADDRESS));
-            serializer.Serialize(ProfileId, ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            serializer.Serialize(InClusterList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(NwkAddrOfInterest, DataType.NWK_ADDRESS);
+            serializer.Serialize(ProfileId, DataType.UNSIGNED_16_BIT_INTEGER);
+            serializer.Serialize(InClusterList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < InClusterList.Count; cnt++)
             {
-                serializer.Serialize(InClusterList[cnt], ZclDataType.Get(DataType.CLUSTERID));
+                serializer.Serialize(InClusterList[cnt], DataType.CLUSTERID);
             }
-            serializer.Serialize(OutClusterList.Count, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            serializer.Serialize(OutClusterList.Count, DataType.UNSIGNED_8_BIT_INTEGER);
             for (int cnt = 0; cnt < OutClusterList.Count; cnt++)
             {
-                serializer.Serialize(OutClusterList[cnt], ZclDataType.Get(DataType.CLUSTERID));
+                serializer.Serialize(OutClusterList[cnt], DataType.CLUSTERID);
             }
         }
 
@@ -82,22 +82,22 @@ namespace ZigBeeNet.ZDO.Command
             InClusterList = new List<ushort>();
             OutClusterList = new List<ushort>();
 
-            NwkAddrOfInterest = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.NWK_ADDRESS));
-            ProfileId = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.UNSIGNED_16_BIT_INTEGER));
-            byte? inClusterCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            NwkAddrOfInterest = deserializer.Deserialize<ushort>(DataType.NWK_ADDRESS);
+            ProfileId = deserializer.Deserialize<ushort>(DataType.UNSIGNED_16_BIT_INTEGER);
+            byte? inClusterCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (inClusterCount != null)
             {
                 for (int cnt = 0; cnt < inClusterCount; cnt++)
                 {
-                    InClusterList.Add((ushort) deserializer.Deserialize(ZclDataType.Get(DataType.CLUSTERID)));
+                    InClusterList.Add((ushort) deserializer.Deserialize(DataType.CLUSTERID));
                 }
             }
-            byte? outClusterCount = (byte?) deserializer.Deserialize(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
+            byte? outClusterCount = (byte?) deserializer.Deserialize(DataType.UNSIGNED_8_BIT_INTEGER);
             if (outClusterCount != null)
             {
                 for (int cnt = 0; cnt < outClusterCount; cnt++)
                 {
-                    OutClusterList.Add((ushort) deserializer.Deserialize(ZclDataType.Get(DataType.CLUSTERID)));
+                    OutClusterList.Add((ushort) deserializer.Deserialize(DataType.CLUSTERID));
                 }
             }
         }

@@ -16,8 +16,9 @@ using ZigBeeNet.Serialization;
 using ZigBeeNet.Transport;
 using ZigBeeNet.ZCL.Protocol;
 using ZigBeeNet.App.Discovery;
-using Serilog;
 using ZigBeeNet.Database;
+using ZigBeeNet.Util;
+using Microsoft.Extensions.Logging;
 
 namespace ZigBeeNet
 {
@@ -57,6 +58,11 @@ namespace ZigBeeNet
     /// </summary>
     public class ZigBeeNetworkManager : IZigBeeNetwork, IZigBeeTransportReceive
     {
+        /// <summary>
+        /// ILogger for logging events for this class
+        /// </summary>
+        private static ILogger _logger = LogManager.GetLog<ZigBeeNetworkManager>();
+
         /// <summary>
         /// The local endpoint ID used for all ZCL commands
         /// </summary>
@@ -187,7 +193,7 @@ namespace ZigBeeNet
         /// <summary>
         /// The default ProfileID to use
         /// </summary>
-        private int _defaultProfileId = ZigBeeProfileType.Get(ProfileType.ZIGBEE_HOME_AUTOMATION).Key;
+        private ushort _defaultProfileId = (ushort)ZigBeeProfileType.ZIGBEE_HOME_AUTOMATION;
 
         public ZigBeeChannel ZigbeeChannel
         {
@@ -336,7 +342,7 @@ namespace ZigBeeNet
                 ZigBeeNode node = GetNode(ieeeAddress);
                 if (node == null)
                 {
-                    Log.Debug("{IeeeAddress}: Adding local node to network, NWK={NetworkAddress}", ieeeAddress, nwkAddress);
+                    _logger.LogDebug("{IeeeAddress}: Adding local node to network, NWK={NetworkAddress}", ieeeAddress, nwkAddress);
                     node = new ZigBeeNode(this, ieeeAddress, nwkAddress);
                     UpdateNode(node);
                 }
@@ -476,12 +482,12 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeStatus Startup(bool reinitialize)
         {
-            Log.Debug("ZigBeeNetworkManager startup: reinitialize={Reinitialize}, networkState={NetworkState}", reinitialize, NetworkState);
+            _logger.LogDebug("ZigBeeNetworkManager startup: reinitialize={Reinitialize}, networkState={NetworkState}", reinitialize, NetworkState);
             lock (_networkStateSync)
             {
                 if (NetworkState != ZigBeeNetworkState.INITIALISING)
                 {
-                    Log.Error("ZigBeeNetworkManager startup: Can't be called when NetworkState={NetworkState}", NetworkState);
+                    _logger.LogError("ZigBeeNetworkManager startup: Can't be called when NetworkState={NetworkState}", NetworkState);
                     return ZigBeeStatus.INVALID_STATE;
                 }
             }
@@ -504,7 +510,7 @@ namespace ZigBeeNet
         /// </summary>
         public void Shutdown()
         {
-            Log.Debug("ZigBeeNetworkManager shutdown: networkState={NetworkState}", NetworkState);
+            _logger.LogDebug("ZigBeeNetworkManager shutdown: networkState={NetworkState}", NetworkState);
             SetNetworkState(ZigBeeNetworkState.SHUTDOWN);
 
             if (_clusterMatcher != null)
@@ -537,7 +543,7 @@ namespace ZigBeeNet
         {
             if (NetworkState != ZigBeeNetworkState.ONLINE)
             {
-                Log.Debug("ZigBeeNetworkManager scheduleTask: not scheduling task while {NetworkState}", NetworkState);
+                _logger.LogDebug("ZigBeeNetworkManager scheduleTask: not scheduling task while {NetworkState}", NetworkState);
                 return;
             }
             await Task.Delay(delay);
@@ -563,7 +569,7 @@ namespace ZigBeeNet
             // TODO: Use only a single endpoint for HA and fix this here
             command.SourceAddress = new ZigBeeEndpointAddress(_localNwkAddress);
 
-            Log.Debug("TX CMD: {Command}", command);
+            _logger.LogDebug("TX CMD: {Command}", command);
 
             apsFrame.Cluster = command.ClusterId;
             apsFrame.ApsCounter = (byte)(((byte)Interlocked.Increment(ref _apsCounter)) & 0xff);
@@ -601,7 +607,7 @@ namespace ZigBeeNet
             }
             catch (Exception e)
             {
-                Log.Debug("Error serializing ZigBee frame {Exception}", e);
+                _logger.LogDebug("Error serializing ZigBee frame {Exception}", e);
                 return 0;
             }
 
@@ -648,10 +654,10 @@ namespace ZigBeeNet
                 // Serialise the ZCL header and add the payload
                 apsFrame.Payload = zclHeader.Serialize(fieldSerializer, fieldSerializer.Payload);
 
-                Log.Debug("TX ZCL: {ZclHeader}", zclHeader);
+                _logger.LogDebug("TX ZCL: {ZclHeader}", zclHeader);
             }
 
-            Log.Debug("TX APS: {ApsFrame}", apsFrame);
+            _logger.LogDebug("TX APS: {ApsFrame}", apsFrame);
 
             Transport.SendCommand(apsFrame);
 
@@ -675,12 +681,12 @@ namespace ZigBeeNet
             {
                 if (NetworkState != ZigBeeNetworkState.ONLINE)
                 {
-                    Log.Debug("Dropping APS: state={NetworkState}, frame={ApsFrame}", NetworkState, apsFrame);
+                    _logger.LogDebug("Dropping APS: state={NetworkState}, frame={ApsFrame}", NetworkState, apsFrame);
                     return;
                 }
             }
 
-            Log.Debug("RX APS: {ApsFrame}", apsFrame);
+            _logger.LogDebug("RX APS: {ApsFrame}", apsFrame);
 
             if (apsFrame == null)
             {
@@ -690,7 +696,7 @@ namespace ZigBeeNet
             ZigBeeNode currentNode = GetNode(apsFrame.SourceAddress);
             if (currentNode == null)
             {
-                Log.Debug("Incoming message from unknown node {0}: Notifying announce listeners", apsFrame.SourceAddress.ToString("X4"));
+                _logger.LogDebug("Incoming message from unknown node {0}: Notifying announce listeners", apsFrame.SourceAddress.ToString("X4"));
 
                 // Notify the listeners that we have heard a command that was unknown to us
                 foreach (IZigBeeAnnounceListener announceListener in _announceListeners)
@@ -722,13 +728,13 @@ namespace ZigBeeNet
                     command = ReceiveZclCommand(fieldDeserializer, apsFrame);
                     break;
                 default:
-                    Log.Debug("Received message with unknown profile {Profile}", apsFrame.Profile.ToString("X4"));
+                    _logger.LogDebug("Received message with unknown profile {Profile}", apsFrame.Profile.ToString("X4"));
                     break;
             }
 
             if (command == null)
             {
-                Log.Debug("Incoming message did not translate to command.");
+                _logger.LogDebug("Incoming message did not translate to command.");
                 return;
             }
 
@@ -737,7 +743,7 @@ namespace ZigBeeNet
             command.DestinationAddress = new ZigBeeEndpointAddress(apsFrame.DestinationAddress, apsFrame.DestinationEndpoint);
             command.ApsSecurity = apsFrame.SecurityEnabled;
 
-            Log.Debug("RX CMD: {Command}", command);
+            _logger.LogDebug("RX CMD: {Command}", command);
 
             // Notify the listeners
             _commandNotifier.NotifyCommandListeners(command);
@@ -749,7 +755,7 @@ namespace ZigBeeNet
 
             if (commandType == null)
             {
-                Log.Debug("Error instantiating ZDO command: Unknown cluster {Cluster}", apsFrame.Cluster.ToString("X4"));
+                _logger.LogDebug("Error instantiating ZDO command: Unknown cluster {Cluster}", apsFrame.Cluster.ToString("X4"));
                 return null;
             }
 
@@ -761,7 +767,7 @@ namespace ZigBeeNet
             }
             catch (Exception e)
             {
-                Log.Debug(e, "Error instantiating ZDO command");
+                _logger.LogDebug(e, "Error instantiating ZDO command");
                 return null;
             }
 
@@ -774,25 +780,25 @@ namespace ZigBeeNet
         {
             if (apsFrame.DestinationEndpoint != LOCAL_ENDPOINT_ID && apsFrame.DestinationEndpoint != BROADCAST_ENDPOINT_ID)
             {
-                Log.Debug("Unknown local endpoint for APS frame {Frame}", apsFrame);
+                _logger.LogDebug("Unknown local endpoint for APS frame {Frame}", apsFrame);
                 return null;
             }
 
             // Process the ZCL header
             ZclHeader zclHeader = new ZclHeader(fieldDeserializer);
-            Log.Debug("RX ZCL: {ZclHeader}", zclHeader);
+            _logger.LogDebug("RX ZCL: {ZclHeader}", zclHeader);
 
             ZigBeeNode node = GetNode(apsFrame.SourceAddress);
             if (node == null)
             {
-                Log.Debug("Unknown node {SourceAddress}", apsFrame.SourceAddress);
+                _logger.LogDebug("Unknown node {SourceAddress}", apsFrame.SourceAddress);
                 return null;
             }
 
             ZigBeeEndpoint endpoint = node.GetEndpoint(apsFrame.SourceEndpoint);
             if (endpoint == null)
             {
-                Log.Debug("Unknown endpoint {SourceEndpoint}", apsFrame.SourceEndpoint);
+                _logger.LogDebug("Unknown endpoint {SourceEndpoint}", apsFrame.SourceEndpoint);
                 return null;
             }
 
@@ -802,7 +808,7 @@ namespace ZigBeeNet
                 ZclCluster cluster = endpoint.GetInputCluster(apsFrame.Cluster);
                 if (cluster == null)
                 {
-                    Log.Debug("Unknown input cluster {Cluster}", apsFrame.Cluster);
+                    _logger.LogDebug("Unknown input cluster {Cluster}", apsFrame.Cluster);
                     return null;
                 }
                 command = cluster.GetResponseFromId(zclHeader.FrameType, zclHeader.CommandId);
@@ -812,14 +818,14 @@ namespace ZigBeeNet
                 ZclCluster cluster = endpoint.GetOutputCluster(apsFrame.Cluster);
                 if (cluster == null)
                 {
-                    Log.Debug("Unknown output cluster {Cluster}", apsFrame.Cluster);
+                    _logger.LogDebug("Unknown output cluster {Cluster}", apsFrame.Cluster);
                     return null;
                 }
                 command = cluster.GetCommandFromId(zclHeader.FrameType, zclHeader.CommandId);
             }
             if (command == null)
             {
-                Log.Debug("Unknown command {CommandId}", zclHeader.CommandId);
+                _logger.LogDebug("Unknown command {CommandId}", zclHeader.CommandId);
                 return null;
             }
 
@@ -859,7 +865,7 @@ namespace ZigBeeNet
 
         public void NodeStatusUpdate(ZigBeeNodeStatus deviceStatus, ushort networkAddress, IeeeAddress ieeeAddress)
         {
-            Log.Debug("{IeeeAddress}: nodeStatusUpdate - node status is {DeviceStatus}, network address is {NetworkAddress}.", ieeeAddress, deviceStatus,
+            _logger.LogDebug("{IeeeAddress}: nodeStatusUpdate - node status is {DeviceStatus}, network address is {NetworkAddress}.", ieeeAddress, deviceStatus,
                     networkAddress);
 
             // This method should only be called when the transport layer has authoritative information about
@@ -877,7 +883,7 @@ namespace ZigBeeNet
 
                     if (currentNode == null)
                     {
-                        Log.Debug("{IeeeAddress}: Node has left, but wasn't found in the network.", ieeeAddress);
+                        _logger.LogDebug("{IeeeAddress}: Node has left, but wasn't found in the network.", ieeeAddress);
                     }
                     else
                     {
@@ -938,7 +944,7 @@ namespace ZigBeeNet
         {
             if (!_validTransportStateTransitions[TransportState].Contains(state))
             {
-                Log.Debug("Ignoring invalid network state transition from {TransportState} to {State}", TransportState, state);
+                _logger.LogDebug("Ignoring invalid network state transition from {TransportState} to {State}", TransportState, state);
                 return;
             }
             TransportState = state;
@@ -949,7 +955,7 @@ namespace ZigBeeNet
                 ZigBeeNetworkState networkstate;
                 if (Enum.TryParse(state.ToString(), out networkstate))
                 {
-                    Log.Debug("ZigBeeNetworkManager transport state updated to {State}", state);
+                    _logger.LogDebug("ZigBeeNetworkManager transport state updated to {State}", state);
                     SetNetworkState(networkstate);
                 }
             }
@@ -963,7 +969,7 @@ namespace ZigBeeNet
                 return;
 
             NetworkState = state;
-            Log.Debug("Network state is updated to {NetworkState}", state);
+            _logger.LogDebug("Network state is updated to {NetworkState}", state);
 
             // If the state has changed to online, then we need to add any pending nodes,
             // and ensure that the local node is added.
@@ -976,7 +982,7 @@ namespace ZigBeeNet
                     SetNetworkStateOnline();
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                    _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                 }, TaskContinuationOptions.OnlyOnFaulted);
                 return;
             }
@@ -988,7 +994,7 @@ namespace ZigBeeNet
                     stateListener.NetworkStateUpdated(state);
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                    _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                 }, TaskContinuationOptions.OnlyOnFaulted);
             }
         }
@@ -1024,7 +1030,7 @@ namespace ZigBeeNet
                         listener.NodeAdded(node);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1037,7 +1043,7 @@ namespace ZigBeeNet
                     stateListener.NetworkStateUpdated(ZigBeeNetworkState.ONLINE);
                 }).ContinueWith((t) =>
                 {
-                    Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                    _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                 }, TaskContinuationOptions.OnlyOnFaulted);
             }
         }
@@ -1097,7 +1103,7 @@ namespace ZigBeeNet
         /// </summary>
         public ZigBeeStatus PermitJoin(byte duration)
         {
-            return PermitJoin(new ZigBeeEndpointAddress(ZigBeeBroadcastDestination.GetBroadcastDestination(BroadcastDestination.BROADCAST_ROUTERS_AND_COORD).Key), duration);
+            return PermitJoin(ZigBeeEndpointAddress.BROADCAST_ROUTERS_AND_COORD, duration);
         }
 
         /// <summary>
@@ -1115,31 +1121,31 @@ namespace ZigBeeNet
         {
             if (duration < 0 || duration >= 255)
             {
-                Log.Debug("Permit join to {Destination} invalid period of {Duration} seconds.", destination, duration);
+                _logger.LogDebug("Permit join to {Destination} invalid period of {Duration} seconds.", destination, duration);
                 return ZigBeeStatus.INVALID_ARGUMENTS;
             }
-            Log.Debug("Permit join to {Destination} for {Duration} seconds.", destination, duration);
+            _logger.LogDebug("Permit join to {Destination} for {Duration} seconds.", destination, duration);
 
             ManagementPermitJoiningRequest command = new ManagementPermitJoiningRequest
             {
                 PermitDuration = duration,
                 TcSignificance = true,
                 DestinationAddress = destination,
-                SourceAddress = new ZigBeeEndpointAddress(0)
+                SourceAddress = ZigBeeEndpointAddress.Zero
             };
 
             SendCommand(command);
 
             // If this is a broadcast, then we send it to our own address as well
             // This seems to be required for some stacks (eg ZNP)
-            if (ZigBeeBroadcastDestination.GetBroadcastDestination(destination.Address) != null)
+            if (ZigBeeBroadcastDestinationHelper.IsBroadcast(destination.Address))
             {
                 command = new ManagementPermitJoiningRequest
                 {
                     PermitDuration = duration,
                     TcSignificance = true,
-                    DestinationAddress = new ZigBeeEndpointAddress(0),
-                    SourceAddress = new ZigBeeEndpointAddress(0)
+                    DestinationAddress = ZigBeeEndpointAddress.Zero,
+                    SourceAddress = ZigBeeEndpointAddress.Zero
                 };
 
                 SendCommand(command);
@@ -1174,7 +1180,7 @@ namespace ZigBeeNet
 
                 command.DeviceAddress = leaveAddress;
                 command.DestinationAddress = new ZigBeeEndpointAddress(destinationAddress);
-                command.SourceAddress = new ZigBeeEndpointAddress(0);
+                command.SourceAddress = ZigBeeEndpointAddress.Zero;
                 command.RemoveChildrenRejoin = false;
 
                 CommandResult response = await SendTransaction(command, command);
@@ -1188,22 +1194,22 @@ namespace ZigBeeNet
                     }
                     else
                     {
-                        Log.Debug("{IeeeAddress}: No successful response received to leave command (status code {StatusCode})", leaveAddress, response.GetStatusCode());
+                        _logger.LogDebug("{IeeeAddress}: No successful response received to leave command (status code {StatusCode})", leaveAddress, response.GetStatusCode());
                         if (forceNodeRemoval)
                         {
-                            Log.Debug("{IeeeAddress}: Force-removing node from the node list after unsuccessful leave request", leaveAddress);
+                            _logger.LogDebug("{IeeeAddress}: Force-removing node from the node list after unsuccessful leave request", leaveAddress);
                             RemoveNode(node);
                         }
                     }
                 }
                 else
                 {
-                    Log.Debug("{IeeeAddress}: No node found after leave command", leaveAddress);
+                    _logger.LogDebug("{IeeeAddress}: No node found after leave command", leaveAddress);
                 }
             }
             catch (Exception ex)
             {
-                Log.Debug("Error sending leave command {Exception}", ex);
+                _logger.LogDebug("Error sending leave command {Exception}", ex);
             }
         }
 
@@ -1318,7 +1324,7 @@ namespace ZigBeeNet
                 return;
             }
 
-            Log.Debug("{IeeeAddress}: Node {NetworkAddress} is removed from the network", node.IeeeAddress, node.NetworkAddress);
+            _logger.LogDebug("{IeeeAddress}: Node {NetworkAddress} is removed from the network", node.IeeeAddress, node.NetworkAddress);
 
             _nodeDiscoveryComplete.Remove(node.IeeeAddress);
 
@@ -1350,7 +1356,7 @@ namespace ZigBeeNet
                         listener.NodeRemoved(node);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1371,7 +1377,7 @@ namespace ZigBeeNet
                 return;
             }
 
-            Log.Debug("{IeeeAddress}: Updating Node {NetworkAddress}", node.IeeeAddress, node.NetworkAddress);
+            _logger.LogDebug("{IeeeAddress}: Updating Node {NetworkAddress}", node.IeeeAddress, node.NetworkAddress);
 
             // If the node is already known, refresh and return
             // We especially don't want to notify listeners
@@ -1396,11 +1402,11 @@ namespace ZigBeeNet
                 {
                     Task.Run(() =>
                     {
-                        Log.Debug("{IeeeAddress}: Node sending added", node.IeeeAddress);
+                        _logger.LogDebug("{IeeeAddress}: Node sending added", node.IeeeAddress);
                         listener.NodeAdded(node);
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1417,21 +1423,21 @@ namespace ZigBeeNet
             {
                 return;
             }
-            Log.Debug("{IeeeAddress}: Node {NetworkAddress} update", node.IeeeAddress, node.NetworkAddress);
+            _logger.LogDebug("{IeeeAddress}: Node {NetworkAddress} update", node.IeeeAddress, node.NetworkAddress);
 
             ZigBeeNode currentNode = GetNode(node.IeeeAddress);
 
             // Return if we don't know this node
             if (currentNode == null)
             {
-                Log.Debug("{IeeeAddress}: Node {NetworkAddress} is not known - can't be updated", node.IeeeAddress, node.NetworkAddress);
+                _logger.LogDebug("{IeeeAddress}: Node {NetworkAddress} is not known - can't be updated", node.IeeeAddress, node.NetworkAddress);
                 return;
             }
 
             // Return if there were no updates
             if (!currentNode.UpdateNode(node))
             {
-                Log.Debug("{IeeeAddress}: Node {NwkAddress} is not updated", node.IeeeAddress, node.NetworkAddress);
+                _logger.LogDebug("{IeeeAddress}: Node {NwkAddress} is not updated", node.IeeeAddress, node.NetworkAddress);
                 return;
             }
 
@@ -1470,7 +1476,7 @@ namespace ZigBeeNet
                         }
                     }).ContinueWith((t) =>
                     {
-                        Log.Error(t.Exception, "Error: {Exception}", t.Exception.Message);
+                        _logger.LogError(t.Exception, "Error: {Exception}", t.Exception.Message);
                     }, TaskContinuationOptions.OnlyOnFaulted);
                 }
             }
@@ -1486,7 +1492,7 @@ namespace ZigBeeNet
         [Obsolete("This will be removed in a future release. Use AddSupportedClientCluster instead", false)]
         public void AddSupportedCluster(ushort cluster)
         {
-            Log.Debug("Adding supported cluster {Cluster}", cluster);
+            _logger.LogDebug("Adding supported cluster {Cluster}", cluster);
             AddSupportedClientCluster(cluster);
         }
 
@@ -1501,11 +1507,11 @@ namespace ZigBeeNet
         {
             if (NetworkState != ZigBeeNetworkState.INITIALISING)
             {
-                Log.Error("Cannot add supported client cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
+                _logger.LogError("Cannot add supported client cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
                 return ZigBeeStatus.INVALID_STATE;
             }
 
-            Log.Debug("Adding supported client cluster {Cluster}", cluster);
+            _logger.LogDebug("Adding supported client cluster {Cluster}", cluster);
             if (_clusterMatcher == null)
             {
                 _clusterMatcher = new ClusterMatcher(this, LOCAL_ENDPOINT_ID, _defaultProfileId);
@@ -1525,11 +1531,11 @@ namespace ZigBeeNet
         {
             if (NetworkState != ZigBeeNetworkState.INITIALISING)
             {
-                Log.Error("Cannot add supported server cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
+                _logger.LogError("Cannot add supported server cluster {Cluster} when network state is {NetworkState}", cluster, NetworkState);
                 return ZigBeeStatus.INVALID_STATE;
             }
 
-            Log.Debug("Adding supported server cluster {Cluster}", cluster);
+            _logger.LogDebug("Adding supported server cluster {Cluster}", cluster);
             if (_clusterMatcher == null)
             {
                 _clusterMatcher = new ClusterMatcher(this, LOCAL_ENDPOINT_ID, _defaultProfileId);

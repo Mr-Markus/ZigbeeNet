@@ -69,18 +69,18 @@ namespace ZigBeeNet.ZCL.Clusters.IasAce
 
         internal override void Serialize(ZclFieldSerializer serializer)
         {
-            serializer.Serialize(ZoneId, ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            serializer.Serialize(ZoneType, ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            serializer.Serialize(IeeeAddress, ZclDataType.Get(DataType.IEEE_ADDRESS));
-            serializer.Serialize(ZoneLabel, ZclDataType.Get(DataType.CHARACTER_STRING));
+            serializer.Serialize(ZoneId, DataType.UNSIGNED_8_BIT_INTEGER);
+            serializer.Serialize(ZoneType, DataType.ENUMERATION_16_BIT);
+            serializer.Serialize(IeeeAddress, DataType.IEEE_ADDRESS);
+            serializer.Serialize(ZoneLabel, DataType.CHARACTER_STRING);
         }
 
         internal override void Deserialize(ZclFieldDeserializer deserializer)
         {
-            ZoneId = deserializer.Deserialize<byte>(ZclDataType.Get(DataType.UNSIGNED_8_BIT_INTEGER));
-            ZoneType = deserializer.Deserialize<ushort>(ZclDataType.Get(DataType.ENUMERATION_16_BIT));
-            IeeeAddress = deserializer.Deserialize<IeeeAddress>(ZclDataType.Get(DataType.IEEE_ADDRESS));
-            ZoneLabel = deserializer.Deserialize<string>(ZclDataType.Get(DataType.CHARACTER_STRING));
+            ZoneId = deserializer.Deserialize<byte>(DataType.UNSIGNED_8_BIT_INTEGER);
+            ZoneType = deserializer.Deserialize<ushort>(DataType.ENUMERATION_16_BIT);
+            IeeeAddress = deserializer.Deserialize<IeeeAddress>(DataType.IEEE_ADDRESS);
+            ZoneLabel = deserializer.Deserialize<string>(DataType.CHARACTER_STRING);
         }
 
         public override string ToString()
