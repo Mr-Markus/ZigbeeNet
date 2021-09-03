@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace ZigBeeNet.Security
 {
@@ -64,7 +65,7 @@ namespace ZigBeeNet.Security
             {
                 StringBuilder curr = new StringBuilder(2);
                 curr.Append(enc[i]).Append(enc[i + 1]);
-                Key[i / 2] = byte.Parse(curr.ToString());
+                Key[i / 2] = byte.Parse(curr.ToString(), NumberStyles.HexNumber);
             }
         }
 
